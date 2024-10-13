@@ -30,7 +30,6 @@ import android.view.accessibility.Flags;
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.internal.accessibility.util.ShortcutUtils;
 
@@ -123,7 +122,7 @@ public final class PreferredShortcuts {
     public static void updatePreferredShortcutsFromSettings(
             @NonNull Context context, @NonNull Set<String> components) {
         final Map<Integer, Set<String>> shortcutTypeToTargets = new ArrayMap<>();
-        for (int shortcutType : ShortcutConstants.USER_SHORTCUT_TYPES) {
+        for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
             if (!Flags.a11yQsShortcut()
                     && shortcutType == QUICK_SETTINGS) {
                 // Skip saving quick setting as preferred shortcut option when flag is not enabled

@@ -246,16 +246,11 @@
     <string name="roaming_enable" msgid="7845716016861535340">"Poveži se s podatkovnim uslugama u roamingu"</string>
     <string name="roaming_disable" msgid="729512894708689604">"Poveži se s podatkovnim uslugama u roamingu"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"Moguća je naplata dodatnih naknada za roaming."</string>
-    <!-- no translation found for date_time_auto (1759599045100040686) -->
-    <skip />
-    <!-- no translation found for date_time_auto_summary (8294938565417729698) -->
-    <skip />
-    <!-- no translation found for zone_auto_title (3520584257065861479) -->
-    <skip />
-    <!-- no translation found for zone_auto_title_summary (6540356783943375071) -->
-    <skip />
-    <!-- no translation found for auto_zone_requires_location_summary (8751995978350701451) -->
-    <skip />
+    <string name="date_time_auto" msgid="1759599045100040686">"Automatski datum i vrijeme"</string>
+    <string name="date_time_auto_summary" msgid="8294938565417729698">"Postavi automatski pomoću mreže i bežičnih signala"</string>
+    <string name="zone_auto_title" msgid="3520584257065861479">"Automatska vremenska zona"</string>
+    <string name="zone_auto_title_summary" msgid="6540356783943375071">"Automatski postavi na temelju mobilnih mreža u blizini"</string>
+    <string name="auto_zone_requires_location_summary" msgid="8751995978350701451">"Postavi automatski pomoću lokacije uređaja, ako je dostupna. Možda je potrebna i aktivna Wi-Fi veza."</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Koristi zadani lokalni format"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Koristi 24-satni format"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Vrijeme"</string>
@@ -664,6 +659,9 @@
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Postavljanje uzorka za privatni prostor"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"Zaključavanje"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"Sakrivanje"</string>
+    <string name="private_space_confirm_your_pattern_header" msgid="449382220134788771">"Potvrdite uzorak za privatni prostor"</string>
+    <string name="private_space_confirm_your_pin_header" msgid="4543332157470087796">"Ponovo unesite PIN za privatni prostor"</string>
+    <string name="private_space_confirm_your_password_header" msgid="9202308075814307169">"Ponovo unesite zaporku za privatni prostor"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Maksimalni broj otisaka prstiju koji možete dodati: <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Dodali ste maksimalan broj otisaka prstiju"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Nije moguće dodati više otisaka prstiju"</string>
@@ -1031,6 +1029,8 @@
     <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"Provjerite zaporku i pokušajte ponovo"</string>
     <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"Obratite se proizvođaču uređaja"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Provjerite vezu i pokušajte ponovo"</string>
+    <string name="wifi_dpp_check_connection_no_matched_ssid" msgid="3608318690698685427">"Ova Wi‑Fi mreža trenutačno nije dostupna"</string>
+    <string name="wifi_dpp_check_connection_no_matched_security" msgid="1462706753123341376">"Došlo je do problema s ovim QR kodom. Pokušajte se povezati na neki drugi način."</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Odabir mreže"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Da biste povezali uređaj, odaberite mrežu."</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5170095438763569255">"Želite li dodati ovaj uređaj na mrežu “<xliff:g id="SSID">%1$s</xliff:g>”?"</string>
@@ -1630,8 +1630,7 @@
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Dopustite aplikacijama i uslugama da traže uređaje u blizini u bilo kojem trenutku, čak i kada je Bluetooth isključen. Time se primjerice mogu poboljšati značajke i usluge koje se temelje na lokaciji."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Usluge lokacije"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Usluge lokacije"</string>
-    <!-- no translation found for location_time_zone_detection_toggle_title (720338048522014712) -->
-    <skip />
+    <string name="location_time_zone_detection_toggle_title" msgid="720338048522014712">"Koristi lokaciju za vremensku zonu"</string>
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Nije moguće automatski postaviti vremensku zonu"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
     <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Isključeni su lokacija ili usluge lokacije"</string>
@@ -1642,13 +1641,11 @@
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Postavke lokacije"</string>
     <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"Popravi"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"Odustani"</string>
-    <!-- no translation found for location_time_zone_detection_auto_is_off (4785540862935730060) -->
-    <skip />
+    <string name="location_time_zone_detection_auto_is_off" msgid="4785540862935730060">"Nije dostupno kad je automatska vremenska zona isključena"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Onemogućeno je otkrivanje vremenske zone lokacije"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Nije podržano otkrivanje vremenske zone lokacije"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Izmjene značajke otkrivanja vremenske zone lokacije nisu dopuštene"</string>
-    <!-- no translation found for location_time_zone_detection_auto_is_on (1837317773761632655) -->
-    <skip />
+    <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"Ako je lokacija vašeg uređaja dostupna, može se upotrebljavati za postavljanje vremenske zone"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Prikaži pravne informacije, status, verziju softvera"</string>
     <string name="legal_information" msgid="7509900979811934843">"Pravne informacije"</string>
     <string name="manual" msgid="3651593989906084868">"Priručnik"</string>
@@ -1948,14 +1945,19 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opcije"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Pristupačnost"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fizička tipkovnica"</string>
-    <string name="bounce_keys" msgid="7419450970351743904">"Slučajni pritisci tipki"</string>
-    <string name="bounce_keys_summary" msgid="7347050868868080302">"Tipkovnica zanemaruje brzo ponovljene pritiske iste tipke unutar <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
+    <string name="bounce_keys" msgid="7419450970351743904">"Zanemari slučajne pritiske tipki"</string>
+    <string name="bounce_keys_summary" msgid="7418024428905737729">"Tipkovnica zanemaruje brzo ponovljene pritiske iste tipke"</string>
+    <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Prag zanemarivanja slučajnih pritisaka"</string>
+    <string name="bounce_keys_dialog_subtitle" msgid="5640575860258120026">"Odaberite koliko dugo će tipkovnica zanemarivati ponovljene pritiske tipki"</string>
+    <string name="bounce_keys_dialog_option_200" msgid="7876774697200082558">"0,2 s"</string>
+    <string name="bounce_keys_dialog_option_400" msgid="8146580138675322657">"0,4 s"</string>
+    <string name="bounce_keys_dialog_option_600" msgid="6166166103942612488">"0,6 s"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Spore tipke"</string>
-    <string name="slow_keys_summary" msgid="1784371292745423292">"Vrijeme potrebno za aktivaciju pritiska tipke prilagođava se na <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
+    <string name="slow_keys_summary" msgid="2914214326648535377">"Prilagođava vrijeme potrebno za aktivaciju pritiska tipke"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Ljepljive tipke"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Pritisnite jednu po jednu tipku za prečace umjesto da ih pritisnete zajedno"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Tipke miša"</string>
-    <string name="mouse_keys_summary" msgid="2396247040177734245">"Upotrijebite fizičku tipkovnicu za upravljanje mišem."</string>
+    <string name="mouse_keys_summary" msgid="7030731235143286467">"Upravljajte pokazivačem pomoću tipkovnice"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Tipkovni prečaci"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Prikaži popis prečaca"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tipkovnice i alati radnog profila"</string>
@@ -2023,7 +2025,11 @@
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Odaberi modifikatorsku tipku"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Odaberite novu tipku za <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Pristupačnost fizičke tipkovnice"</string>
-    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Ljepljive tipke, tipke za sprečavanje ponovljenih unosa, tipke miša"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Ljepljive tipke, sprečavanje slučajnih pritisaka tipki, tipke miša"</string>
+    <!-- no translation found for keyboard_repeat_key_title (3641350808120194549) -->
+    <skip />
+    <!-- no translation found for keyboard_repeat_key_summary (3970350989341158854) -->
+    <skip />
     <string name="ime_label_title" msgid="8994569521516807168">"Izgled: <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Zadano"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automatski: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2428,7 +2434,8 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"Pregled"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Standardne opcije"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"Jezik"</string>
-    <string name="captioning_text_size" msgid="8039448543171463017">"Veličina teksta"</string>
+    <!-- no translation found for captioning_text_size (5764254558945371745) -->
+    <skip />
     <string name="captioning_preset" msgid="4174276086501638524">"Stil titlova"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"Prilagođene opcije"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"Boja pozadine"</string>
@@ -3519,15 +3526,6 @@
     <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"Shvaćam"</string>
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"Obavijesti"</string>
     <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"Trajanje"</string>
-    <string name="zen_msg_event_reminder_title" msgid="5362025129007417554">"Poruke, događaji i podsjetnici"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"Kada je način Ne uznemiravaj uključen, zanemarit će se poruke, podsjetnici i događaji, osim prethodno navedenih stavki koje dopustite. Možete prilagoditi postavke poruka da bi vaša obitelj, prijatelji ili drugi kontakti mogli stupiti u kontakt s vama."</string>
-    <string name="zen_onboarding_ok" msgid="8764248406533833392">"Gotovo"</string>
-    <string name="zen_onboarding_settings" msgid="2815839576245114342">"Postavke"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"Bez vizualnih i zvučnih signala obavijesti"</string>
-    <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"Bez zvuka obavijesti"</string>
-    <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"Obavijesti se neće prikazivati niti će se čuti zvučni signali. Dopušteni su pozivi kontakata označenih zvjezdicom i ponovnih pozivatelja."</string>
-    <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(Trenutačna postavka)"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"Želite li promijeniti postavke obavijesti za način Ne uznemiravaj?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Zvukovi poslovnog profila"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Koristi zvukove osobnog profila"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Upotrebljavaju se isti zvukovi kao na vašem osobnom profilu"</string>
@@ -3596,6 +3594,8 @@
     <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"Nakon otključavanja otvara se posljednji korišteni zaslon. Obavijesti se neće prikazivati na zaključanom zaslonu. Prijeđite prstom prema dolje za prikaz."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Zaključani zaslon, preskakanje, zaobilaženje"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Kad je poslovni profil zaključan"</string>
+    <string name="lock_screen_notif_minimalism" msgid="5556871004042668149">"Smanji broj obavijesti na zaključanom zaslonu"</string>
+    <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"Prikaži manje obavijesti na zaključanom zaslonu"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Prikazuj samo nove obavijesti na zaključanom zaslonu"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Prethodno pregledane obavijesti automatski se uklanjaju sa zaključanog zaslona"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Obavijesti na zaključanom zaslonu"</string>
@@ -3813,6 +3813,7 @@
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"prioritetni razgovori"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Ništa"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Nijedan}=1{1 razgovor}one{# razgovor}few{# razgovora}other{# razgovora}}"</string>
+    <string name="zen_mode_from_conversations_settings" msgid="2411930666794576607">"Postavke razgovora"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Tko može prekidati"</string>
     <string name="zen_mode_people_footer" msgid="7710707353004137431">"Čak i ako vas aplikacije za slanje poruka ili pozivanje ne mogu obavijestiti, osobe koje odaberete ovdje i dalje mogu stupiti u kontakt s vama putem tih aplikacija"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Pozivi"</string>
@@ -3836,6 +3837,8 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Svatko"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Kontakti"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Kontakti označeni zvjezdicom"</string>
+    <string name="zen_mode_from_contacts_settings" msgid="853428575138439415">"Postavke kontakata"</string>
+    <string name="zen_mode_from_starred_settings" msgid="3389516761063134119">"Postavke kontakata označenih zvjezdicom"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"Nitko"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"Nitko"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Alarmi"</string>
@@ -3865,6 +3868,7 @@
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Nijedna aplikacija ne može prekidati}=1{{app_1} može prekidati}=2{{app_1} i {app_2} mogu prekidati}=3{{app_1}, {app_2} i {app_3} mogu prekidati}one{{app_1}, {app_2} i još # aplikacija mogu prekidati}few{{app_1}, {app_2} i još # aplikacije mogu prekidati}other{{app_1}, {app_2} i još # aplikacija mogu prekidati}}"</string>
     <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (posao)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Izračun u tijeku…"</string>
+    <string name="zen_mode_apps_priority_apps_settings" msgid="5544513568250354374">"Postavke aplikacija"</string>
     <string name="zen_mode_plus_n_items" msgid="6136713354369243421">"+ <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Dopusti aplikacijama da nadjačaju"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Aplikacije koje mogu prekidati"</string>
@@ -3907,8 +3911,8 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Izradite način rada"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Prilagođeni način"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Naziv načina"</string>
-    <!-- no translation found for zen_mode_edit_choose_icon_title (6452801577128788362) -->
-    <skip />
+    <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"Polje za naziv načina ne može biti prazno"</string>
+    <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"Odabir ikone"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Događaji iz kalendara"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Rutina prije spavanja"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Tijekom vožnje"</string>
@@ -3978,12 +3982,9 @@
     <string name="managing_admin" msgid="2633920317425356619">"Upravlja <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Otvaranje prema zadanim postavkama"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"Otvori podržane veze"</string>
-    <!-- no translation found for app_launch_open_in_app (2208182888681699512) -->
-    <skip />
-    <!-- no translation found for app_launch_open_in_browser (766170191853009756) -->
-    <skip />
-    <!-- no translation found for app_launch_top_intro_message (9037324384325518290) -->
-    <skip />
+    <string name="app_launch_open_in_app" msgid="2208182888681699512">"U aplikaciji"</string>
+    <string name="app_launch_open_in_browser" msgid="766170191853009756">"U pregledniku"</string>
+    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"Odaberite način otvaranja web-veza za ovu aplikaciju"</string>
     <string name="app_launch_links_category" msgid="2380467163878760037">"Veze koje se otvaraju u ovoj aplikaciji"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Podržane veze"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Ostale zadane postavke"</string>
@@ -5452,10 +5453,11 @@
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Čitač QR koda"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Trebate li pomoć?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Pretražite postavke"</string>
-    <!-- no translation found for keywords_contacts_storage (9061213057165337893) -->
-    <skip />
-    <!-- no translation found for contacts_storage_settings_title (1574030546525203810) -->
-    <skip />
-    <!-- no translation found for contacts_storage_no_account_set (1548101985417720782) -->
-    <skip />
+    <string name="keywords_contacts_storage" msgid="9061213057165337893">"kontakti, pohrana, račun"</string>
+    <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Prostor za pohranu kontakata"</string>
+    <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Samo uređaj"</string>
+    <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"Novi kontakti neće se sinkronizirati s računom"</string>
+    <string name="contacts_storage_selection_message" msgid="8082077300632059003">"Kontakti će se spremiti na vaš uređaj i prema zadanim postavkama sinkronizirati s vašim računom"</string>
+    <string name="contacts_storage_no_account_set" msgid="1548101985417720782">"Nema zadane postavke"</string>
+    <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Dodajte račun da biste započeli"</string>
 </resources>

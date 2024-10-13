@@ -246,16 +246,11 @@
     <string name="roaming_enable" msgid="7845716016861535340">"اتصال به سرویس‌های داده هنگام فراگردی"</string>
     <string name="roaming_disable" msgid="729512894708689604">"اتصال به سرویس‌های داده هنگام فراگردی"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"ممکن است هزینه‌های فراگردی اعمال شود."</string>
-    <!-- no translation found for date_time_auto (1759599045100040686) -->
-    <skip />
-    <!-- no translation found for date_time_auto_summary (8294938565417729698) -->
-    <skip />
-    <!-- no translation found for zone_auto_title (3520584257065861479) -->
-    <skip />
-    <!-- no translation found for zone_auto_title_summary (6540356783943375071) -->
-    <skip />
-    <!-- no translation found for auto_zone_requires_location_summary (8751995978350701451) -->
-    <skip />
+    <string name="date_time_auto" msgid="1759599045100040686">"تاریخ و ساعت خودکار"</string>
+    <string name="date_time_auto_summary" msgid="8294938565417729698">"به‌طور خودکار بااستفاده از سیگنال‌های شبکه و بی‌سیم تنظیم می‌شود"</string>
+    <string name="zone_auto_title" msgid="3520584257065861479">"منطقه زمانی خودکار"</string>
+    <string name="zone_auto_title_summary" msgid="6540356783943375071">"به‌طور خودکار براساس شبکه‌های تلفن همراه اطرافتان تنظیم می‌شود"</string>
+    <string name="auto_zone_requires_location_summary" msgid="8751995978350701451">"‏به‌طور خودکار با مکان دستگاه (اگر دردسترس باشد) تنظیم می‌شود. شاید اتصال فعال Wi-Fi نیز لازم باشد."</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"استفاده از پیش‌فرض منطقه زبانی"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"استفاده از قالب ۲۴ ساعته"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"زمان"</string>
@@ -664,6 +659,9 @@
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"تنظیم الگو برای فضای خصوصی"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"قفل کردن"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"پنهان کردن"</string>
+    <string name="private_space_confirm_your_pattern_header" msgid="449382220134788771">"الگوی فضای خصوصی خود را تأیید کنید"</string>
+    <string name="private_space_confirm_your_pin_header" msgid="4543332157470087796">"پین فضای خصوصی خود را دوباره وارد کنید"</string>
+    <string name="private_space_confirm_your_password_header" msgid="9202308075814307169">"گذرواژه فضای خصوصی خود را دوباره وارد کنید"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"می‌توانید حداکثر <xliff:g id="COUNT">%d</xliff:g> اثرانگشت اضافه کنید"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"حداکثر تعداد اثرانگشت را اضافه کرده‌اید"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"نمی‌توانید اثرانگشت‌های بیشتری اضافه کنید"</string>
@@ -1031,6 +1029,8 @@
     <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"گذرواژه را بررسی و دوباره امتحان کنید"</string>
     <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"با سازنده دستگاه تماس بگیرید"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"اتصال را بررسی کنید و دوباره امتحان کنید"</string>
+    <string name="wifi_dpp_check_connection_no_matched_ssid" msgid="3608318690698685427">"‏این شبکه Wi-Fi درحال‌حاضر دردسترس نیست"</string>
+    <string name="wifi_dpp_check_connection_no_matched_security" msgid="1462706753123341376">"این رمزینه پاسخ‌سریع مشکلی دارد. ازطریق روش دیگری متصل شوید."</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"انتخاب شبکه"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"برای متصل کردن دستگاهتان،‌ شبکه‌ای انتخاب کنید"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5170095438763569255">"این دستگاه به «<xliff:g id="SSID">%1$s</xliff:g>» اضافه شود؟"</string>
@@ -1630,8 +1630,7 @@
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"به برنامه‌ها و سرویس‌ها اجازه دهید درهر زمانی (حتی وقتی «بلوتوث» خاموش است) دستگاه‌های اطراف را اسکن کنند. برای مثال این مورد مي‌تواند برای بهبود ویژگی‌ها و سرویس‌های مکان‌مبنا استفاده شود."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"خدمات مکان"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"خدمات مکان"</string>
-    <!-- no translation found for location_time_zone_detection_toggle_title (720338048522014712) -->
-    <skip />
+    <string name="location_time_zone_detection_toggle_title" msgid="720338048522014712">"استفاده از مکان برای منطقه زمانی"</string>
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"نمی‌توان منطقه زمانی را به‌طور خودکار تنظیم کرد"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
     <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"«مکان» یا «خدمات مکان» خاموش است"</string>
@@ -1642,13 +1641,11 @@
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"تنظیمات مکان"</string>
     <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"تصحیح شود"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"لغو"</string>
-    <!-- no translation found for location_time_zone_detection_auto_is_off (4785540862935730060) -->
-    <skip />
+    <string name="location_time_zone_detection_auto_is_off" msgid="4785540862935730060">"وقتی منطقه زمانی خودکار خاموش باشد، دردسترس نیست"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"تشخیص منطقه زمانی بااستفاده از مکان غیرفعال است"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"تشخیص منطقه زمانی بااستفاده از مکان پشتیبانی نمی‌شود"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"تغییر تشخیص منطقه زمانی بااستفاده از مکان مجاز نیست"</string>
-    <!-- no translation found for location_time_zone_detection_auto_is_on (1837317773761632655) -->
-    <skip />
+    <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"اگر مکان دستگاهتان دردسترس باشد، می‌توان از آن برای مشخص کردن منطقه زمانی‌تان استفاده کرد"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"مشاهدهٔ اطلاعات حقوقی، وضعیت، نسخه نرم‌افزار"</string>
     <string name="legal_information" msgid="7509900979811934843">"اطلاعات حقوقی"</string>
     <string name="manual" msgid="3651593989906084868">"دفترچه راهنما"</string>
@@ -1790,9 +1787,9 @@
     <string name="auto_launch_label_generic" msgid="5033137408273064599">"پیش‌فرض‌ها"</string>
     <string name="screen_compatibility_label" msgid="7549658546078613431">"سازگاری با صفحه‌نمایش"</string>
     <string name="permissions_label" msgid="1708927634370314404">"اجازه‌ها"</string>
-    <string name="cache_header_label" msgid="2441967971921741047">"حافظهٔ پنهان"</string>
-    <string name="clear_cache_btn_text" msgid="8597272828928143723">"پاک کردن حافظهٔ پنهان"</string>
-    <string name="cache_size_label" msgid="313456088966822757">"حافظهٔ پنهان"</string>
+    <string name="cache_header_label" msgid="2441967971921741047">"حافظه نهان"</string>
+    <string name="clear_cache_btn_text" msgid="8597272828928143723">"پاک کردن حافظه نهان"</string>
+    <string name="cache_size_label" msgid="313456088966822757">"حافظه نهان"</string>
     <string name="uri_permissions_text" msgid="8406345863117405105">"{count,plural, =1{یک مورد}one{# مورد}other{# مورد}}"</string>
     <string name="clear_uri_btn_text" msgid="4828117421162495134">"پاک کردن دسترسی"</string>
     <string name="controls_label" msgid="8671492254263626383">"کنترل ها"</string>
@@ -1828,7 +1825,7 @@
     <string name="sort_order_recent_notification" msgid="1496198895330443073">"جدیدترین"</string>
     <string name="sort_order_frequent_notification" msgid="4063700985742284794">"پرتکرارترین"</string>
     <string name="show_running_services" msgid="8666008279959853318">"نمایش سرویس‌های در حال اجرا"</string>
-    <string name="show_background_processes" msgid="5682856012453562151">"فرآیندهای ذخیره شده در حافظهٔ پنهان"</string>
+    <string name="show_background_processes" msgid="5682856012453562151">"فرآیندهای ذخیره شده در حافظه نهان"</string>
     <string name="default_emergency_app" msgid="1929974800666613803">"برنامه اضطراری"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"بازنشانی اولویت‌های برنامه"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"بازنشانی اولویت‌های برنامه؟"</string>
@@ -1879,7 +1876,7 @@
     <string name="app_ops_never_used" msgid="9038133162371204506">"(تاکنون استفاده نشده)"</string>
     <string name="storageuse_settings_title" msgid="3125650750657988194">"فضای ذخیره‌سازی مصرفی"</string>
     <string name="service_restarting" msgid="5104563288155809226">"در حال راه‌اندازی مجدد"</string>
-    <string name="cached" msgid="5379485147573438201">"پردازش پس‌زمینه ذخیره شده در حافظهٔ پنهان"</string>
+    <string name="cached" msgid="5379485147573438201">"پردازش پس‌زمینه ذخیره شده در حافظه نهان"</string>
     <string name="no_running_services" msgid="9079738069349859373">"چیزی در حال اجرا نیست."</string>
     <string name="service_started_by_app" msgid="6845028506417670179">"توسط برنامه شروع شد."</string>
     <!-- no translation found for service_client_name (2210898622981598861) -->
@@ -1949,13 +1946,26 @@
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"دسترس‌پذیری"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"صفحه‌کلید فیزیکی"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"کلیدهای واگشت"</string>
-    <string name="bounce_keys_summary" msgid="7347050868868080302">"صفحه‌کلید فشردن‌های تکراری و سریع یک کلید در <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> میلی‌ثانیه را نادیده می‌گیرد"</string>
+    <!-- no translation found for bounce_keys_summary (7418024428905737729) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_title (4088646362538368693) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_subtitle (5640575860258120026) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_200 (7876774697200082558) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_400 (8146580138675322657) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_600 (6166166103942612488) -->
+    <skip />
     <string name="slow_keys" msgid="2891452895499690837">"کلیدهای آهسته"</string>
-    <string name="slow_keys_summary" msgid="1784371292745423292">"فاصله زمانی بین فشردن کلید و فعال‌سازی آن را روی <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> میلی‌ثانیه تنظیم می‌کند"</string>
+    <!-- no translation found for slow_keys_summary (2914214326648535377) -->
+    <skip />
     <string name="sticky_keys" msgid="7317317044898161747">"کلیدهای چسبان"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"به‌جای اینکه چند کلید را به‌طور هم‌زمان پایین نگه دارید، هربار یک کلید را برای میان‌برها فشار دهید"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"کلیدهای موشواره"</string>
-    <string name="mouse_keys_summary" msgid="2396247040177734245">"برای کنترل موشواره، از صفحه‌کلید فیزیکی استفاده کنید."</string>
+    <!-- no translation found for mouse_keys_summary (7030731235143286467) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"میان‌برهای صفحه‌کلید"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"نمایش فهرست میان‌برها"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"نمایه کاری صفحه‌کلیدها و ابزارها"</string>
@@ -2024,6 +2034,10 @@
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"کلید جدیدی برای <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> انتخاب کنید:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"دسترس‌پذیری صفحه‌کلید فیزیکی"</string>
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"کلیدهای چسبان، کلیدهای کمانه‌ای، کلیدهای موشواره"</string>
+    <!-- no translation found for keyboard_repeat_key_title (3641350808120194549) -->
+    <skip />
+    <!-- no translation found for keyboard_repeat_key_summary (3970350989341158854) -->
+    <skip />
     <string name="ime_label_title" msgid="8994569521516807168">"چیدمان <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"پیش‌فرض"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"خودکار: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2428,7 +2442,8 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"پیش‌نمایش"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"گزینه‌های استاندارد"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"زبان"</string>
-    <string name="captioning_text_size" msgid="8039448543171463017">"اندازه نوشتار"</string>
+    <!-- no translation found for captioning_text_size (5764254558945371745) -->
+    <skip />
     <string name="captioning_preset" msgid="4174276086501638524">"سبک زیرنویس"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"گزینه‌های سفارشی"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"رنگ پس‌زمینه"</string>
@@ -2810,7 +2825,7 @@
     <string name="emergency_tone_title" msgid="6673118505206685168">"سیگنال شماره‌گیری اضطراری"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"واکنش موجود در هنگام برقراری تماس اضطراری را تنظیم کنید"</string>
     <string name="privacy_settings_title" msgid="6437057228255974577">"پشتیبان‌گیری"</string>
-    <string name="backup_section_title" msgid="6539706829848457794">"تهیهٔ نسخهٔ پشتیبان و بازیابی"</string>
+    <string name="backup_section_title" msgid="6539706829848457794">"پشتیبان‌گیری و بازیابی"</string>
     <string name="personal_data_section_title" msgid="6368610168625722682">"اطلاعات شخصی"</string>
     <string name="backup_data_title" msgid="507663517227498525">"پشتیبان‌گیری از داده‌های من"</string>
     <string name="backup_data_summary" msgid="8054551085241427531">"‏داده‌های نسخه پشتیبان برنامه، گذرواژه‌های Wi-Fi، و سایر تنظیمات در سرورهای Google"</string>
@@ -3519,15 +3534,6 @@
     <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"متوجه شدم"</string>
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"اعلان‌ها"</string>
     <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"مدت"</string>
-    <string name="zen_msg_event_reminder_title" msgid="5362025129007417554">"پیام‌ها، رویدادها و یادآوری‌ها"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"وقتی «مزاحم نشوید» روشن باشد، به‌جز مواردی که در بالا مجاز می‌کنید، پیام‌ها، یادآوری‌ها و رویدادها صامت خواهند شد. می‌توانید تنظیمات پیام‌ها را به‌گونه‌ای انجام دهید که دوستان، خانواده یا سایر مخاطبینتان بتوانند به شما دسترسی پیدا کنند."</string>
-    <string name="zen_onboarding_ok" msgid="8764248406533833392">"تمام"</string>
-    <string name="zen_onboarding_settings" msgid="2815839576245114342">"تنظیمات"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"بدون تصویر یا صدای اعلان‌ها"</string>
-    <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"بدون صدای اعلان‌ها"</string>
-    <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"دیگر اعلان‌ها را نخواهید دید یا شنید. تماس‌های مخاطبین ستاره‌دار و تماس‌گیرنده‌های تکراری مجاز هستند."</string>
-    <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(تنظیم فعلی)"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"تنظیمات اعلان «مزاحم نشوید» تغییر کند؟"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"صداهای نمایه کاری"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"استفاده از صداهای نمایه شخصی"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"از همان صداهای نمایه شخصی‌تان استفاده شود"</string>
@@ -3596,6 +3602,8 @@
     <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"پس‌از قفل‌گشایی، آخرین صفحه استفاده‌شده باز می‌شود. اعلان‌ها در صفحه قفل نشان داده نمی‌شود. برای دیدن آن‌ها، از بالای صفحه تند به‌پایین بکشید."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"صفحه قفل، صفحه‌قفل، رد کردن، نادیده گرفتن"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"وقتی نمایه کاری قفل است"</string>
+    <string name="lock_screen_notif_minimalism" msgid="5556871004042668149">"به‌حداقل رساندن اعلان‌های صفحه قفل"</string>
+    <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"نمایش دادن اعلان‌های کمتر در صفحه قفل"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"نشان دادن تنها اعلان‌های جدید در صفحه قفل"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"اعلان‌هایی که قبلاً مشاهده شده‌اند به‌طور خودکار از صفحه قفل برداشته می‌شوند"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"اعلان‌ها در صفحه قفل"</string>
@@ -3813,6 +3821,7 @@
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"مکالمه‌های اولویت‌دار"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"هیچ‌کدام"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{هیچ‌کدام}=1{۱ مکالمه}one{# مکالمه}other{# مکالمه}}"</string>
+    <string name="zen_mode_from_conversations_settings" msgid="2411930666794576607">"تنظیمات مکالمه"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"افرادی که می‌توانند وقفه ایجاد کنند"</string>
     <string name="zen_mode_people_footer" msgid="7710707353004137431">"حتی اگر برنامه‌های پیام‌رسانی و تماس گرفتن نتوانند شما را خبر کنند، افرادی که در اینجا انتخاب می‌کنید همچنان می‌توانند ازطریق این برنامه‌ها با شما ارتباط برقرار کنند"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"تماس‌ها"</string>
@@ -3836,6 +3845,8 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"همه"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"مخاطبین"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"مخاطبین ستاره‌دار"</string>
+    <string name="zen_mode_from_contacts_settings" msgid="853428575138439415">"تنظیمات مخاطبین"</string>
+    <string name="zen_mode_from_starred_settings" msgid="3389516761063134119">"تنظیمات مخاطبین ستاره‌دار"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"مجاز نبودن"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"هیچ‌کس"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"هشدارها"</string>
@@ -3865,6 +3876,7 @@
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{هیچ برنامه‌ای نمی‌تواند وقفه ایجاد کند}=1{‫{app_1} می‌تواند وقفه ایجاد کند}=2{‫{app_1} و {app_2} می‌توانند وقفه ایجاد کنند}=3{‫{app_1}، {app_2}، و {app_3} می‌توانند وقفه ایجاد کنند}one{‫{app_1}، {app_2}، و # برنامه دیگر می‌توانند وقفه ایجاد کنند}other{‫{app_1}، {app_2}، و # برنامه دیگر می‌توانند وقفه ایجاد کنند}}"</string>
     <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"‫<xliff:g id="APP_LABEL">%s</xliff:g> (کاری)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"درحال محاسبه…"</string>
+    <string name="zen_mode_apps_priority_apps_settings" msgid="5544513568250354374">"تنظیمات برنامه‌ها"</string>
     <string name="zen_mode_plus_n_items" msgid="6136713354369243421">"‪+<xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"مجاز کردن برنامه‌ها برای لغو"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"برنامه‌هایی که می‌توانند وقفه ایجاد کنند"</string>
@@ -3907,8 +3919,8 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"ایجاد حالت"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"حالت سفارشی"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"نام حالت"</string>
-    <!-- no translation found for zen_mode_edit_choose_icon_title (6452801577128788362) -->
-    <skip />
+    <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"نام حالت نباید خالی باشد"</string>
+    <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"نمادی را انتخاب کنید"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"رویدادهای تقویم"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"روال وقت خواب"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"هنگام رانندگی"</string>
@@ -3978,12 +3990,9 @@
     <string name="managing_admin" msgid="2633920317425356619">"مدیریت شده توسط <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"باز کردن به‌صورت پیش‌فرض"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"باز کردن پیوندهای پشتیبانی شده"</string>
-    <!-- no translation found for app_launch_open_in_app (2208182888681699512) -->
-    <skip />
-    <!-- no translation found for app_launch_open_in_browser (766170191853009756) -->
-    <skip />
-    <!-- no translation found for app_launch_top_intro_message (9037324384325518290) -->
-    <skip />
+    <string name="app_launch_open_in_app" msgid="2208182888681699512">"در برنامه"</string>
+    <string name="app_launch_open_in_browser" msgid="766170191853009756">"در مرورگر"</string>
+    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"انتخاب روش باز کردن پیوندهای وب مربوط به این برنامه"</string>
     <string name="app_launch_links_category" msgid="2380467163878760037">"پیوندهایی که در این برنامه باز می‌شوند"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"پیوندهای پشتیبانی شده"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"دیگر اولویت‌های پیش‌فرض"</string>
@@ -4626,7 +4635,7 @@
     <string name="location_category" msgid="3496759112306219062">"مکان"</string>
     <string name="location_indicator_settings_title" msgid="6655916258720093451">"نشانگر مکان در نوار وضعیت"</string>
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"برای همه مکان‌ها نشان داده شود، ازجمله شبکه و اتصال"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"‏اجرای کامل اندازه‌گیری GNSS"</string>
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"‏الزام به انجام اندازه‌گیری‌های کامل GNSS GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"بدون دوره کاری، همه دسته عکس‌های پانوراما و فرکانس‌ها را ردیابی کنید."</string>
     <string name="input_method_category" msgid="2252659253631639005">"روش ورودی"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"دست‌نویسی با قلم"</string>
@@ -4814,8 +4823,7 @@
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"طرح <xliff:g id="CARRIER_NAME">%1$s</xliff:g> شما"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"پیام‌رسانی ماهواره‌ای با حسابتان ارائه شده است"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"پیام‌رسانی ماهواره‌ای با حسابتان ارائه نشده است"</string>
-    <!-- no translation found for summary_add_satellite_setting (190359698593056946) -->
-    <skip />
+    <string name="summary_add_satellite_setting" msgid="190359698593056946">"بیشتر بدانید"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"روش کار"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"وقتی شبکه تلفن همراه ندارید"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"تلفن شما به‌طور خودکار به ماهواره متصل خواهد شد. برای داشتن بهترین اتصال، به فضای بازی بروید که دید واضحی به آسمان داشته باشید."</string>
@@ -5452,10 +5460,15 @@
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"کدخوان پاسخ‌سریع"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"به راهنمایی نیاز دارید؟"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"جستجو در «تنظیمات»"</string>
-    <!-- no translation found for keywords_contacts_storage (9061213057165337893) -->
+    <string name="keywords_contacts_storage" msgid="9061213057165337893">"مخاطبین، فضای ذخیره‌سازی، حساب"</string>
+    <string name="contacts_storage_settings_title" msgid="1574030546525203810">"فضای ذخیره‌سازی مخاطبین"</string>
+    <!-- no translation found for contacts_storage_device_only_preference_label (970250816918108264) -->
     <skip />
-    <!-- no translation found for contacts_storage_settings_title (1574030546525203810) -->
+    <!-- no translation found for contacts_storage_device_only_preference_summary (2339782491812039153) -->
     <skip />
-    <!-- no translation found for contacts_storage_no_account_set (1548101985417720782) -->
+    <!-- no translation found for contacts_storage_selection_message (8082077300632059003) -->
+    <skip />
+    <string name="contacts_storage_no_account_set" msgid="1548101985417720782">"حساب پیش‌فرضی تنظیم نشده است"</string>
+    <!-- no translation found for contacts_storage_first_time_add_account_message (5161093169928132323) -->
     <skip />
 </resources>

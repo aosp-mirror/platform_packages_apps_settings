@@ -17,14 +17,14 @@
 package com.android.settings.development;
 
 import static android.provider.Settings.Global.DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES;
-import static android.window.flags.DesktopModeFlags.ToggleOverride.fromSetting;
-import static android.window.flags.DesktopModeFlags.ToggleOverride.OVERRIDE_OFF;
-import static android.window.flags.DesktopModeFlags.ToggleOverride.OVERRIDE_ON;
-import static android.window.flags.DesktopModeFlags.ToggleOverride.OVERRIDE_UNSET;
+import static android.window.DesktopModeFlags.ToggleOverride.fromSetting;
+import static android.window.DesktopModeFlags.ToggleOverride.OVERRIDE_OFF;
+import static android.window.DesktopModeFlags.ToggleOverride.OVERRIDE_ON;
+import static android.window.DesktopModeFlags.ToggleOverride.OVERRIDE_UNSET;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.window.flags.DesktopModeFlags.ToggleOverride;
+import android.window.DesktopModeFlags.ToggleOverride;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

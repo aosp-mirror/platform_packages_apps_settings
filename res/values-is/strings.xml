@@ -246,16 +246,11 @@
     <string name="roaming_enable" msgid="7845716016861535340">"Tengjast gagnaþjónustu í reiki"</string>
     <string name="roaming_disable" msgid="729512894708689604">"Tengjast gagnaþjónustu í reiki"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"Reikigjöld kunna að eiga við."</string>
-    <!-- no translation found for date_time_auto (1759599045100040686) -->
-    <skip />
-    <!-- no translation found for date_time_auto_summary (8294938565417729698) -->
-    <skip />
-    <!-- no translation found for zone_auto_title (3520584257065861479) -->
-    <skip />
-    <!-- no translation found for zone_auto_title_summary (6540356783943375071) -->
-    <skip />
-    <!-- no translation found for auto_zone_requires_location_summary (8751995978350701451) -->
-    <skip />
+    <string name="date_time_auto" msgid="1759599045100040686">"Sjálfvirk dagsetning og tími"</string>
+    <string name="date_time_auto_summary" msgid="8294938565417729698">"Stilla sjálfvirkt með því að nota merki netkerfis og þráðlaus merki"</string>
+    <string name="zone_auto_title" msgid="3520584257065861479">"Sjálfvirkt tímabelti"</string>
+    <string name="zone_auto_title_summary" msgid="6540356783943375071">"Stilla sjálfvirkt samkvæmt farsímakerfum nálægt þér"</string>
+    <string name="auto_zone_requires_location_summary" msgid="8751995978350701451">"Stilla sjálfvirkt með því að nota staðsetningu tækis, ef tiltæk. Virkrar Wifi-tengingar kann einnig að vera krafist."</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Nota sjálfgefið snið staðar"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Nota 24 tíma snið"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Tími"</string>
@@ -664,6 +659,9 @@
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Stilltu mynstur fyrir einkarýmið þitt"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"Læsa"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"Fela"</string>
+    <string name="private_space_confirm_your_pattern_header" msgid="449382220134788771">"Staðfestu mynstur leynirýmisins"</string>
+    <string name="private_space_confirm_your_pin_header" msgid="4543332157470087796">"Sláðu inn PIN-númer leynirýmisins aftur"</string>
+    <string name="private_space_confirm_your_password_header" msgid="9202308075814307169">"Sláðu inn aðgangsorð leynirýmisins aftur"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Þú getur bætt við allt að <xliff:g id="COUNT">%d</xliff:g> fingraförum"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Þú hefur bætt við hámarksfjölda fingrafara"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Ekki er hægt að bæta fleiri fingraförum við"</string>
@@ -1031,6 +1029,8 @@
     <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"Athugaðu aðgangsorðið og reyndu aftur"</string>
     <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"Hafðu samband við framleiðanda tækisins"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Athugaðu tenginguna og reyndu aftur"</string>
+    <string name="wifi_dpp_check_connection_no_matched_ssid" msgid="3608318690698685427">"Þetta WiFi-net er ekki tiltækt í augnablikinu"</string>
+    <string name="wifi_dpp_check_connection_no_matched_security" msgid="1462706753123341376">"Vandamál kom upp í tengslum við þennan QR-kóða. Reyndu að tengjast með öðrum hætti."</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Velja net"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Veldu net til að tengja tækið þitt"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5170095438763569255">"Bæta þessu tæki við „<xliff:g id="SSID">%1$s</xliff:g>“?"</string>
@@ -1630,8 +1630,7 @@
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Leyfa forritum og þjónustu að leita að nálægum tækjum hvenær sem er, jafnvel þegar slökkt er á Bluetooth. Sem dæmi er hægt að nota þetta til að bæta eiginleika og þjónustu sem byggja á staðsetningu."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Staðsetningar­þjónustur"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Staðsetningar­þjónus­tur"</string>
-    <!-- no translation found for location_time_zone_detection_toggle_title (720338048522014712) -->
-    <skip />
+    <string name="location_time_zone_detection_toggle_title" msgid="720338048522014712">"Nota staðsetningu fyrir tímabelti"</string>
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Ekki er hægt að stilla tímabelti sjálfvirkt"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
     <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Slökkt er á staðsetningu eða staðsetningarþjónustum"</string>
@@ -1642,13 +1641,11 @@
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Staðsetningarstillingar"</string>
     <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"Laga þetta"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"Hætta við"</string>
-    <!-- no translation found for location_time_zone_detection_auto_is_off (4785540862935730060) -->
-    <skip />
+    <string name="location_time_zone_detection_auto_is_off" msgid="4785540862935730060">"Ekki í boði þegar slökkt er á sjálfvirku tímabelti"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Slökkt er á staðsetningargreiningu tímabeltis"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Staðsetningargreining tímabeltis er ekki studd"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Breytingar á staðsetningargreiningu tímabeltis eru ekki leyfðar"</string>
-    <!-- no translation found for location_time_zone_detection_auto_is_on (1837317773761632655) -->
-    <skip />
+    <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"Ef staðsetning tækis er tiltæk þá kann hún að vera notuð til að stilla tímabeltið þitt"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Skoða lagalegar upplýsingar, stöðu, útgáfu hugbúnaðar"</string>
     <string name="legal_information" msgid="7509900979811934843">"Lagalegar upplýsingar"</string>
     <string name="manual" msgid="3651593989906084868">"Handbók"</string>
@@ -1949,13 +1946,26 @@
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Aðgengi"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Vélbúnaðarlyklaborð"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Endurkastslyklar"</string>
-    <string name="bounce_keys_summary" msgid="7347050868868080302">"Lyklaborðið hunsar snöggan endurtekinn innslátt á sama lykilinn innan <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
+    <!-- no translation found for bounce_keys_summary (7418024428905737729) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_title (4088646362538368693) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_subtitle (5640575860258120026) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_200 (7876774697200082558) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_400 (8146580138675322657) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_600 (6166166103942612488) -->
+    <skip />
     <string name="slow_keys" msgid="2891452895499690837">"Hægir lyklar"</string>
-    <string name="slow_keys_summary" msgid="1784371292745423292">"Stillir tímann sem það tekur lyklainnslátt að virka í <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
+    <!-- no translation found for slow_keys_summary (2914214326648535377) -->
+    <skip />
     <string name="sticky_keys" msgid="7317317044898161747">"Festilyklar"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Ýttu á einn lykil í einu fyrir flýtilykla í staðinn fyrir að halda lyklum saman niðri"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Músarhnappar"</string>
-    <string name="mouse_keys_summary" msgid="2396247040177734245">"Notaðu sjálft lyklaborðið til að stjórna músinni."</string>
+    <!-- no translation found for mouse_keys_summary (7030731235143286467) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Flýtilyklar"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Sýna lista yfir flýtileiðir"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Lyklaborð og verkfæri vinnusniðs"</string>
@@ -2024,6 +2034,10 @@
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Veldu nýjan lykil fyrir <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Aðgengi vélbúnaðarlyklaborðs"</string>
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Festilyklar, endurkastslyklar, músarhnappar"</string>
+    <!-- no translation found for keyboard_repeat_key_title (3641350808120194549) -->
+    <skip />
+    <!-- no translation found for keyboard_repeat_key_summary (3970350989341158854) -->
+    <skip />
     <string name="ime_label_title" msgid="8994569521516807168">"Útlit: <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Sjálfgefið"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Sjálfvirkt: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2428,7 +2442,8 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"Forskoða"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Hefðbundnir valkostir"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"Tungumál"</string>
-    <string name="captioning_text_size" msgid="8039448543171463017">"Leturstærð"</string>
+    <!-- no translation found for captioning_text_size (5764254558945371745) -->
+    <skip />
     <string name="captioning_preset" msgid="4174276086501638524">"Stíll texta"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"Sérsniðnir valkostir"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"Bakgrunnslitur"</string>
@@ -3519,15 +3534,6 @@
     <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"Ég skil"</string>
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"Tilkynningar"</string>
     <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"Lengd"</string>
-    <string name="zen_msg_event_reminder_title" msgid="5362025129007417554">"Skilaboð, viðburðir og áminningar"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"Þegar kveikt er á „Ónáðið ekki“ munu engin hljóð heyrast vegna skilaboða, áminninga eða viðburða, nema fyrir það sem þú heimilar að ofan. Hægt er að breyta stillingum til leyfa símtöl frá vinum, fjölskyldumeðlimum eða öðrum tengiliðum."</string>
-    <string name="zen_onboarding_ok" msgid="8764248406533833392">"Lokið"</string>
-    <string name="zen_onboarding_settings" msgid="2815839576245114342">"Stillingar"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"Engin skilaboð á skjá eða hljóð frá tilkynningum"</string>
-    <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"Ekkert hljóð frá tilkynningum"</string>
-    <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"Þú hvorki sérð né heyrir tilkynningar. Símtöl frá stjörnumerktum tengiliðum og þeim sem hringja endurtekið eru leyfð."</string>
-    <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(Núverandi stilling)"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"Viltu breyta stillingum tilkynninga fyrir „Ónáðið ekki“?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Hljóð vinnuprófils"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Nota hljóð úr eigin sniði"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Nota sömu hljóð og eigið snið þitt"</string>
@@ -3596,6 +3602,8 @@
     <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"Fara beint á síðasta virka skjá þegar tekið er úr lás. Tilkynningar birtast ekki á lásskjá. Strjúktu niður frá efsta hluta skjásins til að sjá þær."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Læsa skjá, lásskjár, sleppa, sneiða hjá"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Þegar vinnusnið er læst"</string>
+    <string name="lock_screen_notif_minimalism" msgid="5556871004042668149">"Fækka tilkynningum á lásskjá"</string>
+    <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"Sýna færri tilkynningar á lásskjá"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Sýna aðeins nýjar tilkynningar á lásskjánum"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Fjarlægja tilkynningar sem hafa verið skoðaðar áður sjálfkrafa af lásskjánum"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Tilkynningar á lásskjá"</string>
@@ -3813,6 +3821,7 @@
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"forgangssamtöl"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Engin"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Engin}=1{1 samtal}one{# samtal}other{# samtöl}}"</string>
+    <string name="zen_mode_from_conversations_settings" msgid="2411930666794576607">"Stillingar samtala"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Hver má trufla"</string>
     <string name="zen_mode_people_footer" msgid="7710707353004137431">"Þrátt fyrir að síma- og skilaboðaforrit geti ekki sent þér tilkynningar geta þeir aðilar sem þú velur hér haft samband við þig í gegnum þessi forrit"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Símtöl"</string>
@@ -3836,6 +3845,8 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Hver sem er"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Tengiliðir"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Stjörnumerktir tengiliðir"</string>
+    <string name="zen_mode_from_contacts_settings" msgid="853428575138439415">"Stillingar Tengiliða"</string>
+    <string name="zen_mode_from_starred_settings" msgid="3389516761063134119">"Stillingar stjörnumerktra tengiliða"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"Engin"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"Engin"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Vekjarar"</string>
@@ -3865,6 +3876,7 @@
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Engin forrit mega trufla}=1{{app_1} má trufla}=2{{app_1} og {app_2} mega trufla}=3{{app_1}, {app_2} og {app_3} mega trufla}one{{app_1}, {app_2} og # til viðbótar mega trufla}other{{app_1}, {app_2} og # til viðbótar mega trufla}}"</string>
     <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (vinnusnið)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Reiknar út…"</string>
+    <string name="zen_mode_apps_priority_apps_settings" msgid="5544513568250354374">"Stillingar forrita"</string>
     <string name="zen_mode_plus_n_items" msgid="6136713354369243421">"+<xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Leyfa forritum að hnekkja"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Forrit sem mega trufla"</string>
@@ -3907,8 +3919,8 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Búðu til stillingu"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Sérsniðin stilling"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Heiti stillingar"</string>
-    <!-- no translation found for zen_mode_edit_choose_icon_title (6452801577128788362) -->
-    <skip />
+    <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"Heiti stillingar má ekki vera autt"</string>
+    <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"Veldu tákn"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Dagatalsviðburðir"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Háttatímarútína"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Meðan á akstri stendur"</string>
@@ -3978,12 +3990,9 @@
     <string name="managing_admin" msgid="2633920317425356619">"Stjórnað af <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Opna sjálfgefið"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"Opna studda tengla"</string>
-    <!-- no translation found for app_launch_open_in_app (2208182888681699512) -->
-    <skip />
-    <!-- no translation found for app_launch_open_in_browser (766170191853009756) -->
-    <skip />
-    <!-- no translation found for app_launch_top_intro_message (9037324384325518290) -->
-    <skip />
+    <string name="app_launch_open_in_app" msgid="2208182888681699512">"í forritinu"</string>
+    <string name="app_launch_open_in_browser" msgid="766170191853009756">"í vafranum"</string>
+    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"Veldu hvernig á að opna veftengla fyrir þetta forrit"</string>
     <string name="app_launch_links_category" msgid="2380467163878760037">"Tenglar til að opna í þessu forriti"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Studdir tenglar"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Aðrar sjálfgefnar kjörstillingar"</string>
@@ -5451,10 +5460,15 @@
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR-kóðaskanni"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Þarftu aðstoð?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Leitarstillingar"</string>
-    <!-- no translation found for keywords_contacts_storage (9061213057165337893) -->
+    <string name="keywords_contacts_storage" msgid="9061213057165337893">"tengiliðir, geymsla, reikningur"</string>
+    <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Tengiliðageymsla"</string>
+    <!-- no translation found for contacts_storage_device_only_preference_label (970250816918108264) -->
     <skip />
-    <!-- no translation found for contacts_storage_settings_title (1574030546525203810) -->
+    <!-- no translation found for contacts_storage_device_only_preference_summary (2339782491812039153) -->
     <skip />
-    <!-- no translation found for contacts_storage_no_account_set (1548101985417720782) -->
+    <!-- no translation found for contacts_storage_selection_message (8082077300632059003) -->
+    <skip />
+    <string name="contacts_storage_no_account_set" msgid="1548101985417720782">"Ekkert sjálfgildi stillt"</string>
+    <!-- no translation found for contacts_storage_first_time_add_account_message (5161093169928132323) -->
     <skip />
 </resources>

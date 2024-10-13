@@ -246,16 +246,11 @@
     <string name="roaming_enable" msgid="7845716016861535340">"Verbind aan datadienste tydens swerwing"</string>
     <string name="roaming_disable" msgid="729512894708689604">"Verbind aan datadienste tydens swerwing"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"Swerwingheffings kan geld."</string>
-    <!-- no translation found for date_time_auto (1759599045100040686) -->
-    <skip />
-    <!-- no translation found for date_time_auto_summary (8294938565417729698) -->
-    <skip />
-    <!-- no translation found for zone_auto_title (3520584257065861479) -->
-    <skip />
-    <!-- no translation found for zone_auto_title_summary (6540356783943375071) -->
-    <skip />
-    <!-- no translation found for auto_zone_requires_location_summary (8751995978350701451) -->
-    <skip />
+    <string name="date_time_auto" msgid="1759599045100040686">"Outomatiese datum en tyd"</string>
+    <string name="date_time_auto_summary" msgid="8294938565417729698">"Stel outomaties deur jou netwerk- en draadloosinstellings"</string>
+    <string name="zone_auto_title" msgid="3520584257065861479">"Outomatiese tydsone"</string>
+    <string name="zone_auto_title_summary" msgid="6540356783943375071">"Stel outomaties op grond van mobiele netwerke naby jou"</string>
+    <string name="auto_zone_requires_location_summary" msgid="8751995978350701451">"Stel outomaties met jou toestelligging, indien beskikbaar. ’n Aktiewe wi-fi-verbinding kan vereis word."</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Gebruik verstek vir locale"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Gebruik 24-uur-formaat"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Tyd"</string>
@@ -664,6 +659,9 @@
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Stel \'n patroon vir jou privaat ruimte"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"Sluit"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"Versteek"</string>
+    <string name="private_space_confirm_your_pattern_header" msgid="449382220134788771">"Bevestig jou privaatruimtepatroon"</string>
+    <string name="private_space_confirm_your_pin_header" msgid="4543332157470087796">"Voer weer die PIN vir jou privaat ruimte in"</string>
+    <string name="private_space_confirm_your_password_header" msgid="9202308075814307169">"Voer weer die wagwoord vir jou privaat ruimte in"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Jy kan tot <xliff:g id="COUNT">%d</xliff:g> vingerafdrukke byvoeg"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Jy het die maksimum aantal vingerafdrukke bygevoeg"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Kan nie nog vingerafdrukke byvoeg nie"</string>
@@ -1031,6 +1029,8 @@
     <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"Gaan die wagwoord na en probeer weer"</string>
     <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"Kontak die toestelvervaardiger"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Gaan verbinding na en probeer weer"</string>
+    <string name="wifi_dpp_check_connection_no_matched_ssid" msgid="3608318690698685427">"Hierdie wi-fi-netwerk is nie tans beskikbaar nie"</string>
+    <string name="wifi_dpp_check_connection_no_matched_security" msgid="1462706753123341376">"Daar is ’n probleem met hierdie QR-kode. Probeer op ’n ander manier koppel."</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Kies netwerk"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Kies \'n netwerk om jou toestel te koppel"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5170095438763569255">"Voeg hierdie toestel by “<xliff:g id="SSID">%1$s</xliff:g>”?"</string>
@@ -1630,8 +1630,7 @@
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Laat programme en dienste toe om enige tyd na toestelle in die omtrek te soek, selfs wanneer Bluetooth af is. Dit kan byvoorbeeld gebruik word om ligginggegronde kenmerke en dienste te verbeter."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Liggingdienste"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Liggingdienste"</string>
-    <!-- no translation found for location_time_zone_detection_toggle_title (720338048522014712) -->
-    <skip />
+    <string name="location_time_zone_detection_toggle_title" msgid="720338048522014712">"Gebruik ligging vir tydsone"</string>
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Kan nie die tydsone outomaties stel nie"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
     <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Ligging of Liggingdienste is af"</string>
@@ -1642,13 +1641,11 @@
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Ligginginstellings"</string>
     <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"Maak dit reg"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"Kanselleer"</string>
-    <!-- no translation found for location_time_zone_detection_auto_is_off (4785540862935730060) -->
-    <skip />
+    <string name="location_time_zone_detection_auto_is_off" msgid="4785540862935730060">"Nie beskikbaar wanneer outomatiese tydsone af is nie"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Liggingtydsonebespeuring is gedeaktiveer"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Liggingtydsonebespeuring word nie gesteun nie"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Veranderings aan liggingtydsonebespeuring word nie toegelaat nie"</string>
-    <!-- no translation found for location_time_zone_detection_auto_is_on (1837317773761632655) -->
-    <skip />
+    <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"As jou toestel se ligging beskikbaar is, kan dit gebruik word om jou tydsone te stel"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Sien regsinligting, status, sagteware-weergawe"</string>
     <string name="legal_information" msgid="7509900979811934843">"Regsinligting"</string>
     <string name="manual" msgid="3651593989906084868">"Handleiding"</string>
@@ -1949,13 +1946,26 @@
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Toeganklikheid"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fisiese sleutelbord"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Hopsleutels"</string>
-    <string name="bounce_keys_summary" msgid="7347050868868080302">"Die sleutelbord ignoreer drukke van dieselfde sleutel wat binne <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms vinnig herhaal word"</string>
+    <!-- no translation found for bounce_keys_summary (7418024428905737729) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_title (4088646362538368693) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_subtitle (5640575860258120026) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_200 (7876774697200082558) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_400 (8146580138675322657) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_600 (6166166103942612488) -->
+    <skip />
     <string name="slow_keys" msgid="2891452895499690837">"Stadige sleutels"</string>
-    <string name="slow_keys_summary" msgid="1784371292745423292">"Dit verstel die tyd wat dit neem vir ’n sleuteldruk om geaktiveer te word na <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms toe"</string>
+    <!-- no translation found for slow_keys_summary (2914214326648535377) -->
+    <skip />
     <string name="sticky_keys" msgid="7317317044898161747">"Taaisleutels"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Druk een sleutel op ’n slag vir kortpaaie pleks van om die sleutels saam in te hou"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Muissleutels"</string>
-    <string name="mouse_keys_summary" msgid="2396247040177734245">"Gebruik die fisieke sleutelbord om die muis te beheer."</string>
+    <!-- no translation found for mouse_keys_summary (7030731235143286467) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Kortpadsleutels"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Wys lys met kortpaaie"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Werkprofielsleutelborde en -nutsgoed"</string>
@@ -2024,6 +2034,10 @@
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Kies ’n nuwe sleutel vir <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Toeganklikheid vir fisieke sleutelbord"</string>
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Taaisleutels, hopsleutels, muissleutels"</string>
+    <!-- no translation found for keyboard_repeat_key_title (3641350808120194549) -->
+    <skip />
+    <!-- no translation found for keyboard_repeat_key_summary (3970350989341158854) -->
+    <skip />
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g>-uitleg"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Verstek"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Outomaties: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2428,7 +2442,8 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"Voorskou"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Standaardopsies"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"Taal"</string>
-    <string name="captioning_text_size" msgid="8039448543171463017">"Teksgrootte"</string>
+    <!-- no translation found for captioning_text_size (5764254558945371745) -->
+    <skip />
     <string name="captioning_preset" msgid="4174276086501638524">"Onderskrifstyl"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"Gepasmaakte opsies"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"Agtergrondkleur"</string>
@@ -3519,15 +3534,6 @@
     <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"Het dit"</string>
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"Kennisgewings"</string>
     <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"Tydsduur"</string>
-    <string name="zen_msg_event_reminder_title" msgid="5362025129007417554">"Boodskappe, geleenthede en onthounotas"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"Boodskappe, onthounotas en geleenthede sal gedemp word wanneer Moenie Steur Nie aan is, met die uitsondering van die items wat jy hierbo toelaat. Jy kan boodskapinstellings verstel om dit vir jou vriende, familielede of ander kontakte moontlik te maak om jou te bereik."</string>
-    <string name="zen_onboarding_ok" msgid="8764248406533833392">"Klaar"</string>
-    <string name="zen_onboarding_settings" msgid="2815839576245114342">"Instellings"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"Geen visuele elemente of klank van kennisgewings af nie"</string>
-    <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"Geen klank van kennisgewings af nie"</string>
-    <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"Jy sal nie kennisgewings sien of hoor nie. Oproepe vanaf gesterde kontakte en herhaalbellers word toegelaat."</string>
-    <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(Huidige instelling)"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"Verander Moenie Steur Nie-kennisgewinginstellings?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Werkprofielklanke"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Gebruik persoonlike profiel se klanke"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Gebruik dieselfde klanke as jou persoonlike profiel"</string>
@@ -3596,6 +3602,8 @@
     <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"Gaan ná ontsluiting direk na die skerm wat laas gebruik is. Kennisgewings sal nie op sluitskerm wys nie. Swiep van bo af na onder om hulle te sien."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Sluitskerm, sluit skerm, slaan oor, systap"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Wanneer werkprofiel gesluit is"</string>
+    <string name="lock_screen_notif_minimalism" msgid="5556871004042668149">"Minimalisme van sluitskermkennisgewing"</string>
+    <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"Wys minder kennisgewings op sluitskerm"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Wys net nuwe kennisgewings op sluitskerm"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Verwyder kennisgewings wat voorheen bekyk is outomaties van die sluitskerm"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Kennisgewings op sluitskerm"</string>
@@ -3813,6 +3821,7 @@
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"prioriteitgesprekke"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Geen"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Geen}=1{1 gesprek}other{# gesprekke}}"</string>
+    <string name="zen_mode_from_conversations_settings" msgid="2411930666794576607">"Gesprekke-instellings"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Wie kan onderbreek"</string>
     <string name="zen_mode_people_footer" msgid="7710707353004137431">"Selfs al kan boodskap- of oproepapps jou nie in kennis stel nie, kan mense wat jy hier kies jou steeds deur daardie apps bereik"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Oproepe"</string>
@@ -3836,6 +3845,8 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Enigiemand"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Kontakte"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Gesterde kontakte"</string>
+    <string name="zen_mode_from_contacts_settings" msgid="853428575138439415">"Kontakte-instellings"</string>
+    <string name="zen_mode_from_starred_settings" msgid="3389516761063134119">"Gesterde Kontakte-instellings"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"Geen"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"Geen"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Wekkers"</string>
@@ -3865,6 +3876,7 @@
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Geen apps kan onderbreek nie}=1{{app_1} kan onderbreek}=2{{app_1} en {app_2} kan onderbreek}=3{{app_1}, {app_2} en {app_3} kan onderbreek}other{{app_1}, {app_2} en nog # kan onderbreek}}"</string>
     <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (Werk)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Bereken tans …"</string>
+    <string name="zen_mode_apps_priority_apps_settings" msgid="5544513568250354374">"Appsinstellings"</string>
     <string name="zen_mode_plus_n_items" msgid="6136713354369243421">"+<xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Laat programme toe om te ignoreer"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Programme wat kan onderbreek"</string>
@@ -3907,8 +3919,8 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Skep ’n modus"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Gepasmaakte modus"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Modusnaam"</string>
-    <!-- no translation found for zen_mode_edit_choose_icon_title (6452801577128788362) -->
-    <skip />
+    <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"Modusnaam kan nie leeg wees nie"</string>
+    <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"Kies ‘n ikoon"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Kalendergeleenthede"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Slaaptydroetine"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Terwyl jy bestuur"</string>
@@ -3978,12 +3990,9 @@
     <string name="managing_admin" msgid="2633920317425356619">"Bestuur deur <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Maak by verstek oop"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"Maak gesteunde skakels oop"</string>
-    <!-- no translation found for app_launch_open_in_app (2208182888681699512) -->
-    <skip />
-    <!-- no translation found for app_launch_open_in_browser (766170191853009756) -->
-    <skip />
-    <!-- no translation found for app_launch_top_intro_message (9037324384325518290) -->
-    <skip />
+    <string name="app_launch_open_in_app" msgid="2208182888681699512">"In die app"</string>
+    <string name="app_launch_open_in_browser" msgid="766170191853009756">"In jou blaaier"</string>
+    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"Kies hoe om webskakels vir hierdie app oop te maak"</string>
     <string name="app_launch_links_category" msgid="2380467163878760037">"Skakels om in hierdie program oop te maak"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Gesteunde skakels"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Ander verstekvoorkeure"</string>
@@ -4814,8 +4823,7 @@
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Jou <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-pakket"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"Satellietboodskappe is by jou rekening ingesluit"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Satellietboodskappe is nie by jou rekening ingesluit nie"</string>
-    <!-- no translation found for summary_add_satellite_setting (190359698593056946) -->
-    <skip />
+    <string name="summary_add_satellite_setting" msgid="190359698593056946">"Kry meer inligting"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Hoe dit werk"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"As jy nie ’n selnetwerk het nie"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Jou foon sal outomaties aan ’n satelliet verbind. Vir die beste verbinding, maak seker jy kan die lug duidelik sien."</string>
@@ -5452,10 +5460,15 @@
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR-kodeskandeerder"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Het jy hulp nodig?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Soekinstellings"</string>
-    <!-- no translation found for keywords_contacts_storage (9061213057165337893) -->
+    <string name="keywords_contacts_storage" msgid="9061213057165337893">"kontakte, berging, rekening"</string>
+    <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Kontakte-berging"</string>
+    <!-- no translation found for contacts_storage_device_only_preference_label (970250816918108264) -->
     <skip />
-    <!-- no translation found for contacts_storage_settings_title (1574030546525203810) -->
+    <!-- no translation found for contacts_storage_device_only_preference_summary (2339782491812039153) -->
     <skip />
-    <!-- no translation found for contacts_storage_no_account_set (1548101985417720782) -->
+    <!-- no translation found for contacts_storage_selection_message (8082077300632059003) -->
+    <skip />
+    <string name="contacts_storage_no_account_set" msgid="1548101985417720782">"Geen verstek gestel nie"</string>
+    <!-- no translation found for contacts_storage_first_time_add_account_message (5161093169928132323) -->
     <skip />
 </resources>

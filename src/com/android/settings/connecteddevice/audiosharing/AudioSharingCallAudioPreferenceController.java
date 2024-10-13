@@ -31,6 +31,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -195,40 +196,33 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
                         }
                         updateDeviceItemsInSharingSession();
                         if (!mDeviceItemsInSharingSession.isEmpty()) {
-                            int checkedItemIndex = getActiveItemIndex(mDeviceItemsInSharingSession);
+                            Pair<Integer, AudioSharingDeviceItem> pair = getActiveItemWithIndex();
                             AudioSharingCallAudioDialogFragment.show(
                                     mFragment,
                                     mDeviceItemsInSharingSession,
-                                    checkedItemIndex,
+                                    pair == null ? -1 : pair.first,
                                     (AudioSharingDeviceItem item) -> {
                                         int currentGroupId =
                                                 BluetoothUtils.getPrimaryGroupIdForBroadcast(
                                                         mContext.getContentResolver());
-                                        if (item.getGroupId() == currentGroupId) {
-                                            Log.d(
-                                                    TAG,
-                                                    "Skip set fallback active device: unchanged");
+                                        int clickedGroupId = item.getGroupId();
+                                        if (clickedGroupId == currentGroupId) {
+                                            Log.d(TAG, "Skip set call audio device: unchanged");
                                             return;
                                         }
                                         List<BluetoothDevice> devices =
                                                 mGroupedConnectedDevices.getOrDefault(
-                                                        item.getGroupId(), ImmutableList.of());
+                                                        clickedGroupId, ImmutableList.of());
                                         CachedBluetoothDevice lead =
                                                 AudioSharingUtils.getLeadDevice(
                                                         mCacheManager, devices);
                                         if (lead != null) {
-                                            Log.d(
-                                                    TAG,
-                                                    "Set fallback active device: "
-                                                            + lead.getDevice()
-                                                                    .getAnonymizedAddress());
-                                            lead.setActive();
+                                            String addr = lead.getDevice().getAnonymizedAddress();
+                                            Log.d(TAG, "Set call audio device: " + addr);
+                                            AudioSharingUtils.setPrimary(mContext, lead);
                                             logCallAudioDeviceChange(currentGroupId, lead);
                                         } else {
-                                            Log.d(
-                                                    TAG,
-                                                    "Fail to set fallback active device: no"
-                                                            + " lead device");
+                                            Log.d(TAG, "Skip set call audio device: no lead");
                                         }
                                     });
                         }
@@ -259,6 +253,18 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
             Log.d(TAG, "updatePreference, LE_AUDIO_BROADCAST_ASSISTANT is disconnected.");
             // The fallback active device could be updated if the previous fallback device is
             // disconnected.
+            updateSummary();
+        }
+    }
+
+    @Override
+    public void onActiveDeviceChanged(@Nullable CachedBluetoothDevice activeDevice,
+            int bluetoothProfile) {
+        if (activeDevice != null && bluetoothProfile == BluetoothProfile.LE_AUDIO
+                && BluetoothUtils.isBroadcasting(mBtManager)) {
+            Log.d(TAG, "onActiveDeviceChanged: update summary, device = "
+                    + activeDevice.getDevice().getAnonymizedAddress()
+                    + ", profile = " + bluetoothProfile);
             updateSummary();
         }
     }
@@ -348,30 +354,22 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
      */
     private void updateSummary() {
         updateDeviceItemsInSharingSession();
-        int fallbackActiveGroupId =
-                BluetoothUtils.getPrimaryGroupIdForBroadcast(mContext.getContentResolver());
-        if (fallbackActiveGroupId != BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
-            for (AudioSharingDeviceItem item : mDeviceItemsInSharingSession) {
-                if (item.getGroupId() == fallbackActiveGroupId) {
-                    Log.d(
-                            TAG,
-                            "updatePreference: set summary to fallback group "
-                                    + fallbackActiveGroupId);
-                    AudioSharingUtils.postOnMainThread(
-                            mContext,
-                            () -> {
-                                if (mPreference != null) {
-                                    mPreference.setSummary(
-                                            mContext.getString(
-                                                    R.string.audio_sharing_call_audio_description,
-                                                    item.getName()));
-                                }
-                            });
-                    return;
-                }
-            }
+        Pair<Integer, AudioSharingDeviceItem> pair = getActiveItemWithIndex();
+        if (pair != null) {
+            Log.d(TAG, "updateSummary, group = " + pair.second.getGroupId());
+            AudioSharingUtils.postOnMainThread(
+                    mContext,
+                    () -> {
+                        if (mPreference != null) {
+                            mPreference.setSummary(
+                                    mContext.getString(
+                                            R.string.audio_sharing_call_audio_description,
+                                            pair.second.getName()));
+                        }
+                    });
+            return;
         }
-        Log.d(TAG, "updatePreference: set empty summary");
+        Log.d(TAG, "updateSummary: set empty");
         AudioSharingUtils.postOnMainThread(
                 mContext,
                 () -> {
@@ -388,16 +386,26 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
                         mBtManager, mGroupedConnectedDevices, /* filterByInSharing= */ true);
     }
 
-    private int getActiveItemIndex(List<AudioSharingDeviceItem> deviceItems) {
-        int checkedItemIndex = -1;
+    @Nullable
+    private Pair<Integer, AudioSharingDeviceItem> getActiveItemWithIndex() {
+        List<AudioSharingDeviceItem> deviceItems = new ArrayList<>(mDeviceItemsInSharingSession);
         int fallbackActiveGroupId =
                 BluetoothUtils.getPrimaryGroupIdForBroadcast(mContext.getContentResolver());
-        for (AudioSharingDeviceItem item : deviceItems) {
-            if (item.getGroupId() == fallbackActiveGroupId) {
-                return deviceItems.indexOf(item);
+        if (fallbackActiveGroupId != BluetoothCsipSetCoordinator.GROUP_ID_INVALID) {
+            for (AudioSharingDeviceItem item : deviceItems) {
+                if (item.getGroupId() == fallbackActiveGroupId) {
+                    Log.d(TAG, "getActiveItemWithIndex, fallback group = " + item.getGroupId());
+                    return new Pair<>(deviceItems.indexOf(item), item);
+                }
             }
         }
-        return checkedItemIndex;
+        for (AudioSharingDeviceItem item : deviceItems) {
+            if (item.isActive()) {
+                Log.d(TAG, "getActiveItemWithIndex, active LEA group = " + item.getGroupId());
+                return new Pair<>(deviceItems.indexOf(item), item);
+            }
+        }
+        return null;
     }
 
     @VisibleForTesting

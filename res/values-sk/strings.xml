@@ -246,16 +246,11 @@
     <string name="roaming_enable" msgid="7845716016861535340">"Pripájať sa k dátovým službám pri roamingu"</string>
     <string name="roaming_disable" msgid="729512894708689604">"Pripájať sa k dátovým službám pri roamingu"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"Môžu sa účtovať poplatky za roaming."</string>
-    <!-- no translation found for date_time_auto (1759599045100040686) -->
-    <skip />
-    <!-- no translation found for date_time_auto_summary (8294938565417729698) -->
-    <skip />
-    <!-- no translation found for zone_auto_title (3520584257065861479) -->
-    <skip />
-    <!-- no translation found for zone_auto_title_summary (6540356783943375071) -->
-    <skip />
-    <!-- no translation found for auto_zone_requires_location_summary (8751995978350701451) -->
-    <skip />
+    <string name="date_time_auto" msgid="1759599045100040686">"Automatický dátum a čas"</string>
+    <string name="date_time_auto_summary" msgid="8294938565417729698">"Nastavujte automaticky pomocou sieťových a bezdrôtových signálov"</string>
+    <string name="zone_auto_title" msgid="3520584257065861479">"Automatické časové pásmo"</string>
+    <string name="zone_auto_title_summary" msgid="6540356783943375071">"Nastavujte automaticky na základe mobilných sietí v okolí"</string>
+    <string name="auto_zone_requires_location_summary" msgid="8751995978350701451">"Nastavujte automaticky pomocou polohy zariadenia, ak je k dispozícii. Môže sa vyžadovať aj aktívne pripojenie Wi‑Fi."</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Používať miestny predvolený formát"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Používať 24-hodinový formát"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Čas"</string>
@@ -664,6 +659,9 @@
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Nastavte vzor pre súkromný priestor"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"Uzamknutie"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"Skrytie"</string>
+    <string name="private_space_confirm_your_pattern_header" msgid="449382220134788771">"Potvrďte vzor súkromného priestoru"</string>
+    <string name="private_space_confirm_your_pin_header" msgid="4543332157470087796">"Znova zadajte PIN súkromného priestoru"</string>
+    <string name="private_space_confirm_your_password_header" msgid="9202308075814307169">"Znova zadajte heslo súkromného priestoru"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Maximálny počet odtlačkov, ktoré môžete pridať: <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Pridali ste maximálny počet odtlačkov prstov"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Nie je možné pridať ďalšie odtlačky prstov"</string>
@@ -1031,6 +1029,8 @@
     <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"Skontrolujte heslo a skúste to znova"</string>
     <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"Kontaktujte výrobcu zariadenia"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Skontrolujte pripojenie a skúste to znova"</string>
+    <string name="wifi_dpp_check_connection_no_matched_ssid" msgid="3608318690698685427">"Táto sieť Wi‑Fi nie je momentálne k dispozícii"</string>
+    <string name="wifi_dpp_check_connection_no_matched_security" msgid="1462706753123341376">"Vyskytol sa problém s týmto QR kódom. Skúste sa pripojiť inak."</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Výber siete"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Ak chcete pripojiť svoje zariadenie, vyberte sieť"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5170095438763569255">"Chcete pridať toto zariadenie do siete <xliff:g id="SSID">%1$s</xliff:g>?"</string>
@@ -1630,8 +1630,7 @@
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Povoľte aplikáciám a službám kedykoľvek vyhľadávať zariadenia v okolí, a to aj vtedy, keď je rozhranie Bluetooth vypnuté. Môžete to využiť napríklad na zlepšenie funkcií a služieb podmienených polohou."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Služby určovania polohy"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Služby určovania polohy"</string>
-    <!-- no translation found for location_time_zone_detection_toggle_title (720338048522014712) -->
-    <skip />
+    <string name="location_time_zone_detection_toggle_title" msgid="720338048522014712">"Použiť polohu pre časové pásmo"</string>
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Časové pásmo sa nedá nastaviť automaticky"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
     <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Poloha alebo služby určovania polohy sú vypnuté"</string>
@@ -1642,13 +1641,11 @@
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Nastavenia polohy"</string>
     <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"Opraviť"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"Zrušiť"</string>
-    <!-- no translation found for location_time_zone_detection_auto_is_off (4785540862935730060) -->
-    <skip />
+    <string name="location_time_zone_detection_auto_is_off" msgid="4785540862935730060">"Nie je k dispozícii, keď je automatické časové pásmo vypnuté"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Zisťovanie časového pásma podľa polohy je deaktivované"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Zisťovanie časového pásma podľa polohy nie je podporované"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Zmeny zisťovania časového pásma podľa polohy nie sú povolené"</string>
-    <!-- no translation found for location_time_zone_detection_auto_is_on (1837317773761632655) -->
-    <skip />
+    <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"Ak je k dispozícii poloha zariadenia, môže sa pomocou nej nastaviť časové pásmo"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Zobrazuje právne informácie, stav a verziu softvéru"</string>
     <string name="legal_information" msgid="7509900979811934843">"Právne informácie"</string>
     <string name="manual" msgid="3651593989906084868">"Príručka"</string>
@@ -1949,13 +1946,26 @@
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Dostupnosť"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fyzická klávesnica"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Klávesy jedného stlačenia"</string>
-    <string name="bounce_keys_summary" msgid="7347050868868080302">"Klávesnica ignoruje rýchle opakované stlačenia rovnakého klávesa rýchlosťou do <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
+    <!-- no translation found for bounce_keys_summary (7418024428905737729) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_title (4088646362538368693) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_subtitle (5640575860258120026) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_200 (7876774697200082558) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_400 (8146580138675322657) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_600 (6166166103942612488) -->
+    <skip />
     <string name="slow_keys" msgid="2891452895499690837">"Pomalé klávesy"</string>
-    <string name="slow_keys_summary" msgid="1784371292745423292">"Upraví čas aktivácie po stlačení klávesa na <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
+    <!-- no translation found for slow_keys_summary (2914214326648535377) -->
+    <skip />
     <string name="sticky_keys" msgid="7317317044898161747">"Režim uzamknutia klávesa"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Používať skratky stlačením jedného klávesa namiesto viacerých"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Klávesy myši"</string>
-    <string name="mouse_keys_summary" msgid="2396247040177734245">"Ovládať myš pomocou fyzickej klávesnice"</string>
+    <!-- no translation found for mouse_keys_summary (7030731235143286467) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Klávesové skratky"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Zobraziť zoznam skratiek"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Klávesnice a nástroje pracovného profilu"</string>
@@ -2024,6 +2034,10 @@
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Vyberte pre <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> nový kláves:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Dostupnosť fyzickej klávesnice"</string>
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Režim uzamknutia klávesa, klávesy jedného stlačenia, klávesy myši"</string>
+    <!-- no translation found for keyboard_repeat_key_title (3641350808120194549) -->
+    <skip />
+    <!-- no translation found for keyboard_repeat_key_summary (3970350989341158854) -->
+    <skip />
     <string name="ime_label_title" msgid="8994569521516807168">"Rozloženie <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Predvolené"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automaticky: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2428,7 +2442,8 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"Ukážka"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Štandardné možnosti"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"Jazyk"</string>
-    <string name="captioning_text_size" msgid="8039448543171463017">"Veľkosť textu"</string>
+    <!-- no translation found for captioning_text_size (5764254558945371745) -->
+    <skip />
     <string name="captioning_preset" msgid="4174276086501638524">"Štýl titulkov"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"Vlastné možnosti"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"Farba pozadia"</string>
@@ -3519,15 +3534,6 @@
     <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"Dobre"</string>
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"Upozornenia"</string>
     <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"Trvanie"</string>
-    <string name="zen_msg_event_reminder_title" msgid="5362025129007417554">"Správy, udalosti a pripomenutia"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"Keď je zapnutý režim bez vyrušení, zvuky správ, pripomenutí a udalostí budú vypnuté. Výnimku predstavujú položky, ktoré povolíte vyššie. Môžete upraviť nastavenia správ a povoliť priateľom, rodine alebo ďalším kontaktom spojiť sa s vami."</string>
-    <string name="zen_onboarding_ok" msgid="8764248406533833392">"Hotovo"</string>
-    <string name="zen_onboarding_settings" msgid="2815839576245114342">"Nastavenia"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"Upozornenia bez zobrazenia aj zvuku"</string>
-    <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"Upozornenia bez zvuku"</string>
-    <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"Upozornenia sa nebudú zobrazovať ani vydávať zvuky. Povolené sú kontakty s hviezdičkou a opakujúci sa volajúci."</string>
-    <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(Aktuálne nastavenie)"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"Zmeniť nastavenia upozornení režimu bez vyrušení?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Zvuky pracovného profilu"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Použiť zvuky osobného profilu"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Používať rovnaké zvuky ako váš osobný profil"</string>
@@ -3596,6 +3602,8 @@
     <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"Po odomknutí prejdete priamo na poslednú obrazovku. Upozornenia sa nebudú zobrazovať na uzamknutej obrazovke. Zobrazíte ich potiahnutím zhora nadol."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Uzamknutá obrazovka, preskočiť, obísť"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Keď je pracovný profil zamknutý"</string>
+    <string name="lock_screen_notif_minimalism" msgid="5556871004042668149">"Minimalizmus upozornení na uzamknutej obrazovke"</string>
+    <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"Zobrazovať menej upozornení na uzamknutej obrazovke"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Zobrazovať na uzamknutej obrazovke iba nové upozornenia"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Automaticky odstraňovať upozornenia zobrazené v minulosti z uzamknutej obrazovky"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Upozornenia na uzamknutej obrazovke"</string>
@@ -3813,6 +3821,7 @@
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"prioritné konverzácie"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Žiadne"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Žiadne}=1{1 konverzácia}few{# konverzácie}many{# conversations}other{# konverzácií}}"</string>
+    <string name="zen_mode_from_conversations_settings" msgid="2411930666794576607">"Nastavenia konverzácií"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Kto môže vyrušiť"</string>
     <string name="zen_mode_people_footer" msgid="7710707353004137431">"Komunikátory a telefonické aplikácie vám nemôžu posielať upozornenia, ale ľudia, ktorých si tu vyberiete, vás môžu prostredníctvom nich kontaktovať"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Hovory"</string>
@@ -3836,6 +3845,8 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Ktokoľvek"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Kontakty"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Kontakty s hviezdičkou"</string>
+    <string name="zen_mode_from_contacts_settings" msgid="853428575138439415">"Nastavenia kontaktov"</string>
+    <string name="zen_mode_from_starred_settings" msgid="3389516761063134119">"Nastavenia kontaktov s hviezdičkou"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"Žiadne"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"Žiadne"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Budíky"</string>
@@ -3865,6 +3876,7 @@
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Žiadne aplikácie nemôžu vyrušiť}=1{{app_1} môže vyrušiť}=2{{app_1} a {app_2} môžu vyrušiť}=3{{app_1}, {app_2} a {app_3} môžu vyrušiť}few{{app_1}, {app_2} a # ďalšie aplikácie môžu vyrušiť}many{{app_1}, {app_2}, and # more can interrupt}other{{app_1}, {app_2} a # ďalších aplikácií môžu vyrušiť}}"</string>
     <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (práca)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Prebieha výpočet..."</string>
+    <string name="zen_mode_apps_priority_apps_settings" msgid="5544513568250354374">"Nastavenia aplikácií"</string>
     <string name="zen_mode_plus_n_items" msgid="6136713354369243421">"+<xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Povoľte aplikáciám prekonávať nastavenia"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Aplikácie, ktoré môžu vyrušiť"</string>
@@ -3907,8 +3919,8 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Vytvorenie režimu"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Vlastný režim"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Názov režimu"</string>
-    <!-- no translation found for zen_mode_edit_choose_icon_title (6452801577128788362) -->
-    <skip />
+    <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"Pole pre názov režimu nemôže byť prázdne"</string>
+    <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"Vyberte ikonu"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Udalosti v kalendári"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Postup Večierka"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Počas jazdy"</string>
@@ -3978,12 +3990,9 @@
     <string name="managing_admin" msgid="2633920317425356619">"Spravované aplikáciou <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Predvolené otváranie"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"Otvárať podporované odkazy"</string>
-    <!-- no translation found for app_launch_open_in_app (2208182888681699512) -->
-    <skip />
-    <!-- no translation found for app_launch_open_in_browser (766170191853009756) -->
-    <skip />
-    <!-- no translation found for app_launch_top_intro_message (9037324384325518290) -->
-    <skip />
+    <string name="app_launch_open_in_app" msgid="2208182888681699512">"V aplikácii"</string>
+    <string name="app_launch_open_in_browser" msgid="766170191853009756">"V prehliadači"</string>
+    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"Vyberte, ako sa majú v tejto aplikácii otvárať webové odkazy"</string>
     <string name="app_launch_links_category" msgid="2380467163878760037">"Odkazy na otvorenie v tejto aplikácii"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Podporované odkazy"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Ďalšie predvolené predvoľby"</string>
@@ -4814,8 +4823,7 @@
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Vaša tarifa <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"Správy cez satelit sú zahrnuté vo vašom účte"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Správy cez satelit nie sú zahrnuté vo vašom účte"</string>
-    <!-- no translation found for summary_add_satellite_setting (190359698593056946) -->
-    <skip />
+    <string name="summary_add_satellite_setting" msgid="190359698593056946">"Ďalšie informácie"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Ako to funguje"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"Keď nemáte k dispozícii mobilnú sieť"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Váš telefón sa automaticky pripojí k satelitu. V záujme čo najlepšieho pripojenia choďte na miesto, odkiaľ je dobrý výhľad na oblohu."</string>
@@ -5454,10 +5462,15 @@
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Skener QR kódov"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Potrebujete pomoc?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Vyhľadávať v nastaveniach"</string>
-    <!-- no translation found for keywords_contacts_storage (9061213057165337893) -->
+    <string name="keywords_contacts_storage" msgid="9061213057165337893">"kontakty, priestor, účet"</string>
+    <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Úložisko kontaktov"</string>
+    <!-- no translation found for contacts_storage_device_only_preference_label (970250816918108264) -->
     <skip />
-    <!-- no translation found for contacts_storage_settings_title (1574030546525203810) -->
+    <!-- no translation found for contacts_storage_device_only_preference_summary (2339782491812039153) -->
     <skip />
-    <!-- no translation found for contacts_storage_no_account_set (1548101985417720782) -->
+    <!-- no translation found for contacts_storage_selection_message (8082077300632059003) -->
+    <skip />
+    <string name="contacts_storage_no_account_set" msgid="1548101985417720782">"Nie je nastavená žiadna predvolená hodnota"</string>
+    <!-- no translation found for contacts_storage_first_time_add_account_message (5161093169928132323) -->
     <skip />
 </resources>

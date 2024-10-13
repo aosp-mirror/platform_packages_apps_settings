@@ -39,21 +39,41 @@ import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.app.Flags;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.provider.Contacts;
 import android.service.notification.ZenPolicy;
 import android.service.notification.ZenPolicy.ConversationSenders;
 import android.service.notification.ZenPolicy.PeopleType;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import androidx.fragment.app.testing.EmptyFragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceViewHolder;
 import androidx.preference.TwoStatePreference;
+import androidx.test.core.content.pm.PackageInfoBuilder;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
+import com.android.settings.R;
 import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
@@ -70,6 +90,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowDialog;
 
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -84,7 +105,13 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
+    @Rule
+    public ActivityScenarioRule<EmptyFragmentActivity> mActivityScenario =
+            new ActivityScenarioRule<>(EmptyFragmentActivity.class);
+
     private Context mContext;
+    private Activity mActivity;
+    private PackageManager mPackageManager;
     @Mock private ZenModesBackend mBackend;
     @Mock private ZenHelperBackend mHelperBackend;
 
@@ -97,6 +124,9 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
+        mActivityScenario.getScenario().onActivity(activity -> mActivity = activity);
+        mPackageManager = mContext.getPackageManager();
 
         mMessagesController = new ZenModePrioritySendersPreferenceController(mContext, "messages",
                 true, mBackend, mHelperBackend);
@@ -114,8 +144,8 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
         mPreferenceScreen.addPreference(mMessagesPrefCategory);
 
         when(mHelperBackend.getStarredContacts()).thenReturn(ImmutableList.of());
-        when(mHelperBackend.getAllContacts()).thenReturn(
-                ImmutableList.of(new ZenHelperBackend.Contact(1, "The only contact", null)));
+        when(mHelperBackend.getAllContacts()).thenReturn(ImmutableList.of(
+                new ZenHelperBackend.Contact(UserHandle.SYSTEM, 1, "The only contact", null)));
         when(mHelperBackend.getAllContactsCount()).thenReturn(1);
 
         when(mHelperBackend.getImportantConversations()).thenReturn(ImmutableList.of());
@@ -1438,5 +1468,143 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
         verify(mBackend).updateMode(captor.capture());
         assertThat(captor.getValue().getPolicy().getPriorityCallSenders())
                 .isEqualTo(PEOPLE_TYPE_NONE);
+    }
+
+    @Test
+    public void displayPreference_hasContactsApp_hasSettingsButton() {
+        String contactsPackage = mContext.getString(R.string.config_contacts_package_name);
+        setUpContactsApp(contactsPackage, /* withPreciseIntents= */ false);
+        mCallsController.displayPreference(mPreferenceScreen);
+
+        SelectorWithWidgetPreference contactsPref = getBoundSelectorPreference(KEY_STARRED);
+
+        assertThat(((View) contactsPref.getExtraWidget().getParent()).getVisibility()).isEqualTo(
+                View.VISIBLE);
+    }
+
+    @Test
+    public void displayPreference_noContactsApp_noSettingsButton() {
+        String contactsPackage = mContext.getString(R.string.config_contacts_package_name);
+        shadowOf(mPackageManager).removePackage(contactsPackage);
+        mCallsController.displayPreference(mPreferenceScreen);
+
+        SelectorWithWidgetPreference contactsPref = getBoundSelectorPreference(KEY_STARRED);
+
+        assertThat(((View) contactsPref.getExtraWidget().getParent()).getVisibility()).isEqualTo(
+                View.GONE);
+    }
+
+    @Test
+    public void contactsSettingsClick_usesBestIntent() {
+        String contactsPackage = mContext.getString(R.string.config_contacts_package_name);
+        setUpContactsApp(contactsPackage, /* withPreciseIntents= */ true);
+
+        mCallsController.displayPreference(mPreferenceScreen);
+        mCallsController.updateZenMode(mCallsPrefCategory, TestModeBuilder.EXAMPLE);
+
+        SelectorWithWidgetPreference contactsPref = getBoundSelectorPreference(KEY_CONTACTS);
+        contactsPref.getExtraWidget().performClick();
+
+        Intent nextActivity = shadowOf(mActivity).getNextStartedActivity();
+        assertThat(nextActivity).isNotNull();
+        assertThat(nextActivity.getPackage()).isEqualTo(contactsPackage);
+        assertThat(nextActivity.getAction()).isEqualTo(Contacts.Intents.UI.LIST_DEFAULT);
+    }
+
+    @Test
+    public void starredContactsSettingsClick_usesBestIntent() {
+        String contactsPackage = mContext.getString(R.string.config_contacts_package_name);
+        setUpContactsApp(contactsPackage, /* withPreciseIntents= */  true);
+
+        mCallsController.displayPreference(mPreferenceScreen);
+        mCallsController.updateZenMode(mCallsPrefCategory, TestModeBuilder.EXAMPLE);
+        SelectorWithWidgetPreference contactsPref = getBoundSelectorPreference(KEY_STARRED);
+
+        contactsPref.getExtraWidget().performClick();
+
+        Intent nextActivity = shadowOf(mActivity).getNextStartedActivity();
+        assertThat(nextActivity).isNotNull();
+        assertThat(nextActivity.getPackage()).isEqualTo(contactsPackage);
+        assertThat(nextActivity.getAction()).isEqualTo(Contacts.Intents.UI.LIST_STARRED_ACTION);
+    }
+
+    @Test
+    public void contactsSettingsClick_usesFallbackIntent() {
+        String contactsPackage = mContext.getString(R.string.config_contacts_package_name);
+        setUpContactsApp(contactsPackage, /* withPreciseIntents= */ false);
+
+        mCallsController.displayPreference(mPreferenceScreen);
+        mCallsController.updateZenMode(mCallsPrefCategory, TestModeBuilder.EXAMPLE);
+        SelectorWithWidgetPreference contactsPref = getBoundSelectorPreference(KEY_CONTACTS);
+
+        contactsPref.getExtraWidget().performClick();
+
+        Intent nextActivity = shadowOf(mActivity).getNextStartedActivity();
+        assertThat(nextActivity).isNotNull();
+        assertThat(nextActivity.getPackage()).isEqualTo(contactsPackage);
+        assertThat(nextActivity.getAction()).isEqualTo(Intent.ACTION_MAIN);
+    }
+
+    @Test
+    public void contactsSettingsClick_multipleProfiles_showsProfileChooserDialog() {
+        String contactsPackage = mContext.getString(R.string.config_contacts_package_name);
+        setUpContactsApp(contactsPackage, /* withPreciseIntents= */ true);
+
+        UserInfo workProfile = new UserInfo(mContext.getUserId() + 10, "Work Profile", 0);
+        workProfile.userType = UserManager.USER_TYPE_PROFILE_MANAGED;
+        UserManager userManager = mContext.getSystemService(UserManager.class);
+        shadowOf(userManager).addProfile(mContext.getUserId(), workProfile.id, workProfile);
+
+        mCallsController.displayPreference(mPreferenceScreen);
+        mCallsController.updateZenMode(mCallsPrefCategory, TestModeBuilder.EXAMPLE);
+        SelectorWithWidgetPreference contactsPref = getBoundSelectorPreference(KEY_CONTACTS);
+
+        contactsPref.getExtraWidget().performClick();
+
+        Dialog profileSelectDialog = ShadowDialog.getLatestDialog();
+        assertThat(profileSelectDialog).isNotNull();
+        TextView dialogTitle = profileSelectDialog.findViewById(android.R.id.title);
+        assertThat(dialogTitle.getText().toString()).isEqualTo("Choose profile");
+    }
+
+    private void setUpContactsApp(String contactsPackage, boolean withPreciseIntents) {
+        ComponentName contactsActivity = new ComponentName(contactsPackage, "ContactsActivity");
+        shadowOf(mPackageManager).installPackage(
+                PackageInfoBuilder.newBuilder()
+                        .setPackageName(contactsPackage)
+                        .build());
+        shadowOf(mPackageManager).addActivityIfNotPresent(contactsActivity);
+
+        // Fallback / default intent filter.
+        IntentFilter mainFilter = new IntentFilter(Intent.ACTION_MAIN);
+        mainFilter.addCategory(Intent.CATEGORY_DEFAULT);
+        mainFilter.addCategory(Intent.CATEGORY_APP_CONTACTS);
+        shadowOf(mPackageManager).addIntentFilterForActivity(contactsActivity, mainFilter);
+
+        if (withPreciseIntents) {
+            IntentFilter listFilter = new IntentFilter(Contacts.Intents.UI.LIST_DEFAULT);
+            listFilter.addCategory(Intent.CATEGORY_DEFAULT);
+            shadowOf(mPackageManager).addIntentFilterForActivity(contactsActivity, listFilter);
+
+            IntentFilter starredFilter = new IntentFilter(Contacts.Intents.UI.LIST_STARRED_ACTION);
+            starredFilter.addCategory(Intent.CATEGORY_DEFAULT);
+            shadowOf(mPackageManager).addIntentFilterForActivity(contactsActivity, starredFilter);
+        }
+    }
+
+    private SelectorWithWidgetPreference getBoundSelectorPreference(String key) {
+        SelectorWithWidgetPreference selectorPref = checkNotNull(
+                mCallsPrefCategory.findPreference(key));
+
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        View view = inflater.inflate(selectorPref.getLayoutResource(), null);
+        LinearLayout widgetView = view.findViewById(android.R.id.widget_frame);
+        assertThat(widgetView).isNotNull();
+        inflater.inflate(selectorPref.getWidgetLayoutResource(), widgetView, true);
+
+        PreferenceViewHolder viewHolder = PreferenceViewHolder.createInstanceForTests(view);
+        selectorPref.onBindViewHolder(viewHolder);
+
+        return selectorPref;
     }
 }

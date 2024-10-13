@@ -48,7 +48,7 @@
     <string name="stay_awake_on_fold_summary" msgid="1939963751585954262">"Құрылғыңызды бүктегенде, алдыңғы экран қосылады."</string>
     <string name="selective_stay_awake_title" msgid="7887645333447645168">"Тек ойындар, бейнелер және т.б."</string>
     <string name="selective_stay_awake_summary" msgid="9055967322921984543">"Экранды күту режиміне қоймайтын қолданбаларда алдыңғы экран қосылады."</string>
-    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Жалғастыру үшін жоғары қарай сырғытыңыз"</string>
+    <string name="stay_awake_on_lockscreen_title" msgid="8088456642083051068">"Жалғастыру үшін жоғары қарай сырғыту"</string>
     <string name="stay_awake_on_lockscreen_summary" msgid="8825321939913726566">"Қолданбаны пайдалана беру үшін телефоныңызды бүгіп жауып, алдыңғы экранда жоғары қарай сырғытыңыз немесе экран құлыпталғанша бірнеше секунд күтіңіз. Ойындар мен бейне қолданбалары автоматты түрде жұмысын жалғастырады."</string>
     <string name="sleep_on_fold_title" msgid="7626123024330501411">"Ешқашан"</string>
     <string name="sleep_on_fold_summary" msgid="4191753338303043456">"Құрылғыңызды бүгіп жапқан кезде, алдыңғы экран өшіп, құлыпталады."</string>
@@ -246,16 +246,11 @@
     <string name="roaming_enable" msgid="7845716016861535340">"Роуминг кезінде дерек тасымалдау қызметтеріне қосылу"</string>
     <string name="roaming_disable" msgid="729512894708689604">"Роуминг кезінде дерек тасымалдау қызметтеріне қосылу"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"Роуминг үшін ақы алынуы мүмкін."</string>
-    <!-- no translation found for date_time_auto (1759599045100040686) -->
-    <skip />
-    <!-- no translation found for date_time_auto_summary (8294938565417729698) -->
-    <skip />
-    <!-- no translation found for zone_auto_title (3520584257065861479) -->
-    <skip />
-    <!-- no translation found for zone_auto_title_summary (6540356783943375071) -->
-    <skip />
-    <!-- no translation found for auto_zone_requires_location_summary (8751995978350701451) -->
-    <skip />
+    <string name="date_time_auto" msgid="1759599045100040686">"Күн мен уақытты автоматты түрде анықтау"</string>
+    <string name="date_time_auto_summary" msgid="8294938565417729698">"Желі мен сымсыз сигналдар арқылы автоматты түрде орнатылады."</string>
+    <string name="zone_auto_title" msgid="3520584257065861479">"Aвтоматты уақыт белдеуі"</string>
+    <string name="zone_auto_title_summary" msgid="6540356783943375071">"Маңайдағы мобильдік желілер негізінде автоматты түрде орнату"</string>
+    <string name="auto_zone_requires_location_summary" msgid="8751995978350701451">"Құрылғы локациясы (қолжетімді болса) арқылы автоматты түрде орнатылады. Қосулы Wi-Fi байланысы да қажет болуы мүмкін."</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Жергілікті әдепкі формат"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24 сағаттық формат"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Уақыт"</string>
@@ -664,6 +659,9 @@
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Жеке кеңістік үшін өрнек орнату"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"Құлыптау"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"Жасыру"</string>
+    <string name="private_space_confirm_your_pattern_header" msgid="449382220134788771">"Құпия кеңістігіңіздің өрнегін растаңыз"</string>
+    <string name="private_space_confirm_your_pin_header" msgid="4543332157470087796">"Құпия кеңістігіңіздің PIN кодын қайта енгізіңіз"</string>
+    <string name="private_space_confirm_your_password_header" msgid="9202308075814307169">"Құпия кеңістігіңіздің құпия сөзін қайта енгізіңіз"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"<xliff:g id="COUNT">%d</xliff:g> саусақ ізіне дейін қосуға болады"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Саусақ іздерінің максималды саны енгізілді"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Қосымша саусақ іздері енгізілмейді"</string>
@@ -1031,6 +1029,8 @@
     <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"Құпия сөзді тексеріп, әрекетті қайталаңыз."</string>
     <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"Құрылғы өндірушісіне хабарласыңыз."</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Байланысты тексеріп, әрекетті қайталаңыз."</string>
+    <string name="wifi_dpp_check_connection_no_matched_ssid" msgid="3608318690698685427">"Бұл Wi-Fi желісі қазіргі уақытта қолжетімді емес."</string>
+    <string name="wifi_dpp_check_connection_no_matched_security" msgid="1462706753123341376">"QR кодына қатысты мәселе пайда болды. Басқа жолмен қосып көріңіз."</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Желіні таңдау"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Құрылғыны жалғау үшін желіні таңдаңыз"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5170095438763569255">"Құрылғы “<xliff:g id="SSID">%1$s</xliff:g>” желісіне қосылсын ба?"</string>
@@ -1630,8 +1630,7 @@
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Bluetooth өшірулі болса да, қолданбалар мен қызметтерге маңайдағы құрылғыларды іздеуге рұқсат беріледі. Бұл параметрді, мысалы, локация функциялары мен қызметтерін жақсарту үшін пайдалануға болады."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Локация қызметтері"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Локация қызметтері"</string>
-    <!-- no translation found for location_time_zone_detection_toggle_title (720338048522014712) -->
-    <skip />
+    <string name="location_time_zone_detection_toggle_title" msgid="720338048522014712">"Уақыт белдеуін орнату үшін локацияны пайдалану"</string>
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Уақыт белдеуі автоматты түрде орнатылмады"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
     <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Локация функциялары өшірулі."</string>
@@ -1642,13 +1641,11 @@
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Локация параметрлері"</string>
     <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"Жөндеу"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"Бас тарту"</string>
-    <!-- no translation found for location_time_zone_detection_auto_is_off (4785540862935730060) -->
-    <skip />
+    <string name="location_time_zone_detection_auto_is_off" msgid="4785540862935730060">"Автоматты уақыт белдеуі өшірулі болғанда, қолжетімсіз."</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Орынның уақыт белдеуін анықтау функциясы өшірулі."</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Орынның уақыт белдеуін анықтау функциясына қолдау көрсетілмейді."</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Орынның уақыт белдеуін анықтау функциясына өзгеріс енгізуге болмайды."</string>
-    <!-- no translation found for location_time_zone_detection_auto_is_on (1837317773761632655) -->
-    <skip />
+    <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"Құрылғы локациясы қолжетімді болса, ол уақыт белдеуін орнату үшін пайдаланылуы мүмкін."</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Заңнамалық ақпарат, күйін, бағдарлама нұсқасын қарау"</string>
     <string name="legal_information" msgid="7509900979811934843">"Құқықтық ақпарат"</string>
     <string name="manual" msgid="3651593989906084868">"Қолмен"</string>
@@ -1949,13 +1946,26 @@
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Арнайы мүмкіндіктер"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Физикалық пернетақта"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Қайтару пернелері"</string>
-    <string name="bounce_keys_summary" msgid="7347050868868080302">"Пернетақта перненің <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> мс ішінде жылдам қайталап басылғанын елемейді."</string>
+    <!-- no translation found for bounce_keys_summary (7418024428905737729) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_title (4088646362538368693) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_subtitle (5640575860258120026) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_200 (7876774697200082558) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_400 (8146580138675322657) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_600 (6166166103942612488) -->
+    <skip />
     <string name="slow_keys" msgid="2891452895499690837">"Баяу пернелер"</string>
-    <string name="slow_keys_summary" msgid="1784371292745423292">"Перненің <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> мс ішінде іске қосылуына қажетті уақытты реттейді."</string>
+    <!-- no translation found for slow_keys_summary (2914214326648535377) -->
+    <skip />
     <string name="sticky_keys" msgid="7317317044898161747">"Бекітілген пернелер"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Жылдам пәрмендерді пайдалану үшін пернелерді бірге баспай-ақ, бір пернені бір рет бассаңыз болады."</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Тінтуір пернелері"</string>
-    <string name="mouse_keys_summary" msgid="2396247040177734245">"Тінтуірді басқару үшін физикалық пернетақтаны пайдаланыңыз."</string>
+    <!-- no translation found for mouse_keys_summary (7030731235143286467) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Перне тіркесімдері"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Перне тіркесімдерінің тізімін көрсету"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Жұмыс профилі пернетақталары және құралдары"</string>
@@ -2024,6 +2034,10 @@
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> жаңа пернесін таңдау:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Физикалық пернетақтаның арнайы мүмкіндіктері"</string>
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Бекітілген пернелер, серпімді пернелер, тінтуір пернелері"</string>
+    <!-- no translation found for keyboard_repeat_key_title (3641350808120194549) -->
+    <skip />
+    <!-- no translation found for keyboard_repeat_key_summary (3970350989341158854) -->
+    <skip />
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> форматы"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Әдепкі"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Автоматты: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2428,7 +2442,8 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"Алғы көрініс"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Стандартты опциялар"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"Тіл"</string>
-    <string name="captioning_text_size" msgid="8039448543171463017">"Мәтін өлшемі"</string>
+    <!-- no translation found for captioning_text_size (5764254558945371745) -->
+    <skip />
     <string name="captioning_preset" msgid="4174276086501638524">"Субтитр стилі"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"Реттеу опциялары"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"Артқы фон түсі"</string>
@@ -3519,15 +3534,6 @@
     <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"Түсінікті"</string>
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"Хабарландырулар"</string>
     <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"Ұзақтығы"</string>
-    <string name="zen_msg_event_reminder_title" msgid="5362025129007417554">"Хабарлар, іс-шаралар және еске салғыштар"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"Мазаламау режимі қосулы кезде, хабарлардың, еске салғыштардың және іс-шаралардың дыбысы өшіріледі (жоғарыда рұқсат берілгендерді қоспағанда). Достарыңыз, отбасы мүшелері не басқа контактілер сізге хабарласа алуы үшін, хабарлардың параметрлерін реттей аласыз."</string>
-    <string name="zen_onboarding_ok" msgid="8764248406533833392">"Дайын"</string>
-    <string name="zen_onboarding_settings" msgid="2815839576245114342">"Параметрлер"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"Хабарландырулар визуалды не дыбыстық сигналсыз беріледі"</string>
-    <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"Хабарландырулар дыбыссыз беріледі"</string>
-    <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"Хабарландырулар көрсетілмейді не естілмейді. Жұлдызшалы және тұрақты контактілерден келетін қоңырауларға рұқсат етілген."</string>
-    <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(ағымдағы параметр)"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"Мазаламау режиміндегі хабарландыру параметрлері өзгертілсін бе?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Жұмыс профилінің дыбыстары"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Жеке профиль дыбыстарын пайдалану"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Жеке профильдегідей дыбыстарды пайдалану"</string>
@@ -3596,6 +3602,8 @@
     <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"Құлыпты ашқан соң, бірден соңғы ашылған экранға өтесіз. Құлыптаулы экранда хабарландырулар көрсетілмейді. Оларды көру үшін жоғарыдан төмен сырғытыңыз."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Құлып экраны, құлыптаулы экран, өткізіп жіберу, өткізу"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Жұмыс профилі құлыпталғанда"</string>
+    <string name="lock_screen_notif_minimalism" msgid="5556871004042668149">"Құлып экранындағы хабарландыру минимализмі"</string>
+    <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"Құлып экранында хабарландыруларды аз көрсету"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Құлып экранында тек жаңа хабарландыруларды көрсету"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Құлыптаулы экраннан бұрын көрген хабарландыруларды автоматты түрде өшіру"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Құлып экранындағы хабарландыру"</string>
@@ -3813,6 +3821,7 @@
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"маңызды әңгімелер"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Жоқ"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Жоқ}=1{1 әңгіме}other{# әңгіме}}"</string>
+    <string name="zen_mode_from_conversations_settings" msgid="2411930666794576607">"Әңгіме параметрлері"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Тоқтата алатындар"</string>
     <string name="zen_mode_people_footer" msgid="7710707353004137431">"Хабар алмасу немесе қоңырау шалу қолданбаларының хабарландырулары өшіп тұрса да, осында таңдаған адамдарыңыз сол қолданбалар арқылы сізге хабарласа алады."</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Қоңыраулар"</string>
@@ -3836,6 +3845,8 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Кез келген адам"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Контактілер"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Жұлдызшалы контактілер"</string>
+    <string name="zen_mode_from_contacts_settings" msgid="853428575138439415">"Контакт параметрлері"</string>
+    <string name="zen_mode_from_starred_settings" msgid="3389516761063134119">"Жұлдызшалы контакт параметрлері"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"Ешқандай қоңырауға рұқсат жоқ"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"Жоқ"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Оятқыштар"</string>
@@ -3865,6 +3876,7 @@
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Ешқандай қолданба тоқтата алмайды.}=1{{app_1} тоқтата алады.}=2{{app_1} және {app_2} тоқтата алады.}=3{{app_1}, {app_2} және {app_3} тоқтата алады.}other{{app_1}, {app_2} және тағы # қолданба тоқтата алады.}}"</string>
     <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (жұмыс)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Есептеліп жатыр…"</string>
+    <string name="zen_mode_apps_priority_apps_settings" msgid="5544513568250354374">"Қолданба параметрлері"</string>
     <string name="zen_mode_plus_n_items" msgid="6136713354369243421">"+<xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Қолданбаларға қайта анықтауға рұқсат беру"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Тоқтата алатын қолданбалар"</string>
@@ -3907,8 +3919,8 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Режим жасау"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Арнаулы режим"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Режим аты"</string>
-    <!-- no translation found for zen_mode_edit_choose_icon_title (6452801577128788362) -->
-    <skip />
+    <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"Режим атауы бос болмауы керек."</string>
+    <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"Белгішені таңдау"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Күнтізбедегі іс-шаралар"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"\"Ұйқы\" режимі"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Көлік жүргізгенде"</string>
@@ -3978,12 +3990,9 @@
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> арқылы басқарылады"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Әдепкідей ашу"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"Қолдау көрсетілетін сілтемелерді ашу"</string>
-    <!-- no translation found for app_launch_open_in_app (2208182888681699512) -->
-    <skip />
-    <!-- no translation found for app_launch_open_in_browser (766170191853009756) -->
-    <skip />
-    <!-- no translation found for app_launch_top_intro_message (9037324384325518290) -->
-    <skip />
+    <string name="app_launch_open_in_app" msgid="2208182888681699512">"Қолданбада"</string>
+    <string name="app_launch_open_in_browser" msgid="766170191853009756">"Браузерде"</string>
+    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"Осы қолданбада веб-сілтемелерді ашу жолын таңдаңыз"</string>
     <string name="app_launch_links_category" msgid="2380467163878760037">"Осы қолданбада ашылатын сілтемелер"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Қолдау көрсетілетін сілтемелер"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Басқа да әдепкі параметрлер"</string>
@@ -5451,10 +5460,15 @@
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR кодының сканері"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Көмек керек пе?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Іздеу параметрлері"</string>
-    <!-- no translation found for keywords_contacts_storage (9061213057165337893) -->
+    <string name="keywords_contacts_storage" msgid="9061213057165337893">"контактілер, жад, аккаунт"</string>
+    <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Контактілер жады"</string>
+    <!-- no translation found for contacts_storage_device_only_preference_label (970250816918108264) -->
     <skip />
-    <!-- no translation found for contacts_storage_settings_title (1574030546525203810) -->
+    <!-- no translation found for contacts_storage_device_only_preference_summary (2339782491812039153) -->
     <skip />
-    <!-- no translation found for contacts_storage_no_account_set (1548101985417720782) -->
+    <!-- no translation found for contacts_storage_selection_message (8082077300632059003) -->
+    <skip />
+    <string name="contacts_storage_no_account_set" msgid="1548101985417720782">"Әдепкі аккаунт таңдалмаған"</string>
+    <!-- no translation found for contacts_storage_first_time_add_account_message (5161093169928132323) -->
     <skip />
 </resources>

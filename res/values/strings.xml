@@ -4520,11 +4520,21 @@
     <!-- Title for the 'Bounce keys' preference switch. [CHAR LIMIT=35] -->
     <string name="bounce_keys">Bounce keys</string>
     <!-- Summary text for the 'Bounce keys' preference sub-screen. [CHAR LIMIT=300] -->
-    <string name="bounce_keys_summary">The keyboard ignores quickly repeated presses of the same key within <xliff:g id="bounce_keys_threshold" example="500">%1$d</xliff:g> ms</string>
+    <string name="bounce_keys_summary">The keyboard ignores quickly repeated presses of the same key </string>
+    <!-- Title for the 'Bounce keys' threshold dialog. [CHAR LIMIT=35] -->
+    <string name="bounce_keys_dialog_title">Bounce key threshold</string>
+    <!-- Subtitle for the 'Bounce keys' threshold dialog. [CHAR LIMIT=300] -->
+    <string name="bounce_keys_dialog_subtitle">Choose the duration of time your keyboard ignores repeated key presses</string>
+    <!-- Option title for the 'Bounce keys' threshold dialog for 200 millisecond. [CHAR LIMIT=35] -->
+    <string name="bounce_keys_dialog_option_200">0.2s</string>
+    <!-- Option title for the 'Bounce keys' threshold dialog for 400 millisecond. [CHAR LIMIT=35] -->
+    <string name="bounce_keys_dialog_option_400">0.4s</string>
+    <!-- Option title for the 'Bounce keys' threshold dialog for 600 millisecond. [CHAR LIMIT=35] -->
+    <string name="bounce_keys_dialog_option_600">0.6s</string>
     <!-- Title for the 'Slow keys' preference switch. [CHAR LIMIT=35] -->
     <string name="slow_keys">Slow keys</string>
     <!-- Summary text for the 'Slow keys' preference sub-screen. [CHAR LIMIT=300] -->
-    <string name="slow_keys_summary">Adjusts the time it takes for a key press to activate to <xliff:g id="slow_keys_threshold" example="500">%1$d</xliff:g> ms</string>
+    <string name="slow_keys_summary">Adjusts the time it takes for a key press to activate</string>
     <!-- Title for the 'Sticky keys' preference switch. [CHAR LIMIT=35] -->
     <string name="sticky_keys">Sticky keys</string>
     <!-- Summary text for the 'Sticky keys' preference sub-screen. [CHAR LIMIT=300] -->
@@ -4532,7 +4542,15 @@
     <!-- Title for a toggle switch for 'mouse' keys,  an accessibility setting that allows the mouse pointer to be controlled using certain keys on a physical keyboard if keyboard is connected. [CHAR LIMIT=35] -->
     <string name="mouse_keys">Mouse keys</string>
     <!-- Summary text for the accessibility setting 'Mouse keys' preference sub-screen. [CHAR LIMIT=100] -->
-    <string name="mouse_keys_summary">Use the physical keyboard to control the mouse.</string>
+    <string name="mouse_keys_summary">Use your keyboard to control the pointer</string>
+    <!-- Title for the 'Mouse reverse scrolling' preference switch, which reverses the direction of mouse scroll wheels so that moving the wheel up scrolls the content down. [CHAR LIMIT=60] -->
+    <string name="mouse_reverse_vertical_scrolling">Mouse reverse scrolling</string>
+    <!-- Summary text for the 'Mouse reverse scrolling' preference switch indicating to users that when the setting is enabled that scrolling up with their mouse wheel will move the page content down. [CHAR LIMIT=NONE] -->
+    <string name="mouse_reverse_vertical_scrolling_summary">Scroll up to move the page down</string>
+    <!-- Title for the 'Swap buttons' preference switch, which swaps the left and right buttons of connected mice so that right click will be the primary action button and left clicking will be the secondary action, for example showing the context menu. [CHAR LIMIT=60] -->
+    <string name="mouse_swap_primary_button">Swap left and right buttons</string>
+    <!-- Summary text for the 'Swap buttons' preference switch indicating to users that when this switch is enabled, their left click will behave as though it is the right click (secondary action) and that the right click will be the primary action. [CHAR LIMIT=NONE] -->
+    <string name="mouse_swap_primary_button_summary">Use the left mouse button as your right</string>
     <!-- Title for the button to trigger the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=35] -->
     <string name="keyboard_shortcuts_helper">Keyboard shortcuts</string>
     <!-- Summary text for the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=100] -->
@@ -4686,6 +4704,10 @@
     <string name="keyboard_a11y_settings">Physical keyboard accessibility</string>
     <!-- Summary for the button to trigger the 'Physical keyboard accessibility' page. [CHAR LIMIT=NONE] -->
     <string name="keyboard_a11y_settings_summary">Sticky keys, Bounce keys, Mouse keys</string>
+    <!-- Title for the keyboard repeat key option. [CHAR LIMIT=60] -->
+    <string name="keyboard_repeat_key_title">Repeat Keys</string>
+    <!-- Summary for the keyboard repeat key option. [CHAR LIMIT=NONE] -->
+    <string name="keyboard_repeat_key_summary">Hold down a key to repeat its character until the key is released</string>
 
     <!-- Title text for per IME subtype keyboard layout. [CHAR LIMIT=35] -->
     <string name="ime_label_title"><xliff:g id="ime_label" example="Gboard">%s</xliff:g> layout</string>
@@ -5625,7 +5647,7 @@
     <!-- Title for the preference to change video caption locale. [CHAR LIMIT=35] -->
     <string name="captioning_locale">Language</string>
     <!-- Title for the preference to change video caption text size. [CHAR LIMIT=35] -->
-    <string name="captioning_text_size">Text size</string>
+    <string name="captioning_text_size">Caption size</string>
     <!-- Title for the preference category containing video caption property presets. [CHAR LIMIT=35] -->
     <string name="captioning_preset">Caption style</string>
     <!-- Title for the preference catgeory containing custom video caption properties. [CHAR LIMIT=35] -->
@@ -13691,6 +13713,14 @@
     <string name="keywords_contacts_storage">contacts, storage, account</string>
     <!-- Text for Contacts Storage Settings title [CHAR LIMIT=50]-->
     <string name="contacts_storage_settings_title">Contacts storage</string>
+    <!-- Text for "device only" preference label in Contacts Storage Settings [CHAR LIMIT=34] -->
+    <string name="contacts_storage_device_only_preference_label">Device only</string>
+    <!-- Text for "device only" preference summary in Contacts Storage Settings [CHAR LIMIT=NONE] -->
+    <string name="contacts_storage_device_only_preference_summary">New contacts won\'t be synced with an account</string>
+    <!-- Text for explaining the selection in Contacts Storage Settings [CHAR LIMIT=NONE] -->
+    <string name="contacts_storage_selection_message">Contacts will be saved to your device and synced to your account by default</string>
     <!-- Text for displaying when no account is set as default account [CHAR LIMIT=50] -->
     <string name="contacts_storage_no_account_set">No default set</string>
+    <!-- Text for add account selection message when no account has been added [CHAR LIMIT=100] -->
+    <string name="contacts_storage_first_time_add_account_message">Add an account to get started</string>
 </resources>
