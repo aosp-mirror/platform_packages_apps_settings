@@ -36,10 +36,11 @@ class SoundScreen : PreferenceScreenCreator {
 
     override fun isFlagEnabled(context: Context): Boolean = Flags.catalystSoundScreen()
 
+    override fun hasCompleteHierarchy() = false
+
     override fun fragmentClass(): Class<out Fragment>? = SoundSettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
 
     companion object {
         const val KEY = "sound_screen"
