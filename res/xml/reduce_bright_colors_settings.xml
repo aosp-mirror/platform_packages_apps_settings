@@ -30,8 +30,12 @@
         settings:tickMark="@android:color/transparent"
     />
 
+    <!-- The term `restarts` is usually used for indicating restarting devices.
+         Therefore, We wouldn't want `Keep on after device restarts` preference in the Extra Dim
+         shows up as the search result when the user searches `restart`-->
     <SwitchPreferenceCompat
         android:key="rbc_persist"
         android:persistent="false"
-        android:title="@string/reduce_bright_colors_persist_preference_title" />
+        android:title="@string/reduce_bright_colors_persist_preference_title"
+        settings:searchable="false"/>
 </PreferenceScreen>

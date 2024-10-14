@@ -1180,9 +1180,9 @@ public final class Utils extends com.android.settingslib.Utils {
         try {
             return context.getPackageManager().getApplicationInfo(packageName, 0).enabled;
         } catch (Exception e) {
-            Log.e(TAG, "Error while retrieving application info for package " + packageName, e);
+            // Expected, package is not installed or not enabled.
+            return false;
         }
-        return false;
     }
 
     /** Get {@link Resources} by subscription id if subscription id is valid. */

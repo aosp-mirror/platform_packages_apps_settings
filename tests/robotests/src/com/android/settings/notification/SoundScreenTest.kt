@@ -15,39 +15,23 @@
  */
 package com.android.settings.notification
 
-import android.content.Context
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
-import android.platform.test.flag.junit.SetFlagsRule
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.flags.Flags
+import com.android.settingslib.preference.CatalystScreenTestCase
 import com.google.common.truth.Truth.assertThat
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class SoundScreenTest {
-    @get:Rule val setFlagsRule = SetFlagsRule()
-    private val context: Context = ApplicationProvider.getApplicationContext()
-    private val soundScreen = SoundScreen()
+class SoundScreenTest : CatalystScreenTestCase() {
+
+    override val preferenceScreenCreator = SoundScreen()
+
+    override val flagName: String
+        get() = Flags.FLAG_CATALYST_SOUND_SCREEN
 
     @Test
     fun key() {
-        assertThat(soundScreen.key).isEqualTo(SoundScreen.KEY)
+        assertThat(preferenceScreenCreator.key).isEqualTo(SoundScreen.KEY)
     }
-
-    @Test
-    @EnableFlags(Flags.FLAG_CATALYST_SOUND_SCREEN)
-    fun isFlagEnabled_returnTrue() {
-        assertThat(soundScreen.isFlagEnabled(context)).isTrue()
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_CATALYST_SOUND_SCREEN)
-    fun isFlagEnabled_returnFalse() {
-        assertThat(soundScreen.isFlagEnabled(context)).isFalse()
-    }
-
 }
