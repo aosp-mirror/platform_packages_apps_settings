@@ -306,6 +306,7 @@ class DeviceDetailsFragmentFormatterImpl(
                 override val onCheckedChange = { newChecked: Boolean ->
                     model.onCheckedChange(newChecked)
                 }
+                override val changeable = { !model.disabled }
                 override val icon: (@Composable () -> Unit)?
                     get() {
                         if (model.icon == null) {

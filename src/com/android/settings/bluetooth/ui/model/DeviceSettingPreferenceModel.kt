@@ -44,6 +44,7 @@ sealed interface DeviceSettingPreferenceModel {
         val icon: DeviceSettingIcon? = null,
         val checked: Boolean,
         val onCheckedChange: ((Boolean) -> Unit),
+        val disabled: Boolean = false,
         val action: DeviceSettingActionModel? = null,
     ) : DeviceSettingPreferenceModel
 
