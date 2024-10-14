@@ -51,7 +51,8 @@ final class BatteryOptimizationModeCache {
                     Pair.create(
                             BatteryOptimizationMode.forNumber(
                                     batteryOptimizeUtils.getAppOptimizationMode(
-                                            /* refreshList= */ false)),
+                                            /* refreshList= */ false,
+                                            /* ignoreUnknownMode= */ false)),
                             batteryOptimizeUtils.isOptimizeModeMutable()));
         }
         final Pair<BatteryOptimizationMode, Boolean> batteryOptimizeModeInfo =

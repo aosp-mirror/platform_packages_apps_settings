@@ -100,7 +100,8 @@ public class BatteryOptimizeUtils {
 
     /** Gets the {@link OptimizationMode} based on mode and allowed list. */
     @OptimizationMode
-    public static int getAppOptimizationMode(int mode, boolean isAllowListed) {
+    public static int getAppOptimizationMode(
+            int mode, boolean isAllowListed, boolean ignoreUnknownMode) {
         if (!isAllowListed && mode == AppOpsManager.MODE_IGNORED) {
             return MODE_RESTRICTED;
         } else if (isAllowListed && mode == AppOpsManager.MODE_ALLOWED) {
@@ -108,13 +109,15 @@ public class BatteryOptimizeUtils {
         } else if (!isAllowListed && mode == AppOpsManager.MODE_ALLOWED) {
             return MODE_OPTIMIZED;
         } else {
-            return MODE_UNKNOWN;
+            // MODE_UNKNOWN = isAllowListed + AppOpsManager.MODE_IGNORED
+            // Return Unrestricted mode for Unknown mode since it is in allowlist.
+            return ignoreUnknownMode ? MODE_UNRESTRICTED : MODE_UNKNOWN;
         }
     }
 
     /** Gets the {@link OptimizationMode} for associated app. */
     @OptimizationMode
-    public int getAppOptimizationMode(boolean refreshList) {
+    public int getAppOptimizationMode(boolean refreshList, boolean ignoreUnknownMode) {
         if (refreshList) {
             mPowerAllowListBackend.refreshList();
         }
@@ -127,13 +130,13 @@ public class BatteryOptimizeUtils {
                 String.format(
                         "refresh %s state, allowlisted = %s, mode = %d",
                         mPackageName, mAllowListed, mMode));
-        return getAppOptimizationMode(mMode, mAllowListed);
+        return getAppOptimizationMode(mMode, mAllowListed, ignoreUnknownMode);
     }
 
     /** Gets the {@link OptimizationMode} for associated app. */
     @OptimizationMode
     public int getAppOptimizationMode() {
-        return getAppOptimizationMode(true);
+        return getAppOptimizationMode(/* refreshList= */ true, /* ignoreUnknownMode= */ true);
     }
 
     /** Resets optimization mode for all applications. */
@@ -246,10 +249,11 @@ public class BatteryOptimizeUtils {
             @OptimizationMode
             final int optimizationMode =
                     getAppOptimizationMode(
-                            mode, allowlistBackend.isAllowlisted(info.packageName, info.uid));
-            // Ignores default optimized/unknown state or system/default apps.
+                            mode,
+                            allowlistBackend.isAllowlisted(info.packageName, info.uid),
+                            /* ignoreUnknownMode= */ false);
+            // Ignores default optimized state or system/default apps.
             if (optimizationMode == MODE_OPTIMIZED
-                    || optimizationMode == MODE_UNKNOWN
                     || isSystemOrDefaultApp(
                             context, allowlistBackend, info.packageName, info.uid)) {
                 continue;
@@ -374,7 +378,8 @@ public class BatteryOptimizeUtils {
                         "\tStandbyMode: %s, allowListed: %s, mode: %s",
                         appStandbyMode,
                         allowListed,
-                        getAppOptimizationMode(appStandbyMode, allowListed));
+                        getAppOptimizationMode(
+                                appStandbyMode, allowListed, /* ignoreUnknownMode= */ false));
     }
 
     private static @DataChangeReason int toChangeReason(Action action) {
