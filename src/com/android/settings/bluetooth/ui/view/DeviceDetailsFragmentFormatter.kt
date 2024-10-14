@@ -139,7 +139,7 @@ class DeviceDetailsFragmentFormatterImpl(
             viewModel
                 .getItems(fragmentType)
                 ?.filterIsInstance<DeviceSettingConfigItemModel.BuiltinItem.BluetoothProfilesItem>()
-                ?.first()
+                ?.firstOrNull()
                 ?.invisibleProfiles
         }
 
