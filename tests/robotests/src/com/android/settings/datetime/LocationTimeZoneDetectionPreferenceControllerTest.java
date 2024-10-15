@@ -25,6 +25,8 @@ import static android.app.time.DetectorStatusTypes.DETECTOR_STATUS_RUNNING;
 import static android.app.time.LocationTimeZoneAlgorithmStatus.PROVIDER_STATUS_NOT_PRESENT;
 import static android.app.time.LocationTimeZoneAlgorithmStatus.PROVIDER_STATUS_NOT_READY;
 
+import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -43,11 +45,17 @@ import android.app.time.TimeZoneConfiguration;
 import android.app.time.TimeZoneDetectorStatus;
 import android.content.Context;
 import android.os.UserHandle;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
+
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.flags.Flags;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -62,9 +70,14 @@ import org.robolectric.annotation.Config;
         com.android.settings.testutils.shadow.ShadowFragment.class,
 })
 public class LocationTimeZoneDetectionPreferenceControllerTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     @Mock
     private TimeManager mTimeManager;
     private Context mContext;
+    private SwitchPreference mPreference;
     private LocationTimeZoneDetectionPreferenceController mController;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private InstrumentedPreferenceFragment mFragment;
@@ -76,6 +89,9 @@ public class LocationTimeZoneDetectionPreferenceControllerTest {
         when(mContext.getSystemService(TimeManager.class)).thenReturn(mTimeManager);
         mController = new LocationTimeZoneDetectionPreferenceController(mContext);
         mController.setFragment(mFragment);
+
+        mPreference = new SwitchPreference(mContext);
+        mPreference.setKey("location_time_zone_detection");
     }
 
     @Test
@@ -112,6 +128,17 @@ public class LocationTimeZoneDetectionPreferenceControllerTest {
 
         // Verify the TimeManager was not updated.
         verify(mTimeManager, never()).updateTimeZoneConfiguration(any());
+    }
+
+    @Test
+    @EnableFlags({Flags.FLAG_REVAMP_TOGGLES})
+    public void flagRevampTogglesOn_toggleOff_automaticTimeZone_disablesLocationToggle() {
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig =
+                createTimeZoneCapabilitiesAndConfig(/* useLocationEnabled= */ true,
+                        CAPABILITY_POSSESSED, /* setAutoDetectionEnabled= */ false);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
     }
 
     @Test
@@ -181,7 +208,14 @@ public class LocationTimeZoneDetectionPreferenceControllerTest {
     private static TimeZoneCapabilitiesAndConfig createTimeZoneCapabilitiesAndConfig(
             boolean useLocationEnabled,
             @CapabilityState int configureGeoDetectionEnabledCapability) {
+        return createTimeZoneCapabilitiesAndConfig(useLocationEnabled,
+                configureGeoDetectionEnabledCapability, /* setAutoDetectionEnabled= */ true);
+    }
 
+    private static TimeZoneCapabilitiesAndConfig createTimeZoneCapabilitiesAndConfig(
+            boolean useLocationEnabled,
+            @CapabilityState int configureGeoDetectionEnabledCapability,
+            boolean setAutoDetectionEnabled) {
         // Create a status that matches the user's capability state.
         LocationTimeZoneAlgorithmStatus locationAlgorithmStatus;
         switch (configureGeoDetectionEnabledCapability) {
@@ -213,7 +247,7 @@ public class LocationTimeZoneDetectionPreferenceControllerTest {
                 .build();
 
         TimeZoneConfiguration configuration = new TimeZoneConfiguration.Builder()
-                .setAutoDetectionEnabled(true)
+                .setAutoDetectionEnabled(setAutoDetectionEnabled)
                 .setGeoDetectionEnabled(true)
                 .build();
 
