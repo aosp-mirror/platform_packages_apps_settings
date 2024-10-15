@@ -20,6 +20,9 @@
     android:persistent="false"
     android:title="@string/accessibility_system_controls_title">
 
+    <!-- The item is not specific to Accessibility.
+        The same entry is under System, which is unlikely to be removed,
+        so this is not searchable. -->
     <Preference
         android:fragment="com.android.settings.gestures.SystemNavigationGestureSettings"
         android:key="gesture_system_navigation_input_summary_accessibility"
@@ -28,6 +31,9 @@
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.SystemNavigationPreferenceController"/>
 
+    <!-- The item is not specific to Accessibility.
+        The same entry is under System > Gesture, which is unlikely to be removed,
+        so this is not searchable. -->
     <Preference
         android:fragment="com.android.settings.gestures.OneHandedSettings"
         android:key="gesture_system_navigation_one_handed_accessibility"
@@ -43,21 +49,28 @@
         settings:controller="com.android.settings.accessibility.PowerButtonEndsCallPreferenceController"/>
 
     <!-- Standard auto-rotation preference that will be shown when device state based auto-rotation
-         settings are NOT available. -->
+         settings are NOT available.
+         The item is not specific to Accessibility.
+         The same entry is under Display & touch, which is unlikely to be removed,
+         so this is not searchable.-->
     <SwitchPreferenceCompat
         android:key="toggle_lock_screen_rotation_preference"
         android:persistent="false"
         android:title="@string/accelerometer_title"
+        settings:searchable="false"
         settings:controller="com.android.settings.accessibility.LockScreenRotationPreferenceController"/>
 
     <!-- Auto-rotation preference that will be shown when device state based auto-rotation settings
-         are available. -->
+         are available.
+         The item is not specific to Accessibility.
+         The same entry is under Display & touch, which is unlikely to be removed,
+         so this is not searchable. -->
     <Preference
         android:key="device_state_auto_rotate_accessibility"
         android:persistent="false"
         android:title="@string/accelerometer_title"
         android:fragment="com.android.settings.display.DeviceStateAutoRotateDetailsFragment"
-        settings:keywords="@string/keywords_auto_rotate"
+        settings:searchable="false"
         settings:controller="com.android.settings.display.DeviceStateAutoRotateOverviewController"/>
 
 </PreferenceScreen>
