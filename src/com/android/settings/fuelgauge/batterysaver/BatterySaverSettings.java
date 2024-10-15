@@ -17,8 +17,11 @@
 package com.android.settings.fuelgauge.batterysaver;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
@@ -92,5 +95,11 @@ public class BatterySaverSettings extends DashboardFragment {
                     });
             pref.setLearnMoreText(getString(R.string.battery_saver_link_a11y));
         }
+    }
+
+    @Nullable
+    @Override
+    public String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return BatterySaverScreen.KEY;
     }
 }

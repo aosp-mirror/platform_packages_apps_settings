@@ -25,14 +25,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreferenceCompat;
+
+import com.android.settingslib.PrimarySwitchPreference;
+import com.android.settingslib.widget.MainSwitchPreference;
 
 public class KeyboardRepeatKeysController extends
         InputSettingPreferenceController implements
         LifecycleObserver {
+    private static final String KEY_REPEAT_KEY = "physical_keyboard_repeat_keys";
+    private static final String KEY_REPEAT_KEY_MAIN_PAGE = "repeat_key_main_switch";
 
     @Nullable
-    private SwitchPreferenceCompat mSwitchPreferenceCompat;
+    private PrimarySwitchPreference mPrimarySwitchPreference;
+    @Nullable
+    private MainSwitchPreference mMainSwitchPreference;
 
     public KeyboardRepeatKeysController(@NonNull Context context,
             @NonNull String key) {
@@ -42,7 +48,11 @@ public class KeyboardRepeatKeysController extends
     @Override
     public void displayPreference(@NonNull PreferenceScreen screen) {
         super.displayPreference(screen);
-        mSwitchPreferenceCompat = screen.findPreference(getPreferenceKey());
+        if (KEY_REPEAT_KEY.equals(getPreferenceKey())) {
+            mPrimarySwitchPreference = screen.findPreference(getPreferenceKey());
+        } else if (KEY_REPEAT_KEY_MAIN_PAGE.equals(getPreferenceKey())) {
+            mMainSwitchPreference = screen.findPreference(getPreferenceKey());
+        }
     }
 
     @Override
@@ -63,8 +73,10 @@ public class KeyboardRepeatKeysController extends
 
     @Override
     protected void onInputSettingUpdated() {
-        if (mSwitchPreferenceCompat != null) {
-            mSwitchPreferenceCompat.setChecked(InputSettings.isRepeatKeysEnabled(mContext));
+        if (mPrimarySwitchPreference != null) {
+            mPrimarySwitchPreference.setChecked(InputSettings.isRepeatKeysEnabled(mContext));
+        } else if (mMainSwitchPreference != null) {
+            mMainSwitchPreference.setChecked(InputSettings.isRepeatKeysEnabled(mContext));
         }
     }
 
