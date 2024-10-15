@@ -40,44 +40,47 @@ import org.robolectric.annotation.Config;
 @Config(shadows = {
         com.android.settings.testutils.shadow.ShadowFragment.class,
 })
-public class KeyboardRepeatKeysControllerTest {
+public class KeyboardRepeatKeysDelayPreferenceControllerTest {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private Context mContext;
-
-    private KeyboardRepeatKeysController mKeyboardRepeatKeysController;
+    private KeyboardRepeatKeysDelayPreferenceController mRepeatKeysDelayPreferenceController;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mKeyboardRepeatKeysController = new KeyboardRepeatKeysController(mContext,
-                "physical_keyboard_repeat_keys");
+        mRepeatKeysDelayPreferenceController = new KeyboardRepeatKeysDelayPreferenceController(
+                mContext, "repeat_keys_delay_preference");
     }
 
     @Test
     @EnableFlags(FLAG_KEYBOARD_REPEAT_KEYS)
     public void getAvailabilityStatus_flagIsEnabled_isAvailable() {
-        assertThat(mKeyboardRepeatKeysController.getAvailabilityStatus())
+        assertThat(mRepeatKeysDelayPreferenceController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
     @DisableFlags(FLAG_KEYBOARD_REPEAT_KEYS)
     public void getAvailabilityStatus_flagIsDisabled_notSupport() {
-        assertThat(mKeyboardRepeatKeysController.getAvailabilityStatus())
+        assertThat(mRepeatKeysDelayPreferenceController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
-    public void isChecked_sameWithInputSettingValue() {
-        boolean isRepeatKeysEnabled = InputSettings.isRepeatKeysEnabled(mContext);
-        assertThat(mKeyboardRepeatKeysController.isChecked()).isEqualTo(isRepeatKeysEnabled);
+    public void setSliderPosition_updatesInputSettingValue() {
+        int sliderPosition = 1;
+        mRepeatKeysDelayPreferenceController.setSliderPosition(sliderPosition);
+        assertThat(InputSettings.getRepeatKeysDelay(mContext)).isEqualTo(
+                KeyboardRepeatKeysDelayPreferenceController.REPEAT_KEY_DELAY_VALUE_LIST.get(
+                        sliderPosition));
     }
 
     @Test
-    public void setChecked_updatesInputSettingValue() {
-        mKeyboardRepeatKeysController.setChecked(false);
-
-        assertThat(InputSettings.isRepeatKeysEnabled(mContext)).isEqualTo(false);
+    public void getSliderPosition_matchesWithDelayValue() {
+        int timeout = InputSettings.getRepeatKeysDelay(mContext);
+        assertThat(mRepeatKeysDelayPreferenceController.getSliderPosition()).isEqualTo(
+                KeyboardRepeatKeysDelayPreferenceController.REPEAT_KEY_DELAY_VALUE_LIST.indexOf(
+                        timeout));
     }
 }
