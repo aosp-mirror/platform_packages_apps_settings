@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice.audiosharing;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast.BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID;
 import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast.EXTRA_BLUETOOTH_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -37,6 +38,7 @@ import static org.robolectric.Shadows.shadowOf;
 
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
@@ -50,6 +52,7 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Looper;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.provider.Settings;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -587,6 +590,10 @@ public class AudioSharingDevicePreferenceControllerTest {
     @Test
     public void testInCallState_showCallStateTitleAndSetActiveOnDeviceClick() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        mSetFlagsRule.disableFlags(Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
+                BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
         mController.displayPreference(mScreen);
 
         mAudioManager.setMode(AudioManager.MODE_IN_CALL);
@@ -599,6 +606,32 @@ public class AudioSharingDevicePreferenceControllerTest {
         BluetoothDevicePreference preference = createBluetoothDevicePreference();
         mController.onDeviceClick(preference);
         verify(mCachedDevice).setActive();
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
+                BluetoothCsipSetCoordinator.GROUP_ID_INVALID)).isEqualTo(
+                BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
+    }
+
+    @Test
+    public void testInCallState_enableHysteresisFix_setAndSaveActiveOnDeviceClick() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        mSetFlagsRule.enableFlags(Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
+                BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
+        mController.displayPreference(mScreen);
+
+        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
+        mController.onAudioModeChanged();
+        shadowOf(Looper.getMainLooper()).idle();
+
+        BluetoothDevicePreference preference = createBluetoothDevicePreference();
+        when(mCachedDevice.getGroupId()).thenReturn(1);
+        mController.onDeviceClick(preference);
+        verify(mCachedDevice).setActive();
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
+                BluetoothCsipSetCoordinator.GROUP_ID_INVALID)).isEqualTo(1);
     }
 
     @Test

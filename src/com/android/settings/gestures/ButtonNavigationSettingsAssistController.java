@@ -16,6 +16,7 @@
 
 package com.android.settings.gestures;
 
+import static android.app.contextualsearch.ContextualSearchManager.FEATURE_CONTEXTUAL_SEARCH;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON_OVERLAY;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVERLAY;
 
@@ -50,6 +51,11 @@ public class ButtonNavigationSettingsAssistController extends TogglePreferenceCo
 
     @Override
     public int getAvailabilityStatus() {
+        // Hide the existing assistant UI elements when contextual search is available.
+        if (mContext.getPackageManager().hasSystemFeature(FEATURE_CONTEXTUAL_SEARCH)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
         if (SystemNavigationPreferenceController.isOverlayPackageAvailable(mContext,
                 NAV_BAR_MODE_2BUTTON_OVERLAY)
                 || SystemNavigationPreferenceController.isOverlayPackageAvailable(mContext,

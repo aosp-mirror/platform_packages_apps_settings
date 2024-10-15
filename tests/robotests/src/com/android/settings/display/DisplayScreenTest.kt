@@ -17,24 +17,33 @@ package com.android.settings.display
 
 import android.content.ContextWrapper
 import android.content.res.Resources
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.internal.widget.LockPatternUtils
+import com.android.settings.flags.Flags
+import com.android.settings.testutils.FakeFeatureFactory
+import com.android.settingslib.preference.CatalystScreenTestCase
 import com.google.common.truth.Truth.assertThat
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
+import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
-class DisplayScreenTest {
-    val preferenceScreenCreator = DisplayScreen()
+class DisplayScreenTest : CatalystScreenTestCase() {
+
+    override val preferenceScreenCreator = DisplayScreen()
+
+    override val flagName: String
+        get() = Flags.FLAG_CATALYST_DISPLAY_SETTINGS_SCREEN
 
     private val mockResources = mock<Resources>()
 
-    private val context =
-        object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
+    private val contextWrapper =
+        object : ContextWrapper(context) {
             override fun getResources(): Resources = mockResources
         }
 
@@ -47,13 +56,26 @@ class DisplayScreenTest {
     fun isAvailable_configTrue_shouldReturnTrue() {
         mockResources.stub { on { getBoolean(anyInt()) } doReturn true }
 
-        assertThat(preferenceScreenCreator.isAvailable(context)).isTrue()
+        assertThat(preferenceScreenCreator.isAvailable(contextWrapper)).isTrue()
     }
 
     @Test
     fun isAvailable_configFalse_shouldReturnFalse() {
         mockResources.stub { on { getBoolean(anyInt()) } doReturn false }
 
-        assertThat(preferenceScreenCreator.isAvailable(context)).isFalse()
+        assertThat(preferenceScreenCreator.isAvailable(contextWrapper)).isFalse()
+    }
+
+    @Ignore("robolectric.createActivityContexts cause other test failure")
+    override fun migration() {
+        // avoid UnsupportedOperationException when getDisplay from context
+        System.setProperty("robolectric.createActivityContexts", "true")
+
+        val lockPatternUtils = mock<LockPatternUtils> { on { isSecure(anyInt()) } doReturn true }
+        FakeFeatureFactory.setupForTest().securityFeatureProvider.stub {
+            on { getLockPatternUtils(any()) } doReturn lockPatternUtils
+        }
+
+        super.migration()
     }
 }

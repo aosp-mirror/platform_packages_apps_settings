@@ -38,9 +38,17 @@ class SpaSearchLandingActivity : Activity() {
         finish()
     }
 
-    private fun isValidCall() =
-        PasswordUtils.getCallingAppPackageName(activityToken) ==
+    private fun isValidCall(): Boolean {
+        val callingAppPackageName = PasswordUtils.getCallingAppPackageName(activityToken)
+        if (callingAppPackageName == packageName) {
+            // SettingsIntelligence sometimes starts SearchResultTrampoline first, in this case,
+            // SearchResultTrampoline checks if the call is valid, then SearchResultTrampoline will
+            // start this activity, allow this use case.
+            return true
+        }
+        return callingAppPackageName ==
             featureFactory.searchFeatureProvider.getSettingsIntelligencePkgName(this)
+    }
 
     companion object {
         @VisibleForTesting

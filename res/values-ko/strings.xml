@@ -659,12 +659,9 @@
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"비공개 스페이스용 패턴 설정"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"잠금"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"숨기기"</string>
-    <!-- no translation found for private_space_confirm_your_pattern_header (449382220134788771) -->
-    <skip />
-    <!-- no translation found for private_space_confirm_your_pin_header (4543332157470087796) -->
-    <skip />
-    <!-- no translation found for private_space_confirm_your_password_header (9202308075814307169) -->
-    <skip />
+    <string name="private_space_confirm_your_pattern_header" msgid="449382220134788771">"비공개 스페이스 패턴 확인"</string>
+    <string name="private_space_confirm_your_pin_header" msgid="4543332157470087796">"비공개 스페이스 PIN 다시 입력"</string>
+    <string name="private_space_confirm_your_password_header" msgid="9202308075814307169">"비공개 스페이스 비밀번호 다시 입력"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"지문을 <xliff:g id="COUNT">%d</xliff:g>개까지 추가할 수 있습니다."</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"최대 개수의 지문을 추가했습니다."</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"지문을 추가할 수 없습니다."</string>
@@ -1032,10 +1029,8 @@
     <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"비밀번호를 확인하고 다시 시도해 보세요."</string>
     <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"기기 제조업체에 문의하세요."</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"연결을 확인한 후 다시 시도해 보세요."</string>
-    <!-- no translation found for wifi_dpp_check_connection_no_matched_ssid (3608318690698685427) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_check_connection_no_matched_security (1462706753123341376) -->
-    <skip />
+    <string name="wifi_dpp_check_connection_no_matched_ssid" msgid="3608318690698685427">"현재 이 Wi‑Fi 네트워크를 사용할 수 없습니다."</string>
+    <string name="wifi_dpp_check_connection_no_matched_security" msgid="1462706753123341376">"이 QR 코드에 문제가 있습니다. 다른 방법으로 연결해 보세요."</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"네트워크 선택"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"기기를 연결하려면 네트워크를 선택하세요."</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5170095438763569255">"이 기기를 \'<xliff:g id="SSID">%1$s</xliff:g>\'에 추가하시겠습니까?"</string>
@@ -1654,7 +1649,7 @@
     <string name="about_settings_summary" msgid="4831942939227432513">"법률 정보, 상태, 소프트웨어 버전 보기"</string>
     <string name="legal_information" msgid="7509900979811934843">"법률 정보"</string>
     <string name="manual" msgid="3651593989906084868">"수동"</string>
-    <string name="regulatory_labels" msgid="5960251403367154270">"규정 라벨"</string>
+    <string name="regulatory_labels" msgid="5960251403367154270">"규제 라벨"</string>
     <string name="safety_and_regulatory_info" msgid="8285048080439298528">"안전 및 규제 설명서"</string>
     <string name="copyright_title" msgid="83245306827757857">"저작권"</string>
     <string name="license_title" msgid="8745742085916617540">"라이선스"</string>
@@ -1951,13 +1946,26 @@
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"접근성"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"물리적 키보드"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"바운스 키"</string>
-    <string name="bounce_keys_summary" msgid="7347050868868080302">"<xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g>밀리초 이내에 동일한 키를 빠르게 반복해서 누를 시 키보드에서 이를 무시합니다."</string>
+    <!-- no translation found for bounce_keys_summary (7418024428905737729) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_title (4088646362538368693) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_subtitle (5640575860258120026) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_200 (7876774697200082558) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_400 (8146580138675322657) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_option_600 (6166166103942612488) -->
+    <skip />
     <string name="slow_keys" msgid="2891452895499690837">"느린 키"</string>
-    <string name="slow_keys_summary" msgid="1784371292745423292">"키를 누를 때 활성화하기까지 걸리는 시간을 <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g>밀리초로 조정합니다."</string>
+    <!-- no translation found for slow_keys_summary (2914214326648535377) -->
+    <skip />
     <string name="sticky_keys" msgid="7317317044898161747">"고정키"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"단축키를 사용할 때 키를 함께 누르지 않고 한 번에 하나씩 누릅니다"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"마우스 키"</string>
-    <string name="mouse_keys_summary" msgid="2396247040177734245">"실제 키보드를 사용해서 마우스를 제어합니다."</string>
+    <!-- no translation found for mouse_keys_summary (7030731235143286467) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"단축키"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"단축키 목록 표시"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"직장 프로필 키보드 및 도구"</string>
@@ -2026,6 +2034,10 @@
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>의 새 키 선택:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"실제 키보드 접근성"</string>
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"고정키, 바운스 키, 마우스 키"</string>
+    <!-- no translation found for keyboard_repeat_key_title (3641350808120194549) -->
+    <skip />
+    <!-- no translation found for keyboard_repeat_key_summary (3970350989341158854) -->
+    <skip />
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> 레이아웃"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"기본"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"자동: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2430,7 +2442,8 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"미리보기"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"표준 옵션"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"언어"</string>
-    <string name="captioning_text_size" msgid="8039448543171463017">"텍스트 크기"</string>
+    <!-- no translation found for captioning_text_size (5764254558945371745) -->
+    <skip />
     <string name="captioning_preset" msgid="4174276086501638524">"자막 스타일"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"맞춤설정 옵션"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"배경색"</string>
@@ -3832,7 +3845,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"모든 사용자"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"연락처"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"별표표시한 연락처"</string>
-    <string name="zen_mode_from_contacts_settings" msgid="853428575138439415">"주소록 설정"</string>
+    <string name="zen_mode_from_contacts_settings" msgid="853428575138439415">"연락처 설정"</string>
     <string name="zen_mode_from_starred_settings" msgid="3389516761063134119">"별표표시 연락처 설정"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"없음"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"없음"</string>
@@ -3906,8 +3919,7 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"모드 만들기"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"맞춤 모드"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"모드 이름"</string>
-    <!-- no translation found for zen_mode_edit_name_empty_error (5788063278827188275) -->
-    <skip />
+    <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"모드 이름은 비워 둘 수 없습니다."</string>
     <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"아이콘 선택"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"캘린더 일정"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"취침 시간 루틴"</string>
@@ -5450,5 +5462,13 @@
     <string name="homepage_search" msgid="6759334912284663559">"설정 검색"</string>
     <string name="keywords_contacts_storage" msgid="9061213057165337893">"연락처, 저장소, 계정"</string>
     <string name="contacts_storage_settings_title" msgid="1574030546525203810">"연락처 저장소"</string>
+    <!-- no translation found for contacts_storage_device_only_preference_label (970250816918108264) -->
+    <skip />
+    <!-- no translation found for contacts_storage_device_only_preference_summary (2339782491812039153) -->
+    <skip />
+    <!-- no translation found for contacts_storage_selection_message (8082077300632059003) -->
+    <skip />
     <string name="contacts_storage_no_account_set" msgid="1548101985417720782">"기본 설정 없음"</string>
+    <!-- no translation found for contacts_storage_first_time_add_account_message (5161093169928132323) -->
+    <skip />
 </resources>

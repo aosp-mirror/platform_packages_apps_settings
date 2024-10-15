@@ -101,6 +101,7 @@ class BluetoothDeviceDetailsViewModel(
                                 DeviceSettingStateModel.ActionSwitchPreferenceState(newState)
                             )
                         },
+                        disabled = !isAllowedChangingState,
                         action = action,
                     )
                 } else {
