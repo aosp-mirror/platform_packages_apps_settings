@@ -57,7 +57,7 @@ public class KeyboardAccessibilityBounceKeysControllerTest {
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Rule
     public MockitoRule mMockitoRule = MockitoJUnit.rule();
-    private static final String PREFERENCE_KEY = "accessibility_bounce_keys";
+    private static final String PREFERENCE_KEY = "keyboard_a11y_page_bounce_keys";
     @Mock
     private Preference mPreference;
     private Context mContext;
@@ -116,8 +116,8 @@ public class KeyboardAccessibilityBounceKeysControllerTest {
     public void handlePreferenceTreeClick_performClickOn200_updatesBounceKeysThreshold() {
         mKeyboardAccessibilityBounceKeysController.handlePreferenceTreeClick(mPreference);
         AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        RadioGroup radioGroup = alertDialog.findViewById(R.id.bounce_key_value_group);
-        radioGroup.check(R.id.bounce_key_value_200);
+        RadioGroup radioGroup = alertDialog.findViewById(R.id.input_setting_keys_value_group);
+        radioGroup.check(R.id.input_setting_keys_value_200);
 
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).performClick();
         ShadowLooper.idleMainLooper();

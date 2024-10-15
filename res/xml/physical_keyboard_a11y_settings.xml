@@ -19,35 +19,35 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/keyboard_a11y_settings"
-    android:key="physical_keyboard_a11y">
+    android:key="physical_keyboard_a11y_page">
 
     <PreferenceCategory
-        android:key="keyboard_a11y_category"
+        android:key="keyboard_a11y_page_category"
         android:title="@string/keyboard_a11y_category">
 
         <SwitchPreferenceCompat
-            android:key="accessibility_sticky_keys"
+            android:key="keyboard_a11y_page_sticky_keys"
             android:title="@string/sticky_keys"
             android:summary="@string/sticky_keys_summary"
             android:defaultValue="false"
             settings:controller="com.android.settings.inputmethod.KeyboardAccessibilityStickyKeysController"/>
 
         <com.android.settingslib.PrimarySwitchPreference
-            android:key="accessibility_bounce_keys"
+            android:key="keyboard_a11y_page_bounce_keys"
             android:title="@string/bounce_keys"
             android:summary="@string/bounce_keys_summary"
             android:defaultValue="false"
             settings:controller="com.android.settings.inputmethod.KeyboardAccessibilityBounceKeysController"/>
 
-        <SwitchPreferenceCompat
-            android:key="accessibility_slow_keys"
+        <com.android.settingslib.PrimarySwitchPreference
+            android:key="keyboard_a11y_page_slow_keys"
             android:title="@string/slow_keys"
             android:defaultValue="false"
             android:summary="@string/slow_keys_summary"
             settings:controller="com.android.settings.inputmethod.KeyboardAccessibilitySlowKeysController" />
 
         <SwitchPreferenceCompat
-            android:key="accessibility_mouse_keys"
+            android:key="keyboard_a11y_page_mouse_keys"
             android:title="@string/mouse_keys"
             android:summary="@string/mouse_keys_summary"
             android:defaultValue="false"
