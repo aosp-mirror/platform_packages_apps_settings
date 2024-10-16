@@ -1508,4 +1508,9 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
             return android.R.attr.colorControlNormal;
         }
     }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return NetworkProviderScreen.KEY;
+    }
 }
