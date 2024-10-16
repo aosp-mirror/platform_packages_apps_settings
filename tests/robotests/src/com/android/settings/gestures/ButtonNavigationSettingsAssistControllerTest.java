@@ -16,6 +16,8 @@
 
 package com.android.settings.gestures;
 
+import static android.app.contextualsearch.ContextualSearchManager.FEATURE_CONTEXTUAL_SEARCH;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.mock;
@@ -23,6 +25,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.provider.Settings;
 
@@ -40,13 +43,16 @@ public class ButtonNavigationSettingsAssistControllerTest {
             "assistant_long_press_home_gesture";
 
     private Context mContext;
+    private PackageManager mPackageManager;
     private Resources mResources;
     private ButtonNavigationSettingsAssistController mController;
 
     @Before
     public void setUp() {
         mContext = spy(ApplicationProvider.getApplicationContext());
+        mPackageManager = mock(PackageManager.class);
         mResources = mock(Resources.class);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mContext.getResources()).thenReturn(mResources);
 
         mController = new ButtonNavigationSettingsAssistController(
@@ -97,4 +103,23 @@ public class ButtonNavigationSettingsAssistControllerTest {
                 Settings.Secure.ASSIST_LONG_PRESS_HOME_ENABLED, -1)).isEqualTo(1);
     }
 
+    @Test
+    public void onPreferenceChange_preferenceChecked_valueTrue() {
+        mController.onPreferenceChange(null, true);
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.ASSIST_LONG_PRESS_HOME_ENABLED, -1)).isEqualTo(1);
+    }
+
+    @Test
+    public void onPreferenceChange_preferenceUnchecked_valueFalse() {
+        mController.onPreferenceChange(null, false);
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.ASSIST_LONG_PRESS_HOME_ENABLED, -1)).isEqualTo(0);
+    }
+
+    @Test
+    public void isAvailable_hasContextualSearchSystemFeature_shouldReturnFalse() {
+        when(mPackageManager.hasSystemFeature(FEATURE_CONTEXTUAL_SEARCH)).thenReturn(true);
+        assertThat(mController.isAvailable()).isFalse();
+    }
 }
