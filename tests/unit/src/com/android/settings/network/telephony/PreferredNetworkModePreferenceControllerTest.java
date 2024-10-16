@@ -30,6 +30,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.PersistableBundle;
+import android.telephony.RadioAccessFamily;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -111,7 +112,7 @@ public class PreferredNetworkModePreferenceControllerTest {
 
         verify(mTelephonyManager, times(1)).setAllowedNetworkTypesForReason(
                 TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER,
-                MobileNetworkUtils.getRafFromNetworkType(
+                RadioAccessFamily.getRafFromNetworkType(
                         TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA));
     }
 }
