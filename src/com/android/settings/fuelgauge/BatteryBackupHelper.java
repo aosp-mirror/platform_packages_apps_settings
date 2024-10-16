@@ -196,7 +196,9 @@ public final class BatteryBackupHelper implements BackupHelper {
                     appOptModeMap.containsKey(info.uid)
                             ? (int) appOptModeMap.get(info.uid).getResetOptimizationMode()
                             : BatteryOptimizeUtils.getAppOptimizationMode(
-                                    mode, allowlistedApps.contains(info.packageName));
+                                    mode,
+                                    allowlistedApps.contains(info.packageName),
+                                    /* ignoreUnknownMode= */ false);
             // Ignores default optimized/unknown state or system/default apps.
             if (optimizationMode == BatteryOptimizeUtils.MODE_OPTIMIZED
                     || optimizationMode == BatteryOptimizeUtils.MODE_UNKNOWN
