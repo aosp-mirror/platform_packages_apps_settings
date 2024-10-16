@@ -109,7 +109,10 @@ android_robolectric_test {
 
 java_library {
     name: "Settings-robo-testutils",
-    srcs: ["testutils/**/*.java"],
+    srcs: [
+        "testutils/**/*.java",
+        "testutils/**/*.kt",
+    ],
     libs: [
         "Robolectric_all-target_upstream",
         "Settings-core",

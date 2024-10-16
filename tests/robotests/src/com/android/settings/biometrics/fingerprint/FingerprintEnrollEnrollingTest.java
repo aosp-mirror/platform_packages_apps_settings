@@ -63,12 +63,14 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SystemProperty;
 import com.android.settings.widget.RingProgressBar;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieTask;
 import com.google.android.setupdesign.GlifLayout;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -111,13 +113,21 @@ public class FingerprintEnrollEnrollingTest {
     private final int[] mSfpsStageThresholds = new int[]{0, 9, 13, 19, 25};
     private final int[] mUdfpsStageThresholds = new int[]{0, 13, 17, 22};
 
+    private final SystemProperty mSystemProperty = new SystemProperty();
+
     private FingerprintEnrollEnrolling mActivity;
     private Context mContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mSystemProperty.override("robolectric.createActivityContexts", "true");
         FakeFeatureFactory.setupForTest();
+    }
+
+    @After
+    public void tearDown() {
+        mSystemProperty.close();
     }
 
     @Test
@@ -645,7 +655,6 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     private void createActivity() {
-        System.setProperty("robolectric.createActivityContexts", "true");
         final Bundle savedInstanceState = new Bundle();
         savedInstanceState.putInt(KEY_STATE_PREVIOUS_ROTATION, Surface.ROTATION_90);
 
