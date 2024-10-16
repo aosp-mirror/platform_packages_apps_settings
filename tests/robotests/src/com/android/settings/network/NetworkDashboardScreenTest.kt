@@ -17,12 +17,15 @@ package com.android.settings.network
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.flags.Flags
+import com.android.settings.testutils.shadow.ShadowConnectivityManager
 import com.android.settingslib.preference.CatalystScreenTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
+@Config(shadows = [ShadowConnectivityManager::class])
 class NetworkDashboardScreenTest : CatalystScreenTestCase() {
     override val preferenceScreenCreator = NetworkDashboardScreen()
 
@@ -35,5 +38,9 @@ class NetworkDashboardScreenTest : CatalystScreenTestCase() {
     }
 
     override fun migration() {
+        // Avoid thread hanging when TetheringManager.isTetheringSupported
+        ShadowConnectivityManager.getShadow().setTetheringSupported(true)
+
+        super.migration()
     }
 }
