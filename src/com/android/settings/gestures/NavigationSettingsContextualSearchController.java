@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,57 +17,54 @@
 package com.android.settings.gestures;
 
 import static android.app.contextualsearch.ContextualSearchManager.FEATURE_CONTEXTUAL_SEARCH;
-import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON_OVERLAY;
-import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVERLAY;
 
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.R;
+import androidx.annotation.NonNull;
+
 import com.android.settings.core.TogglePreferenceController;
 
 /**
- * Configures behaviour of long press home button to invoke assistant app gesture.
+ * Configures behaviour of Contextual Search setting.
  */
-public class ButtonNavigationSettingsAssistController extends TogglePreferenceController {
+public class NavigationSettingsContextualSearchController extends TogglePreferenceController {
 
-    public ButtonNavigationSettingsAssistController(Context context, String key) {
-        super(context, key);
+    public NavigationSettingsContextualSearchController(@NonNull Context context,
+            @NonNull String preferenceKey) {
+        super(context, preferenceKey);
     }
 
     @Override
     public boolean isChecked() {
         boolean onByDefault = mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_assistLongPressHomeEnabledDefault);
+                com.android.internal.R.bool.config_searchAllEntrypointsEnabledDefault);
         return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ASSIST_LONG_PRESS_HOME_ENABLED, onByDefault ? 1 : 0) == 1;
+                Settings.Secure.SEARCH_ALL_ENTRYPOINTS_ENABLED, onByDefault ? 1 : 0)
+                == 1;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ASSIST_LONG_PRESS_HOME_ENABLED, isChecked ? 1 : 0);
+                Settings.Secure.SEARCH_ALL_ENTRYPOINTS_ENABLED, isChecked ? 1 : 0);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        // Hide the existing assistant UI elements when contextual search is available.
         if (mContext.getPackageManager().hasSystemFeature(FEATURE_CONTEXTUAL_SEARCH)) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
-
-        if (SystemNavigationPreferenceController.isOverlayPackageAvailable(mContext,
-                NAV_BAR_MODE_2BUTTON_OVERLAY)
-                || SystemNavigationPreferenceController.isOverlayPackageAvailable(mContext,
-                NAV_BAR_MODE_3BUTTON_OVERLAY)) {
             return AVAILABLE;
         }
-
         return UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
+    public boolean isSliceable() {
+        return false;
+    }
+
+    @Override
     public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_system;
+        return NO_RES;
     }
 }

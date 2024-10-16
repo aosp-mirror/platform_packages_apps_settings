@@ -21,9 +21,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.internal.widget.LockPatternUtils
 import com.android.settings.flags.Flags
 import com.android.settings.testutils.FakeFeatureFactory
+import com.android.settings.testutils.SystemProperty
 import com.android.settingslib.preference.CatalystScreenTestCase
 import com.google.common.truth.Truth.assertThat
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
@@ -66,16 +66,16 @@ class DisplayScreenTest : CatalystScreenTestCase() {
         assertThat(preferenceScreenCreator.isAvailable(contextWrapper)).isFalse()
     }
 
-    @Ignore("robolectric.createActivityContexts cause other test failure")
     override fun migration() {
         // avoid UnsupportedOperationException when getDisplay from context
-        System.setProperty("robolectric.createActivityContexts", "true")
+        SystemProperty("robolectric.createActivityContexts", "true").use {
+            val lockPatternUtils =
+                mock<LockPatternUtils> { on { isSecure(anyInt()) } doReturn true }
+            FakeFeatureFactory.setupForTest().securityFeatureProvider.stub {
+                on { getLockPatternUtils(any()) } doReturn lockPatternUtils
+            }
 
-        val lockPatternUtils = mock<LockPatternUtils> { on { isSecure(anyInt()) } doReturn true }
-        FakeFeatureFactory.setupForTest().securityFeatureProvider.stub {
-            on { getLockPatternUtils(any()) } doReturn lockPatternUtils
+            super.migration()
         }
-
-        super.migration()
     }
 }
