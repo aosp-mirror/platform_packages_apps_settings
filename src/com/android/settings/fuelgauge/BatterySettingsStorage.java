@@ -347,7 +347,9 @@ public final class BatterySettingsStorage extends ObservableBackupRestoreStorage
                         appOptModeMap.containsKey(info.uid)
                                 ? (int) appOptModeMap.get(info.uid).getResetOptimizationMode()
                                 : BatteryOptimizeUtils.getAppOptimizationMode(
-                                        mode, mAllowlistedApps.contains(info.packageName));
+                                        mode,
+                                        mAllowlistedApps.contains(info.packageName),
+                                        /* ignoreUnknownMode= */ false);
                 // Ignores default optimized/unknown state or system/default apps.
                 if (optimizationMode == BatteryOptimizeUtils.MODE_OPTIMIZED
                         || optimizationMode == BatteryOptimizeUtils.MODE_UNKNOWN
