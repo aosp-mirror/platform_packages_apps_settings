@@ -195,23 +195,21 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (!isCatalystEnabled()) {
-            ArrayList<VolumeSeekBarPreferenceController> volumeControllers = new ArrayList<>();
-            volumeControllers.add(use(AlarmVolumePreferenceController.class));
-            volumeControllers.add(use(MediaVolumePreferenceController.class));
-            volumeControllers.add(use(SeparateRingVolumePreferenceController.class));
-            volumeControllers.add(use(NotificationVolumePreferenceController.class));
-            volumeControllers.add(use(CallVolumePreferenceController.class));
+        ArrayList<VolumeSeekBarPreferenceController> volumeControllers = new ArrayList<>();
+        volumeControllers.add(use(AlarmVolumePreferenceController.class));
+        volumeControllers.add(use(MediaVolumePreferenceController.class));
+        volumeControllers.add(use(SeparateRingVolumePreferenceController.class));
+        volumeControllers.add(use(NotificationVolumePreferenceController.class));
+        volumeControllers.add(use(CallVolumePreferenceController.class));
 
-            use(HandsFreeProfileOutputPreferenceController.class).setCallback(listPreference ->
-                    onPreferenceDataChanged(listPreference));
-            mHfpOutputControllerKey =
-                    use(HandsFreeProfileOutputPreferenceController.class).getPreferenceKey();
+        use(HandsFreeProfileOutputPreferenceController.class).setCallback(listPreference ->
+                onPreferenceDataChanged(listPreference));
+        mHfpOutputControllerKey =
+                use(HandsFreeProfileOutputPreferenceController.class).getPreferenceKey();
 
-            for (VolumeSeekBarPreferenceController controller : volumeControllers) {
-                controller.setCallback(mVolumeCallback);
-                getSettingsLifecycle().addObserver(controller);
-            }
+        for (VolumeSeekBarPreferenceController controller : volumeControllers) {
+            controller.setCallback(mVolumeCallback);
+            getSettingsLifecycle().addObserver(controller);
         }
     }
 
