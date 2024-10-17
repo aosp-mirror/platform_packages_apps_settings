@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.notification
+package com.android.settings.accessibility
 
 import android.content.Context
 import androidx.fragment.app.Fragment
@@ -24,28 +24,23 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen
-class SoundScreen : PreferenceScreenCreator {
+class VibrationIntensityScreen : PreferenceScreenCreator {
     override val key: String
         get() = KEY
 
     override val title: Int
-        get() = R.string.sound_settings
+        get() = R.string.accessibility_vibration_settings_title
 
-    override val keywords: Int
-        get() = R.string.keywords_sounds
-
-    override fun isFlagEnabled(context: Context): Boolean = Flags.catalystSoundScreen()
+    override fun isFlagEnabled(context: Context): Boolean = Flags.catalystVibrationIntensityScreen()
 
     override fun hasCompleteHierarchy() = false
 
-    override fun fragmentClass(): Class<out Fragment>? = SoundSettings::class.java
+    override fun fragmentClass(): Class<out Fragment>? =
+        VibrationIntensitySettingsFragment::class.java
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(this) {
-            +DialPadTonePreference()
-        }
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
 
     companion object {
-        const val KEY = "sound_screen"
+        const val KEY = "vibration_intensity_screen"
     }
 }
