@@ -16,9 +16,10 @@
 
 package com.android.settings.network.telephony.cdma;
 
-import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA;
-import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA;
-import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_UNKNOWN;
+import static android.telephony.TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA;
+import static android.telephony.TelephonyManager.NETWORK_MODE_NR_LTE_GSM_WCDMA;
+
+import static com.android.settings.network.telephony.mode.NetworkModes.NETWORK_MODE_UNKNOWN;
 
 import android.content.Context;
 import android.provider.Settings;
