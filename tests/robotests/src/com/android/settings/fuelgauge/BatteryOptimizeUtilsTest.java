@@ -128,6 +128,15 @@ public class BatteryOptimizeUtilsTest {
     }
 
     @Test
+    public void testGetAppOptimizationMode_unknownMode_returnOptimized() throws Exception {
+        when(mMockBackend.isAllowlisted(anyString(), anyInt())).thenReturn(true);
+        when(mMockAppOpsManager.checkOpNoThrow(anyInt(), anyInt(), anyString()))
+                .thenReturn(AppOpsManager.MODE_IGNORED);
+
+        assertThat(mBatteryOptimizeUtils.getAppOptimizationMode()).isEqualTo(MODE_UNRESTRICTED);
+    }
+
+    @Test
     public void testIsSystemOrDefaultApp_isSystemOrDefaultApp_returnTrue() {
         when(mMockBackend.isAllowlisted(anyString(), anyInt())).thenReturn(true);
         when(mMockBackend.isDefaultActiveApp(anyString(), anyInt())).thenReturn(true);

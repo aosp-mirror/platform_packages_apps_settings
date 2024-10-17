@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
 
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -32,7 +33,6 @@ import androidx.loader.content.Loader;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryHeaderPreferenceController;
 import com.android.settings.fuelgauge.BatteryInfo;
@@ -125,7 +125,7 @@ public class PowerUsageSummary extends PowerUsageBase
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        final SettingsActivity activity = (SettingsActivity) getActivity();
+        final Activity activity = getActivity();
 
         mBatteryHeaderPreferenceController = use(BatteryHeaderPreferenceController.class);
 
