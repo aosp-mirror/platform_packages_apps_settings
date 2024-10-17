@@ -228,7 +228,7 @@ class AppOptModeSharedPreferencesUtilsTest {
     @Test
     fun updateBatteryOptimizationMode_updateToOptimizedMode_verifyAction() {
         whenever(testBatteryOptimizeUtils?.isOptimizeModeMutable).thenReturn(true)
-        whenever(testBatteryOptimizeUtils?.getAppOptimizationMode(true))
+        whenever(testBatteryOptimizeUtils?.getAppOptimizationMode())
             .thenReturn(MODE_UNRESTRICTED)
 
         val currentOptMode =
@@ -246,9 +246,9 @@ class AppOptModeSharedPreferencesUtilsTest {
     }
 
     @Test
-    fun updateBatteryOptimizationMode_optimizationModeNotChanged_verifyAction() {
+    fun updateBatteryOptimizationMode_optimizationModeImmutable_verifyAction() {
         whenever(testBatteryOptimizeUtils?.isOptimizeModeMutable).thenReturn(false)
-        whenever(testBatteryOptimizeUtils?.getAppOptimizationMode(true))
+        whenever(testBatteryOptimizeUtils?.appOptimizationMode)
             .thenReturn(MODE_UNRESTRICTED)
 
         val currentOptMode =
@@ -268,7 +268,7 @@ class AppOptModeSharedPreferencesUtilsTest {
     @Test
     fun updateBatteryOptimizationMode_updateToSameOptimizationMode_verifyAction() {
         whenever(testBatteryOptimizeUtils?.isOptimizeModeMutable).thenReturn(true)
-        whenever(testBatteryOptimizeUtils?.getAppOptimizationMode(true)).thenReturn(MODE_RESTRICTED)
+        whenever(testBatteryOptimizeUtils?.appOptimizationMode).thenReturn(MODE_RESTRICTED)
 
         val currentOptMode =
             AppOptModeSharedPreferencesUtils.updateBatteryOptimizationMode(
@@ -286,7 +286,7 @@ class AppOptModeSharedPreferencesUtilsTest {
 
     private fun insertAppOptModeEventForTest(expirationTime: Long, mode: Int = MODE_OPTIMIZED) {
         whenever(testBatteryOptimizeUtils?.isOptimizeModeMutable).thenReturn(true)
-        whenever(testBatteryOptimizeUtils?.getAppOptimizationMode(true)).thenReturn(mode)
+        whenever(testBatteryOptimizeUtils?.appOptimizationMode).thenReturn(mode)
         AppOptModeSharedPreferencesUtils.updateAppOptModeExpirationInternal(
             context,
             mutableListOf(UID),

@@ -21,6 +21,7 @@ import static com.android.settings.network.telephony.EnabledNetworkModePreferenc
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
+import android.telephony.RadioAccessFamily;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -72,7 +73,7 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
 
         mTelephonyManager.setAllowedNetworkTypesForReason(
                 TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER,
-                MobileNetworkUtils.getRafFromNetworkType(newPreferredNetworkMode));
+                RadioAccessFamily.getRafFromNetworkType(newPreferredNetworkMode));
 
             final ListPreference listPreference = (ListPreference) preference;
             listPreference.setSummary(getPreferredNetworkModeSummaryResId(newPreferredNetworkMode));
@@ -94,7 +95,7 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
             Log.w(TAG, "TelephonyManager is null");
             return TelephonyManagerConstants.NETWORK_MODE_UNKNOWN;
         }
-        return MobileNetworkUtils.getNetworkTypeFromRaf(
+        return RadioAccessFamily.getNetworkTypeFromRaf(
                 (int) mTelephonyManager.getAllowedNetworkTypesForReason(
                         TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
     }
