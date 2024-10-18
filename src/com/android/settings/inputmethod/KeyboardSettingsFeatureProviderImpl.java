@@ -19,6 +19,7 @@ package com.android.settings.inputmethod;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
 
 /**
@@ -32,12 +33,13 @@ public class KeyboardSettingsFeatureProviderImpl implements KeyboardSettingsFeat
     }
 
     @Override
-    public boolean addFirmwareUpdateCategory(Context context, PreferenceScreen screen) {
-        return false;
-    }
+    public void registerKeyboardInformationCategory(@Nullable PreferenceScreen screen) {}
+
+    @Override
+    public void unregisterKeyboardInformationCategory() {}
 
     @Override
     public Drawable getActionKeyIcon(Context context) {
         return null;
-    };
+    }
 }

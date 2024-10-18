@@ -164,7 +164,7 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
         mFeatureProvider = featureFactory.getKeyboardSettingsFeatureProvider();
         mSupportsFirmwareUpdate = mFeatureProvider.supportsFirmwareUpdate();
         if (mSupportsFirmwareUpdate) {
-            mFeatureProvider.addFirmwareUpdateCategory(getContext(), getPreferenceScreen());
+            mFeatureProvider.registerKeyboardInformationCategory(getPreferenceScreen());
         }
         boolean isModifierKeySettingsEnabled = FeatureFlagUtils
                 .isEnabled(getContext(), FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_MODIFIER_KEY);
@@ -344,7 +344,7 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
         mKeyboardAssistanceCategory.setOrder(1);
         preferenceScreen.addPreference(mKeyboardAssistanceCategory);
         if (mSupportsFirmwareUpdate) {
-            mFeatureProvider.addFirmwareUpdateCategory(getPrefContext(), preferenceScreen);
+            mFeatureProvider.registerKeyboardInformationCategory(preferenceScreen);
         }
 
         if (InputSettings.isAccessibilityBounceKeysFeatureEnabled()
@@ -423,6 +423,9 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
 
     private void unregisterSettingsObserver() {
         getActivity().getContentResolver().unregisterContentObserver(mContentObserver);
+        if (mSupportsFirmwareUpdate) {
+            mFeatureProvider.unregisterKeyboardInformationCategory();
+        }
     }
 
     private void updateAccessibilityBounceKeysSwitch(@NonNull Context context) {
