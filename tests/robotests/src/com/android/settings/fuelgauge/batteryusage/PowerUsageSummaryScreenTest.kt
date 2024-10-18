@@ -19,16 +19,22 @@ import android.content.ContextWrapper
 import android.content.res.Resources
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
+import androidx.fragment.app.testing.FragmentScenario
+import androidx.preference.PreferenceFragmentCompat
 import com.android.settings.R
 import com.android.settings.flags.Flags
+import com.android.settings.testutils.shadow.ShadowUtils
 import com.android.settingslib.preference.CatalystScreenTestCase
 import com.google.common.truth.Truth.assertThat
+import org.junit.After
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
+import org.robolectric.annotation.Config
 
+@Config(shadows = [ShadowUtils::class])
 class PowerUsageSummaryScreenTest : CatalystScreenTestCase() {
 
     override val preferenceScreenCreator = PowerUsageSummaryScreen()
@@ -42,6 +48,11 @@ class PowerUsageSummaryScreenTest : CatalystScreenTestCase() {
         object : ContextWrapper(appContext) {
             override fun getResources(): Resources = mockResources
         }
+
+    @After
+    fun tearDown() {
+        ShadowUtils.reset()
+    }
 
     @Test
     fun key() {
@@ -76,5 +87,15 @@ class PowerUsageSummaryScreenTest : CatalystScreenTestCase() {
             .isEqualTo(R.drawable.ic_settings_battery_white)
     }
 
-    override fun migration() {}
+    override fun migration() {
+        ShadowUtils.setIsBatteryPresent(false)
+
+        super.migration()
+    }
+
+    override fun launchFragmentScenario(fragmentClass: Class<PreferenceFragmentCompat>) =
+        FragmentScenario.launch(
+            fragmentClass,
+            themeResId = R.style.Theme_CollapsingToolbar_Settings,
+        )
 }
