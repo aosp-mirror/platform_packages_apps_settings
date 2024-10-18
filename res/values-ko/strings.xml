@@ -250,7 +250,8 @@
     <string name="date_time_auto_summary" msgid="8294938565417729698">"네트워크 및 무선 신호를 사용하여 자동으로 설정합니다."</string>
     <string name="zone_auto_title" msgid="3520584257065861479">"시간대 자동 설정"</string>
     <string name="zone_auto_title_summary" msgid="6540356783943375071">"주변의 모바일 네트워크를 기반으로 자동으로 설정합니다."</string>
-    <string name="auto_zone_requires_location_summary" msgid="8751995978350701451">"가능한 경우, 기기 위치를 사용하여 자동으로 설정합니다. 활성 상태의 Wi-Fi 연결도 필요할 수 있습니다."</string>
+    <!-- no translation found for auto_zone_requires_location_summary (2366567167956530124) -->
+    <skip />
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"언어 기본값 사용"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24시간 형식 사용"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"시간"</string>
@@ -1946,26 +1947,22 @@
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"접근성"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"물리적 키보드"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"바운스 키"</string>
-    <!-- no translation found for bounce_keys_summary (7418024428905737729) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_title (4088646362538368693) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_subtitle (5640575860258120026) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_option_200 (7876774697200082558) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_option_400 (8146580138675322657) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_option_600 (6166166103942612488) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="7418024428905737729">"동일한 키를 빠르게 반복해서 누를 시 키보드에서 이를 무시합니다."</string>
+    <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"바운스 키 기준점"</string>
+    <string name="bounce_keys_dialog_subtitle" msgid="5640575860258120026">"키보드에서 반복 키 입력을 무시하는 시간을 선택하세요"</string>
+    <string name="bounce_keys_dialog_option_200" msgid="7876774697200082558">"0.2초"</string>
+    <string name="bounce_keys_dialog_option_400" msgid="8146580138675322657">"0.4초"</string>
+    <string name="bounce_keys_dialog_option_600" msgid="6166166103942612488">"0.6초"</string>
     <string name="slow_keys" msgid="2891452895499690837">"느린 키"</string>
-    <!-- no translation found for slow_keys_summary (2914214326648535377) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="2914214326648535377">"키를 누를 때 활성화하기까지 걸리는 시간을 조정합니다."</string>
     <string name="sticky_keys" msgid="7317317044898161747">"고정키"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"단축키를 사용할 때 키를 함께 누르지 않고 한 번에 하나씩 누릅니다"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"마우스 키"</string>
-    <!-- no translation found for mouse_keys_summary (7030731235143286467) -->
-    <skip />
+    <string name="mouse_keys_summary" msgid="7030731235143286467">"키보드를 사용하여 포인터를 제어합니다."</string>
+    <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"마우스 역방향 스크롤"</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"위로 스크롤하여 페이지 아래로 이동합니다."</string>
+    <string name="mouse_swap_primary_button" msgid="3028204969091057207">"왼쪽 및 오른쪽 버튼 바꾸기"</string>
+    <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"왼쪽 마우스 버튼을 오른쪽 버튼으로 사용합니다."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"단축키"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"단축키 목록 표시"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"직장 프로필 키보드 및 도구"</string>
@@ -2034,9 +2031,13 @@
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>의 새 키 선택:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"실제 키보드 접근성"</string>
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"고정키, 바운스 키, 마우스 키"</string>
-    <!-- no translation found for keyboard_repeat_key_title (3641350808120194549) -->
+    <!-- no translation found for keyboard_repeat_keys_title (6346877755243280735) -->
     <skip />
-    <!-- no translation found for keyboard_repeat_key_summary (3970350989341158854) -->
+    <!-- no translation found for keyboard_repeat_keys_timeout_title (3411871149974652293) -->
+    <skip />
+    <!-- no translation found for keyboard_repeat_keys_delay_title (7323531750483922943) -->
+    <skip />
+    <!-- no translation found for keyboard_repeat_keys_summary (8972905345211768313) -->
     <skip />
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> 레이아웃"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"기본"</string>
@@ -2442,8 +2443,7 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"미리보기"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"표준 옵션"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"언어"</string>
-    <!-- no translation found for captioning_text_size (5764254558945371745) -->
-    <skip />
+    <string name="captioning_text_size" msgid="5764254558945371745">"자막 크기"</string>
     <string name="captioning_preset" msgid="4174276086501638524">"자막 스타일"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"맞춤설정 옵션"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"배경색"</string>
@@ -2987,6 +2987,8 @@
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"이 VPN을 연결 해제하시겠습니까?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"연결 해제"</string>
     <string name="vpn_version" msgid="6344167191984400976">"버전"</string>
+    <!-- no translation found for vpn_version_info (5717671228402924155) -->
+    <skip />
     <string name="vpn_forget_long" msgid="729132269203870205">"VPN 삭제"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"기존 VPN을 교체하시겠습니까?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"연결 유지 VPN을 설정하시겠습니까?"</string>
@@ -3823,7 +3825,7 @@
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{없음}=1{대화 1개}other{대화 #개}}"</string>
     <string name="zen_mode_from_conversations_settings" msgid="2411930666794576607">"대화 설정"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"예외 대상"</string>
-    <string name="zen_mode_people_footer" msgid="7710707353004137431">"메시지 또는 전화 앱에서 나에게 알림을 전송할 수 없을 때에도 여기에서 선택한 사용자는 앱을 통해 나에게 연락할 수 있습니다."</string>
+    <string name="zen_mode_people_footer" msgid="7710707353004137431">"메시지 또는 전화 앱에서 나에게 알림을 전송할 수 없을 때에도 여기에서 선택한 사람은 이러한 앱을 통해 나에게 연락할 수 있습니다."</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"전화"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"전화"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"전화"</string>
@@ -5462,13 +5464,13 @@
     <string name="homepage_search" msgid="6759334912284663559">"설정 검색"</string>
     <string name="keywords_contacts_storage" msgid="9061213057165337893">"연락처, 저장소, 계정"</string>
     <string name="contacts_storage_settings_title" msgid="1574030546525203810">"연락처 저장소"</string>
-    <!-- no translation found for contacts_storage_device_only_preference_label (970250816918108264) -->
-    <skip />
-    <!-- no translation found for contacts_storage_device_only_preference_summary (2339782491812039153) -->
-    <skip />
-    <!-- no translation found for contacts_storage_selection_message (8082077300632059003) -->
-    <skip />
+    <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"기기만"</string>
+    <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"새 연락처는 계정과 동기화되지 않습니다."</string>
+    <string name="contacts_storage_selection_message" msgid="8082077300632059003">"연락처가 기기에 저장되고 기본적으로 계정과 동기화됩니다."</string>
     <string name="contacts_storage_no_account_set" msgid="1548101985417720782">"기본 설정 없음"</string>
-    <!-- no translation found for contacts_storage_first_time_add_account_message (5161093169928132323) -->
+    <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"계정을 추가하여 시작하세요."</string>
+    <!-- no translation found for search_gesture_feature_title (7037117019612710960) -->
+    <skip />
+    <!-- no translation found for search_gesture_feature_summary (1793056495030564014) -->
     <skip />
 </resources>

@@ -18,20 +18,24 @@ package com.android.settings.network
 import android.content.Context
 import com.android.settings.R
 import com.android.settings.flags.Flags
+import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen
-class NetworkDashboardScreen : PreferenceScreenCreator {
+class NetworkDashboardScreen : PreferenceScreenCreator, PreferenceIconProvider {
     override val key: String
         get() = KEY
 
     override val title: Int
         get() = R.string.network_dashboard_title
 
-    override val icon: Int
-        get() = R.drawable.ic_settings_wireless_filled
+    override fun getIcon(context: Context) =
+        when {
+            Flags.homepageRevamp() -> R.drawable.ic_settings_wireless_filled
+            else -> R.drawable.ic_settings_wireless
+        }
 
     override fun isFlagEnabled(context: Context) = Flags.catalystNetworkProviderAndInternetScreen()
 
