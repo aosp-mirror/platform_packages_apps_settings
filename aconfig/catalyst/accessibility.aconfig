@@ -2,6 +2,13 @@ package: "com.android.settings.flags"
 container: "system"
 
 flag {
+  name: "catalyst_accessibility_color_and_motion"
+  namespace: "android_settings"
+  description: "Migrate Color and motion screen to the Catalyst infrastructure"
+  bug: "323791114"
+}
+
+flag {
   name: "catalyst_text_reading_screen"
   namespace: "android_settings"
   description: "Flag for Display size and text"
