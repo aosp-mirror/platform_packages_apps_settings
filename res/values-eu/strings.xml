@@ -250,7 +250,8 @@
     <string name="date_time_auto_summary" msgid="8294938565417729698">"Ezarri automatikoki sarea eta hari gabeko seinaleak erabilita"</string>
     <string name="zone_auto_title" msgid="3520584257065861479">"Ordu-zona automatikoa"</string>
     <string name="zone_auto_title_summary" msgid="6540356783943375071">"Ezarri automatikoki inguruko sare mugikorretan oinarrituta"</string>
-    <string name="auto_zone_requires_location_summary" msgid="8751995978350701451">"Ezarri automatikoki gailuaren kokapena erabilita, halakorik badago. Baliteke wifi-konexio aktibo bat ere behar izatea."</string>
+    <!-- no translation found for auto_zone_requires_location_summary (2366567167956530124) -->
+    <skip />
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Erabili lurraldeko ezarpen lehenetsiak"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Erabili 24 orduko formatua"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Ordua"</string>
@@ -1946,26 +1947,22 @@
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Erabilerraztasuna"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teklatu fisikoa"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Errebote-teklak"</string>
-    <!-- no translation found for bounce_keys_summary (7418024428905737729) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_title (4088646362538368693) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_subtitle (5640575860258120026) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_option_200 (7876774697200082558) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_option_400 (8146580138675322657) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_option_600 (6166166103942612488) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="7418024428905737729">"Teklatuak ez ikusi egiten du tekla bera behin eta berriro bizkor sakatzen bada"</string>
+    <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Tekla-sakatze errepikatuen atalasea"</string>
+    <string name="bounce_keys_dialog_subtitle" msgid="5640575860258120026">"Aukeratu zer iraupenarekin egiten duen teklatuak ez ikusi tekla bera behin eta berriro sakatzen bada"</string>
+    <string name="bounce_keys_dialog_option_200" msgid="7876774697200082558">"0,2 s"</string>
+    <string name="bounce_keys_dialog_option_400" msgid="8146580138675322657">"0,4 s"</string>
+    <string name="bounce_keys_dialog_option_600" msgid="6166166103942612488">"0,6 s"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Tekla motelak"</string>
-    <!-- no translation found for slow_keys_summary (2914214326648535377) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="2914214326648535377">"Tekla bat sakatzean aktibatzeko behar den denbora doitzen du"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Tekla itsaskorrak"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Lasterbideetan, sakatu teklak banan-banan, guztiak aldi berean sakatu ordez"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Saguaren teklak"</string>
-    <!-- no translation found for mouse_keys_summary (7030731235143286467) -->
-    <skip />
+    <string name="mouse_keys_summary" msgid="7030731235143286467">"Erabili teklatua erakuslea kontrolatzeko"</string>
+    <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Saguarekin gora eta behera alderantziz egiteko aukera"</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Egin gora orria beherantz mugitzeko"</string>
+    <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Aldatu ezkerreko eta eskuineko botoiak"</string>
+    <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Erabili saguaren ezkerreko botoia eskuinekoa balitz bezala"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Lasterbideak"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Erakutsi lasterbideen zerrenda"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Laneko profilaren teklatuak eta tresnak"</string>
@@ -2034,9 +2031,13 @@
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Aukeratu <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> teklarako beste tekla bat:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Teklatu fisikoaren erabilerraztasuna"</string>
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Tekla itsaskorrak, errebote-teklak, saguaren teklak"</string>
-    <!-- no translation found for keyboard_repeat_key_title (3641350808120194549) -->
+    <!-- no translation found for keyboard_repeat_keys_title (6346877755243280735) -->
     <skip />
-    <!-- no translation found for keyboard_repeat_key_summary (3970350989341158854) -->
+    <!-- no translation found for keyboard_repeat_keys_timeout_title (3411871149974652293) -->
+    <skip />
+    <!-- no translation found for keyboard_repeat_keys_delay_title (7323531750483922943) -->
+    <skip />
+    <!-- no translation found for keyboard_repeat_keys_summary (8972905345211768313) -->
     <skip />
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> teklatuaren diseinua"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Lehenetsia"</string>
@@ -2442,8 +2443,7 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"Aurreikusi"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Aukera estandarrak"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"Hizkuntza"</string>
-    <!-- no translation found for captioning_text_size (5764254558945371745) -->
-    <skip />
+    <string name="captioning_text_size" msgid="5764254558945371745">"Azpitituluen tamaina"</string>
     <string name="captioning_preset" msgid="4174276086501638524">"Azpitituluen estiloa"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"Aukera pertsonalizatuak"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"Atzeko planoaren kolorea"</string>
@@ -2987,6 +2987,8 @@
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"VPN saretik deskonektatu nahi duzu?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Deskonektatu"</string>
     <string name="vpn_version" msgid="6344167191984400976">"Bertsioa"</string>
+    <!-- no translation found for vpn_version_info (5717671228402924155) -->
+    <skip />
     <string name="vpn_forget_long" msgid="729132269203870205">"Ahaztu VPN konexioa"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Dagoen VPN konexioa ordeztu nahi duzu?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"VPNa beti aktibatuta egoteko aukera ezarri nahi duzu?"</string>
@@ -3100,7 +3102,7 @@
     <string name="emergency_info_summary" msgid="8463622253016757697">"Datuak eta kontaktuak (<xliff:g id="USER_NAME">%1$s</xliff:g>)"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Ireki <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="application_restrictions" msgid="276179173572729205">"Baimendu aplikazioak eta edukia"</string>
-    <string name="apps_with_restrictions_header" msgid="5277698582872267931">"Murrizketak dituzten aplikazioak"</string>
+    <string name="apps_with_restrictions_header" msgid="5277698582872267931">"Murriztapenak dituzten aplikazioak"</string>
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"Zabaldu aplikazio-ezarpenak"</string>
     <string name="user_choose_copy_apps_to_another_user" msgid="5914037067347012870">"Aukeratu instalatu nahi dituzun aplikazioak"</string>
     <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"Instalatu aplikazio erabilgarriak"</string>
@@ -3134,7 +3136,7 @@
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Eguneratu"</string>
     <string name="nfc_work_text" msgid="2496515165821504077">"Lanekoak"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"Murriztapenak"</string>
-    <string name="restriction_menu_reset" msgid="92859464456364092">"Kendu murrizketak"</string>
+    <string name="restriction_menu_reset" msgid="92859464456364092">"Kendu murriztapenak"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Aldatu PINa"</string>
     <string name="help_label" msgid="2896538416436125883">"Laguntza eta iritziak"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Edukia gordetzeko kontua"</string>
@@ -3175,7 +3177,7 @@
     <string name="work_sim_title" msgid="8999872928646924429">"Laneko SIM txartela"</string>
     <string name="user_restrictions_title" msgid="4068914244980335993">"Eduki eta aplikazioetarako sarbidea"</string>
     <string name="user_rename" msgid="8735940847878484249">"ALDATU IZENA"</string>
-    <string name="app_restrictions_custom_label" msgid="6949268049087435132">"Ezarri murrizketak aplikazioei"</string>
+    <string name="app_restrictions_custom_label" msgid="6949268049087435132">"Ezarri murriztapenak aplikazioei"</string>
     <string name="user_restrictions_controlled_by" msgid="2821526006742851624">"<xliff:g id="APP">%1$s</xliff:g> aplikazioak kontrolatua"</string>
     <string name="app_sees_restricted_accounts" msgid="3526008344222566318">"Aplikazioak zure kontuak atzi ditzake"</string>
     <string name="app_sees_restricted_accounts_and_controlled_by" msgid="8338520379923447143">"Aplikazio honek zure kontuak atzi ditzake. <xliff:g id="APP">%1$s</xliff:g> aplikazioak kontrolatua."</string>
@@ -3482,7 +3484,7 @@
     <string name="zen_mode_restrict_notifications_summary_muted" msgid="2826459087306271381">"Erakutsi jakinarazpenak"</string>
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="6455811408721183198">"Jakinarazpenak partzialki ezkutatuta"</string>
     <string name="zen_mode_restrict_notifications_summary_hidden" msgid="2157279412167366119">"Ezkutatu jakinarazpenak"</string>
-    <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"Murrizketa pertsonalizatuak"</string>
+    <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"Murriztapen pertsonalizatuak"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="8780668375194500987">"Pantaila piztuta dagoenean"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="2291988790355612826">"Pantaila itzalita dagoenean"</string>
     <string name="zen_mode_block_effect_sound" msgid="7929909410442858327">"Desaktibatu soinua eta dardara"</string>
@@ -3919,7 +3921,7 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Sortu modu bat"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Modu pertsonalizatua"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Moduaren izena"</string>
-    <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"Moduaren izenak ezin du hutsik egon"</string>
+    <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"Moduaren izena ezin da hutsik egon"</string>
     <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"Aukeratu ikono bat"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Egutegiko gertaerak"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Lo egiteko garaiko ohitura"</string>
@@ -5462,13 +5464,13 @@
     <string name="homepage_search" msgid="6759334912284663559">"Bilatu ezarpenetan"</string>
     <string name="keywords_contacts_storage" msgid="9061213057165337893">"kontaktuak, biltegia, kontua"</string>
     <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Kontaktuen biltegia"</string>
-    <!-- no translation found for contacts_storage_device_only_preference_label (970250816918108264) -->
-    <skip />
-    <!-- no translation found for contacts_storage_device_only_preference_summary (2339782491812039153) -->
-    <skip />
-    <!-- no translation found for contacts_storage_selection_message (8082077300632059003) -->
-    <skip />
+    <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Gailua soilik"</string>
+    <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"Kontaktu berriak ez dira sinkronizatuko kontu batekin"</string>
+    <string name="contacts_storage_selection_message" msgid="8082077300632059003">"Kontaktuak gailuan gordeko dira, eta modu lehenetsian kontuarekin sinkronizatuko"</string>
     <string name="contacts_storage_no_account_set" msgid="1548101985417720782">"Ez da ezarri kontu lehenetsirik"</string>
-    <!-- no translation found for contacts_storage_first_time_add_account_message (5161093169928132323) -->
+    <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Hasteko, gehitu kontu bat"</string>
+    <!-- no translation found for search_gesture_feature_title (7037117019612710960) -->
+    <skip />
+    <!-- no translation found for search_gesture_feature_summary (1793056495030564014) -->
     <skip />
 </resources>
