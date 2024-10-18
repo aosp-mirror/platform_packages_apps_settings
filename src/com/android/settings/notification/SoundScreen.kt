@@ -19,12 +19,13 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.flags.Flags
+import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen
-class SoundScreen : PreferenceScreenCreator {
+class SoundScreen : PreferenceScreenCreator, PreferenceIconProvider {
     override val key: String
         get() = KEY
 
@@ -33,6 +34,12 @@ class SoundScreen : PreferenceScreenCreator {
 
     override val keywords: Int
         get() = R.string.keywords_sounds
+
+    override fun getIcon(context: Context) =
+        when {
+            Flags.homepageRevamp() -> R.drawable.ic_volume_up_filled
+            else -> R.drawable.ic_volume_up_24dp
+        }
 
     override fun isFlagEnabled(context: Context): Boolean = Flags.catalystSoundScreen()
 

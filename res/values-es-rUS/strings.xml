@@ -250,7 +250,8 @@
     <string name="date_time_auto_summary" msgid="8294938565417729698">"Se establecen automáticamente con la red y las señales inalámbricas"</string>
     <string name="zone_auto_title" msgid="3520584257065861479">"Zona horaria automática"</string>
     <string name="zone_auto_title_summary" msgid="6540356783943375071">"Configurar automáticamente según las redes móviles cercanas"</string>
-    <string name="auto_zone_requires_location_summary" msgid="8751995978350701451">"Se establecen automáticamente con la ubicación del dispositivo (si está disponible). Se podría necesitar una conexión Wi-Fi activa."</string>
+    <!-- no translation found for auto_zone_requires_location_summary (2366567167956530124) -->
+    <skip />
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Usar configuración regional predeterminada"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Formato de 24 horas"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Hora"</string>
@@ -659,12 +660,9 @@
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Establece patrón para espacio privado"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"Bloqueo"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"Ocultar"</string>
-    <!-- no translation found for private_space_confirm_your_pattern_header (449382220134788771) -->
-    <skip />
-    <!-- no translation found for private_space_confirm_your_pin_header (4543332157470087796) -->
-    <skip />
-    <!-- no translation found for private_space_confirm_your_password_header (9202308075814307169) -->
-    <skip />
+    <string name="private_space_confirm_your_pattern_header" msgid="449382220134788771">"Confirma el patrón de tu espacio privado"</string>
+    <string name="private_space_confirm_your_pin_header" msgid="4543332157470087796">"Vuelve a ingresar el PIN de tu espacio privado"</string>
+    <string name="private_space_confirm_your_password_header" msgid="9202308075814307169">"Vuelve a ingresar la contraseña de tu espacio privado"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Puedes agregar hasta <xliff:g id="COUNT">%d</xliff:g> huellas dactilares"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Agregaste la cantidad máxima permitida de huellas digitales"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"No se pueden agregar más huellas digitales"</string>
@@ -1032,10 +1030,8 @@
     <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"Revisa la contraseña y vuelve a intentarlo"</string>
     <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"Comunícate con el fabricante del dispositivo"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Comprueba la conexión y vuelve a intentarlo"</string>
-    <!-- no translation found for wifi_dpp_check_connection_no_matched_ssid (3608318690698685427) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_check_connection_no_matched_security (1462706753123341376) -->
-    <skip />
+    <string name="wifi_dpp_check_connection_no_matched_ssid" msgid="3608318690698685427">"Esta red Wi-Fi no está disponible en este momento"</string>
+    <string name="wifi_dpp_check_connection_no_matched_security" msgid="1462706753123341376">"Hay un problema con este código QR. Intenta conectarte de otra forma."</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Elegir una red"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Selecciona una red para conectar tu dispositivo"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5170095438763569255">"¿Agregar este dispositivo a \"<xliff:g id="SSID">%1$s</xliff:g>\"?"</string>
@@ -1963,6 +1959,10 @@
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Presiona una tecla a la vez para hacer la combinación de teclas en lugar de presionarlas juntas"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Teclas del mouse"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Usa el teclado para controlar el puntero"</string>
+    <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Desplazamiento invertido del mouse"</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Desplázate hacia arriba para bajar la página"</string>
+    <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Intercambiar los botones izquierdo y derecho"</string>
+    <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Usa el botón izquierdo del mouse como el derecho"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Combinaciones de teclas"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Mostrar lista de combinaciones de teclas"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Teclados y herramientas del perfil de trabajo"</string>
@@ -2031,9 +2031,13 @@
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Elige una nueva tecla para <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Accesibilidad del teclado físico"</string>
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Teclas especiales, rechazo de teclas, teclas del mouse"</string>
-    <!-- no translation found for keyboard_repeat_key_title (3641350808120194549) -->
+    <!-- no translation found for keyboard_repeat_keys_title (6346877755243280735) -->
     <skip />
-    <!-- no translation found for keyboard_repeat_key_summary (3970350989341158854) -->
+    <!-- no translation found for keyboard_repeat_keys_timeout_title (3411871149974652293) -->
+    <skip />
+    <!-- no translation found for keyboard_repeat_keys_delay_title (7323531750483922943) -->
+    <skip />
+    <!-- no translation found for keyboard_repeat_keys_summary (8972905345211768313) -->
     <skip />
     <string name="ime_label_title" msgid="8994569521516807168">"Diseño <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Predeterminadas"</string>
@@ -2439,8 +2443,7 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"Vista previa"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Opciones estándar"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"Idioma"</string>
-    <!-- no translation found for captioning_text_size (5764254558945371745) -->
-    <skip />
+    <string name="captioning_text_size" msgid="5764254558945371745">"Tamaño de los subtítulos"</string>
     <string name="captioning_preset" msgid="4174276086501638524">"Estilo de los subtítulos"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"Opciones personalizadas"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"Color de fondo"</string>
@@ -2984,6 +2987,8 @@
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"¿Deseas desconectar esta VPN?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Desconectar"</string>
     <string name="vpn_version" msgid="6344167191984400976">"Versión"</string>
+    <!-- no translation found for vpn_version_info (5717671228402924155) -->
+    <skip />
     <string name="vpn_forget_long" msgid="729132269203870205">"Borrar VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"¿Reemplazar VPN existente?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"¿Configurar la VPN siempre activa?"</string>
@@ -3916,8 +3921,7 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Crea un modo"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Modo personalizado"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Nombre del modo"</string>
-    <!-- no translation found for zen_mode_edit_name_empty_error (5788063278827188275) -->
-    <skip />
+    <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"El nombre del modo no puede estar vacío"</string>
     <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"Selecciona un ícono"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Eventos de calendario"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Rutina Hora de dormir"</string>
@@ -5465,4 +5469,8 @@
     <string name="contacts_storage_selection_message" msgid="8082077300632059003">"De forma predeterminada, los contactos se guardarán en el dispositivo y se sincronizarán con tu cuenta"</string>
     <string name="contacts_storage_no_account_set" msgid="1548101985417720782">"No hay cuenta predeterminada"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Agrega una cuenta para comenzar"</string>
+    <!-- no translation found for search_gesture_feature_title (7037117019612710960) -->
+    <skip />
+    <!-- no translation found for search_gesture_feature_summary (1793056495030564014) -->
+    <skip />
 </resources>
