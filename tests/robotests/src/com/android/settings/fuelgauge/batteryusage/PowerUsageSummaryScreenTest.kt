@@ -38,8 +38,8 @@ class PowerUsageSummaryScreenTest : CatalystScreenTestCase() {
 
     private val mockResources = mock<Resources>()
 
-    private val contextWrapper =
-        object : ContextWrapper(context) {
+    private val context =
+        object : ContextWrapper(appContext) {
             override fun getResources(): Resources = mockResources
         }
 
@@ -52,26 +52,28 @@ class PowerUsageSummaryScreenTest : CatalystScreenTestCase() {
     fun isAvailable_configTrue_shouldReturnTrue() {
         mockResources.stub { on { getBoolean(anyInt()) } doReturn true }
 
-        assertThat(preferenceScreenCreator.isAvailable(contextWrapper)).isTrue()
+        assertThat(preferenceScreenCreator.isAvailable(context)).isTrue()
     }
 
     @Test
     fun isAvailable_configFalse_shouldReturnFalse() {
         mockResources.stub { on { getBoolean(anyInt()) } doReturn false }
 
-        assertThat(preferenceScreenCreator.isAvailable(contextWrapper)).isFalse()
+        assertThat(preferenceScreenCreator.isAvailable(context)).isFalse()
     }
 
     @Test
     @EnableFlags(Flags.FLAG_HOMEPAGE_REVAMP)
     fun getIcon_whenHomePageRevampFlagOn() {
-        assertThat(preferenceScreenCreator.getIcon(contextWrapper)).isEqualTo(R.drawable.ic_settings_battery_filled)
+        assertThat(preferenceScreenCreator.getIcon(context))
+            .isEqualTo(R.drawable.ic_settings_battery_filled)
     }
 
     @Test
     @DisableFlags(Flags.FLAG_HOMEPAGE_REVAMP)
     fun getIcon_whenHomePageRevampFlagOff() {
-        assertThat(preferenceScreenCreator.getIcon(contextWrapper)).isEqualTo(R.drawable.ic_settings_battery_white)
+        assertThat(preferenceScreenCreator.getIcon(context))
+            .isEqualTo(R.drawable.ic_settings_battery_white)
     }
 
     override fun migration() {}
