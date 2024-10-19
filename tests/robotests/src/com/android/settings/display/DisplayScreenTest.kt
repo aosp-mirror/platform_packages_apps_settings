@@ -42,8 +42,8 @@ class DisplayScreenTest : CatalystScreenTestCase() {
 
     private val mockResources = mock<Resources>()
 
-    private val contextWrapper =
-        object : ContextWrapper(context) {
+    private val context =
+        object : ContextWrapper(appContext) {
             override fun getResources(): Resources = mockResources
         }
 
@@ -56,14 +56,14 @@ class DisplayScreenTest : CatalystScreenTestCase() {
     fun isAvailable_configTrue_shouldReturnTrue() {
         mockResources.stub { on { getBoolean(anyInt()) } doReturn true }
 
-        assertThat(preferenceScreenCreator.isAvailable(contextWrapper)).isTrue()
+        assertThat(preferenceScreenCreator.isAvailable(context)).isTrue()
     }
 
     @Test
     fun isAvailable_configFalse_shouldReturnFalse() {
         mockResources.stub { on { getBoolean(anyInt()) } doReturn false }
 
-        assertThat(preferenceScreenCreator.isAvailable(contextWrapper)).isFalse()
+        assertThat(preferenceScreenCreator.isAvailable(context)).isFalse()
     }
 
     override fun migration() {

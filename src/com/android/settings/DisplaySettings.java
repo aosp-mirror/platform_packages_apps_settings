@@ -97,9 +97,8 @@ public class DisplaySettings extends DashboardFragment {
                 }
             };
 
-    @Nullable
     @Override
-    public String getPreferenceScreenBindingKey(@NonNull Context context) {
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
         return DisplayScreen.KEY;
     }
 }

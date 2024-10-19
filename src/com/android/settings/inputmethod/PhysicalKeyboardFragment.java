@@ -289,11 +289,12 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
                 getActivity().finish();
                 return;
             }
-            ThreadUtils.postOnMainThread(() -> updateHardKeyboards(newHardKeyboards));
+            ThreadUtils.postOnMainThread(() -> updateHardKeyboards(context, newHardKeyboards));
         });
     }
 
-    private void updateHardKeyboards(@NonNull List<HardKeyboardDeviceInfo> newHardKeyboards) {
+    private void updateHardKeyboards(@NonNull Context context,
+                                     @NonNull List<HardKeyboardDeviceInfo> newHardKeyboards) {
         if (Objects.equals(mLastHardKeyboards, newHardKeyboards)) {
             // Nothing has changed.  Ignore.
             return;
@@ -316,7 +317,7 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
             final Preference pref = new Preference(getPrefContext());
             pref.setTitle(hardKeyboardDeviceInfo.mDeviceName);
             String currentLayout =
-                    NewKeyboardSettingsUtils.getSelectedKeyboardLayoutLabelForUser(getContext(),
+                    NewKeyboardSettingsUtils.getSelectedKeyboardLayoutLabelForUser(context,
                             UserHandle.myUserId(), hardKeyboardDeviceInfo.mDeviceIdentifier);
             if (currentLayout != null) {
                 pref.setSummary(currentLayout);
@@ -336,7 +337,7 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
             vendorAndProductId.append("-");
             vendorAndProductId.append(productId);
             mMetricsFeatureProvider.action(
-                    getContext(),
+                    context,
                     SettingsEnums.ACTION_USE_SPECIFIC_KEYBOARD,
                     vendorAndProductId.toString());
         }
@@ -352,10 +353,10 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
                 || InputSettings.isAccessibilityMouseKeysFeatureFlagEnabled()) {
             Objects.requireNonNull(mKeyboardA11yCategory).setOrder(2);
             preferenceScreen.addPreference(mKeyboardA11yCategory);
-            updateAccessibilityBounceKeysSwitch();
-            updateAccessibilitySlowKeysSwitch();
-            updateAccessibilityStickyKeysSwitch();
-            updateAccessibilityMouseKeysSwitch();
+            updateAccessibilityBounceKeysSwitch(context);
+            updateAccessibilitySlowKeysSwitch(context);
+            updateAccessibilityStickyKeysSwitch(context);
+            updateAccessibilityMouseKeysSwitch(context);
         }
     }
 
@@ -413,46 +414,47 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
                     mContentObserver,
                     UserHandle.myUserId());
         }
-        updateAccessibilityBounceKeysSwitch();
-        updateAccessibilitySlowKeysSwitch();
-        updateAccessibilityStickyKeysSwitch();
-        updateAccessibilityMouseKeysSwitch();
+        final Context context = getContext();
+        updateAccessibilityBounceKeysSwitch(context);
+        updateAccessibilitySlowKeysSwitch(context);
+        updateAccessibilityStickyKeysSwitch(context);
+        updateAccessibilityMouseKeysSwitch(context);
     }
 
     private void unregisterSettingsObserver() {
         getActivity().getContentResolver().unregisterContentObserver(mContentObserver);
     }
 
-    private void updateAccessibilityBounceKeysSwitch() {
+    private void updateAccessibilityBounceKeysSwitch(@NonNull Context context) {
         if (!InputSettings.isAccessibilityBounceKeysFeatureEnabled()) {
             return;
         }
         Objects.requireNonNull(mAccessibilityBounceKeys).setChecked(
-                InputSettings.isAccessibilityBounceKeysEnabled(getContext()));
+                InputSettings.isAccessibilityBounceKeysEnabled(context));
     }
 
-    private void updateAccessibilitySlowKeysSwitch() {
+    private void updateAccessibilitySlowKeysSwitch(@NonNull Context context) {
         if (!InputSettings.isAccessibilitySlowKeysFeatureFlagEnabled()) {
             return;
         }
         Objects.requireNonNull(mAccessibilitySlowKeys).setChecked(
-                InputSettings.isAccessibilitySlowKeysEnabled(getContext()));
+                InputSettings.isAccessibilitySlowKeysEnabled(context));
     }
 
-    private void updateAccessibilityStickyKeysSwitch() {
+    private void updateAccessibilityStickyKeysSwitch(@NonNull Context context) {
         if (!InputSettings.isAccessibilityStickyKeysFeatureEnabled()) {
             return;
         }
         Objects.requireNonNull(mAccessibilityStickyKeys).setChecked(
-                InputSettings.isAccessibilityStickyKeysEnabled(getContext()));
+                InputSettings.isAccessibilityStickyKeysEnabled(context));
     }
 
-    private void updateAccessibilityMouseKeysSwitch() {
+    private void updateAccessibilityMouseKeysSwitch(@NonNull Context context) {
         if (!InputSettings.isAccessibilityMouseKeysFeatureFlagEnabled()) {
             return;
         }
         Objects.requireNonNull(mAccessibilityMouseKeys).setChecked(
-                InputSettings.isAccessibilityMouseKeysEnabled(getContext()));
+                InputSettings.isAccessibilityMouseKeysEnabled(context));
     }
 
     private void toggleKeyboardShortcutsMenu() {
@@ -489,13 +491,13 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             if (sAccessibilityBounceKeysUri.equals(uri)) {
-                updateAccessibilityBounceKeysSwitch();
+                updateAccessibilityBounceKeysSwitch(getContext());
             } else if (sAccessibilitySlowKeysUri.equals(uri)) {
-                updateAccessibilitySlowKeysSwitch();
+                updateAccessibilitySlowKeysSwitch(getContext());
             } else if (sAccessibilityStickyKeysUri.equals(uri)) {
-                updateAccessibilityStickyKeysSwitch();
+                updateAccessibilityStickyKeysSwitch(getContext());
             } else if (sAccessibilityMouseKeysUri.equals(uri)) {
-                updateAccessibilityMouseKeysSwitch();
+                updateAccessibilityMouseKeysSwitch(getContext());
             }
         }
     };
