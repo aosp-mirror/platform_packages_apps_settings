@@ -18,39 +18,59 @@ package com.android.settings.inputmethod;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.hardware.input.InputSettings;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.widget.RadioGroup;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
+
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.keyboard.Flags;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         com.android.settings.testutils.shadow.ShadowFragment.class,
+        ShadowAlertDialogCompat.class,
 })
 public class KeyboardAccessibilitySlowKeysControllerTest {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+    @Rule
+    public MockitoRule mMockitoRule = MockitoJUnit.rule();
+    private static final String PREFERENCE_KEY = "keyboard_a11y_page_slow_keys";
+    @Mock
+    private Preference mPreference;
     private Context mContext;
     private KeyboardAccessibilitySlowKeysController mKeyboardAccessibilitySlowKeysController;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
+        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
         mKeyboardAccessibilitySlowKeysController = new KeyboardAccessibilitySlowKeysController(
                 mContext,
-                "accessibility_slow_keys");
+                PREFERENCE_KEY);
+        when(mPreference.getKey()).thenReturn(PREFERENCE_KEY);
     }
 
     @Test
@@ -81,5 +101,29 @@ public class KeyboardAccessibilitySlowKeysControllerTest {
         boolean isEnabled = InputSettings.isAccessibilitySlowKeysEnabled(mContext);
 
         assertThat(isEnabled).isFalse();
+    }
+
+    @Test
+    public void handlePreferenceTreeClick_dialogShows() {
+        mKeyboardAccessibilitySlowKeysController.handlePreferenceTreeClick(mPreference);
+
+        AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+
+        assertThat(alertDialog.isShowing()).isTrue();
+    }
+
+    @Test
+    public void handlePreferenceTreeClick_performClickOn200_updatesSlowKeysThreshold() {
+        mKeyboardAccessibilitySlowKeysController.handlePreferenceTreeClick(mPreference);
+        AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        RadioGroup radioGroup = alertDialog.findViewById(R.id.input_setting_keys_value_group);
+        radioGroup.check(R.id.input_setting_keys_value_200);
+
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).performClick();
+        ShadowLooper.idleMainLooper();
+
+        assertThat(alertDialog.isShowing()).isFalse();
+        int threshold = InputSettings.getAccessibilitySlowKeysThreshold(mContext);
+        assertThat(threshold).isEqualTo(200);
     }
 }

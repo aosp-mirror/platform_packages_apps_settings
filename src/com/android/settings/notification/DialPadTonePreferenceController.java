@@ -16,24 +16,24 @@
 
 package com.android.settings.notification;
 
+import static android.provider.Settings.System.DTMF_TONE_WHEN_DIALING;
+
 import static com.android.settings.notification.SettingPref.TYPE_SYSTEM;
 
 import android.content.Context;
-import android.provider.Settings.System;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+// LINT.IfChange
 public class DialPadTonePreferenceController extends SettingPrefController {
-
-    private static final String KEY_DIAL_PAD_TONES = "dial_pad_tones";
 
     public DialPadTonePreferenceController(Context context, SettingsPreferenceFragment parent,
             Lifecycle lifecycle) {
         super(context, parent, lifecycle);
-        mPreference = new SettingPref(
-            TYPE_SYSTEM, KEY_DIAL_PAD_TONES, System.DTMF_TONE_WHEN_DIALING, DEFAULT_ON) {
+        mPreference = new SettingPref(TYPE_SYSTEM, DTMF_TONE_WHEN_DIALING, DTMF_TONE_WHEN_DIALING,
+                DEFAULT_ON) {
             @Override
             public boolean isApplicable(Context context) {
                 return Utils.isVoiceCapable(context);
@@ -42,3 +42,4 @@ public class DialPadTonePreferenceController extends SettingPrefController {
     }
 
 }
+// LINT.ThenChange(DialPadTonePreference.kt)
