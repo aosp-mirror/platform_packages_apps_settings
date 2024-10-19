@@ -27,6 +27,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings.Global;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
@@ -270,4 +272,9 @@ public class PowerUsageSummary extends PowerUsageBase
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.power_usage_summary);
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return PowerUsageSummaryScreen.KEY;
+    }
 }
