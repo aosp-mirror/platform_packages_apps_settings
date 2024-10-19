@@ -84,7 +84,7 @@ class FingerprintEnrollFindSensorViewModel(
 
   /** Represents the stream of showing udfps lottie and whether accessibility is enabled. */
   val udfpsLottieInfo: Flow<Boolean> =
-    _showUdfpsLottie.combine(accessibilityInteractor.isAccessibilityEnabled) {
+    _showUdfpsLottie.combine(accessibilityInteractor.isEnabledFlow(viewModelScope)) {
       _,
       isAccessibilityEnabled ->
       isAccessibilityEnabled
@@ -213,7 +213,7 @@ class FingerprintEnrollFindSensorViewModel(
           provider[FingerprintGatekeeperViewModel::class],
           provider[BackgroundViewModel::class],
           provider[FingerprintFlowViewModel::class],
-          biometricEnvironment.accessibilityInteractor,
+          biometricEnvironment.createAccessibilityInteractor(),
           biometricEnvironment.foldStateInteractor,
           biometricEnvironment.orientationInteractor,
           biometricEnvironment.createSensorPropertiesInteractor(),

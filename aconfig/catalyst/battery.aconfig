@@ -2,6 +2,13 @@ package: "com.android.settings.flags"
 container: "system"
 
 flag {
+  name: "catalyst_power_usage_summary_screen"
+  namespace: "android_settings"
+  description: "Flag for Battery screen"
+  bug: "323791114"
+}
+
+flag {
   name: "catalyst_battery_saver_screen"
   namespace: "android_settings"
   description: "Flag for Battery Saver"
