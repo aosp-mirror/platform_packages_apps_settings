@@ -35,7 +35,7 @@ class DisplaySizeData extends PreviewSizeData<Integer> {
         super(context);
 
         mDensity = new DisplayDensityUtils(getContext());
-        final int initialIndex = mDensity.getCurrentIndexForDefaultDisplay();
+        final int initialIndex = mDensity.getCurrentIndex();
         if (initialIndex < 0) {
             // Failed to obtain default density, which means we failed to
             // connect to the window manager service. Just use the current
@@ -46,9 +46,9 @@ class DisplaySizeData extends PreviewSizeData<Integer> {
             setInitialIndex(0);
             setValues(Collections.singletonList(densityDpi));
         } else {
-            setDefaultValue(mDensity.getDefaultDensityForDefaultDisplay());
+            setDefaultValue(mDensity.getDefaultDensity());
             setInitialIndex(initialIndex);
-            setValues(Arrays.stream(mDensity.getDefaultDisplayDensityValues()).boxed()
+            setValues(Arrays.stream(mDensity.getValues()).boxed()
                     .collect(Collectors.toList()));
         }
     }

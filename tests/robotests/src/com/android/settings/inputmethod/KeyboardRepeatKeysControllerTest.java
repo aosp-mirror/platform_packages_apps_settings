@@ -51,7 +51,7 @@ public class KeyboardRepeatKeysControllerTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mKeyboardRepeatKeysController = new KeyboardRepeatKeysController(mContext,
-                "physical_keyboard_repeat_key");
+                "physical_keyboard_repeat_keys");
     }
 
     @Test

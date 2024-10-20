@@ -579,7 +579,7 @@
     <!-- Date & time setting screen setting switch summary: whether the time zone should be determined automatically [CHAR LIMIT=100]  -->
     <string name="zone_auto_title_summary">Set automatically based on mobile networks near you</string>
     <!-- Date & time setting screen setting switch summary for non-telephony devices [CHAR LIMIT=100] -->
-    <string name="auto_zone_requires_location_summary">Set automatically using your device location, if available. An active Wifi connection may also be required.</string>
+    <string name="auto_zone_requires_location_summary">Set automatically using your device location, if available</string>
     <!-- Date & time setting screen setting option summary text for the automatic 24 hour setting checkbox [CHAR LIMIT=100] -->
     <string name="date_time_24hour_auto">Use locale default</string>
     <!-- Date & time setting screen setting check box title -->
@@ -4525,12 +4525,17 @@
     <string name="bounce_keys_dialog_title">Bounce key threshold</string>
     <!-- Subtitle for the 'Bounce keys' threshold dialog. [CHAR LIMIT=300] -->
     <string name="bounce_keys_dialog_subtitle">Choose the duration of time your keyboard ignores repeated key presses</string>
-    <!-- Option title for the 'Bounce keys' threshold dialog for 200 millisecond. [CHAR LIMIT=35] -->
-    <string name="bounce_keys_dialog_option_200">0.2s</string>
-    <!-- Option title for the 'Bounce keys' threshold dialog for 400 millisecond. [CHAR LIMIT=35] -->
-    <string name="bounce_keys_dialog_option_400">0.4s</string>
-    <!-- Option title for the 'Bounce keys' threshold dialog for 600 millisecond. [CHAR LIMIT=35] -->
-    <string name="bounce_keys_dialog_option_600">0.6s</string>
+    <!-- Option title for the input setting keys threshold dialog for 200 millisecond. [CHAR LIMIT=35] -->
+    <string name="input_setting_keys_dialog_option_200">0.2s</string>
+    <!-- Option title for the input setting keys threshold dialog for 400 millisecond. [CHAR LIMIT=35] -->
+    <string name="input_setting_keys_dialog_option_400">0.4s</string>
+    <!-- Option title for the input setting keys threshold dialog for 600 millisecond. [CHAR LIMIT=35] -->
+    <string name="input_setting_keys_dialog_option_600">0.6s</string>
+    <!-- Option title for the input setting keys threshold dialog for custom value. [CHAR LIMIT=35] -->
+    <string name="input_setting_keys_custom_title">Custom</string>
+    <!-- Option subtitle for the input setting keys threshold dialog for custom value. [CHAR LIMIT=35] -->
+    <string name="input_setting_keys_custom_value">custom value</string>
+
     <!-- Title for the 'Slow keys' preference switch. [CHAR LIMIT=35] -->
     <string name="slow_keys">Slow keys</string>
     <!-- Summary text for the 'Slow keys' preference sub-screen. [CHAR LIMIT=300] -->
@@ -4705,9 +4710,13 @@
     <!-- Summary for the button to trigger the 'Physical keyboard accessibility' page. [CHAR LIMIT=NONE] -->
     <string name="keyboard_a11y_settings_summary">Sticky keys, Bounce keys, Mouse keys</string>
     <!-- Title for the keyboard repeat key option. [CHAR LIMIT=60] -->
-    <string name="keyboard_repeat_key_title">Repeat Keys</string>
+    <string name="keyboard_repeat_keys_title">Repeat Keys</string>
+    <!-- Title for the keyboard repeat key timeout option. [CHAR LIMIT=60] -->
+    <string name="keyboard_repeat_keys_timeout_title">Delay before repeat</string>
+    <!-- Title for the keyboard repeat key delay option. [CHAR LIMIT=60] -->
+    <string name="keyboard_repeat_keys_delay_title">Repeat Rate</string>
     <!-- Summary for the keyboard repeat key option. [CHAR LIMIT=NONE] -->
-    <string name="keyboard_repeat_key_summary">Hold down a key to repeat its character until the key is released</string>
+    <string name="keyboard_repeat_keys_summary">Hold down a key to repeat its character until the key is released</string>
 
     <!-- Title text for per IME subtype keyboard layout. [CHAR LIMIT=35] -->
     <string name="ime_label_title"><xliff:g id="ime_label" example="Gboard">%s</xliff:g> layout</string>
@@ -6957,6 +6966,8 @@
     <string name="vpn_disconnect">Disconnect</string>
     <!-- Field label to show the version number for a VPN app. [CHAR LIMIT=40] -->
     <string name="vpn_version">Version</string>
+    <!-- Field label to show the version number for a VPN app dialog. [CHAR LIMIT=40] -->
+    <string name="vpn_version_info">Version <xliff:g id="version" example="3.3.0">%s</xliff:g></string>
     <!-- Button label to forget a VPN profile [CHAR LIMIT=40] -->
     <string name="vpn_forget_long">Forget VPN</string>
     <!-- Dialog message title to set another VPN app to be always-on [CHAR LIMIT=40] -->
@@ -13702,7 +13713,6 @@
     <!-- Learn more link for audio sharing qrcode [CHAR LIMIT=none]-->
     <string name="audio_streams_qr_code_help_with_link"><annotation id="link">Need help?</annotation></string>
 
-
     <!-- url for learning more about bluetooth audio sharing -->
     <string name="help_url_audio_sharing" translatable="false"></string>
 
@@ -13723,4 +13733,11 @@
     <string name="contacts_storage_no_account_set">No default set</string>
     <!-- Text for add account selection message when no account has been added [CHAR LIMIT=100] -->
     <string name="contacts_storage_first_time_add_account_message">Add an account to get started</string>
+
+    <!-- Circle to Search (shared between all entrypoints) -->
+    <!-- Name of Google's new feature to circle to search anything on your phone screen,
+         without switching apps. Also used as the setting title. [CHAR LIMIT=60] -->
+    <string name="search_gesture_feature_title">Circle to Search</string>
+    <!-- Summary text for press and hold nav handle OR home button to invoke Circle to Search. [CHAR LIMIT=NONE] -->
+    <string name="search_gesture_feature_summary">Touch and hold the Home button or the navigation handle to search using the content on your screen.</string>
 </resources>

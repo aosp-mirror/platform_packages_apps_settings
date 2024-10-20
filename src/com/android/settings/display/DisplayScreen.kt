@@ -20,19 +20,29 @@ import com.android.settings.DisplaySettings
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen
-class DisplayScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider {
+class DisplayScreen :
+    PreferenceScreenCreator, PreferenceAvailabilityProvider, PreferenceIconProvider {
     override val key: String
         get() = KEY
 
     override val title: Int
         get() = R.string.display_settings
 
+    override fun getIcon(context: Context) =
+        when {
+            Flags.homepageRevamp() -> R.drawable.ic_settings_display_filled
+            else -> R.drawable.ic_settings_display_white
+        }
+
     override fun isFlagEnabled(context: Context) = Flags.catalystDisplaySettingsScreen()
+
+    override fun hasCompleteHierarchy() = false
 
     override fun fragmentClass() = DisplaySettings::class.java
 

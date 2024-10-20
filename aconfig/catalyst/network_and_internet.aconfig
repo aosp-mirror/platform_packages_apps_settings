@@ -1,0 +1,16 @@
+package: "com.android.settings.flags"
+container: "system"
+
+flag {
+  name: "catalyst_network_provider_and_internet_screen"
+  namespace: "android_settings"
+  description: "Flag for Network & Internet"
+  bug: "323791114"
+}
+
+flag {
+  name: "catalyst_mobile_network_list"
+  namespace: "android_settings"
+  description: "Flag for SIMs"
+  bug: "323791114"
+}

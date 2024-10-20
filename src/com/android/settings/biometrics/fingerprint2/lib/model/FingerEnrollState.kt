@@ -35,10 +35,13 @@ sealed class FingerEnrollState {
   data class EnrollHelp(@StringRes val helpMsgId: Int, val helpString: String) :
     FingerEnrollState()
 
-  /** Represents that an unrecoverable error has been encountered and the operation is complete. */
+  /** Represents that an unrecoverable error has been encountered and the operation is complete.
+   * Note that errorId is the raw error id from [FingerprintManager]
+   */
   data class EnrollError(
     @StringRes val errTitle: Int,
     @StringRes val errString: Int,
+    val errorId: Int,
     val shouldRetryEnrollment: Boolean,
     val isCancelled: Boolean,
   ) : FingerEnrollState()

@@ -250,7 +250,8 @@
     <string name="date_time_auto_summary" msgid="8294938565417729698">"Se establece automáticamente mediante tu red y señales inalámbricas"</string>
     <string name="zone_auto_title" msgid="3520584257065861479">"Zona horaria automática"</string>
     <string name="zone_auto_title_summary" msgid="6540356783943375071">"Se establece automáticamente según las redes móviles cercanas"</string>
-    <string name="auto_zone_requires_location_summary" msgid="8751995978350701451">"Se establece automáticamente usando la ubicación de tu dispositivo, si está disponible. También puede que se necesite una conexión Wi-Fi activa."</string>
+    <!-- no translation found for auto_zone_requires_location_summary (2366567167956530124) -->
+    <skip />
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Usar configuración regional predeterminada"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Usar formato de 24 horas"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Hora"</string>
@@ -659,12 +660,9 @@
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Configura un patrón para espacio privado"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"Bloquear"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"Ocultar"</string>
-    <!-- no translation found for private_space_confirm_your_pattern_header (449382220134788771) -->
-    <skip />
-    <!-- no translation found for private_space_confirm_your_pin_header (4543332157470087796) -->
-    <skip />
-    <!-- no translation found for private_space_confirm_your_password_header (9202308075814307169) -->
-    <skip />
+    <string name="private_space_confirm_your_pattern_header" msgid="449382220134788771">"Confirma el patrón del espacio privado"</string>
+    <string name="private_space_confirm_your_pin_header" msgid="4543332157470087796">"Vuelve a introducir el PIN del espacio privado"</string>
+    <string name="private_space_confirm_your_password_header" msgid="9202308075814307169">"Vuelve a introducir la contraseña del espacio privado"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Puedes añadir hasta <xliff:g id="COUNT">%d</xliff:g> huellas digitales"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Has añadido el número máximo de huellas digitales"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"No se pueden añadir más huellas digitales"</string>
@@ -1032,10 +1030,8 @@
     <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"Comprueba que la contraseña sea correcta y vuelve a intentarlo"</string>
     <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"Ponte en contacto con el fabricante del dispositivo"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Comprueba la conexión y vuelve a intentarlo"</string>
-    <!-- no translation found for wifi_dpp_check_connection_no_matched_ssid (3608318690698685427) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_check_connection_no_matched_security (1462706753123341376) -->
-    <skip />
+    <string name="wifi_dpp_check_connection_no_matched_ssid" msgid="3608318690698685427">"Esta red Wi-Fi no está disponible en este momento"</string>
+    <string name="wifi_dpp_check_connection_no_matched_security" msgid="1462706753123341376">"Hay un problema con este código QR. Prueba a conectarte de otra forma."</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Elegir red"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Elige una red para conectar tu dispositivo"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5170095438763569255">"¿Añadir este dispositivo a \"<xliff:g id="SSID">%1$s</xliff:g>\"?"</string>
@@ -1951,26 +1947,22 @@
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accesibilidad"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclado físico"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Teclas de rebote"</string>
-    <!-- no translation found for bounce_keys_summary (7418024428905737729) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_title (4088646362538368693) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_subtitle (5640575860258120026) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_option_200 (7876774697200082558) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_option_400 (8146580138675322657) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_option_600 (6166166103942612488) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="7418024428905737729">"El teclado ignora las pulsaciones rápidas repetidas de la misma tecla"</string>
+    <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Umbral de tecla de rebote"</string>
+    <string name="bounce_keys_dialog_subtitle" msgid="5640575860258120026">"Elige el tiempo que tu teclado ignora las pulsaciones repetidas de teclas"</string>
+    <string name="bounce_keys_dialog_option_200" msgid="7876774697200082558">"0,2 s"</string>
+    <string name="bounce_keys_dialog_option_400" msgid="8146580138675322657">"0,4 s"</string>
+    <string name="bounce_keys_dialog_option_600" msgid="6166166103942612488">"0,6 s"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Teclas lentas"</string>
-    <!-- no translation found for slow_keys_summary (2914214326648535377) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="2914214326648535377">"Ajusta el tiempo que se tarda en activar una pulsación de tecla"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Teclas persistentes"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Para las combinaciones de teclas, pulsa las teclas de una en una en lugar de mantenerlas pulsadas todas a la vez"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Teclas para el ratón"</string>
-    <!-- no translation found for mouse_keys_summary (7030731235143286467) -->
-    <skip />
+    <string name="mouse_keys_summary" msgid="7030731235143286467">"Usa el teclado para controlar el puntero"</string>
+    <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Desplazamiento inverso del ratón"</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Desplázate hacia arriba para mover la página hacia abajo"</string>
+    <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Cambiar los botones izquierdo y derecho"</string>
+    <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Usa el botón izquierdo del ratón como el derecho"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Combinaciones de teclas"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Muestra la lista de combinaciones de teclas"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Perfiles de trabajo y herramientas"</string>
@@ -2039,9 +2031,13 @@
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Elige una nueva tecla para <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Accesibilidad del teclado físico"</string>
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Teclas persistentes, teclas de rebote y teclas para el ratón"</string>
-    <!-- no translation found for keyboard_repeat_key_title (3641350808120194549) -->
+    <!-- no translation found for keyboard_repeat_keys_title (6346877755243280735) -->
     <skip />
-    <!-- no translation found for keyboard_repeat_key_summary (3970350989341158854) -->
+    <!-- no translation found for keyboard_repeat_keys_timeout_title (3411871149974652293) -->
+    <skip />
+    <!-- no translation found for keyboard_repeat_keys_delay_title (7323531750483922943) -->
+    <skip />
+    <!-- no translation found for keyboard_repeat_keys_summary (8972905345211768313) -->
     <skip />
     <string name="ime_label_title" msgid="8994569521516807168">"Diseño <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Predeterminado"</string>
@@ -2447,8 +2443,7 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"Vista previa"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Opciones estándar"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"Idioma"</string>
-    <!-- no translation found for captioning_text_size (5764254558945371745) -->
-    <skip />
+    <string name="captioning_text_size" msgid="5764254558945371745">"Tamaño de los subtítulos"</string>
     <string name="captioning_preset" msgid="4174276086501638524">"Estilo de los subtítulos"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"Opciones personalizadas"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"Color de fondo"</string>
@@ -2992,6 +2987,8 @@
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"¿Desconectar esta VPN?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Desconectar"</string>
     <string name="vpn_version" msgid="6344167191984400976">"Versión"</string>
+    <!-- no translation found for vpn_version_info (5717671228402924155) -->
+    <skip />
     <string name="vpn_forget_long" msgid="729132269203870205">"Olvidar VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"¿Reemplazar VPN actual?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"¿Configurar el modo de VPN siempre activada?"</string>
@@ -3924,8 +3921,7 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Crea un modo"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Modo personalizado"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Nombre del modo"</string>
-    <!-- no translation found for zen_mode_edit_name_empty_error (5788063278827188275) -->
-    <skip />
+    <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"El nombre del modo no puede estar vacío"</string>
     <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"Selecciona un icono"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Eventos del calendario"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Rutina Buenas noches"</string>
@@ -3946,7 +3942,7 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Bloquea las distracciones o interrupciones de tu dispositivo para concentrarte"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimina todas las distracciones para un ambiente silencioso"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Personaliza las experiencias y los ajustes del dispositivo para diferentes usuarios"</string>
-    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Reduce las interrupciones al permitir que solo se pongan en contacto contigo las personas y aplicaciones importantes"</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Reduce interrupciones al solo permitir que ciertas personas y aplicaciones importantes se pongan en contacto contigo."</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Configura un modo que siga un horario regular"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Mantén tu dispositivo sincronizado con los eventos del día"</string>
     <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Empieza el día con energía"</string>
@@ -5468,13 +5464,13 @@
     <string name="homepage_search" msgid="6759334912284663559">"Buscar ajustes"</string>
     <string name="keywords_contacts_storage" msgid="9061213057165337893">"contactos, almacenamiento, cuenta"</string>
     <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Almacenamiento de los contactos"</string>
-    <!-- no translation found for contacts_storage_device_only_preference_label (970250816918108264) -->
-    <skip />
-    <!-- no translation found for contacts_storage_device_only_preference_summary (2339782491812039153) -->
-    <skip />
-    <!-- no translation found for contacts_storage_selection_message (8082077300632059003) -->
-    <skip />
+    <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Solo en el dispositivo"</string>
+    <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"Los contactos nuevos no se sincronizarán con ninguna cuenta"</string>
+    <string name="contacts_storage_selection_message" msgid="8082077300632059003">"Los contactos se guardarán en tu dispositivo y se sincronizarán con tu cuenta de forma predeterminada"</string>
     <string name="contacts_storage_no_account_set" msgid="1548101985417720782">"Ninguna cuenta predeterminada definida"</string>
-    <!-- no translation found for contacts_storage_first_time_add_account_message (5161093169928132323) -->
+    <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Añade una cuenta para empezar"</string>
+    <!-- no translation found for search_gesture_feature_title (7037117019612710960) -->
+    <skip />
+    <!-- no translation found for search_gesture_feature_summary (1793056495030564014) -->
     <skip />
 </resources>
