@@ -23,6 +23,7 @@ import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settingslib.datastore.SettingsSystemStore
+import com.android.settingslib.preference.DefaultPreferenceBindingFactory
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -61,7 +62,7 @@ class DialPadTonePreferenceTest {
 
     @Test
     fun performClick_shouldPreferenceChangeToChecked() {
-        setDialPadToneEnabled(false)
+        enableDialPadTone(false)
 
         val preference = getSwitchPreference().apply { performClick() }
 
@@ -70,7 +71,7 @@ class DialPadTonePreferenceTest {
 
     @Test
     fun performClick_shouldPreferenceChangeToUnchecked() {
-        setDialPadToneEnabled(true)
+        enableDialPadTone(true)
 
         val preference = getSwitchPreference().apply { performClick() }
 
@@ -79,28 +80,26 @@ class DialPadTonePreferenceTest {
 
     @Test
     fun dialToneEnabled_shouldCheckedPreference() {
-        setDialPadToneEnabled(true)
+        enableDialPadTone(true)
 
         assertThat(getSwitchPreference().isChecked).isTrue()
     }
 
     @Test
     fun dialToneDisabled_shouldUncheckedPreference() {
-        setDialPadToneEnabled(false)
+        enableDialPadTone(false)
 
         assertThat(getSwitchPreference().isChecked).isFalse()
     }
 
     private fun getSwitchPreference(): SwitchPreferenceCompat =
-        dialPadTonePreference.run {
+        DefaultPreferenceBindingFactory.getPreferenceBinding(dialPadTonePreference).run {
             val preference = createWidget(context)
-            bind(preference, this)
+            bind(preference, dialPadTonePreference)
             preference as SwitchPreferenceCompat
         }
 
-    private fun setDialPadToneEnabled(enabled: Boolean) {
-        SettingsSystemStore.get(context)
-            .setValue(DTMF_TONE_WHEN_DIALING, Boolean::class.javaObjectType, enabled)
-    }
+    private fun enableDialPadTone(enabled: Boolean) =
+        SettingsSystemStore.get(context).setBoolean(DTMF_TONE_WHEN_DIALING, enabled)
 }
 // LINT.ThenChange(DialPadTonePreferenceControllerTest.java)
