@@ -179,7 +179,7 @@ class UdfpsViewModel(
 
   /** Indicates if accessibility is enabled */
   val accessibilityEnabled =
-    accessibilityInteractor.isAccessibilityEnabled.shareIn(
+    accessibilityInteractor.isEnabledFlow(viewModelScope).shareIn(
       this.viewModelScope,
       SharingStarted.Eagerly,
       replay = 1,
@@ -425,7 +425,7 @@ class UdfpsViewModel(
           biometricEnvironment.enrollStageInteractor,
           biometricEnvironment.orientationInteractor,
           biometricEnvironment.udfpsEnrollInteractor,
-          biometricEnvironment.accessibilityInteractor,
+          biometricEnvironment.createAccessibilityInteractor(),
           biometricEnvironment.sensorInteractor,
           biometricEnvironment.touchEventInteractor,
           biometricEnvironment.createSensorPropertiesInteractor(),

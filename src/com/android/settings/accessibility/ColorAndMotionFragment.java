@@ -17,12 +17,15 @@
 package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.view.accessibility.Flags;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.TwoStatePreference;
@@ -146,6 +149,12 @@ public class ColorAndMotionFragment extends DashboardFragment {
             experimentalCategory.addPreference(mToggleDisableAnimationsPreference);
             experimentalCategory.addPreference(mToggleLargePointerIconPreference);
         }
+    }
+
+    @Nullable
+    @Override
+    public String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return ColorAndMotionScreen.KEY;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

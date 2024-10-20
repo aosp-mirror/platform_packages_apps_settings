@@ -69,6 +69,6 @@ class RegulatoryInfoDisplayActivity : Activity() {
     private fun getRegulatoryText(): CharSequence? {
         val regulatoryInfoText = resources.getText(R.string.regulatory_info_text)
         if (regulatoryInfoText.isNotBlank()) return regulatoryInfoText
-        return featureFactory.hardwareInfoFeatureProvider?.countryIfOriginLabel
+        return featureFactory.hardwareInfoFeatureProvider?.countryOfOriginLabel
     }
 }

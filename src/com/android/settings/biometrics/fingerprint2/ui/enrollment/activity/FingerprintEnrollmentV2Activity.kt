@@ -149,11 +149,11 @@ class FingerprintEnrollmentV2Activity : FragmentActivity() {
     super.onConfigurationChanged(newConfig)
     foldStateInteractor.onConfigurationChange(newConfig)
     val displayDensityUtils = DisplayDensityUtils(applicationContext)
-    val currIndex = displayDensityUtils.currentIndexForDefaultDisplay
+    val currIndex = displayDensityUtils.currentIndex
     displayDensityInteractor.updateFontScale(resources.configuration.fontScale)
-    displayDensityInteractor.updateDisplayDensity(
-      displayDensityUtils.defaultDisplayDensityValues[currIndex]
-    )
+    displayDensityUtils.values?.let {
+      displayDensityInteractor.updateDisplayDensity(it[currIndex])
+    }
   }
 
   private fun onConfirmDevice(resultCode: Int, data: Intent?) {

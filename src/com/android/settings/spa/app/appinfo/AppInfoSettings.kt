@@ -140,18 +140,20 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
 
         AppButtons(packageInfoPresenter, isHibernationSwitchEnabledStateFlow)
 
-        AppSettingsPreference(app)
-        AppAllServicesPreference(app)
-        AppNotificationPreference(app)
-        AppPermissionPreference(app)
-        AppStoragePreference(app)
-        InstantAppDomainsPreference(app)
-        AppDataUsagePreference(app)
-        AppTimeSpentPreference(app)
-        AppBatteryPreference(app)
-        AppLocalePreference(app)
-        AppOpenByDefaultPreference(app)
-        DefaultAppShortcuts(app)
+        Category {
+            AppSettingsPreference(app)
+            AppAllServicesPreference(app)
+            AppNotificationPreference(app)
+            AppPermissionPreference(app)
+            AppStoragePreference(app)
+            InstantAppDomainsPreference(app)
+            AppDataUsagePreference(app)
+            AppTimeSpentPreference(app)
+            AppBatteryPreference(app)
+            AppLocalePreference(app)
+            AppOpenByDefaultPreference(app)
+            DefaultAppShortcuts(app)
+        }
 
         Category(title = stringResource(R.string.unused_apps_category)) {
             HibernationSwitchPreference(app, isHibernationSwitchEnabledStateFlow)

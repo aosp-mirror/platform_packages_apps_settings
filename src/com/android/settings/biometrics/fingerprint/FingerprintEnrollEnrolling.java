@@ -207,10 +207,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     @VisibleForTesting
     protected boolean shouldShowLottie() {
         DisplayDensityUtils displayDensity = new DisplayDensityUtils(getApplicationContext());
-        int currentDensityIndex = displayDensity.getCurrentIndexForDefaultDisplay();
-        final int currentDensity = displayDensity.getDefaultDisplayDensityValues()
-                [currentDensityIndex];
-        final int defaultDensity = displayDensity.getDefaultDensityForDefaultDisplay();
+        int currentDensityIndex = displayDensity.getCurrentIndex();
+        final int currentDensity = displayDensity.getValues()[currentDensityIndex];
+        final int defaultDensity = displayDensity.getDefaultDensity();
 
         if (getResources().getConfiguration().fontScale > 1) {
             return false;

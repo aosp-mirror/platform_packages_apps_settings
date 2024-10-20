@@ -58,6 +58,8 @@ class BluetoothDeviceDetailsViewModel(
             deviceSettingRepository.getDeviceSettingsConfig(cachedDevice)
         }
 
+    private val spatialAudioModel by lazy { spatialAudioInteractor.getDeviceSetting(cachedDevice) }
+
     suspend fun getItems(fragment: FragmentTypeModel): List<DeviceSettingConfigItemModel>? =
         when (fragment) {
             is FragmentTypeModel.DeviceDetailsMainFragment -> items.await()?.mainItems
@@ -81,7 +83,7 @@ class BluetoothDeviceDetailsViewModel(
         }
         return when (settingId) {
             DeviceSettingId.DEVICE_SETTING_ID_SPATIAL_AUDIO_MULTI_TOGGLE ->
-                spatialAudioInteractor.getDeviceSetting(cachedDevice)
+                spatialAudioModel
             else -> deviceSettingRepository.getDeviceSetting(cachedDevice, settingId)
         }.map { it?.toPreferenceModel() }
     }
@@ -101,6 +103,7 @@ class BluetoothDeviceDetailsViewModel(
                                 DeviceSettingStateModel.ActionSwitchPreferenceState(newState)
                             )
                         },
+                        disabled = !isAllowedChangingState,
                         action = action,
                     )
                 } else {
