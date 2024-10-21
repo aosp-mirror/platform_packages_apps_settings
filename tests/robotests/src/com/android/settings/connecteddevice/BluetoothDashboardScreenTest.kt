@@ -15,7 +15,12 @@
  */
 package com.android.settings.connecteddevice
 
+import android.content.Intent
+import android.provider.Settings.Global
+import androidx.preference.PreferenceFragmentCompat
+import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.Settings.BluetoothDashboardActivity
 import com.android.settings.flags.Flags
 import com.android.settingslib.preference.CatalystScreenTestCase
 import com.google.common.truth.Truth.assertThat
@@ -34,6 +39,18 @@ class BluetoothDashboardScreenTest : CatalystScreenTestCase() {
         assertThat(preferenceScreenCreator.key).isEqualTo(BluetoothDashboardScreen.KEY)
     }
 
-    override fun migration() {
+    override fun launchFragment(
+        fragmentClass: Class<PreferenceFragmentCompat>,
+        action: (PreferenceFragmentCompat) -> Unit,
+    ) {
+        Global.putInt(appContext.contentResolver, Global.DEVICE_PROVISIONED, 1)
+        val intent = Intent(appContext, BluetoothDashboardActivity::class.java)
+        ActivityScenario.launch<BluetoothDashboardActivity>(intent).use {
+            it.onActivity { activity ->
+                val fragment = activity.supportFragmentManager.fragments[0]
+                assertThat(fragment.javaClass).isEqualTo(fragmentClass)
+                action(fragment as PreferenceFragmentCompat)
+            }
+        }
     }
 }
