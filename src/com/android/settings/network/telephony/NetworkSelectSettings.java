@@ -368,6 +368,11 @@ public class NetworkSelectSettings extends DashboardFragment {
 
     @VisibleForTesting
     protected void scanResultHandler(NetworkScanRepository.NetworkScanResult results) {
+        if (isFinishingOrDestroyed()) {
+            Log.d(TAG, "scanResultHandler: activity isFinishingOrDestroyed, directly return");
+            return;
+        }
+
         mCellInfoList = filterOutSatellitePlmn(results.getCellInfos());
         Log.d(TAG, "CellInfoList: " + CellInfoUtil.cellInfoListToString(mCellInfoList));
         updateAllPreferenceCategory();
