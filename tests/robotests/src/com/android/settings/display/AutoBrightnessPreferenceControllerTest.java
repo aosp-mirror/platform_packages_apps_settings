@@ -43,6 +43,7 @@ import org.robolectric.annotation.Config;
 /**
  * Tests for {@link AutoBrightnessPreferenceController}.
  */
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {SettingsShadowResources.class})
 public class AutoBrightnessPreferenceControllerTest {
@@ -139,3 +140,4 @@ public class AutoBrightnessPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 }
+// LINT.ThenChange(AutoBrightnessScreenTest.kt)
