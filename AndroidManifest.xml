@@ -5297,7 +5297,7 @@
             android:name="Settings$ContactsStorageSettingsActivity"
             android:label="@string/contacts_storage_settings_title"
             android:exported="true"
-            android:featureFlag="com.android.settings.flags.enable_contacts_default_account_in_settings">
+            android:featureFlag="android.provider.new_default_account_api_enabled">
             <intent-filter>
                 <action android:name="android.provider.action.SET_DEFAULT_ACCOUNT" />
                 <category android:name="android.intent.category.DEFAULT" />
