@@ -243,7 +243,9 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
     protected boolean setDefaultKey(String key) {
         setCurrentSystemNavigationMode(mOverlayManager, key);
         setIllustrationVideo(mVideoPreference, key);
-        setGestureNavigationTutorialDialog(key);
+        if (!android.provider.Flags.a11yStandaloneGestureEnabled()) {
+            setGestureNavigationTutorialDialog(key);
+        }
         setIllustrationClickListener(mVideoPreference, key);
         return true;
     }
