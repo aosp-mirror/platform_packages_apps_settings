@@ -51,6 +51,7 @@ class SoundScreen : PreferenceScreenCreator, PreferenceIconProvider {
         preferenceHierarchy(this) {
             +MediaVolumePreference() order -180
             +CallVolumePreference() order -170
+            +SeparateRingVolumePreference() order -155
             +DialPadTonePreference() order -50
         }
 
