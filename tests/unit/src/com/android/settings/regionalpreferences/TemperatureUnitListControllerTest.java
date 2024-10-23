@@ -17,6 +17,7 @@
 package com.android.settings.regionalpreferences;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
@@ -24,15 +25,14 @@ import android.os.LocaleList;
 import android.os.Looper;
 import android.provider.Settings;
 
-import com.android.internal.app.LocalePicker;
-import com.android.settings.widget.TickButtonPreference;
-
-import androidx.preference.PreferenceManager;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.android.internal.app.LocalePicker;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -88,8 +88,9 @@ public class TemperatureUnitListControllerTest {
 
     @Test
     public void displayPreference_setSelectPreferredTemperatureUnitIsDefault() {
-        TickButtonPreference pref = (TickButtonPreference) mPreferenceCategory.getPreference(0);
-        pref.performClick();
+        SelectorWithWidgetPreference pref =
+                (SelectorWithWidgetPreference) mPreferenceCategory.getPreference(0);
+        pref.onClick();
         String record = Settings.System.getString(
                 mContext.getContentResolver(), Settings.System.LOCALE_PREFERENCES);
 
@@ -101,8 +102,9 @@ public class TemperatureUnitListControllerTest {
 
     @Test
     public void displayPreference_setSelectPreferredTemperatureUnitIsCelsius() {
-        TickButtonPreference pref = (TickButtonPreference) mPreferenceCategory.getPreference(1);
-        pref.performClick();
+        SelectorWithWidgetPreference pref =
+                (SelectorWithWidgetPreference) mPreferenceCategory.getPreference(1);
+        pref.onClick();
         String record = Settings.System.getString(
                 mContext.getContentResolver(), Settings.System.LOCALE_PREFERENCES);
 
@@ -112,8 +114,9 @@ public class TemperatureUnitListControllerTest {
 
     @Test
     public void displayPreference_setSelectPreferredTemperatureUnitIsFahrenhe() {
-        TickButtonPreference pref = (TickButtonPreference) mPreferenceCategory.getPreference(2);
-        pref.performClick();
+        SelectorWithWidgetPreference pref =
+                (SelectorWithWidgetPreference) mPreferenceCategory.getPreference(2);
+        pref.onClick();
         String record = Settings.System.getString(
                 mContext.getContentResolver(), Settings.System.LOCALE_PREFERENCES);
 
