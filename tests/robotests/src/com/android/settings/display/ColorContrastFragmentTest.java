@@ -28,7 +28,6 @@ import android.content.Context;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.ShortcutsSettingsFragment;
 import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Before;
@@ -79,7 +78,7 @@ public class ColorContrastFragmentTest {
     @Test
     public void getNonIndexableKeys_existInXmlLayout() {
         final List<String> niks =
-                ShortcutsSettingsFragment.SEARCH_INDEX_DATA_PROVIDER
+                ColorContrastFragment.SEARCH_INDEX_DATA_PROVIDER
                         .getNonIndexableKeys(mContext);
         final List<String> keys =
                 XmlTestUtils.getKeysFromPreferenceXml(mContext,
