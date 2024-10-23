@@ -70,6 +70,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
+import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
@@ -98,6 +99,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowToast;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
@@ -190,6 +192,9 @@ public class NetworkProviderSettingsTest {
                 .when(mFirstWifiEntryPreferenceCategory).getKey();
         mNetworkProviderSettings.mFirstWifiEntryPreferenceCategory =
                 mFirstWifiEntryPreferenceCategory;
+
+        ReflectionHelpers.setField(mNetworkProviderSettings, "mDashboardFeatureProvider",
+                mock(DashboardFeatureProvider.class));
     }
 
     @Test

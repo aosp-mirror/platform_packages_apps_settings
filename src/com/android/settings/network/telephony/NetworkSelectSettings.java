@@ -219,7 +219,7 @@ public class NetworkSelectSettings extends DashboardFragment {
         setProgressBarVisible(true);
         mNetworkScanJob = mNetworkScanRepository.launchNetworkScan(getViewLifecycleOwner(),
                 (networkScanResult) -> {
-                    if (isPreferenceScreenEnabled()) {
+                    if (isPreferenceScreenEnabled() && !isFinishingOrDestroyed()) {
                         scanResultHandler(networkScanResult);
                     }
 
@@ -368,11 +368,6 @@ public class NetworkSelectSettings extends DashboardFragment {
 
     @VisibleForTesting
     protected void scanResultHandler(NetworkScanRepository.NetworkScanResult results) {
-        if (isFinishingOrDestroyed()) {
-            Log.d(TAG, "scanResultHandler: activity isFinishingOrDestroyed, directly return");
-            return;
-        }
-
         mCellInfoList = filterOutSatellitePlmn(results.getCellInfos());
         Log.d(TAG, "CellInfoList: " + CellInfoUtil.cellInfoListToString(mCellInfoList));
         updateAllPreferenceCategory();
