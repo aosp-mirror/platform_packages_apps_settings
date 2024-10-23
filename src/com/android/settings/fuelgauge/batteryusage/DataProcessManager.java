@@ -19,8 +19,6 @@ package com.android.settings.fuelgauge.batteryusage;
 import android.app.usage.UsageEvents;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.ArrayMap;
 import android.util.Log;
 
@@ -82,7 +80,6 @@ public class DataProcessManager {
     private final long mLastFullChargeTimestamp;
     private final boolean mIsFromPeriodJob;
     private final Context mContext;
-    private final Handler mHandler;
     private final UserIdsSeries mUserIdsSeries;
     private final OnBatteryDiffDataMapLoadedListener mCallbackFunction;
     private final List<AppUsageEvent> mAppUsageEventList = new ArrayList<>();
@@ -123,7 +120,6 @@ public class DataProcessManager {
     /** Constructor when there exists battery level data. */
     DataProcessManager(
             Context context,
-            Handler handler,
             final UserIdsSeries userIdsSeries,
             final boolean isFromPeriodJob,
             final long rawStartTimestamp,
@@ -132,7 +128,6 @@ public class DataProcessManager {
             @NonNull final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
             @NonNull final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
         mContext = context.getApplicationContext();
-        mHandler = handler;
         mUserIdsSeries = userIdsSeries;
         mIsFromPeriodJob = isFromPeriodJob;
         mRawStartTimestamp = rawStartTimestamp;
@@ -145,11 +140,9 @@ public class DataProcessManager {
     /** Constructor when there is no battery level data. */
     DataProcessManager(
             Context context,
-            Handler handler,
             final UserIdsSeries userIdsSeries,
             @NonNull final OnBatteryDiffDataMapLoadedListener callbackFunction) {
         mContext = context.getApplicationContext();
-        mHandler = handler;
         mUserIdsSeries = userIdsSeries;
         mCallbackFunction = callbackFunction;
         mIsFromPeriodJob = false;
@@ -444,12 +437,8 @@ public class DataProcessManager {
 
             @Override
             protected void onPostExecute(final Map<Long, BatteryDiffData> batteryDiffDataMap) {
-                // Post results back to main thread to refresh UI.
-                if (mHandler != null && mCallbackFunction != null) {
-                    mHandler.post(
-                            () -> {
-                                mCallbackFunction.onBatteryDiffDataMapLoaded(batteryDiffDataMap);
-                            });
+                if (mCallbackFunction != null) {
+                    mCallbackFunction.onBatteryDiffDataMapLoaded(batteryDiffDataMap);
                 }
             }
         }.execute();
@@ -534,12 +523,8 @@ public class DataProcessManager {
 
             @Override
             protected void onPostExecute(final Map<Long, BatteryDiffData> batteryDiffDataMap) {
-                // Post results back to main thread to refresh UI.
-                if (mHandler != null && mCallbackFunction != null) {
-                    mHandler.post(
-                            () -> {
-                                mCallbackFunction.onBatteryDiffDataMapLoaded(batteryDiffDataMap);
-                            });
+                if (mCallbackFunction != null) {
+                    mCallbackFunction.onBatteryDiffDataMapLoaded(batteryDiffDataMap);
                 }
             }
         }.execute();
@@ -581,7 +566,6 @@ public class DataProcessManager {
     @Nullable
     public static BatteryLevelData getBatteryLevelData(
             Context context,
-            @Nullable Handler handler,
             final UserIdsSeries userIdsSeries,
             final boolean isFromPeriodJob,
             final OnBatteryDiffDataMapLoadedListener onBatteryUsageMapLoadedListener) {
@@ -601,7 +585,6 @@ public class DataProcessManager {
         final BatteryLevelData batteryLevelData =
                 getPeriodBatteryLevelData(
                         context,
-                        handler,
                         userIdsSeries,
                         startTimestamp,
                         lastFullChargeTime,
@@ -621,7 +604,6 @@ public class DataProcessManager {
 
     private static BatteryLevelData getPeriodBatteryLevelData(
             Context context,
-            @Nullable Handler handler,
             final UserIdsSeries userIdsSeries,
             final long startTimestamp,
             final long lastFullChargeTime,
@@ -639,7 +621,6 @@ public class DataProcessManager {
             return null;
         }
 
-        handler = handler != null ? handler : new Handler(Looper.getMainLooper());
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
                 sFakeBatteryHistoryMap != null
                         ? sFakeBatteryHistoryMap
@@ -650,8 +631,7 @@ public class DataProcessManager {
                                 lastFullChargeTime);
         if (batteryHistoryMap == null || batteryHistoryMap.isEmpty()) {
             Log.d(TAG, "batteryHistoryMap is null in getPeriodBatteryLevelData()");
-            new DataProcessManager(
-                            context, handler, userIdsSeries, onBatteryDiffDataMapLoadedListener)
+            new DataProcessManager(context, userIdsSeries, onBatteryDiffDataMapLoadedListener)
                     .start();
             return null;
         }
@@ -680,8 +660,7 @@ public class DataProcessManager {
                 DataProcessor.getLevelDataThroughProcessedHistoryMap(
                         context, processedBatteryHistoryMap);
         if (batteryLevelData == null) {
-            new DataProcessManager(
-                            context, handler, userIdsSeries, onBatteryDiffDataMapLoadedListener)
+            new DataProcessManager(context, userIdsSeries, onBatteryDiffDataMapLoadedListener)
                     .start();
             Log.d(TAG, "getBatteryLevelData() returns null");
             return null;
@@ -690,7 +669,6 @@ public class DataProcessManager {
         // Start the async task to compute diff usage data and load labels and icons.
         new DataProcessManager(
                         context,
-                        handler,
                         userIdsSeries,
                         isFromPeriodJob,
                         startTimestamp,
