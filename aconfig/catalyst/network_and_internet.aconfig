@@ -9,6 +9,13 @@ flag {
 }
 
 flag {
+  name: "catalyst_internet_settings"
+  namespace: "android_settings"
+  description: "Flag for Internet"
+  bug: "323791114"
+}
+
+flag {
   name: "catalyst_mobile_network_list"
   namespace: "android_settings"
   description: "Flag for SIMs"
