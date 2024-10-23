@@ -111,6 +111,8 @@ class FingerprintEnrollFindSensorViewModelV2Test {
         override val isEnabled: Boolean
           get() = true
         override fun announce(clazz: Class<*>, announcement: CharSequence?) {}
+        override fun interrupt() {
+        }
       }
     foldStateInteractor =
       object : FoldStateInteractor {
