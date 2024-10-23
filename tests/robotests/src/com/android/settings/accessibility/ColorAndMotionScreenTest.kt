@@ -27,7 +27,9 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class ColorAndMotionScreenTest : CatalystScreenTestCase() {
     override val preferenceScreenCreator: PreferenceScreenCreator = ColorAndMotionScreen()
-    override val flagName: String = Flags.FLAG_CATALYST_ACCESSIBILITY_COLOR_AND_MOTION
+
+    override val flagName: String
+        get() = Flags.FLAG_CATALYST_ACCESSIBILITY_COLOR_AND_MOTION
 
     override fun migration() {}
 
