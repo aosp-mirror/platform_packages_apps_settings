@@ -29,6 +29,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
@@ -158,6 +160,11 @@ public class LockscreenDashboardFragment extends DashboardFragment
         if (mOwnerInfoPreferenceController != null) {
             mOwnerInfoPreferenceController.updateSummary();
         }
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return LockScreenPreferenceScreen.KEY;
     }
 
     private AmbientDisplayConfiguration getConfig(Context context) {
