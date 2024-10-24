@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics.fingerprint2.data.repository
 
+import android.annotation.SuppressLint
 import android.hardware.biometrics.ComponentInfoInternal
 import android.hardware.biometrics.SensorLocationInternal
 import android.hardware.biometrics.SensorProperties
@@ -23,18 +24,24 @@ import android.hardware.fingerprint.FingerprintManager
 import android.hardware.fingerprint.FingerprintSensorProperties
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import android.hardware.fingerprint.IFingerprintAuthenticatorsRegisteredCallback
+import android.util.Log
 import com.android.systemui.biometrics.shared.model.FingerprintSensor
 import com.android.systemui.biometrics.shared.model.toFingerprintSensor
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.transform
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
@@ -56,17 +63,24 @@ class FingerprintSensorRepositoryImpl(
   activityScope: CoroutineScope,
 ) : FingerprintSensorRepository {
 
-  private val fingerprintPropsInternal: Flow<FingerprintSensorPropertiesInternal> =
-    callbackFlow {
+  private val _fingerprintSensor = MutableSharedFlow<FingerprintSensor>(replay = 1)
+  override val fingerprintSensor: Flow<FingerprintSensor>
+    get() = _fingerprintSensor.asSharedFlow()
+
+  init {
+    activityScope.launch {
+      callbackFlow{
         val callback =
           object : IFingerprintAuthenticatorsRegisteredCallback.Stub() {
+            @SuppressLint("LongLogTag")
             override fun onAllAuthenticatorsRegistered(
               sensors: List<FingerprintSensorPropertiesInternal>
             ) {
               if (sensors.isEmpty()) {
-                trySend(DEFAULT_PROPS)
+                Log.e(TAG, "empty sensors from onAllAuthenticatorsRegistered")
               } else {
                 trySend(sensors[0])
+                channel.close()
               }
             }
           }
@@ -74,27 +88,16 @@ class FingerprintSensorRepositoryImpl(
           fingerprintManager.addAuthenticatorsRegisteredCallback(callback)
         }
         awaitClose {}
+      }.collect {
+        _fingerprintSensor.emit(it.toFingerprintSensor())
       }
-      .stateIn(activityScope, started = SharingStarted.Eagerly, initialValue = DEFAULT_PROPS)
-
-  override val fingerprintSensor: Flow<FingerprintSensor> =
-    fingerprintPropsInternal.transform { emit(it.toFingerprintSensor()) }
+    }
+  }
 
   override val hasSideFps: Flow<Boolean> =
     fingerprintSensor.flatMapLatest { flow { emit(fingerprintManager.isPowerbuttonFps()) } }
 
-  companion object {
-
-    private val DEFAULT_PROPS =
-      FingerprintSensorPropertiesInternal(
-        -1 /* sensorId */,
-        SensorProperties.STRENGTH_CONVENIENCE,
-        0 /* maxEnrollmentsPerUser */,
-        listOf<ComponentInfoInternal>(),
-        FingerprintSensorProperties.TYPE_UNKNOWN,
-        false /* halControlsIllumination */,
-        true /* resetLockoutRequiresHardwareAuthToken */,
-        listOf<SensorLocationInternal>(SensorLocationInternal.DEFAULT),
-      )
+  private companion object {
+    const val TAG = "FingerprintSensorRepository"
   }
 }
