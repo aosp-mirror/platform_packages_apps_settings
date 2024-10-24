@@ -54,7 +54,7 @@ java_test_host {
         "compatibility-host-util",
         "compatibility-tradefed",
     ],
-    data: [
+    device_common_data: [
         ":test_16kb_app",
     ],
     test_suites: ["device-tests"],
