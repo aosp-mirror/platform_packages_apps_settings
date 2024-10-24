@@ -52,6 +52,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+// LINT.IfChange
 public class AirplaneModePreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnStart, OnResume, OnStop, OnDestroy,
         AirplaneModeEnabler.OnAirplaneModeChangedListener {
@@ -217,3 +218,4 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
         }
     }
 }
+// LINT.ThenChange(AirplaneModePreference.kt)

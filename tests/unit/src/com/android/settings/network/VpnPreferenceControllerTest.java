@@ -34,7 +34,6 @@ import android.net.VpnManager;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.provider.SettingsSlicesContract;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
@@ -102,7 +101,7 @@ public class VpnPreferenceControllerTest {
 
         controller.displayPreference(mScreen);
 
-        verify(mPreference).setDependency(SettingsSlicesContract.KEY_AIRPLANE_MODE);
+        verify(mPreference).setDependency(Settings.Global.AIRPLANE_MODE_ON);
     }
 
     @Test
