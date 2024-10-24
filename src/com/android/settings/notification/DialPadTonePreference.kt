@@ -22,12 +22,12 @@ import com.android.settings.Utils
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.SwitchPreference
-import com.android.settingslib.preference.SwitchPreferenceBinding
 
 // LINT.IfChange
 class DialPadTonePreference :
     SwitchPreference(DTMF_TONE_WHEN_DIALING, R.string.dial_pad_tones_title),
-    SwitchPreferenceBinding, PreferenceAvailabilityProvider {
+    PreferenceAvailabilityProvider {
+
     override fun storage(context: Context) = SettingsSystemStore.get(context)
 
     override fun isAvailable(context: Context) = Utils.isVoiceCapable(context)
