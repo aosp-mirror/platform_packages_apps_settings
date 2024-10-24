@@ -200,6 +200,11 @@
             android:summary="@string/enable_terminal_summary" />
 
         <SwitchPreferenceCompat
+            android:key="enable_linux_terminal"
+            android:title="@string/enable_linux_terminal_title"
+            android:summary="@string/enable_linux_terminal_summary" />
+
+        <SwitchPreferenceCompat
             android:key="bugreport_in_power"
             android:title="@string/bugreport_in_power"
             android:summary="@string/bugreport_in_power_summary" />
@@ -726,11 +731,6 @@
             android:key="inactive_apps"
             android:title="@string/inactive_apps_title"
             android:fragment="com.android.settings.fuelgauge.InactiveApps" />
-
-        <Preference
-            android:key="tare"
-            android:title="@string/tare_title" >
-        </Preference>
 
         <SwitchPreferenceCompat
             android:key="force_allow_on_external"

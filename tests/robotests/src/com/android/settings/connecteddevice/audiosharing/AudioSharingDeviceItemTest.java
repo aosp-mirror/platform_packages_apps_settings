@@ -78,4 +78,13 @@ public class AudioSharingDeviceItemTest {
         assertThat(itemFromParcel.getGroupId()).isEqualTo(TEST_GROUP_ID);
         assertThat(itemFromParcel.isActive()).isEqualTo(TEST_IS_ACTIVE);
     }
+
+    @Test
+    public void toString_correctValue() {
+        AudioSharingDeviceItem item =
+                new AudioSharingDeviceItem(TEST_NAME, TEST_GROUP_ID, TEST_IS_ACTIVE);
+        assertThat(item.toString()).isEqualTo(
+                "AudioSharingDeviceItem groupId = " + TEST_GROUP_ID + ", isActive = "
+                        + TEST_IS_ACTIVE);
+    }
 }

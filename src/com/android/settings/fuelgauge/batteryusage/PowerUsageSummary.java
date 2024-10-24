@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
 
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -26,13 +27,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings.Global;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryHeaderPreferenceController;
 import com.android.settings.fuelgauge.BatteryInfo;
@@ -125,7 +127,7 @@ public class PowerUsageSummary extends PowerUsageBase
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        final SettingsActivity activity = (SettingsActivity) getActivity();
+        final Activity activity = getActivity();
 
         mBatteryHeaderPreferenceController = use(BatteryHeaderPreferenceController.class);
 
@@ -270,4 +272,9 @@ public class PowerUsageSummary extends PowerUsageBase
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.power_usage_summary);
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return PowerUsageSummaryScreen.KEY;
+    }
 }

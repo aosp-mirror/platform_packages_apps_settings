@@ -57,7 +57,9 @@ import android.util.Pair;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -111,10 +113,10 @@ import java.util.concurrent.Executor;
 @RunWith(RobolectricTestRunner.class)
 @Config(
         shadows = {
-            ShadowBluetoothAdapter.class,
-            ShadowBluetoothUtils.class,
-            ShadowThreadUtils.class,
-            ShadowAlertDialogCompat.class
+                ShadowBluetoothAdapter.class,
+                ShadowBluetoothUtils.class,
+                ShadowThreadUtils.class,
+                ShadowAlertDialogCompat.class
         })
 public class AudioSharingSwitchBarControllerTest {
     private static final String TEST_DEVICE_NAME1 = "test1";
@@ -123,12 +125,13 @@ public class AudioSharingSwitchBarControllerTest {
     private static final String TEST_DEVICE_ANONYMIZED_ADDR2 = "XX:XX:02";
     private static final int TEST_DEVICE_GROUP_ID1 = 1;
     private static final int TEST_DEVICE_GROUP_ID2 = 2;
-    private static final Correspondence<Fragment, String> TAG_EQUALS =
+    private static final Correspondence<Fragment, String> CLAZZNAME_EQUALS =
             Correspondence.from(
-                    (Fragment fragment, String tag) ->
+                    (Fragment fragment, String clazzName) ->
                             fragment instanceof DialogFragment
-                                    && ((DialogFragment) fragment).getTag() != null
-                                    && ((DialogFragment) fragment).getTag().equals(tag),
+                                    && ((DialogFragment) fragment).getClass().getName() != null
+                                    && ((DialogFragment) fragment).getClass().getName().equals(
+                                    clazzName),
                     "is equal to");
 
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
@@ -143,6 +146,7 @@ public class AudioSharingSwitchBarControllerTest {
     @Mock private LocalBluetoothLeBroadcastAssistant mAssistant;
     @Mock private VolumeControlProfile mVolumeControl;
     @Mock private BluetoothLeBroadcastMetadata mMetadata;
+    @Mock private BluetoothLeBroadcastReceiveState mState;
     @Mock private CompoundButton mBtnView;
     @Mock private CachedBluetoothDevice mCachedDevice1;
     @Mock private CachedBluetoothDevice mCachedDevice2;
@@ -234,6 +238,7 @@ public class AudioSharingSwitchBarControllerTest {
 
     @After
     public void tearDown() {
+        ShadowAlertDialogCompat.reset();
         ShadowBluetoothUtils.reset();
         ShadowThreadUtils.reset();
     }
@@ -344,6 +349,18 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
+    public void onStart_flagOn_updateSwitch() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        when(mBroadcast.isEnabled(null)).thenReturn(false);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of());
+        mController.onStart(mLifecycleOwner);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        assertThat(mSwitchBar.isChecked()).isFalse();
+        assertThat(mSwitchBar.isEnabled()).isTrue();
+    }
+
+    @Test
     public void onStop_flagOff_doNothing() {
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.onStop(mLifecycleOwner);
@@ -398,15 +415,23 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
-    public void onCheckedChangedToChecked_noConnectedLeaDevices_flagOn_notStartAudioSharing() {
+    public void onCheckedChangedToChecked_noConnectedLeaDevices_flagOn_showDialog() {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of());
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
+        shadowOf(Looper.getMainLooper()).idle();
+
         assertThat(mSwitchBar.isChecked()).isFalse();
         verify(mBroadcast, never()).startPrivateBroadcast();
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments)
+                .comparingElementsUsing(CLAZZNAME_EQUALS)
+                .containsExactly(AudioSharingConfirmDialogFragment.class.getName());
+
+        childFragments.forEach(fragment -> ((DialogFragment) fragment).dismiss());
     }
 
     @Test
@@ -471,14 +496,21 @@ public class AudioSharingSwitchBarControllerTest {
                             public void onAudioSharingProfilesConnected() {}
                         });
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
+        shadowOf(Looper.getMainLooper()).idle();
+
         verify(mBroadcast).startPrivateBroadcast();
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        // No progress dialog.
+        assertThat(childFragments).isEmpty();
+
         mController.mBroadcastCallback.onPlaybackStarted(0, 0);
         shadowOf(Looper.getMainLooper()).idle();
 
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(any(Context.class), eq(SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING));
 
-        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        // No audio sharing dialog.
         assertThat(childFragments).isEmpty();
     }
 
@@ -488,14 +520,19 @@ public class AudioSharingSwitchBarControllerTest {
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2, mDevice1));
-        BluetoothLeBroadcastReceiveState state = mock(BluetoothLeBroadcastReceiveState.class);
-        when(state.getBroadcastId()).thenReturn(1);
+        when(mState.getBroadcastId()).thenReturn(1);
         when(mBroadcast.getLatestBroadcastId()).thenReturn(1);
-        when(mAssistant.getAllSources(mDevice2)).thenReturn(ImmutableList.of(state));
+        when(mAssistant.getAllSources(mDevice2)).thenReturn(ImmutableList.of(mState));
         when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
+        shadowOf(Looper.getMainLooper()).idle();
+
         verify(mBroadcast).startPrivateBroadcast();
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
+                AudioSharingProgressDialogFragment.class.getName());
+
         mController.mBroadcastCallback.onPlaybackStarted(0, 0);
         shadowOf(Looper.getMainLooper()).idle();
 
@@ -503,12 +540,80 @@ public class AudioSharingSwitchBarControllerTest {
         verify(mFeatureFactory.metricsFeatureProvider, never())
                 .action(any(Context.class), eq(SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING));
 
-        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
-        assertThat(childFragments).isEmpty();
+        childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        // No audio sharing dialog.
+        assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).doesNotContain(
+                AudioSharingDialogFragment.class.getName());
+
+        childFragments.forEach(fragment -> ((DialogFragment) fragment).dismiss());
     }
 
     @Test
-    public void onPlaybackStarted_showJoinAudioSharingDialog() {
+    public void onPlaybackStarted_singleActiveDevice_showJoinAudioSharingDialog() {
+        FeatureFlagUtils.setEnabled(
+                mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
+        when(mBtnView.isEnabled()).thenReturn(true);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2));
+        when(mAssistant.getAllSources(any(BluetoothDevice.class))).thenReturn(ImmutableList.of());
+        doNothing().when(mBroadcast).startPrivateBroadcast();
+        mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mBroadcast).startPrivateBroadcast();
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
+                AudioSharingProgressDialogFragment.class.getName());
+
+        when(mBroadcast.isEnabled(null)).thenReturn(true);
+        when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
+        mController.mBroadcastCallback.onPlaybackStarted(0, 0);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(any(Context.class), eq(SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING));
+
+        when(mState.getBisSyncState()).thenReturn(ImmutableList.of(1L));
+        mController.mBroadcastAssistantCallback.onReceiveStateChanged(mDevice2, /* sourceId= */ 1,
+                mState);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments)
+                .comparingElementsUsing(CLAZZNAME_EQUALS)
+                .containsExactly(AudioSharingDialogFragment.class.getName());
+
+        Pair<Integer, Object>[] eventData = new Pair[0];
+        for (Fragment fragment : childFragments) {
+            if (fragment instanceof AudioSharingDialogFragment) {
+                eventData = ((AudioSharingDialogFragment) fragment).getEventData();
+                break;
+            }
+        }
+        assertThat(eventData)
+                .asList()
+                .containsExactly(
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID.ordinal(),
+                                SettingsEnums.AUDIO_SHARING_SETTINGS),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_PAGE_ID.ordinal(),
+                                SettingsEnums.DIALOG_AUDIO_SHARING_ADD_DEVICE),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_USER_TRIGGERED.ordinal(), 0),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_DEVICE_COUNT_IN_SHARING
+                                        .ordinal(),
+                                1),
+                        Pair.create(
+                                AudioSharingUtils.MetricKey.METRIC_KEY_CANDIDATE_DEVICE_COUNT
+                                        .ordinal(),
+                                0));
+
+        childFragments.forEach(fragment -> ((DialogFragment) fragment).dismiss());
+    }
+
+    @Test
+    public void onPlaybackStarted_oneActiveOnConnected_showJoinAudioSharingDialog() {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
@@ -516,22 +621,42 @@ public class AudioSharingSwitchBarControllerTest {
         when(mAssistant.getAllSources(any(BluetoothDevice.class))).thenReturn(ImmutableList.of());
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
-        when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
+        shadowOf(Looper.getMainLooper()).idle();
+
         verify(mBroadcast).startPrivateBroadcast();
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
+                AudioSharingProgressDialogFragment.class.getName());
+        AudioSharingProgressDialogFragment progressFragment =
+                (AudioSharingProgressDialogFragment) Iterables.getOnlyElement(childFragments);
+        String expectedMessage = mContext.getString(
+                R.string.audio_sharing_progress_dialog_start_stream_content);
+        checkProgressDialogMessage(progressFragment, expectedMessage);
+
+        when(mBroadcast.isEnabled(null)).thenReturn(true);
+        when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
         mController.mBroadcastCallback.onPlaybackStarted(0, 0);
         shadowOf(Looper.getMainLooper()).idle();
 
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(any(Context.class), eq(SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING));
+        expectedMessage = mContext.getString(
+                R.string.audio_sharing_progress_dialog_add_source_content, TEST_DEVICE_NAME2);
+        checkProgressDialogMessage(progressFragment, expectedMessage);
 
-        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        childFragments = mParentFragment.getChildFragmentManager().getFragments();
         assertThat(childFragments)
-                .comparingElementsUsing(TAG_EQUALS)
-                .containsExactly(AudioSharingDialogFragment.tag());
+                .comparingElementsUsing(CLAZZNAME_EQUALS)
+                .containsExactly(AudioSharingDialogFragment.class.getName(),
+                        AudioSharingProgressDialogFragment.class.getName());
 
-        AudioSharingDialogFragment fragment =
-                (AudioSharingDialogFragment) Iterables.getOnlyElement(childFragments);
-        Pair<Integer, Object>[] eventData = fragment.getEventData();
+        Pair<Integer, Object>[] eventData = new Pair[0];
+        for (Fragment fragment : childFragments) {
+            if (fragment instanceof AudioSharingDialogFragment) {
+                eventData = ((AudioSharingDialogFragment) fragment).getEventData();
+                break;
+            }
+        }
         assertThat(eventData)
                 .asList()
                 .containsExactly(
@@ -551,19 +676,24 @@ public class AudioSharingSwitchBarControllerTest {
                                 AudioSharingUtils.MetricKey.METRIC_KEY_CANDIDATE_DEVICE_COUNT
                                         .ordinal(),
                                 1));
+
+        childFragments.forEach(fragment -> ((DialogFragment) fragment).dismiss());
     }
 
     @Test
-    public void onPlaybackStarted_clickShareBtnOnDialog_addSource() {
+    public void onPlaybackStarted_oneActiveOnConnected_clickShareBtnOnDialog_addSource() {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2, mDevice1));
         when(mAssistant.getAllSources(any(BluetoothDevice.class))).thenReturn(ImmutableList.of());
-        when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
+        shadowOf(Looper.getMainLooper()).idle();
+
         verify(mBroadcast).startPrivateBroadcast();
+        when(mBroadcast.isEnabled(null)).thenReturn(true);
+        when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
         mController.mBroadcastCallback.onPlaybackStarted(0, 0);
         shadowOf(Looper.getMainLooper()).idle();
 
@@ -578,19 +708,33 @@ public class AudioSharingSwitchBarControllerTest {
 
         verify(mAssistant).addSource(mDevice1, mMetadata, /* isGroupOp= */ false);
         assertThat(dialog.isShowing()).isFalse();
+        // Progress dialog shows sharing progress for the user chosen sink.
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
+                AudioSharingProgressDialogFragment.class.getName());
+        AudioSharingProgressDialogFragment progressFragment =
+                (AudioSharingProgressDialogFragment) Iterables.getOnlyElement(childFragments);
+        String expectedMessage = mContext.getString(
+                R.string.audio_sharing_progress_dialog_add_source_content, TEST_DEVICE_NAME1);
+        checkProgressDialogMessage(progressFragment, expectedMessage);
+
+        childFragments.forEach(fragment -> ((DialogFragment) fragment).dismiss());
     }
 
     @Test
-    public void onPlaybackStarted_clickCancelBtnOnDialog_doNothing() {
+    public void onPlaybackStarted_oneActiveOnConnected_clickCancelBtnOnDialog_doNothing() {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2, mDevice1));
         when(mAssistant.getAllSources(any(BluetoothDevice.class))).thenReturn(ImmutableList.of());
-        when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
+        shadowOf(Looper.getMainLooper()).idle();
+
         verify(mBroadcast).startPrivateBroadcast();
+        when(mBroadcast.isEnabled(null)).thenReturn(true);
+        when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
         mController.mBroadcastCallback.onPlaybackStarted(0, 0);
         shadowOf(Looper.getMainLooper()).idle();
 
@@ -605,14 +749,27 @@ public class AudioSharingSwitchBarControllerTest {
 
         verify(mAssistant, never()).addSource(mDevice1, mMetadata, /* isGroupOp= */ false);
         assertThat(dialog.isShowing()).isFalse();
+        // Progress dialog shows sharing progress for the auto add active sink.
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
+                AudioSharingProgressDialogFragment.class.getName());
+        AudioSharingProgressDialogFragment progressFragment =
+                (AudioSharingProgressDialogFragment) Iterables.getOnlyElement(childFragments);
+        String expectedMessage = mContext.getString(
+                R.string.audio_sharing_progress_dialog_add_source_content, TEST_DEVICE_NAME2);
+        checkProgressDialogMessage(progressFragment, expectedMessage);
+
+        childFragments.forEach(fragment -> ((DialogFragment) fragment).dismiss());
     }
 
     @Test
-    public void testBluetoothLeBroadcastCallbacks_updateSwitch() {
+    public void testBroadcastCallbacks_updateSwitch() {
         mOnAudioSharingStateChanged = false;
         mSwitchBar.setChecked(false);
         when(mBroadcast.isEnabled(any())).thenReturn(false);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice1, mDevice2));
+        when(mDeviceManager.getCachedDevicesCopy()).thenReturn(
+                ImmutableList.of(mCachedDevice1, mCachedDevice2));
         mController.mBroadcastCallback.onBroadcastStartFailed(/* reason= */ 1);
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(mSwitchBar.isChecked()).isFalse();
@@ -652,7 +809,7 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
-    public void testBluetoothLeBroadcastCallbacks_doNothing() {
+    public void testBroadcastCallbacks_doNothing() {
         mController.mBroadcastCallback.onBroadcastMetadataChanged(/* reason= */ 1, mMetadata);
         mController.mBroadcastCallback.onBroadcastUpdated(/* reason= */ 1, /* broadcastId= */ 1);
         mController.mBroadcastCallback.onPlaybackStarted(/* reason= */ 1, /* broadcastId= */ 1);
@@ -664,23 +821,73 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
-    public void testBluetoothLeBroadcastAssistantCallbacks_logAction() {
+    public void testAssistantCallbacks_onSourceAddFailed_twoDevices_showErrorAndLogAction() {
+        FeatureFlagUtils.setEnabled(
+                mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
+        when(mBtnView.isEnabled()).thenReturn(true);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2, mDevice1));
+        when(mAssistant.getAllSources(any(BluetoothDevice.class))).thenReturn(ImmutableList.of());
+        doNothing().when(mBroadcast).startPrivateBroadcast();
+        mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mBroadcast).startPrivateBroadcast();
+
+        when(mBroadcast.isEnabled(null)).thenReturn(true);
+        when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
+        mController.mBroadcastCallback.onPlaybackStarted(0, 0);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mAssistant).addSource(mDevice2, mMetadata, /* isGroupOp= */ false);
+
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNotNull();
+        View btnView = dialog.findViewById(R.id.positive_btn);
+        assertThat(btnView).isNotNull();
+        btnView.performClick();
+        shadowMainLooper().idle();
+
+        verify(mAssistant).addSource(mDevice1, mMetadata, /* isGroupOp= */ false);
+        assertThat(dialog.isShowing()).isFalse();
+
         mController.mBroadcastAssistantCallback.onSourceAddFailed(
                 mDevice1, mMetadata, /* reason= */ 1);
+        shadowMainLooper().idle();
+
+        // Progress dialog shows sharing progress for the user chosen sink.
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
+                AudioSharingErrorDialogFragment.class.getName());
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(
                         mContext,
                         SettingsEnums.ACTION_AUDIO_SHARING_JOIN_FAILED,
                         SettingsEnums.AUDIO_SHARING_SETTINGS);
+
+        childFragments.forEach(fragment -> ((DialogFragment) fragment).dismiss());
     }
 
     @Test
-    public void testBluetoothLeBroadcastAssistantCallbacks_doNothing() {
-        BluetoothLeBroadcastReceiveState state = mock(BluetoothLeBroadcastReceiveState.class);
+    public void testAssistantCallbacks_onReceiveStateChanged_dismissProgressDialog() {
+        AudioSharingProgressDialogFragment.show(mParentFragment, TEST_DEVICE_NAME1);
+        shadowOf(Looper.getMainLooper()).idle();
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
+                AudioSharingProgressDialogFragment.class.getName());
 
+        when(mState.getBisSyncState()).thenReturn(ImmutableList.of(1L));
+        mController.mBroadcastAssistantCallback.onReceiveStateChanged(mDevice1, /* sourceId= */ 1,
+                mState);
+        shadowOf(Looper.getMainLooper()).idle();
+        childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments).isEmpty();
+    }
+
+    @Test
+    public void testAssistantCallbacks_doNothing() {
         // Do nothing
         mController.mBroadcastAssistantCallback.onReceiveStateChanged(
-                mDevice1, /* sourceId= */ 1, state);
+                mDevice1, /* sourceId= */ 1, mState);
         mController.mBroadcastAssistantCallback.onSearchStarted(/* reason= */ 1);
         mController.mBroadcastAssistantCallback.onSearchStartFailed(/* reason= */ 1);
         mController.mBroadcastAssistantCallback.onSearchStopped(/* reason= */ 1);
@@ -706,7 +913,25 @@ public class AudioSharingSwitchBarControllerTest {
         mSwitchBar.setEnabled(false);
         when(mBroadcast.isEnabled(null)).thenReturn(false);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2, mDevice1));
+        when(mDeviceManager.getCachedDevicesCopy()).thenReturn(
+                ImmutableList.of(mCachedDevice2, mCachedDevice1));
         mController.onActiveDeviceChanged(mCachedDevice2, BluetoothProfile.LE_AUDIO);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertThat(mSwitchBar.isChecked()).isFalse();
+        verify(mSwitchBar).setEnabled(true);
+    }
+
+    @Test
+    public void onActiveDeviceChanged_a2dpProfile_updateSwitch() {
+        mSwitchBar.setChecked(true);
+        mSwitchBar.setEnabled(false);
+        when(mBroadcast.isEnabled(null)).thenReturn(false);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice1, mDevice2));
+        when(mCachedDevice2.isActiveDevice(BluetoothProfile.LE_AUDIO)).thenReturn(false);
+        when(mCachedDevice2.isActiveDevice(BluetoothProfile.A2DP)).thenReturn(true);
+        when(mDeviceManager.getCachedDevicesCopy()).thenReturn(
+                ImmutableList.of(mCachedDevice1, mCachedDevice2));
+        mController.onActiveDeviceChanged(mCachedDevice2, BluetoothProfile.A2DP);
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(mSwitchBar.isChecked()).isFalse();
         verify(mSwitchBar).setEnabled(true);
@@ -715,14 +940,6 @@ public class AudioSharingSwitchBarControllerTest {
     @Test
     public void onActiveDeviceChanged_nullActiveDevice_doNothing() {
         mController.onActiveDeviceChanged(/* activeDevice= */ null, BluetoothProfile.LE_AUDIO);
-        shadowOf(Looper.getMainLooper()).idle();
-        verify(mSwitchBar, never()).setEnabled(anyBoolean());
-        verify(mSwitchBar, never()).setChecked(anyBoolean());
-    }
-
-    @Test
-    public void onActiveDeviceChanged_notLeaProfile_doNothing() {
-        mController.onActiveDeviceChanged(mCachedDevice2, BluetoothProfile.HEADSET);
         shadowOf(Looper.getMainLooper()).idle();
         verify(mSwitchBar, never()).setEnabled(anyBoolean());
         verify(mSwitchBar, never()).setChecked(anyBoolean());
@@ -753,7 +970,7 @@ public class AudioSharingSwitchBarControllerTest {
     @Test
     public void handleStartAudioSharingFromIntent_flagOff_doNothing() {
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        setUpStartSharingIntent();
+        var unused = setUpFragmentWithStartSharingIntent();
         mController.onStart(mLifecycleOwner);
         shadowOf(Looper.getMainLooper()).idle();
 
@@ -764,7 +981,7 @@ public class AudioSharingSwitchBarControllerTest {
     public void handleStartAudioSharingFromIntent_profileNotReady_doNothing() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         when(mAssistant.isProfileReady()).thenReturn(false);
-        setUpStartSharingIntent();
+        var unused = setUpFragmentWithStartSharingIntent();
         mController.onServiceConnected();
         shadowOf(Looper.getMainLooper()).idle();
 
@@ -786,13 +1003,16 @@ public class AudioSharingSwitchBarControllerTest {
         when(mBtnView.isEnabled()).thenReturn(true);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2, mDevice1));
         when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
-        setUpStartSharingIntent();
+        Fragment parentFragment = setUpFragmentWithStartSharingIntent();
         mController.onServiceConnected();
         shadowOf(Looper.getMainLooper()).idle();
 
         verify(mSwitchBar).setChecked(true);
         doNothing().when(mBroadcast).startPrivateBroadcast();
         mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mBroadcast).startPrivateBroadcast();
         mController.mBroadcastCallback.onPlaybackStarted(0, 0);
         shadowOf(Looper.getMainLooper()).idle();
 
@@ -800,11 +1020,34 @@ public class AudioSharingSwitchBarControllerTest {
                 .action(any(Context.class), eq(SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING));
         verify(mAssistant).addSource(mDevice1, mMetadata, /* isGroupOp= */ false);
         verify(mAssistant).addSource(mDevice2, mMetadata, /* isGroupOp= */ false);
-        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
-        assertThat(childFragments).isEmpty();
+        List<Fragment> childFragments = parentFragment.getChildFragmentManager().getFragments();
+        // Skip audio sharing dialog.
+        assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
+                AudioSharingProgressDialogFragment.class.getName());
+        // Progress dialog shows sharing progress for the auto add second sink.
+        AudioSharingProgressDialogFragment progressFragment =
+                (AudioSharingProgressDialogFragment) Iterables.getOnlyElement(childFragments);
+        String expectedMessage = mContext.getString(
+                R.string.audio_sharing_progress_dialog_add_source_content, TEST_DEVICE_NAME1);
+        checkProgressDialogMessage(progressFragment, expectedMessage);
+
+        childFragments.forEach(fragment -> ((DialogFragment) fragment).dismiss());
     }
 
-    private void setUpStartSharingIntent() {
+    @Test
+    public void handleAutoAddSourceAfterPair() {
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice1));
+        when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
+        mController.handleAutoAddSourceAfterPair(mDevice1);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mAssistant).addSource(mDevice1, mMetadata, /* isGroupOp= */ false);
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
+                AudioSharingProgressDialogFragment.class.getName());
+    }
+
+    private Fragment setUpFragmentWithStartSharingIntent() {
         Bundle args = new Bundle();
         args.putBoolean(EXTRA_START_LE_AUDIO_SHARING, true);
         Intent intent = new Intent();
@@ -818,5 +1061,15 @@ public class AudioSharingSwitchBarControllerTest {
                 .get();
         shadowOf(Looper.getMainLooper()).idle();
         mController.init(fragment);
+        return fragment;
+    }
+
+    private void checkProgressDialogMessage(
+            @NonNull AudioSharingProgressDialogFragment fragment,
+            @NonNull String expectedMessage) {
+        TextView progressMessage = fragment.getDialog() == null ? null
+                : fragment.getDialog().findViewById(R.id.message);
+        assertThat(progressMessage).isNotNull();
+        assertThat(progressMessage.getText().toString()).isEqualTo(expectedMessage);
     }
 }

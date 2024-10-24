@@ -28,7 +28,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
-import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
@@ -271,8 +270,9 @@ public class AudioSharingBluetoothDeviceUpdaterTest {
     public void onPreferenceClick_logClick() {
         Preference preference = new Preference(mContext);
         mDeviceUpdater.onPreferenceClick(preference);
-        verify(mFeatureFactory.metricsFeatureProvider)
-                .action(mContext, SettingsEnums.ACTION_AUDIO_SHARING_DEVICE_CLICK);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mDevicePreferenceCallback).onDeviceClick(preference);
     }
 
     private void setupPreferenceMapWithDevice() {

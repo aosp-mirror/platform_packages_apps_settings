@@ -32,6 +32,9 @@ import java.util.Arrays;
 
 public class SetupWizardUtils {
 
+    public static final String ACTION_SETUP_WIZARD_FINISHED =
+            "com.google.android.setupwizard.SETUP_WIZARD_FINISHED";
+
     public static String getThemeString(Intent intent) {
         String theme = intent.getStringExtra(WizardManagerHelper.EXTRA_THEME);
         if (theme == null) {

@@ -39,6 +39,8 @@
         settings:keywords="@string/keywords_color_inversion"
         settings:controller="com.android.settings.accessibility.ColorInversionPreferenceController"/>
 
+    <!-- DarkModePreference is searchable in the Display & Touch setting.
+         Therefore, we set searchable = false here to avoid duplicate search results. -->
     <com.android.settings.display.darkmode.DarkModePreference
         android:key="dark_ui_mode_accessibility"
         android:icon="@drawable/ic_dark_ui"
@@ -71,17 +73,6 @@
         android:summary="@string/accessibility_toggle_large_pointer_icon_summary"
         android:title="@string/accessibility_toggle_large_pointer_icon_title"
         settings:controller="com.android.settings.accessibility.LargePointerIconPreferenceController"/>
-
-    <com.android.settings.widget.LabeledSeekBarPreference
-        android:key="large_pointer_scale"
-        android:title="@string/accessibility_toggle_large_pointer_icon_title"
-        android:summary="@string/accessibility_toggle_large_pointer_icon_summary"
-        android:max="@integer/pointer_scale_seek_bar_end"
-        settings:iconStart="@drawable/ic_remove_24dp"
-        settings:iconStartContentDescription="@string/pointer_scale_decrease_content_description"
-        settings:iconEnd="@drawable/ic_add_24dp"
-        settings:iconEndContentDescription="@string/pointer_scale_increase_content_description"
-        settings:controller="com.android.settings.inputmethod.PointerScaleSeekBarController" />
 
     <PreferenceCategory
         android:key="experimental_category"

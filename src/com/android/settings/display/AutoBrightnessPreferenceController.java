@@ -22,26 +22,23 @@ import android.os.Process;
 import android.os.UserManager;
 import android.provider.Settings;
 
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.Flags;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.PrimarySwitchPreference;
 
+/**
+ * The top-level preference controller that updates the adaptive brightness.
+ */
 public class AutoBrightnessPreferenceController extends TogglePreferenceController {
 
     private final String SYSTEM_KEY = SCREEN_BRIGHTNESS_MODE;
     private final int DEFAULT_VALUE = SCREEN_BRIGHTNESS_MODE_MANUAL;
 
-    private boolean mInSetupWizard;
-
-    public AutoBrightnessPreferenceController(Context context, String key) {
+    public AutoBrightnessPreferenceController(@NonNull Context context, @NonNull String key) {
         super(context, key);
-    }
-
-    public void setInSetupWizard(boolean inSetupWizard) {
-        mInSetupWizard = inSetupWizard;
     }
 
     @Override
@@ -60,14 +57,10 @@ public class AutoBrightnessPreferenceController extends TogglePreferenceControll
     @Override
     @AvailabilityStatus
     public int getAvailabilityStatus() {
-        if (!mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_automatic_brightness_available)) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
-        if (mInSetupWizard && !Flags.addBrightnessSettingsInSuw()) {
-            return CONDITIONALLY_UNAVAILABLE;
-        }
-        return AVAILABLE_UNSEARCHABLE;
+        return mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_automatic_brightness_available)
+                ? AVAILABLE_UNSEARCHABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast.BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -32,6 +34,7 @@ import static org.robolectric.Shadows.shadowOf;
 
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
@@ -43,6 +46,7 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Looper;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.provider.Settings;
 import android.util.Pair;
 
 import androidx.fragment.app.DialogFragment;
@@ -193,6 +197,10 @@ public class AudioSharingDialogHandlerTest {
 
     @Test
     public void handleUserTriggeredDeviceConnected_inCall_setActive() {
+        mSetFlagsRule.disableFlags(Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
+                BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
         when(mAudioManager.getMode()).thenReturn(AudioManager.MODE_IN_CALL);
         setUpBroadcast(true);
         ImmutableList<BluetoothDevice> deviceList = ImmutableList.of(mDevice1);
@@ -201,6 +209,29 @@ public class AudioSharingDialogHandlerTest {
         mHandler.handleDeviceConnected(mCachedDevice1, /* userTriggered= */ true);
         shadowOf(Looper.getMainLooper()).idle();
         verify(mCachedDevice1).setActive();
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
+                BluetoothCsipSetCoordinator.GROUP_ID_INVALID)).isEqualTo(
+                BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
+    }
+
+    @Test
+    public void handleUserTriggeredDeviceConnected_inCall_enableHysteresisFix_setAndSaveActive() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
+                BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
+        when(mAudioManager.getMode()).thenReturn(AudioManager.MODE_IN_CALL);
+        setUpBroadcast(true);
+        ImmutableList<BluetoothDevice> deviceList = ImmutableList.of(mDevice1);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(deviceList);
+        when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of());
+        mHandler.handleDeviceConnected(mCachedDevice1, /* userTriggered= */ true);
+        shadowOf(Looper.getMainLooper()).idle();
+        verify(mCachedDevice1).setActive();
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
+                BluetoothCsipSetCoordinator.GROUP_ID_INVALID)).isEqualTo(1);
     }
 
     @Test

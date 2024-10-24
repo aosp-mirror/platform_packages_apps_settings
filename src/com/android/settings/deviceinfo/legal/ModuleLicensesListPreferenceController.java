@@ -24,6 +24,7 @@ import com.android.settings.core.BasePreferenceController;
 
 import java.util.List;
 
+// LINT.IfChange
 public class ModuleLicensesListPreferenceController extends BasePreferenceController {
     public ModuleLicensesListPreferenceController(Context context,
             String preferenceKey) {
@@ -39,3 +40,4 @@ public class ModuleLicensesListPreferenceController extends BasePreferenceContro
                 : CONDITIONALLY_UNAVAILABLE;
     }
 }
+// LINT.ThenChange(ModuleLicensesScreen.kt)

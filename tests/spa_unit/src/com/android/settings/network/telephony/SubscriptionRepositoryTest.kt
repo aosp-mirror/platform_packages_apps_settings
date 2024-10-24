@@ -91,7 +91,23 @@ class SubscriptionRepositoryTest {
 
         subInfoListener?.onSubscriptionsChanged()
 
-        assertThat(listDeferred.await()).hasSize(2)
+        assertThat(listDeferred.await().size).isAtLeast(2)
+    }
+
+    @Test
+    fun subscriptionsChangedFlow_managerNotCallOnSubscriptionsChangedInitially() = runBlocking {
+        mockSubscriptionManager.stub {
+            on { addOnSubscriptionsChangedListener(any(), any()) } doAnswer
+                {
+                    subInfoListener =
+                        it.arguments[1] as SubscriptionManager.OnSubscriptionsChangedListener
+                    // not call onSubscriptionsChanged here
+                }
+        }
+
+        val initialValue = repository.subscriptionsChangedFlow().firstWithTimeoutOrNull()
+
+        assertThat(initialValue).isSameInstanceAs(Unit)
     }
 
     @Test
@@ -120,7 +136,7 @@ class SubscriptionRepositoryTest {
             )
         }
 
-        val subInfos = context.getSelectableSubscriptionInfoList()
+        val subInfos = repository.getSelectableSubscriptionInfoList()
 
         assertThat(subInfos.map { it.simSlotIndex })
             .containsExactly(SIM_SLOT_INDEX_0, SIM_SLOT_INDEX_1).inOrder()
@@ -141,7 +157,7 @@ class SubscriptionRepositoryTest {
             )
         }
 
-        val subInfos = context.getSelectableSubscriptionInfoList()
+        val subInfos = repository.getSelectableSubscriptionInfoList()
 
         assertThat(subInfos.map { it.simSlotIndex })
             .containsExactly(SIM_SLOT_INDEX_1, SubscriptionManager.INVALID_SIM_SLOT_INDEX).inOrder()
@@ -164,7 +180,7 @@ class SubscriptionRepositoryTest {
             )
         }
 
-        val subInfos = context.getSelectableSubscriptionInfoList()
+        val subInfos = repository.getSelectableSubscriptionInfoList()
 
         assertThat(subInfos.map { it.subscriptionId }).containsExactly(SUB_ID_IN_SLOT_0)
     }
@@ -184,7 +200,7 @@ class SubscriptionRepositoryTest {
             )
         }
 
-        val subInfos = context.getSelectableSubscriptionInfoList()
+        val subInfos = repository.getSelectableSubscriptionInfoList()
 
         assertThat(subInfos.map { it.subscriptionId }).containsExactly(SUB_ID_3_NOT_IN_SLOT)
     }

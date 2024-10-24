@@ -419,6 +419,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 mTimeoutToDockUserPreferenceController.getPreferenceKey()));
         mRemoveGuestOnExitPreferenceController.updateState(screen.findPreference(
                 mRemoveGuestOnExitPreferenceController.getPreferenceKey()));
+        mSwitchBarController.updateState();
         if (mShouldUpdateUserList) {
             updateUI();
         }
@@ -1833,6 +1834,24 @@ public class UserSettings extends SettingsPreferenceFragment
                             MultiUserSwitchBarController.class.getName();
 
                     rawData.add(allowMultipleUsersResult);
+
+                    SearchIndexableRaw addUserData = new SearchIndexableRaw(context);
+                    addUserData.key = KEY_ADD_USER;
+
+                    // Dynamically set the title of addUser preference
+                    final UserCapabilities userCaps = UserCapabilities.create(context);
+                    if (!userCaps.mCanAddRestrictedProfile) {
+                        addUserData.title = context.getString(
+                                com.android.settingslib.R.string.user_add_user);
+                    } else {
+                        addUserData.title = context.getString(
+                                R.string.user_add_user_or_profile_menu);
+                    }
+                    addUserData.screenTitle = context.getString(R.string.user_settings_title);
+                    addUserData.iconResId = R.drawable.ic_add_40dp;
+
+                    rawData.add(addUserData);
+
                     return rawData;
                 }
 
@@ -1841,6 +1860,10 @@ public class UserSettings extends SettingsPreferenceFragment
                         boolean suppressAllPage) {
                     final List<String> niks = super.getNonIndexableKeysFromXml(context, xmlResId,
                             suppressAllPage);
+                    if (TextUtils.isEmpty(context.getString(
+                            com.android.internal.R.string.config_supervisedUserCreationPackage))) {
+                        niks.add(KEY_ADD_SUPERVISED_USER);
+                    }
                     AddUserWhenLockedPreferenceController controller =
                             new AddUserWhenLockedPreferenceController(
                                     context, KEY_ADD_USER_WHEN_LOCKED);

@@ -14,7 +14,6 @@
 
 package com.android.settings.display.darkmode;
 
-import android.app.UiModeManager;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.PowerManager;
@@ -23,46 +22,49 @@ import android.util.AttributeSet;
 import com.android.settings.R;
 import com.android.settingslib.PrimarySwitchPreference;
 
-import java.time.LocalTime;
-
 /**
  * component for the display settings dark ui summary
  */
 public class DarkModePreference extends PrimarySwitchPreference {
 
-    private UiModeManager mUiModeManager;
     private DarkModeObserver mDarkModeObserver;
-    private PowerManager mPowerManager;
-    private Runnable mCallback;
-
-    private TimeFormatter mFormat;
+    private boolean isCatalystEnabled;
 
     public DarkModePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mDarkModeObserver = new DarkModeObserver(context);
-        mUiModeManager = context.getSystemService(UiModeManager.class);
-        mPowerManager = context.getSystemService(PowerManager.class);
-        mFormat = new TimeFormatter(context);
-        mCallback = () -> {
-            final boolean batterySaver = mPowerManager.isPowerSaveMode();
-            final boolean active = (getContext().getResources().getConfiguration().uiMode
-                    & Configuration.UI_MODE_NIGHT_YES) != 0;
-            setSwitchEnabled(!batterySaver);
-            updateSummary(batterySaver, active);
-        };
-        mDarkModeObserver.subscribe(mCallback);
+    }
+
+    /**
+     * Sets if catalyst is enabled on the preference.
+     */
+    public void setCatalystEnabled(boolean catalystEnabled) {
+        isCatalystEnabled = catalystEnabled;
     }
 
     @Override
     public void onAttached() {
         super.onAttached();
-        mDarkModeObserver.subscribe(mCallback);
+        if (!isCatalystEnabled) {
+            Context context = getContext();
+            mDarkModeObserver = new DarkModeObserver(context);
+            Runnable callback = () -> {
+                PowerManager powerManager = context.getSystemService(PowerManager.class);
+                final boolean batterySaver = powerManager.isPowerSaveMode();
+                final boolean active = (context.getResources().getConfiguration().uiMode
+                        & Configuration.UI_MODE_NIGHT_YES) != 0;
+                setSwitchEnabled(!batterySaver);
+                updateSummary(batterySaver, active);
+            };
+            mDarkModeObserver.subscribe(callback);
+        }
     }
 
     @Override
     public void onDetached() {
         super.onDetached();
-        mDarkModeObserver.unsubscribe();
+        if (!isCatalystEnabled) {
+            mDarkModeObserver.unsubscribe();
+        }
     }
 
     private void updateSummary(boolean batterySaver, boolean active) {
@@ -71,36 +73,8 @@ public class DarkModePreference extends PrimarySwitchPreference {
                     ? R.string.dark_ui_mode_disabled_summary_dark_theme_on
                     : R.string.dark_ui_mode_disabled_summary_dark_theme_off;
             setSummary(getContext().getString(stringId));
-            return;
-        }
-        final int mode = mUiModeManager.getNightMode();
-        String summary;
-
-        if (mode == UiModeManager.MODE_NIGHT_AUTO) {
-            summary = getContext().getString(active
-                    ? R.string.dark_ui_summary_on_auto_mode_auto
-                    : R.string.dark_ui_summary_off_auto_mode_auto);
-        } else if (mode == UiModeManager.MODE_NIGHT_CUSTOM) {
-            if (mUiModeManager.getNightModeCustomType()
-                    == UiModeManager.MODE_NIGHT_CUSTOM_TYPE_BEDTIME) {
-                summary = getContext().getString(active
-                        ? R.string.dark_ui_summary_on_auto_mode_custom_bedtime
-                        : R.string.dark_ui_summary_off_auto_mode_custom_bedtime);
-            } else {
-                final LocalTime time = active
-                        ? mUiModeManager.getCustomNightModeEnd()
-                        : mUiModeManager.getCustomNightModeStart();
-                final String timeStr = mFormat.of(time);
-                summary = getContext().getString(active
-                        ? R.string.dark_ui_summary_on_auto_mode_custom
-                        : R.string.dark_ui_summary_off_auto_mode_custom, timeStr);
-            }
         } else {
-            summary = getContext().getString(active
-                    ? R.string.dark_ui_summary_on_auto_mode_never
-                    : R.string.dark_ui_summary_off_auto_mode_never);
+            setSummary(AutoDarkTheme.getStatus(getContext(), active));
         }
-
-        setSummary(summary);
     }
 }

@@ -94,8 +94,11 @@ android_library {
         "MediaDrmSettingsFlagsLib",
         "Settings-change-ids",
         "SettingsLib",
-        "SettingsLibDataStore",
         "SettingsLibActivityEmbedding",
+        "SettingsLibDataStore",
+        "SettingsLibMetadata",
+        "SettingsLibPreference",
+        "SettingsLibService",
         "aconfig_settings_flags_lib",
         "accessibility_settings_flags_lib",
         "contextualcards",
@@ -105,13 +108,15 @@ android_library {
         "fuelgauge-protos-lite",
         "settings-logtags",
         "statslog-settings",
-        "telephony_flags_core_java_lib",
         "setupdesign-lottie-loading-layout",
         "device_policy_aconfig_flags_lib",
         "keyboard_flags_lib",
     ],
 
-    plugins: ["androidx.room_room-compiler-plugin"],
+    plugins: [
+        "SettingsLibMetadata-processor",
+        "androidx.room_room-compiler-plugin",
+    ],
 
     errorprone: {
         extra_check_modules: ["//external/nullaway:nullaway_plugin"],
@@ -125,6 +130,7 @@ android_library {
         "ims-common",
     ],
     flags_packages: [
+        "aconfig_settings_flags",
         "android.app.flags-aconfig",
     ],
 }

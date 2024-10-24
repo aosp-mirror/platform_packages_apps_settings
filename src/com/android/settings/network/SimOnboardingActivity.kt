@@ -53,8 +53,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.LifecycleRegistry
 import com.android.settings.R
 import com.android.settings.SidecarFragment
+import com.android.settings.network.telephony.SimRepository
 import com.android.settings.network.telephony.SubscriptionActionDialogActivity
-import com.android.settings.network.telephony.SubscriptionRepository
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity
 import com.android.settings.network.telephony.requireSubscriptionManager
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
@@ -221,6 +221,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
                         "showRestartDialog:${showRestartDialog.value}")
                 showStartingDialog.value = false
             } else if (onboardingService.activeSubInfoList.isNotEmpty()) {
+                Log.d(TAG, "status: showStartingDialog.value:${showStartingDialog.value}")
                 showStartingDialog.value = true
             }
         }
@@ -468,11 +469,11 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
     }
 
     fun handleEnableMultiSimSidecarStateChange() {
-        showDsdsProgressDialog.value = false
         when (enableMultiSimSidecar!!.state) {
             SidecarFragment.State.SUCCESS -> {
                 enableMultiSimSidecar!!.reset()
                 Log.i(TAG, "Successfully switched to DSDS without reboot.")
+                showDsdsProgressDialog.value = false
                 // refresh data
                 initServiceData(this, onboardingService.targetSubId, callbackListener)
                 startSimOnboardingProvider()
@@ -480,6 +481,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
 
             SidecarFragment.State.ERROR -> {
                 enableMultiSimSidecar!!.reset()
+                showDsdsProgressDialog.value = false
                 Log.i(TAG, "Failed to switch to DSDS without rebooting.")
                 showError.value = ErrorType.ERROR_ENABLE_DSDS
                 callbackListener(CallbackType.CALLBACK_ERROR)
@@ -576,6 +578,10 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
             subId: Int,
             isNewTask: Boolean = false,
         ) {
+            if (!SimRepository(context).canEnterMobileNetworkPage()) {
+                Log.i(TAG, "Unable to start SimOnboardingActivity due to missing permissions")
+                return
+            }
             val intent = Intent(context, SimOnboardingActivity::class.java).apply {
                 putExtra(SUB_ID, subId)
                 if(isNewTask) {

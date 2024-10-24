@@ -23,14 +23,16 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.withContext
 
 /** Repository that contains information about fingerprint enrollments. */
@@ -38,19 +40,30 @@ interface FingerprintEnrollmentRepository {
   /** The current enrollments of the user */
   val currentEnrollments: Flow<List<FingerprintData>?>
 
+  /** Indicates the maximum fingerprints that are enrollable * */
+  val maxFingerprintsEnrollable: Flow<Int>
+
   /** Indicates if a user can enroll another fingerprint */
   val canEnrollUser: Flow<Boolean>
 
-  fun maxFingerprintsEnrollable(): Int
+  /**
+   * Indicates if we should use the default settings for maximum enrollments or the sensor props
+   * from the fingerprint sensor
+   */
+  fun setShouldUseSettingsMaxFingerprints(useSettings: Boolean)
 }
 
 class FingerprintEnrollmentRepositoryImpl(
-  fingerprintManager: FingerprintManager,
+  private val fingerprintManager: FingerprintManager,
   userRepo: UserRepo,
-  private val settingsRepository: FingerprintSettingsRepository,
+  settingsRepository: FingerprintSettingsRepository,
   backgroundDispatcher: CoroutineDispatcher,
   applicationScope: CoroutineScope,
+  sensorRepo: FingerprintSensorRepository,
 ) : FingerprintEnrollmentRepository {
+
+  private val _shouldUseSettingsMaxFingerprints = MutableStateFlow(false)
+  val shouldUseSettingsMaxFingerprints = _shouldUseSettingsMaxFingerprints.asStateFlow()
 
   private val enrollmentChangedFlow: Flow<Int?> =
     callbackFlow {
@@ -72,27 +85,34 @@ class FingerprintEnrollmentRepositoryImpl(
   override val currentEnrollments: Flow<List<FingerprintData>> =
     userRepo.currentUser
       .distinctUntilChanged()
-      .flatMapLatest { currentUser ->
-        enrollmentChangedFlow.map { enrollmentChanged ->
-          if (enrollmentChanged == null || enrollmentChanged == currentUser) {
-            fingerprintManager
-              .getEnrolledFingerprints(currentUser)
-              ?.map { (FingerprintData(it.name.toString(), it.biometricId, it.deviceId)) }
-              ?.toList()
-          } else {
-            null
-          }
-        }
-      }
+      .combine(enrollmentChangedFlow) { currentUser, _ -> getFingerprintsForUser(currentUser) }
       .filterNotNull()
       .flowOn(backgroundDispatcher)
 
-  override val canEnrollUser: Flow<Boolean> =
-    currentEnrollments.map {
-      it?.size?.let { it < settingsRepository.maxEnrollableFingerprints() } ?: false
+  override val maxFingerprintsEnrollable: Flow<Int> =
+    shouldUseSettingsMaxFingerprints.combine(sensorRepo.fingerprintSensor) {
+      shouldUseSettings,
+      sensor ->
+      if (shouldUseSettings) {
+        settingsRepository.maxEnrollableFingerprints()
+      } else {
+        sensor.maxEnrollmentsPerUser
+      }
     }
 
-  override fun maxFingerprintsEnrollable(): Int {
-    return settingsRepository.maxEnrollableFingerprints()
+  override val canEnrollUser: Flow<Boolean> =
+    currentEnrollments.combine(maxFingerprintsEnrollable) { enrollments, maxFingerprints ->
+      enrollments.size < maxFingerprints
+    }
+
+  override fun setShouldUseSettingsMaxFingerprints(useSettings: Boolean) {
+    _shouldUseSettingsMaxFingerprints.update { useSettings }
+  }
+
+  private fun getFingerprintsForUser(userId: Int): List<FingerprintData>? {
+    return fingerprintManager
+      .getEnrolledFingerprints(userId)
+      ?.map { (FingerprintData(it.name.toString(), it.biometricId, it.deviceId)) }
+      ?.toList()
   }
 }

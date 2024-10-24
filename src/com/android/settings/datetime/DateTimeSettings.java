@@ -23,6 +23,7 @@ import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -49,6 +50,9 @@ public class DateTimeSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
+        if (Flags.revampToggles()) {
+            return R.xml.date_time_prefs_revamped;
+        }
         return R.xml.date_time_prefs;
     }
 
@@ -119,5 +123,6 @@ public class DateTimeSettings extends DashboardFragment implements
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.date_time_prefs);
+            new BaseSearchIndexProvider(
+                    Flags.revampToggles() ? R.xml.date_time_prefs_revamped : R.xml.date_time_prefs);
 }

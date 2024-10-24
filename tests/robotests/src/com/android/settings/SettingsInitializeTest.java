@@ -24,6 +24,7 @@ import android.content.pm.ShortcutInfo;
 
 import android.content.pm.ShortcutManager;
 
+import com.android.settings.core.instrumentation.ElapsedTimeUtils;
 import java.util.Collections;
 import org.junit.Before;
 import org.junit.Test;
@@ -95,5 +96,13 @@ public class SettingsInitializeTest {
         final List<ShortcutInfo> updatedShortcuts = mShortcutManager.getPinnedShortcuts();
         assertThat(updatedShortcuts).hasSize(1);
         assertThat(updatedShortcuts.get(0)).isSameInstanceAs(info);
+    }
+
+    @Test
+    public void onReceive_suwFinished_shouldHaveElapsedTime() {
+        mSettingsInitialize.onReceive(mContext, new Intent(SetupWizardUtils.ACTION_SETUP_WIZARD_FINISHED));
+
+        final long elapsedTime = ElapsedTimeUtils.getElapsedTime(System.currentTimeMillis());
+        assertThat(elapsedTime).isNotEqualTo(-1L);
     }
 }

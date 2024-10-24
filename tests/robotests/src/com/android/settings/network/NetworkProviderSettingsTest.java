@@ -22,6 +22,7 @@ import static com.android.settings.network.NetworkProviderSettings.MENU_ID_MODIF
 import static com.android.settings.network.NetworkProviderSettings.MENU_ID_SHARE;
 import static com.android.settings.wifi.WifiConfigUiBase2.MODE_CONNECT;
 import static com.android.settings.wifi.WifiConfigUiBase2.MODE_MODIFY;
+import static com.android.wifitrackerlib.WifiEntry.CONNECTED_STATE_CONNECTED;
 import static com.android.wifitrackerlib.WifiEntry.CONNECTED_STATE_DISCONNECTED;
 import static com.android.wifitrackerlib.WifiPickerTracker.WIFI_ENTRIES_CHANGED_REASON_GENERAL;
 
@@ -69,6 +70,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
+import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
@@ -97,6 +99,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowToast;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
@@ -189,6 +192,9 @@ public class NetworkProviderSettingsTest {
                 .when(mFirstWifiEntryPreferenceCategory).getKey();
         mNetworkProviderSettings.mFirstWifiEntryPreferenceCategory =
                 mFirstWifiEntryPreferenceCategory;
+
+        ReflectionHelpers.setField(mNetworkProviderSettings, "mDashboardFeatureProvider",
+                mock(DashboardFeatureProvider.class));
     }
 
     @Test
@@ -343,7 +349,7 @@ public class NetworkProviderSettingsTest {
         when(mWifiEntry.canDisconnect()).thenReturn(true);
         when(mWifiEntry.canForget()).thenReturn(true);
         when(mWifiEntry.isSaved()).thenReturn(true);
-        when(mWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTED);
+        when(mWifiEntry.getConnectedState()).thenReturn(CONNECTED_STATE_CONNECTED);
 
         final LongPressWifiEntryPreference connectedWifiEntryPreference =
                 mNetworkProviderSettings.createLongPressWifiEntryPreference(mWifiEntry);
@@ -366,7 +372,7 @@ public class NetworkProviderSettingsTest {
         when(mWifiEntry.canShare()).thenReturn(true);
         when(mWifiEntry.canForget()).thenReturn(true);
         when(mWifiEntry.isSaved()).thenReturn(true);
-        when(mWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTED);
+        when(mWifiEntry.getConnectedState()).thenReturn(CONNECTED_STATE_CONNECTED);
 
         final LongPressWifiEntryPreference connectedWifiEntryPreference =
                 mNetworkProviderSettings.createLongPressWifiEntryPreference(mWifiEntry);
@@ -388,7 +394,7 @@ public class NetworkProviderSettingsTest {
         when(mWifiEntry.canShare()).thenReturn(false);
         when(mWifiEntry.canForget()).thenReturn(true);
         when(mWifiEntry.isSaved()).thenReturn(true);
-        when(mWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTED);
+        when(mWifiEntry.getConnectedState()).thenReturn(CONNECTED_STATE_CONNECTED);
 
         final LongPressWifiEntryPreference connectedWifiEntryPreference =
                 mNetworkProviderSettings.createLongPressWifiEntryPreference(mWifiEntry);
@@ -872,14 +878,54 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    public void launchNetworkDetailsFragment_wifiEntryIsNotSaved_ignoreWifiEntry() {
+    public void launchNetworkDetailsFragment_entryDisconnectedNotSaved_ignore() {
+        when(mWifiEntry.getConnectedState()).thenReturn(CONNECTED_STATE_DISCONNECTED);
         when(mWifiEntry.isSaved()).thenReturn(false);
         LongPressWifiEntryPreference preference =
                 mNetworkProviderSettings.createLongPressWifiEntryPreference(mWifiEntry);
 
         mNetworkProviderSettings.launchNetworkDetailsFragment(preference);
 
-        verify(mWifiEntry, never()).getKey();
+        verify(mContext, never()).startActivity(any());
+    }
+
+    @Test
+    public void launchNetworkDetailsFragment_entryConnectedNotSaved_launch() {
+        doNothing().when(mContext).startActivity(any());
+        when(mWifiEntry.getConnectedState()).thenReturn(CONNECTED_STATE_CONNECTED);
+        when(mWifiEntry.isSaved()).thenReturn(false);
+        LongPressWifiEntryPreference preference =
+                mNetworkProviderSettings.createLongPressWifiEntryPreference(mWifiEntry);
+
+        mNetworkProviderSettings.launchNetworkDetailsFragment(preference);
+
+        verify(mContext).startActivity(any());
+    }
+
+    @Test
+    public void launchNetworkDetailsFragment_entryDisconnectedSaved_launch() {
+        doNothing().when(mContext).startActivity(any());
+        when(mWifiEntry.getConnectedState()).thenReturn(CONNECTED_STATE_DISCONNECTED);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        LongPressWifiEntryPreference preference =
+                mNetworkProviderSettings.createLongPressWifiEntryPreference(mWifiEntry);
+
+        mNetworkProviderSettings.launchNetworkDetailsFragment(preference);
+
+        verify(mContext).startActivity(any());
+    }
+
+    @Test
+    public void launchNetworkDetailsFragment_entryConnectedSaved_launch() {
+        doNothing().when(mContext).startActivity(any());
+        when(mWifiEntry.getConnectedState()).thenReturn(CONNECTED_STATE_CONNECTED);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        LongPressWifiEntryPreference preference =
+                mNetworkProviderSettings.createLongPressWifiEntryPreference(mWifiEntry);
+
+        mNetworkProviderSettings.launchNetworkDetailsFragment(preference);
+
+        verify(mContext).startActivity(any());
     }
 
     @Implements(PreferenceFragmentCompat.class)

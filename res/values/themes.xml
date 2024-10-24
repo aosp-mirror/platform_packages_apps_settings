@@ -73,6 +73,9 @@
         <item name="notification_importance_button_background_color_selected">?androidprv:attr/materialColorSecondaryContainer</item>
         <item name="notification_importance_button_border_color_selected">?androidprv:attr/materialColorOnSecondaryContainer</item>
         <item name="notification_importance_button_foreground_color_selected">?androidprv:attr/materialColorOnSecondaryContainer</item>
+
+        <!-- For AppCompat widgets, e.g. TextInputLayout -->
+        <item name="colorAccent">?android:attr/colorAccent</item>
     </style>
 
     <!-- Variant of the settings theme with no action bar. -->
@@ -114,13 +117,7 @@
         <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
-    <style name="Theme.AlertDialog.Base" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
-        <item name="colorAccent">@android:color/system_primary_light</item>
-        <item name="android:colorError">@color/settings_dialog_colorError</item>
-        <item name="android:colorBackground">@android:color/system_surface_container_high_light</item>
-    </style>
-
-    <style name="Theme.AlertDialog" parent="Theme.AlertDialog.Base">
+    <style name="Theme.AlertDialog" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="android:windowSoftInputMode">adjustResize</item>
         <item name="android:clipToPadding">true</item>
         <item name="android:clipChildren">true</item>

@@ -33,7 +33,6 @@ public interface FingerprintFeatureProvider {
      */
     SfpsEnrollmentFeature getSfpsEnrollmentFeature();
 
-
     /**
      * Gets calibrator for udfps pre-enroll
      * @param appContext application context
@@ -52,4 +51,13 @@ public interface FingerprintFeatureProvider {
      * @return the feature implementation
      */
     SfpsRestToUnlockFeature getSfpsRestToUnlockFeature(@NonNull Context context);
+
+    /**
+     * Gets the provider for current fingerprint enrollment activity classes
+     * @return the provider
+     */
+    @NonNull
+    default FingerprintEnrollActivityClassProvider getEnrollActivityClassProvider() {
+        return FingerprintEnrollActivityClassProvider.getInstance();
+    }
 }

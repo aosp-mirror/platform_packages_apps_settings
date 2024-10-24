@@ -29,6 +29,8 @@ import android.os.UserHandle;
 import android.preference.SeekBarVolumizer;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -320,5 +322,10 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
         if (mDialogFragment != null) {
             mDialogFragment.onListPreferenceUpdated(preference);
         }
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return SoundScreen.KEY;
     }
 }

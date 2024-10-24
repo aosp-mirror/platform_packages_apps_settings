@@ -1,0 +1,24 @@
+package: "com.android.settings.flags"
+container: "system"
+
+flag {
+  name: "catalyst_display_settings_screen"
+  namespace: "android_settings"
+  description: "Flag for Display"
+  bug: "323791114"
+}
+
+flag {
+  name: "catalyst_screen_timeout"
+  namespace: "android_settings"
+  description: "Flag for Screen Timeout settings"
+  bug: "323791114"
+}
+
+flag {
+  name: "catalyst_dark_ui_mode"
+  namespace: "android_settings"
+  description: "Flag for Dark theme"
+  bug: "323791114"
+}
+
