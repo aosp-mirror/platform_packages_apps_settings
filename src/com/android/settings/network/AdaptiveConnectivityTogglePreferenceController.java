@@ -29,6 +29,7 @@ import com.android.settings.widget.SettingsMainSwitchPreferenceController;
  * {@link SettingsMainSwitchPreferenceController}
  * that controls whether Adaptive connectivity option is enabled.
  */
+// LINT.IfChange
 public class AdaptiveConnectivityTogglePreferenceController extends
         SettingsMainSwitchPreferenceController {
 
@@ -69,3 +70,4 @@ public class AdaptiveConnectivityTogglePreferenceController extends
         return R.string.menu_key_network;
     }
 }
+// LINT.ThenChange(AdaptiveConnectivityTogglePreference.kt)
