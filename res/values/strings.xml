@@ -8149,11 +8149,13 @@
     </string>
 
     <!-- Modes: Summary for the modes segment, when no modes are active. [CHAR LIMIT=NONE]-->
-    <string name="zen_modes_summary_none_active">
+    <!-- Note: The "0" option should never actually occur. -->
+    <string name="zen_modes_summary">
         {count, plural,
-        =0    {}
-        =1    {1 mode can turn on automatically}
-        other {# modes can turn on automatically}
+        =0    {Do Not Disturb}
+        =1    {{mode_1}}
+        =2    {{mode_1}, {mode_2}}
+        other {{mode_1}, {mode_2}, {mode_3}}
         }
     </string>
 
