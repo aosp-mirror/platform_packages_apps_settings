@@ -46,6 +46,8 @@ interface FingerprintEnrollmentRepository {
   /** Indicates if a user can enroll another fingerprint */
   val canEnrollUser: Flow<Boolean>
 
+  val enrollStageCount: Int
+
   /**
    * Indicates if we should use the default settings for maximum enrollments or the sensor props
    * from the fingerprint sensor
@@ -115,4 +117,7 @@ class FingerprintEnrollmentRepositoryImpl(
       ?.map { (FingerprintData(it.name.toString(), it.biometricId, it.deviceId)) }
       ?.toList()
   }
+
+  override val enrollStageCount: Int
+    get() = fingerprintManager.enrollStageCount
 }
