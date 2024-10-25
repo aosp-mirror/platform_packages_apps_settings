@@ -79,6 +79,8 @@ class DataSaverSummary : DashboardFragment() {
     override fun getHelpResource() = R.string.help_url_data_saver
     override fun getLogTag() = TAG
 
+    override fun getPreferenceScreenBindingKey(context: Context) = DataSaverScreen.KEY
+
     private val dataSaverBackendListener = object : DataSaverBackend.Listener {
         override fun onDataSaverChanged(isDataSaving: Boolean) {
             synchronized(this) {
