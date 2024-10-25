@@ -724,4 +724,9 @@ public class WifiCallingSettingsForSub extends DashboardFragment
 
         return mOverrideWfcRoamingModeWhileUsingNtn;
     }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return WifiCallingScreen.KEY;
+    }
 }

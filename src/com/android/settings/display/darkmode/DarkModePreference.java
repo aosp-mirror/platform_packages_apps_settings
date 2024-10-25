@@ -14,7 +14,6 @@
 
 package com.android.settings.display.darkmode;
 
-import android.app.UiModeManager;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.PowerManager;
@@ -28,39 +27,44 @@ import com.android.settingslib.PrimarySwitchPreference;
  */
 public class DarkModePreference extends PrimarySwitchPreference {
 
-    private UiModeManager mUiModeManager;
     private DarkModeObserver mDarkModeObserver;
-    private PowerManager mPowerManager;
-    private Runnable mCallback;
-
-    private TimeFormatter mFormat;
+    private boolean isCatalystEnabled;
 
     public DarkModePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mDarkModeObserver = new DarkModeObserver(context);
-        mUiModeManager = context.getSystemService(UiModeManager.class);
-        mPowerManager = context.getSystemService(PowerManager.class);
-        mFormat = new TimeFormatter(context);
-        mCallback = () -> {
-            final boolean batterySaver = mPowerManager.isPowerSaveMode();
-            final boolean active = (getContext().getResources().getConfiguration().uiMode
-                    & Configuration.UI_MODE_NIGHT_YES) != 0;
-            setSwitchEnabled(!batterySaver);
-            updateSummary(batterySaver, active);
-        };
-        mDarkModeObserver.subscribe(mCallback);
+    }
+
+    /**
+     * Sets if catalyst is enabled on the preference.
+     */
+    public void setCatalystEnabled(boolean catalystEnabled) {
+        isCatalystEnabled = catalystEnabled;
     }
 
     @Override
     public void onAttached() {
         super.onAttached();
-        mDarkModeObserver.subscribe(mCallback);
+        if (!isCatalystEnabled) {
+            Context context = getContext();
+            mDarkModeObserver = new DarkModeObserver(context);
+            Runnable callback = () -> {
+                PowerManager powerManager = context.getSystemService(PowerManager.class);
+                final boolean batterySaver = powerManager.isPowerSaveMode();
+                final boolean active = (context.getResources().getConfiguration().uiMode
+                        & Configuration.UI_MODE_NIGHT_YES) != 0;
+                setSwitchEnabled(!batterySaver);
+                updateSummary(batterySaver, active);
+            };
+            mDarkModeObserver.subscribe(callback);
+        }
     }
 
     @Override
     public void onDetached() {
         super.onDetached();
-        mDarkModeObserver.unsubscribe();
+        if (!isCatalystEnabled) {
+            mDarkModeObserver.unsubscribe();
+        }
     }
 
     private void updateSummary(boolean batterySaver, boolean active) {
