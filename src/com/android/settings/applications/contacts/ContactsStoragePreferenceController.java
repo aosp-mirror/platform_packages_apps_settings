@@ -21,11 +21,11 @@ import android.accounts.Account;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.ContactsContract.RawContacts.DefaultAccount.DefaultAccountAndState;
+import android.provider.Flags;
 import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.flags.Flags;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 
 /**
@@ -54,7 +54,7 @@ public class ContactsStoragePreferenceController extends BasePreferenceControlle
 
     @Override
     public int getAvailabilityStatus() {
-        return (Flags.enableContactsDefaultAccountInSettings()
+        return (Flags.newDefaultAccountApiEnabled()
                 && mCurrentDefaultAccountAndState != null) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
