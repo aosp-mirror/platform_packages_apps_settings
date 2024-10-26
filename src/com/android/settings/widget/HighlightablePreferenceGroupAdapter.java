@@ -33,7 +33,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceGroupAdapter;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,10 +41,11 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.accessibility.AccessibilityUtil;
+import com.android.settingslib.widget.SettingsPreferenceGroupAdapter;
 
 import com.google.android.material.appbar.AppBarLayout;
 
-public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter {
+public class HighlightablePreferenceGroupAdapter extends SettingsPreferenceGroupAdapter {
 
     private static final String TAG = "HighlightableAdapter";
     @VisibleForTesting
