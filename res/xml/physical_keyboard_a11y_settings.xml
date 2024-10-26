@@ -44,14 +44,15 @@
             android:title="@string/slow_keys"
             android:defaultValue="false"
             android:summary="@string/slow_keys_summary"
-            settings:controller="com.android.settings.inputmethod.KeyboardAccessibilitySlowKeysController" />
+            settings:controller="com.android.settings.inputmethod.KeyboardAccessibilitySlowKeysController"/>
 
-        <SwitchPreferenceCompat
+        <com.android.settingslib.PrimarySwitchPreference
             android:key="keyboard_a11y_page_mouse_keys"
             android:title="@string/mouse_keys"
             android:summary="@string/mouse_keys_summary"
             android:defaultValue="false"
-            settings:controller="com.android.settings.inputmethod.KeyboardAccessibilityMouseKeysController" />
+            android:fragment="com.android.settings.inputmethod.MouseKeysMainPageFragment"
+            settings:controller="com.android.settings.inputmethod.KeyboardAccessibilityMouseKeysController"/>
 
     </PreferenceCategory>
 

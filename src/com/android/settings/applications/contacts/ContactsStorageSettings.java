@@ -28,7 +28,9 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.ContactsContract.RawContacts.DefaultAccount.DefaultAccountAndState;
+import android.util.Log;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
@@ -79,10 +81,16 @@ public class ContactsStorageSettings extends DashboardFragment
         for (String preferenceKey : mAccountMap.keySet()) {
             if (selectedPreferenceKey.equals(preferenceKey)) {
                 try {
+                    DefaultAccountAndState currentDefaultAccount = mAccountMap.get(preferenceKey);
                     DefaultAccount.setDefaultAccountForNewContacts(getContentResolver(),
-                            mAccountMap.get(preferenceKey));
+                            currentDefaultAccount);
                     selectedPref.setChecked(true);
+                    if (currentDefaultAccount.getState()
+                            == DefaultAccountAndState.DEFAULT_ACCOUNT_STATE_CLOUD) {
+                        startMoveLocalAndSimContactsActivity();
+                    }
                 } catch (RuntimeException e) {
+                    Log.e(TAG, "Error setting the default account " + e);
                     Toast.makeText(getContext(),
                             R.string.contacts_storage_set_default_account_error_message,
                             Toast.LENGTH_SHORT).show();
@@ -123,9 +131,14 @@ public class ContactsStorageSettings extends DashboardFragment
         // when creating eligible account preferences.
         mAccountMap.clear();
         final PreferenceScreen screen = getPreferenceScreen();
+        // If the default account is SIM, we should show in the page, otherwise don't show.
+        SelectorWithWidgetPreference simAccountPreference = buildSimAccountPreference();
+        if (simAccountPreference != null) {
+            getPreferenceScreen().addPreference(simAccountPreference);
+        }
         List<Account> accounts = DefaultAccount.getEligibleCloudAccounts(getContentResolver());
         for (int i = 0; i < accounts.size(); i++) {
-            screen.addPreference(buildAccountPreference(accounts.get(i), /*order=*/i));
+            screen.addPreference(buildCloudAccountPreference(accounts.get(i), /*order=*/i));
         }
         // If there's no eligible account types, the "Add Account" preference should
         // not be shown to the users.
@@ -156,7 +169,7 @@ public class ContactsStorageSettings extends DashboardFragment
         if (mAccountMap.containsKey(preferenceKey)) {
             preference = getPreferenceScreen().findPreference(preferenceKey);
         } else if (preferenceKey != null && currentDefaultAccount != null) {
-            preference = buildAccountPreference(currentDefaultAccount, mAccountMap.size());
+            preference = buildCloudAccountPreference(currentDefaultAccount, mAccountMap.size());
             getPreferenceScreen().addPreference(preference);
         }
         if (preference != null) {
@@ -165,7 +178,7 @@ public class ContactsStorageSettings extends DashboardFragment
     }
 
     //TODO: Add preference category on account preferences.
-    private SelectorWithWidgetPreference buildAccountPreference(Account account, int order) {
+    private SelectorWithWidgetPreference buildCloudAccountPreference(Account account, int order) {
         SelectorWithWidgetPreference preference = new SelectorWithWidgetPreference(
                 getPrefContext());
         DefaultAccountAndState accountAndState = DefaultAccountAndState.ofCloud(account);
@@ -178,6 +191,26 @@ public class ContactsStorageSettings extends DashboardFragment
         preference.setOrder(order);
         mAccountMap.put(preferenceKey, accountAndState);
         return preference;
+    }
+
+    @Nullable
+    private SelectorWithWidgetPreference buildSimAccountPreference() {
+        DefaultAccountAndState currentDefaultAccountAndState =
+                DefaultAccount.getDefaultAccountForNewContacts(getContentResolver());
+        if (currentDefaultAccountAndState.getState()
+                == DefaultAccountAndState.DEFAULT_ACCOUNT_STATE_SIM) {
+            String preferenceKey = getAccountHashCode(currentDefaultAccountAndState);
+            SelectorWithWidgetPreference preference = new SelectorWithWidgetPreference(
+                    getPrefContext());
+            preference.setTitle(R.string.sim_card_label);
+            preference.setIcon(R.drawable.ic_sim_card);
+            preference.setSummary(R.string.sim_card_label);
+            preference.setKey(preferenceKey);
+            preference.setOnClickListener(this);
+            mAccountMap.put(preferenceKey, currentDefaultAccountAndState);
+            return preference;
+        }
+        return null;
     }
 
     private RestrictedPreference buildAddAccountPreference(boolean noAccountBeenAdded) {
@@ -194,7 +227,17 @@ public class ContactsStorageSettings extends DashboardFragment
         return preference;
     }
 
-    private @Nullable String getAccountHashCode(DefaultAccountAndState currentDefaultAccountAndState) {
+    private void startMoveLocalAndSimContactsActivity() {
+        Intent intent = new Intent()
+                .setAction(DefaultAccount.ACTION_MOVE_CONTACTS_TO_DEFAULT_ACCOUNT)
+                .setPackage("com.android.providers.contacts")
+                .addFlags(FLAG_ACTIVITY_NEW_TASK);
+        getContext().startActivity(intent);
+    }
+
+    @Nullable
+    private String getAccountHashCode(
+            DefaultAccountAndState currentDefaultAccountAndState) {
         Account currentDefaultAccount = currentDefaultAccountAndState.getAccount();
         if (currentDefaultAccount != null && (currentDefaultAccountAndState.getState()
                 == DefaultAccountAndState.DEFAULT_ACCOUNT_STATE_CLOUD

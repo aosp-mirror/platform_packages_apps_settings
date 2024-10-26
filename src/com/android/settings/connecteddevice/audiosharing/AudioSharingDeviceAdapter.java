@@ -85,6 +85,10 @@ public class AudioSharingDeviceAdapter extends RecyclerView.Adapter<RecyclerView
                 mButtonView.setText(btnText);
                 mButtonView.setOnClickListener(
                         v -> mOnClickListener.onClick(mDevices.get(position)));
+                if (position == 0) {
+                    mButtonView.setBackgroundResource(
+                            com.android.settingslib.R.drawable.audio_sharing_rounded_bg_ripple_top);
+                }
             } else {
                 Log.w(TAG, "bind view skipped due to button view is null");
             }

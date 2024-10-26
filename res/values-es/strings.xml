@@ -250,8 +250,7 @@
     <string name="date_time_auto_summary" msgid="8294938565417729698">"Se establece automáticamente mediante tu red y señales inalámbricas"</string>
     <string name="zone_auto_title" msgid="3520584257065861479">"Zona horaria automática"</string>
     <string name="zone_auto_title_summary" msgid="6540356783943375071">"Se establece automáticamente según las redes móviles cercanas"</string>
-    <!-- no translation found for auto_zone_requires_location_summary (2366567167956530124) -->
-    <skip />
+    <string name="auto_zone_requires_location_summary" msgid="2366567167956530124">"Se establece automáticamente usando la ubicación de tu dispositivo, si está disponible"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Usar configuración regional predeterminada"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Usar formato de 24 horas"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Hora"</string>
@@ -1950,9 +1949,11 @@
     <string name="bounce_keys_summary" msgid="7418024428905737729">"El teclado ignora las pulsaciones rápidas repetidas de la misma tecla"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Umbral de tecla de rebote"</string>
     <string name="bounce_keys_dialog_subtitle" msgid="5640575860258120026">"Elige el tiempo que tu teclado ignora las pulsaciones repetidas de teclas"</string>
-    <string name="bounce_keys_dialog_option_200" msgid="7876774697200082558">"0,2 s"</string>
-    <string name="bounce_keys_dialog_option_400" msgid="8146580138675322657">"0,4 s"</string>
-    <string name="bounce_keys_dialog_option_600" msgid="6166166103942612488">"0,6 s"</string>
+    <string name="input_setting_keys_dialog_option_200" msgid="3121006986226247560">"0,2 s"</string>
+    <string name="input_setting_keys_dialog_option_400" msgid="2634500629396699440">"0,4 s"</string>
+    <string name="input_setting_keys_dialog_option_600" msgid="3828362866751805146">"0,6 s"</string>
+    <string name="input_setting_keys_custom_title" msgid="670425691119253202">"Personalizado"</string>
+    <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"valor personalizado"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Teclas lentas"</string>
     <string name="slow_keys_summary" msgid="2914214326648535377">"Ajusta el tiempo que se tarda en activar una pulsación de tecla"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Teclas persistentes"</string>
@@ -2031,14 +2032,10 @@
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Elige una nueva tecla para <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Accesibilidad del teclado físico"</string>
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Teclas persistentes, teclas de rebote y teclas para el ratón"</string>
-    <!-- no translation found for keyboard_repeat_keys_title (6346877755243280735) -->
-    <skip />
-    <!-- no translation found for keyboard_repeat_keys_timeout_title (3411871149974652293) -->
-    <skip />
-    <!-- no translation found for keyboard_repeat_keys_delay_title (7323531750483922943) -->
-    <skip />
-    <!-- no translation found for keyboard_repeat_keys_summary (8972905345211768313) -->
-    <skip />
+    <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"Teclas de repetición"</string>
+    <string name="keyboard_repeat_keys_timeout_title" msgid="3411871149974652293">"Tiempo hasta la repetición"</string>
+    <string name="keyboard_repeat_keys_delay_title" msgid="7323531750483922943">"Porcentaje de repetición"</string>
+    <string name="keyboard_repeat_keys_summary" msgid="8972905345211768313">"Mantén pulsada una tecla para repetir su carácter hasta que la sueltes"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"Diseño <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Predeterminado"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automático: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2212,7 +2209,7 @@
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Usar gesto de accesibilidad"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"En la parte inferior de la pantalla, toca el botón de accesibilidad <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> para usar esta función.\n\nPara cambiar de una función a otra, mantén pulsado ese botón."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="6631371483819355514">"Para usar esta función, toca el botón de accesibilidad de la pantalla"</string>
-    <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"Para usar esta función, mantén pulsadas las dos teclas de volumen"</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="3785791536286606664">"Para usar esta función, mantén pulsadas las 2 teclas de volumen"</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Para iniciar o detener la ampliación, toca tres veces en cualquier parte de la pantalla."</string>
     <string name="accessibility_tutorial_dialog_tripletap_instruction" msgid="7549293553589934">"Para iniciar o detener la ampliación, toca rápidamente la pantalla %1$d veces"</string>
     <string name="accessibility_tutorial_dialog_twofinger_doubletap_instruction" msgid="1007756360115974649">"Para iniciar o detener la ampliación, toca rápidamente la pantalla dos veces con %1$d dedos"</string>
@@ -2987,8 +2984,7 @@
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"¿Desconectar esta VPN?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Desconectar"</string>
     <string name="vpn_version" msgid="6344167191984400976">"Versión"</string>
-    <!-- no translation found for vpn_version_info (5717671228402924155) -->
-    <skip />
+    <string name="vpn_version_info" msgid="5717671228402924155">"Versión <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Olvidar VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"¿Reemplazar VPN actual?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"¿Configurar el modo de VPN siempre activada?"</string>
@@ -5467,10 +5463,13 @@
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Solo en el dispositivo"</string>
     <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"Los contactos nuevos no se sincronizarán con ninguna cuenta"</string>
     <string name="contacts_storage_selection_message" msgid="8082077300632059003">"Los contactos se guardarán en tu dispositivo y se sincronizarán con tu cuenta de forma predeterminada"</string>
-    <string name="contacts_storage_no_account_set" msgid="1548101985417720782">"Ninguna cuenta predeterminada definida"</string>
+    <!-- no translation found for contacts_storage_set_default_account_error_message (849847649756411393) -->
+    <skip />
+    <!-- no translation found for contacts_storage_no_account_set_summary (7454973781666475276) -->
+    <skip />
+    <!-- no translation found for contacts_storage_local_account_summary (5034805108128685712) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Añade una cuenta para empezar"</string>
-    <!-- no translation found for search_gesture_feature_title (7037117019612710960) -->
-    <skip />
-    <!-- no translation found for search_gesture_feature_summary (1793056495030564014) -->
-    <skip />
+    <string name="search_gesture_feature_title" msgid="7037117019612710960">"Rodea para buscar"</string>
+    <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Mantén pulsado el botón de inicio o la barra de navegación para buscar usando el contenido de tu pantalla."</string>
 </resources>
