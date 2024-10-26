@@ -43,9 +43,9 @@ import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.RawContacts.DefaultAccount.DefaultAccountAndState;
+import android.provider.Flags;
 
 import com.android.settings.R;
-import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowAuthenticationHelper;
 
 import org.junit.Before;
@@ -108,20 +108,20 @@ public class ContactsStoragePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_CONTACTS_DEFAULT_ACCOUNT_IN_SETTINGS)
+    @EnableFlags(Flags.FLAG_NEW_DEFAULT_ACCOUNT_API_ENABLED)
     public void getAvailabilityStatus_flagIsOn_shouldReturnAvailable() {
         assertThat(mPreferenceController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_CONTACTS_DEFAULT_ACCOUNT_IN_SETTINGS)
+    @RequiresFlagsDisabled(Flags.FLAG_NEW_DEFAULT_ACCOUNT_API_ENABLED)
     public void getAvailabilityStatus_flagIsOff_shouldReturnConditionallyUnavailable() {
         assertThat(mPreferenceController.getAvailabilityStatus()).isEqualTo(
                 CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_CONTACTS_DEFAULT_ACCOUNT_IN_SETTINGS)
+    @EnableFlags(Flags.FLAG_NEW_DEFAULT_ACCOUNT_API_ENABLED)
     public void getAvailabilityStatus_illegalStateExceptionThrown_shouldReturnConditionallyUnavailable()
             throws Exception {
         when(mContentProviderClient.call(eq(QUERY_DEFAULT_ACCOUNT_FOR_NEW_CONTACTS_METHOD), any(),
@@ -135,7 +135,7 @@ public class ContactsStoragePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_CONTACTS_DEFAULT_ACCOUNT_IN_SETTINGS)
+    @EnableFlags(Flags.FLAG_NEW_DEFAULT_ACCOUNT_API_ENABLED)
     public void getAvailabilityStatus_runtimeExceptionThrown_shouldReturnConditionallyUnavailable()
             throws Exception {
         when(mContentProviderClient.call(eq(QUERY_DEFAULT_ACCOUNT_FOR_NEW_CONTACTS_METHOD), any(),

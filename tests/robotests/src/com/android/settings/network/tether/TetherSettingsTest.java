@@ -54,7 +54,7 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
-import com.android.settings.RestrictedSettingsFragment;
+import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.wifi.tether.WifiTetherPreferenceController;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -130,14 +130,12 @@ public class TetherSettingsTest {
     }
 
     @Test
-    @Config(shadows = ShadowRestrictedSettingsFragment.class)
+    @Config(shadows = ShadowRestrictedDashboardFragment.class)
     public void onCreate_isUiRestricted_doNotSetupViewModel() {
-        doNothing().when(mTetherSettings).addPreferencesFromResource(anyInt());
         when(mTetherSettings.isUiRestricted()).thenReturn(true);
 
         mTetherSettings.onCreate(null);
 
-        verify(mTetherSettings).addPreferencesFromResource(anyInt());
         verify(mTetherSettings, never()).setupViewModel();
     }
 
@@ -454,8 +452,8 @@ public class TetherSettingsTest {
         }
     }
 
-    @Implements(RestrictedSettingsFragment.class)
-    public static final class ShadowRestrictedSettingsFragment {
+    @Implements(RestrictedDashboardFragment.class)
+    public static final class ShadowRestrictedDashboardFragment {
         @Implementation
         public void onCreate(Bundle icicle) {
             // do nothing
