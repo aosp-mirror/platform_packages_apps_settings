@@ -17,20 +17,22 @@
 package com.android.settings.bluetooth.ui.viewmodel
 
 import android.app.Application
+import android.bluetooth.BluetoothAdapter
+import android.media.AudioManager
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.android.settings.R
-import com.android.settings.bluetooth.domain.interactor.SpatialAudioInteractor
 import com.android.settings.bluetooth.ui.layout.DeviceSettingLayout
 import com.android.settings.bluetooth.ui.layout.DeviceSettingLayoutColumn
 import com.android.settings.bluetooth.ui.layout.DeviceSettingLayoutRow
 import com.android.settings.bluetooth.ui.model.DeviceSettingPreferenceModel
 import com.android.settings.bluetooth.ui.model.FragmentTypeModel
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.devicesettings.DeviceSettingId
-import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepository
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigItemModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingIcon
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingModel
@@ -47,11 +49,23 @@ import kotlinx.coroutines.flow.stateIn
 
 class BluetoothDeviceDetailsViewModel(
     private val application: Application,
-    private val deviceSettingRepository: DeviceSettingRepository,
-    private val spatialAudioInteractor: SpatialAudioInteractor,
+    private val bluetoothAdapter: BluetoothAdapter,
     private val cachedDevice: CachedBluetoothDevice,
     backgroundCoroutineContext: CoroutineContext,
 ) : AndroidViewModel(application) {
+
+    private val deviceSettingRepository =
+        featureFactory.bluetoothFeatureProvider.getDeviceSettingRepository(
+            application,
+            bluetoothAdapter,
+            viewModelScope,
+        )
+    private val spatialAudioInteractor =
+        featureFactory.bluetoothFeatureProvider.getSpatialAudioInteractor(
+            application,
+            application.getSystemService(AudioManager::class.java),
+            viewModelScope,
+        )
 
     private val items =
         viewModelScope.async(backgroundCoroutineContext, start = CoroutineStart.LAZY) {
@@ -202,8 +216,7 @@ class BluetoothDeviceDetailsViewModel(
 
     class Factory(
         private val application: Application,
-        private val deviceSettingRepository: DeviceSettingRepository,
-        private val spatialAudioInteractor: SpatialAudioInteractor,
+        private val bluetoothAdapter: BluetoothAdapter,
         private val cachedDevice: CachedBluetoothDevice,
         private val backgroundCoroutineContext: CoroutineContext,
     ) : ViewModelProvider.Factory {
@@ -211,8 +224,7 @@ class BluetoothDeviceDetailsViewModel(
             @Suppress("UNCHECKED_CAST")
             return BluetoothDeviceDetailsViewModel(
                 application,
-                deviceSettingRepository,
-                spatialAudioInteractor,
+                bluetoothAdapter,
                 cachedDevice,
                 backgroundCoroutineContext,
             )
