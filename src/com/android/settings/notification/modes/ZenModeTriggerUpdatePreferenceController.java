@@ -174,8 +174,8 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
         @DrawableRes int icon;
         if (mode.getType() == TYPE_BEDTIME) {
             icon = com.android.internal.R.drawable.ic_zen_mode_type_schedule_time; // Clock
-        } else if (mode.getType() == TYPE_DRIVING) {
-            icon = com.android.internal.R.drawable.ic_zen_mode_type_driving; // Car
+        } else if (mode.getType() == TYPE_DRIVING && configurationIntent != null) {
+            icon = R.drawable.ic_zen_mode_trigger_with_settings; // Gear
         } else {
             icon = configurationIntent != null ? R.drawable.ic_zen_mode_trigger_with_activity
                     : R.drawable.ic_zen_mode_trigger_without_activity;

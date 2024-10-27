@@ -250,8 +250,7 @@
     <string name="date_time_auto_summary" msgid="8294938565417729698">"Definir automaticamente usando sua rede e sinais sem fio"</string>
     <string name="zone_auto_title" msgid="3520584257065861479">"Fuso horário automático"</string>
     <string name="zone_auto_title_summary" msgid="6540356783943375071">"Definir automaticamente com base nas redes móveis perto de você"</string>
-    <!-- no translation found for auto_zone_requires_location_summary (2366567167956530124) -->
-    <skip />
+    <string name="auto_zone_requires_location_summary" msgid="2366567167956530124">"Definir automaticamente usando o local do dispositivo, se disponível"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Usar o padrão do local"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Usar formato de 24 horas"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Horário"</string>
@@ -1950,9 +1949,11 @@
     <string name="bounce_keys_summary" msgid="7418024428905737729">"O teclado ignora pressionamentos rápidos e repetidos da mesma tecla"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Limite da tecla de filtragem"</string>
     <string name="bounce_keys_dialog_subtitle" msgid="5640575860258120026">"Escolha por quanto tempo o teclado ignora pressionamentos repetidos"</string>
-    <string name="bounce_keys_dialog_option_200" msgid="7876774697200082558">"0,2s"</string>
-    <string name="bounce_keys_dialog_option_400" msgid="8146580138675322657">"0,4s"</string>
-    <string name="bounce_keys_dialog_option_600" msgid="6166166103942612488">"0,6s"</string>
+    <string name="input_setting_keys_dialog_option_200" msgid="3121006986226247560">"0,2s"</string>
+    <string name="input_setting_keys_dialog_option_400" msgid="2634500629396699440">"0,4s"</string>
+    <string name="input_setting_keys_dialog_option_600" msgid="3828362866751805146">"0,6s"</string>
+    <string name="input_setting_keys_custom_title" msgid="670425691119253202">"Personalizado"</string>
+    <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"valor personalizado"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Teclas lentas"</string>
     <string name="slow_keys_summary" msgid="2914214326648535377">"Ajusta o tempo que leva para um pressionamento de tecla ser ativado"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Teclas de aderência"</string>
@@ -2031,14 +2032,10 @@
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Escolha uma nova tecla para <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Acessibilidade do teclado físico"</string>
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Teclas de aderência, teclas de filtragem, teclas do mouse"</string>
-    <!-- no translation found for keyboard_repeat_keys_title (6346877755243280735) -->
-    <skip />
-    <!-- no translation found for keyboard_repeat_keys_timeout_title (3411871149974652293) -->
-    <skip />
-    <!-- no translation found for keyboard_repeat_keys_delay_title (7323531750483922943) -->
-    <skip />
-    <!-- no translation found for keyboard_repeat_keys_summary (8972905345211768313) -->
-    <skip />
+    <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"Repetir teclas"</string>
+    <string name="keyboard_repeat_keys_timeout_title" msgid="3411871149974652293">"Atraso antes da repetição"</string>
+    <string name="keyboard_repeat_keys_delay_title" msgid="7323531750483922943">"Taxa de repetição"</string>
+    <string name="keyboard_repeat_keys_summary" msgid="8972905345211768313">"Pressione e segure uma tecla para repetir o caractere dela até que seja liberada"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"Layout do <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Padrão"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automático: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2218,7 +2215,7 @@
     <string name="accessibility_tutorial_dialog_twofinger_doubletap_instruction" msgid="1007756360115974649">"Para iniciar ou interromper a ampliação, toque duas vezes rapidamente com %1$d dedos na tela"</string>
     <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{Para usar esse recurso, deslize de cima para baixo na tela. Depois, encontre o bloco {featureName}.}one{Para usar esse recurso, deslize com # dedo de cima para baixo na tela. Depois, encontre o bloco {featureName}.}other{Para usar esse recurso, deslize com # dedos de cima para baixo na tela. Depois, encontre o bloco {featureName}.}}"</string>
     <string name="accessibility_tutorial_dialog_shortcut_unavailable_in_suw" msgid="3847728530771929959">"Esse atalho vai estar disponível depois que você concluir a configuração do dispositivo."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Para usar esse recurso, deslize dois dedos na rela, de baixo para cima.\n\nPara mudar de recurso, deslize dois dedos de baixo para cima da tela e segure."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Para usar esse recurso, deslize dois dedos na tela, de baixo para cima.\n\nPara mudar de recurso, deslize dois dedos de baixo para cima da tela e segure."</string>
     <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{Para usar esse recurso, deslize de baixo para cima na tela}one{Para usar esse recurso, deslize com # dedo de baixo para cima na tela}other{Para usar esse recurso, deslize com # dedos de baixo para cima na tela}}"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Para usar esse recurso, deslize de baixo para cima na tela com três dedos.\n\nPara mudar de recurso, deslize de baixo para cima com três dedos, sem soltar."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Para usar um recurso de acessibilidade, deslize de baixo para cima na tela com dois dedos.\n\nPara alternar entre recursos, deslize de baixo para cima com dois dedos, sem soltar."</string>
@@ -2987,8 +2984,7 @@
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Desconectar esta VPN?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Desconectar"</string>
     <string name="vpn_version" msgid="6344167191984400976">"Versão"</string>
-    <!-- no translation found for vpn_version_info (5717671228402924155) -->
-    <skip />
+    <string name="vpn_version_info" msgid="5717671228402924155">"Versão <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Esquecer VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Substituir VPN já existente?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Configurar VPN sempre ativa?"</string>
@@ -5467,10 +5463,13 @@
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Somente dispositivo"</string>
     <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"Os novos contatos não serão sincronizados com uma conta"</string>
     <string name="contacts_storage_selection_message" msgid="8082077300632059003">"Os contatos serão salvos no seu dispositivo e sincronizados com sua conta por padrão"</string>
-    <string name="contacts_storage_no_account_set" msgid="1548101985417720782">"Nenhuma conta padrão configurada"</string>
+    <!-- no translation found for contacts_storage_set_default_account_error_message (849847649756411393) -->
+    <skip />
+    <!-- no translation found for contacts_storage_no_account_set_summary (7454973781666475276) -->
+    <skip />
+    <!-- no translation found for contacts_storage_local_account_summary (5034805108128685712) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Adicione uma conta para começar"</string>
-    <!-- no translation found for search_gesture_feature_title (7037117019612710960) -->
-    <skip />
-    <!-- no translation found for search_gesture_feature_summary (1793056495030564014) -->
-    <skip />
+    <string name="search_gesture_feature_title" msgid="7037117019612710960">"Circule para pesquisar"</string>
+    <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Toque no botão home ou na alça de navegação e pressione para pesquisar usando o conteúdo na tela."</string>
 </resources>
