@@ -48,12 +48,12 @@
 
     <PreferenceCategory
         android:title="@string/manager_battery_usage_category_title"
-        android:key="manage_battery_usage_category">
+        android:key="background_usage_allowability_category"
+        settings:controller="com.android.settings.fuelgauge.BackgroundUsageAllowabilityPreferenceController">
 
         <com.android.settingslib.PrimarySwitchPreference
-            android:key="allow_background_usage"
-            android:title="@string/manager_battery_usage_allow_background_usage_title"
-            settings:controller="com.android.settings.fuelgauge.AllowBackgroundPreferenceController"/>
+            android:key="background_usage_allowability_switch"
+            android:title="@string/manager_battery_usage_allow_background_usage_title"/>
 
     </PreferenceCategory>
 

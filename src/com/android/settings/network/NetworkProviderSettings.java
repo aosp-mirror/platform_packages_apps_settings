@@ -64,8 +64,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
-import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.location.WifiScanningFragment;
@@ -104,7 +104,7 @@ import java.util.Optional;
  * UI for Mobile network and Wi-Fi network settings.
  */
 @SearchIndexable
-public class NetworkProviderSettings extends RestrictedSettingsFragment
+public class NetworkProviderSettings extends RestrictedDashboardFragment
         implements Indexable, WifiPickerTracker.WifiPickerTrackerCallback,
         WifiDialog2.WifiDialog2Listener, DialogInterface.OnDismissListener,
         AirplaneModeEnabler.OnAirplaneModeChangedListener, InternetUpdater.InternetChangeListener {
@@ -356,9 +356,17 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         mIsGuest = userManager.isGuestUser();
     }
 
-    private void addPreferences() {
-        addPreferencesFromResource(R.xml.network_provider_settings);
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
 
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.network_provider_settings;
+    }
+
+    private void addPreferences() {
         mAirplaneModeMsgPreference = findPreference(PREF_KEY_AIRPLANE_MODE_MSG);
         updateAirplaneModeMsgPreference(mAirplaneModeEnabler.isAirplaneModeOn() /* visible */);
         mConnectedWifiEntryPreferenceCategory = findPreference(PREF_KEY_CONNECTED_ACCESS_POINTS);
@@ -1499,5 +1507,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         protected int getIconColorAttr() {
             return android.R.attr.colorControlNormal;
         }
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return NetworkProviderScreen.KEY;
     }
 }

@@ -18,6 +18,7 @@ package com.android.settings.display
 import android.content.Context
 import com.android.settings.DisplaySettings
 import com.android.settings.R
+import com.android.settings.display.darkmode.DarkModeScreen
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceIconProvider
@@ -46,7 +47,9 @@ class DisplayScreen :
 
     override fun fragmentClass() = DisplaySettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {
+        +DarkModeScreen.KEY
+    }
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_top_level_display)
