@@ -17,16 +17,19 @@
 package com.android.settings.accessibility
 
 import android.content.Context
-import com.android.settings.flags.Flags
 import com.android.settings.R
+import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen
 class ColorAndMotionScreen : PreferenceScreenCreator {
-    override val key: String = KEY
-    override val title: Int = R.string.accessibility_color_and_motion_title
+    override val key: String
+        get() = KEY
+
+    override val title: Int
+        get() = R.string.accessibility_color_and_motion_title
 
     override fun isFlagEnabled(context: Context) = Flags.catalystAccessibilityColorAndMotion()
 
@@ -35,7 +38,6 @@ class ColorAndMotionScreen : PreferenceScreenCreator {
     override fun fragmentClass() = ColorAndMotionFragment::class.java
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
-
 
     companion object {
         const val KEY = "accessibility_color_and_motion"

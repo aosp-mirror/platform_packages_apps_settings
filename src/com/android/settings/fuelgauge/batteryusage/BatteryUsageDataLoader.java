@@ -20,8 +20,6 @@ import android.app.usage.UsageEvents;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.BatteryUsageStats;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -117,11 +115,9 @@ public final class BatteryUsageDataLoader {
     private static void preprocessBatteryUsageSlots(
             final Context context, final UserIdsSeries userIdsSeries) {
         final long start = System.currentTimeMillis();
-        final Handler handler = new Handler(Looper.getMainLooper());
         final BatteryLevelData batteryLevelData =
                 DataProcessManager.getBatteryLevelData(
                         context,
-                        handler,
                         userIdsSeries,
                         /* isFromPeriodJob= */ true,
                         batteryDiffDataMap -> {

@@ -90,6 +90,7 @@ public class WifiCallingSettingsForSubTest {
     private static final String PREFERENCE_NO_OPTIONS_DESC = "no_options_description";
     private static final String TEST_EMERGENCY_ADDRESS_CARRIER_APP =
             "com.android.settings/.wifi.calling.TestEmergencyAddressCarrierApp";
+    private static final String PREFERENCE_EMERGENCY_ADDRESS = "emergency_address_key";
 
     private TestFragment mFragment;
     private Context mContext;
@@ -138,6 +139,7 @@ public class WifiCallingSettingsForSubTest {
         doReturn(mContext.getResources()).when(mFragment).getResources();
         doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(anyInt());
+        doReturn(mock(LifecycleOwner.class)).when(mFragment).getViewLifecycleOwner();
         final Bundle bundle = new Bundle();
         when(mFragment.getArguments()).thenReturn(bundle);
         doNothing().when(mFragment).addPreferencesFromResource(anyInt());
@@ -380,19 +382,22 @@ public class WifiCallingSettingsForSubTest {
 
         @Override
         public <T extends Preference> T findPreference(CharSequence key) {
-            if (SWITCH_BAR.equals(key)) {
+            if (SWITCH_BAR.contentEquals(key)) {
                 return (T) mSwitchPref;
             }
-            if (BUTTON_WFC_MODE.equals(key)) {
+            if (BUTTON_WFC_MODE.contentEquals(key)) {
                 return (T) mButtonWfcMode;
             }
-            if (BUTTON_WFC_ROAMING_MODE.equals(key)) {
+            if (BUTTON_WFC_ROAMING_MODE.contentEquals(key)) {
                 return (T) mButtonWfcRoamingMode;
             }
-            if (PREFERENCE_NO_OPTIONS_DESC.equals(key)) {
+            if (PREFERENCE_NO_OPTIONS_DESC.contentEquals(key)) {
                 return (T) mDescriptionView;
             }
-            return (T) mock(ListWithEntrySummaryPreference.class);
+            if (PREFERENCE_EMERGENCY_ADDRESS.contentEquals(key)) {
+                return (T) mUpdateAddress;
+            }
+            return null;
         }
 
         @Override
