@@ -179,6 +179,24 @@ public class ContactsStoragePreferenceControllerTest {
     }
 
     @Test
+    public void getSummary_simAccountIsSetAsDefault_shouldReturnSimAccountSummary()
+            throws Exception {
+        Bundle bundle = new Bundle();
+        bundle.putInt(KEY_DEFAULT_ACCOUNT_STATE,
+                DefaultAccountAndState.DEFAULT_ACCOUNT_STATE_SIM);
+        bundle.putString(Settings.ACCOUNT_TYPE, "SIM");
+        bundle.putString(Settings.ACCOUNT_NAME, "SIM");
+        when(mContentProviderClient.call(eq(QUERY_DEFAULT_ACCOUNT_FOR_NEW_CONTACTS_METHOD), any(),
+                any())).thenReturn(bundle);
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mResources.getString(eq(R.string.sim_card_label))).thenReturn("SIM");
+        mPreferenceController = new ContactsStoragePreferenceController(mContext,
+                CONTACTS_DEFAULT_ACCOUNT_PREFERENCE_KEY);
+
+        assertThat(mPreferenceController.getSummary()).isEqualTo("SIM");
+    }
+
+    @Test
     public void getSummary_googleAccountIsSetAsDefault_shouldReturnGoogleAccountTypeAndAccountName()
             throws Exception {
         Bundle bundle = new Bundle();
