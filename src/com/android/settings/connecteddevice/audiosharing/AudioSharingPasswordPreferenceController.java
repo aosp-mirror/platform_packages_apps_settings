@@ -136,7 +136,11 @@ public class AudioSharingPasswordPreferenceController extends BasePreferenceCont
 
     @Override
     public boolean isTextValid(String value) {
-        return mAudioSharingPasswordValidator.isTextValid(value);
+        boolean isValid = mAudioSharingPasswordValidator.isTextValid(value);
+        if (mPreference != null) {
+            mPreference.showEditTextFormatAlert(!isValid);
+        }
+        return isValid;
     }
 
     @Override

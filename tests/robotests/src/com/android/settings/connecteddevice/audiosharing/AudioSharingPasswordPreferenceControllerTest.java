@@ -320,16 +320,37 @@ public class AudioSharingPasswordPreferenceControllerTest {
     }
 
     @Test
-    public void idTextValid_emptyString() {
+    public void isTextValid_emptyString() {
         boolean valid = mController.isTextValid("");
 
         assertThat(valid).isFalse();
     }
 
+
     @Test
-    public void idTextValid_validPassword() {
+    public void isTextValid_emptyString_showEditTextFormatAlert() {
+        mController.displayPreference(mScreen);
+        ShadowLooper.idleMainLooper();
+        boolean valid = mController.isTextValid("");
+
+        assertThat(valid).isFalse();
+        verify(mPreference).showEditTextFormatAlert(true);
+    }
+
+    @Test
+    public void isTextValid_validPassword() {
         boolean valid = mController.isTextValid(BROADCAST_PASSWORD);
 
         assertThat(valid).isTrue();
+    }
+
+    @Test
+    public void isTextValid_validPassword_hideEditTextFormatAlert() {
+        mController.displayPreference(mScreen);
+        ShadowLooper.idleMainLooper();
+        boolean valid = mController.isTextValid(BROADCAST_PASSWORD);
+
+        assertThat(valid).isTrue();
+        verify(mPreference).showEditTextFormatAlert(false);
     }
 }

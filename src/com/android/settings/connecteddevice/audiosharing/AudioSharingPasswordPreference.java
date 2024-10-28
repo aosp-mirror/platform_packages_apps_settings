@@ -41,6 +41,7 @@ public class AudioSharingPasswordPreference extends ValidatedEditTextPreference 
     @Nullable private EditText mEditText;
     @Nullable private CheckBox mCheckBox;
     @Nullable private View mDialogMessage;
+    @Nullable private View mEditTextFormatAlert;
     private boolean mEditable = true;
 
     interface OnDialogEventListener {
@@ -77,6 +78,7 @@ public class AudioSharingPasswordPreference extends ValidatedEditTextPreference 
         mEditText = view.findViewById(android.R.id.edit);
         mCheckBox = view.findViewById(R.id.audio_sharing_stream_password_checkbox);
         mDialogMessage = view.findViewById(android.R.id.message);
+        mEditTextFormatAlert = view.findViewById(R.id.edit_alert_message);
 
         if (mEditText == null || mCheckBox == null || mDialogMessage == null) {
             Log.w(TAG, "onBindDialogView() : Invalid layout");
@@ -121,6 +123,14 @@ public class AudioSharingPasswordPreference extends ValidatedEditTextPreference 
         setEditTextEnabled(editable);
         mCheckBox.setEnabled(editable);
         mDialogMessage.setVisibility(editable ? GONE : VISIBLE);
+    }
+
+    void showEditTextFormatAlert(boolean show) {
+        if (mEditTextFormatAlert == null) {
+            Log.w(TAG, "showEditTextFormatAlert() : Invalid layout");
+            return;
+        }
+        mEditTextFormatAlert.setVisibility(show ? VISIBLE : GONE);
     }
 
     void setChecked(boolean checked) {
