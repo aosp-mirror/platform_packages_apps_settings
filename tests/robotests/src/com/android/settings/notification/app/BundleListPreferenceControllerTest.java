@@ -89,15 +89,6 @@ public class BundleListPreferenceControllerTest {
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mGroupList = new PreferenceCategory(mContext);
         mPreferenceScreen.addPreference(mGroupList);
-
-        when(mBackend.getChannel(mAppRow.pkg, mAppRow.uid, PROMOTIONS_ID)).thenReturn(
-                new NotificationChannel(PROMOTIONS_ID, PROMOTIONS_ID, 2));
-        when(mBackend.getChannel(mAppRow.pkg, mAppRow.uid, NEWS_ID)).thenReturn(
-                new NotificationChannel(NEWS_ID, NEWS_ID, 2));
-        when(mBackend.getChannel(mAppRow.pkg, mAppRow.uid, SOCIAL_MEDIA_ID)).thenReturn(
-                new NotificationChannel(SOCIAL_MEDIA_ID, SOCIAL_MEDIA_ID, 2));
-        when(mBackend.getChannel(mAppRow.pkg, mAppRow.uid, RECS_ID)).thenReturn(
-                new NotificationChannel(RECS_ID, RECS_ID, 2));
     }
 
     @Test
@@ -132,6 +123,14 @@ public class BundleListPreferenceControllerTest {
 
     @Test
     public void updateState() {
+        when(mBackend.getChannel(mAppRow.pkg, mAppRow.uid, PROMOTIONS_ID)).thenReturn(
+                new NotificationChannel(PROMOTIONS_ID, PROMOTIONS_ID, 2));
+        when(mBackend.getChannel(mAppRow.pkg, mAppRow.uid, NEWS_ID)).thenReturn(
+                new NotificationChannel(NEWS_ID, NEWS_ID, 2));
+        when(mBackend.getChannel(mAppRow.pkg, mAppRow.uid, SOCIAL_MEDIA_ID)).thenReturn(
+                new NotificationChannel(SOCIAL_MEDIA_ID, SOCIAL_MEDIA_ID, 2));
+        when(mBackend.getChannel(mAppRow.pkg, mAppRow.uid, RECS_ID)).thenReturn(
+                new NotificationChannel(RECS_ID, RECS_ID, 2));
         mController.updateState(mGroupList);
         assertThat(mGroupList.getPreferenceCount()).isEqualTo(4);
         assertThat(mGroupList.findPreference(PROMOTIONS_ID).getTitle()).isEqualTo(PROMOTIONS_ID);
@@ -142,18 +141,37 @@ public class BundleListPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_updateChildren() {
+    public void updateState_noBundles() {
         mController.updateState(mGroupList);
-        assertThat(mGroupList.getPreferenceCount()).isEqualTo(4);
+        assertThat(mGroupList.getPreferenceCount()).isEqualTo(0);
+        assertThat(mGroupList.isVisible()).isFalse();
+    }
 
+    @Test
+    public void updateState_onlySomeBundlesUsed() {
         when(mBackend.getChannel(mAppRow.pkg, mAppRow.uid, PROMOTIONS_ID)).thenReturn(
                 new NotificationChannel(PROMOTIONS_ID, PROMOTIONS_ID, 2));
+        mController.updateState(mGroupList);
+        assertThat(mGroupList.getPreferenceCount()).isEqualTo(1);
+        assertThat(mGroupList.findPreference(PROMOTIONS_ID).getTitle()).isEqualTo(PROMOTIONS_ID);
+    }
+
+    @Test
+    public void updateState_noDuplicateChannelsOnReload() {
+        when(mBackend.getChannel(mAppRow.pkg, mAppRow.uid, PROMOTIONS_ID)).thenReturn(
+                new NotificationChannel(PROMOTIONS_ID, PROMOTIONS_ID, 2));
+        when(mBackend.getChannel(mAppRow.pkg, mAppRow.uid, NEWS_ID)).thenReturn(
+                new NotificationChannel(NEWS_ID, NEWS_ID, 2));
+        when(mBackend.getChannel(mAppRow.pkg, mAppRow.uid, SOCIAL_MEDIA_ID)).thenReturn(
+                new NotificationChannel(SOCIAL_MEDIA_ID, SOCIAL_MEDIA_ID, 2));
+        when(mBackend.getChannel(mAppRow.pkg, mAppRow.uid, RECS_ID)).thenReturn(
+                new NotificationChannel(RECS_ID, RECS_ID, 2));
 
         mController.updateState(mGroupList);
         assertThat(mGroupList.getPreferenceCount()).isEqualTo(4);
+        mController.updateState(mGroupList);
+        assertThat(mGroupList.getPreferenceCount()).isEqualTo(4);
 
-        assertThat(((PrimarySwitchPreference) mGroupList.findPreference(NEWS_ID)).isChecked())
-                .isEqualTo(false);
         assertThat(((PrimarySwitchPreference) mGroupList.findPreference(NEWS_ID)).isChecked())
                 .isEqualTo(false);
     }
