@@ -147,7 +147,7 @@ class SpatialAudioInteractorImpl(
     }
 
     companion object {
-        private const val TAG = "SpatialAudioInteractorImpl"
+        private const val TAG = "SpatialAudioInteractor"
         private const val INDEX_SPATIAL_AUDIO_OFF = 0
         private const val INDEX_SPATIAL_AUDIO_ON = 1
         private const val INDEX_HEAD_TRACKING_ENABLED = 2

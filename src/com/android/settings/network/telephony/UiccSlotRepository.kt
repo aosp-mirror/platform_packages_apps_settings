@@ -22,17 +22,17 @@ import android.util.Log
 
 class UiccSlotRepository(private val telephonyManager: TelephonyManager?) {
 
-    /** Returns whether any removable physical sim is enabled. */
-    fun anyRemovablePhysicalSimEnabled(): Boolean {
+    /** Returns whether any removable physical sim slot is active and the sim is inserted. */
+    fun anyRemovablePhysicalSimSlotActiveAndInserted(): Boolean {
         val result =
             telephonyManager?.uiccSlotsInfo?.any { uiccSlotInfo: UiccSlotInfo? ->
-                uiccSlotInfo.isRemovablePhysicalSimEnabled()
+                uiccSlotInfo.isRemovablePhysicalSimSlotActiveAndInserted()
             } ?: false
         Log.i(TAG, "anyRemovablePhysicalSimEnabled: $result")
         return result
     }
 
-    private fun UiccSlotInfo?.isRemovablePhysicalSimEnabled(): Boolean {
+    private fun UiccSlotInfo?.isRemovablePhysicalSimSlotActiveAndInserted(): Boolean {
         return this != null &&
             isRemovable &&
             !isEuicc &&
