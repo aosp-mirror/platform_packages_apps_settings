@@ -24,22 +24,22 @@
         android:title="@string/terms_of_address_intro_title"
         android:persistent="false"/>
 
-    <com.android.settings.widget.TickButtonPreference
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="key_terms_of_address_not_specified"
         android:title="@string/terms_of_address_not_specified"
         settings:controller="com.android.settings.localepicker.TermsOfAddressNotSpecifiedController"/>
 
-    <com.android.settings.widget.TickButtonPreference
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="key_terms_of_address_feminine"
         android:title="@string/terms_of_address_feminine"
         settings:controller="com.android.settings.localepicker.TermsOfAddressFeminineController"/>
 
-    <com.android.settings.widget.TickButtonPreference
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="key_terms_of_address_masculine"
         android:title="@string/terms_of_address_masculine"
         settings:controller="com.android.settings.localepicker.TermsOfAddressMasculineController"/>
 
-    <com.android.settings.widget.TickButtonPreference
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="key_terms_of_address_neutral"
         android:title="@string/terms_of_address_neutral"
         settings:controller="com.android.settings.localepicker.TermsOfAddressNeutralController"/>

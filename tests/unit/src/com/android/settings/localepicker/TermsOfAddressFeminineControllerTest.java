@@ -31,7 +31,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.widget.TickButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -53,10 +53,10 @@ public class TermsOfAddressFeminineControllerTest {
     private PreferenceCategory mPreferenceCategory;
     private PreferenceScreen mPreferenceScreen;
     private TermsOfAddressFeminineController mController;
-    private TickButtonPreference mFemininePreference;
-    private TickButtonPreference mMasculinePreference;
-    private TickButtonPreference mNotSpecifiedPreference;
-    private TickButtonPreference mNeutralPreference;
+    private SelectorWithWidgetPreference mFemininePreference;
+    private SelectorWithWidgetPreference mMasculinePreference;
+    private SelectorWithWidgetPreference mNotSpecifiedPreference;
+    private SelectorWithWidgetPreference mNeutralPreference;
     private GrammaticalInflectionManager mGrammaticalInflectionManager;
 
     @Before
@@ -74,13 +74,13 @@ public class TermsOfAddressFeminineControllerTest {
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mPreferenceCategory = new PreferenceCategory(mContext);
         mPreferenceCategory.setKey(KEY_CATEGORY_TERMS_OF_ADDRESS);
-        mNotSpecifiedPreference = new TickButtonPreference(mContext);
+        mNotSpecifiedPreference = new SelectorWithWidgetPreference(mContext);
         mNotSpecifiedPreference.setKey(KEY_NOT_SPECIFIED);
-        mFemininePreference = new TickButtonPreference(mContext);
+        mFemininePreference = new SelectorWithWidgetPreference(mContext);
         mFemininePreference.setKey(KEY_FEMININE);
-        mMasculinePreference = new TickButtonPreference(mContext);
+        mMasculinePreference = new SelectorWithWidgetPreference(mContext);
         mMasculinePreference.setKey(KEY_MASCULINE);
-        mNeutralPreference = new TickButtonPreference(mContext);
+        mNeutralPreference = new SelectorWithWidgetPreference(mContext);
         mNeutralPreference.setKey(KEY_NEUTRAL);
         mPreferenceScreen.addPreference(mPreferenceCategory);
         mPreferenceScreen.addPreference(mNotSpecifiedPreference);
@@ -95,8 +95,8 @@ public class TermsOfAddressFeminineControllerTest {
     @Test
     @Ignore("b/339543490")
     public void displayPreference_setGrammaticalGenderIsFeminine_FeminineIsSelected() {
-        TickButtonPreference selectedPreference =
-                (TickButtonPreference) mPreferenceScreen.getPreference(2);
+        SelectorWithWidgetPreference selectedPreference =
+                (SelectorWithWidgetPreference) mPreferenceScreen.getPreference(2);
         selectedPreference.performClick();
 
         assertThat(selectedPreference.getKey()).isEqualTo(KEY_FEMININE);
