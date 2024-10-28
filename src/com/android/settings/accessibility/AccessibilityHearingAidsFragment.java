@@ -26,6 +26,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceCategory;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
@@ -118,6 +119,21 @@ public class AccessibilityHearingAidsFragment extends AccessibilityShortcutPrefe
         return getText(R.string.accessibility_hearing_device_shortcut_title);
     }
 
+    @VisibleForTesting
+    static boolean isPageSearchEnabled(Context context) {
+        final HearingAidHelper mHelper = new HearingAidHelper(context);
+        return mHelper.isHearingAidSupported();
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_hearing_aids);
+            new BaseSearchIndexProvider(R.xml.accessibility_hearing_aids) {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    if (Flags.fixA11ySettingsSearch()) {
+                        return AccessibilityHearingAidsFragment.isPageSearchEnabled(context);
+                    } else {
+                        return super.isPageSearchEnabled(context);
+                    }
+                }
+            };
 }
