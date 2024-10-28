@@ -32,7 +32,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.settings.SettingsEnums;
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
@@ -82,6 +81,8 @@ public class ContactsStorageSettingsTest {
     private static final Account TEST_ACCOUNT2 = new Account("test@samsung.com", "type2");
 
     private static final Account TEST_ACCOUNT3 = new Account("test@outlook.com", "type3");
+
+    private static final Account SIM_ACCOUNT = new Account("SIM", "SIM");
 
     @Rule
     public final MockitoRule mockito = MockitoJUnit.rule();
@@ -216,7 +217,9 @@ public class ContactsStorageSettingsTest {
             throws Exception {
         Bundle currentDefaultAccount = new Bundle();
         currentDefaultAccount.putInt(KEY_DEFAULT_ACCOUNT_STATE,
-                DefaultAccountAndState.DEFAULT_ACCOUNT_STATE_LOCAL);
+                DefaultAccountAndState.DEFAULT_ACCOUNT_STATE_CLOUD);
+        currentDefaultAccount.putString(ContactsContract.Settings.ACCOUNT_NAME, TEST_ACCOUNT2.name);
+        currentDefaultAccount.putString(ContactsContract.Settings.ACCOUNT_TYPE, TEST_ACCOUNT2.type);
         when(mContentProviderClient.call(eq(QUERY_DEFAULT_ACCOUNT_FOR_NEW_CONTACTS_METHOD), any(),
                 any())).thenReturn(currentDefaultAccount);
         Bundle eligibleAccountBundle = new Bundle();
@@ -253,6 +256,14 @@ public class ContactsStorageSettingsTest {
                 "test@samsung.com");
         assertThat(setAccountBundle.getString(ContactsContract.Settings.ACCOUNT_TYPE)).isEqualTo(
                 "type2");
+
+        ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mContext).startActivity(intentCaptor.capture());
+        Intent moveContactsIntent = intentCaptor.getValue();
+        assertThat(moveContactsIntent.getAction()).isEqualTo(
+                ContactsContract.RawContacts.DefaultAccount.ACTION_MOVE_CONTACTS_TO_DEFAULT_ACCOUNT);
+        assertThat(moveContactsIntent.getPackage()).isEqualTo(
+                "com.android.providers.contacts");
     }
 
     @Test
@@ -296,6 +307,32 @@ public class ContactsStorageSettingsTest {
         assertThat(account1Preference.isChecked()).isFalse();
         assertThat(account2Preference.isChecked()).isFalse();
         assertThat(account3Preference.isChecked()).isTrue();
+    }
+
+    @Test
+    public void verifyAccountPreference_defaultAccountIsSimAccount_createSimAccountPreference()
+            throws Exception {
+        Bundle currentDefaultAccount = new Bundle();
+        currentDefaultAccount.putInt(KEY_DEFAULT_ACCOUNT_STATE,
+                DefaultAccountAndState.DEFAULT_ACCOUNT_STATE_SIM);
+        currentDefaultAccount.putString(ContactsContract.Settings.ACCOUNT_NAME, SIM_ACCOUNT.name);
+        currentDefaultAccount.putString(ContactsContract.Settings.ACCOUNT_TYPE, SIM_ACCOUNT.type);
+        when(mContentProviderClient.call(eq(QUERY_DEFAULT_ACCOUNT_FOR_NEW_CONTACTS_METHOD), any(),
+                any())).thenReturn(currentDefaultAccount);
+        Bundle eligibleAccountBundle = new Bundle();
+        eligibleAccountBundle.putParcelableArrayList(KEY_ELIGIBLE_DEFAULT_ACCOUNTS,
+                new ArrayList<>());
+        when(mContentProviderClient.call(eq(QUERY_ELIGIBLE_DEFAULT_ACCOUNTS_METHOD), any(),
+                any())).thenReturn(eligibleAccountBundle);
+
+        mContactsStorageSettings.refreshUI();
+
+        SelectorWithWidgetPreference simPreference = mScreen.findPreference(
+                String.valueOf(SIM_ACCOUNT.hashCode()));
+        assertThat(simPreference.getTitle()).isEqualTo("SIM");
+        assertThat(simPreference.getSummary()).isEqualTo("SIM");
+        assertThat(simPreference.getIcon()).isNotNull();
+        assertThat(simPreference.isChecked()).isTrue();
     }
 
     @Test
