@@ -421,11 +421,13 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<String> invisibleProfiles = List.of();
         if (Flags.enableBluetoothDeviceDetailsPolish()) {
-            mFormatter =
-                    FeatureFactory.getFeatureFactory()
-                            .getBluetoothFeatureProvider()
-                            .getDeviceDetailsFragmentFormatter(
-                                    requireContext(), this, mBluetoothAdapter, mCachedDevice);
+            if (mFormatter == null) {
+                mFormatter =
+                        FeatureFactory.getFeatureFactory()
+                                .getBluetoothFeatureProvider()
+                                .getDeviceDetailsFragmentFormatter(
+                                        requireContext(), this, mBluetoothAdapter, mCachedDevice);
+            }
             invisibleProfiles =
                     mFormatter.getInvisibleBluetoothProfiles(
                             FragmentTypeModel.DeviceDetailsMainFragment.INSTANCE);

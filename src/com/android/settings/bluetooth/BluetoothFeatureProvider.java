@@ -25,7 +25,6 @@ import android.media.Spatializer;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LifecycleCoroutineScope;
 import androidx.preference.Preference;
 
 import com.android.settings.SettingsPreferenceFragment;
@@ -34,12 +33,12 @@ import com.android.settings.bluetooth.ui.view.DeviceDetailsFragmentFormatter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepository;
 
+import kotlinx.coroutines.CoroutineScope;
+
 import java.util.List;
 import java.util.Set;
 
-/**
- * Provider for bluetooth related features.
- */
+/** Provider for bluetooth related features. */
 public interface BluetoothFeatureProvider {
 
     /**
@@ -86,26 +85,25 @@ public interface BluetoothFeatureProvider {
     /**
      * Gets the bluetooth profile preference keys which should be hidden in the device details page.
      *
-     * @param context         Context
+     * @param context Context
      * @param bluetoothDevice the bluetooth device
      * @return the profiles which should be hidden
      */
-    Set<String> getInvisibleProfilePreferenceKeys(
-            Context context, BluetoothDevice bluetoothDevice);
+    Set<String> getInvisibleProfilePreferenceKeys(Context context, BluetoothDevice bluetoothDevice);
 
     /** Gets DeviceSettingRepository. */
     @NonNull
     DeviceSettingRepository getDeviceSettingRepository(
             @NonNull Context context,
             @NonNull BluetoothAdapter bluetoothAdapter,
-            @NonNull LifecycleCoroutineScope scope);
+            @NonNull CoroutineScope scope);
 
     /** Gets spatial audio interactor. */
     @NonNull
     SpatialAudioInteractor getSpatialAudioInteractor(
             @NonNull Context context,
             @NonNull AudioManager audioManager,
-            @NonNull LifecycleCoroutineScope scope);
+            @NonNull CoroutineScope scope);
 
     /** Gets device details fragment layout formatter. */
     @NonNull
