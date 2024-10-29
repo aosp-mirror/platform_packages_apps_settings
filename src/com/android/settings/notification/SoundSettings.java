@@ -113,6 +113,14 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
         if (phoneRingTonePreference != null && openPhoneRingtonePicker) {
             onPreferenceTreeClick(phoneRingTonePreference);
         }
+        if (isCatalystEnabled()) {
+            for (String key : getPreferenceKeysInHierarchy()) {
+                Preference preference = findPreference(key);
+                if (preference instanceof VolumeSeekBarPreference) {
+                    ((VolumeSeekBarPreference) preference).setCallback(mVolumeCallback);
+                }
+            }
+        }
     }
 
     @Override
