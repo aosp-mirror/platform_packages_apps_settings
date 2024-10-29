@@ -51,6 +51,7 @@ import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
@@ -99,6 +100,7 @@ public class AudioSharingBluetoothDeviceUpdaterTest {
     @Mock private CachedBluetoothDeviceManager mCachedDeviceManager;
     @Mock private LocalBluetoothProfileManager mLocalBtProfileManager;
     @Mock private LocalBluetoothLeBroadcastAssistant mAssistant;
+    @Mock private LocalBluetoothLeBroadcast mBroadcast;
     @Mock private BluetoothLeBroadcastReceiveState mState;
 
     private Context mContext;
@@ -122,9 +124,7 @@ public class AudioSharingBluetoothDeviceUpdaterTest {
         when(mLocalBtManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
         when(mLocalBtManager.getProfileManager()).thenReturn(mLocalBtProfileManager);
         when(mLocalBtProfileManager.getLeAudioBroadcastAssistantProfile()).thenReturn(mAssistant);
-        List<Long> bisSyncState = new ArrayList<>();
-        bisSyncState.add(1L);
-        when(mState.getBisSyncState()).thenReturn(bisSyncState);
+        when(mLocalBtProfileManager.getLeAudioBroadcastProfile()).thenReturn(mBroadcast);
         Pair<Drawable, String> pairs = new Pair<>(mDrawable, TEST_DEVICE_NAME);
         doReturn(TEST_DEVICE_NAME).when(mCachedBluetoothDevice).getName();
         doReturn(mBluetoothDevice).when(mCachedBluetoothDevice).getDevice();
@@ -152,7 +152,7 @@ public class AudioSharingBluetoothDeviceUpdaterTest {
 
     @Test
     public void onProfileConnectionStateChanged_leaDeviceConnected_flagOff_removesPref() {
-        setupPreferenceMapWithDevice();
+        setupPreferenceMapWithDevice(false);
 
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         ArgumentCaptor<Preference> captor = ArgumentCaptor.forClass(Preference.class);
@@ -170,8 +170,46 @@ public class AudioSharingBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    public void onProfileConnectionStateChanged_leaDeviceConnected_noSource_removesPref() {
-        setupPreferenceMapWithDevice();
+    public void onProfileConnectionStateChanged_leaConnected_flagOff_hysteresisMode_removesPref() {
+        setupPreferenceMapWithDevice(true);
+
+        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        ArgumentCaptor<Preference> captor = ArgumentCaptor.forClass(Preference.class);
+
+        mDeviceUpdater.onProfileConnectionStateChanged(
+                mCachedBluetoothDevice,
+                BluetoothProfile.STATE_CONNECTED,
+                BluetoothProfile.LE_AUDIO);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mDevicePreferenceCallback).onDeviceRemoved(captor.capture());
+        assertThat(captor.getValue() instanceof BluetoothDevicePreference).isTrue();
+        assertThat(((BluetoothDevicePreference) captor.getValue()).getBluetoothDevice())
+                .isEqualTo(mCachedBluetoothDevice);
+    }
+
+    @Test
+    public void onProfileConnectionStateChanged_leaConnected_noSource_removesPref() {
+        setupPreferenceMapWithDevice(false);
+
+        when(mAssistant.getAllSources(mBluetoothDevice)).thenReturn(ImmutableList.of());
+        ArgumentCaptor<Preference> captor = ArgumentCaptor.forClass(Preference.class);
+
+        mDeviceUpdater.onProfileConnectionStateChanged(
+                mCachedBluetoothDevice,
+                BluetoothProfile.STATE_CONNECTED,
+                BluetoothProfile.LE_AUDIO);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mDevicePreferenceCallback).onDeviceRemoved(captor.capture());
+        assertThat(captor.getValue() instanceof BluetoothDevicePreference).isTrue();
+        assertThat(((BluetoothDevicePreference) captor.getValue()).getBluetoothDevice())
+                .isEqualTo(mCachedBluetoothDevice);
+    }
+
+    @Test
+    public void onProfileConnectionStateChanged_leaConnected_noSource_hysteresisMode_removesPref() {
+        setupPreferenceMapWithDevice(true);
 
         when(mAssistant.getAllSources(mBluetoothDevice)).thenReturn(ImmutableList.of());
         ArgumentCaptor<Preference> captor = ArgumentCaptor.forClass(Preference.class);
@@ -190,7 +228,7 @@ public class AudioSharingBluetoothDeviceUpdaterTest {
 
     @Test
     public void onProfileConnectionStateChanged_deviceIsNotInList_removesPref() {
-        setupPreferenceMapWithDevice();
+        setupPreferenceMapWithDevice(false);
 
         mCachedDevices.clear();
         when(mCachedDeviceManager.getCachedDevicesCopy()).thenReturn(mCachedDevices);
@@ -209,8 +247,28 @@ public class AudioSharingBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    public void onProfileConnectionStateChanged_leaDeviceDisconnected_removesPref() {
-        setupPreferenceMapWithDevice();
+    public void onProfileConnectionStateChanged_deviceIsNotInList_hysteresisMode_removesPref() {
+        setupPreferenceMapWithDevice(true);
+
+        mCachedDevices.clear();
+        when(mCachedDeviceManager.getCachedDevicesCopy()).thenReturn(mCachedDevices);
+        ArgumentCaptor<Preference> captor = ArgumentCaptor.forClass(Preference.class);
+
+        mDeviceUpdater.onProfileConnectionStateChanged(
+                mCachedBluetoothDevice,
+                BluetoothProfile.STATE_CONNECTED,
+                BluetoothProfile.LE_AUDIO);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mDevicePreferenceCallback).onDeviceRemoved(captor.capture());
+        assertThat(captor.getValue() instanceof BluetoothDevicePreference).isTrue();
+        assertThat(((BluetoothDevicePreference) captor.getValue()).getBluetoothDevice())
+                .isEqualTo(mCachedBluetoothDevice);
+    }
+
+    @Test
+    public void onProfileConnectionStateChanged_leaDisconnected_removesPref() {
+        setupPreferenceMapWithDevice(false);
 
         when(mDeviceUpdater.isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(false);
         ArgumentCaptor<Preference> captor = ArgumentCaptor.forClass(Preference.class);
@@ -228,8 +286,27 @@ public class AudioSharingBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    public void onProfileConnectionStateChanged_leaDeviceDisconnecting_removesPref() {
-        setupPreferenceMapWithDevice();
+    public void onProfileConnectionStateChanged_leaDisconnected_hysteresisMode_removesPref() {
+        setupPreferenceMapWithDevice(true);
+
+        when(mDeviceUpdater.isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(false);
+        ArgumentCaptor<Preference> captor = ArgumentCaptor.forClass(Preference.class);
+
+        mDeviceUpdater.onProfileConnectionStateChanged(
+                mCachedBluetoothDevice,
+                BluetoothProfile.STATE_DISCONNECTED,
+                BluetoothProfile.LE_AUDIO);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mDevicePreferenceCallback).onDeviceRemoved(captor.capture());
+        assertThat(captor.getValue() instanceof BluetoothDevicePreference).isTrue();
+        assertThat(((BluetoothDevicePreference) captor.getValue()).getBluetoothDevice())
+                .isEqualTo(mCachedBluetoothDevice);
+    }
+
+    @Test
+    public void onProfileConnectionStateChanged_leaDisconnecting_removesPref() {
+        setupPreferenceMapWithDevice(false);
         doReturn(false).when(mCachedBluetoothDevice).isConnectedLeAudioDevice();
         ArgumentCaptor<Preference> captor = ArgumentCaptor.forClass(Preference.class);
 
@@ -246,9 +323,38 @@ public class AudioSharingBluetoothDeviceUpdaterTest {
     }
 
     @Test
-    public void onProfileConnectionStateChanged_leaDeviceConnected_hasSource_addsPreference() {
+    public void onProfileConnectionStateChanged_leaDisconnecting_hysteresisMode_removesPref() {
+        setupPreferenceMapWithDevice(true);
+        doReturn(false).when(mCachedBluetoothDevice).isConnectedLeAudioDevice();
         ArgumentCaptor<Preference> captor = ArgumentCaptor.forClass(Preference.class);
-        setupPreferenceMapWithDevice();
+
+        mDeviceUpdater.onProfileConnectionStateChanged(
+                mCachedBluetoothDevice,
+                BluetoothProfile.STATE_CONNECTED,
+                BluetoothProfile.LE_AUDIO);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mDevicePreferenceCallback).onDeviceRemoved(captor.capture());
+        assertThat(captor.getValue() instanceof BluetoothDevicePreference).isTrue();
+        assertThat(((BluetoothDevicePreference) captor.getValue()).getBluetoothDevice())
+                .isEqualTo(mCachedBluetoothDevice);
+    }
+
+    @Test
+    public void onProfileConnectionStateChanged_leaConnected_hasSource_addsPref() {
+        ArgumentCaptor<Preference> captor = ArgumentCaptor.forClass(Preference.class);
+        setupPreferenceMapWithDevice(false);
+
+        verify(mDevicePreferenceCallback).onDeviceAdded(captor.capture());
+        assertThat(captor.getValue() instanceof BluetoothDevicePreference).isTrue();
+        assertThat(((BluetoothDevicePreference) captor.getValue()).getBluetoothDevice())
+                .isEqualTo(mCachedBluetoothDevice);
+    }
+
+    @Test
+    public void onProfileConnectionStateChanged_leaConnected_hasSource_hysteresisMode_addsPref() {
+        ArgumentCaptor<Preference> captor = ArgumentCaptor.forClass(Preference.class);
+        setupPreferenceMapWithDevice(true);
 
         verify(mDevicePreferenceCallback).onDeviceAdded(captor.capture());
         assertThat(captor.getValue() instanceof BluetoothDevicePreference).isTrue();
@@ -275,9 +381,19 @@ public class AudioSharingBluetoothDeviceUpdaterTest {
         verify(mDevicePreferenceCallback).onDeviceClick(preference);
     }
 
-    private void setupPreferenceMapWithDevice() {
+    private void setupPreferenceMapWithDevice(boolean hysteresisModeOn) {
         // Add device to preferenceMap
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        if (hysteresisModeOn) {
+            mSetFlagsRule.enableFlags(Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+            when(mBroadcast.getLatestBroadcastId()).thenReturn(1);
+            when(mState.getBroadcastId()).thenReturn(1);
+        } else {
+            mSetFlagsRule.disableFlags(Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+            List<Long> bisSyncState = new ArrayList<>();
+            bisSyncState.add(1L);
+            when(mState.getBisSyncState()).thenReturn(bisSyncState);
+        }
         when(mAssistant.getAllSources(mBluetoothDevice)).thenReturn(ImmutableList.of(mState));
         when(mDeviceUpdater.isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         doReturn(true).when(mCachedBluetoothDevice).isConnectedLeAudioDevice();

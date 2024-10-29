@@ -149,7 +149,7 @@ public class FingerprintSettingsFragmentTest {
         doReturn(true).when(mFingerprintManager).isHardwareDetected();
         doReturn(mVibrator).when(mContext).getSystemService(Vibrator.class);
         when(mBiometricManager.canAuthenticate(PRIMARY_USER_ID,
-                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
+                BiometricManager.Authenticators.IDENTITY_CHECK))
                 .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
     }
 
@@ -176,7 +176,7 @@ public class FingerprintSettingsFragmentTest {
     @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void testLaunchBiometricPromptForFingerprint() {
         when(mBiometricManager.canAuthenticate(PRIMARY_USER_ID,
-                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
+                BiometricManager.Authenticators.IDENTITY_CHECK))
                 .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
         doNothing().when(mFingerprintManager).generateChallenge(anyInt(), any());
         when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(true);

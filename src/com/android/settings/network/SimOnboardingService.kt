@@ -74,8 +74,11 @@ class SimOnboardingService {
         }
     var isEsimProfileEnabled: Boolean = false
         get() {
-            activeSubInfoList.stream().anyMatch { it.isEmbedded }
-            return false
+            return activeSubInfoList.stream().anyMatch { it.isEmbedded }
+        }
+    var isRemovableSimProfileEnabled: Boolean = false
+        get() {
+            return activeSubInfoList.stream().anyMatch { !it.isEmbedded }
         }
     var doesTargetSimActive = false
         get() {
@@ -288,8 +291,8 @@ class SimOnboardingService {
             Log.d(TAG, "Hardware does not support DSDS.")
             return false
         }
-        val isActiveSim = activeSubInfoList.isNotEmpty()
-        if (isMultipleEnabledProfilesSupported && isActiveSim) {
+        val anyActiveSim = activeSubInfoList.isNotEmpty()
+        if (isMultipleEnabledProfilesSupported && anyActiveSim) {
             Log.d(TAG,
                 "Device supports MEP and eSIM operation and eSIM profile is enabled."
                         + " DSDS condition satisfied."
@@ -297,15 +300,13 @@ class SimOnboardingService {
             return true
         }
 
-        if (doesTargetSimHaveEsimOperation) {
-            if (UiccSlotRepository(telephonyManager).anyRemovablePhysicalSimEnabled()) {
-                Log.d(
-                    TAG,
-                    "eSIM operation and removable PSIM is enabled. DSDS condition satisfied."
-                )
-                return true
-            }
-        } else if (isEsimProfileEnabled) {
+        if (doesTargetSimHaveEsimOperation && isRemovableSimProfileEnabled) {
+            Log.d(TAG,
+                "eSIM operation and removable PSIM is enabled. DSDS condition satisfied."
+            )
+            return true
+        }
+        if (!doesTargetSimHaveEsimOperation && isEsimProfileEnabled) {
             Log.d(TAG,
                 "Removable SIM operation and eSIM profile is enabled. DSDS condition"
                         + " satisfied."

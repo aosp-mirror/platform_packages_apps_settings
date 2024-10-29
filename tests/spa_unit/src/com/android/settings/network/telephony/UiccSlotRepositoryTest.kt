@@ -44,7 +44,7 @@ class UiccSlotRepositoryTest {
                 )
         }
 
-        val result = repository.anyRemovablePhysicalSimEnabled()
+        val result = repository.anyRemovablePhysicalSimSlotActiveAndInserted()
 
         assertThat(result).isFalse()
     }
@@ -61,7 +61,7 @@ class UiccSlotRepositoryTest {
                 )
         }
 
-        val result = repository.anyRemovablePhysicalSimEnabled()
+        val result = repository.anyRemovablePhysicalSimSlotActiveAndInserted()
 
         assertThat(result).isFalse()
     }
@@ -78,7 +78,7 @@ class UiccSlotRepositoryTest {
                 )
         }
 
-        val result = repository.anyRemovablePhysicalSimEnabled()
+        val result = repository.anyRemovablePhysicalSimSlotActiveAndInserted()
 
         assertThat(result).isTrue()
     }
@@ -95,7 +95,7 @@ class UiccSlotRepositoryTest {
                 )
         }
 
-        val result = repository.anyRemovablePhysicalSimEnabled()
+        val result = repository.anyRemovablePhysicalSimSlotActiveAndInserted()
 
         assertThat(result).isTrue()
     }
@@ -116,7 +116,7 @@ class UiccSlotRepositoryTest {
                 )
         }
 
-        val result = repository.anyRemovablePhysicalSimEnabled()
+        val result = repository.anyRemovablePhysicalSimSlotActiveAndInserted()
 
         assertThat(result).isFalse()
     }
@@ -137,13 +137,13 @@ class UiccSlotRepositoryTest {
                 )
         }
 
-        val result = repository.anyRemovablePhysicalSimEnabled()
+        val result = repository.anyRemovablePhysicalSimSlotActiveAndInserted()
 
         assertThat(result).isTrue()
     }
 
     @Test
-    fun anyRemovablePhysicalSimEnabled_activePsim_returnsTrue() {
+    fun anyRemovablePhysicalSimSlotActiveAndInserted_activePsim_returnsTrue() {
         mockTelephonyManager.stub {
             on { uiccSlotsInfo } doReturn
                 arrayOf(
@@ -152,13 +152,13 @@ class UiccSlotRepositoryTest {
                 )
         }
 
-        val result = repository.anyRemovablePhysicalSimEnabled()
+        val result = repository.anyRemovablePhysicalSimSlotActiveAndInserted()
 
         assertThat(result).isTrue()
     }
 
     @Test
-    fun anyRemovablePhysicalSimEnabled_inactivePsim_returnsFalse() {
+    fun anyRemovablePhysicalSimSlotActiveAndInserted_inactivePsim_returnsFalse() {
         mockTelephonyManager.stub {
             on { uiccSlotsInfo } doReturn
                 arrayOf(
@@ -167,13 +167,13 @@ class UiccSlotRepositoryTest {
                 )
         }
 
-        val result = repository.anyRemovablePhysicalSimEnabled()
+        val result = repository.anyRemovablePhysicalSimSlotActiveAndInserted()
 
         assertThat(result).isFalse()
     }
 
     @Test
-    fun anyRemovablePhysicalSimEnabled_activeEsimAndActivePsim_returnsTrue() {
+    fun anyRemovablePhysicalSimSlotActiveAndInserted_activeEsimAndActivePsim_returnsTrue() {
         mockTelephonyManager.stub {
             on { uiccSlotsInfo } doReturn
                 arrayOf(
@@ -184,13 +184,13 @@ class UiccSlotRepositoryTest {
                 )
         }
 
-        val result = repository.anyRemovablePhysicalSimEnabled()
+        val result = repository.anyRemovablePhysicalSimSlotActiveAndInserted()
 
         assertThat(result).isTrue()
     }
 
     @Test
-    fun anyRemovablePhysicalSimEnabled_activeEsimAndInactivePsim_returnsFalse() {
+    fun anyRemovablePhysicalSimSlotActiveAndInserted_activeEsimAndInactivePsim_returnsFalse() {
         mockTelephonyManager.stub {
             on { uiccSlotsInfo } doReturn
                 arrayOf(
@@ -201,16 +201,16 @@ class UiccSlotRepositoryTest {
                 )
         }
 
-        val result = repository.anyRemovablePhysicalSimEnabled()
+        val result = repository.anyRemovablePhysicalSimSlotActiveAndInserted()
 
         assertThat(result).isFalse()
     }
 
     @Test
-    fun anyRemovablePhysicalSimEnabled_uiccSlotInfoIsNull_returnsFalse() {
+    fun anyRemovablePhysicalSimSlotActiveAndInserted_uiccSlotInfoIsNull_returnsFalse() {
         mockTelephonyManager.stub { on { uiccSlotsInfo } doReturn arrayOf(null) }
 
-        val result = repository.anyRemovablePhysicalSimEnabled()
+        val result = repository.anyRemovablePhysicalSimSlotActiveAndInserted()
 
         assertThat(result).isFalse()
     }
