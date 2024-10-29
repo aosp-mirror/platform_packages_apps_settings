@@ -123,6 +123,14 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                         }
                     }
                 }
+
+                @Override
+                public void onDeviceBondStateChanged(
+                        @NonNull CachedBluetoothDevice cachedDevice, int bondState) {
+                    if (cachedDevice.equals(mCachedDevice)) {
+                        finishFragmentIfNecessary();
+                    }
+                }
             };
 
     private final BluetoothAdapter.OnMetadataChangedListener mExtraControlMetadataListener =
