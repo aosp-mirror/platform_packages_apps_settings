@@ -149,8 +149,8 @@ public class MainClearTest {
         doReturn(mMockActivity).when(mMainClear).getActivity();
         when(mMockActivity.getSystemService(BiometricManager.class)).thenReturn(mBiometricManager);
         when(mBiometricManager.canAuthenticate(anyInt(),
-                eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
-                .thenReturn(BiometricManager.BIOMETRIC_ERROR_MANDATORY_NOT_ACTIVE);
+                eq(BiometricManager.Authenticators.IDENTITY_CHECK)))
+                .thenReturn(BiometricManager.BIOMETRIC_ERROR_IDENTITY_CHECK_NOT_ACTIVE);
     }
 
     @After
@@ -379,7 +379,7 @@ public class MainClearTest {
         when(mMockActivity.getSystemService(BiometricManager.class)).thenReturn(mBiometricManager);
         when(mResources.getString(anyInt())).thenReturn(TEST_ACCOUNT_NAME);
         when(mBiometricManager.canAuthenticate(anyInt(),
-                eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
+                eq(BiometricManager.Authenticators.IDENTITY_CHECK)))
                 .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
         doReturn(true).when(mMainClear).isValidRequestCode(eq(MainClear.KEYGUARD_REQUEST));
         doNothing().when(mMainClear).startActivityForResult(any(), anyInt());
@@ -406,7 +406,7 @@ public class MainClearTest {
         when(mMockActivity.getSystemService(BiometricManager.class)).thenReturn(mBiometricManager);
         when(mResources.getString(anyInt())).thenReturn(TEST_ACCOUNT_NAME);
         when(mBiometricManager.canAuthenticate(anyInt(),
-                eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
+                eq(BiometricManager.Authenticators.IDENTITY_CHECK)))
                 .thenReturn(BiometricManager.BIOMETRIC_ERROR_LOCKOUT);
         doReturn(true).when(mMainClear).isValidRequestCode(eq(MainClear.KEYGUARD_REQUEST));
         doNothing().when(mMainClear).startActivityForResult(any(), anyInt());
