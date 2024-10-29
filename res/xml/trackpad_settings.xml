@@ -55,6 +55,13 @@
         settings:controller="com.android.settings.inputmethod.TrackpadTapDraggingPreferenceController"
         android:order="35"/>
 
+    <Preference
+        android:fragment="com.android.settings.inputmethod.TouchpadThreeFingerTapFragment"
+        android:key="three_finger_tap"
+        android:title="@string/three_finger_tap_preference_title"
+        settings:controller="com.android.settings.inputmethod.TouchpadThreeFingerTapPreferenceController"
+        android:order="37"/>
+
     <com.android.settings.widget.SeekBarPreference
         android:key="trackpad_pointer_speed"
         android:title="@string/trackpad_pointer_speed"
