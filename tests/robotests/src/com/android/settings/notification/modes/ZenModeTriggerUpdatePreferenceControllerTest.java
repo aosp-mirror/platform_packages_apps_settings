@@ -44,6 +44,8 @@ import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.SystemZenRules;
 import android.service.notification.ZenModeConfig;
+import android.text.Spanned;
+import android.text.style.TtsSpan;
 import android.widget.TextView;
 
 import androidx.preference.PreferenceManager;
@@ -293,7 +295,14 @@ public class ZenModeTriggerUpdatePreferenceControllerTest {
 
         assertThat(mPreference.isVisible()).isTrue();
         assertThat(mPreference.getTitle()).isEqualTo("1:00 AM - 3:00 PM");
-        assertThat(mPreference.getSummary()).isEqualTo("Mon - Tue, Thu");
+        Spanned summary = (Spanned) mPreference.getSummary();
+        assertThat(summary.toString()).isEqualTo("Mon - Tue, Thu");
+        TtsSpan[] ttsSpans = summary.getSpans(0, summary.length(), TtsSpan.class);
+        assertThat(ttsSpans).hasLength(1);
+        assertThat(ttsSpans[0].getType()).isEqualTo(TtsSpan.TYPE_TEXT);
+        assertThat(ttsSpans[0].getArgs().getString(TtsSpan.ARG_TEXT)).isEqualTo(
+                "Monday to Tuesday, Thursday");
+
         // Destination as written into the intent by SubSettingLauncher
         assertThat(
                 mPreference.getIntent().getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
