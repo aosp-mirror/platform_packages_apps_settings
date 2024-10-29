@@ -231,7 +231,7 @@ public class HighlightablePreferenceGroupAdapterTest {
         assertThat(mAdapter.mFadeInAnimated).isTrue();
         assertThat(mViewHolder.itemView.getBackground()).isInstanceOf(ColorDrawable.class);
         assertThat(mViewHolder.itemView.getTag(R.id.preference_highlighted)).isEqualTo(true);
-        verify(mAdapter).requestRemoveHighlightDelayed(mViewHolder);
+        verify(mAdapter).requestRemoveHighlightDelayed(mViewHolder, 10);
     }
 
     @Test
@@ -256,14 +256,14 @@ public class HighlightablePreferenceGroupAdapterTest {
         // through animation.
         assertThat(mAdapter.mFadeInAnimated).isTrue();
         // remove highlight should be requested.
-        verify(mAdapter).requestRemoveHighlightDelayed(mViewHolder);
+        verify(mAdapter).requestRemoveHighlightDelayed(mViewHolder, 10);
 
         ReflectionHelpers.setField(mAdapter, "mHighlightPosition", 10);
         mAdapter.updateBackground(mViewHolder, 10);
         // only sets background color once - if it's animation this would be called many times
-        verify(mViewHolder.itemView).setBackgroundColor(mAdapter.mHighlightColor);
+        verify(mViewHolder.itemView).setBackgroundResource(mAdapter.mHighlightBackgroundRes);
         // remove highlight should be requested.
-        verify(mAdapter, times(2)).requestRemoveHighlightDelayed(mViewHolder);
+        verify(mAdapter, times(2)).requestRemoveHighlightDelayed(mViewHolder, 10);
     }
 
     @Test
@@ -273,7 +273,8 @@ public class HighlightablePreferenceGroupAdapterTest {
 
         mAdapter.updateBackground(mViewHolder, 0);
 
-        assertThat(mViewHolder.itemView.getBackground()).isNotInstanceOf(ColorDrawable.class);
+        assertThat(mViewHolder.itemView.getBackground())
+                .isNotEqualTo(mAdapter.mHighlightBackgroundRes);
         assertThat(mViewHolder.itemView.getTag(R.id.preference_highlighted)).isEqualTo(false);
     }
 }
