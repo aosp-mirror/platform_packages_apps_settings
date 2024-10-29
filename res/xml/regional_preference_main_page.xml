@@ -20,41 +20,46 @@
     android:key="regional_preferences">
 
     <com.android.settingslib.widget.TopIntroPreference
+        android:key="regional_pref_intro"
         android:title="@string/regional_preferences_main_page_sub_title"
-        android:persistent="false" />
+        android:persistent="false"/>
 
-    <Preference
-        android:key="key_temperature_unit"
-        android:title="@string/temperature_preferences_title"
-        android:summary="@string/default_string_of_regional_preference"
-        settings:controller="com.android.settings.regionalpreferences.TemperatureUnitController"
-        settings:fragment="com.android.settings.regionalpreferences.TemperatureUnitFragment">
-        <extra
-            android:name="arg_key_regional_preference"
-            android:value="mu" />
-    </Preference>
+    <PreferenceCategory
+        android:key="regional_preferences_category"
+        android:layout="@layout/settingslib_preference_category_no_title">
+        <Preference
+            android:key="key_temperature_unit"
+            android:title="@string/temperature_preferences_title"
+            android:summary="@string/default_string_of_regional_preference"
+            settings:controller="com.android.settings.regionalpreferences.TemperatureUnitController"
+            settings:fragment="com.android.settings.regionalpreferences.TemperatureUnitFragment">
+            <extra
+                android:name="arg_key_regional_preference"
+                android:value="mu"/>
+        </Preference>
 
-    <Preference
-        android:key="key_first_day_of_week"
-        android:title="@string/first_day_of_week_preferences_title"
-        android:summary="@string/default_string_of_regional_preference"
-        settings:controller="com.android.settings.regionalpreferences.FirstDayOfWeekController"
-        settings:fragment="com.android.settings.regionalpreferences.FirstDayOfWeekItemFragment">
-        <extra
-            android:name="arg_key_regional_preference"
-            android:value="fw" />
-    </Preference>
+        <Preference
+            android:key="key_first_day_of_week"
+            android:title="@string/first_day_of_week_preferences_title"
+            android:summary="@string/default_string_of_regional_preference"
+            settings:controller="com.android.settings.regionalpreferences.FirstDayOfWeekController"
+            settings:fragment="com.android.settings.regionalpreferences.FirstDayOfWeekItemFragment">
+            <extra
+                android:name="arg_key_regional_preference"
+                android:value="fw"/>
+        </Preference>
 
-    <Preference
-        android:key="key_numbering_system"
-        android:title="@string/numbers_preferences_title"
-        android:summary="@string/default_string_of_regional_preference"
-        settings:controller="com.android.settings.regionalpreferences.NumberingSystemController"
-        settings:fragment="com.android.settings.regionalpreferences.NumberingPreferencesFragment">
-        <extra
-            android:name="arg_key_regional_preference"
-            android:value="arg_value_language_select" />
-    </Preference>
+        <Preference
+            android:key="key_numbering_system"
+            android:title="@string/numbers_preferences_title"
+            android:summary="@string/default_string_of_regional_preference"
+            settings:controller="com.android.settings.regionalpreferences.NumberingSystemController"
+            settings:fragment="com.android.settings.regionalpreferences.NumberingPreferencesFragment">
+            <extra
+                android:name="arg_key_regional_preference"
+                android:value="arg_value_language_select"/>
+        </Preference>
+    </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="regional_pref_footer"
