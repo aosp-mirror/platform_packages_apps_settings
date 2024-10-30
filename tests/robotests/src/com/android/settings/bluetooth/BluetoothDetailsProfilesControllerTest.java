@@ -656,7 +656,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
 
     private void initController(List<String> invisibleProfiles) {
         mController = new BluetoothDetailsProfilesController(mContext, mFragment, mLocalManager,
-                mCachedDevice, mLifecycle, invisibleProfiles);
+                mCachedDevice, mLifecycle, invisibleProfiles, true);
         mProfiles.setKey(mController.getPreferenceKey());
         mController.mProfilesContainer = mProfiles;
         mScreen.removeAll();

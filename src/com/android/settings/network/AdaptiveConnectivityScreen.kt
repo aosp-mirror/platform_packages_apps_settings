@@ -35,7 +35,9 @@ class AdaptiveConnectivityScreen : PreferenceScreenCreator {
 
     override fun fragmentClass() = AdaptiveConnectivitySettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {
+        +AdaptiveConnectivityTogglePreference()
+    }
 
     override fun hasCompleteHierarchy() = false
 
