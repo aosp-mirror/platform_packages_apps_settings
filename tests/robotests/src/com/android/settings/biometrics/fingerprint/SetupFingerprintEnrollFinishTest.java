@@ -35,7 +35,6 @@ import com.google.android.setupcompat.PartnerCustomizationLayout;
 import com.google.android.setupcompat.template.FooterBarMixin;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -116,7 +115,6 @@ public class SetupFingerprintEnrollFinishTest {
     }
 
     @Test
-    @Ignore("b/295325503")
     public void onActivityResult_fingerprintCountIsOne_fingerprintSuggestionActivityEnabled() {
         Shadows.shadowOf((FingerprintManager) mFingerprintManager).setDefaultFingerprints(1);
 
@@ -137,8 +135,7 @@ public class SetupFingerprintEnrollFinishTest {
     }
 
     @Test
-    @Ignore("b/295325503")
-    public void clickNext_fingerprintCountIsOne_fngerprintSuggestionActivityEnabled() {
+    public void clickNext_fingerprintCountIsOne_fingerprintSuggestionActivityEnabled() {
         Shadows.shadowOf((FingerprintManager) mFingerprintManager).setDefaultFingerprints(1);
 
         mLayout.getMixin(FooterBarMixin.class).getPrimaryButtonView().performClick();
@@ -158,8 +155,7 @@ public class SetupFingerprintEnrollFinishTest {
     }
 
     @Test
-    @Ignore("b/295325503")
-    public void onBackPressed_fingerprintCountIsOne_fngerprintSuggestionActivityEnabled() {
+    public void onBackPressed_fingerprintCountIsOne_fingerprintSuggestionActivityEnabled() {
         Shadows.shadowOf((FingerprintManager) mFingerprintManager).setDefaultFingerprints(1);
 
         mActivity.onBackPressed();
