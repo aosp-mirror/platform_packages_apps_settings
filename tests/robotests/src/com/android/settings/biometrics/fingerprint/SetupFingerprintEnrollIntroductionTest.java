@@ -154,7 +154,7 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
+    @Ignore("b/295325503 expected: RESULT_SKIP, but was 2")
     public void testKeyguardNotSecure_shouldFinishWithSetupSkipDialogResultSkip() {
         getShadowKeyguardManager().setIsKeyguardSecure(false);
 
@@ -174,7 +174,6 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
     public void testKeyguardSecure_shouldFinishWithFingerprintResultSkip() {
         getShadowKeyguardManager().setIsKeyguardSecure(true);
 
@@ -194,7 +193,7 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
+    @Ignore("b/295325503 expected not to be: null")
     public void testBackKeyPress_shouldSetIntentDataIfLockScreenAdded() {
         getShadowKeyguardManager().setIsKeyguardSecure(false);
 
@@ -208,7 +207,6 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
     public void testBackKeyPress_shouldNotSetIntentDataIfLockScreenPresentBeforeLaunch() {
         getShadowKeyguardManager().setIsKeyguardSecure(true);
 
@@ -221,7 +219,7 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
+    @Ignore("b/295325503 expected not to be: null")
     public void testCancelClicked_shouldSetIntentDataIfLockScreenAdded() {
         getShadowKeyguardManager().setIsKeyguardSecure(false);
 
@@ -237,7 +235,6 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
     public void testCancelClicked_shouldNotSetIntentDataIfLockScreenPresentBeforeLaunch() {
         getShadowKeyguardManager().setIsKeyguardSecure(true);
 
@@ -251,7 +248,6 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
     public void testOnResultFromFindSensor_shouldNotSetIntentDataIfLockScreenPresentBeforeLaunch() {
         getShadowKeyguardManager().setIsKeyguardSecure(true);
         SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
@@ -262,7 +258,6 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
     public void testOnResultFromFindSensor_shouldSetIntentDataIfLockScreenAdded() {
         getShadowKeyguardManager().setIsKeyguardSecure(false);
         SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
@@ -273,7 +268,6 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
     public void testOnResultFromFindSensor_shouldNotSetIntentDataIfLockScreenNotAdded() {
         getShadowKeyguardManager().setIsKeyguardSecure(false);
         SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
@@ -284,7 +278,6 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
     public void testLockPattern() {
         ShadowStorageManager.setIsFileEncrypted(false);
 

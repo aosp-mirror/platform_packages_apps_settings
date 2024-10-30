@@ -1516,13 +1516,13 @@ public final class Utils extends com.android.settingslib.Utils {
             final UserManager userManager = context.getSystemService(
                     UserManager.class);
             final int status = biometricManager.canAuthenticate(getEffectiveUserId(
-                    userManager, userId), BiometricManager.Authenticators.MANDATORY_BIOMETRICS);
+                    userManager, userId), BiometricManager.Authenticators.IDENTITY_CHECK);
             switch(status) {
                 case BiometricManager.BIOMETRIC_SUCCESS:
                     return BiometricStatus.OK;
                 case BiometricManager.BIOMETRIC_ERROR_LOCKOUT:
                     return BiometricStatus.LOCKOUT;
-                case BiometricManager.BIOMETRIC_ERROR_MANDATORY_NOT_ACTIVE:
+                case BiometricManager.BIOMETRIC_ERROR_IDENTITY_CHECK_NOT_ACTIVE:
                 case BiometricManager.BIOMETRIC_ERROR_NOT_ENABLED_FOR_APPS:
                     return BiometricStatus.NOT_ACTIVE;
                 default:
@@ -1582,7 +1582,7 @@ public final class Utils extends com.android.settingslib.Utils {
         final Intent intent = new Intent();
         if (android.hardware.biometrics.Flags.mandatoryBiometrics()) {
             intent.putExtra(BIOMETRIC_PROMPT_AUTHENTICATORS,
-                    BiometricManager.Authenticators.MANDATORY_BIOMETRICS);
+                    BiometricManager.Authenticators.IDENTITY_CHECK);
         }
         intent.putExtra(BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT,
                 resources.getString(R.string.cancel));

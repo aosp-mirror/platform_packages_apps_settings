@@ -19,11 +19,10 @@ package com.android.settings.bluetooth.ui.view
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
-import android.media.AudioManager
 import android.os.Bundle
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -33,14 +32,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.SettingsPreferenceFragment
@@ -52,7 +49,6 @@ import com.android.settings.bluetooth.ui.model.FragmentTypeModel
 import com.android.settings.bluetooth.ui.view.DeviceDetailsMoreSettingsFragment.Companion.KEY_DEVICE_ADDRESS
 import com.android.settings.bluetooth.ui.viewmodel.BluetoothDeviceDetailsViewModel
 import com.android.settings.core.SubSettingLauncher
-import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.spa.preference.ComposePreference
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingActionModel
@@ -97,29 +93,17 @@ interface DeviceDetailsFragmentFormatter {
 class DeviceDetailsFragmentFormatterImpl(
     private val context: Context,
     private val fragment: SettingsPreferenceFragment,
-    bluetoothAdapter: BluetoothAdapter,
+    private val bluetoothAdapter: BluetoothAdapter,
     private val cachedDevice: CachedBluetoothDevice,
     private val backgroundCoroutineContext: CoroutineContext,
 ) : DeviceDetailsFragmentFormatter {
-    private val repository =
-        featureFactory.bluetoothFeatureProvider.getDeviceSettingRepository(
-            fragment.requireActivity().application,
-            bluetoothAdapter,
-            fragment.lifecycleScope,
-        )
-    private val spatialAudioInteractor =
-        featureFactory.bluetoothFeatureProvider.getSpatialAudioInteractor(
-            fragment.requireActivity().application,
-            context.getSystemService(AudioManager::class.java),
-            fragment.lifecycleScope,
-        )
+
     private val viewModel: BluetoothDeviceDetailsViewModel =
         ViewModelProvider(
                 fragment,
                 BluetoothDeviceDetailsViewModel.Factory(
                     fragment.requireActivity().application,
-                    repository,
-                    spatialAudioInteractor,
+                    bluetoothAdapter,
                     cachedDevice,
                     backgroundCoroutineContext,
                 ),
@@ -224,8 +208,8 @@ class DeviceDetailsFragmentFormatterImpl(
         val settings = contents
         AnimatedVisibility(
             visible = settings.isNotEmpty(),
-            enter = expandVertically(expandFrom = Alignment.Top),
-            exit = shrinkVertically(shrinkTowards = Alignment.Top),
+            enter = fadeIn(),
+            exit = fadeOut(),
         ) {
             Box {
                 Box(
