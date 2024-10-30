@@ -377,7 +377,14 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 setBiometricPromptPropertiesForPrivateProfile(promptInfo);
                 showBiometricPrompt(promptInfo, effectiveUserId);
                 launchedBiometric = true;
+            } else if (Flags.privateSpaceBp()) {
+                promptInfo.setAuthenticators(BiometricManager.Authenticators.DEVICE_CREDENTIAL);
+                setBiometricPromptPropertiesForPrivateProfile(promptInfo);
+                showBiometricPrompt(promptInfo, mUserId);
+                launchedBiometric = true;
             } else {
+                // TODO(b/376328272): Remove custom private space behavior
+                mDetails = Utils.getConfirmCredentialStringForUser(this, mUserId, credentialType);
                 showConfirmCredentials();
                 launchedCDC = true;
             }
