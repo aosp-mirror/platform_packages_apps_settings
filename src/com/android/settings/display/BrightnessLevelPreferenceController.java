@@ -57,6 +57,7 @@ import java.text.NumberFormat;
 /**
  * The top-level preference controller that updates the adaptive brightness level.
  */
+// LINT.IfChange
 public class BrightnessLevelPreferenceController extends BasePreferenceController implements
         PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
     private static final Uri BRIGHTNESS_ADJ_URI;
@@ -187,3 +188,4 @@ public class BrightnessLevelPreferenceController extends BasePreferenceControlle
         return (value - min) / (max - min);
     }
 }
+// LINT.ThenChange(BrightnessLevelRestrictedPreference.kt)
