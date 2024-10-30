@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
@@ -45,6 +47,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.widget.HighlightablePreferenceGroupAdapter;
 import com.android.settings.widget.LoadingViewController;
@@ -367,9 +370,13 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     @Override
     protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
         final Bundle arguments = getArguments();
-        mAdapter = new HighlightablePreferenceGroupAdapter(preferenceScreen,
-                arguments == null
-                        ? null : arguments.getString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY),
+        String key = arguments == null ? null : arguments.getString(EXTRA_FRAGMENT_ARG_KEY);
+        if (Flags.catalyst() && key == null) {
+            Activity activity = getActivity();
+            Intent intent = activity != null ? activity.getIntent() : null;
+            key = intent != null ? intent.getStringExtra(EXTRA_FRAGMENT_ARG_KEY) : null;
+        }
+        mAdapter = new HighlightablePreferenceGroupAdapter(preferenceScreen, key,
                 mPreferenceHighlighted);
         return mAdapter;
     }

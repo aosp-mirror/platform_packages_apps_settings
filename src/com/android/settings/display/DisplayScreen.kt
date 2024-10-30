@@ -18,10 +18,13 @@ package com.android.settings.display
 import android.content.Context
 import com.android.settings.DisplaySettings
 import com.android.settings.R
+import com.android.settings.Settings.DisplaySettingsActivity
 import com.android.settings.display.darkmode.DarkModeScreen
 import com.android.settings.flags.Flags
+import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceIconProvider
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
@@ -51,6 +54,9 @@ class DisplayScreen :
         +DarkModeScreen.KEY
         +PeakRefreshRateSwitchPreference()
     }
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        makeLaunchIntent(context, DisplaySettingsActivity::class.java, metadata?.key)
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_top_level_display)
