@@ -38,11 +38,8 @@ import android.os.Build;
 import android.os.SystemConfigManager;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
-import android.webkit.Flags;
 
 import com.android.settings.testutils.ApplicationTestUtils;
 import com.android.settings.webview.WebViewUpdateServiceWrapper;
@@ -373,23 +370,12 @@ public final class ApplicationFeatureProviderImplTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_UPDATE_SERVICE_V2)
     public void getKeepEnabledPackages_shouldContainWebViewPackage() {
         final String testWebViewPackageName = "com.android.webview";
         when(mWebViewUpdateServiceWrapper.getDefaultWebViewPackageName())
                 .thenReturn(testWebViewPackageName);
         final Set<String> allowlist = mProvider.getKeepEnabledPackages();
         assertThat(allowlist).contains(testWebViewPackageName);
-    }
-
-    @Test
-    @RequiresFlagsDisabled(Flags.FLAG_UPDATE_SERVICE_V2)
-    public void getKeepEnabledPackages_shouldNotContainWebViewPackageIfFlagDisabled() {
-        final String testWebViewPackageName = "com.android.webview";
-        when(mWebViewUpdateServiceWrapper.getDefaultWebViewPackageName())
-                .thenReturn(testWebViewPackageName);
-        final Set<String> allowlist = mProvider.getKeepEnabledPackages();
-        assertThat(allowlist).doesNotContain(testWebViewPackageName);
     }
 
     @Test
