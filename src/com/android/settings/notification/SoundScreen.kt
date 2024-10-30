@@ -49,8 +49,8 @@ class SoundScreen : PreferenceScreenCreator, PreferenceIconProvider {
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(this) {
-            +CallVolumePreference()
-            +DialPadTonePreference()
+            +CallVolumePreference() order -170
+            +DialPadTonePreference() order -50
         }
 
     companion object {

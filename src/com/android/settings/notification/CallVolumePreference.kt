@@ -52,8 +52,6 @@ open class CallVolumePreference :
 
     override fun getIcon(context: Context) = R.drawable.ic_local_phone_24_lib
 
-    override fun order(context: Context) = -170
-
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_call_volume) &&
                 !createAudioHelper(context).isSingleVolume()
