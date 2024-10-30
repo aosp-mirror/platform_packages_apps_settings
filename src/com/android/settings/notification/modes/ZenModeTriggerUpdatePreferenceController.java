@@ -40,6 +40,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
@@ -108,7 +109,9 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
                     tryParseScheduleConditionId(mode.getRule().getConditionId());
             if (schedule != null) {
                 preference.setTitle(SystemZenRules.getTimeSummary(mContext, schedule));
-                preference.setSummary(SystemZenRules.getShortDaysSummary(mContext, schedule));
+                preference.setSummary(Utils.createAccessibleSequence(
+                        SystemZenRules.getDaysOfWeekShort(mContext, schedule),
+                        SystemZenRules.getDaysOfWeekFull(mContext, schedule)));
             } else {
                 // Fallback, but shouldn't happen.
                 Log.wtf(TAG, "SCHEDULE_TIME mode without schedule: " + mode);

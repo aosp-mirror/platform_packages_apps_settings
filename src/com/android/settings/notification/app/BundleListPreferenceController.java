@@ -91,14 +91,27 @@ public class BundleListPreferenceController extends NotificationPreferenceContro
     public void updateState(Preference preference) {
         PreferenceCategory category = (PreferenceCategory) preference;
 
-        createOrUpdatePrefForChannel(category,
-                mBackend.getChannel(mAppRow.pkg, mAppRow.uid, PROMOTIONS_ID));
-        createOrUpdatePrefForChannel(category,
-                mBackend.getChannel(mAppRow.pkg, mAppRow.uid, RECS_ID));
-        createOrUpdatePrefForChannel(category,
-                mBackend.getChannel(mAppRow.pkg, mAppRow.uid, SOCIAL_MEDIA_ID));
-        createOrUpdatePrefForChannel(category,
-                mBackend.getChannel(mAppRow.pkg, mAppRow.uid, NEWS_ID));
+        NotificationChannel promos = mBackend.getChannel(mAppRow.pkg, mAppRow.uid, PROMOTIONS_ID);
+        if (promos != null) {
+            createOrUpdatePrefForChannel(category, promos);
+        }
+        NotificationChannel recs = mBackend.getChannel(mAppRow.pkg, mAppRow.uid, RECS_ID);
+        if (recs != null) {
+            createOrUpdatePrefForChannel(category, recs);
+        }
+        NotificationChannel social = mBackend.getChannel(mAppRow.pkg, mAppRow.uid, SOCIAL_MEDIA_ID);
+        if (social != null) {
+            createOrUpdatePrefForChannel(category, social);
+        }
+        NotificationChannel news = mBackend.getChannel(mAppRow.pkg, mAppRow.uid, NEWS_ID);
+        if (news != null) {
+            createOrUpdatePrefForChannel(category, news);
+        }
+
+        int preferenceCount = ((PreferenceGroup) preference).getPreferenceCount();
+        if (preferenceCount == 0) {
+            preference.setVisible(false);
+        }
     }
 
     @NonNull
@@ -167,5 +180,4 @@ public class BundleListPreferenceController extends NotificationPreferenceContro
         icon.setTintList(Utils.getColorAccent(mContext));
         return icon;
     }
-
 }
