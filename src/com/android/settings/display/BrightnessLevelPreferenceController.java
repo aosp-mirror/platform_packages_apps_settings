@@ -20,7 +20,6 @@ import static com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MAX;
 import static com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MIN;
 import static com.android.settingslib.display.BrightnessUtils.convertLinearToGammaFloat;
 
-import android.annotation.Nullable;
 import android.app.ActivityOptions;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -37,12 +36,13 @@ import android.os.UserManager;
 import android.provider.Settings.System;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.accessibility.Flags;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SettingsBaseActivity;
@@ -54,18 +54,17 @@ import com.android.settingslib.transition.SettingsTransitionHelper;
 
 import java.text.NumberFormat;
 
+/**
+ * The top-level preference controller that updates the adaptive brightness level.
+ */
 public class BrightnessLevelPreferenceController extends BasePreferenceController implements
         PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
-
-    private static final String TAG = "BrightnessPrefCtrl";
-
     private static final Uri BRIGHTNESS_ADJ_URI;
     private final ContentResolver mContentResolver;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final DisplayManager mDisplayManager;
     @Nullable
     private Preference mPreference;
-    private boolean mInSetupWizard;
 
     static {
         BRIGHTNESS_ADJ_URI = System.getUriFor(System.SCREEN_AUTO_BRIGHTNESS_ADJ);
@@ -94,11 +93,13 @@ public class BrightnessLevelPreferenceController extends BasePreferenceControlle
         }
     };
 
-    public BrightnessLevelPreferenceController(Context context, Lifecycle lifecycle) {
+    public BrightnessLevelPreferenceController(@NonNull Context context,
+            @Nullable Lifecycle lifecycle) {
         this(context, context.getString(R.string.preference_key_brightness_level), lifecycle);
     }
 
-    private BrightnessLevelPreferenceController(Context context, String key, Lifecycle lifecycle) {
+    private BrightnessLevelPreferenceController(@NonNull Context context, @NonNull String key,
+            @Nullable Lifecycle lifecycle) {
         super(context, key);
         mDisplayManager = context.getSystemService(DisplayManager.class);
 
@@ -108,15 +109,8 @@ public class BrightnessLevelPreferenceController extends BasePreferenceControlle
         mContentResolver = mContext.getContentResolver();
     }
 
-    public void setInSetupWizard(boolean inSetupWizard) {
-        mInSetupWizard = inSetupWizard;
-    }
-
     @Override
     public int getAvailabilityStatus() {
-        if (mInSetupWizard && !Flags.addBrightnessSettingsInSuw()) {
-            return CONDITIONALLY_UNAVAILABLE;
-        }
         return AVAILABLE;
     }
 

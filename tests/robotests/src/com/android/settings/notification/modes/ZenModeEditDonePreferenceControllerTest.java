@@ -43,6 +43,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowToast;
 
 @RunWith(RobolectricTestRunner.class)
 @EnableFlags(Flags.FLAG_MODES_UI)
@@ -74,29 +75,23 @@ public class ZenModeEditDonePreferenceControllerTest {
     }
 
     @Test
-    public void updateState_nameNonEmpty_buttonEnabled() {
+    public void buttonClick_nameNonEmpty_buttonSaves() {
         ZenMode mode = new TestModeBuilder().setName("Such a nice name").build();
 
         mController.updateState(mPreference, mode);
-
-        assertThat(mButton.isEnabled()).isTrue();
-        verifyNoMoreInteractions(mConfirmSave);
-    }
-
-    @Test
-    public void updateState_nameEmpty_buttonDisabled() {
-        ZenMode aModeHasNoName = new TestModeBuilder().setName("").build();
-
-        mController.updateState(mPreference, aModeHasNoName);
-
-        assertThat(mButton.isEnabled()).isFalse();
-        verifyNoMoreInteractions(mConfirmSave);
-    }
-
-    @Test
-    public void onButtonClick_callsConfirmSave() {
         mButton.performClick();
 
         verify(mConfirmSave).run();
+    }
+
+    @Test
+    public void buttonClick_nameEmpty_buttonErrors() {
+        ZenMode aModeHasNoName = new TestModeBuilder().setName("").build();
+
+        mController.updateState(mPreference, aModeHasNoName);
+        mButton.performClick();
+
+        verifyNoMoreInteractions(mConfirmSave);
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo("Mode name cannot be empty");
     }
 }

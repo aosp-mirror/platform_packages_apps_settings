@@ -137,7 +137,7 @@ private fun AddSim() {
     }
 }
 
-private fun startAddSimFlow(context: Context) {
+fun startAddSimFlow(context: Context) {
     val intent = Intent(EuiccManager.ACTION_PROVISION_EMBEDDED_SUBSCRIPTION)
     intent.setPackage(Utils.PHONE_PACKAGE_NAME)
     intent.putExtra(EuiccManager.EXTRA_FORCE_PROVISION, true)

@@ -34,6 +34,7 @@ import android.util.AttributeSet;
 import android.widget.SeekBar;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.testutils.shadow.ShadowSystemSettings;
 
 import org.junit.Before;
@@ -162,7 +163,8 @@ public class BalanceSeekBarTest {
         mProxySeekBarListener.onProgressChanged(mSeekBar, progress, true);
 
         assertThat(mSeekBar.getStateDescription()).isEqualTo(
-                mContext.getString(R.string.audio_seek_bar_state_left_first, 50, 50));
+                mContext.getString(R.string.audio_seek_bar_state_left_first,
+                        Utils.formatPercentage(50), Utils.formatPercentage(50)));
     }
 
     @Test
@@ -177,7 +179,8 @@ public class BalanceSeekBarTest {
         mProxySeekBarListener.onProgressChanged(mSeekBar, progress, true);
 
         assertThat(mSeekBar.getStateDescription()).isEqualTo(
-                mContext.getString(R.string.audio_seek_bar_state_right_first, 50, 50));
+                mContext.getString(R.string.audio_seek_bar_state_right_first,
+                        Utils.formatPercentage(50), Utils.formatPercentage(50)));
     }
 
     @Test
@@ -189,7 +192,8 @@ public class BalanceSeekBarTest {
         mProxySeekBarListener.onProgressChanged(mSeekBar, progress, true);
 
         assertThat(mSeekBar.getStateDescription()).isEqualTo(
-                mContext.getString(R.string.audio_seek_bar_state_left_first, 75, 25));
+                mContext.getString(R.string.audio_seek_bar_state_left_first,
+                        Utils.formatPercentage(75), Utils.formatPercentage(25)));
     }
 
     @Test
@@ -201,7 +205,8 @@ public class BalanceSeekBarTest {
         mProxySeekBarListener.onProgressChanged(mSeekBar, progress, true);
 
         assertThat(mSeekBar.getStateDescription()).isEqualTo(
-                mContext.getString(R.string.audio_seek_bar_state_right_first, 75, 25));
+                mContext.getString(R.string.audio_seek_bar_state_right_first,
+                        Utils.formatPercentage(75), Utils.formatPercentage(25)));
     }
 
     // method to get the center from BalanceSeekBar for testing setMax().

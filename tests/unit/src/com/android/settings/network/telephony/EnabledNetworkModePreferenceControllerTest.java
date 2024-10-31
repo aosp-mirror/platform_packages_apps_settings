@@ -18,7 +18,6 @@ package com.android.settings.network.telephony;
 
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
 
-import static com.android.settings.network.telephony.MobileNetworkUtils.getRafFromNetworkType;
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.CDMA;
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.EVDO;
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.GSM;
@@ -37,6 +36,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
+import android.telephony.RadioAccessFamily;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -304,7 +304,7 @@ public class EnabledNetworkModePreferenceControllerTest {
     public void onPreferenceChange_updateSuccess() {
         mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
         doReturn(true).when(mTelephonyManager).setPreferredNetworkTypeBitmask(
-                getRafFromNetworkType(
+                RadioAccessFamily.getRafFromNetworkType(
                         TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA));
 
         mController.updateState(mPreference);
@@ -321,7 +321,8 @@ public class EnabledNetworkModePreferenceControllerTest {
     public void onPreferenceChange_updateFail() {
         mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
         doReturn(false).when(mTelephonyManager).setPreferredNetworkTypeBitmask(
-                getRafFromNetworkType(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
+                RadioAccessFamily.getRafFromNetworkType(
+                        TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
 
         mController.updateState(mPreference);
         mController.onViewCreated(new TestLifecycleOwner());
@@ -438,7 +439,7 @@ public class EnabledNetworkModePreferenceControllerTest {
     }
 
     private void mockAccessFamily(int networkMode) {
-        doReturn(MobileNetworkUtils.getRafFromNetworkType(networkMode))
+        doReturn((long) RadioAccessFamily.getRafFromNetworkType(networkMode))
                 .when(mTelephonyManager)
                 .getSupportedRadioAccessFamily();
     }

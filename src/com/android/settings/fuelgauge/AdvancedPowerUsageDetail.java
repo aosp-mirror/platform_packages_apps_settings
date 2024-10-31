@@ -26,13 +26,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -48,7 +45,6 @@ import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry;
 import com.android.settings.fuelgauge.batteryusage.BatteryEntry;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.EntityHeaderController;
-import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -67,9 +63,7 @@ import java.util.concurrent.Executors;
  * 2. Battery related controls for app(i.e uninstall, force stop)
  */
 public class AdvancedPowerUsageDetail extends DashboardFragment
-        implements ButtonActionDialogFragment.AppButtonsDialogListener,
-                Preference.OnPreferenceClickListener,
-                Preference.OnPreferenceChangeListener {
+        implements ButtonActionDialogFragment.AppButtonsDialogListener {
     public static final String TAG = "AdvancedPowerDetail";
     public static final String EXTRA_UID = "extra_uid";
     public static final String EXTRA_PACKAGE_NAME = "extra_package_name";
@@ -86,7 +80,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
     public static final String EXTRA_POWER_USAGE_AMOUNT = "extra_power_usage_amount";
 
     private static final String KEY_PREF_HEADER = "header_view";
-    private static final String KEY_ALLOW_BACKGROUND_USAGE = "allow_background_usage";
+    private static final String KEY_BACKGROUND_USAGE_ALLOWABILITY_CATEGORY =
+            "background_usage_allowability_category";
 
     private static final int REQUEST_UNINSTALL = 0;
     private static final int REQUEST_REMOVE_DEVICE_ADMIN = 1;
@@ -96,11 +91,9 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
     private AppButtonsPreferenceController mAppButtonsPreferenceController;
     private PowerUsageTimeController mPowerUsageTimeController;
 
-    @VisibleForTesting LayoutPreference mHeaderPreference;
     @VisibleForTesting ApplicationsState mState;
     @VisibleForTesting ApplicationsState.AppEntry mAppEntry;
     @VisibleForTesting BatteryOptimizeUtils mBatteryOptimizeUtils;
-    @VisibleForTesting PrimarySwitchPreference mAllowBackgroundUsagePreference;
 
     @VisibleForTesting @BatteryOptimizeUtils.OptimizationMode
     int mOptimizationMode = BatteryOptimizeUtils.MODE_UNKNOWN;
@@ -242,17 +235,11 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
+        final Bundle bundle = getArguments();
+        final int uid = bundle.getInt(EXTRA_UID, 0);
+        final String packageName = bundle.getString(EXTRA_PACKAGE_NAME);
+        mBatteryOptimizeUtils = new BatteryOptimizeUtils(getContext(), uid, packageName);
         mState = ApplicationsState.getInstance(getActivity().getApplication());
-    }
-
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-
-        final String packageName = getArguments().getString(EXTRA_PACKAGE_NAME);
-        onCreateBackgroundUsageState(packageName);
-        mHeaderPreference = findPreference(KEY_PREF_HEADER);
-
         if (packageName != null) {
             mAppEntry = mState.getEntry(packageName, UserHandle.myUserId());
         }
@@ -264,7 +251,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
 
         initHeader();
         mOptimizationMode = mBatteryOptimizeUtils.getAppOptimizationMode();
-        initFooter();
         mLogStringBuilder = new StringBuilder("onResume mode = ").append(mOptimizationMode);
     }
 
@@ -299,7 +285,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
 
     @VisibleForTesting
     void initHeader() {
-        final View appSnippet = mHeaderPreference.findViewById(R.id.entity_header);
+        final LayoutPreference headerPreference = findPreference(KEY_PREF_HEADER);
+        final View appSnippet = headerPreference.findViewById(R.id.entity_header);
         final Activity context = getActivity();
         final Bundle bundle = getArguments();
         EntityHeaderController controller =
@@ -340,31 +327,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
         controller.done(true /* rebindActions */);
     }
 
-    @VisibleForTesting
-    void initFooter() {
-        final String stateString;
-        final String detailInfoString;
-        final Context context = getContext();
-
-        if (mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()) {
-            // Present optimized only string when the package name is invalid.
-            stateString = context.getString(R.string.manager_battery_usage_optimized_only);
-            detailInfoString =
-                    context.getString(R.string.manager_battery_usage_footer_limited, stateString);
-        } else if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
-            // Present unrestricted only string when the package is system or default active app.
-            stateString = context.getString(R.string.manager_battery_usage_unrestricted_only);
-            detailInfoString =
-                    context.getString(R.string.manager_battery_usage_footer_limited, stateString);
-        } else {
-            // Present default string to normal app.
-            detailInfoString =
-                    context.getString(
-                            R.string.manager_battery_usage_allow_background_usage_summary);
-        }
-        mAllowBackgroundUsagePreference.setSummary(detailInfoString);
-    }
-
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.FUELGAUGE_POWER_USAGE_DETAIL;
@@ -384,7 +346,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final Bundle bundle = getArguments();
-        final int uid = bundle.getInt(EXTRA_UID, 0);
         final String packageName = bundle.getString(EXTRA_PACKAGE_NAME);
 
         mAppButtonsPreferenceController =
@@ -401,7 +362,12 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
             controllers.add(mPowerUsageTimeController);
         }
         controllers.add(mAppButtonsPreferenceController);
-        controllers.add(new AllowBackgroundPreferenceController(context, uid, packageName));
+        controllers.add(
+                new BackgroundUsageAllowabilityPreferenceController(
+                        context,
+                        /* dashboardFragment= */ this,
+                        KEY_BACKGROUND_USAGE_ALLOWABILITY_CATEGORY,
+                        mBatteryOptimizeUtils));
 
         return controllers;
     }
@@ -419,34 +385,6 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
         if (mAppButtonsPreferenceController != null) {
             mAppButtonsPreferenceController.handleDialogClick(id);
         }
-    }
-
-    @Override
-    public boolean onPreferenceClick(Preference preference) {
-        if (!(preference instanceof PrimarySwitchPreference)
-                || !TextUtils.equals(preference.getKey(), KEY_ALLOW_BACKGROUND_USAGE)) {
-            return false;
-        }
-        PowerBackgroundUsageDetail.startPowerBackgroundUsageDetailPage(
-                getContext(), getArguments());
-        return true;
-    }
-
-    @Override
-    public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
-        if (!(preference instanceof PrimarySwitchPreference)
-                || !TextUtils.equals(preference.getKey(), KEY_ALLOW_BACKGROUND_USAGE)) {
-            return false;
-        }
-        if (newValue instanceof Boolean) {
-            final boolean isAllowBackgroundUsage = (boolean) newValue;
-            mBatteryOptimizeUtils.setAppUsageState(
-                    isAllowBackgroundUsage
-                            ? BatteryOptimizeUtils.MODE_OPTIMIZED
-                            : BatteryOptimizeUtils.MODE_RESTRICTED,
-                    Action.APPLY);
-        }
-        return true;
     }
 
     private void logMetricCategory(int currentOptimizeMode) {
@@ -481,17 +419,5 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
                                     packageName,
                                     getArguments().getInt(EXTRA_POWER_USAGE_AMOUNT));
                 });
-    }
-
-    private void onCreateBackgroundUsageState(String packageName) {
-        mAllowBackgroundUsagePreference = findPreference(KEY_ALLOW_BACKGROUND_USAGE);
-        if (mAllowBackgroundUsagePreference != null) {
-            mAllowBackgroundUsagePreference.setOnPreferenceClickListener(this);
-            mAllowBackgroundUsagePreference.setOnPreferenceChangeListener(this);
-        }
-
-        mBatteryOptimizeUtils =
-                new BatteryOptimizeUtils(
-                        getContext(), getArguments().getInt(EXTRA_UID), packageName);
     }
 }

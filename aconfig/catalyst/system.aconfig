@@ -1,0 +1,9 @@
+package: "com.android.settings.flags"
+container: "system"
+
+flag {
+    name: "catalyst_language_setting"
+    namespace: "android_settings"
+    description: "Flag for System -> Languages screen"
+    bug: "323791114"
+}

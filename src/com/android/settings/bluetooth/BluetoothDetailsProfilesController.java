@@ -26,6 +26,7 @@ import android.sysprop.BluetoothProperties;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -52,7 +53,9 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -81,7 +84,9 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     private static final String LE_AUDIO_TOGGLE_VISIBLE_PROPERTY =
             "persist.bluetooth.leaudio.toggle_visible";
 
-    private final AtomicReference<Set<String>> mInvisiblePreferenceKey = new AtomicReference<>();
+    private Set<String> mInvisibleProfiles = Collections.emptySet();
+    private final AtomicReference<Set<String>> mAdditionalInvisibleProfiles =
+            new AtomicReference<>();
 
     private LocalBluetoothManager mManager;
     private LocalBluetoothProfileManager mProfileManager;
@@ -91,23 +96,38 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             new HashMap<String, List<CachedBluetoothDevice>>();
     private boolean mIsLeAudioToggleEnabled = false;
     private boolean mIsLeAudioOnlyDevice = false;
+    private boolean mHasExtraSpace;
 
     @VisibleForTesting
     PreferenceCategory mProfilesContainer;
 
-    public BluetoothDetailsProfilesController(Context context, PreferenceFragmentCompat fragment,
-            LocalBluetoothManager manager, CachedBluetoothDevice device, Lifecycle lifecycle) {
+    public BluetoothDetailsProfilesController(
+            Context context,
+            PreferenceFragmentCompat fragment,
+            LocalBluetoothManager manager,
+            CachedBluetoothDevice device,
+            Lifecycle lifecycle,
+            @Nullable List<String> invisibleProfiles,
+            boolean hasExtraSpace) {
         super(context, fragment, device, lifecycle);
         mManager = manager;
         mProfileManager = mManager.getProfileManager();
         mCachedDevice = device;
         mCachedDeviceGroup = Utils.findAllCachedBluetoothDevicesByGroupId(mManager, mCachedDevice);
+        if (invisibleProfiles != null) {
+            mInvisibleProfiles = Set.copyOf(invisibleProfiles);
+        }
+        mHasExtraSpace = hasExtraSpace;
     }
 
     @Override
     protected void init(PreferenceScreen screen) {
         mProfilesContainer = (PreferenceCategory)screen.findPreference(getPreferenceKey());
-        mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
+        if (mHasExtraSpace) {
+            mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
+        } else {
+            mProfilesContainer.setLayoutResource(R.layout.preference_category_bluetooth_no_padding);
+        }
         // Call refresh here even though it will get called later in onResume, to avoid the
         // list of switches appearing to "pop" into the page.
         refresh();
@@ -563,7 +583,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     protected void refresh() {
         ThreadUtils.postOnBackgroundThread(
                 () -> {
-                    mInvisiblePreferenceKey.set(
+                    mAdditionalInvisibleProfiles.set(
                             FeatureFactory.getFeatureFactory()
                                     .getBluetoothFeatureProvider()
                                     .getInvisibleProfilePreferenceKeys(
@@ -596,7 +616,11 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         Preference preference = mProfilesContainer.findPreference(KEY_BOTTOM_PREFERENCE);
         if (preference == null) {
             preference = new Preference(mContext);
-            preference.setLayoutResource(R.layout.preference_bluetooth_profile_category);
+            if (mHasExtraSpace) {
+                preference.setLayoutResource(R.layout.preference_bluetooth_profile_category);
+            } else {
+                preference.setLayoutResource(R.layout.preference_category_bluetooth_no_padding);
+            }
             preference.setEnabled(false);
             preference.setKey(KEY_BOTTOM_PREFERENCE);
             preference.setOrder(ORDINAL);
@@ -604,12 +628,15 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             mProfilesContainer.addPreference(preference);
         }
 
-        Set<String> invisibleKeys = mInvisiblePreferenceKey.get();
-        if (invisibleKeys != null) {
-            for (int i = 0; i < mProfilesContainer.getPreferenceCount(); ++i) {
-                Preference pref = mProfilesContainer.getPreference(i);
-                pref.setVisible(pref.isVisible() && !invisibleKeys.contains(pref.getKey()));
-            }
+        Set<String> additionalInvisibleProfiles = mAdditionalInvisibleProfiles.get();
+        HashSet<String> combinedInvisibleProfiles = new HashSet<>(mInvisibleProfiles);
+        if (additionalInvisibleProfiles != null) {
+            combinedInvisibleProfiles.addAll(additionalInvisibleProfiles);
+        }
+        Log.i(TAG, "Invisible profiles: " + combinedInvisibleProfiles);
+        for (int i = 0; i < mProfilesContainer.getPreferenceCount(); ++i) {
+            Preference pref = mProfilesContainer.getPreference(i);
+            pref.setVisible(pref.isVisible() && !combinedInvisibleProfiles.contains(pref.getKey()));
         }
     }
 

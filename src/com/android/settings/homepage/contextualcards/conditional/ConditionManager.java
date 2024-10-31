@@ -16,6 +16,7 @@
 
 package com.android.settings.homepage.contextualcards.conditional;
 
+import android.app.Flags;
 import android.content.Context;
 import android.util.Log;
 
@@ -153,7 +154,9 @@ public class ConditionManager {
                 new BackgroundDataConditionController(mAppContext, this /* manager */));
         mCardControllers.add(new BatterySaverConditionController(mAppContext, this /* manager */));
         mCardControllers.add(new CellularDataConditionController(mAppContext, this /* manager */));
-        mCardControllers.add(new DndConditionCardController(mAppContext, this /* manager */));
+        if (!Flags.modesUi()) {
+            mCardControllers.add(new DndConditionCardController(mAppContext, this /* manager */));
+        }
         mCardControllers.add(new HotspotConditionController(mAppContext, this /* manager */));
         mCardControllers.add(new NightDisplayConditionController(mAppContext, this /* manager */));
         mCardControllers.add(new RingerVibrateConditionController(mAppContext, this /* manager */));

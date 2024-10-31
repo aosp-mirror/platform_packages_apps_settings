@@ -43,7 +43,7 @@ import com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST
 import com.android.settings.biometrics.BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY
 import com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling
-import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroductionInternal
+import com.android.settings.biometrics.fingerprint.FingerprintEnroll.InternalActivity
 import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepositoryImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.PressToAuthInteractorImpl
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel
@@ -514,7 +514,7 @@ class FingerprintSettingsV2Fragment :
     val intent = Intent()
     intent.setClassName(
       SETTINGS_PACKAGE_NAME,
-      FingerprintEnrollIntroductionInternal::class.java.name,
+      InternalActivity::class.java.name,
     )
     intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, true)
     intent.putExtra(

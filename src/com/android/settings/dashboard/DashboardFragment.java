@@ -53,6 +53,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.preference.PreferenceScreenCreator;
 import com.android.settingslib.search.Indexable;
 
 import java.util.ArrayList;
@@ -60,6 +61,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -97,30 +99,35 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 R.array.config_suppress_injected_tile_keys));
         mDashboardFeatureProvider =
                 FeatureFactory.getFeatureFactory().getDashboardFeatureProvider();
-        // Load preference controllers from code
-        final List<AbstractPreferenceController> controllersFromCode =
-                createPreferenceControllers(context);
-        // Load preference controllers from xml definition
-        final List<BasePreferenceController> controllersFromXml = PreferenceControllerListHelper
-                .getPreferenceControllersFromXml(context, getPreferenceScreenResId());
-        // Filter xml-based controllers in case a similar controller is created from code already.
-        final List<BasePreferenceController> uniqueControllerFromXml =
-                PreferenceControllerListHelper.filterControllers(
-                        controllersFromXml, controllersFromCode);
 
-        // Add unique controllers to list.
-        if (controllersFromCode != null) {
-            mControllers.addAll(controllersFromCode);
-        }
-        mControllers.addAll(uniqueControllerFromXml);
+        PreferenceScreenCreator preferenceScreenCreator = getPreferenceScreenCreator();
+        if (preferenceScreenCreator == null || !preferenceScreenCreator.hasCompleteHierarchy()) {
+            // Load preference controllers from code
+            final List<AbstractPreferenceController> controllersFromCode =
+                    createPreferenceControllers(context);
+            // Load preference controllers from xml definition
+            final List<BasePreferenceController> controllersFromXml = PreferenceControllerListHelper
+                    .getPreferenceControllersFromXml(context, getPreferenceScreenResId());
+            // Filter xml-based controllers in case a similar controller is created from code
+            // already.
+            final List<BasePreferenceController> uniqueControllerFromXml =
+                    PreferenceControllerListHelper.filterControllers(
+                            controllersFromXml, controllersFromCode);
 
-        // And wire up with lifecycle.
-        final Lifecycle lifecycle = getSettingsLifecycle();
-        uniqueControllerFromXml.forEach(controller -> {
-            if (controller instanceof LifecycleObserver) {
-                lifecycle.addObserver((LifecycleObserver) controller);
+            // Add unique controllers to list.
+            if (controllersFromCode != null) {
+                mControllers.addAll(controllersFromCode);
             }
-        });
+            mControllers.addAll(uniqueControllerFromXml);
+
+            // And wire up with lifecycle.
+            final Lifecycle lifecycle = getSettingsLifecycle();
+            uniqueControllerFromXml.forEach(controller -> {
+                if (controller instanceof LifecycleObserver) {
+                    lifecycle.addObserver((LifecycleObserver) controller);
+                }
+            });
+        }
 
         // Set metrics category for BasePreferenceController.
         final int metricCategory = getMetricsCategory();
@@ -245,6 +252,15 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
+        if (isCatalystEnabled()) {
+            Intent intent = preference.getIntent();
+            if (intent != null && preference.getContext().getPackageManager().queryIntentActivities(
+                    intent, 0).isEmpty()) {
+                Log.w(TAG, "No activity to start for " + intent);
+                return true;
+            }
+        }
+
         final Collection<List<AbstractPreferenceController>> controllers =
                 mPreferenceControllers.values();
         for (List<AbstractPreferenceController> controllerList : controllers) {
@@ -270,6 +286,11 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             }
             mListeningToCategoryChange = false;
         }
+    }
+
+    @Override
+    protected final int getPreferenceScreenResId(@NonNull Context context) {
+        return getPreferenceScreenResId();
     }
 
     @Override
@@ -364,10 +385,59 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         if (resId <= 0) {
             return;
         }
-        addPreferencesFromResource(resId);
-        final PreferenceScreen screen = getPreferenceScreen();
+        PreferenceScreen screen;
+        PreferenceScreenCreator preferenceScreenCreator = getPreferenceScreenCreator();
+        if (preferenceScreenCreator != null) {
+            screen = createPreferenceScreen();
+            if (!preferenceScreenCreator.hasCompleteHierarchy()) {
+                removeControllersForHybridMode();
+            }
+            setPreferenceScreen(screen);
+            requireActivity().setTitle(screen.getTitle());
+        } else {
+            addPreferencesFromResource(resId);
+            screen = getPreferenceScreen();
+        }
         screen.setOnExpandButtonClickListener(this);
         displayResourceTilesToScreen(screen);
+    }
+
+    /**
+     * Removes preference controllers that have been migrated to catalyst.
+     *
+     * In hybrid mode, preference screen is inflated from XML resource, while preference metadata
+     * in the preference hierarchy are used to update preference widget UI. To avoid conflict,
+     * remove the preference controllers.
+     */
+    private void removeControllersForHybridMode() {
+        Set<String> keys = getPreferenceKeysInHierarchy();
+        Iterator<AbstractPreferenceController> iterator = mControllers.iterator();
+        while (iterator.hasNext()) {
+            AbstractPreferenceController controller = iterator.next();
+            String key = controller.getPreferenceKey();
+            if (keys.contains(key)) {
+                Log.i(TAG, "Remove preference controller for " + key);
+                iterator.remove();
+                List<AbstractPreferenceController> controllers = mPreferenceControllers.get(
+                        controller.getClass());
+                if (controllers != null) {
+                    controllers.remove(controller);
+                }
+            }
+        }
+    }
+
+    /** Returns if catalyst is enabled on current screen. */
+    protected final boolean isCatalystEnabled() {
+        return getPreferenceScreenCreator() != null;
+    }
+
+    private @Nullable PreferenceScreenCreator getPreferenceScreenCreator() {
+        if (!Flags.catalyst()) {
+            return null;
+        }
+        Context context = getContext();
+        return context != null ? getPreferenceScreenCreator(context) : null;
     }
 
     /**
