@@ -26,6 +26,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.DevicePolicyResourcesManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.UserInfo;
@@ -83,6 +84,8 @@ public class LocationInjectedServicesPreferenceControllerTest {
     private AppSettingsInjector mSettingsInjector;
     @Mock
     private DevicePolicyManager mDevicePolicyManager;
+    @Mock
+    private DevicePolicyResourcesManager mDevicePolicyResourcesManager;
 
     private Context mContext;
     private LocationInjectedServicesPreferenceController mController;
@@ -104,6 +107,7 @@ public class LocationInjectedServicesPreferenceControllerTest {
         when(mCategoryPrimary.getKey()).thenReturn(key);
         when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
+        when(mDevicePolicyManager.getResources()).thenReturn(mDevicePolicyResourcesManager);
     }
 
     @Test
@@ -276,6 +280,7 @@ public class LocationInjectedServicesPreferenceControllerTest {
                 UserHandle.of(userId),
                 enforcingUsers);
         when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(componentName);
+        when(mDevicePolicyResourcesManager.getString(any(), any())).thenReturn(any());
 
         mController.displayPreference(mScreen);
 
