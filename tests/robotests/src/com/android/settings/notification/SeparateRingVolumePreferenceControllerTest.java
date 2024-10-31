@@ -41,6 +41,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowDeviceConfig.class})
 public class SeparateRingVolumePreferenceControllerTest {
@@ -108,3 +109,4 @@ public class SeparateRingVolumePreferenceControllerTest {
     }
 
 }
+// LINT.ThenChange(SeparateRingVolumePreferenceTest.kt)
