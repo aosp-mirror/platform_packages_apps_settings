@@ -54,9 +54,9 @@ import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.network.telephony.wificalling.IWifiCallingRepository;
 import com.android.settings.network.telephony.wificalling.WifiCallingRepository;
@@ -70,7 +70,7 @@ import java.util.List;
  * This is the inner class of {@link WifiCallingSettings} fragment.
  * The preference screen lets you enable/disable Wi-Fi Calling and change Wi-Fi Calling mode.
  */
-public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
+public class WifiCallingSettingsForSub extends DashboardFragment
         implements OnCheckedChangeListener,
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "WifiCallingForSub";
@@ -266,8 +266,6 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.wifi_calling_settings);
-
         // SubId should always be specified when creating this fragment. Either through
         // fragment.setArguments() or through savedInstanceState.
         if (getArguments() != null && getArguments().containsKey(FRAGMENT_BUNDLE_SUBID)) {
@@ -447,6 +445,11 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.wifi_calling_settings;
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
         Context context = getActivity();
@@ -569,6 +572,11 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                 Log.e(TAG, "Unexpected request: " + requestCode);
                 break;
         }
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     private void updateButtonWfcMode(boolean wfcEnabled,
@@ -715,5 +723,10 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         }
 
         return mOverrideWfcRoamingModeWhileUsingNtn;
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return WifiCallingScreen.KEY;
     }
 }

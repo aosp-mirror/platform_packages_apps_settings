@@ -23,5 +23,17 @@ interface CanEnrollFingerprintsInteractor {
   /** Returns true if a user can enroll a fingerprint false otherwise. */
   val canEnrollFingerprints: Flow<Boolean>
   /** Indicates the maximum fingerprints enrollable for a given user */
-  fun maxFingerprintsEnrollable(): Int
+  val maxFingerprintsEnrollable: Flow<Int>
+
+  /**
+   * Indicates if we should use the default settings for maximum enrollments or the sensor props
+   * from the fingerprint sensor. This can be useful if you are supporting HIDL & AIDL enrollment
+   * types from one code base. Prior to AIDL there was no way to determine how many
+   * fingerprints were enrollable, Settings relied on
+   * com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser.
+   *
+   * Typically Fingerprints with AIDL HAL's should not use this
+   * (setShouldUseSettingsMaxFingerprints(false))
+   */
+  fun setShouldUseSettingsMaxFingerprints(useSettings: Boolean)
 }

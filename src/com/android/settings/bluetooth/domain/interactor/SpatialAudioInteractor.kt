@@ -30,10 +30,13 @@ import com.android.settingslib.bluetooth.devicesettings.shared.model.ToggleModel
 import com.android.settingslib.media.domain.interactor.SpatializerInteractor
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -41,9 +44,7 @@ import kotlinx.coroutines.launch
 /** Provides device setting for spatial audio. */
 interface SpatialAudioInteractor {
     /** Gets device setting for spatial audio */
-    fun getDeviceSetting(
-        cachedDevice: CachedBluetoothDevice,
-    ): Flow<DeviceSettingModel?>
+    fun getDeviceSetting(cachedDevice: CachedBluetoothDevice): Flow<DeviceSettingModel?>
 }
 
 class SpatialAudioInteractorImpl(
@@ -56,33 +57,55 @@ class SpatialAudioInteractorImpl(
     private val spatialAudioOffToggle =
         ToggleModel(
             context.getString(R.string.spatial_audio_multi_toggle_off),
-            DeviceSettingIcon.ResourceIcon(R.drawable.ic_spatial_audio_off))
+            DeviceSettingIcon.ResourceIcon(R.drawable.ic_spatial_audio_off),
+        )
     private val spatialAudioOnToggle =
         ToggleModel(
             context.getString(R.string.spatial_audio_multi_toggle_on),
-            DeviceSettingIcon.ResourceIcon(R.drawable.ic_spatial_audio))
+            DeviceSettingIcon.ResourceIcon(R.drawable.ic_spatial_audio),
+        )
     private val headTrackingOnToggle =
         ToggleModel(
             context.getString(R.string.spatial_audio_multi_toggle_head_tracking_on),
-            DeviceSettingIcon.ResourceIcon(R.drawable.ic_head_tracking))
+            DeviceSettingIcon.ResourceIcon(R.drawable.ic_head_tracking),
+        )
     private val changes = MutableSharedFlow<Unit>()
 
-    override fun getDeviceSetting(
-        cachedDevice: CachedBluetoothDevice,
-    ): Flow<DeviceSettingModel?> =
+    override fun getDeviceSetting(cachedDevice: CachedBluetoothDevice): Flow<DeviceSettingModel?> =
         changes
             .onStart { emit(Unit) }
-            .map { getSpatialAudioDeviceSettingModel(cachedDevice) }
+            .combine(
+                isDeviceConnected(cachedDevice),
+            ) { _, connected ->
+                if (connected) {
+                    getSpatialAudioDeviceSettingModel(cachedDevice)
+                } else {
+                    null
+                }
+            }
+            .flowOn(backgroundCoroutineContext)
             .stateIn(coroutineScope, SharingStarted.WhileSubscribed(), initialValue = null)
 
+    private fun isDeviceConnected(cachedDevice: CachedBluetoothDevice): Flow<Boolean> =
+        callbackFlow {
+                val listener =
+                    CachedBluetoothDevice.Callback { launch { send(cachedDevice.isConnected) } }
+                cachedDevice.registerCallback(context.mainExecutor, listener)
+                awaitClose { cachedDevice.unregisterCallback(listener) }
+            }
+            .onStart { emit(cachedDevice.isConnected) }
+            .flowOn(backgroundCoroutineContext)
+
     private suspend fun getSpatialAudioDeviceSettingModel(
-        cachedDevice: CachedBluetoothDevice,
+        cachedDevice: CachedBluetoothDevice
     ): DeviceSettingModel? {
         // TODO(b/343317785): use audio repository instead of calling AudioManager directly.
         Log.i(TAG, "CachedDevice: $cachedDevice profiles: ${cachedDevice.profiles}")
         val attributes =
             BluetoothUtils.getAudioDeviceAttributesForSpatialAudio(
-                cachedDevice, audioManager.getBluetoothAudioDeviceCategory(cachedDevice.address))
+                cachedDevice,
+                audioManager.getBluetoothAudioDeviceCategory(cachedDevice.address),
+            )
                 ?: run {
                     Log.i(TAG, "No audio profiles in cachedDevice: ${cachedDevice.address}.")
                     return null
@@ -116,7 +139,8 @@ class SpatialAudioInteractorImpl(
             TAG,
             "Head tracking available: $headTrackingAvailable, " +
                 "spatial audio enabled: $spatialAudioEnabled, " +
-                "head tracking enabled: $headTrackingEnabled")
+                "head tracking enabled: $headTrackingEnabled",
+        )
         return DeviceSettingModel.MultiTogglePreference(
             cachedDevice = cachedDevice,
             id = DeviceSettingId.DEVICE_SETTING_ID_SPATIAL_AUDIO_MULTI_TOGGLE,
@@ -143,11 +167,12 @@ class SpatialAudioInteractorImpl(
                     }
                     changes.emit(Unit)
                 }
-            })
+            },
+        )
     }
 
     companion object {
-        private const val TAG = "SpatialAudioInteractorImpl"
+        private const val TAG = "SpatialAudioInteractor"
         private const val INDEX_SPATIAL_AUDIO_OFF = 0
         private const val INDEX_SPATIAL_AUDIO_ON = 1
         private const val INDEX_HEAD_TRACKING_ENABLED = 2

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2024 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="accessibility_pointer_and_touchpad"
+    android:persistent="false"
+    android:title="@string/accessibility_pointer_and_touchpad_title">
+
+    <com.android.settings.widget.LabeledSeekBarPreference
+        android:key="pointer_scale_preference"
+        android:title="@string/pointer_scale"
+        android:max="@integer/pointer_scale_seek_bar_end"
+        settings:iconStart="@drawable/ic_remove_24dp"
+        settings:iconStartContentDescription="@string/pointer_scale_decrease_content_description"
+        settings:iconEnd="@drawable/ic_add_24dp"
+        settings:iconEndContentDescription="@string/pointer_scale_increase_content_description"
+        settings:keywords="@string/pointer_scale_keywords"
+        settings:controller="com.android.settings.inputmethod.PointerScaleSeekBarController" />
+
+    <Preference
+        android:fragment="com.android.settings.inputmethod.PointerColorCustomizationFragment"
+        android:key="pointer_color_customization_preference"
+        android:persistent="false"
+        android:title="@string/accessibility_pointer_color_customization_title"/>
+
+    <Preference
+        android:fragment="com.android.settings.accessibility.ToggleAutoclickPreferenceFragment"
+        android:key="autoclick_preference"
+        android:persistent="false"
+        android:title="@string/accessibility_autoclick_preference_title"
+        settings:keywords="@string/keywords_auto_click"
+        settings:controller="com.android.settings.accessibility.AutoclickPreferenceController"/>
+
+</PreferenceScreen>

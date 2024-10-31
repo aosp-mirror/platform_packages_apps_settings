@@ -29,6 +29,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 public class SimpleBuildNumberPreferenceControllerTest {
 
@@ -48,3 +49,4 @@ public class SimpleBuildNumberPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 }
+// LINT.ThenChange(SimpleBuildNumberPreferenceTest.kt)

@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
+import android.telephony.RadioAccessFamily;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
@@ -445,7 +446,7 @@ public class EnabledNetworkModePreferenceController extends
         }
 
         private int getPreferredNetworkMode() {
-            int networkMode = MobileNetworkUtils.getNetworkTypeFromRaf(
+            int networkMode = RadioAccessFamily.getNetworkTypeFromRaf(
                     (int) mTelephonyManager.getAllowedNetworkTypesForReason(
                             TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
             if (!showNrList()) {

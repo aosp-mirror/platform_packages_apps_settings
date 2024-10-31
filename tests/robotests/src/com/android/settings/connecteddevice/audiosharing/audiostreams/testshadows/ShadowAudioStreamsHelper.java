@@ -59,6 +59,11 @@ public class ShadowAudioStreamsHelper {
         return sMockHelper.getAllConnectedSources();
     }
 
+    @Implementation
+    public List<BluetoothLeBroadcastReceiveState> getAllPresentSources() {
+        return sMockHelper.getAllPresentSources();
+    }
+
     /** Gets {@link CachedBluetoothDevice} in sharing or le connected */
     @Implementation
     public static Optional<CachedBluetoothDevice> getCachedBluetoothDeviceInSharingOrLeConnected(

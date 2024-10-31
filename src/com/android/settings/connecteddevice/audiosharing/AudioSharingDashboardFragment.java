@@ -16,10 +16,18 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
-import android.app.settings.SettingsEnums;
-import android.content.Context;
-import android.os.Bundle;
 
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast.EXTRA_BT_DEVICE_TO_AUTO_ADD_SOURCE;
+
+import android.app.Activity;
+import android.app.settings.SettingsEnums;
+import android.bluetooth.BluetoothDevice;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
@@ -27,16 +35,21 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsCategoryController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.SettingsMainSwitchBar;
+import com.android.settingslib.bluetooth.BluetoothUtils;
+import com.android.settingslib.utils.ThreadUtils;
 
 public class AudioSharingDashboardFragment extends DashboardFragment
         implements AudioSharingSwitchBarController.OnAudioSharingStateChangedListener {
     private static final String TAG = "AudioSharingDashboardFrag";
+
+    public static final int SHARE_THEN_PAIR_REQUEST_CODE = 1002;
 
     SettingsMainSwitchBar mMainSwitchBar;
     private AudioSharingDeviceVolumeGroupController mAudioSharingDeviceVolumeGroupController;
     private AudioSharingCallAudioPreferenceController mAudioSharingCallAudioPreferenceController;
     private AudioSharingPlaySoundPreferenceController mAudioSharingPlaySoundPreferenceController;
     private AudioStreamsCategoryController mAudioStreamsCategoryController;
+    private AudioSharingSwitchBarController mAudioSharingSwitchBarController;
 
     public AudioSharingDashboardFragment() {
         super();
@@ -84,11 +97,36 @@ public class AudioSharingDashboardFragment extends DashboardFragment
         final SettingsActivity activity = (SettingsActivity) getActivity();
         mMainSwitchBar = activity.getSwitchBar();
         mMainSwitchBar.setTitle(getText(R.string.audio_sharing_switch_title));
-        AudioSharingSwitchBarController switchBarController =
+        mAudioSharingSwitchBarController =
                 new AudioSharingSwitchBarController(activity, mMainSwitchBar, this);
-        switchBarController.init(this);
-        getSettingsLifecycle().addObserver(switchBarController);
+        mAudioSharingSwitchBarController.init(this);
+        getSettingsLifecycle().addObserver(mAudioSharingSwitchBarController);
         mMainSwitchBar.show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (!BluetoothUtils.isAudioSharingEnabled()) return;
+        // In share then pair flow, after users be routed to pair new device page and successfully
+        // pair and connect an LEA headset, the pair fragment will be finished with RESULT_OK
+        // and EXTRA_BT_DEVICE_TO_AUTO_ADD_SOURCE, pass the BT device to switch bar controller,
+        // which is responsible for adding source to the device with loading indicator.
+        if (requestCode == SHARE_THEN_PAIR_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                BluetoothDevice btDevice =
+                        data != null
+                                ? data.getParcelableExtra(EXTRA_BT_DEVICE_TO_AUTO_ADD_SOURCE,
+                                BluetoothDevice.class)
+                                : null;
+                Log.d(TAG, "onActivityResult: RESULT_OK with device = " + btDevice);
+                if (btDevice != null) {
+                    var unused = ThreadUtils.postOnBackgroundThread(
+                            () -> mAudioSharingSwitchBarController.handleAutoAddSourceAfterPair(
+                                    btDevice));
+                }
+            }
+        }
     }
 
     @Override
@@ -107,11 +145,13 @@ public class AudioSharingDashboardFragment extends DashboardFragment
             AudioSharingDeviceVolumeGroupController volumeGroupController,
             AudioSharingCallAudioPreferenceController callAudioController,
             AudioSharingPlaySoundPreferenceController playSoundController,
-            AudioStreamsCategoryController streamsCategoryController) {
+            AudioStreamsCategoryController streamsCategoryController,
+            AudioSharingSwitchBarController switchBarController) {
         mAudioSharingDeviceVolumeGroupController = volumeGroupController;
         mAudioSharingCallAudioPreferenceController = callAudioController;
         mAudioSharingPlaySoundPreferenceController = playSoundController;
         mAudioStreamsCategoryController = streamsCategoryController;
+        mAudioSharingSwitchBarController = switchBarController;
     }
 
     private void updateVisibilityForAttachedPreferences() {
