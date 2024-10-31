@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import static android.hardware.biometrics.Flags.screenOffUnlockUdfps;
+
 import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
 
@@ -42,7 +44,7 @@ public class FingerprintUnlockCategoryController extends BasePreferenceControlle
     public int getAvailabilityStatus() {
         if (mFingerprintManager != null
                 && mFingerprintManager.isHardwareDetected()
-                && mFingerprintManager.isPowerbuttonFps()) {
+                && (mFingerprintManager.isPowerbuttonFps() || screenOffUnlockUdfps())) {
             return mFingerprintManager.hasEnrolledTemplates(getUserId())
                     ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
         } else {

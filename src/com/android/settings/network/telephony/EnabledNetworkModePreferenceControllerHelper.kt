@@ -18,6 +18,7 @@ package com.android.settings.network.telephony
 
 import android.content.Context
 import android.telephony.CarrierConfigManager
+import android.telephony.RadioAccessFamily
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import androidx.lifecycle.LifecycleOwner
@@ -35,7 +36,7 @@ fun TelephonyManager.setAllowedNetworkTypes(
     viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Default) {
         setAllowedNetworkTypesForReason(
             TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER,
-            MobileNetworkUtils.getRafFromNetworkType(newPreferredNetworkMode),
+            RadioAccessFamily.getRafFromNetworkType(newPreferredNetworkMode).toLong(),
         )
     }
 }

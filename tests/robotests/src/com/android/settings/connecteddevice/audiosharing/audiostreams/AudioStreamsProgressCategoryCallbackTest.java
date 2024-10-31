@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static com.android.settingslib.flags.Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -25,6 +27,7 @@ import static org.mockito.Mockito.when;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -41,14 +44,18 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 public class AudioStreamsProgressCategoryCallbackTest {
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     @Mock private AudioStreamsProgressCategoryController mController;
     @Mock private BluetoothDevice mDevice;
     @Mock private BluetoothLeBroadcastReceiveState mState;
     @Mock private BluetoothLeBroadcastMetadata mMetadata;
+    @Mock private BluetoothDevice mSourceDevice;
     private AudioStreamsProgressCategoryCallback mCallback;
 
     @Before
     public void setUp() {
+        mSetFlagsRule.disableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
         mCallback = new AudioStreamsProgressCategoryCallback(mController);
     }
 
@@ -60,6 +67,20 @@ public class AudioStreamsProgressCategoryCallbackTest {
         mCallback.onReceiveStateChanged(mDevice, /* sourceId= */ 0, mState);
 
         verify(mController).handleSourceConnected(any());
+    }
+
+    @Test
+    public void testOnReceiveStateChanged_sourcePresent() {
+        mSetFlagsRule.enableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        String address = "11:22:33:44:55:66";
+
+        List<Long> bisSyncState = new ArrayList<>();
+        when(mState.getBisSyncState()).thenReturn(bisSyncState);
+        when(mState.getSourceDevice()).thenReturn(mSourceDevice);
+        when(mSourceDevice.getAddress()).thenReturn(address);
+        mCallback.onReceiveStateChanged(mDevice, /* sourceId= */ 0, mState);
+
+        verify(mController).handleSourcePresent(any());
     }
 
     @Test

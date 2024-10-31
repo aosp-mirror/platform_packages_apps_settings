@@ -44,6 +44,7 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Fing
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintScrollViewModel
 import com.android.settings.testutils2.FakeFingerprintManagerInteractor
 import com.android.systemui.biometrics.shared.model.toFingerprintSensor
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -73,7 +74,10 @@ class Injector(step: FingerprintNavigationStep.UiStep) {
 
   var accessibilityInteractor =
     object : AccessibilityInteractor {
-      override val isAccessibilityEnabled: Flow<Boolean> = flowOf(true)
+      override fun isEnabledFlow(scope: CoroutineScope): Flow<Boolean> = flowOf(true)
+      override val isEnabled: Boolean
+        get() = true
+      override fun announce(clazz: Class<*>, announcement: CharSequence?) {}
     }
 
   var foldStateInteractor =

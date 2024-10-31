@@ -16,6 +16,11 @@
 
 package com.android.settings.wifi.dpp;
 
+import static com.android.wifitrackerlib.WifiEntry.SECURITY_NONE;
+import static com.android.wifitrackerlib.WifiEntry.SECURITY_OWE;
+import static com.android.wifitrackerlib.WifiEntry.SECURITY_PSK;
+import static com.android.wifitrackerlib.WifiEntry.SECURITY_SAE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -147,5 +152,25 @@ public class WifiDppQrCodeScannerFragmentTest {
 
         verify(mActivity).setResult(eq(Activity.RESULT_OK), any());
         verify(mActivity).finish();
+    }
+
+    @Test
+    public void isSecurityMatched_securityNotMatch_returnFalse() {
+        assertThat(mFragment.isSecurityMatched(SECURITY_NONE, SECURITY_PSK)).isFalse();
+    }
+
+    @Test
+    public void isSecurityMatched_securityMatch_returnTrue() {
+        assertThat(mFragment.isSecurityMatched(SECURITY_PSK, SECURITY_PSK)).isTrue();
+    }
+
+    @Test
+    public void isSecurityMatched_tryPskSaeTransition_returnTrue() {
+        assertThat(mFragment.isSecurityMatched(SECURITY_SAE, SECURITY_PSK)).isTrue();
+    }
+
+    @Test
+    public void isSecurityMatched_noPasswordSecurity_returnTrue() {
+        assertThat(mFragment.isSecurityMatched(SECURITY_NONE, SECURITY_OWE)).isTrue();
     }
 }

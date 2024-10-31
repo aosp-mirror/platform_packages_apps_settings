@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static com.android.settingslib.flags.Flags.audioSharingHysteresisModeFix;
+
 import static java.util.Collections.emptyList;
 
 import android.app.AlertDialog;
@@ -48,6 +50,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -95,9 +98,14 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
     private final Comparator<AudioStreamPreference> mComparator =
             Comparator.<AudioStreamPreference, Boolean>comparing(
                             p ->
-                                    p.getAudioStreamState()
-                                            == AudioStreamsProgressCategoryController
-                                                    .AudioStreamState.SOURCE_ADDED)
+                                    (p.getAudioStreamState()
+                                                    == AudioStreamsProgressCategoryController
+                                                            .AudioStreamState.SOURCE_ADDED
+                                            || (audioSharingHysteresisModeFix()
+                                                    && p.getAudioStreamState()
+                                                            == AudioStreamsProgressCategoryController
+                                                                    .AudioStreamState
+                                                                    .SOURCE_PRESENT)))
                     .thenComparingInt(AudioStreamPreference::getAudioStreamRssi)
                     .reversed();
 
@@ -113,6 +121,8 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         ADD_SOURCE_BAD_CODE,
         // When addSource result in other bad state.
         ADD_SOURCE_FAILED,
+        // Source is present on sink.
+        SOURCE_PRESENT,
         // Source is added to active sink.
         SOURCE_ADDED,
     }
@@ -243,10 +253,13 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                                 existingPreference, AudioStreamState.ADD_SOURCE_WAIT_FOR_RESPONSE);
                     } else {
                         // A preference with source founded existed either because it's already
-                        // connected (SOURCE_ADDED). Any other reason is unexpected. We update the
-                        // preference with this source and won't change it's state.
+                        // connected (SOURCE_ADDED) or present (SOURCE_PRESENT). Any other reason
+                        // is unexpected. We update the preference with this source and won't
+                        // change it's state.
                         existingPreference.setAudioStreamMetadata(source);
-                        if (fromState != AudioStreamState.SOURCE_ADDED) {
+                        if (fromState != AudioStreamState.SOURCE_ADDED
+                                && (!audioSharingHysteresisModeFix()
+                                        || fromState != AudioStreamState.SOURCE_PRESENT)) {
                             Log.w(
                                     TAG,
                                     "handleSourceFound(): unexpected state : "
@@ -346,10 +359,14 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         for (var entry : mBroadcastIdToPreferenceMap.entrySet()) {
             var preference = entry.getValue();
 
-            // Look for preference has SOURCE_ADDED state, re-check if they are still connected. If
+            // Look for preference has SOURCE_ADDED or SOURCE_PRESENT state, re-check if they are
+            // still connected. If
             // not, means the source is removed from the sink, we move back the preference to SYNCED
             // state.
-            if (preference.getAudioStreamState() == AudioStreamState.SOURCE_ADDED
+            if ((preference.getAudioStreamState() == AudioStreamState.SOURCE_ADDED
+                            || (audioSharingHysteresisModeFix()
+                                    && preference.getAudioStreamState()
+                                            == AudioStreamState.SOURCE_PRESENT))
                     && mAudioStreamsHelper.getAllConnectedSources().stream()
                             .noneMatch(
                                     connected ->
@@ -383,6 +400,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         if (!AudioStreamsHelper.isConnected(receiveState)) {
             return;
         }
+
         var broadcastIdConnected = receiveState.getBroadcastId();
         if (mSourceFromQrCode != null && mSourceFromQrCode.getBroadcastId() == UNSET_BROADCAST_ID) {
             // mSourceFromQrCode could have no broadcast Id, we fill in the broadcast Id from the
@@ -451,6 +469,58 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                 broadcastId,
                 (k, existingPreference) -> {
                     moveToState(existingPreference, AudioStreamState.ADD_SOURCE_FAILED);
+                    return existingPreference;
+                });
+    }
+
+    // Find preference by receiveState and decide next state.
+    // Expect one preference existed, move to SOURCE_PRESENT
+    void handleSourcePresent(BluetoothLeBroadcastReceiveState receiveState) {
+        if (DEBUG) {
+            Log.d(TAG, "handleSourcePresent()");
+        }
+        if (!AudioStreamsHelper.hasSourcePresent(receiveState)) {
+            return;
+        }
+
+        var broadcastIdConnected = receiveState.getBroadcastId();
+        if (mSourceFromQrCode != null && mSourceFromQrCode.getBroadcastId() == UNSET_BROADCAST_ID) {
+            // mSourceFromQrCode could have no broadcast Id, we fill in the broadcast Id from the
+            // connected source receiveState.
+            if (DEBUG) {
+                Log.d(
+                        TAG,
+                        "handleSourcePresent() : processing mSourceFromQrCode with broadcastId"
+                                + " unset");
+            }
+            boolean updated =
+                    maybeUpdateId(
+                            AudioStreamsHelper.getBroadcastName(receiveState),
+                            receiveState.getBroadcastId());
+            if (updated && mBroadcastIdToPreferenceMap.containsKey(UNSET_BROADCAST_ID)) {
+                var preference = mBroadcastIdToPreferenceMap.remove(UNSET_BROADCAST_ID);
+                mBroadcastIdToPreferenceMap.put(receiveState.getBroadcastId(), preference);
+            }
+        }
+
+        mBroadcastIdToPreferenceMap.compute(
+                broadcastIdConnected,
+                (k, existingPreference) -> {
+                    if (existingPreference == null) {
+                        // No existing preference for this source even if it's already connected,
+                        // add one and set initial state to SOURCE_PRESENT. This could happen
+                        // because
+                        // we retrieves the connected source during onStart() from
+                        // AudioStreamsHelper#getAllPresentSources() even before the source is
+                        // founded by scanning.
+                        return addNewPreference(receiveState, AudioStreamState.SOURCE_PRESENT);
+                    }
+                    if (existingPreference.getAudioStreamState() == AudioStreamState.WAIT_FOR_SYNC
+                            && existingPreference.getAudioStreamBroadcastId() == UNSET_BROADCAST_ID
+                            && mSourceFromQrCode != null) {
+                        existingPreference.setAudioStreamMetadata(mSourceFromQrCode);
+                    }
+                    moveToState(existingPreference, AudioStreamState.SOURCE_PRESENT);
                     return existingPreference;
                 });
     }
@@ -530,9 +600,23 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                     // Handle QR code scan, display currently connected streams then start scanning
                     // sequentially
                     handleSourceFromQrCodeIfExists();
-                    mAudioStreamsHelper
-                            .getAllConnectedSources()
-                            .forEach(this::handleSourceConnected);
+                    if (audioSharingHysteresisModeFix()) {
+                        // With hysteresis mode, we prioritize showing connected sources first.
+                        // If no connected sources are found, we then show present sources.
+                        List<BluetoothLeBroadcastReceiveState> sources =
+                                mAudioStreamsHelper.getAllConnectedSources();
+                        if (!sources.isEmpty()) {
+                            sources.forEach(this::handleSourceConnected);
+                        } else {
+                            mAudioStreamsHelper
+                                    .getAllPresentSources()
+                                    .forEach(this::handleSourcePresent);
+                        }
+                    } else {
+                        mAudioStreamsHelper
+                                .getAllConnectedSources()
+                                .forEach(this::handleSourceConnected);
+                    }
                     mLeBroadcastAssistant.startSearchingForSources(emptyList());
                     mMediaControlHelper.start();
                 });
@@ -581,6 +665,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                             AddSourceWaitForResponseState.getInstance();
                     case ADD_SOURCE_BAD_CODE -> AddSourceBadCodeState.getInstance();
                     case ADD_SOURCE_FAILED -> AddSourceFailedState.getInstance();
+                    case SOURCE_PRESENT -> SourcePresentState.getInstance();
                     case SOURCE_ADDED -> SourceAddedState.getInstance();
                     default -> throw new IllegalArgumentException("Unsupported state: " + state);
                 };

@@ -33,9 +33,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.hardware.display.BrightnessInfo;
 import android.os.PowerManager;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings.System;
 import android.view.Display;
 
@@ -43,12 +40,10 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.Flags;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settingslib.transition.SettingsTransitionHelper;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -61,12 +56,11 @@ import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowContentResolver;
 
+/**
+ * Tests for {@link BrightnessLevelPreferenceController}.
+ */
 @RunWith(RobolectricTestRunner.class)
 public class BrightnessLevelPreferenceControllerTest {
-
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
-
     @Mock
     private PowerManager mPowerManager;
     @Mock
@@ -95,26 +89,12 @@ public class BrightnessLevelPreferenceControllerTest {
                 mPowerManager);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         doReturn(mDisplay).when(mContext).getDisplay();
-        mController = spy(new BrightnessLevelPreferenceController(mContext, null));
+        mController = spy(new BrightnessLevelPreferenceController(mContext, /* lifecycle= */ null));
     }
 
     @Test
-    public void isAvailable_shouldAlwaysReturnTrueWhenNotInSetupWizard() {
+    public void isAvailable_shouldAlwaysReturnTrue() {
         assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
-    public void isAvailable_inSetupWizardAndFlagOn_shouldReturnTrue() {
-        mController.setInSetupWizard(true);
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
-    public void isAvailable_inSetupWizardAndFlagOff_shouldReturnFalse() {
-        mController.setInSetupWizard(true);
-        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test

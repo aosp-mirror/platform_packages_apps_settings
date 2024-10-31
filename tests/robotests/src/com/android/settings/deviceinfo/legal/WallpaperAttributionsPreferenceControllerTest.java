@@ -29,6 +29,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 public class WallpaperAttributionsPreferenceControllerTest {
 
@@ -55,3 +56,4 @@ public class WallpaperAttributionsPreferenceControllerTest {
                 .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 }
+// LINT.ThenChange(WallpaperAttributionsPreferenceTest.kt)
