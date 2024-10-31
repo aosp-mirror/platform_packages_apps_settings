@@ -1,10 +1,17 @@
 package: "com.android.settings.flags"
-container: "system_ext"
+container: "system"
 
 flag {
     name: "protect_screen_timeout_with_auth"
     namespace: "safety_center"
     description: "Require an auth challenge for increasing screen timeout."
     bug: "315937886"
+}
+
+flag {
+    name: "screen_timeout_settings_dashboard"
+    namespace: "android_settings"
+    description: "Use dashboard style settings"
+    bug: "368359967"
 }
 

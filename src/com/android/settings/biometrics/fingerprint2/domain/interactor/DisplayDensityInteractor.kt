@@ -42,7 +42,7 @@ interface DisplayDensityInteractor {
   val fontScale: Flow<Float>
 
   /** A flow that propagates displayDensity. */
-  val displayDensity: Flow<Int>
+  val displayDensity: Flow<Int?>
 
   /** A flow that propagates the default display density. */
   val defaultDisplayDensity: Flow<Int>
@@ -67,16 +67,14 @@ class DisplayDensityInteractorImpl(context: Context, scope: CoroutineScope) :
 
   private val _fontScale = MutableStateFlow(context.resources.configuration.fontScale)
   private val _displayDensity =
-    MutableStateFlow(
-      displayDensityUtils.defaultDisplayDensityValues[
-          displayDensityUtils.currentIndexForDefaultDisplay]
-    )
+    MutableStateFlow(displayDensityUtils.values?.let{
+      it[displayDensityUtils.currentIndex]
+    })
 
   override val fontScale: Flow<Float> = _fontScale.asStateFlow()
 
-  override val displayDensity: Flow<Int> = _displayDensity.asStateFlow()
+  override val displayDensity: Flow<Int?> = _displayDensity.asStateFlow()
 
   override val defaultDisplayDensity: Flow<Int> =
-    flowOf(displayDensityUtils.defaultDensityForDefaultDisplay)
-      .shareIn(scope, SharingStarted.Eagerly, 1)
+    flowOf(displayDensityUtils.defaultDensity).shareIn(scope, SharingStarted.Eagerly, 1)
 }

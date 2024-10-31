@@ -16,7 +16,6 @@
 
 package com.android.settings.network;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -27,13 +26,14 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.system.ResetDashboardFragment;
 import com.android.settings.network.telephony.MobileNetworkUtils;
+import com.android.settings.system.ResetDashboardFragment;
 
 public class EraseEuiccDataDialogFragment extends InstrumentedDialogFragment implements
         DialogInterface.OnClickListener {

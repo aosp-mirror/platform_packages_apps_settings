@@ -72,25 +72,22 @@ public final class BatterySettingsMigrateChecker extends BroadcastReceiver {
             Context context,
             @BatteryOptimizeUtils.OptimizationMode int optimizationMode,
             List<String> allowList) {
-        allowList.forEach(
-                packageName -> {
-                    final BatteryOptimizeUtils batteryOptimizeUtils =
-                            BatteryBackupHelper.newBatteryOptimizeUtils(
-                                    context,
-                                    packageName,
-                                    /* testOptimizeUtils */ sBatteryOptimizeUtils);
-                    if (batteryOptimizeUtils == null) {
-                        return;
-                    }
-                    if (batteryOptimizeUtils.getAppOptimizationMode() != optimizationMode) {
-                        Log.w(
-                                TAG,
-                                "Reset " + packageName + " battery mode into " + optimizationMode);
-                        batteryOptimizeUtils.setAppUsageState(
-                                optimizationMode,
-                                BatteryOptimizeHistoricalLogEntry.Action.FORCE_RESET);
-                    }
-                });
+        for (String packageName : allowList) {
+            final BatteryOptimizeUtils batteryOptimizeUtils =
+                    BatteryBackupHelper.newBatteryOptimizeUtils(
+                            context,
+                            packageName,
+                            /* testOptimizeUtils */ sBatteryOptimizeUtils);
+            if (batteryOptimizeUtils == null) {
+                continue;
+            }
+            if (batteryOptimizeUtils.getAppOptimizationMode() != optimizationMode) {
+                Log.w(TAG, "Reset " + packageName + " mode into " + optimizationMode);
+                batteryOptimizeUtils.setAppUsageState(
+                        optimizationMode,
+                        BatteryOptimizeHistoricalLogEntry.Action.FORCE_RESET);
+            }
+        }
     }
 
     static void verifySaverConfiguration(Context context) {

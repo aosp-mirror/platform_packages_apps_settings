@@ -16,6 +16,10 @@
 package com.android.settings.network;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -29,8 +33,6 @@ import com.android.settingslib.search.SearchIndexable;
 public class AdaptiveConnectivitySettings extends DashboardFragment {
 
     private static final String TAG = "AdaptiveConnectivitySettings";
-
-    private static final String KEY_ADAPTIVE_CONNECTIVITY_PREFERENCE = "adaptive_connectivity";
 
     @Override
     public int getMetricsCategory() {
@@ -49,4 +51,9 @@ public class AdaptiveConnectivitySettings extends DashboardFragment {
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.adaptive_connectivity_settings);
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return AdaptiveConnectivityScreen.KEY;
+    }
 }

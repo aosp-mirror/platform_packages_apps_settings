@@ -22,10 +22,12 @@ import static android.view.WindowInsets.Type.systemBars;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.GESTURE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TRIPLETAP;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
@@ -33,6 +35,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Insets;
 import android.graphics.Rect;
+import android.icu.text.CaseMap;
 import android.os.Build;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -49,14 +52,29 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.internal.accessibility.util.ShortcutUtils;
+import com.android.settings.R;
+import com.android.settings.utils.LocaleUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.StringJoiner;
 
 /** Provides utility methods to accessibility settings only. */
 public final class AccessibilityUtil {
+    // LINT.IfChange(shortcut_type_ui_order)
+    static final int[] SHORTCUTS_ORDER_IN_UI = {
+            QUICK_SETTINGS,
+            SOFTWARE, // FAB displays before gesture. Navbar displays without gesture.
+            GESTURE,
+            HARDWARE,
+            TWOFINGER_DOUBLETAP,
+            TRIPLETAP
+    };
+    // LINT.ThenChange(/res/xml/accessibility_edit_shortcuts.xml:shortcut_type_ui_order)
 
     private AccessibilityUtil(){}
 
@@ -139,8 +157,8 @@ public final class AccessibilityUtil {
 
     /** Determines if a gesture navigation bar is being used. */
     public static boolean isGestureNavigateEnabled(Context context) {
-        return context.getResources().getInteger(
-                com.android.internal.R.integer.config_navBarInteractionMode)
+        return Settings.Secure.getInt(context.getContentResolver(),
+                Settings.Secure.NAVIGATION_MODE, -1)
                 == NAV_BAR_MODE_GESTURAL;
     }
 
@@ -335,22 +353,23 @@ public final class AccessibilityUtil {
      */
     static boolean hasValuesInSettings(Context context, int shortcutTypes,
             @NonNull ComponentName componentName) {
-        boolean exist = false;
-        if ((shortcutTypes & SOFTWARE) == SOFTWARE) {
-            exist = hasValueInSettings(context, SOFTWARE, componentName);
-        }
-        if (((shortcutTypes & HARDWARE) == HARDWARE)) {
-            exist |= hasValueInSettings(context, HARDWARE, componentName);
-        }
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            if ((shortcutTypes & QUICK_SETTINGS)
-                    == QUICK_SETTINGS) {
-                exist |= hasValueInSettings(context, QUICK_SETTINGS,
-                        componentName);
+        for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
+            if (!android.view.accessibility.Flags.a11yQsShortcut()) {
+                if ((shortcutType & QUICK_SETTINGS) == QUICK_SETTINGS) {
+                    continue;
+                }
+            }
+            if (!android.provider.Flags.a11yStandaloneGestureEnabled()) {
+                if ((shortcutType & GESTURE) == GESTURE) {
+                    continue;
+                }
+            }
+            if ((shortcutTypes & shortcutType) == shortcutType
+                    && hasValueInSettings(context, shortcutType, componentName)) {
+                return true;
             }
         }
-
-        return exist;
+        return false;
     }
 
     /**
@@ -364,29 +383,14 @@ public final class AccessibilityUtil {
     @VisibleForTesting
     static boolean hasValueInSettings(Context context, @UserShortcutType int shortcutType,
             @NonNull ComponentName componentName) {
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            return ShortcutUtils.getShortcutTargetsFromSettings(
-                    context, shortcutType, UserHandle.myUserId()
-            ).contains(componentName.flattenToString());
-        }
-
-        final String targetKey = convertKeyFromSettings(shortcutType);
-        final String targetString = Settings.Secure.getString(context.getContentResolver(),
-                targetKey);
-
-        if (TextUtils.isEmpty(targetString)) {
+        if (!android.view.accessibility.Flags.a11yQsShortcut()
+                && (shortcutType & QUICK_SETTINGS) == QUICK_SETTINGS) {
             return false;
         }
 
-        sStringColonSplitter.setString(targetString);
-
-        while (sStringColonSplitter.hasNext()) {
-            final String name = sStringColonSplitter.next();
-            if ((componentName.flattenToString()).equals(name)) {
-                return true;
-            }
-        }
-        return false;
+        return ShortcutUtils.getShortcutTargetsFromSettings(
+                context, shortcutType, UserHandle.myUserId()
+        ).contains(componentName.flattenToString());
     }
 
     /**
@@ -400,15 +404,19 @@ public final class AccessibilityUtil {
     static int getUserShortcutTypesFromSettings(Context context,
             @NonNull ComponentName componentName) {
         int shortcutTypes = DEFAULT;
-        if (hasValuesInSettings(context, SOFTWARE, componentName)) {
-            shortcutTypes |= SOFTWARE;
-        }
-        if (hasValuesInSettings(context, HARDWARE, componentName)) {
-            shortcutTypes |= HARDWARE;
-        }
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            if (hasValuesInSettings(context, QUICK_SETTINGS, componentName)) {
-                shortcutTypes |= QUICK_SETTINGS;
+        for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
+            if (!android.view.accessibility.Flags.a11yQsShortcut()) {
+                if ((shortcutType & QUICK_SETTINGS) == QUICK_SETTINGS) {
+                    continue;
+                }
+            }
+            if (!android.provider.Flags.a11yStandaloneGestureEnabled()) {
+                if ((shortcutType & GESTURE) == GESTURE) {
+                    continue;
+                }
+            }
+            if (hasValueInSettings(context, shortcutType, componentName)) {
+                shortcutTypes |= shortcutType;
             }
         }
 
@@ -504,5 +512,65 @@ public final class AccessibilityUtil {
         Settings.Secure.putInt(context.getContentResolver(),
                 Settings.Secure.SKIP_ACCESSIBILITY_SHORTCUT_DIALOG_TIMEOUT_RESTRICTION, /*
                     true */ 1);
+    }
+
+    /**
+     * Assembles a localized string describing the provided shortcut types.
+     */
+    public static CharSequence getShortcutSummaryList(Context context, int shortcutTypes) {
+        final List<CharSequence> list = new ArrayList<>();
+
+        for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
+            if (!android.view.accessibility.Flags.a11yQsShortcut()
+                    && (shortcutType & QUICK_SETTINGS) == QUICK_SETTINGS) {
+                continue;
+            }
+            if (!android.provider.Flags.a11yStandaloneGestureEnabled()
+                    && (shortcutType & GESTURE) == GESTURE) {
+                continue;
+            }
+            if (!com.android.server.accessibility.Flags
+                    .enableMagnificationMultipleFingerMultipleTapGesture()
+                    && (shortcutType & TWOFINGER_DOUBLETAP) == TWOFINGER_DOUBLETAP) {
+                continue;
+            }
+
+            if ((shortcutTypes & shortcutType) == shortcutType) {
+                list.add(switch (shortcutType) {
+                    case QUICK_SETTINGS -> context.getText(
+                            R.string.accessibility_feature_shortcut_setting_summary_quick_settings);
+                    case SOFTWARE -> getSoftwareShortcutSummary(context);
+                    case GESTURE -> context.getText(
+                            R.string.accessibility_shortcut_edit_summary_software_gesture);
+                    case HARDWARE -> context.getText(
+                            R.string.accessibility_shortcut_hardware_keyword);
+                    case TWOFINGER_DOUBLETAP -> context.getString(
+                            R.string.accessibility_shortcut_two_finger_double_tap_keyword, 2);
+                    case TRIPLETAP -> context.getText(
+                            R.string.accessibility_shortcut_triple_tap_keyword);
+                    default -> "";
+                });
+            }
+        }
+
+        list.sort(CharSequence::compare);
+        return CaseMap.toTitle().wholeString().noLowercase().apply(Locale.getDefault(), /* iter= */
+                null, LocaleUtils.getConcatenatedString(list));
+    }
+
+    @VisibleForTesting
+    static CharSequence getSoftwareShortcutSummary(Context context) {
+        if (android.provider.Flags.a11yStandaloneGestureEnabled()) {
+            return context.getText(R.string.accessibility_shortcut_edit_summary_software);
+        }
+        int resId;
+        if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
+            resId = R.string.accessibility_shortcut_edit_summary_software;
+        } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            resId = R.string.accessibility_shortcut_edit_summary_software_gesture;
+        } else {
+            resId = R.string.accessibility_shortcut_edit_summary_software;
+        }
+        return context.getText(resId);
     }
 }

@@ -22,13 +22,12 @@ import static com.android.settings.network.telephony.TelephonyConstants.Telephon
 
 import android.content.Context;
 import android.provider.Settings;
+import android.telephony.RadioAccessFamily;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-
-import com.android.settings.network.telephony.MobileNetworkUtils;
 
 /**
  * Preference controller for "System Select"
@@ -65,7 +64,7 @@ public class CdmaSystemSelectPreferenceController extends CdmaBasePreferenceCont
             }
 
             final int settingsNetworkMode =
-                    hasTelephonyMgr ? MobileNetworkUtils.getNetworkTypeFromRaf(
+                    hasTelephonyMgr ? RadioAccessFamily.getNetworkTypeFromRaf(
                             (int) mTelephonyManager.getAllowedNetworkTypesForReason(
                                     TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER))
                             : NETWORK_MODE_UNKNOWN;

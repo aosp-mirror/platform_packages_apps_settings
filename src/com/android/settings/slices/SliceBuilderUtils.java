@@ -24,6 +24,7 @@ import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -47,6 +48,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
+import com.android.settings.accessibility.AccessibilitySlicePreferenceController;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settings.core.SubSettingLauncher;
@@ -448,7 +450,17 @@ public class SliceBuilderUtils {
             iconResource = R.drawable.ic_settings_accent;
         }
         try {
-            return IconCompat.createWithResource(context, iconResource);
+            // LINT.IfChange(createA11yIcon)
+            if (AccessibilitySlicePreferenceController.class.getName().equals(
+                    data.getPreferenceController())) {
+                ComponentName serviceComponent = ComponentName.unflattenFromString(data.getKey());
+                return IconCompat.createWithResource(
+                        context.createPackageContext(serviceComponent.getPackageName(), 0),
+                        iconResource);
+                // LINT.ThenChange()
+            } else {
+                return IconCompat.createWithResource(context, iconResource);
+            }
         } catch (Exception e) {
             Log.w(TAG, "Falling back to settings icon because there is an error getting slice icon "
                     + data.getUri(), e);

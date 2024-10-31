@@ -31,6 +31,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
+import androidx.test.annotation.UiThreadTest;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
@@ -90,6 +91,7 @@ public class SecurityDashboardActivityTest {
     }
 
     @Test
+    @UiThreadTest
     public void noAvailableAlternativeFragmentAvailable_defaultFragmentSet() {
         when(mSecuritySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment())
                 .thenReturn(false);
@@ -99,6 +101,7 @@ public class SecurityDashboardActivityTest {
     }
 
     @Test
+    @UiThreadTest
     public void alternativeFragmentAvailable_alternativeFragmentSet() {
         when(mSecuritySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment())
                 .thenReturn(true);
@@ -110,6 +113,7 @@ public class SecurityDashboardActivityTest {
     }
 
     @Test
+    @UiThreadTest
     public void noAvailableAlternativeFragmentAvailable_alternativeFragmentNotValid() {
         when(mSecuritySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment())
                 .thenReturn(false);
@@ -118,6 +122,7 @@ public class SecurityDashboardActivityTest {
     }
 
     @Test
+    @UiThreadTest
     public void alternativeFragmentAvailable_alternativeFragmentIsValid() {
         when(mSecuritySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment())
                 .thenReturn(true);
@@ -128,6 +133,7 @@ public class SecurityDashboardActivityTest {
     }
 
     @Test
+    @UiThreadTest
     public void onCreate_whenSafetyCenterEnabled_redirectsToSafetyCenter() {
         when(mSafetyCenterManagerWrapper.isEnabled(any(Context.class))).thenReturn(true);
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
@@ -139,6 +145,7 @@ public class SecurityDashboardActivityTest {
     }
 
     @Test
+    @UiThreadTest
     public void onCreate_whenSafetyCenterDisabled_doesntRedirectToSafetyCenter() {
         when(mSafetyCenterManagerWrapper.isEnabled(any(Context.class))).thenReturn(false);
 

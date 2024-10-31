@@ -17,57 +17,37 @@
 package com.android.settings.network
 
 import android.content.Context
-import android.content.res.Resources
-import android.os.UserManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.R
-import com.android.settingslib.spaprivileged.framework.common.userManager
+import com.android.settings.network.MobileNetworkListFragment.Companion.SearchIndexProvider
+import com.android.settings.network.telephony.SimRepository
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
-import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
 class MobileNetworkListFragmentTest {
-    private val mockUserManager = mock<UserManager>()
+    private val mockSimRepository = mock<SimRepository>()
 
-    private val mockResources = mock<Resources>()
-
-    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
-        on { userManager } doReturn mockUserManager
-        on { resources } doReturn mockResources
-    }
+    private val context: Context = ApplicationProvider.getApplicationContext()
 
     @Test
-    fun isPageSearchEnabled_adminUser_shouldReturnTrue() {
-        mockUserManager.stub {
-            on { isAdminUser } doReturn true
-        }
-        mockResources.stub {
-            on { getBoolean(R.bool.config_show_sim_info) } doReturn true
-        }
+    fun isPageSearchEnabled_showMobileNetworkPage_returnTrue() {
+        mockSimRepository.stub { on { canEnterMobileNetworkPage() } doReturn true }
 
-        val isEnabled =
-            MobileNetworkListFragment.SEARCH_INDEX_DATA_PROVIDER.isPageSearchEnabled(context)
+        val isEnabled = SearchIndexProvider { mockSimRepository }.isPageSearchEnabled(context)
 
         assertThat(isEnabled).isTrue()
     }
 
     @Test
-    fun isPageSearchEnabled_nonAdminUser_shouldReturnFalse() {
-        mockUserManager.stub {
-            on { isAdminUser } doReturn false
-        }
-        mockResources.stub {
-            on { getBoolean(R.bool.config_show_sim_info) } doReturn true
-        }
+    fun isPageSearchEnabled_hideMobileNetworkPage_returnFalse() {
+        mockSimRepository.stub { on { canEnterMobileNetworkPage() } doReturn false }
 
-        val isEnabled =
-            MobileNetworkListFragment.SEARCH_INDEX_DATA_PROVIDER.isPageSearchEnabled(context)
+        val isEnabled = SearchIndexProvider { mockSimRepository }.isPageSearchEnabled(context)
 
         assertThat(isEnabled).isFalse()
     }

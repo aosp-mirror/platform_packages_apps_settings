@@ -36,6 +36,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 public class CallVolumePreferenceControllerTest {
     private static final String TEST_KEY = "Test_Key";
@@ -108,3 +109,4 @@ public class CallVolumePreferenceControllerTest {
         assertThat(mController.isPublicSlice()).isTrue();
     }
 }
+// LINT.ThenChange(CallVolumePreferenceTest.kt)

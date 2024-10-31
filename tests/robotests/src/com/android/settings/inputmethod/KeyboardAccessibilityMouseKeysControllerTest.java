@@ -50,7 +50,7 @@ public class KeyboardAccessibilityMouseKeysControllerTest {
         mContext = RuntimeEnvironment.application;
         mKeyboardAccessibilityMouseKeysController = new KeyboardAccessibilityMouseKeysController(
                 mContext,
-                "accessibility_mouse_keys");
+                "keyboard_a11y_page_mouse_keys");
     }
 
     @Test

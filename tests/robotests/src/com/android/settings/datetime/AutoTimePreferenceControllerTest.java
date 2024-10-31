@@ -34,6 +34,8 @@ import android.os.UserHandle;
 
 import androidx.preference.Preference;
 
+import com.android.settings.R;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -151,6 +153,12 @@ public class AutoTimePreferenceControllerTest {
                 capabilitiesAndConfigAfterUpdate);
 
         assertThat(mController.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void getSummary() {
+        assertThat(mController.getSummary().toString()).isEqualTo(
+                mContext.getString(R.string.date_time_auto_summary));
     }
 
     private static TimeCapabilitiesAndConfig createCapabilitiesAndConfig(boolean autoSupported,
