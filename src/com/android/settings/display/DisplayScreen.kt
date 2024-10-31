@@ -49,6 +49,7 @@ class DisplayScreen :
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {
         +DarkModeScreen.KEY
+        +PeakRefreshRateSwitchPreference()
     }
 
     override fun isAvailable(context: Context) =

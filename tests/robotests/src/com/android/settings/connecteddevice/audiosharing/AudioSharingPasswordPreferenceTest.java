@@ -71,10 +71,12 @@ public class AudioSharingPasswordPreferenceTest {
         var editText = view.findViewById(android.R.id.edit);
         var checkBox = view.findViewById(R.id.audio_sharing_stream_password_checkbox);
         var dialogMessage = view.findViewById(android.R.id.message);
+        var editTextAlertMessage = view.findViewById(R.id.edit_alert_message);
 
         assertThat(editText).isNotNull();
         assertThat(checkBox).isNotNull();
         assertThat(dialogMessage).isNotNull();
+        assertThat(editTextAlertMessage).isNotNull();
     }
 
     @Test
@@ -145,6 +147,34 @@ public class AudioSharingPasswordPreferenceTest {
 
         assertThat(checkBox).isNotNull();
         assertThat(checkBox.isChecked()).isFalse();
+    }
+
+    @Test
+    public void showEditTextFormatAlert_show() {
+        View view =
+                LayoutInflater.from(mContext).inflate(R.layout.audio_sharing_password_dialog, null);
+        mPreference.onBindDialogView(view);
+
+        var editTextAlertMessage = view.findViewById(R.id.edit_alert_message);
+
+        mPreference.showEditTextFormatAlert(true);
+
+        assertThat(editTextAlertMessage).isNotNull();
+        assertThat(editTextAlertMessage.getVisibility()).isEqualTo(VISIBLE);
+    }
+
+    @Test
+    public void showEditTextFormatAlert_hide() {
+        View view =
+                LayoutInflater.from(mContext).inflate(R.layout.audio_sharing_password_dialog, null);
+        mPreference.onBindDialogView(view);
+
+        var editTextAlertMessage = view.findViewById(R.id.edit_alert_message);
+
+        mPreference.showEditTextFormatAlert(false);
+
+        assertThat(editTextAlertMessage).isNotNull();
+        assertThat(editTextAlertMessage.getVisibility()).isEqualTo(GONE);
     }
 
     @Test

@@ -22,6 +22,7 @@ import android.telephony.CarrierConfigManager
 import android.telephony.NetworkRegistrationInfo
 import android.telephony.TelephonyManager
 import android.telephony.satellite.SatelliteManager
+import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
@@ -92,6 +93,11 @@ class NetworkSelectRepository(context: Context, private val subId: Int) {
      * Update satellite PLMNs from the satellite framework.
      */
     private fun getSatellitePlmns(): List<String> {
+        if (satelliteManager == null) {
+            Log.d(TAG, "SatelliteManager is null")
+            return emptyList()
+        }
+
         val config = carrierConfigManager.getConfigForSubId(
             subId,
             CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL
@@ -104,7 +110,11 @@ class NetworkSelectRepository(context: Context, private val subId: Int) {
         return if (shouldFilter) {
             satelliteManager.getSatellitePlmnsForCarrier(subId)
         } else {
-            emptyList();
+            emptyList()
         }
+    }
+
+    private companion object {
+        private const val TAG = "NetworkSelectRepository"
     }
 }

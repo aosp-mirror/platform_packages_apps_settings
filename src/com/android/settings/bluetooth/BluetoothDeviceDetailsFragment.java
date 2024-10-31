@@ -458,7 +458,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
             controllers.add(new BluetoothDetailsSpatialAudioController(context, this, mCachedDevice,
                     lifecycle));
             controllers.add(new BluetoothDetailsProfilesController(context, this, mManager,
-                    mCachedDevice, lifecycle, invisibleProfiles));
+                    mCachedDevice, lifecycle, invisibleProfiles, invisibleProfiles == null));
             controllers.add(new BluetoothDetailsMacAddressController(context, this, mCachedDevice,
                     lifecycle));
             controllers.add(new StylusDevicesController(context, mInputDevice, mCachedDevice,
