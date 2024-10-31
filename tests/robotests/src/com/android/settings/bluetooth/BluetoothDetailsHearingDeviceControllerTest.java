@@ -53,11 +53,11 @@ public class BluetoothDetailsHearingDeviceControllerTest extends
     @Mock
     private LocalBluetoothProfileManager mProfileManager;
     @Mock
-    private BluetoothDetailsHearingDeviceController mHearingDeviceController;
-    @Mock
     private BluetoothDetailsHearingAidsPresetsController mPresetsController;
     @Mock
     private BluetoothDetailsHearingDeviceSettingsController mHearingDeviceSettingsController;
+
+    private BluetoothDetailsHearingDeviceController mHearingDeviceController;
 
     @Override
     public void setUp() {
@@ -125,5 +125,25 @@ public class BluetoothDetailsHearingDeviceControllerTest extends
 
         assertThat(mHearingDeviceController.getSubControllers().stream().anyMatch(
                 c -> c instanceof BluetoothDetailsHearingAidsPresetsController)).isFalse();
+    }
+
+    @Test
+    @RequiresFlagsEnabled(
+            com.android.settingslib.flags.Flags.FLAG_HEARING_DEVICES_AMBIENT_VOLUME_CONTROL)
+    public void initSubControllers_flagEnabled_ambientVolumeControllerExist() {
+        mHearingDeviceController.initSubControllers(false);
+
+        assertThat(mHearingDeviceController.getSubControllers().stream().anyMatch(
+                c -> c instanceof BluetoothDetailsAmbientVolumePreferenceController)).isTrue();
+    }
+
+    @Test
+    @RequiresFlagsDisabled(
+            com.android.settingslib.flags.Flags.FLAG_HEARING_DEVICES_AMBIENT_VOLUME_CONTROL)
+    public void initSubControllers_flagDisabled_ambientVolumeControllerNotExist() {
+        mHearingDeviceController.initSubControllers(false);
+
+        assertThat(mHearingDeviceController.getSubControllers().stream().anyMatch(
+                c -> c instanceof BluetoothDetailsAmbientVolumePreferenceController)).isFalse();
     }
 }
