@@ -27,6 +27,7 @@ import com.android.settings.core.BasePreferenceController;
 
 import java.util.List;
 
+// LINT.IfChange
 public abstract class LegalPreferenceController extends BasePreferenceController {
     private final PackageManager mPackageManager;
     private Preference mPreference;
@@ -94,3 +95,4 @@ public abstract class LegalPreferenceController extends BasePreferenceController
         mPreference.setTitle(resolveInfo.loadLabel(mPackageManager));
     }
 }
+// LINT.ThenChange(LegalPreference.kt)

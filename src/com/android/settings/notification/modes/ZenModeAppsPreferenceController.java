@@ -29,6 +29,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
+import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
@@ -58,6 +59,8 @@ public class ZenModeAppsPreferenceController extends
                 pref.setExtraWidgetOnClickListener(p -> {
                     launchPrioritySettings();
                 });
+                pref.setExtraWidgetContentDescription(
+                        mContext.getString(R.string.zen_mode_apps_priority_apps_settings));
             }
         }
         super.displayPreference(screen);

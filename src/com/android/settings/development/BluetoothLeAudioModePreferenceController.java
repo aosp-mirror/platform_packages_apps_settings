@@ -34,12 +34,10 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
+import java.util.Objects;
 
-/**
- * Preference controller to control Bluetooth LE audio mode
- */
-public class BluetoothLeAudioModePreferenceController
-        extends DeveloperOptionsPreferenceController
+/** Preference controller to control Bluetooth LE audio mode */
+public class BluetoothLeAudioModePreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String PREFERENCE_KEY = "bluetooth_leaudio_mode";
@@ -51,15 +49,13 @@ public class BluetoothLeAudioModePreferenceController
 
     private final String[] mListValues;
     private final String[] mListSummaries;
-    @VisibleForTesting
-    @Nullable String mNewMode;
-    @VisibleForTesting
-    BluetoothAdapter mBluetoothAdapter;
+    @VisibleForTesting @Nullable String mNewMode;
+    @VisibleForTesting BluetoothAdapter mBluetoothAdapter;
 
     boolean mChanged = false;
 
-    public BluetoothLeAudioModePreferenceController(@NonNull Context context,
-            @Nullable DevelopmentSettingsDashboardFragment fragment) {
+    public BluetoothLeAudioModePreferenceController(
+            @NonNull Context context, @Nullable DevelopmentSettingsDashboardFragment fragment) {
         super(context);
         mFragment = fragment;
         mBluetoothAdapter = context.getSystemService(BluetoothManager.class).getAdapter();
@@ -69,7 +65,8 @@ public class BluetoothLeAudioModePreferenceController
     }
 
     @Override
-    @NonNull public String getPreferenceKey() {
+    @NonNull
+    public String getPreferenceKey() {
         return PREFERENCE_KEY;
     }
 
@@ -125,20 +122,25 @@ public class BluetoothLeAudioModePreferenceController
         }
     }
 
-    /**
-     * Called when the RebootDialog confirm is clicked.
-     */
+    /** Called when the RebootDialog confirm is clicked. */
     public void onRebootDialogConfirmed() {
         if (!mChanged) {
             return;
         }
         SystemProperties.set(LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY, mNewMode);
+        if (mFragment != null && !Objects.equals(mNewMode, "broadcast")) {
+            mFragment.onBroadcastDisabled();
+        }
     }
 
-    /**
-     * Called when the RebootDialog cancel is clicked.
-     */
+    /** Called when the RebootDialog cancel is clicked. */
     public void onRebootDialogCanceled() {
         mChanged = false;
+    }
+
+    public interface OnModeChangeListener {
+
+        /** Called when the broadcast mode is disabled. */
+        void onBroadcastDisabled();
     }
 }

@@ -195,19 +195,19 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
 
             final String[] link = new String[1];
             link[0] = readSatelliteMoreInfoString(mSubId);
-            footerPreference.setLearnMoreAction(view -> {
-                if (!link[0].isEmpty()) {
-                    Intent helpIntent = HelpUtils.getHelpIntent(mActivity, link[0],
-                            this.getClass().getName());
-                    if (helpIntent != null) {
-                        mActivity.startActivityForResult(helpIntent, /*requestCode=*/ 0);
+            if (link[0] != null && !link[0].isEmpty()) {
+                footerPreference.setLearnMoreAction(view -> {
+                    if (!link[0].isEmpty()) {
+                        Intent helpIntent = HelpUtils.getHelpIntent(mActivity, link[0],
+                                this.getClass().getName());
+                        if (helpIntent != null) {
+                            mActivity.startActivityForResult(helpIntent, /*requestCode=*/ 0);
+                        }
                     }
-                }
-            });
-            footerPreference.setLearnMoreText(
-                    getResources().getString(R.string.more_about_satellite_messaging));
-
-            // TODO : b/320467418 add rounded rectangle border line to footer preference.
+                });
+                footerPreference.setLearnMoreText(
+                        getResources().getString(R.string.more_about_satellite_messaging));
+            }
         }
     }
 

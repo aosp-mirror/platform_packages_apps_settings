@@ -71,7 +71,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDrawable;
 
@@ -314,7 +313,7 @@ public class ChooseLockPasswordTest {
                 /* minComplexity= */ PASSWORD_COMPLEXITY_NONE,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
                 /* userEnteredPassword= */ LockscreenCredential.createPassword("12345678"),
-                "Ascending, descending, or repeated sequence of digits isn't allowed");
+                "Ascending, descending, or repeated sequence of characters isn't allowed");
     }
 
     @Test
@@ -356,7 +355,7 @@ public class ChooseLockPasswordTest {
                 /* minComplexity= */ PASSWORD_COMPLEXITY_LOW,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
                 /* userEnteredPassword= */ LockscreenCredential.createPassword("12345678"),
-                "Ascending, descending, or repeated sequence of digits isn't allowed");
+                "Ascending, descending, or repeated sequence of characters isn't allowed");
     }
 
     @Test

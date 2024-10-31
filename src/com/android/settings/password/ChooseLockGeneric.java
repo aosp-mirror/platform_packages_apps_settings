@@ -84,6 +84,7 @@ import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.safetycenter.LockScreenSafetySource;
@@ -500,11 +501,18 @@ public class ChooseLockGeneric extends SettingsActivity {
                             BIOMETRIC_AUTH_REQUEST,
                             mUserId, true /* hideBackground */);
                 } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
-                    finish();
+                    IdentityCheckBiometricErrorDialog
+                            .showBiometricErrorDialogAndFinishActivityOnDismiss(getActivity(),
+                                    biometricAuthStatus);
                 }
             } else if (requestCode == BIOMETRIC_AUTH_REQUEST) {
                 if (resultCode == Activity.RESULT_OK) {
                     mBiometricsAuthSuccessful = true;
+                } else if (resultCode
+                        == ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT) {
+                    IdentityCheckBiometricErrorDialog
+                            .showBiometricErrorDialogAndFinishActivityOnDismiss(getActivity(),
+                                    Utils.BiometricStatus.LOCKOUT);
                 } else {
                     finish();
                 }

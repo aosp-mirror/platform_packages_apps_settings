@@ -16,6 +16,11 @@
 
 package com.android.settings.accessibility;
 
+import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU;
+import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_GESTURE;
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON;
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
+
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
@@ -396,6 +401,49 @@ public final class AccessibilityUtilTest {
     public void convertKeyFromSettings_shortcutTypeQuickSettings() {
         assertThat(AccessibilityUtil.convertKeyFromSettings(QUICK_SETTINGS))
                 .isEqualTo(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
+    }
+
+    @Test
+    @EnableFlags(android.provider.Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
+    public void getSoftwareShortcutSummary_returnsSoftwareSummary() {
+        assertThat(AccessibilityUtil.getSoftwareShortcutSummary(mContext)).isEqualTo(
+                mContext.getText(R.string.accessibility_shortcut_edit_summary_software));
+    }
+
+    @Test
+    @DisableFlags(android.provider.Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
+    public void getSoftwareShortcutSummary_gestureMode_floatingButton_returnsSoftwareSummary() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.NAVIGATION_MODE, NAV_BAR_MODE_GESTURAL);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_BUTTON_MODE,
+                ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU);
+
+        assertThat(AccessibilityUtil.getSoftwareShortcutSummary(mContext)).isEqualTo(
+                mContext.getText(R.string.accessibility_shortcut_edit_summary_software));
+    }
+
+    @Test
+    @DisableFlags(android.provider.Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
+    public void getSoftwareShortcutSummary_gestureMode_gesture_returnsGestureSummary() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.NAVIGATION_MODE, NAV_BAR_MODE_GESTURAL);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_BUTTON_MODE,
+                ACCESSIBILITY_BUTTON_MODE_GESTURE);
+
+        assertThat(AccessibilityUtil.getSoftwareShortcutSummary(mContext)).isEqualTo(
+                mContext.getText(R.string.accessibility_shortcut_edit_summary_software_gesture));
+    }
+
+    @Test
+    @DisableFlags(android.provider.Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
+    public void getSoftwareShortcutSummary_navBarMode_returnsSoftwareSummary() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.NAVIGATION_MODE, NAV_BAR_MODE_3BUTTON);
+
+        assertThat(AccessibilityUtil.getSoftwareShortcutSummary(mContext)).isEqualTo(
+                mContext.getText(R.string.accessibility_shortcut_edit_summary_software));
     }
 
     private AccessibilityServiceInfo getMockAccessibilityServiceInfo() {

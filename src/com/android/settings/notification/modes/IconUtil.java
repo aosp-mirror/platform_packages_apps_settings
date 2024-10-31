@@ -60,7 +60,7 @@ class IconUtil {
 
     private static Drawable applyTint(@NonNull Context context, @NonNull Drawable icon,
             @AttrRes int colorAttr) {
-        icon = icon.mutate();
+        icon = mutateDrawable(context.getResources(), icon);
         icon.setTintList(Utils.getColorAttr(context, colorAttr));
         return icon;
     }
@@ -218,9 +218,9 @@ class IconUtil {
 
     private static Drawable composeIcons(Resources res, Drawable outer, ColorStateList outerColor,
             @Px int outerSizePx, Drawable icon, ColorStateList iconColor, @Px int iconSizePx) {
-        Drawable background = checkNotNull(outer.getConstantState()).newDrawable(res).mutate();
+        Drawable background = mutateDrawable(res, outer);
         background.setTintList(outerColor);
-        Drawable foreground = checkNotNull(icon.getConstantState()).newDrawable(res).mutate();
+        Drawable foreground = mutateDrawable(res, icon);
         foreground.setTintList(iconColor);
 
         LayerDrawable layerDrawable = new LayerDrawable(new Drawable[] { background, foreground });
@@ -231,5 +231,14 @@ class IconUtil {
 
         layerDrawable.setBounds(0, 0, outerSizePx, outerSizePx);
         return layerDrawable;
+    }
+
+    private static Drawable mutateDrawable(Resources res, Drawable drawable) {
+        Drawable.ConstantState cs = drawable.getConstantState();
+        if (cs != null) {
+            return cs.newDrawable(res).mutate();
+        } else {
+            return drawable.mutate();
+        }
     }
 }
