@@ -143,6 +143,7 @@ class DeviceDetailsMoreSettingsFragment : DashboardFragment() {
                 formatter.getInvisibleBluetoothProfiles(
                     FragmentTypeModel.DeviceDetailsMoreSettingsFragment
                 ),
+                false,
             ),
             BluetoothDetailsAudioDeviceTypeController(
                 context,

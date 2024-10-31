@@ -36,10 +36,11 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 public class AdaptiveConnectivityTogglePreferenceControllerTest {
 
-    private static final String PREF_KEY = "adaptive_connectivity";
+    private static final String PREF_KEY = "adaptive_connectivity_enabled";
 
     @Mock(answer = RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -87,3 +88,4 @@ public class AdaptiveConnectivityTogglePreferenceControllerTest {
         verify(mWifiManager).setWifiScoringEnabled(false);
     }
 }
+// LINT.ThenChange(AdaptiveConnectivityTogglePreferenceTest.kt)
