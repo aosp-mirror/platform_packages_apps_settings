@@ -16,7 +16,6 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.util.Log;
 
@@ -30,6 +29,7 @@ import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.utils.ThreadUtils;
 
 public class AudioSharingBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         implements Preference.OnPreferenceClickListener {
@@ -73,7 +73,9 @@ public class AudioSharingBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     @Override
     public boolean onPreferenceClick(Preference preference) {
         mMetricsFeatureProvider.logClickedPreference(preference, mMetricsCategory);
-        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_AUDIO_SHARING_DEVICE_CLICK);
+        var unused =
+                ThreadUtils.postOnBackgroundThread(
+                        () -> mDevicePreferenceCallback.onDeviceClick(preference));
         return true;
     }
 

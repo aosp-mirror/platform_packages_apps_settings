@@ -30,6 +30,7 @@ import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import android.os.CancellationSignal
 import android.os.Handler
 import com.android.settings.biometrics.GatekeeperPasswordProvider
+import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintEnrollmentRepository
 import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintEnrollmentRepositoryImpl
 import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepository
 import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSettingsRepositoryImpl
@@ -61,7 +62,7 @@ import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.last
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
@@ -106,9 +107,14 @@ class FingerprintManagerInteractorTest {
   private val flow: FingerprintFlow = Default
   private val maxFingerprints = 5
   private val currUser = MutableStateFlow(0)
+  private lateinit var fingerprintEnrollRepo: FingerprintEnrollmentRepository
   private val userRepo =
     object : UserRepo {
       override val currentUser: Flow<Int> = currUser
+
+      override fun updateUser(user: Int) {
+        currUser.update { user }
+      }
     }
 
   @Before
@@ -133,17 +139,18 @@ class FingerprintManagerInteractorTest {
       }
 
     val settingsRepository = FingerprintSettingsRepositoryImpl(maxFingerprints)
-    val fingerprintEnrollmentRepository =
+    fingerprintEnrollRepo =
       FingerprintEnrollmentRepositoryImpl(
         fingerprintManager,
         userRepo,
         settingsRepository,
         backgroundDispatcher,
         backgroundScope,
+        fingerprintSensorRepository,
       )
 
     enrolledFingerprintsInteractorUnderTest =
-      EnrolledFingerprintsInteractorImpl(fingerprintManager, userId)
+      EnrolledFingerprintsInteractorImpl(fingerprintEnrollRepo)
     generateChallengeInteractorUnderTest =
       GenerateChallengeInteractorImpl(fingerprintManager, userId, gateKeeperPasswordProvider)
     removeFingerprintsInteractorUnderTest =
@@ -153,7 +160,7 @@ class FingerprintManagerInteractorTest {
     authenticateInteractorImplUnderTest = AuthenticateInteractorImpl(fingerprintManager, userId)
 
     canEnrollFingerprintsInteractorUnderTest =
-      CanEnrollFingerprintsInteractorImpl(fingerprintEnrollmentRepository)
+      CanEnrollFingerprintsInteractorImpl(fingerprintEnrollRepo)
 
     enrollInteractorUnderTest = EnrollFingerprintInteractorImpl(userId, fingerprintManager, flow)
   }
@@ -163,9 +170,16 @@ class FingerprintManagerInteractorTest {
     testScope.runTest {
       whenever(fingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(emptyList())
 
-      val emptyFingerprintList: List<Fingerprint> = emptyList()
-      assertThat(enrolledFingerprintsInteractorUnderTest.enrolledFingerprints.last())
-        .isEqualTo(emptyFingerprintList)
+      var list: List<FingerprintData>? = null
+      val job =
+        testScope.launch {
+          enrolledFingerprintsInteractorUnderTest.enrolledFingerprints.collect { list = it }
+        }
+
+      runCurrent()
+      job.cancelAndJoin()
+
+      assertThat(list!!.isEmpty())
     }
 
   @Test
@@ -174,10 +188,19 @@ class FingerprintManagerInteractorTest {
       val expected = Fingerprint("Finger 1,", 2, 3L)
       val fingerprintList: List<Fingerprint> = listOf(expected)
       whenever(fingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(fingerprintList)
+      // This causes the enrolled fingerprints to be updated
 
-      val list = enrolledFingerprintsInteractorUnderTest.enrolledFingerprints.last()
+      var list: List<FingerprintData>? = null
+      val job =
+        testScope.launch {
+          enrolledFingerprintsInteractorUnderTest.enrolledFingerprints.collect { list = it }
+        }
+
+      runCurrent()
+      job.cancelAndJoin()
+
       assertThat(list!!.size).isEqualTo(fingerprintList.size)
-      val actual = list[0]
+      val actual = list!![0]
       assertThat(actual.name).isEqualTo(expected.name)
       assertThat(actual.fingerId).isEqualTo(expected.biometricId)
       assertThat(actual.deviceId).isEqualTo(expected.deviceId)
@@ -220,11 +243,7 @@ class FingerprintManagerInteractorTest {
       whenever(fingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(fingerprintList)
 
       var result: Boolean? = null
-      val job =
-        testScope.launch {
-          canEnrollFingerprintsInteractorUnderTest.canEnrollFingerprints.collect { result = it }
-        }
-
+      val job = testScope.launch { fingerprintEnrollRepo.canEnrollUser.collect { result = it } }
       runCurrent()
       job.cancelAndJoin()
 

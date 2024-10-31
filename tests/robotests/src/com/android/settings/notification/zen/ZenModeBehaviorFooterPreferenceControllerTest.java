@@ -43,7 +43,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.notification.zen.AbstractZenModePreferenceController.ZenModeConfigWrapper;
-import com.android.settings.notification.zen.ZenModeBehaviorFooterPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -206,7 +205,7 @@ public class ZenModeBehaviorFooterPreferenceControllerTest {
         ZenRule injectedRule = spy(new ZenRule());
         injectedRule.zenMode = ZEN_MODE_ALARMS;
         injectedRule.component = mock(ComponentName.class);
-        when(injectedRule.isAutomaticActive()).thenReturn(true);
+        when(injectedRule.isActive()).thenReturn(true);
         when(injectedRule.component.getPackageName()).thenReturn(TEST_APP_NAME);
         injectedAutomaticRules.put("testid", injectedRule);
 
@@ -226,7 +225,7 @@ public class ZenModeBehaviorFooterPreferenceControllerTest {
         ZenRule injectedRule = spy(new ZenRule());
         injectedRule.zenMode = ZEN_MODE_NO_INTERRUPTIONS;
         injectedRule.component = mock(ComponentName.class);
-        when(injectedRule.isAutomaticActive()).thenReturn(true);
+        when(injectedRule.isActive()).thenReturn(true);
         when(injectedRule.component.getPackageName()).thenReturn(TEST_APP_NAME);
         injectedAutomaticRules.put("testid", injectedRule);
 

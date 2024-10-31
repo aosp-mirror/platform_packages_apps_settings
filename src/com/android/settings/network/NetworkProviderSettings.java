@@ -19,6 +19,8 @@ package com.android.settings.network;
 import static android.net.wifi.WifiConfiguration.NetworkSelectionStatus.NETWORK_SELECTION_ENABLED;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
+import static com.android.wifitrackerlib.WifiEntry.CONNECTED_STATE_CONNECTED;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
@@ -62,8 +64,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
-import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.location.WifiScanningFragment;
@@ -102,7 +104,7 @@ import java.util.Optional;
  * UI for Mobile network and Wi-Fi network settings.
  */
 @SearchIndexable
-public class NetworkProviderSettings extends RestrictedSettingsFragment
+public class NetworkProviderSettings extends RestrictedDashboardFragment
         implements Indexable, WifiPickerTracker.WifiPickerTrackerCallback,
         WifiDialog2.WifiDialog2Listener, DialogInterface.OnDismissListener,
         AirplaneModeEnabler.OnAirplaneModeChangedListener, InternetUpdater.InternetChangeListener {
@@ -354,9 +356,17 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         mIsGuest = userManager.isGuestUser();
     }
 
-    private void addPreferences() {
-        addPreferencesFromResource(R.xml.network_provider_settings);
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
 
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.network_provider_settings;
+    }
+
+    private void addPreferences() {
         mAirplaneModeMsgPreference = findPreference(PREF_KEY_AIRPLANE_MODE_MSG);
         updateAirplaneModeMsgPreference(mAirplaneModeEnabler.isAirplaneModeOn() /* visible */);
         mConnectedWifiEntryPreferenceCategory = findPreference(PREF_KEY_CONNECTED_ACCESS_POINTS);
@@ -669,7 +679,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     void addModifyMenuIfSuitable(ContextMenu menu, WifiEntry wifiEntry) {
         if (mIsAdmin && wifiEntry.isSaved()
-                && wifiEntry.getConnectedState() != WifiEntry.CONNECTED_STATE_CONNECTED) {
+                && wifiEntry.getConnectedState() != CONNECTED_STATE_CONNECTED) {
             menu.add(Menu.NONE, MENU_ID_MODIFY, 0 /* order */, R.string.wifi_modify);
         }
     }
@@ -765,7 +775,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     private void showDialog(WifiEntry wifiEntry, int dialogMode) {
         if (WifiUtils.isNetworkLockedDown(getActivity(), wifiEntry.getWifiConfiguration())
-                && wifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED) {
+                && wifiEntry.getConnectedState() == CONNECTED_STATE_CONNECTED) {
             RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(),
                     RestrictedLockUtilsInternal.getDeviceOwner(getActivity()));
             return;
@@ -1068,8 +1078,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     void launchNetworkDetailsFragment(LongPressWifiEntryPreference pref) {
         final WifiEntry wifiEntry = pref.getWifiEntry();
-        if (!wifiEntry.isSaved()) {
-            Log.w(TAG, "launchNetworkDetailsFragment: Don't launch because WifiEntry isn't saved!");
+        if (!wifiEntry.isSaved() && wifiEntry.getConnectedState() != CONNECTED_STATE_CONNECTED) {
+            Log.w(TAG, "Don't launch Wi-Fi details because WifiEntry is not saved or connected!");
             return;
         }
         final Context context = requireContext();
@@ -1497,5 +1507,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         protected int getIconColorAttr() {
             return android.R.attr.colorControlNormal;
         }
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return NetworkProviderScreen.KEY;
     }
 }

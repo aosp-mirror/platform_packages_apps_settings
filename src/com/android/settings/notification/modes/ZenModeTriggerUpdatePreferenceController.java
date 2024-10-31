@@ -40,6 +40,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
@@ -108,7 +109,9 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
                     tryParseScheduleConditionId(mode.getRule().getConditionId());
             if (schedule != null) {
                 preference.setTitle(SystemZenRules.getTimeSummary(mContext, schedule));
-                preference.setSummary(SystemZenRules.getShortDaysSummary(mContext, schedule));
+                preference.setSummary(Utils.createAccessibleSequence(
+                        SystemZenRules.getDaysOfWeekShort(mContext, schedule),
+                        SystemZenRules.getDaysOfWeekFull(mContext, schedule)));
             } else {
                 // Fallback, but shouldn't happen.
                 Log.wtf(TAG, "SCHEDULE_TIME mode without schedule: " + mode);
@@ -174,8 +177,8 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
         @DrawableRes int icon;
         if (mode.getType() == TYPE_BEDTIME) {
             icon = com.android.internal.R.drawable.ic_zen_mode_type_schedule_time; // Clock
-        } else if (mode.getType() == TYPE_DRIVING) {
-            icon = com.android.internal.R.drawable.ic_zen_mode_type_driving; // Car
+        } else if (mode.getType() == TYPE_DRIVING && configurationIntent != null) {
+            icon = R.drawable.ic_zen_mode_trigger_with_settings; // Gear
         } else {
             icon = configurationIntent != null ? R.drawable.ic_zen_mode_trigger_with_activity
                     : R.drawable.ic_zen_mode_trigger_without_activity;

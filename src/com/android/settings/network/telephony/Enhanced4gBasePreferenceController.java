@@ -34,7 +34,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
 import com.android.internal.telephony.flags.Flags;
-import com.android.internal.telephony.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.network.ims.VolteQueryImsState;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -56,8 +55,6 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
     Preference mPreference;
     private PhoneCallStateTelephonyCallback mTelephonyCallback;
     private boolean mShow5gLimitedDialog;
-    boolean mIsNrEnabledFromCarrierConfig;
-    private boolean mHas5gCapability;
     private Integer mCallState;
     private final List<On4gLteUpdateListener> m4gLteListeners;
 
@@ -94,9 +91,6 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         mShow5gLimitedDialog = carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_VOLTE_5G_LIMITED_ALERT_DIALOG_BOOL);
 
-        int[] nrAvailabilities = carrierConfig.getIntArray(
-                CarrierConfigManager.KEY_CARRIER_NR_AVAILABILITIES_INT_ARRAY);
-        mIsNrEnabledFromCarrierConfig = !ArrayUtils.isEmpty(nrAvailabilities);
         return this;
     }
 
@@ -247,10 +241,6 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
             }
             mTelephonyManager.registerTelephonyCallback(
                     mContext.getMainExecutor(), mTelephonyCallback);
-
-            final long supportedRadioBitmask = mTelephonyManager.getSupportedRadioAccessFamily();
-            mHas5gCapability =
-                    (supportedRadioBitmask & TelephonyManager.NETWORK_TYPE_BITMASK_NR) > 0;
         }
 
         public void unregister() {
@@ -269,8 +259,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
     }
 
     private boolean isDialogNeeded() {
-        Log.d(TAG, "Has5gCapability:" + mHas5gCapability);
-        return mShow5gLimitedDialog && mHas5gCapability && mIsNrEnabledFromCarrierConfig;
+        return mShow5gLimitedDialog && new NrRepository(mContext).isNrAvailable(mSubId);
     }
 
     private void show5gLimitedDialog(ImsMmTelManager imsMmTelManager) {

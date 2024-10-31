@@ -169,6 +169,19 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
         preferenceScreen.removeAll();
         List<InputMethodInfo> infoList =
                 mImm.getEnabledInputMethodListAsUser(UserHandle.of(mUserId));
+
+        // Remove IMEs with no suitable ime subtypes
+        infoList.removeIf(imeInfo -> {
+            List<InputMethodSubtype> subtypes =
+                    mImm.getEnabledInputMethodSubtypeListAsUser(imeInfo.getId(), true,
+                            UserHandle.of(mUserId));
+            for (InputMethodSubtype subtype : subtypes) {
+                if (subtype.isSuitableForPhysicalKeyboardLayoutMapping()) {
+                    return false;
+                }
+            }
+            return true;
+        });
         Collections.sort(infoList, new Comparator<InputMethodInfo>() {
             public int compare(InputMethodInfo o1, InputMethodInfo o2) {
                 String s1 = o1.loadLabel(mContext.getPackageManager()).toString();

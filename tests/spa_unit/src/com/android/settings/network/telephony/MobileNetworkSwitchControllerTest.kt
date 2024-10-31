@@ -62,10 +62,15 @@ class MobileNetworkSwitchControllerTest {
         on { isSubscriptionEnabledFlow(SUB_ID) } doReturn flowOf(false)
     }
 
+    private val mockSubscriptionActivationRepository = mock<SubscriptionActivationRepository> {
+        on { isActivationChangeableFlow() } doReturn flowOf(true)
+    }
+
     private val controller = MobileNetworkSwitchController(
         context = context,
         preferenceKey = TEST_KEY,
         subscriptionRepository = mockSubscriptionRepository,
+        subscriptionActivationRepository = mockSubscriptionActivationRepository,
     ).apply { init(SUB_ID) }
 
     @Test

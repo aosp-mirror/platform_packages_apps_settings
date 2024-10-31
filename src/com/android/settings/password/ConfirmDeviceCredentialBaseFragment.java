@@ -27,7 +27,6 @@ import android.app.KeyguardManager;
 import android.app.RemoteLockscreenValidationSession;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.ManagedSubscriptionsPolicy;
-import android.app.admin.flags.Flags;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -198,8 +197,8 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         mCancelButton = view.findViewById(R.id.cancelButton);
         boolean showCancelButton = mRemoteValidation || getActivity().getIntent().getBooleanExtra(
                 SHOW_CANCEL_BUTTON, false);
-        boolean hasAlternateButton = (mFrp || mRemoteValidation) && !TextUtils.isEmpty(
-                mAlternateButtonText);
+        boolean hasAlternateButton = (mFrp || mRemoteValidation || mRepairMode)
+                && !TextUtils.isEmpty(mAlternateButtonText);
         mCancelButton.setVisibility(showCancelButton || hasAlternateButton
                 ? View.VISIBLE : View.GONE);
         if (hasAlternateButton) {
@@ -375,13 +374,8 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     private int getUserTypeForWipe() {
         final UserInfo userToBeWiped = mUserManager.getUserInfo(
                 mDevicePolicyManager.getProfileWithMinimumFailedPasswordsForWipe(mEffectiveUserId));
-        UserHandle primaryUser = UserHandle.SYSTEM;
-        if (Flags.headlessSingleUserFixes()) {
-            UserHandle mainUser = mUserManager.getMainUser();
-            if (mainUser != null ) {
-                primaryUser = mainUser;
-            }
-        }
+        UserHandle mainUser = mUserManager.getMainUser();
+        UserHandle primaryUser = mainUser != null ? mainUser : UserHandle.SYSTEM;
         if (userToBeWiped == null || userToBeWiped.getUserHandle().equals(primaryUser)) {
             return USER_TYPE_PRIMARY;
         } else if (userToBeWiped.isManagedProfile()) {

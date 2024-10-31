@@ -19,6 +19,7 @@ package com.android.settings.network
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.UserHandle;
 import android.provider.Settings
 import android.telephony.SubscriptionManager
 import android.util.Log
@@ -53,8 +54,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.LifecycleRegistry
 import com.android.settings.R
 import com.android.settings.SidecarFragment
+import com.android.settings.network.telephony.SimRepository
 import com.android.settings.network.telephony.SubscriptionActionDialogActivity
-import com.android.settings.network.telephony.SubscriptionRepository
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity
 import com.android.settings.network.telephony.requireSubscriptionManager
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
@@ -221,6 +222,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
                         "showRestartDialog:${showRestartDialog.value}")
                 showStartingDialog.value = false
             } else if (onboardingService.activeSubInfoList.isNotEmpty()) {
+                Log.d(TAG, "status: showStartingDialog.value:${showStartingDialog.value}")
                 showStartingDialog.value = true
             }
         }
@@ -328,20 +330,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
     @Composable
     fun ErrorDialogImpl(){
         // EuiccSlotSidecar showErrorDialog
-        val errorDialogPresenterForEuiccSlotSidecar = rememberAlertDialogPresenter(
-                confirmButton = AlertDialogButton(
-                        stringResource(android.R.string.ok)
-                ) {
-                    finish()
-                },
-                title = stringResource(R.string.privileged_action_disable_fail_title),
-                text = {
-                    Text(stringResource(R.string.privileged_action_disable_fail_text))
-                },
-        )
-
-        // RemovableSlotSidecar showErrorDialog
-        val errorDialogPresenterForRemovableSlotSidecar = rememberAlertDialogPresenter(
+        val errorDialogPresenterForSimSwitching = rememberAlertDialogPresenter(
                 confirmButton = AlertDialogButton(
                         stringResource(android.R.string.ok)
                 ) {
@@ -368,8 +357,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
 
         // show error
         when (showError.value) {
-            ErrorType.ERROR_EUICC_SLOT -> errorDialogPresenterForEuiccSlotSidecar.open()
-            ErrorType.ERROR_REMOVABLE_SLOT -> errorDialogPresenterForRemovableSlotSidecar.open()
+            ErrorType.ERROR_SIM_SWITCHING -> errorDialogPresenterForSimSwitching.open()
             ErrorType.ERROR_ENABLE_DSDS -> errorDialogPresenterForMultiSimSidecar.open()
             else -> {}
         }
@@ -455,7 +443,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
             SidecarFragment.State.ERROR -> {
                 Log.i(TAG, "Failed to enable the eSIM profile.")
                 switchToEuiccSubscriptionSidecar!!.reset()
-                showError.value = ErrorType.ERROR_EUICC_SLOT
+                showError.value = ErrorType.ERROR_SIM_SWITCHING
                 callbackListener(CallbackType.CALLBACK_ERROR)
             }
         }
@@ -475,18 +463,18 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
             SidecarFragment.State.ERROR -> {
                 Log.e(TAG, "Failed switching to removable slot.")
                 switchToRemovableSlotSidecar!!.reset()
-                showError.value = ErrorType.ERROR_REMOVABLE_SLOT
+                showError.value = ErrorType.ERROR_SIM_SWITCHING
                 callbackListener(CallbackType.CALLBACK_ERROR)
             }
         }
     }
 
     fun handleEnableMultiSimSidecarStateChange() {
-        showDsdsProgressDialog.value = false
         when (enableMultiSimSidecar!!.state) {
             SidecarFragment.State.SUCCESS -> {
                 enableMultiSimSidecar!!.reset()
                 Log.i(TAG, "Successfully switched to DSDS without reboot.")
+                showDsdsProgressDialog.value = false
                 // refresh data
                 initServiceData(this, onboardingService.targetSubId, callbackListener)
                 startSimOnboardingProvider()
@@ -494,6 +482,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
 
             SidecarFragment.State.ERROR -> {
                 enableMultiSimSidecar!!.reset()
+                showDsdsProgressDialog.value = false
                 Log.i(TAG, "Failed to switch to DSDS without rebooting.")
                 showError.value = ErrorType.ERROR_ENABLE_DSDS
                 callbackListener(CallbackType.CALLBACK_ERROR)
@@ -590,13 +579,17 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
             subId: Int,
             isNewTask: Boolean = false,
         ) {
+            if (!SimRepository(context).canEnterMobileNetworkPage()) {
+                Log.i(TAG, "Unable to start SimOnboardingActivity due to missing permissions")
+                return
+            }
             val intent = Intent(context, SimOnboardingActivity::class.java).apply {
                 putExtra(SUB_ID, subId)
                 if(isNewTask) {
                     setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }
             }
-            context.startActivity(intent)
+            context.startActivityAsUser(intent, UserHandle.CURRENT)
         }
 
         var onboardingService:SimOnboardingService = SimOnboardingService()
@@ -605,9 +598,8 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
 
         enum class ErrorType(val value:Int){
             ERROR_NONE(-1),
-            ERROR_EUICC_SLOT(1),
-            ERROR_REMOVABLE_SLOT(2),
-            ERROR_ENABLE_DSDS(3)
+            ERROR_SIM_SWITCHING(1),
+            ERROR_ENABLE_DSDS(2)
         }
 
         enum class CallbackType(val value:Int){

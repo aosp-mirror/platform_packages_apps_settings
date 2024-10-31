@@ -85,7 +85,7 @@ public class ZenModesListAddModePreferenceControllerTest {
         mContext = RuntimeEnvironment.getApplication();
         Function<ApplicationInfo, Drawable> appIconRetriever = appInfo -> new ColorDrawable();
 
-        mController = new ZenModesListAddModePreferenceController(mContext, mListener,
+        mController = new ZenModesListAddModePreferenceController(mContext, "add_mode", mListener,
                 mZenServiceListing, mConfigurationActivityHelper, mNm, mPm, appIconRetriever,
                 MoreExecutors.newDirectExecutorService(), MoreExecutors.directExecutor());
 

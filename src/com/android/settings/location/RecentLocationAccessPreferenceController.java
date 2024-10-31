@@ -15,13 +15,16 @@ package com.android.settings.location;
 
 import static android.Manifest.permission_group.LOCATION;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.icu.text.RelativeDateTimeFormatter;
+import android.location.LocationManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -43,6 +46,8 @@ import java.util.List;
  * Preference controller that handles the display of apps that access locations.
  */
 public class RecentLocationAccessPreferenceController extends LocationBasePreferenceController {
+    private static final String TAG = RecentLocationAccessPreferenceController.class
+            .getSimpleName();
     public static final int MAX_APPS = 3;
     @VisibleForTesting
     RecentAppOpsAccess mRecentLocationApps;
@@ -51,7 +56,8 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
     private boolean mShowSystem = false;
     private boolean mSystemSettingChanged = false;
 
-    private static class PackageEntryClickedListener implements
+    @VisibleForTesting
+    static class PackageEntryClickedListener implements
             Preference.OnPreferenceClickListener {
         private final Context mContext;
         private final String mPackage;
@@ -66,12 +72,28 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
 
         @Override
         public boolean onPreferenceClick(Preference preference) {
-            final Intent intent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSION);
-            intent.setPackage(mContext.getPackageManager().getPermissionControllerPackageName());
-            intent.putExtra(Intent.EXTRA_PERMISSION_GROUP_NAME, LOCATION);
-            intent.putExtra(Intent.EXTRA_PACKAGE_NAME, mPackage);
-            intent.putExtra(Intent.EXTRA_USER, mUserHandle);
-            mContext.startActivity(intent);
+            if (mPackage.equals(mContext.getSystemService(LocationManager.class)
+                    .getExtraLocationControllerPackage())) {
+                try {
+                    mContext.startActivityAsUser(
+                            new Intent(Settings.ACTION_LOCATION_CONTROLLER_EXTRA_PACKAGE_SETTINGS),
+                            mUserHandle);
+                } catch (ActivityNotFoundException e) {
+                    // In rare cases where location controller extra package is set, but
+                    // no activity exists to handle the location controller extra package settings
+                    // intent, log an error instead of crashing.
+                    Log.e(TAG, "No activity to handle "
+                            + "android.settings.LOCATION_CONTROLLER_EXTRA_PACKAGE_SETTINGS");
+                }
+            } else {
+                final Intent intent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSION);
+                intent.setPackage(mContext.getPackageManager()
+                        .getPermissionControllerPackageName());
+                intent.putExtra(Intent.EXTRA_PERMISSION_GROUP_NAME, LOCATION);
+                intent.putExtra(Intent.EXTRA_PACKAGE_NAME, mPackage);
+                intent.putExtra(Intent.EXTRA_USER, mUserHandle);
+                mContext.startActivity(intent);
+            }
             return true;
         }
     }

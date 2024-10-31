@@ -25,22 +25,25 @@
         android:layout="@layout/settings_entity_header"
         android:selectable="false"/>
 
-    <com.android.settingslib.widget.MainSwitchPreference
-        android:key="allow_background_usage"
-        android:title="@string/manager_battery_usage_allow_background_usage_title"
-        settings:controller="com.android.settings.fuelgauge.AllowBackgroundPreferenceController"/>
+    <PreferenceCategory
+        android:key="battery_optimization_mode_category"
+        android:layout="@layout/settingslib_preference_category_no_title"
+        settings:controller="com.android.settings.fuelgauge.BatteryOptimizationModePreferenceController">
 
-    <com.android.settingslib.widget.SelectorWithWidgetPreference
-        android:key="optimized_preference"
-        android:title="@string/manager_battery_usage_optimized_title"
-        android:summary="@string/manager_battery_usage_optimized_summary"
-        settings:controller="com.android.settings.fuelgauge.OptimizedPreferenceController"/>
+        <com.android.settingslib.widget.MainSwitchPreference
+            android:key="background_usage_allowability_switch"
+            android:title="@string/manager_battery_usage_allow_background_usage_title"/>
 
-    <com.android.settingslib.widget.SelectorWithWidgetPreference
-        android:key="unrestricted_preference"
-        android:title="@string/manager_battery_usage_unrestricted_title"
-        android:summary="@string/manager_battery_usage_unrestricted_summary"
-        settings:controller="com.android.settings.fuelgauge.UnrestrictedPreferenceController"/>
+        <com.android.settingslib.widget.SelectorWithWidgetPreference
+            android:key="optimized_preference"
+            android:title="@string/manager_battery_usage_optimized_title"
+            android:summary="@string/manager_battery_usage_optimized_summary"/>
+
+        <com.android.settingslib.widget.SelectorWithWidgetPreference
+            android:key="unrestricted_preference"
+            android:title="@string/manager_battery_usage_unrestricted_title"
+            android:summary="@string/manager_battery_usage_unrestricted_summary"/>
+    </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="app_usage_footer_preference"
