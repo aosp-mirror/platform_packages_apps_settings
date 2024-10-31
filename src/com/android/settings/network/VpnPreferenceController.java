@@ -26,7 +26,6 @@ import android.net.VpnManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.provider.SettingsSlicesContract;
 import android.security.Credentials;
 import android.security.LegacyVpnProfileStore;
 import android.util.Log;
@@ -39,7 +38,6 @@ import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.vpn2.VpnInfoPreference;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -50,7 +48,6 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Function;
 
 public class VpnPreferenceController extends AbstractPreferenceController
@@ -87,7 +84,7 @@ public class VpnPreferenceController extends AbstractPreferenceController
                 Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
         // Manually set dependencies for Wifi when not toggleable.
         if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_WIFI)) {
-            preference.setDependency(SettingsSlicesContract.KEY_AIRPLANE_MODE);
+            preference.setDependency(Settings.Global.AIRPLANE_MODE_ON);
         }
         return preference;
     }
