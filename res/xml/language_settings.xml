@@ -82,6 +82,17 @@
         </Preference>
 
         <Preference
+            android:key="key_measurement_system"
+            android:title="@string/measurement_system_preferences_title"
+            android:summary="@string/default_string_of_regional_preference"
+            settings:controller="com.android.settings.regionalpreferences.MeasurementSystemController"
+            settings:fragment="com.android.settings.regionalpreferences.MeasurementSystemItemFragment">
+            <extra
+                android:name="arg_key_regional_preference"
+                android:value="ms"/>
+        </Preference>
+
+        <Preference
             android:key="first_day_of_week_preference"
             android:title="@string/first_day_of_week_preferences_title"
             android:summary="@string/default_string_of_regional_preference"
