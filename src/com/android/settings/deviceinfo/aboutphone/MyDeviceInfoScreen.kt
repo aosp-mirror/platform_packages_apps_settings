@@ -13,49 +13,50 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.notification
+
+package com.android.settings.deviceinfo.aboutphone
 
 import android.content.Context
-import androidx.fragment.app.Fragment
+import android.os.Build
+import android.provider.Settings
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceIconProvider
+import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen
-class SoundScreen : PreferenceScreenCreator, PreferenceIconProvider {
+class MyDeviceInfoScreen :
+    PreferenceScreenCreator, PreferenceSummaryProvider, PreferenceIconProvider {
     override val key: String
         get() = KEY
 
     override val title: Int
-        get() = R.string.sound_settings
+        get() = R.string.about_settings
 
-    override val keywords: Int
-        get() = R.string.keywords_sounds
+    override fun getSummary(context: Context): CharSequence? {
+        return Settings.Global.getString(context.contentResolver, Settings.Global.DEVICE_NAME)
+            ?: Build.MODEL
+    }
 
-    override fun getIcon(context: Context) =
-        when {
-            Flags.homepageRevamp() -> R.drawable.ic_volume_up_filled
-            else -> R.drawable.ic_volume_up_24dp
+    override fun getIcon(context: Context): Int {
+        return when (Flags.homepageRevamp()) {
+            true -> R.drawable.ic_settings_about_device_filled
+            false -> R.drawable.ic_settings_about_device
         }
+    }
 
-    override fun isFlagEnabled(context: Context): Boolean = Flags.catalystSoundScreen()
+    override fun isFlagEnabled(context: Context) = Flags.catalystMyDeviceInfoPrefScreen()
+
+    override fun fragmentClass() = MyDeviceInfoFragment::class.java
+
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
 
     override fun hasCompleteHierarchy() = false
 
-    override fun fragmentClass(): Class<out Fragment>? = SoundSettings::class.java
-
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(this) {
-            +MediaVolumePreference() order -180
-            +CallVolumePreference() order -170
-            +SeparateRingVolumePreference() order -155
-            +DialPadTonePreference() order -50
-        }
-
     companion object {
-        const val KEY = "sound_screen"
+        const val KEY = "my_device_info_pref_screen"
     }
 }

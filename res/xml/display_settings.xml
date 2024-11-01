@@ -28,6 +28,7 @@
         <com.android.settingslib.RestrictedPreference
             android:key="@string/preference_key_brightness_level"
             android:title="@string/brightness"
+            android:persistent="false"
             settings:keywords="@string/keywords_display_brightness_level"
             settings:useAdminDisabledSummary="true"
             settings:userRestriction="no_config_brightness"/>
