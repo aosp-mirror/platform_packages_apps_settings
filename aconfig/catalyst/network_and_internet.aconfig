@@ -23,6 +23,13 @@ flag {
 }
 
 flag {
+  name: "catalyst_tether_settings"
+  namespace: "android_settings"
+  description: "Flag for Hotspot & tethering"
+  bug: "323791114"
+}
+
+flag {
   name: "catalyst_adaptive_connectivity"
   namespace: "android_settings"
   description: "Flag for Adaptive connectivity"

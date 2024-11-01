@@ -17,6 +17,8 @@
 package com.android.settings;
 
 
+import static android.content.Context.MODE_PRIVATE;
+
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.ProgressDialog;
@@ -25,6 +27,7 @@ import android.app.admin.FactoryResetProtectionPolicy;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,6 +36,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.service.oemlock.OemLockManager;
 import android.service.persistentdata.PersistentDataBlockManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +46,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
+import com.android.settings.network.telephony.SubscriptionActionDialogActivity;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -90,7 +95,7 @@ public class MainClearConfirm extends InstrumentedFragment {
             } else {
                 pdbManager = null;
             }
-
+            setSimDialogProgressState();
             if (shouldWipePersistentDataBlock(pdbManager)) {
 
                 new AsyncTask<Void, Void, Void>() {
@@ -127,6 +132,17 @@ public class MainClearConfirm extends InstrumentedFragment {
                 }.execute();
             } else {
                 doMainClear();
+            }
+
+        }
+
+        private void setSimDialogProgressState() {
+            if (getActivity() != null) {
+                final SharedPreferences prefs = getActivity().getSharedPreferences(
+                        SubscriptionActionDialogActivity.SIM_ACTION_DIALOG_PREFS, MODE_PRIVATE);
+                prefs.edit().putInt(SubscriptionActionDialogActivity.KEY_PROGRESS_STATE,
+                        SubscriptionActionDialogActivity.PROGRESS_IS_SHOWING).apply();
+                Log.d(TAG, "SIM dialog setProgressState: 1");
             }
         }
 

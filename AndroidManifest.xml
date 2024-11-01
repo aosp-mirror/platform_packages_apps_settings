@@ -3365,6 +3365,21 @@
                        android:value="@string/menu_key_battery"/>
         </activity>
 
+        <activity
+            android:name="Settings$PowerUsageAdvancedActivity"
+            android:label="@string/advanced_battery_title"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.battery.action.POWER_USAGE_ADVANCED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.fuelgauge.batteryusage.PowerUsageAdvanced" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_battery"/>
+        </activity>
+
         <provider
             android:name=".fuelgauge.batteryusage.BatteryUsageContentProvider"
             android:enabled="true"
