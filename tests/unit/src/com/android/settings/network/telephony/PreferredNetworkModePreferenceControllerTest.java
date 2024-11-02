@@ -40,7 +40,6 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.network.CarrierConfigCache;
-import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
@@ -99,7 +98,7 @@ public class PreferredNetworkModePreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.getValue()).isEqualTo(
-                String.valueOf(TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA));
+                String.valueOf(TelephonyManager.NETWORK_MODE_TDSCDMA_GSM_WCDMA));
         assertThat(mPreference.getSummary()).isEqualTo(
                 ResourcesUtils.getResourcesString(mContext,
                         "preferred_network_mode_tdscdma_gsm_wcdma_summary"));
@@ -108,11 +107,10 @@ public class PreferredNetworkModePreferenceControllerTest {
     @Test
     public void onPreferenceChange_updateNetworkMode() {
         mController.onPreferenceChange(mPreference,
-                String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA));
+                String.valueOf(TelephonyManager.NETWORK_MODE_LTE_TDSCDMA));
 
         verify(mTelephonyManager, times(1)).setAllowedNetworkTypesForReason(
                 TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER,
-                RadioAccessFamily.getRafFromNetworkType(
-                        TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA));
+                RadioAccessFamily.getRafFromNetworkType(TelephonyManager.NETWORK_MODE_LTE_TDSCDMA));
     }
 }
