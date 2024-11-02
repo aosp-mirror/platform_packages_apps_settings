@@ -78,7 +78,15 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
             setTheme(SetupWizardUtils.getTheme(this, getIntent()));
             mConfirmCredentialTheme = ConfirmCredentialTheme.NORMAL;
         }
-        ThemeHelper.trySetDynamicColor(this);
+
+        if (ThemeHelper.shouldApplyGlifExpressiveStyle(getApplicationContext())) {
+            if (!ThemeHelper.trySetSuwTheme(this)) {
+                setTheme(ThemeHelper.getSuwDefaultTheme(getApplicationContext()));
+                ThemeHelper.trySetDynamicColor(this);
+            }
+        } else {
+            ThemeHelper.trySetDynamicColor(this);
+        }
         super.onCreate(savedState);
 
         if (mConfirmCredentialTheme == ConfirmCredentialTheme.NORMAL) {
