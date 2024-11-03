@@ -107,7 +107,8 @@ class BrightnessLevelRestrictedPreference :
         context.displayManager.registerDisplayListener(
             listener,
             HandlerExecutor.main,
-            DisplayManager.EVENT_FLAG_DISPLAY_BRIGHTNESS,
+            /* eventFlags= */ 0,
+            DisplayManager.PRIVATE_EVENT_FLAG_DISPLAY_BRIGHTNESS,
         )
     }
 
