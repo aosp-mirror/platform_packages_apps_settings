@@ -52,6 +52,7 @@ class DisplayScreen :
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {
         +BrightnessLevelRestrictedPreference()
+        +AutoBrightnessScreen.KEY
         +DarkModeScreen.KEY
         +PeakRefreshRateSwitchPreference()
     }
