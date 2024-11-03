@@ -22,6 +22,7 @@ import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settingslib.preference.createAndBindWidget
 import com.android.settingslib.widget.MainSwitchPreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -78,10 +79,6 @@ class AdaptiveConnectivityTogglePreferenceTest {
     }
 
     private fun getMainSwitchPreferenceCompat(): MainSwitchPreference =
-        adaptiveConnectivityTogglePreference.run {
-            val preference = createWidget(appContext)
-            bind(preference, this)
-            preference as MainSwitchPreference
-        }
+        adaptiveConnectivityTogglePreference.createAndBindWidget(appContext)
 }
 // LINT.ThenChange(AdaptiveConnectivityTogglePreferenceControllerTest.java)
