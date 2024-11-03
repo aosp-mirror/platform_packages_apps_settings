@@ -28,6 +28,7 @@ import com.android.settingslib.PrimarySwitchPreference
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import com.android.settingslib.widget.theme.R
 import com.google.common.truth.Truth.assertThat
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
@@ -35,6 +36,7 @@ import org.robolectric.annotation.Config
 // LINT.IfChange
 @RunWith(AndroidJUnit4::class)
 @Config(shadows = [SettingsShadowResources::class])
+@Ignore("robolectric runtime")
 class AutoBrightnessScreenTest {
 
     private val context: Context = ApplicationProvider.getApplicationContext()
