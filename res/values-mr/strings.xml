@@ -120,6 +120,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"ब्लूटूथ LE ऑडिओ बंद करा"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"डिव्हाइसला LE ऑडिओ हार्डवेअरसंबंधित क्षमतांचा सपोर्ट असल्यास, ब्लूटूथ LE ऑडिओ वैशिष्‍ट्य बंद करते."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"ब्लूटूथ LE ऑडिओ मोड"</string>
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
+    <skip />
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
+    <skip />
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"डिव्हाइस तपशील यांत LE ऑडिओ टॉगल दाखवा"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"ब्लूटूथ LE ऑडिओ अनुमती सूची बायपास करा"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"अनुमती सूचीच्या निकषांची पूर्तता करण्यासाठी LE ऑडिओ पेरिफेरलची पडताळणी केली नसली, तरीही बाय डीफॉल्ट LE ऑडिओ वापरा."</string>
@@ -668,7 +672,7 @@
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"\'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' हटवा"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"तुम्ही तुमची फिंगरप्रिंट तुमचे कार्य प्रोफाइल अनलॉक करण्‍यासाठी, खरेदी ऑथोराइझ करण्‍यासाठी किंवा कार्य ॲप्समध्‍ये साइन इन करण्‍यासाठी वापरू शकणार नाही."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"एंक्रिप्शन"</string>
-    <string name="encrypted_summary" msgid="545623487587251207">"एंक्रिप्ट केले"</string>
+    <string name="encrypted_summary" msgid="545623487587251207">"एन्क्रिप्ट केले"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"स्क्रीन लॉक सेट करा"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"अतिरिक्त सुरक्षेसाठी, या डिव्हाइसकरिता पिन, पॅटर्न किंवा पासवर्ड सेट करा."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"स्क्रीन लॉक सेट करा"</string>
@@ -1959,11 +1963,19 @@
     <string name="sticky_keys" msgid="7317317044898161747">"स्टिकी की"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"की एकत्र धरून ठेवण्याऐवजी शॉर्टकटसाठी एकावेळी एक की प्रेस करा"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"माउस की"</string>
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"माउस की वापरा"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"पॉइंटर नियंत्रित करण्यासाठी तुमचा कीबोर्ड वापरा"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"माउस रिव्हर्स स्क्रोलिंग"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"पेज खाली हलवण्यासाठी वरती स्क्रोल करा"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"डावे व उजवे बटण स्वॅप करा"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"माऊसच्या डाव्या बटणाला तुमचे उजवे बटण म्हणून वापरा"</string>
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"<xliff:g id="KEYBOARD_NAME">%s</xliff:g> साठी माउस की"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"माउस पॉइंटर हलवण्यासाठी <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> की वापरा"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"प्राथमिक माउस बटणावर क्लिक करण्यासाठी <xliff:g id="CLICK_LABEL">%s</xliff:g> की वापरा"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"प्रेस करण्यासाठी <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> की वापरा आणि प्राथमिक माउस बटण धरून ठेवा"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"प्राथमिक माउस बटण रिलीझ करण्यासाठी <xliff:g id="RELEASE_LABEL">%s</xliff:g> की वापरा"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"स्क्रोल मोड टॉगल करण्यासाठी <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> वापरा. हे <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> की ला वरती, खाली, डावीकडील किंवा उजवीकडील दृश्यावर स्क्रोल करू देईल"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"दुय्यम माउस बटणावर क्लिक करण्यासाठी <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> की वापरा"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"कीबोर्ड शॉर्टकट"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"शॉर्टकटची सूची दाखवा"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"कार्य प्रोफाइल कीबोर्ड आणि टूल"</string>
@@ -2567,6 +2579,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"पॉवर वापर समायोजित करा"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"समाविष्ट पॅकेज"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"अ‍ॅप्स नेहमीप्रमाणे चालत आहेत"</string>
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"बॅटरी बदलण्याची शिफारस केली आहे"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"बॅटरी क्षमता आणि चार्जिंग परफॉर्मन्स कमी झाला असून, बॅटरी बदलण्याची शिफारस केली आहे."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"बॅटरीची पातळी कमी आहे"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"बॅटरी लाइफ वाढवण्यासाठी बॅटरी सेव्हर सुरू करा"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"बॅटरी लाइफ सुधारा"</string>
@@ -3407,7 +3421,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"आठवड्यातील दिवस सकाळी ९ - संध्याकाळी ५\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"कॅलेंडर इव्हेंट"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} अ‍ॅक्टिव्ह आहे}=2{{mode_1} आणि {mode_2} अ‍ॅक्टिव्ह आहेत}=3{{mode_1}, {mode_2} आणि{mode_3} अ‍ॅक्टिव्ह आहेत}other{{mode_1}, {mode_2} आणि आणखी # अ‍ॅक्टिव्ह आहेत}}"</string>
-    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{१ मोड आपोआप सुरू होऊ शकतो}other{# मोड आपोआप सुरू होऊ शकतात}}"</string>
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Do Not Disturb}=1{{mode_1}}=2{{mode_1}, {mode_2}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"सुरू आहे"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"सेट केलेला नाही"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"बंद केला आहे"</string>
@@ -3757,7 +3771,7 @@
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"हे अ‍ॅप सूचना पाठवत नाही"</string>
     <string name="notification_channels" msgid="1502969522886493799">"वर्गवाऱ्या"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"अन्य"</string>
-    <string name="no_channels" msgid="4716199078612071915">"या ॲपने कोणत्याही सूचना पोस्ट केल्या नाहीत"</string>
+    <string name="no_channels" msgid="4716199078612071915">"या ॲपने कोणत्याही नोटिफिकेशन पोस्ट केल्या नाहीत"</string>
     <string name="no_recent_channels" msgid="5068574296267584043">"न वापरलेल्या वर्गवाऱ्या दाखवा"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"अ‍ॅपमधील अतिरिक्त सेटिंग्ज"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"न वापरलेल्या वर्गवाऱ्या दाखवा"</string>
@@ -5455,6 +5469,8 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"स्ट्रीम ऐका"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> वापरून ऐकण्यासाठी ऑडिओ स्ट्रीमचा QR कोड स्कॅन करा"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"शेअर करताना पासवर्ड संपादित करू शकत नाही. पासवर्ड बदलण्यासाठी सर्वप्रथम ऑडिओ शेअरिंग बंद करा."</string>
+    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
+    <skip />
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR कोड स्कॅनर"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"मदत हवी आहे का?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"शोध सेटिंग्ज"</string>
@@ -5463,12 +5479,9 @@
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"केवळ डिव्हाइस"</string>
     <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"खात्यासह नवीन संपर्क सिंक केले जाणार नाहीत"</string>
     <string name="contacts_storage_selection_message" msgid="8082077300632059003">"संपर्क हे तुमच्या डिव्हाइसमध्ये सेव्ह केले जातील आणि बाय डीफॉल्ट तुमच्या खात्यामध्ये सिंक केले जातील"</string>
-    <!-- no translation found for contacts_storage_set_default_account_error_message (849847649756411393) -->
-    <skip />
-    <!-- no translation found for contacts_storage_no_account_set_summary (7454973781666475276) -->
-    <skip />
-    <!-- no translation found for contacts_storage_local_account_summary (5034805108128685712) -->
-    <skip />
+    <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"डीफॉल्ट खाते सेट करताना एरर आली"</string>
+    <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"कोणतेही डीफॉल्ट अकाउंट सेट केलेले नाही"</string>
+    <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"केवळ डिव्हाइस"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"सुरू करण्यासाठी एखादे खाते जोडा"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"शोधण्यासाठी वर्तुळ करा"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"तुमच्या स्क्रीनवरील आशय वापरून शोधण्यासाठी होम बटण किंवा नेव्हिगेशन हँडल स्‍पर्श करून धरून ठेवा."</string>

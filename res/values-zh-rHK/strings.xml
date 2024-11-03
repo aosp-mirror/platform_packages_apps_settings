@@ -120,6 +120,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"停用藍牙 LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"如果裝置支援 LE Audio 硬件功能，則停用藍牙 LE Audio 功能。"</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"藍牙 LE Audio 模式"</string>
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
+    <skip />
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
+    <skip />
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"在「裝置詳情」中顯示 LE Audio 切換按鈕"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"繞過藍牙 LE Audio 許可名單"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"即使 LE Audio 周邊裝置未通過符合許可清單條件的驗證，系統仍會預設使用 LE Audio。"</string>
@@ -1959,11 +1963,19 @@
     <string name="sticky_keys" msgid="7317317044898161747">"相黏鍵"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"一次按下快速鍵中的一個鍵，而非同時按住多個鍵"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"滑鼠按鍵"</string>
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"啟用滑鼠按鍵"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"使用鍵盤控制游標"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"滑鼠反向捲動"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"向上捲動即可將頁面向下移動"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"調換左右鍵"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"將滑鼠左鍵當右鍵使用"</string>
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"「<xliff:g id="KEYBOARD_NAME">%s</xliff:g>」的滑鼠按鍵"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"按下 <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> 鍵可移動滑鼠游標"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"按下 <xliff:g id="CLICK_LABEL">%s</xliff:g> 鍵代表點選滑鼠主要按鍵"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"按下 <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> 鍵表示按住滑鼠主要按鍵"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"按下 <xliff:g id="RELEASE_LABEL">%s</xliff:g> 鍵表示放開滑鼠主要按鍵"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"按下 <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> 鍵可切換捲動模式。這樣一來，按下 <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> 鍵就會讓檢視畫面向上、向下、向左或向右捲動"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"按下 <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> 鍵表示點選滑鼠次要按鍵"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"鍵盤快速鍵"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"顯示快速鍵清單"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"工作設定檔鍵盤與工具"</string>
@@ -2567,6 +2579,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"調整電力使用"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"已包含套件"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"應用程式運作正常"</string>
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"建議更換電池"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"電池容量和充電效能已降低，建議更換電池。"</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"電量不足"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"開啟慳電模式可延長電池壽命"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"延長電池壽命"</string>
@@ -3407,7 +3421,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"「平日上午 9 時至下午 5 時」"</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"日曆活動"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{已啟用{mode_1}}=2{已啟用{mode_1}和{mode_2}}=3{已啟用{mode_1}、{mode_2}和{mode_3}}other{已啟用{mode_1}、{mode_2}和其他 # 個模式}}"</string>
-    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{可自動啟動 1 個模式}other{可自動啟動 # 個模式}}"</string>
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{零打擾}=1{{mode_1}}=2{{mode_1}、{mode_2}}other{{mode_1}、{mode_2}、{mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"開啟"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"未設定"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"已停用"</string>
@@ -5455,6 +5469,8 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"收聽串流"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"使用「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」掃瞄音訊串流 QR 碼即可收聽"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"分享音訊期間無法編輯密碼。如要變更密碼，請先關閉音訊分享功能。"</string>
+    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
+    <skip />
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR 碼掃瞄器"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"需要協助嗎？"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"搜尋設定"</string>
@@ -5463,12 +5479,9 @@
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"只限裝置"</string>
     <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"新聯絡人不會與帳戶同步"</string>
     <string name="contacts_storage_selection_message" msgid="8082077300632059003">"根據預設，系統會將聯絡人儲存至裝置並同步至你的帳戶"</string>
-    <!-- no translation found for contacts_storage_set_default_account_error_message (849847649756411393) -->
-    <skip />
-    <!-- no translation found for contacts_storage_no_account_set_summary (7454973781666475276) -->
-    <skip />
-    <!-- no translation found for contacts_storage_local_account_summary (5034805108128685712) -->
-    <skip />
+    <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"設定預設帳戶時發生錯誤"</string>
+    <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"沒有預設帳戶"</string>
+    <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"只限裝置"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"新增帳戶以開始使用"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"一圈即搜"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"按住主按鈕或導覽列，就能透過畫面上的內容搜尋。"</string>

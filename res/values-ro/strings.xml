@@ -120,6 +120,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Dezactivează Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Dezactivează funcția Bluetooth LE Audio dacă dispozitivul acceptă capacitățile de hardware LE Audio."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Modul Bluetooth LE Audio"</string>
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
+    <skip />
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
+    <skip />
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Comutator LE Audio în Detalii dispozitiv"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Omite lista cu acces permis Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Folosește în mod prestabilit LE Audio chiar dacă dispozitivul periferic LE Audio nu a fost confirmat ca respectând criteriile Allowlist."</string>
@@ -1959,11 +1963,19 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Taste adezive"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Apasă câte o tastă pentru comenzile rapide în loc să ții apăsate tastele împreună"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Butoanele mouse-ului"</string>
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Folosește tastele pentru mouse"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Folosește tastatura pentru a controla indicatorul"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Derularea inversă cu mouse-ul"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Derulează în sus pentru a muta pagina în jos"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Schimbă butoanele stâng și drept"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Folosește butonul stâng al mouse-ului ca pe cel drept"</string>
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Tastele pentru mouse de pe <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Folosește tastele <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> pentru a muta cursorul mouse-ului"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Folosește tasta <xliff:g id="CLICK_LABEL">%s</xliff:g> pentru a da clic pe butonul principal al mouse-ului"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"Folosește tasta <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> pentru a apăsa lung butonul principal al mouse-ului"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Folosește tasta <xliff:g id="RELEASE_LABEL">%s</xliff:g> pentru a elibera butonul principal al mouse-ului"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Folosește tasta <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> pentru a activa sau a dezactiva modul de derulare. Astfel, tastele <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> vor derula afișarea în sus, în jos, la stânga sau la dreapta."</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Folosește tasta <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> pentru a da clic pe butonul secundar al mouse-ului"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Comenzi rapide de la tastatură"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Afișează lista de comenzi rapide"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastaturi și instrumente pt. profilul de serviciu"</string>
@@ -2567,6 +2579,10 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Ajustează utilizarea de energie"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Pachete incluse"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Aplicațiile rulează normal"</string>
+    <!-- no translation found for battery_tip_replacement_title (3932335880485957919) -->
+    <skip />
+    <!-- no translation found for battery_tip_replacement_summary (7892640031317153349) -->
+    <skip />
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Nivelul bateriei este scăzut"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Activează Economisirea bateriei pentru a mări autonomia bateriei"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Îmbunătățește autonomia bateriei"</string>
@@ -3407,7 +3423,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"În zilele lucrătoare între 09:00 și 17:00"</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Evenimente din calendar"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} este activ}=2{{mode_1} și {mode_2} sunt active}=3{{mode_1}, {mode_2} și {mode_3} sunt active}few{{mode_1}, {mode_2} și încă # sunt active}other{{mode_1}, {mode_2} și încă # sunt active}}"</string>
-    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{Un mod se poate activa automat}few{# moduri se pot activa automat}other{# de moduri se pot activa automat}}"</string>
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Nu deranja}=1{{mode_1}}=2{{mode_1}, {mode_2}}few{{mode_1}, {mode_2}, {mode_3}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ACTIVAT"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Nesetat"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Dezactivat"</string>
@@ -5456,6 +5472,8 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Ascultă streamul"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Scanează un cod QR de stream audio pentru a-l asculta folosind <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Nu poți edita parola în timpul permiterii accesului. Pentru a schimba parola, mai întâi dezactivează permiterea accesului la audio."</string>
+    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
+    <skip />
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Scanner de coduri QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Ai nevoie de ajutor?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Caută în setări"</string>
@@ -5464,12 +5482,9 @@
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Numai pe dispozitiv"</string>
     <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"Contactele noi nu se vor sincroniza cu un cont"</string>
     <string name="contacts_storage_selection_message" msgid="8082077300632059003">"Persoanele de contact vor fi salvate pe dispozitiv și sincronizate cu contul în mod prestabilit"</string>
-    <!-- no translation found for contacts_storage_set_default_account_error_message (849847649756411393) -->
-    <skip />
-    <!-- no translation found for contacts_storage_no_account_set_summary (7454973781666475276) -->
-    <skip />
-    <!-- no translation found for contacts_storage_local_account_summary (5034805108128685712) -->
-    <skip />
+    <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Eroare la setarea contului prestabilit"</string>
+    <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Nicio setare prestabilită"</string>
+    <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Numai pe dispozitiv"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Adaugă un cont pentru a începe"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Încercuiește și caută"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Atinge lung butonul Ecran de pornire sau ghidajul de navigare ca să cauți folosind conținutul de pe ecran."</string>

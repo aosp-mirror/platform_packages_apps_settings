@@ -46,6 +46,16 @@ interface FingerprintEnrollmentRepository {
   /** Indicates if a user can enroll another fingerprint */
   val canEnrollUser: Flow<Boolean>
 
+  val enrollStageCount: Int
+
+  /**
+   * Returns the threshold for the given stage of fingerprint enrollment.
+   *
+   * @param index The index of the enrollment stage.
+   * @return The threshold for the enrollment stage.
+   */
+  fun getEnrollStageThreshold(index: Int): Float
+
   /**
    * Indicates if we should use the default settings for maximum enrollments or the sensor props
    * from the fingerprint sensor
@@ -115,4 +125,10 @@ class FingerprintEnrollmentRepositoryImpl(
       ?.map { (FingerprintData(it.name.toString(), it.biometricId, it.deviceId)) }
       ?.toList()
   }
+
+  override val enrollStageCount: Int
+    get() = fingerprintManager.enrollStageCount
+
+  override fun getEnrollStageThreshold(index: Int): Float =
+    fingerprintManager.getEnrollStageThreshold(index)
 }

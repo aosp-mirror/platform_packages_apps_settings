@@ -120,6 +120,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Deaktivovat Bluetooth LE audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Vypne funkci zvuku přes Bluetooth LE, pokud zařízení podporuje hardwarové zvukové funkce LE."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Režim Bluetooth LE Audio"</string>
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
+    <skip />
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
+    <skip />
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Zobrazit přepínač LE Audio v Podrobnostech o zařízení"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Obejít seznam povolených pro Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Ve výchozím nastavení použít LE Audio i v případě, že u periferního zařízení LE Audio nebylo ověřeno splnění kritérií na seznamu povolených."</string>
@@ -1959,11 +1963,27 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Jedním prstem"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Místo držení více kláves aktivujte zkratky postupným tisknutím jednotlivých kláves"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Klávesy pro myš"</string>
+    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
+    <skip />
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Ukazatel můžete ovládat pomocí klávesnice"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Opačné posouvání myší"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Při posunutí nahoru posunout stránku dolů"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Prohodit levé a pravé tlačítko"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Používat levé tlačítko myši jako pravé"</string>
+    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
+    <skip />
+    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
+    <skip />
+    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
+    <skip />
+    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
+    <skip />
+    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
+    <skip />
+    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
+    <skip />
+    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Klávesové zkratky"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Zobrazit seznam zkratek"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Klávesnice a nástroje v pracovním profilu"</string>
@@ -2567,6 +2587,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Upravit spotřebu energie"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Zahrnuté balíčky"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Aplikace běží normálně"</string>
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"Doporučujeme výměnu baterie"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"Kapacita a výkon baterie při nabíjení jsou snížené. Doporučujeme výměnu baterie."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Baterie je slabá"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Pokud chcete prodloužit výdrž baterie, zapněte Spořič baterie"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Prodloužení životnosti baterie"</string>
@@ -3407,7 +3429,8 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"„9:00–17:00, pracovní dny“"</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Události v kalendáři"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Režim {mode_1} je aktivní}=2{Režimy {mode_1} a {mode_2} jsou aktivní}=3{Režimy {mode_1}, {mode_2} a {mode_3} jsou aktivní}few{Režimy {mode_1}, {mode_2} a # další jsou aktivní}many{Režimy {mode_1}, {mode_2} a # dalšího jsou aktivní}other{Režimy {mode_1}, {mode_2} a # dalších je aktivních}}"</string>
-    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 režim se může zapnout automaticky}few{# režimy se mohou zapnout automaticky}many{# režimu se může zapnout automaticky}other{# režimů se může zapnout automaticky}}"</string>
+    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
+    <skip />
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ZAPNUTO"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Nenastaveno"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Vypnuto"</string>
@@ -5457,20 +5480,19 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Poslouchat stream"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Naskenujte QR kód zvukového streamu a poslouchejte na zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Heslo nelze upravit během sdílení. Pokud chcete změnit heslo, nejdříve vypněte sdílení zvuku."</string>
+    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
+    <skip />
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Čtečka QR kódů"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Potřebujete poradit?"</annotation></string>
-    <string name="homepage_search" msgid="6759334912284663559">"Vyhledávat v nastavení"</string>
+    <string name="homepage_search" msgid="6759334912284663559">"Vyhledat v nastavení"</string>
     <string name="keywords_contacts_storage" msgid="9061213057165337893">"kontakty, úložiště, účet"</string>
     <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Úložiště kontaktů"</string>
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Pouze zařízení"</string>
     <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"Nové kontakty se nebudou synchronizovat s účtem"</string>
     <string name="contacts_storage_selection_message" msgid="8082077300632059003">"Kontakty se ve výchozím nastavení uloží do zařízení a synchronizují s účtem"</string>
-    <!-- no translation found for contacts_storage_set_default_account_error_message (849847649756411393) -->
-    <skip />
-    <!-- no translation found for contacts_storage_no_account_set_summary (7454973781666475276) -->
-    <skip />
-    <!-- no translation found for contacts_storage_local_account_summary (5034805108128685712) -->
-    <skip />
+    <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Při nastavování výchozího účtu došlo k chybě"</string>
+    <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Žádné výchozí nastavení"</string>
+    <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Pouze zařízení"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Začněte tím, že přidáte účet"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Zakroužkuj a hledej"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Pokud chcete vyhledávat pomocí obsahu na obrazovce, podržte tlačítko plochy nebo navigační úchyt."</string>

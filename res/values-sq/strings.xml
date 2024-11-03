@@ -65,7 +65,7 @@
     <string name="bluetooth_rename_button" msgid="9162500408570289545">"Riemërto"</string>
     <string name="bluetooth_disconnect_title" msgid="4581951246357823044">"Të shkëputet pajisja?"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Çifto pajisjen e re"</string>
-    <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
+    <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth-i"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Aktivizo automatikisht nesër"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Çifto anën e djathtë"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Çifto anën e majtë"</string>
@@ -120,6 +120,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Çaktivizo Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Çaktivizon veçorinë Bluetooth LE Audio nëse pajisja mbështet aftësitë e harduerit të LE Audio."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Modaliteti i Bluetooth LE Audio"</string>
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
+    <skip />
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
+    <skip />
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Shfaq çelësin për LE Audio te \"Detajet e pajisjes\""</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Anashkalo \"Listën e lejimeve\" të Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Përdor LE Audio si parazgjedhje edhe nëse LE Audio periferike nuk është verifikuar se i ka plotësuar kriteret e \"Listës së lejimeve\"."</string>
@@ -1582,12 +1586,12 @@
     <string name="tether_settings_disabled_on_data_saver" msgid="9054069463426952689">"Nuk mund të ndajë internetin ose të përdorë zonat e qasjes në internet kur \"Kursyesi i të dhënave\" është aktiv"</string>
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Vetëm zona e qasjes për internet"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"Vetëm USB"</string>
-    <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Vetëm Bluetooth"</string>
+    <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Vetëm me Bluetooth"</string>
     <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"Vetëm eternet"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"Zona e qasjes për internet, USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"Zona e qasjes për internet, Bluetooth"</string>
     <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"Zona e qasjes së internetit, eternet"</string>
-    <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, Bluetooth"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB-ja, Bluetooth-i"</string>
     <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"USB, Ethernet"</string>
     <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"Bluetooth, eternet"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"Zona e qasjes për internet, USB, Bluetooth"</string>
@@ -1949,26 +1953,37 @@
     <string name="bounce_keys_summary" msgid="7418024428905737729">"Tastiera i shpërfill shtypjet e shpejta të përsëritura të të njëjtit tast"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Pragu për tastet e përsëritura"</string>
     <string name="bounce_keys_dialog_subtitle" msgid="5640575860258120026">"Zgjidh kohëzgjatjen e shpërfilljes së shtypjeve të përsëritura të tasteve nga tastiera jote"</string>
-    <!-- no translation found for input_setting_keys_dialog_option_200 (3121006986226247560) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_400 (2634500629396699440) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_600 (3828362866751805146) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_custom_title (670425691119253202) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_custom_value (4455905650507193648) -->
-    <skip />
+    <string name="input_setting_keys_dialog_option_200" msgid="3121006986226247560">"0,2 sek."</string>
+    <string name="input_setting_keys_dialog_option_400" msgid="2634500629396699440">"0,4 sek."</string>
+    <string name="input_setting_keys_dialog_option_600" msgid="3828362866751805146">"0,6 sek."</string>
+    <string name="input_setting_keys_custom_title" msgid="670425691119253202">"E personalizuar"</string>
+    <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"Vlerë e personalizuar"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Tastet e ngadalta"</string>
     <string name="slow_keys_summary" msgid="2914214326648535377">"Rregullon kohën që duhet për aktivizimin e një shtypjeje tasti"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Tastet e përhershme"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Shtyp vetëm një tast në një moment për shkurtoret në vend që t\'i mbash shtypur bashkë tastet"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Butonat e miut"</string>
+    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
+    <skip />
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Përdor tastierën për të kontrolluar treguesin"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Lëvizja e miut në të kundërt"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Lëviz lart për ta zhvendosur faqen poshtë"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Ndërro butonin e majtë dhe të djathtë"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Përdor butonin e majtë të miut si buton të djathtë"</string>
+    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
+    <skip />
+    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
+    <skip />
+    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
+    <skip />
+    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
+    <skip />
+    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
+    <skip />
+    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
+    <skip />
+    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Shkurtoret e tastierës"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Shfaq listën e shkurtoreve"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastierat dhe veglat e profilit të punës"</string>
@@ -2572,6 +2587,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Rregullo përdorimin e energjisë"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Paketat e përfshira"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Aplikacionet po funksionojnë normalisht"</string>
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"Rekomandohet zëvendësimi i baterisë"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"Kapaciteti i baterisë dhe performanca e karikimit janë reduktuar dhe rekomandohet zëvendësimi i baterisë."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Niveli i baterisë është i ulët"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Aktivizo \"Kursyesin e baterisë\" për të rritur kohëzgjatjen e baterisë"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Përmirëso kohëzgjatjen e baterisë"</string>
@@ -3412,7 +3429,8 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"9:00 - 17:00 në ditë jave\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Ngjarjet e kalendarit"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Modaliteti \"{mode_1}\" është aktiv}=2{Modalitetet \"{mode_1}\" dhe \"{mode_2}\" janë aktive}=3{Modalitetet \"{mode_1}\", \"{mode_2}\" dhe \"{mode_3}\" janë aktive}other{Modalitetet \"{mode_1}\", \"{mode_2}\" dhe # të tjera janë aktive}}"</string>
-    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 modalitet mund të aktivizohet automatikisht}other{# modalitete mund të aktivizohen automatikisht}}"</string>
+    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
+    <skip />
     <string name="zen_mode_active_text" msgid="5002406772481439437">"AKTIV"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Nuk është caktuar"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Çaktivizuar"</string>
@@ -5460,6 +5478,8 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Dëgjo transmetimin"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Skano një kod QR të transmetimit audio për të dëgjuar me <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Fjalëkalimi nuk mund të modifikohet gjatë ndarjes. Për të ndryshuar fjalëkalimin, në fillim çaktivizo ndarjen e audios."</string>
+    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
+    <skip />
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Skaneri i kodeve QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Ke nevojë për ndihmë?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Kërko te cilësimet"</string>
@@ -5468,12 +5488,9 @@
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Vetëm pajisja"</string>
     <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"Kontaktet e reja nuk do të sinkronizohen me një llogari"</string>
     <string name="contacts_storage_selection_message" msgid="8082077300632059003">"Kontaktet do të ruhen në pajisjen tënde dhe do të sinkronizohen në llogarinë tënde si parazgjedhje"</string>
-    <!-- no translation found for contacts_storage_set_default_account_error_message (849847649756411393) -->
-    <skip />
-    <!-- no translation found for contacts_storage_no_account_set_summary (7454973781666475276) -->
-    <skip />
-    <!-- no translation found for contacts_storage_local_account_summary (5034805108128685712) -->
-    <skip />
+    <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Gabim gjatë caktimit të llogarisë së parazgjedhur"</string>
+    <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Nuk është caktuar asnjë e parazgjedhur"</string>
+    <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Vetëm në pajisje"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Shto një llogari për të filluar"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Qarko për të kërkuar"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Prek dhe mbaj shtypur butonin \"Kreu\" ose emërtimin e navigimit për të kërkuar duke përdorur përmbajtjen në ekranin tënd."</string>

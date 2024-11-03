@@ -48,6 +48,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.Preference;
@@ -730,5 +731,10 @@ public class TetherSettings extends RestrictedDashboardFragment
             mAvailableInterfaces.remove(iface);
         }
         updateBluetoothAndEthernetState();
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return TetherScreen.KEY;
     }
 }
