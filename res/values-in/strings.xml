@@ -35,7 +35,7 @@
     <string name="radioInfo_service_off" msgid="6184928420860868571">"Radio Nonaktif"</string>
     <string name="radioInfo_roaming_in" msgid="8892550453644088692">"Roaming"</string>
     <string name="radioInfo_roaming_not" msgid="3137594549464975054">"Tidak Roaming"</string>
-    <string name="radioInfo_data_disconnected" msgid="362604130117666924">"Sambungan terputus"</string>
+    <string name="radioInfo_data_disconnected" msgid="362604130117666924">"Tidak terhubung"</string>
     <string name="radioInfo_data_connecting" msgid="7280819598028917888">"Menghubungkan"</string>
     <string name="radioInfo_data_connected" msgid="8816467971633020141">"Terhubung"</string>
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Ditangguhkan"</string>
@@ -120,6 +120,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Nonaktifkan Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Nonaktifkan fitur Bluetooth LE Audio jika perangkat mendukung kemampuan hardware LE Audio."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Mode Bluetooth LE Audio"</string>
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
+    <skip />
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
+    <skip />
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Tampilkan tombol LE Audio di Detail Perangkat"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Abaikan Daftar yang Diizinkan Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Gunakan LE Audio secara default meskipun periferal LE Audio belum diverifikasi untuk memenuhi kriteria Daftar yang diizinkan."</string>
@@ -924,7 +928,7 @@
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"Tampilkan rasio HDR/SDR"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"Tampilkan rasio HDR/SDR saat ini"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Wajib buka kunci perangkat untuk NFC"</string>
+    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Wajibkan kunci perangkat dibuka untuk menggunakan NFC"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Siap mentransmisikan konten apl melalui NFC"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"Mati"</string>
@@ -1959,11 +1963,27 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Tombol lekat"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Tekan satu tombol pada satu waktu untuk mengaktifkan pintasan, bukan menekan tombol secara bersamaan"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Tombol mouse"</string>
+    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
+    <skip />
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Gunakan keyboard untuk mengontrol kursor"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Scroll terbalik mouse"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Scroll ke atas untuk memindahkan halaman ke bawah"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Tukar tombol kiri dan kanan"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Gunakan tombol mouse kiri sebagai tombol kanan"</string>
+    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
+    <skip />
+    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
+    <skip />
+    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
+    <skip />
+    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
+    <skip />
+    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
+    <skip />
+    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
+    <skip />
+    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Pintasan keyboard"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Tampilkan daftar pintasan"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Keyboard &amp; fitur profil kerja"</string>
@@ -2567,6 +2587,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Sesuaikan penggunaan daya"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Termasuk paket"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Aplikasi berjalan normal"</string>
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"Disarankan mengganti baterai"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"Performa pengisian daya dan kapasitas baterai berkurang, dan disarankan untuk mengganti baterai."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Tingkat daya baterai rendah"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Aktifkan Penghemat Baterai untuk memperpanjang masa pakai baterai"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Tingkatkan masa pakai baterai"</string>
@@ -3407,7 +3429,8 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"09.00 - 17.00 hari kerja\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Acara kalender"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} aktif}=2{{mode_1} dan {mode_2} aktif}=3{{mode_1}, {mode_2}, dan {mode_3} aktif}other{{mode_1}, {mode_2}, dan # lainnya aktif}}"</string>
-    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 mode dapat otomatis diaktifkan}other{# mode dapat otomatis diaktifkan}}"</string>
+    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
+    <skip />
     <string name="zen_mode_active_text" msgid="5002406772481439437">"AKTIF"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Tidak disetel"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Dinonaktifkan"</string>
@@ -4710,7 +4733,7 @@
     <string name="pref_title_network_details" msgid="7329759534269363308">"Detail jaringan"</string>
     <string name="devices_title" msgid="649715719278562515">"Perangkat"</string>
     <string name="choose_network_title" msgid="5355609223363859430">"Pilih jaringan"</string>
-    <string name="network_disconnected" msgid="8281188173486212661">"Terputus"</string>
+    <string name="network_disconnected" msgid="8281188173486212661">"Tidak terhubung"</string>
     <string name="network_connected" msgid="7637745547242487795">"Terhubung"</string>
     <string name="network_connecting" msgid="6856124847029124041">"Menghubungkan…"</string>
     <string name="network_could_not_connect" msgid="676574629319069922">"Tidak dapat terhubung"</string>
@@ -5455,6 +5478,8 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Dengarkan streaming"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Pindai kode QR streaming audio agar dapat mendengarkan dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Tidak dapat mengedit sandi saat sedang membagikan audio. Untuk mengubah sandi, nonaktifkan berbagi audio terlebih dahulu."</string>
+    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
+    <skip />
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Pemindai kode QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Perlu bantuan?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Telusuri Setelan"</string>
@@ -5463,12 +5488,9 @@
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Perangkat saja"</string>
     <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"Kontak baru tidak akan disinkronkan dengan akun"</string>
     <string name="contacts_storage_selection_message" msgid="8082077300632059003">"Kontak akan disimpan ke perangkat dan disinkronkan ke akun Anda secara default"</string>
-    <!-- no translation found for contacts_storage_set_default_account_error_message (849847649756411393) -->
-    <skip />
-    <!-- no translation found for contacts_storage_no_account_set_summary (7454973781666475276) -->
-    <skip />
-    <!-- no translation found for contacts_storage_local_account_summary (5034805108128685712) -->
-    <skip />
+    <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Terjadi error saat menetapkan akun default"</string>
+    <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Tidak ada default yang disetel"</string>
+    <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Perangkat saja"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Tambahkan akun untuk memulai"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Lingkari untuk Menelusuri"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Sentuh lama tombol Layar utama atau tuas navigasi untuk menelusuri menggunakan konten di layar."</string>

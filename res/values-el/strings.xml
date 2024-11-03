@@ -120,6 +120,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Απενεργοποίηση Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Απενεργοποιεί τη λειτουργία Bluetooth LE Audio αν η συσκευή υποστηρίζει δυνατότητες εξοπλισμού LE Audio."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Λειτουργία Bluetooth LE Audio"</string>
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
+    <skip />
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
+    <skip />
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Εναλλαγή LE Audio στις λεπτομ. συσκευής"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Παράκαμψη λίστας επιτρεπομένων Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Χρήση του LE Audio από προεπιλογή, ακόμα και αν το περιφερειακό LE Audio δεν έχει επαληθευτεί, ώστε να πληροί τα κριτήρια της λίστας επιτρεπομένων."</string>
@@ -600,7 +604,7 @@
     <string name="private_space_search_description" msgid="1538155187658429618">"Στη γραμμή αναζήτησης, πληκτρολογήστε \"απόρρητος χώρος\""</string>
     <string name="private_space_tap_tile_description" msgid="6173556870938267361">"Πατήστε "<b>"Ιδιωτικός χώρος"</b></string>
     <string name="private_space_unlock_description" msgid="5527228922778630361">"Ξεκλείδωμα ιδιωτικού χώρου"</string>
-    <string name="private_space_hide_off_summary" msgid="8565973976602078315">"Ανενεργός"</string>
+    <string name="private_space_hide_off_summary" msgid="8565973976602078315">"Ανενεργή"</string>
     <string name="private_space_hide_on_summary" msgid="3450844101901438867">"Ενεργός"</string>
     <string name="private_space_hide_dialog_title" msgid="6439207708506990156">"Θα γίνει απόκρυψη του ιδιωτικού χώρου στο επόμενο κλείδωμα"</string>
     <string name="private_space_hide_dialog_message" msgid="618693520130744836">"Για πρόσβ. στον απόρ. χώρο, πληκτρ. \"απόρρητος χώρος\" στη γραμμή αναζ. στη λίστα εφαρμογ."</string>
@@ -622,11 +626,11 @@
     <string name="private_space_cancel_label" msgid="379259667396956886">"Ακύρωση"</string>
     <string name="private_space_setup_button_label" msgid="2094882154623560585">"Ρύθμιση"</string>
     <string name="private_space_setup_title" msgid="2272968244329821450">"Ιδιωτικός χώρος"</string>
-    <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Απόκρυψη ή κλείδωμα ιδιωτικών εφαρμογών σε ξεχωριστό χώρο. Χρησιμοποιήστε έναν αποκλειστικό Λογαριασμό Google για επιπλέον ασφάλεια."</string>
+    <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Αποκρύψτε ή κλειδώστε ιδιωτικές εφαρμογές σε ξεχωριστό χώρο. Χρησιμοποιήστε έναν αποκλειστικό Λογαριασμό Google για επιπλέον ασφάλεια."</string>
     <string name="private_space_setup_sub_header" msgid="550476876393954356">"Πώς λειτουργεί"</string>
     <string name="private_space_separate_account_text" msgid="790319706810190320"><b>"Δημιουργήστε έναν Λογαριασμό Google για τον χώρο σας"</b>\n"Εάν χρησιμοποιείτε έναν αποκλειστικό λογαριασμό, μπορείτε να αποτρέψετε την εμφάνιση συγχρονισμένων αρχείων, φωτογραφιών και μηνυμάτων ηλεκτρονικού ταχυδρομείου εκτός του χώρου σας"</string>
     <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Ρύθμιση κλειδώματος"</b>\n"Κλειδώστε τον χώρο σας για να μην μπορούν να τον ανοίξουν άλλα άτομα"</string>
-    <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Εγκαταστήστε εφαρμογές"</b>\n"Εγκαταστήστε εφαρμογές που θέλετε να διατηρήσετε ιδιωτικές στον χώρο σας"</string>
+    <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Εγκατάσταση εφαρμογών"</b>\n"Εγκαταστήστε εφαρμογές που θέλετε να διατηρήσετε ιδιωτικές στον χώρο σας"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Να έχετε υπόψη τα εξής"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Η λειτουργία των εφαρμογών διακόπτεται όταν κλειδώνετε τον χώρο σας"</b>\n"Όταν κλειδώνετε τον χώρο σας, η λειτουργία των εφαρμογών στον χώρο σας διακόπτεται και παύετε να λαμβάνετε ειδοποιήσεις από αυτές"</string>
     <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Οι ιδιωτικοί χώροι δεν είναι κατάλληλοι για εφαρμογές που πρέπει να εκτελούνται στο παρασκήνιο ή να στέλνουν κρίσιμες ειδοποιήσεις, όπως οι ιατρικές εφαρμογές. Αυτό συμβαίνει επειδή οι ειδοποιήσεις και η δραστηριότητα στο παρασκήνιο διακόπτονται όταν ο χώρος κλειδώνεται.\n\nΟι εφαρμογές στον ιδιωτικό χώρο σας δεν εμφανίζονται στη Διαχείριση αδειών, στον πίνακα ελέγχου απορρήτου και σε άλλες ρυθμίσεις όταν ο ιδιωτικός χώρος είναι κλειδωμένος.\n\nΔεν είναι δυνατή η μετακίνηση του ιδιωτικού χώρου σας σε νέα συσκευή. Θα πρέπει να δημιουργήσετε άλλον ιδιωτικό χώρο αν επιθυμείτε να τον χρησιμοποιήσετε σε μια άλλη συσκευή.\n\nΕάν κάποιος συνδέσει τη συσκευή σας σε έναν υπολογιστή ή εγκαταστήσει επιβλαβείς εφαρμογές στη συσκευή σας, μπορεί να αποκτήσει πρόσβαση στον ιδιωτικό χώρο σας."</string>
@@ -1959,11 +1963,27 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Ασύγχρονα πλήκτρα"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Για τις συντομεύσεις, αντί να πατάτε παρατεταμένα όλα τα κουμπιά μαζί, φροντίστε να πατάτε ένα πλήκτρο κάθε φορά"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Πλήκτρα ποντικιού"</string>
+    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
+    <skip />
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Χρησιμοποιήστε το πληκτρολόγιο, για να ελέγξετε τον δείκτη"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Αντίστροφη κύλιση με το ποντίκι"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Κάντε κύλιση προς τα επάνω, για να μετακινήσετε τη σελίδα προς τα κάτω."</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Εναλλαγή αριστερού και δεξιού κουμπιού"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Χρησιμοποιήστε το αριστερό κουμπί του ποντικιού ως δεξί κουμπί"</string>
+    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
+    <skip />
+    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
+    <skip />
+    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
+    <skip />
+    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
+    <skip />
+    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
+    <skip />
+    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
+    <skip />
+    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Συντομεύσεις πληκτρολογίου"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Εμφάνιση λίστας συντομεύσεων"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Πληκτρολόγιο και εργαλεία προφίλ εργασίας"</string>
@@ -2567,6 +2587,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Προσαρμογή χρήσης ισχύος"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Συμπεριλαμβανόμενα πακέτα"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Οι εφαρμογές εκτελούνται κανονικά"</string>
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"Συνιστάται αντικατάσταση της μπαταρίας"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"Η χωρητικότητα μπαταρίας και η απόδοση φόρτισης έχουν μειωθεί και συνιστάται αντικατάσταση της μπαταρίας."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Χαμηλή ισχύς μπαταρίας"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Ενεργοποιήστε την Εξοικονόμηση μπαταρίας για να επεκτείνετε τη διάρκεια ζωής της μπαταρίας"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Βελτιώστε τη διάρκεια ζωής της μπαταρίας"</string>
@@ -3407,7 +3429,8 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"9 π.μ.-5 μ.μ. τις εργάσιμες ημέρες\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Συμβάντα ημερολογίου"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Η λειτουργία {mode_1} είναι ενεργή}=2{Οι λειτουργίες {mode_1} και {mode_2} είναι ενεργές}=3{Οι λειτουργίες {mode_1}, {mode_2} και {mode_3} είναι ενεργές}other{Οι λειτουργίες {mode_1}, {mode_2} και # ακόμη είναι ενεργές}}"</string>
-    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 λειτουργία μπορεί να ενεργοποιηθεί αυτόματα}other{# λειτουργίες μπορούν να ενεργοποιηθούν αυτόματα}}"</string>
+    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
+    <skip />
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ΕΝΕΡΓΗ"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Δεν έχει οριστεί"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Απενεργοποιημένη"</string>
@@ -3956,7 +3979,7 @@
     <string name="nfc_setting_on" msgid="7701896496026725772">"Ενεργό"</string>
     <string name="nfc_setting_off" msgid="7142103438532732309">"Ανενεργό"</string>
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Ενεργή"</string>
-    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Ανενεργή"</string>
+    <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Ανενεργό"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Καρφίτσωμα εφαρμογών"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Το καρφίτσωμα εφαρμογών σάς επιτρέπει να διατηρείτε την τρέχουσα εφαρμογή ορατή έως ότου την ξεκαρφιτσώσετε. Για παράδειγμα, αυτή η λειτουργία μπορεί να χρησιμοποιηθεί για να επιτρέψετε σε έναν έμπιστο φίλο να παίξει ένα συγκεκριμένο παιχνίδι."</string>
     <string name="screen_pinning_description" msgid="5822120806426139396">"Όταν μια εφαρμογή έχει καρφιτσωθεί, η συγκεκριμένη εφαρμογή μπορεί να ανοίξει άλλες εφαρμογές και να είναι δυνατή η πρόσβαση σε προσωπικά δεδομένα. \n\nΓια να χρησιμοποιήσετε το καρφίτσωμα εφαρμογών: 	\n{0,number,integer}. Ενεργοποιήστε το καρφίτσωμα εφαρμογών 	\n{1,number,integer}. Ανοίξτε την Επισκόπηση 	\n{2,number,integer}. Πατήστε το εικονίδιο εφαρμογής στο επάνω μέρος της οθόνης και έπειτα πατήστε Καρφίτσωμα."</string>
@@ -5455,6 +5478,8 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Ακρόαση ροής"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Σαρώστε τον κωδικό QR μιας ροής ήχου για να ακούσετε με τη συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Δεν είναι δυνατή η επεξεργασία του κωδικού πρόσβασης κατά την κοινή χρήση. Για να αλλάξετε τον κωδικό πρόσβασης, αρχικά, απενεργοποιήστε την κοινή χρήση ήχου."</string>
+    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
+    <skip />
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Σάρωση κωδικών QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Χρειάζεστε βοήθεια;"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Ρυθμίσεις αναζήτησης"</string>
@@ -5463,12 +5488,9 @@
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Μόνο στη συσκευή"</string>
     <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"Οι νέες επαφές δεν θα συγχρονίζονται με κάποιον λογαριασμό"</string>
     <string name="contacts_storage_selection_message" msgid="8082077300632059003">"Οι επαφές θα αποθηκεύονται στη συσκευή σας και θα συγχρονίζονται με τον λογαριασμό σας από προεπιλογή"</string>
-    <!-- no translation found for contacts_storage_set_default_account_error_message (849847649756411393) -->
-    <skip />
-    <!-- no translation found for contacts_storage_no_account_set_summary (7454973781666475276) -->
-    <skip />
-    <!-- no translation found for contacts_storage_local_account_summary (5034805108128685712) -->
-    <skip />
+    <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Σφάλμα κατά τον ορισμό προεπιλεγμένου λογαριασμού"</string>
+    <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Δεν ορίστηκε προεπιλογή"</string>
+    <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Μόνο από συσκευή"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Για να ξεκινήσετε, προσθέστε λογαριασμό"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Κυκλώστε για αναζήτηση"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Πατήστε παρατεταμένα το κουμπί αρχικής οθόνης ή τη λαβή πλοήγησης, για να κάνετε αναζήτηση χρησιμοποιώντας το περιεχόμενο στην οθόνη σας."</string>

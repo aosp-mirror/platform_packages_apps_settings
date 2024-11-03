@@ -120,6 +120,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Онемогући Bluetooth LE audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Онемогућава функцију Bluetooth LE audio ако уређај подржава могућности LE audio хардвера."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE Audio режим"</string>
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
+    <skip />
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
+    <skip />
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"LE Audio прекидач у детаљима о уређају"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Заобиђи Bluetooth LE Audio листу дозвољених"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Подразумевано користи LE Audio чак и ако није потврђено да LE Audio периферни уређај задовољава критеријуме листе дозвољених."</string>
@@ -1959,11 +1963,19 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Лепљиви тастери"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Притискајте један по један тастер да бисте користили пречице уместо да истовремено држите тастере"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Тастери миша"</string>
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Користите тастере миша"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Контролишите показивач помоћу тастатуре"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Обрнуто скроловање мишем"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Скролујте нагоре да бисте померили страницу надоле"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Замените дугмад налево и надесно"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Користите леви тастер миша као десни"</string>
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Тастери миша за: <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Користите тастере <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> да бисте померили показивач миша"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Користите тастер <xliff:g id="CLICK_LABEL">%s</xliff:g> да бисте кликнули на примарно дугме миша"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"Користите тастер <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> да бисте притиснули и задржали примарни тастер миша"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Користите тастер <xliff:g id="RELEASE_LABEL">%s</xliff:g> да бисте ослободили примарно дугме миша"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Користите тастер <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> да бисте укључили или искључили режим скроловања. Тако ћете помоћу тастера <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> скроловати приказ нагоре, надоле, улево или удесно"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Користите тастер <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> да бисте кликнули на секундарно дугме миша"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Тастерске пречице"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Приказује листу пречица"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Тастатуре и алатке за пословни профил"</string>
@@ -2567,6 +2579,10 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Прилагођавање коришћења напајања"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Садржани пакети"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Апликације раде уобичајено"</string>
+    <!-- no translation found for battery_tip_replacement_title (3932335880485957919) -->
+    <skip />
+    <!-- no translation found for battery_tip_replacement_summary (7892640031317153349) -->
+    <skip />
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Низак ниво напуњености батерије"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Укључите уштеду батерије да бисте продужили трајање батерије"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Продужите трајање батерије"</string>
@@ -3407,7 +3423,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"9:00–17:00 радним данима"</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Догађаји у календару"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Активан је {mode_1}}=2{Активни су {mode_1} и {mode_2}}=3{Активни су {mode_1}, {mode_2} и {mode_3}}one{Активни су {mode_1}, {mode_2} и још # режим}few{Активни су {mode_1}, {mode_2} и још # режима}other{Активни су {mode_1}, {mode_2} и још # режима}}"</string>
-    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 режим може да се укључује аутоматски}one{# режим може да се укључује аутоматски}few{# режима могу да се укључују аутоматски}other{# режима може да се укључује аутоматски}}"</string>
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Не узнемиравај}=1{{mode_1}}=2{{mode_1}, {mode_2}}one{{mode_1}, {mode_2}, {mode_3}}few{{mode_1}, {mode_2}, {mode_3}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"УКЉУЧЕНО"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Није подешено"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Онемогућено"</string>
@@ -5456,6 +5472,8 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Слушајте стрим"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Скенирајте QR кôд аудио стрима да бисте слушали помоћу: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Лозинка не може да се мења током дељења. Да бисте променили лозинку, прво искључите дељење звука."</string>
+    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
+    <skip />
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Скенер QR кода"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Треба вам помоћ?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Подешавања претраге"</string>
@@ -5464,12 +5482,9 @@
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Само уређај"</string>
     <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"Нови контакти се неће синхронизовати са налогом"</string>
     <string name="contacts_storage_selection_message" msgid="8082077300632059003">"Контакти се подразумевано чувају на уређају и синхронизују са налогом"</string>
-    <!-- no translation found for contacts_storage_set_default_account_error_message (849847649756411393) -->
-    <skip />
-    <!-- no translation found for contacts_storage_no_account_set_summary (7454973781666475276) -->
-    <skip />
-    <!-- no translation found for contacts_storage_local_account_summary (5034805108128685712) -->
-    <skip />
+    <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Грешка при подешавању подразумеваног налога"</string>
+    <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Није подешен подразумевани налог"</string>
+    <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Само уређај"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Додајте налог да бисте започели"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Претрага заокруживањем"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Додирните и задржите дугме Почетак или маркер за кретање да бисте претраживали помоћу садржаја на екрану."</string>

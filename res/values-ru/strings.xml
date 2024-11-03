@@ -120,6 +120,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Отключить Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Отключить Bluetooth LE Audio, если доступны аппаратные возможности"</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Режим Bluetooth LE Audio"</string>
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
+    <skip />
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
+    <skip />
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Переключатель LE Audio в сведениях об устройстве"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Обходить белый список Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Использовать LE Audio по умолчанию, даже если периферийное устройство LE Audio не соответствует критериям белого списка"</string>
@@ -561,7 +565,7 @@
     <string name="privacy_header" msgid="5526002421324257007">"Конфиденциальность"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Рабочий профиль"</string>
     <string name="private_space_title" msgid="1752064212078238723">"Частное пространство"</string>
-    <string name="private_space_summary" msgid="2274405892301976238">"Приложения в личном пространстве скрыты и доступны только вам"</string>
+    <string name="private_space_summary" msgid="2274405892301976238">"Приложения в частном пространстве скрыты и доступны только вам"</string>
     <string name="private_space_description" msgid="4059594203775816136">"Создайте отдельное пространство для личных приложений, которое можно скрыть или защитить с помощью блокировки."</string>
     <string name="private_space_lock_title" msgid="7230836881433350526">"Блокировка частного пространства"</string>
     <string name="private_space_one_lock_summary" msgid="2106513606571219068">"Для личного пространства можно установить тот же способ разблокировки, который используется для экрана, или выбрать другой."</string>
@@ -1959,11 +1963,19 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Залипание клавиш"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Вместо того чтобы удерживать вместе все клавиши из сочетания, нажимайте их по одной"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Клавиши управления мышью"</string>
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Управлять мышью с помощью клавиш"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Управлять указателем с помощью клавиатуры"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Прокручивать мышью в обратном направлении"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Если прокрутить вверх, страница прокрутится вниз"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Поменять местами левую и правую кнопки"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Использовать левую кнопку мыши в качестве правой"</string>
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Клавиши управления мышью для устройства \"<xliff:g id="KEYBOARD_NAME">%s</xliff:g>\""</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Для перемещения указателя мыши используйте клавиши <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>."</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Нажатие клавиши <xliff:g id="CLICK_LABEL">%s</xliff:g> соответствует нажатию левой кнопки мыши."</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"Нажатие клавиши <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> соответствует нажатию и удержанию левой кнопки мыши."</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Нажатие клавиши <xliff:g id="RELEASE_LABEL">%s</xliff:g> соответствует отпусканию левой кнопки мыши."</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Нажмите клавишу <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>, чтобы включить режим прокрутки. В нем с помощью клавиш <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> можно прокручивать экран вверх, вниз, влево и вправо."</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Нажатие клавиши <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> соответствует нажатию правой кнопки мыши."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Быстрые клавиши"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Показывать список сочетаний клавиш"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Клавиатуры и инструменты рабочего профиля"</string>
@@ -2567,6 +2579,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Режим энергопотребления"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Пакеты"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Приложения работают нормально"</string>
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"Рекомендуем заменить батарею"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"Емкость батареи и эффективность зарядки снижены. Советуем заменить батарею."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Низкий уровень заряда батареи"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Включите режим энергосбережения, чтобы увеличить время работы от батареи."</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Продлите время работы от батареи"</string>
@@ -3407,7 +3421,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"В будние дни с 09:00 до 17:00\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Мероприятия из календаря"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Включен режим \"{mode_1}\"}=2{Включены режимы \"{mode_1}\" и \"{mode_2}\"}=3{Включены режимы \"{mode_1}\", \"{mode_2}\" и \"{mode_3}\"}one{Включены режимы \"{mode_1}\", \"{mode_2}\" и ещё #}few{Включены режимы \"{mode_1}\", \"{mode_2}\" и ещё #}many{Включены режимы \"{mode_1}\", \"{mode_2}\" и ещё #}other{Включены режимы \"{mode_1}\", \"{mode_2}\" и ещё #}}"</string>
-    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 режим может включаться автоматически}one{# режим может включаться автоматически}few{# режима могут включаться автоматически}many{# режимов могут включаться автоматически}other{# режима могут включаться автоматически}}"</string>
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Не беспокоить}=1{{mode_1}}=2{{mode_1}, {mode_2}}one{{mode_1}, {mode_2} {mode_3}}few{{mode_1}, {mode_2} {mode_3}}many{{mode_1}, {mode_2} {mode_3}}other{{mode_1}, {mode_2} {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ВКЛ."</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Не задано"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Отключено"</string>
@@ -3663,7 +3677,7 @@
     <string name="notification_channel_summary_default" msgid="1168420867670390611">"Звонок или вибрация в зависимости от настроек устройства"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"При разблокированном устройстве показывать уведомления в виде баннера в верхней части экрана"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"<xliff:g id="APP_NAME">%1$s</xliff:g>: все уведомления"</string>
-    <string name="notification_app_switch_label" msgid="4422902423925084193">"Показывать все уведомления приложения \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g>: все уведомления"</string>
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Примерно # уведомление в день}one{Примерно # уведомление в день}few{Примерно # уведомления в день}many{Примерно # уведомлений в день}other{Примерно # уведомления в день}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Примерно # уведомление в неделю}one{Примерно # уведомление в неделю}few{Примерно # уведомления в неделю}many{Примерно # уведомлений в неделю}other{Примерно # уведомления в неделю}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Никогда"</string>
@@ -5340,7 +5354,7 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Название устройства доступно установленным приложениям. Его также могут видеть другие пользователи, когда вы подключаетесь к устройствам Bluetooth и сетям Wi-Fi или настраиваете точку доступа Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Грамматический род"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Выберите грамматический род"</string>
-    <string name="content_protection_preference_title" msgid="5069260032659193074">"Сканировать на наличие приложений, вводящих в заблуждение"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Сканирование подозрительных приложений"</string>
     <string name="content_protection_preference_summary" msgid="2252393849408445391">"Проверять историю действий в приложении на фишинг"</string>
     <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"Сканировать на наличие вводящих в заблуждение приложений"</string>
     <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Сканировать на наличие вводящих в заблуждение приложений для работы"</string>
@@ -5457,6 +5471,8 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Подключиться к потоку"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Отсканируйте QR-код аудиопотока, чтобы воспроизвести его на устройстве \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\""</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Нельзя изменить пароль во время отправки аудио. Сначала отключите ее."</string>
+    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
+    <skip />
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Сканер QR-кодов"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Нужна помощь?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Поиск по настройкам"</string>
@@ -5465,12 +5481,9 @@
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Только на устройстве"</string>
     <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"Новые контакты не будут синхронизироваться с аккаунтом"</string>
     <string name="contacts_storage_selection_message" msgid="8082077300632059003">"Контакты будут по умолчанию сохраняться на устройстве и синхронизироваться с аккаунтом"</string>
-    <!-- no translation found for contacts_storage_set_default_account_error_message (849847649756411393) -->
-    <skip />
-    <!-- no translation found for contacts_storage_no_account_set_summary (7454973781666475276) -->
-    <skip />
-    <!-- no translation found for contacts_storage_local_account_summary (5034805108128685712) -->
-    <skip />
+    <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Не удалось выбрать аккаунт по умолчанию."</string>
+    <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Аккаунт по умолчанию не выбран"</string>
+    <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Только на устройстве"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Сначала добавьте аккаунт"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Обвести и найти"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Чтобы запустить поиск по экрану, нажмите и удерживайте кнопку главного экрана или маркер навигации"</string>
