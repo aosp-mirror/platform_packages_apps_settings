@@ -120,6 +120,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Onemogući Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Onemogućava funkciju Bluetooth LE Audio ako uređaj podržava mogućnosti hardvera za LE Audio."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Način rada Bluetooth LE Audio"</string>
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
+    <skip />
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
+    <skip />
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Prikaži prekidač za LE Audio u detaljima o uređaju"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Zaobiđi Listu dozvoljenih za Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Koristite LE Audio prema zadanim postavkama čak i ako nije potvrđeno da LE Audio periferni uređaj ispunjava kriterije Liste dozvoljenih."</string>
@@ -1959,11 +1963,19 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Ljepljive tipke"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Za prečice pritišćite jednu po jednu tipku umjesto da ih istovremeno zadržavate"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Tipke miša"</string>
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Koristi tipke miša"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Koristite tastaturu da upravljate pokazivačem"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Obrnuto klizanje mišem"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Kliznite nagore da pomjerite stranicu nadolje"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Zamijeni lijevo i desno dugme"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Koristite lijevo dugme miša kao desno dugme"</string>
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Tipke miša – <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Upotrijebite tipku <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> da pomaknete pokazivač miša"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Upotrijebite tipku <xliff:g id="CLICK_LABEL">%s</xliff:g> da kliknete na primarno dugme miša"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"Upotrijebite tipku <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> da pritisnete i zadržite primarno dugme miša"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Upotrijebite tipku <xliff:g id="RELEASE_LABEL">%s</xliff:g> da pustite primarno dugme miša"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Upotrijebite tipku <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> da uključite/isključite način rada za klizanje. Ovo će omogućiti klizanje pregledom nagore, nadolje, ulijevo ili udesno pomoću tipki <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Upotrijebite tipku <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> da kliknete na sekundarno dugme miša"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Prečice tastature"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Prikaz liste prečica"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastatura i alati radnog profila"</string>
@@ -2567,6 +2579,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Podesite potrošnju energije"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Uključeni paketi"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Aplikacije rade uobičajeno"</string>
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"Preporučuje se zamjena baterije"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"Kapacitet baterije i performanse punjenja su smanjeni, pa preporučujemo zamjenu baterije."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Nivo napunjenosti baterije je nizak"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Uključite uštedu baterije da produžite vijek trajanja baterije"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Poboljšajte vijek trajanja baterije"</string>
@@ -3407,7 +3421,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"9:00–17:00 radnim danima\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Događaji u kalendaru"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Način rada {mode_1} je aktivan}=2{Načini rada {mode_1} i {mode_2} su aktivni}=3{Načini rada {mode_1}, {mode_2} i {mode_3} su aktivni}one{Načini rada {mode_1} i {mode_2} te još # način rada su aktivni}few{Načini rada {mode_1} i {mode_2} te još # načina rada su aktivni}other{Načini rada {mode_1} i {mode_2} te još # načina rada su aktivni}}"</string>
-    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 način rada se može automatski uključivati}one{# način rada se može automatski uključivati}few{# načina rada se mogu automatski uključivati}other{# načina rada se može automatski uključivati}}"</string>
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Ne ometaj}=1{{mode_1}}=2{{mode_1} i {mode_2}}one{{mode_1}, {mode_2} i {mode_3}}few{{mode_1}, {mode_2} i {mode_3}}other{{mode_1}, {mode_2} i {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"UKLJUČENO"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Nije postavljeno"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Onemogućeno"</string>
@@ -3454,8 +3468,8 @@
     <string name="mode_grayscale_title" msgid="6027553257331235461">"Nijanse sive"</string>
     <string name="mode_grayscale_title_secondary_list" msgid="2662593380253642581">"nijanse sive"</string>
     <string name="mode_grayscale_summary" msgid="6682099523626777038">"Promijenite ekran u crno-bijeli"</string>
-    <string name="mode_aod_title" msgid="5903435070341237325">"Neka zaslon ostane taman"</string>
-    <string name="mode_aod_title_secondary_list" msgid="8268180392811027557">"neka zaslon ostane taman"</string>
+    <string name="mode_aod_title" msgid="5903435070341237325">"Zadržavanje ekrana tamnim"</string>
+    <string name="mode_aod_title_secondary_list" msgid="8268180392811027557">"zadržavanje ekrana tamnim"</string>
     <string name="mode_aod_summary" msgid="7516159044827627065">"Onemogućite uvijek uključen ekran"</string>
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Zatamni pozadinsku sliku"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"zatamni pozadinsku sliku"</string>
@@ -3932,7 +3946,7 @@
     <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Ovaj način rada će se možda automatski uključiti na osnovu postavki"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Omogući"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Postavite način rada koji je u skladu s redovnim rasporedom"</string>
-    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Postavite način rada da sinhronizirate s događajima u kalendaru i odgovorima na pozive"</string>
+    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Postavite način rada za sinhronizaciju s događajima u kalendaru i odgovorima na pozive"</string>
     <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Dizajnirajte opuštajuću rutinu za spavanje. Postavite alarme, zatamnite ekran i blokirajte obavještenja."</string>
     <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Dajte prioritet sigurnosti na putu radi fokusirane vožnje bez ometanja"</string>
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Blokirajte ometanja ili prekide s uređaja radi fokusiranja"</string>
@@ -5456,6 +5470,8 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Slušajte prijenos"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Skenirajte QR kôd prijenosa zvuka da slušate na uređaju <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Nije moguće urediti lozinku tokom dijeljenja. Da promijenite lozinku, prvo isključite dijeljenje zvuka."</string>
+    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
+    <skip />
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Skener QR koda"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Trebate pomoć?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Pretražite postavke"</string>
@@ -5464,12 +5480,9 @@
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Samo uređaj"</string>
     <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"Novi kontakti se neće sinhronizirati s računom"</string>
     <string name="contacts_storage_selection_message" msgid="8082077300632059003">"Kontakti će se sačuvati na uređaj i sinhronizirati s računom prema zadanim postavkama"</string>
-    <!-- no translation found for contacts_storage_set_default_account_error_message (849847649756411393) -->
-    <skip />
-    <!-- no translation found for contacts_storage_no_account_set_summary (7454973781666475276) -->
-    <skip />
-    <!-- no translation found for contacts_storage_local_account_summary (5034805108128685712) -->
-    <skip />
+    <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Došlo je do greške prilikom postavljanja zadanog računa"</string>
+    <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Zadani račun nije postavljen"</string>
+    <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Samo uređaj"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Dodajte račun da započnete"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Pretraživanje zaokruživanjem"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Dodirnite i zadržite dugme za početnu stranicu ili ručicu za navigaciju da pretražujete pomoću sadržaja na ekranu."</string>

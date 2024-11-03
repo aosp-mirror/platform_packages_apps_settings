@@ -66,9 +66,12 @@ import com.android.internal.widget.LockscreenCredential;
 import com.android.internal.widget.TextViewInputDisabler;
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
+import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
+
+import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.ArrayList;
 
@@ -83,6 +86,18 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
     };
 
     public static class InternalActivity extends ConfirmLockPassword {
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (ThemeHelper.shouldApplyGlifExpressiveStyle(getApplicationContext())) {
+            if (!ThemeHelper.trySetSuwTheme(this)) {
+                setTheme(ThemeHelper.getSuwDefaultTheme(getApplicationContext()));
+                ThemeHelper.trySetDynamicColor(this);
+            }
+        }
     }
 
     @Override

@@ -120,6 +120,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Desativar Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Desativa a funcionalidade Bluetooth LE Audio se o dispositivo suportar as capacidades de hardware LE Audio."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Modo Bluetooth LE Audio"</string>
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Ativar a pré-visualização da IU de transmissão do Bluetooth LE Audio"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Ativa a pré-visualização da IU de partilha do LE Audio, incluindo a partilha de áudio pessoal e a transmissão privada"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Ver botão LE Audio nos Detalhes"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Contornar lista de autorizações do Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Use o LE Audio por predefinição, mesmo se o cumprimento dos critérios da lista de autorizações pelo periférico com LE Audio não tiver sido validado."</string>
@@ -284,7 +286,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"Localização"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Usar localização"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Desativada"</string>
-    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Ativada / # app tem acesso à localização}other{Ativada / # apps têm acesso à localização}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Ativada/# app tem acesso à localização}other{Ativada/# apps têm acesso à localização}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"A carregar…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"As apps com a autorização Dispositivos próximos podem determinar a posição relativa dos dispositivos ligados."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"O acesso à localização está desativado para apps e serviços. A localização do dispositivo ainda pode ser enviada para os contactos de resposta a emergências quando liga ou envia uma mensagem de texto para um número de emergência."</string>
@@ -563,7 +565,7 @@
     <string name="private_space_title" msgid="1752064212078238723">"Espaço privado"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Mantém as apps privadas bloqueadas e ocultas"</string>
     <string name="private_space_description" msgid="4059594203775816136">"Mantenha as apps privadas num espaço separado que pode ocultar ou bloquear"</string>
-    <string name="private_space_lock_title" msgid="7230836881433350526">"Bloqueio do espaço privado"</string>
+    <string name="private_space_lock_title" msgid="7230836881433350526">"Bloquear espaço privado"</string>
     <string name="private_space_one_lock_summary" msgid="2106513606571219068">"Pode desbloquear o espaço privado da mesma forma que desbloqueia o seu dispositivo ou escolher um bloqueio diferente"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Usar bloqueio de ecrã do dispositivo"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"Desbloqueio facial e por impressão digital"</string>
@@ -622,7 +624,7 @@
     <string name="private_space_cancel_label" msgid="379259667396956886">"Cancelar"</string>
     <string name="private_space_setup_button_label" msgid="2094882154623560585">"Configurar"</string>
     <string name="private_space_setup_title" msgid="2272968244329821450">"Espaço privado"</string>
-    <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Oculte ou bloqueie apps privadas num espaço separado. Use uma Conta Google exclusiva para maior segurança."</string>
+    <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Oculte ou bloqueie apps privadas num espaço separado. Use uma Conta Google dedicada para maior segurança."</string>
     <string name="private_space_setup_sub_header" msgid="550476876393954356">"Como funciona"</string>
     <string name="private_space_separate_account_text" msgid="790319706810190320"><b>"Crie uma Conta Google para o seu espaço"</b>\n"Se usar uma conta dedicada, impede que os ficheiros, as fotos e os emails sincronizados sejam apresentados fora do seu espaço"</string>
     <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Defina um bloqueio"</b>\n"Bloqueie o seu espaço para impedir que outras pessoas o abram"</string>
@@ -1959,11 +1961,27 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Teclas aderentes"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Prima uma tecla de cada vez para os atalhos em vez de manter as teclas premidas em simultâneo"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Teclas do rato"</string>
+    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
+    <skip />
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Use o teclado para controlar o ponteiro"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Deslocamento inverso do rato"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Desloque para cima para mover a página para baixo"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Trocar botões esquerdo e direito"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Use o botão esquerdo do rato como o botão direito"</string>
+    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
+    <skip />
+    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
+    <skip />
+    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
+    <skip />
+    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
+    <skip />
+    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
+    <skip />
+    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
+    <skip />
+    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Atalhos de teclado"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Mostre a lista de atalhos"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Teclados e ferramentas do perfil de trabalho"</string>
@@ -2567,6 +2585,10 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Ajustar utilização de energia"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Pacotes incluídos"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"As apps estão a ser executadas normalmente"</string>
+    <!-- no translation found for battery_tip_replacement_title (3932335880485957919) -->
+    <skip />
+    <!-- no translation found for battery_tip_replacement_summary (7892640031317153349) -->
+    <skip />
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Nível da bateria baixo"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Ative a Poupança de bateria para prolongar a autonomia da bateria"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Melhore a autonomia da bateria"</string>
@@ -2697,7 +2719,7 @@
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Utilização da bateria desde o último carregamento completo"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Utilização da bateria: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Tempo ao ecrã desde o último carregamento completo"</string>
-    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Tempo ao ecrão: <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Tempo ao ecrã: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Ver por apps"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Ver por sistemas"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
@@ -3225,7 +3247,7 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Não disponível com o NFC desativado"</string>
-    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Para utilizar, comece por instalar uma app de pagamento"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Para usar, instale primeiro uma app de pagamento"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Apps recentes, apps predefinidas"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"O acesso às notificações não está disponível para aplicações no perfil de trabalho."</string>
     <string name="account_dashboard_title" msgid="8228773251948253914">"Palavras-passe e contas"</string>
@@ -3407,7 +3429,8 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"9:00 – 17:00, dias úteis\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Eventos de calendário"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} está ativo}=2{{mode_1} e {mode_2} estão ativos}=3{{mode_1}, {mode_2} e {mode_3} estão ativos}other{{mode_1}, {mode_2} e mais # estão ativos}}"</string>
-    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 modo pode ser ativado automaticamente}other{# modos podem ser ativados automaticamente}}"</string>
+    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
+    <skip />
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ATIVADO"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Não definido"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Desativado"</string>
@@ -5453,8 +5476,10 @@
     <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"Ler código QR"</string>
     <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Comece a ouvir lendo o código QR de uma stream"</string>
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Ouvir stream"</string>
-    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Leia o código QR de uma stream de áudio para ouvir com <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Leia o código QR de uma stream de áudio para ouvir com os <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Não é possível editar a palavra-passe durante a partilha. Para alterar a palavra-passe, primeiro, desative a partilha de áudio."</string>
+    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
+    <skip />
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Leitor de códigos QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Precisa de ajuda?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Pesquise definições"</string>
@@ -5463,12 +5488,9 @@
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Apenas no dispositivo"</string>
     <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"Os novos contactos não vão ser sincronizados com uma conta"</string>
     <string name="contacts_storage_selection_message" msgid="8082077300632059003">"Os contactos vão ser guardados no dispositivo e sincronizados com a sua conta por predefinição"</string>
-    <!-- no translation found for contacts_storage_set_default_account_error_message (849847649756411393) -->
-    <skip />
-    <!-- no translation found for contacts_storage_no_account_set_summary (7454973781666475276) -->
-    <skip />
-    <!-- no translation found for contacts_storage_local_account_summary (5034805108128685712) -->
-    <skip />
+    <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Erro ao predefinir a conta"</string>
+    <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Nenhuma conta predefinida"</string>
+    <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Apenas no dispositivo"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Adicione uma conta para começar"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Circundar para Pesquisar"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Toque sem soltar no botão do ecrã principal ou no indicador de navegação para pesquisar usando o conteúdo no ecrã."</string>

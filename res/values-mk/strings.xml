@@ -120,6 +120,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Оневозможи Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Ја оневозможува функцијата Bluetooth LE Audio ако уредот поддржува хардверски способности за LE Audio."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Режим за Bluetooth LE Audio"</string>
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
+    <skip />
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
+    <skip />
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Прекинувач за LE Audio во „Детали за уредот“"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Игнорирај го списокот со дозволени за Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Користи LE Audio стандардно дури и ако не е потврдено дека периферното LE Audio ги исполнува критериумите на списокот со дозволени."</string>
@@ -130,7 +134,7 @@
     <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"Поврзано со сметка"</string>
     <string name="connected_device_previously_associated_fast_pair_device_title" msgid="8353405823992023457">"Претходно користено со сметката"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"Bluetooth ќе се вклучи за спарување"</string>
-    <string name="connected_device_connections_title" msgid="4164120115341579170">"Поставки за врски"</string>
+    <string name="connected_device_connections_title" msgid="4164120115341579170">"Поставки за поврзување"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Претходно поврзани"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"Bluetooth е вклучен"</string>
     <string name="previous_connected_see_all" msgid="7759413145713251328">"Прикажи ги сите"</string>
@@ -1959,11 +1963,19 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Лепливи копчиња"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Притискајте ги копчињата за кратенки едно по едно наместо да ги држите копчињата притиснати заедно"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Копчиња на глувчето"</string>
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Користете ги копчињата на глувчето"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Користете ја тастатурата за да го контролирате покажувачот"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Обратно лизгање на глувчето"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Лизгајте нагоре за да ја преместите страницата надолу"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Заменете ги местата на левото и десното копче"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Користете го левото копче на глувчето како десно"</string>
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Копчиња на глувчето за <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Користете ги копчињата <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> за да го движите покажувачот на глувчето"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Користете го копчето <xliff:g id="CLICK_LABEL">%s</xliff:g> за да кликнете на примарното копче на глувчето"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"Користете го копчето <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> за да го притиснете и задржите примарното копче на глувчето"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Користете го копчето <xliff:g id="RELEASE_LABEL">%s</xliff:g> за да го отпуштите примарното копче на глувчето"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Користете го копчето <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> за вклучување/исклучување на „Режим на лизгање“. Ова ќе направи копчињата <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> да го лизгаат приказот нагоре, надолу, налево или надесно"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Користете го копчето <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> за да кликнете на секундарното копче на глувчето"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Кратенки на тастатурата"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Прикажи список со кратенки"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Тастатури и алатки за работниот профил"</string>
@@ -2567,6 +2579,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Приспособи употреба на струја"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Вклучени пакети"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Апликациите работат нормално"</string>
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"Се препорачува замена на батеријата"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"Капацитетот на батеријата и изведбата на полнењето се намалени, па се препорачува замена на батеријата."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Нивото на батеријата е слабо"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Вклучете „Штедач на батерија“ за да го продолжи траењето на батеријата"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Подобрете го траењето на батеријата"</string>
@@ -3407,7 +3421,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"„работни денови, 9:00 – 17:00“"</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Настани во календарот"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Активен е {mode_1}}=2{Активни се {mode_1} и {mode_2}}=3{Активни се {mode_1}, {mode_2} и {mode_3}}one{Активни се {mode_1}, {mode_2} и уште #}other{Активни се {mode_1}, {mode_2} и уште #}}"</string>
-    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 режим може да се вклучи автоматски}one{# режим може да се вклучат автоматски}other{# режими може да се вклучат автоматски}}"</string>
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Не вознемирувај}=1{{mode_1}}=2{{mode_1}, {mode_2}}one{{mode_1}, {mode_2}, {mode_3}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ВКЛУЧЕНО"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Не е поставено"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Оневозможено"</string>
@@ -3757,7 +3771,7 @@
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Апликацијава не испраќа известувања"</string>
     <string name="notification_channels" msgid="1502969522886493799">"Категории"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Друго"</string>
-    <string name="no_channels" msgid="4716199078612071915">"Апликацијава не објави ниедно известување"</string>
+    <string name="no_channels" msgid="4716199078612071915">"Апликацијава нема објавено ниедно известување"</string>
     <string name="no_recent_channels" msgid="5068574296267584043">"Прикажи ги некористените категории"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Дополнителни поставки во апликацијата"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Прикажи ги некористените категории"</string>
@@ -5455,6 +5469,8 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Слушнете го стримот"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Скенирајте го QR-кодот на аудиостримот за да слушате со <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Лозинката не може да се измени додека се споделува. За промена на лозинката, прво исклучете го споделувањето аудио."</string>
+    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
+    <skip />
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Скенер на QR-кодови"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Ви треба помош?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Пребарувајте низ поставките"</string>
@@ -5463,12 +5479,9 @@
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Само уред"</string>
     <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"Новите контакти нема да се синхронизираат со сметка"</string>
     <string name="contacts_storage_selection_message" msgid="8082077300632059003">"Контактите ќе се зачувуваат на вашиот уред и стандардно ќе се синхронизираат со вашата сметка"</string>
-    <!-- no translation found for contacts_storage_set_default_account_error_message (849847649756411393) -->
-    <skip />
-    <!-- no translation found for contacts_storage_no_account_set_summary (7454973781666475276) -->
-    <skip />
-    <!-- no translation found for contacts_storage_local_account_summary (5034805108128685712) -->
-    <skip />
+    <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Грешка при поставувањето на стандардната сметка"</string>
+    <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Нема поставено стандардна сметка"</string>
+    <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Само уред"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Додајте сметка за да започнете"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Пребарување со заокружување"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Допрете и задржете го копчето за почетен екран или лентата за навигација за да пребарувате со содржините на екранот."</string>

@@ -120,13 +120,15 @@ class DeviceDetailsMoreSettingsFragment : DashboardFragment() {
                     finish()
                     return emptyList()
                 }
-        formatter =
-            featureFactory.bluetoothFeatureProvider.getDeviceDetailsFragmentFormatter(
-                requireContext(),
-                this,
-                bluetoothManager.adapter,
-                cachedDevice,
-            )
+        if (!this::formatter.isInitialized) {
+            formatter =
+                featureFactory.bluetoothFeatureProvider.getDeviceDetailsFragmentFormatter(
+                    requireContext(),
+                    this,
+                    bluetoothManager.adapter,
+                    cachedDevice,
+                )
+        }
         helpItem =
             formatter
                 .getMenuItem(FragmentTypeModel.DeviceDetailsMoreSettingsFragment)
@@ -141,6 +143,7 @@ class DeviceDetailsMoreSettingsFragment : DashboardFragment() {
                 formatter.getInvisibleBluetoothProfiles(
                     FragmentTypeModel.DeviceDetailsMoreSettingsFragment
                 ),
+                false,
             ),
             BluetoothDetailsAudioDeviceTypeController(
                 context,

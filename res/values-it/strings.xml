@@ -120,6 +120,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Disattiva Bluetooth LE audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Disattiva la funzionalità Bluetooth LE audio se il dispositivo supporta funzioni hardware LE audio."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Modalità Bluetooth LE audio"</string>
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Attiva anteprima UI di trasmissione Bluetooth LE audio"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Attiva l\'anteprima della UI di condivisione LE audio, incluse la condivisione audio personale e la trasmissione privata"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Mostra comandi LE audio nei dettagli dispositivo"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Ignora lista consentita Bluetooth LE audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Usa LE audio per impostazione predefinita anche se non è stato verificato che la periferica LE audio soddisfa i criteri della lista consentita."</string>
@@ -625,7 +627,7 @@
     <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Nascondi o blocca le app private in uno spazio separato. Usa un Account Google dedicato per una maggiore sicurezza."</string>
     <string name="private_space_setup_sub_header" msgid="550476876393954356">"Come funziona"</string>
     <string name="private_space_separate_account_text" msgid="790319706810190320"><b>"Crea un Account Google per il tuo spazio"</b>\n"L\'utilizzo di un account dedicato consente di interrompere la sincronizzazione di file, foto e email al di fuori del tuo spazio"</string>
-    <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Imposta un blocco"</b>\n"Blocca il tuo spazio per impedire ad altre persone di aprirlo."</string>
+    <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Imposta un blocco"</b>\n"Blocca il tuo spazio per impedire ad altre persone di aprirlo"</string>
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Installa le app"</b>\n"Installa le app che vuoi mantenere private nel tuo spazio"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Aspetti da considerare"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Le app vengono interrotte quando blocchi il tuo spazio"</b>\n"Quando blocchi il tuo spazio, le app al suo interno verranno interrotte e non ti invieranno notifiche"</string>
@@ -897,7 +899,7 @@
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"mirroring"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Attiva display wireless"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Nessun dispositivo nelle vicinanze."</string>
-    <string name="wifi_display_status_connecting" msgid="530880182560077334">"Collegamento in corso"</string>
+    <string name="wifi_display_status_connecting" msgid="530880182560077334">"Connessione in corso…"</string>
     <string name="wifi_display_status_connected" msgid="2189925211258519539">"Connesso"</string>
     <string name="wifi_display_status_in_use" msgid="5904009697167947449">"In uso"</string>
     <string name="wifi_display_status_not_available" msgid="8463750208946968594">"Non disponibile"</string>
@@ -1959,11 +1961,27 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Tasti permanenti"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Premi un tasto alla volta per le scorciatoie invece di tenere premuti più tasti contemporaneamente"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Tasti del mouse"</string>
+    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
+    <skip />
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Usa la tastiera per controllare il puntatore"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Scorrimento invertito del mouse"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Scorri verso l\'alto per spostare la pagina in basso"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Scambia i tasti sinistro e destro"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Usa il tasto sinistro del mouse come il destro"</string>
+    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
+    <skip />
+    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
+    <skip />
+    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
+    <skip />
+    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
+    <skip />
+    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
+    <skip />
+    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
+    <skip />
+    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Scorciatoie da tastiera"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Mostra l\'elenco di scorciatoie"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastiere e strumenti del profilo di lavoro"</string>
@@ -2567,6 +2585,10 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Regola consumo alimentazione"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Pacchetti inclusi"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Le app funzionano normalmente"</string>
+    <!-- no translation found for battery_tip_replacement_title (3932335880485957919) -->
+    <skip />
+    <!-- no translation found for battery_tip_replacement_summary (7892640031317153349) -->
+    <skip />
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Livello della batteria basso"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Attiva il Risparmio energetico per prolungare la durata della batteria"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Prolunga la durata della batteria"</string>
@@ -3407,7 +3429,8 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"9:00-17:00, giorni feriali\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Eventi nel calendario"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} è attiva}=2{{mode_1} e {mode_2} sono attive}=3{{mode_1}, {mode_2} e {mode_3} sono attive}other{{mode_1}, {mode_2} e altre # sono attive}}"</string>
-    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{Può essere attivata automaticamente 1 modalità}other{Possono essere attivate automaticamente # modalità}}"</string>
+    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
+    <skip />
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ON"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Non impostata"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Disattivata"</string>
@@ -5455,6 +5478,8 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Ascolta lo stream"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Scansiona il codice QR di uno stream audio da ascoltare con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Impossibile modificare la password durante la condivisione. Per modificarla, devi prima disattivare la condivisione audio."</string>
+    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
+    <skip />
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Scanner codici QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Serve aiuto?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Cerca in Impostazioni"</string>
@@ -5463,12 +5488,9 @@
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Solo dispositivo"</string>
     <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"I nuovi contatti non verranno sincronizzati con un account"</string>
     <string name="contacts_storage_selection_message" msgid="8082077300632059003">"I contatti verranno salvati sul dispositivo e sincronizzati con il tuo account per impostazione predefinita"</string>
-    <!-- no translation found for contacts_storage_set_default_account_error_message (849847649756411393) -->
-    <skip />
-    <!-- no translation found for contacts_storage_no_account_set_summary (7454973781666475276) -->
-    <skip />
-    <!-- no translation found for contacts_storage_local_account_summary (5034805108128685712) -->
-    <skip />
+    <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Errore durante l\'impostazione dell\'account predefinito"</string>
+    <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Nessun account impostato come predefinito"</string>
+    <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Solo dispositivo"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Aggiungi un account per iniziare"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Cerchia e Cerca"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Tocca e tieni premuto il pulsante Home o la barra di navigazione per eseguire una ricerca usando i contenuti sullo schermo."</string>

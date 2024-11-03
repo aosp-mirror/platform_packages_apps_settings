@@ -34,8 +34,6 @@ class DataSaverScreen : PreferenceScreenCreator {
     override val icon: Int
         get() = R.drawable.ic_settings_data_usage
 
-    override fun order(context: Context) = 10
-
     override fun isFlagEnabled(context: Context) = Flags.catalystRestrictBackgroundParentEntry()
 
     override fun fragmentClass() = DataSaverSummary::class.java

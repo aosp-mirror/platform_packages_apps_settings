@@ -260,6 +260,13 @@
     <string name="bluetooth_disable_leaudio_summary">Disables Bluetooth LE audio feature if the device supports LE audio hardware capabilities.</string>
     <!-- Setting toggle title for switch Bluetooth LE Audio mode. [CHAR LIMIT=40] -->
     <string name="bluetooth_leaudio_mode">Bluetooth LE Audio mode</string>
+
+    <!-- Setting toggle title for enabling Bluetooth LE Audio UI preview. [CHAR LIMIT=none] -->
+    <string name="bluetooth_leaudio_broadcast_ui">Enable Bluetooth LE Audio Broadcast UI preview</string>
+    <!-- Summary of toggle for enabling Bluetooth LE Audio UI preview. [CHAR LIMIT=none]-->
+    <string name="bluetooth_leaudio_broadcast_ui_summary">Enables the LE Audio Sharing UI preview
+        including personal audio sharing and private broadcast</string>
+
     <!-- Setting toggle title for enabling Bluetooth LE Audio toggle in Device Details. [CHAR LIMIT=40] -->
     <string name="bluetooth_show_leaudio_device_details">Show LE audio toggle in Device Details</string>
 
@@ -1227,6 +1234,16 @@
     <string name="security_settings_fingerprint_bad_calibration_title">Can\u2019t use fingerprint sensor</string>
     <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
     <string name="security_settings_fingerprint_bad_calibration">Visit a repair provider.</string>
+
+    <!-- Key for screen off udfps unlock feature. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_screen_off_unlock_udfps_key" translatable="false">security_settings_screen_off_unlock_udfps</string>
+    <!-- Title for  Key for screen off udfps unlock feature. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_screen_off_unlock_udfps_title">Screen-off Fingerprint Unlock</string>
+    <!-- Description for screen off udfps unlock feature. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_screen_off_unlock_udfps_description">Use Fingerprint Unlock even when the screen is off</string>
+    <!-- Description for screen off udfps unlock feature. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_screen_off_unlock_udfps_keywords">Screen-off, Unlock</string>
+
     <!-- Title for the section that has additional security settings. [CHAR LIMIT=60] -->
     <string name="security_advanced_settings">More security settings</string>
     <!-- String for the "More security settings" summary when a work profile is on the device. [CHAR_LIMIT=NONE] -->
@@ -5995,6 +6012,10 @@
 
     <!-- Title for the battery summary tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_summary_title">Apps are running normally</string>
+    <!-- Title for the battery replacement tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_replacement_title">Battery replacement recommended</string>
+    <!-- Summary for the battery replacement tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_replacement_summary">Battery capacity and charging performance are reduced, and battery replacement is recommended.</string>
     <!-- Title for the low battery tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_low_battery_title">Battery level low</string>
     <!-- Summary for the low battery tip [CHAR LIMIT=NONE] -->
@@ -7417,6 +7438,8 @@
     <string name="help_url_battery" translatable="false"></string>
     <!-- Help URL, Battery Defender [DO NOT TRANSLATE] -->
     <string name="help_url_battery_defender" translatable="false"></string>
+    <!-- Help URL, Battery Replacement [DO NOT TRANSLATE] -->
+    <string name="help_url_battery_replacement" translatable="false"></string>
     <!-- Help URL, Dock Defender [DO NOT TRANSLATE] -->
     <string name="help_url_dock_defender" translatable="false"></string>
     <!-- Help URL, Incompatible charging [DO NOT TRANSLATE] -->
@@ -13725,8 +13748,10 @@
     <string name="audio_streams_main_page_password_dialog_join_button">Listen to stream</string>
     <!-- Le audio streams main page qr code scanner summary [CHAR LIMIT=NONE] -->
     <string name="audio_streams_main_page_qr_code_scanner_summary">Scan an audio stream QR code to listen with <xliff:g example="LE headset" id="device_name">%1$s</xliff:g></string>
-    <!-- Le audio streams password dialog  [CHAR LIMIT=NONE] -->
+    <!-- Le audio streams password dialog not editable message [CHAR LIMIT=NONE] -->
     <string name="audio_streams_main_page_password_dialog_cannot_edit">Can\u0027t edit password while sharing. To change the password, first turn off audio sharing.</string>
+    <!-- Le audio streams password dialog password format alert [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_password_dialog_format_alert">Your password must contain 4-16 characters and use only letters, numbers and symbols</string>
     <!-- Text for audio sharing qrcode scanner [CHAR LIMIT=none]-->
     <string name="audio_streams_qr_code_scanner_label">QR code scanner</string>
     <!-- Learn more link for audio sharing qrcode [CHAR LIMIT=none]-->
