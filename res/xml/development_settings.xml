@@ -199,10 +199,11 @@
             android:title="@string/enable_terminal_title"
             android:summary="@string/enable_terminal_summary" />
 
-        <SwitchPreferenceCompat
-            android:key="enable_linux_terminal"
+        <Preference
+            android:key="linux_terminal"
             android:title="@string/enable_linux_terminal_title"
-            android:summary="@string/enable_linux_terminal_summary" />
+            android:summary="@string/enable_linux_terminal_summary"
+            android:fragment="com.android.settings.development.linuxterminal.LinuxTerminalDashboardFragment" />
 
         <SwitchPreferenceCompat
             android:key="bugreport_in_power"
