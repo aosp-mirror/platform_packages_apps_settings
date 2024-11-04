@@ -27,6 +27,9 @@ import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.PrimarySwitchPreference
 import com.android.settingslib.RestrictedLockUtilsInternal
+import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.datastore.KeyedObservableDelegate
+import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.metadata.BooleanValue
 import com.android.settingslib.metadata.PersistentPreference
@@ -60,7 +63,8 @@ class AutoBrightnessScreen :
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
 
-    override fun storage(context: Context) = SettingsSystemStore.get(context)
+    override fun storage(context: Context): KeyValueStore =
+        AutoBrightnessDataStore(SettingsSystemStore.get(context))
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(
@@ -85,16 +89,39 @@ class AutoBrightnessScreen :
         (preference as PrimarySwitchPreference).apply {
             useAdminDisabledSummary(true)
             isSwitchEnabled = isEnabled
-            isChecked =
-                storage(preference.context).getBoolean(KEY)
-                    ?: getDefault(SCREEN_BRIGHTNESS_MODE_MANUAL)
+            // "true" is not the real default value (it is provided by AutoBrightnessDataStore)
+            isChecked = preferenceDataStore!!.getBoolean(key, true)
         }
     }
 
-    private fun getDefault(brightnessDefault: Int): Boolean =
-        brightnessDefault == SCREEN_BRIGHTNESS_MODE_AUTOMATIC
+    /**
+     * The datastore for brightness, which is persisted as integer but the external type is boolean.
+     */
+    @Suppress("UNCHECKED_CAST")
+    private class AutoBrightnessDataStore(private val settingsStore: SettingsStore) :
+        KeyedObservableDelegate<String>(settingsStore), KeyValueStore {
+
+        override fun contains(key: String) = settingsStore.contains(key)
+
+        override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>) =
+            DEFAULT_VALUE.toBoolean() as T
+
+        override fun <T : Any> getValue(key: String, valueType: Class<T>) =
+            (settingsStore.getInt(key) ?: DEFAULT_VALUE).toBoolean() as T
+
+        override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) =
+            settingsStore.setInt(key, (value as? Boolean)?.toBrightnessMode())
+
+        /** Converts brightness mode integer to boolean. */
+        private fun Int.toBoolean() = this == SCREEN_BRIGHTNESS_MODE_AUTOMATIC
+
+        /** Converts boolean value to brightness mode integer. */
+        private fun Boolean.toBrightnessMode() =
+            if (this) SCREEN_BRIGHTNESS_MODE_AUTOMATIC else SCREEN_BRIGHTNESS_MODE_MANUAL
+    }
 
     companion object {
         const val KEY = Settings.System.SCREEN_BRIGHTNESS_MODE
+        private const val DEFAULT_VALUE = SCREEN_BRIGHTNESS_MODE_MANUAL
     }
 }
