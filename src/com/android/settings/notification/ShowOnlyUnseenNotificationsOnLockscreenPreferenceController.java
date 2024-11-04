@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import static android.provider.Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS;
 import static android.provider.Settings.Secure.LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS;
 
 import android.content.Context;
@@ -23,6 +24,7 @@ import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.server.notification.Flags;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
@@ -55,6 +57,13 @@ public class ShowOnlyUnseenNotificationsOnLockscreenPreferenceController
 
     @Override
     public int getAvailabilityStatus() {
+        if (Flags.notificationMinimalism()) {
+            if (!isNotifOnLockScreenEnabled()) {
+                return DISABLED_DEPENDENT_SETTING;
+            }
+            // We want to show the switch when the lock screen notification minimalism flag is on.
+            return AVAILABLE;
+        }
         int setting = Settings.Secure.getInt(mContext.getContentResolver(),
                 LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, UNSET);
         if (setting == UNSET) {
@@ -67,5 +76,10 @@ public class ShowOnlyUnseenNotificationsOnLockscreenPreferenceController
     @Override
     public int getSliceHighlightMenuRes() {
         return R.string.menu_key_notifications;
+    }
+
+    private boolean isNotifOnLockScreenEnabled() {
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                LOCK_SCREEN_SHOW_NOTIFICATIONS, 0) == 1;
     }
 }

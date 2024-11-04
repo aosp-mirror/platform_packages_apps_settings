@@ -115,7 +115,8 @@ public class BluetoothDetailsCompanionAppsControllerTest extends
                 /* pending */ false,
                 /* timeApprovedMs */ System.currentTimeMillis(),
                 /* lastTimeConnected */ Long.MAX_VALUE,
-                /* systemDataSyncFlags */ -1);
+                /* systemDataSyncFlags */ -1,
+                /* deviceIcon */ null);
 
         mAssociations.add(association);
         showScreen(mController);

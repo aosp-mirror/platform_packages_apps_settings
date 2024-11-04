@@ -29,7 +29,6 @@ import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollSuggestionActivity;
 import com.android.settings.biometrics.fingerprint.FingerprintSuggestionActivity;
-import com.android.settings.notification.zen.ZenSuggestionActivity;
 import com.android.settings.wallpaper.WallpaperSuggestionActivity;
 import com.android.settings.wifi.calling.WifiCallingSuggestionActivity;
 
@@ -79,14 +78,6 @@ public class SettingsSuggestionsTest {
                 Settings.NightDisplaySuggestionActivity.class.getName(),
                 R.string.night_display_suggestion_title,
                 R.string.night_display_suggestion_summary);
-    }
-
-    @Test
-    public void zenSuggestion_isValid() {
-        assertSuggestionEquals(
-                ZenSuggestionActivity.class.getName(),
-                R.string.zen_suggestion_title,
-                R.string.zen_suggestion_summary);
     }
 
     private void assertSuggestionEquals(String activityName, @StringRes int titleRes,

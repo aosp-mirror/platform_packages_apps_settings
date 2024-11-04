@@ -1,0 +1,9 @@
+package: "com.android.settings.flags"
+container: "system"
+
+flag {
+  name: "catalyst_lockscreen_from_display_settings"
+  namespace: "android_settings"
+  description: "Flag for Display & touch > Lock screen"
+  bug: "323791114"
+}

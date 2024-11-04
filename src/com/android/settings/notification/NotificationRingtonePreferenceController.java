@@ -19,6 +19,7 @@ package com.android.settings.notification;
 import android.content.Context;
 import android.media.RingtoneManager;
 
+import com.android.server.notification.Flags;
 import com.android.settings.R;
 
 public class NotificationRingtonePreferenceController extends RingtonePreferenceControllerBase {
@@ -31,6 +32,9 @@ public class NotificationRingtonePreferenceController extends RingtonePreference
 
     @Override
     public boolean isAvailable() {
+        if (isVibrationInSoundUriEnabled()) {
+            return false;
+        }
         return mContext.getResources().getBoolean(R.bool.config_show_notification_ringtone);
     }
 
@@ -42,5 +46,10 @@ public class NotificationRingtonePreferenceController extends RingtonePreference
     @Override
     public int getRingtoneType() {
         return RingtoneManager.TYPE_NOTIFICATION;
+    }
+
+    private boolean isVibrationInSoundUriEnabled() {
+        return Flags.notificationVibrationInSoundUri() && mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_ringtoneVibrationSettingsSupported);
     }
 }

@@ -36,6 +36,7 @@ import android.widget.SeekBar;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 /**
  * A custom seekbar for the balance setting.
@@ -178,10 +179,12 @@ public class BalanceSeekBar extends SeekBar {
                 == LAYOUT_DIRECTION_RTL;
         final int rightPercent = (int) (100 * (progress / max));
         final int leftPercent = 100 - rightPercent;
+        final String rightPercentString = Utils.formatPercentage(rightPercent);
+        final String leftPercentString = Utils.formatPercentage(leftPercent);
         if (rightPercent > leftPercent || (rightPercent == leftPercent && isLayoutRtl)) {
-            return context.getString(resIdRightFirst, rightPercent, leftPercent);
+            return context.getString(resIdRightFirst, rightPercentString, leftPercentString);
         } else {
-            return context.getString(resIdLeftFirst, leftPercent, rightPercent);
+            return context.getString(resIdLeftFirst, leftPercentString, rightPercentString);
         }
     }
 }

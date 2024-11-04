@@ -30,6 +30,7 @@ import android.util.TypedValue;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceGroupAdapter;
@@ -64,7 +65,7 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
 
     private final Context mContext;
     private final int mNormalBackgroundRes;
-    private final String mHighlightKey;
+    private final @Nullable String mHighlightKey;
     private boolean mHighlightRequested;
     private int mHighlightPosition = RecyclerView.NO_POSITION;
 
@@ -101,7 +102,8 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
         screen.setInitialExpandedChildrenCount(initialCount);
     }
 
-    public HighlightablePreferenceGroupAdapter(PreferenceGroup preferenceGroup, String key,
+    public HighlightablePreferenceGroupAdapter(PreferenceGroup preferenceGroup,
+            @Nullable String key,
             boolean highlightRequested) {
         super(preferenceGroup);
         mHighlightKey = key;

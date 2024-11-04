@@ -46,8 +46,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.display.AutoBrightnessPreferenceController;
-import com.android.settings.display.BrightnessLevelPreferenceController;
+import com.android.settings.display.BrightnessLevelPreferenceControllerForSetupWizard;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -146,16 +145,15 @@ public class AccessibilitySettingsForSetupWizardTest {
     }
 
     @Test
-    public void createPreferenceControllers_brightnessPreferencesControllersAreCreated() {
+    public void createPreferenceControllers_lifeCycleDependencyControllerIsCreated() {
         mFragment.onAttach(mContext);
 
         List<AbstractPreferenceController> controllers =
                 mFragment.createPreferenceControllers(mContext);
 
         assertTrue(controllers.stream().anyMatch(
-                controller -> controller instanceof BrightnessLevelPreferenceController));
-        assertTrue(controllers.stream().anyMatch(
-                controller -> controller instanceof AutoBrightnessPreferenceController));
+                controller ->
+                        controller instanceof BrightnessLevelPreferenceControllerForSetupWizard));
     }
 
     private void addEnabledServiceInfo(ComponentName componentName, boolean isAccessibilityTool) {

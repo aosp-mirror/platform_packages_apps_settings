@@ -206,7 +206,12 @@ public class SimSlotChangeHandler {
         if (hasActiveEsimSubscription()) {
             if (mTelMgr.isMultiSimSupported() == TelephonyManager.MULTISIM_ALLOWED) {
                 Log.i(TAG, "Enabled profile exists. DSDS condition satisfied.");
-                startDsdsDialogActivity();
+                if (Flags.isDualSimOnboardingEnabled()) {
+                    // enable dsds by sim onboarding flow
+                    handleRemovableSimInsertWhenDsds(removableSlotInfo);
+                } else {
+                    startDsdsDialogActivity();
+                }
             } else {
                 Log.i(TAG, "Enabled profile exists. DSDS condition not satisfied.");
                 startChooseSimActivity(true);

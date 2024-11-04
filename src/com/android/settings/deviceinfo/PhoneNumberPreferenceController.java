@@ -84,7 +84,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
         for (int simSlotNumber = 0; simSlotNumber < mPreferenceList.size(); simSlotNumber++) {
             final Preference simStatusPreference = mPreferenceList.get(simSlotNumber);
             simStatusPreference.setTitle(getPreferenceTitle(simSlotNumber));
-            simStatusPreference.setSummary(getPhoneNumber(simSlotNumber));
+            setPhoneNumber(simSlotNumber);
         }
     }
 
@@ -93,24 +93,15 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
         return true;
     }
 
-    private CharSequence getFirstPhoneNumber() {
-        final List<SubscriptionInfo> subscriptionInfoList =
-                mSubscriptionManager.getActiveSubscriptionInfoList();
-        if (subscriptionInfoList == null || subscriptionInfoList.isEmpty()) {
-            return mContext.getText(R.string.device_info_default);
-        }
-
-        // For now, We only return first result for slice view.
-        return getFormattedPhoneNumber(subscriptionInfoList.get(0));
-    }
-
-    private CharSequence getPhoneNumber(int simSlot) {
+    private void setPhoneNumber(int simSlot) {
+        final Preference simStatusPreference = mPreferenceList.get(simSlot);
         final SubscriptionInfo subscriptionInfo = getSubscriptionInfo(simSlot);
+        simStatusPreference.setEnabled(subscriptionInfo != null);
         if (subscriptionInfo == null) {
-            return mContext.getText(R.string.device_info_default);
+            simStatusPreference.setSummary(mContext.getString(R.string.device_info_not_available));
+        } else {
+            simStatusPreference.setSummary(getFormattedPhoneNumber(subscriptionInfo));
         }
-
-        return getFormattedPhoneNumber(subscriptionInfo);
     }
 
     private CharSequence getPreferenceTitle(int simSlot) {

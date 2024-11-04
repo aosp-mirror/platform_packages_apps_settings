@@ -39,7 +39,7 @@ import java.io.IOException;
  * underlying drawable. This class should only be used in XML.
  *
  * @attr ref android.R.styleable#DrawableWrapper_drawable
- * @attr ref R.styleable#TintDrawable_tint
+ * @attr ref android.R.styleable#TintDrawable_tint
  */
 public class TintDrawable extends DrawableWrapper {
     private ColorStateList mTint;

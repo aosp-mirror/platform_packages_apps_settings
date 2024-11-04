@@ -18,6 +18,8 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 import static android.text.Spanned.SPAN_EXCLUSIVE_INCLUSIVE;
 
+import static com.android.settingslib.flags.Flags.audioSharingHysteresisModeFix;
+
 import android.os.Handler;
 import android.os.Looper;
 import android.text.SpannableString;
@@ -94,8 +96,12 @@ class AudioStreamStateHandler {
                     }
                     preference.setIsConnected(
                             newState
-                                    == AudioStreamsProgressCategoryController.AudioStreamState
-                                            .SOURCE_ADDED);
+                                            == AudioStreamsProgressCategoryController
+                                                    .AudioStreamState.SOURCE_ADDED
+                                    || (audioSharingHysteresisModeFix()
+                                            && newState
+                                                    == AudioStreamsProgressCategoryController
+                                                            .AudioStreamState.SOURCE_PRESENT));
                     preference.setOnPreferenceClickListener(getOnClickListener(controller));
                 });
     }

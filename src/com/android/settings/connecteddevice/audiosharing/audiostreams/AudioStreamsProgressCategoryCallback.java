@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static com.android.settingslib.flags.Flags.audioSharingHysteresisModeFix;
+
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
@@ -39,6 +41,9 @@ public class AudioStreamsProgressCategoryCallback extends AudioStreamsBroadcastA
             mCategoryController.handleSourceConnected(state);
         } else if (AudioStreamsHelper.isBadCode(state)) {
             mCategoryController.handleSourceConnectBadCode(state);
+        } else if (audioSharingHysteresisModeFix() && AudioStreamsHelper.hasSourcePresent(state)) {
+            // Keep this check as the last, source might also present in above states
+            mCategoryController.handleSourcePresent(state);
         }
     }
 

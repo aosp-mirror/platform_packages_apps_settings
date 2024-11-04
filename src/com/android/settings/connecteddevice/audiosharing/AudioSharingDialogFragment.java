@@ -16,6 +16,9 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
+import static com.android.settings.connecteddevice.audiosharing.AudioSharingDashboardFragment.SHARE_THEN_PAIR_REQUEST_CODE;
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast.EXTRA_PAIR_AND_JOIN_SHARING;
+
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
@@ -28,6 +31,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothPairingDetail;
@@ -48,19 +52,23 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
     // The host creates an instance of this dialog fragment must implement this interface to receive
     // event callbacks.
     public interface DialogEventListener {
+        /** Called when users click the positive button in the dialog. */
+        default void onPositiveClick() {}
+
         /**
          * Called when users click the device item for sharing in the dialog.
          *
          * @param item The device item clicked.
          */
-        void onItemClick(AudioSharingDeviceItem item);
+        default void onItemClick(@NonNull AudioSharingDeviceItem item) {}
 
         /** Called when users click the cancel button in the dialog. */
-        void onCancelClick();
+        default void onCancelClick() {}
     }
 
     @Nullable private static DialogEventListener sListener;
     private static Pair<Integer, Object>[] sEventData = new Pair[0];
+    @Nullable private static Fragment sHost;
 
     @Override
     public int getMetricsCategory() {
@@ -70,10 +78,10 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
     /**
      * Display the {@link AudioSharingDialogFragment} dialog.
      *
-     * @param host The Fragment this dialog will be hosted.
+     * @param host        The Fragment this dialog will be hosted.
      * @param deviceItems The connected device items eligible for audio sharing.
-     * @param listener The callback to handle the user action on this dialog.
-     * @param eventData The eventData to log with for dialog onClick events.
+     * @param listener    The callback to handle the user action on this dialog.
+     * @param eventData   The eventData to log with for dialog onClick events.
      */
     public static void show(
             @NonNull Fragment host,
@@ -88,6 +96,12 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
             Log.d(TAG, "Fail to show dialog: " + e.getMessage());
             return;
         }
+        Lifecycle.State currentState = host.getLifecycle().getCurrentState();
+        if (!currentState.isAtLeast(Lifecycle.State.STARTED)) {
+            Log.d(TAG, "Fail to show dialog with state: " + currentState);
+            return;
+        }
+        sHost = host;
         sListener = listener;
         sEventData = eventData;
         AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
@@ -136,23 +150,33 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
                     .setCustomPositiveButton(
                             R.string.audio_sharing_pair_button_label,
                             v -> {
-                                dismiss();
-                                new SubSettingLauncher(getContext())
-                                        .setDestination(BluetoothPairingDetail.class.getName())
-                                        .setSourceMetricsCategory(getMetricsCategory())
-                                        .launch();
+                                if (sListener != null) {
+                                    sListener.onPositiveClick();
+                                }
                                 logDialogPositiveBtnClick();
+                                dismiss();
+                                Bundle args = new Bundle();
+                                args.putBoolean(EXTRA_PAIR_AND_JOIN_SHARING, true);
+                                SubSettingLauncher launcher =
+                                        new SubSettingLauncher(getContext())
+                                                .setDestination(
+                                                        BluetoothPairingDetail.class.getName())
+                                                .setSourceMetricsCategory(getMetricsCategory())
+                                                .setArguments(args);
+                                if (sHost != null) {
+                                    launcher.setResultListener(sHost, SHARE_THEN_PAIR_REQUEST_CODE);
+                                }
+                                launcher.launch();
                             })
                     .setCustomNegativeButton(
                             R.string.audio_sharing_qrcode_button_label,
                             v -> {
-                                dismiss();
+                                onCancelClick();
                                 new SubSettingLauncher(getContext())
                                         .setTitleRes(R.string.audio_streams_qr_code_page_title)
                                         .setDestination(AudioStreamsQrCodeFragment.class.getName())
                                         .setSourceMetricsCategory(getMetricsCategory())
                                         .launch();
-                                logDialogNegativeBtnClick();
                             });
         } else if (deviceItems.size() == 1) {
             AudioSharingDeviceItem deviceItem = Iterables.getOnlyElement(deviceItems);
@@ -166,8 +190,8 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
                             v -> {
                                 if (sListener != null) {
                                     sListener.onItemClick(deviceItem);
-                                    logDialogPositiveBtnClick();
                                 }
+                                logDialogPositiveBtnClick();
                                 dismiss();
                             })
                     .setCustomNegativeButton(
@@ -182,8 +206,8 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
                                     (AudioSharingDeviceItem item) -> {
                                         if (sListener != null) {
                                             sListener.onItemClick(item);
-                                            logDialogPositiveBtnClick();
                                         }
+                                        logDialogPositiveBtnClick();
                                         dismiss();
                                     },
                                     AudioSharingDeviceAdapter.ActionType.SHARE))
@@ -196,8 +220,8 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
     private void onCancelClick() {
         if (sListener != null) {
             sListener.onCancelClick();
-            logDialogNegativeBtnClick();
         }
+        logDialogNegativeBtnClick();
         dismiss();
     }
 

@@ -39,6 +39,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.Editable;
 import android.text.InputType;
@@ -65,8 +66,12 @@ import com.android.internal.widget.LockscreenCredential;
 import com.android.internal.widget.TextViewInputDisabler;
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
+import com.android.settings.SetupWizardUtils;
+import com.android.settings.Utils;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
+
+import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.util.ArrayList;
 
@@ -81,6 +86,18 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
     };
 
     public static class InternalActivity extends ConfirmLockPassword {
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (ThemeHelper.shouldApplyGlifExpressiveStyle(getApplicationContext())) {
+            if (!ThemeHelper.trySetSuwTheme(this)) {
+                setTheme(ThemeHelper.getSuwDefaultTheme(getApplicationContext()));
+                ThemeHelper.trySetDynamicColor(this);
+            }
+        }
     }
 
     @Override
@@ -290,6 +307,14 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         CONFIRM_WORK_PROFILE_PIN_HEADER,
                         () -> getString(R.string.lockpassword_confirm_your_work_pin_header));
             }
+            if (android.multiuser.Flags.showCustomUnlockTitleInsidePrivateProfile()
+                    && Utils.isPrivateProfile(mEffectiveUserId, getActivity())
+                    && !UserManager.get(getActivity())
+                    .isQuietModeEnabled(UserHandle.of(mEffectiveUserId))) {
+                return mIsAlpha ? getString(R.string.private_space_confirm_your_password_header)
+                        : getString(R.string.private_space_confirm_your_pin_header);
+            }
+
             return mIsAlpha ? getString(R.string.lockpassword_confirm_your_password_header)
                     : getString(R.string.lockpassword_confirm_your_pin_header);
         }

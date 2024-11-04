@@ -67,14 +67,11 @@ public class FloatingMenuFadePreferenceController extends BasePreferenceControll
 
     @Override
     public CharSequence getSummary() {
-        if (mPreference != null) {
-            return mPreference.isEnabled()
-                    ? "%s"
-                    : mContext.getString(
-                            R.string.accessibility_button_disabled_button_mode_summary);
-        } else {
-            return "%s";
+        int rId = R.string.accessibility_button_fade_summary;
+        if (mPreference != null && !mPreference.isEnabled()) {
+            rId = R.string.accessibility_button_disabled_button_mode_summary;
         }
+        return mContext.getString(rId);
     }
 
     @Override

@@ -24,6 +24,8 @@ import android.content.Context;
 import android.util.ArrayMap;
 import android.view.accessibility.AccessibilityManager;
 
+import com.android.internal.accessibility.common.ShortcutConstants;
+
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
@@ -70,5 +72,15 @@ public class ShadowAccessibilityManager extends org.robolectric.shadows.ShadowAc
     public void setInstalledAccessibilityShortcutListAsUser(
             @NonNull List<AccessibilityShortcutInfo> installedAccessibilityShortcutList) {
         mInstalledAccessibilityShortcutList = installedAccessibilityShortcutList;
+    }
+
+    /**
+     * Implements the hidden method
+     * {@link AccessibilityManager#getAccessibilityShortcutTargets}.
+     */
+    @Implementation
+    public List<String> getAccessibilityShortcutTargets(
+            @ShortcutConstants.UserShortcutType int shortcutType) {
+        return List.of();
     }
 }
