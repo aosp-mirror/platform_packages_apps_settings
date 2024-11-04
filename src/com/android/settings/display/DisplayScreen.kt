@@ -30,7 +30,7 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen
-class DisplayScreen :
+open class DisplayScreen :
     PreferenceScreenCreator, PreferenceAvailabilityProvider, PreferenceIconProvider {
     override val key: String
         get() = KEY
@@ -52,6 +52,7 @@ class DisplayScreen :
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {
         +BrightnessLevelRestrictedPreference()
+        +AutoBrightnessScreen.KEY
         +DarkModeScreen.KEY
         +PeakRefreshRateSwitchPreference()
     }

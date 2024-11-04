@@ -32,6 +32,7 @@ import com.android.settingslib.PrimarySwitchPreference;
 /**
  * The top-level preference controller that updates the adaptive brightness.
  */
+// LINT.IfChange
 public class AutoBrightnessPreferenceController extends TogglePreferenceController {
 
     private final String SYSTEM_KEY = SCREEN_BRIGHTNESS_MODE;
@@ -90,3 +91,4 @@ public class AutoBrightnessPreferenceController extends TogglePreferenceControll
         return R.string.menu_key_display;
     }
 }
+// LINT.ThenChange(AutoBrightnessScreen.kt)

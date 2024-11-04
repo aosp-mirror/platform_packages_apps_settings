@@ -23,7 +23,7 @@ import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settingslib.datastore.SettingsSystemStore
-import com.android.settingslib.preference.DefaultPreferenceBindingFactory
+import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -93,11 +93,7 @@ class DialPadTonePreferenceTest {
     }
 
     private fun getSwitchPreference(): SwitchPreferenceCompat =
-        DefaultPreferenceBindingFactory.getPreferenceBinding(dialPadTonePreference).run {
-            val preference = createWidget(context)
-            bind(preference, dialPadTonePreference)
-            preference as SwitchPreferenceCompat
-        }
+        dialPadTonePreference.createAndBindWidget(context)
 
     private fun enableDialPadTone(enabled: Boolean) =
         SettingsSystemStore.get(context).setBoolean(DTMF_TONE_WHEN_DIALING, enabled)
