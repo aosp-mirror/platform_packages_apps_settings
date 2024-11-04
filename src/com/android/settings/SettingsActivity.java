@@ -73,6 +73,7 @@ import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
 import com.android.settingslib.drawer.DashboardCategory;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -168,6 +169,9 @@ public class SettingsActivity extends SettingsBaseActivity
             "com.android.settings.HIGHLIGHT_MENU_KEY";
 
     private static final String EXTRA_UI_OPTIONS = "settings:ui_options";
+
+    private static final int EXPRESSIVE_BACK_ICON =
+            com.android.settingslib.collapsingtoolbar.R.drawable.settingslib_expressive_icon_back;
 
     private String mFragmentClass;
     private String mHighlightMenuKey;
@@ -301,7 +305,9 @@ public class SettingsActivity extends SettingsBaseActivity
         // If this is in setup flow, don't apply theme. Because light theme needs to be applied
         // in SettingsBaseActivity#onCreate().
         if (isSubSettings(intent) && !WizardManagerHelper.isAnySetupWizard(getIntent())) {
-            setTheme(R.style.Theme_SubSettings);
+            int themeId = SettingsThemeHelper.isExpressiveTheme(this)
+                    ? R.style.Theme_SubSettings_Expressive : R.style.Theme_SubSettings;
+            setTheme(themeId);
         }
 
         setContentView(R.layout.settings_main_prefs);
@@ -388,6 +394,9 @@ public class SettingsActivity extends SettingsBaseActivity
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(isActionBarButtonEnabled);
             actionBar.setHomeButtonEnabled(isActionBarButtonEnabled);
+            if (SettingsThemeHelper.isExpressiveTheme(this)) {
+                actionBar.setHomeAsUpIndicator(EXPRESSIVE_BACK_ICON);
+            }
             actionBar.setDisplayShowTitleEnabled(true);
         }
     }
