@@ -33,6 +33,7 @@ import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SwitchPreference
 import kotlin.math.roundToInt
 
@@ -47,6 +48,9 @@ class PeakRefreshRateSwitchPreference :
 
     override fun storage(context: Context): KeyValueStore =
         PeakRefreshRateStore(context, SettingsSystemStore.get(context))
+
+    override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_smooth_display) &&

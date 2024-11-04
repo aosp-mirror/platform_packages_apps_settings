@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth.ui.view
 
+import android.app.ActivityOptions
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
@@ -206,25 +207,21 @@ class DeviceDetailsFragmentFormatterImpl(
                 .collectAsStateWithLifecycle(initialValue = false)
 
         val settings = contents
-        AnimatedVisibility(
-            visible = settings.isNotEmpty(),
-            enter = fadeIn(),
-            exit = fadeOut(),
-        ) {
+        AnimatedVisibility(visible = settings.isNotEmpty(), enter = fadeIn(), exit = fadeOut()) {
             Box {
                 Box(
                     modifier =
-                    Modifier.matchParentSize()
-                        .padding(16.dp, 0.dp, 8.dp, 0.dp)
-                        .background(
-                            color =
-                            if (highlighted) {
-                                MaterialTheme.colorScheme.primaryContainer
-                            } else {
-                                Color.Transparent
-                            },
-                            shape = RoundedCornerShape(28.dp),
-                        ),
+                        Modifier.matchParentSize()
+                            .padding(16.dp, 0.dp, 8.dp, 0.dp)
+                            .background(
+                                color =
+                                    if (highlighted) {
+                                        MaterialTheme.colorScheme.primaryContainer
+                                    } else {
+                                        Color.Transparent
+                                    },
+                                shape = RoundedCornerShape(28.dp),
+                            )
                 ) {}
                 buildPreferences(settings)
             }
@@ -257,17 +254,11 @@ class DeviceDetailsFragmentFormatterImpl(
                 }
             }
             else -> {
-                if (
-                    !settings.all {
-                        it is DeviceSettingPreferenceModel.MultiTogglePreference
-                    }
-                ) {
+                if (!settings.all { it is DeviceSettingPreferenceModel.MultiTogglePreference }) {
                     return
                 }
                 buildMultiTogglePreference(
-                    settings.filterIsInstance<
-                            DeviceSettingPreferenceModel.MultiTogglePreference
-                            >()
+                    settings.filterIsInstance<DeviceSettingPreferenceModel.MultiTogglePreference>()
                 )
             }
         }
@@ -375,7 +366,12 @@ class DeviceDetailsFragmentFormatterImpl(
                 context.startActivity(action.intent)
             }
             is DeviceSettingActionModel.PendingIntentAction -> {
-                action.pendingIntent.send()
+                val options =
+                    ActivityOptions.makeBasic()
+                        .setPendingIntentBackgroundActivityStartMode(
+                            ActivityOptions.MODE_BACKGROUND_ACTIVITY_START_ALLOW_ALWAYS
+                        )
+                action.pendingIntent.send(options.toBundle())
             }
         }
     }
