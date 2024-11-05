@@ -1930,6 +1930,20 @@
                 android:value="@string/menu_key_apps"/>
         </activity-alias>
 
+        <activity android:name="Settings$AppStorageSettingsActivity"
+                  android:label="@string/storage_label"
+                  android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.APP_STORAGE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                   android:value="com.android.settings.applications.AppStorageSettings" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                   android:value="@string/menu_key_apps"/>
+        </activity>
+
         <activity android:name=".applications.InstalledAppOpenByDefaultActivity"
                   android:label="@string/application_info_label"
                   android:exported="true">

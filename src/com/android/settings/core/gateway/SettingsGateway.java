@@ -44,6 +44,7 @@ import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.ChooseAccountFragment;
 import com.android.settings.accounts.ManagedProfileSettings;
 import com.android.settings.applications.AppDashboardFragment;
+import com.android.settings.applications.AppStorageSettings;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
@@ -245,6 +246,7 @@ public class SettingsGateway {
             MyDeviceInfoFragment.class.getName(),
             ModuleLicensesDashboard.class.getName(),
             ManageApplications.class.getName(),
+            AppStorageSettings.class.getName(),
             FirmwareVersionSettings.class.getName(),
             ManageAssist.class.getName(),
             ProcessStatsUi.class.getName(),
@@ -437,6 +439,7 @@ public class SettingsGateway {
             Settings.UserSettingsActivity.class.getName(),
             Settings.ConfigureNotificationSettingsActivity.class.getName(),
             Settings.ManageApplicationsActivity.class.getName(),
+            Settings.AppStorageSettingsActivity.class.getName(),
             Settings.PaymentSettingsActivity.class.getName(),
             // Home page > Display
             Settings.AdaptiveBrightnessActivity.class.getName(),
