@@ -47,7 +47,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.telephony.flags.Flags;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.ResetNetworkRestrictionViewBuilder;
@@ -142,13 +141,10 @@ public class ResetNetwork extends InstrumentedFragment {
         Context context = getContext();
         boolean resetSims = false;
 
-        // TODO(b/317276437) Simplify the logic once flag is released
         int resetOptions = ResetNetworkRequest.RESET_CONNECTIVITY_MANAGER
-                        | ResetNetworkRequest.RESET_VPN_MANAGER;
-        if (Flags.resetMobileNetworkSettings()) {
-            resetOptions |= ResetNetworkRequest.RESET_IMS_STACK;
-            resetOptions |= ResetNetworkRequest.RESET_PHONE_PROCESS;
-        }
+                        | ResetNetworkRequest.RESET_VPN_MANAGER
+                        | ResetNetworkRequest.RESET_IMS_STACK
+                        | ResetNetworkRequest.RESET_PHONE_PROCESS;
         ResetNetworkRequest request = new ResetNetworkRequest(resetOptions);
         if (mSubscriptions != null && mSubscriptions.size() > 0) {
             int selectedIndex = mSubscriptionSpinner.getSelectedItemPosition();
@@ -156,9 +152,7 @@ public class ResetNetwork extends InstrumentedFragment {
             int subId = subscription.getSubscriptionId();
             request.setResetTelephonyAndNetworkPolicyManager(subId)
                     .setResetApn(subId);
-            if (Flags.resetMobileNetworkSettings()) {
-                request.setResetImsSubId(subId);
-            }
+            request.setResetImsSubId(subId);
         }
         if (mEsimContainer.getVisibility() == View.VISIBLE && mEsimCheckbox.isChecked()) {
             resetSims = true;

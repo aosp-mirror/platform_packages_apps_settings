@@ -50,9 +50,8 @@ public class LegalSettings extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.about_legal);
 
-    @Nullable
     @Override
-    public String getPreferenceScreenBindingKey(@NonNull Context context) {
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
         return LegalSettingsScreen.KEY;
     }
 }

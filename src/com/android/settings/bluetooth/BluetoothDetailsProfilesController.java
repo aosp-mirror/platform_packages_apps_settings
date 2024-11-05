@@ -96,6 +96,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             new HashMap<String, List<CachedBluetoothDevice>>();
     private boolean mIsLeAudioToggleEnabled = false;
     private boolean mIsLeAudioOnlyDevice = false;
+    private boolean mHasExtraSpace;
 
     @VisibleForTesting
     PreferenceCategory mProfilesContainer;
@@ -106,7 +107,8 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             LocalBluetoothManager manager,
             CachedBluetoothDevice device,
             Lifecycle lifecycle,
-            @Nullable List<String> invisibleProfiles) {
+            @Nullable List<String> invisibleProfiles,
+            boolean hasExtraSpace) {
         super(context, fragment, device, lifecycle);
         mManager = manager;
         mProfileManager = mManager.getProfileManager();
@@ -115,12 +117,17 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         if (invisibleProfiles != null) {
             mInvisibleProfiles = Set.copyOf(invisibleProfiles);
         }
+        mHasExtraSpace = hasExtraSpace;
     }
 
     @Override
     protected void init(PreferenceScreen screen) {
         mProfilesContainer = (PreferenceCategory)screen.findPreference(getPreferenceKey());
-        mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
+        if (mHasExtraSpace) {
+            mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
+        } else {
+            mProfilesContainer.setLayoutResource(R.layout.preference_category_bluetooth_no_padding);
+        }
         // Call refresh here even though it will get called later in onResume, to avoid the
         // list of switches appearing to "pop" into the page.
         refresh();
@@ -609,7 +616,11 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         Preference preference = mProfilesContainer.findPreference(KEY_BOTTOM_PREFERENCE);
         if (preference == null) {
             preference = new Preference(mContext);
-            preference.setLayoutResource(R.layout.preference_bluetooth_profile_category);
+            if (mHasExtraSpace) {
+                preference.setLayoutResource(R.layout.preference_bluetooth_profile_category);
+            } else {
+                preference.setLayoutResource(R.layout.preference_category_bluetooth_no_padding);
+            }
             preference.setEnabled(false);
             preference.setKey(KEY_BOTTOM_PREFERENCE);
             preference.setOrder(ORDINAL);

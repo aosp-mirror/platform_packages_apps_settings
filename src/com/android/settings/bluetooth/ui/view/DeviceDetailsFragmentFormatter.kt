@@ -16,14 +16,14 @@
 
 package com.android.settings.bluetooth.ui.view
 
+import android.app.ActivityOptions
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
-import android.media.AudioManager
 import android.os.Bundle
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -33,14 +33,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.SettingsPreferenceFragment
@@ -52,9 +50,9 @@ import com.android.settings.bluetooth.ui.model.FragmentTypeModel
 import com.android.settings.bluetooth.ui.view.DeviceDetailsMoreSettingsFragment.Companion.KEY_DEVICE_ADDRESS
 import com.android.settings.bluetooth.ui.viewmodel.BluetoothDeviceDetailsViewModel
 import com.android.settings.core.SubSettingLauncher
-import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.spa.preference.ComposePreference
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
+import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingActionModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigItemModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingIcon
 import com.android.settingslib.spa.framework.theme.SettingsDimension
@@ -96,29 +94,17 @@ interface DeviceDetailsFragmentFormatter {
 class DeviceDetailsFragmentFormatterImpl(
     private val context: Context,
     private val fragment: SettingsPreferenceFragment,
-    bluetoothAdapter: BluetoothAdapter,
+    private val bluetoothAdapter: BluetoothAdapter,
     private val cachedDevice: CachedBluetoothDevice,
     private val backgroundCoroutineContext: CoroutineContext,
 ) : DeviceDetailsFragmentFormatter {
-    private val repository =
-        featureFactory.bluetoothFeatureProvider.getDeviceSettingRepository(
-            fragment.requireActivity().application,
-            bluetoothAdapter,
-            fragment.lifecycleScope,
-        )
-    private val spatialAudioInteractor =
-        featureFactory.bluetoothFeatureProvider.getSpatialAudioInteractor(
-            fragment.requireActivity().application,
-            context.getSystemService(AudioManager::class.java),
-            fragment.lifecycleScope,
-        )
+
     private val viewModel: BluetoothDeviceDetailsViewModel =
         ViewModelProvider(
                 fragment,
                 BluetoothDeviceDetailsViewModel.Factory(
                     fragment.requireActivity().application,
-                    repository,
-                    spatialAudioInteractor,
+                    bluetoothAdapter,
                     cachedDevice,
                     backgroundCoroutineContext,
                 ),
@@ -138,7 +124,7 @@ class DeviceDetailsFragmentFormatterImpl(
             viewModel
                 .getItems(fragmentType)
                 ?.filterIsInstance<DeviceSettingConfigItemModel.BuiltinItem.BluetoothProfilesItem>()
-                ?.first()
+                ?.firstOrNull()
                 ?.invisibleProfiles
         }
 
@@ -221,25 +207,21 @@ class DeviceDetailsFragmentFormatterImpl(
                 .collectAsStateWithLifecycle(initialValue = false)
 
         val settings = contents
-        AnimatedVisibility(
-            visible = settings.isNotEmpty(),
-            enter = expandVertically(expandFrom = Alignment.Top),
-            exit = shrinkVertically(shrinkTowards = Alignment.Top),
-        ) {
+        AnimatedVisibility(visible = settings.isNotEmpty(), enter = fadeIn(), exit = fadeOut()) {
             Box {
                 Box(
                     modifier =
-                    Modifier.matchParentSize()
-                        .padding(16.dp, 0.dp, 8.dp, 0.dp)
-                        .background(
-                            color =
-                            if (highlighted) {
-                                MaterialTheme.colorScheme.primaryContainer
-                            } else {
-                                Color.Transparent
-                            },
-                            shape = RoundedCornerShape(28.dp),
-                        ),
+                        Modifier.matchParentSize()
+                            .padding(16.dp, 0.dp, 8.dp, 0.dp)
+                            .background(
+                                color =
+                                    if (highlighted) {
+                                        MaterialTheme.colorScheme.primaryContainer
+                                    } else {
+                                        Color.Transparent
+                                    },
+                                shape = RoundedCornerShape(28.dp),
+                            )
                 ) {}
                 buildPreferences(settings)
             }
@@ -272,17 +254,11 @@ class DeviceDetailsFragmentFormatterImpl(
                 }
             }
             else -> {
-                if (
-                    !settings.all {
-                        it is DeviceSettingPreferenceModel.MultiTogglePreference
-                    }
-                ) {
+                if (!settings.all { it is DeviceSettingPreferenceModel.MultiTogglePreference }) {
                     return
                 }
                 buildMultiTogglePreference(
-                    settings.filterIsInstance<
-                            DeviceSettingPreferenceModel.MultiTogglePreference
-                            >()
+                    settings.filterIsInstance<DeviceSettingPreferenceModel.MultiTogglePreference>()
                 )
             }
         }
@@ -305,6 +281,7 @@ class DeviceDetailsFragmentFormatterImpl(
                 override val onCheckedChange = { newChecked: Boolean ->
                     model.onCheckedChange(newChecked)
                 }
+                override val changeable = { !model.disabled }
                 override val icon: (@Composable () -> Unit)?
                     get() {
                         if (model.icon == null) {
@@ -313,10 +290,10 @@ class DeviceDetailsFragmentFormatterImpl(
                         return { deviceSettingIcon(model.icon) }
                     }
             }
-        if (model.intent != null) {
+        if (model.action != null) {
             TwoTargetSwitchPreference(
                 switchPrefModel,
-                primaryOnClick = { startActivity(model.intent) },
+                primaryOnClick = { triggerAction(model.action) },
             )
         } else {
             SwitchPreference(switchPrefModel)
@@ -330,7 +307,7 @@ class DeviceDetailsFragmentFormatterImpl(
                 override val title = model.title
                 override val summary = { model.summary ?: "" }
                 override val onClick = {
-                    model.intent?.let { startActivity(it) }
+                    model.action?.let { triggerAction(it) }
                     Unit
                 }
                 override val icon: (@Composable () -> Unit)?
@@ -382,9 +359,21 @@ class DeviceDetailsFragmentFormatterImpl(
         icon?.let { Icon(it, modifier = Modifier.size(SettingsDimension.itemIconSize)) }
     }
 
-    private fun startActivity(intent: Intent) {
-        intent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        context.startActivity(intent)
+    private fun triggerAction(action: DeviceSettingActionModel) {
+        when (action) {
+            is DeviceSettingActionModel.IntentAction -> {
+                action.intent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                context.startActivity(action.intent)
+            }
+            is DeviceSettingActionModel.PendingIntentAction -> {
+                val options =
+                    ActivityOptions.makeBasic()
+                        .setPendingIntentBackgroundActivityStartMode(
+                            ActivityOptions.MODE_BACKGROUND_ACTIVITY_START_ALLOW_ALWAYS
+                        )
+                action.pendingIntent.send(options.toBundle())
+            }
+        }
     }
 
     private fun getPreferenceKey(settingId: Int) = "DEVICE_SETTING_${settingId}"

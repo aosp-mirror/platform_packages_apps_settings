@@ -147,8 +147,8 @@ public class WifiTetherSwitchBarControllerTest {
     }
 
     @Test
-    public void onSwitchChanged_switchNotEnabled_doNothingForTethering() {
-        when(mSwitch.isEnabled()).thenReturn(false);
+    public void onSwitchChanged_switchIsBusy_doNothingForTethering() {
+        mController.mIsSwitchBusy = true;
 
         mController.onCheckedChanged(mSwitch, true);
 

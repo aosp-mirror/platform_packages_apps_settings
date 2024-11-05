@@ -24,6 +24,7 @@ import static com.android.internal.accessibility.common.ShortcutConstants.UserSh
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import static com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
+import static com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment.KEY_MAGNIFICATION_SHORTCUT_PREFERENCE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -70,6 +71,7 @@ import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowStorageManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import com.google.common.truth.Correspondence;
 
@@ -539,7 +541,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
     @Test
     public void optInAllValuesToSettings_software_sizeValueIsNotNull_sizeValueIsNotChanged() {
-        for (int size : new int[] {FloatingMenuSizePreferenceController.Size.LARGE,
+        for (int size : new int[]{FloatingMenuSizePreferenceController.Size.LARGE,
                 FloatingMenuSizePreferenceController.Size.SMALL}) {
             Settings.Secure.putInt(mContext.getContentResolver(),
                     Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE, size);
@@ -557,7 +559,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
     @Test
     public void optInAllValuesToSettings_hardware_sizeValueIsNotChanged() {
-        for (int size : new int[] {FloatingMenuSizePreferenceController.Size.UNKNOWN,
+        for (int size : new int[]{FloatingMenuSizePreferenceController.Size.UNKNOWN,
                 FloatingMenuSizePreferenceController.Size.LARGE,
                 FloatingMenuSizePreferenceController.Size.SMALL}) {
             Settings.Secure.putInt(mContext.getContentResolver(),
@@ -575,7 +577,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
     @Test
     public void optInAllValuesToSettings_tripletap_sizeValueIsNotChanged() {
-        for (int size : new int[] {FloatingMenuSizePreferenceController.Size.UNKNOWN,
+        for (int size : new int[]{FloatingMenuSizePreferenceController.Size.UNKNOWN,
                 FloatingMenuSizePreferenceController.Size.LARGE,
                 FloatingMenuSizePreferenceController.Size.SMALL}) {
             Settings.Secure.putInt(mContext.getContentResolver(),
@@ -1023,6 +1025,107 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         assertThat(collectionInfo.getItemCount())
                 // One unimportant item: the illustration preference
                 .isEqualTo(collectionInfo.getImportantForAccessibilityItemCount() + 1);
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    public void getRawDataToIndex_returnsAllPreferenceKeys() {
+        List<String> expectedSearchKeys = List.of(
+                KEY_MAGNIFICATION_SHORTCUT_PREFERENCE,
+                MagnificationModePreferenceController.PREF_KEY,
+                MagnificationFollowTypingPreferenceController.PREF_KEY,
+                MagnificationOneFingerPanningPreferenceController.PREF_KEY,
+                MagnificationAlwaysOnPreferenceController.PREF_KEY,
+                MagnificationJoystickPreferenceController.PREF_KEY);
+
+        final List<SearchIndexableRaw> rawData = ToggleScreenMagnificationPreferenceFragment
+                .SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
+        final List<String> actualSearchKeys = rawData.stream().map(raw -> raw.key).toList();
+
+        assertThat(actualSearchKeys).containsExactlyElementsIn(expectedSearchKeys);
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    public void
+            getNonIndexableKeys_windowMagnificationNotSupported_onlyShortcutPreferenceSearchable() {
+        setWindowMagnificationSupported(false, false);
+
+        final List<String> niks = ToggleScreenMagnificationPreferenceFragment
+                .SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+        final List<SearchIndexableRaw> rawData = ToggleScreenMagnificationPreferenceFragment
+                .SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
+        // Expect all search data, except the shortcut preference, to be in NIKs.
+        final List<String> expectedNiks = rawData.stream().map(raw -> raw.key)
+                .filter(key -> !key.equals(KEY_MAGNIFICATION_SHORTCUT_PREFERENCE)).toList();
+
+        // In NonIndexableKeys == not searchable
+        assertThat(niks).containsExactlyElementsIn(expectedNiks);
+    }
+
+    @Test
+    @EnableFlags({
+            com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH,
+            Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE})
+    public void getNonIndexableKeys_hasShortcutAndAllFeaturesEnabled_allItemsSearchable() {
+        setMagnificationTripleTapEnabled(true);
+        setAlwaysOnSupported(true);
+        setJoystickSupported(true);
+
+        final List<String> niks = ToggleScreenMagnificationPreferenceFragment
+                .SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+
+        // Empty NonIndexableKeys == all indexed items are searchable
+        assertThat(niks).isEmpty();
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    public void getNonIndexableKeys_noShortcut_alwaysOnSupported_notSearchable() {
+        setMagnificationTripleTapEnabled(false);
+        setAlwaysOnSupported(true);
+
+        final List<String> niks = ToggleScreenMagnificationPreferenceFragment
+                .SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+
+        // In NonIndexableKeys == not searchable
+        assertThat(niks).contains(MagnificationAlwaysOnPreferenceController.PREF_KEY);
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    public void getNonIndexableKeys_hasShortcut_alwaysOnNotSupported_notSearchable() {
+        setMagnificationTripleTapEnabled(true);
+        setAlwaysOnSupported(false);
+
+        final List<String> niks = ToggleScreenMagnificationPreferenceFragment
+                .SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+
+        // In NonIndexableKeys == not searchable
+        assertThat(niks).contains(MagnificationAlwaysOnPreferenceController.PREF_KEY);
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
+    public void getNonIndexableKeys_oneFingerPanningNotSupported_notSearchable() {
+        final List<String> niks = ToggleScreenMagnificationPreferenceFragment
+                .SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+
+        // In NonIndexableKeys == not searchable
+        assertThat(niks).contains(MagnificationOneFingerPanningPreferenceController.PREF_KEY);
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    public void getNonIndexableKeys_joystickNotSupported_notSearchable() {
+        setJoystickSupported(false);
+
+        final List<String> niks = ToggleScreenMagnificationPreferenceFragment
+                .SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+
+        // In NonIndexableKeys == not searchable
+        assertThat(niks).contains(MagnificationJoystickPreferenceController.PREF_KEY);
     }
 
     private void putStringIntoSettings(String key, String componentName) {

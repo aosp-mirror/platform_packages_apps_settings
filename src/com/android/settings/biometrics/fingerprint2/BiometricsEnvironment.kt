@@ -45,6 +45,8 @@ import com.android.settings.biometrics.fingerprint2.domain.interactor.EnrollFing
 import com.android.settings.biometrics.fingerprint2.domain.interactor.EnrollStageInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.EnrollStageInteractorImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.EnrolledFingerprintsInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintEnrollStageCountInteractor
+import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintEnrollStageThresholdInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintSensorInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintSensorInteractorImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FoldStateInteractor
@@ -113,6 +115,12 @@ class BiometricsEnvironment(
   fun createCanEnrollFingerprintsInteractor(): CanEnrollFingerprintsInteractor =
     CanEnrollFingerprintsInteractorImpl(fingerprintEnrollmentRepository)
 
+  fun createFingerprintEnrollStageCountInteractor(): FingerprintEnrollStageCountInteractor =
+    FingerprintEnrollStageCountInteractor(fingerprintEnrollmentRepository)
+
+  fun createFingerprintEnrollStageThresholdInteractor(): FingerprintEnrollStageThresholdInteractor =
+    FingerprintEnrollStageThresholdInteractor(fingerprintEnrollmentRepository)
+
   fun createGenerateChallengeInteractor(): GenerateChallengeInteractor =
     GenerateChallengeInteractorImpl(fingerprintManager, context.userId, gateKeeperPasswordProvider)
 
@@ -133,11 +141,8 @@ class BiometricsEnvironment(
   fun createRenameFingerprintInteractor(): RenameFingerprintInteractor =
     RenameFingerprintsInteractorImpl(fingerprintManager, context.userId, backgroundDispatcher)
 
-  val accessibilityInteractor: AccessibilityInteractor by lazy {
-    AccessibilityInteractorImpl(
-      context.getSystemService(AccessibilityManager::class.java)!!,
-      applicationScope,
-    )
+  fun createAccessibilityInteractor(): AccessibilityInteractor {
+    return AccessibilityInteractorImpl(context.getSystemService(AccessibilityManager::class.java)!!)
   }
 
   val foldStateInteractor: FoldStateInteractor by lazy { FoldStateInteractorImpl(context) }
@@ -157,7 +162,7 @@ class BiometricsEnvironment(
   val enrollStageInteractor: EnrollStageInteractor by lazy { EnrollStageInteractorImpl() }
 
   val udfpsEnrollInteractor: UdfpsEnrollInteractor by lazy {
-    UdfpsEnrollInteractorImpl(context, accessibilityInteractor)
+    UdfpsEnrollInteractorImpl(context, createAccessibilityInteractor())
   }
 
   val sensorInteractor: FingerprintSensorInteractor by lazy {

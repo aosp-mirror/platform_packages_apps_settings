@@ -43,6 +43,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.UserHandle;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.notification.ConversationChannelWrapper;
@@ -229,13 +230,13 @@ public final class ZenModePeopleLinkPreferenceControllerTest {
 
     private void setUpContacts(Collection<Integer> allIds, Collection<Integer> starredIds) {
         when(mHelperBackend.getAllContacts()).thenReturn(ImmutableList.copyOf(
-                allIds.stream()
-                        .map(id -> new Contact(id, "#" + id, Uri.parse("photo://" + id)))
+                allIds.stream().map(id -> new Contact(UserHandle.SYSTEM, id, "#" + id,
+                                Uri.parse("photo://" + id)))
                         .toList()));
 
         when(mHelperBackend.getStarredContacts()).thenReturn(ImmutableList.copyOf(
-                starredIds.stream()
-                        .map(id -> new Contact(id, "#" + id, Uri.parse("photo://" + id)))
+                starredIds.stream().map(id -> new Contact(UserHandle.SYSTEM, id, "#" + id,
+                                Uri.parse("photo://" + id)))
                         .toList()));
     }
 
@@ -253,6 +254,6 @@ public final class ZenModePeopleLinkPreferenceControllerTest {
     }
 
     private static ColorDrawable photoOf(Contact contact) {
-        return new ColorDrawable((int) contact.id());
+        return new ColorDrawable((int) contact.contactId());
     }
 }

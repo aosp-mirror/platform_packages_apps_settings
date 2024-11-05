@@ -19,6 +19,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
@@ -115,4 +116,9 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                     return buildPreferenceControllers(context, null /* lifecycle */);
                 }
             };
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return NetworkDashboardScreen.KEY;
+    }
 }

@@ -262,16 +262,9 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                 continue;
             }
             canFindNetwork = true;
-            final int security =
-                    WifiDppUtils.getSecurityTypeFromWifiConfiguration(wifiConfiguration);
-            if (security == wifiEntry.getSecurity()) {
-                return REACHABLE_WIFI_NETWORK;
-            }
-
-            // Default security type of PSK/SAE transition mode WifiEntry is SECURITY_PSK and
-            // there is no way to know if a WifiEntry is of transition mode. Give it a chance.
-            if (security == WifiEntry.SECURITY_SAE
-                    && wifiEntry.getSecurity() == WifiEntry.SECURITY_PSK) {
+            int security = WifiDppUtils.getSecurityTypeFromWifiConfiguration(wifiConfiguration);
+            if (isSecurityMatched(security, wifiEntry.getSecurity())) {
+                Log.d(TAG, "WiFi DPP detects connection security for a matching WiFi network.");
                 return REACHABLE_WIFI_NETWORK;
             }
         }
@@ -281,6 +274,24 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         }
         Log.e(TAG, "WiFi DPP check connection no matched SSID");
         return R.string.wifi_dpp_check_connection_no_matched_ssid;
+    }
+
+    @VisibleForTesting
+    boolean isSecurityMatched(int qrSecurity, int entrySecurity) {
+        if (qrSecurity == entrySecurity) {
+            return true;
+        }
+        // Default security type of PSK/SAE transition mode WifiEntry is SECURITY_PSK and
+        // there is no way to know if a WifiEntry is of transition mode. Give it a chance.
+        if (qrSecurity == WifiEntry.SECURITY_SAE && entrySecurity == WifiEntry.SECURITY_PSK) {
+            return true;
+        }
+        // If configured is no password, the Wi-Fi framework will attempt OPEN and OWE security.
+        return isNoPasswordSecurity(qrSecurity) && isNoPasswordSecurity(entrySecurity);
+    }
+
+    private boolean isNoPasswordSecurity(int security) {
+        return security == WifiEntry.SECURITY_NONE || security == WifiEntry.SECURITY_OWE;
     }
 
     @VisibleForTesting

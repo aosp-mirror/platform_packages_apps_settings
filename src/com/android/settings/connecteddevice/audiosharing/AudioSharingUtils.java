@@ -21,6 +21,7 @@ import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtil
 import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.MetricKey.METRIC_KEY_PAGE_ID;
 import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.MetricKey.METRIC_KEY_SOURCE_PAGE_ID;
 import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.MetricKey.METRIC_KEY_USER_TRIGGERED;
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast.BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID;
 
 import static java.util.stream.Collectors.toList;
 
@@ -28,6 +29,7 @@ import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.content.Context;
+import android.provider.Settings;
 import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
@@ -44,6 +46,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.bluetooth.VolumeControlProfile;
+import com.android.settingslib.flags.Flags;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -342,6 +345,27 @@ public class AudioSharingUtils {
         }
         VolumeControlProfile vc = profileManager.getVolumeControlProfile();
         return vc != null && vc.isProfileReady();
+    }
+
+    /** Set {@link CachedBluetoothDevice} as primary device for call audio */
+    public static void setPrimary(@NonNull Context context,
+            @Nullable CachedBluetoothDevice cachedDevice) {
+        if (cachedDevice == null) return;
+        cachedDevice.setActive();
+        if (Flags.audioSharingHysteresisModeFix()) {
+            int groupId = BluetoothUtils.getGroupId(cachedDevice);
+            // TODO: use real key name in SettingsProvider
+            int userPreferredId = Settings.Secure.getInt(
+                    context.getContentResolver(),
+                    BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
+                    BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
+            if (groupId != userPreferredId) {
+                Settings.Secure.putInt(
+                        context.getContentResolver(),
+                        BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
+                        groupId);
+            }
+        }
     }
 
     /**

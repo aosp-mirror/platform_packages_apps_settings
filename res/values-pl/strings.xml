@@ -120,6 +120,10 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Wyłącz Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Wyłącza funkcję Bluetooth LE Audio, jeśli urządzenie obsługuje sprzętowe funkcje LE Audio"</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Tryb Bluetooth LE Audio"</string>
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
+    <skip />
+    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
+    <skip />
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Pokazuj przełącznik LE Audio w Szczegółach urządzenia"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Omijaj listę dozwolonych Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Używaj domyślnie technologii LE Audio, nawet jeśli urządzenie peryferyjne LE Audio nie zostało zweryfikowane jako spełniające kryteria listy dozwolonych"</string>
@@ -246,16 +250,11 @@
     <string name="roaming_enable" msgid="7845716016861535340">"Łącz z usługami transmisji danych w roamingu"</string>
     <string name="roaming_disable" msgid="729512894708689604">"Łącz z usługami transmisji danych w roamingu"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"Mogą zostać naliczone opłaty za roaming."</string>
-    <!-- no translation found for date_time_auto (1759599045100040686) -->
-    <skip />
-    <!-- no translation found for date_time_auto_summary (8294938565417729698) -->
-    <skip />
-    <!-- no translation found for zone_auto_title (3520584257065861479) -->
-    <skip />
-    <!-- no translation found for zone_auto_title_summary (6540356783943375071) -->
-    <skip />
-    <!-- no translation found for auto_zone_requires_location_summary (8751995978350701451) -->
-    <skip />
+    <string name="date_time_auto" msgid="1759599045100040686">"Automatyczna data i godzina"</string>
+    <string name="date_time_auto_summary" msgid="8294938565417729698">"Ustaw automatycznie za pomocą sygnałów bezprzewodowych i sieci"</string>
+    <string name="zone_auto_title" msgid="3520584257065861479">"Automatyczna strefa czasowa"</string>
+    <string name="zone_auto_title_summary" msgid="6540356783943375071">"Ustaw automatycznie na podstawie pobliskich sieci komórkowych"</string>
+    <string name="auto_zone_requires_location_summary" msgid="2366567167956530124">"Ustaw automatycznie według lokalizacji, jeśli jest dostępna"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Używaj ustawień domyślnych dla regionu"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Format 24-godzinny"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Godzina"</string>
@@ -423,9 +422,9 @@
     <string name="identity_check_lockout_error_title" msgid="7486409651908283892">"Weryfikacja tożsamości jest włączona i nie może potwierdzić, że to Ty"</string>
     <string name="identity_check_lockout_error_description_1" msgid="4882147327291296884">"Podanie danych biometrycznych nie powiodło się zbyt wiele razy. Zablokuj i odblokuj urządzenie, aby spróbować ponownie."</string>
     <string name="identity_check_lockout_error_two_factor_auth_description_1" msgid="8369894114882274736">"Podanie danych biometrycznych nie powiodło się zbyt wiele razy. Spróbuj ponownie."</string>
-    <string name="identity_check_lockout_error_description_2" msgid="5512321457771307067">"Weryfikacją tożsamości można zarządzać w ustawieniach ochrony w razie kradzieży. Otwórz Ustawienia"</string>
-    <string name="identity_check_general_error_title" msgid="5073929400896102674">"Aby kontynuować, musisz użyć biometrii"</string>
-    <string name="identity_check_general_error_description_1" msgid="5260846996256699095">"Weryfikacja tożsamości jest włączona i wymaga danych biometrycznych, ale czujnik rozpoznawania twarzy lub czytnik linii papilarnych jest niedostępny\n"<ul><li>"Sprawdź, czy aparat jest włączony, i spróbuj ponownie"</li>\n<li>"Możesz wyłączyć weryfikację tożsamości na koncie Google"</li></ul></string>
+    <string name="identity_check_lockout_error_description_2" msgid="5512321457771307067">"Weryfikacją tożsamości można zarządzać w ustawieniach ochrony w razie kradzieży. Otwórz Ustawienia."</string>
+    <string name="identity_check_general_error_title" msgid="5073929400896102674">"Aby przejść dalej, musisz użyć biometrii"</string>
+    <string name="identity_check_general_error_description_1" msgid="5260846996256699095">"Weryfikacja tożsamości jest włączona i wymaga danych biometrycznych, ale czujnik rozpoznawania twarzy lub czytnik linii papilarnych jest niedostępny\n"<ul><li>"Sprawdź, czy aparat jest włączony, i spróbuj ponownie"</li>\n<li>"Weryfikację tożsamości możesz wyłączyć na koncie Google"</li></ul></string>
     <string name="identity_check_biometric_error_cancel" msgid="3353689146211669291">"Anuluj"</string>
     <string name="identity_check_biometric_error_ok" msgid="4535306787363107304">"OK"</string>
     <string name="go_to_identity_check" msgid="5215846637575231800">"Przejdź do weryfikacji tożsamości"</string>
@@ -590,7 +589,7 @@
     <string name="private_space_face_settings_footer" msgid="7722256209563543711">"Używaj rozpoznawania twarzy do odblokowywania przestrzeni prywatnej.\n\nPamiętaj:\nMożesz mieć skonfigurowany tylko jeden model twarzy. Jeśli chcesz dodać inny model twarzy, usuń bieżący.\n\nPatrząc na telefon, możesz niechcący odblokować przestrzeń prywatną.\n\nMoże to także zrobić inna osoba, zbliżając urządzenie do Twojej twarzy.\n\nIstnieje też możliwość, że ktoś bardzo podobny do Ciebie (np. bliźniacze rodzeństwo) będzie w stanie odblokować Twoją przestrzeń prywatną."</string>
     <string name="private_space_face_settings_require_confirmation_details" msgid="5406498664903812249">"W przypadku rozpoznawania twarzy zawsze wymagaj etapu potwierdzenia"</string>
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Sposoby odblokowywania"</string>
-    <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Taka sama jak blokada ekranu urządzenia"</string>
+    <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Identyczna jak blokada ekranu urządzenia"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"Wybrać nową blokadę dla przestrzeni prywatnej?"</string>
     <string name="private_space_new_lock_message" msgid="3117703578905489206">"Na następnym ekranie będzie trzeba wpisać kod PIN lub hasło albo narysować wzór ustawiony na urządzeniu."</string>
     <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Automatyczne blokowanie przestrzeni prywatnej"</string>
@@ -633,9 +632,9 @@
     <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Ustaw blokadę"</b>\n"Zablokuj swoją przestrzeń, żeby inni nie mogli jej otworzyć."</string>
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Instalowanie aplikacji"</b>\n"Zainstaluj w swojej przestrzeni aplikacje, które mają pozostać prywatne"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Pamiętaj"</string>
-    <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Aplikacje przestają działać, gdy blokujesz swoją przestrzeń"</b>\n"Po zablokowaniu przestrzeni działające w niej aplikacje zostaną zatrzymane i nie będziesz otrzymywać powiadomień na ich temat"</string>
-    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Przestrzenie prywatne nie są odpowiednie dla aplikacji, które muszą działać w tle lub wysyłać krytyczne powiadomienia (jak np. aplikacje medyczne). Wynika to z tego, że działanie w tle i powiadomienia są wstrzymywane, gdy przestrzeń jest zablokowana.\n\nPo zablokowaniu przestrzeni prywatnej umieszczone w niej aplikacje nie będą też widoczne w menedżerze uprawnień, panelu prywatności ani innych ustawieniach.\n\nPrzestrzeni prywatnej nie można przenieść na inne urządzenie. Jeśli chcesz z niej korzystać na innym urządzeniu, musisz utworzyć nową przestrzeń.\n\nKażdy, kto połączy Twoje urządzenie z komputerem lub zainstaluje na urządzeniu szkodliwe aplikacje, będzie mógł uzyskać dostęp do Twojej przestrzeni prywatnej."</string>
-    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Przestrzenie prywatne nie są odpowiednie dla aplikacji, które muszą działać w tle lub wysyłać krytyczne powiadomienia (jak np. aplikacje medyczne). Wynika to z tego, że działanie w tle i powiadomienia są wstrzymywane, gdy przestrzeń jest zablokowana.\n\nPo zablokowaniu przestrzeni prywatnej umieszczone w niej aplikacje nie będą też widoczne w menedżerze uprawnień, panelu prywatności ani innych ustawieniach.\n\nPrzestrzeni prywatnej nie można przywrócić na innym urządzeniu. Jeśli chcesz z niej korzystać na innym urządzeniu, musisz utworzyć nową przestrzeń.\n\nKażdy, kto połączy Twoje urządzenie z komputerem lub zainstaluje na urządzeniu szkodliwe aplikacje, będzie mógł uzyskać dostęp do Twojej przestrzeni prywatnej."</string>
+    <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Aplikacje przestają działać, gdy blokujesz swoją przestrzeń"</b>\n"Gdy zablokujesz przestrzeń, działające w niej aplikacje zostaną zatrzymane i nie będziesz otrzymywać powiadomień z nich"</string>
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Przestrzenie prywatne nie są odpowiednie dla aplikacji, które muszą działać w tle lub wysyłać krytyczne powiadomienia (jak np. aplikacje medyczne). Wynika to z tego, że działanie w tle i powiadomienia są wstrzymywane, gdy przestrzeń jest zablokowana.\n\nZablokowanie przestrzeni prywatnej spowoduje też, że umieszczone w niej aplikacje nie będą widoczne w menedżerze uprawnień, panelu prywatności ani innych ustawieniach.\n\nPrzestrzeni prywatnej nie można przenieść na inne urządzenie. Jeśli chcesz z niej korzystać na innym urządzeniu, musisz utworzyć nową przestrzeń.\n\nKażdy, kto połączy Twoje urządzenie z komputerem lub zainstaluje na urządzeniu szkodliwe aplikacje, będzie mógł uzyskać dostęp do Twojej przestrzeni prywatnej."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Przestrzenie prywatne nie są odpowiednie dla aplikacji, które muszą działać w tle lub wysyłać krytyczne powiadomienia (jak np. aplikacje medyczne). Wynika to z tego, że działanie w tle i powiadomienia są wstrzymywane, gdy przestrzeń jest zablokowana.\n\nZablokowanie przestrzeni prywatnej spowoduje też, że umieszczone w niej aplikacje nie będą też widoczne w menedżerze uprawnień, panelu prywatności ani innych ustawieniach.\n\nPrzestrzeni prywatnej nie można przywrócić na innym urządzeniu. Jeśli chcesz z niej korzystać na innym urządzeniu, musisz utworzyć nową przestrzeń.\n\nKażdy, kto połączy Twoje urządzenie z komputerem lub zainstaluje na urządzeniu szkodliwe aplikacje, będzie mógł uzyskać dostęp do Twojej przestrzeni prywatnej."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"Więcej o przestrzeni prywatnej"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Potrwa to kilka chwil"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Konfiguruję przestrzeń prywatną…"</string>
@@ -664,6 +663,9 @@
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Ustaw wzór do przestrzeni prywatnej"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"Blokowanie"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"Ukrywanie"</string>
+    <string name="private_space_confirm_your_pattern_header" msgid="449382220134788771">"Potwierdź wzór przestrzeni prywatnej"</string>
+    <string name="private_space_confirm_your_pin_header" msgid="4543332157470087796">"Wpisz ponownie kod PIN do przestrzeni prywatnej"</string>
+    <string name="private_space_confirm_your_password_header" msgid="9202308075814307169">"Wpisz ponownie hasło do przestrzeni prywatnej"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Możesz dodać do <xliff:g id="COUNT">%d</xliff:g> odcisków palców"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Dodano maksymalną liczbę odcisków palców"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Nie można dodać więcej odcisków palców"</string>
@@ -1031,6 +1033,8 @@
     <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"Sprawdź hasło i spróbuj ponownie"</string>
     <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"Skontaktuj się z producentem urządzenia"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Sprawdź połączenie i spróbuj ponownie"</string>
+    <string name="wifi_dpp_check_connection_no_matched_ssid" msgid="3608318690698685427">"Ta sieć Wi‑Fi jest teraz niedostępna"</string>
+    <string name="wifi_dpp_check_connection_no_matched_security" msgid="1462706753123341376">"Wystąpił problem z kodem QR. Spróbuj połączyć się w inny sposób."</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Wybierz sieć"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Aby podłączyć urządzenie, wybierz sieć"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5170095438763569255">"Dodać to urządzenie do sieci „<xliff:g id="SSID">%1$s</xliff:g>”?"</string>
@@ -1630,8 +1634,7 @@
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Zezwól na wyszukiwanie urządzeń w pobliżu przez aplikacje i usługi w dowolnym momencie, nawet gdy Bluetooth jest wyłączony. Może to np. pomóc usprawnić działanie funkcji i usług opartych na lokalizacji."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Usługi lokalizacyjne"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Usługi lokalizacyjne"</string>
-    <!-- no translation found for location_time_zone_detection_toggle_title (720338048522014712) -->
-    <skip />
+    <string name="location_time_zone_detection_toggle_title" msgid="720338048522014712">"Użyj lokalizacji do określenia strefy czasowej"</string>
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"Nie można ustawić strefy czasowej automatycznie"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
     <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"Lokalizacja lub usługi lokalizacyjne są wyłączone"</string>
@@ -1642,13 +1645,11 @@
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Ustawienia lokalizacji"</string>
     <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"Napraw to"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"Anuluj"</string>
-    <!-- no translation found for location_time_zone_detection_auto_is_off (4785540862935730060) -->
-    <skip />
+    <string name="location_time_zone_detection_auto_is_off" msgid="4785540862935730060">"Funkcja jest niedostępna, gdy wyłączona jest automatyczna strefa czasowa"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Wykrywanie strefy czasowej lokalizacji jest wyłączone"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Wykrywanie strefy czasowej lokalizacji nie jest obsługiwane"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Wprowadzanie zmian dotyczących wykrywania strefy czasowej lokalizacji nie jest dozwolone"</string>
-    <!-- no translation found for location_time_zone_detection_auto_is_on (1837317773761632655) -->
-    <skip />
+    <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"Jeśli lokalizacja urządzenia jest dostępna, może być używana do ustawienia strefy czasowej"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"Wyświetl informacje prawne, stan, wersję oprogramowania"</string>
     <string name="legal_information" msgid="7509900979811934843">"Informacje prawne"</string>
     <string name="manual" msgid="3651593989906084868">"Instrukcja"</string>
@@ -1949,13 +1950,40 @@
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Ułatwienia dostępu"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Klawiatura fizyczna"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Klawisze z filtrem powtórzeń"</string>
-    <string name="bounce_keys_summary" msgid="7347050868868080302">"Klawiatura ignoruje szybkie naciśnięcia tego samego klawisza powtórzone w ciągu <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
+    <string name="bounce_keys_summary" msgid="7418024428905737729">"Klawiatura ignoruje szybko powtarzane naciśnięcia tego samego klawisza"</string>
+    <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Próg klawisza z filtrem powtórzeń"</string>
+    <string name="bounce_keys_dialog_subtitle" msgid="5640575860258120026">"Wybierz czas, przez który klawiatura ma ignorować powtarzane naciśnięcia klawiszy"</string>
+    <string name="input_setting_keys_dialog_option_200" msgid="3121006986226247560">"0,2 s"</string>
+    <string name="input_setting_keys_dialog_option_400" msgid="2634500629396699440">"0,4 s"</string>
+    <string name="input_setting_keys_dialog_option_600" msgid="3828362866751805146">"0,6 s"</string>
+    <string name="input_setting_keys_custom_title" msgid="670425691119253202">"Niestandardowa"</string>
+    <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"wartość niestandardowa"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Klawisze powolne"</string>
-    <string name="slow_keys_summary" msgid="1784371292745423292">"Czas wymagany do aktywacji naciśnięcia klawisza zmienia się na <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
+    <string name="slow_keys_summary" msgid="2914214326648535377">"Dostosowuje czas wymagany do aktywacji naciśnięcia klawisza"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Klawisze trwałe"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Naciśnij 1 klawisz, aby zyskać dostęp do skrótów, zamiast przytrzymywać kilka jednocześnie"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Klawisze sterowania myszą"</string>
-    <string name="mouse_keys_summary" msgid="2396247040177734245">"Używaj fizycznej klawiatury do sterowania myszą"</string>
+    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
+    <skip />
+    <string name="mouse_keys_summary" msgid="7030731235143286467">"Używaj klawiatury do sterowania wskaźnikiem"</string>
+    <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Odwrotne przewijanie myszą"</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Przewiń w górę, aby przesunąć stronę w dół"</string>
+    <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Zamień lewy i prawy przycisk"</string>
+    <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Używaj lewego przycisku myszy jako prawego"</string>
+    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
+    <skip />
+    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
+    <skip />
+    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
+    <skip />
+    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
+    <skip />
+    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
+    <skip />
+    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
+    <skip />
+    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
+    <skip />
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Skróty klawiszowe"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Lista skrótów"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Klawiatura i narzędzia w profilu służbowym"</string>
@@ -2023,7 +2051,11 @@
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Wybierz klawisz modyfikujący"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Wybierz nowy klawisz jako <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Ułatwienia dostępu z klawiatury fizycznej"</string>
-    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Klawisze trwałe, klawisze zwrócone, klawisze sterowania myszą"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Klawisze trwałe, Klawisze z filtrem powtórzeń, klawisze sterowania myszą"</string>
+    <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"Powtarzaj znaki klawiszy"</string>
+    <string name="keyboard_repeat_keys_timeout_title" msgid="3411871149974652293">"Opóźnienie przed powtórzeniem"</string>
+    <string name="keyboard_repeat_keys_delay_title" msgid="7323531750483922943">"Szybkość powtarzania"</string>
+    <string name="keyboard_repeat_keys_summary" msgid="8972905345211768313">"Przytrzymaj klawisz, aby powtarzać dany znak"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"Układ <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Domyślny"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automatyczny: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2428,7 +2460,7 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"Podgląd"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Opcje standardowe"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"Język"</string>
-    <string name="captioning_text_size" msgid="8039448543171463017">"Rozmiar tekstu"</string>
+    <string name="captioning_text_size" msgid="5764254558945371745">"Rozmiar napisów"</string>
     <string name="captioning_preset" msgid="4174276086501638524">"Styl napisów"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"Opcje niestandardowe"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"Kolor tła"</string>
@@ -2555,6 +2587,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Dostosuj wykorzystanie energii"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Dołączone pakiety"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Aplikacje działają normalnie"</string>
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"Zalecana wymiana baterii"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"Bateria ma ograniczoną pojemność i wydajność ładowania. Zalecamy jej wymianę."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Niski poziom naładowania baterii"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Włącz Oszczędzanie baterii, aby wydłużyć czas pracy na baterii"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Wydłuż czas pracy na baterii"</string>
@@ -2972,6 +3006,7 @@
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Odłączyć tę sieć VPN?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Odłącz"</string>
     <string name="vpn_version" msgid="6344167191984400976">"Wersja"</string>
+    <string name="vpn_version_info" msgid="5717671228402924155">"Wersja <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Zapomnij VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Zastąpić obecną sieć VPN?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Ustawić stały VPN?"</string>
@@ -3394,7 +3429,8 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"„Od 9:00 do 17:00 w ciągu tygodnia”"</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Wydarzenia w kalendarzu"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Tryb {mode_1} jest aktywny}=2{Tryby {mode_1} i {mode_2} są aktywne}=3{Tryby {mode_1}, {mode_2} i {mode_3} są aktywne}few{Tryby {mode_1}, {mode_2} i # inne są aktywne}many{Tryby {mode_1}, {mode_2} i # innych są aktywne}other{Tryby {mode_1}, {mode_2} i # innego są aktywne}}"</string>
-    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 tryb może włączać się automatycznie}few{# tryby mogą włączać się automatycznie}many{# trybów może włączać się automatycznie}other{# trybu może włączać się automatycznie}}"</string>
+    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
+    <skip />
     <string name="zen_mode_active_text" msgid="5002406772481439437">"WŁ."</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Nie ustawiono"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Wyłączony"</string>
@@ -3519,15 +3555,6 @@
     <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"OK"</string>
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"Powiadomienia"</string>
     <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"Czas trwania"</string>
-    <string name="zen_msg_event_reminder_title" msgid="5362025129007417554">"Wiadomości, wydarzenia i przypomnienia"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"Gdy włączysz tryb Nie przeszkadzać, wiadomości, przypomnienia i wydarzenia będą wyciszone. Wyciszenie nie będzie dotyczyło elementów, na które zezwolisz powyżej. Możesz dostosować ustawienia wiadomości, by znajomi, rodzina i inni mogli do Ciebie zadzwonić."</string>
-    <string name="zen_onboarding_ok" msgid="8764248406533833392">"Gotowe"</string>
-    <string name="zen_onboarding_settings" msgid="2815839576245114342">"Ustawienia"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"Brak wizualnego i dźwiękowego sygnalizowania powiadomień"</string>
-    <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"Brak dźwięku powiadomień"</string>
-    <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"Powiadomienia nie będą wyświetlane ani sygnalizowane dźwiękiem. Dozwolone są połączenia od kontaktów oznaczonych gwiazdką i dzwoniących powtórnie."</string>
-    <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(Aktualne ustawienie)"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"Zmienić ustawienia trybu Nie przeszkadzać?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Dźwięki w profilu służbowym"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Używaj dźwięków z profilu osobistego"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Używaj takich samych dźwięków w profilu służbowym jak w profilu osobistym"</string>
@@ -3596,6 +3623,8 @@
     <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"Po odblokowaniu wyświetl ostatnio używany ekran. Na ekranie blokady nie będzie powiadomień. Aby je zobaczyć, przesuń palcem z góry na dół."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Ekran blokady, Pomiń, Pomijaj"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Gdy profil służbowy jest zablokowany"</string>
+    <string name="lock_screen_notif_minimalism" msgid="5556871004042668149">"Minimalne powiadomienia na ekranie blokady"</string>
+    <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"Pokaż mniej powiadomień na ekranie blokady"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Na ekranie blokady pokazuj tylko nowe powiadomienia"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Automatycznie usuwaj już wyświetlone powiadomienia z ekranu blokady"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Powiadomienia na ekranie blokady"</string>
@@ -3813,6 +3842,7 @@
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"rozmowy priorytetowe"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Brak"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Brak}=1{1 rozmowa}few{# rozmowy}many{# rozmów}other{# rozmowy}}"</string>
+    <string name="zen_mode_from_conversations_settings" msgid="2411930666794576607">"Ustawienia rozmów"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Osoby, które mogą się kontaktować mimo trybu Nie przeszkadzać"</string>
     <string name="zen_mode_people_footer" msgid="7710707353004137431">"Nawet jeśli aplikacje służące do dzwonienia lub wysyłania wiadomości nie będą mogły wysyłać Ci powiadomień, osoby, które tutaj wybierzesz, będą mogły się z Tobą skontaktować za pomocą tych aplikacji."</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Połączenia"</string>
@@ -3836,6 +3866,8 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Wszyscy"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Kontakty"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Kontakty oznaczone gwiazdką"</string>
+    <string name="zen_mode_from_contacts_settings" msgid="853428575138439415">"Ustawienia kontaktów"</string>
+    <string name="zen_mode_from_starred_settings" msgid="3389516761063134119">"Ustawienia kontaktów oznaczonych gwiazdką"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"Nikt"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"Brak"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Alarmy"</string>
@@ -3865,6 +3897,7 @@
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Żadna aplikacja nie może ignorować trybu Nie przeszkadzać}=1{Aplikacja {app_1} może ignorować tryb Nie przeszkadzać}=2{Aplikacje {app_1} i {app_2} mogą ignorować tryb Nie przeszkadzać}=3{Aplikacje {app_1}, {app_2} i {app_3} mogą ignorować tryb Nie przeszkadzać}few{Aplikacje {app_1}, {app_2} i jeszcze # inne mogą ignorować tryb Nie przeszkadzać}many{Aplikacje {app_1}, {app_2} i jeszcze # innych mogą ignorować tryb Nie przeszkadzać}other{Aplikacje {app_1}, {app_2} i jeszcze inne (#) mogą ignorować tryb Nie przeszkadzać}}"</string>
     <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (służbowa)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Obliczam…"</string>
+    <string name="zen_mode_apps_priority_apps_settings" msgid="5544513568250354374">"Ustawienia aplikacji"</string>
     <string name="zen_mode_plus_n_items" msgid="6136713354369243421">"+<xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Zezwól na zastępowanie przez aplikacje"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Aplikacje, które mogą ignorować tryb Nie przeszkadzać"</string>
@@ -3907,8 +3940,8 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Utwórz tryb"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Tryb niestandardowy"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Nazwa trybu"</string>
-    <!-- no translation found for zen_mode_edit_choose_icon_title (6452801577128788362) -->
-    <skip />
+    <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"Nazwa trybu nie może być pusta"</string>
+    <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"Wybierz ikonę"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Wydarzenia w kalendarzu"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Rutyna wieczorna"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Podczas jazdy"</string>
@@ -4811,8 +4844,7 @@
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Twój abonament u operatora <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"Twoje konto obejmuje funkcję przesyłania wiadomości przez satelitę"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Twoje konto nie obejmuje funkcji przesyłania wiadomości przez satelitę"</string>
-    <!-- no translation found for summary_add_satellite_setting (190359698593056946) -->
-    <skip />
+    <string name="summary_add_satellite_setting" msgid="190359698593056946">"Więcej informacji"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Jak to działa"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"Gdy nie masz połączenia z siecią komórkową"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Twój telefon automatycznie połączy się z satelitą. Aby uzyskać najlepszą jakość połączenia, stań w miejscu, w którym nic nie zasłania widoku nieba."</string>
@@ -5313,7 +5345,7 @@
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Ta aplikacja może być otwarta tylko w 1 oknie."</string>
     <string name="generic_accessibility_service_on" msgid="4466229372357726824">"Włączono"</string>
     <string name="generic_accessibility_service_off" msgid="4759859497651675724">"Wyłączono"</string>
-    <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"Wyłączony"</string>
+    <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"Wyłączono"</string>
     <string name="accessibility_shortcut_state_off" msgid="8158137799007601475">"Wyłączono"</string>
     <string name="daltonizer_state_on" msgid="131013270022603983">"Włączono"</string>
     <string name="daltonizer_state_off" msgid="1162285688069856179">"Wyłączono"</string>
@@ -5448,13 +5480,20 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Posłuchaj strumienia"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Zeskanuj kod QR strumienia audio, aby słuchać na urządzeniu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Podczas udostępniania nie można edytować hasła. Aby je zmienić, najpierw wyłącz udostępnianie dźwięku."</string>
+    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
+    <skip />
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Skaner kodów QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Potrzebujesz pomocy?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Ustawienia wyszukiwania"</string>
-    <!-- no translation found for keywords_contacts_storage (9061213057165337893) -->
-    <skip />
-    <!-- no translation found for contacts_storage_settings_title (1574030546525203810) -->
-    <skip />
-    <!-- no translation found for contacts_storage_no_account_set (1548101985417720782) -->
-    <skip />
+    <string name="keywords_contacts_storage" msgid="9061213057165337893">"kontakty, spis, konto"</string>
+    <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Spis kontaktów"</string>
+    <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Tylko urządzenie"</string>
+    <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"Nowe kontakty nie będą synchronizowane z kontem"</string>
+    <string name="contacts_storage_selection_message" msgid="8082077300632059003">"Kontakty będą domyślnie zapisywane na urządzeniu i synchronizowane z kontem"</string>
+    <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Podczas ustawiania konta domyślnego wystąpił błąd"</string>
+    <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Nie ustawiono konta domyślnego"</string>
+    <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Tylko urządzenie"</string>
+    <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Na początek dodaj konto"</string>
+    <string name="search_gesture_feature_title" msgid="7037117019612710960">"Zaznacz, aby wyszukać"</string>
+    <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Aby wyszukać to, co jest widoczne na ekranie, naciśnij i przytrzymaj przycisk ekranu głównego lub uchwyt nawigacyjny."</string>
 </resources>

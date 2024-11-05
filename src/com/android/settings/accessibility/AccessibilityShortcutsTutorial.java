@@ -64,7 +64,6 @@ import androidx.core.widget.TextViewCompat;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.R;
@@ -490,11 +489,10 @@ public final class AccessibilityShortcutsTutorial {
     static List<TutorialPage> createShortcutTutorialPages(
             @NonNull Context context, int shortcutTypes, @NonNull CharSequence featureName,
             boolean inSetupWizard) {
-        // LINT.IfChange(shortcut_type_ui_order)
         final List<TutorialPage> tutorialPages = new ArrayList<>();
         int buttonMode = ShortcutUtils.getButtonMode(context, context.getUserId());
 
-        for (int shortcutType: ShortcutConstants.USER_SHORTCUT_TYPES) {
+        for (int shortcutType: AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
             if ((shortcutTypes & shortcutType) == 0) {
                 continue;
             }
@@ -506,7 +504,6 @@ public final class AccessibilityShortcutsTutorial {
                     createShortcutTutorialPage(
                             context, shortcutType, buttonMode, featureName, inSetupWizard));
         }
-        // LINT.ThenChange(/res/xml/accessibility_edit_shortcuts.xml:shortcut_type_ui_order)
 
         return tutorialPages;
     }

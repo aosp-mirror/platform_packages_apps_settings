@@ -83,7 +83,6 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     public static final String KEY_GENERAL_CATEGORY = "general_categories";
     public static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     protected static final String KEY_TOP_INTRO_PREFERENCE = "top_intro";
-    protected static final String KEY_USE_SERVICE_PREFERENCE = "use_service";
     protected static final String KEY_HTML_DESCRIPTION_PREFERENCE = "html_description";
     protected static final String KEY_SAVED_QS_TOOLTIP_RESHOW = "qs_tooltip_reshow";
     protected static final String KEY_SAVED_QS_TOOLTIP_TYPE = "qs_tooltip_type";
@@ -325,6 +324,10 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         switchPreference.setTitle(title);
     }
 
+    protected String getUseServicePreferenceKey() {
+        return "use_service";
+    }
+
     protected CharSequence getShortcutTitle() {
         return getString(R.string.accessibility_shortcut_title, mPackageName);
     }
@@ -411,7 +414,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         final List<String> lists = new ArrayList<>();
         lists.add(KEY_TOP_INTRO_PREFERENCE);
         lists.add(KEY_ANIMATED_IMAGE);
-        lists.add(KEY_USE_SERVICE_PREFERENCE);
+        lists.add(getUseServicePreferenceKey());
         lists.add(KEY_GENERAL_CATEGORY);
         lists.add(KEY_HTML_DESCRIPTION_PREFERENCE);
         return lists;
@@ -476,7 +479,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
 
     private void initToggleServiceSwitchPreference() {
         mToggleServiceSwitchPreference = new SettingsMainSwitchPreference(getPrefContext());
-        mToggleServiceSwitchPreference.setKey(KEY_USE_SERVICE_PREFERENCE);
+        mToggleServiceSwitchPreference.setKey(getUseServicePreferenceKey());
         if (getArguments().containsKey(AccessibilitySettings.EXTRA_CHECKED)) {
             final boolean enabled = getArguments().getBoolean(AccessibilitySettings.EXTRA_CHECKED);
             mToggleServiceSwitchPreference.setChecked(enabled);

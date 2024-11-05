@@ -44,6 +44,7 @@ import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.ChooseAccountFragment;
 import com.android.settings.accounts.ManagedProfileSettings;
 import com.android.settings.applications.AppDashboardFragment;
+import com.android.settings.applications.AppStorageSettings;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
@@ -60,6 +61,7 @@ import com.android.settings.applications.appinfo.TurnScreenOnDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
 import com.android.settings.applications.appops.BackgroundCheckSummary;
 import com.android.settings.applications.assist.ManageAssist;
+import com.android.settings.applications.contacts.ContactsStorageSettings;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.applications.managedomainurls.ManageDomainUrls;
 import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings;
@@ -116,6 +118,7 @@ import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScheduleSettings;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
+import com.android.settings.fuelgauge.batteryusage.PowerUsageAdvanced;
 import com.android.settings.fuelgauge.batteryusage.PowerUsageSummary;
 import com.android.settings.gestures.ButtonNavigationSettingsFragment;
 import com.android.settings.gestures.DoubleTapPowerSettings;
@@ -243,6 +246,7 @@ public class SettingsGateway {
             MyDeviceInfoFragment.class.getName(),
             ModuleLicensesDashboard.class.getName(),
             ManageApplications.class.getName(),
+            AppStorageSettings.class.getName(),
             FirmwareVersionSettings.class.getName(),
             ManageAssist.class.getName(),
             ProcessStatsUi.class.getName(),
@@ -275,6 +279,7 @@ public class SettingsGateway {
             DevelopmentSettingsDashboardFragment.class.getName(),
             WifiDisplaySettings.class.getName(),
             PowerUsageSummary.class.getName(),
+            PowerUsageAdvanced.class.getName(),
             AccountSyncSettings.class.getName(),
             FaceSettings.class.getName(),
             FingerprintSettings.FingerprintSettingsFragment.class.getName(),
@@ -401,7 +406,8 @@ public class SettingsGateway {
             AccessibilityHearingAidsFragment.class.getName(),
             HearingDevicePairingFragment.class.getName(),
             ZenModesListFragment.class.getName(),
-            ZenModeFragment.class.getName()
+            ZenModeFragment.class.getName(),
+            ContactsStorageSettings.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
@@ -413,6 +419,7 @@ public class SettingsGateway {
             Settings.SoundSettingsActivity.class.getName(),
             Settings.StorageDashboardActivity.class.getName(),
             Settings.PowerUsageSummaryActivity.class.getName(),
+            Settings.PowerUsageAdvancedActivity.class.getName(),
             Settings.AccountDashboardActivity.class.getName(),
             Settings.PrivacySettingsActivity.class.getName(),
             Settings.SecurityDashboardActivity.class.getName(),
@@ -432,13 +439,12 @@ public class SettingsGateway {
             Settings.UserSettingsActivity.class.getName(),
             Settings.ConfigureNotificationSettingsActivity.class.getName(),
             Settings.ManageApplicationsActivity.class.getName(),
+            Settings.AppStorageSettingsActivity.class.getName(),
             Settings.PaymentSettingsActivity.class.getName(),
             // Home page > Display
             Settings.AdaptiveBrightnessActivity.class.getName(),
             // Home page > Security & screen lock
             Settings.LocationSettingsActivity.class.getName(),
-            // Home page > System
-            Settings.LanguageAndInputSettingsActivity.class.getName(),
             Settings.LanguageSettingsActivity.class.getName(),
             Settings.KeyboardSettingsActivity.class.getName(),
             Settings.DateTimeSettingsActivity.class.getName(),

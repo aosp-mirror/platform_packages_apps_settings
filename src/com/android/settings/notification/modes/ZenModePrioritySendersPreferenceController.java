@@ -28,11 +28,14 @@ import static android.service.notification.ZenPolicy.PEOPLE_TYPE_UNSET;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.icu.text.MessageFormat;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Contacts;
 import android.service.notification.ZenPolicy;
 import android.view.View;
@@ -46,6 +49,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
 import com.android.settings.notification.app.ConversationListSettings;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
@@ -55,6 +59,7 @@ import com.google.common.collect.ImmutableSet;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -87,16 +92,18 @@ class ZenModePrioritySendersPreferenceController
     private static final Intent STARRED_CONTACTS_INTENT =
             new Intent(Contacts.Intents.UI.LIST_STARRED_ACTION)
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK  | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-    private static final Intent FALLBACK_INTENT = new Intent(Intent.ACTION_MAIN)
+    private static final Intent FALLBACK_CONTACTS_INTENT = new Intent(Intent.ACTION_MAIN)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
     private final ZenHelperBackend mHelperBackend;
+    private final UserManager mUserManager;
     private final PackageManager mPackageManager;
     private PreferenceCategory mPreferenceCategory;
     private final LinkedHashMap<String, SelectorWithWidgetPreference> mOptions =
             new LinkedHashMap<>();
 
     private final ZenModeSummaryHelper mZenModeSummaryHelper;
+    @Nullable private Dialog mProfileSelectDialog;
 
     public ZenModePrioritySendersPreferenceController(Context context, String key,
             boolean isMessages, ZenModesBackend backend, ZenHelperBackend helperBackend) {
@@ -107,11 +114,12 @@ class ZenModePrioritySendersPreferenceController
         String contactsPackage = context.getString(R.string.config_contacts_package_name);
         ALL_CONTACTS_INTENT.setPackage(contactsPackage);
         STARRED_CONTACTS_INTENT.setPackage(contactsPackage);
-        FALLBACK_INTENT.setPackage(contactsPackage);
+        FALLBACK_CONTACTS_INTENT.setPackage(contactsPackage);
 
+        mUserManager = mContext.getSystemService(UserManager.class);
         mPackageManager = mContext.getPackageManager();
-        if (!FALLBACK_INTENT.hasCategory(Intent.CATEGORY_APP_CONTACTS)) {
-            FALLBACK_INTENT.addCategory(Intent.CATEGORY_APP_CONTACTS);
+        if (!FALLBACK_CONTACTS_INTENT.hasCategory(Intent.CATEGORY_APP_CONTACTS)) {
+            FALLBACK_CONTACTS_INTENT.addCategory(Intent.CATEGORY_APP_CONTACTS);
         }
         mZenModeSummaryHelper = new ZenModeSummaryHelper(mContext, mHelperBackend);
     }
@@ -270,32 +278,48 @@ class ZenModePrioritySendersPreferenceController
         }
 
         return v -> {
-            if (KEY_STARRED.equals(key)
-                    && STARRED_CONTACTS_INTENT.resolveActivity(mPackageManager) != null) {
-                mContext.startActivity(STARRED_CONTACTS_INTENT);
-            } else if (KEY_CONTACTS.equals(key)
-                    && ALL_CONTACTS_INTENT.resolveActivity(mPackageManager) != null) {
-                mContext.startActivity(ALL_CONTACTS_INTENT);
+            if (KEY_STARRED.equals(key)) {
+                startContactsActivity(STARRED_CONTACTS_INTENT);
+            } else if (KEY_CONTACTS.equals(key)) {
+                startContactsActivity(ALL_CONTACTS_INTENT);
             } else if (KEY_ANY_CONVERSATIONS.equals(key)
                     || KEY_IMPORTANT_CONVERSATIONS.equals(key)) {
                 new SubSettingLauncher(mContext)
                         .setDestination(ConversationListSettings.class.getName())
                         .setSourceMetricsCategory(SettingsEnums.DND_MESSAGES)
                         .launch();
-            } else {
-                mContext.startActivity(FALLBACK_INTENT);
             }
         };
     }
 
+    private void startContactsActivity(Intent preferredIntent) {
+        Intent intent = preferredIntent.resolveActivity(mPackageManager) != null
+                ? preferredIntent : FALLBACK_CONTACTS_INTENT;
+
+        List<UserHandle> userProfiles = mUserManager.getEnabledProfiles();
+        if (userProfiles.size() <= 1) {
+            mContext.startActivity(intent);
+        }
+
+        mProfileSelectDialog = ProfileSelectDialog.createDialog(mContext, userProfiles,
+                position -> {
+                    mContext.startActivityAsUser(intent, userProfiles.get(position));
+                    if (mProfileSelectDialog != null) {
+                        mProfileSelectDialog.dismiss();
+                        mProfileSelectDialog = null;
+                    }
+                });
+        mProfileSelectDialog.show();
+    }
+
     private boolean isStarredIntentValid() {
         return STARRED_CONTACTS_INTENT.resolveActivity(mPackageManager) != null
-                || FALLBACK_INTENT.resolveActivity(mPackageManager) != null;
+                || FALLBACK_CONTACTS_INTENT.resolveActivity(mPackageManager) != null;
     }
 
     private boolean isContactsIntentValid() {
         return ALL_CONTACTS_INTENT.resolveActivity(mPackageManager) != null
-                || FALLBACK_INTENT.resolveActivity(mPackageManager) != null;
+                || FALLBACK_CONTACTS_INTENT.resolveActivity(mPackageManager) != null;
     }
 
     void updateSummaries() {

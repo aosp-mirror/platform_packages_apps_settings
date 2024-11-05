@@ -19,6 +19,7 @@ package com.android.settings.network
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.UserHandle;
 import android.provider.Settings
 import android.telephony.SubscriptionManager
 import android.util.Log
@@ -588,7 +589,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
                     setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }
             }
-            context.startActivity(intent)
+            context.startActivityAsUser(intent, UserHandle.CURRENT)
         }
 
         var onboardingService:SimOnboardingService = SimOnboardingService()
