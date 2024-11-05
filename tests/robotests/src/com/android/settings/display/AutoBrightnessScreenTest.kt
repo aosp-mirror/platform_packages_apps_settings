@@ -15,7 +15,8 @@
  */
 package com.android.settings.display
 
-import android.content.Context
+import android.content.ContextWrapper
+import android.content.res.Resources
 import android.provider.Settings
 import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
 import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL
@@ -23,25 +24,29 @@ import android.view.LayoutInflater
 import androidx.preference.PreferenceViewHolder
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settingslib.PrimarySwitchPreference
+import com.android.settingslib.preference.PreferenceDataStoreAdapter
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import com.android.settingslib.widget.theme.R
 import com.google.common.truth.Truth.assertThat
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.annotation.Config
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
 
 // LINT.IfChange
 @RunWith(AndroidJUnit4::class)
-@Config(shadows = [SettingsShadowResources::class])
-@Ignore("robolectric runtime")
 class AutoBrightnessScreenTest {
 
-    private val context: Context = ApplicationProvider.getApplicationContext()
-
     private val preferenceScreenCreator = AutoBrightnessScreen()
+
+    private var mockResources: Resources? = null
+
+    private val context =
+        object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
+            override fun getResources(): Resources = mockResources ?: super.getResources()
+        }
 
     @Test
     fun switchClick_defaultScreenBrightnessModeTurnOffAuto_returnTrue() {
@@ -100,20 +105,14 @@ class AutoBrightnessScreenTest {
 
     @Test
     fun isAvailable_configTrueSet_shouldReturnTrue() {
-        SettingsShadowResources.overrideResource(
-            com.android.internal.R.bool.config_automatic_brightness_available,
-            true,
-        )
+        mockResources = mock { on { getBoolean(any()) } doReturn true }
 
         assertThat(preferenceScreenCreator.isAvailable(context)).isTrue()
     }
 
     @Test
     fun isAvailable_configFalseSet_shouldReturnFalse() {
-        SettingsShadowResources.overrideResource(
-            com.android.internal.R.bool.config_automatic_brightness_available,
-            false,
-        )
+        mockResources = mock { on { getBoolean(any()) } doReturn false }
 
         assertThat(preferenceScreenCreator.isAvailable(context)).isFalse()
     }
@@ -121,6 +120,7 @@ class AutoBrightnessScreenTest {
     private fun getPrimarySwitchPreference(): PrimarySwitchPreference =
         preferenceScreenCreator.run {
             val preference = createWidget(context)
+            preference.preferenceDataStore = PreferenceDataStoreAdapter(storage(context))
             bind(preference, this)
             val holder =
                 PreferenceViewHolder.createInstanceForTests(

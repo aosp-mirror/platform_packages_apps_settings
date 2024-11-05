@@ -36,6 +36,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenBinding
 import com.android.settingslib.preference.PreferenceScreenCreator
@@ -68,6 +69,9 @@ class DarkModeScreen :
 
     override val keywords: Int
         get() = R.string.keywords_dark_ui_mode
+
+    override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
 
     override fun isFlagEnabled(context: Context) = Flags.catalystDarkUiMode()
 
