@@ -18,8 +18,11 @@ package com.android.settings.notification
 import android.content.Context
 import androidx.fragment.app.Fragment
 import com.android.settings.R
+import com.android.settings.Settings.SoundSettingsActivity
 import com.android.settings.flags.Flags
+import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceIconProvider
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
@@ -54,6 +57,9 @@ class SoundScreen : PreferenceScreenCreator, PreferenceIconProvider {
             +SeparateRingVolumePreference() order -155
             +DialPadTonePreference() order -50
         }
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        makeLaunchIntent(context, SoundSettingsActivity::class.java, metadata?.key)
 
     companion object {
         const val KEY = "sound_screen"
