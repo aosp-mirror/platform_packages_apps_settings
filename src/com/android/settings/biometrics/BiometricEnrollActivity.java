@@ -58,6 +58,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockPattern;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.transition.TransitionHelper;
@@ -452,7 +453,9 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                             Utils.launchBiometricPromptForMandatoryBiometrics(this,
                                     BIOMETRIC_AUTH_REQUEST, mUserId, true /* hideBackground */);
                         } else if (biometricStatus != Utils.BiometricStatus.NOT_ACTIVE) {
-                            finish();
+                            IdentityCheckBiometricErrorDialog
+                                    .showBiometricErrorDialogAndFinishActivityOnDismiss(this,
+                                            biometricStatus);
                         }
                     }
                 } else {
@@ -486,7 +489,11 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 }
                 break;
             case BIOMETRIC_AUTH_REQUEST:
-                if (resultCode != RESULT_OK) {
+                if (resultCode == ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT) {
+                    IdentityCheckBiometricErrorDialog
+                            .showBiometricErrorDialogAndFinishActivityOnDismiss(this,
+                                    Utils.BiometricStatus.LOCKOUT);
+                } else if (resultCode != RESULT_OK) {
                     finish();
                 }
             default:

@@ -18,13 +18,24 @@ package com.android.settings.network.telephony
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.UserManager
+import android.provider.Settings
 import com.android.settingslib.spaprivileged.framework.common.userManager
+import com.android.settingslib.spaprivileged.settingsprovider.settingsGlobalBoolean
 
-class SimRepository(context: Context) {
+class SimRepository(private val context: Context) {
     private val packageManager = context.packageManager
     private val userManager = context.userManager
 
-    /** Gets whether we show mobile network settings page to the current user. */
-    fun showMobileNetworkPage(): Boolean =
+    /** Gets whether show mobile network settings page entrance to the current user. */
+    fun showMobileNetworkPageEntrance(): Boolean =
         packageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY) && userManager.isAdminUser
+
+    /** Gets whether current user can enter mobile network settings page. */
+    fun canEnterMobileNetworkPage(): Boolean {
+        val isAirplaneMode by context.settingsGlobalBoolean(Settings.Global.AIRPLANE_MODE_ON)
+        return showMobileNetworkPageEntrance() &&
+            !isAirplaneMode &&
+            !userManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)
+    }
 }

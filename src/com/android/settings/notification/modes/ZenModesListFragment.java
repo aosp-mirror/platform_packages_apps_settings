@@ -58,7 +58,7 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
             ZenModesBackend backend, OnAddModeListener onAddModeListener) {
         return ImmutableList.of(
                 new ZenModesListPreferenceController(context, backend, ZenIconLoader.getInstance()),
-                new ZenModesListAddModePreferenceController(context, onAddModeListener)
+                new ZenModesListAddModePreferenceController(context, "add_mode", onAddModeListener)
         );
     }
 

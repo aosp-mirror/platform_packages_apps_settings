@@ -35,6 +35,8 @@ import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.widget.LayoutPreference;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -55,6 +57,7 @@ public class ZenModeEditNamePreferenceControllerTest {
 
     private ZenModeEditNamePreferenceController mController;
     private LayoutPreference mPreference;
+    private TextInputLayout mTextInputLayout;
     private EditText mEditText;
     @Mock private Consumer<String> mNameSetter;
 
@@ -64,12 +67,15 @@ public class ZenModeEditNamePreferenceControllerTest {
 
         Context context = RuntimeEnvironment.application;
         PreferenceManager preferenceManager = new PreferenceManager(context);
+
+        // Inflation is a test in itself, because it will crash if the Theme isn't set correctly.
         PreferenceScreen preferenceScreen = preferenceManager.inflateFromResource(context,
                 R.xml.modes_edit_name_icon, null);
         mPreference = preferenceScreen.findPreference("name");
 
         mController = new ZenModeEditNamePreferenceController(context, "name", mNameSetter);
         mController.displayPreference(preferenceScreen);
+        mTextInputLayout = mPreference.findViewById(R.id.edit_input_layout);
         mEditText = mPreference.findViewById(android.R.id.edit);
         assertThat(mEditText).isNotNull();
     }
@@ -88,11 +94,24 @@ public class ZenModeEditNamePreferenceControllerTest {
     public void onEditText_callsNameSetter() {
         ZenMode mode = new TestModeBuilder().setName("A fancy name").build();
         mController.updateState(mPreference, mode);
-        EditText editText = mPreference.findViewById(android.R.id.edit);
 
-        editText.setText("An even fancier name");
+        mEditText.setText("An even fancier name");
 
         verify(mNameSetter).accept("An even fancier name");
         verifyNoMoreInteractions(mNameSetter);
+    }
+
+    @Test
+    public void onEditText_emptyText_showsError() {
+        ZenMode mode = new TestModeBuilder().setName("Default name").build();
+        mController.updateState(mPreference, mode);
+
+        mEditText.setText("");
+
+        assertThat(mTextInputLayout.getError()).isNotNull();
+
+        mEditText.setText("this is fine");
+
+        assertThat(mTextInputLayout.getError()).isNull();
     }
 }

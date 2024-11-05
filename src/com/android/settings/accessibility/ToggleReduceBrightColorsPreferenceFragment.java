@@ -32,6 +32,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.TwoStatePreference;
 
@@ -41,6 +42,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +54,10 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
     private static final String TAG = "ToggleReduceBrightColorsPreferenceFragment";
     private static final String KEY_INTENSITY = "rbc_intensity";
     private static final String KEY_PERSIST = "rbc_persist";
+    @VisibleForTesting
+    static final String KEY_SHORTCUT = "rbc_shortcut";
+    @VisibleForTesting
+    static final String KEY_SWITCH = "rbc_switch";
     private static final String REDUCE_BRIGHT_COLORS_ACTIVATED_KEY =
             Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED;
 
@@ -197,11 +203,43 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
         }
     }
 
+    @Override
+    protected String getUseServicePreferenceKey() {
+        return KEY_SWITCH;
+    }
+
+    @Override
+    protected String getShortcutPreferenceKey() {
+        return KEY_SHORTCUT;
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.reduce_bright_colors_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return ColorDisplayManager.isReduceBrightColorsAvailable(context);
+                }
+
+                @Override
+                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
+                        boolean enabled) {
+                    final List<SearchIndexableRaw> rawData =
+                            super.getRawDataToIndex(context, enabled);
+
+                    if (Flags.fixA11ySettingsSearch()) {
+                        SearchIndexableRaw shortcutRaw = new SearchIndexableRaw(context);
+                        shortcutRaw.key = KEY_SHORTCUT;
+                        shortcutRaw.title = context.getString(
+                                R.string.reduce_bright_colors_shortcut_title);
+                        rawData.add(shortcutRaw);
+
+                        SearchIndexableRaw mainSwitchRaw = new SearchIndexableRaw(context);
+                        mainSwitchRaw.key = KEY_SWITCH;
+                        mainSwitchRaw.title = context.getString(
+                                R.string.reduce_bright_colors_switch_title);
+                        rawData.add(mainSwitchRaw);
+                    }
+                    return rawData;
                 }
             };
 }

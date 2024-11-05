@@ -219,7 +219,7 @@ public class NetworkSelectSettings extends DashboardFragment {
         setProgressBarVisible(true);
         mNetworkScanJob = mNetworkScanRepository.launchNetworkScan(getViewLifecycleOwner(),
                 (networkScanResult) -> {
-                    if (isPreferenceScreenEnabled()) {
+                    if (isPreferenceScreenEnabled() && !isFinishingOrDestroyed()) {
                         scanResultHandler(networkScanResult);
                     }
 

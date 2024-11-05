@@ -38,6 +38,7 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.Arrays;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 public class BasebandVersionPreferenceControllerTest {
     @Mock
@@ -68,3 +69,4 @@ public class BasebandVersionPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 }
+// LINT.ThenChange(BasebandVersionPreferenceTest.kt)

@@ -498,29 +498,27 @@ class ZenModeSummaryHelper {
             MessageFormat msgFormat = new MessageFormat(
                     mContext.getString(R.string.zen_modes_summary_some_active),
                     Locale.getDefault());
-
-            Map<String, Object> args = new HashMap<>();
-            args.put("count", activeModes.size());
-            args.put("mode_1", activeModes.get(0).getName());
-            if (activeModes.size() >= 2) {
-                args.put("mode_2", activeModes.get(1).getName());
-                if (activeModes.size() == 3) {
-                    args.put("mode_3", activeModes.get(2).getName());
-                }
-            }
-
-            return msgFormat.format(args);
+            return buildModesSummary(msgFormat, activeModes);
         } else {
-            int automaticModeCount = (int) modes.stream()
-                    .filter(m -> m.isEnabled() && !m.isManualDnd() && !m.isCustomManual())
-                    .count();
-
             MessageFormat msgFormat = new MessageFormat(
-                    mContext.getString(R.string.zen_modes_summary_none_active),
+                    mContext.getString(R.string.zen_modes_summary),
                     Locale.getDefault());
-            Map<String, Object> msgArgs = Map.of("count", automaticModeCount);
-            return msgFormat.format(msgArgs);
+            return buildModesSummary(msgFormat, modes);
         }
     }
 
+    private static String buildModesSummary(MessageFormat msgFormat, List<ZenMode> modes) {
+        Map<String, Object> args = new HashMap<>();
+        args.put("count", modes.size());
+        if (modes.size() >= 1) {
+            args.put("mode_1", modes.get(0).getName());
+            if (modes.size() >= 2) {
+                args.put("mode_2", modes.get(1).getName());
+                if (modes.size() >= 3) {
+                    args.put("mode_3", modes.get(2).getName());
+                }
+            }
+        }
+        return msgFormat.format(args);
+    }
 }

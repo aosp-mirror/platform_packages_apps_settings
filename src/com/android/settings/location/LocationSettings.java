@@ -29,6 +29,8 @@ import android.os.SystemProperties;
 import android.provider.Settings;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 
@@ -184,5 +186,10 @@ public class LocationSettings extends DashboardFragment implements
             switchBar.setTooltipText(getResources().getString(
                     R.string.location_settings_tooltip_text_for_chrome));
         }
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return LocationScreen.KEY;
     }
 }

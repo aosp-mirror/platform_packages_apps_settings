@@ -37,50 +37,76 @@ class SimRepositoryTest {
 
     private val mockPackageManager = mock<PackageManager>()
 
-    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
-        on { userManager } doReturn mockUserManager
-        on { packageManager } doReturn mockPackageManager
-    }
+    private val context: Context =
+        spy(ApplicationProvider.getApplicationContext()) {
+            on { userManager } doReturn mockUserManager
+            on { packageManager } doReturn mockPackageManager
+        }
 
     private val repository = SimRepository(context)
 
     @Test
-    fun showMobileNetworkPage_adminUserAndHasTelephony_returnTrue() {
-        mockUserManager.stub {
-            on { isAdminUser } doReturn true
-        }
+    fun showMobileNetworkPageEntrance_adminUserAndHasTelephony_returnTrue() {
+        mockUserManager.stub { on { isAdminUser } doReturn true }
         mockPackageManager.stub {
             on { hasSystemFeature(PackageManager.FEATURE_TELEPHONY) } doReturn true
         }
 
-        val showMobileNetworkPage = repository.showMobileNetworkPage()
+        val showMobileNetworkPage = repository.showMobileNetworkPageEntrance()
 
         assertThat(showMobileNetworkPage).isTrue()
     }
 
     @Test
-    fun showMobileNetworkPage_notAdminUser_returnFalse() {
+    fun showMobileNetworkPageEntrance_notAdminUser_returnFalse() {
+        mockUserManager.stub { on { isAdminUser } doReturn false }
+        mockPackageManager.stub {
+            on { hasSystemFeature(PackageManager.FEATURE_TELEPHONY) } doReturn true
+        }
+
+        val showMobileNetworkPage = repository.showMobileNetworkPageEntrance()
+
+        assertThat(showMobileNetworkPage).isFalse()
+    }
+
+    @Test
+    fun showMobileNetworkPageEntrance_noTelephony_returnFalse() {
+        mockUserManager.stub { on { isAdminUser } doReturn true }
+        mockPackageManager.stub {
+            on { hasSystemFeature(PackageManager.FEATURE_TELEPHONY) } doReturn false
+        }
+
+        val showMobileNetworkPage = repository.showMobileNetworkPageEntrance()
+
+        assertThat(showMobileNetworkPage).isFalse()
+    }
+
+    @Test
+    fun canEnterMobileNetworkPage_allowConfigMobileNetwork_returnTrue() {
         mockUserManager.stub {
-            on { isAdminUser } doReturn false
+            on { isAdminUser } doReturn true
+            on { hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS) } doReturn false
         }
         mockPackageManager.stub {
             on { hasSystemFeature(PackageManager.FEATURE_TELEPHONY) } doReturn true
         }
 
-        val showMobileNetworkPage = repository.showMobileNetworkPage()
+        val showMobileNetworkPage = repository.canEnterMobileNetworkPage()
 
-        assertThat(showMobileNetworkPage).isFalse()
+        assertThat(showMobileNetworkPage).isTrue()
     }
 
-    @Test fun showMobileNetworkPage_noTelephony_returnFalse() {
+    @Test
+    fun canEnterMobileNetworkPage_disallowConfigMobileNetwork_returnFalse() {
         mockUserManager.stub {
             on { isAdminUser } doReturn true
+            on { hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS) } doReturn true
         }
         mockPackageManager.stub {
-            on { hasSystemFeature(PackageManager.FEATURE_TELEPHONY) } doReturn false
+            on { hasSystemFeature(PackageManager.FEATURE_TELEPHONY) } doReturn true
         }
 
-        val showMobileNetworkPage = repository.showMobileNetworkPage()
+        val showMobileNetworkPage = repository.canEnterMobileNetworkPage()
 
         assertThat(showMobileNetworkPage).isFalse()
     }

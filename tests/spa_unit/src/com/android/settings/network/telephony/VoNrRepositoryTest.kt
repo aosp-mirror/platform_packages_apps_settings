@@ -27,7 +27,9 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.doThrow
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
@@ -135,7 +137,29 @@ class VoNrRepositoryTest {
     }
 
     @Test
+    fun isVoNrEnabledFlow_noPhoneProcess_noCrash() = runBlocking {
+        mockTelephonyManager.stub { on { isVoNrEnabled } doThrow IllegalStateException("no Phone") }
+
+        val isVoNrEnabled = repository.isVoNrEnabledFlow(SUB_ID).firstWithTimeoutOrNull()
+
+        assertThat(isVoNrEnabled).isFalse()
+    }
+
+    @Test
     fun setVoNrEnabled(): Unit = runBlocking {
+        repository.setVoNrEnabled(SUB_ID, true)
+
+        verify(mockTelephonyManager).setVoNrEnabled(true)
+    }
+
+    @Test
+    fun setVoNrEnabled_noPhoneProcess_noCrash(): Unit = runBlocking {
+        mockTelephonyManager.stub {
+            on {
+                setVoNrEnabled(any())
+            } doThrow IllegalStateException("no Phone")
+        }
+
         repository.setVoNrEnabled(SUB_ID, true)
 
         verify(mockTelephonyManager).setVoNrEnabled(true)

@@ -212,7 +212,7 @@ open class NetworkCellularGroupProvider : SettingsPageProvider, SearchablePage {
         const val fileName = "NetworkCellularGroupProvider"
 
         private fun isPageSearchable(context: Context) =
-            Flags.isDualSimOnboardingEnabled() && SimRepository(context).showMobileNetworkPage()
+            Flags.isDualSimOnboardingEnabled() && SimRepository(context).canEnterMobileNetworkPage()
     }
 }
 

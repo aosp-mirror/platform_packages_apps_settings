@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_GESTURE;
+import static android.provider.Settings.Secure.NAVIGATION_MODE;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
@@ -26,11 +28,17 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.res.Resources;
 import android.icu.text.MessageFormat;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
+import android.provider.Flags;
+import android.provider.Settings;
 import android.text.Html;
 
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.R;
 
 import org.junit.Before;
@@ -47,6 +55,8 @@ import org.robolectric.RobolectricTestRunner;
 @RunWith(RobolectricTestRunner.class)
 public class AccessibilityButtonFooterPreferenceControllerTest {
 
+    @Rule
+    public final SetFlagsRule mCheckFlagsRule = new SetFlagsRule();
     @Rule
     public final MockitoRule mockito = MockitoJUnit.rule();
     @Spy
@@ -69,9 +79,12 @@ public class AccessibilityButtonFooterPreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
     public void displayPreference_navigationGestureEnabled_setCorrectTitle() {
-        when(mResources.getInteger(com.android.internal.R.integer.config_navBarInteractionMode))
-                .thenReturn(NAV_BAR_MODE_GESTURAL);
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                NAVIGATION_MODE, NAV_BAR_MODE_GESTURAL, mContext.getUserId());
+        ShortcutUtils.setButtonMode(
+                mContext, ACCESSIBILITY_BUTTON_MODE_GESTURE, mContext.getUserId());
 
         mController.displayPreference(mScreen);
 
@@ -83,10 +96,25 @@ public class AccessibilityButtonFooterPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
+    public void displayPreference_navigationGestureEnabled_flag_setCorrectTitle() {
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                NAVIGATION_MODE, NAV_BAR_MODE_GESTURAL, mContext.getUserId());
+
+        assertThat(AccessibilityUtil.isGestureNavigateEnabled(mContext)).isTrue();
+        mController.displayPreference(mScreen);
+
+        assertThat(mPreference.getTitle().toString()).isEqualTo(
+                Html.fromHtml(
+                        MessageFormat.format(mContext.getString(
+                                R.string.accessibility_button_description), 1, 2, 3),
+                        Html.FROM_HTML_MODE_COMPACT).toString());
+    }
+
+    @Test
     public void displayPreference_navigationGestureDisabled_setCorrectTitle() {
-        when(mResources.getInteger(
-                com.android.internal.R.integer.config_navBarInteractionMode)).thenReturn(
-                NAV_BAR_MODE_2BUTTON);
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                NAVIGATION_MODE, NAV_BAR_MODE_2BUTTON, mContext.getUserId());
 
         mController.displayPreference(mScreen);
 

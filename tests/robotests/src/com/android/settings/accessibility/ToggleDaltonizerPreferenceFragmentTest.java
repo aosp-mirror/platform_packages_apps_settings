@@ -18,7 +18,8 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
-import static com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment.KEY_USE_SERVICE_PREFERENCE;
+import static com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment.KEY_SHORTCUT_PREFERENCE;
+import static com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment.KEY_SWITCH_PREFERENCE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -27,9 +28,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
-import android.view.accessibility.Flags;
 import android.widget.PopupWindow;
 
 import androidx.fragment.app.Fragment;
@@ -39,6 +40,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.widget.SettingsMainSwitchPreference;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -49,6 +51,7 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /** Tests for {@link ToggleDaltonizerPreferenceFragment} */
@@ -104,7 +107,7 @@ public class ToggleDaltonizerPreferenceFragmentTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
+    @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void onPreferenceToggled_colorCorrectDisabled_shouldReturnTrueAndShowTooltipView() {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED, OFF);
@@ -169,6 +172,37 @@ public class ToggleDaltonizerPreferenceFragmentTest {
         assertThat(keys).containsAtLeastElementsIn(niks);
     }
 
+    @Test
+    @DisableFlags(Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    public void getRawDataToIndex_flagOff_returnEmptyData() {
+        List<SearchIndexableRaw> rawData = ToggleDaltonizerPreferenceFragment
+                .SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, /* enabled= */ true);
+
+        assertThat(rawData).isEmpty();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    public void getRawDataToIndex_flagOn_returnAllIndexablePreferences() {
+        String[] expectedKeys = {KEY_SHORTCUT_PREFERENCE, KEY_SWITCH_PREFERENCE};
+        String[] expectedTitles = {
+                mContext.getString(R.string.accessibility_daltonizer_shortcut_title),
+                mContext.getString(R.string.accessibility_daltonizer_primary_switch_title)};
+        List<String> keysResultList = new ArrayList<>();
+        List<String> titlesResultList = new ArrayList<>();
+        List<SearchIndexableRaw> rawData = ToggleDaltonizerPreferenceFragment
+                .SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, /* enabled= */ true);
+
+        for (SearchIndexableRaw rawDataItem : rawData) {
+            keysResultList.add(rawDataItem.key);
+            titlesResultList.add(rawDataItem.title);
+        }
+
+        assertThat(rawData).hasSize(2);
+        assertThat(keysResultList).containsExactly(expectedKeys);
+        assertThat(titlesResultList).containsExactly(expectedTitles);
+    }
+
     private static PopupWindow getLatestPopupWindow() {
         final ShadowApplication shadowApplication =
                 Shadow.extract(ApplicationProvider.getApplicationContext());
@@ -189,6 +223,6 @@ public class ToggleDaltonizerPreferenceFragmentTest {
 
     private SettingsMainSwitchPreference getMainFeatureToggle(
             ToggleDaltonizerPreferenceFragment fragment) {
-        return fragment.findPreference(KEY_USE_SERVICE_PREFERENCE);
+        return fragment.findPreference(fragment.getUseServicePreferenceKey());
     }
 }

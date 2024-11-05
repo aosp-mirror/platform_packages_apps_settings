@@ -48,7 +48,7 @@ constructor(
 
     override fun getSummary(): CharSequence {
         val summaryResId =
-            if (simRepository.showMobileNetworkPage()) {
+            if (simRepository.showMobileNetworkPageEntrance()) {
                 R.string.network_dashboard_summary_mobile
             } else {
                 R.string.network_dashboard_summary_no_mobile

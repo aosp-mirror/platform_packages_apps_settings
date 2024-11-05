@@ -41,6 +41,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 public class FirmwareVersionDetailPreferenceControllerTest {
 
@@ -112,3 +113,4 @@ public class FirmwareVersionDetailPreferenceControllerTest {
         }
     }
 }
+// LINT.ThenChange(FirmwareVersionDetailPreferenceTest.kt)

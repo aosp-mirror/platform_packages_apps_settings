@@ -17,6 +17,10 @@
 package com.android.settings.deviceinfo.firmwareversion;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -25,6 +29,11 @@ import com.android.settingslib.search.SearchIndexable;
 
 @SearchIndexable
 public class FirmwareVersionSettings extends DashboardFragment {
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return FirmwareVersionScreen.KEY;
+    }
 
     @Override
     protected int getPreferenceScreenResId() {

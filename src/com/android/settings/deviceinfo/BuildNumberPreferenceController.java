@@ -36,10 +36,12 @@ import androidx.preference.Preference;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -235,10 +237,18 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
                         userId, false /* hideBackground */);
             } else if (biometricAuthStatus == Utils.BiometricStatus.NOT_ACTIVE) {
                 enableDevelopmentSettings();
+            } else {
+                IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(mFragment.getActivity(),
+                        biometricAuthStatus, true /* twoFactorAuthentication */);
             }
-        } else if (requestCode == REQUEST_IDENTITY_CHECK_FOR_DEV_PREF
-                && resultCode == Activity.RESULT_OK) {
-            enableDevelopmentSettings();
+        } else if (requestCode == REQUEST_IDENTITY_CHECK_FOR_DEV_PREF) {
+            if (resultCode == Activity.RESULT_OK) {
+                enableDevelopmentSettings();
+            } else if (resultCode
+                    == ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT) {
+                IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(mFragment.getActivity(),
+                        Utils.BiometricStatus.LOCKOUT, true /* twoFactorAuthentication */);
+            }
         }
         mProcessingLastDevHit = false;
         return true;

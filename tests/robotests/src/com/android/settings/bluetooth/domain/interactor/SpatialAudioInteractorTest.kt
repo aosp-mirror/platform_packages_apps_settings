@@ -83,6 +83,7 @@ class SpatialAudioInteractorTest {
     @Test
     fun getDeviceSetting_noAudioProfile_returnNull() {
         testScope.runTest {
+            `when`(cachedDevice.isConnected).thenReturn(true)
             val setting = getLatestValue(underTest.getDeviceSetting(cachedDevice))
 
             assertThat(setting).isNull()
@@ -93,6 +94,7 @@ class SpatialAudioInteractorTest {
     @Test
     fun getDeviceSetting_audioProfileNotEnabled_returnNull() {
         testScope.runTest {
+            `when`(cachedDevice.isConnected).thenReturn(true)
             `when`(cachedDevice.profiles).thenReturn(listOf(leAudioProfile))
             `when`(leAudioProfile.isEnabled(bluetoothDevice)).thenReturn(false)
 
@@ -104,8 +106,23 @@ class SpatialAudioInteractorTest {
     }
 
     @Test
+    fun getDeviceSetting_deviceNotConnected_returnNull() {
+        testScope.runTest {
+            `when`(cachedDevice.isConnected).thenReturn(false)
+            `when`(cachedDevice.profiles).thenReturn(listOf(leAudioProfile))
+            `when`(leAudioProfile.isEnabled(bluetoothDevice)).thenReturn(true)
+
+            val setting = getLatestValue(underTest.getDeviceSetting(cachedDevice))
+
+            assertThat(setting).isNull()
+            verifyNoInteractions(spatializerRepository)
+        }
+    }
+
+    @Test
     fun getDeviceSetting_spatialAudioNotSupported_returnNull() {
         testScope.runTest {
+            `when`(cachedDevice.isConnected).thenReturn(true)
             `when`(cachedDevice.profiles).thenReturn(listOf(leAudioProfile))
             `when`(leAudioProfile.isEnabled(bluetoothDevice)).thenReturn(true)
             `when`(
@@ -122,6 +139,7 @@ class SpatialAudioInteractorTest {
     @Test
     fun getDeviceSetting_spatialAudioSupported_returnTwoToggles() {
         testScope.runTest {
+            `when`(cachedDevice.isConnected).thenReturn(true)
             `when`(cachedDevice.profiles).thenReturn(listOf(leAudioProfile))
             `when`(leAudioProfile.isEnabled(bluetoothDevice)).thenReturn(true)
             `when`(
@@ -150,6 +168,7 @@ class SpatialAudioInteractorTest {
     @Test
     fun getDeviceSetting_headTrackingSupported_returnThreeToggles() {
         testScope.runTest {
+            `when`(cachedDevice.isConnected).thenReturn(true)
             `when`(cachedDevice.profiles).thenReturn(listOf(leAudioProfile))
             `when`(leAudioProfile.isEnabled(bluetoothDevice)).thenReturn(true)
             `when`(
@@ -178,6 +197,7 @@ class SpatialAudioInteractorTest {
     @Test
     fun getDeviceSetting_updateState_enableSpatialAudio() {
         testScope.runTest {
+            `when`(cachedDevice.isConnected).thenReturn(true)
             `when`(cachedDevice.profiles).thenReturn(listOf(leAudioProfile))
             `when`(leAudioProfile.isEnabled(bluetoothDevice)).thenReturn(true)
             `when`(
@@ -207,6 +227,7 @@ class SpatialAudioInteractorTest {
     @Test
     fun getDeviceSetting_updateState_enableHeadTracking() {
         testScope.runTest {
+            `when`(cachedDevice.isConnected).thenReturn(true)
             `when`(cachedDevice.profiles).thenReturn(listOf(leAudioProfile))
             `when`(leAudioProfile.isEnabled(bluetoothDevice)).thenReturn(true)
             `when`(

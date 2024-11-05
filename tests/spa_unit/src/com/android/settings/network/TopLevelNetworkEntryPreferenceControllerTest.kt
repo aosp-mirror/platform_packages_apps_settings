@@ -71,7 +71,7 @@ class TopLevelNetworkEntryPreferenceControllerTest {
 
     @Test
     fun getSummary_hasMobile_shouldReturnMobileSummary() {
-        mockSimRepository.stub { on { showMobileNetworkPage() } doReturn true }
+        mockSimRepository.stub { on { showMobileNetworkPageEntrance() } doReturn true }
 
         val summary = controller.summary
 
@@ -84,7 +84,7 @@ class TopLevelNetworkEntryPreferenceControllerTest {
 
     @Test
     fun getSummary_noMobile_shouldReturnNoMobileSummary() {
-        mockSimRepository.stub { on { showMobileNetworkPage() } doReturn false }
+        mockSimRepository.stub { on { showMobileNetworkPageEntrance() } doReturn false }
 
         val summary = controller.summary
 

@@ -30,18 +30,15 @@ import android.view.MenuItem;
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
-import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.utils.ManagedServiceSettings;
 import com.android.settings.utils.ZenServiceListing;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@SearchIndexable
 public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     public static final String DELETE = "DELETE_RULE";
     protected final ManagedServiceSettings.Config CONFIG = getConditionProviderConfig();
@@ -133,25 +130,4 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    /**
-     * For Search.
-     */
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.zen_mode_automation_settings) {
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add(ZenModeAddAutomaticRulePreferenceController.KEY);
-                    keys.add(ZenModeAutomaticRulesPreferenceController.KEY);
-                    return keys;
-                }
-
-                @Override
-                public List<AbstractPreferenceController> createPreferenceControllers(
-                        Context context) {
-                    return buildPreferenceControllers(context, null, null, null);
-                }
-            };
 }
