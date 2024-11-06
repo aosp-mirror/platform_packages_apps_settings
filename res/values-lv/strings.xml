@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Savienošana pārī ar jaunu ierīci"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Automātiski ieslēgt rīt"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Savienot pārī labo"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Savienot pārī kreiso"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Savienojiet otru aparātu"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Atspējot Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Tiek atspējota Bluetooth LE Audio funkcija, ja ierīcē tiek atbalstītas LE Audio aparatūras iespējas."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE Audio režīms"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Iespējot Bluetooth LE audio apraides lietotāja saskarnes priekšskatījumu"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Tiks iespējots LE Audio kopīgošanas lietotāja saskarnes priekšskatījums, tostarp personīga audio kopīgošana un privāta apraide."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"LE Audio slēdzis informācijā par ierīci"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Apiet Bluetooth LE Audio atļaušanas sarakstu"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Pēc noklusējuma izmantot LE Audio, pat ja nav pārbaudīta LE Audio perifērijas ierīces atbilstība atļaušanas saraksta kritērijiem."</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Paceliet pirkstu un pēc tam vēlreiz pieskarieties sensoram."</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Nevar izmantot pirksta nospieduma sensoru"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Sazinieties ar remonta pakalpojumu sniedzēju."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Autorizācija ar pirksta nospiedumu, kad ekrāns izslēgts"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Izmantot autorizāciju ar pirksta nospiedumu, pat ja ekrāns ir izslēgts"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Ekrāna izslēgšana, atbloķēšana"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Vairāk drošības iestatījumu"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Darba profila bloķēšana, šifrēšana u.c."</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Šifrēšana, akreditācijas dati u.c."</string>
@@ -1963,27 +1966,19 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Taustiņu ķēde"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Izmantojot īsinājumtaustiņus, vienlaikus nospiediet tikai vienu taustiņu, nevis turiet nospiestus vairākus taustiņus."</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Peles taustiņi"</string>
-    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
-    <skip />
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Izmantot peles taustiņus"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Izmantojiet tastatūru, lai kontrolētu rādītāju."</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Peles ritināšana atpakaļgaitā"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Ritiniet augšup, lai pārvietotu lapu uz leju"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Apmainīt vietām kreiso un labo pogu"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Izmantojiet peles kreiso pogu kā labo"</string>
-    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
-    <skip />
-    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
-    <skip />
-    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
-    <skip />
-    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
-    <skip />
-    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
-    <skip />
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Peles taustiņi tastatūrai <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Lai pārvietotu peles rādītāju, izmantojiet taustiņus <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>."</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Lai noklikšķinātu uz peles primārās pogas, izmantojiet taustiņu <xliff:g id="CLICK_LABEL">%s</xliff:g>."</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"Lai nospiestu un turētu peles primāro pogu, izmantojiet taustiņu <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>."</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Lai atlaistu peles primāro pogu, izmantojiet taustiņu <xliff:g id="RELEASE_LABEL">%s</xliff:g>."</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Lai pārslēgtu ritināšanas režīmu, izmantojiet taustiņu <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>. Šajā režīmā varēsiet ritināt skatu augšup, lejup, pa kreisi un pa labi ar taustiņiem <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>."</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Lai noklikšķinātu uz peles sekundārās pogas, izmantojiet taustiņu <xliff:g id="RELEASE_2_LABEL">%s</xliff:g>."</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Īsinājumtaustiņi"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Rādīt īsinājumtaustiņu sarakstu"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastatūras un rīki darba profilā"</string>
@@ -3429,8 +3424,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"“Darbdienās plkst. 9:00–17:00”"</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Kalendāra pasākumi"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Režīms {mode_1} ir aktīvs}=2{Režīmi {mode_1} un {mode_2} ir aktīvi}=3{Režīmi {mode_1}, {mode_2} un {mode_3} ir aktīvi}zero{Režīmi {mode_1}, {mode_2} un vēl # ir aktīvi}one{Režīmi {mode_1}, {mode_2} un vēl # ir aktīvi}other{Režīmi {mode_1}, {mode_2} un vēl # ir aktīvi}}"</string>
-    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
-    <skip />
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Netraucēt}=1{{mode_1}}=2{{mode_1}, {mode_2}}zero{{mode_1}, {mode_2} un {mode_3}}one{{mode_1}, {mode_2} un {mode_3}}other{{mode_1}, {mode_2} un {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"IESLĒGTS"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Nav iestatīts"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Atspējots"</string>
@@ -5479,8 +5473,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Klausīties straumi"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Skenējiet audio straumes kvadrātkodu, lai to klausītos ierīcē <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Kopīgošanas laikā paroli nevar rediģēt. Lai mainītu paroli, vispirms izslēdziet audio kopīgošanu."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Parolei ir jābūt 4–16 rakstzīmes garai, un tajā drīkst izmantot tikai burtus, ciparus un simbolus."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Kvadrātkoda skeneris"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Vai nepieciešama palīdzība?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Meklēšanas iestatījumi"</string>
@@ -5492,7 +5485,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Iestatot noklusējuma kontu, radās kļūda."</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Nav iestatīts noklusējuma konts"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Tikai ierīcē"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Lai sāktu darbu, pievienojiet kontu."</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Apvilkt un meklēt"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Pieskarieties un turiet pogu “Sākums” vai navigācijas turi, lai meklētu, izmantojot ekrāna saturu."</string>
 </resources>
