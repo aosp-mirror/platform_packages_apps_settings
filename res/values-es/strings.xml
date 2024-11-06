@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Emparejar nuevo dispositivo"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Activar automáticamente mañana"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Emparejar derecho"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Emparejar izquierdo"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Empareja el otro audífono"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Inhabilitar Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Inhabilita la función Bluetooth LE Audio si el dispositivo es compatible con las capacidades de hardware de LE Audio."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Modo Bluetooth LE Audio"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Habilitar vista previa de la interfaz de emisión de Bluetooth LE Audio"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Habilita la vista previa de la interfaz de usuario de LE Audio para compartir, que incluye las funciones de compartir audio personal y emisión privada"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Mostrar botón LE Audio en Detalles del dispositivo"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Ignorar lista de permitidos de Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Usa LE Audio de forma predeterminada aunque no se haya verificado que el periférico LE Audio cumpla los criterios de la lista de permitidos"</string>
@@ -215,7 +215,7 @@
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Más información sobre las preferencias de idioma"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Preferencias adicionales"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"Elegir formas de dirigirse a ti"</string>
-    <string name="terms_of_address_summary" msgid="7802443422612600620">"Tu dispositivo puede personalizar la forma de dirigirse a ti"</string>
+    <string name="terms_of_address_summary" msgid="7802443422612600620">"Tu dispositivo puede personalizar la forma de dirigirse a ti."</string>
     <string name="terms_of_address_intro_title" msgid="1533951542181569335">"Este ajuste permite personalizar la forma en la que la mayoría de las aplicaciones del sistema se dirigen a ti, pero no sirve para las aplicaciones que instales."</string>
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Sin especificar"</string>
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"Femenino"</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Levanta el dedo y vuelve a tocar el sensor"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"No se puede usar el sensor de huellas digitales"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Visita un proveedor de reparaciones."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Desbloqueo con huella digital con la pantalla apagada"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Usa Desbloqueo con huella digital incluso con la pantalla apagada"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Pantalla apagada, desbloqueo"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Más ajustes de seguridad"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Bloqueo del perfil de trabajo, cifrado y más"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Cifrado, credenciales y más"</string>
@@ -2126,7 +2129,7 @@
     <string name="color_contrast_preview" msgid="6791430227535363883">"Vista previa"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Helen, Adam"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"Hace 2 días"</string>
-    <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"¿Seguir?"</string>
+    <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"¿Responder?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"Informe del viaje de negocios"</string>
     <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"Para recibir más ayuda, ponte en contacto conmigo o con Helen. Este informe"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"Gastos del cliente"</string>
@@ -2248,7 +2251,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Más opciones"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Más información sobre <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Ajustes rápidos"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Desliza hacia abajo desde la parte superior de la pantalla}other{Desliza hacia abajo con # dedos desde la parte superior de la pantalla}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Desliza hacia abajo desde la parte superior de la pantalla.}other{Desliza hacia abajo con # dedos desde la parte superior de la pantalla.}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Desliza hacia abajo desde la parte superior de la pantalla. Este acceso directo estará disponible cuando termines de configurar el dispositivo.}other{Desliza hacia abajo con # dedos desde la parte superior de la pantalla. Este acceso directo estará disponible cuando termines de configurar el dispositivo.}}"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Ajustes rápidos"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Teclas de volumen"</string>
@@ -3810,7 +3813,7 @@
     <string name="zen_mode_event_rule_calendar" msgid="6279460374929508907">"Durante eventos de"</string>
     <string name="zen_mode_event_rule_calendar_any" msgid="5152139705998281205">"Cualquier calendario"</string>
     <string name="zen_mode_event_rule_reply" msgid="6099405414361340225">"Cuando la respuesta sea"</string>
-    <string name="zen_mode_event_rule_reply_any_except_no" msgid="4672746760505346596">"Sí, quizás o sin respuesta"</string>
+    <string name="zen_mode_event_rule_reply_any_except_no" msgid="4672746760505346596">"Sí, Quizás o Sin respuesta"</string>
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="6584448788100186574">"Sí o Quizás"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="7812120982734551236">"Sí"</string>
     <string name="zen_mode_rule_not_found_text" msgid="5303667326973891036">"No se ha encontrado esa regla."</string>
@@ -3927,7 +3930,7 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{Cambiar a Solo alarmas durante una hora hasta las {time}}other{Cambiar a Solo alarmas durante # horas hasta las {time}}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Cambiar a Solo alarmas hasta las <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Cambiar a interrumpir siempre"</string>
-    <string name="zen_mode_rename_title" msgid="8146882272966214558">"Modo de edición"</string>
+    <string name="zen_mode_rename_title" msgid="8146882272966214558">"Edita el modo"</string>
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Crea un modo"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Modo personalizado"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Nombre del modo"</string>
@@ -5182,7 +5185,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Falta el número de teléfono."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"Aceptar"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"Permitir 2G"</string>
-    <string name="enable_2g_summary" msgid="2794534052372565914">"El 2G es menos seguro, pero puede mejorar tu conexión en algunos lugares. Para hacer llamadas de emergencia, el 2G siempre se permite."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"El 2G es menos seguro, pero puede mejorar tu conexión en algunos lugares. Para hacer llamadas de emergencia, el 2G siempre está permitido."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> necesita una conexión 2G para estar disponible"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Permitir solo redes cifradas"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Es una opción más segura, pero puede limitar tu conexión de red móvil en algunas ubicaciones. Las llamadas de emergencia están permitidas siempre."</string>
@@ -5469,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Escuchar emisión"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Escanea el código QR de una emisión de audio para escucharlo con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"No se puede modificar la contraseña durante el uso compartido. Para cambiarla, primero desactiva la función compartir audio."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Tu contraseña debe tener entre 4 y 16 caracteres, y solo puedes usar letras, números y símbolos"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Escáner de códigos QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"¿Necesitas ayuda?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Buscar ajustes"</string>
@@ -5482,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"No se ha podido definir la cuenta predeterminada"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Ninguna cuenta predeterminada definida"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Solo en el dispositivo"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Añade una cuenta para empezar"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Rodea para buscar"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Mantén pulsado el botón de inicio o la barra de navegación para buscar usando el contenido de tu pantalla."</string>
 </resources>

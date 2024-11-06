@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Uparite novi uređaj"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Automatski uključi sutra"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Upari desno uho"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Upari lijevo uho"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Uparite drugo uho"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Onemogući Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Onemogućava funkciju Bluetooth LE Audio ako uređaj podržava mogućnosti hardvera za LE Audio."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Način rada Bluetooth LE Audio"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Omogući pregled korisničkog interfejsa za emitiranje putem Bluetooth LE Audija"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Omogućava pregled korisničkog interfejsa za dijeljenje putem LE Audija, uključujući dijeljenje ličnog zvuka i privatno emitiranje"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Prikaži prekidač za LE Audio u detaljima o uređaju"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Zaobiđi Listu dozvoljenih za Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Koristite LE Audio prema zadanim postavkama čak i ako nije potvrđeno da LE Audio periferni uređaj ispunjava kriterije Liste dozvoljenih."</string>
@@ -247,8 +247,8 @@
     <string name="airplane_mode" msgid="3196085857882526817">"Način rada u avionu"</string>
     <string name="wireless_networks_settings_title" msgid="8557542379234105369">"Bežična veza i mreže"</string>
     <string name="roaming" msgid="3055365654530847985">"Roming"</string>
-    <string name="roaming_enable" msgid="7845716016861535340">"Povezivanje na usluge prijenosa podataka u romingu"</string>
-    <string name="roaming_disable" msgid="729512894708689604">"Povezivanje na usluge prijenosa podataka u romingu"</string>
+    <string name="roaming_enable" msgid="7845716016861535340">"Povezivanje na usluge prenosa podataka u romingu"</string>
+    <string name="roaming_disable" msgid="729512894708689604">"Povezivanje na usluge prenosa podataka u romingu"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"Mogu nastati troškovi rominga."</string>
     <string name="date_time_auto" msgid="1759599045100040686">"Automatski datum i vrijeme"</string>
     <string name="date_time_auto_summary" msgid="8294938565417729698">"Automatsko postavljanje putem mreže i bežičnih signala"</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Podignite prst, zatim ponovo dodirnite senzor"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Nije moguće koristiti senzor za otisak prsta"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Posjetite pružaoca usluga za popravke."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Otključavanje isključenog ekrana otiskom prsta"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Koristite otključavanje otiskom prsta čak i kada je ekran isključen"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Isključen ekran, otključavanje"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Više postavki sigurnosti"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Zaključavanje radnog profila, šifriranje i drugo"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Šifriranje, akreditivi i drugo"</string>
@@ -930,7 +933,7 @@
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Zahtijevaj otključavanje uređaja za NFC"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
-    <string name="android_beam_on_summary" msgid="6067720758437490896">"Spremno za prijenos sadržaja aplikacije putem NFC-a"</string>
+    <string name="android_beam_on_summary" msgid="6067720758437490896">"Spremno za prenos sadržaja aplikacije putem NFC-a"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"Isključeno"</string>
     <string name="nfc_disabled_summary" msgid="8737797364522502351">"Nije dostupno jer je NFC isključen"</string>
     <string name="android_beam_explained" msgid="5684416131846701256">"Kada je uključena ova funkcija, možete emitirati sadržaj aplikacije na drugi uređaj koji podržava NFC približavanjem uređaja jedan drugome. Naprimjer, možete emitirati web stranice, videozapise s YouTubea, kontakte i drugo.\n\nSamo približite uređaje jedan drugome (u pravilu, poleđinu uz poleđinu) a zatim dodirnite svoj ekran. Aplikacija će sama prepoznati šta treba emitirati."</string>
@@ -954,8 +957,8 @@
     <string name="wifi_install_credentials" msgid="5192903644606839972">"Instaliraj certifikate"</string>
     <string name="wifi_scan_notify_text" msgid="7163137260385995873">"Radi poboljšanja preciznosti lokacije, aplikacije i usluge i dalje mogu skenirati WiFi mreže bilo kada, čak i kada je WiFi isključen. Ovim se, naprimjer, mogu poboljšati funkcije i usluge zasnovane na lokaciji. Ovo možete izmijeniti u <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>postavkama Skeniranja WiFi mreže<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="7439201783168213149">"Radi poboljšanja preciznosti lokacije, uključite skeniranje WiFi mreža u <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>postavkama Skeniranja WiFi mreže<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
-    <string name="wifi_cellular_data_fallback_title" msgid="2844653839490977040">"Automatsko prebacivanje na prijenos podataka na mobilnoj mreži"</string>
-    <string name="wifi_cellular_data_fallback_summary" msgid="7039944853033554386">"Korištenje prijenosa podataka na mobilnoj mreži kada WiFi mreža nema pristup internetu. Mogu nastati troškovi prijenosa podataka."</string>
+    <string name="wifi_cellular_data_fallback_title" msgid="2844653839490977040">"Automatsko prebacivanje na prenos podataka na mobilnoj mreži"</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="7039944853033554386">"Korištenje prenosa podataka na mobilnoj mreži kada WiFi mreža nema pristup internetu. Mogu nastati troškovi prenosa podataka."</string>
     <string name="wifi_add_network" msgid="4178564862173751181">"Dodajte mrežu"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"Postavke za WiFi"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"WiFi se uključuje ponovo automatski"</string>
@@ -987,7 +990,7 @@
     <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Ukoliko ruter ne emitira ID mreže, ali biste se ubuduće željeli povezati na njega, možete postaviti mrežu kao skrivenu.\n\nNa taj način može biti ugrožena sigurnost jer će telefon redovno emitirati signal da pronađe mrežu.\n\nPostavljenjem mreže kao skrivene neće se promijeniti postavke vašeg rutera."</string>
     <string name="wifi_signal" msgid="4442182285304271424">"Jačina signala"</string>
     <string name="wifi_status" msgid="5349199188871002778">"Status"</string>
-    <string name="tx_wifi_speed" msgid="2368986629172050673">"Brzina prijenosa veze"</string>
+    <string name="tx_wifi_speed" msgid="2368986629172050673">"Brzina prenosa veze"</string>
     <string name="rx_wifi_speed" msgid="5167966079215111232">"Brzina primanja veze"</string>
     <string name="wifi_speed" msgid="6562147734565434513">"Brzina veze"</string>
     <string name="wifi_frequency" msgid="3120998420184702834">"Frekvencija"</string>
@@ -1073,7 +1076,7 @@
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Neke aplikacije i usluge možda neće raditi zbog ograničene povezivosti. Ipak koristiti?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Ne pitaj me više za ovu mrežu"</string>
     <string name="lost_internet_access_title" msgid="9032463989950384698">"WiFi mreža nije povezana na internet"</string>
-    <string name="lost_internet_access_text" msgid="1535911323549496789">"Možete se prebaciti na mobilnu mrežu kad god je Wi‑Fi veza loša. Mogu nastati troškovi prijenosa podataka."</string>
+    <string name="lost_internet_access_text" msgid="1535911323549496789">"Možete se prebaciti na mobilnu mrežu kad god je Wi‑Fi veza loša. Mogu nastati troškovi prenosa podataka."</string>
     <string name="lost_internet_access_switch" msgid="7935665847081706202">"Prebaci na mobilnu mrežu"</string>
     <string name="lost_internet_access_cancel" msgid="1981171269794585284">"Ostani na WiFi mreži"</string>
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Nemoj više prikazivati"</string>
@@ -1365,11 +1368,11 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"Uredu"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Otkaži"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Koristiti <xliff:g id="CARRIER">%1$s</xliff:g> za mobilne podatke?"</string>
-    <string name="sim_change_data_message" msgid="3046178883369645132">"Koristite <xliff:g id="CARRIER2_0">%2$s</xliff:g> za prijenos podataka na mobilnoj mreži. Ako se prebacite na operatera <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> se više neće koristiti za prijenos podataka na mobilnoj mreži."</string>
+    <string name="sim_change_data_message" msgid="3046178883369645132">"Koristite <xliff:g id="CARRIER2_0">%2$s</xliff:g> za prenos podataka na mobilnoj mreži. Ako se prebacite na operatera <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> se više neće koristiti za prenos podataka na mobilnoj mreži."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Koristi <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="sim_preferred_message" msgid="4894337280925553873">"<xliff:g id="NEW_SIM">%1$s</xliff:g> je sada primarni SIM"</string>
-    <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Poboljšati pokrivenost prijenosa pod.?"</string>
-    <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Dozvolite uređaju da se automatski prebaci na operatera <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> za prijenos podataka na mobilnoj mreži kada ima bolju dostupnost."</string>
+    <string name="enable_auto_data_switch_dialog_title" msgid="3563043560556718994">"Poboljšati pokrivenost prenosa pod.?"</string>
+    <string name="enable_auto_data_switch_dialog_message" msgid="5777287241521946883">"Dozvolite uređaju da se automatski prebaci na operatera <xliff:g id="BACKUP_CARRIER">%1$s</xliff:g> za prenos podataka na mobilnoj mreži kada ima bolju dostupnost."</string>
     <string name="auto_data_switch_dialog_managed_profile_warning" msgid="6839438290079866605">\n\n"Pozivi, poruke i mrežni saobraćaj mogu biti vidljivi vašoj organizaciji."</string>
     <string name="wrong_pin_code_pukked" msgid="3414172752791445033">"PIN za SIM je netačan. Za otključavanje uređaja sada morate kontaktirati svog operatera."</string>
     <string name="wrong_pin_code" msgid="8124222991071607958">"{count,plural, =1{PIN kôd za SIM je netačan. Imate još # pokušaj prije nego što budete morali kontaktirati mobilnog operatera da vam otključa uređaj.}one{PIN kôd za SIM je netačan. Imate još # pokušaj.}few{PIN kôd za SIM je netačan. Imate još # pokušaja.}other{PIN kôd za SIM je netačan. Imate još # pokušaja.}}"</string>
@@ -1408,7 +1411,7 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Isključeno"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
-    <string name="status_data_network_type" msgid="3689772955330665876">"Vrsta mreže za prijenos podataka"</string>
+    <string name="status_data_network_type" msgid="3689772955330665876">"Vrsta mreže za prenos podataka"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Vrsta mreže za glasovne pozive"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Informacije o operateru"</string>
     <string name="status_data_state" msgid="525196229491743487">"Stanje mobilne mreže"</string>
@@ -1604,8 +1607,8 @@
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Dijeljenje internetske veze putem USB-a"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Dijeljenje internetske veze putem Bluetootha"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Dijeljenje internetske veze putem Etherneta"</string>
-    <string name="tethering_footer_info" msgid="6782375845587483281">"Koristite pristupnu tačku i Dijeljenje internetske veze da omogućite internet drugim uređajima putem veze za prijenos podataka na mobilnoj mreži. Aplikacije također mogu kreirati pristupne tačke za dijeljenje sadržaja s uređajima u blizini."</string>
-    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Koristite pristupnu tačku i dijeljenje internetske veze da omogućite internet drugim uređajima putem WiFi-ja ili prijenosa podataka na mobilnoj mreži. Aplikacije također mogu kreirati pristupne tačke za dijeljenje sadržaja s uređajima u blizini."</string>
+    <string name="tethering_footer_info" msgid="6782375845587483281">"Koristite pristupnu tačku i Dijeljenje internetske veze da omogućite internet drugim uređajima putem veze za prenos podataka na mobilnoj mreži. Aplikacije također mogu kreirati pristupne tačke za dijeljenje sadržaja s uređajima u blizini."</string>
+    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Koristite pristupnu tačku i dijeljenje internetske veze da omogućite internet drugim uređajima putem WiFi-ja ili prenosa podataka na mobilnoj mreži. Aplikacije također mogu kreirati pristupne tačke za dijeljenje sadržaja s uređajima u blizini."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Pomoć"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Mobilna mreža"</string>
     <string name="sms_application_title" msgid="4791107002724108809">"Aplikacija za SMS"</string>
@@ -2408,11 +2411,11 @@
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Informacije o slušnim aparatima"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"Da pronađete druge slušne aparate koje ne podržava ASHA ni LE Audio, dodirnite opciju "<b>"Uparivanje novog uređaja"</b>" &gt; "<b>"Pogledajte više uređaja"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Uparite slušni aparat"</string>
-    <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Na ovoj stranici možete upariti slušne aparate s prijenosom zvuka za slušne aparate i LE Audijem. Provjerite je li slušni aparat uključen i spreman za uparivanje."</string>
+    <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Na ovoj stranici možete upariti slušne aparate s prenosom zvuka za slušne aparate i LE Audijem. Provjerite je li slušni aparat uključen i spreman za uparivanje."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Dostupni slušni aparati"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Ne vidite slušni aparat?"</string>
     <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"Prikaži više uređaja"</string>
-    <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Automatsko podešavanje"</string>
+    <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Podešavanje zvuka"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Zvučni opis"</string>
     <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Slušajte opis dešavanja na ekranu za podržane filmove i serije"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"zvučni opis, zvuk, opis, slaba vidljivost"</string>
@@ -2926,7 +2929,7 @@
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Automatska sinhronizacija podataka za posao"</string>
     <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Automatski sinhroniziraj privatne podatke"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Promijeni ciklus…"</string>
-    <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Dan u mjesecu za poništavanje ciklusa prijenosa podataka:"</string>
+    <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Dan u mjesecu za poništavanje ciklusa prenosa podataka:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Nijedna apl. nije koristila pod. u ovom periodu."</string>
     <string name="data_usage_label_foreground" msgid="8782117644558473624">"Prvi plan"</string>
     <string name="data_usage_label_background" msgid="8862781660427421859">"Pozadina"</string>
@@ -2954,17 +2957,17 @@
     <string name="data_usage_app_restrict_background_summary" msgid="2997942775999602794">"Omogućite prijenos podataka na mobilnoj mreži u pozadini"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="8213268097024597864">"Za ograničenje pozad. podataka ove aplikacije prvo postavite ogranič. mob. podataka."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="5383874438677899255">"Ograničiti podatke u pozadini?"</string>
-    <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"Ova funkcija može uzrokovati da aplikacija koja ovisi o pozadinskim podacima prestane raditi kada su dostupne samo mobilne mreže.\n\nPrikladnije kontrole za prijenos podataka možete pronaći među postavkama koje su dostupne unutar aplikacije."</string>
+    <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"Ova funkcija može uzrokovati da aplikacija koja ovisi o pozadinskim podacima prestane raditi kada su dostupne samo mobilne mreže.\n\nPrikladnije kontrole za prenos podataka možete pronaći među postavkama koje su dostupne unutar aplikacije."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="8599940395497268584">"Ograničavanje prijenosa pozadinskih podataka moguće je samo ako ste postavili ograničenje za prijenos podataka na mobilnoj mreži."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"Uključiti autom. sinhr. podataka?"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"Isključiti autom. sinhr. podataka?"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"Ovim će se uštedjeti na prijenosu podataka i potrošnji baterije, ali ćete morati ručno sinhronizirati svaki račun da prikupite najnovije informacije. Također, nećete primati obavještenja kada se izvrše ažuriranja."</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"Ovim će se uštedjeti na prenosu podataka i potrošnji baterije, ali ćete morati ručno sinhronizirati svaki račun da prikupite najnovije informacije. Također, nećete primati obavještenja kada se izvrše ažuriranja."</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"Datum poništavanja ciklusa potrošnje"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="1026234456777365545">"Datum svakog mjeseca:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="6110165528024717527">"Postavi"</string>
-    <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"Postavite upozorenje o prijenosu podataka"</string>
-    <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"Postavite ograničenje prijenosa podataka"</string>
-    <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"Ograničavanje prijenosa podataka"</string>
+    <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"Postavite upozorenje o prenosu podataka"</string>
+    <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"Postavite ograničenje prenosa podataka"</string>
+    <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"Ograničavanje prenosa podataka"</string>
     <string name="data_usage_sweep_warning" msgid="2072854703184614828"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"upozorenje"</font></string>
     <string name="data_usage_sweep_limit" msgid="6947019190890086284"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"ograničenje"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="9065885396147675694">"Uklonjene aplikacije"</string>
@@ -3203,13 +3206,13 @@
     <string name="regulatory_info_text" msgid="1154461023369976667"></string>
     <string name="sim_settings_title" msgid="2254609719033946272">"SIM-ovi"</string>
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Prijenos podataka na mobilnoj mreži je nedostupan"</string>
-    <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Dodirnite za odabir SIM-a za prijenos podataka"</string>
+    <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Dodirnite za odabir SIM-a za prenos podataka"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Uvijek koristi ovo za pozive"</string>
-    <string name="select_sim_for_data" msgid="2642305487659432499">"Odaberite SIM za prijenos podataka"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"Odaberite SIM za prenos podataka"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Odaberite SIM za SMS"</string>
-    <string name="data_switch_started" msgid="6292759843974720112">"Prebacivanje SIM-a za prijenos podataka. Ovo može potrajati do 1 min…"</string>
-    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Koristiti operatera <xliff:g id="NEW_SIM">%1$s</xliff:g> za prijenos podataka?"</string>
-    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Ako se prebacite na operatera <xliff:g id="NEW_SIM">%1$s</xliff:g>, <xliff:g id="OLD_SIM">%2$s</xliff:g> se više neće koristiti za prijenos podataka na mobilnoj mreži."</string>
+    <string name="data_switch_started" msgid="6292759843974720112">"Prebacivanje SIM-a za prenos podataka. Ovo može potrajati do 1 min…"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Koristiti operatera <xliff:g id="NEW_SIM">%1$s</xliff:g> za prenos podataka?"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Ako se prebacite na operatera <xliff:g id="NEW_SIM">%1$s</xliff:g>, <xliff:g id="OLD_SIM">%2$s</xliff:g> se više neće koristiti za prenos podataka na mobilnoj mreži."</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Koristi operatera <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Poziv putem"</string>
     <string name="sim_name_hint" msgid="8231524869124193119">"Unesite ime SIM-a"</string>
@@ -4096,7 +4099,7 @@
     <string name="sharing_remote_bugreport_dialog_message" msgid="3523877008096439251">"Ovaj izvještaj o grešci se dijeli sa vašim IT administratorom. Kontaktirajte ga da dobijete više informacija."</string>
     <string name="share_remote_bugreport_action" msgid="7173093464692893276">"Podijelite"</string>
     <string name="decline_remote_bugreport_action" msgid="1276509879613158895">"Odbij"</string>
-    <string name="usb_use_charging_only" msgid="1743303747327057947">"Nema prijenosa podataka"</string>
+    <string name="usb_use_charging_only" msgid="1743303747327057947">"Nema prenosa podataka"</string>
     <string name="usb_use_power_only" msgid="3408055485802114621">"Punjenje povezanog uređaja"</string>
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Prijenos fajlova"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
@@ -4109,7 +4112,7 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Zadana USB konfiguracija"</string>
     <string name="usb_default_info" msgid="167172599497085266">"Kada se poveže drugi uređaj i vaš telefon je otključan, primijenit će se ove postavke. Povežite se samo s pouzdanim uređajima."</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Opcije napajanja"</string>
-    <string name="usb_file_transfer_title" msgid="2261577861371481478">"Opcije prijenosa fajlova"</string>
+    <string name="usb_file_transfer_title" msgid="2261577861371481478">"Opcije prenosa fajlova"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"Postavke USB-a"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB-om upravlja"</string>
@@ -4179,7 +4182,7 @@
     <string name="allow_overlay_description" msgid="1607235723669496298">"Dozvolite ovoj aplikaciji da prekrije ostale aplikacije koje koristite. Ova aplikacija će moći vidjeti gdje dodirujete ili promijeniti ono što je prikazano na ekranu."</string>
     <string name="media_routing_control_title" msgid="6402800638960066807">"Promjena medijskog izlaza"</string>
     <string name="allow_media_routing_control" msgid="4907036637509360616">"Dozvoli aplikaciji da mijenja medijski izlaz"</string>
-    <string name="allow_media_routing_description" msgid="8343709701298051207">"Dozvoljava ovoj aplikaciji da odabere koji povezani uređaj reproducira zvuk ili videozapis iz drugih aplikacija. Ako je dozvoljeno, ova aplikacija može pristupiti listi dostupnih uređaja kao što su slušalice i zvučnici te odabrati koji izlazni uređaj se koristi za prijenos ili emitiranje zvuka ili videozapisa."</string>
+    <string name="allow_media_routing_description" msgid="8343709701298051207">"Dozvoljava ovoj aplikaciji da odabere koji povezani uređaj reproducira zvuk ili videozapis iz drugih aplikacija. Ako je dozvoljeno, ova aplikacija može pristupiti listi dostupnih uređaja kao što su slušalice i zvučnici te odabrati koji izlazni uređaj se koristi za prenos ili emitiranje zvuka ili videozapisa."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"Pristup svim fajlovima"</string>
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Dozvoli pristup za upravljanje svim fajlovima"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Dozvolite ovoj aplikaciji da čita, mijenja i briše sve fajlove na ovom uređaju ili svim povezanim uređajima za pohranu. Ako to dozvolite, aplikacija može pristupati fajlovima bez vašeg znanja."</string>
@@ -4284,33 +4287,33 @@
     <string name="ethernet_data_usage" msgid="4552227880905679761">"Prijenos podataka putem Etherneta"</string>
     <string name="wifi" msgid="2932584495223243842">"WiFi"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
-    <string name="cell_data_template" msgid="6077963976103260821">"<xliff:g id="AMOUNT">^1</xliff:g> putem prijenosa podataka"</string>
+    <string name="cell_data_template" msgid="6077963976103260821">"<xliff:g id="AMOUNT">^1</xliff:g> putem prenosa podataka"</string>
     <string name="wifi_data_template" msgid="935934798340307438">"<xliff:g id="AMOUNT">^1</xliff:g> WiFi podataka"</string>
     <string name="ethernet_data_template" msgid="1429173767445201145">"<xliff:g id="AMOUNT">^1</xliff:g> ethernet podataka"</string>
-    <string name="billing_cycle" msgid="6618424022653876279">"Upozorenje o prijenosu pod. i ograničenje"</string>
-    <string name="app_usage_cycle" msgid="341009528778520583">"Ciklus prijenosa podataka na mob. mreži"</string>
-    <string name="cell_data_warning" msgid="5664921950473359634">"Upozorenje o prijenosu podataka: <xliff:g id="ID_1">^1</xliff:g>"</string>
-    <string name="cell_data_limit" msgid="256855024790622112">"Ograničenje prijenosa podataka: <xliff:g id="ID_1">^1</xliff:g>"</string>
-    <string name="cell_data_warning_and_limit" msgid="8393200831986035724">"Upozorenje o prijenosu podataka: <xliff:g id="ID_1">^1</xliff:g> / Ograničenje prijenosa podataka: <xliff:g id="ID_2">^2</xliff:g>"</string>
+    <string name="billing_cycle" msgid="6618424022653876279">"Upozorenje o prenosu pod. i ograničenje"</string>
+    <string name="app_usage_cycle" msgid="341009528778520583">"Ciklus prenosa podataka na mob. mreži"</string>
+    <string name="cell_data_warning" msgid="5664921950473359634">"Upozorenje o prenosu podataka: <xliff:g id="ID_1">^1</xliff:g>"</string>
+    <string name="cell_data_limit" msgid="256855024790622112">"Ograničenje prenosa podataka: <xliff:g id="ID_1">^1</xliff:g>"</string>
+    <string name="cell_data_warning_and_limit" msgid="8393200831986035724">"Upozorenje o prenosu podataka: <xliff:g id="ID_1">^1</xliff:g> / Ograničenje prenosa podataka: <xliff:g id="ID_2">^2</xliff:g>"</string>
     <string name="operator_warning" msgid="5672761970087591211">"Obračun podataka koji vrši operater se može razlikovati od obračuna koji vrši uređaj"</string>
     <string name="non_carrier_data_usage_warning" msgid="4707184871368847697">"Ne obuhvata podatke koje koriste mreže mobilnog operatera"</string>
     <string name="data_used_template" msgid="8229342096562327646">"Iskorišteno je <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Postavi upozor. o prij. podat."</string>
-    <string name="data_warning" msgid="2925054658166062884">"Upozorenje o prijenosu podataka"</string>
-    <string name="data_warning_footnote" msgid="5991901765915710592">"Uređaj mjeri upozorenje o prijenosu podataka i ograničenje prijenosa podataka. Ovo se može razlikovati od mjerenja prijenosa podataka koje vrši mobilni operater."</string>
+    <string name="data_warning" msgid="2925054658166062884">"Upozorenje o prenosu podataka"</string>
+    <string name="data_warning_footnote" msgid="5991901765915710592">"Uređaj mjeri upozorenje o prenosu podataka i ograničenje prenosa podataka. Ovo se može razlikovati od mjerenja prenosa podataka koje vrši mobilni operater."</string>
     <string name="set_data_limit" msgid="9010326815874642680">"Postavi ogranič. prij. podat."</string>
-    <string name="data_limit" msgid="8731731657513652363">"Ograničenje prijenosa podataka"</string>
+    <string name="data_limit" msgid="8731731657513652363">"Ograničenje prenosa podataka"</string>
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> iskorišteno <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1499586749829665889">"Konfiguracija"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Ostale aplikacije uključene u korištenje"</string>
     <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{1 aplikacija smije upotrebljavati neograničeni prijenos podataka na mobilnoj mreži kada je Ušteda podataka uključena}one{# aplikacija smije upotrebljavati neograničeni prijenos podataka na mobilnoj mreži kada je Ušteda podataka uključena}few{# aplikacije smiju upotrebljavati neograničeni prijenos podataka na mobilnoj mreži kada je Ušteda podataka uključena}other{# aplikacija smije upotrebljavati neograničeni prijenos podataka na mobilnoj mreži kada je Ušteda podataka uključena}}"</string>
-    <string name="data_usage_title" msgid="4039024073687469094">"Primarni plan prijenosa podataka"</string>
+    <string name="data_usage_title" msgid="4039024073687469094">"Primarni plan prenosa podataka"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi podaci"</string>
     <string name="data_used_formatted" msgid="7913920278059077938">"Iskorišteno je <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
     <string name="data_overusage" msgid="3680477320458707259">"Prekoračenje: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_remaining" msgid="6316251496381922837">"Još <xliff:g id="ID_1">^1</xliff:g>"</string>
-    <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"Grafikon koji prikazuje potrošnju prijenosa podataka od <xliff:g id="START_DATE">%1$s</xliff:g> do <xliff:g id="END_DATE">%2$s</xliff:g>."</string>
-    <string name="data_usage_chart_no_data_content_description" msgid="5481968839079467231">"Nema potrošnje prijenosa podataka u ovom rasponu datuma"</string>
+    <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"Grafikon koji prikazuje potrošnju prenosa podataka od <xliff:g id="START_DATE">%1$s</xliff:g> do <xliff:g id="END_DATE">%2$s</xliff:g>."</string>
+    <string name="data_usage_chart_no_data_content_description" msgid="5481968839079467231">"Nema potrošnje prenosa podataka u ovom rasponu datuma"</string>
     <string name="billing_cycle_days_left" msgid="174337287346866400">"{count,plural, =1{Preostao je još # dan}one{Preostao je još # dan}few{Preostala su još # dana}other{Preostalo je još # dana}}"</string>
     <string name="billing_cycle_none_left" msgid="1694844019159277504">"Nema preostalog vremena"</string>
     <string name="billing_cycle_less_than_one_day_left" msgid="1210202399053992163">"Preostalo je manje od 1 dana"</string>
@@ -4325,8 +4328,8 @@
     <string name="data_saver_on" msgid="7848893946018448793">"Uključeno"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Isključeno"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Koristi Uštedu podataka"</string>
-    <string name="unrestricted_app_title" msgid="8531936851059106374">"Korištenje neograničenog prijenosa podataka na mobilnoj mreži"</string>
-    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Dozvolite pristup neograničenom prijenosu podataka na mobilnoj mreži kada je Ušteda podataka uključena"</string>
+    <string name="unrestricted_app_title" msgid="8531936851059106374">"Korištenje neograničenog prenosa podataka na mobilnoj mreži"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Dozvolite pristup neograničenom prenosu podataka na mobilnoj mreži kada je Ušteda podataka uključena"</string>
     <string name="home_app" msgid="6056850504746902747">"Aplikacija za početni ekran"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Dodajte još jedan otisak prsta"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Otključajte nekim drugim prstom"</string>
@@ -4781,7 +4784,7 @@
     <string name="carrier_settings_title" msgid="6959295328730560529">"Postavke operatera"</string>
     <string name="cdma_lte_data_service" msgid="6937443423651347345">"Postavi prijenos podataka"</string>
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"Prijenos podataka na mobilnoj mreži"</string>
-    <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Pristup prijenosu podataka putem mobilne mreže"</string>
+    <string name="mobile_data_settings_summary" msgid="7323978798199919063">"Pristup prenosu podataka putem mobilne mreže"</string>
     <string name="mobile_data_settings_summary_auto_switch" msgid="7851549787645698945">"Telefon će se automatski prebaciti na ovog operatera kada bude u dometu"</string>
     <string name="mobile_data_settings_summary_unavailable" msgid="9176513507571883986">"Nije dostupan nijedan SIM"</string>
     <string name="calls_preference" msgid="2166481296066890129">"Postavke za pozive"</string>
@@ -4791,7 +4794,7 @@
     <string name="default_for_calls" msgid="2788950217176988034">"Zadano za pozive"</string>
     <string name="default_for_sms" msgid="1316988329407434771">"Zadano za SMS-ove"</string>
     <string name="default_for_calls_and_sms" msgid="8223971369339958151">"Zadano za pozive i SMS-ove"</string>
-    <string name="default_for_mobile_data" msgid="3725773640392315626">"Zadano za prijenos mobilnih podataka"</string>
+    <string name="default_for_mobile_data" msgid="3725773640392315626">"Zadano za prenos mobilnih podataka"</string>
     <string name="mobile_data_active" msgid="8683694456401350210">"Prijenos mobilnih podataka je aktivan"</string>
     <string name="mobile_data_off" msgid="2702029611959308269">"Prijenos mobilnih podataka je isključen"</string>
     <string name="subscription_available" msgid="2659722770210403365">"Dostupno"</string>
@@ -4884,7 +4887,7 @@
     <string name="sim_onboarding_dialog_starting_title" msgid="4212945803784596345">"Postavite preference SIM-a"</string>
     <string name="sim_onboarding_dialog_starting_msg" msgid="8450391476631265209">"Postavite preference mobilne mreže da koristite više SIM-ova na uređaju"</string>
     <string name="sim_onboarding_label_sim_title" msgid="273162565849288273">"Označite SIM-ove"</string>
-    <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"Vidjet ćete ove oznake prilikom upućivanja poziva, slanja poruka i korištenja prijenosa podataka, kao i u Postavkama"</string>
+    <string name="sim_onboarding_label_sim_msg" msgid="5105859235219529056">"Vidjet ćete ove oznake prilikom upućivanja poziva, slanja poruka i korištenja prenosa podataka, kao i u Postavkama"</string>
     <string name="sim_onboarding_label_sim_dialog_title" msgid="5839073125605286120">"Oznaka SIM-a"</string>
     <string name="sim_onboarding_label_sim_dialog_label" msgid="9020433985426525185">"Oznaka"</string>
     <string name="sim_onboarding_select_sim_title" msgid="5895262188167744055">"Odaberite SIM-ove za korištenje"</string>
@@ -4894,7 +4897,7 @@
     <string name="primary_sim_title" msgid="2508161011657571566">"Primarni SIM-ovi"</string>
     <string name="primary_sim_calls_title" msgid="4961189133582615685">"Pozivi"</string>
     <string name="primary_sim_texts_title" msgid="1287584042733097749">"Poruke"</string>
-    <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Automatsko prebacivanje na prijenos podataka"</string>
+    <string name="primary_sim_automatic_data_title" msgid="1265528923229642480">"Automatsko prebacivanje na prenos podataka"</string>
     <string name="primary_sim_automatic_data_msg" msgid="1612203837010785203">"Koristite prijenos podataka s bilo kojeg SIM-a ovisno o pokrivenosti i dostupnosti"</string>
     <string name="sim_action_restart_dialog_title" msgid="3507413479633430120">"Ponovo pokrenite uređaj da koristite 2 SIM-a"</string>
     <string name="sim_action_restart_dialog_msg" msgid="4737611046767629774">"Da istovremeno koristite 2 SIM-a, ponovno pokrenite uređaj, a zatim uključite oba SIM-a"</string>
@@ -4923,7 +4926,7 @@
     <string name="choose_sim_activating" msgid="6485547671356386998">"Uključivanje<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="choose_sim_could_not_activate" msgid="866488735834045525">"Uključivanje SIM-a trenutno nije uspjelo"</string>
     <string name="switch_sim_dialog_title" msgid="5407316878973237773">"Koristiti operatera <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
-    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"Usluge operatera <xliff:g id="CARRIER_NAME">%1$s</xliff:g> će se koristiti za prijenos podataka na mobilnoj mreži, pozive i SMS."</string>
+    <string name="switch_sim_dialog_text" msgid="7530186862171635464">"Usluge operatera <xliff:g id="CARRIER_NAME">%1$s</xliff:g> će se koristiti za prenos podataka na mobilnoj mreži, pozive i SMS."</string>
     <string name="switch_sim_dialog_no_switch_title" msgid="809763410787744247">"Nema dostupnih SIM-ova"</string>
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Da kasnije koristite prijenos podataka na mobilnoj mreži, funkcije poziva i SMS, idite u postavke mreže"</string>
     <string name="sim_card_label" msgid="6263064316075963775">"SIM"</string>
@@ -5377,7 +5380,7 @@
     <string name="audio_sharing_call_audio_description" msgid="6573621048260616924">"Reproduciranje samo na uređaju <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_test_sound_title" msgid="6438868185641027763">"Reproducirajte testni zvuk"</string>
     <string name="audio_sharing_test_sound_description" msgid="4072462502371937399">"Svako ko sluša treba ovo čuti"</string>
-    <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Postavke prijenosa zvuka"</string>
+    <string name="audio_sharing_stream_settings_title" msgid="1374391898689242036">"Postavke prenosa zvuka"</string>
     <string name="audio_sharing_stream_name_title" msgid="8156859441897180940">"Naziv"</string>
     <string name="audio_sharing_stream_password_title" msgid="7026649168165764602">"Lozinka"</string>
     <string name="audio_sharing_stream_compatibility_title" msgid="5690947186724469918">"Poboljšaj kompatibilnost"</string>
@@ -5385,8 +5388,8 @@
     <string name="audio_sharing_stream_compatibility_disabled_description" msgid="2586408353546825682">"Isključuje dijeljenje zvuka radi konfiguracije kompatibilnosti"</string>
     <string name="audio_sharing_nearby_audio_title" msgid="4795438407040677177">"Slušajte zvuk u blizini"</string>
     <string name="audio_sharing_footer_description" msgid="4786942197840271680">"Dijeljenje zvuka podržava Auracast™"</string>
-    <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Naziv prijenosa zvuka"</string>
-    <string name="audio_sharing_stream_password_dialog_title" msgid="4148196538860845705">"Lozinka prijenosa zvuka"</string>
+    <string name="audio_sharing_stream_name_dialog_title" msgid="6706027295417556499">"Naziv prenosa zvuka"</string>
+    <string name="audio_sharing_stream_password_dialog_title" msgid="4148196538860845705">"Lozinka prenosa zvuka"</string>
     <string name="audio_sharing_media_device_group_title" msgid="4850674234590549565">"Drugi medijski uređaji"</string>
     <string name="audio_sharing_summary_on" msgid="611197542982323788">"Uključeno"</string>
     <string name="audio_sharing_summary_off" msgid="8833198995257547378">"Isključeno"</string>
@@ -5398,8 +5401,8 @@
     <string name="audio_sharing_share_with_more_dialog_title" msgid="2840069088858232267">"Dijelite zvuk s drugim uređajem"</string>
     <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"Dijeli s uređajem <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Zatvori"</string>
-    <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Povežite drugi par kompatibilnih slušalica ili podijelite naziv i lozinku prijenosa s drugom osobom"</string>
-    <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Uparite drugi komplet kompatibilnih slušalica ili podijelite QR kôd prijenosa zvuka s drugom osobom"</string>
+    <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Povežite drugi par kompatibilnih slušalica ili podijelite naziv i lozinku prenosa s drugom osobom"</string>
+    <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Uparite drugi komplet kompatibilnih slušalica ili podijelite QR kôd prenosa zvuka s drugom osobom"</string>
     <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Dijeljenje zvuka"</string>
     <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Uparite novi uređaj"</string>
     <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"Prikaži QR kôd"</string>
@@ -5419,18 +5422,18 @@
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Povežite kompatibilan uređaj"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Da počnete dijeliti zvuk, prvo povežite slušalice s LE Audijem s telefonom"</string>
     <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Prebaci se na uređaj <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <string name="audio_sharing_progress_dialog_start_stream_content" msgid="1152386358063502897">"Pokretanje prijenosa zvuka…"</string>
+    <string name="audio_sharing_progress_dialog_start_stream_content" msgid="1152386358063502897">"Pokretanje prenosa zvuka…"</string>
     <string name="audio_sharing_progress_dialog_add_source_content" msgid="2913609550496440710">"Dijeljenje s uređajem <xliff:g id="DEVICE_NAME">%1$s</xliff:g>…"</string>
     <string name="progress_dialog_connect_device_content" msgid="1387370883978461533">"Povezivanje s uređajem <xliff:g id="DEVICE_NAME">%1$s</xliff:g>…"</string>
     <string name="audio_sharing_retry_dialog_title" msgid="3954529199333866445">"Dijeljenje zvuka nije uspjelo"</string>
     <string name="audio_sharing_retry_dialog_content" msgid="6014534433894608834">"Nešto nije uredu. Pokušajte ponovo."</string>
     <string name="audio_sharing_incompatible_dialog_title" msgid="4586805264392802115">"Nije moguće dijeliti zvuk s uređajem <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_incompatible_dialog_content" msgid="3943223683620405311">"Dijeljenje zvuka funkcionira samo sa slušalicama koje podržavaju LE Audio"</string>
-    <string name="audio_streams_category_title" msgid="4878022761829895463">"Povežite se s prijenosom zvuka LE Audio"</string>
-    <string name="audio_streams_pref_title" msgid="6320485086288646209">"Prijenosi zvuka u blizini"</string>
-    <string name="audio_streams_title" msgid="6617990880383079165">"Prijenosi zvuka"</string>
-    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"Povežite se s prijenosom zvuka putem QR koda"</string>
-    <string name="audio_streams_empty" msgid="8803517701437394982">"U blizini nije pronađen nijed. prijenos zvuka"</string>
+    <string name="audio_streams_category_title" msgid="4878022761829895463">"Povežite se s prenosom zvuka LE Audio"</string>
+    <string name="audio_streams_pref_title" msgid="6320485086288646209">"Prenosi zvuka u blizini"</string>
+    <string name="audio_streams_title" msgid="6617990880383079165">"Prenosi zvuka"</string>
+    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"Povežite se s prenosom zvuka putem QR koda"</string>
+    <string name="audio_streams_empty" msgid="8803517701437394982">"U blizini nije pronađen nijed. prenos zvuka"</string>
     <string name="audio_streams_disconnect" msgid="1755594831469579161">"Prekini vezu"</string>
     <string name="audio_streams_connect" msgid="1955964373102927954">"Poveži"</string>
     <string name="audio_streams_qr_code_is_not_valid_format" msgid="4856288389653121830">"Format QR koda nije važeći"</string>
@@ -5439,39 +5442,38 @@
     <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Nije se moguće povezati. Pokušajte ponovo."</string>
     <string name="audio_streams_connecting_summary" msgid="7237827765572331702">"Povezivanje…"</string>
     <string name="audio_streams_dialog_stream_is_not_available" msgid="4032878851270690546">"Prijenos zvuka nije dostupan"</string>
-    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Prijenos zvuka trenutno ništa ne reproducira"</string>
+    <string name="audio_streams_is_not_playing" msgid="8480293894696007941">"Prenos zvuka trenutno ništa ne reproducira"</string>
     <string name="audio_streams_dialog_close" msgid="8177201719298408431">"Zatvori"</string>
     <string name="audio_streams_dialog_listen" msgid="7290340191504987685">"Slušajte"</string>
     <string name="audio_streams_dialog_retry" msgid="4456843891970998556">"Pokušajte ponovo"</string>
-    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Slušajte prijenos zvuka"</string>
+    <string name="audio_streams_dialog_listen_to_audio_stream" msgid="8585253007762261528">"Slušajte prenos zvuka"</string>
     <string name="audio_streams_dialog_control_volume" msgid="7615062686016713544">"Prijenos zvuka će se reproducirati na uređaju <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Koristite ovaj uređaj da kontrolirate jačinu zvuka."</string>
-    <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Nije moguće slušati prijenos zvuka"</string>
+    <string name="audio_streams_dialog_cannot_listen" msgid="4432257183698209966">"Nije moguće slušati prenos zvuka"</string>
     <string name="audio_streams_dialog_default_device" msgid="6159800303379303266">"povezane kompatibilne slušalice"</string>
-    <string name="audio_streams_activity_title" msgid="6766869545769831935">"Prijenosi zvuka"</string>
+    <string name="audio_streams_activity_title" msgid="6766869545769831935">"Prenosi zvuka"</string>
     <string name="audio_streams_no_password_summary" msgid="8976357323034830144">"Nema lozinke"</string>
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"Saznajte više"</string>
-    <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Nije moguće reproducirati prijenos zvuka na uređaju <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"Nije moguće reproducirati prenos zvuka na uređaju <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"Slušate sada"</string>
     <string name="audio_streams_present_now" msgid="1128360774541089402">"Pauzirano je putem host računara"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"Prestanite slušati"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Povežite kompatibilne slušalice"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Poveži uređaj"</string>
-    <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Detalji prijenosa zvuka"</string>
-    <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR kôd prijenosa zvuka"</string>
+    <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Detalji prenosa zvuka"</string>
+    <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR kôd prenosa zvuka"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Lozinka: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Da drugi slušaju prijenos <xliff:g id="STREAM_NAME">%1$s</xliff:g>, mogu povezati kompatibilne slušalice s Android uređajem. Zatim mogu skenirati ovaj QR kôd."</string>
-    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Pronađite prijenos zvuka"</string>
+    <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Pronađite prenos zvuka"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Slušajte zvuk koji dijeli uređaj ili Auracast emitiranje u blizini"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Vaš audio uređaj"</string>
     <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"Povežite kompatibilne slušalice"</string>
-    <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"Prijenosi zvuka u blizini"</string>
+    <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"Prenosi zvuka u blizini"</string>
     <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"Skenirajte QR kôd"</string>
-    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Počnite slušati skeniranjem QR koda prijenosa"</string>
-    <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Slušajte prijenos"</string>
-    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Skenirajte QR kôd prijenosa zvuka da slušate na uređaju <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Počnite slušati skeniranjem QR koda prenosa"</string>
+    <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Slušajte prenos"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Skenirajte QR kôd prenosa zvuka da slušate na uređaju <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Nije moguće urediti lozinku tokom dijeljenja. Da promijenite lozinku, prvo isključite dijeljenje zvuka."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Lozinka mora sadržavati između 4 i 16 znakova koji su samo slova, brojevi i simboli"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Skener QR koda"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Trebate pomoć?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Pretražite postavke"</string>
@@ -5483,7 +5485,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Došlo je do greške prilikom postavljanja zadanog računa"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Zadani račun nije postavljen"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Samo uređaj"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Dodajte račun da započnete"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Pretraživanje zaokruživanjem"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Dodirnite i zadržite dugme za početnu stranicu ili ručicu za navigaciju da pretražujete pomoću sadržaja na ekranu."</string>
 </resources>
