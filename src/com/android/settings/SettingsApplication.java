@@ -46,6 +46,7 @@ import com.android.settingslib.datastore.BackupRestoreStorageManager;
 import com.android.settingslib.metadata.PreferenceScreenMetadata;
 import com.android.settingslib.metadata.PreferenceScreenRegistry;
 import com.android.settingslib.metadata.ProvidePreferenceScreenOptions;
+import com.android.settingslib.preference.PreferenceBindingFactory;
 import com.android.settingslib.spa.framework.common.SpaEnvironmentFactory;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -76,6 +77,7 @@ public class SettingsApplication extends Application {
         if (Flags.catalyst()) {
             PreferenceScreenRegistry.INSTANCE.setPreferenceScreensSupplier(
                     this::getPreferenceScreens);
+            PreferenceBindingFactory.setDefaultFactory(new SettingsPreferenceBindingFactory());
         }
 
         BackupRestoreStorageManager.getInstance(this)
