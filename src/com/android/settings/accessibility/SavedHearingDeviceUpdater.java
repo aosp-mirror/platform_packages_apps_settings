@@ -36,14 +36,16 @@ public class SavedHearingDeviceUpdater extends SavedBluetoothDeviceUpdater {
         super(context, devicePreferenceCallback, /* showConnectedDevice= */ false, metricsCategory);
     }
 
-    @Override
-    public boolean isFilterMatched(CachedBluetoothDevice cachedDevice) {
+    static boolean isSavedHearingAidDevice(CachedBluetoothDevice cachedDevice) {
         final BluetoothDevice device = cachedDevice.getDevice();
-        final boolean isSavedHearingAidDevice = cachedDevice.isHearingAidDevice()
+        return cachedDevice.isHearingAidDevice()
                 && device.getBondState() == BluetoothDevice.BOND_BONDED
                 && !device.isConnected();
+    }
 
-        return isSavedHearingAidDevice && isDeviceInCachedDevicesList(cachedDevice);
+    @Override
+    public boolean isFilterMatched(CachedBluetoothDevice cachedDevice) {
+        return isSavedHearingAidDevice(cachedDevice) && isDeviceInCachedDevicesList(cachedDevice);
     }
 
     @Override

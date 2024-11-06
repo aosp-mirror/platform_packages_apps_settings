@@ -18,11 +18,14 @@ package com.android.settings.accessibility;
 
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
@@ -32,6 +35,9 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.search.SearchIndexableRaw;
+
+import java.util.List;
 
 /**
  * Controller to update the {@link androidx.preference.PreferenceCategory} for all
@@ -44,6 +50,7 @@ public class AvailableHearingDevicePreferenceController extends
         BluetoothCallback {
 
     private static final String TAG = "AvailableHearingDevicePreferenceController";
+    private static final String SEARCH_DATA_KEY_PREFIX = "a11y_available_hearing_device";
 
     private BluetoothDeviceUpdater mAvailableHearingDeviceUpdater;
     private final LocalBluetoothManager mLocalBluetoothManager;
@@ -54,6 +61,14 @@ public class AvailableHearingDevicePreferenceController extends
         super(context, preferenceKey);
         mLocalBluetoothManager = com.android.settings.bluetooth.Utils.getLocalBluetoothManager(
                 context);
+    }
+
+    @VisibleForTesting
+    void init(AvailableHearingDeviceUpdater availableHearingDeviceUpdater) {
+        if (mAvailableHearingDeviceUpdater != null) {
+            throw new IllegalStateException("Should not call init() more than 1 time.");
+        }
+        mAvailableHearingDeviceUpdater = availableHearingDeviceUpdater;
     }
 
     /**
@@ -105,6 +120,36 @@ public class AvailableHearingDevicePreferenceController extends
         if (bluetoothProfile == BluetoothProfile.HEARING_AID) {
             HearingAidUtils.launchHearingAidPairingDialog(mFragmentManager, activeDevice,
                     getMetricsCategory());
+        }
+    }
+
+    @Override
+    public void updateDynamicRawDataToIndex(List<SearchIndexableRaw> rawData) {
+        if (Flags.fixA11ySettingsSearch()) {
+            if (mLocalBluetoothManager == null) {
+                Log.d(TAG, "Bluetooth is not supported");
+                return;
+            }
+
+            for (CachedBluetoothDevice cachedDevice :
+                    mLocalBluetoothManager.getCachedDeviceManager().getCachedDevicesCopy()) {
+
+                if (!AvailableHearingDeviceUpdater.isAvailableHearingDevice(cachedDevice)) {
+                    continue;
+                }
+
+                SearchIndexableRaw data = new SearchIndexableRaw(mContext);
+                // Include the identity address and add prefix to ensure the key is unique and
+                // distinguish from Bluetooth's connected devices.
+                data.key = SEARCH_DATA_KEY_PREFIX
+                        + cachedDevice.getName() + cachedDevice.getIdentityAddress();
+                data.title = cachedDevice.getName();
+                data.summaryOn = mContext.getString(R.string.accessibility_hearingaid_title);
+                data.screenTitle = mContext.getString(R.string.accessibility_hearingaid_title);
+                rawData.add(data);
+            }
+        } else {
+            super.updateDynamicRawDataToIndex(rawData);
         }
     }
 }
