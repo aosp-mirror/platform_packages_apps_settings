@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Σύζευξη νέας συσκευής"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Αυτόματη ενεργοποίηση αύριο"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Σύζευξη δεξιού"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Σύζευξη αριστερού"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Σύζευξη του άλλου αυτιού"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Απενεργοποίηση Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Απενεργοποιεί τη λειτουργία Bluetooth LE Audio αν η συσκευή υποστηρίζει δυνατότητες εξοπλισμού LE Audio."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Λειτουργία Bluetooth LE Audio"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Ενεργοποίηση προεπισκόπησης διεπαφής χρήστη για μετάδοση Bluetooth LE Audio"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Ενεργοποιεί την προεπισκόπηση της διεπαφής χρήστη για την κοινή χρήση LE Audio, συμπεριλαμβανομένης της κοινής χρήσης προσωπικού ήχου και της ιδιωτικής μετάδοσης"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Εναλλαγή LE Audio στις λεπτομ. συσκευής"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Παράκαμψη λίστας επιτρεπομένων Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Χρήση του LE Audio από προεπιλογή, ακόμα και αν το περιφερειακό LE Audio δεν έχει επαληθευτεί, ώστε να πληροί τα κριτήρια της λίστας επιτρεπομένων."</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Σηκώστε το δάχτυλο και, στη συνέχεια, αγγίξτε ξανά τον αισθητήρα"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Δεν είναι δυνατή η χρήση του αισθητήρα δακτυλικών αποτυπωμάτων"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Επισκεφτείτε έναν πάροχο υπηρεσιών επισκευής."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Ξεκλείδωμα με δακτυλικό αποτύπωμα με απενεργοποιημένη οθόνη"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Χρησιμοποιήστε το Ξεκλείδωμα με δακτυλικό αποτύπωμα ακόμα και όταν η οθόνη είναι απενεργοποιημένη"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Απενεργοποημένη οθόνη, ξεκλείδωμα"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Περισσότερες ρυθμίσεις ασφαλείας"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Κλείδωμα προφίλ εργασίας, κρυπτογράφηση και περισσότερα"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Κρυπτογράφηση, διαπιστευτήρια και περισσότερα"</string>
@@ -1963,27 +1966,19 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Ασύγχρονα πλήκτρα"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Για τις συντομεύσεις, αντί να πατάτε παρατεταμένα όλα τα κουμπιά μαζί, φροντίστε να πατάτε ένα πλήκτρο κάθε φορά"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Πλήκτρα ποντικιού"</string>
-    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
-    <skip />
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Χρήση των πλήκτρων ποντικιού"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Χρησιμοποιήστε το πληκτρολόγιο, για να ελέγξετε τον δείκτη"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Αντίστροφη κύλιση με το ποντίκι"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Κάντε κύλιση προς τα επάνω, για να μετακινήσετε τη σελίδα προς τα κάτω."</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Εναλλαγή αριστερού και δεξιού κουμπιού"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Χρησιμοποιήστε το αριστερό κουμπί του ποντικιού ως δεξί κουμπί"</string>
-    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
-    <skip />
-    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
-    <skip />
-    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
-    <skip />
-    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
-    <skip />
-    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
-    <skip />
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Πλήκτρα ποντικιού για το <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Χρησιμοποιήστε τα πλήκτρα <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>, για να μετακινήσετε τον δείκτη του ποντικιού"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Χρησιμοποιήστε το πλήκτρο <xliff:g id="CLICK_LABEL">%s</xliff:g>, για να κάνετε κλικ στο κύριο κουμπί του ποντικιού"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"Χρησιμοποιήστε το πλήκτρο <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>, για να πατήσετε παρατεταμένα το κύριο κουμπί του ποντικιού"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Χρησιμοποιήστε το πλήκτρο <xliff:g id="RELEASE_LABEL">%s</xliff:g>, για να απελευθερώσετε το κύριο κουμπί του ποντικιού"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Χρησιμοποιήστε το πλήκτρο <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> για εναλλαγή της λειτουργίας κύλισης. Με αυτόν τον τρόπο, τα πλήκτρα <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> θα μετακινούν με κύλιση την προβολή προς τα επάνω, προς τα κάτω, προς τα αριστερά ή προς τα δεξιά"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Χρησιμοποιήστε το πλήκτρο <xliff:g id="RELEASE_2_LABEL">%s</xliff:g>, για να κάνετε κλικ στο δευτερεύον κουμπί του ποντικιού"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Συντομεύσεις πληκτρολογίου"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Εμφάνιση λίστας συντομεύσεων"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Πληκτρολόγιο και εργαλεία προφίλ εργασίας"</string>
@@ -3429,8 +3424,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"9 π.μ.-5 μ.μ. τις εργάσιμες ημέρες\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Συμβάντα ημερολογίου"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Η λειτουργία {mode_1} είναι ενεργή}=2{Οι λειτουργίες {mode_1} και {mode_2} είναι ενεργές}=3{Οι λειτουργίες {mode_1}, {mode_2} και {mode_3} είναι ενεργές}other{Οι λειτουργίες {mode_1}, {mode_2} και # ακόμη είναι ενεργές}}"</string>
-    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
-    <skip />
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Μην ενοχλείτε}=1{{mode_1}}=2{{mode_1}, {mode_2}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ΕΝΕΡΓΗ"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Δεν έχει οριστεί"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Απενεργοποιημένη"</string>
@@ -5478,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Ακρόαση ροής"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Σαρώστε τον κωδικό QR μιας ροής ήχου για να ακούσετε με τη συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Δεν είναι δυνατή η επεξεργασία του κωδικού πρόσβασης κατά την κοινή χρήση. Για να αλλάξετε τον κωδικό πρόσβασης, αρχικά, απενεργοποιήστε την κοινή χρήση ήχου."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Ο κωδικός πρόσβασης πρέπει να περιέχει 4-16 χαρακτήρες και να χρησιμοποιεί μόνο γράμματα, αριθμούς και σύμβολα"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Σάρωση κωδικών QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Χρειάζεστε βοήθεια;"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Ρυθμίσεις αναζήτησης"</string>
@@ -5491,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Σφάλμα κατά τον ορισμό προεπιλεγμένου λογαριασμού"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Δεν ορίστηκε προεπιλογή"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Μόνο από συσκευή"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Για να ξεκινήσετε, προσθέστε λογαριασμό"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Κυκλώστε για αναζήτηση"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Πατήστε παρατεταμένα το κουμπί αρχικής οθόνης ή τη λαβή πλοήγησης, για να κάνετε αναζήτηση χρησιμοποιώντας το περιεχόμενο στην οθόνη σας."</string>
 </resources>

@@ -33,6 +33,7 @@ import android.widget.CheckedTextView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.preference.ListPreferenceDialogFragmentCompat;
@@ -40,11 +41,14 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreferenceHelper;
+import com.android.settingslib.RestrictedPreferenceHelperProvider;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestrictedListPreference extends CustomListPreference {
+public class RestrictedListPreference extends CustomListPreference implements
+        RestrictedPreferenceHelperProvider {
+
     private final RestrictedPreferenceHelper mHelper;
     private final List<RestrictedItem> mRestrictedItems = new ArrayList<>();
     private boolean mRequiresActiveUnlockedProfile = false;
@@ -59,6 +63,11 @@ public class RestrictedListPreference extends CustomListPreference {
             int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         mHelper = new RestrictedPreferenceHelper(context, this, attrs);
+    }
+
+    @Override
+    public @NonNull RestrictedPreferenceHelper getRestrictedPreferenceHelper() {
+        return mHelper;
     }
 
     @Override

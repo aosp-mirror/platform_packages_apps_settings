@@ -51,6 +51,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 
 import java.util.List;
+import java.util.Objects;
 
 /** Tests for {@link AccessibilityHearingAidsFragment}. */
 @RunWith(RobolectricTestRunner.class)
@@ -88,7 +89,9 @@ public class AccessibilityHearingAidsFragmentTest {
         mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
 
         final List<String> niks = AccessibilityHearingAidsFragment.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mContext);
+                .getNonIndexableKeys(mContext).stream()
+                .filter(Objects::nonNull)
+                .toList();
         final List<String> keys =
                 XmlTestUtils.getKeysFromPreferenceXml(mContext, R.xml.accessibility_hearing_aids);
 

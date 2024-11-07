@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Спарете нов уред"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Автоматски вклучи го утре"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Спари го десното уво"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Спари го левото уво"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Спари го другото уво"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Оневозможи Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Ја оневозможува функцијата Bluetooth LE Audio ако уредот поддржува хардверски способности за LE Audio."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Режим за Bluetooth LE Audio"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Овозможи преглед на UI за емитување Bluetooth LE Audio."</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Овозможува преглед на UI за LE Audio Sharing што опфаќа и лично споделување аудио и приватно емитување"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Прекинувач за LE Audio во „Детали за уредот“"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Игнорирај го списокот со дозволени за Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Користи LE Audio стандардно дури и ако не е потврдено дека периферното LE Audio ги исполнува критериумите на списокот со дозволени."</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Подигнете го прстот, потоа допрете го сензорот повторно"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Не може да се користи сензорот за отпечатоци"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Однесете го уредот на поправка."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"„Отклучување со отпечаток“ при исклучен екран"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Користете „Отклучување со отпечаток“ дури и кога е исклучен екранот"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Исклучен екран, отклучете"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Повеќе поставки за безбедност"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Заклучување работен профил, шифрирање и друго"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Шифрирање, акредитиви и друго"</string>
@@ -1309,8 +1312,8 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"Темната тема користи црна заднина за подолго траење на батеријата на некои екрани. Распоредите за темната тема не се вклучуваат додека не се исклучи екранот."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"„Темната тема“ тековно го следи вашиот распоред за „Режимот за спиење“"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Поставки за „Режимот за спиење“"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{„Режимите“ може да активираат и „Темна тема“}=1{{mode_1} активира и „Темна тема“}=2{{mode_1} и {mode_2} активираат и „Темна тема“}=3{{mode_1}, {mode_2} и {mode_3} активираат и „Темна тема“}one{{mode_1}, {mode_2} и уште # активираат и „Темна тема“}other{{mode_1}, {mode_2} и уште # активираат и „Темна тема“}}"</string>
-    <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Поставки за „Режими“"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Режимите може да активираат и „Темна тема“}=1{{mode_1} активира и „Темна тема“}=2{{mode_1} и {mode_2} активираат и „Темна тема“}=3{{mode_1}, {mode_2} и {mode_3} активираат и „Темна тема“}one{{mode_1}, {mode_2} и уште # активираат и „Темна тема“}other{{mode_1}, {mode_2} и уште # активираат и „Темна тема“}}"</string>
+    <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Поставки за режими"</string>
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"Уште потемно"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Дозволете уредот да стане потемен од вообичаено"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Исклучување на екранот"</string>
@@ -3432,7 +3435,7 @@
     <string name="zen_mode_not_found_text" msgid="692090778655810329">"Режимот не е најден"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Ограничете ги прекините"</string>
     <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Блокирајте ги прекините и одвлекувањата на внимание"</string>
-    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Поставете <xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Поставете „<xliff:g id="MODE">%1$s</xliff:g>“"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Исклучување на „Не вознемирувај“"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Алармите и звуците од аудиовизуелните содржини може да го прекинуваат"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Распореди"</string>
@@ -3699,9 +3702,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Може да одговара на пораки и да ги користи копчињата во известувањата, вклучително и да одложува или отфрла известувања и да одговара на повици."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Да ги менува поставките"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Може да го вклучува и исклучува „Не вознемирувај“ и да ги менува поврзаните поставки."</string>
-    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"Може да ги активира и да управува со „Режимите“, а и да ги променува поврзаните поставки."</string>
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"Може да ги активира и да управува со режимите, а и да ги променува поврзаните поставки."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Ако го исклучите пристапот на <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> до известувањата, пристапот до „Не вознемирувај“ може исто така да се исклучи."</string>
-    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"Ако го исклучите пристапот до известувањата за <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, можеби ќе се исклучи и пристапот до „Режими“."</string>
+    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"Ако го исклучите пристапот до известувањата за <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, може да се исклучи и пристапот до режимите."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Исклучи"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Откажи"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Реално време"</string>
@@ -3762,8 +3765,8 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Пристап до „Не вознемирувај“"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Дозволи „Не вознемирувај“"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Ниту една од инсталираните апликации не побарала пристап до „Не вознемирувај“"</string>
-    <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"Пристап до „Режими“"</string>
-    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"Дозволи пристап до „Режими“"</string>
+    <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"Пристап до режими"</string>
+    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"Дозволи пристап до режимите"</string>
     <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"Ниедна од инсталираните апликации не побара пристап до „Режими“"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Немате дозволено известувања од оваа апликација"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"На ваше барање, Android го блокира појавувањето на оваа категорија известувања на уредов"</string>
@@ -3939,10 +3942,10 @@
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Поставки за апликации"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Податоци и поставки во <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Управувано од <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Да се оневозможи <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Да се оневозможи „<xliff:g id="MODE_NAME">%1$s</xliff:g>“?"</string>
     <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Овој режим никогаш нема да се вклучи кога е оневозможен"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Оневозможи"</string>
-    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Да се овозможи <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Да се овозможи „<xliff:g id="MODE_NAME">%1$s</xliff:g>“?"</string>
     <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Овој режим може да се вклучи автоматски според неговите поставки"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Овозможи"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Поставете режим што следи редовен распоред"</string>
@@ -4164,8 +4167,8 @@
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Да се отповика пристапот до „Не вознемирувај“ за <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Сите правила за „Не вознемирувај“ што ги создала апликацијава ќе се отстранат."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Да се дозволи пристап до „Режими“ за <xliff:g id="APP">%1$s</xliff:g>?"</string>
-    <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"Апликацијата ќе може да ја вклучува/исклучува „Не вознемирувај“, да ги активира и да управува со „Режимите“, а и да ги променува поврзаните поставки."</string>
-    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"Да се одземе пристапот до „Режими“ за <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"Апликацијата ќе може да ја вклучува/исклучува „Не вознемирувај“, да ги активира и да управува со режимите, а и да ги променува поврзаните поставки."</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"Да се одземе пристапот до режимите за <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Сите режими што ги создала апликацијава ќе се отстранат."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Не оптимизирај"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Оптимизирај"</string>
@@ -5469,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Слушнете го стримот"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Скенирајте го QR-кодот на аудиостримот за да слушате со <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Лозинката не може да се измени додека се споделува. За промена на лозинката, прво исклучете го споделувањето аудио."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Вашата лозинка мора да содржи 4 – 16 знаци и да опфаќа само букви, бројки и симболи"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Скенер на QR-кодови"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Ви треба помош?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Пребарувајте низ поставките"</string>
@@ -5482,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Грешка при поставувањето на стандардната сметка"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Нема поставено стандардна сметка"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Само уред"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Додајте сметка за да започнете"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Пребарување со заокружување"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Допрете и задржете го копчето за почетен екран или лентата за навигација за да пребарувате со содржините на екранот."</string>
 </resources>

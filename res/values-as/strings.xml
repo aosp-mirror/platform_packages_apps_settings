@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"নতুন ডিভাইচ পেয়াৰ কৰক"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"ব্লুটুথ"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"কাইলৈ স্বয়ংক্ৰিয়ভাৱে অন কৰক"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"সোঁ কাণখন পেয়াৰ কৰক"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"বাওঁ কাণখন পেয়াৰ কৰক"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"নিজৰ অন্য কাণখন পেয়াৰ কৰক"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"ব্লুটুথ LE অডিঅ’ অক্ষম কৰক"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"ডিভাইচটোৱে LE অডিঅ’ হাৰ্ডৱেৰ ক্ষমতাসমূহ সমৰ্থন কৰিলে ই ব্লুটুথ LE অডিঅ’ সুবিধাসমূহ অক্ষম কৰে।"</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"ব্লুটুথ LE অডিঅ’ ম’ড"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"ব্লুটুথ LE অডিঅ’ ব্ৰডকাষ্ট UIৰ পূৰ্বদৰ্শন সক্ষম কৰক"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"ব্যক্তিগত অডিঅ’ শ্বেয়াৰিং আৰু ব্যক্তিগত সম্প্ৰচাৰকে ধৰি LE অডিঅ’ শ্বেয়াৰিং UIৰ পূৰ্বদৰ্শন সক্ষম কৰে"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"ডিভাইচৰ সবিশেষত LE অডিঅ’ৰ ট’গল দেখুৱাওক"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"ব্লুটুথ LE অডিঅ’ৰ অনুমতি দিয়া সূচী বাইপাছ কৰক"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE অডিঅ’ৰ পৰিধীয় ডিভাইচে অনুমতি দিয়া সূচীৰ যোগ্যতাৰ মাপকাঠী মানি চলিছে বুলি সত্যাপন নকৰিলেও ডিফ’ল্ট হিচাপে LE অডিঅ’ ব্যৱহাৰ কৰক।"</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"আঙুলিটো আঁতৰাওক আৰু ছেন্সৰটো আকৌ স্পৰ্শ কৰক"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"ফিংগাৰপ্ৰিণ্ট ছেন্সৰ ব্যৱহাৰ কৰিব নোৱাৰি"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"মেৰামতি সেৱা প্ৰদানকাৰী কোনো প্ৰতিষ্ঠানলৈ যাওক।"</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"স্ক্ৰীনখন অফ হৈ আছে ফিংগাৰপ্ৰিণ্ট আনলক"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"স্ক্ৰীনখন অফ থকা অৱস্থাতো ফিংগাৰপ্ৰিণ্ট আনলক ব্যৱহাৰ কৰক"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"স্ক্ৰীনখন অফ হৈ আছে, আনলক কৰক"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"সুৰক্ষা সম্পৰ্কীয় অধিক ছেটিং"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"কৰ্মস্থানৰ প্ৰ’ফাইলৰ লক, এনক্ৰিপশ্বন আৰু বহুতো"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"এনক্ৰিপশ্বন, ক্ৰেডেনশ্বিয়েল আৰু বহুতো"</string>
@@ -5469,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"ষ্ট্ৰীম শুনক"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>ৰ জৰিয়তে শুনিবলৈ অডিঅ’ ষ্ট্ৰীমৰ কিউআৰ ক’ড এটা স্কেন কৰক"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"শ্বেয়াৰ কৰি থকা সময়ত পাছৱৰ্ড সম্পাদনা কৰিব নোৱাৰি। পাছৱৰ্ডটো সলনি কৰিবলৈ, প্ৰথমে অডিঅ’ শ্বেয়াৰিং অফ কৰক।"</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"আপোনাৰ পাছৱৰ্ডটোত ৪-১৬ টা বৰ্ণসংখ্যা থাকিবই লাগিব আৰু সেইটোত কেৱল বৰ্ণ, সংখ্যা আৰু চিহ্ন ব্যৱহাৰ কৰিব পাৰি"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"কিউআৰ ক’ড স্কেনাৰ"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"সহায় লাগে নেকি?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"সন্ধানৰ ছেটিংসমূহ"</string>
@@ -5482,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"ডিফ’ল্ট একাউণ্ট ছেট কৰোঁতে আসোঁৱাহ হৈছে"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"কোনো ডিফ’ল্ট ছেট কৰা হোৱা নাই"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"ডিভাইচ মাত্ৰ"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"আৰম্ভ কৰিবলৈ এটা একাউণ্ট যোগ দিয়ক"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"সন্ধান কৰিবৰ বাবে বৃত্ত"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"আপোনাৰ স্ক্ৰীনত থকা সমলটো ব্যৱহাৰ কৰি সন্ধান কৰিবলৈ গৃহ বুটামটো বা নেভিগেশ্বন হেণ্ডেল স্পৰ্শ কৰি ধৰি ৰাখক।"</string>
 </resources>

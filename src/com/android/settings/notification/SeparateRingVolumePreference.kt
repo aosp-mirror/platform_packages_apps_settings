@@ -24,21 +24,19 @@ import android.media.AudioManager.RINGER_MODE_SILENT
 import android.media.AudioManager.RINGER_MODE_VIBRATE
 import android.media.AudioManager.STREAM_RING
 import android.os.ServiceManager
-import android.os.UserHandle
-import android.os.UserManager.DISALLOW_ADJUST_VOLUME
+import android.os.UserManager
 import android.os.Vibrator
 import android.service.notification.NotificationListenerService.HINT_HOST_DISABLE_CALL_EFFECTS
 import android.service.notification.NotificationListenerService.HINT_HOST_DISABLE_EFFECTS
 import androidx.preference.Preference
+import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
-import com.android.settingslib.RestrictedLockUtilsInternal
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.metadata.PreferenceRestrictionProvider
 import com.android.settingslib.metadata.RangeValue
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.PreferenceBinding
@@ -51,7 +49,8 @@ open class SeparateRingVolumePreference :
     RangeValue,
     PreferenceAvailabilityProvider,
     PreferenceIconProvider,
-    PreferenceRestrictionProvider {
+    PreferenceRestrictionMixin {
+
     override val key: String
         get() = KEY
 
@@ -64,21 +63,12 @@ open class SeparateRingVolumePreference :
             else -> R.drawable.ic_ring_volume
         }
 
-    override fun isAvailable(context: Context) = !createAudioHelper(context).isSingleVolume()
+    override fun isAvailable(context: Context) = !createAudioHelper(context).isSingleVolume
 
-    override fun isEnabled(context: Context) =
-        !RestrictedLockUtilsInternal.hasBaseUserRestriction(
-            context,
-            DISALLOW_ADJUST_VOLUME,
-            UserHandle.myUserId(),
-        )
+    override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
-    override fun isRestricted(context: Context) =
-        RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
-            context,
-            DISALLOW_ADJUST_VOLUME,
-            UserHandle.myUserId(),
-        ) != null
+    override val restrictionKey: String
+        get() = UserManager.DISALLOW_ADJUST_VOLUME
 
     override fun storage(context: Context): KeyValueStore {
         val helper = createAudioHelper(context)
@@ -118,7 +108,7 @@ open class SeparateRingVolumePreference :
 
     open fun createAudioHelper(context: Context) = AudioHelper(context)
 
-    fun updateContentDescription(preference: VolumeSeekBarPreference) {
+    private fun updateContentDescription(preference: VolumeSeekBarPreference) {
         val context = preference.context
         val ringerMode = getEffectiveRingerMode(context)
         when (ringerMode) {
@@ -152,13 +142,13 @@ open class SeparateRingVolumePreference :
         }
     }
 
-    fun getSuppressionText(context: Context): String? {
+    private fun getSuppressionText(context: Context): String? {
         val suppressor = NotificationManager.from(context).getEffectsSuppressor()
         val notificationManager =
             INotificationManager.Stub.asInterface(
                 ServiceManager.getService(Context.NOTIFICATION_SERVICE)
             )
-        val hints = notificationManager.getHintsFromListenerNoToken()
+        val hints = notificationManager.hintsFromListenerNoToken
         return when {
             hintsMatch(hints) -> SuppressorHelper.getSuppressionText(context, suppressor)
             else -> null
@@ -167,7 +157,7 @@ open class SeparateRingVolumePreference :
 
     private fun hintsMatch(hints: Int) =
         (hints and HINT_HOST_DISABLE_CALL_EFFECTS) != 0 ||
-                (hints and HINT_HOST_DISABLE_EFFECTS) != 0
+            (hints and HINT_HOST_DISABLE_EFFECTS) != 0
 
     companion object {
         const val KEY = "separate_ring_volume"
