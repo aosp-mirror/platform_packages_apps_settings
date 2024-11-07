@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"નવા ડિવાઇસ જોડો"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"બ્લૂટૂથ"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"આવતીકાલે ઑટોમૅટિક રીતે ચાલુ કરો"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"જમણા કાનને જોડો"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"ડાબા કાનને જોડો"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"તમારા બીજા કાનનું જોડો"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"બ્લૂટૂથ LE ઑડિયો બંધ કરો"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"જો ડિવાઇસ LE ઑડિયો હાર્ડવેર ક્ષમતાઓને સપોર્ટ કરતું હોય, તો બ્લૂટૂથ LE ઑડિયો સુવિધા બંધ કરે છે."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"બ્લૂટૂથ LE ઑડિયો મોડ"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"બ્લૂટૂથ LE ઑડિયો બ્રોડકાસ્ટ UI પ્રીવ્યૂ ચાલુ કરો"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"વ્યક્તિગત ઑડિયો શેરિંગ અને ખાનગી બ્રોડકાસ્ટ સહિત LE ઑડિયો શેરિંગ UI પ્રીવ્યૂ ચાલુ કરે છે"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"ડિવાઇસની વિગતોમાં LE ઑડિયો ટૉગલ બતાવો"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"બ્લૂટૂથ LE ઑડિયો માટેની વ્હાઇટલિસ્ટને બાયપાસ કરો"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"વ્હાઇટલિસ્ટના માપદંડનું પાલન કરવા માટે LE ઑડિયો પેરિફેરલની ચકાસણી કરવામાં આવી ન હોય, તો પણ ડિફૉલ્ટ તરીકે LE ઑડિયોનો ઉપયોગ કરો."</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"આંગળીને ઉંચકો, પછી ફરીથી સેન્સરને સ્પર્શ કરો"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"ફિંગરપ્રિન્ટ સેન્સરનો ઉપયોગ કરી શકાતો નથી"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"રિપેર કરવાની સેવા આપતા પ્રદાતાની મુલાકાત લો."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"સ્ક્રીન-ઑફ ફિંગરપ્રિન્ટ અનલૉક"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"સ્ક્રીન બંધ હોય ત્યારે પણ ફિંગરપ્રિન્ટ અનલૉકનો ઉપયોગ કરો"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"સ્ક્રીન-ઑફ, અનલૉક કરો"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"સુરક્ષાના વધુ સેટિંગ"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"ઑફિસની પ્રોફાઇલનું લૉક, એન્ક્રિપ્શન અને બીજું ઘણું"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"એન્ક્રિપ્શન, લૉગ ઇન વિગતો અને બીજું ઘણું"</string>
@@ -4289,7 +4292,7 @@
     <string name="ethernet_data_template" msgid="1429173767445201145">"<xliff:g id="AMOUNT">^1</xliff:g> ઇથરનેટ ડેટા"</string>
     <string name="billing_cycle" msgid="6618424022653876279">"ડેટા સંબંધી ચેતવણી અને મર્યાદા"</string>
     <string name="app_usage_cycle" msgid="341009528778520583">"મોબાઇલ ડેટા વપરાશની સાયકલ"</string>
-    <string name="cell_data_warning" msgid="5664921950473359634">"ડેટા ચેતવણી <xliff:g id="ID_1">^1</xliff:g>"</string>
+    <string name="cell_data_warning" msgid="5664921950473359634">"ડેટા સંબંધી ચેતવણી <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="256855024790622112">"ડેટા મર્યાદા <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_warning_and_limit" msgid="8393200831986035724">"ડેટા ચેતવણી <xliff:g id="ID_1">^1</xliff:g> / ડેટા મર્યાદા <xliff:g id="ID_2">^2</xliff:g>"</string>
     <string name="operator_warning" msgid="5672761970087591211">"કૅરિઅર ડેટા ગણતરી, ડિવાઇસ ગણતરીથી અલગ હોઈ શકે છે"</string>
@@ -5469,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"સ્ટ્રીમ સાંભળો"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> વડે સાંભળવા માટે, ઑડિયો સ્ટ્રીમનો QR કોડ સ્કૅન કરો"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"શેર કરતી વખતે પાસવર્ડમાં ફેરફાર કરી શકાતો નથી. પાસવર્ડ બદલવા માટે, પહેલાં ઑડિયો શેરિંગ બંધ કરો."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"તમારા પાસવર્ડમાં 4-16 અક્ષર હોવા જોઈએ અને તેમાં માત્ર અક્ષરો, અંકો અને પ્રતીકોનો ઉપયોગ થવો જોઈએ"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR કોડ સ્કૅનર"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"શું સહાયની જરૂર છે?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"સેટિંગમાં શોધો"</string>
@@ -5482,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"ડિફૉલ્ટ એકાઉન્ટ સેટ કરવામાં ભૂલ આવી"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"કોઈ ડિફૉલ્ટ સેટ નથી"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"ફક્ત ડિવાઇસ"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"શરૂ કરવા માટે કોઈ એકાઉન્ટ ઉમેરો"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"શોધવા માટે વર્તુળ દોરો"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"તમારી સ્ક્રીન પરના કન્ટેન્ટનો ઉપયોગ કરીને શોધવા માટે હોમ બટનને અથવા નૅવિગેશન હૅન્ડલને ટચ કરીને થોડીવાર દબાવી રાખો."</string>
 </resources>

@@ -33,11 +33,13 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreferenceHelper;
+import com.android.settingslib.RestrictedPreferenceHelperProvider;
 
 /**
  * A tri-state preference allowing a user to specify what gets to bubble.
  */
-public class BubblePreference extends Preference implements RadioGroup.OnCheckedChangeListener {
+public class BubblePreference extends Preference implements RadioGroup.OnCheckedChangeListener,
+        RestrictedPreferenceHelperProvider {
     RestrictedPreferenceHelper mHelper;
 
     private int mSelectedPreference;
@@ -62,6 +64,11 @@ public class BubblePreference extends Preference implements RadioGroup.OnChecked
         mHelper = new RestrictedPreferenceHelper(context, this, attrs);
         mHelper.useAdminDisabledSummary(true);
         setLayoutResource(R.layout.bubble_preference);
+    }
+
+    @Override
+    public @NonNull RestrictedPreferenceHelper getRestrictedPreferenceHelper() {
+        return mHelper;
     }
 
     public void setSelectedPreference(int preference) {

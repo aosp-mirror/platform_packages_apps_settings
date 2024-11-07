@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"नवीन डिव्हाइससोबत पेअर करा"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"ब्लूटूथ"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"उद्या आपोआप सुरू करा"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"उजवा कान पेअर करा"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"डावा कान पेअर करा"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"तुमचा दुसरा कान पेअर करा"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"ब्लूटूथ LE ऑडिओ बंद करा"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"डिव्हाइसला LE ऑडिओ हार्डवेअरसंबंधित क्षमतांचा सपोर्ट असल्यास, ब्लूटूथ LE ऑडिओ वैशिष्‍ट्य बंद करते."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"ब्लूटूथ LE ऑडिओ मोड"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"ब्लूटूथ LE ऑडिओ ब्रॉडकास्ट UI पूर्वावलोकन सुरू करा"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"वैयक्तिक ऑडिओ शेअरिंग आणि खाजगी ब्रॉडकास्ट यांच्या समावेशासह LE ऑडिओ शेअरिंग UI पूर्वावलोकन सुरू करते"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"डिव्हाइस तपशील यांत LE ऑडिओ टॉगल दाखवा"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"ब्लूटूथ LE ऑडिओ अनुमती सूची बायपास करा"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"अनुमती सूचीच्या निकषांची पूर्तता करण्यासाठी LE ऑडिओ पेरिफेरलची पडताळणी केली नसली, तरीही बाय डीफॉल्ट LE ऑडिओ वापरा."</string>
@@ -143,7 +143,7 @@
     <string name="stylus_default_notes_app" msgid="4165657465911764628">"टेल बटण प्रेस करा"</string>
     <string name="stylus_default_notes_summary_work" msgid="4554643411627934223">"<xliff:g id="APP_NAME">%s</xliff:g> (कार्य प्रोफाइल)"</string>
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"मजकूर फील्डमध्ये लिहा"</string>
-    <string name="stylus_ignore_button" msgid="7734540973145241391">"सर्व स्टायलस बटण दाबण्याकडे दुर्लक्ष करा"</string>
+    <string name="stylus_ignore_button" msgid="7734540973145241391">"सर्व स्टायलस बटण प्रेसकडे दुर्लक्ष करा"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"स्टायलस"</string>
     <string name="date_and_time" msgid="1788358029823431692">"तारीख आणि वेळ"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"प्रॉक्सी"</string>
@@ -171,7 +171,7 @@
     <string name="language_picker_category_title" msgid="1792199453060454565">"प्राधान्य असलेल्या भाषेचा क्रम"</string>
     <string name="desc_current_default_language" msgid="1901157141663662859">"सिस्टीमची भाषा"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"काढा"</string>
-    <string name="add_a_language" msgid="2126220398077503271">"एक भाषा जोडा"</string>
+    <string name="add_a_language" msgid="2126220398077503271">"भाषा जोडा"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"भाषा"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"प्राधान्य दिलेली भाषा"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"ॲपच्या भाषा"</string>
@@ -184,7 +184,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"या अ‍ॅपसाठीची भाषा निवडणे हे सेटिंग्ज मध्ये उपलब्ध नाही."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"अ‍ॅपमध्ये उपलब्ध असलेल्या भाषांपेक्षा भाषा वेगळी असू शकते. काही अ‍ॅप्स कदाचित या सेटिंगला सपोर्ट करत नाहीत."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"प्रत्येक ॲपसाठी भाषा सेट करा."</string>
-    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"तुमचे डिव्हाइस, अ‍ॅप्स आणि वेबसाइट या तुमच्या प्राधान्य दिलेल्या भाषा सूचीमधील पहिली सपोर्ट असलेली भाषा वापरतात.\n\nअनेक ॲप्स तुमच्या प्राध्यान्य दिलेल्या भाषेतील प्रदेशाचा वापर तारखा, संख्या आणि युनिट फॉरमॅट करण्यासाठी करतील. तुमचा प्रदेश बदलण्यासाठी भाषा जोडा त्यानंतर तुम्ही प्राधान्‍य दिलेली भाषा निवडा."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"तुमचे डिव्हाइस, अ‍ॅप्स आणि वेबसाइट या तुमच्या प्राधान्य दिलेल्या भाषा सूचीमधील पहिली सपोर्ट असलेली भाषा वापरतात.\n\nअनेक ॲप्स तुमच्या प्राध्यान्य दिलेल्या भाषेतील प्रदेशाचा वापर तारखा, अंक आणि एकके फॉरमॅट करण्यासाठीदेखील करतील. तुमचा प्रदेश बदलण्यासाठी भाषा जोडा त्यानंतर तुम्ही प्राधान्‍य दिलेली भाषा निवडा."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"प्रत्येक अ‍ॅपसाठी भाषा निवडण्यासाठी, अ‍ॅप भाषा सेटिंग्जवर जा."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"ॲपच्या भाषांविषयी अधिक जाणून घ्या"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"सिस्टीमची भाषा %s वर बदलायची आहे का ?"</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"बोट उचला, नंतर पुन्हा सेन्सरला स्पर्श करा"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"फिंगरप्रिंट सेन्सर वापरू शकत नाही"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"दुरुस्तीच्या सेवा पुरवठादाराला भेट द्या."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"स्क्रीन बंद असताना फिंगरप्रिंट अनलॉक"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"स्क्रीन बंद असतानादेखील फिंगरप्रिंट अनलॉक वापरा"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"स्क्रीन बंद असताना अनलॉक करा"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"आणखी सुरक्षा सेटिंग्ज"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"कार्य प्रोफाइल लॉक, एंक्रिप्शन आणि आणखी बरेच काही"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"एंक्रिप्शन, क्रेडेंशियल आणि आणखी बरेच काही"</string>
@@ -1290,7 +1293,7 @@
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"सूर्योदयापर्यंत सुरू करा"</string>
     <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"सूर्यास्तापर्यंत बंद करा"</string>
     <string name="dark_ui_title" msgid="3373976268671557416">"गडद मोड"</string>
-    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"शेड्युल करा"</string>
+    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"शेड्यूल करा"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"काहीही नाही"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"सूर्यास्त ते सूर्योदय सुरू राहते"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"कस्टम वेळी सुरू होते"</string>
@@ -2368,9 +2371,9 @@
     <string name="accessibility_font_scaling_auto_added_qs_tooltip_content" msgid="7229921960884718332">"क्विक सेटिंग्ज मध्ये फॉंटचा आकार जोडला आहे. फॉंटचा आकार बदलण्यासाठी खाली स्‍वाइप करा."</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"डिसमिस करा"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"रंग सुधारणा वापरा"</string>
-    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"रंग सुधारण्याचा शॉर्टकट"</string>
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"रंग सुधारणा शॉर्टकट"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"रंग सुधारणेबद्दल"</string>
-    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"रंग सुधारणेबद्दल अधिक जाणून घ्या"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"रंग सुधारणा याबद्दल अधिक जाणून घ्या"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"कलर इन्व्हर्जनबद्दल"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"कलर इन्व्हर्जनबद्दल अधिक जाणून घ्या"</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"कॅप्शन दाखवा"</string>
@@ -2430,8 +2433,8 @@
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"ग्रेस्केल"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"तीव्रता"</string>
     <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"ग्रेस्केल मोडसाठी किंवा रंग सुधारणा बंद असताना उपलब्ध नाही"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"आंशिक हरितवर्णांधता"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"क्षीण रक्तवर्णांधता"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"द्वितीयवर्ण दृष्टिक्षीणता"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"प्रथमवर्ण दृष्टिक्षीणता"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"तृतीयवर्ण दृष्टिक्षीणता"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"आणखी डिम"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"स्क्रीन आणखी डिम करा"</string>
@@ -3708,7 +3711,7 @@
     <string name="notif_type_ongoing_summary" msgid="2348867528527573574">"वापरात असलेल्या ॲप्समधील सुरू असलेले संभाषण, नेव्हिगेशन, फोन कॉल आणि आणखी बरेच काही"</string>
     <string name="notif_type_conversation" msgid="4383931408641374979">"संभाषणे"</string>
     <string name="notif_type_conversation_summary" msgid="179142405410217101">"एसएमएस आणि इतर संभाषणे"</string>
-    <string name="notif_type_alerting" msgid="4713073696855718576">"सूचना"</string>
+    <string name="notif_type_alerting" msgid="4713073696855718576">"नोटिफिकेशन"</string>
     <string name="notif_type_alerting_summary" msgid="4681068287836313604">"सेटिंग्जनुसार रिंग किंवा व्हायब्रेट होऊ शकतो"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"सायलंट"</string>
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"कधीही आवाज किंवा व्हायब्रेशन न करणाऱ्या सूचना"</string>
@@ -4470,8 +4473,8 @@
     <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"एकहाती मोड कसा वापरायचा"</b>\n" • सिस्टीमच्या नेव्हिगेशन सेटिंग्जमध्ये जेश्चर नेव्हिगेशन निवडले असल्याची खात्री करा\n • स्क्रीनच्या तळाशी कडेजवळ खाली स्‍वाइप करा"</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"पोहोचता येईल अशा अंतरावर स्क्रीन खेचा"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"स्क्रीनचा सर्वात वरचा भाग तुमच्या अंगठ्याने पोहोचण्याच्या अंतरावर येईल."</string>
-    <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"सूचना दाखवा"</string>
-    <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"सूचना आणि सेटिंग्ज दिसतील."</string>
+    <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"नोटिफिकेशन दाखवा"</string>
+    <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"नोटिफिकेशन आणि सेटिंग्ज दिसतील."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"वेळ, सूचना आणि इतर माहिती तपासण्यासाठी, तुमच्या स्क्रीनवर दोनदा टॅप करा."</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"वेक अप डिस्प्ले"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"वेळ, सूचना आणि इतर माहिती तपासण्यासाठी तुमच्या स्क्रीनवर टॅप करा."</string>
@@ -5469,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"स्ट्रीम ऐका"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> वापरून ऐकण्यासाठी ऑडिओ स्ट्रीमचा QR कोड स्कॅन करा"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"शेअर करताना पासवर्ड संपादित करू शकत नाही. पासवर्ड बदलण्यासाठी सर्वप्रथम ऑडिओ शेअरिंग बंद करा."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"तुमच्या पासवर्डमध्ये ४ ते १६ वर्णांचा समावेश असणे आवश्यक आहे आणि फक्त अक्षरे, नंबर व चिन्हे वापरा"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR कोड स्कॅनर"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"मदत हवी आहे का?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"शोध सेटिंग्ज"</string>
@@ -5482,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"डीफॉल्ट खाते सेट करताना एरर आली"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"कोणतेही डीफॉल्ट अकाउंट सेट केलेले नाही"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"केवळ डिव्हाइस"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"सुरू करण्यासाठी एखादे खाते जोडा"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"शोधण्यासाठी वर्तुळ करा"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"तुमच्या स्क्रीनवरील आशय वापरून शोधण्यासाठी होम बटण किंवा नेव्हिगेशन हँडल स्‍पर्श करून धरून ठेवा."</string>
 </resources>

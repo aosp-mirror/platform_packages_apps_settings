@@ -294,6 +294,7 @@ class DeviceDetailsFragmentFormatterImpl(
             TwoTargetSwitchPreference(
                 switchPrefModel,
                 primaryOnClick = { triggerAction(model.action) },
+                primaryEnabled = { !model.disabled }
             )
         } else {
             SwitchPreference(switchPrefModel)

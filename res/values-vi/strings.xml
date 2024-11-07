@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Ghép nối thiết bị mới"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Tự động bật vào ngày mai"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Ghép nối tai phải"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Ghép nối tai trái"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Ghép nối tai khác"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Tắt âm thanh năng lượng thấp qua Bluetooth"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Tắt tính năng âm thanh năng lượng thấp qua Bluetooth nếu thiết bị hỗ trợ chức năng phần cứng âm thanh năng lượng thấp."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth Âm thanh năng lượng thấp"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Bật chế độ xem trước giao diện người dùng của tính năng truyền phát qua Bluetooth Âm thanh năng lượng thấp"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Bật chế độ xem trước giao diện người dùng của tính năng Chia sẻ âm thanh năng lượng thấp, bao gồm cả tính năng chia sẻ âm thanh cá nhân và truyền phát ở chế độ riêng tư"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Hiện nút bật/tắt Âm thanh năng lượng thấp"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bỏ qua danh sách cho phép đối với tính năng Bluetooth Âm thanh năng lượng thấp"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Sử dụng Âm thanh năng lượng thấp theo mặc định, ngay cả khi chưa xác minh được rằng thiết bị ngoại vi Âm thanh năng lượng thấp đáp ứng tiêu chí của danh sách cho phép."</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Nhấc ngón tay, sau đó chạm lại vào cảm biến"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Không thể dùng cảm biến vân tay"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Hãy liên hệ với một nhà cung cấp dịch vụ sửa chữa."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Mở khoá bằng vân tay khi màn hình tắt"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Dùng tính năng Mở khoá bằng vân tay ngay cả khi màn hình đang tắt"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Màn hình tắt, Mở khoá"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Chế độ cài đặt bảo mật khác"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Khoá hồ sơ công việc, mã hoá và chế độ cài đặt khác"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Mã hoá, thông tin xác thực và chế độ cài đặt khác"</string>
@@ -3432,7 +3435,7 @@
     <string name="zen_mode_not_found_text" msgid="692090778655810329">"Không tìm thấy chế độ nào"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Hạn chế bị gián đoạn"</string>
     <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Chặn các yếu tố gây gián đoạn và mất tập trung"</string>
-    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Thiết lập <xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Thiết lập chế độ <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Bật chế độ Không làm phiền"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Chuông báo và âm thanh đa phương tiện có thể làm gián đoạn"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Lịch biểu"</string>
@@ -3491,7 +3494,7 @@
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Tùy chỉnh"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Bật cài đặt tùy chỉnh"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Xóa cài đặt tùy chỉnh"</string>
-    <string name="zen_mode_restrict_notifications_summary_muted" msgid="2826459087306271381">"Đã hiện thông báo"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="2826459087306271381">"Thông báo hiển thị"</string>
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="6455811408721183198">"Đã ẩn một phần thông báo"</string>
     <string name="zen_mode_restrict_notifications_summary_hidden" msgid="2157279412167366119">"Đã ẩn thông báo"</string>
     <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"Hạn chế tùy chỉnh"</string>
@@ -5281,7 +5284,7 @@
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Hãy thử một tỷ lệ khung hình mới để xem ứng dụng, nếu ứng dụng này chưa được thiết kế cho vừa với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> của bạn"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Hãy thử một tỷ lệ khung hình mới để xem ứng dụng, nếu ứng dụng này chưa được thiết kế cho vừa với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> của bạn. Có thể một số ứng dụng chưa được tối ưu hoá cho một số tỷ lệ khung hình nhất định."</string>
     <string name="aspect_ratio_summary_text" msgid="4737461467467220325">"Hãy thử một tỷ lệ khung hình mới để xem một ứng dụng nếu ứng dụng đó chưa được thiết kế cho vừa với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> của bạn"</string>
-    <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"Hãy thử một tỷ lệ khung hình mới để xem một ứng dụng nếu ứng dụng đó chưa được thiết kế cho vừa với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> của bạn. Có thể một số ứng dụng chưa được tối ưu hoá cho một số tỷ lệ khung hình nhất định."</string>
+    <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"Hãy thử một tỷ lệ khung hình mới để xem một ứng dụng nếu ứng dụng đó chưa được thiết kế cho vừa với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> của bạn. Một số ứng dụng có thể chưa được tối ưu hoá cho một số tỷ lệ khung hình nhất định."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Ứng dụng đề xuất"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Đã thay đổi"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Theo giá trị mặc định của ứng dụng"</string>
@@ -5469,11 +5472,10 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Nghe luồng âm thanh"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Hãy quét mã QR của luồng âm thanh để nghe bằng <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Không thể chỉnh sửa mật khẩu trong khi chia sẻ. Để đổi mật khẩu, trước tiên hãy tắt tính năng chia sẻ âm thanh."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Mật khẩu của bạn phải có từ 4 đến 16 ký tự và chỉ được sử dụng chữ cái, số và ký hiệu"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Trình quét mã QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Bạn cần được trợ giúp?"</annotation></string>
-    <string name="homepage_search" msgid="6759334912284663559">"Tìm kiếm trong phần Cài đặt"</string>
+    <string name="homepage_search" msgid="6759334912284663559">"Tìm chế độ cài đặt"</string>
     <string name="keywords_contacts_storage" msgid="9061213057165337893">"danh bạ, bộ nhớ, tài khoản"</string>
     <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Bộ nhớ danh bạ"</string>
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Chỉ thiết bị"</string>
@@ -5482,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Đã xảy ra lỗi khi đặt tài khoản mặc định"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Chưa đặt tài khoản mặc định nào"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Chỉ thiết bị"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Thêm một tài khoản để bắt đầu"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Khoanh tròn để tìm kiếm"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Bạn có thể chạm và giữ nút Màn hình chính hoặc thanh điều hướng để tìm kiếm bằng nội dung có trên màn hình của mình."</string>
 </resources>

@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"配對新裝置"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"藍牙"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"明天自動開啟"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"配對右耳的裝置"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"配對左耳的裝置"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"配對另一耳的裝置"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"停用藍牙 LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"如果裝置支援 LE Audio 硬體功能，就停用藍牙 LE Audio 功能。"</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"藍牙 LE Audio 模式"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"啟用藍牙 LE Audio 廣播使用者介面預覽"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"啟用 LE Audio 分享使用者介面預覽，包括個人音訊分享和私人廣播"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"在「裝置詳細資料」中顯示 LE Audio 切換鈕"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"略過藍牙 LE Audio 許可清單"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"即使 LE Audio 周邊裝置未經過驗證，尚未確認符合許可清單的條件，系統仍會預設使用 LE Audio。"</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"移開手指，然後再次輕觸感應器"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"指紋感應器無法使用"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"請洽詢維修供應商。"</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"在螢幕關閉時用指紋解鎖"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"即使螢幕關閉，也能使用指紋解鎖"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"螢幕關閉, 解鎖"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"其他安全性設定"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"工作資料夾鎖定、加密等等"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"加密、憑證等等"</string>
@@ -5469,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"聆聽串流"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"使用「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」掃描音訊串流 QR code 即可聆聽"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"分享期間無法編輯密碼。如要變更密碼，請先關閉音訊分享功能。"</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"密碼長度必須介於 4 到 16 個半形字元之間，而且只能使用英文字母、數字和符號"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR code 掃描器"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"需要協助嗎？"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"搜尋設定"</string>
@@ -5482,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"設定預設帳戶時發生錯誤"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"沒有預設帳戶"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"僅限裝置"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"如要開始使用，請新增帳戶"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"畫圈搜尋"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"按住主畫面按鈕或導覽列，就能搜尋畫面內容。"</string>
 </resources>
