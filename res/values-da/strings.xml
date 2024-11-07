@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Par en ny enhed"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Aktivér automatisk i morgen"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Par højre øre"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Par venstre øre"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Par det andet høreapparat"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Deaktiver Bluetooth LE-lyd"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Deaktiverer funktionen Bluetooth LE-lyd, hvis enheden understøtter denne LE-lyd til hardware."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Tilstanden Bluetooth LE-lyd"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Aktivér preview af brugerfladen for broadcast af Bluetooth LE-lyd"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Aktiverer preview af brugerfladen for LE-lyddeling, herunder personlig lyddeling og privat broadcast"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Vis kontakten til LE-lyd i Enhedsoplysninger"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Omgå tilladelsesliste for Bluetooth LE-lyd"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Brug LE-lyd som standard, selvom det ikke er verificeret, at den eksterne LE-lydenhed opfylder kriterierne for tilladelseslisten."</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Løft fingeren, og tryk på sensoren igen"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Fingeraftrykssensoren kan ikke bruges"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Få den repareret."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Fingeroplåsning ved slukket skærm"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Brug fingeroplåsning, selv når skærmen er slukket"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Oplåsning ved slukket skærm"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Flere sikkerhedsindstillinger"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Lås til arbejdsprofil, kryptering og mere"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Kryptering, loginoplysninger og mere"</string>
@@ -863,7 +866,7 @@
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"Tastaturindstillinger"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"Flere indstillinger"</string>
     <string name="bluetooth_device_more_settings_preference_summary" msgid="7639584132778245426">"Firmwareopdateringer, om m.m."</string>
-    <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"Support og tips"</string>
+    <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"Support og tip"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Enhedens Bluetooth-adresse: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Enhedens Bluetooth-adresse:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Vil du glemme denne enhed?"</string>
@@ -3434,7 +3437,7 @@
     <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Bloker forstyrrende elementer"</string>
     <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Konfigurer <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Aktivér Forstyr ikke"</string>
-    <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Alarmer og medielyde kan afbryde"</string>
+    <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Alarmer og medielyde kan forstyrre"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Tidsplaner"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Slet tidsplaner"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Slet"</string>
@@ -3447,7 +3450,7 @@
     <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Hvornår skal den aktiveres automatisk?"</string>
     <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Tidsplan for begivenhed"</string>
     <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Aktivér for følgende begivenheder"</string>
-    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Hvor finder jeg svaret på invitationen?"</string>
+    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Hvor svaret på invitationen er"</string>
     <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Tidsplan"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Tidsplan"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> t. <xliff:g id="MINUTES">%2$d</xliff:g> min."</string>
@@ -3479,7 +3482,7 @@
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Skift enhedens tema til en mørk baggrund, som er mere behagelig for øjnene"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Ingen ændringer af visningen}=1{{effect_1}}=2{{effect_1} og {effect_2}}=3{{effect_1}, {effect_2} og {effect_3}}one{{effect_1}, {effect_2} og # anden}other{{effect_1}, {effect_2} og # andre}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Tillad alle notifikationer"</string>
-    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Personer, apps og lyde kan afbryde"</string>
+    <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Personer, apps og lyde kan forstyrre"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Visningsmuligheder for filtrerede notifikationer"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Når Forstyr ikke er aktiveret"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Ingen lyd fra notifikationer"</string>
@@ -3834,12 +3837,12 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Ingen"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Ingen}=1{1 samtale}one{# samtale}other{# samtaler}}"</string>
     <string name="zen_mode_from_conversations_settings" msgid="2411930666794576607">"Samtaleindstillinger"</string>
-    <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Hvem kan afbryde?"</string>
+    <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Hvem kan forstyrre?"</string>
     <string name="zen_mode_people_footer" msgid="7710707353004137431">"Selv hvis besked- og opkaldsapps ikke kan underrette dig, kan de personer, du vælger her, stadig kontakte dig via de pågældende apps"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Opkald"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Opkald"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"opkald"</string>
-    <string name="zen_mode_calls_header" msgid="8379225445095856726">"Opkald, der kan afbryde"</string>
+    <string name="zen_mode_calls_header" msgid="8379225445095856726">"Opkald, der kan forstyrre"</string>
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Hvis du vil sørge for, at tilladte opkald benytter lyd, skal du tjekke, at enheden er indstillet til at ringe"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Indgående opkald blokeres for \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Du kan ændre indstillingerne, så dine venner, din familie eller andre kontakter kan få fat i dig."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Stjernemarkerede kontakter"</string>
@@ -3882,33 +3885,33 @@
     <string name="zen_mode_events_list" msgid="7191316245742097229">"begivenheder"</string>
     <string name="zen_mode_events_list_first" msgid="7425369082835214361">"Begivenheder"</string>
     <string name="zen_mode_apps_title" msgid="1691010857014041183">"Apps"</string>
-    <string name="zen_mode_apps_category" msgid="4082380323683889391">"Apps, der kan afbryde"</string>
+    <string name="zen_mode_apps_category" msgid="4082380323683889391">"Apps, der kan forstyrre"</string>
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Valgte apps"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Ingen"</string>
-    <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Ingen apps må forstyrre}=1{{app_1} må gerne forstyrre}=2{{app_1} og {app_2} må gerne forstyrre}=3{{app_1}, {app_2} og {app_3} må gerne forstyrre}one{{app_1}, {app_2} og # mere må gerne forstyrre}other{{app_1}, {app_2} og # andre må gerne forstyrre}}"</string>
+    <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Ingen apps kan forstyrre}=1{{app_1} kan forstyrre}=2{{app_1} og {app_2} kan forstyrre}=3{{app_1}, {app_2} og {app_3} kan forstyrre}one{{app_1}, {app_2} og # mere kan forstyrre}other{{app_1}, {app_2} og # andre kan forstyrre}}"</string>
     <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (arbejde)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Beregner…"</string>
     <string name="zen_mode_apps_priority_apps_settings" msgid="5544513568250354374">"Appindstillinger"</string>
     <string name="zen_mode_plus_n_items" msgid="6136713354369243421">"+<xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Tillad, at apps tilsidesætter"</string>
-    <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Apps, der kan afbryde"</string>
+    <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Apps, der kan forstyrre"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Vælg flere apps"</string>
     <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"Ingen apps er valgt"</string>
-    <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"Ingen apps kan afbryde"</string>
+    <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"Ingen apps kan forstyrre"</string>
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"Tilføj apps"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Alle notifikationer"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Nogle notifikationer"</string>
-    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Valgte personer kan stadig kontakte dig, selv hvis du ikke tillader, at apps kan afbryde"</string>
-    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Ingen apps kan afbryde}=1{{app_1} kan afbryde}=2{{app_1} og {app_2} kan afbryde}=3{{app_1}, {app_2} og {app_3} kan afbryde}one{{app_1}, {app_2} og # mere kan afbryde}other{{app_1}, {app_2} og # andre kan afbryde}}"</string>
+    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Valgte personer kan stadig kontakte dig, selv hvis du ikke tillader, at apps kan forstyrre"</string>
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Ingen apps kan forstyrre}=1{{app_1} kan forstyrre}=2{{app_1} og {app_2} kan forstyrre}=3{{app_1}, {app_2} og {app_3} kan forstyrre}one{{app_1}, {app_2} og # mere kan forstyrre}other{{app_1}, {app_2} og # andre kan forstyrre}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Apps"</string>
-    <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Notifikationer, der kan afbryde"</string>
+    <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Notifikationer, der kan forstyrre"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Tillad alle notifikationer"</string>
-    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Intet kan afbryde}=1{{sound_category_1} kan afbryde}=2{{sound_category_1} og {sound_category_2} kan afbryde}=3{{sound_category_1}, {sound_category_2} og{sound_category_3} kan afbryde}one{{sound_category_1}, {sound_category_2} og # mere kan afbryde}other{{sound_category_1}, {sound_category_2} og # andre kan afbryde}}"</string>
-    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Intet kan afbryde"</string>
-    <string name="zen_mode_people_none" msgid="4613147461974255046">"Ingen kan afbryde"</string>
-    <string name="zen_mode_people_some" msgid="9101872681298810281">"Nogle personer kan afbryde"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Intet kan forstyrre}=1{{sound_category_1} kan forstyrre}=2{{sound_category_1} og {sound_category_2} kan forstyrre}=3{{sound_category_1}, {sound_category_2} og{sound_category_3} kan forstyrre}one{{sound_category_1}, {sound_category_2} og # mere kan forstyrre}other{{sound_category_1}, {sound_category_2} og # andre kan forstyrre}}"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Intet kan forstyrre"</string>
+    <string name="zen_mode_people_none" msgid="4613147461974255046">"Ingen kan forstyrre"</string>
+    <string name="zen_mode_people_some" msgid="9101872681298810281">"Nogle personer kan forstyrre"</string>
     <string name="zen_mode_people_repeat_callers" msgid="4499084111069828761">"Gentagne opkald må gerne forstyrre"</string>
-    <string name="zen_mode_people_all" msgid="311036110283015205">"Alle personer kan afbryde"</string>
+    <string name="zen_mode_people_all" msgid="311036110283015205">"Alle personer kan forstyrre"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Gentagne opkald"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Tillad gentagne opkald"</string>
     <string name="zen_mode_all_callers" msgid="8104755389401941875">"alle"</string>
@@ -3952,7 +3955,7 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Bloker forstyrrelser eller afbrydelser fra din enhed, så du bedre kan koncentrere dig"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Fjern alle forstyrrelser for at få ro"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Tilpas brugeroplevelser og indstillinger på enheden til forskellige brugere"</string>
-    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimer afbrydelser ved kun at tillade, at vigtige personer og apps kan få fat i dig"</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Minimer afbrydelser ved kun at tillade, at vigtige personer og apps kan få fat på dig"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Indstil en tilstand, der følger en fast tidsplan"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Hold din enhed synkroniseret med dagens begivenheder"</string>
     <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Vågn op frisk og veloplagt"</string>
@@ -4339,7 +4342,7 @@
     <string name="battery_tips_card_action_button_check" msgid="1535140204105479318">"Tjek"</string>
     <string name="battery_tips_card_dismiss_button" msgid="1885756985544936618">"OK"</string>
     <string name="battery_tips_card_feedback_info" msgid="767117835675157298">"Er denne meddelelse nyttig?"</string>
-    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"Advarselsikon med batteritips"</string>
+    <string name="battery_hints_warning_icon_a11y" msgid="5312542323401447620">"Advarselsikon med batteritip"</string>
     <string name="battery_tips_settings_summary_brightness" msgid="546145032616077783">"Aktivér adaptiv lysstyrke for at forlænge batteritiden"</string>
     <string name="battery_tips_settings_summary_screen_timeout" msgid="556801426050962077">"Reducer timeout for skærm for at forlænge batteritiden"</string>
     <string name="battery_tips_apps_summary_always_high" msgid="6334519477067044920">"<xliff:g id="APP_LABEL">%1$s</xliff:g> brugte mere batteri"</string>
@@ -4398,7 +4401,7 @@
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"Antalsbegrænsning i ShortcutManager er nulstillet"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"Styr, hvad der vises på din låseskærm"</string>
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Vis eller skjul indhold i notifikationer"</string>
-    <string name="page_tab_title_support" msgid="3235725053332345773">"Support og tips"</string>
+    <string name="page_tab_title_support" msgid="3235725053332345773">"Support og tip"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"Mindste bredde"</string>
     <string name="premium_sms_none" msgid="4718916765158062108">"Ingen installerede apps har anmodet om adgang til overtakseret sms"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"Overtakseret sms kan koste dig penge, som opkræves via din mobilregning. Hvis du aktiverer tilladelsen for en app, kan du sende overtakserede sms-beskeder ved hjælp af denne app."</string>
@@ -5469,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Lyt til stream"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Scan en QR-kode til en lydstream for at lytte via <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Adgangskoden kan ikke ændres under deling. Deaktiver lyddeling for at ændre adgangskoden."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Din adgangskode skal indeholde 4-16 tegn og må kun bestå af bogstaver, tal og symboler"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR-kodescanner"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Har du brug for hjælp?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Søg i Indstillinger"</string>
@@ -5482,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Der opstod en fejl under konfigurationen af standardkontoen"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Der er ikke angivet nogen standardkonto"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Kun via GPS"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Tilføj en konto for at komme godt i gang"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Circle to Search"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Hold fingeren på knappen Hjem eller navigationshåndtaget for at søge ved hjælp af indholdet på skærmen."</string>
 </resources>

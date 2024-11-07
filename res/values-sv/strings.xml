@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Parkoppla en ny enhet"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Aktivera automatiskt i morgon"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Parkoppla höger"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Parkoppla vänster"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Parkoppla andra örat"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Inaktivera Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Inaktiverar Bluetooth LE Audio-funktionen om enheten har stöd för funktioner för LE Audio-hårdvara."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE Audio-läge"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Aktivera förhandsgranskning av användargränssnittet för Bluetooth LE Audio-sändning"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Aktiverar förhandsgranskningen av användargränssnittet för LE Audio-delning, inklusive delning av personligt ljud och privat sändning"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Visa reglage för LE Audio i Enhetsinfo"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Hoppa över godkännandelistan för Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Använd LE Audio som standard även om LE Audio-kringutrustningen inte har bekräftats uppfylla kraven för godkännandelistan."</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Lyft fingret och nudda sedan sensorn igen"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Det går inte att använda fingeravtryckssensorn"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Besök ett reparationsställe."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Skärmen av, fingeravtryckslås"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Använd fingeravtryckslås även när skärmen är av"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Skärmen av, lås upp"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Fler säkerhetsinställningar"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Lås för jobbprofilen, kryptering med mera"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Kryptering, användaruppgifter med mera"</string>
@@ -1963,27 +1966,19 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Låstangentsläge"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Tryck ned en tangent i taget för kortkommandon i stället för att hålla ned flera tangenter samtidigt"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Musknappar"</string>
-    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
-    <skip />
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Använd mustangenter"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Använd tangentbordet för att styra pekaren"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Omvänd scrollning på musen"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Scrolla uppåt för att flytta sidan nedåt"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Byt plats på vänster och höger knapp"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Använd vänster musknapp som höger"</string>
-    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
-    <skip />
-    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
-    <skip />
-    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
-    <skip />
-    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
-    <skip />
-    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
-    <skip />
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Mustangenter för <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Använd tangenterna <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> för att flytta muspekaren"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Använd tangenten <xliff:g id="CLICK_LABEL">%s</xliff:g> för att klicka med den primära musknappen"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"Använd tangenten <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> för att hålla den primära musknappen nedtryckt"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Använd tangenten <xliff:g id="RELEASE_LABEL">%s</xliff:g> för att släppa den primära musknappen"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Använd tangenten <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> för att aktivera och inaktivera scrollningsläget. Då scrollar tangenterna <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> vyn uppåt, nedåt, åt vänster och åt höger"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Använd tangenten <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> för att klicka med den sekundära musknappen"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Kortkommandon"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Visa en lista över genvägar"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tangentbord och verktyg för jobbprofilen"</string>
@@ -3429,8 +3424,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"”Vardagar kl. 9.00–17.00”"</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Kalenderhändelser"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} är aktivt}=2{{mode_1} och {mode_2} är aktiva}=3{{mode_1}, {mode_2} och {mode_3} är aktiva}other{{mode_1}, {mode_2} och # till är aktiva}}"</string>
-    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
-    <skip />
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Stör ej}=1{{mode_1}}=2{{mode_1}, {mode_2}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"PÅ"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Inte angivet"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Inaktiverat"</string>
@@ -3545,7 +3539,7 @@
     <string name="zen_category_behavior" msgid="3214056473947178507">"Vad får avbryta Stör ej"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"Personer"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"Appar"</string>
-    <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarm och andra störningsmoment"</string>
+    <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarm och andra avbrott"</string>
     <string name="zen_category_schedule" msgid="2003707171924226212">"Scheman"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Varaktighet för snabbinställningar"</string>
     <string name="zen_settings_general" msgid="2704932194620124153">"Allmänt"</string>
@@ -3876,7 +3870,7 @@
     <string name="zen_mode_alarms_list_first" msgid="2780418316613576610">"Alarm"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"Medieljud"</string>
     <string name="zen_mode_media_summary" msgid="7174081803853351461">"Ljud från videor, spel och annan media"</string>
-    <string name="zen_mode_media_list" msgid="2006413476596092020">"ljud från video"</string>
+    <string name="zen_mode_media_list" msgid="2006413476596092020">"media"</string>
     <string name="zen_mode_media_list_first" msgid="7824427062528618442">"Media"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"Ljud vid tryck"</string>
     <string name="zen_mode_system_summary" msgid="7225581762792177522">"Ljud från tangentbordet och andra knappar"</string>
@@ -3893,7 +3887,7 @@
     <string name="zen_mode_apps_title" msgid="1691010857014041183">"Appar"</string>
     <string name="zen_mode_apps_category" msgid="4082380323683889391">"Appar som får störa dig"</string>
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Valda appar"</string>
-    <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Ingen"</string>
+    <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Inga"</string>
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Inga appar får avbryta}=1{{app_1} får avbryta}=2{{app_1} och {app_2} får avbryta}=3{{app_1}, {app_2} och {app_3} får avbryta}other{{app_1}, {app_2} och # till får avbryta}}"</string>
     <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (jobbet)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Beräknar …"</string>
@@ -3940,7 +3934,7 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Skapa ett läge"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Anpassat läge"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Lägesnamn"</string>
-    <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"Namnet på läget får inte vara tomt"</string>
+    <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"Du måste ange ett lägesnamn"</string>
     <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"Välj en ikon"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Kalenderhändelser"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Läggdagsrutin"</string>
@@ -5478,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Lyssna på streamen"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Skanna QR-koden för en ljudstream om du vill lyssna med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Det går inte att redigera lösenordet medan delning pågår. Om du vill byta lösenord måste du först stänga av ljuddelningen."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Lösenordet måste innehålla 4–16 tecken och endast bokstäver, siffror och symboler"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR-skanner"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Behöver du hjälp?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Sökinställningar"</string>
@@ -5491,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Det gick inte att ställa in standardkontot"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Inget standardkonto har angetts"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Endast enheten"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Lägg till ett konto för att komma igång"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Circle to Search"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Tryck länge på hemknappen eller navigeringshandtaget för att söka med innehållet på skärmen."</string>
 </resources>
