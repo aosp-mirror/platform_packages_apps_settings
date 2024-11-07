@@ -299,6 +299,7 @@ class ZenModePrioritySendersPreferenceController
         List<UserHandle> userProfiles = mUserManager.getEnabledProfiles();
         if (userProfiles.size() <= 1) {
             mContext.startActivity(intent);
+            return;
         }
 
         mProfileSelectDialog = ProfileSelectDialog.createDialog(mContext, userProfiles,
