@@ -23,12 +23,14 @@ import android.util.AttributeSet;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.widget.SettingsMainSwitchBar.OnBeforeCheckedChangeListener;
 import com.android.settingslib.RestrictedPreferenceHelper;
+import com.android.settingslib.RestrictedPreferenceHelperProvider;
 import com.android.settingslib.core.instrumentation.SettingsJankMonitor;
 
 import java.util.ArrayList;
@@ -40,7 +42,7 @@ import java.util.List;
  * to enable or disable the preferences on the page.
  */
 public class SettingsMainSwitchPreference extends TwoStatePreference implements
-        OnCheckedChangeListener {
+        OnCheckedChangeListener, RestrictedPreferenceHelperProvider {
 
     private final List<OnBeforeCheckedChangeListener> mBeforeCheckedChangeListeners =
             new ArrayList<>();
@@ -69,6 +71,11 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
+    }
+
+    @Override
+    public @NonNull RestrictedPreferenceHelper getRestrictedPreferenceHelper() {
+        return mRestrictedHelper;
     }
 
     @Override

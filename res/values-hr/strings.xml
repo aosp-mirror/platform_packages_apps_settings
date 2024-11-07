@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Uparite novi uređaj"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Automatski uključi sutra"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Upari desno uho"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Upari lijevo uho"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Uparite drugo uho"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Onemogući Bluetooth LE audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Onemogućuje značajku Bluetooth LE audio ako uređaj podržava mogućnosti za LE audio hardvera."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Način Bluetooth LE Audio"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Omogući pregled korisničkog sučelja za Bluetooth LE Audio emitiranje"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Omogućuje pregled korisničkog sučelja za LE Audio dijeljenje, uključujući dijeljenje osobnog zvuka i privatno emitiranje"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Prikaži prekidač LE audio u pojedinostima o uređaju"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Zaobiđi popis dopuštenih za Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Upotrebljavajte LE Audio prema zadanim postavkama čak i ako nije potvrđeno da LE Audio periferni uređaj ispunjava kriterije za popis dopuštenih."</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Podignite prst, a zatim ponovo dodirnite senzor"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Senzor otiska prsta ne može se koristiti"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Posjetite servisera."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Otključavanje otiskom prsta kad je zaslon isključen"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Upotreba otključavanja otiskom prsta čak i kad je zaslon isključen"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Isključivanje zaslona, otključavanje"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Više sigurnosnih postavki"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Zaključavanje poslovnog profila, šifriranje i drugo"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Šifriranje, vjerodajnice i drugo"</string>
@@ -1271,7 +1274,7 @@
     <string name="night_display_text" msgid="4789324042428095383">"Noćno svjetlo boji zaslon uređaja u jantarnu nijansu. To olakšava gledanje zaslona i čitanje pri slabom svjetlu i može vam pomoći da lakše zaspite."</string>
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"Raspored"</string>
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"Ništa"</string>
-    <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"Uključi u prilagođeno vrijeme"</string>
+    <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"Uključuje se u odabrano vrijeme"</string>
     <string name="night_display_auto_mode_twilight" msgid="4291855156158833997">"Od zalaska do izlaska sunca"</string>
     <string name="night_display_start_time_title" msgid="2611541851596977786">"Vrijeme početka"</string>
     <string name="night_display_end_time_title" msgid="5243112480391192111">"Vrijeme završetka"</string>
@@ -1293,7 +1296,7 @@
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Raspored"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Nijedan"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Od zalaska do izlaska sunca"</string>
-    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Uključi u prilagođeno vrijeme"</string>
+    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Uključuje se u odabrano vrijeme"</string>
     <string name="dark_ui_auto_mode_custom_bedtime" msgid="8465023741946439266">"Uključuje se za vrijeme spavanja"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Status"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Nikad se ne uključuje automatski"</string>
@@ -1961,29 +1964,21 @@
     <string name="slow_keys" msgid="2891452895499690837">"Spore tipke"</string>
     <string name="slow_keys_summary" msgid="2914214326648535377">"Prilagođava vrijeme potrebno za aktivaciju pritiska tipke"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Ljepljive tipke"</string>
-    <string name="sticky_keys_summary" msgid="1844953803625480623">"Pritisnite jednu po jednu tipku za prečace umjesto da ih pritisnete zajedno"</string>
+    <string name="sticky_keys_summary" msgid="1844953803625480623">"Za prečace pritišćite jednu po jednu tipku, a ne sve u isto vrijeme"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Tipke miša"</string>
-    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
-    <skip />
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Koristi tipke miša"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Upravljajte pokazivačem pomoću tipkovnice"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Obrnuto pomicanje pomoću miša"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Pomičite se prema gore za pomicanje stranice prema dolje"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Zamjena lijeve i desne tipke"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Upotrebljavajte lijevu tipku miša kao desnu"</string>
-    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
-    <skip />
-    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
-    <skip />
-    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
-    <skip />
-    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
-    <skip />
-    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
-    <skip />
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Tipke miša za tipkovnicu <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Pomoću tipki <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> pomičite pokazivač miša"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Pomoću tipke <xliff:g id="CLICK_LABEL">%s</xliff:g> kliknite primarnu tipku miša"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"Pomoću tipke <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> pritisnite i zadržite primarnu tipku miša"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Pomoću tipke <xliff:g id="RELEASE_LABEL">%s</xliff:g> otpustite primarnu tipku miša"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Pomoću tipke <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> uključite način pomicanja. To će omogućiti da tipkama <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> pomičete prikaz prema gore, dolje, ulijevo ili udesno"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Pomoću tipke <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> kliknite sekundarnu tipku miša"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Tipkovni prečaci"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Prikaži popis prečaca"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tipkovnice i alati radnog profila"</string>
@@ -2041,7 +2036,7 @@
     <string name="trackpad_switch_apps_title" msgid="7342032935377284039">"Promjena aplikacija"</string>
     <string name="trackpad_switch_apps_summary" msgid="9193942041912927440">"Prijeđite s četiri prsta ulijevo ili udesno"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Modifikatorske tipke"</string>
-    <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Promjena ponašanja tipki"</string>
+    <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Promijenite ponašanje tipki"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Vrati sve na zadano"</string>
     <string name="modifier_keys_default_summary" msgid="8701640508670973258">"Zadano"</string>
     <string name="modifier_keys_reset_message" msgid="5236994817619936058">"Jeste li sigurni da sve modifikatorske tipke želite vratiti na zadano?"</string>
@@ -2434,7 +2429,7 @@
     <string name="enable_quick_setting" msgid="6648073323202243604">"Prikaži u Brzim postavkama"</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Crveno-zelena, poteškoća prepoznavanja zelene"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Crveno-zelena, poteškoća prepoznavanja crvene"</string>
-    <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Plavo – žuto"</string>
+    <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Plavo-žuta"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Nijanse sive"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Intenzitet"</string>
     <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"Nedostupno za način nijansi sive ili kad je korekcija boja onemogućena"</string>
@@ -2587,10 +2582,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Podesi potrošnju energije"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Uključeni paketi"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Aplikacije se izvode na uobičajen način"</string>
-    <!-- no translation found for battery_tip_replacement_title (3932335880485957919) -->
-    <skip />
-    <!-- no translation found for battery_tip_replacement_summary (7892640031317153349) -->
-    <skip />
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"Preporučuje se zamjena baterije"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"Smanjen je kapacitet baterije i učinkovitost punjenja, pa se preporučuje zamjena baterije."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Niska razina baterije"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Uključite štednju baterije radi produljenja trajanja baterije"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Produljenje trajanja baterije"</string>
@@ -3431,8 +3424,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"9:00 – 17:00, radnim danom\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Događaji iz kalendara"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Aktivno: {mode_1}}=2{Aktivno: {mode_1} i {mode_2}}=3{Aktivno: {mode_1}, {mode_2} i {mode_3}}one{Aktivno: {mode_1}, {mode_2} i još #}few{Aktivno: {mode_1}, {mode_2} i još #}other{Aktivno: {mode_1}, {mode_2} i još #}}"</string>
-    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
-    <skip />
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Ne uznemiravaj}=1{{mode_1}}=2{{mode_1}, {mode_2}}one{{mode_1}, {mode_2}, {mode_3}}few{{mode_1}, {mode_2}, {mode_3}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"UKLJUČENO"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Nije postavljeno"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Onemogućeno"</string>
@@ -3443,7 +3435,7 @@
     <string name="zen_mode_not_found_text" msgid="692090778655810329">"Način nije pronađen"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Ograničavanje prekida"</string>
     <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Blokiraj prekide i ometanja"</string>
-    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Postavljanje aplikacije <xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Postavite način <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Uključite opciju Ne uznemiravaj."</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Zvukovi alarma i medija mogu prekidati"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Rasporedi"</string>
@@ -3903,7 +3895,7 @@
     <string name="zen_mode_plus_n_items" msgid="6136713354369243421">"+ <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Dopusti aplikacijama da nadjačaju"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Aplikacije koje mogu prekidati"</string>
-    <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Odaberite više aplikacija"</string>
+    <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Odaberite aplikacije"</string>
     <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"Nije odabrana nijedna aplikacija"</string>
     <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"Nijedna aplikacija ne može prekidati"</string>
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"Dodajte aplikacije"</string>
@@ -3938,12 +3930,12 @@
     <string name="zen_mode_summary_alarms_only_by_hour" msgid="7400910210950788163">"{count,plural, =1{Promijeni na opciju Samo alarmi na jedan sat do {time}}one{Promijeni na opciju Samo alarmi na # sat do {time}}few{Promijeni na opciju Samo alarmi na # sata do {time}}other{Promijeni na opciju Samo alarmi na # sati do {time}}}"</string>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Promijeni na \"Samo alarmi\" do <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Promijeni na \"Uvijek prekidaj\""</string>
-    <string name="zen_mode_rename_title" msgid="8146882272966214558">"Uređivanje načina"</string>
+    <string name="zen_mode_rename_title" msgid="8146882272966214558">"Uredite način rada"</string>
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"Izradite način rada"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"Prilagođeni način"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"Naziv načina"</string>
     <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"Polje za naziv načina ne može biti prazno"</string>
-    <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"Odabir ikone"</string>
+    <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"Odaberite ikonu"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Događaji iz kalendara"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Rutina prije spavanja"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Tijekom vožnje"</string>
@@ -3954,7 +3946,7 @@
     <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Ovaj se način nikad neće uključiti kada je onemogućen"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Onemogući"</string>
     <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Omogućiti način <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Ovaj se način može automatski uključiti na temelju njegovih postavki"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Ovaj se način može automatski uključiti na temelju svojih postavki"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Omogući"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Postavite način koji prati uobičajeni raspored"</string>
     <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Postavite način za sinkronizaciju s događajima iz kalendara i odgovorima na pozivnice"</string>
@@ -5481,8 +5473,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Slušajte stream"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Skenirajte QR kôd audiostreama da biste slušali s uređajem <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Nije moguće urediti zaporku dok je zajedničko slušanje u tijeku. Da biste promijenili zaporku, prvo isključite zajedničko slušanje."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Zaporka mora sadržavati od 4 do 16 znakova i upotrebljavati samo slova, brojeve i simbole"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Čitač QR koda"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Trebate li pomoć?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Pretražite postavke"</string>
@@ -5494,7 +5485,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Pogreška pri postavljanju zadanog računa"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Nema zadane postavke"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Samo uređaj"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Dodajte račun da biste započeli"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Zaokružite i potražite"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Dodirnite gumb početnog zaslona ili oznaku za navigaciju i zadržite pritisak za pretraživanje pomoću sadržaja na vašem zaslonu."</string>
 </resources>

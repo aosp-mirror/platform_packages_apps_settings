@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"නව උපාංගය යුගල කරන්න"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"බ්ලූටූත්"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"හෙට ස්වයංක්‍රීයව ක්‍රියාත්මක කරන්න"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"දකුණු කණ යුගල කරන්න"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"වම් කණ යුගල කරන්න"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"ඔබගේ අනෙක් කණ යුගල කරන්න"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"බ්ලූටූත් LE ශ්‍රව්‍ය අබල කරන්න"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"උපාංගය LE ශ්‍රව්‍ය දෘඨාංග හැකියා වෙත සහාය දක්වන්නේ නම් බ්ලූටූත් LE ශ්‍රව්‍ය විශේෂාංගය අබල කරයි."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"බ්ලූටූත් LE ශ්‍රව්‍ය මාදිලිය"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"බ්ලූටූත් LE ශ්‍රව්‍ය විකාශන UI පෙරදසුන සබල කරන්න"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"පුද්ගලික ශ්‍රව්‍ය බෙදා ගැනීම සහ පුද්ගලික විකාශනය ඇතුළුව LE ශ්‍රව්‍ය බෙදා ගැනීමේ UI පෙරදසුන සබල කරයි"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"උපාංග විස්තරවල LE ශ්‍රව්‍ය ටොගල පෙන්වන්න"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"බ්ලූටූත් LE ශ්‍රව්‍ය ඉඩ දුන් ලැයිස්තුව මඟහරින්න"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"ඉඩ දුන් ලැයිස්තුවේ නිර්ණායක සපුරාලීමට LE ශ්‍රව්‍ය පර්යන්තය සත්‍යාපනය කර නොමැති වුවත් පෙරනිමියෙන් LE ශ්‍රව්‍ය භාවිතා කරන්න."</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"ඇඟිල්ල ඔසවා, අනතුරුව නැවත සංවේදකය ස්පර්ශ කරන්න"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"ඇඟිලි සලකුණු සංවේදකය භාවිත කළ නොහැක"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"අලුත්වැඩියා සැපයුම්කරුවෙකු වෙත පැමිණෙන්න."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"තිරය ක්‍රියාවිරහිත ඇඟිලි සලකුණු අගුළු හැරීම"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"තිරය ​​ක්‍රියාවිරහිත වූ විට පවා ඇඟිලි සලකුණු අගුළු හැරීම භාවිත කරන්න"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"තිරය ​​ක්‍රියාවිරහිතයි, අගුළු ඇරීම"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"තවත් ආරක්ෂක සැකසීම්"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"කාර්යාල පැතිකඩ අගුල, සංකේතනය සහ තවත් දේ"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"සංකේතනය, අක්තපත්‍ර සහ තවත් දේ"</string>
@@ -1963,27 +1966,19 @@
     <string name="sticky_keys" msgid="7317317044898161747">"ඇලෙන යතුරු"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"කෙටිමං සඳහා යතුරු එකට තබා ගැනීම වෙනුවට වරකට යතුරක් ඔබන්න"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"මූසික යතුරු"</string>
-    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
-    <skip />
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"මූසික යතුරු භාවිතා කරන්න"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"දර්ශකය පාලනය කිරීමට ඔබේ යතුරු පුවරුව භාවිතා කරන්න"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"මූසික ආපස්සට අනුචලනය"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"පිටුව පහළට ගෙන යාමට ඉහළට අනුචලන කරන්න"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"වම් සහ දකුණු බොත්තම් මාරු කරන්න"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"වම් මූසික බොත්තම ඔබේ දකුණ ලෙස භාවිතා කරන්න"</string>
-    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
-    <skip />
-    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
-    <skip />
-    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
-    <skip />
-    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
-    <skip />
-    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
-    <skip />
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"<xliff:g id="KEYBOARD_NAME">%s</xliff:g> සඳහා මූසික යතුරු"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"මූසික දර්ශකය චලනය කිරීමට <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> යතුරු භාවිතා කරන්න"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"මූලික මූසික බොත්තම ක්ලික් කිරීමට <xliff:g id="CLICK_LABEL">%s</xliff:g> යතුර භාවිතා කරන්න"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"මූලික මූසික බොත්තම ඔබාගෙන සිටීමට<xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> යතුර භාවිතා කරන්න"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"මූලික මූසික බොත්තම මුදා හැරීමට <xliff:g id="RELEASE_LABEL">%s</xliff:g> යතුර භාවිතා කරන්න"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"අනුචලන ප්‍රකාරය ටොගල් කිරීමට <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> යතුර භාවිතා කරන්න. මෙය <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> යතුරු දර්ශනය ඉහළට, පහළට, වමට හෝ දකුණට අනුචලනය කරයි"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"ද්විතියික මූසික බොත්තම ක්ලික් කිරීමට <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> යතුර භාවිතා කරන්න"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"යතුරු පුවරු කෙටිමං"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"කෙටිමං ලැයිස්තුව පෙන්වන්න"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"කාර්යාල පැතිකඩ යතුරු පුවරු සහ මෙවලම්"</string>
@@ -3429,8 +3424,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"සතියේ දිනවල පෙ.ව. 9 - ප.ව. 5\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"දින දර්ශන සිදුවීම්"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} සක්‍රියයි}=2{{mode_1} සහ {mode_2} සක්‍රියයි}=3{{mode_1}, {mode_2}, සහ {mode_3} සක්‍රියයි}one{{mode_1}, {mode_2}, සහ තව #ක් සක්‍රියයි}other{{mode_1}, {mode_2}, සහ තව #ක් සක්‍රියයි}}"</string>
-    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
-    <skip />
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{බාධා නොකිරීම}=1{{mode_1}}=2{{mode_1}, {mode_2}}one{{mode_1}, {mode_2}, {mode_3}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ක්‍රියාත්මකයි"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"සකසා නැත"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"අබලයි"</string>
@@ -5478,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"ප්‍රවාහයට සවන් දෙන්න"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> සමග සවන් දීමට ශ්‍රව්‍ය ප්‍රවාහ QR කේතයක් ස්කෑන් කරන්න"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"බෙදා ගන්නා අතරේ මුරපදය සංස්කරණය කළ නොහැක. මුරපදය වෙනස් කිරීමට, පළමුව ශ්‍රව්‍ය බෙදා ගැනීම ක්‍රියාවිරහිත කරන්න."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"ඔබේ මුරපදයේ අනුලකුණු 4-16ක් අඩංගු විය යුතු අතර අකුරු, අංක සහ සංකේත පමණක් භාවිතා කළ යුතු යි"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR කේත ස්කෑනරය"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"උදවු අවශ්‍ය ද?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"සෙවීමේ සැකසීම්"</string>
@@ -5491,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"පෙරනිමි ගිණුම සැකසීමේ දෝෂයකි"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"පෙරනිමි සැකසීමක් නැත"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"උපාංගය පමණි"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"පටන් ගැනීමට ගිණුමක් එක් කරන්න"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"සෙවීමට කවයසෙවීමට කවය අදින්න"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"ඔබේ තිරයේ ඇති අන්තර්ගතය භාවිතයෙන් සෙවීමට මුල් පිටුව බොත්තම හෝ සංචලන හසුරුව ස්පර්ශ කර අල්ලාගෙන සිටින්න."</string>
 </resources>

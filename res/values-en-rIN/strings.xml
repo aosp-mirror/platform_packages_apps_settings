@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Pair new device"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Automatically turn on tomorrow"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Pair right ear"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Pair left ear"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Pair your other ear"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Disable Bluetooth LE audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Disables the Bluetooth LE audio feature if the device supports LE audio hardware capabilities."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE Audio mode"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Enable Bluetooth LE Audio Broadcast UI preview"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Enables the LE Audio Sharing UI preview including personal audio sharing and private broadcast"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Show LE Audio toggle in Device details"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bypass Bluetooth LE Audio allowlist"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Use LE Audio by default even if LE Audio peripheral hasn\'t been verified to meet allowlist criteria."</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Lift finger, then touch sensor again"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Can\'t use fingerprint sensor"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Visit a repair provider."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Screen-off Fingerprint Unlock"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Use Fingerprint Unlock even when the screen is off"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Screen-off, unlock"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"More security settings"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Work profile lock, encryption and more"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Encryption, credentials and more"</string>
@@ -1963,27 +1966,19 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Sticky keys"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Press one key at a time for shortcuts instead of holding keys down together"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Mouse keys"</string>
-    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
-    <skip />
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Use mouse keys"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Use your keyboard to control the pointer"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Mouse reverse scrolling"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Scroll up to move the page down"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Swap left and right buttons"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Use the left mouse button as your right"</string>
-    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
-    <skip />
-    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
-    <skip />
-    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
-    <skip />
-    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
-    <skip />
-    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
-    <skip />
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Mouse keys for <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Use the <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> keys to move the mouse pointer"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Use the <xliff:g id="CLICK_LABEL">%s</xliff:g> key to click the primary mouse button"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"Use the <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> key to press and hold the primary mouse button"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Use the <xliff:g id="RELEASE_LABEL">%s</xliff:g> key to release the primary mouse button"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Use the <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> key to toggle scroll mode. This will make the <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> keys scroll the view top, down, left or right"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Use the <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> key to click the secondary mouse button"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Keyboard shortcuts"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Show list of shortcuts"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Work profile keyboards &amp; tools"</string>
@@ -3429,8 +3424,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\'9.00 a.m. – 5.00 p.m. weekdays\'"</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Calendar events"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} is active}=2{{mode_1} and {mode_2} are active}=3{{mode_1}, {mode_2} and {mode_3} are active}other{{mode_1}, {mode_2} and # more are active}}"</string>
-    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
-    <skip />
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Do Not Disturb}=1{{mode_1}}=2{{mode_1}, {mode_2}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ON"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Not set"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Disabled"</string>
@@ -3708,9 +3702,9 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"It can reply to messages and take action on buttons in notifications, including snoozing or dismissing notifications and answering calls."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Change settings"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"It can turn Do Not Disturb on or off and change related settings."</string>
-    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"It can manage and activate Modes and change related settings."</string>
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"It can manage and activate modes, and change related settings."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"If you turn off notification access for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, Do Not Disturb access may also be turned off."</string>
-    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"If you turn off notification access for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, Modes access may also be turned off."</string>
+    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"If you turn off notification access for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, modes access may also be turned off."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Turn off"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Cancel"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Real-time"</string>
@@ -3772,7 +3766,7 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Allow Do Not Disturb"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"No installed apps have requested Do Not Disturb access"</string>
     <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"Modes access"</string>
-    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"Allow Modes access"</string>
+    <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"Allow modes access"</string>
     <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"No installed apps have requested Modes access"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"You haven\'t allowed notifications from this app"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"At your request, Android is blocking this category of notifications from appearing on this device"</string>
@@ -4172,8 +4166,8 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Must stay turned on because notification access is on"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Revoke access to Do Not Disturb for <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"All Do Not Disturb rules created by this app will be removed."</string>
-    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Allow access to Modes for <xliff:g id="APP">%1$s</xliff:g>?"</string>
-    <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"The app will be able to turn on/off Do Not Disturb, manage and activate Modes and make changes to related settings."</string>
+    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Allow access to modes for <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"The app will be able to turn on/off Do Not Disturb, manage and activate modes and make changes to related settings."</string>
     <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"Revoke access to modes for <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"All modes created by this app will be removed."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Don’t optimise"</string>
@@ -5478,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Listen to stream"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Scan an audio stream QR code to listen with <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Can\'t edit password while sharing. To change the password, first turn off audio sharing."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Your password must contain 4–16 characters and use only letters, numbers and symbols"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR code scanner"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Need help?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Search settings"</string>
@@ -5491,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Error setting the default account"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"No default set"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Device only"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Add an account to get started"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Circle to Search"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Touch and hold the home button or the navigation handle to search using the content on your screen."</string>
 </resources>

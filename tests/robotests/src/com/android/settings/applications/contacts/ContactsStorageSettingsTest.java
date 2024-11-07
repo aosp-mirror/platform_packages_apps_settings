@@ -44,6 +44,7 @@ import android.provider.ContactsContract.RawContacts.DefaultAccount.DefaultAccou
 import android.provider.SearchIndexableResource;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
@@ -73,7 +74,7 @@ import java.util.List;
 @Config(shadows = ShadowAuthenticationHelper.class)
 public class ContactsStorageSettingsTest {
     private static final String PREF_KEY_DEVICE_ONLY = "device_only_account_preference";
-
+    private static final String PREF_KEY_ACCOUNT_CATEGORY = "account_category";
     private static final String PREF_KEY_ADD_ACCOUNT = "add_account";
 
     private static final Account TEST_ACCOUNT1 = new Account("test@gmail.com", "type1");
@@ -95,6 +96,7 @@ public class ContactsStorageSettingsTest {
     private PreferenceManager mPreferenceManager;
     private TestContactsStorageSettings mContactsStorageSettings;
     private PreferenceScreen mScreen;
+    private PreferenceGroup accountCategory;
 
     @Before
     public void setUp() throws Exception {
@@ -103,8 +105,16 @@ public class ContactsStorageSettingsTest {
                 eq(ContactsContract.AUTHORITY_URI))).thenReturn(mContentProviderClient);
         mPreferenceManager = new PreferenceManager(mContext);
         when(mContactsStorageSettings.getPreferenceManager()).thenReturn(mPreferenceManager);
-        mScreen = spy(new PreferenceScreen(mContext, /* attrs= */ null));
+        mScreen = spy(mPreferenceManager.inflateFromResource(mContext,
+                R.xml.contacts_storage_settings, mScreen));
         when(mScreen.getPreferenceManager()).thenReturn(mPreferenceManager);
+        accountCategory = mScreen.findPreference(PREF_KEY_ACCOUNT_CATEGORY);
+        SelectorWithWidgetPreference deviceOnlyPreference = mScreen.findPreference(
+                PREF_KEY_DEVICE_ONLY);
+        when(mContactsStorageSettings.findPreference(eq(PREF_KEY_DEVICE_ONLY))).thenReturn(
+                deviceOnlyPreference);
+        when(mContactsStorageSettings.findPreference(eq(PREF_KEY_ACCOUNT_CATEGORY))).thenReturn(
+                accountCategory);
         when(mContactsStorageSettings.getPreferenceScreen()).thenReturn(mScreen);
         mContactsStorageSettings.onAttach(mContext);
     }
@@ -134,17 +144,15 @@ public class ContactsStorageSettingsTest {
         when(mContentProviderClient.call(eq(QUERY_ELIGIBLE_DEFAULT_ACCOUNTS_METHOD), any(),
                 any())).thenReturn(eligibleAccountBundle);
 
-        PreferenceScreen settingScreen = mPreferenceManager.inflateFromResource(mContext,
-                R.xml.contacts_storage_settings, mScreen);
-        SelectorWithWidgetPreference deviceOnlyPreference = settingScreen.findPreference(
+        SelectorWithWidgetPreference deviceOnlyPreference = mContactsStorageSettings.findPreference(
                 PREF_KEY_DEVICE_ONLY);
-        when(mContactsStorageSettings.findPreference(eq(PREF_KEY_DEVICE_ONLY))).thenReturn(
-                deviceOnlyPreference);
 
         assertThat(deviceOnlyPreference.getTitle()).isEqualTo("Device only");
         assertThat(deviceOnlyPreference.getSummary()).isEqualTo(
                 "New contacts won't be synced with an account");
         assertThat(deviceOnlyPreference.getOrder()).isEqualTo(999);
+        assertThat(mContactsStorageSettings.findPreference(
+                PREF_KEY_ACCOUNT_CATEGORY).getTitle()).isEqualTo("Where to save contacts");
 
         mContactsStorageSettings.refreshUI();
         mContactsStorageSettings.onRadioButtonClicked(deviceOnlyPreference);
@@ -175,6 +183,8 @@ public class ContactsStorageSettingsTest {
 
         mContactsStorageSettings.refreshUI();
 
+        assertThat(mContactsStorageSettings.findPreference(
+                PREF_KEY_ACCOUNT_CATEGORY).getTitle()).isEqualTo("Where to save contacts");
         assertThat(mScreen.findPreference(PREF_KEY_ADD_ACCOUNT).getTitle()).isEqualTo(
                 "Add an account to get started");
         assertThat(mScreen.findPreference(PREF_KEY_ADD_ACCOUNT).getOrder()).isEqualTo(998);
@@ -232,15 +242,15 @@ public class ContactsStorageSettingsTest {
 
         mContactsStorageSettings.refreshUI();
 
-        SelectorWithWidgetPreference account1Preference = mScreen.findPreference(
+        SelectorWithWidgetPreference account1Preference = accountCategory.findPreference(
                 String.valueOf(TEST_ACCOUNT1.hashCode()));
-        assertThat(account1Preference.getTitle()).isEqualTo("LABEL1");
+        assertThat(account1Preference.getTitle()).isEqualTo("Device and LABEL1");
         assertThat(account1Preference.getSummary()).isEqualTo("test@gmail.com");
         assertThat(account1Preference.getIcon()).isNotNull();
 
-        SelectorWithWidgetPreference account2Preference = mScreen.findPreference(
+        SelectorWithWidgetPreference account2Preference = accountCategory.findPreference(
                 String.valueOf(TEST_ACCOUNT2.hashCode()));
-        assertThat(account2Preference.getTitle()).isEqualTo("LABEL2");
+        assertThat(account2Preference.getTitle()).isEqualTo("Device and LABEL2");
         assertThat(account2Preference.getSummary()).isEqualTo("test@samsung.com");
         assertThat(account2Preference.getIcon()).isNotNull();
 
@@ -286,21 +296,21 @@ public class ContactsStorageSettingsTest {
 
         mContactsStorageSettings.refreshUI();
 
-        SelectorWithWidgetPreference account1Preference = mScreen.findPreference(
+        SelectorWithWidgetPreference account1Preference = accountCategory.findPreference(
                 String.valueOf(TEST_ACCOUNT1.hashCode()));
-        assertThat(account1Preference.getTitle()).isEqualTo("LABEL1");
+        assertThat(account1Preference.getTitle()).isEqualTo("Device and LABEL1");
         assertThat(account1Preference.getSummary()).isEqualTo("test@gmail.com");
         assertThat(account1Preference.getIcon()).isNotNull();
 
-        SelectorWithWidgetPreference account2Preference = mScreen.findPreference(
+        SelectorWithWidgetPreference account2Preference = accountCategory.findPreference(
                 String.valueOf(TEST_ACCOUNT2.hashCode()));
-        assertThat(account2Preference.getTitle()).isEqualTo("LABEL2");
+        assertThat(account2Preference.getTitle()).isEqualTo("Device and LABEL2");
         assertThat(account2Preference.getSummary()).isEqualTo("test@samsung.com");
         assertThat(account2Preference.getIcon()).isNotNull();
 
-        SelectorWithWidgetPreference account3Preference = mScreen.findPreference(
+        SelectorWithWidgetPreference account3Preference = accountCategory.findPreference(
                 String.valueOf(TEST_ACCOUNT3.hashCode()));
-        assertThat(account3Preference.getTitle()).isEqualTo("LABEL3");
+        assertThat(account3Preference.getTitle()).isEqualTo("Device and LABEL3");
         assertThat(account3Preference.getSummary()).isEqualTo("test@outlook.com");
         assertThat(account3Preference.getIcon()).isNotNull();
 
@@ -327,7 +337,7 @@ public class ContactsStorageSettingsTest {
 
         mContactsStorageSettings.refreshUI();
 
-        SelectorWithWidgetPreference simPreference = mScreen.findPreference(
+        SelectorWithWidgetPreference simPreference = accountCategory.findPreference(
                 String.valueOf(SIM_ACCOUNT.hashCode()));
         assertThat(simPreference.getTitle()).isEqualTo("SIM");
         assertThat(simPreference.getSummary()).isEqualTo("SIM");

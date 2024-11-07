@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Parear novo dispositivo"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Ativar automaticamente amanhã"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Parear lado direito"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Parear lado esquerdo"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Pareie o outro lado"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Desativar Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Desativa o recurso de Bluetooth LE Audio caso o hardware do dispositivo tenha essa opção."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Modo Bluetooth LE Audio"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Ativar a visualização da interface de transmissão de Bluetooth LE Audio"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Ativa a visualização da interface de compartilhamento de LE Audio, incluindo o compartilhamento de áudio pessoal e a transmissão particular"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Mostrar a chave do Bluetooth LE Audio nos Detalhes do dispositivo"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Ignorar lista de permissões do Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Usar o áudio de baixo consumo (LE Audio) por padrão, mesmo que o periférico dele não tenha sido verificado para atender aos critérios da lista de permissões."</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Levante o dedo e depois toque no sensor novamente"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Não foi possível usar o sensor de impressão digital"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Entre em contato com uma assistência técnica."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Desbloqueio por impressão digital com a tela desligada"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Use o Desbloqueio por impressão digital mesmo com a tela desligada"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Tela desligada, Desbloqueio"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Mais configurações de segurança"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Bloqueio do perfil de trabalho, criptografia e muito mais"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Criptografia, credenciais e muito mais"</string>
@@ -1306,7 +1309,7 @@
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Será desativado automaticamente: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Será desativado automaticamente após a hora de dormir"</string>
     <string name="dark_ui_summary_on_auto_mode_modes" msgid="7769594183411785087">"Será desativado quando o modo <xliff:g id="ID_1">%1$s</xliff:g> terminar"</string>
-    <string name="dark_ui_text" msgid="4392646155331126666">"O tema escuro usa um plano de fundo preto para aumentar a duração da bateria em algumas telas. Ele é ativado apenas depois que a tela for desligada."</string>
+    <string name="dark_ui_text" msgid="4392646155331126666">"O tema escuro usa um plano de fundo preto para ajudar a prolongar a duração da bateria. Só é ativado por Programação depois que a tela for desativada."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"O tema escuro está seguindo sua programação do Modo hora de dormir"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Configurações do Modo hora de dormir"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Os modos também podem ativar o tema escuro}=1{O modo {mode_1} também ativa o tema escuro}=2{Os modos {mode_1} e {mode_2} também ativam o tema escuro}=3{Os modos {mode_1}, {mode_2} e {mode_3} também ativam o tema escuro}one{Os modos {mode_1}, {mode_2} e mais # também ativam o tema escuro}other{Os modos {mode_1}, {mode_2} e mais # também ativam o tema escuro}}"</string>
@@ -1600,7 +1603,7 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Ponto de acesso, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Não está compartilhando a Internet com outros dispositivos"</string>
-    <string name="tether_preference_summary_off" msgid="6266799346319794630">"Desativados"</string>
+    <string name="tether_preference_summary_off" msgid="6266799346319794630">"Desativado"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Tethering USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Tethering Bluetooth"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Tethering Ethernet"</string>
@@ -2012,7 +2015,7 @@
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Deslize para cima com três dedos em qualquer lugar do touchpad"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Voltar"</string>
     <string name="gesture_summary_go_back" msgid="4981604277892236888">"Deslize da esquerda ou direita com três dedos"</string>
-    <string name="gesture_title_recent_apps" msgid="6082688963233208761">"Conferir os apps recentes"</string>
+    <string name="gesture_title_recent_apps" msgid="6082688963233208761">"Ver os apps recentes"</string>
     <string name="gesture_summary_recent_apps" msgid="6643179135202417509">"Deslize para cima com três dedos, segure e depois solte"</string>
     <string name="gesture_title_notifications" msgid="791717222472350194">"Abrir notificações e Configurações rápidas"</string>
     <string name="gesture_summary_notifications" msgid="8419514601638387255">"Deslize para baixo com três dedos na tela inicial"</string>
@@ -2579,10 +2582,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Ajustar uso de energia"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Pacotes incluídos"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Os apps estão funcionando normalmente"</string>
-    <!-- no translation found for battery_tip_replacement_title (3932335880485957919) -->
-    <skip />
-    <!-- no translation found for battery_tip_replacement_summary (7892640031317153349) -->
-    <skip />
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"É recomendável trocar a bateria"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"A capacidade e o desempenho de carregamento estão reduzidos. Recomendamos a troca da bateria."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Nível da bateria baixo"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Ativar a Economia de bateria para prolongar a duração da carga"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Melhorar a duração da bateria"</string>
@@ -2782,7 +2783,7 @@
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"<xliff:g id="VPN_COUNT">%d</xliff:g> não segura"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"Conectividade adaptável"</string>
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"Aumenta a duração da bateria e melhora o desempenho do dispositivo ao gerenciar suas conexões de rede automaticamente"</string>
-    <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Ativado"</string>
+    <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"Ativada"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"Desativada"</string>
     <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"Usar Conectividade adaptável"</string>
     <string name="cellular_security_title" msgid="5562899485544677941">"Segurança de rede móvel"</string>
@@ -5471,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Ouvir o stream"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Use o QR code de um stream de áudio para ouvir com <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Não é possível editar a senha enquanto compartilha. Para mudar a senha, primeiro desligue o compartilhamento de áudio."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"A senha precisa ter de 4 a 16 caracteres e usar apenas letras, números e símbolos"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Leitor de QR code"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Precisa de ajuda?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Pesquisar configurações"</string>
@@ -5484,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Erro ao definir a conta padrão"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Nenhuma conta padrão configurada"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Somente dispositivo"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Adicione uma conta para começar"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Circule para pesquisar"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Toque no botão home ou na alça de navegação e pressione para pesquisar usando o conteúdo na tela."</string>
 </resources>
