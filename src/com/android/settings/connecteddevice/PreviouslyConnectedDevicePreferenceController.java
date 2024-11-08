@@ -54,10 +54,8 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static final int MAX_DEVICE_NUM = 3;
-    private static final int DOCK_DEVICE_INDEX = 9;
     private static final String KEY_SEE_ALL = "previously_connected_devices_see_all";
 
-    private final List<Preference> mDevicesList = new ArrayList<>();
     private final List<Preference> mDockDevicesList = new ArrayList<>();
     private final Map<BluetoothDevice, Preference> mDevicePreferenceMap = new HashMap<>();
     private final BluetoothAdapter mBluetoothAdapter;
@@ -118,6 +116,8 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
         mContext.registerReceiver(mReceiver, mIntentFilter,
                 Context.RECEIVER_EXPORTED_UNAUDITED);
         mBluetoothDeviceUpdater.refreshPreference();
+        Log.d(TAG, "Updating preference group by onStart on thread "
+                + Thread.currentThread().getName());
         updatePreferenceGroup();
     }
 
@@ -146,53 +146,9 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
         if (DEBUG) {
             Log.d(TAG, "onDeviceAdded() " + preference.getTitle());
         }
+        Log.d(TAG, "Updating preference group by onDeviceAdded on thread "
+                + Thread.currentThread().getName());
         updatePreferenceGroup();
-    }
-
-    private void addPreference(int index, Preference preference) {
-        if (preference instanceof BluetoothDevicePreference) {
-            if (index >= 0 && mDevicesList.size() >= index) {
-                mDevicesList.add(index, preference);
-            } else {
-                mDevicesList.add(preference);
-            }
-        } else {
-            mDockDevicesList.add(preference);
-        }
-        addPreference();
-    }
-
-    private void addPreference() {
-        mPreferenceGroup.removeAll();
-        mPreferenceGroup.addPreference(mSeeAllPreference);
-        final int size = getDeviceListSize();
-        for (int i = 0; i < size; i++) {
-            if (DEBUG) {
-                Log.d(TAG, "addPreference() add device : " + mDevicesList.get(i).getTitle());
-            }
-            mDevicesList.get(i).setOrder(i);
-            mPreferenceGroup.addPreference(mDevicesList.get(i));
-        }
-        if (mDockDevicesList.size() > 0) {
-            for (int i = 0; i < getDockDeviceListSize(MAX_DEVICE_NUM - size); i++) {
-                if (DEBUG) {
-                    Log.d(TAG, "addPreference() add dock device : "
-                            + mDockDevicesList.get(i).getTitle());
-                }
-                mDockDevicesList.get(i).setOrder(DOCK_DEVICE_INDEX);
-                mPreferenceGroup.addPreference(mDockDevicesList.get(i));
-            }
-        }
-    }
-
-    private int getDeviceListSize() {
-        return mDevicesList.size() >= MAX_DEVICE_NUM
-                ? MAX_DEVICE_NUM : mDevicesList.size();
-    }
-
-    private int getDockDeviceListSize(int availableSize) {
-        return mDockDevicesList.size() >= availableSize
-                ? availableSize : mDockDevicesList.size();
     }
 
     @Override
@@ -207,19 +163,22 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
         if (DEBUG) {
             Log.d(TAG, "onDeviceRemoved() " + preference.getTitle());
         }
+        Log.d(TAG, "Updating preference group by onDeviceRemoved on thread "
+                + Thread.currentThread().getName());
         updatePreferenceGroup();
     }
 
     /** Sort the preferenceGroup by most recently used. */
     public void updatePreferenceGroup() {
         mPreferenceGroup.removeAll();
-        mPreferenceGroup.addPreference(mSeeAllPreference);
         if (mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()) {
             // Bluetooth is supported
             int order = 0;
             for (BluetoothDevice device : mBluetoothAdapter.getMostRecentlyConnectedDevices()) {
                 Preference preference = mDevicePreferenceMap.getOrDefault(device, null);
                 if (preference != null) {
+                    Log.d(TAG, "Adding preference with order " + order + " when there are "
+                            + mPreferenceGroup.getPreferenceCount());
                     preference.setOrder(order);
                     mPreferenceGroup.addPreference(preference);
                     order += 1;
@@ -237,6 +196,7 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
                 order += 1;
             }
         }
+        mPreferenceGroup.addPreference(mSeeAllPreference);
         updatePreferenceVisibility();
     }
 
