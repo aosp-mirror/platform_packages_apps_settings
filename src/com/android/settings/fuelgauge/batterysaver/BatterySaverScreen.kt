@@ -39,7 +39,9 @@ class BatterySaverScreen : PreferenceScreenCreator {
 
     override fun hasCompleteHierarchy() = false
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {
+        +BatterySaverPreference()
+    }
 
     companion object {
         const val KEY = "battery_saver_screen"
