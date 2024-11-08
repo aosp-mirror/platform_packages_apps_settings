@@ -179,7 +179,7 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
         super(context, KEY);
         mBtManager = Utils.getLocalBtManager(mContext);
         mExecutor = Executors.newSingleThreadExecutor();
-        if (BluetoothUtils.isAudioSharingEnabled()) {
+        if (BluetoothUtils.isAudioSharingUIAvailable(mContext)) {
             mBroadcast =
                     mBtManager == null
                             ? null
@@ -200,7 +200,7 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
             Log.d(TAG, "onStart() Bluetooth is not supported on this device");
             return;
         }
-        if (BluetoothUtils.isAudioSharingEnabled()) {
+        if (BluetoothUtils.isAudioSharingUIAvailable(mContext)) {
             registerAudioSharingCallbacks();
         }
         mBtManager.getEventManager().registerCallback(this);
@@ -216,7 +216,7 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
             Log.d(TAG, "onStop() Bluetooth is not supported on this device");
             return;
         }
-        if (BluetoothUtils.isAudioSharingEnabled()) {
+        if (BluetoothUtils.isAudioSharingUIAvailable(mContext)) {
             unregisterAudioSharingCallbacks();
         }
         if (mBluetoothDeviceUpdater != null) {
@@ -278,7 +278,7 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
     public void onDeviceClick(Preference preference) {
         final CachedBluetoothDevice cachedDevice =
                 ((BluetoothDevicePreference) preference).getBluetoothDevice();
-        if (BluetoothUtils.isAudioSharingEnabled() && mDialogHandler != null) {
+        if (BluetoothUtils.isAudioSharingUIAvailable(mContext) && mDialogHandler != null) {
             mDialogHandler.handleDeviceConnected(cachedDevice, /* userTriggered= */ true);
             FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
                     .action(mContext, SettingsEnums.ACTION_MEDIA_DEVICE_CLICK);
@@ -294,7 +294,7 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
                         fragment.getContext(),
                         AvailableMediaDeviceGroupController.this,
                         fragment.getMetricsCategory());
-        if (BluetoothUtils.isAudioSharingEnabled()) {
+        if (BluetoothUtils.isAudioSharingUIAvailable(mContext)) {
             mDialogHandler = new AudioSharingDialogHandler(mContext, fragment);
         }
     }
@@ -341,7 +341,7 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
                             if (isAudioModeOngoingCall(mContext)) {
                                 // in phone call
                                 titleResId = R.string.connected_device_call_device_title;
-                            } else if (BluetoothUtils.isAudioSharingEnabled()
+                            } else if (BluetoothUtils.isAudioSharingUIAvailable(mContext)
                                     && BluetoothUtils.isBroadcasting(mBtManager)) {
                                 // without phone call, in audio sharing
                                 titleResId = R.string.audio_sharing_media_device_group_title;
