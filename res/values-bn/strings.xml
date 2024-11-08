@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"নতুন ডিভাইস পেয়ার করুন"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"ব্লুটুথ"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"আগামীকাল অটোমেটিক চালু হয়ে যাবে"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"ডান কানে পেয়ার করুন"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"বাঁ কানে পেয়ার করুন"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"অন্য হিয়ারিং এড পেয়ার করুন"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"ব্লুটুথ LE অডিও বন্ধ করুন"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"ডিভাইসে LE অডিও হার্ডওয়্যার কাজ করলে, ব্লুটুথ LE অডিও ফিচার বন্ধ করে।"</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"ব্লুটুথ LE অডিও মোড"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"ব্লুটুথ LE অডিও ব্রডকাস্ট UI প্রিভিউ চালু করুন"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"LE অডিও শেয়ারিং প্রিভিউ সহ ব্যক্তিগত অডিও শেয়ারিং এবং ব্যক্তিগত ব্রডকাস্ট চালু করে"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"ডিভাইসের বিবরণে LE অডিও টগল দেখুন"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"ব্লুটুথ LE অডিও-এর সাদাতালিকা বাইপাস করুন"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE অডিও-এর সাদাতালিকার শর্ত পূর্ণ করতে LE অডিও-এর পেরিফেরাল যাাচাই করা না হলেও ডিফল্ট হিসেবে LE অডিও ব্যবহার করুন।"</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"আঙ্গুল তুলুন, তারপরে আবার সেন্সরে স্পর্শ করুন"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"ফিঙ্গারপ্রিন্ট সেন্সর ব্যবহার করা যাচ্ছে না"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"এটি সারাতে পারবেন এমন কারওর কাছে যান।"</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"স্ক্রিন-বন্ধ থাকা অবস্থায় \'ফিঙ্গারপ্রিন্ট আনলক\' ফিচার ব্যবহার করুন"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"\'ফিঙ্গারপ্রিন্ট আনলক\' ফিচার ব্যবহার করুন, এমনকি স্ক্রিন বন্ধ করা থাকলেও"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"স্ক্রিন-বন্ধ, আনলক করুন"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"আরও নিরাপত্তা সেটিংস"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"অফিস প্রোফাইল লক, এনক্রিপশন এবং আরও অনেক কিছু"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"এনক্রিপশন, ক্রেডেনশিয়াল এবং আরও অনেক কিছু"</string>
@@ -1306,7 +1309,7 @@
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"<xliff:g id="ID_1">%1$s</xliff:g> টার সময় নিজে থেকে বন্ধ হবে"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"ঘুমানোর সময় অটোমেটিক বন্ধ হয়ে যাবে"</string>
     <string name="dark_ui_summary_on_auto_mode_modes" msgid="7769594183411785087">"<xliff:g id="ID_1">%1$s</xliff:g> শেষ হলে বন্ধ হবে"</string>
-    <string name="dark_ui_text" msgid="4392646155331126666">"ব্যাটারি যাতে অনেক্ষণ চলতে পারে সেই জন্য গাঢ় থিম কিছু স্ক্রিনে কালো রঙয়ের ব্যাকগ্রাউন্ড ব্যবহার করে। গাঢ় থিমের সময়সূচি আপনার স্ক্রিনটি বন্ধ না হওয়া পর্যন্ত চালু হওয়ার জন্য অপেক্ষা করে।"</string>
+    <string name="dark_ui_text" msgid="4392646155331126666">"ব্যাটারি যাতে অনেকক্ষণ চলতে পারে সেই জন্য গাঢ় থিম কিছু স্ক্রিনে কালো রঙয়ের ব্যাকগ্রাউন্ড ব্যবহার করে। গাঢ় থিমের সময়সূচি আপনার স্ক্রিনটি বন্ধ না হওয়া পর্যন্ত চালু হওয়ার জন্য অপেক্ষা করে।"</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"ডার্ক থিম বর্তমানে আপনার বেডটাইম মোডের শিডিউল অনুযায়ী চালু বা বন্ধ হয়"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"বেডটাইম মোডের সেটিংস"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{এছাড়া, মোড, ডার্ক থিম চালু করতে পারে}=1{এছাড়া, {mode_1} ডার্ক থিম চালু করে}=2{এছাড়া, {mode_1} ও {mode_2} ডার্ক থিম চালু করে}=3{এছাড়া, {mode_1}, {mode_2} ও {mode_3} ডার্ক থিম চালু করে}one{{mode_1}, {mode_2} ও আরও #টি মোড ডার্ক থিম চালু করে}other{{mode_1}, {mode_2} ও আরও #টি মোড ডার্ক থিম চালু করে}}"</string>
@@ -3840,7 +3843,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"কল"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"কল"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"যে কলগুলি \'বিরক্ত করবে না\' মোড এড়িয়ে নিজের কাজ করতে পারে"</string>
-    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"কল আসলে রিং বাজবে কিনা তা নিশ্চিত করতে ডিভাইসটি রিং হওয়ার মোডে সেট করা আছে কিনা"</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"কল আসলে রিং বাজবে কিনা তা নিশ্চিত করতে ডিভাইসটি রিং হওয়ার মোডে সেট করা আছে কিনা দেখুন"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’-এর জন্য ইনকামিং কল ব্লক করা হয়েছে। আপনার বন্ধুবান্ধব, পরিবারের সদস্য অথবা অন্য পরিচিতিরা যাতে আপনার সাথে যোগাযোগ করতে পারেন তার জন্য আপনি সেটিংস অ্যাডজাস্ট করে নিতে পারেন।"</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"তারা চিহ্নিত পরিচিতি"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{কেউ নেই}=1{{contact_1}}=2{{contact_1} এবং {contact_2}}=3{{contact_1}, {contact_2} এবং {contact_3}}one{{contact_1}, {contact_2} এবং অন্যান্য #জন}other{{contact_1}, {contact_2} এবং অন্যান্য #জন}}"</string>
@@ -3898,7 +3901,7 @@
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"অ্যাপ যোগ করুন"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"সব বিজ্ঞপ্তি"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"কিছু বিজ্ঞপ্তি"</string>
-    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"এমনকী আপনি অ্যাপগুলিকে বিরক্ত করতে না দিলেও বেছে নেওয়া লোকজন আপনার সাথে যোগাযোগ করতে পারবেন"</string>
+    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"আপনি অ্যাপগুলিকে বিরক্ত করতে না দিলেও বেছে নেওয়া লোকজন আপনার সাথে যোগাযোগ করতে পারবেন"</string>
     <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{কোনও অ্যাপই বাধা দিতে পারবে না}=1{{app_1} বাধা দিতে পারবে}=2{{app_1} ও {app_2} বাধা দিতে পারবে}=3{{app_1}, {app_2} ও {app_3} বাধা দিতে পারবে}one{{app_1}, {app_2}, ও #টি অ্যাপ বাধা দিতে পারবে}other{{app_1}, {app_2}, ও #টি অ্যাপ বাধা দিতে পারবে}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"অ্যাপ"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"যে বিজ্ঞপ্তিগুলি \'বিরক্ত করবে না\' মোড এড়িয়ে নিজের কাজ করতে পারে"</string>
@@ -5469,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"স্ট্রিম শুনুন"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-এর মাধ্যমে শুনতে অডিও স্ট্রিম QR কোড স্ক্যান করুন"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"শেয়ারিং চলাকালীন পাসওয়ার্ড এডিট করতে পারবেন না। পাসওয়ার্ড পরিবর্তন করতে, প্রথমে অডিও শেয়ারিং বন্ধ করুন।"</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"আপনার পাসওয়ার্ডে অবশ্যই ৪-১৬টি অক্ষর থাকতে হবে এবং শুধু বর্ণ, সংখ্যা ও চিহ্ন ব্যবহার করতে হবে"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR কোড স্ক্যানার"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"সাহায্য প্রয়োজন?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"সেটিংস সার্চ করুন"</string>
@@ -5482,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"ডিফল্ট অ্যাকাউন্ট সেট করার সময় কোনও সমস্যা হয়েছে"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"কোনও ডিফল্ট অ্যাকাউন্ট সেট করা নেই"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"শুধুমাত্র ডিভাইস"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"শুরু করতে একটি অ্যাকাউন্ট যোগ করুন"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"খোঁজার জন্য সার্কেল বানান"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"আপনার স্ক্রিনে কন্টেন্ট ব্যবহার করে সার্চ করতে হোম বোতাম বা নেভিগেশন হ্যান্ডেল টাচ করে ধরে রাখুন।"</string>
 </resources>

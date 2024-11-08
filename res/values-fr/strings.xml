@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Associer un appareil"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Activer automatiquement demain"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Associer le droit"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Associer le gauche"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Associer l\'autre appareil"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Désactiver Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Désactive la fonctionnalité Bluetooth LE Audio si l\'appareil est compatible avec les capacités matérielles LE Audio"</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Mode Bluetooth LE Audio"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Activer l\'aperçu de l\'UI de diffusion Bluetooth LE Audio"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Active l\'aperçu de l\'UI de partage LE Audio, y compris le partage audio personnel et la diffusion privée"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Bouton LE Audio dans Détails appareil"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Liste d\'autorisation de contournement Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Utilisez LE Audio par défaut même si le respect des critères de la liste d\'autorisation par le périphérique LE Audio n\'a pas été validé."</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Relevez le doigt, puis reposez-le sur le lecteur"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Impossible d\'utiliser le lecteur d\'empreinte digitale"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Contactez un réparateur."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Déverrouillage par empreinte digitale avec l\'écran éteint"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Utilisez le déverrouillage par empreinte digitale même lorsque l\'écran est éteint"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Écran éteint, déverrouillage"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Autres paramètres de sécurité"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Verrouillage du profil professionnel, chiffrement et plus"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Chiffrement, identifiants et plus"</string>
@@ -2216,7 +2219,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"Raccourci des boutons de volume"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"Raccourci Appuyer trois fois"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"Raccourci Appuyer deux fois avec %1$d doigts"</string>
-    <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Raccourci des réglages rapides"</string>
+    <string name="accessibility_tutorial_dialog_title_quick_setting" msgid="2905083277641794558">"Raccourci vers Réglages rapides"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4541649734549409614">"Raccourci : geste d\'accessibilité"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Utiliser le geste d\'accessibilité"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="8977286776192770246">"Pour utiliser cette fonctionnalité, appuyez sur le bouton Accessibilité (<xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>) en bas de votre écran.\n\nPour changer de fonctionnalité, appuyez dessus de manière prolongée."</string>
@@ -2579,10 +2582,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Ajuster la consommation"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Modules inclus"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Les applications s\'exécutent normalement"</string>
-    <!-- no translation found for battery_tip_replacement_title (3932335880485957919) -->
-    <skip />
-    <!-- no translation found for battery_tip_replacement_summary (7892640031317153349) -->
-    <skip />
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"Remplacement de la batterie recommandé"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"La capacité de la batterie et les performances de recharge sont réduites. Nous vous recommandons de remplacer la batterie."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Niveau de batterie faible"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Activer l\'économiseur de batterie pour prolonger l\'autonomie"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Améliorer l\'autonomie de la batterie"</string>
@@ -3696,12 +3697,12 @@
     <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"L\'appli <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> pourra lire toutes les notifications, y compris des informations personnelles comme le nom des contacts, les photos et le texte des messages que vous recevez. Cette appli pourra aussi suspendre ou fermer des notifications, ou effectuer l\'action spécifique aux boutons dans ces notifications (répondre aux appels, par exemple). \n\nElle pourra enfin activer ou désactiver Ne pas déranger, et modifier les paramètres associés."</string>
     <string name="nls_warning_prompt" msgid="1486887096703743841">"L\'appli <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> pourra :"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Lire vos notifications"</string>
-    <string name="nls_feature_read_summary" msgid="1064698238110273593">"Pourra lire vos notifications, y compris des informations personnelles comme les contacts, les messages et les photos"</string>
+    <string name="nls_feature_read_summary" msgid="1064698238110273593">"Elle pourra lire vos notifications, y compris des informations personnelles comme les contacts, les messages et les photos."</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"Répondre aux messages"</string>
-    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Pourra répondre aux messages et agir sur les boutons dans les notifications, y compris mettre en attente ou fermer les notifications et répondre aux appels"</string>
+    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Elle pourra répondre aux messages et agir sur les boutons dans les notifications, y compris mettre en attente ou fermer les notifications et répondre aux appels."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Modifier les paramètres"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Pourra activer ou désactiver Ne pas déranger, et modifier les paramètres associés"</string>
-    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"Peut gérer et activer les modes ou encore modifier les paramètres associés."</string>
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"Elle pourra gérer et activer les modes ou encore modifier les paramètres associés."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Si vous désactivez l\'accès aux notifications pour <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, l\'accès à Ne pas déranger pourra aussi être désactivé."</string>
     <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"Si vous désactivez l\'accès aux notifications pour <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, l\'accès aux modes peut également être désactivé."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Désactiver"</string>
@@ -5345,7 +5346,7 @@
     <string name="color_inversion_feature_summary" msgid="1199876648549627647">"Assombrir les écrans clairs et éclaircir les écrans sombres"</string>
     <string name="magnification_feature_summary" msgid="2053971569640663564">"Faire un zoom avant sur l\'écran"</string>
     <string name="autoclick_disabled" msgid="3213396804955002120">"Désactivé"</string>
-    <string name="show_captions_disabled" msgid="690650956523818755">"Désactivées"</string>
+    <string name="show_captions_disabled" msgid="690650956523818755">"Désactivé"</string>
     <string name="show_captions_enabled" msgid="7089043007924626">"Activé"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Désactivés"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Activés"</string>
@@ -5471,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Écouter le flux"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Scanner le code QR d\'un flux audio pour l\'écouter avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Impossible de modifier le mot de passe lors du partage. Pour modifier le mot de passe, il faut d\'abord désactiver le partage audio."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Votre mot de passe doit contenir entre 4 et 16 caractères et n\'être composé que de lettres, de chiffres et de symboles"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Lecteur de code QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Besoin d\'aide ?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Rechercher un paramètre"</string>
@@ -5484,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Erreur lors de la définition du compte par défaut"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Aucun compte par défaut n\'a été défini"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Appareil uniquement"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Ajoutez un compte pour commencer"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Entourer pour chercher"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Appuyez de manière prolongée sur le bouton d\'accueil ou la barre de navigation pour effectuer une recherche basée sur le contenu de votre écran."</string>
 </resources>

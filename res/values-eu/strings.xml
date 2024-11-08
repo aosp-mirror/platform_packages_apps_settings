@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Parekatu beste gailu batekin"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetootha"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Aktibatu automatikoki bihar"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Parekatu eskuineko audifonoa"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Parekatu ezkerreko audifonoa"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Parekatu beste audifonoa"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Desgaitu kontsumo txikiko Bluetooth bidezko audioa"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Kontsumo txikiko Bluetooth bidezko audioa darabilten hardware-gaitasunak gailuarekin bateragarriak badira, Kontsumo txikiko Bluetooth bidezko audioa eginbidea desgaitzen du."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Kontsumo txikiko Bluetooth bidezko audioaren modua"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Gaitu kontsumo txikiko Bluetooth bidezko audioa igortzeko erabiltzaile-interfazearen aurrebista"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Kontsumo txikiko Bluetooth bidezko audioa partekatzeko erabiltzaile-interfazearen aurrebista gaitzen du, audio pertsonala partekatzeko eginbidea eta aldi bereko igorpen pribatuak barne"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Erakutsi kontsumo txikiko audioaren etengailua gailuaren xehetasunetan"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Ez aplikatu kontsumo txikiko Bluetooth bidezko audioaren baimendutakoen zerrenda"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Erabili kontsumo txikiko audioa modu lehenetsian, hura darabilen gailu periferikoak baimendutakoen zerrendako irizpideak betetzen dituen egiaztatu ez bada ere."</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Jaso hatza eta sakatu berriro sentsorea"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Ezin da erabili hatz-marken sentsorea"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Joan konponketak egiten dituen hornitzaile baten webgunera edo dendara."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Pantaila itzalita dagoela hatz-marka bidez desblokeatzeko eginbidea"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Erabili hatz-marka bidez desblokeatzeko eginbidea pantaila itzalita badago ere"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Pantaila itzalita dagoela desblokeatzeko eginbidea"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Segurtasun-ezarpen gehiago"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Laneko profilaren blokeoa, enkriptatzea eta abar"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Enkriptatzea, kredentzialak eta abar"</string>
@@ -1309,7 +1312,7 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"Gai ilunak atzeko plano beltza erabiltzen du bateriak gehiago iraun dezan pantaila batzuetan. Gai ilunaren programazioak ez dira aktibatzen pantaila itzaltzen den arte."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Une honetan, gai iluna lo egiteko garaiaren moduaren programazioarekin bat dator"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Lo egiteko garaiaren moduaren ezarpenak"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Moduek gai iluna ere aktiba dezakete}=1{{mode_1} moduak gai iluna ere aktibatzen du}=2{{mode_1} eta {mode_2} moduek gai iluna ere aktibatzen dute}=3{{mode_1}, {mode_2} eta {mode_3} moduek gai iluna ere aktibatzen dute}other{{mode_1}, {mode_2} eta beste # moduk gai iluna ere aktibatzen dute}}"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Moduek ere gai iluna aktiba dezakete}=1{{mode_1} moduak ere gai iluna aktibatzen du}=2{{mode_1} eta {mode_2} moduek ere gai iluna aktibatzen dute}=3{{mode_1}, {mode_2} eta {mode_3} moduek ere gai iluna aktibatzen dute}other{{mode_1}, {mode_2} eta beste # moduk ere gai iluna aktibatzen dute}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Moduen ezarpenak"</string>
     <string name="even_dimmer_display_title" msgid="6731255736830410149">"Are ilunago"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Eman ohi baino gehiago iluntzeko baimena gailuari"</string>
@@ -1963,27 +1966,19 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Tekla itsaskorrak"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Lasterbideetan, sakatu teklak banan-banan, guztiak aldi berean sakatu ordez"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Saguaren teklak"</string>
-    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
-    <skip />
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Erabili saguaren teklak"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Erabili teklatua erakuslea kontrolatzeko"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Saguarekin gora eta behera alderantziz egiteko aukera"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Egin gora orria beherantz mugitzeko"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Aldatu ezkerreko eta eskuineko botoiak"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Erabili saguaren ezkerreko botoia eskuinekoa balitz bezala"</string>
-    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
-    <skip />
-    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
-    <skip />
-    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
-    <skip />
-    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
-    <skip />
-    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
-    <skip />
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"<xliff:g id="KEYBOARD_NAME">%s</xliff:g> teklatuko saguaren teklak"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Erabili <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> teklak saguaren erakuslea mugitzeko"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Erabili <xliff:g id="CLICK_LABEL">%s</xliff:g> tekla saguaren botoi nagusia sakatzeko"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"Erabili <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> tekla saguaren botoi nagusia sakatuta edukitzeko"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Erabili <xliff:g id="RELEASE_LABEL">%s</xliff:g> tekla saguaren botoi nagusia askatzeko"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Erabili <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> tekla gora/behera egiteko modua aldatzeko. Horrela, <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> teklekin gora, behera, ezkerrera edo eskuinera mugituko da ikuspegia."</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Erabili <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> tekla saguaren bigarren mailako botoia sakatzeko"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Lasterbideak"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Erakutsi lasterbideen zerrenda"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Laneko profilaren teklatuak eta tresnak"</string>
@@ -2587,10 +2582,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Doitu energia-erabilera"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Sartutako paketeak"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Aplikazioak ohiko moduan dabiltza"</string>
-    <!-- no translation found for battery_tip_replacement_title (3932335880485957919) -->
-    <skip />
-    <!-- no translation found for battery_tip_replacement_summary (7892640031317153349) -->
-    <skip />
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"Bateria aldatzea gomendatzen da"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"Bateriaren ahalmena eta kargatzeko abiadura murriztuta daude, eta bateria ordeztea gomendatzen da."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Bateria-maila baxua"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Aktibatu Bateria-aurreztailea bateriaren iraupena luzatzeko"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Hobetu bateriaren iraupena"</string>
@@ -3431,8 +3424,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"09:00-17:00, astegunetan\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Egutegiko gertaerak"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{\"{mode_1}\" aktibo dago}=2{\"{mode_1}\" eta \"{mode_2}\" aktibo daude}=3{\"{mode_1}\", \"{mode_2}\" eta \"{mode_3}\" aktibo daude}other{\"{mode_1}\", \"{mode_2}\" eta beste # aktibo daude}}"</string>
-    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
-    <skip />
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Ez molestatzeko modua}=1{{mode_1}}=2{{mode_1}, {mode_2}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"AKTIBATUTA"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Ezarri gabe"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Desgaituta"</string>
@@ -3736,11 +3728,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Epe labur batean jakinarazpen ugari jasotzen badituzu, gailuak bolumena jaitsiko du eta alertak murriztuko ditu 2 minutuz (gehienez). Ezarpen horrek ez die eragiten deiei, alarmei eta lehentasunezko elkarrizketei. \n\nArintze-aldi horretan jasotako jakinarazpenak ikusteko, pasatu hatza pantailaren goialdetik behera."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Aplikatu laneko profiletan"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Aplikatu laneko profileko aplikazioetan"</string>
-    <string name="vr_listeners_title" msgid="4960357292472540964">"Errealitate birtualeko laguntza-zerbitzuak"</string>
-    <string name="no_vr_listeners" msgid="8442646085375949755">"Ez dago errealitate birtualeko laguntza-zerbitzu gisa abiaraztea eskatu duen aplikaziorik instalatuta."</string>
-    <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Errealitate birtualeko zerbitzuak erabiltzeko baimena eman nahi diozu <xliff:g id="SERVICE">%1$s</xliff:g> zerbitzuari?"</string>
+    <string name="vr_listeners_title" msgid="4960357292472540964">"EBko laguntza-zerbitzuak"</string>
+    <string name="no_vr_listeners" msgid="8442646085375949755">"Ez dago EBko laguntza-zerbitzu gisa abiaraztea eskatu duen aplikaziorik instalatuta."</string>
+    <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"EBko zerbitzuak erabiltzeko baimena eman nahi diozu <xliff:g id="SERVICE">%1$s</xliff:g> zerbitzuari?"</string>
     <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"Aplikazioak errealitate birtualean erabiltzen dituzunean abiarazi ahal izango da  <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g>."</string>
-    <string name="display_vr_pref_title" msgid="4850474436291113569">"Errealitate birtualeko moduan"</string>
+    <string name="display_vr_pref_title" msgid="4850474436291113569">"EBko moduan"</string>
     <string name="display_vr_pref_low_persistence" msgid="7039841277157739871">"Murriztu lausotzea (gomendatua)"</string>
     <string name="display_vr_pref_off" msgid="4008841566387432721">"Murriztu distira"</string>
     <string name="picture_in_picture_title" msgid="9001594281840542493">"Pantaila txiki gainjarria"</string>
@@ -3822,7 +3814,7 @@
     <string name="zen_mode_event_rule_calendar_any" msgid="5152139705998281205">"Edozein egutegi"</string>
     <string name="zen_mode_event_rule_reply" msgid="6099405414361340225">"Erantzuna hau denean"</string>
     <string name="zen_mode_event_rule_reply_any_except_no" msgid="4672746760505346596">"Bai, Agian edo Erantzun gabe"</string>
-    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="6584448788100186574">"\"Bai\" edo \"Agian\""</string>
+    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="6584448788100186574">"Bai edo Agian"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="7812120982734551236">"Bai"</string>
     <string name="zen_mode_rule_not_found_text" msgid="5303667326973891036">"Ez da aurkitu araua."</string>
     <string name="zen_mode_rule_summary_enabled_combination" msgid="1183604368083885789">"Aktibatuta / <xliff:g id="MODE">%1$s</xliff:g>"</string>
@@ -5480,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Entzun zuzeneko igorpena"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> gailuarekin entzuteko, eskaneatu zuzeneko audio-igorpen baten QR kodea"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Ezin da editatu pasahitza audioa partekatu bitartean. Pasahitza aldatzeko, desaktibatu audioa partekatzeko eginbidea."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Pasahitzak 4-16 karaktere eduki behar ditu, eta hizkiak, zenbakiak eta ikurrak soilik erabil daitezke"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR kodeen eskanerra"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Laguntza behar duzu?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Bilatu ezarpenetan"</string>
@@ -5493,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Errore bat gertatu da kontu lehenetsia ezartzean"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Ez da ezarri kontu lehenetsirik"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Gailua soilik"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Hasteko, gehitu kontu bat"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Inguratu bilatzeko"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Pantailako edukia erabilita bilaketa egiteko, eduki sakatuta orri nagusira joateko botoia edo nabigazioaren kontrol-puntua."</string>
 </resources>
