@@ -4507,6 +4507,10 @@
                   android:label="@string/privacy_settings_title"
                   android:exported="true"
                   android:icon="@drawable/ic_settings_backup">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.BACKUP_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
