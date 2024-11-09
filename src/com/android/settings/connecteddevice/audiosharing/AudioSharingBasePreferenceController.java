@@ -55,7 +55,8 @@ public abstract class AudioSharingBasePreferenceController extends BasePreferenc
 
     @Override
     public int getAvailabilityStatus() {
-        return BluetoothUtils.isAudioSharingEnabled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return (BluetoothUtils.isAudioSharingUIAvailable(mContext))
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

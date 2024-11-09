@@ -228,19 +228,19 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
             final BluetoothDevice device = cachedDevice.getDevice();
             if (device != null
                     && mSelectedList.contains(device)) {
-                if (!BluetoothUtils.isAudioSharingEnabled()) {
+                if (BluetoothUtils.isAudioSharingUIAvailable(getContext())) {
+                    if (bluetoothProfile == BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT
+                            && state == BluetoothAdapter.STATE_CONNECTED
+                            && device.equals(mJustBonded)
+                            && mShouldTriggerAudioSharingShareThenPairFlow) {
+                        Log.d(getLogTag(),
+                                "onProfileConnectionStateChanged, assistant profile connected");
+                        dismissConnectingDialog();
+                        mHandler.removeMessages(AUTO_DISMISS_MESSAGE_ID);
+                        finishFragmentWithResultForAudioSharing(device);
+                    }
+                } else {
                     finish();
-                    return;
-                }
-                if (bluetoothProfile == BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT
-                        && state == BluetoothAdapter.STATE_CONNECTED
-                        && device.equals(mJustBonded)
-                        && mShouldTriggerAudioSharingShareThenPairFlow) {
-                    Log.d(getLogTag(),
-                            "onProfileConnectionStateChanged, assistant profile connected");
-                    dismissConnectingDialog();
-                    mHandler.removeMessages(AUTO_DISMISS_MESSAGE_ID);
-                    finishFragmentWithResultForAudioSharing(device);
                 }
             } else {
                 onDeviceDeleted(cachedDevice);
@@ -309,15 +309,17 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
 
     @VisibleForTesting
     boolean shouldTriggerAudioSharingShareThenPairFlow() {
-        if (!BluetoothUtils.isAudioSharingEnabled()) return false;
-        Activity activity = getActivity();
-        Intent intent = activity == null ? null : activity.getIntent();
-        Bundle args =
-                intent == null ? null :
-                        intent.getBundleExtra(
-                                SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
-        return args != null
-                && args.getBoolean(EXTRA_PAIR_AND_JOIN_SHARING, false);
+        if (BluetoothUtils.isAudioSharingUIAvailable(getContext())) {
+            Activity activity = getActivity();
+            Intent intent = activity == null ? null : activity.getIntent();
+            Bundle args =
+                    intent == null ? null :
+                            intent.getBundleExtra(
+                                    SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+            return args != null
+                    && args.getBoolean(EXTRA_PAIR_AND_JOIN_SHARING, false);
+        }
+        return false;
     }
 
     private void addOnMetadataChangedListener(@Nullable BluetoothDevice device) {
