@@ -62,32 +62,37 @@ public class AudioSharingIncompatibleDialogFragment extends InstrumentedDialogFr
      */
     public static void show(@Nullable Fragment host, @NonNull String deviceName,
             @NonNull DialogEventListener listener) {
-        if (host == null || !BluetoothUtils.isAudioSharingEnabled()) return;
-        final FragmentManager manager;
-        try {
-            manager = host.getChildFragmentManager();
-        } catch (IllegalStateException e) {
-            Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+        if (host == null) {
+            Log.d(TAG, "Fail to show dialog, host is null");
             return;
         }
-        Lifecycle.State currentState = host.getLifecycle().getCurrentState();
-        if (!currentState.isAtLeast(Lifecycle.State.STARTED)) {
-            Log.d(TAG, "Fail to show dialog with state: " + currentState);
-            return;
+        if (BluetoothUtils.isAudioSharingUIAvailable(host.getContext())) {
+            final FragmentManager manager;
+            try {
+                manager = host.getChildFragmentManager();
+            } catch (IllegalStateException e) {
+                Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+                return;
+            }
+            Lifecycle.State currentState = host.getLifecycle().getCurrentState();
+            if (!currentState.isAtLeast(Lifecycle.State.STARTED)) {
+                Log.d(TAG, "Fail to show dialog with state: " + currentState);
+                return;
+            }
+            sListener = listener;
+            AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
+            if (dialog != null) {
+                Log.d(TAG, "Dialog is showing, return.");
+                return;
+            }
+            Log.d(TAG, "Show up the incompatible device dialog.");
+            final Bundle bundle = new Bundle();
+            bundle.putString(BUNDLE_KEY_DEVICE_NAME, deviceName);
+            AudioSharingIncompatibleDialogFragment dialogFrag =
+                    new AudioSharingIncompatibleDialogFragment();
+            dialogFrag.setArguments(bundle);
+            dialogFrag.show(manager, TAG);
         }
-        sListener = listener;
-        AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
-        if (dialog != null) {
-            Log.d(TAG, "Dialog is showing, return.");
-            return;
-        }
-        Log.d(TAG, "Show up the incompatible device dialog.");
-        final Bundle bundle = new Bundle();
-        bundle.putString(BUNDLE_KEY_DEVICE_NAME, deviceName);
-        AudioSharingIncompatibleDialogFragment dialogFrag =
-                new AudioSharingIncompatibleDialogFragment();
-        dialogFrag.setArguments(bundle);
-        dialogFrag.show(manager, TAG);
     }
 
     @Override

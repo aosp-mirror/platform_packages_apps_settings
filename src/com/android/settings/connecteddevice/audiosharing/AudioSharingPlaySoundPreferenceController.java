@@ -57,7 +57,7 @@ public class AudioSharingPlaySoundPreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return (mRingtone != null && BluetoothUtils.isAudioSharingEnabled())
+        return (mRingtone != null && BluetoothUtils.isAudioSharingUIAvailable(mContext))
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
