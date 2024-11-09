@@ -55,7 +55,7 @@ public class AudioSharingBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         if (isDeviceConnected(cachedDevice) && isDeviceInCachedDevicesList(cachedDevice)) {
             // If device is LE audio device and has a broadcast source,
             // it would show in audio sharing devices group.
-            if (BluetoothUtils.isAudioSharingEnabled()
+            if (BluetoothUtils.isAudioSharingUIAvailable(mContext)
                     && cachedDevice.isConnectedLeAudioDevice()
                     && BluetoothUtils.hasConnectedBroadcastSource(cachedDevice, mLocalBtManager)) {
                 isFilterMatched = true;

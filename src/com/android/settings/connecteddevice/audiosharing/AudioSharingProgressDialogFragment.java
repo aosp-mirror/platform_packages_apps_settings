@@ -65,55 +65,66 @@ public class AudioSharingProgressDialogFragment extends InstrumentedDialogFragme
      * @param message The content to be shown on the dialog.
      */
     public static void show(@Nullable Fragment host, @NonNull String message) {
-        if (host == null || !BluetoothUtils.isAudioSharingEnabled()) return;
-        final FragmentManager manager;
-        try {
-            manager = host.getChildFragmentManager();
-        } catch (IllegalStateException e) {
-            Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+        if (host == null) {
+            Log.d(TAG, "Fail to show dialog, host is null");
             return;
         }
-        Lifecycle.State currentState = host.getLifecycle().getCurrentState();
-        if (!currentState.isAtLeast(Lifecycle.State.STARTED)) {
-            Log.d(TAG, "Fail to show dialog with state: " + currentState);
-            return;
-        }
-        AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
-        if (dialog != null) {
-            if (!sMessage.equals(message)) {
-                Log.d(TAG, "Update dialog message.");
-                TextView messageView = dialog.findViewById(R.id.message);
-                if (messageView != null) {
-                    messageView.setText(message);
-                }
-                sMessage = message;
+        if (BluetoothUtils.isAudioSharingUIAvailable(host.getContext())) {
+            final FragmentManager manager;
+            try {
+                manager = host.getChildFragmentManager();
+            } catch (IllegalStateException e) {
+                Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+                return;
             }
-            Log.d(TAG, "Dialog is showing, return.");
-            return;
+            Lifecycle.State currentState = host.getLifecycle().getCurrentState();
+            if (!currentState.isAtLeast(Lifecycle.State.STARTED)) {
+                Log.d(TAG, "Fail to show dialog with state: " + currentState);
+                return;
+            }
+            AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
+            if (dialog != null) {
+                if (!sMessage.equals(message)) {
+                    Log.d(TAG, "Update dialog message.");
+                    TextView messageView = dialog.findViewById(R.id.message);
+                    if (messageView != null) {
+                        messageView.setText(message);
+                    }
+                    sMessage = message;
+                }
+                Log.d(TAG, "Dialog is showing, return.");
+                return;
+            }
+            sMessage = message;
+            Log.d(TAG, "Show up the progress dialog.");
+            Bundle args = new Bundle();
+            args.putString(BUNDLE_KEY_MESSAGE, message);
+            AudioSharingProgressDialogFragment dialogFrag =
+                    new AudioSharingProgressDialogFragment();
+            dialogFrag.setArguments(args);
+            dialogFrag.show(manager, TAG);
         }
-        sMessage = message;
-        Log.d(TAG, "Show up the progress dialog.");
-        Bundle args = new Bundle();
-        args.putString(BUNDLE_KEY_MESSAGE, message);
-        AudioSharingProgressDialogFragment dialogFrag = new AudioSharingProgressDialogFragment();
-        dialogFrag.setArguments(args);
-        dialogFrag.show(manager, TAG);
     }
 
     /** Dismiss the {@link AudioSharingProgressDialogFragment} dialog. */
     public static void dismiss(@Nullable Fragment host) {
-        if (host == null || !BluetoothUtils.isAudioSharingEnabled()) return;
-        final FragmentManager manager;
-        try {
-            manager = host.getChildFragmentManager();
-        } catch (IllegalStateException e) {
-            Log.d(TAG, "Fail to dismiss dialog: " + e.getMessage());
+        if (host == null) {
+            Log.d(TAG, "Fail to dismiss dialog, host is null");
             return;
         }
-        AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
-        if (dialog != null) {
-            Log.d(TAG, "Dialog is showing, dismiss.");
-            dialog.dismiss();
+        if (BluetoothUtils.isAudioSharingUIAvailable(host.getContext())) {
+            final FragmentManager manager;
+            try {
+                manager = host.getChildFragmentManager();
+            } catch (IllegalStateException e) {
+                Log.d(TAG, "Fail to dismiss dialog: " + e.getMessage());
+                return;
+            }
+            AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
+            if (dialog != null) {
+                Log.d(TAG, "Dialog is showing, dismiss.");
+                dialog.dismiss();
+            }
         }
     }
 

@@ -17,6 +17,8 @@ package com.android.settings.network.tether
 
 import android.content.Context
 import android.net.TetheringManager
+import android.os.UserManager
+import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settings.network.TetherPreferenceController
@@ -28,7 +30,8 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen
-class TetherScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider {
+class TetherScreen :
+    PreferenceScreenCreator, PreferenceAvailabilityProvider, PreferenceRestrictionMixin {
 
     override val key: String
         get() = KEY
@@ -48,6 +51,11 @@ class TetherScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider {
         }
 
     override fun isAvailable(context: Context) = TetherUtil.isTetherAvailable(context)
+
+    override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
+
+    override val restrictionKey: String
+        get() = UserManager.DISALLOW_CONFIG_TETHERING
 
     override fun isFlagEnabled(context: Context) = Flags.catalystTetherSettings()
 
