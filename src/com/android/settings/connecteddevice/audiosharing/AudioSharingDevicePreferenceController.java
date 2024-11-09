@@ -308,7 +308,8 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        return BluetoothUtils.isAudioSharingEnabled() && mBluetoothDeviceUpdater != null
+        return (BluetoothUtils.isAudioSharingUIAvailable(mContext)
+                && mBluetoothDeviceUpdater != null)
                 ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
     }

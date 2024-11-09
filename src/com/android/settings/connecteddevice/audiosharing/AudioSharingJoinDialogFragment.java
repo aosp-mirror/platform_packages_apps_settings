@@ -77,39 +77,45 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
      * @param eventData The eventData to log with for dialog onClick events.
      */
     public static void show(
-            @NonNull Fragment host,
+            @Nullable Fragment host,
             @NonNull List<AudioSharingDeviceItem> deviceItems,
             @NonNull CachedBluetoothDevice newDevice,
             @NonNull DialogEventListener listener,
             @NonNull Pair<Integer, Object>[] eventData) {
-        if (!BluetoothUtils.isAudioSharingEnabled()) return;
-        final FragmentManager manager;
-        try {
-            manager = host.getChildFragmentManager();
-        } catch (IllegalStateException e) {
-            Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+        if (host == null) {
+            Log.d(TAG, "Fail to show dialog, host is null");
             return;
         }
-        Lifecycle.State currentState = host.getLifecycle().getCurrentState();
-        if (!currentState.isAtLeast(Lifecycle.State.STARTED)) {
-            Log.d(TAG, "Fail to show dialog with state: " + currentState);
-            return;
-        }
-        sListener = listener;
-        sNewDevice = newDevice;
-        sEventData = eventData;
-        AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
-        if (dialog != null) {
-            Log.d(TAG, "Dialog is showing, update the content.");
-            updateDialog(deviceItems, newDevice.getName(), dialog);
-        } else {
-            Log.d(TAG, "Show up the dialog.");
-            final Bundle bundle = new Bundle();
-            bundle.putParcelableList(BUNDLE_KEY_DEVICE_ITEMS, deviceItems);
-            bundle.putString(BUNDLE_KEY_NEW_DEVICE_NAME, newDevice.getName());
-            final AudioSharingJoinDialogFragment dialogFrag = new AudioSharingJoinDialogFragment();
-            dialogFrag.setArguments(bundle);
-            dialogFrag.show(manager, TAG);
+        if (BluetoothUtils.isAudioSharingUIAvailable(host.getContext())) {
+            final FragmentManager manager;
+            try {
+                manager = host.getChildFragmentManager();
+            } catch (IllegalStateException e) {
+                Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+                return;
+            }
+            Lifecycle.State currentState = host.getLifecycle().getCurrentState();
+            if (!currentState.isAtLeast(Lifecycle.State.STARTED)) {
+                Log.d(TAG, "Fail to show dialog with state: " + currentState);
+                return;
+            }
+            sListener = listener;
+            sNewDevice = newDevice;
+            sEventData = eventData;
+            AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
+            if (dialog != null) {
+                Log.d(TAG, "Dialog is showing, update the content.");
+                updateDialog(deviceItems, newDevice.getName(), dialog);
+            } else {
+                Log.d(TAG, "Show up the dialog.");
+                final Bundle bundle = new Bundle();
+                bundle.putParcelableList(BUNDLE_KEY_DEVICE_ITEMS, deviceItems);
+                bundle.putString(BUNDLE_KEY_NEW_DEVICE_NAME, newDevice.getName());
+                final AudioSharingJoinDialogFragment dialogFrag =
+                        new AudioSharingJoinDialogFragment();
+                dialogFrag.setArguments(bundle);
+                dialogFrag.show(manager, TAG);
+            }
         }
     }
 
