@@ -27,6 +27,7 @@ import static com.android.settings.Utils.isPrivateProfile;
 import static com.android.settings.biometrics.BiometricEnrollBase.BIOMETRIC_AUTH_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_CHALLENGE;
+import static com.android.settings.flags.Flags.screenOffUnlockPowerOptimization;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -600,6 +601,24 @@ public class FingerprintSettings extends SubSettings {
             return false;
         }
 
+        private boolean isUltrasnoicUdfps() {
+            // b/368465560 Gate either ultrasonic or optical UDFPS if the power do not optimized
+            if (!screenOffUnlockPowerOptimization()) {
+                return false;
+            }
+
+            mFingerprintManager = Utils.getFingerprintManagerOrNull(getActivity());
+            if (mFingerprintManager != null) {
+                mSensorProperties = mFingerprintManager.getSensorPropertiesInternal();
+                for (FingerprintSensorPropertiesInternal prop : mSensorProperties) {
+                    if (prop.isUltrasonicUdfps()) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         protected void removeFingerprintPreference(int fingerprintId) {
             String name = genKey(fingerprintId);
             Log.e(TAG, "removeFingerprintPreference : " + fingerprintId);
@@ -639,7 +658,7 @@ public class FingerprintSettings extends SubSettings {
             // This needs to be after setting ids, otherwise
             // |mRequireScreenOnToAuthPreferenceController.isChecked| is always checking the primary
             // user instead of the user with |mUserId|.
-            if (isSfps() || screenOffUnlockUdfps()) {
+            if (isSfps() || (screenOffUnlockUdfps() && isUltrasnoicUdfps())) {
                 scrollToPreference(fpPrefKey);
                 addFingerprintUnlockCategory();
             }
@@ -706,7 +725,7 @@ public class FingerprintSettings extends SubSettings {
                             restToUnlockPreference.getOnPreferenceChangeListener());
                 }
                 setupFingerprintUnlockCategoryPreferencesForScreenOnToAuth();
-            } else if (screenOffUnlockUdfps()) {
+            } else if (screenOffUnlockUdfps() && isUltrasnoicUdfps()) {
                 setupFingerprintUnlockCategoryPreferencesForScreenOffUnlock();
             }
             updateFingerprintUnlockCategoryVisibility();
@@ -754,7 +773,7 @@ public class FingerprintSettings extends SubSettings {
 
         private void updatePreferencesAfterFingerprintRemoved() {
             updateAddPreference();
-            if (isSfps() || screenOffUnlockUdfps()) {
+            if (isSfps() || (screenOffUnlockUdfps() && isUltrasnoicUdfps())) {
                 updateFingerprintUnlockCategoryVisibility();
             }
             updatePreferences();
@@ -998,7 +1017,7 @@ public class FingerprintSettings extends SubSettings {
                     }
 
                 }
-            } else if (screenOffUnlockUdfps()) {
+            } else if (screenOffUnlockUdfps() && isUltrasnoicUdfps()) {
                 for (AbstractPreferenceController controller : controllers) {
                     if (controller.getPreferenceKey() == KEY_FINGERPRINT_UNLOCK_CATEGORY) {
                         mFingerprintUnlockCategoryPreferenceController =
