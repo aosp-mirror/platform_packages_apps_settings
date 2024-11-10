@@ -16,6 +16,7 @@
 
 package com.android.settings.biometrics.fingerprint2.domain.interactor
 
+import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityEvent.TYPE_ANNOUNCEMENT
 import android.view.accessibility.AccessibilityManager
@@ -30,23 +31,26 @@ import kotlinx.coroutines.flow.stateIn
 interface AccessibilityInteractor {
   /** A flow that contains whether or not accessibility is enabled */
   fun isEnabledFlow(scope: CoroutineScope): Flow<Boolean>
+
   val isEnabled: Boolean
+
   fun announce(clazz: Class<*>, announcement: CharSequence?)
+
+  fun interrupt()
 }
 
-class AccessibilityInteractorImpl(
-  private val accessibilityManager: AccessibilityManager,
-) : AccessibilityInteractor {
+class AccessibilityInteractorImpl(private val accessibilityManager: AccessibilityManager) :
+  AccessibilityInteractor {
   /** A flow that contains whether or not accessibility is enabled */
   override fun isEnabledFlow(scope: CoroutineScope): Flow<Boolean> =
     callbackFlow {
-      val listener =
-        AccessibilityManager.AccessibilityStateChangeListener { enabled -> trySend(enabled) }
-      accessibilityManager.addAccessibilityStateChangeListener(listener)
+        val listener =
+          AccessibilityManager.AccessibilityStateChangeListener { enabled -> trySend(enabled) }
+        accessibilityManager.addAccessibilityStateChangeListener(listener)
 
-      // This clause will be called when no one is listening to the flow
-      awaitClose { accessibilityManager.removeAccessibilityStateChangeListener(listener) }
-    }
+        // This clause will be called when no one is listening to the flow
+        awaitClose { accessibilityManager.removeAccessibilityStateChangeListener(listener) }
+      }
       .stateIn(
         scope,
         SharingStarted.WhileSubscribed(), // When no longer subscribed, we removeTheListener
@@ -62,5 +66,18 @@ class AccessibilityInteractorImpl(
     event.packageName = clazz.packageName
     event.text.add(announcement)
     accessibilityManager.sendAccessibilityEvent(event)
+  }
+
+  /** Interrupts the current accessibility manager from announcing a phrase. */
+  override fun interrupt() {
+    try {
+      accessibilityManager.interrupt()
+    } catch (e: IllegalStateException) {
+      Log.e(TAG, "Error trying to interrupt when accessibility isn't enabled $e")
+    }
+  }
+
+  companion object {
+    const val TAG = "AccessibilityInteractor"
   }
 }

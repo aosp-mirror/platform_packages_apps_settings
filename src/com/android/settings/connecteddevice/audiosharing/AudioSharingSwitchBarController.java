@@ -426,9 +426,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                         () -> {
                             mSwitchBar.setEnabled(true);
                             mSwitchBar.setChecked(false);
-                            if (mFragment != null) {
-                                AudioSharingConfirmDialogFragment.show(mFragment);
-                            }
+                            AudioSharingConfirmDialogFragment.show(mFragment);
                         });
                 return;
             }
@@ -447,7 +445,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return BluetoothUtils.isAudioSharingEnabled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return BluetoothUtils.isAudioSharingUIAvailable(mContext) ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -733,13 +732,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 };
         AudioSharingUtils.postOnMainThread(
                 mContext,
-                () -> {
-                    // Check nullability to pass NullAway check
-                    if (mFragment != null) {
-                        AudioSharingDialogFragment.show(
-                                mFragment, mDeviceItemsForSharing, listener, eventData);
-                    }
-                });
+                () -> AudioSharingDialogFragment.show(
+                        mFragment, mDeviceItemsForSharing, listener, eventData));
     }
 
     private void showErrorDialog() {

@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"புதிய சாதனத்தை இணை"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"புளூடூத்"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"தானாகவே நாளை இயக்குதல்"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"வலதுபுற கருவியை இணை"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"இடதுபுற கருவியை இணை"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"மற்றொரு கருவியை இணைத்தல்"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"புளூடூத் LE ஆடியோவை முடக்கு"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"LE ஆடியோ ஹார்டுவேர்களை சாதனம் ஆதரித்தால் புளூடூத் LE ஆடியோ அம்சத்தை முடக்கும்."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"புளூடூத் LE ஆடியோ பயன்முறை"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"புளூடூத் LE ஆடியோ பிராட்காஸ்ட் UI மாதிரிக்காட்சியை இயக்குதல்"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"தனிப்பட்ட ஆடியோ பகிர்வு மற்றும் தனிப்பட்ட பிராட்காஸ்ட் உட்பட LE ஆடியோ பகிர்வு UI மாதிரிக்காட்சியை இயக்கும்"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"சாதன விவரங்களில் LE ஆடியோ டாகிளை காட்டு"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"புளூடூத் LE ஆடியோ ஏற்புப் பட்டியலை பைபாஸ் செய்தல்"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"ஏற்புப் பட்டியல் நிபந்தனைகளை LE ஆடியோ வெளிப்புறச் சாதனம் பூர்த்திசெய்கிறதா என்று சரிபார்க்கப்படவில்லை என்றாலும் LE ஆடியோவை இயல்பாகப் பயன்படுத்தும்."</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"விரலை எடுத்துவிட்டு, மீண்டும் சென்சாரைத் தொடவும்"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"கைரேகை சென்சாரைப் பயன்படுத்த முடியவில்லை"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"பழுதுபார்ப்புச் சேவை வழங்குநரைத் தொடர்புகொள்ளவும்."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"திரை ஆஃப் கைரேகை அன்லாக்"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"திரை ஆஃப் செய்யப்பட்டிருக்கும்போதும் கைரேகை அன்லாக்கைப் பயன்படுத்தும்"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"திரை ஆஃப், அன்லாக்"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"கூடுதல் பாதுகாப்பு அமைப்புகள்"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"பணிக் கணக்குப் பூட்டு, என்க்ரிப்ஷன் மற்றும் பல"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"என்க்ரிப்ஷன், அனுமதிச் சான்றுகள் மற்றும் பல"</string>
@@ -1338,7 +1341,7 @@
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"தொடங்க வேண்டிய நேரம்"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"விரலை எடுக்கும் போது இயங்கு"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"சூழல்சார் திரை"</string>
-    <string name="ambient_display_category_triggers" msgid="1216640141609270011">"காட்டுவதற்கான நேரம்"</string>
+    <string name="ambient_display_category_triggers" msgid="1216640141609270011">"எப்போது காட்டுவது"</string>
     <string name="doze_title" msgid="1523090408230862316">"அறிவிப்பிற்கு திரை விழித்தல்"</string>
     <string name="doze_summary" msgid="8252867381522942804">"திரை டார்க்காக இருக்கும்போது புதிய அறிவிப்புகளுக்கு இது ஆன் ஆகும்"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"நேரம் &amp; தகவலை எப்போதும் காட்டு"</string>
@@ -1963,27 +1966,19 @@
     <string name="sticky_keys" msgid="7317317044898161747">"ஸ்டிக்கி கீஸ்"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"ஷார்ட்கட்களுக்கு பட்டன்களை ஒன்றாகப் பிடிப்பதற்குப் பதிலாக ஒரு நேரத்தில் ஒரு பட்டனை அழுத்தலாம்"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"மவுஸ் பட்டன்கள்"</string>
-    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
-    <skip />
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"மவுஸ் பட்டன்களைப் பயன்படுத்துங்கள்"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"பாயிண்ட்டரைக் கட்டுப்படுத்த உங்கள் கீபோர்டைப் பயன்படுத்தலாம்"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"மவுஸ் ரிவர்ஸ் ஸ்க்ரோலிங்"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"பக்கத்தை மேலிருந்து கீழே நகர்த்த மவுஸை முன்னோக்கி ஸ்க்ரோல் செய்யலாம்"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"இடதுபுற மற்றும் வலதுபுற பட்டன்களை மாற்றுதல்"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"இடதுபுற மவுஸ் பட்டனை வலதுபுற பட்டனாகப் பயன்படுத்தலாம்"</string>
-    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
-    <skip />
-    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
-    <skip />
-    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
-    <skip />
-    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
-    <skip />
-    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
-    <skip />
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"<xliff:g id="KEYBOARD_NAME">%s</xliff:g>க்கான மவுஸ் பட்டன்கள்"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"மவுஸ் பாயிண்ட்டரை நகர்த்த <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> பட்டன்களைப் பயன்படுத்துங்கள்"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"முதன்மை மவுஸ் பட்டனைக் கிளிக் செய்ய <xliff:g id="CLICK_LABEL">%s</xliff:g> பட்டனைப் பயன்படுத்துங்கள்"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"முதன்மை மவுஸ் பட்டனை அழுத்திப் பிடிக்க <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> பட்டனைப் பயன்படுத்துங்கள்"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"முதன்மை மவுஸ் பட்டனை விடுவிக்க <xliff:g id="RELEASE_LABEL">%s</xliff:g> பட்டனைப் பயன்படுத்துங்கள்"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"நகர்த்துதல் பயன்முறையை நிலைமாற்ற <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> பட்டனைப் பயன்படுத்துங்கள். இதன்மூலம் <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> பட்டன்களைப் பயன்படுத்தி காட்சியை மேலே, கீழே, இடதுபுறம் அல்லது வலதுபுறம் நகர்த்தலாம்"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"இரண்டாவது மவுஸ் பட்டனைக் கிளிக் செய்ய <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> பட்டனைப் பயன்படுத்துங்கள்"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"கீபோர்டு ஷார்ட்கட்கள்"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"ஷார்ட்கட்களின் பட்டியலைக் காட்டும்"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"பணிக் கணக்கிற்கான கீபோர்டுகள் &amp; கருவிகள்"</string>
@@ -2460,7 +2455,7 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"முன்னோட்டம்"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"நிலையான விருப்பங்கள்"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"மொழி"</string>
-    <string name="captioning_text_size" msgid="5764254558945371745">"வ்சன எழுத்து வடிவ அளவு"</string>
+    <string name="captioning_text_size" msgid="5764254558945371745">"வசன எழுத்து வடிவ அளவு"</string>
     <string name="captioning_preset" msgid="4174276086501638524">"வசனத்தின் நடை"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"பிரத்தியேக விருப்பங்கள்"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"பின்புல வண்ணம்"</string>
@@ -3429,8 +3424,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"வாரநாட்களில் காலை 9 மணி முதல் மாலை 5 மணி வரை\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"கேலெண்டர் நிகழ்வுகள்"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} செயலில் உள்ளது}=2{{mode_1} மற்றும் {mode_2} செயலில் உள்ளன}=3{{mode_1}, {mode_2} மற்றும் {mode_3} செயலில் உள்ளன}other{{mode_1}, {mode_2} மற்றும் கூடுதலாக # பயன்முறைகள் செயலில் உள்ளன}}"</string>
-    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
-    <skip />
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{தொந்தரவு செய்ய வேண்டாம்}=1{{mode_1}}=2{{mode_1}, {mode_2}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ஆன்"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"அமைக்கப்படவில்லை"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"முடக்கப்பட்டுள்ளது"</string>
@@ -3455,8 +3449,8 @@
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"திட்ட அட்டவணை"</string>
     <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"எப்போது தானாகவே இயக்குவது"</string>
     <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"நிகழ்வு அட்டவணை"</string>
-    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"நிகழ்வுகளின் போது இயக்குங்கள்"</string>
-    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"அழைப்புக்கான பதிலுள்ள இடத்தில்"</string>
+    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"இந்த நிகழ்வுகளின் போது இயங்கு"</string>
+    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"அழைப்பு பதில் இப்படியெனில்"</string>
     <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"நேரத் திட்ட அட்டவணை"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"திட்டமிடுங்கள்"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> ம.நே <xliff:g id="MINUTES">%2$d</xliff:g> நிமி"</string>
@@ -3961,7 +3955,7 @@
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"கவனம் செலுத்த, உங்கள் சாதனத்தில் இருந்து ஏற்படும் கவனச்சிதறல்களையோ இடையூறுகளையோ தடைசெய்தல்"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"அமைதியான சூழலைப் பெற, கவனச்சிதறல்கள் அனைத்தையும் தவிர்த்தல்"</string>
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"வெவ்வேறு பயனர்களுக்கான சாதன அனுபவத்தையும் அமைப்புகளையும் பிரத்தியேகப்படுத்துதல்"</string>
-    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"முக்கியமான நபர்களும் ஆப்ஸும் மட்டுமே உங்களைத் தொடர்புகொள்ள அனுமதிப்பதன் மூலம் இடையூறுகளைக் குறைத்தல்"</string>
+    <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"முக்கியமான நபர்களும் ஆப்ஸும் மட்டுமே உங்களைத் தொடர்புகொள்ள அனுமதிப்பதன் மூலம் இடையூறுகளைக் குறைக்கலாம்"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"வழக்கமான திட்ட அட்டவணையைப் பின்பற்றும் பயன்முறையை அமையுங்கள்"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"உங்கள் அன்றாட நிகழ்வுகளுடன் சாதனத்தை ஒத்திசைத்து வைத்திருங்கள்"</string>
     <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"100% உற்சாகத்துடன் கண்விழியுங்கள்"</string>
@@ -5478,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"ஸ்ட்ரீமைக் கேளுங்கள்"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> மூலம் கேட்க ஆடியோ ஸ்ட்ரீமின் QR குறியீட்டை ஸ்கேன் செய்யுங்கள்"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"பகிரும்போது கடவுச்சொல்லை மாற்ற முடியாது. கடவுச்சொல்லை மாற்ற, முதலில் ஆடியோ பகிர்வை முடக்கவும்."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"கடவுச்சொல் 4-16 எழுத்துகளைக் கொண்டிருக்க வேண்டும். அதில் எழுத்துகள், எண்கள், குறியீடுகளை மட்டுமே பயன்படுத்த வேண்டும்."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR குறியீடு ஸ்கேனர்"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"உதவி தேவையா?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"அமைப்புகளைத் தேடுங்கள்"</string>
@@ -5491,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"இயல்புக் கணக்கை அமைப்பதில் பிழை"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"இயல்புக் கணக்கு அமைக்கப்படவில்லை"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"சாதனம் மட்டும்"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"தொடங்குவதற்கு ஒரு கணக்கைச் சேருங்கள்"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"வட்டமிட்டுத் தேடல்"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"முகப்பு பட்டனைத் தொட்டுப் பிடித்திருக்கவும் அல்லது திரையில் உள்ள உள்ளடக்கத்தைப் பயன்படுத்தித் தேடுவதற்கு ஹேண்டிலுக்குச் செல்லவும்."</string>
 </resources>

@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Neues Gerät koppeln"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Morgen automatisch aktivieren"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Rechtes Gerät koppeln"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Linkes Gerät koppeln"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Anderes Ohr koppeln"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE Audio deaktivieren"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Deaktiviert die Bluetooth LE Audio-Funktion, wenn das Gerät LE Audio-Hardwarefunktionen unterstützt."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE Audio-Modus"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Vorschau für Benutzeroberfläche der Bluetooth LE Audioübertragung aktivieren"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Aktiviert die Vorschau für die Benutzeroberfläche der LE Audiofreigabe, einschließlich der persönlichen Audiofreigabe und der privaten Übertragung"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Ein/Aus für LE Audio in Gerätedetails"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bluetooth LE Audio-Zulassungsliste umgehen"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE Audio wird standardmäßig verwendet, selbst wenn ein LE Audio-Peripheriegerät nicht die Kriterien der Zulassungsliste erfüllt."</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Hebe den Finger und berühre den Sensor dann noch einmal"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Der Fingerabdrucksensor kann nicht verwendet werden"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Suche einen Reparaturdienstleister auf."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Entsperrung per Fingerabdruck bei ausgeschaltetem Display"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Entsperrung per Fingerabdruck auch bei ausgeschaltetem Display verwenden"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Display aus, Entsperrung"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Weitere Sicher­heits­einstellungen"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Sperre des Arbeitsprofils, Verschlüsselung und mehr"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Verschlüsselung, Anmeldedaten und mehr"</string>
@@ -853,7 +856,7 @@
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Bei aktiviertem Bluetooth kann dein Gerät mit Bluetooth-Geräten in der Nähe kommunizieren"</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Bei aktiviertem Bluetooth kann dein Gerät mit Bluetooth-Geräten in der Nähe kommunizieren. Funktionen wie „Quick Share“ und „Mein Gerät finden“ verwenden Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Bei aktiviertem Bluetooth kann dein Gerät mit anderen Bluetooth-Geräten in der Nähe kommunizieren.\n\nDamit es optimal funktioniert, können Apps und Dienste immer nach Geräten in der Nähe suchen, auch wenn Bluetooth deaktiviert ist. Dadurch werden beispielsweise standortbasierte Funktionen und Dienste verbessert. Dies lässt sich in den Bluetooth-Sucheinstellungen ändern."</string>
-    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Bei aktiviertem Bluetooth kann dein Gerät mit Bluetooth-Geräten in der Nähe kommunizieren. Funktionen wie „Quick Share“ und „Mein Gerät finden“ verwenden Bluetooth.\n\nApps und Dienste können weiterhin jederzeit nach Geräten in der Nähe suchen, auch wenn Bluetooth deaktiviert ist. Dies kann beispielsweise dafür verwendet werden, um standortbezogene Funktionen und Dienste zu verbessern.In den Einstellungen für die Bluetooth-Suche lässt sich dieses Verhalten ändern."</string>
+    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Bei aktiviertem Bluetooth kann dein Gerät mit Bluetooth-Geräten in der Nähe kommunizieren. Funktionen wie „Quick Share“ und „Mein Gerät finden“ verwenden Bluetooth.\n\nApps und Dienste können weiterhin jederzeit nach Geräten in der Nähe suchen, auch wenn Bluetooth deaktiviert ist. Dies kann beispielsweise dafür verwendet werden, um standortbezogene Funktionen und Dienste zu verbessern. In den Einstellungen für die Bluetooth-Suche lässt sich dieses Verhalten ändern."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Ändern"</string>
     <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"„<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“ ist nicht gekoppelt"</string>
     <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"Entkopple dieses Gerät aus Sicherheitsgründen und koppele es dann erneut"</string>
@@ -1963,27 +1966,19 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Einfingerbedienung"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Bei Tastenkombinationen Tasten einzeln drücken, statt sie zusammen gedrückt zu halten"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Maustasten"</string>
-    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
-    <skip />
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Maustasten verwenden"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Zum Steuern des Mauszeigers die Tastatur verwenden"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Mausrad-Scrollrichtung umkehren"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Wenn du nach oben scrollst, wird die Seite nach unten verschoben"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Linke und rechte Taste tauschen"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Die linke Maustaste übernimmt die Funktion der rechten Maustaste (und umgekehrt)"</string>
-    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
-    <skip />
-    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
-    <skip />
-    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
-    <skip />
-    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
-    <skip />
-    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
-    <skip />
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Maustasten für <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Mauszeiger bewegen: Tasten „<xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>“ verwenden"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Mit der primären Maustaste klicken: Taste „<xliff:g id="CLICK_LABEL">%s</xliff:g>“ verwenden"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"Primäre Taste gedrückt halten: Taste „<xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>“ verwenden"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Primäre Taste loslassen: Taste „<xliff:g id="RELEASE_LABEL">%s</xliff:g>“ verwenden"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Scrollmodus aktivieren oder deaktivieren: Taste „<xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>“ verwenden; anschließend kannst du mit den Tasten „<xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>“ in der Ansicht nach oben, unten, links oder rechts scrollen"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Sekundäre Maustaste drücken: Taste „<xliff:g id="RELEASE_2_LABEL">%s</xliff:g>“ verwenden"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Tastenkürzel"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Liste der Tastenkombinationen anzeigen"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastaturen und Tools für das Arbeitsprofil"</string>
@@ -3420,7 +3415,7 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Keine}=1{1 Zeitplan festgelegt}other{# Zeitpläne festgelegt}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Bitte nicht stören"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Modi"</string>
-    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Mit Modi für Schlaf, Arbeit, das Fahren und alles dazwischen kannst du Ablenkungen minimieren und deine Aufmerksamkeit besser lenken."</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Mit Modi für Schlaf, Arbeit, Autofahren und alles dazwischen kannst du Ablenkungen minimieren und deine Aufmerksamkeit besser lenken."</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Eigenen Modus erstellen"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Benachrichtigungen nur von wichtigen Personen und Apps"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Zeitplan festlegen"</string>
@@ -3429,8 +3424,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"„Von 9 Uhr bis 17 Uhr an Wochentagen“"</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Kalendertermine"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} ist aktiv}=2{{mode_1} und {mode_2} sind aktiv}=3{{mode_1}, {mode_2} und {mode_3} sind aktiv}other{{mode_1}, {mode_2} und # weitere Modi sind aktiv}}"</string>
-    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
-    <skip />
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Bitte nicht stören}=1{{mode_1}}=2{{mode_1}, {mode_2}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"AN"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Nicht festgelegt"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Deaktiviert"</string>
@@ -3443,7 +3437,7 @@
     <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Unterbrechungen und Ablenkungen blockieren"</string>
     <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"<xliff:g id="MODE">%1$s</xliff:g> einrichten"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"„Bitte nicht stören“ aktivieren"</string>
-    <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Wecker und Medientöne können ihn unterbrechen"</string>
+    <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Wecker und Medientöne können unterbrechen"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Zeitpläne"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Zeitpläne löschen"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Löschen"</string>
@@ -3486,7 +3480,7 @@
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"Dunkles Design aktivieren"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"Dunkles Design aktivieren"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Gerätedesign wechseln, um einen dunklen Hintergrund zu verwenden, der die Augen schont"</string>
-    <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Keine Änderungen der Anzeige}=1{{effect_1}}=2{{effect_1} und {effect_2}}=3{{effect_1}, {effect_2} und {effect_3}}other{{effect_1}, {effect_2} und # mehr}}"</string>
+    <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Keine Änderungen der Anzeige}=1{{effect_1}}=2{{effect_1} und {effect_2}}=3{{effect_1}, {effect_2} und {effect_3}}other{{effect_1}, {effect_2} und # weitere}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Alle Benachrichtigungen zulassen"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Personen, Apps und Töne dürfen unterbrechen"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"Anzeigeoptionen für gefilterte Benachrichtigungen"</string>
@@ -3894,7 +3888,7 @@
     <string name="zen_mode_apps_category" msgid="4082380323683889391">"Apps, die unterbrechen dürfen"</string>
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"Ausgewählte Apps"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"Keine"</string>
-    <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Keine App kann ihn unterbrechen}=1{{app_1} kann ihn unterbrechen}=2{{app_1} und {app_2} können ihn unterbrechen}=3{{app_1}, {app_2} und {app_3} können ihn unterbrechen}other{{app_1}, {app_2}, und # weitere können ihn unterbrechen}}"</string>
+    <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{Keine App kann unterbrechen}=1{{app_1} kann unterbrechen}=2{{app_1} und {app_2} können unterbrechen}=3{{app_1}, {app_2} und {app_3} können unterbrechen}other{{app_1}, {app_2}, und # weitere können unterbrechen}}"</string>
     <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (geschäftlich)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"Wird berechnet…"</string>
     <string name="zen_mode_apps_priority_apps_settings" msgid="5544513568250354374">"Apps-Einstellungen"</string>
@@ -3908,16 +3902,16 @@
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Alle Benachrichtigungen"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Einige Benachrichtigungen"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Ausgewählte Personen können dich weiterhin erreichen, auch wenn du nicht zulässt, dass Apps dich unterbrechen."</string>
-    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Keine Apps können ihn unterbrechen}=1{Die App „{app_1}“ kann ihn unterbrechen}=2{Die Apps „{app_1}“ und „{app_2}“ können ihn unterbrechen}=3{Die Apps „{app_1}“, „{app_2}“ und „{app_3}“ können ihn unterbrechen}other{Die App „{app_1}“, „{app_2}“ und # weitere können ihn unterbrechen}}"</string>
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Keine Apps können unterbrechen}=1{Die App „{app_1}“ kann unterbrechen}=2{Die Apps „{app_1}“ und „{app_2}“ können unterbrechen}=3{Die Apps „{app_1}“, „{app_2}“ und „{app_3}“ können unterbrechen}other{Die App „{app_1}“, „{app_2}“ und # weitere können unterbrechen}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Apps"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Benachrichtigungen, die unterbrechen dürfen"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Alle Benachrichtigungen zulassen"</string>
     <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Nichts kann unterbrechen}=1{Geräusche der Kategorie „{sound_category_1}“ können unterbrechen}=2{Geräusche der Kategorie „{sound_category_1}“ und „{sound_category_2}“ können unterbrechen}=3{Geräusche der Kategorie „{sound_category_1}“, „{sound_category_2}“ und „{sound_category_3}“ können unterbrechen}other{Geräusche der Kategorie „{sound_category_1}“, „{sound_category_2}“ und # weiteren können unterbrechen}}"</string>
-    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Nichts kann ihn unterbrechen"</string>
-    <string name="zen_mode_people_none" msgid="4613147461974255046">"Niemand kann ihn unterbrechen"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Nichts kann unterbrechen"</string>
+    <string name="zen_mode_people_none" msgid="4613147461974255046">"Niemand kann unterbrechen"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Einige Personen können unterbrechen"</string>
     <string name="zen_mode_people_repeat_callers" msgid="4499084111069828761">"Bei wiederkehrenden Anrufern unterbrechen"</string>
-    <string name="zen_mode_people_all" msgid="311036110283015205">"Alle Personen können ihn unterbrechen"</string>
+    <string name="zen_mode_people_all" msgid="311036110283015205">"Alle Personen können unterbrechen"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Wiederholte Anrufer"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Wiederholte Anrufer zulassen"</string>
     <string name="zen_mode_all_callers" msgid="8104755389401941875">"Alle"</string>
@@ -3951,7 +3945,7 @@
     <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"<xliff:g id="MODE_NAME">%1$s</xliff:g> deaktivieren?"</string>
     <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Bei Deaktivierung wird dieser Modus nie aktiviert"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Deaktivieren"</string>
-    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"<xliff:g id="MODE_NAME">%1$s</xliff:g> aktivieren?"</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"„<xliff:g id="MODE_NAME">%1$s</xliff:g>“ aktivieren?"</string>
     <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Dieser Modus kann abhängig von den Einstellungen automatisch aktiviert werden"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Aktivieren"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Du kannst einen Modus festlegen, der einem regulären Zeitplan folgt"</string>
@@ -5478,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Stream anhören"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Den QR-Code eines Audiostreams scannen, um den Stream auf <xliff:g id="DEVICE_NAME">%1$s</xliff:g> anzuhören"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Während der Freigabe kann das Passwort nicht geändert werden. Wenn du das Passwort ändern möchtest, deaktiviere zuerst die Audiofreigabe."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Dein Passwort muss zwischen 4 und 16 Zeichen lang sein und darf nur aus Buchstaben, Zahlen und Symbolen bestehen"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR‑Code-Scanner"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Benötigst du Hilfe?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"In Einstellungen suchen"</string>
@@ -5491,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Fehler beim Festlegen des Standardkontos"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Kein Standard festgelegt"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Nur Gerät"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Füge ein Konto hinzu, um loszulegen"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Circle to Search"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Halte die Startbildschirmtaste oder den Navigationsziehpunkt gedrückt, um anhand des Inhalts auf dem Bildschirm zu suchen."</string>
 </resources>

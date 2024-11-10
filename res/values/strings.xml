@@ -136,6 +136,8 @@
     <string name="keywords_add_bt_device">bluetooth</string>
     <!-- Title for bluetooth auto on toggle [CHAR LIMIT=60] -->
     <string name="bluetooth_screen_auto_on_title">Automatically turn on tomorrow</string>
+    <!-- Summary for bluetooth auto on toggle [CHAR LIMIT=60] -->
+    <string name="bluetooth_screen_auto_on_summary">If you turn off Bluetooth, it turns on again the next day</string>
 
 
     <!-- Button to help user to pair right ear of the hearing aid device. It will show when only one of the hearing aid device set is connected. [CHAR LIMIT=20] -->
@@ -9039,6 +9041,13 @@
     <string name="notification_polite_work">Apply to work profiles</string>
     <string name="notification_polite_work_summary">Apply to work profile apps</string>
 
+    <!-- Title for Bundled Notifications setting  [CHAR LIMIT=45]-->
+    <string name="notification_bundle_title">Bundled notifications</string>
+    <string name="notification_bundle_on">On</string>
+    <string name="notification_bundle_off">Off</string>
+    <string name="notification_bundle_main_control_title">Use notification bundling</string>
+    <string name="notification_bundle_description">Notifications with similar themes will be silenced and grouped together for a quieter experience. Bundling will override an app\'s own notification settings.</string>
+
 
     <!-- Title for managing VR (virtual reality) helper services. [CHAR LIMIT=50] -->
     <string name="vr_listeners_title">VR helper services</string>
@@ -13779,9 +13788,12 @@
     <string name="contacts_storage_no_account_set_summary">No default set</string>
     <!-- Text for displaying when default account is set as local only [CHAR LIMIT=50] -->
     <string name="contacts_storage_local_account_summary">Device only</string>
+    <!-- Text for displaying eligible account preference title [CHAR LIMIT=50] -->
+    <string name="contacts_storage_account_title">Device and %1$s</string>
     <!-- Text for add account selection message when no account has been added [CHAR LIMIT=100] -->
     <string name="contacts_storage_first_time_add_account_message">Add an account to get started</string>
-
+    <!-- Text for account preference category title for contacts storage settings page [CHAR LIMIT=100] -->
+    <string name="contacts_storage_account_category_title">Where to save contacts</string>
     <!-- Circle to Search (shared between all entrypoints) -->
     <!-- Name of Google's new feature to circle to search anything on your phone screen,
          without switching apps. Also used as the setting title. [CHAR LIMIT=60] -->
