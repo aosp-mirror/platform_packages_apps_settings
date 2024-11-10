@@ -23,15 +23,13 @@ import android.content.Intent.EXTRA_BRIGHTNESS_DIALOG_IS_FULL_WIDTH
 import android.hardware.display.BrightnessInfo
 import android.hardware.display.DisplayManager
 import android.hardware.display.DisplayManager.DisplayListener
-import android.os.Process
-import android.os.UserHandle
 import android.os.UserManager
 import android.provider.Settings.System
 import androidx.preference.Preference
+import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.core.SettingsBaseActivity
-import com.android.settingslib.RestrictedLockUtilsInternal
 import com.android.settingslib.RestrictedPreference
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
@@ -42,7 +40,6 @@ import com.android.settingslib.display.BrightnessUtils.convertLinearToGammaFloat
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.metadata.PreferenceRestrictionProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.transition.SettingsTransitionHelper
@@ -52,7 +49,7 @@ import java.text.NumberFormat
 class BrightnessLevelRestrictedPreference :
     PreferenceMetadata,
     PreferenceBinding,
-    PreferenceRestrictionProvider,
+    PreferenceRestrictionMixin,
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider,
     Preference.OnPreferenceClickListener {
@@ -69,34 +66,28 @@ class BrightnessLevelRestrictedPreference :
     override val keywords: Int
         get() = R.string.keywords_display_brightness_level
 
-    override fun getSummary(context: Context) =
+    override fun getSummary(context: Context): CharSequence? =
         NumberFormat.getPercentInstance().format(getCurrentBrightness(context))
 
-    override fun isEnabled(context: Context) =
-        !UserManager.get(context)
-            .hasBaseUserRestriction(UserManager.DISALLOW_CONFIG_BRIGHTNESS, Process.myUserHandle())
+    override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
-    override fun isRestricted(context: Context) =
-        RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
-            context,
-            UserManager.DISALLOW_CONFIG_BRIGHTNESS,
-            UserHandle.myUserId(),
-        ) != null
+    override val restrictionKey: String
+        get() = UserManager.DISALLOW_CONFIG_BRIGHTNESS
+
+    override val useAdminDisabledSummary: Boolean
+        get() = true
 
     override fun createWidget(context: Context) = RestrictedPreference(context)
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
-        if (preference is RestrictedPreference) preference.useAdminDisabledSummary(true)
         preference.onPreferenceClickListener = this
     }
 
     override fun onStart(context: PreferenceLifecycleContext) {
         val observer =
-            object : KeyedObserver<String> {
-                override fun onKeyChanged(key: String, reason: Int) {
-                    context.notifyPreferenceChange(this@BrightnessLevelRestrictedPreference)
-                }
+            KeyedObserver<String> { _, _ ->
+                context.notifyPreferenceChange(this@BrightnessLevelRestrictedPreference)
             }
         brightnessObserver = observer
         SettingsSystemStore.get(context)
@@ -113,13 +104,12 @@ class BrightnessLevelRestrictedPreference :
                 }
             }
         displayListener = listener
-        context
-            .getSystemService(DisplayManager::class.java)
-            .registerDisplayListener(
-                listener,
-                HandlerExecutor.main,
-                DisplayManager.EVENT_FLAG_DISPLAY_BRIGHTNESS,
-            )
+        context.displayManager.registerDisplayListener(
+            listener,
+            HandlerExecutor.main,
+            /* eventFlags= */ 0,
+            DisplayManager.PRIVATE_EVENT_FLAG_DISPLAY_BRIGHTNESS,
+        )
     }
 
     override fun onStop(context: PreferenceLifecycleContext) {
@@ -129,10 +119,13 @@ class BrightnessLevelRestrictedPreference :
         }
 
         displayListener?.let {
-            context.getSystemService(DisplayManager::class.java).unregisterDisplayListener(it)
+            context.displayManager.unregisterDisplayListener(it)
             displayListener = null
         }
     }
+
+    private val Context.displayManager: DisplayManager
+        get() = getSystemService(DisplayManager::class.java)!!
 
     override fun onPreferenceClick(preference: Preference): Boolean {
         val context = preference.context

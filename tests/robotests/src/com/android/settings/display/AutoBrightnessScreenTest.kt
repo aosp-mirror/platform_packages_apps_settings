@@ -25,7 +25,7 @@ import androidx.preference.PreferenceViewHolder
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settingslib.PrimarySwitchPreference
-import com.android.settingslib.preference.PreferenceDataStoreAdapter
+import com.android.settingslib.preference.createAndBindWidget
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import com.android.settingslib.widget.theme.R
 import com.google.common.truth.Truth.assertThat
@@ -117,17 +117,14 @@ class AutoBrightnessScreenTest {
         assertThat(preferenceScreenCreator.isAvailable(context)).isFalse()
     }
 
-    private fun getPrimarySwitchPreference(): PrimarySwitchPreference =
-        preferenceScreenCreator.run {
-            val preference = createWidget(context)
-            preference.preferenceDataStore = PreferenceDataStoreAdapter(storage(context))
-            bind(preference, this)
+    private fun getPrimarySwitchPreference() =
+        preferenceScreenCreator.createAndBindWidget<PrimarySwitchPreference>(context).also {
             val holder =
                 PreferenceViewHolder.createInstanceForTests(
                         LayoutInflater.from(context).inflate(getResId(), /* root= */ null)
                     )
                     .apply { findViewById(androidx.preference.R.id.switchWidget) }
-            preference.apply { onBindViewHolder(holder) }
+            it.onBindViewHolder(holder)
         }
 
     private fun setScreenBrightnessMode(value: Int) =

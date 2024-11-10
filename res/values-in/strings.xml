@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Sambungkan perangkat baru"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Aktifkan otomatis besok"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Sambungkan ke telinga kanan"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Sambungkan ke telinga kiri"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Sambungkan ke telinga satunya"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Nonaktifkan Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Nonaktifkan fitur Bluetooth LE Audio jika perangkat mendukung kemampuan hardware LE Audio."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Mode Bluetooth LE Audio"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Aktifkan pratinjau UI Siaran Bluetooth LE Audio"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Mengaktifkan pratinjau UI Berbagi LE Audio termasuk berbagi audio pribadi dan siaran pribadi"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Tampilkan tombol LE Audio di Detail Perangkat"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Abaikan Daftar yang Diizinkan Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Gunakan LE Audio secara default meskipun periferal LE Audio belum diverifikasi untuk memenuhi kriteria Daftar yang diizinkan."</string>
@@ -298,7 +298,7 @@
     <string name="security_settings_title" msgid="6710768415432791970">"Keamanan"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Enkripsi &amp; kredensial"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Layar kunci"</string>
-    <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Elemen yang ditampilkan"</string>
+    <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Yang ditampilkan"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Tidak tersedia"</string>
     <string name="security_status_title" msgid="6958004275337618656">"Status keamanan"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Kunci layar, Temukan Perangkat Saya, keamanan aplikasi"</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Angkat jari, lalu sentuh sensor lagi"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Tidak dapat menggunakan sensor sidik jari"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Kunjungi penyedia reparasi."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Buka dengan Sidik Jari saat Layar Nonaktif"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Gunakan Buka dengan Sidik Jari bahkan saat layar nonaktif"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Layar nonaktif, Buka kunci"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Setelan keamanan lainnya"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Kunci profil kerja, enkripsi, dan lainnya"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Enkripsi, kredensial, dan lainnya"</string>
@@ -848,7 +851,7 @@
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"Tidak dapat terhubung ke <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Perangkat yang tersedia"</string>
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"Hubungkan"</string>
-    <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Putuskan koneksi"</string>
+    <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Berhenti hubungkan"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Sambungkan &amp; hubungkan"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Jika Bluetooth aktif, perangkat dapat berkomunikasi dengan perangkat Bluetooth lain di sekitar"</string>
     <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Jika Bluetooth aktif, perangkat dapat berkomunikasi dengan perangkat Bluetooth lain di sekitar. Fitur seperti Quick Share dan Temukan Perangkat Saya menggunakan Bluetooth."</string>
@@ -1132,7 +1135,7 @@
     <string name="wifi_p2p_remembered_groups" msgid="5497007770930525695">"Grup yang diingat"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="6767831720507440027">"Tidak dapat menyambung."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="1317434386267376606">"Gagal mengubah nama perangkat."</string>
-    <string name="wifi_p2p_disconnect_title" msgid="96361896458072463">"Putuskan koneksi?"</string>
+    <string name="wifi_p2p_disconnect_title" msgid="96361896458072463">"Berhenti hubungkan?"</string>
     <string name="wifi_p2p_disconnect_message" msgid="1208761239498807208">"Jika diputuskan, sambungan Anda dengan <xliff:g id="PEER_NAME">%1$s</xliff:g> akan berakhir."</string>
     <string name="wifi_p2p_disconnect_multiple_message" msgid="4490648217799144078">"Jika diputuskan, sambungan Anda dengan <xliff:g id="PEER_NAME">%1$s</xliff:g> dan <xliff:g id="PEER_COUNT">%2$s</xliff:g> perangkat lain akan berakhir."</string>
     <string name="wifi_p2p_cancel_connect_title" msgid="8476985132989357041">"Batalkan undangan?"</string>
@@ -1306,7 +1309,7 @@
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Akan nonaktif otomatis pukul <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Akan otomatis dinonaktifkan setelah waktu tidur"</string>
     <string name="dark_ui_summary_on_auto_mode_modes" msgid="7769594183411785087">"Akan dinonaktifkan saat <xliff:g id="ID_1">%1$s</xliff:g> berakhir"</string>
-    <string name="dark_ui_text" msgid="4392646155331126666">"Tema gelap menggunakan latar belakang hitam agar daya baterai dapat bertahan lebih lama di beberapa layar. Jadwal tema gelap menunggu diaktifkan hingga layar nonaktif."</string>
+    <string name="dark_ui_text" msgid="4392646155331126666">"Tema gelap menggunakan latar belakang hitam agar daya baterai bertahan lebih lama di layar tertentu. Jika dijadwalkan, setelan tema gelap akan menunggu layar Anda nonaktif terlebih dahulu sebelum diterapkan."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Tema gelap saat ini mengikuti jadwal Mode Waktu Tidur Anda"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Setelan Mode Waktu Tidur"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Mode juga dapat mengaktifkan tema gelap}=1{{mode_1} juga mengaktifkan tema gelap}=2{{mode_1} dan {mode_2} juga mengaktifkan tema gelap}=3{{mode_1}, {mode_2}, dan {mode_3} juga mengaktifkan tema gelap}other{{mode_1}, {mode_2}, dan # lainnya juga mengaktifkan tema gelap}}"</string>
@@ -1959,31 +1962,23 @@
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"Kustom"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"Nilai kustom"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Tombol lambat"</string>
-    <string name="slow_keys_summary" msgid="2914214326648535377">"Menyesuaikan waktu yang diperlukan penekanan tombol untuk diaktifkan"</string>
+    <string name="slow_keys_summary" msgid="2914214326648535377">"Menyesuaikan lama waktu tombol untuk merespons setelah ditekan"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Tombol lekat"</string>
-    <string name="sticky_keys_summary" msgid="1844953803625480623">"Tekan satu tombol pada satu waktu untuk mengaktifkan pintasan, bukan menekan tombol secara bersamaan"</string>
+    <string name="sticky_keys_summary" msgid="1844953803625480623">"Tekan tombol satu per satu untuk menggunakan pintasan, bukan menekan beberapa tombol secara bersamaan"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Tombol mouse"</string>
-    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
-    <skip />
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Gunakan tombol mouse"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Gunakan keyboard untuk mengontrol kursor"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Scroll terbalik mouse"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Scroll ke atas untuk memindahkan halaman ke bawah"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Tukar tombol kiri dan kanan"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Gunakan tombol mouse kiri sebagai tombol kanan"</string>
-    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
-    <skip />
-    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
-    <skip />
-    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
-    <skip />
-    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
-    <skip />
-    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
-    <skip />
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Tombol mouse untuk <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Gunakan tombol <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> untuk memindahkan kursor mouse"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Gunakan tombol <xliff:g id="CLICK_LABEL">%s</xliff:g> untuk mengklik tombol mouse utama"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"Gunakan tombol <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> untuk menekan &amp; menahan tombol mouse utama"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Gunakan tombol <xliff:g id="RELEASE_LABEL">%s</xliff:g> untuk melepaskan tombol mouse utama"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Gunakan tombol <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> untuk mengaktifkan/menonaktifkan mode scroll. Tindakan ini akan membuat tombol <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> men-scroll tampilan ke atas, bawah, kiri, atau kanan"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Gunakan tombol <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> untuk mengklik tombol mouse sekunder"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Pintasan keyboard"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Tampilkan daftar pintasan"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Keyboard &amp; fitur profil kerja"</string>
@@ -2046,7 +2041,7 @@
     <string name="modifier_keys_default_summary" msgid="8701640508670973258">"Default"</string>
     <string name="modifier_keys_reset_message" msgid="5236994817619936058">"Yakin ingin mereset semua tombol pengubah ke defaultnya?"</string>
     <string name="modifier_keys_done" msgid="8196199314913909700">"Selesai"</string>
-    <string name="modifier_keys_cancel" msgid="7136520252570826772">"Batalkan"</string>
+    <string name="modifier_keys_cancel" msgid="7136520252570826772">"Batal"</string>
     <string name="modifier_keys_reset" msgid="551170906710422041">"Reset"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Pilih tombol pengubah"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Pilih tombol baru untuk <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
@@ -2387,7 +2382,7 @@
     <string name="captioning_appearance_summary" msgid="4620682807315588019">"Ukuran teks <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Opsi lainnya"</string>
     <string name="accessibility_captioning_preference_intro" msgid="8995427146374031134">"Sesuaikan ukuran dan gaya teks agar lebih mudah dibaca"</string>
-    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"Preferensi teks ini didukung di aplikasi media tertentu"</string>
+    <string name="accessibility_captioning_preference_summary" msgid="8335768472978374255">"Tidak semua aplikasi mendukung preferensi teks ini"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Tombol aksesibilitas"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"geser dengan 2 jari dari bawah ke atas"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Tahan tombol volume"</string>
@@ -3004,7 +2999,7 @@
     <string name="vpn_forget" msgid="2913950864877236737">"Lupakan"</string>
     <string name="vpn_connect_to" msgid="216709261691085594">"Menghubungkan ke <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Putuskan sambungan VPN ini?"</string>
-    <string name="vpn_disconnect" msgid="7753808961085867345">"Putuskan koneksi"</string>
+    <string name="vpn_disconnect" msgid="7753808961085867345">"Berhenti hubungkan"</string>
     <string name="vpn_version" msgid="6344167191984400976">"Versi"</string>
     <string name="vpn_version_info" msgid="5717671228402924155">"Versi <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Lupakan VPN"</string>
@@ -3233,7 +3228,7 @@
     <string name="sim_selection_required_pref" msgid="231437651041498359">"Perlu dipilih"</string>
     <string name="sim_selection_channel_title" msgid="3193666315607572484">"pilihan SIM"</string>
     <string name="dashboard_title" msgid="5660733037244683387">"Setelan"</string>
-    <string name="network_dashboard_title" msgid="788543070557731240">"Jaringan dan internet"</string>
+    <string name="network_dashboard_title" msgid="788543070557731240">"Jaringan &amp; internet"</string>
     <string name="network_dashboard_summary_mobile" msgid="7750924671970583670">"Data seluler, Wi‑Fi, hotspot"</string>
     <string name="network_dashboard_summary_no_mobile" msgid="4022575916334910790">"Wi‑Fi, hotspot"</string>
     <string name="connected_devices_dashboard_title" msgid="19868275519754895">"Perangkat terhubung"</string>
@@ -3424,13 +3419,12 @@
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Buat mode Anda sendiri"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Hanya dapatkan notifikasi dari aplikasi dan orang yang penting"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Setel jadwal"</string>
-    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"Jadwal berdasarkan"</string>
+    <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"Jadwalkan menurut"</string>
     <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"Hari dan waktu"</string>
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"09.00 - 17.00 hari kerja\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Acara kalender"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} aktif}=2{{mode_1} dan {mode_2} aktif}=3{{mode_1}, {mode_2}, dan {mode_3} aktif}other{{mode_1}, {mode_2}, dan # lainnya aktif}}"</string>
-    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
-    <skip />
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Jangan Ganggu}=1{{mode_1}}=2{{mode_1}, {mode_2}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"AKTIF"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Tidak disetel"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Dinonaktifkan"</string>
@@ -3456,7 +3450,7 @@
     <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Kapan mode akan otomatis diaktifkan"</string>
     <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Jadwal acara"</string>
     <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Aktifkan selama acara untuk"</string>
-    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Lokasi balasan undangan"</string>
+    <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Yang balasan undangannya"</string>
     <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Jadwal waktu"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Jadwal"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> jam, <xliff:g id="MINUTES">%2$d</xliff:g> mnt"</string>
@@ -3669,8 +3663,8 @@
     <string name="recent_convo_removed" msgid="8686414146325958281">"Percakapan dihapus"</string>
     <string name="clear" msgid="5092178335409471100">"Hapus"</string>
     <string name="clear_conversation" msgid="5564321180363279096">"Hapus <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
-    <string name="conversation_onboarding_title" msgid="5194559958353468484">"Percakapan prioritas dan yang diubah akan muncul di sini"</string>
-    <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Setelah ditandai sebagai prioritas atau diubah-ubah, percakapan akan muncul di sini. \n\nUntuk mengubah setelan percakapan: \nGeser layar dari atas ke bawah untuk membuka menu notifikasi, lalu sentuh lama percakapan."</string>
+    <string name="conversation_onboarding_title" msgid="5194559958353468484">"Percakapan yang Anda tandai sebagai prioritas dan yang Anda ubah akan muncul di sini"</string>
+    <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Setelah Anda tandai sebagai prioritas atau Anda ubah, percakapan akan muncul di sini. \n\nUntuk mengubah setelan percakapan: \nGeser layar dari atas ke bawah untuk membuka menu notifikasi, lalu sentuh lama percakapan."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Perkecil"</string>
     <string name="notification_importance_high_title" msgid="394129291760607808">"Munculkan di layar"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"Senyap"</string>
@@ -3712,7 +3706,7 @@
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Jika Anda menonaktifkan akses notifikasi untuk <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, akses ke mode Jangan Ganggu mungkin juga akan dinonaktifkan."</string>
     <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"Jika Anda menonaktifkan akses notifikasi untuk <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, akses Mode mungkin juga akan dinonaktifkan."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Nonaktifkan"</string>
-    <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Batalkan"</string>
+    <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Batal"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Real-time"</string>
     <string name="notif_type_ongoing_summary" msgid="2348867528527573574">"Komunikasi yang sedang berlangsung dari aplikasi yang sedang digunakan, navigasi, panggilan telepon, dan lain-lain"</string>
     <string name="notif_type_conversation" msgid="4383931408641374979">"Percakapan"</string>
@@ -3771,7 +3765,7 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Akses Jangan Ganggu"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Izinkan Mode Jangan Ganggu"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Tidak ada aplikasi terpasang yang meminta akses Jangan Ganggu"</string>
-    <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"Akses mode"</string>
+    <string name="manage_zen_modes_access_title" msgid="2520680004915648824">"Akses Mode"</string>
     <string name="zen_modes_access_detail_switch" msgid="4060429747631111299">"Izinkan akses Mode"</string>
     <string name="zen_modes_access_empty_text" msgid="8750927923904377110">"Tidak ada aplikasi terinstal yang meminta akses Mode"</string>
     <string name="app_notifications_off_desc" msgid="2484843759466874201">"Anda belum mengizinkan notifikasi dari aplikasi ini"</string>
@@ -3819,7 +3813,7 @@
     <string name="zen_mode_event_rule_calendar" msgid="6279460374929508907">"Selama acara untuk"</string>
     <string name="zen_mode_event_rule_calendar_any" msgid="5152139705998281205">"Kalender mana saja"</string>
     <string name="zen_mode_event_rule_reply" msgid="6099405414361340225">"Jika balasannya adalah"</string>
-    <string name="zen_mode_event_rule_reply_any_except_no" msgid="4672746760505346596">"Ya, Mungkin, atau Tidak dibalas"</string>
+    <string name="zen_mode_event_rule_reply_any_except_no" msgid="4672746760505346596">"Ya, Mungkin, atau Tidak ada balasan"</string>
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="6584448788100186574">"Ya atau Mungkin"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="7812120982734551236">"Ya"</string>
     <string name="zen_mode_rule_not_found_text" msgid="5303667326973891036">"Aturan tidak ditemukan."</string>
@@ -3912,7 +3906,7 @@
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Aplikasi"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Notifikasi yang boleh mengganggu"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Izinkan semua notifikasi"</string>
-    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Tidak ada yang boleh menginterupsi}=1{{sound_category_1} boleh menginterupsi}=2{{sound_category_1} dan {sound_category_2} boleh menginterupsi}=3{{sound_category_1}, {sound_category_2}, dan {sound_category_3} boleh menginterupsi}other{{sound_category_1}, {sound_category_2}, dan # lainnya boleh menginterupsi}}"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Tidak ada yang boleh mengganggu}=1{{sound_category_1} boleh mengganggu}=2{{sound_category_1} dan {sound_category_2} boleh mengganggu}=3{{sound_category_1}, {sound_category_2}, dan {sound_category_3} boleh mengganggu}other{{sound_category_1}, {sound_category_2}, dan # lainnya boleh mengganggu}}"</string>
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Tidak ada yang boleh mengganggu"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Tidak ada orang yang boleh mengganggu"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Beberapa orang boleh mengganggu"</string>
@@ -3949,13 +3943,13 @@
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Info dan setelan di <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Dikelola oleh <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Nonaktifkan <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Mode ini tidak akan diaktifkan saat dinonaktifkan"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Jika dinonaktifkan, mode ini tidak akan pernah diterapkan"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Nonaktifkan"</string>
     <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Aktifkan <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Mode ini mungkin diaktifkan otomatis berdasarkan setelan ini"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Mode ini mungkin otomatis diaktifkan menurut setelannya"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Aktifkan"</string>
-    <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Menyetel mode yang mengikuti jadwal rutin"</string>
-    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Menyetel mode untuk menyinkronkan dengan acara kalender dan mengundang respons"</string>
+    <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Setel mode yang mengikuti jadwal rutin"</string>
+    <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Setel mode untuk menjalankan sinkronisasi acara kalender dan respons undangan"</string>
     <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Merancang rutinitas tidur yang menenangkan. Menyetel alarm, meredupkan layar, dan memblokir notifikasi."</string>
     <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Memprioritaskan keamanan di jalan untuk mengemudi dengan fokus dan bebas distraksi"</string>
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Memblokir distraksi dan gangguan dari perangkat agar dapat fokus"</string>
@@ -5004,7 +4998,7 @@
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"Tidak dapat mengambil heap dump sistem"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"Otomatis ambil heap dump sistem"</string>
     <string name="automatic_system_heap_dump_summary" msgid="4060846186592886986">"Otomatis ambil heap dump untuk Sistem Android saat sistem menggunakan terlalu banyak memori"</string>
-    <string name="wifi_disconnect_button_text" msgid="5698154296678571998">"Putuskan koneksi"</string>
+    <string name="wifi_disconnect_button_text" msgid="5698154296678571998">"Berhenti hubungkan"</string>
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Panggilan darurat"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Panggilan darurat melalui Panggilan Wi‑Fi tidak didukung oleh operator Anda.\nPerangkat beralih ke jaringan seluler secara otomatis untuk melakukan panggilan darurat.\nPanggilan darurat hanya dapat dilakukan dengan cakupan seluler."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Gunakan Wi‑Fi untuk melakukan panggilan dengan kualitas lebih baik"</string>
@@ -5289,8 +5283,8 @@
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Rasio aspek"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Coba rasio aspek baru untuk melihat aplikasi ini jika aplikasi belum didesain agar sesuai dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Coba rasio aspek baru untuk melihat aplikasi ini jika aplikasi belum didesain agar sesuai dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Beberapa aplikasi mungkin tidak dioptimalkan untuk rasio aspek tertentu."</string>
-    <string name="aspect_ratio_summary_text" msgid="4737461467467220325">"Coba rasio aspek baru untuk melihat aplikasi jika aplikasi belum didesain agar sesuai dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"Coba rasio aspek baru untuk melihat aplikasi jika aplikasi belum didesain agar sesuai dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Beberapa aplikasi mungkin tidak dioptimalkan untuk rasio aspek tertentu."</string>
+    <string name="aspect_ratio_summary_text" msgid="4737461467467220325">"Coba rasio aspek baru untuk aplikasi yang desain tampilannya belum sesuai dengan perangkat <xliff:g id="DEVICE_NAME">%1$s</xliff:g> Anda"</string>
+    <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"Coba rasio aspek baru untuk aplikasi yang desain tampilannya belum sesuai dengan perangkat <xliff:g id="DEVICE_NAME">%1$s</xliff:g> Anda. Beberapa aplikasi mungkin tidak dioptimalkan untuk rasio aspek tertentu."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Aplikasi yang disarankan"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Aplikasi yang diubah"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Default aplikasi"</string>
@@ -5478,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Dengarkan streaming"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Pindai kode QR streaming audio agar dapat mendengarkan dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Tidak dapat mengedit sandi saat sedang membagikan audio. Untuk mengubah sandi, nonaktifkan berbagi audio terlebih dahulu."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Sandi Anda harus berisi 4-16 karakter dan hanya menggunakan huruf, angka, serta simbol"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Pemindai kode QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Perlu bantuan?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Telusuri Setelan"</string>
@@ -5491,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Terjadi error saat menetapkan akun default"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Tidak ada default yang disetel"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Perangkat saja"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Tambahkan akun untuk memulai"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Lingkari untuk Menelusuri"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Sentuh lama tombol Layar utama atau tuas navigasi untuk menelusuri menggunakan konten di layar."</string>
 </resources>

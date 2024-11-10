@@ -25,7 +25,7 @@ public class AudioSharingActivity extends SettingsActivity {
     @Override
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
-        if (!BluetoothUtils.isAudioSharingEnabled()) {
+        if (!BluetoothUtils.isAudioSharingUIAvailable(this)) {
             finish();
         }
     }

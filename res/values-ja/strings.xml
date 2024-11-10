@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"新しいデバイスとペア設定"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"明日自動的に ON にする"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"右耳をペア設定"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"左耳をペア設定"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"もう一方の耳をペア設定"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE Audio を無効にする"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"デバイスが LE オーディオ ハードウェア機能に対応している場合に、Bluetooth LE Audio 機能を無効にします。"</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE Audio モード"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Bluetooth LE Audio ブロードキャスト UI のプレビューを有効にする"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"個人の音声の共有やプライベート ブロードキャストなど、LE Audio 共有 UI のプレビューを有効にします"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"LE Audio の切替をデバイスの詳細に表示"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bluetooth LE Audio の許可リストを回避する"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE Audio の周辺機器が許可リストの基準を満たしていない場合でも、デフォルトで LE Audio を使用します。"</string>
@@ -247,8 +247,8 @@
     <string name="airplane_mode" msgid="3196085857882526817">"機内モード"</string>
     <string name="wireless_networks_settings_title" msgid="8557542379234105369">"無線とネットワーク"</string>
     <string name="roaming" msgid="3055365654530847985">"ローミング"</string>
-    <string name="roaming_enable" msgid="7845716016861535340">"ローミング中にデータサービスに接続"</string>
-    <string name="roaming_disable" msgid="729512894708689604">"ローミング中にデータサービスに接続"</string>
+    <string name="roaming_enable" msgid="7845716016861535340">"ローミング中にデータサービスに接続します"</string>
+    <string name="roaming_disable" msgid="729512894708689604">"ローミング中にデータサービスに接続します"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"ローミング料金が発生する場合があります。"</string>
     <string name="date_time_auto" msgid="1759599045100040686">"日時の自動設定"</string>
     <string name="date_time_auto_summary" msgid="8294938565417729698">"ネットワークとワイヤレス通信を使用して自動的に設定します"</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"指を離してから、もう一度センサーに触れてください。"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"指紋認証センサーを使用できません"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"修理業者に調整を依頼してください。"</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"画面オフ時の指紋認証"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"画面がオフの状態でも指紋認証を使用"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"画面オフ、ロック解除"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"セキュリティの詳細設定"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"仕事用プロファイルのロック、暗号化など"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"暗号化、認証情報など"</string>
@@ -2367,7 +2370,7 @@
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"画面の上部からクイック設定に「片手モード」を追加することもできます"</string>
     <string name="accessibility_font_scaling_auto_added_qs_tooltip_content" msgid="7229921960884718332">"クイック設定にフォントサイズが追加されました。下にスワイプしてフォントサイズをいつでも変更できます。"</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"閉じる"</string>
-    <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"色補正を使用"</string>
+    <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"色補正を使用する"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"色補正のショートカット"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"色補正について"</string>
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"色補正の詳細"</string>
@@ -3470,7 +3473,7 @@
     <string name="mode_grayscale_summary" msgid="6682099523626777038">"画面をモノクロに切り替えます"</string>
     <string name="mode_aod_title" msgid="5903435070341237325">"画面を暗くしたままにする"</string>
     <string name="mode_aod_title_secondary_list" msgid="8268180392811027557">"画面を暗くしたままにする"</string>
-    <string name="mode_aod_summary" msgid="7516159044827627065">"「常に表示状態のディスプレイ」機能を無効にする"</string>
+    <string name="mode_aod_summary" msgid="7516159044827627065">"「常に表示状態のディスプレイ」機能を無効にします"</string>
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"壁紙を暗くする"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"壁紙を暗くする"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"壁紙の明るさを調整します"</string>
@@ -3501,8 +3504,8 @@
     <string name="zen_mode_block_effect_intent" msgid="7621578645742903531">"画面を OFF のままにする"</string>
     <string name="zen_mode_block_effect_light" msgid="1997222991427784993">"点滅させない"</string>
     <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"画面にポップアップ通知を表示しない"</string>
-    <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"ステータスバー アイコンを非表示"</string>
-    <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"アプリアイコンの通知ドットを非表示"</string>
+    <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"ステータスバー アイコンを表示しない"</string>
+    <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"アプリアイコンの通知ドットを表示しない"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"通知で画面を ON にしない"</string>
     <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"プルダウン シェードに通知を表示しない"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"設定しない"</string>
@@ -3885,7 +3888,7 @@
     <string name="zen_mode_apps_category" msgid="4082380323683889391">"割り込み可能なアプリ"</string>
     <string name="zen_mode_apps_priority_apps" msgid="7386196048313716076">"選択したアプリ"</string>
     <string name="zen_mode_apps_none_apps" msgid="2493642312793604327">"なし"</string>
-    <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{アプリは割り込み不可}=1{{app_1} が割り込み可能}=2{{app_1} と {app_2} が割り込み可能}=3{{app_1}、{app_2}、{app_3} が割り込み可能}other{{app_1}、{app_2}、他 # 個が割り込み可能}}"</string>
+    <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{割り込み可能なアプリはありません}=1{{app_1} が割り込み可能}=2{{app_1} と {app_2} が割り込み可能}=3{{app_1}、{app_2}、{app_3} が割り込み可能}other{{app_1}、{app_2}、他 # 個が割り込み可能}}"</string>
     <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g>（仕事用）"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"計算中…"</string>
     <string name="zen_mode_apps_priority_apps_settings" msgid="5544513568250354374">"アプリの設定"</string>
@@ -4165,7 +4168,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"このアプリで作成したすべてのサイレント モード ルールは削除されます。"</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"<xliff:g id="APP">%1$s</xliff:g> によるモードへのアクセスを許可しますか？"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"アプリはサイレント モードの ON / OFF を切り替えたり、モードの管理や有効化を行ったり、関連する設定を変更したりできるようになります。"</string>
-    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"<xliff:g id="APP">%1$s</xliff:g> に対するモードのアクセス権限を取り消しますか？"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"<xliff:g id="APP">%1$s</xliff:g> によるモードへのアクセス権限を取り消しますか？"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"このアプリで作成したすべてのモードが削除されます。"</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"最適化しない"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"最適化する"</string>
@@ -4777,7 +4780,7 @@
     <string name="network_5G_recommended" msgid="4769018972369031538">"5G（推奨）"</string>
     <string name="network_lte" msgid="2449425437381668780">"LTE（推奨）"</string>
     <string name="network_4G" msgid="9018841362928321047">"4G（推奨）"</string>
-    <string name="select_automatically" msgid="2419752566747259155">"ネットワークを自動的に選択"</string>
+    <string name="select_automatically" msgid="2419752566747259155">"ネットワークを自動的に選択する"</string>
     <string name="carrier_settings_title" msgid="6959295328730560529">"携帯通信会社の設定"</string>
     <string name="cdma_lte_data_service" msgid="6937443423651347345">"データサービスの設定"</string>
     <string name="mobile_data_settings_title" msgid="3927524078598009792">"モバイルデータ"</string>
@@ -5181,7 +5184,7 @@
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"電話番号を入力"</string>
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"電話番号が指定されていません。"</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
-    <string name="enable_2g_title" msgid="8184757884636162942">"2G を許可"</string>
+    <string name="enable_2g_title" msgid="8184757884636162942">"2G を許可する"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G は安全面で劣りますが、場所によっては接続性が改善される場合があります。緊急通報では 2G は常に許可されます。"</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> を利用するには、2G が必要です"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"暗号化されたネットワークのみを許可する"</string>
@@ -5469,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"ストリームを聴く"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>で聴くには、音声ストリームの QR コードをスキャンします"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"共有中はパスワードを編集できません。パスワードを変更するには、まず音声の共有を OFF にしてください。"</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"パスワードは英字、数字、記号のみを使用し、4～16 文字で指定してください"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR コードスキャナ"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"ご不明な点がある場合"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"設定を検索"</string>
@@ -5482,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"デフォルトのアカウントの設定中にエラーが発生しました"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"デフォルトは設定されていません"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"デバイスのみ"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"開始するにはアカウントを追加してください"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"かこって検索"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"ホームボタンまたはナビゲーション ハンドルを長押しすると、画面上のコンテンツを使って検索できます。"</string>
 </resources>

@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Sincronizar novo dispositivo"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Ativar automaticamente amanhã"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Sincr. ouv. direito"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Sincr. ouv. esquerdo"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Sincroniz. o outro ouvido"</string>
@@ -553,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Levante o dedo e toque no sensor novamente"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Não é possível usar o sensor de impressões digitais"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Visite um fornecedor de serviços de reparação."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Desbloqueio por impressão digital com o ecrã desligado"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Use o Desbloqueio por impressão digital mesmo quando o ecrã está desligado"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Ecrã desligado, Desbloquear"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Mais definições de segurança"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Bloqueio do perfil de trabalho, encriptação e muito mais"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Encriptação, credenciais e muito mais"</string>
@@ -1947,7 +1952,7 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opções"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Acessibilidade"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclado físico"</string>
-    <string name="bounce_keys" msgid="7419450970351743904">"Teclas de rejeição"</string>
+    <string name="bounce_keys" msgid="7419450970351743904">"Evitar pressão repetida"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"O teclado ignora as pressões rápidas repetidas da mesma tecla"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Limiar para evitar pressão repetida"</string>
     <string name="bounce_keys_dialog_subtitle" msgid="5640575860258120026">"Escolha o tempo durante o qual o teclado ignora as pressões repetidas das teclas"</string>
@@ -1961,27 +1966,19 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Teclas aderentes"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Prima uma tecla de cada vez para os atalhos em vez de manter as teclas premidas em simultâneo"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Teclas do rato"</string>
-    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
-    <skip />
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Usar teclas do rato"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Use o teclado para controlar o ponteiro"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Deslocamento inverso do rato"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Desloque para cima para mover a página para baixo"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Trocar botões esquerdo e direito"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Use o botão esquerdo do rato como o botão direito"</string>
-    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
-    <skip />
-    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
-    <skip />
-    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
-    <skip />
-    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
-    <skip />
-    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
-    <skip />
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Teclas do rato de <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Use as teclas <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> para mover o ponteiro do rato"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Use a tecla <xliff:g id="CLICK_LABEL">%s</xliff:g> para clicar no botão principal do rato"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"Use a tecla <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> para premir sem soltar o botão principal do rato"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Use a tecla <xliff:g id="RELEASE_LABEL">%s</xliff:g> para soltar o botão principal do rato"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Use a tecla <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> para ativar/desativar o modo de deslocamento. Isto faz com que as teclas <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> desloquem a vista para cima, para baixo, para a esquerda ou para a direita"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Use a tecla <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> para clicar no botão secundário do rato"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Atalhos de teclado"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Mostre a lista de atalhos"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Teclados e ferramentas do perfil de trabalho"</string>
@@ -2585,10 +2582,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Ajustar utilização de energia"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Pacotes incluídos"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"As apps estão a ser executadas normalmente"</string>
-    <!-- no translation found for battery_tip_replacement_title (3932335880485957919) -->
-    <skip />
-    <!-- no translation found for battery_tip_replacement_summary (7892640031317153349) -->
-    <skip />
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"Substituição da bateria recomendada"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"A capacidade da bateria e o desempenho de carregamento estão reduzidos, e é recomendada a substituição da bateria."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Nível da bateria baixo"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Ative a Poupança de bateria para prolongar a autonomia da bateria"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Melhore a autonomia da bateria"</string>
@@ -3429,8 +3424,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"9:00 – 17:00, dias úteis\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Eventos de calendário"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} está ativo}=2{{mode_1} e {mode_2} estão ativos}=3{{mode_1}, {mode_2} e {mode_3} estão ativos}other{{mode_1}, {mode_2} e mais # estão ativos}}"</string>
-    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
-    <skip />
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Não incomodar}=1{{mode_1}}=2{{mode_1} e {mode_2}}other{{mode_1}, {mode_2} e {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ATIVADO"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Não definido"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Desativado"</string>
@@ -5478,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Ouvir stream"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Leia o código QR de uma stream de áudio para ouvir com os <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Não é possível editar a palavra-passe durante a partilha. Para alterar a palavra-passe, primeiro, desative a partilha de áudio."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"A sua palavra-passe tem de conter entre 4 e 16 carateres e usar apenas letras, números e símbolos"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Leitor de códigos QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Precisa de ajuda?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Pesquise definições"</string>
@@ -5491,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Erro ao predefinir a conta"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Nenhuma conta predefinida"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Apenas no dispositivo"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Adicione uma conta para começar"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Circundar para Pesquisar"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Toque sem soltar no botão do ecrã principal ou no indicador de navegação para pesquisar usando o conteúdo no ecrã."</string>
 </resources>

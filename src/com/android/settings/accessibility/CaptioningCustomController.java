@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import android.annotation.Nullable;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Handler;
@@ -39,6 +40,7 @@ import java.util.List;
 public class CaptioningCustomController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
 
+    @Nullable
     private Preference mCustom;
     private final CaptionHelper mCaptionHelper;
     private final ContentResolver mContentResolver;
@@ -50,32 +52,41 @@ public class CaptioningCustomController extends BasePreferenceController
     );
 
     public CaptioningCustomController(Context context, String preferenceKey) {
-        super(context, preferenceKey);
-        mCaptionHelper = new CaptionHelper(context);
-        mContentResolver = context.getContentResolver();
-        mSettingsContentObserver = new AccessibilitySettingsContentObserver(
-                new Handler(Looper.getMainLooper()));
-        mSettingsContentObserver.registerKeysToObserverCallback(CAPTIONING_FEATURE_KEYS,
-                key -> refreshShowingCustom());
+        this(context, preferenceKey, new CaptionHelper(context),
+                new AccessibilitySettingsContentObserver(new Handler(Looper.getMainLooper())));
     }
 
     @VisibleForTesting
-    CaptioningCustomController(Context context, String preferenceKey,
+    CaptioningCustomController(
+            Context context, String preferenceKey, CaptionHelper captionHelper,
             AccessibilitySettingsContentObserver contentObserver) {
-        this(context, preferenceKey);
+        super(context, preferenceKey);
+        mCaptionHelper = new CaptionHelper(context);
+        mContentResolver = context.getContentResolver();
         mSettingsContentObserver = contentObserver;
+        mSettingsContentObserver.registerKeysToObserverCallback(CAPTIONING_FEATURE_KEYS, key -> {
+            if (mCustom != null) {
+                mCustom.setVisible(shouldShowPreference());
+            }
+        });
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        if (com.android.settings.accessibility.Flags.fixA11ySettingsSearch()) {
+            return (shouldShowPreference()) ? AVAILABLE : AVAILABLE_UNSEARCHABLE;
+        } else {
+            return AVAILABLE;
+        }
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mCustom = screen.findPreference(getPreferenceKey());
-        refreshShowingCustom();
+        if (mCustom != null) {
+            mCustom.setVisible(shouldShowPreference());
+        }
     }
 
     @Override
@@ -88,9 +99,7 @@ public class CaptioningCustomController extends BasePreferenceController
         mSettingsContentObserver.unregister(mContentResolver);
     }
 
-    private void refreshShowingCustom() {
-        final boolean isCustomPreset =
-                mCaptionHelper.getRawUserStyle() == CaptioningManager.CaptionStyle.PRESET_CUSTOM;
-        mCustom.setVisible(isCustomPreset);
+    private boolean shouldShowPreference() {
+        return mCaptionHelper.getRawUserStyle() == CaptioningManager.CaptionStyle.PRESET_CUSTOM;
     }
 }

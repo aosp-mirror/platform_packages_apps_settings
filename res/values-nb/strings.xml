@@ -67,6 +67,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Koble til en ny enhet"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Slå på automatisk i morgen"</string>
+    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
+    <skip />
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Tilkoble høyre øre"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Tilkoble venstre øre"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Tilkoble det andre øret"</string>
@@ -120,10 +122,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Slå av Bluetooth LE-lyd"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Slår av Bluetooth LE-lydfunksjonen hvis enheten støtter maskinvarefunksjoner for LE-lyd."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE-lydmodus"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Slå på forhåndsvisningen av brukergrensesnittet for kringkasting av Bluetooth LE-lyd"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Slår på forhåndsvisningen av brukergrensesnittet for kringkasting av Bluetooth LE-lyd, inkludert personlig lyddeling og privat kringkasting"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Vis LE-lyd-av/på-bryter i Enhetsdetaljer"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Omgå godkjenningsliste for Bluetooth LE-lyd"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Bruk LE-lyd som standard, selv om det ikke er bekreftet at den eksterne LE-lydenheten overholder kriteriene for godkjenningslisten."</string>
@@ -555,6 +555,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Løft fingeren og legg den på sensoren igjen"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Kan ikke bruke fingeravtrykkssensoren"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Gå til en reparasjonsleverandør."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Opplåsing med fingeravtrykk når skjermen er av"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Bruk opplåsing med fingeravtrykk selv når skjermen er av"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Skjerm av, opplåsing"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Flere sikkerhetsinnstillinger"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Lås for jobbprofil, kryptering med mer"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Kryptering, legitimasjon med mer"</string>
@@ -1962,28 +1965,20 @@
     <string name="slow_keys_summary" msgid="2914214326648535377">"Justerer tiden det tar før tastetrykk aktiveres"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Trege taster"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Aktiver hurtigtaster ved å trykke på én tast av gangen i stedet for å holde flere taster inne samtidig"</string>
-    <string name="mouse_keys" msgid="6237254627808525540">"Museknapper"</string>
-    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
-    <skip />
+    <string name="mouse_keys" msgid="6237254627808525540">"Musetaster"</string>
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Bruk musetaster"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Bruk tastaturet til å kontrollere pekeren"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Omvendt rulling med musen"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Rull opp for å flytte siden ned"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Bytt om på venstre og høyre knapp"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Bruk venstre museknapp som høyre"</string>
-    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
-    <skip />
-    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
-    <skip />
-    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
-    <skip />
-    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
-    <skip />
-    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
-    <skip />
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Musetaster for <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Bruk <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>-tastene for å flytte musepekeren"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Bruk <xliff:g id="CLICK_LABEL">%s</xliff:g>-tasten for å klikke på den primære museknappen"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"Bruk <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>-tasten for å trykke og holde på den primære museknappen"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Bruk <xliff:g id="RELEASE_LABEL">%s</xliff:g>-tasten for å frigjøre den primære museknappen"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Bruk <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>-tasten for å slå rullemodus av og på. Da ruller <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>-tastene visningen opp, ned, til venstre eller til høyre"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Bruk <xliff:g id="RELEASE_2_LABEL">%s</xliff:g>-tasten for å klikke på den sekundære museknappen"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Hurtigtaster"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Vis listen over hurtigtaster"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastatur og verktøy i jobbprofilen"</string>
@@ -3420,7 +3415,7 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ingen}=1{1 tidsplan er angitt}other{# tidsplaner er angitt}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ikke forstyrr"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Moduser"</string>
-    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Reduser distraksjoner til et minimum, og ta kontroll på oppmerksomheten med moduser for søvn, jobb, kjøring og alt mulig annet."</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Reduser distraksjoner til et minimum, og ta kontroll over oppmerksomheten med moduser for søvn, jobb, kjøring og alt mulig annet."</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Lag din egen modus"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Bli bare varslet av viktige personer og apper"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Angi en tidsplan"</string>
@@ -3429,8 +3424,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"«9:00–17:00 på hverdager»"</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Kalenderaktiviteter"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} er aktiv}=2{{mode_1} og {mode_2} er aktive}=3{{mode_1}, {mode_2} og {mode_3} er aktive}other{{mode_1}, {mode_2} og # til er aktive}}"</string>
-    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
-    <skip />
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Ikke forstyrr}=1{{mode_1}}=2{{mode_1}, {mode_2}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"PÅ"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Ikke angitt"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Deaktivert"</string>
@@ -3948,12 +3942,12 @@
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Appinnstillinger"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Informasjon og innstillinger i <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Administreres av <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Vil du slå av <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Denne modusen slås aldri på når den er slått av"</string>
-    <string name="zen_mode_action_disable" msgid="3552921561331044881">"Slå av"</string>
-    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Vil du slå på <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Vil du deaktivere <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Denne modusen blir aldri slått på når den er deaktivert"</string>
+    <string name="zen_mode_action_disable" msgid="3552921561331044881">"Deaktiver"</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Vil du aktivere <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
     <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Denne modusen kan slås på automatisk basert på innstillingene"</string>
-    <string name="zen_mode_action_enable" msgid="1161480633223176531">"Slå på"</string>
+    <string name="zen_mode_action_enable" msgid="1161480633223176531">"Aktivér"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Angi en modus som følger en regelmessig tidsplan"</string>
     <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Angi en modus for å synkronisere med kalenderaktiviteter og svare på invitasjoner"</string>
     <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Lag en avslappende søvnrutine. Angi alarmer, demp skjermen og blokker varsler."</string>
@@ -4172,9 +4166,9 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Må være slått på fordi varseltilgang er på"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Vil du trekke tilbake tilgangen til Ikke forstyrr for <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Alle Ikke forstyrr-regler opprettet av denne appen blir fjernet."</string>
-    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Vil du gi <xliff:g id="APP">%1$s</xliff:g> modustilgang?"</string>
+    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"Vil du gi <xliff:g id="APP">%1$s</xliff:g> tilgang til moduser?"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"Appen får muligheten til å slå Ikke forstyrr av og på, administrere og aktivere moduser og endre relaterte innstillinger."</string>
-    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"Vil du oppheve tilgangen til Moduser for <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"Vil du oppheve tilgangen til moduser for <xliff:g id="APP">%1$s</xliff:g>?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Alle modusene som er opprettet av denne appen, blir fjernet."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Ikke optimaliser"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimaliser"</string>
@@ -5049,7 +5043,7 @@
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Dette valget er ikke gyldig lenger. Prøv på nytt."</string>
     <string name="power_menu_setting_name" msgid="2394440932633137229">"Trykk og hold på/av-knappen"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Trykk og hold på av/på-knappen for å åpne"</string>
-    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"På/av-meny"</string>
+    <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Av/på-meny"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Digital assistent"</string>
     <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Åpne den digitale assistenten"</string>
     <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Åpne av/på-menyen"</string>
@@ -5478,8 +5472,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Lytt til strømmen"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Skann en QR-kode for en lydstrøm for å lytte med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Kan ikke redigere passordet under deling. For å bytte passord, slå først av lyddelingen."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Passordet må inneholde 4–16 tegn og bare bokstaver, tall og symboler"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR-kodeskanner"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Trenger du hjelp?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Søk i innstillingene"</string>
@@ -5491,7 +5484,11 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Feil ved innstilling av standardkonto"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Ingen standard er valgt"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Bare enheten"</string>
+    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Legg til en konto for å komme i gang"</string>
+    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
+    <skip />
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Circle to Search"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Trykk og hold på hjemknappen eller navigasjonshåndtaket for å søke med innholdet på skjermen."</string>
 </resources>
