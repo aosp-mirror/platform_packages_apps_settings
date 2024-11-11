@@ -29,14 +29,19 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothProfile;
 import android.content.ContentResolver;
+import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 
@@ -44,8 +49,13 @@ import androidx.preference.PreferenceCategory;
 
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settings.widget.SeekBarPreference;
+import com.android.settingslib.bluetooth.AmbientVolumeController;
+import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HearingDeviceLocalDataManager;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
+import com.android.settingslib.bluetooth.VolumeControlProfile;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -90,6 +100,18 @@ public class BluetoothDetailsAmbientVolumePreferenceControllerTest extends
     private BluetoothDevice mMemberDevice;
     @Mock
     private HearingDeviceLocalDataManager mLocalDataManager;
+    @Mock
+    private LocalBluetoothManager mBluetoothManager;
+    @Mock
+    private BluetoothEventManager mEventManager;
+    @Mock
+    private LocalBluetoothProfileManager mProfileManager;
+    @Mock
+    private VolumeControlProfile mVolumeControlProfile;
+    @Mock
+    private AmbientVolumeController mVolumeController;
+    @Mock
+    private Handler mTestHandler;
 
     private BluetoothDetailsAmbientVolumePreferenceController mController;
 
@@ -97,11 +119,29 @@ public class BluetoothDetailsAmbientVolumePreferenceControllerTest extends
     public void setUp() {
         super.setUp();
 
+        mContext = spy(mContext);
         PreferenceCategory deviceControls = new PreferenceCategory(mContext);
         deviceControls.setKey(KEY_HEARING_DEVICE_GROUP);
         mScreen.addPreference(deviceControls);
-        mController = new BluetoothDetailsAmbientVolumePreferenceController(mContext, mFragment,
-                mCachedDevice, mLifecycle, mLocalDataManager);
+        mController = spy(
+                new BluetoothDetailsAmbientVolumePreferenceController(mContext, mBluetoothManager,
+                        mFragment, mCachedDevice, mLifecycle, mLocalDataManager,
+                        mVolumeController));
+
+        when(mBluetoothManager.getEventManager()).thenReturn(mEventManager);
+        when(mBluetoothManager.getProfileManager()).thenReturn(mProfileManager);
+        when(mProfileManager.getVolumeControlProfile()).thenReturn(mVolumeControlProfile);
+        when(mVolumeControlProfile.getConnectionStatus(mDevice)).thenReturn(
+                BluetoothProfile.STATE_CONNECTED);
+        when(mVolumeControlProfile.getConnectionStatus(mMemberDevice)).thenReturn(
+                BluetoothProfile.STATE_CONNECTED);
+
+        when(mContext.getMainThreadHandler()).thenReturn(mTestHandler);
+        when(mTestHandler.postDelayed(any(Runnable.class), anyLong())).thenAnswer(
+                invocationOnMock -> {
+                    invocationOnMock.getArgument(0, Runnable.class).run();
+                    return null;
+                });
     }
 
     @Test
@@ -128,10 +168,13 @@ public class BluetoothDetailsAmbientVolumePreferenceControllerTest extends
 
     @Test
     public void onDeviceLocalDataChange_noMemberAndExpanded_uiCorrectAndDataUpdated() {
-        prepareDevice(/* hasMember= */ false, /* controlExpanded= */ true);
-
+        prepareDevice(/* hasMember= */ false);
         mController.init(mScreen);
-        mController.onDeviceLocalDataChange(TEST_ADDRESS, prepareEmptyData());
+        HearingDeviceLocalDataManager.Data data = new HearingDeviceLocalDataManager.Data.Builder()
+                .ambient(0).groupAmbient(0).ambientControlExpanded(true).build();
+        when(mLocalDataManager.get(mDevice)).thenReturn(data);
+
+        mController.onDeviceLocalDataChange(TEST_ADDRESS, data);
         shadowOf(Looper.getMainLooper()).idle();
 
         AmbientVolumePreference preference = mScreen.findPreference(KEY_AMBIENT_VOLUME);
@@ -142,10 +185,13 @@ public class BluetoothDetailsAmbientVolumePreferenceControllerTest extends
 
     @Test
     public void onDeviceLocalDataChange_noMemberAndCollapsed_uiCorrectAndDataUpdated() {
-        prepareDevice(/* hasMember= */ false, /* controlExpanded= */ false);
-
+        prepareDevice(/* hasMember= */ false);
         mController.init(mScreen);
-        mController.onDeviceLocalDataChange(TEST_ADDRESS, prepareEmptyData());
+        HearingDeviceLocalDataManager.Data data = new HearingDeviceLocalDataManager.Data.Builder()
+                .ambient(0).groupAmbient(0).ambientControlExpanded(false).build();
+        when(mLocalDataManager.get(mDevice)).thenReturn(data);
+
+        mController.onDeviceLocalDataChange(TEST_ADDRESS, data);
         shadowOf(Looper.getMainLooper()).idle();
 
         AmbientVolumePreference preference = mScreen.findPreference(KEY_AMBIENT_VOLUME);
@@ -156,10 +202,13 @@ public class BluetoothDetailsAmbientVolumePreferenceControllerTest extends
 
     @Test
     public void onDeviceLocalDataChange_hasMemberAndExpanded_uiCorrectAndDataUpdated() {
-        prepareDevice(/* hasMember= */ true, /* controlExpanded= */ true);
-
+        prepareDevice(/* hasMember= */ true);
         mController.init(mScreen);
-        mController.onDeviceLocalDataChange(TEST_ADDRESS, prepareEmptyData());
+        HearingDeviceLocalDataManager.Data data = new HearingDeviceLocalDataManager.Data.Builder()
+                .ambient(0).groupAmbient(0).ambientControlExpanded(true).build();
+        when(mLocalDataManager.get(mDevice)).thenReturn(data);
+
+        mController.onDeviceLocalDataChange(TEST_ADDRESS, data);
         shadowOf(Looper.getMainLooper()).idle();
 
         AmbientVolumePreference preference = mScreen.findPreference(KEY_AMBIENT_VOLUME);
@@ -170,10 +219,13 @@ public class BluetoothDetailsAmbientVolumePreferenceControllerTest extends
 
     @Test
     public void onDeviceLocalDataChange_hasMemberAndCollapsed_uiCorrectAndDataUpdated() {
-        prepareDevice(/* hasMember= */ true, /* controlExpanded= */ false);
-
+        prepareDevice(/* hasMember= */ true);
         mController.init(mScreen);
-        mController.onDeviceLocalDataChange(TEST_ADDRESS, prepareEmptyData());
+        HearingDeviceLocalDataManager.Data data = new HearingDeviceLocalDataManager.Data.Builder()
+                .ambient(0).groupAmbient(0).ambientControlExpanded(false).build();
+        when(mLocalDataManager.get(mDevice)).thenReturn(data);
+
+        mController.onDeviceLocalDataChange(TEST_ADDRESS, data);
         shadowOf(Looper.getMainLooper()).idle();
 
         AmbientVolumePreference preference = mScreen.findPreference(KEY_AMBIENT_VOLUME);
@@ -185,11 +237,13 @@ public class BluetoothDetailsAmbientVolumePreferenceControllerTest extends
     @Test
     public void onStart_localDataManagerStartAndCallbackRegistered() {
         prepareDevice(/* hasMember= */ true);
-
         mController.init(mScreen);
+
         mController.onStart();
 
         verify(mLocalDataManager, atLeastOnce()).start();
+        verify(mVolumeController).registerCallback(any(Executor.class), eq(mDevice));
+        verify(mVolumeController).registerCallback(any(Executor.class), eq(mMemberDevice));
         verify(mCachedDevice).registerCallback(any(Executor.class),
                 any(CachedBluetoothDevice.Callback.class));
         verify(mCachedMemberDevice).registerCallback(any(Executor.class),
@@ -199,11 +253,13 @@ public class BluetoothDetailsAmbientVolumePreferenceControllerTest extends
     @Test
     public void onStop_localDataManagerStopAndCallbackUnregistered() {
         prepareDevice(/* hasMember= */ true);
-
         mController.init(mScreen);
+
         mController.onStop();
 
         verify(mLocalDataManager).stop();
+        verify(mVolumeController).unregisterCallback(mDevice);
+        verify(mVolumeController).unregisterCallback(mMemberDevice);
         verify(mCachedDevice).unregisterCallback(any(CachedBluetoothDevice.Callback.class));
         verify(mCachedMemberDevice).unregisterCallback(any(CachedBluetoothDevice.Callback.class));
     }
@@ -211,7 +267,6 @@ public class BluetoothDetailsAmbientVolumePreferenceControllerTest extends
     @Test
     public void onDeviceAttributesChanged_newDevice_newPreference() {
         prepareDevice(/* hasMember= */ false);
-
         mController.init(mScreen);
 
         // check the right control is null before onDeviceAttributesChanged()
@@ -231,16 +286,34 @@ public class BluetoothDetailsAmbientVolumePreferenceControllerTest extends
         assertThat(updatedRightControl).isNotNull();
     }
 
-    private void prepareDevice(boolean hasMember) {
-        prepareDevice(hasMember, false);
+    @Test
+    public void onAmbientChanged_refreshWhenNotInitiateFromUi() {
+        prepareDevice(/* hasMember= */ false);
+        mController.init(mScreen);
+        final int testAmbient = 10;
+        HearingDeviceLocalDataManager.Data data = new HearingDeviceLocalDataManager.Data.Builder()
+                .ambient(testAmbient)
+                .groupAmbient(testAmbient)
+                .ambientControlExpanded(false)
+                .build();
+        when(mLocalDataManager.get(mDevice)).thenReturn(data);
+        getPreference().setExpanded(true);
+
+        mController.onAmbientChanged(mDevice, testAmbient);
+        verify(mController, never()).refresh();
+
+        final int updatedTestAmbient = 20;
+        mController.onAmbientChanged(mDevice, updatedTestAmbient);
+        verify(mController).refresh();
     }
 
-    private void prepareDevice(boolean hasMember, boolean controlExpanded) {
+    private void prepareDevice(boolean hasMember) {
         when(mCachedDevice.getDeviceSide()).thenReturn(SIDE_LEFT);
         when(mCachedDevice.getDevice()).thenReturn(mDevice);
         when(mCachedDevice.getBondState()).thenReturn(BOND_BONDED);
         when(mDevice.getAddress()).thenReturn(TEST_ADDRESS);
         when(mDevice.getAnonymizedAddress()).thenReturn(TEST_ADDRESS);
+        when(mDevice.isConnected()).thenReturn(true);
         if (hasMember) {
             when(mCachedDevice.getMemberDevice()).thenReturn(Set.of(mCachedMemberDevice));
             when(mCachedMemberDevice.getDeviceSide()).thenReturn(SIDE_RIGHT);
@@ -248,14 +321,8 @@ public class BluetoothDetailsAmbientVolumePreferenceControllerTest extends
             when(mCachedMemberDevice.getBondState()).thenReturn(BOND_BONDED);
             when(mMemberDevice.getAddress()).thenReturn(TEST_MEMBER_ADDRESS);
             when(mMemberDevice.getAnonymizedAddress()).thenReturn(TEST_MEMBER_ADDRESS);
+            when(mMemberDevice.isConnected()).thenReturn(true);
         }
-        HearingDeviceLocalDataManager.Data data = new HearingDeviceLocalDataManager.Data.Builder()
-                .ambient(0).groupAmbient(0).ambientControlExpanded(controlExpanded).build();
-        when(mLocalDataManager.get(any(BluetoothDevice.class))).thenReturn(data);
-    }
-
-    private HearingDeviceLocalDataManager.Data prepareEmptyData() {
-        return new HearingDeviceLocalDataManager.Data.Builder().build();
     }
 
     private void verifyDeviceDataUpdated(BluetoothDevice device) {
@@ -263,6 +330,10 @@ public class BluetoothDetailsAmbientVolumePreferenceControllerTest extends
         verify(mLocalDataManager, atLeastOnce()).updateGroupAmbient(eq(device), anyInt());
         verify(mLocalDataManager, atLeastOnce()).updateAmbientControlExpanded(eq(device),
                 anyBoolean());
+    }
+
+    private AmbientVolumePreference getPreference() {
+        return mScreen.findPreference(KEY_AMBIENT_VOLUME);
     }
 
     @Implements(value = Settings.Global.class)

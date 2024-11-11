@@ -110,7 +110,7 @@ public class BluetoothDetailsHearingDeviceController extends BluetoothDetailsCon
         }
         if (com.android.settingslib.flags.Flags.hearingDevicesAmbientVolumeControl()) {
             mControllers.add(new BluetoothDetailsAmbientVolumePreferenceController(mContext,
-                    mFragment, mCachedDevice, mLifecycle));
+                    mManager, mFragment, mCachedDevice, mLifecycle));
         }
     }
 
