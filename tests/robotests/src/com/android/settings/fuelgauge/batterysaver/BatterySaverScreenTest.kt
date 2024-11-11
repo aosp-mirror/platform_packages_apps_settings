@@ -15,20 +15,36 @@
  */
 package com.android.settings.fuelgauge.batterysaver
 
+import android.content.Intent
+import android.os.BatteryManager
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.flags.Flags
 import com.android.settingslib.preference.CatalystScreenTestCase
 import com.google.common.truth.Truth.assertThat
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BatterySaverScreenTest : CatalystScreenTestCase() {
+    private val intent =
+        Intent(Intent.ACTION_BATTERY_CHANGED).putExtra(BatteryManager.EXTRA_PLUGGED, 0)
 
     override val preferenceScreenCreator = BatterySaverScreen()
 
     override val flagName: String
         get() = Flags.FLAG_CATALYST_BATTERY_SAVER_SCREEN
+
+    @Before
+    fun setUp() {
+        appContext.sendStickyBroadcast(intent)
+    }
+
+    @After
+    fun tearDown() {
+        appContext.removeStickyBroadcast(intent)
+    }
 
     @Test
     fun key() {
