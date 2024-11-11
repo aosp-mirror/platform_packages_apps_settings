@@ -20,7 +20,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.ComponentName;
 import android.content.Context;
-import android.media.AudioManager;
 import android.media.Spatializer;
 import android.net.Uri;
 
@@ -28,7 +27,6 @@ import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.bluetooth.domain.interactor.SpatialAudioInteractor;
 import com.android.settings.bluetooth.ui.view.DeviceDetailsFragmentFormatter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepository;
@@ -96,13 +94,6 @@ public interface BluetoothFeatureProvider {
     DeviceSettingRepository getDeviceSettingRepository(
             @NonNull Context context,
             @NonNull BluetoothAdapter bluetoothAdapter,
-            @NonNull CoroutineScope scope);
-
-    /** Gets spatial audio interactor. */
-    @NonNull
-    SpatialAudioInteractor getSpatialAudioInteractor(
-            @NonNull Context context,
-            @NonNull AudioManager audioManager,
             @NonNull CoroutineScope scope);
 
     /** Gets device details fragment layout formatter. */
