@@ -15,3 +15,13 @@ flag {
   bug: "301226085"
 }
 
+flag {
+  name: "screen_off_unlock_power_optimization"
+  namespace: "biometrics_integration"
+  description: "This flag controls Whether to gate fp unlock when screen turns off feature before AOC optimized"
+  bug: "368465560"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+  }
+}
+
