@@ -161,8 +161,7 @@ class ZenModeAppsLinkPreferenceController extends AbstractZenModePreferenceContr
         Multimap<Integer, String> packagesBypassingDnd = HashMultimap.create();
         for (UserHandle userHandle : mUserManager.getUserProfiles()) {
             packagesBypassingDnd.putAll(userHandle.getIdentifier(),
-                    mHelperBackend.getPackagesBypassingDnd(userHandle.getIdentifier(),
-                            /* includeConversationChannels= */ false));
+                    mHelperBackend.getPackagesBypassingDnd(userHandle.getIdentifier()).keySet());
         }
 
         return ImmutableList.copyOf(
