@@ -43,7 +43,7 @@ import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.SettingsPreferenceFragment
 import com.android.settings.bluetooth.ui.composable.Icon
-import com.android.settings.bluetooth.ui.composable.MultiTogglePreferenceGroup
+import com.android.settings.bluetooth.ui.composable.MultiTogglePreference
 import com.android.settings.bluetooth.ui.layout.DeviceSettingLayout
 import com.android.settings.bluetooth.ui.model.DeviceSettingPreferenceModel
 import com.android.settings.bluetooth.ui.model.FragmentTypeModel
@@ -56,11 +56,14 @@ import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSetti
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigItemModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingIcon
 import com.android.settingslib.spa.framework.theme.SettingsDimension
+import com.android.settingslib.spa.widget.button.ActionButton
+import com.android.settingslib.spa.widget.button.ActionButtons
 import com.android.settingslib.spa.widget.preference.Preference as SpaPreference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
 import com.android.settingslib.spa.widget.preference.TwoTargetSwitchPreference
+import com.android.settingslib.spa.widget.scaffold.RegularScaffold
 import com.android.settingslib.spa.widget.ui.Footer
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -241,7 +244,7 @@ class DeviceDetailsFragmentFormatterImpl(
                         buildSwitchPreference(setting)
                     }
                     is DeviceSettingPreferenceModel.MultiTogglePreference -> {
-                        buildMultiTogglePreference(listOf(setting))
+                        buildMultiTogglePreference(setting)
                     }
                     is DeviceSettingPreferenceModel.FooterPreference -> {
                         buildFooterPreference(setting)
@@ -253,22 +256,15 @@ class DeviceDetailsFragmentFormatterImpl(
                     null -> {}
                 }
             }
-            else -> {
-                if (!settings.all { it is DeviceSettingPreferenceModel.MultiTogglePreference }) {
-                    return
-                }
-                buildMultiTogglePreference(
-                    settings.filterIsInstance<DeviceSettingPreferenceModel.MultiTogglePreference>()
-                )
-            }
+            else -> {}
         }
     }
 
     @Composable
     private fun buildMultiTogglePreference(
-        prefs: List<DeviceSettingPreferenceModel.MultiTogglePreference>
+        pref: DeviceSettingPreferenceModel.MultiTogglePreference
     ) {
-        MultiTogglePreferenceGroup(prefs)
+        MultiTogglePreference(pref)
     }
 
     @Composable
