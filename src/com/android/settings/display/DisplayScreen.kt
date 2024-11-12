@@ -51,7 +51,7 @@ open class DisplayScreen :
     override fun fragmentClass() = DisplaySettings::class.java
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {
-        +BrightnessLevelRestrictedPreference()
+        +BrightnessLevelPreference()
         +AutoBrightnessScreen.KEY
         +DarkModeScreen.KEY
         +PeakRefreshRateSwitchPreference()
