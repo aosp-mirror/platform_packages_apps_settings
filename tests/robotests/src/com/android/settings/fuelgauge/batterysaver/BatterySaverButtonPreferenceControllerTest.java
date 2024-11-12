@@ -40,6 +40,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 public class BatterySaverButtonPreferenceControllerTest {
 
@@ -120,3 +121,4 @@ public class BatterySaverButtonPreferenceControllerTest {
         assertThat(mController.isPublicSlice()).isTrue();
     }
 }
+// LINT.ThenChange(BatterySaverPreferenceTest.kt)
