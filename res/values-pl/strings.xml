@@ -67,8 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Sparuj nowe urządzenie"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Automatycznie włącz jutro"</string>
-    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
-    <skip />
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Gdy wyłączysz Bluetooth, następnego dnia włączy się ponownie"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Sparuj prawe ucho"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Sparuj lewe ucho"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Sparuj drugie ucho"</string>
@@ -251,7 +250,7 @@
     <string name="roaming_disable" msgid="729512894708689604">"Łącz z usługami transmisji danych w roamingu"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"Mogą zostać naliczone opłaty za roaming."</string>
     <string name="date_time_auto" msgid="1759599045100040686">"Automatyczna data i godzina"</string>
-    <string name="date_time_auto_summary" msgid="8294938565417729698">"Ustaw automatycznie za pomocą sygnałów bezprzewodowych i sieci"</string>
+    <string name="date_time_auto_summary" msgid="8294938565417729698">"Ustaw automatycznie za pomocą sygnałów z sieci i sieci bezprzewodowych"</string>
     <string name="zone_auto_title" msgid="3520584257065861479">"Automatyczna strefa czasowa"</string>
     <string name="zone_auto_title_summary" msgid="6540356783943375071">"Ustaw automatycznie na podstawie pobliskich sieci komórkowych"</string>
     <string name="auto_zone_requires_location_summary" msgid="2366567167956530124">"Ustaw automatycznie według lokalizacji, jeśli jest dostępna"</string>
@@ -2015,7 +2014,7 @@
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Przesuń 3 palcami w górę w dowolnym miejscu na touchpadzie"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Przechodzenie wstecz"</string>
     <string name="gesture_summary_go_back" msgid="4981604277892236888">"Przesuń 3 palcami od lewej lub prawej krawędzi ekranu"</string>
-    <string name="gesture_title_recent_apps" msgid="6082688963233208761">"Wyświetlanie ostatnich aplikacji"</string>
+    <string name="gesture_title_recent_apps" msgid="6082688963233208761">"Wyświetl ostatnie aplikacje"</string>
     <string name="gesture_summary_recent_apps" msgid="6643179135202417509">"Przesuń 3 palcami, przytrzymaj, a potem podnieś palce"</string>
     <string name="gesture_title_notifications" msgid="791717222472350194">"Wyświetlanie powiadomień i Szybkich ustawień"</string>
     <string name="gesture_summary_notifications" msgid="8419514601638387255">"Przesuń 3 palcami w dół na ekranie głównym"</string>
@@ -2283,9 +2282,9 @@
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Używaj przycisku lub gestu"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Lokalizacja"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Rozmiar"</string>
-    <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Zanikanie, gdy nie w użyciu"</string>
+    <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Zanikanie, gdy nie jest używany"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Zanika po kilku sekundach, aby nie utrudniać oglądania ekranu"</string>
-    <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Przezroczystość, gdy nie w użyciu"</string>
+    <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Przezroczystość, gdy nie jest używany"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Przezroczyste"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Nieprzezroczyste"</string>
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"Niedostępne w trybie przycisków na pasku nawigacji."</string>
@@ -3197,7 +3196,7 @@
     <string name="restriction_wifi_config_title" msgid="2630656989926554685">"Sieć Wi‑Fi i komórkowa"</string>
     <string name="restriction_wifi_config_summary" msgid="920419010472168694">"Zezwalaj na modyfikowanie ustawień sieci Wi‑Fi i komórkowej"</string>
     <string name="restriction_bluetooth_config_title" msgid="220586273589093821">"Bluetooth"</string>
-    <string name="restriction_bluetooth_config_summary" msgid="7558879931011271603">"Zezwalaj na modyfikowanie parowań i ustawień Bluetooth"</string>
+    <string name="restriction_bluetooth_config_summary" msgid="7558879931011271603">"Zezwalaj na modyfikowanie parowań i ustawień Bluetootha"</string>
     <string name="restriction_location_enable_title" msgid="4872281754836538066">"Lokalizacja"</string>
     <string name="restriction_location_enable_summary" msgid="7139292323897390221">"Zezwalaj aplikacji na korzystanie z informacji o lokalizacji"</string>
     <string name="wizard_back" msgid="8257697435061870191">"Wróć"</string>
@@ -3728,6 +3727,16 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Gdy w krótkim czasie otrzymasz wiele powiadomień, urządzenie zmniejszy głośność i ograniczy liczbę alertów przez maksymalnie 2 minuty. Nie wpłynie to na połączenia, alarmy ani rozmowy priorytetowe. \n\nPowiadomienia otrzymane w tym czasie można zobaczyć po przesunięciu palcem z góry ekranu w dół."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Zastosuj do profili służbowych"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Zastosuj w aplikacjach profilu służbowego"</string>
+    <!-- no translation found for notification_bundle_title (460988459835922719) -->
+    <skip />
+    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
+    <skip />
+    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
+    <skip />
+    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
+    <skip />
+    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
+    <skip />
     <string name="vr_listeners_title" msgid="4960357292472540964">"Usługi pomocnicze rzeczywistości wirtualnej"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Żadne zainstalowane aplikacje nie prosiły o uruchomienie w trybie usług pomocniczych rzeczywistości wirtualnej."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Zezwalasz usłudze <xliff:g id="SERVICE">%1$s</xliff:g> na dostęp do usług VR?"</string>
@@ -4467,7 +4476,7 @@
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Korzystaj z trybu jednej ręki"</string>
     <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Skrót do trybu jednej ręki"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"osiągalność"</string>
-    <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Przesuń w dół, aby uzyskać"</string>
+    <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Przesuń w dół, aby wykonać wybraną czynność"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Użyj skrótu, aby"</string>
     <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"Przeciągnij w dół górną połowę ekranu, aby łatwiej było korzystać z niego jedną ręką"</string>
     <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Jak używać trybu jednej ręki"</b>\n" • Wybierz nawigację przy użyciu gestów w ustawieniach nawigacji w systemie.\n • Przesuń palcem w dół przy dolnej krawędzi ekranu."</string>
@@ -5051,7 +5060,7 @@
     <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Menu zasilania:\nNaciśnij jednocześnie przycisk zasilania i przycisk zwiększania głośności."</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"Wyłączanie dzwonka:\nAby uruchomić ten skrót, naciśnij przycisk głośności"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Długość naciśnięcia i przytrzymania"</string>
-    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Dostosuj czułość, określając, jak długo ma być naciskany i przytrzymywany przycisk zasilania"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Dostosuj czułość, określając, jak długo po naciśnięciu ma być przytrzymany przycisk zasilania"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Krótko"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Długo"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Pokazuj portfel"</string>
@@ -5477,7 +5486,7 @@
     <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Hasło musi zawierać od 4 do 16 znaków i zawierać tylko litery, cyfry i symbole"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Skaner kodów QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Potrzebujesz pomocy?"</annotation></string>
-    <string name="homepage_search" msgid="6759334912284663559">"Ustawienia wyszukiwania"</string>
+    <string name="homepage_search" msgid="6759334912284663559">"Wyszukaj w Ustawieniach"</string>
     <string name="keywords_contacts_storage" msgid="9061213057165337893">"kontakty, spis, konto"</string>
     <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Spis kontaktów"</string>
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Tylko urządzenie"</string>
