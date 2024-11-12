@@ -38,7 +38,8 @@ class DataSaverScreen : PreferenceScreenCreator {
 
     override fun fragmentClass() = DataSaverSummary::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) =
+        preferenceHierarchy(this) { +DataSaverMainSwitchPreference(context) }
 
     override fun hasCompleteHierarchy() = false
 
