@@ -20,6 +20,7 @@ import static android.content.pm.verify.domain.DomainVerificationUserState.DOMAI
 import static android.content.pm.verify.domain.DomainVerificationUserState.DOMAIN_STATE_SELECTED;
 import static android.content.pm.verify.domain.DomainVerificationUserState.DOMAIN_STATE_VERIFIED;
 
+import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.appwidget.AppWidgetManager;
@@ -35,10 +36,9 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
@@ -51,7 +51,7 @@ import com.android.settings.applications.ClearDefaultsPreference;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.HashMap;
 import java.util.List;
@@ -62,10 +62,11 @@ import java.util.UUID;
 
 /** The page of the Open by default */
 public class AppLaunchSettings extends AppInfoBase implements
-        Preference.OnPreferenceChangeListener, OnCheckedChangeListener {
+        Preference.OnPreferenceChangeListener, SelectorWithWidgetPreference.OnClickListener {
     private static final String TAG = "AppLaunchSettings";
     // Preference keys
-    private static final String MAIN_SWITCH_PREF_KEY = "open_by_default_supported_links";
+    private static final String OPEN_IN_APP_PREF_KEY = "app_launch_open_in_app";
+    private static final String OPEN_IN_BROWSER_PREF_KEY = "app_launch_open_in_browser";
     private static final String VERIFIED_LINKS_PREF_KEY = "open_by_default_verified_links";
     private static final String ADD_LINK_PREF_KEY = "open_by_default_add_link";
     private static final String CLEAR_DEFAULTS_PREF_KEY = "app_launch_clear_defaults";
@@ -86,7 +87,10 @@ public class AppLaunchSettings extends AppInfoBase implements
     public static final String APP_PACKAGE_KEY = "app_package";
 
     private ClearDefaultsPreference mClearDefaultsPreference;
-    private MainSwitchPreference mMainSwitchPreference;
+    @Nullable
+    private SelectorWithWidgetPreference mOpenInAppSelector;
+    @Nullable
+    private SelectorWithWidgetPreference mOpenInBrowserSelector;
     private Preference mAddLinkPreference;
     private PreferenceCategory mMainPreferenceCategory;
     private PreferenceCategory mSelectedLinksPreferenceCategory;
@@ -168,20 +172,20 @@ public class AppLaunchSettings extends AppInfoBase implements
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        IntentPickerUtils.logd("onSwitchChanged: isChecked=" + isChecked);
-        if (mMainSwitchPreference != null) { //mMainSwitchPreference synced with Switch
-            mMainSwitchPreference.setChecked(isChecked);
-        }
+    public void onRadioButtonClicked(@NonNull SelectorWithWidgetPreference selected) {
+        final boolean openSupportedLinks = selected.getKey().equals(OPEN_IN_APP_PREF_KEY);
+        IntentPickerUtils.logd("onRadioButtonClicked: openInApp =" + openSupportedLinks);
+        setOpenByDefaultPreference(openSupportedLinks /* openInApp */);
+
         if (mMainPreferenceCategory != null) {
-            mMainPreferenceCategory.setVisible(isChecked);
+            mMainPreferenceCategory.setVisible(openSupportedLinks);
         }
         if (mDomainVerificationManager != null) {
             try {
                 mDomainVerificationManager.setDomainVerificationLinkHandlingAllowed(mPackageName,
-                        isChecked);
+                        openSupportedLinks);
             } catch (PackageManager.NameNotFoundException e) {
-                Log.w(TAG, "onSwitchChanged: " + e.getMessage());
+                Log.w(TAG, "onRadioButtonClicked: " + e.getMessage());
             }
         }
     }
@@ -224,7 +228,8 @@ public class AppLaunchSettings extends AppInfoBase implements
     }
 
     private void initMainSwitchAndCategories() {
-        mMainSwitchPreference = (MainSwitchPreference) findPreference(MAIN_SWITCH_PREF_KEY);
+        mOpenInAppSelector = findPreference(OPEN_IN_APP_PREF_KEY);
+        mOpenInBrowserSelector = findPreference(OPEN_IN_BROWSER_PREF_KEY);
         mMainPreferenceCategory = findPreference(MAIN_PREF_CATEGORY_KEY);
         mSelectedLinksPreferenceCategory = findPreference(SELECTED_LINKS_CATEGORY_KEY);
         // Initialize the "Other Default Category" section
@@ -235,14 +240,15 @@ public class AppLaunchSettings extends AppInfoBase implements
         final DomainVerificationUserState userState =
                 IntentPickerUtils.getDomainVerificationUserState(mDomainVerificationManager,
                         mPackageName);
-        if (userState == null) {
+        if (userState == null || mOpenInAppSelector == null || mOpenInBrowserSelector == null) {
             disabledPreference();
             return false;
         }
 
         IntentPickerUtils.logd("isLinkHandlingAllowed() : " + userState.isLinkHandlingAllowed());
-        mMainSwitchPreference.updateStatus(userState.isLinkHandlingAllowed());
-        mMainSwitchPreference.addOnSwitchChangeListener(this);
+        setOpenByDefaultPreference(userState.isLinkHandlingAllowed());
+        mOpenInAppSelector.setOnClickListener(this);
+        mOpenInBrowserSelector.setOnClickListener(this);
         mMainPreferenceCategory.setVisible(userState.isLinkHandlingAllowed());
         return true;
     }
@@ -258,6 +264,12 @@ public class AppLaunchSettings extends AppInfoBase implements
         final int verifiedLinksNo = getLinksNumber(DOMAIN_STATE_VERIFIED);
         verifiedLinksPreference.setTitle(getVerifiedLinksTitle(verifiedLinksNo));
         verifiedLinksPreference.setEnabled(verifiedLinksNo > 0);
+    }
+
+    private void setOpenByDefaultPreference(boolean openInApp) {
+        if (mOpenInBrowserSelector == null || mOpenInAppSelector == null) return;
+        mOpenInAppSelector.setChecked(openInApp);
+        mOpenInBrowserSelector.setChecked(!openInApp);
     }
 
     private void showVerifiedLinksDialog() {
@@ -360,9 +372,12 @@ public class AppLaunchSettings extends AppInfoBase implements
     }
 
     private void disabledPreference() {
-        mMainSwitchPreference.updateStatus(false);
-        mMainSwitchPreference.setSelectable(false);
-        mMainSwitchPreference.setEnabled(false);
+        if (mOpenInAppSelector == null ||mOpenInBrowserSelector == null) return;
+        setOpenByDefaultPreference(false /* openInApp */);
+        mOpenInAppSelector.setSelectable(false);
+        mOpenInAppSelector.setEnabled(false);
+        mOpenInBrowserSelector.setSelectable(false);
+        mOpenInBrowserSelector.setEnabled(false);
         mMainPreferenceCategory.setVisible(false);
     }
 

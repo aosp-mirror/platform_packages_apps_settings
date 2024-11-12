@@ -30,7 +30,6 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -131,12 +130,18 @@ public class SettingsSliceProviderTest {
             CustomSliceRegistry.LOCATION_SLICE_URI
     );
 
-    private static final List<Uri> SPECIAL_CASE_OEM_URIS = Arrays.asList(
-            CustomSliceRegistry.ZEN_MODE_SLICE_URI,
-            CustomSliceRegistry.FLASHLIGHT_SLICE_URI,
-            CustomSliceRegistry.MOBILE_DATA_SLICE_URI,
-            CustomSliceRegistry.WIFI_CALLING_URI
-    );
+    private static final List<Uri> SPECIAL_CASE_OEM_URIS = android.app.Flags.modesUi()
+            ? Arrays.asList(
+                    CustomSliceRegistry.FLASHLIGHT_SLICE_URI,
+                    CustomSliceRegistry.MOBILE_DATA_SLICE_URI,
+                    CustomSliceRegistry.WIFI_CALLING_URI
+            ) :
+            Arrays.asList(
+                CustomSliceRegistry.ZEN_MODE_SLICE_URI,
+                CustomSliceRegistry.FLASHLIGHT_SLICE_URI,
+                CustomSliceRegistry.MOBILE_DATA_SLICE_URI,
+                CustomSliceRegistry.WIFI_CALLING_URI
+            );
 
     @Before
     public void setUp() {

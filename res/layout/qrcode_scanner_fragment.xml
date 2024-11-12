@@ -15,67 +15,41 @@
      limitations under the License.
 -->
 
-<LinearLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:layout_marginBottom="55dp">
-        <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_margin="20dp">
+
+        <TextView
+            android:id="@android:id/summary"
+            style="@style/QrCodeScanner"
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="40dp"
-            android:paddingEnd="40dp"
-            android:layout_gravity="bottom"
-            android:gravity="center"
-            android:orientation="vertical">
-            <TextView
-                android:id="@android:id/summary"
-                style="@style/QrCodeScanner"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"/>
-        </LinearLayout>
-    </LinearLayout>
+            android:layout_margin="40dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="7"
-        android:orientation="vertical">
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:gravity="center"
-            android:clipChildren="true">
-            <TextureView
-                android:id="@+id/preview_view"
-                android:layout_marginStart="@dimen/qrcode_preview_margin"
-                android:layout_marginEnd="@dimen/qrcode_preview_margin"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/qrcode_preview_size"/>
-        </FrameLayout>
+        <TextureView
+            android:id="@+id/preview_view"
+            android:layout_width="@dimen/audio_streams_qrcode_preview_size"
+            android:layout_height="@dimen/audio_streams_qrcode_preview_size"
+            android:contentDescription="@string/audio_streams_qr_code_scanner_label"
+            android:focusable="true" />
 
         <TextView
             android:id="@+id/error_message"
             style="@style/TextAppearance.ErrorText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:gravity="center"
-            android:layout_gravity="center"
-            android:visibility="invisible"/>
-
+            android:visibility="gone"/>
     </LinearLayout>
 
-
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>
 

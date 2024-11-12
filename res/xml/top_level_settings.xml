@@ -68,6 +68,16 @@
         android:summary="@string/notification_dashboard_summary"
         settings:highlightableMenuKey="@string/menu_key_notifications"/>
 
+    <com.android.settings.widget.RestrictedHomepagePreference
+        android:fragment="com.android.settings.notification.modes.ZenModesListFragment"
+        android:icon="@*android:drawable/ic_zen_priority_modes"
+        android:key="top_level_priority_modes"
+        android:order="-115"
+        android:title="@string/zen_modes_list_title"
+        settings:useAdminDisabledSummary="true"
+        settings:highlightableMenuKey="@string/menu_key_priority_modes"
+        settings:controller="com.android.settings.notification.modes.ZenModesLinkPreferenceController"/>
+
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.fuelgauge.batteryusage.PowerUsageSummary"
         android:icon="@drawable/ic_settings_battery_white"
@@ -94,8 +104,9 @@
         android:key="top_level_sound"
         android:order="-90"
         android:title="@string/sound_settings"
-        android:summary="@string/sound_dashboard_summary"
-        settings:highlightableMenuKey="@string/menu_key_sound"/>
+        android:summary="@string/sound_dashboard_summary_with_dnd"
+        settings:highlightableMenuKey="@string/menu_key_sound"
+        settings:controller="com.android.settings.sound.TopLevelSoundPreferenceController"/>
 
     <com.android.settings.widget.HomepagePreference
         android:fragment="com.android.settings.DisplaySettings"

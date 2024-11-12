@@ -105,7 +105,7 @@ class AppNotificationsListModel(
 
     override fun getSpinnerOptions(recordList: List<AppNotificationsRecord>): List<SpinnerOption> {
         val options = mutableListOf(SpinnerItem.AllApps, SpinnerItem.TurnedOff)
-        if (repository.isUserUnlocked(recordList[0].app.userId)) {
+        if (recordList.isNotEmpty() && repository.isUserUnlocked(recordList[0].app.userId)) {
             options.add(0, SpinnerItem.MostRecent)
             options.add(1, SpinnerItem.MostFrequent)
         }

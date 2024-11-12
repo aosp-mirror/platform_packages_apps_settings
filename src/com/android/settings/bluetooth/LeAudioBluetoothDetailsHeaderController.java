@@ -27,14 +27,17 @@ import android.os.Looper;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.flags.Flags;
 import com.android.settings.fuelgauge.BatteryMeterView;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -47,7 +50,7 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.widget.LayoutPreference;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * This class adds a header with device name and status (connected/disconnected, etc.).
@@ -86,11 +89,12 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
     @VisibleForTesting
     static final int INVALID_RESOURCE_ID = -1;
 
+    PreferenceFragmentCompat mFragment;
     @VisibleForTesting
     LayoutPreference mLayoutPreference;
     LocalBluetoothManager mManager;
     private CachedBluetoothDevice mCachedDevice;
-    private List<CachedBluetoothDevice> mAllOfCachedDevices;
+    private Set<CachedBluetoothDevice> mCachedDeviceGroup;
     @VisibleForTesting
     Handler mHandler = new Handler(Looper.getMainLooper());
     @VisibleForTesting
@@ -107,7 +111,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
         if (mCachedDevice == null || mProfileManager == null) {
             return CONDITIONALLY_UNAVAILABLE;
         }
-        boolean hasLeAudio = mCachedDevice.getConnectableProfiles()
+        boolean hasLeAudio = mCachedDevice.getUiAccessibleProfiles()
                 .stream()
                 .anyMatch(profile -> profile.getProfileId() == BluetoothProfile.LE_AUDIO);
 
@@ -128,7 +132,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
             return;
         }
         mIsRegisterCallback = true;
-        for (CachedBluetoothDevice item : mAllOfCachedDevices) {
+        for (CachedBluetoothDevice item : mCachedDeviceGroup) {
             item.registerCallback(this);
         }
         refresh();
@@ -139,7 +143,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
         if (!mIsRegisterCallback) {
             return;
         }
-        for (CachedBluetoothDevice item : mAllOfCachedDevices) {
+        for (CachedBluetoothDevice item : mCachedDeviceGroup) {
             item.unregisterCallback(this);
         }
 
@@ -151,17 +155,26 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
     }
 
     public void init(CachedBluetoothDevice cachedBluetoothDevice,
-            LocalBluetoothManager bluetoothManager) {
+            LocalBluetoothManager bluetoothManager, PreferenceFragmentCompat fragment) {
         mCachedDevice = cachedBluetoothDevice;
         mManager = bluetoothManager;
         mProfileManager = bluetoothManager.getProfileManager();
-        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mManager, mCachedDevice);
+        mCachedDeviceGroup = Utils.findAllCachedBluetoothDevicesByGroupId(mManager, mCachedDevice);
+        mFragment = fragment;
     }
 
     @VisibleForTesting
     void refresh() {
         if (mLayoutPreference == null || mCachedDevice == null) {
             return;
+        }
+        if (Flags.enableBluetoothDeviceDetailsPolish()) {
+            ImageButton renameButton = mLayoutPreference.findViewById(R.id.rename_button);
+            renameButton.setVisibility(View.VISIBLE);
+            renameButton.setOnClickListener(view -> {
+                RemoteDeviceNameDialogFragment.newInstance(mCachedDevice).show(
+                        mFragment.getFragmentManager(), RemoteDeviceNameDialogFragment.TAG);
+            });
         }
         final ImageView imageView = mLayoutPreference.findViewById(R.id.entity_header_icon);
         if (imageView != null) {
@@ -230,7 +243,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
         // Init the battery layouts.
         hideAllOfBatteryLayouts();
         LeAudioProfile leAudioProfile = mProfileManager.getLeAudioProfile();
-        if (mAllOfCachedDevices.isEmpty()) {
+        if (mCachedDeviceGroup.isEmpty()) {
             Log.e(TAG, "There is no LeAudioProfile.");
             return;
         }
@@ -244,7 +257,7 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
             return;
         }
 
-        for (CachedBluetoothDevice cachedDevice : mAllOfCachedDevices) {
+        for (CachedBluetoothDevice cachedDevice : mCachedDeviceGroup) {
             int deviceId = leAudioProfile.getAudioLocation(cachedDevice.getDevice());
             Log.d(TAG, "LeAudioDevices:" + cachedDevice.getDevice().getAnonymizedAddress()
                     + ", deviceId:" + deviceId);
@@ -300,15 +313,15 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
 
     @Override
     public void onDeviceAttributesChanged() {
-        for (CachedBluetoothDevice item : mAllOfCachedDevices) {
+        for (CachedBluetoothDevice item : mCachedDeviceGroup) {
             item.unregisterCallback(this);
         }
-        mAllOfCachedDevices = Utils.getAllOfCachedBluetoothDevices(mManager, mCachedDevice);
-        for (CachedBluetoothDevice item : mAllOfCachedDevices) {
+        mCachedDeviceGroup = Utils.findAllCachedBluetoothDevicesByGroupId(mManager, mCachedDevice);
+        for (CachedBluetoothDevice item : mCachedDeviceGroup) {
             item.registerCallback(this);
         }
 
-        if (!mAllOfCachedDevices.isEmpty()) {
+        if (!mCachedDeviceGroup.isEmpty()) {
             refresh();
         }
     }

@@ -19,12 +19,16 @@ package com.android.settings.users;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.os.UserManager;
 
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 /**
  * Controls the preference on the user settings screen which determines whether the guest user
@@ -43,10 +47,21 @@ public class GuestTelephonyPreferenceController extends TogglePreferenceControll
 
     @Override
     public int getAvailabilityStatus() {
-        if (!mUserCaps.isAdmin() || !mUserCaps.mCanAddGuest) {
+        if (!mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)
+                || UserManager.isHeadlessSystemUserMode()) {
             return DISABLED_FOR_USER;
+        }
+        if (android.multiuser.Flags.newMultiuserSettingsUx()) {
+            if (!mUserCaps.isAdmin()) {
+                return DISABLED_FOR_USER;
+            }
+            return AVAILABLE;
         } else {
-            return mUserCaps.mUserSwitcherEnabled ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+            if (!mUserCaps.isAdmin() || !mUserCaps.mCanAddGuest) {
+                return DISABLED_FOR_USER;
+            } else {
+                return mUserCaps.mUserSwitcherEnabled ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+            }
         }
     }
 
@@ -74,8 +89,31 @@ public class GuestTelephonyPreferenceController extends TogglePreferenceControll
     public void updateState(Preference preference) {
         super.updateState(preference);
         mUserCaps.updateAddUserCapabilities(mContext);
-        preference.setVisible(isAvailable() && mUserCaps.mUserSwitcherEnabled
-                && mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)
-                && !UserManager.isHeadlessSystemUserMode());
+        final RestrictedSwitchPreference restrictedSwitchPreference =
+                (RestrictedSwitchPreference) preference;
+        restrictedSwitchPreference.setChecked(isChecked());
+        if (!isAvailable()) {
+            restrictedSwitchPreference.setVisible(false);
+        } else {
+            if (android.multiuser.Flags.newMultiuserSettingsUx()) {
+                restrictedSwitchPreference.setVisible(true);
+                final RestrictedLockUtils.EnforcedAdmin disallowRemoveUserAdmin =
+                        RestrictedLockUtilsInternal.checkIfRestrictionEnforced(mContext,
+                                UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId());
+                if (disallowRemoveUserAdmin != null) {
+                    restrictedSwitchPreference.setDisabledByAdmin(disallowRemoveUserAdmin);
+                } else if (mUserCaps.mDisallowAddUserSetByAdmin) {
+                    restrictedSwitchPreference.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
+                } else if (mUserCaps.mDisallowAddUser) {
+                    // Adding user is restricted by system
+                    restrictedSwitchPreference.setVisible(false);
+                }
+            } else {
+                restrictedSwitchPreference.setDisabledByAdmin(
+                        mUserCaps.disallowAddUser() ? mUserCaps.getEnforcedAdmin() : null);
+                restrictedSwitchPreference.setVisible(mUserCaps.mUserSwitcherEnabled
+                        && isAvailable());
+            }
+        }
     }
 }

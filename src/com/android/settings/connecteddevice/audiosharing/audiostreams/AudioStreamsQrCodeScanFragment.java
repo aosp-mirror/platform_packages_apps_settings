@@ -116,6 +116,8 @@ public class AudioStreamsQrCodeScanFragment extends InstrumentedFragment
     @Override
     public final View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Collapse or expand the app bar based on orientation for better display the qr camera.
+        AudioStreamsHelper.configureAppBarByOrientation(getActivity());
         return inflater.inflate(
                 R.layout.qrcode_scanner_fragment, container, /* attachToRoot */ false);
     }

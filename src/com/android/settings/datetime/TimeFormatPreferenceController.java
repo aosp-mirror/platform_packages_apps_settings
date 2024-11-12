@@ -43,6 +43,11 @@ public class TimeFormatPreferenceController extends TogglePreferenceController {
     public TimeFormatPreferenceController(Context context, String key) {
         super(context, key);
         mDummyDate = Calendar.getInstance();
+        // This is a no-op implementation of UpdateTimeAndDateCallback to avoid a NPE when
+        // setTimeAndDateCallback() isn't called, e.g. for slices and other cases where the
+        // controller is instantiated outside of the context of the real Date & Time settings
+        // screen.
+        mUpdateTimeAndDateCallback  = (c) -> {};
     }
 
     /**

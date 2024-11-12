@@ -23,6 +23,7 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.VibrationAttributes;
 import android.os.Vibrator;
 import android.provider.Settings;
@@ -49,7 +50,8 @@ public class VibrationMainSwitchPreferenceController extends SettingsMainSwitchP
     public VibrationMainSwitchPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mVibrator = context.getSystemService(Vibrator.class);
-        mSettingObserver = new ContentObserver(new Handler(/* async= */ true)) {
+        Handler handler = Looper.myLooper() != null ? new Handler(/* async= */ true) : null;
+        mSettingObserver = new ContentObserver(handler) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
                 updateState(mSwitchPreference);

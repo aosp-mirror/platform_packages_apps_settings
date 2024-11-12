@@ -69,6 +69,9 @@ android_robolectric_test {
         "com_android_server_accessibility_flags_lib",
         "flag-junit",
         "flag-junit-base",
+        "kotlin-test",
+        "mockito-robolectric-prebuilt", // mockito deps order matters!
+        "mockito-kotlin2",
         "notification_flags_lib",
         "platform-test-annotations",
         "testables",

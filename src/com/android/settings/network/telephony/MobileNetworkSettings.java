@@ -20,11 +20,14 @@ import static com.android.settings.network.MobileNetworkListFragment.collectAirp
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -38,6 +41,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.Preference;
 
@@ -63,6 +67,8 @@ import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
 
+import kotlin.Unit;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -79,7 +85,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @VisibleForTesting
     static final String KEY_CLICKED_PREF = "key_clicked_pref";
 
-    private static final String KEY_ROAMING_PREF = "button_roaming_key";
     private static final String KEY_CALLS_PREF = "calls_preference";
     private static final String KEY_SMS_PREF = "sms_preference";
     private static final String KEY_MOBILE_DATA_PREF = "mobile_data_enable";
@@ -106,6 +111,15 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @Nullable
     private SubscriptionInfoEntity mSubscriptionInfoEntity;
     private MobileNetworkInfoEntity mMobileNetworkInfoEntity;
+
+    private BroadcastReceiver mBrocastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED)) {
+                redrawPreferenceControllers();
+            }
+        }
+    };
 
     public MobileNetworkSettings() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
@@ -178,8 +192,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
         return Arrays.asList(
                 new DataUsageSummaryPreferenceController(context, mSubId),
-                new RoamingPreferenceController(context, KEY_ROAMING_PREF, getSettingsLifecycle(),
-                        this, mSubId),
                 new CallsDefaultSubscriptionController(context, KEY_CALLS_PREF,
                         getSettingsLifecycle(), this),
                 new SmsDefaultSubscriptionController(context, KEY_SMS_PREF, getSettingsLifecycle(),
@@ -193,7 +205,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             Log.d(LOG_TAG, "Invalid subId, get the default subscription to show.");
             SubscriptionInfo info = SubscriptionUtil.getSubscriptionOrDefault(context, mSubId);
@@ -238,16 +249,17 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         use(CarrierSettingsVersionPreferenceController.class).init(mSubId);
         use(BillingCyclePreferenceController.class).init(mSubId);
         use(MmsMessagePreferenceController.class).init(mSubId);
-        final var crossSimCallingViewModel =
-                new ViewModelProvider(this).get(CrossSimCallingViewModel.class);
-        use(AutoDataSwitchPreferenceController.class).init(mSubId, crossSimCallingViewModel);
+        // CrossSimCallingViewModel is responsible for maintaining the correct cross sim calling
+        // settings (backup calling).
+        new ViewModelProvider(this).get(CrossSimCallingViewModel.class);
+        use(AutoDataSwitchPreferenceController.class).init(mSubId);
         use(DisabledSubscriptionController.class).init(mSubId);
         use(DeleteSimProfilePreferenceController.class).init(mSubId);
         use(DisableSimFooterPreferenceController.class).init(mSubId);
         use(NrDisabledInDsdsFooterPreferenceController.class).init(mSubId);
 
         use(MobileNetworkSpnPreferenceController.class).init(this, mSubId);
-        use(MobileNetworkPhoneNumberPreferenceController.class).init(this, mSubId);
+        use(MobileNetworkPhoneNumberPreferenceController.class).init(mSubId);
         use(MobileNetworkImeiPreferenceController.class).init(this, mSubId);
 
         final MobileDataPreferenceController mobileDataPreferenceController =
@@ -263,8 +275,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         final RoamingPreferenceController roamingPreferenceController =
                 use(RoamingPreferenceController.class);
         if (roamingPreferenceController != null) {
-            roamingPreferenceController.init(getFragmentManager(), mSubId,
-                    mMobileNetworkInfoEntity);
+            roamingPreferenceController.init(getParentFragmentManager(), mSubId);
         }
         final SatelliteSettingPreferenceController satelliteSettingPreferenceController = use(
                 SatelliteSettingPreferenceController.class);
@@ -332,6 +343,11 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 setTelephonyAvailabilityStatus(getPreferenceControllersAsList());
 
         super.onCreate(icicle);
+        if (isUiRestricted()) {
+            Log.d(LOG_TAG, "Mobile network page is disallowed.");
+            finish();
+            return;
+        }
         final Context context = getContext();
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mTelephonyManager = context.getSystemService(TelephonyManager.class)
@@ -346,6 +362,16 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         collectAirplaneModeAndFinishIfOn(this);
+
+        LifecycleOwner viewLifecycleOwner = getViewLifecycleOwner();
+        new SubscriptionRepository(requireContext())
+                .collectSubscriptionVisible(mSubId, viewLifecycleOwner, (isVisible) -> {
+                    if (!isVisible) {
+                        Log.d(LOG_TAG, "Due to subscription not visible, closes page");
+                        finishFragment();
+                    }
+                    return Unit.INSTANCE;
+                });
     }
 
     @Override
@@ -355,6 +381,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         mMobileNetworkRepository.updateEntity();
         // TODO: remove log after fixing b/182326102
         Log.d(LOG_TAG, "onResume() subId=" + mSubId);
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED);
+        getContext().registerReceiver(mBrocastReceiver, intentFilter, Context.RECEIVER_EXPORTED);
     }
 
     private void onSubscriptionDetailChanged() {
@@ -374,6 +404,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     @Override
     public void onPause() {
         mMobileNetworkRepository.removeRegister(this);
+        getContext().unregisterReceiver(mBrocastReceiver);
         super.onPause();
     }
 
@@ -453,14 +484,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.mobile_network_settings) {
-
-                /** suppress full page if user is not admin */
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    boolean isAirplaneOff = Settings.Global.getInt(context.getContentResolver(),
-                            Settings.Global.AIRPLANE_MODE_ON, 0) == 0;
-                    return isAirplaneOff && SubscriptionUtil.isSimHardwareVisible(context)
-                            && context.getSystemService(UserManager.class).isAdminUser();
+                    return MobileNetworkSettingsSearchIndex
+                            .isMobileNetworkSettingsSearchable(context);
                 }
             };
 
@@ -517,11 +544,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 mSubscriptionInfoEntity = entity;
                 Log.d(LOG_TAG, "Set subInfo to default subInfo.");
             }
-        }
-        if (mSubscriptionInfoEntity == null && getActivity() != null) {
-            // If the current subId is not existed, finish it.
-            finishFragment();
-            return;
         }
         onSubscriptionDetailChanged();
     }

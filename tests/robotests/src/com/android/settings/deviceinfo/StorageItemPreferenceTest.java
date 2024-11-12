@@ -15,8 +15,6 @@
  */
 package com.android.settings.deviceinfo;
 
-import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
@@ -36,6 +34,7 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class StorageItemPreferenceTest {
 
+    private static final long MEGABYTE_IN_BYTES = 1000_000;
     private Context mContext;
     private StorageItemPreference mPreference;
 

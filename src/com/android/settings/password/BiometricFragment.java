@@ -16,8 +16,10 @@
 
 package com.android.settings.password;
 
+import static android.hardware.biometrics.BiometricConstants.BIOMETRIC_ERROR_USER_CANCELED;
+
 import android.app.settings.SettingsEnums;
-import android.content.ComponentName;
+import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricPrompt;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationResult;
@@ -41,7 +43,6 @@ public class BiometricFragment extends InstrumentedFragment {
     private static final String TAG = "ConfirmDeviceCredential/BiometricFragment";
 
     private static final String KEY_PROMPT_INFO = "prompt_info";
-    private static final String KEY_CALLING_ACTIVITY = "calling_activity";
 
     // Re-set by the application. Should be done upon orientation changes, etc
     private Executor mClientExecutor;
@@ -91,13 +92,10 @@ public class BiometricFragment extends InstrumentedFragment {
      * @param promptInfo
      * @return
      */
-    public static BiometricFragment newInstance(PromptInfo promptInfo,
-            ComponentName callingActivity) {
+    public static BiometricFragment newInstance(PromptInfo promptInfo) {
         BiometricFragment biometricFragment = new BiometricFragment();
         final Bundle bundle = new Bundle();
         bundle.putParcelable(KEY_PROMPT_INFO, promptInfo);
-
-        bundle.putParcelable(KEY_CALLING_ACTIVITY, callingActivity);
         biometricFragment.setArguments(bundle);
         return biometricFragment;
     }
@@ -132,12 +130,10 @@ public class BiometricFragment extends InstrumentedFragment {
 
         final Bundle bundle = getArguments();
         final PromptInfo promptInfo = bundle.getParcelable(KEY_PROMPT_INFO);
-        final ComponentName callingActivity = bundle.getParcelable(KEY_CALLING_ACTIVITY);
-
         BiometricPrompt.Builder promptBuilder = new BiometricPrompt.Builder(getContext())
                 .setTitle(promptInfo.getTitle())
                 .setUseDefaultTitle() // use default title if title is null/empty
-                .setDeviceCredentialAllowed(true)
+                .setAllowedAuthenticators(promptInfo.getAuthenticators())
                 .setSubtitle(promptInfo.getSubtitle())
                 .setDescription(promptInfo.getDescription())
                 .setTextForDeviceCredential(
@@ -149,7 +145,8 @@ public class BiometricFragment extends InstrumentedFragment {
                         promptInfo.isDisallowBiometricsIfPolicyExists())
                 .setShowEmergencyCallButton(promptInfo.isShowEmergencyCallButton())
                 .setReceiveSystemEvents(true)
-                .setComponentNameForConfirmDeviceCredentialActivity(callingActivity);
+                .setRealCallerForConfirmDeviceCredentialActivity(
+                        promptInfo.getRealCallerForConfirmDeviceCredentialActivity());
         if (promptInfo.getLogoRes() != 0){
             promptBuilder.setLogoRes(promptInfo.getLogoRes());
         }
@@ -169,6 +166,15 @@ public class BiometricFragment extends InstrumentedFragment {
         // Check if the default subtitle should be used if subtitle is null/empty
         if (promptInfo.isUseDefaultSubtitle()) {
             promptBuilder.setUseDefaultSubtitle();
+        }
+
+        if ((promptInfo.getAuthenticators()
+                & BiometricManager.Authenticators.DEVICE_CREDENTIAL) == 0) {
+            promptBuilder.setNegativeButton(promptInfo.getNegativeButtonText(),
+                    getContext().getMainExecutor(),
+                    (dialog, which) -> mAuthenticationCallback.onAuthenticationError(
+                            BIOMETRIC_ERROR_USER_CANCELED,
+                            null /* errString */));
         }
         mBiometricPrompt = promptBuilder.build();
     }

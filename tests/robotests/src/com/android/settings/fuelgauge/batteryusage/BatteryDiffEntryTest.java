@@ -494,6 +494,7 @@ public final class BatteryDiffEntryTest {
         final ContentValues values =
                 getContentValuesWithType(ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
         values.put(BatteryHistEntry.KEY_UID, /*invalid uid*/ 10001);
+        values.put(BatteryHistEntry.KEY_USER_ID, /*valid userid*/ USER_ID);
         values.put(BatteryHistEntry.KEY_PACKAGE_NAME, fakePackageName);
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, new BatteryHistEntry(values));
 
@@ -503,14 +504,16 @@ public final class BatteryDiffEntryTest {
 
         doReturn(BatteryUtils.UID_NULL)
                 .when(mMockPackageManager)
-                .getPackageUid(entry.getPackageName(), PackageManager.GET_META_DATA);
+                .getPackageUidAsUser(
+                        entry.getPackageName(), PackageManager.GET_META_DATA, USER_ID);
         entry.updateRestrictionFlagState();
         // Sets false if the app is invalid package name.
         assertThat(entry.mValidForRestriction).isFalse();
 
         doReturn(1000)
                 .when(mMockPackageManager)
-                .getPackageUid(entry.getPackageName(), PackageManager.GET_META_DATA);
+                .getPackageUidAsUser(
+                        entry.getPackageName(), PackageManager.GET_META_DATA, USER_ID);
         entry.updateRestrictionFlagState();
         // Sets false if the app PackageInfo cannot be found.
         assertThat(entry.mValidForRestriction).isFalse();

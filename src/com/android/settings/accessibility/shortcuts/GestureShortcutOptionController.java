@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility.shortcuts;
 
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.GESTURE;
+
 import android.content.Context;
 import android.text.SpannableStringBuilder;
 
@@ -52,10 +54,21 @@ public class GestureShortcutOptionController extends SoftwareShortcutOptionPrefe
     }
 
     @Override
+    protected int getShortcutType() {
+        return android.provider.Flags.a11yStandaloneGestureEnabled()
+                ? GESTURE : super.getShortcutType();
+    }
+
+    @Override
     protected boolean isShortcutAvailable() {
-        return !isInSetupWizard()
-                && !AccessibilityUtil.isFloatingMenuEnabled(mContext)
-                && AccessibilityUtil.isGestureNavigateEnabled(mContext);
+        if (android.provider.Flags.a11yStandaloneGestureEnabled()) {
+            return !isInSetupWizard()
+                    && AccessibilityUtil.isGestureNavigateEnabled(mContext);
+        } else {
+            return !isInSetupWizard()
+                    && AccessibilityUtil.isGestureNavigateEnabled(mContext)
+                    && !AccessibilityUtil.isFloatingMenuEnabled(mContext);
+        }
     }
 
     @Override
@@ -68,9 +81,8 @@ public class GestureShortcutOptionController extends SoftwareShortcutOptionPrefe
 
         final SpannableStringBuilder sb = new SpannableStringBuilder();
         sb.append(instruction);
-        if (!isInSetupWizard()) {
-            sb.append("\n\n");
-            sb.append(getCustomizeAccessibilityButtonLink());
+        if (!isInSetupWizard() && !android.provider.Flags.a11yStandaloneGestureEnabled()) {
+            sb.append("\n\n").append(getCustomizeAccessibilityButtonLink());
         }
 
         return sb;

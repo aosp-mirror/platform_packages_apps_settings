@@ -26,6 +26,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import com.android.settings.R;
@@ -99,6 +100,11 @@ public class AccessibilityActivityPreference extends RestrictedPreference {
      */
     public CharSequence getLabel() {
         return mLabel;
+    }
+
+    @NonNull
+    public ComponentName getComponentName() {
+        return mComponentName;
     }
 
     private Drawable getA11yActivityIcon() {

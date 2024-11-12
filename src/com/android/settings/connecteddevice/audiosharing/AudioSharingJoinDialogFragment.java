@@ -32,6 +32,7 @@ import androidx.fragment.app.FragmentManager;
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 
 import java.util.List;
@@ -58,7 +59,7 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return AudioSharingUtils.isBroadcasting(Utils.getLocalBtManager(getContext()))
+        return BluetoothUtils.isBroadcasting(Utils.getLocalBtManager(getContext()))
                 ? SettingsEnums.DIALOG_AUDIO_SHARING_ADD_DEVICE
                 : SettingsEnums.DIALOG_START_AUDIO_SHARING;
     }
@@ -80,8 +81,14 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
             @NonNull CachedBluetoothDevice newDevice,
             @NonNull DialogEventListener listener,
             @NonNull Pair<Integer, Object>[] eventData) {
-        if (!AudioSharingUtils.isFeatureEnabled()) return;
-        final FragmentManager manager = host.getChildFragmentManager();
+        if (!BluetoothUtils.isAudioSharingEnabled()) return;
+        final FragmentManager manager;
+        try {
+            manager = host.getChildFragmentManager();
+        } catch (IllegalStateException e) {
+            Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+            return;
+        }
         sListener = listener;
         sNewDevice = newDevice;
         sEventData = eventData;
@@ -151,7 +158,11 @@ public class AudioSharingJoinDialogFragment extends InstrumentedDialogFragment {
                                     dismiss();
                                 })
                         .setCustomNegativeButton(
-                                R.string.audio_sharing_no_thanks_button_label,
+                                getMetricsCategory() == SettingsEnums.DIALOG_START_AUDIO_SHARING
+                                        ? getString(
+                                                R.string.audio_sharing_switch_active_button_label,
+                                                newDeviceName)
+                                        : getString(R.string.audio_sharing_no_thanks_button_label),
                                 v -> {
                                     if (sListener != null) {
                                         sListener.onCancelClick();

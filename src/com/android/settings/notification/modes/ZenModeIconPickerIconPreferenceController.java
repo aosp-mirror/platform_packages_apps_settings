@@ -19,41 +19,34 @@ package com.android.settings.notification.modes;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.widget.EntityHeaderController;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.notification.modes.ZenIconLoader;
+import com.android.settingslib.notification.modes.ZenMode;
 
-class ZenModeIconPickerIconPreferenceController extends AbstractZenModePreferenceController {
+/** Controller used for displaying the currently-chosen icon at the top of the icon picker. */
+class ZenModeIconPickerIconPreferenceController extends AbstractZenModeHeaderController {
 
-    private final DashboardFragment mFragment;
-    private EntityHeaderController mHeaderController;
+    ZenModeIconPickerIconPreferenceController(@NonNull Context context,
+            @NonNull ZenIconLoader iconLoader, @NonNull String key,
+            @NonNull DashboardFragment fragment) {
+        super(context, iconLoader, key, fragment);
+    }
 
-    ZenModeIconPickerIconPreferenceController(@NonNull Context context, @NonNull String key,
-            @NonNull DashboardFragment fragment, @Nullable ZenModesBackend backend) {
-        super(context, key, backend);
-        mFragment = fragment;
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        setUpHeader(screen, mContext.getResources().getDimensionPixelSize(
+                R.dimen.zen_mode_icon_list_header_circle_diameter));
     }
 
     @Override
     void updateState(Preference preference, @NonNull ZenMode zenMode) {
-        preference.setSelectable(false);
-
-        if (mHeaderController == null) {
-            final LayoutPreference pref = (LayoutPreference) preference;
-            mHeaderController = EntityHeaderController.newInstance(
-                            mFragment.getActivity(),
-                            mFragment,
-                            pref.findViewById(R.id.entity_header));
-        }
-
-        FutureUtil.whenDone(
-                zenMode.getIcon(mContext, IconLoader.getInstance()),
-                icon -> mHeaderController.setIcon(IconUtil.applyTint(mContext, icon))
-                        .done(/* rebindActions= */ false),
-                mContext.getMainExecutor());
+        updateIcon(preference, zenMode,
+                icon -> IconUtil.makeIconPickerHeader(mContext, icon),
+                /* isSelected= */ false);
     }
 }

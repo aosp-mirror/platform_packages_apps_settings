@@ -25,7 +25,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.android.settings.SettingsApplication
 import com.android.settings.biometrics.fingerprint2.domain.interactor.OrientationInteractor
-import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.SensorInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintAction
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintEnrollEnrollingViewModel
@@ -46,10 +46,10 @@ import kotlinx.coroutines.flow.update
 
 /** View Model used by the rear fingerprint enrollment fragment. */
 class RFPSViewModel(
-  private val fingerprintEnrollViewModel: FingerprintEnrollEnrollingViewModel,
-  private val navigationViewModel: FingerprintNavigationViewModel,
-  orientationInteractor: OrientationInteractor,
-  private val fingerprintManager: FingerprintManagerInteractor,
+    private val fingerprintEnrollViewModel: FingerprintEnrollEnrollingViewModel,
+    private val navigationViewModel: FingerprintNavigationViewModel,
+    orientationInteractor: OrientationInteractor,
+    private val sensorInteractor: SensorInteractor,
 ) : ViewModel() {
 
   private val _textViewIsVisible = MutableStateFlow(false)
@@ -62,7 +62,7 @@ class RFPSViewModel(
   val shouldAnimateIcon = _shouldAnimateIcon
 
   private var enrollFlow: Flow<FingerEnrollState?> =
-    fingerprintManager.sensorPropertiesInternal.filterNotNull().combine(
+    sensorInteractor.sensorPropertiesInternal.filterNotNull().combine(
       fingerprintEnrollViewModel.enrollFlow
     ) { props, enroll ->
       if (props.sensorType == FingerprintSensorType.REAR) {
@@ -181,7 +181,7 @@ class RFPSViewModel(
           provider[FingerprintEnrollEnrollingViewModel::class],
           provider[FingerprintNavigationViewModel::class],
           biometricEnvironment.orientationInteractor,
-          biometricEnvironment.fingerprintManagerInteractor,
+          biometricEnvironment.createSensorPropertiesInteractor(),
         )
       }
     }

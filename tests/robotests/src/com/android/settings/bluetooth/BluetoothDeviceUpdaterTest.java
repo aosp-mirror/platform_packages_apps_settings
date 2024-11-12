@@ -275,7 +275,7 @@ public class BluetoothDeviceUpdaterTest {
         }
 
         @Override
-        protected String getPreferenceKey() {
+        protected String getPreferenceKeyPrefix() {
             return "test_bt";
         }
     }

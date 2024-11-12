@@ -25,14 +25,17 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.conflate
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onEach
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class CallStateRepository(private val context: Context) {
-    private val subscriptionManager = context.requireSubscriptionManager()
+class CallStateRepository(
+    private val context: Context,
+    private val subscriptionRepository: SubscriptionRepository = SubscriptionRepository(context),
+) {
 
     /** Flow for call state of given [subId]. */
     fun callStateFlow(subId: Int): Flow<Int> = context.telephonyCallbackFlow(subId) {
@@ -48,9 +51,8 @@ class CallStateRepository(private val context: Context) {
      *
      * @return true if any active subscription's call state is not idle.
      */
-    fun isInCallFlow(): Flow<Boolean> = context.subscriptionsChangedFlow()
-        .flatMapLatest {
-            val subIds = subscriptionManager.activeSubscriptionIdList
+    fun isInCallFlow(): Flow<Boolean> = subscriptionRepository.activeSubscriptionIdListFlow()
+        .flatMapLatest { subIds ->
             if (subIds.isEmpty()) {
                 flowOf(false)
             } else {
@@ -59,9 +61,10 @@ class CallStateRepository(private val context: Context) {
                 }
             }
         }
+        .distinctUntilChanged()
         .conflate()
-        .flowOn(Dispatchers.Default)
         .onEach { Log.d(TAG, "isInCallFlow: $it") }
+        .flowOn(Dispatchers.Default)
 
     private companion object {
         private const val TAG = "CallStateRepository"

@@ -30,6 +30,10 @@ import static org.mockito.Mockito.when;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
+import android.provider.Flags;
 import android.provider.Settings;
 
 import androidx.preference.ListPreference;
@@ -49,6 +53,8 @@ import org.robolectric.RobolectricTestRunner;
 public class AccessibilityButtonGesturePreferenceControllerTest {
 
     @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+    @Rule
     public final MockitoRule mockito = MockitoJUnit.rule();
 
     @Spy
@@ -67,11 +73,22 @@ public class AccessibilityButtonGesturePreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
     public void getAvailabilityStatus_navigationGestureEnabled_returnAvailable() {
         when(mResources.getInteger(com.android.internal.R.integer.config_navBarInteractionMode))
                 .thenReturn(NAV_BAR_MODE_GESTURAL);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
+    public void
+            getAvailabilityStatus_navigationGestureEnabled_gestureFlag_conditionallyUnavailable() {
+        when(mResources.getInteger(com.android.internal.R.integer.config_navBarInteractionMode))
+                .thenReturn(NAV_BAR_MODE_GESTURAL);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
