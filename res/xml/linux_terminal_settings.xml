@@ -24,4 +24,10 @@
         android:title="@string/enable_linux_terminal_summary"
         settings:controller="com.android.settings.development.linuxterminal.EnableLinuxTerminalPreferenceController" />
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="disable_linux_terminal_footer"
+        android:title="@string/disable_linux_terminal_disclaimer"
+        android:selectable="false"
+        settings:searchable="false"/>
+
 </PreferenceScreen>
