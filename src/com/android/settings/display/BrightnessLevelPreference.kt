@@ -71,8 +71,8 @@ class BrightnessLevelPreference :
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
-    override val restrictionKey: String
-        get() = UserManager.DISALLOW_CONFIG_BRIGHTNESS
+    override val restrictionKeys
+        get() = arrayOf(UserManager.DISALLOW_CONFIG_BRIGHTNESS)
 
     override val useAdminDisabledSummary: Boolean
         get() = true

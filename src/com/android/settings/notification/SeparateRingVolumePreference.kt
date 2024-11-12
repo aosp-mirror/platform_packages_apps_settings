@@ -67,8 +67,8 @@ open class SeparateRingVolumePreference :
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
-    override val restrictionKey: String
-        get() = UserManager.DISALLOW_ADJUST_VOLUME
+    override val restrictionKeys
+        get() = arrayOf(UserManager.DISALLOW_ADJUST_VOLUME)
 
     override fun storage(context: Context): KeyValueStore {
         val helper = createAudioHelper(context)
