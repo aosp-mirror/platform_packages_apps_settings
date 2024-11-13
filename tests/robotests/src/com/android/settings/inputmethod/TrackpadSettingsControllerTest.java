@@ -25,6 +25,7 @@ import static org.junit.Assume.assumeTrue;
 import android.content.Context;
 import android.view.InputDevice;
 
+import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.core.BasePreferenceController;
@@ -53,12 +54,29 @@ public class TrackpadSettingsControllerTest {
 
     private Context mContext;
     private TrackpadSettingsController mController;
+    private Preference mPreference;
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
         mController = new TrackpadSettingsController(mContext, PREFERENCE_KEY);
+        mPreference = new Preference(mContext);
         ShadowInputDevice.reset();
+    }
+
+    @Test
+    public void updateState_setTitleBasedOnDeviceSource() {
+        int deviceId = 1;
+        ShadowInputDevice.sDeviceIds = new int[]{deviceId};
+        InputDevice device = ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId,
+                InputDevice.SOURCE_TOUCHPAD);
+        ShadowInputDevice.addDevice(deviceId, device);
+        String expectedTitle = mContext.getString(
+                NewKeyboardSettingsUtils.getTouchpadAndMouseTitleTitleResId());
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getTitle()).isEqualTo(expectedTitle);
     }
 
     @Test

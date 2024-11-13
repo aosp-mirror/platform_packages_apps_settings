@@ -77,6 +77,7 @@ public class TrackpadSettingsController extends BasePreferenceController
             return;
         }
         mPreference.setVisible(isAvailable());
+        mPreference.setTitle(NewKeyboardSettingsUtils.getTouchpadAndMouseTitleTitleResId());
     }
 
     @Override
