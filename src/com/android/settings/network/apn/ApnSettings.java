@@ -59,6 +59,7 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import kotlin.Unit;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /** Handle each different apn setting. */
 public class ApnSettings extends RestrictedSettingsFragment
@@ -135,9 +136,9 @@ public class ApnSettings extends RestrictedSettingsFragment
         mHideImsApn = b.getBoolean(CarrierConfigManager.KEY_HIDE_IMS_APN_BOOL);
         mAllowAddingApns = b.getBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL);
         if (mAllowAddingApns) {
-            final String[] readOnlyApnTypes = ApnEditor.getReadOnlyApnTypes(b);
+            final List<String> readOnlyApnTypes = ApnTypes.getReadOnlyApnTypes(b);
             // if no apn type can be edited, do not allow adding APNs
-            if (ApnEditor.hasAllApns(readOnlyApnTypes)) {
+            if (ApnTypes.hasAllApnTypes(readOnlyApnTypes)) {
                 Log.d(TAG, "not allowing adding APN because all APN types are read only");
                 mAllowAddingApns = false;
             }
