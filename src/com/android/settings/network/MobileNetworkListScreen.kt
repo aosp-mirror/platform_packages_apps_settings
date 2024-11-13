@@ -40,8 +40,8 @@ class MobileNetworkListScreen : PreferenceScreenCreator, PreferenceRestrictionMi
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
-    override val restrictionKey: String
-        get() = UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS
+    override val restrictionKeys
+        get() = arrayOf(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)
 
     override fun isFlagEnabled(context: Context) = Flags.catalystMobileNetworkList()
 

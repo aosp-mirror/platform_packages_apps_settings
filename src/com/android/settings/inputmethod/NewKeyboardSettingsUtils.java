@@ -36,6 +36,8 @@ import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
+import androidx.annotation.StringRes;
+
 import com.android.settings.R;
 
 import java.util.Arrays;
@@ -78,6 +80,18 @@ public class NewKeyboardSettingsUtils {
             }
         }
         return false;
+    }
+
+    static @StringRes int getTouchpadAndMouseTitleTitleResId() {
+        boolean isMouse = isMouse();
+        boolean isTouchpad = isTouchpad();
+        if (isMouse && isTouchpad) {
+            return R.string.trackpad_mouse_settings;
+        } else if (isMouse) {
+            return R.string.mouse_settings;
+        } else {
+            return R.string.trackpad_settings;
+        }
     }
 
     @SuppressLint("MissingPermission")

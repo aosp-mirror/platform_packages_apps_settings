@@ -45,8 +45,8 @@ class NetworkProviderScreen :
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
-    override val restrictionKey: String
-        get() = UserManager.DISALLOW_CONFIG_WIFI
+    override val restrictionKeys
+        get() = arrayOf(UserManager.DISALLOW_CONFIG_WIFI)
 
     override fun isFlagEnabled(context: Context) = Flags.catalystInternetSettings()
 
