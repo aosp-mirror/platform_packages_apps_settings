@@ -75,6 +75,12 @@ public class BluetoothA2dpHwOffloadPreferenceController extends DeveloperOptions
     }
 
     @Override
+    protected void onDeveloperOptionsSwitchEnabled() {
+        super.onDeveloperOptionsSwitchEnabled();
+        updateState(mPreference);
+    }
+
+    @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
         final boolean offloadSupported =
