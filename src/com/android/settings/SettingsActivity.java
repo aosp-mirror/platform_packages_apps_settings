@@ -311,6 +311,11 @@ public class SettingsActivity extends SettingsBaseActivity
         }
 
         setContentView(R.layout.settings_main_prefs);
+        mMainSwitch = findViewById(R.id.switch_bar);
+        if (mMainSwitch != null) {
+            mMainSwitch.setMetricsCategory(lookupMetricsCategory());
+            mMainSwitch.setTranslationZ(findViewById(R.id.main_content).getTranslationZ() + 1);
+        }
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
 
@@ -328,12 +333,6 @@ public class SettingsActivity extends SettingsBaseActivity
             }
         } else {
             launchSettingFragment(initialFragmentName, intent);
-        }
-
-        mMainSwitch = findViewById(R.id.switch_bar);
-        if (mMainSwitch != null) {
-            mMainSwitch.setMetricsCategory(lookupMetricsCategory());
-            mMainSwitch.setTranslationZ(findViewById(R.id.main_content).getTranslationZ() + 1);
         }
 
         // see if we should show Back/Next buttons

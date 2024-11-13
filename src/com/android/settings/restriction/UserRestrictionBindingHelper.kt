@@ -34,7 +34,9 @@ class UserRestrictionBindingHelper(
                 screenBindingHelper.forEachRecursively {
                     val metadata = it.metadata
                     if (metadata is PreferenceRestrictionMixin) {
-                        getOrPut(metadata.restrictionKey) { mutableSetOf() }.add(metadata.key)
+                        for (restrictionKey in metadata.restrictionKeys) {
+                            getOrPut(restrictionKey) { mutableSetOf() }.add(metadata.key)
+                        }
                     }
                 }
             }

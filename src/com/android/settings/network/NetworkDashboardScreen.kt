@@ -17,6 +17,7 @@ package com.android.settings.network
 
 import android.content.Context
 import com.android.settings.R
+import com.android.settings.datausage.DataSaverScreen
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -43,7 +44,10 @@ class NetworkDashboardScreen : PreferenceScreenCreator, PreferenceIconProvider {
 
     override fun fragmentClass() = NetworkDashboardFragment::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) =
+        preferenceHierarchy(this) {
+            +DataSaverScreen.KEY order 10
+        }
 
     companion object {
         const val KEY = "network_provider_and_internet_screen"
