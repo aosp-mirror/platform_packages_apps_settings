@@ -303,6 +303,26 @@ public class SoundPreferenceControllerTest {
     }
 
     @Test
+    public void testOnPreferenceTreeClick_noAudioAttributes() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_HIGH);
+        channel.setSound(null, null);
+        mController.onResume(appRow, channel, null, null, null, null, null);
+
+        AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
+        NotificationSoundPreference pref =
+                spy(new NotificationSoundPreference(mContext, attributeSet));
+        pref.setKey(mController.getPreferenceKey());
+        mController.handlePreferenceTreeClick(pref);
+
+        ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(pref, times(1)).onPrepareRingtonePickerIntent(intentArgumentCaptor.capture());
+        assertEquals(RingtoneManager.TYPE_NOTIFICATION,
+                intentArgumentCaptor.getValue().getIntExtra(
+                        RingtoneManager.EXTRA_RINGTONE_TYPE, 0));
+    }
+
+    @Test
     public void testOnActivityResult() {
         NotificationSoundPreference pref = mock(NotificationSoundPreference.class);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);

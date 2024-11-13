@@ -101,6 +101,8 @@ public class SoundPreferenceController extends NotificationPreferenceController
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_SOUND.equals(preference.getKey()) && mFragment != null) {
             NotificationSoundPreference pref = (NotificationSoundPreference) preference;
+            // default to notification
+            pref.setRingtoneType(RingtoneManager.TYPE_NOTIFICATION);
             if (mChannel != null && mChannel.getAudioAttributes() != null) {
                 if (USAGE_ALARM == mChannel.getAudioAttributes().getUsage()) {
                     pref.setRingtoneType(RingtoneManager.TYPE_ALARM);

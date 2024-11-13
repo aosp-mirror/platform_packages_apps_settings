@@ -16,7 +16,6 @@
 
 package com.android.settings
 
-import android.os.UserHandle
 import androidx.preference.Preference
 import com.android.settingslib.RestrictedPreferenceHelperProvider
 import com.android.settingslib.metadata.PreferenceHierarchyNode
@@ -37,10 +36,11 @@ class SettingsPreferenceBindingFactory : DefaultPreferenceBindingFactory() {
         if (metadata is PreferenceRestrictionMixin) {
             if (preference is RestrictedPreferenceHelperProvider) {
                 preference.getRestrictedPreferenceHelper().apply {
-                    val restrictionKey = metadata.restrictionKey
-                    if (!preference.context.hasBaseUserRestriction(restrictionKey)) {
-                        useAdminDisabledSummary(metadata.useAdminDisabledSummary)
-                        checkRestrictionAndSetDisabled(restrictionKey, UserHandle.myUserId())
+                    useAdminDisabledSummary(metadata.useAdminDisabledSummary)
+                    val context = preference.context
+                    val restrictionKeys = metadata.restrictionKeys
+                    if (!context.hasBaseUserRestriction(restrictionKeys)) {
+                        setDisabledByAdmin(context.getRestrictionEnforcedAdmin(restrictionKeys))
                     }
                 }
             }

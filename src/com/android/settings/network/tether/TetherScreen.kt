@@ -54,8 +54,8 @@ class TetherScreen :
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
-    override val restrictionKey: String
-        get() = UserManager.DISALLOW_CONFIG_TETHERING
+    override val restrictionKeys
+        get() = arrayOf(UserManager.DISALLOW_CONFIG_TETHERING)
 
     override fun isFlagEnabled(context: Context) = Flags.catalystTetherSettings()
 
