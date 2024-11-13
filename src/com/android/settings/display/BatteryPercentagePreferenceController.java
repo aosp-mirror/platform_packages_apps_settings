@@ -19,6 +19,9 @@ import static android.provider.Settings.System.SHOW_BATTERY_PERCENT;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.BatteryManager;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
@@ -59,9 +62,22 @@ public class BatteryPercentagePreferenceController extends BasePreferenceControl
         if (!Utils.isBatteryPresent(mContext)) {
             return CONDITIONALLY_UNAVAILABLE;
         }
+
+        if (isBatteryDead()) {
+            return DISABLED_DEPENDENT_SETTING;
+        }
+
         return mContext.getResources().getBoolean(
                 R.bool.config_battery_percentage_setting_available) ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
+    }
+
+    private boolean isBatteryDead() {
+        Intent batteryBroadcast = mContext.registerReceiver(null /* receiver */,
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        return batteryBroadcast != null && batteryBroadcast.getIntExtra(
+                BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN)
+                == BatteryManager.BATTERY_HEALTH_DEAD;
     }
 
     @Override

@@ -52,6 +52,7 @@ public class BatteryInfo {
     public int pluggedStatus;
     public boolean discharging = true;
     public boolean isOverheated;
+    public boolean isDead;
     public long remainingTimeUs = 0;
     public long averageTimeToDischarge = EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN;
     public String batteryPercentString;
@@ -257,10 +258,10 @@ public class BatteryInfo {
         info.pluggedStatus = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
         info.mCharging = info.pluggedStatus != 0;
         info.averageTimeToDischarge = estimate.getAverageDischargeTime();
-        info.isOverheated = batteryBroadcast.getIntExtra(
-                BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN)
-                == BatteryManager.BATTERY_HEALTH_OVERHEAT;
-
+        final int health = batteryBroadcast.getIntExtra(
+                BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN);
+        info.isOverheated = health == BatteryManager.BATTERY_HEALTH_OVERHEAT;
+        info.isDead = health == BatteryManager.BATTERY_HEALTH_DEAD;
         info.statusLabel = Utils.getBatteryStatus(context, batteryBroadcast, isCompactStatus);
         info.batteryStatus = batteryBroadcast.getIntExtra(
                 BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN);

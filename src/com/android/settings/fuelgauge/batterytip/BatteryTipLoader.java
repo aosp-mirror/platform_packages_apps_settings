@@ -24,6 +24,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.detectors.BatteryDefenderDetector;
+import com.android.settings.fuelgauge.batterytip.detectors.BatteryReplacementDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.DockDefenderDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.EarlyWarningDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.HighUsageDetector;
@@ -68,6 +69,7 @@ public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
         final BatteryInfo batteryInfo = mBatteryUtils.getBatteryInfo(TAG);
         final Context context = getContext();
 
+        tips.add(new BatteryReplacementDetector(batteryInfo).detect());
         tips.add(new LowBatteryDetector(context, policy, batteryInfo).detect());
         tips.add(new HighUsageDetector(context, policy, mBatteryUsageStats, batteryInfo).detect());
         tips.add(new SmartBatteryDetector(
