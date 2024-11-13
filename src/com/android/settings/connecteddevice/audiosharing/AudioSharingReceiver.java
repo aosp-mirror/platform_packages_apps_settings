@@ -62,7 +62,7 @@ public class AudioSharingReceiver extends BroadcastReceiver {
                         intent.getIntExtra(
                                 LocalBluetoothLeBroadcast.EXTRA_LE_AUDIO_SHARING_STATE, -1);
                 if (state == LocalBluetoothLeBroadcast.BROADCAST_STATE_ON) {
-                    if (!BluetoothUtils.isAudioSharingEnabled()) {
+                    if (!BluetoothUtils.isAudioSharingUIAvailable(context)) {
                         Log.w(TAG, "Skip showSharingNotification, feature disabled.");
                         return;
                     }
@@ -85,7 +85,7 @@ public class AudioSharingReceiver extends BroadcastReceiver {
                 }
                 break;
             case ACTION_LE_AUDIO_SHARING_STOP:
-                if (BluetoothUtils.isAudioSharingEnabled()) {
+                if (BluetoothUtils.isAudioSharingUIAvailable(context)) {
                     LocalBluetoothManager manager = Utils.getLocalBtManager(context);
                     if (BluetoothUtils.isBroadcasting(manager)) {
                         AudioSharingUtils.stopBroadcasting(manager);

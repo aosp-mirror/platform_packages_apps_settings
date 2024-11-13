@@ -20,7 +20,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -28,10 +27,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Flags;
-import android.app.NotificationChannel;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.ParceledListSlice;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
@@ -39,7 +36,6 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
-import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
@@ -54,6 +50,7 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(RobolectricTestRunner.class)
 @EnableFlags(Flags.FLAG_MODES_UI)
@@ -66,7 +63,7 @@ public class ZenModeAllBypassingAppsPreferenceControllerTest {
 
     private Context mContext;
     @Mock
-    private NotificationBackend mBackend;
+    private ZenHelperBackend mBackend;
     @Mock
     private PreferenceCategory mPreferenceCategory;
     @Mock
@@ -102,18 +99,25 @@ public class ZenModeAllBypassingAppsPreferenceControllerTest {
         entry2.info.packageName = "test2";
         entry2.info.uid = 0;
 
+        ApplicationsState.AppEntry entry3= mock(ApplicationsState.AppEntry.class);
+        entry3.info = new ApplicationInfo();
+        entry3.info.packageName = "test3";
+        entry3.info.uid = 0;
+
         List<ApplicationsState.AppEntry> appEntries = new ArrayList<>();
         appEntries.add(entry1);
         appEntries.add(entry2);
-        List<NotificationChannel> channelsBypassing = new ArrayList<>();
-        channelsBypassing.add(mock(NotificationChannel.class));
-        channelsBypassing.add(mock(NotificationChannel.class));
-        when(mBackend.getNotificationChannelsBypassingDnd(anyString(),
-                anyInt())).thenReturn(new ParceledListSlice<>(channelsBypassing));
+        appEntries.add(entry3);
+        when(mBackend.getPackagesBypassingDnd(anyInt())).thenReturn(
+                Map.of("test", true, "test2", false));
 
         // THEN there's are two preferences
         mController.updateAppList(appEntries);
-        verify(mPreferenceCategory, times(2)).addPreference(any());
+        ArgumentCaptor<Preference> captor = ArgumentCaptor.forClass(Preference.class);
+        verify(mPreferenceCategory, times(2)).addPreference(captor.capture());
+        List<Preference> prefs = captor.getAllValues();
+        assertThat(prefs.get(0).getSummary().toString()).isEqualTo("All notifications");
+        assertThat(prefs.get(1).getSummary().toString()).isEqualTo("Some notifications");
     }
 
     @Test

@@ -132,7 +132,12 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
 
                 @Override
                 public void onSourceAdded(
-                        @NonNull BluetoothDevice sink, int sourceId, int reason) {}
+                        @NonNull BluetoothDevice sink, int sourceId, int reason) {
+                    Log.d(TAG, "onSourceAdded: update volume list.");
+                    if (mBluetoothDeviceUpdater != null) {
+                        mBluetoothDeviceUpdater.forceUpdate();
+                    }
+                }
 
                 @Override
                 public void onSourceAddFailed(
@@ -165,14 +170,7 @@ public class AudioSharingDeviceVolumeGroupController extends AudioSharingBasePre
                 public void onReceiveStateChanged(
                         @NonNull BluetoothDevice sink,
                         int sourceId,
-                        @NonNull BluetoothLeBroadcastReceiveState state) {
-                    if (BluetoothUtils.isConnected(state)) {
-                        Log.d(TAG, "onReceiveStateChanged: synced, update volume list.");
-                        if (mBluetoothDeviceUpdater != null) {
-                            mBluetoothDeviceUpdater.forceUpdate();
-                        }
-                    }
-                }
+                        @NonNull BluetoothLeBroadcastReceiveState state) {}
             };
 
     public AudioSharingDeviceVolumeGroupController(Context context) {

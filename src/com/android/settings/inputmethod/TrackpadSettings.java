@@ -18,7 +18,10 @@ package com.android.settings.inputmethod;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.FeatureFlagUtils;
+
+import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -31,9 +34,16 @@ public class TrackpadSettings extends DashboardFragment {
     private static final String TAG = "TrackpadSettings";
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         use(TouchGesturesButtonPreferenceController.class).setFragment(this /*parent*/);
+    }
+
+    @Override
+    public void onCreate(@NonNull Bundle icicle) {
+        super.onCreate(icicle);
+        getPreferenceScreen().setTitle(
+                NewKeyboardSettingsUtils.getTouchpadAndMouseTitleTitleResId());
     }
 
     @Override

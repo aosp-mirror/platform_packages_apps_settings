@@ -122,7 +122,7 @@ public class AudioStreamMediaService extends Service {
 
     @Override
     public void onCreate() {
-        if (!BluetoothUtils.isAudioSharingEnabled()) {
+        if (!BluetoothUtils.isAudioSharingUIAvailable(this)) {
             return;
         }
         Log.d(TAG, "onCreate()");
@@ -181,32 +181,32 @@ public class AudioStreamMediaService extends Service {
     public void onDestroy() {
         Log.d(TAG, "onDestroy()");
         super.onDestroy();
-        if (!BluetoothUtils.isAudioSharingEnabled()) {
-            return;
-        }
-        if (mDevices != null) {
-            mDevices.clear();
-            mDevices = null;
-        }
-        synchronized (mLocalSessionLock) {
-            if (mLocalSession != null) {
-                mLocalSession.release();
-                mLocalSession = null;
+        if (BluetoothUtils.isAudioSharingUIAvailable(this)) {
+            if (mDevices != null) {
+                mDevices.clear();
+                mDevices = null;
             }
+            synchronized (mLocalSessionLock) {
+                if (mLocalSession != null) {
+                    mLocalSession.release();
+                    mLocalSession = null;
+                }
+            }
+            mExecutor.execute(
+                    () -> {
+                        if (mLocalBtManager != null) {
+                            mLocalBtManager.getEventManager().unregisterCallback(
+                                    mBluetoothCallback);
+                        }
+                        if (mLeBroadcastAssistant != null && mBroadcastAssistantCallback != null) {
+                            mLeBroadcastAssistant.unregisterServiceCallBack(
+                                    mBroadcastAssistantCallback);
+                        }
+                        if (mVolumeControl != null && mVolumeControlCallback != null) {
+                            mVolumeControl.unregisterCallback(mVolumeControlCallback);
+                        }
+                    });
         }
-        mExecutor.execute(
-                () -> {
-                    if (mLocalBtManager != null) {
-                        mLocalBtManager.getEventManager().unregisterCallback(mBluetoothCallback);
-                    }
-                    if (mLeBroadcastAssistant != null && mBroadcastAssistantCallback != null) {
-                        mLeBroadcastAssistant.unregisterServiceCallBack(
-                                mBroadcastAssistantCallback);
-                    }
-                    if (mVolumeControl != null && mVolumeControlCallback != null) {
-                        mVolumeControl.unregisterCallback(mVolumeControlCallback);
-                    }
-                });
     }
 
     @Override

@@ -31,7 +31,6 @@ import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.flags.Flags;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -78,13 +77,6 @@ public class AudioStreamsCategoryController extends AudioSharingBasePreferenceCo
         if (mLocalBtManager != null) {
             mLocalBtManager.getEventManager().unregisterCallback(mBluetoothCallback);
         }
-    }
-
-    @Override
-    public int getAvailabilityStatus() {
-        return Flags.enableLeAudioQrCodePrivateBroadcastSharing()
-                ? AVAILABLE
-                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

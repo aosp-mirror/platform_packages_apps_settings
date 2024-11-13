@@ -527,12 +527,12 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(mPreference.getSummary().toString()).isEmpty();
 
-        // onReceiveStateChanged will update summary
+        // onSourceAdded will update summary
         Settings.Secure.putInt(mContentResolver, TEST_SETTINGS_KEY, TEST_DEVICE_GROUP_ID1);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice1));
         when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(mState));
-        mController.mBroadcastAssistantCallback.onReceiveStateChanged(
-                mDevice1, /* sourceId= */ 1, mState);
+        mController.mBroadcastAssistantCallback.onSourceAdded(mDevice1, /* sourceId= */
+                1, /* reason= */ 1);
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(mPreference.getSummary().toString())
                 .isEqualTo(
@@ -557,8 +557,6 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         mController.mBroadcastAssistantCallback.onSearchStartFailed(/* reason= */ 1);
         mController.mBroadcastAssistantCallback.onSearchStopped(/* reason= */ 1);
         mController.mBroadcastAssistantCallback.onSearchStopFailed(/* reason= */ 1);
-        mController.mBroadcastAssistantCallback.onSourceAdded(
-                mDevice1, /* sourceId= */ 1, /* reason= */ 1);
         mController.mBroadcastAssistantCallback.onSourceAddFailed(
                 mDevice1, mSource, /* reason= */ 1);
         mController.mBroadcastAssistantCallback.onSourceRemoved(
@@ -572,6 +570,8 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         mController.mBroadcastAssistantCallback.onSourceFound(mSource);
         mController.mBroadcastAssistantCallback.onSourceLost(/* broadcastId= */ 1);
         shadowOf(Looper.getMainLooper()).idle();
+        mController.mBroadcastAssistantCallback.onReceiveStateChanged(mDevice1, /* sourceId= */ 1,
+                mState);
 
         // Above callbacks won't update summary.
         assertThat(mPreference.getSummary().toString()).isEmpty();

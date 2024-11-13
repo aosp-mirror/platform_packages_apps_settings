@@ -46,7 +46,7 @@ import com.android.settingslib.transition.SettingsTransitionHelper
 import java.text.NumberFormat
 
 // LINT.IfChange
-class BrightnessLevelRestrictedPreference :
+class BrightnessLevelPreference :
     PreferenceMetadata,
     PreferenceBinding,
     PreferenceRestrictionMixin,
@@ -71,8 +71,8 @@ class BrightnessLevelRestrictedPreference :
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
-    override val restrictionKey: String
-        get() = UserManager.DISALLOW_CONFIG_BRIGHTNESS
+    override val restrictionKeys
+        get() = arrayOf(UserManager.DISALLOW_CONFIG_BRIGHTNESS)
 
     override val useAdminDisabledSummary: Boolean
         get() = true
@@ -87,7 +87,7 @@ class BrightnessLevelRestrictedPreference :
     override fun onStart(context: PreferenceLifecycleContext) {
         val observer =
             KeyedObserver<String> { _, _ ->
-                context.notifyPreferenceChange(this@BrightnessLevelRestrictedPreference)
+                context.notifyPreferenceChange(this@BrightnessLevelPreference)
             }
         brightnessObserver = observer
         SettingsSystemStore.get(context)
@@ -100,14 +100,15 @@ class BrightnessLevelRestrictedPreference :
                 override fun onDisplayRemoved(displayId: Int) {}
 
                 override fun onDisplayChanged(displayId: Int) {
-                    context.notifyPreferenceChange(this@BrightnessLevelRestrictedPreference)
+                    context.notifyPreferenceChange(this@BrightnessLevelPreference)
                 }
             }
         displayListener = listener
         context.displayManager.registerDisplayListener(
             listener,
             HandlerExecutor.main,
-            DisplayManager.EVENT_FLAG_DISPLAY_BRIGHTNESS,
+            /* eventFlags= */ 0,
+            DisplayManager.PRIVATE_EVENT_FLAG_DISPLAY_BRIGHTNESS,
         )
     }
 
