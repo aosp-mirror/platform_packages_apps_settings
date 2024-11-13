@@ -42,6 +42,7 @@ public class BluetoothDetailsHearingDeviceController extends BluetoothDetailsCon
 
     public static final int ORDER_HEARING_DEVICE_SETTINGS = 1;
     public static final int ORDER_HEARING_AIDS_PRESETS = 2;
+    public static final int ORDER_HEARING_DEVICE_INPUT_ROUTING = 3;
     public static final int ORDER_AMBIENT_VOLUME = 4;
     static final String KEY_HEARING_DEVICE_GROUP = "hearing_device_group";
 
@@ -62,10 +63,12 @@ public class BluetoothDetailsHearingDeviceController extends BluetoothDetailsCon
     @VisibleForTesting
     void setSubControllers(
             BluetoothDetailsHearingDeviceSettingsController hearingDeviceSettingsController,
-            BluetoothDetailsHearingAidsPresetsController presetsController) {
+            BluetoothDetailsHearingAidsPresetsController presetsController,
+            BluetoothDetailsHearingDeviceInputRoutingController inputRoutingController) {
         mControllers.clear();
         mControllers.add(hearingDeviceSettingsController);
         mControllers.add(presetsController);
+        mControllers.add(inputRoutingController);
     }
 
     @Override
@@ -111,6 +114,11 @@ public class BluetoothDetailsHearingDeviceController extends BluetoothDetailsCon
         if (com.android.settingslib.flags.Flags.hearingDevicesAmbientVolumeControl()) {
             mControllers.add(new BluetoothDetailsAmbientVolumePreferenceController(mContext,
                     mManager, mFragment, mCachedDevice, mLifecycle));
+        }
+        if (com.android.settingslib.flags.Flags.hearingDevicesInputRoutingControl()) {
+            mControllers.add(
+                    new BluetoothDetailsHearingDeviceInputRoutingController(mContext, mFragment,
+                            mCachedDevice, mLifecycle));
         }
     }
 

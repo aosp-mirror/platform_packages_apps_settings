@@ -108,7 +108,7 @@ public class HearingDeviceAudioRoutingBasePreferenceControllerTest {
         when(mBluetoothDevice.getAnonymizedAddress()).thenReturn(TEST_DEVICE_ADDRESS);
         when(mCachedBluetoothDevice.getAddress()).thenReturn(TEST_DEVICE_ADDRESS);
         doReturn(hearingDeviceAttribute).when(
-                mAudioRoutingHelper).getMatchedHearingDeviceAttributes(any());
+                mAudioRoutingHelper).getMatchedHearingDeviceAttributesForOutput(any());
         when(mAudioProductStrategyMedia.getAudioAttributesForLegacyStreamType(
                 AudioManager.STREAM_MUSIC)).thenReturn((new AudioAttributes.Builder()).build());
         when(mAudioRoutingHelper.getAudioProductStrategies()).thenReturn(
@@ -143,7 +143,8 @@ public class HearingDeviceAudioRoutingBasePreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_noMatchedDeviceAttributes_notCallSetStrategies() {
-        when(mAudioRoutingHelper.getMatchedHearingDeviceAttributes(any())).thenReturn(null);
+        when(mAudioRoutingHelper.getMatchedHearingDeviceAttributesForOutput(any())).thenReturn(
+                null);
 
         verify(mAudioRoutingHelper, never()).setPreferredDeviceRoutingStrategies(any(), isNull(),
                 anyInt());

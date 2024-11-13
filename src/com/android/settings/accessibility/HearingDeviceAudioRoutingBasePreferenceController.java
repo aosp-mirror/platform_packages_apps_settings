@@ -101,7 +101,7 @@ public abstract class HearingDeviceAudioRoutingBasePreferenceController extends
         final List<AudioProductStrategy> supportedStrategies =
                 mAudioRoutingHelper.getSupportedStrategies(audioAttributes);
         final AudioDeviceAttributes hearingDeviceAttributes =
-                mAudioRoutingHelper.getMatchedHearingDeviceAttributes(hearingDevice);
+                mAudioRoutingHelper.getMatchedHearingDeviceAttributesForOutput(hearingDevice);
         if (hearingDeviceAttributes == null) {
             if (DEBUG) {
                 Log.d(TAG,
