@@ -141,7 +141,6 @@ public class CreateShortcutPreferenceControllerTest {
         assertThat(resultActivityInfo.applicationInfo.isSystemApp()).isTrue();
     }
 
-    @Ignore("b/314924127")
     @Test
     public void queryShortcuts_shouldSortBasedOnPriority() {
         final ResolveInfo ri1 = new ResolveInfo();
@@ -165,8 +164,12 @@ public class CreateShortcutPreferenceControllerTest {
         doReturn(false).when(mController).canShowWifiHotspot();
         final List<ResolveInfo> info = mController.queryShortcuts();
         assertThat(info).hasSize(2);
-        assertThat(info.get(0).activityInfo).isEqualTo(ri2.activityInfo);
-        assertThat(info.get(1).activityInfo).isEqualTo(ri1.activityInfo);
+
+        final ResolveInfo resultRi1 = info.get(0);
+        assertThat(resultRi1.activityInfo.name).isEqualTo(ri2.activityInfo.name);
+        final ResolveInfo resultRi2 = info.get(1);
+        assertThat(resultRi2.activityInfo.name).isEqualTo(ri1.activityInfo.name);
+        assertThat(resultRi1.priority).isLessThan(resultRi2.priority);
     }
 
     @Test
