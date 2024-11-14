@@ -19,35 +19,43 @@ package com.android.settings.network
 import android.content.Context
 import android.net.wifi.WifiManager
 import android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED
-import androidx.preference.Preference
 import com.android.settings.R
+import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.datastore.KeyedObservableDelegate
 import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.metadata.MainSwitchPreference
-import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.preference.MainSwitchPreferenceBinding
 
 // LINT.IfChange
 class AdaptiveConnectivityTogglePreference :
-    MainSwitchPreference(
-        ADAPTIVE_CONNECTIVITY_ENABLED,
-        R.string.adaptive_connectivity_main_switch_title,
-    ),
-    MainSwitchPreferenceBinding,
-    Preference.OnPreferenceChangeListener {
+    MainSwitchPreference(KEY, R.string.adaptive_connectivity_main_switch_title) {
 
-    override fun storage(context: Context) = SettingsSecureStore.get(context)
+    override fun storage(context: Context): KeyValueStore =
+        AdaptiveConnectivityToggleStorage(context, SettingsSecureStore.get(context))
 
-    override fun bind(preference: Preference, metadata: PreferenceMetadata) {
-        super.bind(preference, metadata)
-        preference.onPreferenceChangeListener = this
+    @Suppress("UNCHECKED_CAST")
+    private class AdaptiveConnectivityToggleStorage(
+        private val context: Context,
+        private val settingsStore: SettingsStore,
+    ) : KeyedObservableDelegate<String>(settingsStore), KeyValueStore {
+
+        override fun contains(key: String) = settingsStore.contains(KEY)
+
+        override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>) =
+            DEFAULT_VALUE as T
+
+        override fun <T : Any> getValue(key: String, valueType: Class<T>) =
+            (settingsStore.getBoolean(key) ?: DEFAULT_VALUE) as T
+
+        override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
+            settingsStore.setBoolean(key, value as Boolean)
+            context.getSystemService(WifiManager::class.java)?.setWifiScoringEnabled(value)
+        }
     }
 
-    override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
-        val isChecked = newValue as Boolean
-        preference.context
-            .getSystemService(WifiManager::class.java)
-            ?.setWifiScoringEnabled(isChecked)
-        return true
+    companion object {
+        const val KEY = ADAPTIVE_CONNECTIVITY_ENABLED
+        const val DEFAULT_VALUE = true
     }
 }
 // LINT.ThenChange(AdaptiveConnectivityTogglePreferenceController.java)
