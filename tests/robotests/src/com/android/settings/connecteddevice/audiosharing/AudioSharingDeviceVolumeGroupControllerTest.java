@@ -461,18 +461,9 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
 
     @Test
     public void testBluetoothLeBroadcastAssistantCallbacks_updateGroup() {
-        when(mState.getBisSyncState()).thenReturn(new ArrayList<>());
-        // onReceiveStateChanged with unconnected state will do nothing
-        mController.mBroadcastAssistantCallback.onReceiveStateChanged(
-                mDevice1, /* sourceId= */ 1, mState);
-        verify(mDeviceUpdater, never()).forceUpdate();
-
-        // onReceiveStateChanged with connected state will update group preference
-        List<Long> bisSyncState = new ArrayList<>();
-        bisSyncState.add(1L);
-        when(mState.getBisSyncState()).thenReturn(bisSyncState);
-        mController.mBroadcastAssistantCallback.onReceiveStateChanged(
-                mDevice1, /* sourceId= */ 1, mState);
+        // onSourceAdded will update group preference
+        mController.mBroadcastAssistantCallback.onSourceAdded(mDevice1, /* sourceId= */
+                1, /* reason= */ 1);
         verify(mDeviceUpdater).forceUpdate();
 
         // onSourceRemoved will update group preference
@@ -487,8 +478,13 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
         mController.mBroadcastAssistantCallback.onSearchStartFailed(/* reason= */ 1);
         mController.mBroadcastAssistantCallback.onSearchStopped(/* reason= */ 1);
         mController.mBroadcastAssistantCallback.onSearchStopFailed(/* reason= */ 1);
-        mController.mBroadcastAssistantCallback.onSourceAdded(
-                mDevice1, /* sourceId= */ 1, /* reason= */ 1);
+        List<Long> bisSyncState = new ArrayList<>();
+        bisSyncState.add(1L);
+        when(mState.getBisSyncState()).thenReturn(bisSyncState);
+        when(mBroadcast.getLatestBroadcastId()).thenReturn(1);
+        when(mState.getBroadcastId()).thenReturn(1);
+        mController.mBroadcastAssistantCallback.onReceiveStateChanged(mDevice1, /* sourceId= */ 1,
+                mState);
         mController.mBroadcastAssistantCallback.onSourceAddFailed(
                 mDevice1, mSource, /* reason= */ 1);
         mController.mBroadcastAssistantCallback.onSourceRemoveFailed(
