@@ -41,4 +41,9 @@ public class AutoBrightnessPreferenceControllerForSetupWizard
         }
         return super.getAvailabilityStatus();
     }
+
+    @Override
+    public CharSequence getSummary() {
+        return "";
+    }
 }

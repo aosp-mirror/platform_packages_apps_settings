@@ -16,12 +16,19 @@
 
 package com.android.settings.notification.modes;
 
+import static android.app.AutomaticZenRule.TYPE_SCHEDULE_TIME;
+import static android.service.notification.SystemZenRules.PACKAGE_ANDROID;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import android.app.Flags;
 import android.content.Context;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.service.notification.SystemZenRules;
+import android.service.notification.ZenModeConfig;
+import android.text.Spanned;
+import android.text.style.TtsSpan;
 
 import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenIconLoader;
@@ -36,6 +43,8 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+
+import java.util.Calendar;
 
 @RunWith(RobolectricTestRunner.class)
 @EnableFlags(Flags.FLAG_MODES_UI)
@@ -120,6 +129,31 @@ public class ZenModesListItemPreferenceTest {
         assertThat(preference.getTitle()).isEqualTo("Mode disabled by user");
         assertThat(preference.getSummary()).isEqualTo("Disabled");
         assertThat(preference.getIcon()).isNotNull();
+    }
+
+    @Test
+    public void setZenMode_scheduleTime_hasCustomTtsInSummary() {
+        ZenModeConfig.ScheduleInfo scheduleInfo = new ZenModeConfig.ScheduleInfo();
+        scheduleInfo.days = new int[] { Calendar.MONDAY, Calendar.TUESDAY, Calendar.WEDNESDAY };
+        scheduleInfo.startHour = 11;
+        scheduleInfo.endHour = 15;
+        ZenMode mode = new TestModeBuilder()
+                .setPackage(PACKAGE_ANDROID)
+                .setType(TYPE_SCHEDULE_TIME)
+                .setConditionId(ZenModeConfig.toScheduleConditionId(scheduleInfo))
+                .setTriggerDescription(
+                        SystemZenRules.getTriggerDescriptionForScheduleTime(mContext, scheduleInfo))
+                .build();
+
+        ZenModesListItemPreference preference = newPreference(mode);
+
+        assertThat(preference.getSummary()).isInstanceOf(Spanned.class);
+        Spanned summary = (Spanned) preference.getSummary();
+        TtsSpan[] ttsSpans = summary.getSpans(0, summary.length(), TtsSpan.class);
+        assertThat(ttsSpans).hasLength(1);
+        assertThat(ttsSpans[0].getType()).isEqualTo(TtsSpan.TYPE_TEXT);
+        assertThat(ttsSpans[0].getArgs().getString(TtsSpan.ARG_TEXT)).isEqualTo(
+                "Monday to Wednesday, 11:00 AM - 3:00 PM");
     }
 
     private ZenModesListItemPreference newPreference(ZenMode zenMode) {
