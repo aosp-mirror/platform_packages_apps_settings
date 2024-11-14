@@ -22,8 +22,6 @@ import android.provider.Settings
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.accessibility.AccessibilityUtil.State.OFF
-import com.android.settings.accessibility.AccessibilityUtil.State.ON
 import com.android.settings.testutils.shadow.ShadowUtils
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
