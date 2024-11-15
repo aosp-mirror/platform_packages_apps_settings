@@ -20,6 +20,8 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.OTHER_OPT
 import static android.hardware.SensorPrivacyManager.Sensors.CAMERA;
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
+import static com.android.settings.display.UtilsKt.isAdaptiveSleepSupported;
+
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
@@ -222,7 +224,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
         FeatureFactory.getFeatureFactory().getDisplayFeatureProvider()
                 .addToScreen(mAdditionalTogglePreferenceController, screen);
 
-        if (isScreenAttentionAvailable(getContext())) {
+        if (isAdaptiveSleepSupported(getContext())) {
             mAdaptiveSleepPermissionController.addToScreen(screen);
             mAdaptiveSleepCameraStatePreferenceController.addToScreen(screen);
             mAdaptiveSleepController.addToScreen(screen);
@@ -352,10 +354,6 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
         }
     }
 
-    private static boolean isScreenAttentionAvailable(Context context) {
-        return AdaptiveSleepPreferenceController.isAdaptiveSleepSupported(context);
-    }
-
     private static long getTimeoutFromKey(String key) {
         return Long.parseLong(key);
     }
@@ -423,7 +421,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
             new BaseSearchIndexProvider(R.xml.screen_timeout_settings) {
                 public List<SearchIndexableRaw> getRawDataToIndex(
                         Context context, boolean enabled) {
-                    if (!isScreenAttentionAvailable(context)) {
+                    if (!isAdaptiveSleepSupported(context)) {
                         return null;
                     }
                     final Resources res = context.getResources();
