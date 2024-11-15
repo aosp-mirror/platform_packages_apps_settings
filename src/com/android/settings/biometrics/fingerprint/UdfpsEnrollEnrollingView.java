@@ -16,27 +16,42 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.TypedArray;
+import android.graphics.Insets;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
+import android.view.Display;
 import android.view.DisplayInfo;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
+import android.view.WindowManager;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.systemui.biometrics.UdfpsUtils;
 import com.android.systemui.biometrics.shared.model.UdfpsOverlayParams;
 
@@ -50,6 +65,7 @@ import java.util.Locale;
  * View for udfps enrolling.
  */
 public class UdfpsEnrollEnrollingView extends GlifLayout {
+
     private final UdfpsUtils mUdfpsUtils;
     private final Context mContext;
     // We don't need to listen to onConfigurationChanged() for mRotation here because
@@ -57,14 +73,19 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
     private final int mRotation;
     private final boolean mIsLandscape;
     private final boolean mShouldUseReverseLandscape;
+
+    private WindowManager mWindowManager;
+
     private UdfpsEnrollView mUdfpsEnrollView;
     private View mHeaderView;
     private AccessibilityManager mAccessibilityManager;
 
+    private ObjectAnimator mHeaderScrollAnimator;
 
     public UdfpsEnrollEnrollingView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
+        mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         mRotation = mContext.getDisplay().getRotation();
         mIsLandscape = mRotation == Surface.ROTATION_90 || mRotation == Surface.ROTATION_270;
         final boolean isLayoutRtl = (TextUtils.getLayoutDirectionFromLocale(Locale.getDefault())
@@ -82,6 +103,139 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
         mUdfpsEnrollView = findViewById(R.id.udfps_animation_view);
     }
 
+    @Override
+    protected View onInflateTemplate(LayoutInflater inflater, @LayoutRes int template) {
+        final Configuration config = inflater.getContext().getResources().getConfiguration();
+        if (Flags.enrollLayoutTruncateImprovement()
+                && config.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            template = R.layout.biometrics_glif_compact;
+        }
+        return super.onInflateTemplate(inflater, template);
+    }
+
+    void setDecreasePadding(int decreasePadding) {
+        if (mUdfpsEnrollView != null) {
+            mUdfpsEnrollView.setDecreasePadding(decreasePadding);
+        }
+    }
+
+    void onUdfpsSensorRectUpdated() {
+        if (mUdfpsEnrollView != null) {
+            mUdfpsEnrollView.setVisibility(VISIBLE);
+        }
+    }
+
+    private int getScrollableGlifHeaderHeight(boolean isShouldShowLottie) {
+        final TypedValue tvRatio = new TypedValue();
+        if (isLargeDisplaySizeOrFontSize() && !isShouldShowLottie) {
+            getResources().getValue(
+                    R.dimen.biometrics_glif_header_height_ratio_large, tvRatio, true);
+        } else {
+            getResources().getValue(R.dimen.biometrics_glif_header_height_ratio, tvRatio, true);
+        }
+        final float newHeaderHeight = (float) getResources().getDisplayMetrics().heightPixels
+                * tvRatio.getFloat();
+
+        return (int) newHeaderHeight;
+    }
+
+    void adjustScrollableHeaderHeight(ScrollView headerScrollView, boolean isShouldShowLottie) {
+        ViewGroup.LayoutParams params = headerScrollView.getLayoutParams();
+        params.height = getScrollableGlifHeaderHeight(isShouldShowLottie);
+        headerScrollView.setLayoutParams(params);
+    }
+
+    private boolean isLargeDisplaySizeOrFontSize() {
+        final Configuration config = getResources().getConfiguration();
+        if (config.fontScale > 1.3f || getLargeDisplayScale() >= 2.8f) {
+            return true;
+        }
+        return false;
+    }
+
+    private float getLargeDisplayScale() {
+        final Display display = mWindowManager.getDefaultDisplay();
+        final DisplayMetrics metrics = new DisplayMetrics();
+        display.getMetrics(metrics);
+        return metrics.scaledDensity;
+    }
+
+    void adjustUdfpsVieWithFooterBar() {
+        final FrameLayout allContent = findViewById(R.id.suc_layout_status);
+        final ImageView udfpsProgressView = findViewById(
+                R.id.udfps_enroll_animation_fp_progress_view);
+
+        final int navigationBarHeight = getNaviBarHeight();
+        final int footerBarHeight = getFooterBarHeight();
+
+        final int udfpsProgressDrawableBottom = getOnScreenPositionTop(udfpsProgressView)
+                + udfpsProgressView.getDrawable().getBounds().height()
+                - udfpsProgressView.getPaddingBottom() + 2 /* reserved for more space */;
+        final int footerBarTop = getOnScreenPositionTop(allContent) + allContent.getHeight()
+                - (footerBarHeight + navigationBarHeight);
+
+        if (udfpsProgressDrawableBottom > footerBarTop) {
+            int adjustPadding = udfpsProgressDrawableBottom - footerBarTop;
+            setDecreasePadding(adjustPadding);
+        }
+    }
+
+    private int getOnScreenPositionTop(View view) {
+        int [] location = new int[2];
+        view.getLocationOnScreen(location);
+        return location[1];
+    }
+
+    private int getNaviBarHeight() {
+        final Insets inset = mWindowManager.getMaximumWindowMetrics().getWindowInsets().getInsets(
+                WindowInsets.Type.navigationBars());
+        return inset.toRect().height();
+    }
+
+    private int getFooterBarHeight() {
+        TypedArray a = mContext.getTheme().obtainStyledAttributes(new int[] {
+                com.google.android.setupcompat.R.attr.sucFooterBarMinHeight});
+        final int footerBarMinHeight = a.getDimensionPixelSize(0, -1);
+        a.recycle();
+        return footerBarMinHeight;
+    }
+
+    void headerVerticalScrolling(ScrollView headerScrollView, long duration) {
+        headerScrollView.post(new Runnable() {
+            @Override
+            public void run() {
+                final int maxScroll = headerScrollView.getChildAt(0).getMeasuredHeight()
+                        - headerScrollView.getMeasuredHeight();
+                mHeaderScrollAnimator = ObjectAnimator.ofInt(
+                        headerScrollView, "scrollY", maxScroll);
+                mHeaderScrollAnimator.setDuration(duration);
+                mHeaderScrollAnimator.addListener(new Animator.AnimatorListener() {
+
+                    @Override
+                    public void onAnimationStart(@NonNull Animator animation) {}
+
+                    @Override
+                    public void onAnimationEnd(@NonNull Animator animation) {
+                        mHeaderScrollAnimator.removeAllListeners();
+                        headerScrollView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                mHeaderScrollAnimator.reverse();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onAnimationCancel(@NonNull Animator animation) {}
+
+                    @Override
+                    public void onAnimationRepeat(@NonNull Animator animation) {}
+                });
+                mHeaderScrollAnimator.start();
+            }
+        });
+    }
+
     void initView(FingerprintSensorPropertiesInternal udfpsProps,
             UdfpsEnrollHelper udfpsEnrollHelper,
             AccessibilityManager accessibilityManager) {
@@ -93,7 +247,7 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
         } else if (mShouldUseReverseLandscape) {
             swapHeaderAndContent();
         }
-        mUdfpsEnrollView.setVisibility(View.VISIBLE);
+        mUdfpsEnrollView.setVisibility(View.INVISIBLE);
         setOnHoverListener();
     }
 
@@ -166,17 +320,6 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
                 R.id.udfps_enroll_animation_fp_view);
         fingerprintView.setPadding(0, -layoutLottieAnimationPadding,
                 0, layoutLottieAnimationPadding);
-
-        // TODO(b/260970216) Instead of hiding the description text view, we should
-        //  make the header view scrollable if the text is too long.
-        // If description text view has overlap with udfps progress view, hide it.
-        final View descView = getDescriptionTextView();
-        getViewTreeObserver().addOnDrawListener(() -> {
-            if (descView.getVisibility() == View.VISIBLE
-                    && hasOverlap(descView, mUdfpsEnrollView)) {
-                descView.setVisibility(View.GONE);
-            }
-        });
     }
 
     private void setOnHoverListener() {

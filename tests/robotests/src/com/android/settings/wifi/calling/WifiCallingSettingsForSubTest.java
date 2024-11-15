@@ -49,6 +49,7 @@ import android.telephony.ims.ImsMmTelManager;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -397,6 +398,11 @@ public class WifiCallingSettingsForSubTest {
             if (PREFERENCE_EMERGENCY_ADDRESS.contentEquals(key)) {
                 return (T) mUpdateAddress;
             }
+            return null;
+        }
+
+        @Override
+        public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
             return null;
         }
 
