@@ -31,6 +31,7 @@ import com.android.settingslib.fuelgauge.BatteryUtils
 import com.android.settingslib.metadata.MainSwitchPreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
+import com.android.settingslib.metadata.ReadWritePermit
 
 // LINT.IfChange
 class BatterySaverPreference :
@@ -41,6 +42,9 @@ class BatterySaverPreference :
     private val handler by lazy { Handler(Looper.getMainLooper()) }
 
     override fun storage(context: Context) = BatterySaverStore(context)
+
+    override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
 
     override fun isEnabled(context: Context) =
         !BatteryStatus(BatteryUtils.getBatteryIntent(context)).isPluggedIn
