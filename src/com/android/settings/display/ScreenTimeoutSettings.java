@@ -36,6 +36,7 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
 
@@ -307,6 +308,11 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.screen_timeout_settings;
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return ScreenTimeoutScreen.KEY;
     }
 
     @Override
