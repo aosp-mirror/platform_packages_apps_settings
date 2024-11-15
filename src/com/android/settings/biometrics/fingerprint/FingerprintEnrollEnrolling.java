@@ -57,6 +57,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.IdRes;
@@ -72,6 +73,7 @@ import com.android.settings.biometrics.BiometricsEnrollEnrolling;
 import com.android.settings.biometrics.BiometricsSplitScreenDialog;
 import com.android.settings.biometrics.fingerprint.feature.SfpsEnrollmentFeature;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.display.DisplayDensityUtils;
 import com.android.systemui.unfold.compat.ScreenSizeFoldProvider;
@@ -243,16 +245,36 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         mIsAccessibilityEnabled = mAccessibilityManager.isEnabled();
 
         listenOrientationEvent();
-
         if (mCanAssumeUdfps) {
+            final int rotation = getApplicationContext().getDisplay().getRotation();
+            final boolean isPortrait = (rotation == Surface.ROTATION_0)
+                    || (rotation == Surface.ROTATION_180);
+
             final UdfpsEnrollEnrollingView layout =
                     (UdfpsEnrollEnrollingView) getLayoutInflater().inflate(
-                            R.layout.udfps_enroll_enrolling, null, false);
+                            Flags.enrollLayoutTruncateImprovement()
+                                    ? R.layout.udfps_enroll_enrolling :
+                                    R.layout.udfps_enroll_enrolling_non_scroll, null, false);
             setUdfpsEnrollHelper();
             layout.initView(props.get(0), mUdfpsEnrollHelper, mAccessibilityManager);
-
             setContentView(layout);
             setDescriptionText(R.string.security_settings_udfps_enroll_start_message);
+
+            if (Flags.enrollLayoutTruncateImprovement() && isPortrait) {
+                final UdfpsEnrollEnrollingView layoutView = (UdfpsEnrollEnrollingView) getLayout();
+                if (layoutView != null) {
+                    final ScrollView headerScrollView = layout.findViewById(
+                            R.id.sud_header_scroll_view);
+                    if (headerScrollView != null) {
+                        final long headerScrollDuration = getResources().getInteger(
+                                R.integer.config_biometrics_header_scroll_duration);
+                        layoutView.adjustScrollableHeaderHeight(
+                                headerScrollView, mShouldShowLottie);
+                        layoutView.headerVerticalScrolling(headerScrollView, headerScrollDuration);
+                    }
+                }
+            }
+
         } else if (mCanAssumeSfps) {
             mSfpsEnrollmentFeature = FeatureFactory.getFeatureFactory()
                     .getFingerprintFeatureProvider().getSfpsEnrollmentFeature();
@@ -1196,6 +1218,24 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             getSupportFragmentManager().beginTransaction()
                     .add(mUdfpsEnrollHelper, FingerprintEnrollEnrolling.TAG_UDFPS_HELPER)
                     .commitAllowingStateLoss();
+        }
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasWindowFocus) {
+        super.onWindowFocusChanged(hasWindowFocus);
+        if (Flags.enrollLayoutTruncateImprovement()) {
+            adjustEnrollViewIfOverlappedWithFooterBar();
+        }
+    }
+
+    private void adjustEnrollViewIfOverlappedWithFooterBar() {
+        if (mCanAssumeUdfps) {
+            final UdfpsEnrollEnrollingView layoutView = (UdfpsEnrollEnrollingView) getLayout();
+            if (layoutView != null) {
+                layoutView.adjustUdfpsVieWithFooterBar();
+                layoutView.onUdfpsSensorRectUpdated();
+            }
         }
     }
 
