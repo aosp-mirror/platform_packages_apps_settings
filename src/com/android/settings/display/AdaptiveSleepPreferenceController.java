@@ -42,9 +42,10 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import com.google.common.annotations.VisibleForTesting;
 
+// LINT.IfChange
 /** The controller for Screen attention switch preference. */
 public class AdaptiveSleepPreferenceController {
-    public static final String PREFERENCE_KEY = "adaptive_sleep";
+    public static final String PREFERENCE_KEY = Settings.Secure.ADAPTIVE_SLEEP;
     private static final int DEFAULT_VALUE = 0;
     private final SensorPrivacyManager mPrivacyManager;
     private final RestrictionUtils mRestrictionUtils;
@@ -147,3 +148,4 @@ public class AdaptiveSleepPreferenceController {
                 Manifest.permission.CAMERA, attentionPackage) == PackageManager.PERMISSION_GRANTED;
     }
 }
+// LINT.ThenChange(AdaptiveSleepPreference.kt)

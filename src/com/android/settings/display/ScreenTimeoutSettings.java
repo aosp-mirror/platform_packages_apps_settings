@@ -38,6 +38,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -83,7 +84,9 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     mAdaptiveSleepBatterySaverPreferenceController.updateVisibility();
-                    mAdaptiveSleepController.updatePreference();
+                    if (!isCatalystEnabled()) {
+                        mAdaptiveSleepController.updatePreference();
+                    }
                 }
             };
 
@@ -126,7 +129,6 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
         mDevicePolicyManager = mContext.getSystemService(DevicePolicyManager.class);
         mInitialEntries = getResources().getStringArray(R.array.screen_timeout_entries);
         mInitialValues = getResources().getStringArray(R.array.screen_timeout_values);
-        mAdaptiveSleepController = new AdaptiveSleepPreferenceController(context);
         mAdaptiveSleepPermissionController =
                 new AdaptiveSleepPermissionPreferenceController(context);
         mAdaptiveSleepCameraStatePreferenceController =
@@ -139,8 +141,12 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
         mPrivacyPreference.setSelectable(false);
         mPrivacyPreference.setLayoutResource(
                 com.android.settingslib.widget.preference.footer.R.layout.preference_footer);
-        mPrivacyManager = SensorPrivacyManager.getInstance(context);
-        mPrivacyChangedListener = (sensor, enabled) -> mAdaptiveSleepController.updatePreference();
+        if (!isCatalystEnabled()) {
+            mPrivacyManager = SensorPrivacyManager.getInstance(context);
+            mAdaptiveSleepController = new AdaptiveSleepPreferenceController(context);
+            mPrivacyChangedListener =
+                    (sensor, enabled) -> mAdaptiveSleepController.updatePreference();
+        }
         mAdditionalTogglePreferenceController = FeatureFactory.getFeatureFactory()
                 .getDisplayFeatureProvider().createAdditionalPreference(context);
     }
@@ -169,10 +175,12 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
         mAdaptiveSleepPermissionController.updateVisibility();
         mAdaptiveSleepCameraStatePreferenceController.updateVisibility();
         mAdaptiveSleepBatterySaverPreferenceController.updateVisibility();
-        mAdaptiveSleepController.updatePreference();
         mContext.registerReceiver(
                 mReceiver, new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
-        mPrivacyManager.addSensorPrivacyListener(CAMERA, mPrivacyChangedListener);
+        if (!isCatalystEnabled()) {
+            mAdaptiveSleepController.updatePreference();
+            mPrivacyManager.addSensorPrivacyListener(CAMERA, mPrivacyChangedListener);
+        }
         mIsUserAuthenticated = false;
         FeatureFactory.getFeatureFactory().getDisplayFeatureProvider().updatePreference(
                 mAdditionalTogglePreferenceController);
@@ -182,13 +190,17 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
     public void onStop() {
         super.onStop();
         mContext.unregisterReceiver(mReceiver);
-        mPrivacyManager.removeSensorPrivacyListener(CAMERA, mPrivacyChangedListener);
+        if (!isCatalystEnabled()) {
+            mPrivacyManager.removeSensorPrivacyListener(CAMERA, mPrivacyChangedListener);
+        }
     }
 
     @Override
     public void updateCandidates() {
         final String defaultKey = getDefaultKey();
         final PreferenceScreen screen = getPreferenceScreen();
+        // Adaptive sleep preference is added to the screen when catalyst is enabled
+        Preference adaptiveSleepPreference = screen.findPreference(AdaptiveSleepPreference.KEY);
         screen.removeAll();
 
         final List<? extends CandidateInfo> candidateList = getCandidates();
@@ -228,7 +240,13 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
         if (isAdaptiveSleepSupported(getContext())) {
             mAdaptiveSleepPermissionController.addToScreen(screen);
             mAdaptiveSleepCameraStatePreferenceController.addToScreen(screen);
-            mAdaptiveSleepController.addToScreen(screen);
+            if (adaptiveSleepPreference != null) {
+                // reset order for appending
+                adaptiveSleepPreference.setOrder(Preference.DEFAULT_ORDER);
+                screen.addPreference(adaptiveSleepPreference);
+            } else {
+                mAdaptiveSleepController.addToScreen(screen);
+            }
             mAdaptiveSleepBatterySaverPreferenceController.addToScreen(screen);
             screen.addPreference(mPrivacyPreference);
         }

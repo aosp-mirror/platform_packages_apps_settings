@@ -18,7 +18,10 @@ package com.android.settings.display
 
 import android.content.Context
 import com.android.settings.R
+import com.android.settings.Settings.ScreenTimeoutActivity
 import com.android.settings.flags.Flags
+import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
@@ -39,7 +42,11 @@ class ScreenTimeoutScreen : PreferenceScreenCreator {
 
     override fun hasCompleteHierarchy() = false
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) =
+        preferenceHierarchy(this) { +AdaptiveSleepPreference() }
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        makeLaunchIntent(context, ScreenTimeoutActivity::class.java, metadata?.key)
 
     companion object {
         const val KEY = "screen_timeout"
