@@ -20,19 +20,16 @@ import static android.hardware.SensorPrivacyManager.Sensors.CAMERA;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+import static com.android.settings.display.UtilsKt.isAdaptiveSleepSupported;
 
 import android.Manifest;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.hardware.SensorPrivacyManager;
 import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.service.attention.AttentionService;
-import android.text.TextUtils;
 
 import androidx.preference.PreferenceScreen;
 
@@ -45,9 +42,10 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import com.google.common.annotations.VisibleForTesting;
 
+// LINT.IfChange
 /** The controller for Screen attention switch preference. */
 public class AdaptiveSleepPreferenceController {
-    public static final String PREFERENCE_KEY = "adaptive_sleep";
+    public static final String PREFERENCE_KEY = Settings.Secure.ADAPTIVE_SLEEP;
     private static final int DEFAULT_VALUE = 0;
     private final SensorPrivacyManager mPrivacyManager;
     private final RestrictionUtils mRestrictionUtils;
@@ -144,28 +142,10 @@ public class AdaptiveSleepPreferenceController {
                 : UNSUPPORTED_ON_DEVICE;
     }
 
-    static boolean isAdaptiveSleepSupported(Context context) {
-        return context.getResources().getBoolean(
-                com.android.internal.R.bool.config_adaptive_sleep_available)
-                && isAttentionServiceAvailable(context);
-    }
-
-    private static boolean isAttentionServiceAvailable(Context context) {
-        final PackageManager packageManager = context.getPackageManager();
-        final String resolvePackage = packageManager.getAttentionServicePackageName();
-        if (TextUtils.isEmpty(resolvePackage)) {
-            return false;
-        }
-        final Intent intent = new Intent(AttentionService.SERVICE_INTERFACE).setPackage(
-                resolvePackage);
-        final ResolveInfo resolveInfo = packageManager.resolveService(intent,
-                PackageManager.MATCH_SYSTEM_ONLY);
-        return resolveInfo != null && resolveInfo.serviceInfo != null;
-    }
-
     static boolean hasSufficientPermission(PackageManager packageManager) {
         final String attentionPackage = packageManager.getAttentionServicePackageName();
         return attentionPackage != null && packageManager.checkPermission(
                 Manifest.permission.CAMERA, attentionPackage) == PackageManager.PERMISSION_GRANTED;
     }
 }
+// LINT.ThenChange(AdaptiveSleepPreference.kt)
