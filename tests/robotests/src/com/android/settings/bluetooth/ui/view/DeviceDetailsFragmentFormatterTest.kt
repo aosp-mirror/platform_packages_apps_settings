@@ -20,14 +20,11 @@ import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.media.AudioManager
-import android.net.Uri
 import androidx.fragment.app.FragmentActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import androidx.preference.PreferenceScreen
 import androidx.test.core.app.ApplicationProvider
-import com.android.settings.bluetooth.domain.interactor.SpatialAudioInteractor
 import com.android.settings.bluetooth.ui.model.DeviceSettingPreferenceModel
 import com.android.settings.bluetooth.ui.model.FragmentTypeModel
 import com.android.settings.dashboard.DashboardFragment
@@ -56,13 +53,11 @@ import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
 import org.mockito.Mockito.any
-import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.Shadows
 import org.robolectric.shadows.ShadowLooper
 import org.robolectric.shadows.ShadowLooper.shadowMainLooper
 
@@ -74,7 +69,6 @@ class DeviceDetailsFragmentFormatterTest {
     @Mock private lateinit var cachedDevice: CachedBluetoothDevice
     @Mock private lateinit var bluetoothAdapter: BluetoothAdapter
     @Mock private lateinit var repository: DeviceSettingRepository
-    @Mock private lateinit var spatialAudioInteractor: SpatialAudioInteractor
 
     private lateinit var fragment: TestFragment
     private lateinit var underTest: DeviceDetailsFragmentFormatter
@@ -90,10 +84,6 @@ class DeviceDetailsFragmentFormatterTest {
                 featureFactory.bluetoothFeatureProvider.getDeviceSettingRepository(
                     eq(context), eq(bluetoothAdapter), any()))
             .thenReturn(repository)
-        `when`(
-                featureFactory.bluetoothFeatureProvider.getSpatialAudioInteractor(
-                    eq(context), any(AudioManager::class.java), any()))
-            .thenReturn(spatialAudioInteractor)
         fragmentActivity = Robolectric.setupActivity(FragmentActivity::class.java)
         assertThat(fragmentActivity.applicationContext).isNotNull()
         fragment = TestFragment(context)

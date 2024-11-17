@@ -38,10 +38,13 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.RawContacts.DefaultAccount.DefaultAccountAndState;
 import android.provider.SearchIndexableResource;
+import android.text.TextUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
@@ -51,7 +54,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.accounts.AddAccountSettings;
-import com.android.settings.testutils.shadow.ShadowAuthenticationHelper;
+import com.android.settingslib.accounts.AuthenticatorHelper;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
@@ -66,22 +69,24 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowAuthenticationHelper.class)
+@Config(shadows = ContactsStorageSettingsTest.ShadowAuthenticatorHelper.class)
 public class ContactsStorageSettingsTest {
     private static final String PREF_KEY_DEVICE_ONLY = "device_only_account_preference";
     private static final String PREF_KEY_ACCOUNT_CATEGORY = "account_category";
     private static final String PREF_KEY_ADD_ACCOUNT = "add_account";
 
-    private static final Account TEST_ACCOUNT1 = new Account("test@gmail.com", "type1");
+    private static final Account TEST_ACCOUNT1 = new Account("test@gmail.com", "com.google");
 
-    private static final Account TEST_ACCOUNT2 = new Account("test@samsung.com", "type2");
+    private static final Account TEST_ACCOUNT2 = new Account("test@samsung.com", "com.samsung");
 
-    private static final Account TEST_ACCOUNT3 = new Account("test@outlook.com", "type3");
+    private static final Account TEST_ACCOUNT3 = new Account("test@outlook.com", "com.outlook");
 
     private static final Account SIM_ACCOUNT = new Account("SIM", "SIM");
 
@@ -100,7 +105,8 @@ public class ContactsStorageSettingsTest {
 
     @Before
     public void setUp() throws Exception {
-        mContactsStorageSettings = spy(new TestContactsStorageSettings(mContext, mContentResolver));
+        mContactsStorageSettings = spy(
+                new TestContactsStorageSettings(mContext, mContentResolver));
         when(mContentResolver.acquireContentProviderClient(
                 eq(ContactsContract.AUTHORITY_URI))).thenReturn(mContentProviderClient);
         mPreferenceManager = new PreferenceManager(mContext);
@@ -116,6 +122,7 @@ public class ContactsStorageSettingsTest {
         when(mContactsStorageSettings.findPreference(eq(PREF_KEY_ACCOUNT_CATEGORY))).thenReturn(
                 accountCategory);
         when(mContactsStorageSettings.getPreferenceScreen()).thenReturn(mScreen);
+        mContactsStorageSettings.setEligibleAccountTypes(new String[]{"com.google"});
         mContactsStorageSettings.onAttach(mContext);
     }
 
@@ -179,7 +186,6 @@ public class ContactsStorageSettingsTest {
                 new ArrayList<>());
         when(mContentProviderClient.call(eq(QUERY_ELIGIBLE_DEFAULT_ACCOUNTS_METHOD), any(),
                 any())).thenReturn(eligibleAccountBundle);
-        mContactsStorageSettings.setEligibleAccountTypes(new String[]{"com.google"});
 
         mContactsStorageSettings.refreshUI();
 
@@ -244,13 +250,13 @@ public class ContactsStorageSettingsTest {
 
         SelectorWithWidgetPreference account1Preference = accountCategory.findPreference(
                 String.valueOf(TEST_ACCOUNT1.hashCode()));
-        assertThat(account1Preference.getTitle()).isEqualTo("Device and LABEL1");
+        assertThat(account1Preference.getTitle()).isEqualTo("Device and Google");
         assertThat(account1Preference.getSummary()).isEqualTo("test@gmail.com");
         assertThat(account1Preference.getIcon()).isNotNull();
 
         SelectorWithWidgetPreference account2Preference = accountCategory.findPreference(
                 String.valueOf(TEST_ACCOUNT2.hashCode()));
-        assertThat(account2Preference.getTitle()).isEqualTo("Device and LABEL2");
+        assertThat(account2Preference.getTitle()).isEqualTo("Device and Samsung");
         assertThat(account2Preference.getSummary()).isEqualTo("test@samsung.com");
         assertThat(account2Preference.getIcon()).isNotNull();
 
@@ -265,7 +271,7 @@ public class ContactsStorageSettingsTest {
         assertThat(setAccountBundle.getString(ContactsContract.Settings.ACCOUNT_NAME)).isEqualTo(
                 "test@samsung.com");
         assertThat(setAccountBundle.getString(ContactsContract.Settings.ACCOUNT_TYPE)).isEqualTo(
-                "type2");
+                "com.samsung");
 
         ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         verify(mContext).startActivity(intentCaptor.capture());
@@ -298,19 +304,19 @@ public class ContactsStorageSettingsTest {
 
         SelectorWithWidgetPreference account1Preference = accountCategory.findPreference(
                 String.valueOf(TEST_ACCOUNT1.hashCode()));
-        assertThat(account1Preference.getTitle()).isEqualTo("Device and LABEL1");
+        assertThat(account1Preference.getTitle()).isEqualTo("Device and Google");
         assertThat(account1Preference.getSummary()).isEqualTo("test@gmail.com");
         assertThat(account1Preference.getIcon()).isNotNull();
 
         SelectorWithWidgetPreference account2Preference = accountCategory.findPreference(
                 String.valueOf(TEST_ACCOUNT2.hashCode()));
-        assertThat(account2Preference.getTitle()).isEqualTo("Device and LABEL2");
+        assertThat(account2Preference.getTitle()).isEqualTo("Device and Samsung");
         assertThat(account2Preference.getSummary()).isEqualTo("test@samsung.com");
         assertThat(account2Preference.getIcon()).isNotNull();
 
         SelectorWithWidgetPreference account3Preference = accountCategory.findPreference(
                 String.valueOf(TEST_ACCOUNT3.hashCode()));
-        assertThat(account3Preference.getTitle()).isEqualTo("Device and LABEL3");
+        assertThat(account3Preference.getTitle()).isEqualTo("Device and Outlook");
         assertThat(account3Preference.getSummary()).isEqualTo("test@outlook.com");
         assertThat(account3Preference.getIcon()).isNotNull();
 
@@ -343,6 +349,40 @@ public class ContactsStorageSettingsTest {
         assertThat(simPreference.getSummary()).isEqualTo("SIM");
         assertThat(simPreference.getIcon()).isNotNull();
         assertThat(simPreference.isChecked()).isTrue();
+    }
+
+    @Test
+    public void verifyAccountPreference_newAccountAdded_accountAddedToAccountPreference()
+            throws Exception {
+        Bundle currentDefaultAccount = new Bundle();
+        currentDefaultAccount.putInt(KEY_DEFAULT_ACCOUNT_STATE,
+                DefaultAccountAndState.DEFAULT_ACCOUNT_STATE_CLOUD);
+        currentDefaultAccount.putString(ContactsContract.Settings.ACCOUNT_NAME, TEST_ACCOUNT1.name);
+        currentDefaultAccount.putString(ContactsContract.Settings.ACCOUNT_TYPE, TEST_ACCOUNT1.type);
+        when(mContentProviderClient.call(eq(QUERY_DEFAULT_ACCOUNT_FOR_NEW_CONTACTS_METHOD), any(),
+                any())).thenReturn(currentDefaultAccount);
+        Bundle eligibleAccountBundle = new Bundle();
+        ArrayList<Account> eligibleAccounts = new ArrayList<>(
+                List.of(TEST_ACCOUNT1, TEST_ACCOUNT2));
+        eligibleAccountBundle.putParcelableArrayList(KEY_ELIGIBLE_DEFAULT_ACCOUNTS,
+                eligibleAccounts);
+        when(mContentProviderClient.call(eq(QUERY_ELIGIBLE_DEFAULT_ACCOUNTS_METHOD), any(),
+                any())).thenReturn(eligibleAccountBundle);
+
+        mContactsStorageSettings.onAccountsUpdate(null);
+
+        // onAccountsUpdate should refresh the icon and layouts.
+        SelectorWithWidgetPreference account1Preference = accountCategory.findPreference(
+                String.valueOf(TEST_ACCOUNT1.hashCode()));
+        assertThat(account1Preference.getTitle()).isEqualTo("Device and Google");
+        assertThat(account1Preference.getSummary()).isEqualTo("test@gmail.com");
+        assertThat(account1Preference.getIcon()).isNotNull();
+
+        SelectorWithWidgetPreference account2Preference = accountCategory.findPreference(
+                String.valueOf(TEST_ACCOUNT2.hashCode()));
+        assertThat(account2Preference.getTitle()).isEqualTo("Device and Samsung");
+        assertThat(account2Preference.getSummary()).isEqualTo("test@samsung.com");
+        assertThat(account2Preference.getIcon()).isNotNull();
     }
 
     @Test
@@ -386,6 +426,45 @@ public class ContactsStorageSettingsTest {
 
         public void setEligibleAccountTypes(String[] eligibleAccountTypes) {
             mEligibleAccountTypes = eligibleAccountTypes;
+        }
+    }
+
+    @Implements(AuthenticatorHelper.class)
+    public static class ShadowAuthenticatorHelper {
+
+        boolean preloadDrawableForType = false;
+
+        @Implementation
+        public void listenToAccountUpdates() {
+        }
+
+        @Implementation
+        public void onAccountsUpdated(Account[] accounts) {
+
+        }
+        @Implementation
+        public void preloadDrawableForType(final Context context, final String accountType) {
+            preloadDrawableForType = true;
+        }
+
+        @Implementation
+        protected Drawable getDrawableForType(Context context, final String accountType) {
+            if (preloadDrawableForType) {
+                return context.getPackageManager().getDefaultActivityIcon();
+            }
+            return null;
+        }
+
+        @Implementation
+        protected CharSequence getLabelForType(Context context, final String accountType) {
+            if (TextUtils.equals(accountType, "com.google")) {
+                return "Google";
+            } else if (TextUtils.equals(accountType, "com.samsung")) {
+                return "Samsung";
+            } else if (TextUtils.equals(accountType, "com.outlook")) {
+                return "Outlook";
+            }
+            return null;
         }
     }
 }

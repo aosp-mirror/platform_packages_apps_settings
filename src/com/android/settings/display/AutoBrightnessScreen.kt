@@ -64,6 +64,9 @@ class AutoBrightnessScreen :
     override fun storage(context: Context): KeyValueStore =
         AutoBrightnessDataStore(SettingsSystemStore.get(context))
 
+    override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
     override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
@@ -74,8 +77,8 @@ class AutoBrightnessScreen :
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
-    override val restrictionKey: String
-        get() = UserManager.DISALLOW_CONFIG_BRIGHTNESS
+    override val restrictionKeys
+        get() = arrayOf(UserManager.DISALLOW_CONFIG_BRIGHTNESS)
 
     override val useAdminDisabledSummary: Boolean
         get() = true

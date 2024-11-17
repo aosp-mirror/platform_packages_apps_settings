@@ -86,7 +86,13 @@ public abstract class RadioButtonPickerFragment extends SettingsPreferenceFragme
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        super.onCreatePreferences(savedInstanceState, rootKey);
+        if (isCatalystEnabled()) {
+            PreferenceScreen preferenceScreen = createPreferenceScreen();
+            setPreferenceScreen(preferenceScreen);
+            updateActivityTitleWithScreenTitle(preferenceScreen);
+        } else {
+            super.onCreatePreferences(savedInstanceState, rootKey);
+        }
         try {
             // Check if the xml specifies if static preferences should go on the top or bottom
             final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(getContext(),

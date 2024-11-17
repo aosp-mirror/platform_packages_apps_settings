@@ -18,8 +18,6 @@ package com.android.settings.bluetooth.ui.viewmodel
 
 import android.app.Application
 import android.bluetooth.BluetoothAdapter
-import android.media.AudioManager
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -60,19 +58,11 @@ class BluetoothDeviceDetailsViewModel(
             bluetoothAdapter,
             viewModelScope,
         )
-    private val spatialAudioInteractor =
-        featureFactory.bluetoothFeatureProvider.getSpatialAudioInteractor(
-            application,
-            application.getSystemService(AudioManager::class.java),
-            viewModelScope,
-        )
 
     private val items =
         viewModelScope.async(backgroundCoroutineContext, start = CoroutineStart.LAZY) {
             deviceSettingRepository.getDeviceSettingsConfig(cachedDevice)
         }
-
-    private val spatialAudioModel by lazy { spatialAudioInteractor.getDeviceSetting(cachedDevice) }
 
     suspend fun getItems(fragment: FragmentTypeModel): List<DeviceSettingConfigItemModel>? =
         when (fragment) {
@@ -95,11 +85,8 @@ class BluetoothDeviceDetailsViewModel(
         if (settingId == DeviceSettingId.DEVICE_SETTING_ID_MORE_SETTINGS) {
             return flowOf(DeviceSettingPreferenceModel.MoreSettingsPreference(settingId))
         }
-        return when (settingId) {
-            DeviceSettingId.DEVICE_SETTING_ID_SPATIAL_AUDIO_MULTI_TOGGLE ->
-                spatialAudioModel
-            else -> deviceSettingRepository.getDeviceSetting(cachedDevice, settingId)
-        }.map { it?.toPreferenceModel() }
+        return deviceSettingRepository.getDeviceSetting(cachedDevice, settingId)
+            .map { it?.toPreferenceModel() }
     }
 
     private fun DeviceSettingModel.toPreferenceModel(): DeviceSettingPreferenceModel? {
@@ -166,7 +153,6 @@ class BluetoothDeviceDetailsViewModel(
         val positionToSettingIds =
             combine(configDeviceSetting) { settings ->
                     val positionMapping = mutableMapOf<Int, List<DeviceSettingLayoutColumn>>()
-                    var multiToggleSettingIds: MutableList<DeviceSettingLayoutColumn>? = null
                     for (i in settings.indices) {
                         val configItem = configItems[i]
                         val setting = settings[i]
@@ -174,35 +160,13 @@ class BluetoothDeviceDetailsViewModel(
                         if (!isXmlPreference && setting == null) {
                             continue
                         }
-                        if (setting !is DeviceSettingPreferenceModel.MultiTogglePreference) {
-                            multiToggleSettingIds = null
-                            positionMapping[i] =
-                                listOf(
-                                    DeviceSettingLayoutColumn(
-                                        configItem.settingId,
-                                        configItem.highlighted,
-                                    )
-                                )
-                            continue
-                        }
-
-                        if (multiToggleSettingIds != null) {
-                            multiToggleSettingIds.add(
+                        positionMapping[i] =
+                            listOf(
                                 DeviceSettingLayoutColumn(
                                     configItem.settingId,
                                     configItem.highlighted,
                                 )
                             )
-                        } else {
-                            multiToggleSettingIds =
-                                mutableListOf(
-                                    DeviceSettingLayoutColumn(
-                                        configItem.settingId,
-                                        configItem.highlighted,
-                                    )
-                                )
-                            positionMapping[i] = multiToggleSettingIds
-                        }
                     }
                     positionMapping
                 }

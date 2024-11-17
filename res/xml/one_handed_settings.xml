@@ -24,7 +24,8 @@
 
     <com.android.settingslib.widget.TopIntroPreference
         android:key="gesture_one_handed_mode_intro"
-        android:title="@string/one_handed_mode_intro_text"/>
+        android:title="@string/one_handed_mode_intro_text"
+        settings:searchable="false"/>
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="one_handed_header"
