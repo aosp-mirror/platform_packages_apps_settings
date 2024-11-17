@@ -107,6 +107,11 @@
         settings:controller="com.android.settings.spa.app.specialaccess.UseFullScreenIntentPreferenceController" />
 
     <Preference
+        android:key="write_system_preferences"
+        android:title="@string/write_system_preferences_page_title"
+        settings:controller="com.android.settings.spa.app.specialaccess.WriteSystemPreferencesPreferenceController" />
+
+    <Preference
         android:key="picture_in_picture"
         android:title="@string/picture_in_picture_title"
         android:order="-1100"

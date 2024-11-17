@@ -42,6 +42,7 @@ import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListPro
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
+import com.android.settings.spa.app.specialaccess.WriteSystemPreferencesAppListProvider
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
@@ -167,6 +168,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
             InstallUnknownAppsListProvider.InfoPageEntryItem(app)
             InteractAcrossProfilesDetailsPreference(app)
             AlarmsAndRemindersAppListProvider.InfoPageEntryItem(app)
+            WriteSystemPreferencesAppListProvider.InfoPageEntryItem(app)
         }
 
         Category(title = stringResource(R.string.app_install_details_group_title)) {

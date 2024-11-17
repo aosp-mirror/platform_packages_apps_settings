@@ -402,6 +402,18 @@
     <!-- Category for the app's locale picker activity. [CHAR LIMIT=50]-->
     <string name="all_supported_app_locales_title">All languages</string>
 
+    <!-- Category for suggested locales. [CHAR LIMIT=50]-->
+    <string name="suggested_locales_title">Suggested</string>
+
+    <!-- Category for the locale picker. [CHAR LIMIT=50]-->
+    <string name="all_supported_locales_title">All languages</string>
+
+    <!-- Category for the locale region picker. [CHAR LIMIT=50]-->
+    <string name="all_supported_locales_regions_title">All regions</string>
+
+    <!-- Category for the numbering system of locale region picker. [CHAR LIMIT=50]-->
+    <string name="all_supported_numbering_system_title">All numbering systems</string>
+
     <!-- Title for preference of the system default locale. [CHAR LIMIT=50]-->
     <string name="preference_of_system_locale_title">System language</string>
 
@@ -449,6 +461,15 @@
 
     <!-- The text of the confirmation dialog for saying this selected locale is unavailable to use. [CHAR LIMIT=NONE]-->
     <string name="desc_unavailable_locale">This language can’t be used as a system language, but you’ve let apps and websites know you prefer this language.</string>
+
+    <!-- Menu item in the locale menu  [CHAR LIMIT=30] -->
+    <string name="locale_search_menu">Search</string>
+    <!-- Title for the language selection screen [CHAR LIMIT=25] -->
+    <string name="language_selection_title">Add a language</string>
+    <!-- Title for the region selection screen [CHAR LIMIT=25] -->
+    <string name="country_selection_title">Region preference</string>
+    <!-- Hint text in a search edit box (used to filter long language / country lists) [CHAR LIMIT=25] -->
+    <string name="search_language_hint">Type language name</string>
 
     <!-- Regional Preferences begin -->
     <!-- The title of the menu entry of regional preferences. [CHAR LIMIT=50] -->
@@ -2869,16 +2890,12 @@
     <string name="brightness">Brightness level</string>
     <!-- Sound & display settings screen, setting option name to enable adaptive brightness [CHAR LIMIT=30] -->
     <string name="auto_brightness_title">Adaptive brightness</string>
-    <!-- Note: The content description title is only applied in adaptive brightness detailed page in setup wizard flow, to make the consistency with other accessibility suw pages. -->
-    <!-- ContentDescription title for adaptive brightness detailed page footer. [CHAR LIMIT=60] -->
-    <string name="auto_brightness_content_description_title">About adaptive brightness</string>
     <!-- Description about the feature adaptive brightness -->
     <string name="auto_brightness_description">Your screen brightness will automatically adjust to your environment and activities. You can move the slider manually to help adaptive brightness learn your preferences.</string>
     <!-- Setting option summary when adaptive brightness is on [CHAR LIMIT=NONE] -->
     <string name="auto_brightness_summary_on">On</string>
     <!-- Setting option summary when adaptive brightness is off [CHAR LIMIT=NONE] -->
     <string name="auto_brightness_summary_off">Off</string>
-
     <!-- Display settings screen, display white balance settings title [CHAR LIMIT=30] -->
     <string name="display_white_balance_title">Display white balance</string>
     <!-- Display settings screen, display white balance settings summary [CHAR LIMIT=NONE] -->
@@ -4607,6 +4624,8 @@
     <string name="trackpad_settings">Touchpad</string>
     <!-- Title for the button to trigger the 'trackpad settings' page if connect with a touchpad and a mouse. [CHAR LIMIT=35] -->
     <string name="trackpad_mouse_settings">Touchpad &amp; mouse</string>
+    <!-- Title for the button to trigger the 'mouse settings' page if connect with a mouse. [CHAR LIMIT=35] -->
+    <string name="mouse_settings">Mouse</string>
     <!-- Summary text for the 'trackpad settings' page. [CHAR LIMIT=100] -->
     <string name="trackpad_settings_summary">Pointer speed, gestures</string>
 
@@ -10409,6 +10428,10 @@
 
     <!-- Description for setting that allows apps to send full screen intents. [CHAR LIMIT=NONE] -->
     <string name="footer_description_full_screen_intent">Allow this app to show notifications that take up the full screen when the device is locked. Apps may use these to highlight alarms, incoming calls, or other urgent notifications.</string>
+
+    <string name="write_system_preferences_page_title">Write system preferences</string>
+    <string name="write_system_preferences_switch_title">Allow this app to modify system preferences on your behalf</string>
+    <string name="write_system_preferences_footer_description">This permission allows an app to modify core system preferences.</string>
 
     <!-- Media management apps settings title [CHAR LIMIT=40] -->
     <string name="media_management_apps_title">Media management apps</string>

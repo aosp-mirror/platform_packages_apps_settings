@@ -500,10 +500,13 @@ class ZenModeSummaryHelper {
                     Locale.getDefault());
             return buildModesSummary(msgFormat, activeModes);
         } else {
+            List<ZenMode> modesExcludingImplicit = modes.stream()
+                    .filter(m -> m.getKind() != ZenMode.Kind.IMPLICIT)
+                    .toList();
             MessageFormat msgFormat = new MessageFormat(
                     mContext.getString(R.string.zen_modes_summary),
                     Locale.getDefault());
-            return buildModesSummary(msgFormat, modes);
+            return buildModesSummary(msgFormat, modesExcludingImplicit);
         }
     }
 

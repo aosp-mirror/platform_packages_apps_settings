@@ -67,8 +67,8 @@ open class SeparateRingVolumePreference :
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
-    override val restrictionKey: String
-        get() = UserManager.DISALLOW_ADJUST_VOLUME
+    override val restrictionKeys
+        get() = arrayOf(UserManager.DISALLOW_ADJUST_VOLUME)
 
     override fun storage(context: Context): KeyValueStore {
         val helper = createAudioHelper(context)
@@ -84,6 +84,9 @@ open class SeparateRingVolumePreference :
             }
         }
     }
+
+    override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
 
     override fun getWritePermit(context: Context, value: Int?, myUid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
