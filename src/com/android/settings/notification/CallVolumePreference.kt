@@ -75,6 +75,9 @@ open class CallVolumePreference :
         }
     }
 
+    override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
     override fun getWritePermit(context: Context, value: Int?, myUid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 

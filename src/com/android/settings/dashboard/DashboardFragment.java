@@ -309,11 +309,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    protected final int getPreferenceScreenResId(@NonNull Context context) {
-        return getPreferenceScreenResId();
-    }
-
-    @Override
     protected abstract int getPreferenceScreenResId();
 
     @Override
@@ -413,7 +408,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 removeControllersForHybridMode();
             }
             setPreferenceScreen(screen);
-            requireActivity().setTitle(screen.getTitle());
+            updateActivityTitleWithScreenTitle(screen);
         } else {
             addPreferencesFromResource(resId);
             screen = getPreferenceScreen();
@@ -445,19 +440,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 }
             }
         }
-    }
-
-    /** Returns if catalyst is enabled on current screen. */
-    protected final boolean isCatalystEnabled() {
-        return getPreferenceScreenCreator() != null;
-    }
-
-    private @Nullable PreferenceScreenCreator getPreferenceScreenCreator() {
-        if (!Flags.catalyst()) {
-            return null;
-        }
-        Context context = getContext();
-        return context != null ? getPreferenceScreenCreator(context) : null;
     }
 
     /**
