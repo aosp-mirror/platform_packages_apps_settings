@@ -431,8 +431,8 @@ public class UserSettings extends SettingsPreferenceFragment
         int pos = 0;
         // TODO(b/191509236): The menu item does not need to be accessible for guest users,
         //  regardless of mGuestUserAutoCreated
-        if (!mUserCaps.mIsAdmin && canSwitchUserNow() && !(isCurrentUserGuest()
-                && mGuestUserAutoCreated)) {
+        if (!mUserCaps.mIsAdmin && canSwitchUserNow() && !mUserManager.isProfile()
+                && !(isCurrentUserGuest() && mGuestUserAutoCreated)) {
             String nickname = mUserManager.getUserName();
             MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, pos++,
                     getResources().getString(R.string.user_remove_user_menu, nickname));
