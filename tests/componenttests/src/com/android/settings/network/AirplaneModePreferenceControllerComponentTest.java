@@ -20,7 +20,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.app.Instrumentation;
 import android.provider.Settings;
-import android.provider.SettingsSlicesContract;
 import android.util.Log;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -64,7 +63,7 @@ public class AirplaneModePreferenceControllerComponentTest {
     public void test_on_off_airplane_mode_multiple_times() {
         AirplaneModePreferenceController controller =
                 new AirplaneModePreferenceController(mInstrumentation.getTargetContext(),
-                        SettingsSlicesContract.KEY_AIRPLANE_MODE);
+                        AirplaneModePreference.KEY);
 
         for (int i = 0; i < 10; ++i) {
             Log.d(TAG, "Test #" + (i + 1));
