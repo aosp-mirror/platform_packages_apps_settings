@@ -23,6 +23,8 @@ import android.content.SharedPreferences;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -39,8 +41,12 @@ public class DoubleTapPowerPreferenceController extends BasePreferenceController
     }
 
     private static boolean isGestureAvailable(@NonNull Context context) {
-        return context.getResources()
-                .getBoolean(com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled);
+        if (!android.service.quickaccesswallet.Flags.launchWalletOptionOnPowerDoubleTap()) {
+            return context.getResources()
+                    .getBoolean(
+                            com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled);
+        }
+        return DoubleTapPowerSettingsUtils.isDoubleTapPowerButtonGestureAvailable(context);
     }
 
     @Override
@@ -49,17 +55,41 @@ public class DoubleTapPowerPreferenceController extends BasePreferenceController
     }
 
     @Override
+    public void displayPreference(@NonNull PreferenceScreen screen) {
+        if (!android.service.quickaccesswallet.Flags.launchWalletOptionOnPowerDoubleTap()) {
+            final Preference preference = screen.findPreference(getPreferenceKey());
+            if (preference != null) {
+                preference.setTitle(R.string.double_tap_power_for_camera_title);
+            }
+        }
+        super.displayPreference(screen);
+    }
+
+    @Override
     @NonNull
     public CharSequence getSummary() {
-        final boolean isCameraDoubleTapPowerGestureEnabled =
-                Settings.Secure.getInt(
-                                mContext.getContentResolver(),
-                                CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED,
-                                DoubleTapPowerToOpenCameraPreferenceController.ON)
-                        == DoubleTapPowerToOpenCameraPreferenceController.ON;
-        return mContext.getText(
-                isCameraDoubleTapPowerGestureEnabled
-                        ? R.string.gesture_setting_on
-                        : R.string.gesture_setting_off);
+        if (!android.service.quickaccesswallet.Flags.launchWalletOptionOnPowerDoubleTap()) {
+            final boolean isCameraDoubleTapPowerGestureEnabled =
+                    Settings.Secure.getInt(
+                                    mContext.getContentResolver(),
+                                    CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED,
+                                    DoubleTapPowerToOpenCameraPreferenceController.ON)
+                            == DoubleTapPowerToOpenCameraPreferenceController.ON;
+            return mContext.getText(
+                    isCameraDoubleTapPowerGestureEnabled
+                            ? R.string.gesture_setting_on
+                            : R.string.gesture_setting_off);
+        }
+        if (DoubleTapPowerSettingsUtils.isDoubleTapPowerButtonGestureEnabled(mContext)) {
+            final CharSequence onString =
+                    mContext.getText(com.android.settings.R.string.gesture_setting_on);
+            final CharSequence actionString =
+                    DoubleTapPowerSettingsUtils.isDoubleTapPowerButtonGestureForCameraLaunchEnabled(
+                                    mContext)
+                            ? mContext.getText(R.string.double_tap_power_camera_action_summary)
+                            : mContext.getText(R.string.double_tap_power_wallet_action_summary);
+            return mContext.getString(R.string.double_tap_power_summary, onString, actionString);
+        }
+        return mContext.getText(com.android.settings.R.string.gesture_setting_off);
     }
 }
