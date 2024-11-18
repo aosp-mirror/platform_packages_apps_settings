@@ -70,6 +70,9 @@ class DarkModeScreen :
     override val keywords: Int
         get() = R.string.keywords_dark_ui_mode
 
+    override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
     override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 

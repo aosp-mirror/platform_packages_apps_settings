@@ -19,6 +19,7 @@ package com.android.settings
 import android.app.Application
 import android.content.Intent
 import com.android.settings.flags.Flags
+import com.android.settingslib.graph.PreferenceGetterRequest
 import com.android.settingslib.graph.PreferenceSetterRequest
 import com.android.settingslib.ipc.ApiPermissionChecker
 import com.android.settingslib.service.PreferenceService
@@ -28,6 +29,7 @@ class SettingsService :
     PreferenceService(
         graphPermissionChecker = ApiPermissionChecker.alwaysAllow(),
         setterPermissionChecker = SetterPermissionChecker(),
+        getterPermissionChecker = GetterPermissionChecker(),
     ) {
 
     override fun onBind(intent: Intent) =
@@ -42,5 +44,16 @@ private class SetterPermissionChecker : ApiPermissionChecker<PreferenceSetterReq
         myUid: Int,
         callingUid: Int,
         request: PreferenceSetterRequest,
+    ) = true
+}
+
+/** Permission checker for external getter API. */
+private class GetterPermissionChecker : ApiPermissionChecker<PreferenceGetterRequest> {
+
+    override fun hasPermission(
+        application: Application,
+        myUid: Int,
+        callingUid: Int,
+        request: PreferenceGetterRequest,
     ) = true
 }
