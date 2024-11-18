@@ -5372,6 +5372,23 @@
             </intent-filter>
         </receiver>
 
+        <activity
+            android:name="Settings$ChangeNfcTagAppsActivity"
+            android:exported="true"
+            android:label="@string/change_nfc_tag_apps_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.nfc.action.CHANGE_TAG_INTENT_PREFERENCE" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
