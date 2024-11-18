@@ -34,6 +34,7 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.Utils;
 import com.android.settingslib.widget.UsageProgressBarPreference;
 
+// LINT.IfChange
 /** Controller that update the battery header view */
 public class BatteryHeaderPreferenceController extends BasePreferenceController
         implements PreferenceControllerMixin, LifecycleEventObserver {
@@ -113,3 +114,4 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
         return com.android.settings.Utils.formatPercentage(batteryLevel);
     }
 }
+// LINT.ThenChange(BatteryHeaderPreference.kt)

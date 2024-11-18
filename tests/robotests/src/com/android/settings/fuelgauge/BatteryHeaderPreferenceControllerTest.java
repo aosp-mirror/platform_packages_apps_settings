@@ -48,6 +48,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowEntityHeaderController.class, ShadowUtils.class})
 public class BatteryHeaderPreferenceControllerTest {
@@ -164,3 +165,4 @@ public class BatteryHeaderPreferenceControllerTest {
         return com.android.settings.Utils.formatPercentage(BATTERY_LEVEL);
     }
 }
+// LINT.ThenChange(BatteryHeaderPreferenceTest.java)
