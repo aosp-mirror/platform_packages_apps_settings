@@ -71,7 +71,7 @@ class DataSaverScreen :
     override fun hasCompleteHierarchy() = false
 
     override fun onStart(context: PreferenceLifecycleContext) {
-        val listener = DataSaverBackend.Listener { context.notifyPreferenceChange(this) }
+        val listener = DataSaverBackend.Listener { context.notifyPreferenceChange(KEY) }
         dataSaverBackendListener = listener
         dataSaverBackend = DataSaverBackend(context).apply { addListener(listener) }
     }

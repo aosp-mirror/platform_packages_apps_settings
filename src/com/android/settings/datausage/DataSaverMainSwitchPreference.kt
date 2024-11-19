@@ -32,7 +32,7 @@ class DataSaverMainSwitchPreference(context: Context) :
     private var dataSaverBackendListener: DataSaverBackend.Listener? = null
 
     override val key
-        get() = "use_data_saver"
+        get() = KEY
 
     override val title
         get() = R.string.data_saver_switch_title
@@ -46,7 +46,7 @@ class DataSaverMainSwitchPreference(context: Context) :
         ReadWritePermit.ALLOW
 
     override fun onStart(context: PreferenceLifecycleContext) {
-        val listener = DataSaverBackend.Listener { context.notifyPreferenceChange(this) }
+        val listener = DataSaverBackend.Listener { context.notifyPreferenceChange(KEY) }
         dataSaverBackendListener = listener
         dataSaverBackend.addListener(listener)
     }
@@ -70,5 +70,9 @@ class DataSaverMainSwitchPreference(context: Context) :
         override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
             dataSaverBackend.isDataSaverEnabled = value as Boolean
         }
+    }
+
+    companion object {
+        const val KEY = "use_data_saver"
     }
 }
