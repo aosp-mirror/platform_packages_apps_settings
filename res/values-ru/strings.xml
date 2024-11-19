@@ -96,7 +96,7 @@
     <string name="bluetooth_notif_ticker" msgid="209515545257862858">"Запрос подключения Bluetooth"</string>
     <string name="bluetooth_notif_title" msgid="1196532269131348647">"Запрос подключения"</string>
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"Нажмите, чтобы установить соединение с устройством \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
-    <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"Модуль Bluetooth отключен"</string>
+    <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"Bluetooth отключен"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"Нажмите, чтобы включить"</string>
     <string name="device_picker" msgid="2427027896389445414">"Выбрать устройство Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="1529030199895339199">"Приложению \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" требуется включить Bluetooth"</string>
@@ -178,6 +178,14 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Язык приложения"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Рекомендуемые языки"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Все языки"</string>
+    <!-- no translation found for suggested_locales_title (119908696638862861) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
+    <skip />
+    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
+    <skip />
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Язык системы"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Системные настройки по умолчанию"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Для этого приложения не поддерживается выбор языка в настройках."</string>
@@ -193,6 +201,11 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Изменить"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s недоступен"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Это язык нельзя использовать как системный, но вы разрешили сообщать приложениям и сайтам, что вы предпочитаете его."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"Поиск"</string>
+    <!-- no translation found for language_selection_title (968179636453982415) -->
+    <skip />
+    <string name="country_selection_title" msgid="5376929821458644732">"Региональные настройки"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"Введите название языка"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Региональные настройки"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Укажите предпочтительные единицы измерения и форматы отображения чисел"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Приложения используют эти параметры для персонализации."</string>
@@ -1242,7 +1255,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Адаптивная регулировка"</string>
     <string name="brightness" msgid="6216871641021779698">"Яркость"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Адаптивная яркость"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Об адаптивной яркости"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Яркость экрана будет настраиваться автоматически в зависимости от окружающих условий и ваших действий. Дополнительно ее можно регулировать вручную, чтобы система учитывала ваши предпочтения."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Включено"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Отключено"</string>
@@ -1563,7 +1575,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Не получилось удалить eSIM-карты"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Не получилось удалить eSIM-карты.\n\nПерезапустите устройство и повторите попытку."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Удалить частное пространство"</string>
-    <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Если на устройстве есть частное пространство, оно будет безвозвратно удалено, а его связь с аккаунтом Google отменена. \n\nВсе приложения и их данные, хранящиеся в частном пространстве, будут удалены из "<b>"внутренней памяти"</b>" телефона."</string>
+    <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Если вы создавали частное пространство, оно будет стерто без возможности восстановления, а добавленный в него аккаунт Google удален с устройства. \n\nВсе приложения и их данные, хранящиеся в частном пространстве, будут удалены из "<b>"внутренней памяти"</b>" телефона."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Удалить все данные"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Удалить все данные"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"музыка;"</li>\n<li>"фото;"</li>\n<li>"другие данные."</li></string>
@@ -1985,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"По умолчанию"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Сенсорная панель"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Сенсорная панель и мышь"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"Мышь"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Скорость указателя, жесты"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Нажатие от прикосновения"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Перетаскивание нажатием"</string>
@@ -3422,7 +3435,7 @@
     <string name="zen_mode_select_schedule_time" msgid="1951968104691941146">"День и время"</string>
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"В будние дни с 09:00 до 17:00\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Мероприятия из календаря"</string>
-    <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Включен режим \"{mode_1}\"}=2{Включены режимы \"{mode_1}\" и \"{mode_2}\"}=3{Включены режимы \"{mode_1}\", \"{mode_2}\" и \"{mode_3}\"}one{Включены режимы \"{mode_1}\", \"{mode_2}\" и ещё #}few{Включены режимы \"{mode_1}\", \"{mode_2}\" и ещё #}many{Включены режимы \"{mode_1}\", \"{mode_2}\" и ещё #}other{Включены режимы \"{mode_1}\", \"{mode_2}\" и ещё #}}"</string>
+    <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Режим \"{mode_1}\"}=2{Режимы \"{mode_1}\" и \"{mode_2}\"}=3{Режимы \"{mode_1}\", \"{mode_2}\" и \"{mode_3}\"}one{Режимы \"{mode_1}\", \"{mode_2}\" и ещё #}few{Режимы \"{mode_1}\", \"{mode_2}\" и ещё #}many{Режимы \"{mode_1}\", \"{mode_2}\" и ещё #}other{Режимы \"{mode_1}\", \"{mode_2}\" и ещё #}}"</string>
     <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Не беспокоить}=1{{mode_1}}=2{{mode_1}, {mode_2}}one{{mode_1}, {mode_2} {mode_3}}few{{mode_1}, {mode_2} {mode_3}}many{{mode_1}, {mode_2} {mode_3}}other{{mode_1}, {mode_2} {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ВКЛ."</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Не задано"</string>
@@ -3696,12 +3709,12 @@
     <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"Приложение \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\" сможет читать все уведомления, в том числе содержащие личную информацию, например названия контактов, фото и текст полученных сообщений. Оно также сможет откладывать или закрывать уведомления и нажимать кнопки в них, например отвечать на звонки. \n\nКроме того, приложение сможет включать и отключать режим \"Не беспокоить\", а также менять его настройки."</string>
     <string name="nls_warning_prompt" msgid="1486887096703743841">"Приложение \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\" сможет:"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Читать уведомления"</string>
-    <string name="nls_feature_read_summary" msgid="1064698238110273593">"Приложение может читать уведомления, в том числе содержащие личную информацию (например, имена контактов, фото и сообщения)."</string>
+    <string name="nls_feature_read_summary" msgid="1064698238110273593">"Приложение может читать уведомления, в том числе содержащие личную информацию (например, имена контактов, фото и сообщения)"</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"Отвечать на сообщения"</string>
-    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Приложение может отвечать на звонки и сообщения, а также временно отключать или закрывать уведомления и нажимать кнопки в них."</string>
+    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Приложение может отвечать на сообщения и совершать действия с кнопками в уведомлениях, в том числе откладывать и отклонять уведомления и отвечать на звонки"</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Изменять настройки"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Приложение может включать и отключать режим \"Не беспокоить\", а также менять его настройки."</string>
-    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"Приложение может активировать режимы, управлять ими и изменять их настройки."</string>
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"Приложение может активировать режимы, управлять ими и изменять их настройки"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Если вы отключите доступ к уведомлениям для приложения \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\", также может быть отключен доступ к настройкам режима \"Не беспокоить\"."</string>
     <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"Если вы отключите доступ к уведомлениям для приложения \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\", также может быть отключен доступ к режимам."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Отключить"</string>
@@ -3727,16 +3740,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Если вам будет поступать много уведомлений за короткое время, то устройство на две минуты понизит уровень громкости и сократит количество оповещений. Это не распространяется на звонки, будильники и важные разговоры. \n\nЧтобы увидеть уведомления, полученные в этом режиме, проведите пальцем вниз от верхнего края экрана."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Применить к рабочим профилям"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Применить для приложений в рабочем профиле"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"Сгруппированные уведомления"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"Включено"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"Отключено"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Группировать уведомления"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"Похожие уведомления будут группироваться и показываться без звука. Эти настройки уведомлений имеют приоритет над параметрами приложений."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Вспомогательные VR-сервисы"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Установленные приложения не запрашивали доступ для работы в качестве вспомогательного VR-сервиса."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Разрешить VR-сервису доступ к сервису \"<xliff:g id="SERVICE">%1$s</xliff:g>\"?"</string>
@@ -4199,6 +4207,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Уведомления в полноэкранном режиме"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Разрешить этому приложению отправлять уведомления в полноэкранном режиме"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Разрешить этому приложению показывать уведомления в полноэкранном режиме, когда устройство заблокировано. Так приложение сможет сообщать о будильниках, входящих вызовах и других срочных уведомлениях."</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Управление медиафайлами"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Разрешить приложению управлять медиафайлами"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Если эта настройка включена, приложение сможет без вашего ведома изменять или удалять медиафайлы, созданные другими приложениями. Для этого у приложения должно быть разрешение на доступ к файлам и медиаконтенту."</string>
@@ -5495,11 +5509,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Не удалось выбрать аккаунт по умолчанию."</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Аккаунт по умолчанию не выбран"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Только на устройстве"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Устройство и %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Сначала добавьте аккаунт"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Куда сохранять контакты"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Обвести и найти"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Чтобы запустить поиск по экрану, нажмите и удерживайте кнопку главного экрана или маркер навигации"</string>
 </resources>

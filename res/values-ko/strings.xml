@@ -178,6 +178,14 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"앱 언어"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"추천 언어"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"모든 언어"</string>
+    <!-- no translation found for suggested_locales_title (119908696638862861) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
+    <skip />
+    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
+    <skip />
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"시스템 언어"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"시스템 기본값"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"설정에서 이 앱의 언어를 선택할 수 없습니다."</string>
@@ -193,6 +201,11 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"변경"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s 사용할 수 없음"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"이 언어는 시스템 언어로 사용할 수 없습니다. 단, 이제 앱과 웹사이트에서 이 언어가 선호 언어로 인식됩니다."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"검색"</string>
+    <!-- no translation found for language_selection_title (968179636453982415) -->
+    <skip />
+    <string name="country_selection_title" msgid="5376929821458644732">"지역 환경설정"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"언어 이름 입력"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"지역 설정"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"단위 및 숫자 환경설정"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"앱 환경을 맞춤설정할 수 있도록 지역 설정을 알려주세요."</string>
@@ -285,7 +298,7 @@
     <string name="owner_info_settings_summary" msgid="347238313388083297">"없음"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"예: Joe의 Android"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"위치"</string>
-    <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"위치 사용"</string>
+    <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"위치 정보 사용"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"사용 안함"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{사용 - 앱 #개가 위치 정보에 액세스할 수 있음}other{사용 - 앱 #개가 위치 정보에 액세스할 수 있음}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"로드 중…"</string>
@@ -1242,7 +1255,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"색상 자동 조절"</string>
     <string name="brightness" msgid="6216871641021779698">"밝기 수준"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"밝기 자동 조절"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"밝기 자동 조절 정보"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"화면 밝기가 환경 및 활동에 맞게 자동으로 조정됩니다. 슬라이더를 수동으로 이동하여 밝기 자동 조절 기능이 사용자의 환경설정을 학습하도록 할 수 있습니다."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"사용"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"사용 안함"</string>
@@ -1985,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"기본"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"터치패드"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"터치패드 및 마우스"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"마우스"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"포인터 속도, 동작"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"탭하여 클릭"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"탭하여 드래그"</string>
@@ -2012,7 +2025,7 @@
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"마우스 오른쪽 버튼으로 클릭, 탭"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"홈으로 이동"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"터치패드 아무 곳에서나 세 손가락을 사용해 위로 스와이프하세요."</string>
-    <string name="gesture_title_go_back" msgid="6619462058488419802">"뒤로"</string>
+    <string name="gesture_title_go_back" msgid="6619462058488419802">"돌아가기"</string>
     <string name="gesture_summary_go_back" msgid="4981604277892236888">"세 손가락을 사용해 왼쪽 또는 오른쪽으로 스와이프하세요."</string>
     <string name="gesture_title_recent_apps" msgid="6082688963233208761">"최근 앱 보기"</string>
     <string name="gesture_summary_recent_apps" msgid="6643179135202417509">"세 손가락을 사용해 아래로 스와이프하고 잠시 기다렸다 놓으세요."</string>
@@ -2024,7 +2037,7 @@
     <string name="gesture_button_next" msgid="695288092704187356">"다음"</string>
     <string name="gesture_button_restart" msgid="1895850891992530133">"다시 시작"</string>
     <string name="gesture_button_done" msgid="6387900351203032188">"완료"</string>
-    <string name="trackpad_go_back_title" msgid="5312164160947491440">"뒤로"</string>
+    <string name="trackpad_go_back_title" msgid="5312164160947491440">"돌아가기"</string>
     <string name="trackpad_go_back_summary" msgid="4201901101085902768">"세 손가락을 사용해 왼쪽 또는 오른쪽으로 스와이프하세요."</string>
     <string name="trackpad_go_home_title" msgid="2146525662148291552">"홈으로 이동"</string>
     <string name="trackpad_go_home_summary" msgid="2222744701528360887">"세 손가락을 사용해 위로 스와이프하세요."</string>
@@ -3727,16 +3740,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"짧은 시간 내에 많은 알림을 받으면 최대 2분간 기기에서 볼륨을 낮추고 알림을 최소화합니다. 통화, 알람, 우선순위 대화는 영향을 받지 않습니다. \n\n쿨다운 중에 받은 알림은 화면 상단에서 아래로 당겨서 확인할 수 있습니다."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"직장 프로필에 적용"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"직장 프로필 앱에 적용"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"번들로 묶인 알림"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"사용"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"사용 안함"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"알림 번들로 묶기 사용"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"비슷한 테마의 알림은 음소거되고 함께 그룹화되어 더 조용한 환경을 제공합니다. 번들로 묶기는 앱 자체의 알림 설정보다 우선합니다."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 도우미 서비스"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"설치된 앱 중에서 VR 도우미 서비스로 실행되도록 요청한 앱이 없습니다."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR 서비스가 <xliff:g id="SERVICE">%1$s</xliff:g>에 액세스하도록 허용하시겠습니까?"</string>
@@ -4199,6 +4207,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"전체 화면 알림"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"이 앱에 전체 화면 알림 허용"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"기기가 잠겨 있을 때 앱에서 알림을 전체 화면에 표시할 수 있도록 허용합니다. 앱에서는 이러한 방식으로 알람, 수신 전화 또는 기타 긴급 알림을 강조 표시할 수 있습니다."</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"미디어 관리 앱"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"앱이 미디어를 관리하도록 허용"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"허용하면 이 앱이 다른 앱에서 생성된 미디어 파일을 사용자의 동의 없이 수정하거나 삭제할 수 있습니다. 앱에 파일 및 미디어 액세스 권한을 부여해야 합니다."</string>
@@ -5493,11 +5507,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"기본 계정을 설정하는 중에 오류가 발생했습니다."</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"기본 설정 없음"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"기기만"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"기기 및 %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"계정을 추가하여 시작하세요."</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"연락처 저장 위치"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"서클 투 서치"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"화면의 콘텐츠를 사용해 검색하려면 홈 버튼 또는 탐색 핸들을 길게 터치합니다."</string>
 </resources>
