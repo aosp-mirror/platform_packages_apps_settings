@@ -20,5 +20,9 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="lock_screen_notification_global_pref"
+        android:title="@string/switch_on_text"
+        settings:controller="com.android.settings.notification.LockScreenNotificationsGlobalPreferenceController"/>
 
 </PreferenceScreen>
