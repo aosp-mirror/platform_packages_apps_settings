@@ -36,6 +36,12 @@
         settings:controller="com.android.settings.notification.LockScreenNotificationShowSensitiveToggleController" />
 
     <SwitchPreferenceCompat
+        android:key="lock_screen_notification_hide_seen_toggle"
+        android:title="@string/lock_screen_notification_hide_seen_title"
+        android:summary="@string/lock_screen_notification_hide_seen_summary"
+        settings:controller="com.android.settings.notification.LockScreenNotificationHideSeenToggleController" />
+
+    <SwitchPreferenceCompat
         android:key="lock_screen_notification_hide_silent_toggle"
         android:title="@string/lock_screen_notification_hide_silent_title"
         android:summary="@string/lock_screen_notification_hide_silent_summary"
