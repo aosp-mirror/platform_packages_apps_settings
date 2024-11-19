@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
+import static com.android.settingslib.media.PhoneMediaDevice.isDesktop;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -186,6 +187,13 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     /** Returns if catalyst is enabled on current screen. */
     protected final boolean isCatalystEnabled() {
+        // TODO(b/379130874): make Catalyst compatible with desktop device, such as user restriction
+        // check.
+        Context context = getContext();
+        if (context != null && isDesktop(context)) {
+            return false;
+        }
+
         return getPreferenceScreenCreator() != null;
     }
 

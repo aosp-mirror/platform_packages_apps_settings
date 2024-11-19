@@ -16,13 +16,17 @@
 
 package com.android.settings.localepicker;
 
+import static com.android.settings.localepicker.LocaleListEditor.EXTRA_RESULT_LOCALE;
+import static com.android.settings.localepicker.RegionAndNumberingSystemPickerFragment.EXTRA_IS_NUMBERING_SYSTEM;
+
 import android.content.Context;
+import android.os.Bundle;
 import android.os.LocaleList;
-import android.provider.Settings;
 import android.util.ArrayMap;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -30,7 +34,10 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.app.LocaleCollectorBase;
 import com.android.internal.app.LocaleHelper;
 import com.android.internal.app.LocaleStore;
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settingslib.core.instrumentation.Instrumentable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,38 +50,25 @@ import java.util.stream.Collectors;
 /** A base controller for handling locale controllers. */
 public abstract class LocalePickerBaseListPreferenceController extends
         BasePreferenceController implements LocaleListSearchCallback {
-
     private static final String TAG = "LocalePickerBaseListPreference";
     private static final String KEY_SUGGESTED = "suggested";
+    private static final String KEY_SUPPORTED = "supported";
 
     private PreferenceCategory mPreferenceCategory;
-    private LocaleList mExplicitLocales;
     private Set<LocaleStore.LocaleInfo> mLocaleList;
     private List<LocaleStore.LocaleInfo> mLocaleOptions;
     private Map<String, Preference> mPreferences;
     private String mPackageName;
-    private boolean mCountryMode;
+    private boolean mIsCountryMode;
+    @Nullable private LocaleStore.LocaleInfo mParentLocale;
 
     public LocalePickerBaseListPreferenceController(@NonNull Context context,
             @NonNull String preferenceKey) {
         super(context, preferenceKey);
-        // TODO: Should get extra from fragment.
-//        if (isDeviceDemoMode()) {
-//            Bundle bundle = preference.getExtras();
-//            mExplicitLocales = bundle == null
-//                    ? null
-//                    : bundle.getParcelable(Settings.EXTRA_EXPLICIT_LOCALES, LocaleList.class);
-//            Log.d(TAG, "Has explicit locales : " + mExplicitLocales);
-//        }
         mLocaleList = getLocaleCollectorController(context).getSupportedLocaleList(null,
                 false, false);
         mLocaleOptions = new ArrayList<>(mLocaleList.size());
         mPreferences = new ArrayMap<>();
-    }
-
-    private boolean isDeviceDemoMode() {
-        return Settings.Global.getInt(
-                mContext.getContentResolver(), Settings.Global.DEVICE_DEMO_MODE, 0) == 1;
     }
 
     @Override
@@ -91,8 +85,21 @@ public abstract class LocalePickerBaseListPreferenceController extends
         }
 
         List<LocaleStore.LocaleInfo> result;
+        mParentLocale = getParentLocale();
+        if (mParentLocale != null) {
+            mIsCountryMode = true;
+            mLocaleList = getLocaleCollectorController(mContext).getSupportedLocaleList(
+                    mParentLocale, false, mIsCountryMode);
+            mLocaleOptions = new ArrayList<>(mLocaleList.size());
+            if (!getPreferenceCategoryKey().contains(KEY_SUGGESTED)) {
+                mPreferenceCategory.setTitle(
+                        mContext.getString(R.string.all_supported_locales_regions_title));
+            }
+        }
+
         result = getSortedLocaleList(
-                getPreferenceCategoryKey().contains(KEY_SUGGESTED) ? getSuggestedLocaleList()
+                getPreferenceCategoryKey().contains(KEY_SUGGESTED)
+                        ? getSuggestedLocaleList()
                         : getSupportedLocaleList());
 
         final Map<String, Preference> existingPreferences = mPreferences;
@@ -113,12 +120,7 @@ public abstract class LocalePickerBaseListPreferenceController extends
             newList = getSortedSuggestedLocaleFromSearchList(
                     newList, getSuggestedLocaleList());
         }
-        if (!newList.isEmpty()) {
-            mPreferenceCategory.setVisible(true);
-            setupPreference(newList, existingPreferences);
-        } else {
-            mPreferenceCategory.setVisible(false);
-        }
+        setupPreference(newList, existingPreferences);
     }
 
     private List<LocaleStore.LocaleInfo> getSortedSuggestedLocaleFromSearchList(
@@ -138,6 +140,12 @@ public abstract class LocalePickerBaseListPreferenceController extends
 
     private void setupPreference(List<LocaleStore.LocaleInfo> localeInfoList,
             Map<String, Preference> existingPreferences) {
+        Log.d(TAG, "setupPreference: isNumberingMode = " + isNumberingMode());
+        if (isNumberingMode() && getPreferenceCategoryKey().contains(KEY_SUPPORTED)) {
+            mPreferenceCategory.setTitle(
+                    mContext.getString(R.string.all_supported_numbering_system_title));
+        }
+
         localeInfoList.stream().forEach(locale ->
         {
             Preference pref = existingPreferences.remove(locale.getId());
@@ -146,15 +154,16 @@ public abstract class LocalePickerBaseListPreferenceController extends
                 mPreferenceCategory.addPreference(pref);
             }
             String localeName =
-                    mCountryMode ? locale.getFullCountryNameNative() : locale.getFullNameNative();
+                    mIsCountryMode ? locale.getFullCountryNameNative() : locale.getFullNameNative();
             pref.setTitle(localeName);
             pref.setKey(locale.toString());
             pref.setOnPreferenceClickListener(clickedPref -> {
-                // TODO: Click locale to show region or numbering system page if needed.
+                switchFragment(locale);
                 return true;
             });
             mPreferences.put(locale.getId(), pref);
         });
+        mPreferenceCategory.setVisible(mPreferenceCategory.getPreferenceCount() > 0);
     }
 
     @Override
@@ -166,12 +175,14 @@ public abstract class LocalePickerBaseListPreferenceController extends
 
     protected abstract LocaleCollectorBase getLocaleCollectorController(Context context);
 
+    @Nullable protected abstract LocaleStore.LocaleInfo getParentLocale();
+
+    protected abstract boolean isNumberingMode();
+
+    @Nullable protected abstract LocaleList getExplicitLocaleList();
+
     protected String getPackageName() {
         return mPackageName;
-    }
-
-    protected LocaleList getExplicitLocaleList() {
-        return mExplicitLocales;
     }
 
     protected List<LocaleStore.LocaleInfo> getSuggestedLocaleList() {
@@ -203,8 +214,46 @@ public abstract class LocalePickerBaseListPreferenceController extends
             List<LocaleStore.LocaleInfo> localeInfos) {
         final Locale sortingLocale = Locale.getDefault();
         final LocaleHelper.LocaleInfoComparator comp =
-                new LocaleHelper.LocaleInfoComparator(sortingLocale, mCountryMode);
+                new LocaleHelper.LocaleInfoComparator(sortingLocale, mIsCountryMode);
         Collections.sort(localeInfos, comp);
         return localeInfos;
+    }
+
+    private void switchFragment(LocaleStore.LocaleInfo localeInfo) {
+        boolean shouldShowLocaleEditor = shouldShowLocaleEditor(localeInfo);
+        String extraKey = shouldShowLocaleEditor ? LocaleListEditor.INTENT_LOCALE_KEY
+                : RegionAndNumberingSystemPickerFragment.EXTRA_TARGET_LOCALE;
+        String fragmentName = shouldShowLocaleEditor ? LocaleListEditor.class.getCanonicalName()
+                : RegionAndNumberingSystemPickerFragment.class.getCanonicalName();
+
+        final Bundle extra = new Bundle();
+        extra.putSerializable(extraKey, localeInfo);
+        extra.putBoolean(EXTRA_IS_NUMBERING_SYSTEM, localeInfo.hasNumberingSystems());
+        if (shouldShowLocaleEditor) {
+            extra.putBoolean(EXTRA_RESULT_LOCALE, true);
+        }
+
+        new SubSettingLauncher(mContext)
+                .setDestination(fragmentName)
+                .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                .setArguments(extra)
+                .launch();
+    }
+
+    private boolean shouldShowLocaleEditor(LocaleStore.LocaleInfo localeInfo) {
+        boolean isSystemLocale = localeInfo.isSystemLocale();
+        boolean isRegionLocale = localeInfo.getParent() != null;
+        boolean mayHaveDifferentNumberingSystem = localeInfo.hasNumberingSystems();
+        mLocaleList = getLocaleCollectorController(mContext).getSupportedLocaleList(localeInfo,
+                false, localeInfo != null);
+        Log.d(TAG,
+                "shouldShowLocaleEditor: isSystemLocale = " + isSystemLocale + ", isRegionLocale = "
+                        + isRegionLocale + ", mayHaveDifferentNumberingSystem = "
+                        + mayHaveDifferentNumberingSystem + ", isSuggested = "
+                        + localeInfo.isSuggested() + ", isNumberingMode = " + isNumberingMode());
+
+        return mLocaleList.size() == 1 || isSystemLocale || localeInfo.isSuggested()
+                || (isRegionLocale && !mayHaveDifferentNumberingSystem)
+                || isNumberingMode();
     }
 }

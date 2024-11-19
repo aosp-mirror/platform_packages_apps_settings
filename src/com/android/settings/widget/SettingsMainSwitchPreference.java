@@ -32,6 +32,7 @@ import com.android.settings.widget.SettingsMainSwitchBar.OnBeforeCheckedChangeLi
 import com.android.settingslib.RestrictedPreferenceHelper;
 import com.android.settingslib.RestrictedPreferenceHelperProvider;
 import com.android.settingslib.core.instrumentation.SettingsJankMonitor;
+import com.android.settingslib.widget.GroupSectionDividerMixin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ import java.util.List;
  * to enable or disable the preferences on the page.
  */
 public class SettingsMainSwitchPreference extends TwoStatePreference implements
-        OnCheckedChangeListener, RestrictedPreferenceHelperProvider {
+        OnCheckedChangeListener, RestrictedPreferenceHelperProvider, GroupSectionDividerMixin {
 
     private final List<OnBeforeCheckedChangeListener> mBeforeCheckedChangeListeners =
             new ArrayList<>();
