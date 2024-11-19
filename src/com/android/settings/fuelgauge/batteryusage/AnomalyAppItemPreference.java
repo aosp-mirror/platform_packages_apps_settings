@@ -16,6 +16,7 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
@@ -37,7 +38,7 @@ class AnomalyAppItemPreference extends PowerGaugePreference {
         setLayoutResource(R.layout.anomaly_app_item_preference);
     }
 
-    void setAnomalyHint(CharSequence anomalyHintText) {
+    void setAnomalyHint(@Nullable CharSequence anomalyHintText) {
         if (!TextUtils.equals(mAnomalyHintText, anomalyHintText)) {
             mAnomalyHintText = anomalyHintText;
             notifyChanged();
