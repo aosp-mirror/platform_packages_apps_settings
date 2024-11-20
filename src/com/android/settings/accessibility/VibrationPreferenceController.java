@@ -31,6 +31,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 
 /** Controller for "Vibration & haptics" settings page. */
+// LINT.IfChange
 public class VibrationPreferenceController extends BasePreferenceController {
 
     private final boolean mHasVibrator;
@@ -79,3 +80,7 @@ public class VibrationPreferenceController extends BasePreferenceController {
 
 
 }
+// LINT.ThenChange(
+//     VibrationIntensityScreenTest.kt,
+//     VibrationScreenTest.kt,
+// )
