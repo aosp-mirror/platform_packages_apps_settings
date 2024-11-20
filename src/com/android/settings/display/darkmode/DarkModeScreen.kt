@@ -112,7 +112,7 @@ class DarkModeScreen :
         val broadcastReceiver =
             object : BroadcastReceiver() {
                 override fun onReceive(receiverContext: Context, intent: Intent) {
-                    context.notifyPreferenceChange(this@DarkModeScreen)
+                    context.notifyPreferenceChange(KEY)
                 }
             }
         context.registerReceiver(
@@ -121,7 +121,7 @@ class DarkModeScreen :
         )
 
         val darkModeObserver = DarkModeObserver(context)
-        darkModeObserver.subscribe { context.notifyPreferenceChange(this@DarkModeScreen) }
+        darkModeObserver.subscribe { context.notifyPreferenceChange(KEY) }
 
         fragmentStates[context] = FragmentState(broadcastReceiver, darkModeObserver)
     }

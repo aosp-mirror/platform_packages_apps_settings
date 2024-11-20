@@ -20,6 +20,8 @@ import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.LocaleList;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,8 +50,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import com.google.android.material.appbar.AppBarLayout;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -68,12 +68,24 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
 
     private static final String TAG = "SystemLocalePickerFragment";
     private static final String EXTRA_EXPAND_SEARCH_VIEW = "expand_search_view";
+    private static final String KEY_PREFERENCE_SYSTEM_LOCALE_LIST = "system_locale_list";
+    private static final String KEY_PREFERENCE_SYSTEM_LOCALE_SUGGESTED_LIST =
+            "system_locale_suggested_list";
 
-    @Nullable private SearchView mSearchView = null;
-    @Nullable private SearchFilter mSearchFilter = null;
-    @Nullable private Set<LocaleStore.LocaleInfo> mLocaleList;
-    @Nullable private List<LocaleStore.LocaleInfo> mLocaleOptions;
-    @Nullable private List<LocaleStore.LocaleInfo> mOriginalLocaleInfos;
+    @Nullable
+    private SearchView mSearchView = null;
+    @Nullable
+    private SearchFilter mSearchFilter = null;
+    @Nullable
+    private Set<LocaleStore.LocaleInfo> mLocaleList;
+    @Nullable
+    private List<LocaleStore.LocaleInfo> mLocaleOptions;
+    @Nullable
+    private List<LocaleStore.LocaleInfo> mOriginalLocaleInfos;
+    @Nullable
+    private SystemLocaleAllListPreferenceController mSystemLocaleAllListPreferenceController;
+    @Nullable
+    private SystemLocaleSuggestedListPreferenceController mSuggestedListPreferenceController;
     private AppBarLayout mAppBarLayout;
     private RecyclerView mRecyclerView;
     private Activity mActivity;
@@ -138,12 +150,16 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
     }
 
     private void filterSearch(@Nullable String query) {
+        if (mSystemLocaleAllListPreferenceController == null) {
+            Log.d(TAG, "filterSearch(), can not get preference.");
+            return;
+        }
+
         if (mSearchFilter == null) {
             mSearchFilter = new SearchFilter();
         }
 
-        // TODO: b/30358431 - Add preference of system locales.
-        // mOriginalLocaleInfos = mSystemLocaleAllListPreferenceController.getSupportedLocaleList();
+        mOriginalLocaleInfos = mSystemLocaleAllListPreferenceController.getSupportedLocaleList();
         // If we haven't load apps list completely, don't filter anything.
         if (mOriginalLocaleInfos == null) {
             Log.w(TAG, "Locales haven't loaded completely yet, so nothing can be filtered");
@@ -195,14 +211,19 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
+            if (mSystemLocaleAllListPreferenceController == null
+                    || mSuggestedListPreferenceController == null) {
+                Log.d(TAG, "publishResults(), can not get preference.");
+                return;
+            }
+
             mLocaleOptions = (ArrayList<LocaleStore.LocaleInfo>) results.values;
             // Need to scroll to first preference when searching.
             if (mRecyclerView != null) {
                 mRecyclerView.post(() -> mRecyclerView.scrollToPosition(0));
             }
-            // TODO: b/30358431 - Add preference of system locales.
-            // mSystemLocaleAllListPreferenceController.onSearchListChanged(mLocaleOptions);
-            // mSuggestedListPreferenceController.onSearchListChanged(mLocaleOptions);
+            mSystemLocaleAllListPreferenceController.onSearchListChanged(mLocaleOptions);
+            mSuggestedListPreferenceController.onSearchListChanged(mLocaleOptions);
         }
 
         // TODO: decide if this is enough, or we want to use a BreakIterator...
@@ -271,9 +292,29 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
 
     private List<AbstractPreferenceController> buildPreferenceControllers(
             @NonNull Context context, @Nullable Lifecycle lifecycle) {
+        LocaleList explicitLocales = null;
+        if (isDeviceDemoMode()) {
+            Bundle bundle = getIntent().getExtras();
+            explicitLocales = bundle == null
+                    ? null
+                    : bundle.getParcelable(Settings.EXTRA_EXPLICIT_LOCALES, LocaleList.class);
+            Log.i(TAG, "Has explicit locales : " + explicitLocales);
+        }
+        mSuggestedListPreferenceController =
+                new SystemLocaleSuggestedListPreferenceController(context,
+                        KEY_PREFERENCE_SYSTEM_LOCALE_SUGGESTED_LIST);
+        mSystemLocaleAllListPreferenceController = new SystemLocaleAllListPreferenceController(
+                context, KEY_PREFERENCE_SYSTEM_LOCALE_LIST, explicitLocales);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        // TODO: b/30358431 - Add preference of system locales.
+        controllers.add(mSuggestedListPreferenceController);
+        controllers.add(mSystemLocaleAllListPreferenceController);
+
         return controllers;
+    }
+
+    private boolean isDeviceDemoMode() {
+        return Settings.Global.getInt(
+                getContentResolver(), Settings.Global.DEVICE_DEMO_MODE, 0) == 1;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

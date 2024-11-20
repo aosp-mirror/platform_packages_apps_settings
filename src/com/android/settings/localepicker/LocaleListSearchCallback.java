@@ -21,7 +21,7 @@ import com.android.internal.app.LocaleStore;
 
 import java.util.List;
 
-/** Interface for when locale list changes in SearchView . */
+/** Interface for when locale list changes in SearchView. */
 public interface LocaleListSearchCallback {
 
     /** Callback method for searching changes. */

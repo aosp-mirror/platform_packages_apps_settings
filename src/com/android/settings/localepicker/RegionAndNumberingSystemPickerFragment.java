@@ -55,19 +55,41 @@ import java.util.Set;
  * default locale.</p>
  */
 public class RegionAndNumberingSystemPickerFragment extends DashboardFragment {
-    private static final String TAG = "RegionAndNumberingSystemPickerFragment";
 
+    public static final String EXTRA_TARGET_LOCALE = "extra_target_locale";
+    public static final String EXTRA_IS_NUMBERING_SYSTEM = "extra_is_numbering_system";
+
+    private static final String TAG = "RegionAndNumberingSystemPickerFragment";
+    private static final String KEY_PREFERENCE_SYSTEM_LOCALE_LIST = "system_locale_list";
+    private static final String KEY_PREFERENCE_SYSTEM_LOCALE_SUGGESTED_LIST =
+            "system_locale_suggested_list";
+
+    @Nullable
+    private SystemLocaleAllListPreferenceController mSystemLocaleAllListPreferenceController;
+    @Nullable
+    private SystemLocaleSuggestedListPreferenceController mSuggestedListPreferenceController;
+    @Nullable
+    private LocaleStore.LocaleInfo mLocaleInfo;
     private RecyclerView mRecyclerView;
     private AppBarLayout mAppBarLayout;
     private Activity mActivity;
+    private boolean mIsNumberingMode;
 
     @Override
     public void onCreate(@NonNull Bundle icicle) {
         super.onCreate(icicle);
         mActivity = getActivity();
-        if (mActivity.isFinishing()) {
+        if (mActivity == null || mActivity.isFinishing()) {
+            Log.d(TAG, "onCreate, no activity or activity is finishing");
             return;
         }
+
+        if (mLocaleInfo == null) {
+            Log.d(TAG, "onCreate, can not get localeInfo");
+            return;
+        }
+
+        mActivity.setTitle(mLocaleInfo.getFullNameNative());
     }
 
     @Override
@@ -102,8 +124,15 @@ public class RegionAndNumberingSystemPickerFragment extends DashboardFragment {
     private List<AbstractPreferenceController> buildPreferenceControllers(
             @NonNull Context context, @Nullable Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-
-        // TODO: b/30358431 - Add preference of region locales.
+        mLocaleInfo = (LocaleStore.LocaleInfo) getArguments().getSerializable(EXTRA_TARGET_LOCALE);
+        mIsNumberingMode = getArguments().getBoolean(EXTRA_IS_NUMBERING_SYSTEM);
+        mSuggestedListPreferenceController = new SystemLocaleSuggestedListPreferenceController(
+                context, KEY_PREFERENCE_SYSTEM_LOCALE_SUGGESTED_LIST, mLocaleInfo,
+                mIsNumberingMode);
+        mSystemLocaleAllListPreferenceController = new SystemLocaleAllListPreferenceController(
+                context, KEY_PREFERENCE_SYSTEM_LOCALE_LIST, mLocaleInfo, mIsNumberingMode);
+        controllers.add(mSuggestedListPreferenceController);
+        controllers.add(mSystemLocaleAllListPreferenceController);
 
         return controllers;
     }
