@@ -178,6 +178,14 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"应用语言"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"建议的语言"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"所有语言"</string>
+    <!-- no translation found for suggested_locales_title (119908696638862861) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
+    <skip />
+    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
+    <skip />
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"系统语言"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"系统默认设置"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"您无法从“设置”中选择此应用的语言。"</string>
@@ -193,6 +201,11 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"更改"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"无法使用%s"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"此语言无法用作系统语言，但应用和网站已知晓您选择此语言为您的首选语言。"</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"搜索"</string>
+    <!-- no translation found for language_selection_title (968179636453982415) -->
+    <skip />
+    <string name="country_selection_title" msgid="5376929821458644732">"地区偏好设置"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"输入语言名称"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"地区偏好设置"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"设置单位和数字偏好设置"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"将您的地区偏好设置告知应用，使应用能够为您提供个性化体验。"</string>
@@ -853,9 +866,9 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"断开连接"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"配对和连接"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"开启蓝牙后，您的设备可以与附近的其他蓝牙设备通信"</string>
-    <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"蓝牙处于开启状态时，您的设备可以与附近的其他蓝牙设备通信。快速分享、查找我的设备等功能会使用蓝牙。"</string>
+    <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"蓝牙处于开启状态时，您的设备可以与附近的其他蓝牙设备通信。“快速分享”“查找我的设备”等功能会使用蓝牙。"</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"蓝牙功能处于开启状态时，您的设备可以与附近的其他蓝牙设备通信。\n\n为了提升设备的使用体验，即使蓝牙功能已关闭，应用和服务仍可以随时扫描附近的设备。例如，此功能可用于改进基于地理位置的功能和服务。您可以在蓝牙扫描设置中更改此设置。"</string>
-    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"蓝牙处于开启状态时，您的设备可以与附近的其他蓝牙设备通信。快速分享、查找我的设备等功能会使用蓝牙。\n\n即使蓝牙已关闭，应用和服务仍可以随时扫描附近的设备。此功能有多种用途，例如可用于改进基于地理位置的功能和服务。您可在蓝牙扫描设置中更改此设置。"</string>
+    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"蓝牙处于开启状态时，您的设备可以与附近的其他蓝牙设备通信。“快速分享”“查找我的设备”等功能会使用蓝牙。\n\n即使蓝牙已关闭，应用和服务仍可以随时扫描附近的设备。此功能有多种用途，例如可用于改进基于地理位置的功能和服务。您可在蓝牙扫描设置中更改此设置。"</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"更改"</string>
     <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 未连接"</string>
     <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"为了安全起见，请先与此设备取消配对，然后再与其重新配对"</string>
@@ -1242,7 +1255,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"自适应"</string>
     <string name="brightness" msgid="6216871641021779698">"亮度"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"自适应亮度"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"自适应亮度简介"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"系统会根据您的环境和活动自动调节屏幕亮度。您可以手动移动滑块，帮助“自适应亮度”功能了解您偏好的亮度。"</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"已开启"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"已关闭"</string>
@@ -1985,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"默认"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"触控板"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"触控板和鼠标"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"鼠标"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"指针速度，手势"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"点按即点击"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"点按拖动"</string>
@@ -3683,7 +3696,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{每天大约 # 条通知}other{每天大约 # 条通知}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{每周大约 # 条通知}other{每周大约 # 条通知}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"永不"</string>
-    <string name="manage_notification_access_title" msgid="4154723216570646451">"阅读、回复和控制通知"</string>
+    <string name="manage_notification_access_title" msgid="4154723216570646451">"读取、回复和控制通知"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"控制哪些应用和设备能够读取通知"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"已禁止访问工作资料通知"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"增强型通知"</string>
@@ -3693,17 +3706,17 @@
     <string name="notification_access_detail_switch" msgid="46386786409608330">"授予通知使用权"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"在 Android 12 中，增强型通知功能取代了 Android 自适应通知功能。增强型通知功能可以显示建议的操作和回复，并可将通知整理得井井有条。\n\n增强型通知功能可以读取通知内容，包括联系人姓名、消息等个人信息。该功能还可以关闭通知或对通知做出回应，例如接听来电以及控制勿扰模式。"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"要向“<xliff:g id="SERVICE">%1$s</xliff:g>”授予通知使用权吗？"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"“<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>”应用将能够读取所有通知（包括联系人姓名、照片和您收到的消息内容等个人信息），而且还能暂停/关闭通知或触发通知中的按钮（包括接听来电）。\n\n该应用因此还能开启或关闭“勿扰”模式，并可以更改相关设置。"</string>
+    <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"“<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>”应用将能够读取所有通知（包括联系人姓名、照片和您收到的消息内容等个人信息），而且还能延后/忽略通知或触发通知中的按钮（包括接听来电）。\n\n该应用因此还能开启或关闭“勿扰”模式，并可以更改相关设置。"</string>
     <string name="nls_warning_prompt" msgid="1486887096703743841">"“<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>”应用将能够："</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"读取您的通知"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"该应用可以读取您的通知，包括联系人、消息、照片等个人信息。"</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"回复消息"</string>
-    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"该应用可以回复消息和触发通知中的按钮，包括暂停或关闭通知、接听来电。"</string>
+    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"该应用可以回复消息和触发通知中的按钮，包括延后处理或忽略通知、接听来电。"</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"更改设置"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"该应用可以开启或关闭“勿扰”模式，并可以更改相关设置。"</string>
     <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"该应用可以管理和启用“模式”，以及更改相关设置。"</string>
-    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"如果您停用<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>的通知使用权，勿扰模式的使用权可能也会遭到停用。"</string>
-    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"如果您停用<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>的通知访问权限，“模式访问权限”可能会一并停用。"</string>
+    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"如果您关闭“<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>”的通知使用权，勿扰模式的使用权可能也会关闭。"</string>
+    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"如果您关闭“<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>”的通知使用权，“模式”的使用权可能也会关闭。"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"关闭"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"取消"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"实时"</string>
@@ -3727,16 +3740,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"如果您在短时间内收到很多通知，设备音量和提醒次数会逐渐降低，最长持续 2 分钟。电话、闹钟和优先对话不受影响。\n\n您可以从屏幕顶部向下拉，查看音量渐降期间收到的通知。"</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"应用于工作资料"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"应用于工作资料应用"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"捆绑式通知"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"开启"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"关闭"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"使用通知捆绑功能"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"系统会将主题相似的通知静音并归为一组，以提供更安静的体验。这种捆绑处理会覆盖应用自身的通知设置。"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 助手服务"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"没有任何已安装的应用请求以 VR 助手服务的形式运行。"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"允许<xliff:g id="SERVICE">%1$s</xliff:g>访问 VR 服务吗？"</string>
@@ -4199,6 +4207,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"全屏通知"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"允许此应用显示全屏通知"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"允许此应用在设备锁定时全屏显示通知。应用可利用全屏通知突出显示闹钟、来电或其他紧急通知。"</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"媒体管理应用"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"允许应用管理媒体"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"如果允许，此应用可以直接修改或删除通过其他应用创建的媒体文件，而无需事先征得您的同意。应用必须获得权限才能访问文件和媒体。"</string>
@@ -5493,11 +5507,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"设置默认账号时出错"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"未设置默认账号"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"仅限设备"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"设备和%1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"添加账号即可开始"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"联系人信息保存位置"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"圈定即搜"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"轻触并按住主屏幕按钮或导航手柄，即可使用屏幕上的内容进行搜索。"</string>
 </resources>

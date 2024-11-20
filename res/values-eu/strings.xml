@@ -67,8 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Parekatu beste gailu batekin"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetootha"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Aktibatu automatikoki bihar"</string>
-    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
-    <skip />
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Bluetootha desaktibatuz gero, biharamunean berraktibatuko da"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Parekatu eskuineko audifonoa"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Parekatu ezkerreko audifonoa"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Parekatu beste audifonoa"</string>
@@ -179,6 +178,14 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Aplikazioaren hizkuntza"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Iradokitako hizkuntzak"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Hizkuntza guztiak"</string>
+    <!-- no translation found for suggested_locales_title (119908696638862861) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
+    <skip />
+    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
+    <skip />
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Sistemaren hizkuntza"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Sistemaren balio lehenetsia"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Aplikazioaren hizkuntza hautatzeko aukera ez dago erabilgarri ezarpenetan."</string>
@@ -194,6 +201,11 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Aldatu"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s ez dago erabilgarri"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Hizkuntza hau ezin da erabili sistemaren hizkuntza gisa, baina hura hobesten duzula jakinarazi diezu aplikazio eta webguneei."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"Bilaketa"</string>
+    <!-- no translation found for language_selection_title (968179636453982415) -->
+    <skip />
+    <string name="country_selection_title" msgid="5376929821458644732">"Lurralde-hobespena"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"Adierazi hizkuntza"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Lurraldeko hobespenak"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Ezarri unitate- eta zenbaki-hobespenak"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Eman lurraldeko hobespenen berri aplikazioei zerbitzuak pertsonaliza ditzaten."</string>
@@ -1243,7 +1255,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Egokituak"</string>
     <string name="brightness" msgid="6216871641021779698">"Distira"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Distira egokitua"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Distira egokituari buruz"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Pantailaren distira automatikoki egokituko da inguruneko argiaren eta egiten ari zarenaren arabera. Eskuz aldatu nahi baduzu distira, mugitu graduatzailea distira egokituak zure hobespenak ikas ditzan."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Aktibatuta"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Desaktibatuta"</string>
@@ -1553,7 +1564,7 @@
     <string name="reset_bluetooth_wifi_button_text" msgid="3974098137045963639">"Berrezarri"</string>
     <string name="reset_bluetooth_wifi_complete_toast" msgid="5893439291030574365">"Berrezarri dira Bluetootha eta wifia"</string>
     <string name="reset_esim_title" msgid="4194570573425902754">"Ezabatu eSIMetako eduki guztia"</string>
-    <string name="reset_esim_desc" msgid="6125192435907740751">"Ez da utziko bertan behera mugikorretarako zerbitzu-plana. Ordezko SIM bat lortzeko, jarri operadorearekin harremanetan."</string>
+    <string name="reset_esim_desc" msgid="6125192435907740751">"Ez da bertan behera utziko mugikorretarako zerbitzu-plana. Ordezko SIM bat lortzeko, jarri operadorearekin harremanetan."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Berrezarri ezarpenak"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Sareko ezarpen guztiak berrezarri nahi dituzu? Ezin da desegin ekintza hori."</string>
     <string name="reset_network_final_desc_esim" msgid="1129251284212847939">"Sarearen ezarpen guztiak berrezarri nahi dituzu, eta eSIMetako eduki guztia ezabatu? Ezin da desegin ekintza."</string>
@@ -1569,7 +1580,7 @@
     <string name="main_clear_short_title" msgid="4752094765533020696">"Ezabatu datu guztiak (berrezarri jatorrizkoak)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"musika"</li>\n<li>"argazkiak"</li>\n<li>"bestelako erabiltzaile-datuak"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM txartelak"</li></string>
-    <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Ez da utziko bertan behera mugikorretarako zerbitzu-plana."</string>
+    <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Ez da bertan behera utziko mugikorretarako zerbitzu-plana."</string>
     <string name="main_clear_final_desc" msgid="5800877928569039580">"Informazio pertsonal guztia eta deskargatutako aplikazioak ezabatuko dira, eta ekintza hori ezin da desegin."</string>
     <string name="main_clear_final_desc_esim" msgid="6592404057237813989">"Informazio pertsonal guztia ezabatuko da, deskargatutako aplikazioak eta eSIMak barne, eta ekintza hori ezin da desegin."</string>
     <string name="main_clear_confirm_title" msgid="6577071819657853713">"Datu guztiak ezabatu nahi dituzu?"</string>
@@ -1714,7 +1725,7 @@
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Aurrera egiteko, idatzi laneko pasahitza"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Segurtasuna bermatzeko, marraztu gailuaren eredua"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"Segurtasuna bermatzeko, idatzi gailuaren PINa"</string>
-    <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"Segurtasuna bermatzeko, idatzi gailuko pasahitza"</string>
+    <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"Segurtasuna bermatzeko, idatzi gailuaren pasahitza"</string>
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Segurtasuna bermatzeko, marraztu laneko eredua"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Segurtasuna bermatzeko, idatzi laneko PINa"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Segurtasuna bermatzeko, idatzi laneko pasahitza"</string>
@@ -1724,7 +1735,7 @@
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Egiaztatu zeu zarela"</string>
     <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Google-ko kontuak, ezarpenak eta abar transferitzeko, idatzi beste gailuaren eredua. Enkriptatuta dago eredua."</string>
     <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Google-ko kontuak, ezarpenak eta abar transferitzeko, idatzi beste gailuaren PINa. Enkriptatuta dago PINa."</string>
-    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Google-ko kontuak, ezarpenak eta abar transferitzeko, idatzi beste gailuko pasahitza. Enkriptatuta dago pasahitza."</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Google-ko kontuak, ezarpenak eta abar transferitzeko, idatzi beste gailuaren pasahitza. Enkriptatuta dago pasahitza."</string>
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Erabili eredua ere gailua desblokeatzeko"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Erabili PINa gailua desblokeatzeko ere"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Erabili pasahitza ere gailua desblokeatzeko"</string>
@@ -1733,7 +1744,7 @@
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Egiaztatu pasahitza"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_details" msgid="6187536224419477465">"Aurrera egiteko, marraztu gailuaren eredua"</string>
     <string name="lockpassword_confirm_repair_mode_pin_details" msgid="203022189107305807">"Aurrera egiteko, idatzi gailuaren PINa"</string>
-    <string name="lockpassword_confirm_repair_mode_password_details" msgid="4860219600771003873">"Aurrera egiteko, idatzi gailuko pasahitza"</string>
+    <string name="lockpassword_confirm_repair_mode_password_details" msgid="4860219600771003873">"Aurrera egiteko, idatzi gailuaren pasahitza"</string>
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"PINa ez da zuzena"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"Pasahitza ez da zuzena"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"Eredua ez da zuzena"</string>
@@ -1986,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Lehenetsia"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Ukipen-panela"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Ukipen-panela eta sagua"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"Sagua"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Erakuslearen abiadura, keinuak"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Egin klik sakatuta"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Sakatu eta arrastatu"</string>
@@ -3693,7 +3705,7 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"Ez dago jakinarazpenetarako sarbidea eskatu duen aplikaziorik."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Eman jakinarazpenak erabiltzeko baimena"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12-n, Jakinarazpen hobetuak eginbideak Android-eko Jakinarazpen egokituak ordeztu ditu. Eginbide horrek iradokitako ekintzak eta erantzunak erakusten, eta zure jakinarazpenak antolatzen ditu. \n\nJakinarazpen hobetuek jakinarazpenen eduki osoa atzi dezakete, informazio pertsonala barne (esaterako, kontaktuen izenak eta mezuak). Halaber, eginbideak jakinarazpenak bazter ditzake edo haiei erantzun diezaieke; adibidez, telefono-deiei erantzun diezaieke eta ez molestatzeko modua kontrola dezake."</string>
-    <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Jakinarazpenak erabiltzeko baimena eman nahi diozu <xliff:g id="SERVICE">%1$s</xliff:g> zerbitzuari?"</string>
+    <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Jakinarazpenak erabiltzeko baimena eman nahi diozu <xliff:g id="SERVICE">%1$s</xliff:g> aplikazioari?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> aplikazioak jakinarazpen guztiak irakurri ahalko ditu, informazio pertsonala barne (adibidez, kontaktuen izenak, argazkiak eta jasotzen dituzun mezuen testuak). Halaber, aplikazioak jakinarazpenak atzeratu edo baztertu ahal izango ditu, edo jakinarazpenetako botoiak erabili, telefono-deiei erantzuteko botoia barne. \n\nHorrez gain, ez molestatzeko modua aktibatzeko eta desaktibatzeko aukera izango du aplikazioak, baita modu horrekin erlazionatutako ezarpenak aldatzeko aukera ere."</string>
     <string name="nls_warning_prompt" msgid="1486887096703743841">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> aplikazioak hauek egin ahalko ditu:"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Jakinarazpenak irakurri"</string>
@@ -3728,16 +3740,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Epe labur batean jakinarazpen ugari jasotzen badituzu, gailuak bolumena jaitsiko du eta alertak murriztuko ditu 2 minutuz (gehienez). Ezarpen horrek ez die eragiten deiei, alarmei eta lehentasunezko elkarrizketei. \n\nArintze-aldi horretan jasotako jakinarazpenak ikusteko, pasatu hatza pantailaren goialdetik behera."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Aplikatu laneko profiletan"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Aplikatu laneko profileko aplikazioetan"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"Jakinarazpen multzokatuak"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"Aktibatuta"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"Desaktibatuta"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Multzokatu jakinarazpenak"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"Antzeko gaiak dituzten jakinarazpenen audioa desaktibatuko da, eta multzokatu egingo dira, zerbitzua isilagoa izan dadin. Multzokatuz gero, ez dira erabiliko aplikazioen jakinarazpen-ezarpenak."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"EBko laguntza-zerbitzuak"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ez dago EBko laguntza-zerbitzu gisa abiaraztea eskatu duen aplikaziorik instalatuta."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"EBko zerbitzuak erabiltzeko baimena eman nahi diozu <xliff:g id="SERVICE">%1$s</xliff:g> zerbitzuari?"</string>
@@ -4200,6 +4207,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Pantaila osoko jakinarazpenak"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Eman pantaila osoko jakinarazpenak erakusteko baimena aplikazioari"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Eman gailua blokeatuta dagoenean pantaila osoa hartzen duten jakinarazpenak erakusteko baimena aplikazioari. Alarmen, sarrerako deien edo bestelako premiazko jakinarazpenen berri emateko erabil dezakete aplikazioek."</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Multimedia-edukia kudeatzeko aplikazioak"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Eman multimedia-edukia kudeatzeko baimena aplikazioari"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Baimena ematen badiozu, beste aplikazio batzuekin sortutako multimedia-fitxategiak editatu edo ezabatu ahal izango ditu aplikazioak, baimenik eskatu gabe. Aplikazioak fitxategiak eta multimedia-edukia erabiltzeko baimena izan behar du."</string>
@@ -4867,9 +4880,9 @@
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> operadorera aldatu nahi duzu?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"SIM txartela erabiltzen hasi nahi duzu?"</string>
     <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> erabili nahi duzu?"</string>
-    <string name="sim_action_switch_sub_dialog_text" msgid="7474905814976249607">"SIM bakarra egon daiteke aktibo aldiko.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> operadorera aldatuta ere, ez da utziko bertan behera <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> operadorearen zerbitzua."</string>
-    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="6415848271400253954">"eSIM bakarra egon daiteke aktibo aldiko.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> operadorera aldatuta ere, ez da utziko bertan behera <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> operadorearen zerbitzua."</string>
-    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="421658355882679837">"SIM bakarra egon daiteke aktibo aldiko.\n\nOperadorea aldatuta ere, ez da utziko bertan behera <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> operadorearen zerbitzua."</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="7474905814976249607">"SIM bakarra egon daiteke aktibo aldiko.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> operadorera aldatuta ere, ez da bertan behera utziko <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> operadorearen zerbitzua."</string>
+    <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="6415848271400253954">"eSIM bakarra egon daiteke aktibo aldiko.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> operadorera aldatuta ere, ez da bertan behera utziko <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> operadorearen zerbitzua."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="421658355882679837">"SIM bakarra egon daiteke aktibo aldiko.\n\nOperadorea aldatuta ere, ez da bertan behera utziko <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> operadorearen zerbitzua."</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Bi SIM erabil ditzakezu batera. <xliff:g id="CARRIER_NAME">%1$s</xliff:g> erabiltzeko, desaktibatu beste SIMa."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Aldatu (<xliff:g id="CARRIER_NAME">%1$s</xliff:g>)"</string>
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Desaktibatu <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -4941,7 +4954,7 @@
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"Geroago datu-konexioa, deien eginbideak eta SMSak erabiltzeko, joan sarearen ezarpenetara"</string>
     <string name="sim_card_label" msgid="6263064316075963775">"SIMa"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"eSIM honetako eduki guztia ezabatu nahi duzu?"</string>
-    <string name="erase_sim_dialog_text" msgid="1406141218170595272">"<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> operadorearen zerbitzua gailu honetatik kenduko da, baina ez da utziko bertan behera <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> operadorearekin kontratatuta daukazun tarifa."</string>
+    <string name="erase_sim_dialog_text" msgid="1406141218170595272">"<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> operadorearen zerbitzua gailu honetatik kenduko da, baina ez da bertan behera utziko <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> operadorearekin kontratatuta daukazun tarifa."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Ezabatu eduki guztia"</string>
     <string name="erasing_sim" msgid="4237180547590463930">"eSIMeko eduki guztia ezabatzen…"</string>
     <string name="erase_sim_fail_title" msgid="1445700500168357303">"Ezin da ezabatu eSIMeko eduki guztia"</string>
@@ -5494,11 +5507,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Errore bat gertatu da kontu lehenetsia ezartzean"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Ez da ezarri kontu lehenetsirik"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Gailua soilik"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Gailua eta %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Hasteko, gehitu kontu bat"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Non gorde kontaktuak?"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Inguratu bilatzeko"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Pantailako edukia erabilita bilaketa egiteko, eduki sakatuta orri nagusira joateko botoia edo nabigazioaren kontrol-puntua."</string>
 </resources>

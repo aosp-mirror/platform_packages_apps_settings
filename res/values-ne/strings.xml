@@ -32,7 +32,7 @@
     <string name="header_category_system" msgid="1665516346845259058">"सिस्टम"</string>
     <string name="radioInfo_service_in" msgid="9088637745836646271">"सेवामा"</string>
     <string name="radioInfo_service_out" msgid="1868347333892403287">"सेवा उपलब्ध छैन"</string>
-    <string name="radioInfo_service_off" msgid="6184928420860868571">"रेडियो निष्क्रिय छ"</string>
+    <string name="radioInfo_service_off" msgid="6184928420860868571">"रेडियो अफ छ"</string>
     <string name="radioInfo_roaming_in" msgid="8892550453644088692">"रोमिङ"</string>
     <string name="radioInfo_roaming_not" msgid="3137594549464975054">"रोमिङमा छैन"</string>
     <string name="radioInfo_data_disconnected" msgid="362604130117666924">"जडान विच्छेद भयो"</string>
@@ -178,6 +178,14 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"एपको भाषा"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"सिफारिस गरिएका भाषाहरू"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"सबै भाषा"</string>
+    <!-- no translation found for suggested_locales_title (119908696638862861) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
+    <skip />
+    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
+    <skip />
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"सिस्टमको भाषा"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"सिस्टम डिफल्ट"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"सेटिङबाट यो एपका लागि भाषा चयन गर्न मिल्दैन।"</string>
@@ -193,6 +201,11 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"परिवर्तन गर्नुहोस्"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s उपलब्ध छैन"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"यो भाषालाई सिस्टमको भाषाका रूपमा प्रयोग गर्न सकिँदैन तर तपाईंले एप तथा वेबसाइटलाई तपाईं यो भाषा रुचाउनुहुन्छ भन्ने कुराको जानकारी दिनुभएको छ।"</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"खोज"</string>
+    <!-- no translation found for language_selection_title (968179636453982415) -->
+    <skip />
+    <string name="country_selection_title" msgid="5376929821458644732">"क्षेत्रको प्राथमिकता"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"भाषाको नाम टाइप गर्नुहोस्"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"क्षेत्रीय प्राथमिकताहरू"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"एकाइ तथा सङ्ख्यासम्बन्धी प्राथमिकताहरू तोक्नुहोस्"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"एपहरूले तपाईंलाई पर्सनलाइज गरिएका सुविधा प्रदान गर्न सकुन् भन्नाका लागि ती एपहरूलाई तपाईंका क्षेत्रीय प्राथमिकताहरू बारेमा जानकारी दिनुहोस्।"</string>
@@ -1242,10 +1255,9 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"एड्याप्टिभ"</string>
     <string name="brightness" msgid="6216871641021779698">"चमकको स्तर"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"एड्याप्टिभ ब्राइटनेस"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"अनुकूलनयोग्य चमकका बारेमा"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"स्क्रिनको चमक तपाईंको वातावरण र गतिविधिअनुसार स्वतः समायोजन हुन्छ। तपाईं स्लाइडर सारेर एड्याप्टिभ ब्राइटनेसलाई तपाईंको रूची पहिचान गर्न मद्दत गर्न सक्नुहुन्छ।"</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"सक्रिय छ"</string>
-    <string name="auto_brightness_summary_off" msgid="8077066192887677956">"निष्क्रिय छ"</string>
+    <string name="auto_brightness_summary_off" msgid="8077066192887677956">"अफ छ"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"श्वेत सन्तुलन देखाउनुहोस्"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="fold_lock_behavior_title" msgid="786228803694268449">"फोल्ड गर्दा एपहरू प्रयोग गरिराखियोस्"</string>
@@ -1630,9 +1642,9 @@
     <string name="location_no_recent_accesses" msgid="6031735777805464247">"कुनै पनि एपले हालै लोकेसन प्रयोग गरेको छैन"</string>
     <string name="location_high_battery_use" msgid="4277318891200626524">"उच्च ब्याट्री प्रयोग"</string>
     <string name="location_low_battery_use" msgid="5218950289737996431">"कम ब्याट्री प्रयोग"</string>
-    <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Wi-Fi को खोजी"</string>
+    <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Wi-Fi स्क्यानिङ"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"एप र सेवाहरूलाई जुनसुकै बेला (Wi‑Fi अफ भएको बेलामा पनि) वरपरका Wi-Fi नेटवर्क खोज्ने अनुमति दिनुहोस्। यसलाई लोकेसनमा आधारित सुविधा तथा सेवाहरू सुधार गर्ने जस्ता कार्यहरू गर्नाका लागि प्रयोग गर्न सकिन्छ।"</string>
-    <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"ब्लुटुथको खोजी"</string>
+    <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"ब्लुटुथ स्क्यानिङ"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"एप तथा सेवाहरूलाई जुनसुकै बेला (ब्लुटुथ अफ भएको बेलामा पनि) वरपरका डिभाइस खोज्ने अनुमति दिनुहोस्‌। यसलाई लोकेसनमा आधारित सुविधा तथा सेवाहरू सुधार गर्ने जस्ता कार्यहरू गर्नाका लागि प्रयोग गर्न सकिन्छ।"</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"लोकेसन सर्भिस"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"लोकेसनसम्बन्धी सेवाहरू"</string>
@@ -1985,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"डिफल्ट"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"टचप्याड"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"टचप्याड र माउस"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"माउस"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"पोइन्टरको गति, जेस्चरहरू"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"ट्याप टु क्लिक"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"ट्याप गरी ड्रयाग गर्ने सुविधा"</string>
@@ -2515,7 +2528,7 @@
     <string name="keywords_touch_and_hold_delay" msgid="7854640156419599912">"निपुणता, मोटर, ज्येष्ठ नागरिक, अर्थोटिक्स, rsi, स्टरोक, ट्रेमर, मल्टीपल स्क्लेरोसिस, सेरेब्रल पाल्सी, काम्ने रोग, शरिरका अङ्ग बारम्बार गल्ने रोग, हात"</string>
     <string name="keywords_accessibility_timeout" msgid="8903766864902000346">"ढिलाइ, निपुणता, ज्येष्ठ नागरिक"</string>
     <string name="print_settings" msgid="8519810615863882491">"प्रिन्टिङ"</string>
-    <string name="print_settings_summary_no_service" msgid="6721731154917653862">"निष्क्रिय छ"</string>
+    <string name="print_settings_summary_no_service" msgid="6721731154917653862">"अफ छ"</string>
     <string name="print_settings_summary" msgid="1458773840720811915">"{count,plural, =1{प्रिन्टसम्बन्धी एउटा सेवा अन छ}other{प्रिन्टसम्बन्धी # वटा सेवा अन छन्}}"</string>
     <string name="print_jobs_summary" msgid="7040836482336577323">"{count,plural, =1{प्रिन्ट गर्ने एउटा काम}other{प्रिन्ट गर्ने # वटा काम}}"</string>
     <string name="print_settings_title" msgid="7680498284751129935">"प्रिन्ट सेवाहरु"</string>
@@ -3534,7 +3547,7 @@
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"तपाईंले अफ नगरेसम्म"</string>
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{१ घन्टा}other{# घन्टा}}"</string>
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{१ मिनेट}other{# मिनेट}}"</string>
-    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{अफ छ}=1{अफ छ / एउटा समयतालिका स्वतः अन हुन सक्छ}other{निष्क्रिय छ / # वटा समयतालिका स्वतः अन हुन सक्छन्}}"</string>
+    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{अफ छ}=1{अफ छ / एउटा समयतालिका स्वतः अन हुन सक्छ}other{अफ छ / # वटा समयतालिका स्वतः अन हुन सक्छन्}}"</string>
     <string name="zen_category_behavior" msgid="3214056473947178507">"\'बाधा नपुर्‍याउनुहोस्\' सुविधालाई केले अफ गर्न सक्छ"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"मान्छेहरू"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"एपहरू"</string>
@@ -3727,16 +3740,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"तपाईंले छोटो समयमा धेरै नोटिफिकेसन प्राप्त गर्दा तपाईंको डिभाइसले बढीमा २ मिनेटसम्म ती नोटिफिकेसनको साउन्डको भोल्युम घटाउँछ र अलर्टहरू कम देखाउँछ। कल, अलार्म र महत्त्वपूर्ण वार्तालापहरू भने प्रभावित हुँदैनन्। \n\nडिभाइसको स्क्रिनको सिरानबाट तलतिर स्वाइप गरेर कुलडाउनका बेला प्राप्त भएका नोटिफिकेसनहरू हेर्न सकिन्छ।"</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"कार्य प्रोफाइलहरूमा लागू गर्नुहोस्"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"कार्य प्रोफाइलका एपहरूमा लागू गर्नुहोस्"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"बन्डल गरिएका नोटिफिकेसनहरू"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"अन छ"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"अफ छ"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"सूचनाहरूको बन्डल बनाउने सुविधा प्रयोग गर्नुहोस्"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"मिल्दाजुल्दा थिमहरू भएका सूचनाहरू साइलेन्ट पारिने छन् र अझ शान्त अनुभव प्रदान गर्नका निम्ति तिनलाई एउटै समूहमा राखिने छन्। तपाईंले सूचनाहरूको बन्डल बनाउनुभयो भने एपका नोटिफिकेसन सेटिङ ओभरराइड गरिने छ।"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR का सहायक सेवाहरू"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"इन्स्टल गरिएका कुनै पनि एपहरूले VR का सहायक सेवाहरूको रूपमा चल्ने अनुरोध गरेका छैनन्।"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"<xliff:g id="SERVICE">%1$s</xliff:g> लाई VR सेवा चलाउने अनुमति दिने हो?"</string>
@@ -4199,6 +4207,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"फुल स्क्रिनमा नोटिफिकेसनहरू देखाउने अनुमति"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"यो एपलाई नोटिफिकेसनहरू फुल स्क्रिनमा देखाउने अनुमति दिनुहोस्"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"यो एपलाई डिभाइस लक भएका बेला फुल स्क्रिन ढाक्ने खालका सूचनाहरू देखाउने अनुमति दिनुहोस्। एपहरूले अलार्म, आगमन कल वा अन्य महत्त्वपूर्ण सूचनाहरू हाइलाइट गर्ने प्रयोजनका लागि फुल स्क्रिनमा सूचनाहरू देखाउन सक्छन्।"</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"मिडिया व्यवस्थापन गर्ने अनुमति दिइएका एप"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"एपलाई मिडिया व्यवस्थापन गर्ने अनुमति दिनुहोस्"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"तपाईंले यो अनुमति दिनुभयो भने यो एपले तपाईंलाई नसोधिकन अन्य एपमार्फत सिर्जना गरिएका मिडिया फाइलहरूमा फेरबदल गर्न र तिनलाई मेटाउन सक्छ। यो एपलाई फाइल र मिडिया हेर्ने तथा प्रयोग गर्ने अनुमति दिनु पर्ने हुन्छ।"</string>
@@ -4264,7 +4278,7 @@
     <string name="condition_zen_summary_with_exceptions" msgid="9019937492602199663">"अपवादहरू लागू हुन्छन्"</string>
     <string name="condition_battery_title" msgid="6395113995454385248">"ब्याट्री सञ्चयकर्ता सक्रिय छ"</string>
     <string name="condition_battery_summary" msgid="8436806157833107886">"सुविधाहरूलाई बन्देज लगाइएका छन्"</string>
-    <string name="condition_cellular_title" msgid="155474690792125747">"मोबाइल डेटा निष्क्रिय छ"</string>
+    <string name="condition_cellular_title" msgid="155474690792125747">"मोबाइल डेटा अफ छ"</string>
     <string name="condition_cellular_summary" msgid="1678098728303268851">"Wi‑Fi मार्फत मात्र इन्टरनेट उपलब्ध छ"</string>
     <string name="condition_bg_data_title" msgid="2719263664589753094">"डेटा सेभर"</string>
     <string name="condition_bg_data_summary" msgid="1736255283216193834">"सुविधाहरूलाई बन्देज लगाइएका छन्"</string>
@@ -4415,7 +4429,7 @@
     <string name="premium_sms_none" msgid="4718916765158062108">"इन्स्टल गरिएका कुनै पनि एपले प्रिमियम SMS चलाउने अनुमति मागेका छैनन्"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"प्रिमियम SMS सक्रिय गर्नाले तपाईंलाई पैसा लाग्न सक्छ र उक्त रकम तपाईंको वाहकलाई तिर्नु पर्ने बिलमा जोडिनेछ। यदि तपाईं एपको लागि अनुमति सक्रिय गर्नुहुन्छ भने तपाईं त्यस एपको प्रयोग गरेर प्रिमियम SMS पठाउन सक्नुहुनेछ।"</string>
     <string name="premium_sms_access" msgid="8487315743197916530">"प्रिमियम SMS"</string>
-    <string name="bluetooth_disabled" msgid="835838280837359514">"निष्क्रिय छ"</string>
+    <string name="bluetooth_disabled" msgid="835838280837359514">"अफ छ"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"<xliff:g id="ID_1">%1$s</xliff:g> मा कनेक्ट गरियो"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"धेरै यन्त्रहरूमा जडान गरियो"</string>
     <string name="demo_mode" msgid="6566167465451386728">"सिस्टम UI को डेमो मोड"</string>
@@ -4805,7 +4819,7 @@
     <string name="default_for_calls_and_sms" msgid="8223971369339958151">"कल तथा SMS का लागि डिफल्ट"</string>
     <string name="default_for_mobile_data" msgid="3725773640392315626">"मोबाइल डेटाका लागि डिफल्ट"</string>
     <string name="mobile_data_active" msgid="8683694456401350210">"मोबाइल डेटा सक्रिय छ"</string>
-    <string name="mobile_data_off" msgid="2702029611959308269">"मोबाइल डेटा निष्क्रिय छ"</string>
+    <string name="mobile_data_off" msgid="2702029611959308269">"मोबाइल डेटा अफ छ"</string>
     <string name="subscription_available" msgid="2659722770210403365">"उपलब्ध"</string>
     <string name="mobile_network_list_add_more" msgid="5076722903436552813">"SIM कार्ड हाल्नुहोस्"</string>
     <string name="mobile_network_active_sim" msgid="6397581267971410039">"सक्रिय / SIM"</string>
@@ -5493,11 +5507,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"मुख्य खाता सेट गर्ने क्रममा त्रुटि भयो"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"मुख्य खाता सेट गरिएको छैन"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"डिभाइस मात्र"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"डिभाइस र %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"सुरु गर्न खाता हाल्नुहोस्"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"तपाईं कन्ट्याक्टहरू कहाँ सेभ गर्न चाहनुहुन्छ"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"खोज्न सर्कल बनाउनुहोस्"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"आफ्नो स्क्रिनमा सामग्री प्रयोग गरेर खोज्न होम बटन वा नेभिगेसन ह्यान्डल टच एण्ड होल्ड गर्नुहोस्।"</string>
 </resources>
