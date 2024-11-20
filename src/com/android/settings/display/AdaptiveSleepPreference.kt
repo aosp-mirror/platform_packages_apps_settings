@@ -101,7 +101,7 @@ class AdaptiveSleepPreference :
         val receiver =
             object : BroadcastReceiver() {
                 override fun onReceive(receiverContext: Context, intent: Intent) {
-                    context.notifyPreferenceChange(this@AdaptiveSleepPreference)
+                    context.notifyPreferenceChange(KEY)
                 }
             }
         context.registerReceiver(
@@ -111,7 +111,7 @@ class AdaptiveSleepPreference :
         broadcastReceiver = receiver
 
         val listener = OnSensorPrivacyChangedListener { _, _ ->
-            context.notifyPreferenceChange(this)
+            context.notifyPreferenceChange(KEY)
         }
         SensorPrivacyManager.getInstance(context).addSensorPrivacyListener(CAMERA, listener)
         sensorPrivacyChangedListener = listener

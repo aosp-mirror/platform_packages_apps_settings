@@ -16,6 +16,8 @@
 
 package com.android.settings.development.linuxterminal;
 
+import static com.android.settings.development.linuxterminal.LinuxTerminalPreferenceController.MEMORY_MIN_BYTES;
+import static com.android.settings.development.linuxterminal.LinuxTerminalPreferenceController.STORAGE_MIN_BYTES;
 import static com.android.settings.development.linuxterminal.LinuxTerminalPreferenceController.TERMINAL_PACKAGE_NAME_RESID;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -29,6 +31,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.storage.StorageManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,6 +46,7 @@ public class LinuxTerminalPreferenceControllerTest {
 
     @Mock private Context mContext;
     @Mock private PackageManager mPackageManager;
+    @Mock private StorageManager mStorageManager;
     @Mock private PackageInfo mPackageInfo;
 
     private String mTerminalPackageName = "com.android.virtualization.terminal";
@@ -57,11 +61,30 @@ public class LinuxTerminalPreferenceControllerTest {
         doReturn(mPackageInfo)
                 .when(mPackageManager)
                 .getPackageInfo(eq(mTerminalPackageName), anyInt());
+
+        doReturn(mStorageManager).when(mContext).getSystemService(StorageManager.class);
+        doReturn(STORAGE_MIN_BYTES).when(mStorageManager).getPrimaryStorageSize();
     }
 
     @Test
-    public void isAvailable_whenPackageExists_returnsTrue() throws NameNotFoundException {
-        mController = new LinuxTerminalPreferenceController(mContext);
+    public void isAvailable_whenMemoryInsufficient_returnFalse() {
+        mController = createController(mContext, MEMORY_MIN_BYTES / 2);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isAvailable_whenDeviceStorageInsufficient_returnFalse() {
+        doReturn(STORAGE_MIN_BYTES / 2).when(mStorageManager).getPrimaryStorageSize();
+
+        mController = createController(mContext);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isAvailable_whenPackageExists_returnsTrue() {
+        mController = createController(mContext);
 
         assertThat(mController.isAvailable()).isTrue();
     }
@@ -70,7 +93,7 @@ public class LinuxTerminalPreferenceControllerTest {
     public void isAvailable_whenPackageNameIsNull_returnsFalse() {
         doReturn(null).when(mContext).getString(TERMINAL_PACKAGE_NAME_RESID);
 
-        mController = new LinuxTerminalPreferenceController(mContext);
+        mController = createController(mContext);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -81,8 +104,21 @@ public class LinuxTerminalPreferenceControllerTest {
                 .when(mPackageManager)
                 .getPackageInfo(eq(mTerminalPackageName), anyInt());
 
-        mController = new LinuxTerminalPreferenceController(mContext);
+        mController = createController(mContext);
 
         assertThat(mController.isAvailable()).isFalse();
+    }
+
+    private LinuxTerminalPreferenceController createController(Context context) {
+        return createController(context, MEMORY_MIN_BYTES);
+    }
+
+    private LinuxTerminalPreferenceController createController(Context context, long totalMemory) {
+        return new LinuxTerminalPreferenceController(context) {
+            @Override
+            public long getTotalMemory() {
+                return totalMemory;
+            }
+        };
     }
 }
