@@ -152,17 +152,17 @@ class FingerprintManagerInteractorTest {
     enrolledFingerprintsInteractorUnderTest =
       EnrolledFingerprintsInteractorImpl(fingerprintEnrollRepo)
     generateChallengeInteractorUnderTest =
-      GenerateChallengeInteractorImpl(fingerprintManager, userId, gateKeeperPasswordProvider)
+      GenerateChallengeInteractorImpl(fingerprintManager, userRepo, gateKeeperPasswordProvider)
     removeFingerprintsInteractorUnderTest =
-      RemoveFingerprintsInteractorImpl(fingerprintManager, userId)
+      RemoveFingerprintsInteractorImpl(fingerprintManager, userRepo)
     renameFingerprintsInteractorUnderTest =
-      RenameFingerprintsInteractorImpl(fingerprintManager, userId, backgroundDispatcher)
-    authenticateInteractorImplUnderTest = AuthenticateInteractorImpl(fingerprintManager, userId)
+      RenameFingerprintsInteractorImpl(fingerprintManager, userRepo, backgroundDispatcher)
+    authenticateInteractorImplUnderTest = AuthenticateInteractorImpl(fingerprintManager, userRepo)
 
     canEnrollFingerprintsInteractorUnderTest =
       CanEnrollFingerprintsInteractorImpl(fingerprintEnrollRepo)
 
-    enrollInteractorUnderTest = EnrollFingerprintInteractorImpl(userId, fingerprintManager, flow)
+    enrollInteractorUnderTest = EnrollFingerprintInteractorImpl(userRepo, fingerprintManager, flow)
   }
 
   @Test

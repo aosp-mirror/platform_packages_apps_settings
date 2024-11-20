@@ -59,13 +59,13 @@ class BatterySaverPreference :
                 object : BatterySaverListener {
                     override fun onPowerSaveModeChanged() {
                         handler.postDelayed(
-                            { context.notifyPreferenceChange(this@BatterySaverPreference) },
+                            { context.notifyPreferenceChange(KEY) },
                             SWITCH_ANIMATION_DURATION,
                         )
                     }
 
                     override fun onBatteryChanged(pluggedIn: Boolean) =
-                        context.notifyPreferenceChange(this@BatterySaverPreference)
+                        context.notifyPreferenceChange(KEY)
                 }
             )
             setListening(true)
