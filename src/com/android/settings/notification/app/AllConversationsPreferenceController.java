@@ -23,6 +23,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settingslib.widget.TopIntroPreference;
 
 public class AllConversationsPreferenceController extends ConversationListPreferenceController {
 
@@ -39,9 +40,9 @@ public class AllConversationsPreferenceController extends ConversationListPrefer
 
     @Override
     Preference getSummaryPreference() {
-        Preference pref = new Preference(mContext);
+        Preference pref = new TopIntroPreference(mContext);
         pref.setOrder(1);
-        pref.setSummary(R.string.other_conversations_summary);
+        pref.setTitle(R.string.other_conversations_summary);
         pref.setSelectable(false);
         return pref;
     }

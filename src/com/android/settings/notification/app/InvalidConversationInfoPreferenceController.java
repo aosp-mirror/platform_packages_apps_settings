@@ -23,6 +23,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 public class InvalidConversationInfoPreferenceController extends NotificationPreferenceController {
 
@@ -47,6 +48,9 @@ public class InvalidConversationInfoPreferenceController extends NotificationPre
             return false;
         }
         if (mPreferenceFilter != null && !isIncludedInFilter()) {
+            return false;
+        }
+        if (SettingsThemeHelper.isExpressiveTheme(mContext)) {
             return false;
         }
         return mBackend.isInInvalidMsgState(mAppRow.pkg, mAppRow.uid);

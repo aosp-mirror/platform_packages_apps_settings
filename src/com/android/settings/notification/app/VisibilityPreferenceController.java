@@ -75,6 +75,10 @@ public class VisibilityPreferenceController extends NotificationPreferenceContro
 
     public void updateState(Preference preference) {
         if (mChannel != null && mAppRow != null) {
+            if (preference.getParent() != null) {
+                preference.getParent().setVisible(true);
+            }
+
             RestrictedListPreference pref = (RestrictedListPreference) preference;
             ArrayList<CharSequence> entries = new ArrayList<>();
             ArrayList<CharSequence> values = new ArrayList<>();

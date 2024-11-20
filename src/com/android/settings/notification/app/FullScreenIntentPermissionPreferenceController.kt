@@ -21,9 +21,9 @@ import android.app.AppOpsManager
 import android.app.AppOpsManager.OP_USE_FULL_SCREEN_INTENT
 import android.content.AttributionSource
 import android.content.Context
-import android.content.pm.PackageManager.NameNotFoundException
 import android.content.pm.PackageManager.FLAG_PERMISSION_USER_SET
 import android.content.pm.PackageManager.GET_PERMISSIONS
+import android.content.pm.PackageManager.NameNotFoundException
 import android.os.UserHandle
 import android.permission.PermissionManager
 import android.util.Log
@@ -65,6 +65,7 @@ class FullScreenIntentPermissionPreferenceController(
         preference.setDisabledByAdmin(mAdmin)
         preference.isEnabled = !preference.isDisabledByAdmin
         preference.isChecked = isPermissionGranted()
+        preference.parent?.isVisible = true
     }
 
     override fun onPreferenceChange(preference: Preference, value: Any): Boolean {

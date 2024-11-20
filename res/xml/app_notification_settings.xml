@@ -30,49 +30,21 @@
     <Preference
         android:key="block_desc" />
 
-    <!-- Whether the app can show promoted notifications -->
-    <PreferenceCategory
-        android:title="@string/live_notifications"
-        android:key="promoted_category"
-        android:visibility="gone">
-
-        <com.android.settingslib.RestrictedSwitchPreference
-            android:key="promoted_switch"
-            android:title="@string/live_notifications_switch" />
-
-        <Preference
-            android:key="promoted_desc"
-            android:summary="@string/live_notifications_desc"
-            android:selectable="false"/>
-
-    </PreferenceCategory>
-
     <!-- Conversations added here -->
     <PreferenceCategory
         android:title="@string/conversations_category_title"
         android:key="conversations"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:layout="@layout/empty_view" >
 
     </PreferenceCategory>
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="invalid_conversation_switch"
-        android:title="@string/conversation_section_switch_title" />
-    <Preference
-        android:key="invalid_conversation_info"/>
-
-    <!--Bubbles -->
-    <Preference
-        android:key="bubble_pref_link"
-        android:title="@string/notification_bubbles_title"
-        android:icon="@drawable/ic_create_bubble"
-        settings:controller="com.android.settings.notification.app.BubbleSummaryPreferenceController">
-    </Preference>
 
     <!-- Bundles added here -->
     <PreferenceCategory
         android:key="bundles"
         android:title="@string/notification_bundles"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:layout="@layout/empty_view" />
 
     <!-- Channels/Channel groups added here -->
     <PreferenceCategory
@@ -84,61 +56,78 @@
         android:title="@string/no_recent_channels"
         android:icon="@drawable/ic_expand"/>
 
+    <PreferenceCategory
+        android:key="pre_channels_fields"
+        android:layout="@layout/empty_view"
+        android:visibility="gone" >
     <!-- Importance toggle -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="allow_sound"
-        android:title="@string/allow_interruption"
-        android:summary="@string/allow_interruption_summary"
-        settings:allowDividerAbove="true"
-        settings:allowDividerBelow="false" />
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="allow_sound"
+            android:title="@string/allow_interruption"
+            android:summary="@string/allow_interruption_summary" />
 
-    <!-- Visibility Override -->
-    <com.android.settings.RestrictedListPreference
-        android:key="visibility_override"
-        android:title="@string/app_notification_visibility_override_title"
-        settings:allowDividerAbove="true"
-        settings:allowDividerBelow="false" />
+        <!-- Visibility Override -->
+        <com.android.settings.RestrictedListPreference
+            android:key="visibility_override"
+            android:title="@string/app_notification_visibility_override_title" />
 
-    <!-- Bypass DND -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="bypass_dnd"
-        android:title="@string/app_notification_override_dnd_title"
-        android:summary="@string/app_notification_override_dnd_summary"
-        settings:allowDividerAbove="true"
-        settings:allowDividerBelow="false" />
+        <!-- Bypass DND -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="bypass_dnd"
+            android:title="@string/app_notification_override_dnd_title"
+            android:summary="@string/app_notification_override_dnd_summary"/>
+    </PreferenceCategory>
 
-    <!-- Allow full-screen intents -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="fsi_permission"
-        android:title="@string/app_notification_fsi_permission_title"
-        android:summary="@string/app_notification_fsi_permission_summary"
-        settings:allowDividerAbove="true"
-        settings:allowDividerBelow="false" />
+    <PreferenceCategory
+        android:key="app_wide"
+        android:title="@string/app_notification_settings"
+        settings:isPreferenceVisible="false">
 
-    <!-- Show badge -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="badge"
-        android:title="@string/notification_badge_title"
-        android:icon="@drawable/ic_notification_dot"
-        settings:useAdditionalSummary="true"
-        settings:restrictedSwitchSummary="@string/enabled_by_admin"
-        android:order="1001"
-        settings:allowDividerAbove="true"
-        settings:allowDividerBelow="false" />
+        <!-- Whether the app can show promoted notifications -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="promoted_switch"
+            android:title="@string/live_notifications_switch"
+            android:summary="@string/live_notifications_desc" />
 
-    <Preference
-        android:key="app_link"
-        android:icon="@drawable/ic_settings_24dp"
-        android:title="@string/app_settings_link"
-        android:order="1003"
-        settings:allowDividerAbove="true"
-        settings:allowDividerBelow="false" />
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="invalid_conversation_switch"
+            android:title="@string/conversation_section_switch_title" />
+        <Preference
+            android:key="invalid_conversation_info"/>
 
-    <com.android.settingslib.widget.FooterPreference
-        android:key="deleted"
-        android:icon="@drawable/ic_trash_can"
-        android:order="8000"
-        settings:allowDividerAbove="true"
-        settings:allowDividerBelow="false" />
+        <!--Bubbles -->
+        <Preference
+            android:key="bubble_pref_link"
+            android:title="@string/notification_bubbles_title"
+            android:icon="@drawable/ic_create_bubble"
+            settings:controller="com.android.settings.notification.app.BubbleSummaryPreferenceController">
+        </Preference>
+
+        <!-- Allow full-screen intents -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="fsi_permission"
+            android:title="@string/app_notification_fsi_permission_title"
+            android:summary="@string/app_notification_fsi_permission_summary"/>
+
+        <!-- Show badge -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="badge"
+            android:title="@string/notification_badge_title"
+            android:icon="@drawable/ic_notification_dot"
+            settings:useAdditionalSummary="true"
+            settings:restrictedSwitchSummary="@string/enabled_by_admin"
+            android:order="1001"/>
+
+        <Preference
+            android:key="app_link"
+            android:icon="@drawable/ic_settings_24dp"
+            android:title="@string/app_settings_link"
+            android:order="1003"/>
+
+        <com.android.settingslib.widget.FooterPreference
+            android:key="deleted"
+            android:icon="@drawable/ic_trash_can"
+            android:order="8000"/>
+    </PreferenceCategory>
 
 </PreferenceScreen>

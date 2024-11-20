@@ -37,6 +37,7 @@ import android.permission.PermissionManager.PERMISSION_HARD_DENIED
 import android.permission.PermissionManager.PERMISSION_SOFT_DENIED
 import android.permission.PermissionManager.PermissionResult
 import androidx.preference.Preference
+import androidx.preference.PreferenceManager
 import androidx.preference.PreferenceScreen
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.notification.NotificationBackend
@@ -80,7 +81,6 @@ class FullScreenIntentPermissionPreferenceControllerTest {
 
     private lateinit var preference: RestrictedSwitchPreference
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private lateinit var screen: PreferenceScreen
 
     private lateinit var controller: FullScreenIntentPermissionPreferenceController
@@ -94,7 +94,8 @@ class FullScreenIntentPermissionPreferenceControllerTest {
 
         preference = RestrictedSwitchPreference(context).apply { key = KEY_FSI_PERMISSION }
 
-        whenever(screen.findPreference<Preference>(KEY_FSI_PERMISSION)).thenReturn(preference)
+        screen = PreferenceManager(context).createPreferenceScreen(context)
+        screen.addPreference(preference)
 
         controller = FullScreenIntentPermissionPreferenceController(
             context,

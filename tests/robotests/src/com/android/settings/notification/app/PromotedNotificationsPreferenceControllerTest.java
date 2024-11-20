@@ -18,13 +18,12 @@ package com.android.settings.notification.app;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.app.Flags;
 import android.content.Context;
@@ -32,7 +31,7 @@ import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
-import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceManager;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.notification.NotificationBackend;
@@ -55,8 +54,6 @@ public class PromotedNotificationsPreferenceControllerTest {
     private NotificationBackend.AppRow mAppRow;
     @Mock
     private NotificationBackend mBackend;
-    @Mock
-    private PreferenceCategory mPrefCategory;
     private RestrictedSwitchPreference mSwitch;
 
     private PromotedNotificationsPreferenceController mPrefController;
@@ -66,7 +63,7 @@ public class PromotedNotificationsPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = ApplicationProvider.getApplicationContext();
         mSwitch = new RestrictedSwitchPreference(mContext);
-        when(mPrefCategory.findPreference("promoted_switch")).thenReturn(mSwitch);
+        new PreferenceManager(mContext).createPreferenceScreen(mContext).addPreference(mSwitch);
         mPrefController = new PromotedNotificationsPreferenceController(mContext, mBackend);
 
         mAppRow = new NotificationBackend.AppRow();
@@ -93,12 +90,12 @@ public class PromotedNotificationsPreferenceControllerTest {
         mAppRow.canBePromoted = true;
         mPrefController.onResume(mAppRow, null, null, null, null, null, null);
 
-        mPrefController.updateState(mPrefCategory);
+        mPrefController.updateState(mSwitch);
         assertThat(mSwitch.isChecked()).isTrue();
 
         mAppRow.canBePromoted = false;
         mPrefController.onResume(mAppRow, null, null, null, null, null, null);
-        mPrefController.updateState(mPrefCategory);
+        mPrefController.updateState(mSwitch);
         assertThat(mSwitch.isChecked()).isFalse();
     }
 

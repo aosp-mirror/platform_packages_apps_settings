@@ -58,6 +58,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
 
     private List<NotificationChannelGroup> mChannelGroupList;
     private PreferenceCategory mPreference;
+    int mChannelCount;
 
     public ChannelListPreferenceController(Context context, NotificationBackend backend) {
         super(context, backend);
@@ -107,6 +108,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
                 } else {
                     mChannelGroupList = mBackend.getGroups(mAppRow.pkg, mAppRow.uid).getList();
                 }
+                mChannelCount = mBackend.getChannelCount(mAppRow.pkg, mAppRow.uid);
                 Collections.sort(mChannelGroupList, CHANNEL_GROUP_COMPARATOR);
                 return null;
             }
@@ -116,6 +118,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
                 if (mContext == null) {
                     return;
                 }
+
                 updateFullList(mPreference, mChannelGroupList);
             }
         }.execute();
@@ -129,25 +132,30 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
     void updateFullList(@NonNull PreferenceCategory groupPrefsList,
                 @NonNull List<NotificationChannelGroup> channelGroups) {
         if (channelGroups.isEmpty()) {
-            if (groupPrefsList.getPreferenceCount() == 1
-                    && KEY_ZERO_CATEGORIES.equals(groupPrefsList.getPreference(0).getKey())) {
-                // Ensure the titles are correct for the current language, but otherwise leave alone
-                PreferenceGroup groupCategory = (PreferenceGroup) groupPrefsList.getPreference(0);
-                groupCategory.setTitle(R.string.notification_channels);
-                groupCategory.getPreference(0).setTitle(R.string.no_channels);
-            } else {
-                // Clear any contents and create the 'zero-categories' group.
+            if (mChannelCount > 0) {
                 groupPrefsList.removeAll();
+            } else {
+                if (groupPrefsList.getPreferenceCount() == 1
+                        && KEY_ZERO_CATEGORIES.equals(groupPrefsList.getPreference(0).getKey())) {
+                    // Ensure the titles are correct for the current language, but otherwise leave alone
+                    PreferenceGroup groupCategory = (PreferenceGroup) groupPrefsList.getPreference(
+                            0);
+                    groupCategory.setTitle(R.string.notification_channels);
+                    groupCategory.getPreference(0).setTitle(R.string.no_channels);
+                } else {
+                    // Clear any contents and create the 'zero-categories' group.
+                    groupPrefsList.removeAll();
 
-                PreferenceCategory groupCategory = new PreferenceCategory(mContext);
-                groupCategory.setTitle(R.string.notification_channels);
-                groupCategory.setKey(KEY_ZERO_CATEGORIES);
-                groupPrefsList.addPreference(groupCategory);
+                    PreferenceCategory groupCategory = new PreferenceCategory(mContext);
+                    groupCategory.setTitle(R.string.notification_channels);
+                    groupCategory.setKey(KEY_ZERO_CATEGORIES);
+                    groupPrefsList.addPreference(groupCategory);
 
-                Preference empty = new Preference(mContext);
-                empty.setTitle(R.string.no_channels);
-                empty.setEnabled(false);
-                groupCategory.addPreference(empty);
+                    Preference empty = new Preference(mContext);
+                    empty.setTitle(R.string.no_channels);
+                    empty.setEnabled(false);
+                    groupCategory.addPreference(empty);
+                }
             }
         } else {
             updateGroupList(groupPrefsList, channelGroups);
@@ -211,6 +219,11 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
                 groupPrefsList.addPreference(group);
             }
         }
+        Preference otherGroup = groupPrefsList.findPreference(KEY_GENERAL_CATEGORY);
+        if (otherGroup != null) {
+            otherGroup.setTitle(numFinalGroups == 1
+                    ? R.string.notification_channels : R.string.notification_channels_other);
+        }
     }
 
     /**
@@ -248,8 +261,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
         List<Preference> finalOrderedPrefs = new ArrayList<>();
         Preference appDefinedGroupToggle;
         if (group.getId() == null) {
-            // For the 'null' group, set the "Other" title.
-            groupPrefGroup.setTitle(R.string.notification_channels_other);
+            groupPrefGroup.setTitle(R.string.notification_channels);
             appDefinedGroupToggle = null;
         } else {
             // For an app-defined group, set their name and create a row to toggle 'isBlocked'.

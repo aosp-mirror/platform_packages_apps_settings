@@ -8999,8 +8999,11 @@
     <!-- [CHAR LIMIT=100] Title for switch that says whether this app can appear in the conversation notification section-->
     <string name="conversation_section_switch_title">Conversation section</string>
 
-    <!-- [CHAR LIMIT=100] Summary for switch that says whether this app can appear in the conversation notification section-->
+    <!-- [CHAR LIMIT=100] Summary for switch that says whether this app can appear in the conversation notification section (old)-->
     <string name="conversation_section_switch_summary">Allow app to use conversation section</string>
+
+    <!-- [CHAR LIMIT=100] Summary for switch that says whether this app can appear in the conversation notification section-->
+    <string name="conversation_section_switch_complete_summary">Allow app to use conversation section, although conversation features like prioritization and bubbles are not supported by this app.</string>
 
     <!-- [CHAR LIMIT=NONE] Conversation preference summary, the parent channel this conversation was spawned from (separator) the parent channel group (e.g. an account name)-->
     <string name="notification_conversation_summary" translatable="false">"<xliff:g id="parent_category_name">%1$s</xliff:g> • <xliff:g id="parent_category_group_name">%2$s</xliff:g>"</string>
@@ -9394,8 +9397,11 @@
     <!-- [CHAR LIMIT=NONE] Text appearing when app does not send notifications -->
     <string name="app_notifications_not_send_desc">This app does not send notifications</string>
 
+    <!-- [CHAR LIMIT=NONE] App notification settings: section header for app wide notif settings -->
+    <string name="app_notification_settings">App settings</string>
+
     <!-- [CHAR LIMIT=NONE] App notification settings: channels title -->
-    <string name="notification_channels">Categories</string>
+    <string name="notification_channels">Notification categories</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: non-grouped-channels title -->
     <string name="notification_channels_other">Other</string>
