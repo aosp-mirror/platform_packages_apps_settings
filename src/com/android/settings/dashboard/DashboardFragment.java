@@ -427,6 +427,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     private void removeControllersForHybridMode() {
         Set<String> keys = getPreferenceKeysInHierarchy();
         Iterator<AbstractPreferenceController> iterator = mControllers.iterator();
+        Lifecycle lifecycle = getSettingsLifecycle();
         while (iterator.hasNext()) {
             AbstractPreferenceController controller = iterator.next();
             String key = controller.getPreferenceKey();
@@ -437,6 +438,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                         controller.getClass());
                 if (controllers != null) {
                     controllers.remove(controller);
+                }
+                if (controller instanceof LifecycleObserver) {
+                    lifecycle.removeObserver((LifecycleObserver) controller);
                 }
             }
         }
