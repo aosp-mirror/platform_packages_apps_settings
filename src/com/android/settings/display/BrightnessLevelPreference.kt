@@ -58,7 +58,7 @@ class BrightnessLevelPreference :
     private var displayListener: DisplayListener? = null
 
     override val key: String
-        get() = "brightness"
+        get() = KEY
 
     override val title: Int
         get() = R.string.brightness
@@ -85,10 +85,7 @@ class BrightnessLevelPreference :
     }
 
     override fun onStart(context: PreferenceLifecycleContext) {
-        val observer =
-            KeyedObserver<String> { _, _ ->
-                context.notifyPreferenceChange(this@BrightnessLevelPreference)
-            }
+        val observer = KeyedObserver<String> { _, _ -> context.notifyPreferenceChange(KEY) }
         brightnessObserver = observer
         SettingsSystemStore.get(context)
             .addObserver(System.SCREEN_AUTO_BRIGHTNESS_ADJ, observer, HandlerExecutor.main)
@@ -100,7 +97,7 @@ class BrightnessLevelPreference :
                 override fun onDisplayRemoved(displayId: Int) {}
 
                 override fun onDisplayChanged(displayId: Int) {
-                    context.notifyPreferenceChange(this@BrightnessLevelPreference)
+                    context.notifyPreferenceChange(KEY)
                 }
             }
         displayListener = listener
@@ -162,5 +159,9 @@ class BrightnessLevelPreference :
             value < GAMMA_SPACE_MIN -> 0.0
             else -> (value - GAMMA_SPACE_MIN) / (GAMMA_SPACE_MAX - GAMMA_SPACE_MIN)
         }
+
+    companion object {
+        const val KEY = "brightness"
+    }
 }
 // LINT.ThenChange(BrightnessLevelPreferenceController.java)
