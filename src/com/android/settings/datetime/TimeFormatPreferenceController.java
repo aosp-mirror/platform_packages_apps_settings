@@ -25,7 +25,6 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.flags.Flags;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -73,11 +72,6 @@ public class TimeFormatPreferenceController extends TogglePreferenceController {
         if (mIsFromSUW) {
             return DISABLED_DEPENDENT_SETTING;
         }
-        if (!Flags.revampToggles()) {
-            if (AutoTimeFormatPreferenceController.isAutoTimeFormatSelection(mContext)) {
-                return DISABLED_DEPENDENT_SETTING;
-            }
-        }
         return AVAILABLE;
     }
 
@@ -120,12 +114,12 @@ public class TimeFormatPreferenceController extends TogglePreferenceController {
         return DateFormat.is24HourFormat(mContext);
     }
 
-    static void update24HourFormat(Context context, Boolean is24Hour) {
+    private static void update24HourFormat(Context context, Boolean is24Hour) {
         set24Hour(context, is24Hour);
         timeUpdated(context, is24Hour);
     }
 
-    static void timeUpdated(Context context, Boolean is24Hour) {
+    private static void timeUpdated(Context context, Boolean is24Hour) {
         Intent timeChanged = new Intent(Intent.ACTION_TIME_CHANGED);
         timeChanged.addFlags(Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
         int timeFormatPreference;
@@ -139,9 +133,8 @@ public class TimeFormatPreferenceController extends TogglePreferenceController {
         context.sendBroadcast(timeChanged);
     }
 
-    static void set24Hour(Context context, Boolean is24Hour) {
-        String value = is24Hour == null ? null :
-                is24Hour ? HOURS_24 : HOURS_12;
+    private static void set24Hour(Context context, boolean is24Hour) {
+        String value = is24Hour ? HOURS_24 : HOURS_12;
         Settings.System.putString(context.getContentResolver(),
                 Settings.System.TIME_12_24, value);
     }

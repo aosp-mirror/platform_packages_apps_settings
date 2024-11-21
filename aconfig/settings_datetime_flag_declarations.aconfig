@@ -8,12 +8,3 @@ flag {
     description: "Enable the time feedback feature, a button to launch feedback in Date & Time Settings"
     bug: "283239837"
 }
-
-flag {
-    name: "revamp_toggles"
-    # "location" is used by the Android System Time team for feature flags.
-    namespace: "location"
-    description: "Makes the use location toggle dependent on automatic time zone detection"
-    bug: "296835792"
-}
-

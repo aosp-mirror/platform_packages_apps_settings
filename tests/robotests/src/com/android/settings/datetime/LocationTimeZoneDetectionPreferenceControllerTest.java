@@ -45,17 +45,13 @@ import android.app.time.TimeZoneConfiguration;
 import android.app.time.TimeZoneDetectorStatus;
 import android.content.Context;
 import android.os.UserHandle;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedPreferenceFragment;
-import com.android.settings.flags.Flags;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -70,9 +66,6 @@ import org.robolectric.annotation.Config;
         com.android.settings.testutils.shadow.ShadowFragment.class,
 })
 public class LocationTimeZoneDetectionPreferenceControllerTest {
-
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private TimeManager mTimeManager;
@@ -131,8 +124,7 @@ public class LocationTimeZoneDetectionPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags({Flags.FLAG_REVAMP_TOGGLES})
-    public void flagRevampTogglesOn_toggleOff_automaticTimeZone_disablesLocationToggle() {
+    public void toggleOff_automaticTimeZone_disablesLocationToggle() {
         TimeZoneCapabilitiesAndConfig capabilitiesAndConfig =
                 createTimeZoneCapabilitiesAndConfig(/* useLocationEnabled= */ true,
                         CAPABILITY_POSSESSED, /* setAutoDetectionEnabled= */ false);
