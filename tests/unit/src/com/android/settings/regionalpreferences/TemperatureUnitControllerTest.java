@@ -19,10 +19,12 @@ package com.android.settings.regionalpreferences;
 import static org.junit.Assert.assertEquals;
 
 import android.content.Context;
+import android.platform.test.annotations.DisableFlags;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.After;
@@ -54,6 +56,7 @@ public class TemperatureUnitControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_REGIONAL_PREFERENCES_API_ENABLED)
     public void getSummary_hasProviderValue_resultIsCelsius() {
         RegionalPreferenceTestUtils.setSettingsProviderContent(
                 mApplicationContext, "und-u-mu-celsius");
@@ -65,6 +68,7 @@ public class TemperatureUnitControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_REGIONAL_PREFERENCES_API_ENABLED)
     public void getSummary_hasProviderValue_resultIsFahrenheit() {
         RegionalPreferenceTestUtils.setSettingsProviderContent(
                 mApplicationContext, "und-u-mu-fahrenhe");
@@ -76,6 +80,7 @@ public class TemperatureUnitControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_REGIONAL_PREFERENCES_API_ENABLED)
     public void getSummary_noProviderValueButHasDefaultLocaleWithSubtag_resultIsFahrenheit() {
         RegionalPreferenceTestUtils.setSettingsProviderContent(mApplicationContext, "");
         Locale.setDefault(Locale.forLanguageTag("en-US-u-mu-fahrenhe"));
@@ -87,6 +92,7 @@ public class TemperatureUnitControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_REGIONAL_PREFERENCES_API_ENABLED)
     public void getSummary_noProviderValueAndDefaultLocaleWithoutSubtag_resultIsDefault() {
         RegionalPreferenceTestUtils.setSettingsProviderContent(mApplicationContext, "");
         Locale.setDefault(Locale.forLanguageTag("en-US"));
