@@ -67,8 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Спарете нов уред"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Автоматски вклучи го утре"</string>
-    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
-    <skip />
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Ако го исклучите Bluetooth, ќе се вклучи пак следниот ден"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Спари го десното уво"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Спари го левото уво"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Спари го другото уво"</string>
@@ -179,6 +178,14 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Јазик на апликациjата"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Предложени јазици"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Сите јазици"</string>
+    <!-- no translation found for suggested_locales_title (119908696638862861) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
+    <skip />
+    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
+    <skip />
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Системски јазик"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Стандарден за системот"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Не може да се бира јазик за апликацијава од „Поставките“."</string>
@@ -194,6 +201,11 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Промени"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s не е достапен"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Овој јазик не може да се користи како системски јазик, но им дадовте до знаење на апликациите и веб-сајтовите дека го претпочитате овој јазик."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"Пребарај"</string>
+    <!-- no translation found for language_selection_title (968179636453982415) -->
+    <skip />
+    <string name="country_selection_title" msgid="5376929821458644732">"Претпочитувања за регион"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"Внесете име на јазик"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Регионални поставки"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Одредете поставки за мерни единици и броеви"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Дозволете им на апликациите да пристапуваат до вашите регионални поставки за да ви овозможат персонализирано доживување."</string>
@@ -1243,7 +1255,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Адаптивни"</string>
     <string name="brightness" msgid="6216871641021779698">"Ниво на осветленост"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Адаптивна осветленост"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"За „Адаптивна осветленост“"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Осветленоста на екранот ќе се приспособува автоматски на вашата околина и активности. Може да го поместите лизгачот рачно за да ѝ помогнете на адаптивната осветленост да научи што ви одговара."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Вклучено"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Исклучена"</string>
@@ -1986,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Стандарден"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Подлога за допир"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Подлога за допир и глувче"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"Глувче"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Брзина на покажувачот, движења"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Кликнување со допир"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Влечење со допир"</string>
@@ -3693,7 +3705,7 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"Ниедна од инсталираните апликации не побара пристап до известувања."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Дозволи пристап до известувањата"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"„Подобрените известувања“ ги заменија „Адаптивните известувања на Android“ во Android 12. Оваа функција прикажува предложени дејства и одговори и ги организира вашите известувања. \n\n„Подобрените известувања“ може да пристапуваат до содржините од известувањата, вклучително и личните податоци, како што се имињата на контактите и пораките. Функцијава може и да ги отфрла или да одговара на известувањата, како на пример, да одговара на телефонски повици и да го контролира режимот „Не вознемирувај“."</string>
-    <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Да се дозволи пристап на <xliff:g id="SERVICE">%1$s</xliff:g> до известувањата?"</string>
+    <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Да се дозволи пристап на „<xliff:g id="SERVICE">%1$s</xliff:g>“ до известувањата?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"Апликацијата <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ќе може да ги чита сите известувања, вклучително и личните податоци, како што се имињата на контактите, фотографиите и текстот од пораките што ги примате. Ќе може да одложува или отфрла известувања или да ги користи копчињата во известувањата, вклучително и да одговара на телефонски повици. \n\nОва ќе ѝ овозможи на апликацијата да го вклучува и исклучува „Не вознемирувај“ и да ги менува поврзаните поставки."</string>
     <string name="nls_warning_prompt" msgid="1486887096703743841">"Апликацијата <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ќе може:"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Да ги чита вашите известувања"</string>
@@ -3704,7 +3716,7 @@
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Може да го вклучува и исклучува „Не вознемирувај“ и да ги менува поврзаните поставки."</string>
     <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"Може да ги активира и да управува со режимите, а и да ги променува поврзаните поставки."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Ако го исклучите пристапот на <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> до известувањата, пристапот до „Не вознемирувај“ може исто така да се исклучи."</string>
-    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"Ако го исклучите пристапот до известувањата за <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, може да се исклучи и пристапот до режимите."</string>
+    <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"Ако го исклучите пристапот до известувањата за „<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>“, може да се исклучи и пристапот до режимите."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Исклучи"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Откажи"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"Реално време"</string>
@@ -3728,16 +3740,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Кога ќе добиете многу известувања во краток временски период, уредот ќе го намали звукот и ќе ги минимизира известувањата до 2 минути. Ова не влијае на повиците, алармите и приоритетните разговори. \n\nИзвестувањата добиени додека била вклучена „Подискретни известувања“ може да се најдат со повлекување надолу од горниот дел на екранот."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Примени на работни профили"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Применете на апликациите во работниот профил"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"Групирани известувања"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"Вклучено"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"Исклучено"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Користете групирање на известувањата"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"Звукот на известувањата со слични теми ќе се исклучи, а известувањата ќе се групираат за потивко доживување. Групирањето ќе ги отфрли поставките за известувања на апликацијата."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Помошни услуги за VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ниедна инсталирана апликација не побара извршување како помошна услуга за VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Да се дозволи пристап до VR-услугата за <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4200,6 +4207,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Известувања на цел екран"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Дозволи известувања на цел екран од апликацијава"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Дозволете апликацијава да прикажува известувања што го заземаат целиот екран кога уредот е заклучен. Апликациите може да ги користат овие известувања за да ги истакнуваат алармите, дојдовните повици или други итни известувања."</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Апликации за управување со содржини"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Дозволи апликацијата да управува со аудиовизуелни содржини"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Ако е дозволено, апликацијава ќе може да ги менува или брише датотеките со аудиовизуелни содржини создадени со други апликации без да ве праша. Апликацијата мора да има дозвола за да пристапува до датотеките и аудиовизуелните содржини."</string>
@@ -5494,11 +5507,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Грешка при поставувањето на стандардната сметка"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Нема поставено стандардна сметка"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Само уред"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Уред и %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Додајте сметка за да започнете"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Каде да се зачувуваат контактите"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Пребарување со заокружување"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Допрете и задржете го копчето за почетен екран или лентата за навигација за да пребарувате со содржините на екранот."</string>
 </resources>
