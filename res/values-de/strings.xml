@@ -67,8 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Neues Gerät koppeln"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Morgen automatisch aktivieren"</string>
-    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
-    <skip />
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Wenn du Bluetooth deaktivierst, wird es am nächsten Tag wieder aktiviert"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Rechtes Gerät koppeln"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Linkes Gerät koppeln"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Anderes Ohr koppeln"</string>
@@ -179,6 +178,14 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"App-Sprache"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Vorgeschlagene Sprachen"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Alle Sprachen"</string>
+    <!-- no translation found for suggested_locales_title (119908696638862861) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
+    <skip />
+    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
+    <skip />
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Systemsprache"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Standardeinstellung des Systems"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Für diese App ist in den Einstellungen keine Sprachauswahl verfügbar."</string>
@@ -194,6 +201,11 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Ändern"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s nicht verfügbar"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Diese Sprache kann nicht als Systemsprache verwendet werden, aber Apps und Websites werden darüber informiert, dass du diese Sprache bevorzugst."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"Suche"</string>
+    <!-- no translation found for language_selection_title (968179636453982415) -->
+    <skip />
+    <string name="country_selection_title" msgid="5376929821458644732">"Region auswählen"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"Sprache eingeben"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionale Einstellungen"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Einstellungen für Einheiten und Zahlen festlegen"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Wenn du Apps deine regionalen Einstellungen mitteilst, können ihre Dienste für dich personalisiert werden."</string>
@@ -1243,7 +1255,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Adaptiv"</string>
     <string name="brightness" msgid="6216871641021779698">"Helligkeit"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Automatische Helligkeit"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Informationen zur automatischen Helligkeit"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Die Helligkeit des Displays passt sich automatisch an deine Umgebung und deine Aktivitäten an. Mit dem Schieberegler kannst du sie manuell nach Wunsch anpassen und die Funktion „Automatische Helligkeit“ merkt sich deine Präferenz."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"An"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Aus"</string>
@@ -1564,7 +1575,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Löschen der eSIMs nicht möglich"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Ein Fehler ist aufgetreten und deine eSIMs wurden nicht gelöscht.\n\nStarte dein Gerät neu und versuche es noch einmal."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"vertrauliches Profil löschen"</string>
-    <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Wenn du ein vertrauliches Profil auf deinem Gerät hast, wird dieses endgültig gelöscht und das zu deinem Profil hinzugefügte Google-Konto wird entfernt. \n\nAlle Apps in deinem Profil sowie zugehörige Daten werden ebenfalls dauerhaft aus dem "<b>"internen Speicher"</b>" deines Smartphones gelöscht."</string>
+    <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Wenn du ein vertrauliches Profil auf deinem Gerät hast, wird dieses endgültig gelöscht und das deinem Profil hinzugefügte Google-Konto wird entfernt. \n\nAlle Apps in deinem Profil sowie zugehörige Daten werden ebenfalls dauerhaft aus dem "<b>"internen Speicher"</b>" deines Smartphones gelöscht."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Alle Daten löschen (auf Werkseinstellungen zurücksetzen)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Alle Daten löschen"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Musik"</li>\n<li>"Fotos"</li>\n<li>"Sonstige Nutzerdaten"</li></string>
@@ -1986,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Standard"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad und Maus"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"Maus"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Zeigergeschwindigkeit, Touch-Gesten"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Touchpad-Klick"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Antippen und ziehen"</string>
@@ -3702,7 +3714,7 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Sie kann auf Nachrichten antworten und Schaltflächen in Benachrichtigungen auslösen, beispielsweise Benachrichtigungen zurückstellen oder schließen und Anrufe entgegennehmen."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Einstellungen ändern"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Sie kann die „Bitte nicht stören“-Funktion aktivieren oder deaktivieren und zugehörige Einstellungen ändern."</string>
-    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"Modi verwalten und aktivieren sowie zugehörige Einstellungen ändern."</string>
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"Sie kann Modi verwalten und aktivieren sowie zugehörige Einstellungen ändern."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Wenn du den Benachrichtigungszugriff für <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> deaktivierst, wird möglicherweise auch der „Bitte nicht stören“-Zugriff deaktiviert."</string>
     <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"Wenn du den Benachrichtigungszugriff für <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> deaktivierst, wird möglicherweise auch der Zugriff auf die Modi deaktiviert."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Deaktivieren"</string>
@@ -3728,16 +3740,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Wenn du viele Benachrichtigungen hintereinander erhältst, verringert dein Gerät für bis zu 2 Minuten die Lautstärke der Benachrichtigungssignale und minimiert die Benachrichtigungen. Anrufe, Wecker und priorisierte Unterhaltungen sind davon nicht betroffen. \n\nDie während dieser Zeit eingegangenen Benachrichtigungen kannst du dir ansehen, indem du vom oberen Rand des Displays nach unten wischst."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Auf Arbeitsprofile anwenden"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Auf Apps im Arbeitsprofil anwenden"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"Gruppierte Benachrichtigungen"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"An"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"Aus"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Benachrichtigungsgruppierung verwenden"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"Benachrichtigungen mit ähnlichen Themen werden stummgeschaltet und in einer Gruppe zusammengefasst, damit du seltener gestört wirst. Die Gruppierungsfunktion überschreibt die in den jeweiligen Apps festgelegten Benachrichtigungseinstellungen."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR-Hilfsdienste"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Keine installierte App hat die Ausführung als VR-Hilfsdienst angefordert."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR-Dienstzugriff für <xliff:g id="SERVICE">%1$s</xliff:g> erlauben?"</string>
@@ -4200,6 +4207,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Vollbildbenachrichtigungen"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Vollbildbenachrichtigungen von dieser App erlauben"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Diese App darf Benachrichtigungen anzeigen, die das gesamte Display ausfüllen, wenn das Gerät gesperrt ist. Apps können diese verwenden, um Wecker, eingehende Anrufe oder andere dringende Benachrichtigungen hervorzuheben."</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Apps zur Medienverwaltung"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"App erlauben, Medien zu verwalten"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Wenn du es erlaubst, kann diese App mit anderen Apps erstellte Mediendateien ändern oder löschen, ohne dich zu fragen. Die App muss berechtigt sein, auf Mediendateien zuzugreifen."</string>
@@ -5163,7 +5176,7 @@
     <string name="category_name_lock_display" msgid="8310402558217129670">"Displaysperre"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"Darstellung"</string>
     <string name="category_name_color" msgid="937514550918977151">"Farbe"</string>
-    <string name="category_name_display_controls" msgid="7046581691184725216">"Andere Displaysteuerelemente"</string>
+    <string name="category_name_display_controls" msgid="7046581691184725216">"Andere Displayeinstellungen"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Allgemein"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Dunkles Design verwenden"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Bluetooth verwenden"</string>
@@ -5494,11 +5507,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Fehler beim Festlegen des Standardkontos"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Kein Standard festgelegt"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Nur Gerät"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Gerät und %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Füge ein Konto hinzu, um loszulegen"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Speicherort für Kontakte"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Circle to Search"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Halte die Startbildschirmtaste oder den Navigationsziehpunkt gedrückt, um anhand des Inhalts auf dem Bildschirm zu suchen."</string>
 </resources>

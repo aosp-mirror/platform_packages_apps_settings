@@ -178,6 +178,14 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Bahasa apl"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Bahasa yang dicadangkan"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Semua bahasa"</string>
+    <!-- no translation found for suggested_locales_title (119908696638862861) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
+    <skip />
+    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
+    <skip />
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Bahasa sistem"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Lalai sistem"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Pemilihan bahasa untuk apl ini tidak tersedia daripada Tetapan."</string>
@@ -193,6 +201,11 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Tukar"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s tidak tersedia"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Bahasa ini tidak boleh digunakan sebagai bahasa sistem, tetapi anda telah membenarkan apl dan laman web menerimanya sebagai bahasa pilihan anda."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"Cari"</string>
+    <!-- no translation found for language_selection_title (968179636453982415) -->
+    <skip />
+    <string name="country_selection_title" msgid="5376929821458644732">"Pilihan wilayah"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"Taipkan nama bahasa"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Tetapan wilayah"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Tetapkan pilihan unit dan nombor"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Beritahu apl tetapan wilayah anda supaya apl boleh memeribadikan pengalaman anda."</string>
@@ -660,7 +673,7 @@
     <string name="private_space_continue_login_label" msgid="7779965766333065391">"Teruskan"</string>
     <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Pilih kunci untuk ruang privasi"</string>
     <string name="private_space_lock_setup_description" msgid="423405593476300918">"Anda boleh membuka kunci ruang privasi menggunakan cap jari. Untuk keselamatan, pilihan ini memerlukan kunci sandaran."</string>
-    <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Tetapkan PIN untuk ruang privasi anda"</string>
+    <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Tetapkan PIN untuk ruang peribadi anda"</string>
     <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Tetapkan kata laluan ruang peribadi anda"</string>
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Tetapkan corak untuk ruang peribadi anda"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"Kunci"</string>
@@ -801,7 +814,7 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Jika anda memasukkan corak yang salah pada percubaan seterusnya, profil kerja anda dan data profil itu akan dipadamkan"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Jika anda memasukkan PIN yang salah pada percubaan seterusnya, profil kerja anda dan data profil itu akan dipadamkan"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Jika anda memasukkan kata laluan yang salah pada percubaan seterusnya, profil kerja anda dan data profil itu akan dipadamkan"</string>
-    <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{Mesti mengandungi sekurang-kurangnya # aksara}other{Mestilah sekurang-kurangnya # aksara.}}"</string>
+    <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{Mesti mengandungi sekurang-kurangnya # aksara}other{Mestilah sekurang-kurangnya # aksara}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Jika menggunakan nombor sahaja, kata laluan mestilah sekurang-kurangnya 1 digit}other{Jika menggunakan nombor sahaja, kata laluan mestilah sekurang-kurangnya # digit}}"</string>
     <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{PIN mesti mengandungi sekurang-kurangnya # digit}other{PIN mestilah sekurang-kurangnya # digit}}"</string>
     <string name="lockpassword_pin_too_short_autoConfirm_extra_message" msgid="3271351502900762571">"{count,plural, =1{PIN mestilah mengandungi sekurang-kurangnya # digit, tetapi PIN {minAutoConfirmLen} digit disyorkan demi keselamatan tambahan}other{PIN mestilah mengandungi sekurang-kurangnya # digit, tetapi PIN {minAutoConfirmLen} digit disyorkan demi keselamatan tambahan}}"</string>
@@ -1242,7 +1255,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Boleh suai"</string>
     <string name="brightness" msgid="6216871641021779698">"Tahap kecerahan"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Kecerahan boleh suai"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Perihal kecerahan boleh suai"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Kecerahan skrin akan dilaraskan secara automatik dengan persekitaran dan aktiviti anda. Anda boleh mengalihkan peluncur secara manual untuk membantu kecerahan boleh suai mempelajari pilihan anda."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Hidup"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Mati"</string>
@@ -1563,7 +1575,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Tidak dapat memadamkan eSIM"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Ada yang tidak kena dan eSIM anda tidak dipadamkan.\n\nMulakan semula peranti anda dan cuba sekali lagi."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Padamkan ruang persendirian"</string>
-    <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Jika anda mempunyai ruang privasi pada peranti anda, ruang privasi itu akan dipadamkan secara kekal dan Google Account yang ditambahkan pada ruang anda akan dialih keluar. \n\nSemua apl dalam ruang anda dan data apl juga akan dipadamkan secara kekal daripada "<b>"storan dalaman"</b>" telefon anda."</string>
+    <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Jika anda mempunyai ruang persendirian pada peranti anda, ruang itu akan dipadamkan secara kekal dan Google Account yang ditambahkan pada ruang anda akan dialih keluar. \n\nSemua apl dalam ruang anda dan data apl juga akan dipadamkan secara kekal daripada "<b>"storan dalaman"</b>" telefon anda."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Padamkan semua data (tetapan semula kilang)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Padamkan semua data (tetapan semula kilang)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Muzik"</li>\n<li>"Foto"</li>\n<li>"Data pengguna yang lain"</li></string>
@@ -1985,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Lalai"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Pad sentuh"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Pad sentuh &amp; tetikus"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"Tetikus"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Kelajuan penuding, gerak isyarat"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Ketik untuk klik"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Penyeretan ketik"</string>
@@ -3727,16 +3740,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Apabila anda menerima banyak pemberitahuan dalam tempoh masa yang singkat, peranti anda akan mengurangkan kelantangan dan meminimumkan makluman hingga 2 minit. Panggilan, penggera dan perbualan keutamaan tidak terjejas. \n\nPemberitahuan yang diterima semasa tempoh bertenang boleh ditemukan dengan menarik ke bawah daripada bahagian atas skrin."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Gunakan pada profil kerja"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Gunakan pada apl profil kerja"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"Pemberitahuan terhimpun"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"Hidup"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"Mati"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Gunakan penghimpunan pemberitahuan"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"Pemberitahuan dengan tema serupa akan disenyapkan dan dikumpulkan bersama-sama untuk pengalaman yang lebih senyap. Penghimpunan akan membatalkan tetapan pemberitahuan apl itu sendiri."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Perkhidmatan pembantu VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Tiada apl terpasang yang telah meminta untuk dijalankan sebagai perkhidmatan pembantu VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Benarkan akses perkhidmatan VR untuk <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4199,6 +4207,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Pemberitahuan skrin penuh"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Benarkan pemberitahuan skrin penuh daripada apl ini"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Benarkan apl ini untuk memaparkan pemberitahuan menggunakan skrin penuh apabila peranti dikunci. Apl mungkin menggunakan ciri ini untuk menyerlahkan penggera, panggilan masuk atau pemberitahuan mustahak yang lain."</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Apl pengurusan media"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Benarkan apl mengurus media"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Jika dibenarkan, apl ini boleh mengubah suai atau memadamkan fail media yang dibuat dengan apl lain tanpa meminta izin anda. Apl mesti mempunyai kebenaran untuk mengakses fail dan media."</string>
@@ -5493,11 +5507,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Ralat semasa menetapkan akaun lalai"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Tiada akaun lalai ditetapkan"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Peranti sahaja"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Peranti dan %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Tambahkan akaun untuk bermula"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Lokasi untuk menyimpan kenalan"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Bulatkan untuk Membuat Carian"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Sentuh dan tahan butang Skrin Utama atau pemegang navigasi untuk membuat carian menggunakan kandungan pada skrin anda."</string>
 </resources>
