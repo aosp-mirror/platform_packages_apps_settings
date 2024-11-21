@@ -35,4 +35,10 @@
         android:title="@string/lock_screen_notifications_summary_hide_profile"
         settings:controller="com.android.settings.notification.LockScreenNotificationShowSensitiveToggleController" />
 
+    <SwitchPreferenceCompat
+        android:key="lock_screen_notification_hide_silent_toggle"
+        android:title="@string/lock_screen_notification_hide_silent_title"
+        android:summary="@string/lock_screen_notification_hide_silent_summary"
+        settings:controller="com.android.settings.notification.LockScreenNotificationHideSilentToggleController" />
+
 </PreferenceScreen>
