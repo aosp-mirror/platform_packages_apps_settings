@@ -70,6 +70,9 @@ class DarkModeScreen :
     override val keywords: Int
         get() = R.string.keywords_dark_ui_mode
 
+    override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
     override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
@@ -109,7 +112,7 @@ class DarkModeScreen :
         val broadcastReceiver =
             object : BroadcastReceiver() {
                 override fun onReceive(receiverContext: Context, intent: Intent) {
-                    context.notifyPreferenceChange(this@DarkModeScreen)
+                    context.notifyPreferenceChange(KEY)
                 }
             }
         context.registerReceiver(
@@ -118,7 +121,7 @@ class DarkModeScreen :
         )
 
         val darkModeObserver = DarkModeObserver(context)
-        darkModeObserver.subscribe { context.notifyPreferenceChange(this@DarkModeScreen) }
+        darkModeObserver.subscribe { context.notifyPreferenceChange(KEY) }
 
         fragmentStates[context] = FragmentState(broadcastReceiver, darkModeObserver)
     }

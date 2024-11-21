@@ -178,6 +178,14 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Appspråk"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Föreslagna språk"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Alla språk"</string>
+    <!-- no translation found for suggested_locales_title (119908696638862861) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
+    <skip />
+    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
+    <skip />
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Systemets språkinställning"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Systemets standardinställning"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Det går inte att välja språk för den här appen i Inställningar."</string>
@@ -193,6 +201,11 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Ändra"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s är inte tillgängligt"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Du kan inte använda det här språket som systemspråk, men appar och webbplatser informeras om att du föredrar det."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"Sök"</string>
+    <!-- no translation found for language_selection_title (968179636453982415) -->
+    <skip />
+    <string name="country_selection_title" msgid="5376929821458644732">"Regionsinställningar"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"Ange språk"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionsinställningar"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Anger inställningar för enheter och siffror"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Ge appar åtkomst till dina regionsinställningar så att din upplevelse kan anpassas."</string>
@@ -1242,7 +1255,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Anpassade"</string>
     <string name="brightness" msgid="6216871641021779698">"Ljusstyrka"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Anpassad ljusstyrka"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Om anpassad ljusstyrka"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Skärmens ljusstyrka justeras automatiskt efter miljö och aktivitet. Du kan träna Anpassad ljusstyrka med dina egna inställningar genom att flytta reglaget manuellt."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"På"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Av"</string>
@@ -1563,7 +1575,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Det gick inte att rensa dessa eSIM"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Något gick fel och dina eSIM rensades inte.\n\nStarta om enheten och försök igen."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Radera privat utrymme"</string>
-    <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Om du har ett privat utrymme på din enhet tas det bort permanent och Google-kontot som lagts till för ditt utrymme att tas bort. \n\nAlla appar i ditt utrymme och tillhörande data tas bort från telefonens "<b>"interna lagringsutrymme"</b>"."</string>
+    <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Om du har ett privat utrymme på din enhet tas det bort permanent och Google-kontot som lagts till för ditt utrymme att tas bort. \n\nAlla appar i ditt utrymme och tillhörande data tas även bort från telefonens "<b>"interna lagringsutrymme"</b>"."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Rensa all data (återställ standardinst.)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Rensa all data (återställ standardinst.)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"musik"</li>\n<li>"foton"</li>\n<li>"annan användardata"</li></string>
@@ -1985,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Standard"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Styrplatta"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Styrplatta och mus"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"Mus"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Markörens hastighet, rörelser"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Lätt klick på styrplattan"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Tryck och dra"</string>
@@ -3727,16 +3740,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"När du får många aviseringar på kort tid kommer enheten att sänka volymen och minimera aviseringar i upp till två minuter. Samtal, alarm och prioriterade konversationer påverkas inte. \n\nDu kan hitta aviseringarna som tas emot under den gradvisa sänkningen genom att dra nedåt från skärmens överkant."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Använd för jobbprofiler"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Tillämpa på jobbprofilappar"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"Grupperade aviseringar"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"På"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"Av"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Använd aviseringsgruppering"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"Aviseringar med liknande teman grupperas ljudlöst för en tystare upplevelse. Gruppering åsidosätter en apps egna aviseringsinställningar."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Hjälptjänster för VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Inga installerade appar har begärt att få köras som hjälptjänster för VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Vill du tillåta att tjänsten för VR får tillgång till <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4199,6 +4207,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Aviseringar i helskärm"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Tillåt aviseringar i helskärm från den här appen"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Tillåt att den här appen visar aviseringar som täcker hela skärmen när enheten är låst. Sådana aviseringar kan användas i appar för att lyfta fram alarm, inkommande samtal och andra brådskande aviseringar."</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Appar för mediehantering"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Tillåt att appen hanterar media"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Om du tillåter detta kan appen modifiera eller radera mediefiler som skapats med andra appar utan att du tillfrågas. Appen måste ha åtkomst till filer och media."</string>
@@ -5098,7 +5112,7 @@
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Mediespelaren förblir öppen i snabbinställningarna så att du snabbt kan återuppta uppspelningen"</string>
     <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Visa media på låsskärmen"</string>
     <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"Mediespelaren finns tillgänglig på låsskärmen så att du kan återuppta uppspelningen snabbt"</string>
-    <string name="media_controls_recommendations_title" msgid="3012692549413927608">"Visa medierekommendationer från assistenten"</string>
+    <string name="media_controls_recommendations_title" msgid="3012692549413927608">"Visa medierekommendationer från Google Assistent"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Baserat på din aktivitet"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Dölj spelare"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Visa spelare"</string>
@@ -5493,11 +5507,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Det gick inte att ställa in standardkontot"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Inget standardkonto har angetts"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Endast enheten"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Enhet och %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Lägg till ett konto för att komma igång"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Var du vill spara kontakter"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Circle to Search"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Tryck länge på hemknappen eller navigeringshandtaget för att söka med innehållet på skärmen."</string>
 </resources>

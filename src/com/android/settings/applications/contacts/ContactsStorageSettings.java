@@ -25,7 +25,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.ContactsContract.RawContacts.DefaultAccount.DefaultAccountAndState;
@@ -58,7 +57,8 @@ import java.util.Map;
  */
 @SearchIndexable
 public class ContactsStorageSettings extends DashboardFragment
-        implements SelectorWithWidgetPreference.OnClickListener, OnPreferenceClickListener {
+        implements SelectorWithWidgetPreference.OnClickListener, OnPreferenceClickListener,
+        AuthenticatorHelper.OnAccountsUpdateListener {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.contacts_storage_settings);
     private static final String TAG = "ContactsStorageSettings";
@@ -72,13 +72,15 @@ public class ContactsStorageSettings extends DashboardFragment
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mAuthenticatorHelper = new AuthenticatorHelper(context,
-                new UserHandle(UserHandle.myUserId()), null);
-        String[] accountTypes = getEligibleAccountTypes();
-        for (String accountType : accountTypes) {
-            // Preload the drawable for the account type to avoid the latency when rendering the
-            // account preference.
-            mAuthenticatorHelper.preloadDrawableForType(context, accountType);
-        }
+                new UserHandle(UserHandle.myUserId()), this);
+        mAuthenticatorHelper.listenToAccountUpdates();
+        preloadEligibleAccountIcon();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mAuthenticatorHelper.stopListeningToAccountUpdates();
     }
 
     @UiThread
@@ -127,6 +129,12 @@ public class ContactsStorageSettings extends DashboardFragment
     }
 
     @Override
+    public void onAccountsUpdate(UserHandle userHandle) {
+        preloadEligibleAccountIcon();
+        refreshUI();
+    }
+
+    @Override
     public void onCreatePreferences(@NonNull Bundle savedInstanceState,
             @NonNull String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
@@ -139,6 +147,7 @@ public class ContactsStorageSettings extends DashboardFragment
         // when creating eligible account preferences.
         mAccountMap.clear();
         final PreferenceGroup preferenceGroup = findPreference(PREF_KEY_ACCOUNT_CATEGORY);
+        preferenceGroup.removeAll();
         // If the default account is SIM, we should show in the page, otherwise don't show.
         SelectorWithWidgetPreference simAccountPreference = buildSimAccountPreference();
         if (simAccountPreference != null) {
@@ -152,10 +161,19 @@ public class ContactsStorageSettings extends DashboardFragment
         // If there's no eligible account types, the "Add Account" preference should
         // not be shown to the users.
         if (getEligibleAccountTypes().length > 0) {
-            getPreferenceScreen().addPreference(buildAddAccountPreference(accounts.isEmpty()));
+            preferenceGroup.addPreference(buildAddAccountPreference(accounts.isEmpty()));
         }
         setupDeviceOnlyPreference();
         setDefaultAccountPreference(preferenceGroup);
+    }
+
+    private void preloadEligibleAccountIcon() {
+        String[] accountTypes = getEligibleAccountTypes();
+        for (String accountType : accountTypes) {
+            // Preload the drawable for the account type to avoid the latency when rendering the
+            // account preference.
+            mAuthenticatorHelper.preloadDrawableForType(getContext(), accountType);
+        }
     }
 
     private void setupDeviceOnlyPreference() {

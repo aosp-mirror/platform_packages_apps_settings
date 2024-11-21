@@ -178,6 +178,10 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"अ‍ॅपची भाषा"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"सुचवलेल्या भाषा"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"सर्व भाषा"</string>
+    <string name="suggested_locales_title" msgid="119908696638862861">"सुचवलेल्या"</string>
+    <string name="all_supported_locales_title" msgid="2535112632133166546">"सर्व भाषा"</string>
+    <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"सर्व प्रदेश"</string>
+    <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"सर्व नंबरिंग सिस्टीम"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"सिस्टीम भाषा"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"सिस्टीम डीफॉल्ट"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"या अ‍ॅपसाठीची भाषा निवडणे हे सेटिंग्ज मध्ये उपलब्ध नाही."</string>
@@ -193,6 +197,10 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"बदला"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s उपलब्ध नाही"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"ही भाषा सिस्टीमची भाषा म्हणून वापरली जाऊ शकत नाही, मात्र तुम्ही या भाषेला प्राधान्य देता हे तुम्ही अ‍ॅप्स आणि वेबसाइटना सांगितले आहे."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"शोध"</string>
+    <string name="language_selection_title" msgid="968179636453982415">"भाषा जोडा"</string>
+    <string name="country_selection_title" msgid="5376929821458644732">"प्रदेश प्राधान्य"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"भाषा नाव टाइप करा"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"प्रादेशिक प्राधान्ये"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"युनिट आणि नंबर प्राधान्ये सेट करा"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"अ‍ॅप्सना तुमची प्रादेशिक प्राधान्ये सांगा ज्यामुळे ते तुमचा अनुभव पर्सनलाइझ करतील."</string>
@@ -1242,7 +1250,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"अडॅप्टिव्ह"</string>
     <string name="brightness" msgid="6216871641021779698">"ब्राइटनेस पातळी"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"अडॅप्टिव्ह ब्राइटनेस"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"अडॅप्टिव्ह ब्राइटनेसबद्दल"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"तुमच्या स्क्रीनचा ब्राइटनेस तुमच्या वातावरण आणि अ‍ॅक्टिव्हिटीशी आपोआप अ‍ॅडजस्ट होईल. अडॅप्टिव्ह ब्राइटनेसला तुमची प्राधान्ये जाणून घेण्यात मदत करण्यासाठी तुम्ही स्लाइडर मॅन्युअली हलवू शकता."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"सुरू"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"बंद"</string>
@@ -1985,6 +1992,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"डीफॉल्ट"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"टचपॅड"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"टचपॅड आणि माउस"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"माउस"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"पॉइंटर वेग, जेश्चर"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"क्लिक करण्यासाठी टॅप करा"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"टॅप करून ड्रॅग करणे"</string>
@@ -3727,16 +3735,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"तुम्हाला थोड्या कालावधीमध्ये बरीच नोटिफिकेशन मिळतात, तेव्हा तुमचे डिव्हाइस त्याचा व्हॉल्यूम कमी करेल आणि स्क्रीनवरील सूचनांना २ मिनिटांपर्यंत कमी करेल. कॉल, अलार्म आणि प्राधान्य दिलेल्या संभाषणांवर परिणाम होत नाहीत. \n\nकूलडाउनदरम्यान मिळालेली नोटिफिकेशन स्क्रीनच्या वरून खालपर्यंत स्वाइप करून शोधली जाऊ शकतात."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"कार्य प्रोफाइलला लागू करा"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"कार्य प्रोफाइलच्या अ‍ॅप्सना लागू करा"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"बंडल केलेली नोटिफिकेशन"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"सुरू आहे"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"बंद आहे"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"नोटिफिकेशन बंडलिंग वापरा"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"आणखी शांत अनुभवासाठी समान थीम असलेली नोटिफिकेशन सायलंट करून ती एकत्र गटबद्ध केली जातील. बंडलिंग ॲपची स्वतःची नोटिफिकेशन सेटिंग्ज ओव्हरराइड करेल."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR मदतनीस सेवा"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"कोणत्याही इंस्टॉल केलेल्या अ‍ॅप्सनी VR मदतनीस सेवा म्हणून चालवण्यासाठी विनंती केली नाही."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"<xliff:g id="SERVICE">%1$s</xliff:g> साठी VR सेवा प्रवेशाची अनुमती द्यायची?"</string>
@@ -4199,6 +4202,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"फुल-स्क्रीन नोटिफिकेशन"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"या ॲपवरील फुल-स्क्रीन नोटिफिकेशनना अनुमती द्या"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"डिव्‍हाइस लॉक असताना या ॲपला फुल स्क्रीन वापरणाऱ्या सूचना दाखवण्‍याची अनुमती द्या. ॲप्स यांचा वापर अलार्म, इनकमिंग कॉल किंवा इतर तातडीच्या सूचना हायलाइट करण्यासाठी करू शकतात."</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"मीडिया व्यवस्थापन ॲप्स"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"ॲपला मीडिया व्यवस्थापित करण्याची अनुमती द्या"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"अनुमती दिल्यास, हे ॲप तुमची परवानगी न घेता, इतर ॲप्स वापरून तयार केलेल्या मीडिया फाइलमध्ये बदल करू शकते किंवा त्या हटवू शकते. ॲपला फाइल आणि मीडिया अ‍ॅक्सेस करण्याची परवानगी असणे आवश्यक आहे."</string>
@@ -5300,7 +5309,7 @@
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"फुल स्क्रीन"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"अर्धी स्क्रीन"</string>
     <string name="user_aspect_ratio_device_size" msgid="2339820985120881199">"डिव्हाइस आस्पेक्ट रेशो"</string>
-    <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
+    <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"१६:९"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"४:३"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="DENOMINATOR">%2$s</xliff:g> बाय <xliff:g id="NUMERATOR">%1$s</xliff:g>"</string>
@@ -5493,11 +5502,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"डीफॉल्ट खाते सेट करताना एरर आली"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"कोणतेही डीफॉल्ट अकाउंट सेट केलेले नाही"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"केवळ डिव्हाइस"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"डिव्हाइस आणि %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"सुरू करण्यासाठी एखादे खाते जोडा"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"संपर्क कुठे सेव्ह करावेत"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"शोधण्यासाठी वर्तुळ करा"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"तुमच्या स्क्रीनवरील आशय वापरून शोधण्यासाठी होम बटण किंवा नेव्हिगेशन हँडल स्‍पर्श करून धरून ठेवा."</string>
 </resources>

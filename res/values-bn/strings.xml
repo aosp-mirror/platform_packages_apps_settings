@@ -178,6 +178,14 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"অ্যাপের ভাষা"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"সাজেস্ট করা ভাষা"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"সব ভাষা"</string>
+    <!-- no translation found for suggested_locales_title (119908696638862861) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
+    <skip />
+    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
+    <skip />
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"সিস্টেমের ভাষা"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"সিস্টেম ডিফল্ট"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"এই অ্যাপের জন্য \'সেটিংস\' থেকে ভাষা বেছে নেওয়ার সুবিধা উপলভ্য নেই।"</string>
@@ -193,6 +201,11 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"পরিবর্তন করুন"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s ভাষা উপলভ্য নেই"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"সিস্টেমের ভাষা হিসেবে এই ভাষা ব্যবহার করা যাবে না, তবে এটি যে আপনার পছন্দের ভাষা তা আপনি অ্যাপ ও ওয়েবসাইটে জানিয়েছেন।"</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"সার্চ"</string>
+    <!-- no translation found for language_selection_title (968179636453982415) -->
+    <skip />
+    <string name="country_selection_title" msgid="5376929821458644732">"পছন্দের অঞ্চল"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"ভাষার নাম লিখুন"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"আঞ্চলিক অভিরুচি"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"ইউনিট ও নম্বর সংক্রান্ত পছন্দ সেট করুন"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"অ্যাপকে আপনার আঞ্চলিক অভিরুচি সম্পর্কে জানতে দিন, যাতে সেগুলি আপনার অভিজ্ঞতা পছন্দমতো করে তুলতে পারে।"</string>
@@ -1242,7 +1255,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"অভিযোজিত"</string>
     <string name="brightness" msgid="6216871641021779698">"উজ্জ্বলতার স্তর"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"পরিবেশের আলো অনুযায়ী উজ্জ্বলতা"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"পরিবেশের আলো অনুযায়ী উজ্জ্বলতা সম্পর্কে"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"আপনার পারিপার্শ্বিক অবস্থা এবং অ্যাক্টিভিটি অনুযায়ী স্ক্রিনের উজ্জ্বলতা নিজে থেকেই অ্যাডজাস্ট করে নেওয়া হবে। স্ক্রিন কতখানি উজ্জ্বল হলে আপনার সুবিধা হয়, তা আপনি স্লাইডারের মাধ্যমে নির্দিষ্ট করে দিতে পারেন।"</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"চালু আছে"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"বন্ধ আছে"</string>
@@ -1985,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"ডিফল্ট"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"টাচপ্যাড"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"টাচপ্যাড ও মাউস"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"মাউস"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"পয়েন্টার স্পিড, জেসচার"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"ক্লিক করতে ট্যাপ করা"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"ট্যাপ করে টেনে আনা"</string>
@@ -3727,16 +3740,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"আপনি অল্প সময়ের মধ্যে একসঙ্গে অনেকগুলি বিজ্ঞপ্তি পেলে আপনার ডিভাইস নিজের ভলিউম এবং সতর্কবার্তা সর্বাধিক ২ মিনিটের জন্য কমিয়ে দেবে। কল, অ্যালার্ম ও গুরুত্বপূর্ণ কথোপকথনের উপরে এর কোনও প্রভাব পড়ে না। \n\nস্ক্রিনের একেবারে উপর থেকে নিচের দিকে টেনে নামালে কুলডাউনের সময়ে পাওয়া বিজ্ঞপ্তি দেখতে পাওয়া যায়।"</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"অফিস প্রোফাইলে প্রয়োগ করুন"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"অফিস প্রোফাইল অ্যাপে প্রয়োগ করুন"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"বান্ডেল করা বিজ্ঞপ্তি"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"চালু আছে"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"বন্ধ আছে"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"বিজ্ঞপ্তি বান্ডেলে রাখার সেটিংস ব্যবহার করুন"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"একই থিম রয়েছে এমন বিজ্ঞপ্তি সাইলেন্ট করে দেওয়া হবে এবং সাইলেন্ট অভিজ্ঞতার জন্য গ্রুপ করে রাখা হবে। বান্ডেল করে রাখলে অ্যাপের নিজের বিজ্ঞপ্তির সেটিংস ওভাররাইড হবে।"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"ভিআর(VR) সহায়তাকারী পরিষেবা"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"VR সহায়তাকারী পরিষেবা হিসেবে চলার জন্য কোনও অ্যাপ ইনস্টল করা নেই৷"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"<xliff:g id="SERVICE">%1$s</xliff:g> এর জন্য (ভিআর)VR পরিষেবার অ্যাক্সেসের অনুমতি দেবেন?"</string>
@@ -4199,6 +4207,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"ফুল-স্ক্রিন বিজ্ঞপ্তি"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"এই অ্যাপকে ফুল-স্ক্রিনে বিজ্ঞপ্তি দেখানোর অনুমতি দিন"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"ডিভাইস লক থাকার সময় এই অ্যাপকে ফুল স্ক্রিন জুড়ে বিজ্ঞপ্তি দেখানোর অনুমতি দিন। অ্যালার্ম, ইনকামিং কল অথবা অন্যান্য জরুরি বিজ্ঞপ্তি হাইলাইট করতে, অ্যাপ এগুলি ব্যবহার করতে পারে।"</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"মিডিয়া ম্যানেজমেন্ট অ্যাপ"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"অ্যাপকে মিডিয়া ম্যানেজ করার অনুমতি দিন"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"অনুমতি দেওয়া হলে, এই অ্যাপ আপনাকে জিজ্ঞাসা না করেই অন্য অ্যাপের তৈরি করা মিডিয়া ফাইলে পরিবর্তন করতে বা তা মুছে ফেলতে পারবে। অ্যাপকে অবশ্যই ফাইল এবং মিডিয়া অ্যাক্সেস করার অনুমতি দিতে হবে।"</string>
@@ -5493,11 +5507,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"ডিফল্ট অ্যাকাউন্ট সেট করার সময় কোনও সমস্যা হয়েছে"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"কোনও ডিফল্ট অ্যাকাউন্ট সেট করা নেই"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"শুধুমাত্র ডিভাইস"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"ডিভাইস ও %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"শুরু করতে একটি অ্যাকাউন্ট যোগ করুন"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"পরিচিতি কোথায় সেভ করব"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"খোঁজার জন্য সার্কেল বানান"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"আপনার স্ক্রিনে কন্টেন্ট ব্যবহার করে সার্চ করতে হোম বোতাম বা নেভিগেশন হ্যান্ডেল টাচ করে ধরে রাখুন।"</string>
 </resources>

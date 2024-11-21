@@ -37,7 +37,9 @@ class ColorAndMotionScreen : PreferenceScreenCreator {
 
     override fun fragmentClass() = ColorAndMotionFragment::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {
+        +RemoveAnimationsPreference();
+    }
 
     companion object {
         const val KEY = "accessibility_color_and_motion"

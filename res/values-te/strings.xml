@@ -67,8 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"కొత్త పరికరాన్ని పెయిర్ చేయండి"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"బ్లూటూత్"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"రేపు ఆటోమేటిక్‌గా ఆన్ చేయండి"</string>
-    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
-    <skip />
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"మీరు బ్లూటూత్‌ను ఆఫ్ చేస్తే, తర్వాతి రోజు అది మళ్లీ ఆన్ అవుతుంది"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"కుడి చెవి పెయిర్"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"ఎడమ చెవి పెయిర్"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"మీ మరో చెవిని పెయిర్ చేయి"</string>
@@ -179,6 +178,10 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"యాప్ భాష"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"సూచించిన భాషలు"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"అన్ని భాషలు"</string>
+    <string name="suggested_locales_title" msgid="119908696638862861">"సూచించబడినవి"</string>
+    <string name="all_supported_locales_title" msgid="2535112632133166546">"అన్ని భాషలు"</string>
+    <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"అన్ని ప్రాంతాలు"</string>
+    <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"అన్ని నంబరింగ్ సిస్టమ్‌లు"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"సిస్టమ్ భాష"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"సిస్టమ్ ఆటోమేటిక్ సెట్టింగ్"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"ఈ యాప్ కోసం భాష ఎంపిక సెట్టింగ్‌లలో అందుబాటులో లేదు."</string>
@@ -194,6 +197,10 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"మార్చండి"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s అందుబాటులో లేదు"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"ఈ భాషను సిస్టమ్ భాషగా ఉపయోగించలేరు, కానీ మీరు ఇది మీ ప్రాధాన్య భాష అని యాప్‌లకు, వెబ్‌సైట్‌లకు తెలియజేశారు."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"సెర్చ్"</string>
+    <string name="language_selection_title" msgid="968179636453982415">"భాషను జోడించండి"</string>
+    <string name="country_selection_title" msgid="5376929821458644732">"ప్రాంతం ప్రాధాన్యత"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"భాష పేరును టైప్ చేయండి"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"ప్రాంతీయ ప్రాధాన్యతలు"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"యానిట్‌లు, నంబర్ ప్రాధాన్యతలను సెట్ చేయండి"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"యాప్‌లకు మీ ప్రాంతీయ ప్రాధాన్యతలను తెలియజేయండి, తద్వారా అవి మీ అనుభవాన్ని వ్యక్తిగతీకరించగలుగుతాయి."</string>
@@ -290,7 +297,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"ఆఫ్"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{ఆన్‌లో ఉంది / # యాప్‌నకు లొకేషన్‌కు యాక్సెస్ ఉంది}other{ఆన్‌లో ఉంది / # యాప్‌లకు లొకేషన్‌కు యాక్సెస్ ఉంది}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"లోడ్ చేస్తోంది…"</string>
-    <string name="location_settings_footer_general" msgid="3447585552176173502">"సమీప పరికరాల అనుమతి ఉన్న యాప్‌లు కనెక్ట్ అయిన పరికరాల అంచనా స్థానాన్ని నిర్ణయించగలవు."</string>
+    <string name="location_settings_footer_general" msgid="3447585552176173502">"సమీప పరికరాల అనుమతి గల యాప్‌లు, కనెక్ట్ అయి ఉన్న పరికరాల రిలేటివ్ పొజిషన్‌ను అంచనా వేయగలవు."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"యాప్‌లు, సర్వీస్‌లకు లొకేషన్ యాక్సెస్ ఆఫ్ చేయబడింది. మీరు ఎమర్జెన్సీ నంబర్‌కు కాల్ చేసినా లేదా SMS పంపినా, అత్యవసర సమయాలలో స్పందించే వారికి ఆటోమేటిక్‌గా మీ పరికర లొకేషన్ పంపబడుతుంది."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"లొకేషన్ సెట్టింగ్‌ల గురించి మరింత తెలుసుకోండి"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"మార్చడానికి ChromeOS సెట్టింగ్‌లు &gt; గోప్యత, సెక్యూరిటీ &gt; గోప్యతా కంట్రోల్స్‌ను &gt; లొకేషన్ యాక్సెస్‌కు వెళ్లండి"</string>
@@ -1243,7 +1250,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"అనుకూలం"</string>
     <string name="brightness" msgid="6216871641021779698">"ప్రకాశం స్థాయి"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"పరిసర అనుకూల ప్రకాశం"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"పరిసర అనుకూల ప్రకాశం గురించి పరిచయం"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"మీ స్క్రీన్ బ్రైట్‌నెస్, ఆటోమేటిక్‌గా మీ పరిసరాల‌కు, యాక్టివిటీలకు అనుగుణంగా అడ్జస్ట్ అవుతుంది. మీ ప్రాధాన్యతలను అర్థం చేసుకోవడంలో అనుకూల ప్రకాశానికి సహాయపడటం కోసం స్లయిడర్‌ను మీరు మాన్యువల్‌గా లాగవచ్చు."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"ఆన్"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"ఆఫ్"</string>
@@ -1986,6 +1992,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"ఆటోమేటిక్ సెట్టింగ్"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"టచ్‌ప్యాడ్"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"టచ్‌ప్యాడ్ &amp; మౌస్"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"మౌస్"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"పాయింటర్ స్పీడ్, సంజ్ఞలు"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"క్లిక్ కోసం ట్యాప్ చేయండి"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"ట్యాప్ చేసి లాగండి"</string>
@@ -3728,16 +3735,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"తక్కువ వ్యవధిలో మీరు పలు నోటిఫికేషన్‌లను పొందినప్పుడు, 2 నిమిషాలకు మీ పరికర వాల్యూమ్‌ను తగ్గించి, అలర్ట్‌లను కుదిస్తుంది. కాల్స్, అలారాలు, ప్రాధాన్య సంభాషణలు ప్రభావితం కావు. \n\nకూల్‌డౌన్ సమయంలో అందుకున్న నోటిఫికేషన్‌లను, స్క్రీన్‌ను పై నుండి కిందికి లాగడం ద్వారా కనుగొనవచ్చు."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"వర్క్ ప్రొఫైల్‌లకు వర్తింపజేయండి"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"వర్క్ ప్రొఫైల్ యాప్‌లకు వర్తింపజేయండి"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"బండిల్ చేసిన నోటిఫికేషన్‌లు"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"ఆన్‌లో ఉంది"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"ఆఫ్‌లో ఉంది"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"నోటిఫికేషన్‌లను బండిల్ చేయడాన్ని ఉపయోగించండి"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"ఒకేరకమైన థీమ్‌లతో కూడిన నోటిఫికేషన్‌లు మ్యూట్ చేయబడతాయి, ఇంకా నిశ్శబ్ద ఎక్స్‌పీరియన్స్ కోసం గ్రూప్ చేయబడతాయి. బండిల్ చేయడం అనేది యాప్‌నకు సంబంధించిన నోటిఫికేషన్ సెట్టింగ్‌లను ఓవర్‌రైడ్ చేస్తుంది."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR సహాయక సర్వీసులు"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"ఇన్‌స్టాల్ చేసిన యాప్‌లేవీ వాటిని VR సహాయక సర్వీసులుగా రన్ చేయాల్సిందిగా రిక్వెస్ట్ చేయలేదు."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"<xliff:g id="SERVICE">%1$s</xliff:g> కోసం VR సేవ యాక్సెస్‌ను అనుమతించాలా?"</string>
@@ -4200,6 +4202,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"ఫుల్ స్క్రీన్ నోటిఫికేషన్‌లు"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"ఈ యాప్ నుండి ఫుల్ స్క్రీన్ నోటిఫికేషన్‌లను అనుమతించండి"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"పరికరం లాక్‌లో ఉన్నప్పుడు నోటిఫికేషన్లను చూపడానికి ఈ యాప్‌ను అనుమతించండి. ఈ నోటిఫికేషన్లు ఫుల్ స్క్రీన్‌లో కనిపిస్తాయి. అలారాలు, ఇన్‌కమింగ్ కాల్స్ లేదా ఇతర అత్యవసర నోటిఫికేషన్‌లను హైలైట్ చేయడానికి యాప్‌లు వీటిని ఉపయోగించవచ్చు."</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"మీడియా మేనేజ్‌మెంట్ యాప్‌లు"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"మీడియాను మేనేజ్ చేయడానికి యాప్‌ను అనుమతించండి"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"అనుమతిస్తే, ఈ యాప్ మిమ్మల్ని అడగకుండానే, ఇతర యాప్‌లను ఉపయోగించి క్రియేట్ చేసిన మీడియా ఫైళ్లను ఎడిట్ చేస్తుంది లేదా తొలగిస్తుంది. ఫైళ్లను, మీడియాను యాక్సెస్ చేయడానికి యాప్‌నకు అనుమతి ఉండాలి."</string>
@@ -5205,7 +5213,7 @@
     <string name="all_apps" msgid="3054120149509114789">"అన్ని యాప్‌లు"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"అనుమతించవద్దు"</string>
     <string name="uwb_settings_title" msgid="8578498712312002231">"అల్ట్రా-వైడ్‌బ్యాండ్ (UWB)"</string>
-    <string name="uwb_settings_summary" msgid="3074271396764672268">"UWBని కలిగి ఉన్న సమీపంలోని పరికరాల సంబంధిత స్థానాన్ని గుర్తించడంలో సహాయపడుతుంది"</string>
+    <string name="uwb_settings_summary" msgid="3074271396764672268">"UWBని కలిగి ఉన్న సమీపంలోని పరికరాల సంబంధిత పొజిషన్‌ను గుర్తించడంలో సహాయపడుతుంది"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"UWBని ఉపయోగించడానికి విమానం మోడ్‌ను ఆఫ్ చేయండి"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"ప్రస్తుత లొకేషన్‌లో UWB అందుబాటులో లేదు"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
@@ -5494,11 +5502,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"ఆటోమేటిక్ ఖాతాను సెట్ చేయడంలో ఎర్రర్ ఏర్పడింది"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"ఆటోమేటిక్ సెట్టింగ్ సెట్ చేయబడలేదు"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"పరికరం మాత్రమే"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"పరికరం, %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"ప్రారంభించడానికి ఒక ఖాతాను జోడించండి"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"కాంటాక్ట్‌లను ఎక్కడ సేవ్ చేయాలి"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"సెర్చ్ చేయడానికి సర్కిల్ గీయండి"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"మీ స్క్రీన్‌పై ఉన్న కంటెంట్‌ను ఉపయోగించి సెర్చ్ చేయడానికి హోమ్ బటన్ లేదా నావిగేషన్ హ్యాండిల్‌ను నొక్కి, పట్టుకోండి."</string>
 </resources>

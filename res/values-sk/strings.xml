@@ -67,8 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Spárovať nové zariadenie"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Automaticky zapnúť zajtra"</string>
-    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
-    <skip />
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Ak Bluetooth vypnete, ďalší deň sa vždy znova zapne"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Spárovať pravé ucho"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Spárovať ľavé ucho"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Spárujte si druhé ucho"</string>
@@ -179,6 +178,14 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Jazyk aplikácie"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Navrhované jazyky"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Všetky jazyky"</string>
+    <!-- no translation found for suggested_locales_title (119908696638862861) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
+    <skip />
+    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
+    <skip />
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Jazyk systému"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Predvolené systémom"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Výber jazyka pre túto aplikáciu nie je v Nastaveniach k dispozícii."</string>
@@ -194,6 +201,11 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Zmeniť"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s nie je k dispozícii"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Tento jazyk nemôžete používať pre systém, ale môžete informovať aplikácie a weby, že ho preferujete."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"Vyhľadávanie"</string>
+    <!-- no translation found for language_selection_title (968179636453982415) -->
+    <skip />
+    <string name="country_selection_title" msgid="5376929821458644732">"Preferovaný región"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"Zadajte názov jazyka"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionálne nastavenia"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Nastavte predvoľby jednotiek a čísiel"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Keď používate regionálne nastavenia, aplikácie vám môžu prispôsobiť svoje prostredie."</string>
@@ -854,9 +866,9 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Odpojiť"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Spárovať a pripojiť"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Keď je zapnuté rozhranie Bluetooth, zariadenie môže komunikovať s ostatnými zariadeniami s rozhraním Bluetooth v okolí"</string>
-    <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Keď je zapnuté rozhranie Bluetooth, zariadenie môže komunikovať s ostatnými zariadeniami s rozhraním Bluetooth v okolí. Funkcie ako Quick Share a Nájdi moje zariadenie používajú Bluetooth."</string>
+    <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Keď je zapnuté rozhranie Bluetooth, zariadenie môže komunikovať s inými zariadeniami Bluetooth v okolí. Funkcie ako Quick Share a Nájdi moje zariadenie používajú Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Keď je zapnuté rozhranie Bluetooth, zariadenie môže komunikovať s ostatnými zariadeniami s rozhraním Bluetooth v okolí.\n\nNa zlepšenie prostredia zariadenia môžu aplikácie a služby kedykoľvek vyhľadávať zariadenia v okolí, a to aj vtedy, keď je rozhranie Bluetooth vypnuté. Vďaka tomu je napríklad možné zlepšiť funkcie a služby podmienené polohou. Môžete to zmeniť v nastaveniach vyhľadávania zariadení Bluetooth."</string>
-    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Keď je zapnuté rozhranie Bluetooth, zariadenie môže komunikovať s ostatnými zariadeniami s rozhraním Bluetooth v okolí. Funkcie ako Quick Share a Nájdi moje zariadenie používajú Bluetooth.\n\nAplikácie a služby môžu kedykoľvek vyhľadávať zariadenia v okolí, a to aj vtedy, keď je rozhranie Bluetooth vypnuté. Môžete to napríklad využiť, keď chcete zlepšiť funkcie a služby podmienené polohou. Môžete to zmeniť v nastaveniach vyhľadávania zariadení Bluetooth."</string>
+    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Keď je zapnuté rozhranie Bluetooth, zariadenie môže komunikovať s inými zariadeniami Bluetooth v okolí. Funkcie ako Quick Share a Nájdi moje zariadenie používajú Bluetooth.\n\nAplikácie a služby môžu kedykoľvek vyhľadávať zariadenia v okolí, a to aj vtedy, keď je rozhranie Bluetooth vypnuté. Môžete to napríklad využiť, keď chcete zlepšiť funkcie a služby podmienené polohou. Môžete to zmeniť v nastaveniach vyhľadávania zariadení Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Zmeniť"</string>
     <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"Zariadenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g> nie je pripojené"</string>
     <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"Z bezpečnostných dôvodov zabudnite toto zariadenie a potom ho znova spárujte"</string>
@@ -1243,7 +1255,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Adaptívne"</string>
     <string name="brightness" msgid="6216871641021779698">"Úroveň jasu"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Adaptácia jasu"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Informácie o adaptácii jasu"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Jas obrazovky sa automaticky prispôsobí prostrediu a aktivitám. Ručným posúvaním posúvača učíte adaptáciu jasu svoje preferované nastavenia."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Zapnuté"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Vypnuté"</string>
@@ -1986,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Predvolené"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad a myš"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"Myš"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Rýchlosť kurzora, gestá"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Kliknutie klepnutím"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Presúvanie po klepnutí"</string>
@@ -3158,10 +3170,10 @@
     <string name="extreme_threats_summary" msgid="3560742429496902008">"Prijímať upozornenia na extrémne ohrozenie života a majetku"</string>
     <string name="severe_threats_title" msgid="8962959394373974324">"Závažné hrozby"</string>
     <string name="severe_threats_summary" msgid="4982256198071601484">"Prijímať upozornenia na závažné ohrozenie života a majetku"</string>
-    <string name="amber_alerts_title" msgid="5238275758191804575">"Upozornenia Amber"</string>
+    <string name="amber_alerts_title" msgid="5238275758191804575">"Upozornenia na únosy detí"</string>
     <string name="amber_alerts_summary" msgid="5755221775246075883">"Prijímať bulletiny o únosoch detí"</string>
     <string name="repeat_title" msgid="8676570486899483606">"Opakovať"</string>
-    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Bezdrôtové tiesňové varovania"</string>
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Bezdrôtové tiesňové výstrahy"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Sieťoví operátori"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Názvy prístupových bodov"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3728,16 +3740,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Keď dostanete v krátkom čase priveľa upozornení, zariadenie až na dve minúty zníži hlasitosť a minimalizuje počet upozornení. Netýka sa to hovorov, budíkov a prioritných konverzácií. \n\nUpozornenia prijaté počas režimu stlmenia zobrazíte potiahnutím zhora obrazovky nadol."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Používať na pracovné profily"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Používať na aplikácie v pracovnom profile"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"Združené upozornenia"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"Zapnuté"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"Vypnuté"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Používať združovanie upozornení"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"Upozornenia s podobnými témami budú mať vypnutý zvuk a budú zoskupené, aby ste mali tichšie prostredie. Združovanie prepíše vlastné nastavenia upozornení aplikácie."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Pomocné služby VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Žiadne nainštalované aplikácie nežiadali, aby boli spúšťané ako pomocné služby VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Umožniť službe VR prístup do služby <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4200,6 +4207,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Upozornenia na celej obrazovke"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Povoliť zobrazovanie upozornení z tejto aplikácie na celej obrazovke"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Povoľte tejto aplikácii zobrazovať upozornenia na celú obrazovku, keď bude zariadenie uzamknuté. Aplikácie vás môžu pomocou nich informovať o budíkoch, prichádzajúcich hovoroch a ďalších dôležitých upozorneniach."</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Aplikácie na správu médií"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Povoliť aplikácii spravovať médiá"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Ak toto nastavenie povolíte, táto aplikácia môže upravovať alebo odstraňovať súbory médií vytvorené v iných aplikáciách bez opýtania. Aplikácia musí mať povolenie na prístup k súborom a médiám."</string>
@@ -5249,7 +5262,7 @@
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Reštartovať neskôr"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Priestorový zvuk"</string>
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Zvuk z kompatibilných médií bude strhujúcejší"</string>
-    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Sledovanie polohy hlavy"</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Sledovanie hlavy"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Zmeny zvuku pri pohybe hlavou budú prirodzenejšie"</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Synchronizácia povolení z telefónu"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Udeľte hodinkám rovnaké povolenia aplikácie, ktoré ste poskytli v tomto telefóne"</string>
@@ -5496,11 +5509,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Pri nastavovaní predvoleného účtu sa vyskytla chyba"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Nie je nastavená žiadna predvolená hodnota"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Iba zariadenie"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Zariadenie a %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Začnite pridaním účtu"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Kam ukladať kontakty"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Vyhľadávanie krúžením"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Ak chcete vyhľadávať pomocou obsahu na obrazovke, pridržte tlačidlo plochy alebo navigačnú rukoväť."</string>
 </resources>

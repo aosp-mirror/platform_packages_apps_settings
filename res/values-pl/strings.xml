@@ -178,6 +178,14 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Język aplikacji"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Sugerowane języki"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Wszystkie języki"</string>
+    <!-- no translation found for suggested_locales_title (119908696638862861) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
+    <skip />
+    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
+    <skip />
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Język systemu"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Ustawienie domyślne systemu"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Wybór języka tej aplikacji nie jest dostępny w Ustawieniach."</string>
@@ -193,6 +201,11 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Zmień"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"Język %s nie jest dostępny"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Ten język nie może być używany jako język systemu. Jednak aplikacje i witryny wiedzą, że preferujesz ten język."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"Szukaj"</string>
+    <!-- no translation found for language_selection_title (968179636453982415) -->
+    <skip />
+    <string name="country_selection_title" msgid="5376929821458644732">"Ustawienie regionu"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"Wpisz nazwę języka"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferencje regionalne"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Ustaw preferencje dotyczące jednostek i liczb"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Powiadom aplikacje o swoich preferencjach regionalnych, aby mogły dokonać personalizacji."</string>
@@ -1242,7 +1255,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Adaptacyjne"</string>
     <string name="brightness" msgid="6216871641021779698">"Poziom jasności"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Automatyczna jasność"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Informacje o automatycznej jasności"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Jasność ekranu będzie automatycznie dostosowywana do otoczenia i Twojej aktywności. Możesz ręcznie przesunąć suwak, by pomóc automatycznej jasności poznać Twoje preferencje."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Włączona"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Wył."</string>
@@ -1252,7 +1264,7 @@
     <string name="disable_game_default_frame_rate_title" msgid="3712908601744143753">"Wyłącz domyślną liczbę klatek w grach"</string>
     <string name="disable_game_default_frame_rate_summary" msgid="4436762704707434225">"Wyłącz ograniczenie maksymalnej liczby klatek na sekundę w grach do <xliff:g id="FRAME_RATE">%1$d</xliff:g> Hz."</string>
     <string name="peak_refresh_rate_title" msgid="2056355754210341011">"Płynne wyświetlanie"</string>
-    <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"W przypadku niektórych treści automatycznie podwyższa częstotliwość odświeżania do <xliff:g id="ID_1">%1$d</xliff:g> Hz. Zwiększa wykorzystanie baterii."</string>
+    <string name="peak_refresh_rate_summary" msgid="3212309985294885790">"W przypadku niektórych treści automatycznie podwyższa częstotliwość odświeżania do <xliff:g id="ID_1">%1$d</xliff:g> Hz. Zwiększa zużycie baterii."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Wymuszaj częstotliwość odświeżania na najwyższym poziomie"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Najszybsza częstotliwość odświeżania zapewnia szybszą reakcję na dotyk i wyższą jakość animacji, ale zwiększa zużycie baterii"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Aktywność ekranu"</string>
@@ -1985,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Domyślna"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad i mysz"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"Mysz"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Prędkość wskaźnika, gesty"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Kliknięcie przez dotknięcie"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Przeciąganie dotykiem"</string>
@@ -3727,16 +3740,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Gdy w krótkim czasie otrzymasz wiele powiadomień, urządzenie zmniejszy głośność i ograniczy liczbę alertów przez maksymalnie 2 minuty. Nie wpłynie to na połączenia, alarmy ani rozmowy priorytetowe. \n\nPowiadomienia otrzymane w tym czasie można zobaczyć po przesunięciu palcem z góry ekranu w dół."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Zastosuj do profili służbowych"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Zastosuj w aplikacjach profilu służbowego"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"Grupowanie powiadomień"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"Wł."</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"Wył."</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Grupuj powiadomienia"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"Powiadomienia o podobnych tematach będą wyciszane i grupowane, żeby Ci nie przeszkadzać. Grupowanie powiadomień zastąpi ustawienia poszczególnych aplikacji."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Usługi pomocnicze rzeczywistości wirtualnej"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Żadne zainstalowane aplikacje nie prosiły o uruchomienie w trybie usług pomocniczych rzeczywistości wirtualnej."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Zezwalasz usłudze <xliff:g id="SERVICE">%1$s</xliff:g> na dostęp do usług VR?"</string>
@@ -4199,6 +4207,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Powiadomienia pełnoekranowe"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Zezwalaj na powiadomienia pełnoekranowe z tej aplikacji"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Zezwalaj na wyświetlanie przez tę aplikację powiadomień zajmujących cały ekran, gdy urządzenie jest zablokowane. Aplikacje mogą używać tych uprawnień do powiadamiania o alarmach, połączeniach przychodzących i innych pilnych sprawach."</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Aplikacje do zarządzania multimediami"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Zezwalaj na zarządzanie multimediami przez aplikację"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Ta aplikacja może bez pytania modyfikować lub usuwać pliki multimedialne utworzone w innych aplikacjach, jeśli ma takie uprawnienia. Aplikacja wymaga dostępu do plików i multimediów."</string>
@@ -5495,11 +5509,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Podczas ustawiania konta domyślnego wystąpił błąd"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Nie ustawiono konta domyślnego"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Tylko urządzenie"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Urządzenie i %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Na początek dodaj konto"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Gdzie zapisać kontakty"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Zaznacz, aby wyszukać"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Aby wyszukać to, co jest widoczne na ekranie, naciśnij i przytrzymaj przycisk ekranu głównego lub uchwyt nawigacyjny."</string>
 </resources>

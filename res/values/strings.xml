@@ -402,6 +402,18 @@
     <!-- Category for the app's locale picker activity. [CHAR LIMIT=50]-->
     <string name="all_supported_app_locales_title">All languages</string>
 
+    <!-- Category for suggested locales. [CHAR LIMIT=50]-->
+    <string name="suggested_locales_title">Suggested</string>
+
+    <!-- Category for the locale picker. [CHAR LIMIT=50]-->
+    <string name="all_supported_locales_title">All languages</string>
+
+    <!-- Category for the locale region picker. [CHAR LIMIT=50]-->
+    <string name="all_supported_locales_regions_title">All regions</string>
+
+    <!-- Category for the numbering system of locale region picker. [CHAR LIMIT=50]-->
+    <string name="all_supported_numbering_system_title">All numbering systems</string>
+
     <!-- Title for preference of the system default locale. [CHAR LIMIT=50]-->
     <string name="preference_of_system_locale_title">System language</string>
 
@@ -449,6 +461,15 @@
 
     <!-- The text of the confirmation dialog for saying this selected locale is unavailable to use. [CHAR LIMIT=NONE]-->
     <string name="desc_unavailable_locale">This language can’t be used as a system language, but you’ve let apps and websites know you prefer this language.</string>
+
+    <!-- Menu item in the locale menu  [CHAR LIMIT=30] -->
+    <string name="locale_search_menu">Search</string>
+    <!-- Title for the language selection screen [CHAR LIMIT=25] -->
+    <string name="language_selection_title">Add a language</string>
+    <!-- Title for the region selection screen [CHAR LIMIT=25] -->
+    <string name="country_selection_title">Region preference</string>
+    <!-- Hint text in a search edit box (used to filter long language / country lists) [CHAR LIMIT=25] -->
+    <string name="search_language_hint">Type language name</string>
 
     <!-- Regional Preferences begin -->
     <!-- The title of the menu entry of regional preferences. [CHAR LIMIT=50] -->
@@ -4628,6 +4649,8 @@
     <string name="trackpad_bottom_right_tap_summary">Click in the bottom right corner of the touchpad for more options</string>
     <!-- Title text for 'Pointer speed'. [CHAR LIMIT=35] -->
     <string name="trackpad_pointer_speed">Pointer speed</string>
+    <!-- Title text for 'Three finger tap' touchpad preference. This preference allows the user to select an action that will trigger when they tap three fingers on a touchpad. [CHAR LIMIT=60] -->
+    <string name="three_finger_tap_preference_title">Use three finger tap</string>
     <!-- Title text for mouse pointer color. [CHAR LIMIT=35] -->
     <string name="pointer_fill_style">Pointer color</string>
     <!-- Content description for black pointer fill style. [CHAR LIMIT=60] -->
@@ -4656,6 +4679,16 @@
     <string name="keywords_touchpad">trackpad, track pad, mouse, cursor, scroll, swipe, right click, click, pointer</string>
     <!-- Search keywords for 'Bottom-right tap', the name of the touchpad setting that allows the user to click the bottom right corner of the touchpad for more options. -->
     <string name="keywords_trackpad_bottom_right_tap">right click, tap</string>
+    <!-- Radio button text for 'middle click' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will act as a middle-click when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
+    <string name="three_finger_tap_middle_click">Middle click</string>
+    <!-- Radio button text for 'launch assistant' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will launch the Assistant when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
+    <string name="three_finger_tap_launch_gemini">Launch Assistant</string>
+    <!-- Radio button text for 'Go home' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will take the user home when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
+    <string name="three_finger_tap_go_home">Go home</string>
+    <!-- Radio button text for 'Go back' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will initiate a back gesture when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
+    <string name="three_finger_tap_go_back">Go back</string>
+    <!-- Radio button text for 'View recent apps' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will show the recent apps when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
+    <string name="three_finger_tap_recent_apps">View recent apps</string>
 
     <!-- Title text for 'Go home' gesture education [CHAR LIMIT=35] -->
     <string name="gesture_title_go_home">Go home</string>
@@ -10408,6 +10441,10 @@
     <!-- Description for setting that allows apps to send full screen intents. [CHAR LIMIT=NONE] -->
     <string name="footer_description_full_screen_intent">Allow this app to show notifications that take up the full screen when the device is locked. Apps may use these to highlight alarms, incoming calls, or other urgent notifications.</string>
 
+    <string name="write_system_preferences_page_title">Write system preferences</string>
+    <string name="write_system_preferences_switch_title">Allow this app to modify system preferences on your behalf</string>
+    <string name="write_system_preferences_footer_description">This permission allows an app to modify core system preferences.</string>
+
     <!-- Media management apps settings title [CHAR LIMIT=40] -->
     <string name="media_management_apps_title">Media management apps</string>
     <!-- Label for a setting which controls whether an app can manage media files [CHAR LIMIT=45] -->
@@ -12261,6 +12298,8 @@
     <string name="satellite_warning_dialog_title">Can’t turn on <xliff:g id="function" example="bluetooth">%1$s</xliff:g></string>
     <!-- Content for satellite warning dialog to avoid user using wifi/bluetooth/airplane mode [CHAR_LIMIT=NONE] -->
     <string name="satellite_warning_dialog_content">To turn on <xliff:g id="function" example="bluetooth">%1$s</xliff:g>, first end the satellite connection</string>
+    <!-- Category title for satellite functions in mobile network settings [CHAR LIMIT=60] -->
+    <string name="category_title_satellite_connectivity">Satellite connectivity</string>
 
 
     <!-- Title for Apn settings in mobile network settings [CHAR LIMIT=60] -->

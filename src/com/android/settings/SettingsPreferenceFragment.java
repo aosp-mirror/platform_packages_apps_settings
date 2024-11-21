@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
+import static com.android.settingslib.media.PhoneMediaDevice.isDesktop;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -35,6 +36,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.XmlRes;
 import androidx.fragment.app.DialogFragment;
@@ -54,6 +57,7 @@ import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.CustomDialogPreferenceCompat;
 import com.android.settingslib.CustomEditTextPreferenceCompat;
 import com.android.settingslib.core.instrumentation.Instrumentable;
+import com.android.settingslib.preference.PreferenceScreenCreator;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -174,6 +178,31 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
                 checkAvailablePrefs((PreferenceGroup) pref);
             }
         }
+    }
+
+    @Override
+    protected final int getPreferenceScreenResId(@NonNull Context context) {
+        return getPreferenceScreenResId();
+    }
+
+    /** Returns if catalyst is enabled on current screen. */
+    protected final boolean isCatalystEnabled() {
+        // TODO(b/379130874): make Catalyst compatible with desktop device, such as user restriction
+        // check.
+        Context context = getContext();
+        if (context != null && isDesktop(context)) {
+            return false;
+        }
+
+        return getPreferenceScreenCreator() != null;
+    }
+
+    protected @Nullable PreferenceScreenCreator getPreferenceScreenCreator() {
+        if (!Flags.catalyst()) {
+            return null;
+        }
+        Context context = getContext();
+        return context != null ? getPreferenceScreenCreator(context) : null;
     }
 
     public View setPinnedHeaderView(int layoutResId) {

@@ -31,6 +31,7 @@ import com.android.settingslib.fuelgauge.BatteryUtils
 import com.android.settingslib.metadata.MainSwitchPreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
+import com.android.settingslib.metadata.ReadWritePermit
 
 // LINT.IfChange
 class BatterySaverPreference :
@@ -42,6 +43,12 @@ class BatterySaverPreference :
 
     override fun storage(context: Context) = BatterySaverStore(context)
 
+    override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
     override fun isEnabled(context: Context) =
         !BatteryStatus(BatteryUtils.getBatteryIntent(context)).isPluggedIn
 
@@ -52,13 +59,13 @@ class BatterySaverPreference :
                 object : BatterySaverListener {
                     override fun onPowerSaveModeChanged() {
                         handler.postDelayed(
-                            { context.notifyPreferenceChange(this@BatterySaverPreference) },
+                            { context.notifyPreferenceChange(KEY) },
                             SWITCH_ANIMATION_DURATION,
                         )
                     }
 
                     override fun onBatteryChanged(pluggedIn: Boolean) =
-                        context.notifyPreferenceChange(this@BatterySaverPreference)
+                        context.notifyPreferenceChange(KEY)
                 }
             )
             setListening(true)

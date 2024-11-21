@@ -205,6 +205,21 @@
             settings:controller="com.android.settings.network.telephony.MobileNetworkEidPreferenceController"/>
 
         <PreferenceCategory
+            android:key="telephony_satellite_settings_category_key"
+            android:title="@string/category_title_satellite_connectivity"
+            settings:controller="com.android.settings.network.telephony.SatelliteSettingsPreferenceCategoryController">
+
+            <com.android.settingslib.RestrictedPreference
+                android:key="telephony_satellite_setting_key"
+                android:persistent="false"
+                android:title="@string/satellite_setting_title"
+                settings:keywords="@string/keywords_satellite_setting"
+                settings:controller=
+                    "com.android.settings.network.telephony.SatelliteSettingPreferenceController"/>
+
+        </PreferenceCategory>
+
+        <PreferenceCategory
             android:key="calling_category"
             android:title="@string/call_category"
             settings:controller="com.android.settings.network.telephony.CallingPreferenceCategoryController">
@@ -266,14 +281,6 @@
                 android:title="@string/choose_network_title"
                 settings:controller="com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenceController"/>
         </PreferenceCategory>
-
-        <com.android.settingslib.RestrictedPreference
-            android:key="telephony_satellite_setting_key"
-            android:persistent="false"
-            android:title="@string/satellite_setting_title"
-            settings:keywords="@string/keywords_satellite_setting"
-            settings:controller=
-                "com.android.settings.network.telephony.SatelliteSettingPreferenceController"/>
 
         <!--We want separate APN setting from reset of settings because we want user to change it with caution-->
         <com.android.settingslib.RestrictedPreference
