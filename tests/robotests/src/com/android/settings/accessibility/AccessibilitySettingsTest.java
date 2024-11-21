@@ -376,21 +376,7 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void onCreate_flagDisabled_haveRegisterToSpecificUrisAndActions() {
-        setupFragment();
-
-        assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS,
-                AccessibilitySettingsContentObserver.class).isTrue();
-        assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE,
-                AccessibilitySettingsContentObserver.class).isTrue();
-        assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_QS_TARGETS,
-                AccessibilitySettingsContentObserver.class).isFalse();
-    }
-
-    @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void onCreate_flagEnabled_haveRegisterToSpecificUrisAndActions() {
+    public void onCreate_haveRegisterToSpecificUrisAndActions() {
         setupFragment();
 
         assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS,
