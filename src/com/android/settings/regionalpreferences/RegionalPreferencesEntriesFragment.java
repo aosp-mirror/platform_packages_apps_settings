@@ -17,11 +17,9 @@
 package com.android.settings.regionalpreferences;
 
 import android.app.settings.SettingsEnums;
-import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.flags.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -57,13 +55,5 @@ public class RegionalPreferencesEntriesFragment extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.regional_preference_main_page) {
-                @Override
-                protected boolean isPageSearchEnabled(Context context) {
-                    if (Flags.regionalPreferencesApiEnabled()) {
-                        return false;
-                    }
-                    return true;
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.regional_preference_main_page);
 }
