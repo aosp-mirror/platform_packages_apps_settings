@@ -178,6 +178,14 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Programos kalba"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Siūlomos kalbos"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Visos kalbos"</string>
+    <!-- no translation found for suggested_locales_title (119908696638862861) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
+    <skip />
+    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
+    <skip />
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Sistemos kalba"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Numatytoji sistemos vertė"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Šios programos kalbos pasirinkimas nepasiekiamas iš skilties „Nustatymai“."</string>
@@ -193,6 +201,11 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Keisti"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s nepasiekiama"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Šios kalbos negalima naudoti kaip sistemos kalbos, bet programoms ir svetainėms nurodėte, kad teikiate pirmenybę šiai kalbai."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"Paieška"</string>
+    <!-- no translation found for language_selection_title (968179636453982415) -->
+    <skip />
+    <string name="country_selection_title" msgid="5376929821458644732">"Regiono nuostata"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"Įveskite kalbos pav."</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Tinkamumo nustatymai pagal regioną"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Nustatyti vienetus ir numerių nuostatas"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Leiskite programoms žinoti jūsų tinkamumo nustatymus pagal regioną, kad galėtų suasmeninti funkcijas."</string>
@@ -1242,7 +1255,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Prisitaikanti"</string>
     <string name="brightness" msgid="6216871641021779698">"Šviesumo lygis"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Prisitaikantis šviesumas"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Apie prisitaikantį šviesumą"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Ekrano šviesumas automatiškai prisitaikys prie jūsų aplinkos ir veiklos. Galite šliaužiklį perkelti patys, kad prisitaikantis šviesumas įsimintų jūsų nuostatas."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Įjungta"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Išjungta"</string>
@@ -1985,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Numatytasis"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Jutiklinė dalis"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Jutiklinė dalis ir pelė"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"Pelė"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Žymiklio greitis, gestai"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Palieskite ir spustelėkite"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Vilkimas palietus"</string>
@@ -3727,16 +3740,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Kai per trumpą laiką gaunate daug pranešimų, įrenginys sumažina garsumą ir įspėjimų skaičių ekrane ne daugiau nei dviem minutėms. Skambučiai, signalai ir prioritetiniai pokalbiai nepaveikiami. \n\nNeaktyvumo laikotarpiu gautus pranešimus galima rasti perbraukus žemyn iš ekrano viršaus."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Taikyti darbo profiliams"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Taikyti darbo profilio programoms"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"Sugrupuoti pranešimai"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"Įjungta"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"Išjungta"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Naudoti pranešimų grupavimą"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"Panašių temų pranešimai bus išjungti ir sugrupuoti, kad būtų tyliau. Grupuojant bus perrašomi pačios programos pranešimų nustatymai."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Pagalbinės virtualiosios realybės paslaugos"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nėra įdiegtų programų, kurios pateikė užklausą būti vykdomos kaip pagalbinės virtualiosios realybės paslaugos."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Leisti „<xliff:g id="SERVICE">%1$s</xliff:g>“ pasiekti virtualiosios realybės paslaugą?"</string>
@@ -4199,6 +4207,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Pranešimai viso ekrano režimu"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Leisti pranešimus viso ekrano režimu iš šios programos"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Leiskite šiai programai rodyti pranešimus viso ekrano režimu, kai įrenginys užrakintas. Programos gali juos naudoti, kad paryškintų įspėjimus, gaunamuosius skambučius ar kitus skubius pranešimus."</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Medijos valdymo programos"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Leisti programai valdyti mediją"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Leidus ši programa galės keisti arba ištrinti kitomis programomis sukurtus medijos failus be jūsų sutikimo. Programai turi būti suteiktas leidimas pasiekti failus ir mediją."</string>
@@ -5495,11 +5509,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Nustatant numatytąją paskyrą įvyko klaida"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Numatytoji paskyra nenustatyta"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Tik įrenginys"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Įrenginys ir %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Jei norite pradėti, pridėkite paskyrą"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Kur išsaugoti kontaktus"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Paieška apibrėžiant"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Jei norite ieškoti naudodami turinį ekrane, palieskite ir palaikykite pagrindinio puslapio mygtuką arba naršymo rankenėlę."</string>
 </resources>

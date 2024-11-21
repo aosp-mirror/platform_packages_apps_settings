@@ -178,6 +178,14 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"აპის ენა"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"შემოთავაზებული ენები"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"ყველა ენა"</string>
+    <!-- no translation found for suggested_locales_title (119908696638862861) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
+    <skip />
+    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
+    <skip />
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"სისტემის ენა"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"სისტემის ნაგულისხმევი"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"ამ აპისთვის ენის არჩევა პარამეტრებიდან მიუწვდომელია."</string>
@@ -193,6 +201,11 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"შეცვლა"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s მიუწვდომელია"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"ამ ენის სისტემური ენის სახით გამოყენება შეუძლებელია, მაგრამ აპებს და ვებსაიტებს საშუალება მიეცით, იცოდნენ, რომ ამ ენას ანიჭებთ უპირატესობას."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"ძიება"</string>
+    <!-- no translation found for language_selection_title (968179636453982415) -->
+    <skip />
+    <string name="country_selection_title" msgid="5376929821458644732">"რეგიონის პარამეტრები"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"აკრიფეთ ენის სახელი"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"რეგიონული პარამეტრები"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"რაოდენობის და საზომი ერთეულების პარამეტრების დაყენება"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"აცნობეთ აპებს თქვენი რეგიონული პარამეტრების შესახებ, რათა მათ თქვენი გამოცდილების პერსონალიზება შეძლოს."</string>
@@ -1242,7 +1255,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"ადაპტაციური"</string>
     <string name="brightness" msgid="6216871641021779698">"სიკაშკაშის დონე"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"მორგებადი სიკაშკაშე"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"მორგებადი სიკაშკაშის შესახებ"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"თქვენი ეკრანის სიკაშკაშე ავტომატურად დარეგულირდება თქვენი გარემოსა და აქტივობების გათვალისწინებით. ამ სლაიდერის ამოძრავებას ხელითაც შეძლებთ, რითაც დაეხმარებით მორგებადი სიკაშკაშის პარამეტრს, შეიტყოს, თუ რას ანიჭებთ უპირატესობას."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"ჩართული"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"გამორთული"</string>
@@ -1985,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"ნაგულისხმევი"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"სენსორული პანელი"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"სენსორული პანელი და მაუსი"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"მაუსი"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"კურსორის სიჩქარე, ჟესტები"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"შეხებით დაწკაპუნება"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"შეხებით გადატანა"</string>
@@ -3727,16 +3740,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"როცა მცირე დროის განმავლობაში ბევრ შეტყობინებას იღებთ, თქვენი მოწყობილობა ხმას დაუწევს და მინიმალურამდე შეამცირებს ეკრანზე ამომხტარ გაფრთხილებებს ორ წუთამდე დროის განმავლობაში. თქვენი მოწყობილობის ხმა და გაფრთხილებები ავტომატურად მცირდება 2 წუთამდე, როცა ძალიან ბევრ შეტყობინებას მიიღებთ ერთდროულად. ზარებზე, მაღვიძარებსა და პრიორიტეტულ საუბრებზე ეს გავლენას არ ახდენს. \n\nგანტვირთვის პერიოდის განმავლობაში მიღებული შეტყობინებების ნახვა შესაძლებელია ეკრანის ზემოდან ქვემოთ ჩამოწევით."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"გავრცელდეს სამსახურის პროფილზე"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"სამსახურის პროფილის აპებზე გავრცელება"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"დაჯგუფებული შეტყობინებები"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"ჩართული"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"გამორთული"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"შეტყობინებების დაჯგუფების გამოყენება"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"მსგავსი თემატიკის შეტყობინებები დადუმდება და დაჯგუფდება, რათა ნაკლებად შეწუხდეთ. დაჯგუფება უგულებელყოფს უშუალოდ აპის შეტყობინების პარამეტრებს."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"ვირტ. რეალობის დამხმარე სერვისები"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"ვირტუალური რეალობის დამხმარე სერვისად გაშვება არცერთ დაინსტალირებულ აპს არ მოუთხოვია."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"გსურთ ვირტუალური რეალობის სერვისისთვის <xliff:g id="SERVICE">%1$s</xliff:g>-ზე წვდომის დაშვება?"</string>
@@ -4199,6 +4207,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"სრული ეკრანის შეტყობინებები"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"ამ აპიდან შეტყობინებების დაშვება სრულ ეკრანზე"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"ნება დართეთ ამ აპს, აჩვენოს შეტყობინებები, რომლებიც სრულ ეკრანს იკავებს, როდესაც მოწყობილობა ჩაკეტილია. აპმა ისინი შეიძლება გამოიყენოს გამაფრთხილებელი სიგნალების და შემომავალი ზარების გამოყოფისთვის ან სხვა გადაუდებელი შეტყობინებებისთვის."</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"მედიის მართვის აპები"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"აპისთვის მედიის მართვის ნების დართვა"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"თუ დაუშვებთ, ამ აპს თქვენთვის უკითხავად შეუძლია სხვა აპებით შექმნილი მედიაფაილების შეცვლა ან წაშლა. აპს ფაილებზე და მედიაზე წვდომისთვის ნებართვა უნდა ჰქონდეს."</string>
@@ -5493,11 +5507,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"ნაგულისხმევი ანგარიშის დაყენებისას წარმოიშვა შეცდომა"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"ნაგულისხმევი ანგარიში დაყენებული არ არის"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"მხოლოდ მოწყობილობა"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"მოწყობილობა და %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"დასაწყებად დაამატეთ ანგარიში"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"სად მოხდეს კონტაქტების შენახვა"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"ძიება წრის მოხაზვით"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"ეკრანზე არსებული კონტენტის გამოყენებით ძიებისთვის ხანგრძლივად შეეხეთ მთავარი ეკრანის ღილაკს ან ნავიგაციის ზოლს."</string>
 </resources>

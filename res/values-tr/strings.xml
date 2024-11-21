@@ -67,8 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Yeni cihaz eşle"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Yarın otomatik olarak aç"</string>
-    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
-    <skip />
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Bluetooth\'u kapatırsanız sonraki gün tekrar açılır"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Sağ kulağı eşle"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Sol kulağı eşle"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Diğer kulağınızı eşleyin"</string>
@@ -179,6 +178,14 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Uygulama dili"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Önerilen diller"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Tüm diller"</string>
+    <!-- no translation found for suggested_locales_title (119908696638862861) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
+    <skip />
+    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
+    <skip />
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Sistem dili"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Sistem varsayılanı"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Ayarlar\'da bu uygulama için dil seçimi mevcut değil."</string>
@@ -194,6 +201,11 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Değiştir"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s kullanılamıyor"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Bu dil sistem dili olarak kullanılamaz, ancak uygulamalara ve web sitelerine bu dili tercih ettiğinizi bildirdiniz."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"Ara"</string>
+    <!-- no translation found for language_selection_title (968179636453982415) -->
+    <skip />
+    <string name="country_selection_title" msgid="5376929821458644732">"Bölge tercihi"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"Dil adını yazın"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Bölgesel tercihler"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Birimleri ve sayı tercihlerini ayarlayın"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Deneyiminizin kişiselleştirilebilmesi için bölgesel tercihlerinizi uygulamalarla paylaşın."</string>
@@ -1243,7 +1255,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Uyarlanabilir"</string>
     <string name="brightness" msgid="6216871641021779698">"Parlaklık düzeyi"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Otomatik parlaklık"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Otomatik parlaklık hakkında"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Ekranınızın parlaklığı, bulunduğunuz ortama ve aktivitelerinize göre otomatik olarak ayarlanır. Otomatik parlaklık özelliğinin tercihlerinizi öğrenmesine yardımcı olmak için kaydırma çubuğunu manuel olarak hareket ettirebilirsiniz."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Açık"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Kapalı"</string>
@@ -1986,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Varsayılan"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Dokunmatik alan"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Dokunmatik alan ve fare"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"Fare"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"İşaretçi hızı, hareketler"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Tıklamak için dokunma"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Dokunarak sürükleme"</string>
@@ -3684,7 +3696,7 @@
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Günde yaklaşık # bildirim}other{Günde yaklaşık # bildirim}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Haftada yaklaşık # bildirim}other{Haftada yaklaşık # bildirim}}"</string>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Hiçbir zaman"</string>
-    <string name="manage_notification_access_title" msgid="4154723216570646451">"Bildirimi okuma, yanıtlama ve kontrol etme"</string>
+    <string name="manage_notification_access_title" msgid="4154723216570646451">"Bildirim okuma, yanıtlama ve kontrol etme"</string>
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Bildirimlerin hangi uygulama ve cihazlar tarafından okunabileceğini kontrol edin"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"İş profili bildirimlerine erişim engellendi"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Gelişmiş bildirimler"</string>
@@ -3728,16 +3740,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Kısa süre içinde çok sayıda bildirim aldığınızda cihazınız 2 dakika boyunca sesi kısar ve uyarıları azaltır. Aramalar, alarmlar ve öncelikli görüşmeler bu durumdan etkilenmez. \n\nBildirim şiddeti düşürülürken aldığınız bildirimlere ekranın üst tarafından aşağı doğru çekerek ulaşabilirsiniz."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"İş profillerine uygula"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"İş profili uygulamalarına uygulayın"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"Gruplandırılmış bildirimler"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"Açık"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"Kapalı"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Bildirim gruplandırmayı kullan"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"Benzer temalara sahip bildirimler sessize alınıp gruplandırılarak daha sessiz bir deneyim sunulur. Gruplandırma, uygulamanın kendi bildirim ayarlarını geçersiz kılar."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR yardımcı hizmetleri"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Yüklü hiçbir uygulama VR yardımcı hizmetleri olarak çalışma isteğinde bulunmadı."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"<xliff:g id="SERVICE">%1$s</xliff:g> için VR hizmetine erişim izni verilsin mi?"</string>
@@ -4200,6 +4207,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Tam ekran bildirimler"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Bu uygulamanın tam ekran bildirim göstermesine izin ver"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Cihaz kilitliyken bu uygulamanın tüm ekranı kaplayan bildirimler göstermesine izin verin. Uygulamalar bunu alarmları, gelen aramaları ve diğer acil bildirimleri göstermek için kullanabilir."</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Medya yönetimi uygulamaları"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Uygulamaya medya dosyalarını yönetme izni ver"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"İzin verilirse bu uygulama, diğer uygulamalarla oluşturulan medya dosyalarını size sormadan değiştirebilir ya da silebilir. Bu uygulamanın dosyalara ve medyaya erişim izni olmalıdır."</string>
@@ -5494,11 +5507,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Varsayılan hesap ayarlanırken hata oluştu"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Varsayılan ayar yok"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Yalnızca cihaz"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Cihaz ve %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Başlamak için hesap ekleyin"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Kişilerin kaydedileceği yer"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Seçerek Arat"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Ekranınızdaki içerikleri kullanarak arama yapmak için ana sayfa düğmesine veya gezinme tutma yerine dokunup basılı tutun."</string>
 </resources>
