@@ -564,6 +564,8 @@ public class UtilsTest {
     @Test
     @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void testRequestBiometricAuthentication_biometricManagerReturnsSuccessForDifferentUser_shouldReturnError() {
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mMockUserManager);
+        when(mMockUserManager.getCredentialOwnerProfile(USER_ID)).thenReturn(USER_ID);
         when(mBiometricManager.canAuthenticate(anyInt(),
                 eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
                 .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
@@ -579,6 +581,8 @@ public class UtilsTest {
     @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void testLaunchBiometricPrompt_checkIntentValues() {
         when(mFragment.getContext()).thenReturn(mContext);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mMockUserManager);
+        when(mMockUserManager.getCredentialOwnerProfile(USER_ID)).thenReturn(USER_ID);
 
         final int requestCode = 1;
         final ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
