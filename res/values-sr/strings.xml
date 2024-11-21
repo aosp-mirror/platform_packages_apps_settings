@@ -178,6 +178,14 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Језик апликације"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Предложени језици"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Сви језици"</string>
+    <!-- no translation found for suggested_locales_title (119908696638862861) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
+    <skip />
+    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
+    <skip />
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Језик система"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Подразумевани системски"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Избор језика за ову апликацију није доступан из Подешавања."</string>
@@ -193,6 +201,11 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Промени"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"Није доступно: %s"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Овај језик не може да се користи као језик система, али сте обавестили апликације и веб-сајтове да желите овај језик."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"Претражи"</string>
+    <!-- no translation found for language_selection_title (968179636453982415) -->
+    <skip />
+    <string name="country_selection_title" msgid="5376929821458644732">"Подешавање региона"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"Унесите назив језика"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Регионална подешавања"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Изаберите подешавања јединица и бројева"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Омогућите апликацијама да сазнају ваша регионална подешавања како би могле да персонализују ваш доживљај."</string>
@@ -1242,7 +1255,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Прилагодљиво"</string>
     <string name="brightness" msgid="6216871641021779698">"Ниво осветљености"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Прилагодљива осветљеност"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"О приладољивој осветљености"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Осветљеност екрана ће се аутоматски прилагођавати окружењу и активностима. Можете ручно да померате клизач да би прилагодљиво подешавање осветљености научило шта вам одговара."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Укључено"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Искључено"</string>
@@ -1563,7 +1575,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Брисање eSIM картица није успело"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Дошло је до грешке и eSIM картице нису избрисане.\n\nРестартујте уређај и пробајте поново."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Избриши приватан простор"</string>
-    <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Ако на уређају имате приватни простор, биће трајно избрисан, док ће Google налог који је додат у простор бити уклоњен. \n\nСве апликације у вашем простору и њихови подаци ће такође бити трајно избрисани из "<b>"интерне меморије"</b>" телефона."</string>
+    <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Ако на уређају имате приватни простор, биће трајно избрисан, а Google налог који је додат у простор ће бити уклоњен. \n\nСве апликације у вашем простору и њихови подаци ће такође бити трајно избрисани из "<b>"интерне меморије"</b>" телефона."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Обриши све податке (фабричка подешавања)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Обриши све податке (фабричка подешавања)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"музику"</li>\n<li>"слике"</li>\n<li>"друге податке корисника"</li></string>
@@ -1985,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Подразумевано"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Тачпед"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Тачпед и миш"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"Миш"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Брзина показивача, покрети"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Додирните да бисте кликнули"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Превлачење додиром"</string>
@@ -3727,16 +3740,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Када примите много обавештења у кратком периоду, уређај ће утишати звук и смањити број упозорења на највише два минута. То не утиче на позиве, аларме ни приоритетне конверзације. \n\nОбавештења која добијете током утишавања можете да пронађете повлачењем надоле од врха екрана."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Примени на пословне профиле"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Примените на апликације пословног профила"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"Груписана обавештења"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"Укључено"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"Искључено"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Користи груписање обавештења"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"Звук се искључује за обавештења са сличним темама и она се групишу ради тишег доживљаја. Груписање замењује подешавања обавештења саме апликације."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Услуге помагача за виртуелну реалност"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ниједна инсталирана апликација није захтевала да се покрене као услуга помагача за виртуелну реалност."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Дозвољавате приступ услузи виртуелне реалности за <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4199,6 +4207,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Обавештења преко целог екрана"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Дозволи обавештења преко целог екрана од ове апликације"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Дозволите овој апликацији да приказује обавештења преко целог екрана када је уређај закључан. Апликације могу да их користе ради истицања аларма, долазних позива или других хитних обавештења."</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Апликације за управљање медијима"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Омогући апликацији управљање медијима"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Ако се омогући, ова апликација може да мења или брише медијске фајлове направљене помоћу других апликација без питања. Апликација мора да има дозволу за приступ фајловима и медијима."</string>
@@ -5494,11 +5508,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Грешка при подешавању подразумеваног налога"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Није подешен подразумевани налог"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Само уређај"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Уређај и %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Додајте налог да бисте започели"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Где можете да чувате контакте"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Претрага заокруживањем"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Додирните и задржите дугме Почетак или маркер за кретање да бисте претраживали помоћу садржаја на екрану."</string>
 </resources>

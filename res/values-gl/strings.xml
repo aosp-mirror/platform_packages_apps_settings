@@ -67,8 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Vincular novo dispositivo"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Activar mañá automaticamente"</string>
-    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
-    <skip />
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Se desactivas o Bluetooth, actívase de novo ao día seguinte"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Vincular dereito"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Vincular esquerdo"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Vincula o outro audiófono"</string>
@@ -179,6 +178,14 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Idioma das aplicacións"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Idiomas suxeridos"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Todos os idiomas"</string>
+    <!-- no translation found for suggested_locales_title (119908696638862861) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
+    <skip />
+    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
+    <skip />
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Idioma do sistema"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Aplicación predeterminada do sistema"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"A opción de seleccionar un idioma para esta aplicación non está dispoñible en Configuración."</string>
@@ -194,6 +201,11 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Cambiar"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"O idioma %s non está dispoñible"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Este idioma non se pode usar como idioma do sistema, pero indicácheslles ás aplicacións e aos sitios web que é o que prefires."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"Buscar"</string>
+    <!-- no translation found for language_selection_title (968179636453982415) -->
+    <skip />
+    <string name="country_selection_title" msgid="5376929821458644732">"Preferencia de rexión"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"Escribe o nome do idioma"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferencias rexionais"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Configura as preferencias de números e unidades"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Permite que as aplicacións coñezan as túas preferencias rexionais para que poidan personalizar a túa experiencia."</string>
@@ -686,7 +698,7 @@
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Bloqueo de pantalla"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Escolle un bloqueo de pantalla"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Escolle un novo bloqueo de pantalla"</string>
-    <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Escolle un bloqueo de traballo"</string>
+    <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Escolle un bloqueo para apps de traballo"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Escolle un novo bloqueo do traballo"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Configura un bloqueo de pantalla alternativo para conseguir unha maior seguranza"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Escolle o método de bloqueo da pantalla alternativo"</string>
@@ -1243,7 +1255,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Automáticas"</string>
     <string name="brightness" msgid="6216871641021779698">"Nivel de brillo"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Brillo intelixente"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Acerca do brillo intelixente"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"O brillo da pantalla axustarase automaticamente segundo o ambiente e as actividades que leves a cabo. Podes mover o control desprazable de forma manual para que o brillo intelixente recoñeza as túas preferencias."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Activado"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Desactivado"</string>
@@ -1986,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Predeterminado"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Panel táctil"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Panel táctil e rato"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"Rato"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Velocidade do punteiro, xestos"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Toque para facer clic"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Tocar e arrastrar"</string>
@@ -3624,7 +3636,7 @@
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificacións na pantalla de bloqueo"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostra conversas predeterminadas e silenciadas"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostrar conversas predeterminadas e silenciadas"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Ocultar conversas e notificacións silenciadas"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Oculta conversas e notificacións silenciadas"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Non mostrar ningunha notificación"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Notificacións sobre contido confidencial"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Mostra contido confidencial na pantalla de bloqueo"</string>
@@ -3728,16 +3740,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Cando recibas moitas notificacións en pouco tempo, o teu dispositivo baixará o volume e reducirá ao mínimo o número de alertas durante un máximo de dous minutos. As chamadas, alarmas e conversas prioritarias non se verán afectadas. \n\nPara ver as notificacións amainadas, arrastra cara abaixo a parte superior da pantalla."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Aplicar aos perfís de traballo"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Usa esta opción coas aplicacións do perfil de traballo"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"Notificacións agrupadas"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"Opción activada"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"Opción desactivada"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Usar agrupación de notificacións"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"As notificacións con temas semellantes silenciaranse e agruparanse para que teñas unha experiencia máis silenciosa. A agrupación ignorará a configuración de notificacións das aplicacións."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servizos do asistente de RV"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Ningunha aplicación instalada solicitou executarse como servizo do asistente de RV."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Queres permitir o acceso do servizo de RV para <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4200,6 +4207,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notificacións en pantalla completa"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Permitir mostrar notificacións en pantalla completa procedentes desta aplicación"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permite que esta aplicación amose notificacións en pantalla completa cando o dispositivo estea bloqueado. A aplicación pode usar esta opción para destacar alarmas, chamadas entrantes ou outras notificacións urxentes."</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Aplicacións de xestión multimedia"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Permitir á aplicación a xestión multimedia"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Se lle concedes os permisos necesarios, esta aplicación non necesitará preguntarche para modificar ou eliminar ficheiros multimedia creados con outras aplicacións. A aplicación debe ter permiso para acceder aos ficheiros e ao contido multimedia."</string>
@@ -5494,11 +5507,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Produciuse un erro ao configurar a conta predeterminada"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Ningunha conta predeterminada definida"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Só dispositivo"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Dispositivo e %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Engade unha conta para comezar"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Onde gardar os contactos"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Rodear para buscar"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Mantén premido o botón de inicio ou o controlador de navegación para facer buscas usando o contido da pantalla."</string>
 </resources>

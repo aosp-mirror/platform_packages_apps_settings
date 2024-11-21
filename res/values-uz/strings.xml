@@ -178,6 +178,10 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Ilova tili"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Tavsiya etilgan tillar"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Barcha tillar"</string>
+    <string name="suggested_locales_title" msgid="119908696638862861">"Tavsiya etiladi"</string>
+    <string name="all_supported_locales_title" msgid="2535112632133166546">"Barcha tillar"</string>
+    <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"Barcha hududlar"</string>
+    <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"Barcha sanoqli tizimlar"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Tizim tili"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Tizim standarti"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Bu ilova uchun Sozlamalardan tilni tanlash imkonsiz"</string>
@@ -193,6 +197,10 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Oʻzgartirish"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s mavjud emas"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Bu tildan tizim tili sifatida foydalanib boʻlmaydi, lekin ilova va saytlar uchun bu tilni asosiy sifatida belgilash mumkin."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"Qidiruv"</string>
+    <string name="language_selection_title" msgid="968179636453982415">"Til kiritish"</string>
+    <string name="country_selection_title" msgid="5376929821458644732">"Hudud sozlamalari"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"Til nomini kiriting"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Hududiy sozlamalar"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Birliklar va raqamlar sozlamalarini belgilash"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Ilovalar ushbu hududiy sozlamalardan moslashtirish uchun foydalanadi."</string>
@@ -1242,7 +1250,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Moslashuvchan"</string>
     <string name="brightness" msgid="6216871641021779698">"Yorqinlik darajasi"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Moslashuvchan yorqinlik"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Adaptiv yorqinlik haqida"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Ekran yorqinligi muhit va harakatlaringizga qarab avtomatik moslanadi. Yorqinlikni o‘zingizga moslashtirish uchun slayderni qo‘lda surib sozlashingiz mumkin."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Yoniq"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Oʻchiq"</string>
@@ -1985,6 +1992,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Birlamchi"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Sensorli panel"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Sensorli panel va sichqoncha"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"Sichqon"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Kursor tezligi, ishoralar"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Ohista teginib bosish"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Teginib tortish"</string>
@@ -3727,16 +3735,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Qisqa vaqt oraligʻida koʻp bildirishnoma kelsa, qurilmangizdagi tovush balandligi hamda signallar davomiyligi 2 daqiqagacha kamaytiriladi. Chaqiruvlar, signallar va muhim suhbatlarga taʼsir qilmaydi. \n\nSekinlatish paytida olingan bildirishnomalarni ekranning yuqori qismidan pastga tortish orqali topish mumkin."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Ish profillariga tatbiq qilish"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Ish profilidagi ilovalar uchun qoʻllash"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"Guruhlangan bildirishnomalar"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"Yoniq"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"Yoqilmagan"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Bildirishnomalarni guruhlash"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"Oʻxshash bildirishnomalar guruhlanadi va tovushsiz chiqadi. Bu bildirishnoma sozlamalari ilova sozlamalariga nisbatan ustun hisoblanadi."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Yordamchi VR xizmatlar"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Hech qanday ilova yordamchi VR xizmatlar sifatida ishga tushirilishiga ruxsat so‘ramagan."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR xizmatiga “<xliff:g id="SERVICE">%1$s</xliff:g>” xizmatidan foydalanishga ruxsat berilsinmi?"</string>
@@ -4199,6 +4202,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Butun ekran bildirishnomalari"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Bu ilova bildirishnomalarini butun ekranda chiqishiga ruxsat berish"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Bu ilovaga qurilma qulflanganida butun ekranni egallaydigan bildirishnoma chiqarishga ruxsat berish. Ilovalar uning yordamida signallar, kiruvchi chaqiruv yoki boshqa shoshilinch bildirishnomalarni ajratib koʻrsatishi mumkin."</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Media boshqaruv ilovalari"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Ilova mediani boshqarishiga ruxsat berish"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Ruxsat berilsa, bu ilova sizdan ruxsat soʻramasdan boshqa ilovada yaratilgan media fayllarni oʻzgartirishi yoki oʻchirishi mumkin. Ilovaga media va fayllarga kirish uchun ruxsat berilishi kerak."</string>
@@ -5493,11 +5502,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Birlamchi hisob tanlanmadi"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Birlamchi hisob tanlanmagan"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Faqat qurilmada"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Qurilma va %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Avval hisob qoʻshing"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Kontaktlar qayerda saqlansin"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Chizib qidirish"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Ekrandagi kontent orqali qidirish uchun Asosiy tugmani yoki navigatsiya panelini bosib turing"</string>
 </resources>
