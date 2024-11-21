@@ -36,7 +36,6 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.fuelgauge.BatteryHeaderPreferenceController;
 import com.android.settings.fuelgauge.BatteryHeaderTextPreferenceController;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.BatteryInfoLoader;
@@ -68,7 +67,6 @@ public class PowerUsageSummary extends PowerUsageBase
     @VisibleForTesting BatteryUtils mBatteryUtils;
     @VisibleForTesting BatteryInfo mBatteryInfo;
 
-    @VisibleForTesting BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
     @VisibleForTesting BatteryHeaderTextPreferenceController mBatteryHeaderTextPreferenceController;
     @VisibleForTesting BatteryTipPreferenceController mBatteryTipPreferenceController;
     @VisibleForTesting boolean mNeedUpdateBatteryTip;
@@ -95,7 +93,6 @@ public class PowerUsageSummary extends PowerUsageBase
 
                 @Override
                 public void onLoadFinished(Loader<BatteryInfo> loader, BatteryInfo batteryInfo) {
-                    mBatteryHeaderPreferenceController.quickUpdateHeaderPreference();
                     mBatteryHeaderTextPreferenceController.updateHeaderPreference(batteryInfo);
                     mBatteryHeaderTextPreferenceController.updateHeaderByBatteryTips(
                             mBatteryTipPreferenceController.getCurrentBatteryTip(), batteryInfo);
@@ -132,7 +129,6 @@ public class PowerUsageSummary extends PowerUsageBase
         super.onAttach(context);
         final Activity activity = getActivity();
 
-        mBatteryHeaderPreferenceController = use(BatteryHeaderPreferenceController.class);
         mBatteryHeaderTextPreferenceController = use(BatteryHeaderTextPreferenceController.class);
 
         mBatteryTipPreferenceController = use(BatteryTipPreferenceController.class);
@@ -252,15 +248,6 @@ public class PowerUsageSummary extends PowerUsageBase
     @VisibleForTesting
     void updateBatteryTipFlag(Bundle icicle) {
         mNeedUpdateBatteryTip = icicle == null || mBatteryTipPreferenceController.needUpdate();
-    }
-
-    @Override
-    protected void restartBatteryStatsLoader(@BatteryUpdateType int refreshType) {
-        super.restartBatteryStatsLoader(refreshType);
-        // Update battery header if battery is present.
-        if (mIsBatteryPresent) {
-            mBatteryHeaderPreferenceController.quickUpdateHeaderPreference();
-        }
     }
 
     @Override

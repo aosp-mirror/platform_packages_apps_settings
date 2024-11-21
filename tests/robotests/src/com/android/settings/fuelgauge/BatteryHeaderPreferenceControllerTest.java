@@ -27,6 +27,8 @@ import android.content.Intent;
 import android.hardware.usb.UsbManager;
 import android.os.BatteryManager;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
@@ -55,10 +57,11 @@ public class BatteryHeaderPreferenceControllerTest {
     private static final int BATTERY_MAX_LEVEL = 100;
 
     @Mock private PreferenceScreen mPreferenceScreen;
-    @Mock private BatteryInfo mBatteryInfo;
+    @Mock private BatteryBroadcastReceiver mBatteryBroadcastReceiver;
     @Mock private EntityHeaderController mEntityHeaderController;
-    @Mock private UsageProgressBarPreference mBatteryUsageProgressBarPref;
+    @Mock private UsageProgressBarPreference mBatteryUsageProgressBarPreference;
     @Mock private UsbManager mUsbManager;
+    @Mock private LifecycleOwner mLifecycleOwner;
 
     private BatteryHeaderPreferenceController mController;
     private Context mContext;
@@ -78,14 +81,12 @@ public class BatteryHeaderPreferenceControllerTest {
         mBatteryIntent.putExtra(BatteryManager.EXTRA_PLUGGED, 1);
         doReturn(mBatteryIntent).when(mContext).registerReceiver(any(), any());
 
-        doReturn(mBatteryUsageProgressBarPref)
+        doReturn(mBatteryUsageProgressBarPreference)
                 .when(mPreferenceScreen)
                 .findPreference(PREF_KEY);
 
-        mBatteryInfo.batteryLevel = BATTERY_LEVEL;
-
         mController = spy(new BatteryHeaderPreferenceController(mContext, PREF_KEY));
-        mController.mBatteryUsageProgressBarPref = mBatteryUsageProgressBarPref;
+        mController.mBatteryUsageProgressBarPreference = mBatteryUsageProgressBarPreference;
 
         BatteryUtils.setChargingStringV2Enabled(null);
     }
@@ -97,20 +98,44 @@ public class BatteryHeaderPreferenceControllerTest {
     }
 
     @Test
+    public void onStateChanged_onCreate_receiverCreated() {
+        mController.onStateChanged(mLifecycleOwner,  Lifecycle.Event.ON_CREATE);
+
+        assertThat(mController.mBatteryBroadcastReceiver).isNotNull();
+    }
+
+    @Test
+    public void onStateChanged_onStart_receiverRegistered() {
+        mController.mBatteryBroadcastReceiver = mBatteryBroadcastReceiver;
+
+        mController.onStateChanged(mLifecycleOwner,  Lifecycle.Event.ON_START);
+
+        verify(mBatteryBroadcastReceiver).register();
+    }
+
+    @Test
+    public void onStateChanged_onStop_receiverUnregistered() {
+        mController.mBatteryBroadcastReceiver = mBatteryBroadcastReceiver;
+
+        mController.onStateChanged(mLifecycleOwner,  Lifecycle.Event.ON_STOP);
+
+        verify(mBatteryBroadcastReceiver).unRegister();
+    }
+
+    @Test
     public void displayPreference_displayBatteryLevel() {
         mController.displayPreference(mPreferenceScreen);
 
-        verify(mBatteryUsageProgressBarPref).setUsageSummary(formatBatteryPercentageText());
-        verify(mBatteryUsageProgressBarPref).setPercent(BATTERY_LEVEL, BATTERY_MAX_LEVEL);
+        verify(mBatteryUsageProgressBarPreference).setUsageSummary(formatBatteryPercentageText());
+        verify(mBatteryUsageProgressBarPreference).setPercent(BATTERY_LEVEL, BATTERY_MAX_LEVEL);
     }
-
 
     @Test
     public void quickUpdateHeaderPreference_onlyUpdateBatteryLevelAndChargingState() {
         mController.quickUpdateHeaderPreference();
 
-        verify(mBatteryUsageProgressBarPref).setUsageSummary(formatBatteryPercentageText());
-        verify(mBatteryUsageProgressBarPref).setPercent(BATTERY_LEVEL, BATTERY_MAX_LEVEL);
+        verify(mBatteryUsageProgressBarPreference).setUsageSummary(formatBatteryPercentageText());
+        verify(mBatteryUsageProgressBarPreference).setPercent(BATTERY_LEVEL, BATTERY_MAX_LEVEL);
     }
 
     @Test
@@ -125,14 +150,14 @@ public class BatteryHeaderPreferenceControllerTest {
 
         mController.displayPreference(mPreferenceScreen);
 
-        assertThat(mBatteryUsageProgressBarPref.isVisible()).isFalse();
+        assertThat(mBatteryUsageProgressBarPreference.isVisible()).isFalse();
     }
 
     @Test
     public void displayPreference_init_setEmptyBottomSummary() {
         mController.displayPreference(mPreferenceScreen);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary("");
+        verify(mBatteryUsageProgressBarPreference).setBottomSummary("");
     }
 
     private CharSequence formatBatteryPercentageText() {

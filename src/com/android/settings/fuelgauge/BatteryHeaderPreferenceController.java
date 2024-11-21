@@ -16,10 +16,17 @@
 
 package com.android.settings.fuelgauge;
 
+import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType.BATTERY_NOT_PRESENT;
+
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
@@ -29,27 +36,56 @@ import com.android.settingslib.widget.UsageProgressBarPreference;
 
 /** Controller that update the battery header view */
 public class BatteryHeaderPreferenceController extends BasePreferenceController
-        implements PreferenceControllerMixin {
+        implements PreferenceControllerMixin, LifecycleEventObserver {
     private static final String TAG = "BatteryHeaderPreferenceController";
     private static final int BATTERY_MAX_LEVEL = 100;
 
-    @VisibleForTesting UsageProgressBarPreference mBatteryUsageProgressBarPref;
+    @Nullable @VisibleForTesting BatteryBroadcastReceiver mBatteryBroadcastReceiver;
+    @Nullable @VisibleForTesting UsageProgressBarPreference mBatteryUsageProgressBarPreference;
 
     public BatteryHeaderPreferenceController(Context context, String key) {
         super(context, key);
     }
 
     @Override
+    public void onStateChanged(@NonNull LifecycleOwner lifecycleOwner,
+            @NonNull Lifecycle.Event event) {
+        switch (event) {
+            case ON_CREATE:
+                mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(mContext);
+                mBatteryBroadcastReceiver.setBatteryChangedListener(
+                        type -> {
+                            if (type != BATTERY_NOT_PRESENT) {
+                                quickUpdateHeaderPreference();
+                            }
+                        });
+                break;
+            case ON_START:
+                if (mBatteryBroadcastReceiver != null) {
+                    mBatteryBroadcastReceiver.register();
+                }
+                break;
+            case ON_STOP:
+                if (mBatteryBroadcastReceiver != null) {
+                    mBatteryBroadcastReceiver.unRegister();
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mBatteryUsageProgressBarPref = screen.findPreference(getPreferenceKey());
+        mBatteryUsageProgressBarPreference = screen.findPreference(getPreferenceKey());
         // Hide the bottom summary from the progress bar.
-        mBatteryUsageProgressBarPref.setBottomSummary("");
+        mBatteryUsageProgressBarPreference.setBottomSummary("");
 
         if (com.android.settings.Utils.isBatteryPresent(mContext)) {
             quickUpdateHeaderPreference();
         } else {
-            mBatteryUsageProgressBarPref.setVisible(false);
+            mBatteryUsageProgressBarPreference.setVisible(false);
         }
     }
 
@@ -60,12 +96,17 @@ public class BatteryHeaderPreferenceController extends BasePreferenceController
 
     /** Updates {@link UsageProgressBarPreference} information. */
     public void quickUpdateHeaderPreference() {
+        if (mBatteryUsageProgressBarPreference == null) {
+            return;
+        }
+
         Intent batteryBroadcast =
                 com.android.settingslib.fuelgauge.BatteryUtils.getBatteryIntent(mContext);
         final int batteryLevel = Utils.getBatteryLevel(batteryBroadcast);
 
-        mBatteryUsageProgressBarPref.setUsageSummary(formatBatteryPercentageText(batteryLevel));
-        mBatteryUsageProgressBarPref.setPercent(batteryLevel, BATTERY_MAX_LEVEL);
+        mBatteryUsageProgressBarPreference.setUsageSummary(
+                formatBatteryPercentageText(batteryLevel));
+        mBatteryUsageProgressBarPreference.setPercent(batteryLevel, BATTERY_MAX_LEVEL);
     }
 
     private CharSequence formatBatteryPercentageText(int batteryLevel) {
