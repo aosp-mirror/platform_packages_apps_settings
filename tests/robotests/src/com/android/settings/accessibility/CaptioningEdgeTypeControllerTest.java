@@ -32,8 +32,6 @@ import android.view.accessibility.CaptioningManager.CaptionStyle;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.core.BasePreferenceController;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -67,12 +65,6 @@ public class CaptioningEdgeTypeControllerTest {
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         CaptioningManager captioningManager = mContext.getSystemService(CaptioningManager.class);
         mShadowCaptioningManager = Shadow.extract(captioningManager);
-    }
-
-    @Test
-    public void getAvailabilityStatus_shouldReturnAvailable() {
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
