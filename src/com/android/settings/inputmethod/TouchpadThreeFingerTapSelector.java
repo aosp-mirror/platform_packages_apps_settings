@@ -45,6 +45,7 @@ public class TouchpadThreeFingerTapSelector extends Preference {
         super(context, attrs);
         setLayoutResource(R.layout.touchpad_three_finger_tap_layout);
         mInputManager = context.getSystemService(InputManager.class);
+        setSelectable(false);
     }
 
     @Override
