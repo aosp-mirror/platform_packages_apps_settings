@@ -20,6 +20,7 @@ import static com.android.settings.flags.Flags.termsOfAddressEnabled;
 
 import android.content.Context;
 import android.os.LocaleList;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.preference.PreferenceCategory;
@@ -27,7 +28,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
-import com.android.settings.flags.Flags;
 import com.android.settings.widget.PreferenceCategoryController;
 
 import java.util.Arrays;
@@ -64,9 +64,6 @@ public class TermsOfAddressCategoryController extends PreferenceCategoryControll
 
     @Override
     public int getAvailabilityStatus() {
-        if (Flags.regionalPreferencesApiEnabled()) {
-            return CONDITIONALLY_UNAVAILABLE;
-        }
 
         if (!termsOfAddressEnabled()) {
             return CONDITIONALLY_UNAVAILABLE;
