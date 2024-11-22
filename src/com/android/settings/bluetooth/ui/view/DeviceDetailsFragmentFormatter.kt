@@ -17,6 +17,7 @@
 package com.android.settings.bluetooth.ui.view
 
 import android.app.ActivityOptions
+import android.app.settings.SettingsEnums
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
@@ -39,6 +40,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.SettingsPreferenceFragment
@@ -50,30 +52,33 @@ import com.android.settings.bluetooth.ui.model.FragmentTypeModel
 import com.android.settings.bluetooth.ui.view.DeviceDetailsMoreSettingsFragment.Companion.KEY_DEVICE_ADDRESS
 import com.android.settings.bluetooth.ui.viewmodel.BluetoothDeviceDetailsViewModel
 import com.android.settings.core.SubSettingLauncher
+import com.android.settings.overlay.FeatureFactory
 import com.android.settings.spa.preference.ComposePreference
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingActionModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigItemModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingIcon
 import com.android.settingslib.spa.framework.theme.SettingsDimension
-import com.android.settingslib.spa.widget.button.ActionButton
-import com.android.settingslib.spa.widget.button.ActionButtons
 import com.android.settingslib.spa.widget.preference.Preference as SpaPreference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
 import com.android.settingslib.spa.widget.preference.TwoTargetSwitchPreference
-import com.android.settingslib.spa.widget.scaffold.RegularScaffold
 import com.android.settingslib.spa.widget.ui.Footer
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.runBlocking
 
 /** Handles device details fragment layout according to config. */
@@ -93,6 +98,7 @@ interface DeviceDetailsFragmentFormatter {
     ): Flow<DeviceSettingPreferenceModel.HelpPreference?>
 }
 
+@FlowPreview
 @OptIn(ExperimentalCoroutinesApi::class)
 class DeviceDetailsFragmentFormatterImpl(
     private val context: Context,
@@ -101,6 +107,9 @@ class DeviceDetailsFragmentFormatterImpl(
     private val cachedDevice: CachedBluetoothDevice,
     private val backgroundCoroutineContext: CoroutineContext,
 ) : DeviceDetailsFragmentFormatter {
+    private val metricsFeatureProvider = FeatureFactory.featureFactory.metricsFeatureProvider
+    private val prefVisibility = mutableMapOf<String, MutableStateFlow<Boolean>>()
+    private val prefVisibilityJobs = mutableListOf<Job>()
 
     private val viewModel: BluetoothDeviceDetailsViewModel =
         ViewModelProvider(
@@ -147,21 +156,33 @@ class DeviceDetailsFragmentFormatterImpl(
             prefKeyToSettingId[pref.key]?.let { id -> settingIdToXmlPreferences[id] = pref }
         }
         fragment.preferenceScreen.removeAll()
+        for (job in prefVisibilityJobs) {
+            job.cancel()
+        }
+        prefVisibilityJobs.clear()
 
         for (row in items.indices) {
             val settingId = items[row].settingId
             if (settingIdToXmlPreferences.containsKey(settingId)) {
                 fragment.preferenceScreen.addPreference(
-                    settingIdToXmlPreferences[settingId]!!.apply { order = row }
+                    settingIdToXmlPreferences[settingId]!!
+                        .apply { order = row }
+                        .also { logItemShown(it.key, it.isVisible) }
                 )
             } else {
+                val prefKey = getPreferenceKey(settingId)
+                prefVisibilityJobs.add(
+                    getDevicesSettingForRow(layout, row)
+                        .onEach { logItemShown(prefKey, it.isNotEmpty()) }
+                        .launchIn(fragment.lifecycleScope)
+                )
                 val pref =
                     ComposePreference(context)
                         .apply {
-                            key = getPreferenceKey(settingId)
+                            key = prefKey
                             order = row
                         }
-                        .also { pref -> pref.setContent { buildPreference(layout, row) } }
+                        .also { pref -> pref.setContent { buildPreference(layout, row, prefKey) } }
                 fragment.preferenceScreen.addPreference(pref)
             }
         }
@@ -183,24 +204,28 @@ class DeviceDetailsFragmentFormatterImpl(
         } ?: emit(null)
     }
 
-    @Composable
-    private fun buildPreference(layout: DeviceSettingLayout, row: Int) {
-        val contents by
-            remember(row) {
-                    layout.rows[row].columns.flatMapLatest { columns ->
-                        if (columns.isEmpty()) {
-                            flowOf(emptyList<DeviceSettingPreferenceModel>())
-                        } else {
-                            combine(
-                                columns.map { column ->
-                                    viewModel.getDeviceSetting(cachedDevice, column.settingId)
-                                }
-                            ) {
-                                it.toList()
-                            }
-                        }
+    private fun getDevicesSettingForRow(
+        layout: DeviceSettingLayout,
+        row: Int,
+    ): Flow<List<DeviceSettingPreferenceModel>> =
+        layout.rows[row].columns.flatMapLatest { columns ->
+            if (columns.isEmpty()) {
+                flowOf(emptyList())
+            } else {
+                combine(
+                    columns.map { column ->
+                        viewModel.getDeviceSetting(cachedDevice, column.settingId)
                     }
+                ) {
+                    it.toList().filterNotNull()
                 }
+            }
+        }
+
+    @Composable
+    private fun buildPreference(layout: DeviceSettingLayout, row: Int, prefKey: String) {
+        val contents by
+            remember(row) { getDevicesSettingForRow(layout, row) }
                 .collectAsStateWithLifecycle(initialValue = listOf())
 
         val highlighted by
@@ -226,31 +251,31 @@ class DeviceDetailsFragmentFormatterImpl(
                                 shape = RoundedCornerShape(28.dp),
                             )
                 ) {}
-                buildPreferences(settings)
+                buildPreferences(settings, prefKey)
             }
         }
     }
 
     @Composable
-    fun buildPreferences(settings: List<DeviceSettingPreferenceModel?>) {
+    fun buildPreferences(settings: List<DeviceSettingPreferenceModel?>, prefKey: String) {
         when (settings.size) {
             0 -> {}
             1 -> {
                 when (val setting = settings[0]) {
                     is DeviceSettingPreferenceModel.PlainPreference -> {
-                        buildPlainPreference(setting)
+                        buildPlainPreference(setting, prefKey)
                     }
                     is DeviceSettingPreferenceModel.SwitchPreference -> {
-                        buildSwitchPreference(setting)
+                        buildSwitchPreference(setting, prefKey)
                     }
                     is DeviceSettingPreferenceModel.MultiTogglePreference -> {
-                        buildMultiTogglePreference(setting)
+                        buildMultiTogglePreference(setting, prefKey)
                     }
                     is DeviceSettingPreferenceModel.FooterPreference -> {
                         buildFooterPreference(setting)
                     }
                     is DeviceSettingPreferenceModel.MoreSettingsPreference -> {
-                        buildMoreSettingsPreference()
+                        buildMoreSettingsPreference(prefKey)
                     }
                     is DeviceSettingPreferenceModel.HelpPreference -> {}
                     null -> {}
@@ -262,20 +287,32 @@ class DeviceDetailsFragmentFormatterImpl(
 
     @Composable
     private fun buildMultiTogglePreference(
-        pref: DeviceSettingPreferenceModel.MultiTogglePreference
+        pref: DeviceSettingPreferenceModel.MultiTogglePreference,
+        prefKey: String,
     ) {
-        MultiTogglePreference(pref)
+        MultiTogglePreference(
+            pref.copy(
+                onSelectedChange = { newState ->
+                    logItemClick(prefKey, newState)
+                    pref.onSelectedChange(newState)
+                }
+            )
+        )
     }
 
     @Composable
-    private fun buildSwitchPreference(model: DeviceSettingPreferenceModel.SwitchPreference) {
+    private fun buildSwitchPreference(
+        model: DeviceSettingPreferenceModel.SwitchPreference,
+        prefKey: String,
+    ) {
         val switchPrefModel =
             object : SwitchPreferenceModel {
                 override val title = model.title
                 override val summary = { model.summary ?: "" }
                 override val checked = { model.checked }
-                override val onCheckedChange = { newChecked: Boolean ->
-                    model.onCheckedChange(newChecked)
+                override val onCheckedChange = { newState: Boolean ->
+                    logItemClick(prefKey, if (newState) EVENT_SWITCH_ON else EVENT_SWITCH_OFF)
+                    model.onCheckedChange(newState)
                 }
                 override val changeable = { !model.disabled }
                 override val icon: (@Composable () -> Unit)?
@@ -289,8 +326,11 @@ class DeviceDetailsFragmentFormatterImpl(
         if (model.action != null) {
             TwoTargetSwitchPreference(
                 switchPrefModel,
-                primaryOnClick = { triggerAction(model.action) },
-                primaryEnabled = { !model.disabled }
+                primaryOnClick = {
+                    logItemClick(prefKey, EVENT_CLICK_PRIMARY)
+                    triggerAction(model.action)
+                },
+                primaryEnabled = { !model.disabled },
             )
         } else {
             SwitchPreference(switchPrefModel)
@@ -298,12 +338,16 @@ class DeviceDetailsFragmentFormatterImpl(
     }
 
     @Composable
-    private fun buildPlainPreference(model: DeviceSettingPreferenceModel.PlainPreference) {
+    private fun buildPlainPreference(
+        model: DeviceSettingPreferenceModel.PlainPreference,
+        prefKey: String,
+    ) {
         SpaPreference(
             object : PreferenceModel {
                 override val title = model.title
                 override val summary = { model.summary ?: "" }
                 override val onClick = {
+                    logItemClick(prefKey, EVENT_CLICK_PRIMARY)
                     model.action?.let { triggerAction(it) }
                     Unit
                 }
@@ -319,7 +363,7 @@ class DeviceDetailsFragmentFormatterImpl(
     }
 
     @Composable
-    fun buildMoreSettingsPreference() {
+    fun buildMoreSettingsPreference(prefKey: String) {
         SpaPreference(
             object : PreferenceModel {
                 override val title =
@@ -328,6 +372,7 @@ class DeviceDetailsFragmentFormatterImpl(
                     context.getString(R.string.bluetooth_device_more_settings_preference_summary)
                 }
                 override val onClick = {
+                    logItemClick(prefKey, EVENT_CLICK_PRIMARY)
                     SubSettingLauncher(context)
                         .setDestination(DeviceDetailsMoreSettingsFragment::class.java.name)
                         .setSourceMetricsCategory(fragment.getMetricsCategory())
@@ -356,6 +401,35 @@ class DeviceDetailsFragmentFormatterImpl(
         icon?.let { Icon(it, modifier = Modifier.size(SettingsDimension.itemIconSize)) }
     }
 
+    private fun logItemClick(preferenceKey: String, value: Int = 0) {
+        logAction(preferenceKey, SettingsEnums.ACTION_BLUETOOTH_DEVICE_DETAILS_ITEM_CLICKED, value)
+    }
+
+    private fun logItemShown(preferenceKey: String, visible: Boolean) {
+        if (!visible && !prefVisibility.containsKey(preferenceKey)) {
+            return
+        }
+        prefVisibility
+            .computeIfAbsent(preferenceKey) {
+                MutableStateFlow(true).also { visibilityFlow ->
+                    visibilityFlow
+                        .onEach {
+                            logAction(
+                                preferenceKey,
+                                SettingsEnums.ACTION_BLUETOOTH_DEVICE_DETAILS_ITEM_SHOWN,
+                                if (it) EVENT_VISIBLE else EVENT_INVISIBLE,
+                            )
+                        }
+                        .launchIn(fragment.lifecycleScope)
+                }
+            }
+            .value = visible
+    }
+
+    private fun logAction(preferenceKey: String, action: Int, value: Int) {
+        metricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN, action, 0, preferenceKey, value)
+    }
+
     private fun triggerAction(action: DeviceSettingActionModel) {
         when (action) {
             is DeviceSettingActionModel.IntentAction -> {
@@ -375,7 +449,12 @@ class DeviceDetailsFragmentFormatterImpl(
 
     private fun getPreferenceKey(settingId: Int) = "DEVICE_SETTING_${settingId}"
 
-    companion object {
+    private companion object {
         const val TAG = "DeviceDetailsFormatter"
+        const val EVENT_SWITCH_OFF = 0
+        const val EVENT_SWITCH_ON = 1
+        const val EVENT_CLICK_PRIMARY = 2
+        const val EVENT_INVISIBLE = 0
+        const val EVENT_VISIBLE = 1
     }
 }

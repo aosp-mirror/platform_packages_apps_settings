@@ -47,6 +47,7 @@ public class PointerFillStylePreference extends Preference {
     public PointerFillStylePreference(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         setLayoutResource(R.layout.pointer_icon_fill_style_layout);
+        setSelectable(false);
     }
 
     @Override
