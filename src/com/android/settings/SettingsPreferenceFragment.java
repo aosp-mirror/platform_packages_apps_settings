@@ -186,7 +186,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     }
 
     /** Returns if catalyst is enabled on current screen. */
-    protected final boolean isCatalystEnabled() {
+    public final boolean isCatalystEnabled() {
         // TODO(b/379130874): make Catalyst compatible with desktop device, such as user restriction
         // check.
         Context context = getContext();
