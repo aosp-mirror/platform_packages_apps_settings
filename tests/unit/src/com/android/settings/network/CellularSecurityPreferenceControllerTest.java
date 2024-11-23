@@ -152,6 +152,10 @@ public final class CellularSecurityPreferenceControllerTest {
     public void handlePreferenceTreeClick_safetyCenterSupported_shouldRedirectToSafetyCenter() {
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
 
+        doReturn(true).when(mTelephonyManager).isNullCipherNotificationsEnabled();
+        doReturn(true).when(mTelephonyManager)
+              .isCellularIdentifierDisclosureNotificationsEnabled();
+        doReturn(true).when(mTelephonyManager).isNullCipherAndIntegrityPreferenceEnabled();
         boolean prefHandled = mController.handlePreferenceTreeClick(mPreference);
 
         assertThat(prefHandled).isTrue();

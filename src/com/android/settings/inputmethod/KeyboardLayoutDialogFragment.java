@@ -308,7 +308,7 @@ public class KeyboardLayoutDialogFragment extends InstrumentedDialogFragment
         public Keyboards loadInBackground() {
             Keyboards keyboards = new Keyboards();
             InputManager im = (InputManager)getContext().getSystemService(Context.INPUT_SERVICE);
-            if (mInputDeviceIdentifier == null || NewKeyboardSettingsUtils.getInputDevice(
+            if (mInputDeviceIdentifier == null || InputPeripheralsSettingsUtils.getInputDevice(
                     im, mInputDeviceIdentifier) == null) {
                 keyboards.keyboardLayouts.add(null); // default layout
                 keyboards.current = 0;
