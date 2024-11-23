@@ -270,7 +270,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                                 R.integer.config_biometrics_header_scroll_duration);
                         layoutView.adjustScrollableHeaderHeight(
                                 headerScrollView, mShouldShowLottie);
-                        layoutView.headerVerticalScrolling(headerScrollView, headerScrollDuration);
+                        layoutView.headerVerticalScrolling(headerScrollView, headerScrollDuration,
+                                mIsAccessibilityEnabled);
                     }
                 }
             }
@@ -547,6 +548,9 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     }
 
     private void updateTitleAndDescriptionForUdfps() {
+        final UdfpsEnrollEnrollingView layoutView = (UdfpsEnrollEnrollingView) getLayout();
+        final boolean shouldSetFocusOnDescription = Flags.enrollLayoutTruncateImprovement()
+                && mIsAccessibilityEnabled;
         switch (getCurrentStage()) {
             case STAGE_CENTER:
                 setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
@@ -559,6 +563,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                             getString(R.string.security_settings_sfps_enroll_finger_center_title)
                     );
                     configureEnrollmentStage(R.raw.udfps_center_hint_lottie);
+                }
+
+                if (shouldSetFocusOnDescription) {
+                    layoutView.setFocusOnDescription();
                 }
                 break;
 
@@ -574,6 +582,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                     // TODO(b/228100413) Could customize guided lottie animation
                     configureEnrollmentStage(R.raw.udfps_center_hint_lottie);
                 }
+
+                if (shouldSetFocusOnDescription) {
+                    layoutView.setFocusOnDescription();
+                }
                 break;
             case STAGE_FINGERTIP:
                 setHeaderText(R.string.security_settings_udfps_enroll_fingertip_title);
@@ -583,6 +595,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                             getString(R.string.security_settings_udfps_tip_fingerprint_help)
                     );
                     configureEnrollmentStage(R.raw.udfps_tip_hint_lottie);
+                }
+
+                if (shouldSetFocusOnDescription) {
+                    layoutView.setFocusOnDescription();
                 }
                 break;
             case STAGE_LEFT_EDGE:
@@ -601,6 +617,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                         setDescriptionText(R.string.security_settings_udfps_enroll_edge_message);
                     }
                 }
+
+                if (shouldSetFocusOnDescription) {
+                    layoutView.setFocusOnDescription();
+                }
                 break;
             case STAGE_RIGHT_EDGE:
                 setHeaderText(R.string.security_settings_udfps_enroll_right_edge_title);
@@ -618,6 +638,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                     } else {
                         setDescriptionText(R.string.security_settings_udfps_enroll_edge_message);
                     }
+                }
+
+                if (shouldSetFocusOnDescription) {
+                    layoutView.setFocusOnDescription();
                 }
                 break;
 
