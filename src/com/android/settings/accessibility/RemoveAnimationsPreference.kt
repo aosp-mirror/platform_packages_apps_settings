@@ -27,45 +27,50 @@ import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SwitchPreference
-import com.android.settingslib.preference.SwitchPreferenceBinding
 
 class RemoveAnimationsPreference :
     SwitchPreference(
         KEY,
         R.string.accessibility_disable_animations,
-        R.string.accessibility_disable_animations_summary
+        R.string.accessibility_disable_animations_summary,
     ),
-    SwitchPreferenceBinding,
     PreferenceLifecycleProvider {
 
-    private var mSettingsKeyedObserver: KeyedObserver<String?>? = null
+    private var mSettingsKeyedObserver: KeyedObserver<String>? = null
 
     override val icon: Int
         @DrawableRes get() = R.drawable.ic_accessibility_animation
 
     override fun onStart(context: PreferenceLifecycleContext) {
-        mSettingsKeyedObserver = object : KeyedObserver<String?> {
-            override fun onKeyChanged(key: String?, reason: Int) {
-                context.notifyPreferenceChange(KEY)
-            }
-        }
-        mSettingsKeyedObserver?.let {
-            for (key in TOGGLE_ANIMATION_KEYS) {
-                SettingsGlobalStore.get(context).addObserver(key, it, HandlerExecutor.main)
-            }
+        val observer = KeyedObserver<String> { _, _ -> context.notifyPreferenceChange(KEY) }
+        mSettingsKeyedObserver = observer
+        val storage = SettingsGlobalStore.get(context)
+        for (key in getAnimationKeys()) {
+            storage.addObserver(key, observer, HandlerExecutor.main)
         }
     }
 
     override fun onStop(context: PreferenceLifecycleContext) {
         mSettingsKeyedObserver?.let {
-            SettingsGlobalStore.get(context).removeObserver(it)
+            val storage = SettingsGlobalStore.get(context)
+            for (key in getAnimationKeys()) {
+                storage.removeObserver(key, it)
+            }
             mSettingsKeyedObserver = null
         }
     }
 
     override fun storage(context: Context): KeyValueStore = RemoveAnimationsStorage(context)
 
+    override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    @Suppress("UNCHECKED_CAST")
     private class RemoveAnimationsStorage(private val context: Context) :
         NoOpKeyedObservable<String>(), KeyValueStore {
         override fun contains(key: String) = key == KEY
@@ -74,7 +79,6 @@ class RemoveAnimationsPreference :
             when {
                 key == KEY && valueType == Boolean::class.javaObjectType ->
                     !isAnimationEnabled(context) as T
-
                 else -> null
             }
 
@@ -94,16 +98,11 @@ class RemoveAnimationsPreference :
         const val ANIMATION_ON_VALUE: Float = 1.0f
         const val ANIMATION_OFF_VALUE: Float = 0.0f
 
-        val TOGGLE_ANIMATION_KEYS: List<String> = listOf(
-            Settings.Global.WINDOW_ANIMATION_SCALE, Settings.Global.TRANSITION_ANIMATION_SCALE,
-            Settings.Global.ANIMATOR_DURATION_SCALE
-        )
-
         fun isAnimationEnabled(context: Context): Boolean {
+            val storage = SettingsGlobalStore.get(context)
             // This pref treats animation as enabled if *any* of the animation types are enabled.
-            for (animationSetting in TOGGLE_ANIMATION_KEYS) {
-                val animationValue: Float? =
-                    SettingsGlobalStore.get(context).getFloat(animationSetting)
+            for (animationSetting in getAnimationKeys()) {
+                val animationValue: Float? = storage.getFloat(animationSetting)
                 // Animation is enabled by default, so treat null as enabled.
                 if (animationValue == null || animationValue > ANIMATION_OFF_VALUE) {
                     return true
@@ -113,10 +112,18 @@ class RemoveAnimationsPreference :
         }
 
         fun setAnimationEnabled(context: Context, enabled: Boolean) {
-            val value = if (enabled) ANIMATION_ON_VALUE else ANIMATION_OFF_VALUE;
-            for (animationSetting in TOGGLE_ANIMATION_KEYS) {
-                SettingsGlobalStore.get(context).setFloat(animationSetting, value)
+            val storage = SettingsGlobalStore.get(context)
+            val value = if (enabled) ANIMATION_ON_VALUE else ANIMATION_OFF_VALUE
+            for (animationSetting in getAnimationKeys()) {
+                storage.setFloat(animationSetting, value)
             }
         }
+
+        fun getAnimationKeys() =
+            listOf(
+                Settings.Global.WINDOW_ANIMATION_SCALE,
+                Settings.Global.TRANSITION_ANIMATION_SCALE,
+                Settings.Global.ANIMATOR_DURATION_SCALE,
+            )
     }
 }
