@@ -72,7 +72,7 @@ public class TrackpadSettingsControllerTest {
                 InputDevice.SOURCE_TOUCHPAD);
         ShadowInputDevice.addDevice(deviceId, device);
         String expectedTitle = mContext.getString(
-                NewKeyboardSettingsUtils.getTouchpadAndMouseTitleTitleResId());
+                InputPeripheralsSettingsUtils.getTouchpadAndMouseTitleTitleResId());
 
         mController.updateState(mPreference);
 
