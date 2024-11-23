@@ -25,6 +25,7 @@ import android.graphics.Insets;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -44,6 +45,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.LayoutRes;
@@ -200,7 +202,26 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
         return footerBarMinHeight;
     }
 
-    void headerVerticalScrolling(ScrollView headerScrollView, long duration) {
+    void setFocusOnDescription() {
+        final ScrollView headerScrollView = findViewById(R.id.sud_header_scroll_view);
+        final TextView descriptionView = getDescriptionTextView();
+        if (descriptionView != null && !descriptionView.getText().isEmpty()) {
+            descriptionView.post(
+                    () -> {
+                    Rect scrollBounds = new Rect();
+                    headerScrollView.getHitRect(scrollBounds);
+                    boolean isVisible = descriptionView.getLocalVisibleRect(scrollBounds);
+                    if (!isVisible) {
+                        descriptionView.setFocusable(true);
+                        descriptionView.setFocusableInTouchMode(true);
+                        descriptionView.requestFocus();
+                    }
+                });
+        }
+    }
+
+    void headerVerticalScrolling(ScrollView headerScrollView, long duration,
+            boolean isAccessibilityEnabled) {
         headerScrollView.post(new Runnable() {
             @Override
             public void run() {
@@ -216,13 +237,23 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
 
                     @Override
                     public void onAnimationEnd(@NonNull Animator animation) {
-                        mHeaderScrollAnimator.removeAllListeners();
-                        headerScrollView.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                mHeaderScrollAnimator.reverse();
-                            }
-                        });
+                            headerScrollView.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mHeaderScrollAnimator.removeAllListeners();
+                                    mHeaderScrollAnimator.reverse();
+                                    if (isAccessibilityEnabled) {
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                if (!mHeaderScrollAnimator.isRunning()) {
+                                                    setFocusOnDescription();
+                                                }
+                                            }
+                                        }, duration + 200);
+                                    }
+                                }
+                            });
                     }
 
                     @Override
@@ -320,6 +351,19 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
                 R.id.udfps_enroll_animation_fp_view);
         fingerprintView.setPadding(0, -layoutLottieAnimationPadding,
                 0, layoutLottieAnimationPadding);
+
+        // TODO(b/260970216) Instead of hiding the description text view, we should
+        //  make the header view scrollable if the text is too long.
+        // If description text view has overlap with udfps progress view, hide it.
+        if (!Flags.enrollLayoutTruncateImprovement()) {
+            final View descView = getDescriptionTextView();
+            getViewTreeObserver().addOnDrawListener(() -> {
+                if (descView.getVisibility() == View.VISIBLE
+                        && hasOverlap(descView, mUdfpsEnrollView)) {
+                    descView.setVisibility(View.GONE);
+                }
+            });
+        }
     }
 
     private void setOnHoverListener() {
