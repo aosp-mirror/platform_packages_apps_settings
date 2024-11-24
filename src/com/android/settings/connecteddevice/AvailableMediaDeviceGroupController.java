@@ -132,7 +132,12 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
 
                 @Override
                 public void onSourceAdded(
-                        @NonNull BluetoothDevice sink, int sourceId, int reason) {}
+                        @NonNull BluetoothDevice sink, int sourceId, int reason) {
+                    Log.d(TAG, "onSourceAdded: update media device list.");
+                    if (mBluetoothDeviceUpdater != null) {
+                        mBluetoothDeviceUpdater.forceUpdate();
+                    }
+                }
 
                 @Override
                 public void onSourceAddFailed(
@@ -165,14 +170,7 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
                 public void onReceiveStateChanged(
                         @NonNull BluetoothDevice sink,
                         int sourceId,
-                        @NonNull BluetoothLeBroadcastReceiveState state) {
-                    if (BluetoothUtils.isConnected(state)) {
-                        Log.d(TAG, "onReceiveStateChanged: synced, update media device list.");
-                        if (mBluetoothDeviceUpdater != null) {
-                            mBluetoothDeviceUpdater.forceUpdate();
-                        }
-                    }
-                }
+                        @NonNull BluetoothLeBroadcastReceiveState state) {}
             };
 
     public AvailableMediaDeviceGroupController(Context context) {

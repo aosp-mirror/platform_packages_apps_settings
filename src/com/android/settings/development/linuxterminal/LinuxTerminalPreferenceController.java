@@ -43,7 +43,7 @@ public class LinuxTerminalPreferenceController extends DeveloperOptionsPreferenc
     static final long MEMORY_MIN_BYTES = DataUnit.GIGABYTES.toBytes(4); // 4_000_000_000
 
     @VisibleForTesting
-    static final long STORAGE_MIN_BYTES = DataUnit.GIBIBYTES.toBytes(128); // 128 * 2^30
+    static final long STORAGE_MIN_BYTES = DataUnit.GIGABYTES.toBytes(128); // 128_000_000_000
 
     private static final String LINUX_TERMINAL_KEY = "linux_terminal";
 

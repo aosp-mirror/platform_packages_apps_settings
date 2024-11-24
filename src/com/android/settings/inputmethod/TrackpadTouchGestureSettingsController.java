@@ -31,7 +31,7 @@ public class TrackpadTouchGestureSettingsController extends BasePreferenceContro
     public int getAvailabilityStatus() {
         boolean isFeatureOn = FeatureFlagUtils
                 .isEnabled(mContext, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_TRACKPAD_GESTURE);
-        boolean isTouchpad = NewKeyboardSettingsUtils.isTouchpad();
+        boolean isTouchpad = InputPeripheralsSettingsUtils.isTouchpad();
         return (isFeatureOn && isTouchpad) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 }

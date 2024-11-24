@@ -67,8 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Підключити новий пристрій"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Автоматично ввімкнути завтра"</string>
-    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
-    <skip />
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Якщо вимкнути Bluetooth, він ввімкнеться наступного дня"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Підключити правий"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Підключити лівий"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Підключити другий"</string>
@@ -179,6 +178,14 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Мова додатка"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Пропоновані мови"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Усі мови"</string>
+    <!-- no translation found for suggested_locales_title (119908696638862861) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
+    <skip />
+    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
+    <skip />
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Мова системи"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Налаштування системи за умовчанням"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Вибір мови для цього додатка в налаштуваннях неможливий"</string>
@@ -194,6 +201,11 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Змінити"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"Вибрана мова (%s) недоступна"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Цю мову не можна використовувати як мову системи, однак додатки й веб-сайти знатимуть, що ви надаєте їй перевагу."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"Пошук"</string>
+    <!-- no translation found for language_selection_title (968179636453982415) -->
+    <skip />
+    <string name="country_selection_title" msgid="5376929821458644732">"Вибір регіону"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"Введіть назву мови"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Регіональні налаштування"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Установіть параметри одиниць і чисел"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Укажіть регіональні налаштування, щоб додатки могли персоналізувати для вас свій інтерфейс."</string>
@@ -661,9 +673,9 @@
     <string name="private_space_continue_login_label" msgid="7779965766333065391">"Продовжити"</string>
     <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Виберіть спосіб розблокування приватного простору"</string>
     <string name="private_space_lock_setup_description" msgid="423405593476300918">"Ви можете розблоковувати приватний простір відбитком пальця. З міркувань безпеки для цієї функції потрібно налаштувати резервний спосіб розблокування."</string>
-    <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Створіть PIN-код для особистого простору"</string>
-    <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Установіть пароль особистого простору"</string>
-    <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Налаштуйте ключ для особистого простору"</string>
+    <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Створіть PIN-код для приватного простору"</string>
+    <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Створіть пароль для приватного простору"</string>
+    <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Налаштуйте ключ для приватного простору"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"Блокування"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"Приховування"</string>
     <string name="private_space_confirm_your_pattern_header" msgid="449382220134788771">"Підтвердьте ключ для приватного простору"</string>
@@ -854,9 +866,9 @@
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Відключити"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Створ. пару та підкл."</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="7326727272747345476">"Коли ввімкнено Bluetooth, ваш пристрій може обмінюватися даними з іншими пристроями з цією технологією поблизу"</string>
-    <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Коли Bluetooth увімкнено, ваш пристрій може обмінюватися даними з пристроями з Bluetooth поблизу. Такі функції, як швидкий обмін і \"Знайти пристрій\", використовують Bluetooth."</string>
+    <string name="bluetooth_empty_list_bluetooth_off_auto_on_available" msgid="3430864468105204282">"Коли Bluetooth увімкнено, ваш пристрій може обмінюватися даними з пристроями з Bluetooth поблизу. Такі функції, як \"Швидкий обмін\" і \"Знайти пристрій\", використовують Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"Коли ви вмикаєте Bluetooth, ваш пристрій може обмінюватися даними з іншими пристроями з цією технологією поблизу.\n\nДодатки й сервіси можуть шукати пристрої поруч, навіть якщо Bluetooth вимкнено. Завдяки цьому покращується робота пристрою, зокрема його функцій і сервісів, які використовують геодані. Таке налаштування можна змінити в параметрах пошуку пристроїв із Bluetooth."</string>
-    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Коли Bluetooth увімкнено, ваш пристрій може обмінюватися даними з пристроями з Bluetooth поблизу. Такі функції, як швидкий обмін і \"Знайти пристрій\", використовують Bluetooth.\n\nДодатки й сервіси можуть шукати пристрої поблизу, навіть якщо Bluetooth вимкнено. Завдяки цьому покращується робота пристрою, зокрема його функцій і сервісів, які використовують геодані. Це можна змінити в налаштуваннях пошуку пристроїв із Bluetooth."</string>
+    <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"Коли Bluetooth увімкнено, ваш пристрій може обмінюватися даними з пристроями з Bluetooth поблизу. Такі функції, як \"Швидкий обмін\" і \"Знайти пристрій\", використовують Bluetooth.\n\nДодатки й сервіси можуть шукати пристрої поблизу, навіть якщо Bluetooth вимкнено. Завдяки цьому покращується робота пристрою, зокрема його функцій і сервісів, які використовують геодані. Це можна змінити в налаштуваннях пошуку пристроїв із Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"Змінити"</string>
     <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"Пристрій \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" не підключено"</string>
     <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"З міркувань безпеки видаліть цей пристрій, а потім підключіть його знову"</string>
@@ -1243,7 +1255,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Адаптивні"</string>
     <string name="brightness" msgid="6216871641021779698">"Рівень яскравості"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Адаптивна яскравість"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Про адаптивну яскравість"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Яскравість екрана автоматично пристосовується до середовища й ваших дій. Ви можете пересунути повзунок вручну, щоб відкоригувати яскравість за власним бажанням."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Увімкнено"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Вимкнено"</string>
@@ -1564,7 +1575,7 @@
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Не вдалося видалити всі дані з eSIM-карт"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Сталася помилка. Не вдалося видалити всі дані з eSIM-карт.\n\nПерезапустіть пристрій і повторіть спробу."</string>
     <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Видалити приватний простір"</string>
-    <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Якщо на вашому пристрої є приватний простір, його буде видалено назавжди, а доданий у нього обліковий запис Google буде вилучено \n\nУсі додатки у вашому просторі і їх дані також буде назавжди видалено з "<b>"внутрішньої пам’яті"</b>" вашого телефона."</string>
+    <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Якщо на вашому пристрої є приватний простір, його буде видалено назавжди, а доданий у нього обліковий запис Google буде вилучено. \n\nУсі додатки у вашому просторі і їх дані також буде назавжди видалено з "<b>"внутрішньої пам’яті"</b>" вашого телефона."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Стерти всі дані (скинути налаштування)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Стерти всі дані (скинути налаштування)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"музику"</li>\n<li>"фото"</li>\n<li>"інші дані користувача"</li></string>
@@ -1986,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"За умовчанням"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Сенсорна панель"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Сенсорна панель і миша"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"Миша"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Швидкість курсора, жести"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Натискання дотиком"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Перетягування дотиком"</string>
@@ -3728,16 +3740,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Якщо ви отримаєте багато повідомлень за короткий проміжок часу, пристрій знизить гучність і зменшить кількість сповіщень на період до 2 хвилин. Звук дзвінків, будильників і сповіщень щодо важливих розмов не зміниться. \n\nСповіщення, отримані протягом цього періоду, можна буде переглянути, пpовівши пальцем униз від верхнього краю екрана."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Застосувати до робочих профілів"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Застосувати до додатків робочого профілю"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"Згруповані сповіщення"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"Увімкнено"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"Вимкнено"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Використовувати групування сповіщень"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"Сповіщення з подібними темами групуватимуться, і їх звук буде вимкнено, щоб ви менше відволікалися. У такому разі налаштування сповіщень, установлені в додатку, не діятимуть."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Допоміжні VR-сервіси"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Установлені додатки не запитували доступу для роботи в режимі допоміжних VR-сервісів."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Надати VR-сервісу доступ до сервісу <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
@@ -4200,6 +4207,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Сповіщення на весь екран"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Дозволити сповіщення на весь екран із цього додатка"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Цьому додатку буде дозволено показувати сповіщення на весь екран, коли пристрій заблоковано. Додатки можуть використовувати це налаштування, щоб показувати будильники, сповіщення про вхідні дзвінки або інші термінові сповіщення."</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"Додатки для керування медіафайлами"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Дозволити додатку керувати медіафайлами"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Якщо вибрати цей параметр, додаток зможе без вашого підтвердження змінювати чи видаляти медіафайли, створені в інших додатках. У додатка має бути дозвіл на доступ до файлів і медіафайлів."</string>
@@ -5496,11 +5509,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Не вдалося налаштувати обліковий запис за умовчанням"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Немає облікового запису за умовчанням"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Лише на пристрої"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Пристрій і %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Щоб почати, додайте обліковий запис"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Де зберігати контакти"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Обвести й знайти"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Натисніть і втримуйте кнопку головного екрана або маркер навігації, щоб здійснити пошук за вмістом на екрані."</string>
 </resources>
