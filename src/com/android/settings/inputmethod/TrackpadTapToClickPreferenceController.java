@@ -49,7 +49,7 @@ public class TrackpadTapToClickPreferenceController extends TogglePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        boolean isTouchpad = NewKeyboardSettingsUtils.isTouchpad();
+        boolean isTouchpad = InputPeripheralsSettingsUtils.isTouchpad();
         return isTouchpad ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 

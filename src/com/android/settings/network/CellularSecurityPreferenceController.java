@@ -125,7 +125,7 @@ public class CellularSecurityPreferenceController extends BasePreferenceControll
             return super.handlePreferenceTreeClick(preference);
         }
         boolean isSafetyCenterSupported = isSafetyCenterSupported();
-        if (isSafetyCenterSupported) {
+        if (isSafetyCenterSupported && areNotificationsEnabled()) {
             Intent safetyCenterIntent = new Intent(Intent.ACTION_SAFETY_CENTER);
             safetyCenterIntent.putExtra(SafetyCenterManager.EXTRA_SAFETY_SOURCES_GROUP_ID,
                     "AndroidCellularNetworkSecuritySources");

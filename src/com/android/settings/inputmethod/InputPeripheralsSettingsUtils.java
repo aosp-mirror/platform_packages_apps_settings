@@ -44,9 +44,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 /**
- * Utilities of keyboard settings
+ * Utilities of input peripherals settings
  */
-public class NewKeyboardSettingsUtils {
+public class InputPeripheralsSettingsUtils {
 
     static final String EXTRA_TITLE = "keyboard_layout_picker_title";
     static final String EXTRA_USER_ID = "user_id";

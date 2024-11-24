@@ -43,7 +43,7 @@ public class TrackpadSettings extends DashboardFragment {
     public void onCreate(@NonNull Bundle icicle) {
         super.onCreate(icicle);
         getPreferenceScreen().setTitle(
-                NewKeyboardSettingsUtils.getTouchpadAndMouseTitleTitleResId());
+                InputPeripheralsSettingsUtils.getTouchpadAndMouseTitleTitleResId());
     }
 
     @Override
@@ -67,7 +67,7 @@ public class TrackpadSettings extends DashboardFragment {
                 protected boolean isPageSearchEnabled(Context context) {
                     return FeatureFlagUtils
                             .isEnabled(context, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_TRACKPAD)
-                            && NewKeyboardSettingsUtils.isTouchpad();
+                            && InputPeripheralsSettingsUtils.isTouchpad();
                 }
             };
 }

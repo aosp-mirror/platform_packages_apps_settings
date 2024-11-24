@@ -67,8 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Accoppia nuovo dispositivo"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Attiva automaticamente domani"</string>
-    <!-- no translation found for bluetooth_screen_auto_on_summary (1490150818921417875) -->
-    <skip />
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Se disattivi il Bluetooth, si riattiva il giorno successivo"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Accoppia orecchio dx"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Accoppia orecchio sx"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Accoppia l\'altro orecchio"</string>
@@ -179,6 +178,14 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Lingua dell\'app"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Lingue suggerite"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Tutte le lingue"</string>
+    <!-- no translation found for suggested_locales_title (119908696638862861) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
+    <skip />
+    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
+    <skip />
+    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
+    <skip />
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Lingua di sistema"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Predefinita di sistema"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La selezione della lingua per questa app non è disponibile nelle Impostazioni."</string>
@@ -194,6 +201,11 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Cambia"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s non disponibile"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Non è possibile usare questa lingua come lingua di sistema, ma app e siti web sanno che preferisci questa lingua."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"Cerca"</string>
+    <!-- no translation found for language_selection_title (968179636453982415) -->
+    <skip />
+    <string name="country_selection_title" msgid="5376929821458644732">"Regione preferita"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"Digita nome lingua"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferenze locali"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Imposta le preferenze per unità e numeri"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Consenti alle app di conoscere le tue preferenze locali affinché possano personalizzare la tua esperienza."</string>
@@ -292,7 +304,7 @@
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Caricamento…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Le app con autorizzazione di accesso ai dispositivi nelle vicinanze possono stabilire la posizione relativa dei dispositivi connessi."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"L\'accesso alla posizione è disattivato per app e servizi. La posizione del dispositivo potrebbe essere comunque inviata ai servizi di emergenza se chiami o invii un SMS a un numero di emergenza."</string>
-    <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Scopri di più sulle impostazioni di geolocalizzazione"</string>
+    <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"Scopri di più sulle impostazioni di localizzazione"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Per apportare modifiche, vai alle Impostazioni di ChromeOS &gt; Privacy e sicurezza &gt; Controlli per la privacy &gt; Accesso alla posizione"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Account"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Sicurezza"</string>
@@ -1243,7 +1255,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Adattivi"</string>
     <string name="brightness" msgid="6216871641021779698">"Livello di luminosità"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Luminosità adattiva"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Informazioni sulla luminosità adattiva"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"La luminosità dello schermo verrà regolata automaticamente in base all\'ambiente e alle attività. Puoi spostare manualmente il cursore per far sì che la luminosità adattiva memorizzi le tue preferenze."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"On"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Off"</string>
@@ -1986,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Predefinito"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad e mouse"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"Mouse"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Velocità del puntatore, gesti"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Tocco per fare clic"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Trascinamento al tocco"</string>
@@ -3695,7 +3707,7 @@
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Le notifiche adattive Android sono state sostituite dalle notifiche avanzate in Android 12. Questa funzionalità mostra risposte e azioni suggerite e organizza le tue notifiche. \n\nLe notifiche avanzate possono accedere ai contenuti di una notifica, incluse le informazioni personali, come i nomi dei contatti e i messaggi. Questa funzionalità può anche ignorare le notifiche o rispondervi, ad esempio accettando le telefonate, e controllare la modalità Non disturbare."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Consentire a <xliff:g id="SERVICE">%1$s</xliff:g> di accedere alle notifiche?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"L\'app <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> potrà leggere tutte le notifiche, incluse informazioni personali quali nomi dei contatti, foto e il testo dei messaggi ricevuti. Questa app potrà inoltre posticipare o ignorare le notifiche oppure agire sui pulsanti nelle notifiche, ad esempio rispondere alle telefonate. \n\nL\'app potrà anche attivare o disattivare la funzionalità Non disturbare e modificare le relative impostazioni."</string>
-    <string name="nls_warning_prompt" msgid="1486887096703743841">"L\'app <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> potrà:"</string>
+    <string name="nls_warning_prompt" msgid="1486887096703743841">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> potrà:"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Leggere le tue notifiche"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Può leggere le tue notifiche, incluse informazioni personali quali contatti, messaggi e foto."</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"Rispondere ai messaggi"</string>
@@ -3728,16 +3740,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Quando ricevi molte notifiche in un breve periodo di tempo, il dispositivo abbasserà il volume e ridurrà al minimo gli avvisi per un massimo di 2 minuti. Non ci sono ripercussioni su chiamate, sveglie e conversazioni prioritarie. \n\nPer trovare le notifiche ricevute durante l\'attenuazione basta trascinare verso il basso la parte superiore dello schermo."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Applica ai profili di lavoro"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Applica alle app del profilo di lavoro"</string>
-    <!-- no translation found for notification_bundle_title (460988459835922719) -->
-    <skip />
-    <!-- no translation found for notification_bundle_on (1596327200778050642) -->
-    <skip />
-    <!-- no translation found for notification_bundle_off (1550261372988157377) -->
-    <skip />
-    <!-- no translation found for notification_bundle_main_control_title (4746182488388939403) -->
-    <skip />
-    <!-- no translation found for notification_bundle_description (3896142878395333784) -->
-    <skip />
+    <string name="notification_bundle_title" msgid="460988459835922719">"Notifiche raggruppate"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"On"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"Off"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Usa il raggruppamento delle notifiche"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"Le notifiche con temi simili verranno silenziate e raggruppate per un\'esperienza più discreta. Il raggruppamento prevarrà sulle impostazioni di notifica di un\'app."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Servizi di supporto VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nessuna app installata ha richiesto di essere eseguita come servizio di supporto VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Consentire l\'accesso a <xliff:g id="SERVICE">%1$s</xliff:g> al servizio VR?"</string>
@@ -4200,6 +4207,12 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notifiche a schermo intero"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Consenti notifiche a schermo intero di questa app"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Consenti a questa app di mostrare notifiche a schermo intero quando il dispositivo è bloccato. L\'app potrebbe usarle per mettere in evidenza sveglie, chiamate in arrivo o altre notifiche urgenti."</string>
+    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
+    <skip />
+    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
+    <skip />
     <string name="media_management_apps_title" msgid="8222942355578724582">"App di gestione contenuti multimediali"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Consenti all\'app di gestire contenuti multimediali"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Se autorizzata, questa app può modificare o eliminare file multimediali creati con altre app senza chiederti l\'autorizzazione. L\'app deve avere l\'autorizzazione di accesso a file e contenuti multimediali."</string>
@@ -5494,11 +5507,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Errore durante l\'impostazione dell\'account predefinito"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Nessun account impostato come predefinito"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Solo dispositivo"</string>
-    <!-- no translation found for contacts_storage_account_title (4939024280942927810) -->
-    <skip />
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Dispositivo e %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Aggiungi un account per iniziare"</string>
-    <!-- no translation found for contacts_storage_account_category_title (6427149157377815586) -->
-    <skip />
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Dove salvare i contatti"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Cerchia e Cerca"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Tocca e tieni premuto il pulsante Home o la barra di navigazione per eseguire una ricerca usando i contenuti sullo schermo."</string>
 </resources>

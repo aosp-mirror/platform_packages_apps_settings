@@ -319,7 +319,16 @@ public class ExternalDisplaySettingsConfiguration {
      */
     public static boolean isExternalDisplaySettingsPageEnabled(@NonNull FeatureFlags flags) {
         return flags.rotationConnectedDisplaySetting()
-                || flags.resolutionAndEnableConnectedDisplaySetting();
+                || flags.resolutionAndEnableConnectedDisplaySetting()
+                || flags.displayTopologyPaneInDisplayList();
+    }
+
+    /**
+     * If true, indicates the display list activity should be shown even if there is only one
+     * display.
+     */
+    public static boolean forceShowDisplayList(@NonNull FeatureFlags flags) {
+        return flags.displayTopologyPaneInDisplayList();
     }
 
     static boolean isDisplayAllowed(@NonNull Display display,
