@@ -50,7 +50,6 @@ public class ColorAndMotionFragment extends DashboardFragment {
 
     // Preferences
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN = "daltonizer_preference";
-    private static final String TOGGLE_DISABLE_ANIMATIONS = "toggle_disable_animations";
     private static final String TOGGLE_LARGE_POINTER_ICON = "toggle_large_pointer_icon";
     @VisibleForTesting
     static final String TOGGLE_FORCE_INVERT = "toggle_force_invert";
@@ -125,7 +124,7 @@ public class ColorAndMotionFragment extends DashboardFragment {
         mDisplayDaltonizerPreferenceScreen = findPreference(DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
 
         // Disable animation.
-        mToggleDisableAnimationsPreference = findPreference(TOGGLE_DISABLE_ANIMATIONS);
+        mToggleDisableAnimationsPreference = findPreference(RemoveAnimationsPreference.KEY);
 
         // Large pointer icon.
         mToggleLargePointerIconPreference = findPreference(TOGGLE_LARGE_POINTER_ICON);
