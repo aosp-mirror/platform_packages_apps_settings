@@ -412,10 +412,8 @@ public class AccessibilitySettings extends DashboardFragment implements
         final List<RestrictedPreference> preferenceList = getInstalledAccessibilityPreferences(
                 getPrefContext(), installedShortcutList, installedServiceList);
 
-        if (Flags.checkPrebundledIsPreinstalled()) {
-            removeNonPreinstalledComponents(mPreBundledServiceComponentToCategoryMap,
-                    installedShortcutList, installedServiceList);
-        }
+        removeNonPreinstalledComponents(mPreBundledServiceComponentToCategoryMap,
+                installedShortcutList, installedServiceList);
 
         final PreferenceCategory downloadedServicesCategory =
                 mCategoryToPrefCategoryMap.get(CATEGORY_DOWNLOADED_SERVICES);
