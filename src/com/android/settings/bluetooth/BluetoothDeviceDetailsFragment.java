@@ -347,6 +347,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         if (view != null) {
             view.getViewTreeObserver().addOnGlobalLayoutListener(mOnGlobalLayoutListener);
         }
+        getListView().setItemViewCacheSize(100);
         return view;
     }
 
