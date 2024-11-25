@@ -20,6 +20,8 @@ import android.content.Context;
 import android.hardware.input.InputManager;
 import android.util.FeatureFlagUtils;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
@@ -28,15 +30,16 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
-public class TrackpadSettingsController extends BasePreferenceController
+public class TouchpadAndMouseSettingsController extends BasePreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop,
         InputManager.InputDeviceListener {
 
     private final InputManager mIm;
 
+    @Nullable
     private Preference mPreference;
 
-    public TrackpadSettingsController(Context context, String key) {
+    public TouchpadAndMouseSettingsController(@NonNull Context context, @NonNull String key) {
         super(context, key);
         mIm = context.getSystemService(InputManager.class);
     }
