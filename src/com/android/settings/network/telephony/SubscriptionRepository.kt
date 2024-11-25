@@ -23,11 +23,13 @@ import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import com.android.settings.network.SubscriptionUtil
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -36,6 +38,8 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.shareIn
 
 private const val TAG = "SubscriptionRepository"
 
@@ -132,20 +136,7 @@ class SubscriptionRepository(private val context: Context) {
     fun canDisablePhysicalSubscription() = subscriptionManager.canDisablePhysicalSubscription()
 
     /** Flow for subscriptions changes. */
-    fun subscriptionsChangedFlow() = callbackFlow {
-        val listener = object : SubscriptionManager.OnSubscriptionsChangedListener() {
-            override fun onSubscriptionsChanged() {
-                trySend(Unit)
-            }
-        }
-
-        subscriptionManager.addOnSubscriptionsChangedListener(
-            Dispatchers.Default.asExecutor(),
-            listener,
-        )
-
-        awaitClose { subscriptionManager.removeOnSubscriptionsChangedListener(listener) }
-    }.conflate().onEach { Log.d(TAG, "subscriptions changed") }.flowOn(Dispatchers.Default)
+    fun subscriptionsChangedFlow() = getSharedSubscriptionsChangedFlow(context)
 
     /** Flow of active subscription ids. */
     fun activeSubscriptionIdListFlow(): Flow<List<Int>> =
@@ -172,6 +163,57 @@ class SubscriptionRepository(private val context: Context) {
                 flowOf(null)
             }
         }
+
+    companion object {
+        private lateinit var SharedSubscriptionsChangedFlow: Flow<Unit>
+
+        private fun getSharedSubscriptionsChangedFlow(context: Context): Flow<Unit> {
+            if (!this::SharedSubscriptionsChangedFlow.isInitialized) {
+                SharedSubscriptionsChangedFlow =
+                    context.applicationContext
+                        .requireSubscriptionManager()
+                        .subscriptionsChangedFlow()
+                        .shareIn(
+                            scope = CoroutineScope(Dispatchers.Default),
+                            started = SharingStarted.WhileSubscribed(),
+                            replay = 1,
+                        )
+            }
+            return SharedSubscriptionsChangedFlow
+        }
+
+        /**
+         * Flow for subscriptions changes.
+         *
+         * Note: Even the SubscriptionManager.addOnSubscriptionsChangedListener's doc says the
+         * SubscriptionManager.OnSubscriptionsChangedListener.onSubscriptionsChanged() method will
+         * also be invoked once initially when calling it, there still case that the
+         * onSubscriptionsChanged() method is not invoked initially. For example, when the
+         * onSubscriptionsChanged event never happens before, on a device never ever has any
+         * subscriptions.
+         */
+        private fun SubscriptionManager.subscriptionsChangedFlow() =
+            callbackFlow {
+                    val listener =
+                        object : SubscriptionManager.OnSubscriptionsChangedListener() {
+                            override fun onSubscriptionsChanged() {
+                                trySend(Unit)
+                            }
+
+                            override fun onAddListenerFailed() {
+                                close()
+                            }
+                        }
+
+                    addOnSubscriptionsChangedListener(Dispatchers.Default.asExecutor(), listener)
+
+                    awaitClose { removeOnSubscriptionsChangedListener(listener) }
+                }
+                .onStart { emit(Unit) } // Ensure this flow is never empty
+                .conflate()
+                .onEach { Log.d(TAG, "subscriptions changed") }
+                .flowOn(Dispatchers.Default)
+    }
 }
 
 val Context.subscriptionManager: SubscriptionManager?

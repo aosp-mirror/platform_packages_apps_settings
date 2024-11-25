@@ -412,28 +412,17 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"Ansikte, fingeravtryck och <xliff:g id="WATCH">%s</xliff:g> har lagts till"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"Ansikte, fingeravtryck och <xliff:g id="WATCH">%s</xliff:g> har lagts till"</string>
     <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"Identitetskontroll är aktiverad så biometrisk data krävs"</string>
-    <!-- no translation found for go_to_settings (4394928396153474179) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_title (7486409651908283892) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_description_1 (4882147327291296884) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_two_factor_auth_description_1 (8369894114882274736) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_description_2 (5512321457771307067) -->
-    <skip />
-    <!-- no translation found for identity_check_general_error_title (5073929400896102674) -->
-    <skip />
-    <!-- no translation found for identity_check_general_error_description_1 (5260846996256699095) -->
-    <skip />
-    <!-- no translation found for identity_check_biometric_error_cancel (3353689146211669291) -->
-    <skip />
-    <!-- no translation found for identity_check_biometric_error_ok (4535306787363107304) -->
-    <skip />
-    <!-- no translation found for go_to_identity_check (5215846637575231800) -->
-    <skip />
-    <!-- no translation found for identity_check_lockout_error_lock_screen (3021787511681444051) -->
-    <skip />
+    <string name="go_to_settings" msgid="4394928396153474179">"Öppna inställningarna"</string>
+    <string name="identity_check_lockout_error_title" msgid="7486409651908283892">"Identitetskontroll är aktiverad och din identitet kan inte verifieras"</string>
+    <string name="identity_check_lockout_error_description_1" msgid="4882147327291296884">"Biometri misslyckades för många gånger. Lås och lås upp enheten för att försöka igen."</string>
+    <string name="identity_check_lockout_error_two_factor_auth_description_1" msgid="8369894114882274736">"Biometri misslyckades för många gånger. Försök igen."</string>
+    <string name="identity_check_lockout_error_description_2" msgid="5512321457771307067">"Du kan hantera identitetskontrollen i inställningarna för stöldskydd. Öppna inställningarna"</string>
+    <string name="identity_check_general_error_title" msgid="5073929400896102674">"Biometri krävs för att fortsätta"</string>
+    <string name="identity_check_general_error_description_1" msgid="5260846996256699095">"Identitetskontrollen är aktiverad och kräver biometri, men ansikts- eller fingeravtryckssensorn är inte tillgänglig\n"<ul><li>"Kontrollera att kameran är på och försök igen"</li>\n<li>"Du kan inaktivera identitetskontroll med ditt Google-konto"</li></ul></string>
+    <string name="identity_check_biometric_error_cancel" msgid="3353689146211669291">"Avbryt"</string>
+    <string name="identity_check_biometric_error_ok" msgid="4535306787363107304">"OK"</string>
+    <string name="go_to_identity_check" msgid="5215846637575231800">"Gå till identitetskontrollen"</string>
+    <string name="identity_check_lockout_error_lock_screen" msgid="3021787511681444051">"Låsskärm"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"Upplåsning med fjärrverifierare"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"Klockan har lagts till"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"Konfigurera klockan"</string>
@@ -572,57 +561,57 @@
     <string name="private_space_title" msgid="1752064212078238723">"Privat område"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Håll privata appar låsta och dolda"</string>
     <string name="private_space_description" msgid="4059594203775816136">"Ha privata appar i ett separat rum som du kan dölja eller låsa"</string>
-    <string name="private_space_lock_title" msgid="7230836881433350526">"Lås privat område"</string>
-    <string name="private_space_one_lock_summary" msgid="2106513606571219068">"Du kan låsa upp ditt privata område på samma sätt som du låser upp din enhet, eller så väljer du ett annat lås"</string>
+    <string name="private_space_lock_title" msgid="7230836881433350526">"Lås privat utrymme"</string>
+    <string name="private_space_one_lock_summary" msgid="2106513606571219068">"Du kan låsa upp ditt privata utrymme på samma sätt som du låser upp din enhet, eller så väljer du ett annat lås"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Använd skärmlåset för enheten"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"Ansikts- och fingeravtryckslås"</string>
     <string name="private_space_fingerprint_title" msgid="5989254643211889931">"Fingeravtryckslås"</string>
     <string name="private_space_face_title" msgid="3290402865367663079">"Ansiktslås"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Tryck för att ställa in"</string>
-    <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"Fingeravtryckslås för privat område"</string>
-    <string name="private_space_face_unlock_title" msgid="462248384776453613">"Ansiktslås för privat område"</string>
-    <string name="private_space_biometric_unlock_title" msgid="1978145237698659673">"Ansikts- och fingeravtryckslås för privat område"</string>
-    <string name="private_space_fingerprint_enroll_introduction_title" msgid="5187730641333680942">"Ställ in fingeravtryckslås för privat område"</string>
-    <string name="private_space_fingerprint_enroll_introduction_message" msgid="9092068873421435300">"Lås upp ditt privata område eller verifiera din identitet med ditt fingeravtryck, till exempel när du loggar in i appar eller godkänner ett köp"</string>
-    <string name="private_space_fingerprint_enroll_introduction_footer_message" msgid="7125255484447984854">"Ditt privata område kan låsas upp oavsiktligt, till exempel om någon håller upp telefonen mot ditt finger."</string>
-    <string name="private_space_fingerprint_enroll_finish_message" msgid="4754797926493316965">"Använd ditt fingeravtryck för att låsa upp ditt privata område eller för att godkänna köp"</string>
-    <string name="private_space_face_enroll_introduction_title" msgid="3717541082520006032">"Ställ in ansiktslås för privat område"</string>
-    <string name="private_space_face_enroll_introduction_message" msgid="250239418499081821">"Lås upp det privata området eller verifiera din identitet med hjälp av ditt ansikte, till exempel när du loggar in i appar eller godkänner ett köp"</string>
-    <string name="private_space_face_enroll_introduction_info_looking" msgid="5694757845303924042">"Du kan råka låsa upp det privata området bara genom att titta på telefonen. Ditt privata område kan också låsas upp av någon som är lik dig, som ett syskon, eller någon som håller enheten mot ditt ansikte."</string>
-    <string name="private_space_face_enroll_introduction_info_less_secure" msgid="8460719783943533172">"Det kan vara mindre säkert att låsa upp ditt privata område med ditt ansikte än med ett starkt mönster, en PIN-kod eller ett lösenord"</string>
-    <string name="private_space_face_settings_require_attention_details" msgid="2799569069549999689">"För att låsa upp det privata området måste du ha ögonen öppna. För bästa resultat bör du ta av dig eventuella solglasögon."</string>
-    <string name="private_space_face_settings_footer" msgid="7722256209563543711">"Lås upp det privata området med ditt ansikte.\n\nTänk på detta:\nBara ett ansikte kan vara inställt i taget. För att lägga till ett nytt ansikte måste du ta bort det nuvarande.\n\nOm du tittar på telefonen kan du råka låsa upp den.\n\nDitt privata område kan låsas upp av någon annan om din enhet hålls mot ditt ansikte.\n\nDitt privata område kan låsas upp av någon som är lik dig, till exempel ett syskon."</string>
+    <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"Fingeravtryckslås för privat utrymme"</string>
+    <string name="private_space_face_unlock_title" msgid="462248384776453613">"Ansiktslås för privat utrymme"</string>
+    <string name="private_space_biometric_unlock_title" msgid="1978145237698659673">"Ansikts- och fingeravtryckslås för privat utrymme"</string>
+    <string name="private_space_fingerprint_enroll_introduction_title" msgid="5187730641333680942">"Ställ in fingeravtryckslås för privat utrymme"</string>
+    <string name="private_space_fingerprint_enroll_introduction_message" msgid="9092068873421435300">"Lås upp ditt privata utrymme eller verifiera din identitet med ditt fingeravtryck, till exempel när du loggar in i appar eller godkänner ett köp"</string>
+    <string name="private_space_fingerprint_enroll_introduction_footer_message" msgid="7125255484447984854">"Ditt privata utrymme kan låsas upp oavsiktligt, till exempel om någon håller upp telefonen mot ditt finger."</string>
+    <string name="private_space_fingerprint_enroll_finish_message" msgid="4754797926493316965">"Använd ditt fingeravtryck för att låsa upp ditt privata utrymme eller för att godkänna köp"</string>
+    <string name="private_space_face_enroll_introduction_title" msgid="3717541082520006032">"Ställ in ansiktslås för privat utrymme"</string>
+    <string name="private_space_face_enroll_introduction_message" msgid="250239418499081821">"Lås upp det privata utrymmet eller verifiera din identitet med hjälp av ditt ansikte, till exempel när du loggar in i appar eller godkänner ett köp"</string>
+    <string name="private_space_face_enroll_introduction_info_looking" msgid="5694757845303924042">"Du kan råka låsa upp det privata utrymmet bara genom att titta på telefonen. Ditt privata utrymme kan också låsas upp av någon som är lik dig, som ett syskon, eller någon som håller enheten mot ditt ansikte."</string>
+    <string name="private_space_face_enroll_introduction_info_less_secure" msgid="8460719783943533172">"Det kan vara mindre säkert att låsa upp ditt privata utrymme med ditt ansikte än med ett starkt mönster, en PIN-kod eller ett lösenord"</string>
+    <string name="private_space_face_settings_require_attention_details" msgid="2799569069549999689">"För att låsa upp det privata utrymmet måste du ha ögonen öppna. För bästa resultat bör du ta av dig eventuella solglasögon."</string>
+    <string name="private_space_face_settings_footer" msgid="7722256209563543711">"Lås upp det privata utrymmet med ditt ansikte.\n\nTänk på detta:\nBara ett ansikte kan vara inställt i taget. För att lägga till ett nytt ansikte måste du ta bort det nuvarande.\n\nOm du tittar på telefonen kan du råka låsa upp den.\n\nDitt privata utrymme kan låsas upp av någon annan om din enhet hålls mot ditt ansikte.\n\nDitt privata utrymme kan låsas upp av någon som är lik dig, till exempel ett syskon."</string>
     <string name="private_space_face_settings_require_confirmation_details" msgid="5406498664903812249">"Ansiktslås måste alltid bekräftas"</string>
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"Olika sätt att låsa upp"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"Samma som skärmlåset för enheten"</string>
-    <string name="private_space_new_lock_title" msgid="9056139964133004094">"Välja ett nytt lås för ditt privata område?"</string>
+    <string name="private_space_new_lock_title" msgid="9056139964133004094">"Välja ett nytt lås för ditt privata utrymme?"</string>
     <string name="private_space_new_lock_message" msgid="3117703578905489206">"Du måste ange enhetens pinkod, mönster eller lösenord på nästa skärm"</string>
-    <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Lås privat område automatiskt"</string>
-    <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Du kan låsa ditt privata område automatiskt om du inte har använt enheten på ett tag"</string>
+    <string name="private_space_auto_lock_title" msgid="8663409382910601261">"Lås privat utrymme automatiskt"</string>
+    <string name="private_space_auto_lock_page_summary" msgid="8679844515655838654">"Du kan låsa ditt privata utrymme automatiskt om du inte har använt enheten på ett tag"</string>
     <string name="private_space_auto_lock_every_time" msgid="1215061855836002830">"Varje gång enheten låses"</string>
     <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"5 minuter efter att skärmen har släckts"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Endast när enheten har startats om"</string>
-    <string name="private_space_hide_page_title" msgid="3364639176511877414">"Dölj privat område"</string>
-    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Dölj privat område när det är låst"</string>
-    <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Du kan dölja ett privat område i applistan så att andra inte vet att du har ett"</string>
-    <string name="private_space_access_header" msgid="1077082416567150819">"Kom åt ett privat område när det är dolt"</string>
-    <string name="private_space_search_description" msgid="1538155187658429618">"Ange ”privat område” i sökfältet"</string>
+    <string name="private_space_hide_page_title" msgid="3364639176511877414">"Dölj privat utrymme"</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Dölj privat utrymme när det är låst"</string>
+    <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Du kan dölja ett privat utrymme i applistan så att andra inte vet att du har ett"</string>
+    <string name="private_space_access_header" msgid="1077082416567150819">"Kom åt ett privat utrymme när det är dolt"</string>
+    <string name="private_space_search_description" msgid="1538155187658429618">"Ange ”privat utrymme” i sökfältet"</string>
     <string name="private_space_tap_tile_description" msgid="6173556870938267361">"Tryck på "<b>"Privat område"</b></string>
-    <string name="private_space_unlock_description" msgid="5527228922778630361">"Lås upp ditt privata område"</string>
+    <string name="private_space_unlock_description" msgid="5527228922778630361">"Lås upp ditt privata utrymme"</string>
     <string name="private_space_hide_off_summary" msgid="8565973976602078315">"Av"</string>
     <string name="private_space_hide_on_summary" msgid="3450844101901438867">"På"</string>
-    <string name="private_space_hide_dialog_title" msgid="6439207708506990156">"Det privata området döljs nästa gång du låser det"</string>
-    <string name="private_space_hide_dialog_message" msgid="618693520130744836">"Öppna ditt privata område genom att skriva ”privat område” i sökfältet i applistan."</string>
+    <string name="private_space_hide_dialog_title" msgid="6439207708506990156">"Det privata utrymmet döljs nästa gång du låser det"</string>
+    <string name="private_space_hide_dialog_message" msgid="618693520130744836">"Öppna ditt privata utrymme genom att skriva ”privat utrymme” i sökfältet i applistan."</string>
     <string name="private_space_hide_dialog_button" msgid="4157191429310035457">"OK"</string>
     <string name="private_space_category_system" msgid="1286843321867285700">"System"</string>
-    <string name="private_space_delete_title" msgid="636873505724100006">"Radera privat område"</string>
-    <string name="private_space_delete_header" msgid="4594429153176776184">"Vill du radera det privata området?"</string>
-    <string name="private_space_delete_summary" msgid="7507302208399543921">"Ditt privata område tas bort permanent från din enhet. \n\nAlla appar i ditt område och tillhörande data tas bort från telefonens "<b>"interna lagringsutrymme"</b>"."</string>
-    <string name="private_space_accounts" msgid="1078277762792056395">"Följande konton tas bort från det privata området:"</string>
+    <string name="private_space_delete_title" msgid="636873505724100006">"Radera privat utrymme"</string>
+    <string name="private_space_delete_header" msgid="4594429153176776184">"Vill du radera det privata utrymmet?"</string>
+    <string name="private_space_delete_summary" msgid="7507302208399543921">"Ditt privata utrymme tas bort permanent från din enhet. \n\nAlla appar i ditt område och tillhörande data tas bort från telefonens "<b>"interna lagringsutrymme"</b>"."</string>
+    <string name="private_space_accounts" msgid="1078277762792056395">"Följande konton tas bort från det privata utrymmet:"</string>
     <string name="private_space_delete_button_label" msgid="1256981385318225002">"Radera"</string>
-    <string name="private_space_confirm_deletion_header" msgid="3468651585498942977">"Raderar privat område …"</string>
+    <string name="private_space_confirm_deletion_header" msgid="3468651585498942977">"Raderar privat utrymme …"</string>
     <string name="private_space_deleted" msgid="7692240901492540053">"Privat område har raderats"</string>
-    <string name="private_space_delete_failed" msgid="7705795653796174741">"Det gick inte att radera privat område"</string>
+    <string name="private_space_delete_failed" msgid="7705795653796174741">"Det gick inte att radera privat utrymme"</string>
     <string name="private_space_unlocked" msgid="9091600948712932046">"Privat område är upplåst"</string>
     <string name="no_device_lock_title" msgid="1078223464721029954">"Ställ in skärmlås"</string>
     <string name="no_device_lock_summary" msgid="7436025227616244687">"Ställ in ett skärmlås för enheten om du vill använda ditt privata rum."</string>
@@ -633,36 +622,36 @@
     <string name="private_space_setup_title" msgid="2272968244329821450">"Privat område"</string>
     <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Dölj eller lås privata appar i ett separat område. Använd ett dedikerat Google-konto för extra säkerhet."</string>
     <string name="private_space_setup_sub_header" msgid="550476876393954356">"Så fungerar det"</string>
-    <string name="private_space_separate_account_text" msgid="790319706810190320"><b>"Skapa ett Google-konto för ditt privata område"</b>\n"Om du använder ett separat konto förhindrar det att synkroniserade filer, foton och e-postmeddelanden visas utanför det privata området"</string>
+    <string name="private_space_separate_account_text" msgid="790319706810190320"><b>"Skapa ett Google-konto för ditt privata utrymme"</b>\n"Om du använder ett separat konto förhindrar det att synkroniserade filer, foton och e-postmeddelanden visas utanför det privata utrymmet"</string>
     <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Ställ in ett lås"</b>\n"Lås ditt område så att andra inte kan öppna det"</string>
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Installera appar"</b>\n"Installera appar som du vill hålla privata i området"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Viktigt att tänka på"</string>
-    <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Appar stoppas när du låser ditt privata område"</b>\n"När du låser ditt privata område stoppas apparna i området och du får inga aviseringar från dem"</string>
-    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Privata områden lämpar sig inte för appar som måste köras i bakgrunden eller skicka viktig information, till exempel medicinska appar. Detta beror på att aviseringar och aktivitet i bakgrunden stoppas när du låser området.\n\nAppar som finns i ditt privata område visas inte i behörighetshanteraren, på integritetsöversikten eller i andra inställningar när området är låst.\n\nDet går inte att flytta ditt privata område till en ny enhet. Du måste ställa in ett nytt privat område om du vill använda det på en annan enhet.\n\nAlla som ansluter din enhet till en dator eller installerar skadliga appar på enheten kanske kan få åtkomst till ditt privata område."</string>
-    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Privata områden lämpar sig inte för appar som måste köras i bakgrunden eller skicka viktig information, till exempel medicinska appar. Detta beror på att aviseringar och aktivitet i bakgrunden stoppas när du låser området.\n\nAppar som finns i ditt privata område visas inte i behörighetshanteraren, på integritetsöversikten eller i andra inställningar när området är låst.\n\nDet går inte att återställa ditt privata område på en ny enhet. Du måste ställa in ett nytt område om du vill använda det på en annan enhet.\n\nOm någon ansluter din enhet till en dator eller installerar skadliga appar på enheten kan det hända att hen får åtkomst till ditt privata område."</string>
-    <string name="private_space_learn_more_text" msgid="5314198983263277586">"Läs mer om privat område"</string>
+    <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Appar stoppas när du låser ditt privata utrymme"</b>\n"När du låser ditt privata utrymme stoppas apparna i området och du får inga aviseringar från dem"</string>
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Privata områden lämpar sig inte för appar som måste köras i bakgrunden eller skicka viktig information, till exempel medicinska appar. Detta beror på att aviseringar och aktivitet i bakgrunden stoppas när du låser området.\n\nAppar som finns i ditt privata utrymme visas inte i behörighetshanteraren, på integritetsöversikten eller i andra inställningar när området är låst.\n\nDet går inte att flytta ditt privata utrymme till en ny enhet. Du måste ställa in ett nytt privat utrymme om du vill använda det på en annan enhet.\n\nAlla som ansluter din enhet till en dator eller installerar skadliga appar på enheten kanske kan få åtkomst till ditt privata utrymme."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Privata områden lämpar sig inte för appar som måste köras i bakgrunden eller skicka viktig information, till exempel medicinska appar. Detta beror på att aviseringar och aktivitet i bakgrunden stoppas när du låser området.\n\nAppar som finns i ditt privata utrymme visas inte i behörighetshanteraren, på integritetsöversikten eller i andra inställningar när området är låst.\n\nDet går inte att återställa ditt privata utrymme på en ny enhet. Du måste ställa in ett nytt område om du vill använda det på en annan enhet.\n\nOm någon ansluter din enhet till en dator eller installerar skadliga appar på enheten kan det hända att hen får åtkomst till ditt privata utrymme."</string>
+    <string name="private_space_learn_more_text" msgid="5314198983263277586">"Läs mer om privat utrymme"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"Detta tar en stund"</string>
-    <string name="private_space_setting_up_text" msgid="8458035555212009528">"Ställer in privat område …"</string>
-    <string name="private_space_error_screen_title" msgid="739381738044418346">"Det gick inte att ställa in privat område"</string>
+    <string name="private_space_setting_up_text" msgid="8458035555212009528">"Ställer in privat utrymme …"</string>
+    <string name="private_space_error_screen_title" msgid="739381738044418346">"Det gick inte att ställa in privat utrymme"</string>
     <string name="private_space_tryagain_label" msgid="8305362615231738367">"Försök igen"</string>
     <string name="private_space_exit_label" msgid="2358175237993013881">"Stäng"</string>
-    <string name="private_space_error_description" msgid="6591005734266923120">"Det privata området är inte tillgängligt.\nVisa möjliga orsaker"</string>
+    <string name="private_space_error_description" msgid="6591005734266923120">"Det privata utrymmet är inte tillgängligt.\nVisa möjliga orsaker"</string>
     <string name="private_space_error_causes_text" msgid="1649162505129365620">"Visa möjliga orsaker"</string>
-    <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Vill du välja ett nytt lås för ditt privata område?"</string>
-    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Du kan ställa in ett nytt lås för endast det privata området eller använda samma lås som du har till enheten"</string>
+    <string name="private_space_lockscreen_title" msgid="5785259588888586366">"Vill du välja ett nytt lås för ditt privata utrymme?"</string>
+    <string name="private_space_lockscreen_summary" msgid="3053836076639653805">"Du kan ställa in ett nytt lås för endast det privata utrymmet eller använda samma lås som du har till enheten"</string>
     <string name="private_space_use_screenlock_label" msgid="9182153443192032782">"Använd skärmlås"</string>
     <string name="private_space_set_lock_label" msgid="1790408277477408475">"Välj ett nytt lås"</string>
     <string name="private_space_wait_screen_title" msgid="1535431437075585381">"Ett ögonblick …"</string>
     <string name="private_space_success_title" msgid="4351904015352046118">"Klart!"</string>
-    <string name="private_space_access_text" msgid="4433988836344567888">"Om du vill hitta ditt privata område öppnar du applistan och scrollar nedåt"</string>
+    <string name="private_space_access_text" msgid="4433988836344567888">"Om du vill hitta ditt privata utrymme öppnar du applistan och scrollar nedåt"</string>
     <string name="private_space_done_label" msgid="1020482651595246071">"Klar"</string>
-    <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"Scrolla nedåt för att hitta privat område"</string>
+    <string name="private_space_scrolldown_to_access" msgid="4820954877349434545">"Scrolla nedåt för att hitta privat utrymme"</string>
     <string name="private_space_retry_signin_title" msgid="8090276618867918844">"Logga in"</string>
-    <string name="private_space_retry_summary" msgid="1920444015972648774">"Logga in på ett konto för att använda det med ditt privata område"</string>
+    <string name="private_space_retry_summary" msgid="1920444015972648774">"Logga in på ett konto för att använda det med ditt privata utrymme"</string>
     <string name="private_space_skip_login_label" msgid="7078019409056628192">"Inte nu"</string>
     <string name="private_space_continue_login_label" msgid="7779965766333065391">"Fortsätt"</string>
-    <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Välj ett lås för ditt privata område"</string>
-    <string name="private_space_lock_setup_description" msgid="423405593476300918">"Du kan låsa upp ditt privata område med fingeravtrycket. Av säkerhetsskäl krävs ett alternativt lås."</string>
+    <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Välj ett lås för ditt privata utrymme"</string>
+    <string name="private_space_lock_setup_description" msgid="423405593476300918">"Du kan låsa upp ditt privata utrymme med fingeravtrycket. Av säkerhetsskäl krävs ett alternativt lås."</string>
     <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Ställ in pinkod för ditt privata rum"</string>
     <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Ställ in lösenord för ditt privata rum"</string>
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Ställ in mönster för ditt privata rum"</string>
@@ -818,8 +807,7 @@
     <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{Lösenordet måste innehålla minst 1 tecken som inte är en siffra}other{Lösenordet måste innehålla minst # tecken som inte är en siffra}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"Enhetsadministratören tillåter inte att ett lösenord som använts nyligen används igen"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"En stigande, fallande eller upprepad siffersekvens är inte tillåten"</string>
-    <!-- no translation found for lockpassword_password_no_sequential_characters (2191567105898075606) -->
-    <skip />
+    <string name="lockpassword_password_no_sequential_characters" msgid="2191567105898075606">"En stigande, fallande eller upprepad teckensekvens tillåts inte"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"Bekräfta"</string>
     <string name="lockpassword_clear_label" msgid="311359833434539894">"Rensa"</string>
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"Skärmlåset har redan bytts. Testa igen med det nya skärmlåset."</string>
@@ -1561,8 +1549,8 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Nätverksinställningarna har återställts"</string>
     <string name="reset_esim_error_title" msgid="6516110227665862295">"Det gick inte att rensa dessa eSIM"</string>
     <string name="reset_esim_error_msg" msgid="8459527827897797168">"Något gick fel och dina eSIM rensades inte.\n\nStarta om enheten och försök igen."</string>
-    <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Radera privat område"</string>
-    <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Om du har ett privat område på din enhet tas det bort permanent och Google-kontot som lagts till för ditt område att tas bort. \n\nAlla appar i ditt område och tillhörande data tas bort från telefonens "<b>"interna lagringsutrymme"</b>"."</string>
+    <string name="reset_private_space_delete_title" msgid="2555885198282572990">"Radera privat utrymme"</string>
+    <string name="reset_private_space_delete_dialog" msgid="2325106559507364385">"Om du har ett privat utrymme på din enhet tas det bort permanent och Google-kontot som lagts till för ditt område att tas bort. \n\nAlla appar i ditt område och tillhörande data tas bort från telefonens "<b>"interna lagringsutrymme"</b>"."</string>
     <string name="main_clear_title" msgid="277664302144837723">"Rensa all data (återställ standardinst.)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Rensa all data (återställ standardinst.)"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"musik"</li>\n<li>"foton"</li>\n<li>"annan användardata"</li></string>
@@ -1618,7 +1606,7 @@
     <string name="network_scorer_change_active_no_previous_dialog_text" msgid="680685773455072321">"Vill du hantera nätverksanslutningarna med <xliff:g id="NEW_APP">%s</xliff:g>?"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Nya platsförfrågningar"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Plats för jobbprofil"</string>
-    <string name="private_profile_location_switch_title" msgid="4127119143109855789">"Plats för privat område"</string>
+    <string name="private_profile_location_switch_title" msgid="4127119143109855789">"Plats för privat utrymme"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Appars platsbehörighet"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Plats har inaktiverats"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{# av {total} appar har platsåtkomst}other{# av {total} appar har platsåtkomst}}"</string>
@@ -1976,18 +1964,14 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Klicka nere till höger"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Klicka i högra hörnet på styrplattan för fler alternativ"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Markörens hastighet"</string>
-    <!-- no translation found for pointer_fill_style (8794616790175016092) -->
-    <skip />
+    <string name="pointer_fill_style" msgid="8794616790175016092">"Muspekarens färg"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Ändra markörfyllningen till svart"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Ändra markörfyllningen till grön"</string>
-    <!-- no translation found for pointer_fill_style_red_button (6424326623906159283) -->
-    <skip />
+    <string name="pointer_fill_style_red_button" msgid="6424326623906159283">"Ändra markörfyllningen till röd"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"Ändra markörfyllningen till rosa"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"Ändra markörfyllningen till blå"</string>
-    <!-- no translation found for pointer_fill_style_purple_button (3713175300139801778) -->
-    <skip />
-    <!-- no translation found for pointer_stroke_style (139962661485972329) -->
-    <skip />
+    <string name="pointer_fill_style_purple_button" msgid="3713175300139801778">"Ändra markörfyllningen till lila"</string>
+    <string name="pointer_stroke_style" msgid="139962661485972329">"Färg på pekardrag"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"Vit"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"Svart"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"Ingen"</string>
@@ -2039,6 +2023,7 @@
     <string name="pointer_scale" msgid="4941564570571663964">"Skala för muspekare"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Minska skalan för muspekare"</string>
     <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"Öka skalan för muspekare"</string>
+    <string name="pointer_scale_keywords" msgid="8939432511048322072">"skala, storlek, pekarskala, pekarstorlek, stor muspekare, stor, märkbar"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Spelkontroller"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Omdirigera vibration"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Styr vibrationer till spelkontrollen när en sådan är ansluten"</string>
@@ -2098,12 +2083,9 @@
     <string name="general_category_title" msgid="6298579528716834157">"Allmänt"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Skärm"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"Färg och rörelse"</string>
-    <!-- no translation found for accessibility_pointer_and_touchpad_title (8719482393177273831) -->
-    <skip />
-    <!-- no translation found for accessibility_pointer_and_touchpad_summary (6089872217234956258) -->
-    <skip />
-    <!-- no translation found for accessibility_pointer_color_customization_title (3376392766113189508) -->
-    <skip />
+    <string name="accessibility_pointer_and_touchpad_title" msgid="8719482393177273831">"Tillgänglighet för muspekare och styrplatta"</string>
+    <string name="accessibility_pointer_and_touchpad_summary" msgid="6089872217234956258">"Muspekarens färg, muspekarens storlek och annat"</string>
+    <string name="accessibility_pointer_color_customization_title" msgid="3376392766113189508">"Anpassa muspekarens färg"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Färgkontrast"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Högre kontrast gör att text, knappar och ikoner syns bättre. Välj kontrasten som ser bäst ut för dig."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Vissa appar kanske inte har stöd för alla inställningar för färg- och textkontrast"</string>
@@ -3344,7 +3326,7 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, etikett, läsare"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"tangentbord, haptik, vibrera,"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Volym och vibration"</string>
-    <string name="sound_dashboard_summary_with_dnd" msgid="731956092218394657">"Volym, vibration, stör ej"</string>
+    <string name="sound_dashboard_summary_with_dnd" msgid="731956092218394657">"Volym, vibration, Stör ej"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Medievolym"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Castvolym"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Samtalsvolym"</string>
@@ -3388,8 +3370,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Inställningar för anslutna enheter"</string>
     <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"Rumsligt ljud"</string>
     <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"Av"</string>
-    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"Av"</string>
-    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"Av"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="4204808183659033003">"Fast"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="4156440073634867249">"Huvudföljning"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Inga}=1{1 schema har ställts in}other{# scheman har ställts in}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Stör ej"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Lägen"</string>
@@ -3457,7 +3439,7 @@
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtrera bakgrundens ljusstyrka"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"Aktivera mörkt tema"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"aktivera mörkt tema"</string>
-    <string name="mode_dark_theme_summary" msgid="8428887193785431898">"Ändra så att operativsystemet och apparna föredrar ljus text på en mörk bakgrund, vilket kan vara snällare för ögonen och gör så att batteriet sparas på vissa enheter."</string>
+    <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Byt enhetens tema till en mörk bakgrund, vilket är mer behagligt för ögonen"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{Inga skärmändringar}=1{{effect_1}}=2{{effect_1} och {effect_2}}=3{{effect_1}, {effect_2} och {effect_3}}other{{effect_1}, {effect_2} och # till}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"Tillåt alla aviseringar"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"Personer, appar och ljud får avbryta"</string>
@@ -3984,7 +3966,9 @@
     <string name="managing_admin" msgid="2633920317425356619">"Hanteras av <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Öppna som standard"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"Öppna länkar som stöds"</string>
-    <string name="app_launch_top_intro_message" msgid="137370923637482459">"Tillåt att webblänkar öppnas i den här appen"</string>
+    <string name="app_launch_open_in_app" msgid="2208182888681699512">"I appen"</string>
+    <string name="app_launch_open_in_browser" msgid="766170191853009756">"I webbläsaren"</string>
+    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"Välj hur webblänkar ska öppnas för den här appen"</string>
     <string name="app_launch_links_category" msgid="2380467163878760037">"Länkar som ska öppnas i appen"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Länkar som stöds"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Andra standardinställningar"</string>
@@ -4808,15 +4792,14 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Ogiltigt nätverksläge: <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignorera."</string>
     <string name="satellite_setting_title" msgid="2543034229989047673">"Satellitmeddelanden"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Skicka och ta emot sms via satellit. Ingår i kontot."</string>
-    <!-- no translation found for satellite_setting_disabled_summary (8428393986403708690) -->
-    <skip />
+    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Skicka och ta emot sms via satellit. Ingår inte i kontot."</string>
     <string name="keywords_satellite_setting" msgid="3312183289776517695">"Satellitmeddelanden"</string>
     <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Om satellitmeddelanden"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Att skicka och ta emot sms via satellit ingår i kvalificerade <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-konton"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Ditt <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-abonnemang"</string>
     <string name="title_have_satellite_plan" msgid="2048372355699977947">"Satellitmeddelanden ingår i kontot"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Satellitmeddelanden ingår inte i kontot"</string>
-    <string name="summary_add_satellite_setting" msgid="3815254731634052432">"Lägg till satellitmeddelanden"</string>
+    <string name="summary_add_satellite_setting" msgid="190359698593056946">"Läs mer"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Så fungerar det"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"När du inte har ett mobilnätverk"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Telefonen ansluter automatiskt till en satellit. Den bästa anslutningen får du utomhus under bar himmel."</string>
@@ -5399,6 +5382,13 @@
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"Anslut en kompatibel enhet"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"Om du vill dela ljud ska du börja med att ansluta LE Audio-hörlurarna till din telefon"</string>
     <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"Byt till <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_progress_dialog_start_stream_content" msgid="1152386358063502897">"Startar ljudstream …"</string>
+    <string name="audio_sharing_progress_dialog_add_source_content" msgid="2913609550496440710">"Delar med <xliff:g id="DEVICE_NAME">%1$s</xliff:g> …"</string>
+    <string name="progress_dialog_connect_device_content" msgid="1387370883978461533">"Ansluter till <xliff:g id="DEVICE_NAME">%1$s</xliff:g> …"</string>
+    <string name="audio_sharing_retry_dialog_title" msgid="3954529199333866445">"Det gick inte att dela ljud"</string>
+    <string name="audio_sharing_retry_dialog_content" msgid="6014534433894608834">"Något gick fel. Försök igen."</string>
+    <string name="audio_sharing_incompatible_dialog_title" msgid="4586805264392802115">"Det går inte att dela ljud med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_incompatible_dialog_content" msgid="3943223683620405311">"Ljuddelning fungerar endast med hörlurar som har stöd för LE Audio"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Ansut till en LE Audio-stream"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Ljudstreamar i närheten"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Ljudstreamar"</string>

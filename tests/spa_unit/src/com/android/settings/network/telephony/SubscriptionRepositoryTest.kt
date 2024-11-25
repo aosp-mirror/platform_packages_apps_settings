@@ -91,7 +91,23 @@ class SubscriptionRepositoryTest {
 
         subInfoListener?.onSubscriptionsChanged()
 
-        assertThat(listDeferred.await()).hasSize(2)
+        assertThat(listDeferred.await().size).isAtLeast(2)
+    }
+
+    @Test
+    fun subscriptionsChangedFlow_managerNotCallOnSubscriptionsChangedInitially() = runBlocking {
+        mockSubscriptionManager.stub {
+            on { addOnSubscriptionsChangedListener(any(), any()) } doAnswer
+                {
+                    subInfoListener =
+                        it.arguments[1] as SubscriptionManager.OnSubscriptionsChangedListener
+                    // not call onSubscriptionsChanged here
+                }
+        }
+
+        val initialValue = repository.subscriptionsChangedFlow().firstWithTimeoutOrNull()
+
+        assertThat(initialValue).isSameInstanceAs(Unit)
     }
 
     @Test
