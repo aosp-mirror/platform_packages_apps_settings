@@ -18,7 +18,6 @@ package com.android.settings.bluetooth.ui.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -37,6 +36,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -46,47 +51,44 @@ import com.android.settings.bluetooth.ui.model.DeviceSettingPreferenceModel
 
 @Composable
 fun MultiTogglePreference(pref: DeviceSettingPreferenceModel.MultiTogglePreference) {
-    Column(modifier = Modifier.padding(24.dp)) {
+    Column(modifier = Modifier.padding(24.dp).fillMaxWidth()) {
         Row(
-            modifier = Modifier.fillMaxWidth().height(56.dp),
+            modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
-            Box {
-                Row {
-                    for ((idx, toggle) in pref.toggles.withIndex()) {
-                        val selected = idx == pref.selectedIndex
-                        Column(
-                            modifier = Modifier.weight(1f)
-                                .padding(start = if (idx == 0) 0.dp else 1.dp)
-                                .height(56.dp)
-                                .background(
-                                    Color.Transparent,
-                                    shape = RoundedCornerShape(12.dp),
-                                ),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                        ) {
-                            val startCornerRadius = if (idx == 0) 12.dp else 0.dp
-                            val endCornerRadius = if (idx == pref.toggles.size - 1) 12.dp else 0.dp
-                            Button(
-                                onClick = { pref.onSelectedChange(idx) },
-                                modifier = Modifier.fillMaxSize(),
-                                enabled = pref.isAllowedChangingState,
-                                colors = getButtonColors(selected),
-                                shape = RoundedCornerShape(
-                                    startCornerRadius,
-                                    endCornerRadius,
-                                    endCornerRadius,
-                                    startCornerRadius,
-                                )
-                            ) {
-                                DeviceSettingComposeIcon(
-                                    toggle.icon,
-                                    modifier = Modifier.size(24.dp),
-                                )
-                            }
-                        }
+            for ((idx, toggle) in pref.toggles.withIndex()) {
+                val selected = idx == pref.selectedIndex
+                Column(
+                    modifier =
+                        Modifier.weight(1f)
+                            .padding(start = if (idx == 0) 0.dp else 1.dp)
+                            .height(56.dp)
+                            .background(Color.Transparent, shape = RoundedCornerShape(12.dp)),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    val startCornerRadius = if (idx == 0) 12.dp else 0.dp
+                    val endCornerRadius = if (idx == pref.toggles.size - 1) 12.dp else 0.dp
+                    Button(
+                        onClick = { pref.onSelectedChange(idx) },
+                        modifier =
+                            Modifier.fillMaxSize().semantics {
+                                this.role = Role.RadioButton
+                                this.selected = selected
+                                this.contentDescription = toggle.label
+                            },
+                        enabled = pref.isAllowedChangingState,
+                        colors = getButtonColors(selected),
+                        shape =
+                            RoundedCornerShape(
+                                startCornerRadius,
+                                endCornerRadius,
+                                endCornerRadius,
+                                startCornerRadius,
+                            ),
+                    ) {
+                        DeviceSettingComposeIcon(toggle.icon, modifier = Modifier.size(24.dp))
                     }
                 }
             }
@@ -103,7 +105,8 @@ fun MultiTogglePreference(pref: DeviceSettingPreferenceModel.MultiTogglePreferen
                     fontSize = 12.sp,
                     textAlign = TextAlign.Center,
                     overflow = TextOverflow.Visible,
-                    modifier = Modifier.weight(1f).padding(horizontal = 8.dp),
+                    modifier =
+                        Modifier.weight(1f).padding(horizontal = 8.dp).clearAndSetSemantics {},
                 )
             }
         }
@@ -111,14 +114,15 @@ fun MultiTogglePreference(pref: DeviceSettingPreferenceModel.MultiTogglePreferen
 }
 
 @Composable
-private fun getButtonColors(isActive: Boolean) = if (isActive) {
-    ButtonDefaults.buttonColors(
-        containerColor = MaterialTheme.colorScheme.primary,
-        contentColor = MaterialTheme.colorScheme.onPrimary,
-    )
-} else {
-    ButtonDefaults.buttonColors(
-        containerColor = MaterialTheme.colorScheme.surfaceVariant,
-        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-    )
-}
+private fun getButtonColors(isActive: Boolean) =
+    if (isActive) {
+        ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.onPrimary,
+        )
+    } else {
+        ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+            contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+        )
+    }
