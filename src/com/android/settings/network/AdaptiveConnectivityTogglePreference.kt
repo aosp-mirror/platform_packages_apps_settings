@@ -25,6 +25,7 @@ import com.android.settingslib.datastore.KeyedObservableDelegate
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.metadata.MainSwitchPreference
+import com.android.settingslib.metadata.ReadWritePermit
 
 // LINT.IfChange
 class AdaptiveConnectivityTogglePreference :
@@ -32,6 +33,12 @@ class AdaptiveConnectivityTogglePreference :
 
     override fun storage(context: Context): KeyValueStore =
         AdaptiveConnectivityToggleStorage(context, SettingsSecureStore.get(context))
+
+    override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
 
     @Suppress("UNCHECKED_CAST")
     private class AdaptiveConnectivityToggleStorage(
