@@ -287,7 +287,7 @@ public class UserSettings extends SettingsPreferenceFragment
         final SettingsActivity activity = (SettingsActivity) getActivity();
         final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
         switchBar.setTitle(getContext().getString(R.string.multiple_users_main_switch_title));
-        if (!mUserCaps.mIsGuest) {
+        if (!mUserCaps.mIsGuest && mUserCaps.mUserSwitchingUiEnabled) {
             switchBar.show();
         } else {
             switchBar.hide();
@@ -465,7 +465,7 @@ public class UserSettings extends SettingsPreferenceFragment
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         int pos = 0;
         if (!isCurrentUserAdmin() && (canSwitchUserNow() || Flags.newMultiuserSettingsUx())
-                && !isCurrentUserGuest()) {
+                && !isCurrentUserGuest() && !mUserManager.isProfile()) {
             String nickname = mUserManager.getUserName();
             MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, pos++,
                     getResources().getString(R.string.user_remove_user_menu, nickname));

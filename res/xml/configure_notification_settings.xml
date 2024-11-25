@@ -43,6 +43,14 @@
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.notification.history.NotificationHistoryActivity" />
         </Preference>
+
+        <Preference
+            android:fragment="com.android.settings.notification.BundlePreferenceFragment"
+            android:key="bundle_notifications_preference"
+            android:persistent="false"
+            android:order="12"
+            android:title="@string/notification_bundle_title"
+            settings:controller="com.android.settings.notification.BundlePreferenceController" />
     </PreferenceCategory>
 
     <PreferenceCategory

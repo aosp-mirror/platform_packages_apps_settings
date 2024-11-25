@@ -77,9 +77,9 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
             // It would show in Available Devices group if the audio sharing flag is disabled or
             // the device is not in the audio sharing session.
             if (cachedDevice.isConnectedLeAudioDevice()) {
-                if (BluetoothUtils.isAudioSharingEnabled()
+                if (BluetoothUtils.isAudioSharingUIAvailable(mContext)
                         && BluetoothUtils.hasConnectedBroadcastSource(
-                                cachedDevice, mLocalBtManager)) {
+                        cachedDevice, mLocalBtManager)) {
                     Log.d(
                             TAG,
                             "Filter out device : "

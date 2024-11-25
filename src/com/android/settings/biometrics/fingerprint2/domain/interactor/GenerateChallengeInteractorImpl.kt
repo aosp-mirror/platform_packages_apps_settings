@@ -19,19 +19,22 @@ package com.android.settings.biometrics.fingerprint2.domain.interactor
 import android.content.Intent
 import android.hardware.fingerprint.FingerprintManager
 import com.android.settings.biometrics.GatekeeperPasswordProvider
+import com.android.settings.biometrics.fingerprint2.data.repository.UserRepo
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.GenerateChallengeInteractor
 import com.android.settings.password.ChooseLockSettingsHelper
+import kotlinx.coroutines.flow.first
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class GenerateChallengeInteractorImpl(
   private val fingerprintManager: FingerprintManager,
-  private val userId: Int,
+  private val userRepo: UserRepo,
   private val gatekeeperPasswordProvider: GatekeeperPasswordProvider,
 ) : GenerateChallengeInteractor {
 
-  override suspend fun generateChallenge(gateKeeperPasswordHandle: Long): Pair<Long, ByteArray> =
-    suspendCoroutine {
+  override suspend fun generateChallenge(gateKeeperPasswordHandle: Long): Pair<Long, ByteArray> {
+    val userId = userRepo.currentUser.first()
+    return suspendCoroutine {
       val callback =
         FingerprintManager.GenerateChallengeCallback { _, userId, challenge ->
           val intent = Intent()
@@ -45,4 +48,5 @@ class GenerateChallengeInteractorImpl(
         }
       fingerprintManager.generateChallenge(userId, callback)
     }
+  }
 }

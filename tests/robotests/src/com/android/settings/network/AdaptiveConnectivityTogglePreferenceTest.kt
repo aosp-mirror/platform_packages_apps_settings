@@ -17,68 +17,90 @@
 package com.android.settings.network
 
 import android.content.Context
+import android.content.ContextWrapper
 import android.net.wifi.WifiManager
-import android.platform.test.flag.junit.SetFlagsRule
-import android.provider.Settings
+import android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settingslib.preference.createAndBindWidget
 import com.android.settingslib.widget.MainSwitchPreference
 import com.google.common.truth.Truth.assertThat
-import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.kotlin.atLeastOnce
 import org.mockito.kotlin.mock
-import org.mockito.kotlin.spy
 import org.mockito.kotlin.verify
-import org.mockito.kotlin.whenever
 
 // LINT.IfChange
 @RunWith(AndroidJUnit4::class)
 class AdaptiveConnectivityTogglePreferenceTest {
-    @get:Rule
-    val setFlagsRule = SetFlagsRule()
+    private val mockWifiManager = mock<WifiManager>()
 
-    private val appContext: Context = spy(ApplicationProvider.getApplicationContext()){}
-
-    private val mockWifiManager: WifiManager = mock()
+    private val context: Context =
+        object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
+            override fun getSystemService(name: String): Any? =
+                when {
+                    name == getSystemServiceName(WifiManager::class.java) -> mockWifiManager
+                    else -> super.getSystemService(name)
+                }
+        }
 
     private val adaptiveConnectivityTogglePreference = AdaptiveConnectivityTogglePreference()
 
-    @Before
-    fun setUp() {
-        whenever(appContext.getSystemService(WifiManager::class.java)).thenReturn(mockWifiManager)
+    @Test
+    fun switchClick_defaultDisabled_returnFalse() {
+        setAdaptiveConnectivityEnabled(false)
+
+        assertThat(getMainSwitchPreference().isChecked).isFalse()
     }
 
     @Test
-    fun setChecked_withTrue_shouldUpdateSetting() {
-        Settings.Secure.putInt(
-            appContext.contentResolver,
-            Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED, 0
-        )
+    fun switchClick_defaultEnabled_returnTrue() {
+        setAdaptiveConnectivityEnabled(true)
 
-        val mainSwitchPreference = getMainSwitchPreferenceCompat().apply { performClick() }
-
-        assertThat(mainSwitchPreference.isChecked).isTrue()
-        verify(mockWifiManager, atLeastOnce()).setWifiScoringEnabled(true)
+        assertThat(getMainSwitchPreference().isChecked).isTrue()
     }
 
     @Test
-    fun setChecked_withFalse_shouldUpdateSetting() {
-        Settings.Secure.putInt(
-            appContext.contentResolver,
-            Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED, 1
-        )
+    fun setChecked_defaultEnabled_updatesCorrectly() {
+        val preference = getMainSwitchPreference()
+        assertThat(preference.isChecked).isTrue()
 
-        val mainSwitchPreference = getMainSwitchPreferenceCompat().apply { performClick() }
+        preference.performClick()
 
-        assertThat(mainSwitchPreference.isChecked).isFalse()
+        assertThat(preference.isChecked).isFalse()
+
+        preference.performClick()
+
+        assertThat(preference.isChecked).isTrue()
+    }
+
+    @Test
+    fun storeSetTrue_wifiManagerSetWifiScoringEnabled() {
+        setAdaptiveConnectivityEnabled(true)
+
+        assertThat(getAdaptiveConnectivityEnabled()).isTrue()
+        verify(mockWifiManager).setWifiScoringEnabled(true)
+    }
+
+    @Test
+    fun storeSetFalse_wifiManagerSetWifiScoringDisabled() {
+        setAdaptiveConnectivityEnabled(false)
+
+        assertThat(getAdaptiveConnectivityEnabled()).isFalse()
         verify(mockWifiManager).setWifiScoringEnabled(false)
     }
 
-    private fun getMainSwitchPreferenceCompat(): MainSwitchPreference =
-        adaptiveConnectivityTogglePreference.createAndBindWidget(appContext)
+    private fun getMainSwitchPreference(): MainSwitchPreference =
+        adaptiveConnectivityTogglePreference.createAndBindWidget(context)
+
+    private fun setAdaptiveConnectivityEnabled(enabled: Boolean) =
+        adaptiveConnectivityTogglePreference
+            .storage(context)
+            .setValue(ADAPTIVE_CONNECTIVITY_ENABLED, Boolean::class.javaObjectType, enabled)
+
+    private fun getAdaptiveConnectivityEnabled() =
+        adaptiveConnectivityTogglePreference
+            .storage(context)
+            .getValue(ADAPTIVE_CONNECTIVITY_ENABLED, Boolean::class.javaObjectType)
 }
 // LINT.ThenChange(AdaptiveConnectivityTogglePreferenceControllerTest.java)

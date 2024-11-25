@@ -43,26 +43,34 @@ class DataSaverSummary : DashboardFragment() {
             return
         }
 
-        dataSaverBackend = DataSaverBackend(requireContext())
+        if (!isCatalystEnabled) {
+            dataSaverBackend = DataSaverBackend(requireContext())
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        switchBar = (activity as SettingsActivity).switchBar.apply {
-            setTitle(getString(R.string.data_saver_switch_title))
-            show()
-            addOnSwitchChangeListener { _, isChecked -> onSwitchChanged(isChecked) }
+        if (!isCatalystEnabled) {
+            switchBar = (activity as SettingsActivity).switchBar.apply {
+                setTitle(getString(R.string.data_saver_switch_title))
+                show()
+                addOnSwitchChangeListener { _, isChecked -> onSwitchChanged(isChecked) }
+            }
         }
     }
 
     override fun onResume() {
         super.onResume()
-        dataSaverBackend.addListener(dataSaverBackendListener)
+        if (!isCatalystEnabled) {
+            dataSaverBackend.addListener(dataSaverBackendListener)
+        }
     }
 
     override fun onPause() {
         super.onPause()
-        dataSaverBackend.remListener(dataSaverBackendListener)
+        if (!isCatalystEnabled) {
+            dataSaverBackend.remListener(dataSaverBackendListener)
+        }
     }
 
     private fun onSwitchChanged(isChecked: Boolean) {

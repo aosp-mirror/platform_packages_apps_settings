@@ -20,7 +20,8 @@
     android:title="@string/accessibility_hearingaid_title">
 
     <com.android.settingslib.widget.TopIntroPreference
-        android:title="@string/accessibility_hearingaid_intro" />
+        android:title="@string/accessibility_hearingaid_intro"
+        settings:searchable="false" />
 
     <PreferenceCategory
         android:key="available_hearing_devices"

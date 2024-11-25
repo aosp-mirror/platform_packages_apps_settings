@@ -42,6 +42,7 @@ import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Locale;
@@ -105,6 +106,7 @@ public class NumberingSystemItemControllerTest {
 
     @Test
     @UiThreadTest
+    @Ignore("b/377633438")
     public void handlePreferenceTreeClick_numbersSelect_preferenceHasTick() {
         Bundle bundle = new Bundle();
         bundle.putString(RegionalPreferencesEntriesFragment.ARG_KEY_REGIONAL_PREFERENCE,

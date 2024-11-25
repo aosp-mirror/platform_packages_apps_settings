@@ -61,6 +61,9 @@ public class ContactsStoragePreferenceController extends BasePreferenceControlle
     @Override
     public CharSequence getSummary() {
         if (mCurrentDefaultAccountAndState != null) {
+            // Re-fetch account in controller to refresh the latest set default account.
+            mCurrentDefaultAccountAndState =
+                    DefaultAccount.getDefaultAccountForNewContacts(mContext.getContentResolver());
             int currentDefaultAccountState = mCurrentDefaultAccountAndState.getState();
             Account currentDefaultAccount = mCurrentDefaultAccountAndState.getAccount();
             if (currentDefaultAccountState

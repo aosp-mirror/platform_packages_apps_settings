@@ -19,10 +19,12 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.view.accessibility.CaptioningManager;
 import android.view.accessibility.CaptioningManager.CaptionStyle;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.accessibility.ListDialogPreference.OnValueChangedListener;
 import com.android.settings.core.BasePreferenceController;
@@ -34,14 +36,26 @@ public class CaptioningWindowColorController extends BasePreferenceController
     private final CaptionHelper mCaptionHelper;
     private int mCachedNonDefaultOpacity = CaptionStyle.COLOR_UNSPECIFIED;
 
-    public CaptioningWindowColorController(Context context, String preferenceKey) {
+    @VisibleForTesting
+    CaptioningWindowColorController(Context context, String preferenceKey,
+            CaptionHelper captionHelper) {
         super(context, preferenceKey);
-        mCaptionHelper = new CaptionHelper(context);
+        mCaptionHelper = captionHelper;
+    }
+
+    public CaptioningWindowColorController(Context context, String preferenceKey) {
+        this(context, preferenceKey, new CaptionHelper(context));
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        if (com.android.settings.accessibility.Flags.fixA11ySettingsSearch()) {
+            return (mCaptionHelper.getRawUserStyle()
+                    == CaptioningManager.CaptionStyle.PRESET_CUSTOM)
+                    ? AVAILABLE : AVAILABLE_UNSEARCHABLE;
+        } else {
+            return AVAILABLE;
+        }
     }
 
     @Override

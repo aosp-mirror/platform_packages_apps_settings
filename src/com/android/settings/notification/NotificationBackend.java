@@ -46,6 +46,7 @@ import android.os.Build;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.service.notification.Adjustment;
 import android.service.notification.ConversationChannelWrapper;
 import android.service.notification.NotificationListenerFilter;
 import android.text.format.DateUtils;
@@ -65,9 +66,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public class NotificationBackend {
     private static final String TAG = "NotificationBackend";
@@ -649,6 +652,59 @@ public class NotificationBackend {
             Log.w(TAG, "Error calling NoMan", e);
         }
         return false;
+    }
+
+    public boolean isNotificationBundlingSupported() {
+        try {
+            return !sINM.getUnsupportedAdjustmentTypes().contains(Adjustment.KEY_TYPE);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+        return false;
+    }
+
+    public boolean isNotificationBundlingEnabled(Context context) {
+        try {
+            return sINM.getAllowedAssistantAdjustments(context.getPackageName())
+                    .contains(Adjustment.KEY_TYPE);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+        return false;
+    }
+
+    public void setNotificationBundlingEnabled(boolean enabled) {
+        try {
+            if (enabled) {
+                sINM.allowAssistantAdjustment(Adjustment.KEY_TYPE);
+            } else {
+                sINM.disallowAssistantAdjustment(Adjustment.KEY_TYPE);
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
+    public boolean isBundleTypeApproved(@Adjustment.Types int type) {
+        try {
+            int[] approved = sINM.getAllowedAdjustmentKeyTypes();
+            for (int approvedType : approved) {
+                if (type == approvedType) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+        return false;
+    }
+
+    public void setBundleTypeState(@Adjustment.Types int type, boolean enabled) {
+        try {
+            sINM.setAssistantAdjustmentKeyTypeState(type, enabled);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
     }
 
     @VisibleForTesting

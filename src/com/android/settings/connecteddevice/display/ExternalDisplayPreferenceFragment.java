@@ -22,6 +22,7 @@ import static android.view.Display.INVALID_DISPLAY;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_NOT_FOUND_RESOURCE;
+import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.forceShowDisplayList;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isDisplayAllowed;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isUseDisplaySettingEnabled;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isResolutionSettingEnabled;
@@ -295,13 +296,20 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         updateScreenForDisplayId(getDisplayIdArg(), screen, mInjector.getContext());
     }
 
+    private boolean okayToBypassDisplayListSelection() {
+        if (mInjector != null && forceShowDisplayList(mInjector.getFlags())) {
+            return false;
+        }
+        return !mPreviouslyShownListOfDisplays;
+    }
+
     private void updateScreenForDisplayId(final int displayId,
             @NonNull final PreferenceScreen screen, @NonNull Context context) {
         final var displaysToShow = getDisplaysToShow(displayId);
         if (displaysToShow.isEmpty() && displayId == INVALID_DISPLAY) {
             showTextWhenNoDisplaysToShow(screen, context);
         } else if (displaysToShow.size() == 1
-                && ((displayId == INVALID_DISPLAY && !mPreviouslyShownListOfDisplays)
+                && ((displayId == INVALID_DISPLAY && okayToBypassDisplayListSelection())
                         || displaysToShow.get(0).getDisplayId() == displayId)) {
             showDisplaySettings(displaysToShow.get(0), screen, context);
         } else if (displayId == INVALID_DISPLAY) {
