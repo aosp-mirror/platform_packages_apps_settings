@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,16 +17,21 @@
 package com.android.settings.regionalpreferences;
 
 import android.content.Context;
-import android.os.SystemProperties;
+import android.provider.Settings;
 
+import androidx.annotation.NonNull;
+import androidx.core.text.util.LocalePreferences;
+
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.flags.Flags;
 
-/** A controller for the entry of Regional preferences */
-public class RegionalPreferencesController  extends BasePreferenceController {
-    // This is a feature flag and will be removed after feature completed.
-    static final String FEATURE_PROPERTY = "i18n-feature-locale-preference";
-    public RegionalPreferencesController(Context context, String preferenceKey) {
+import java.util.Locale;
+
+/** A controller for the entry of First Day of Week's page */
+public class NewFirstDayOfWeekController extends BasePreferenceController {
+
+    public NewFirstDayOfWeekController(@NonNull Context context, @NonNull String preferenceKey) {
         super(context, preferenceKey);
     }
 
@@ -44,9 +49,26 @@ public class RegionalPreferencesController  extends BasePreferenceController {
     @Override
     public int getAvailabilityStatus() {
         if (Flags.regionalPreferencesApiEnabled()) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return AVAILABLE;
         }
-        return SystemProperties.getBoolean(FEATURE_PROPERTY, true)
-                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return CONDITIONALLY_UNAVAILABLE;
+    }
+
+    @Override
+    @NonNull
+    public CharSequence getSummary() {
+        String record = Settings.System.getString(
+                mContext.getContentResolver(), Settings.System.LOCALE_PREFERENCES);
+        String result = "";
+        if (record != null) {
+            result = LocalePreferences.getFirstDayOfWeek(Locale.forLanguageTag(record), false);
+        }
+
+        if (result.isEmpty()) {
+            result = LocalePreferences.getFirstDayOfWeek(false);
+        }
+        return result.isEmpty()
+            ? mContext.getString(R.string.default_string_of_regional_preference)
+            : RegionalPreferencesDataUtils.dayConverter(mContext, result);
     }
 }
