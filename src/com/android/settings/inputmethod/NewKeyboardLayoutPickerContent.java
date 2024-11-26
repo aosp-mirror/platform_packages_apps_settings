@@ -48,9 +48,9 @@ public class NewKeyboardLayoutPickerContent extends DashboardFragment {
         InputManager im = getContext().getSystemService(InputManager.class);
         InputDeviceIdentifier identifier =
                 getArguments().getParcelable(
-                        NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER);
+                        InputPeripheralsSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER);
         if (identifier == null
-                || NewKeyboardSettingsUtils.getInputDevice(im, identifier) == null) {
+                || InputPeripheralsSettingsUtils.getInputDevice(im, identifier) == null) {
             getActivity().finish();
             return;
         }

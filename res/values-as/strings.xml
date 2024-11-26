@@ -67,6 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"নতুন ডিভাইচ পেয়াৰ কৰক"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"ব্লুটুথ"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"কাইলৈ স্বয়ংক্ৰিয়ভাৱে অন কৰক"</string>
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"যদি আপুনি ব্লুটুথ অফ কৰে, তেন্তে পাছদিনা ই পুনৰ অন হয়"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"সোঁ কাণখন পেয়াৰ কৰক"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"বাওঁ কাণখন পেয়াৰ কৰক"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"নিজৰ অন্য কাণখন পেয়াৰ কৰক"</string>
@@ -120,10 +121,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"ব্লুটুথ LE অডিঅ’ অক্ষম কৰক"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"ডিভাইচটোৱে LE অডিঅ’ হাৰ্ডৱেৰ ক্ষমতাসমূহ সমৰ্থন কৰিলে ই ব্লুটুথ LE অডিঅ’ সুবিধাসমূহ অক্ষম কৰে।"</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"ব্লুটুথ LE অডিঅ’ ম’ড"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"ব্লুটুথ LE অডিঅ’ ব্ৰডকাষ্ট UIৰ পূৰ্বদৰ্শন সক্ষম কৰক"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"ব্যক্তিগত অডিঅ’ শ্বেয়াৰিং আৰু ব্যক্তিগত সম্প্ৰচাৰকে ধৰি LE অডিঅ’ শ্বেয়াৰিং UIৰ পূৰ্বদৰ্শন সক্ষম কৰে"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"ডিভাইচৰ সবিশেষত LE অডিঅ’ৰ ট’গল দেখুৱাওক"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"ব্লুটুথ LE অডিঅ’ৰ অনুমতি দিয়া সূচী বাইপাছ কৰক"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE অডিঅ’ৰ পৰিধীয় ডিভাইচে অনুমতি দিয়া সূচীৰ যোগ্যতাৰ মাপকাঠী মানি চলিছে বুলি সত্যাপন নকৰিলেও ডিফ’ল্ট হিচাপে LE অডিঅ’ ব্যৱহাৰ কৰক।"</string>
@@ -179,6 +178,10 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"এপৰ ভাষা"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"পৰামৰ্শ হিচাপে পোৱা ভাষা"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"আটাইবোৰ ভাষা"</string>
+    <string name="suggested_locales_title" msgid="119908696638862861">"পৰামৰ্শিত"</string>
+    <string name="all_supported_locales_title" msgid="2535112632133166546">"আটাইবোৰ ভাষা"</string>
+    <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"আটাইবোৰ অঞ্চল"</string>
+    <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"আটাইবোৰ সংখ্যা প্ৰণালী"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"ছিষ্টেমৰ ভাষা"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"ছিষ্টেম ডিফ’ল্ট"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"এই এপ্‌টোৰ বাবে ছেটিঙৰ পৰা ভাষা বাছনি কৰাৰ সুবিধা উপলব্ধ নহয়।"</string>
@@ -194,6 +197,10 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"সলনি কৰক"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s উপলব্ধ নহয়"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"এই ভাষাটো ছিষ্টেমৰ ভাষা হিচাপে ব্যৱহাৰ কৰিব নোৱাৰি, কিন্তু আপুনি এপ্‌ আৰু ৱেবছাইটসমূহক জনাইছে যে আপুনি এই ভাষাটোক অগ্ৰাধিকাৰ দিয়ে।"</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"সন্ধান কৰক"</string>
+    <string name="language_selection_title" msgid="968179636453982415">"এটা ভাষা যোগ দিয়ক"</string>
+    <string name="country_selection_title" msgid="5376929821458644732">"অঞ্চলৰ অগ্ৰাধিকাৰ"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"ভাষাৰ নাম লিখক"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"আঞ্চলিক অগ্ৰাধিকাৰ"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"একক আৰু সংখ্যাৰ অগ্ৰাধিকাৰ ছেট কৰক"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"এপ্‌সমূহক আপোনাৰ আঞ্চলিক অগ্ৰাধিকাৰসমূহ জানিবলৈ দিয়ক যাতে সেইবোৰে আপোনাৰ অভিজ্ঞতা ব্যক্তিগতকৰণ কৰিব পাৰে।"</string>
@@ -555,6 +562,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"আঙুলিটো আঁতৰাওক আৰু ছেন্সৰটো আকৌ স্পৰ্শ কৰক"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"ফিংগাৰপ্ৰিণ্ট ছেন্সৰ ব্যৱহাৰ কৰিব নোৱাৰি"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"মেৰামতি সেৱা প্ৰদানকাৰী কোনো প্ৰতিষ্ঠানলৈ যাওক।"</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"স্ক্ৰীনখন অফ হৈ আছে ফিংগাৰপ্ৰিণ্ট আনলক"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"স্ক্ৰীনখন অফ থকা অৱস্থাতো ফিংগাৰপ্ৰিণ্ট আনলক ব্যৱহাৰ কৰক"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"স্ক্ৰীনখন অফ হৈ আছে, আনলক কৰক"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"সুৰক্ষা সম্পৰ্কীয় অধিক ছেটিং"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"কৰ্মস্থানৰ প্ৰ’ফাইলৰ লক, এনক্ৰিপশ্বন আৰু বহুতো"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"এনক্ৰিপশ্বন, ক্ৰেডেনশ্বিয়েল আৰু বহুতো"</string>
@@ -1240,7 +1250,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"অভিযোজিত"</string>
     <string name="brightness" msgid="6216871641021779698">"উজ্জ্বলতাৰ স্তৰ"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"অভিযোজিত উজ্জ্বলতা"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"অভিযোজিত উজ্জ্বলতাৰ বিষয়ে"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"আপোনাৰ স্ক্ৰীনৰ উজ্জ্বলতা আপোনাৰ পৰিৱেশ আৰু কাৰ্যকলাপবোৰৰ লগত স্ৱয়ংক্ৰিয়ভাৱে খাপ খায়। আপুনি অভিযোজিত উজ্জ্বলতাক আপোনাৰ অগ্ৰাধিকাৰসমূহ বুজাত সহায় কৰাৰ বাবে শ্লাইডাৰ মেনুৱেলভাৱে স্থানান্তৰ কৰিব পাৰে।"</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"অন আছে"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"অফ হৈ আছে"</string>
@@ -1983,6 +1992,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"ডিফ’ল্ট"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"টাচ্চপেড"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"টাচ্চপেড আৰু মাউছ"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"মাউছ"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"পইণ্টাৰৰ গতিবেগ, নিৰ্দেশ"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"ক্লিক কৰিবলৈ টিপাৰ সুবিধা"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"টিপি ধৰি টানি অনা সুবিধা"</string>
@@ -1994,6 +2004,8 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"সোঁফালে তলত ক্লিক কৰা"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"অধিক বিকল্পৰ বাবে টাচ্চপেডৰ একেবাৰে তলৰ সোঁকোণত ক্লিক কৰক"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"পইণ্টাৰৰ গতিবেগ"</string>
+    <!-- no translation found for three_finger_tap_preference_title (7130739855086106052) -->
+    <skip />
     <string name="pointer_fill_style" msgid="8794616790175016092">"পইণ্টাৰৰ ৰং"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"পইণ্টাৰ পূৰ কৰাৰ শৈলী ক’লা কৰক"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"পইণ্টাৰ পূৰ কৰাৰ শৈলী সেউজীয়া কৰক"</string>
@@ -2008,6 +2020,16 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"টাচ্চপেডৰ নিৰ্দেশসমূহ শিকক"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"ট্ৰেকপেড, ট্ৰেক পেড, মাউছ, কাৰ্ছৰ, স্ক্ৰ’ল কৰক, ছোৱাইপ কৰক, ৰাইট ক্লিক কৰক, ক্লিক কৰক, পইণ্টাৰ"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"ৰাইট ক্লিক কৰক, টিপক"</string>
+    <!-- no translation found for three_finger_tap_middle_click (5274906692591143158) -->
+    <skip />
+    <!-- no translation found for three_finger_tap_launch_gemini (4030401656711588982) -->
+    <skip />
+    <!-- no translation found for three_finger_tap_go_home (6526301745535089812) -->
+    <skip />
+    <!-- no translation found for three_finger_tap_go_back (2898205524575684271) -->
+    <skip />
+    <!-- no translation found for three_finger_tap_recent_apps (5578228979519733605) -->
+    <skip />
     <string name="gesture_title_go_home" msgid="3682238648647225933">"গৃহ পৃষ্ঠালৈ যাওক"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"আপোনাৰ টাচ্চপেডৰ যিকোনো ঠাইত তিনিটা আঙুলিৰে ওপৰলৈ ছোৱাইপ কৰক"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"উভতি যাওক"</string>
@@ -3725,6 +3747,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"আপুনি কম সময়ৰ ভিতৰতে বহুতো জাননী পালে, আপোনাৰ ডিভাইচটোৱে নিজৰ ভলিউম কমাব আৰু ২ মিনিটলৈকে সতৰ্কবাৰ্তাসমূহ মিনিমাইজ কৰিব। কল, এৰ্লাম আৰু অগ্ৰাধিকাৰপ্ৰাপ্ত বাৰ্তালাপত প্ৰভাৱ নপৰে। \n\nকুলডাউনৰ সময়ত পোৱা জাননী স্ক্ৰীনখনৰ একেবাৰে ওপৰৰ পৰা তললৈ টানি পাব পাৰি।"</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"কৰ্মস্থানৰ প্ৰ’ফাইলত প্ৰয়োগ কৰক"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"কৰ্মস্থানৰ প্ৰ’ফাইলৰ এপত প্ৰয়োগ কৰক"</string>
+    <string name="notification_bundle_title" msgid="460988459835922719">"বাণ্ডল কৰা জাননী"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"অন আছে"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"অফ আছে"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"জাননীৰ বাণ্ডলিং ব্যৱহাৰ কৰক"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"একে ধৰণৰ থীমৰ জাননীসমূহ নীৰৱ কৰা হ’ব আৰু অধিক নীৰৱ অভিজ্ঞতাৰ বাবে একেলগে গোটবদ্ধ কৰা হ’ব। বাণ্ডলিঙে কোনো এপৰ নিজৰ জাননীৰ ছেটিং অ’ভাৰৰাইড কৰিব।"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"ভিআৰ সহায়ক সেৱা"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"ইনষ্টল কৰি থোৱা কোনো এপে ভিআৰ সহায়ক সেৱা হিচাপে চলাবলৈ অনুৰোধ কৰা নাই।"</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"VR সেৱাক <xliff:g id="SERVICE">%1$s</xliff:g>ৰ এক্সেছ দিবনে?"</string>
@@ -4187,6 +4214,9 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"পূৰ্ণ স্ক্ৰীনৰ জাননীসমূহ"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"এই এপ্‌টোৰ পৰা পূৰ্ণ স্ক্ৰীনৰ জাননীৰ অনুমতি দিয়ক"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"এই এপ্‌টোক ডিভাইচ লক হৈ থাকোঁতে পূৰ্ণ স্ক্ৰীনত ওলোৱা জাননীসমূহ দেখুওৱাৰ অনুমতি দিয়ক। এপ্‌সমূহে এইবোৰ এলাৰ্ম, অন্তৰ্গামী কল অথবা অন্য জৰুৰী জাননীসমূহ হাইলাইট কৰিবলৈ ব্যৱহাৰ কৰিব পাৰে।"</string>
+    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"ছিষ্টেমৰ অগ্ৰাধিকাৰসমূহ লিখক"</string>
+    <string name="write_system_preferences_switch_title" msgid="213522354119233085">"এই এপ্‌টোক আপোনাৰ হৈ ছিষ্টেমৰ অগ্ৰাধিকাৰসমূহ সংশোধন কৰিবলৈ অনুমতি দিয়ক"</string>
+    <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"এই অনুমতিটোৱে কোনো এপক ছিষ্টেমৰ মুখ্য অগ্ৰাধিকাৰসমূহ সংশোধন কৰিবলৈ দিব।"</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"মিডিয়া পৰিচালনা কৰা এপ্‌"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"এপ্‌টোক মিডিয়া পৰিচালনা কৰিবলৈ অনুমতি দিয়ক"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"অনুমতি দিলে, এই এপ্‌টোৱে আপোনাক নোসোধাকৈয়ে অন্য এপৰ জৰিয়তে সৃষ্টি কৰা মিডিয়া ফাইল সংশোধন কৰিব অথবা মচিব পাৰে। ফাইল আৰু মিডিয়া এক্সেছ কৰিবলৈ এপৰ ওচৰত অনুমতি থাকিবই লাগিব।"</string>
@@ -4845,6 +4875,8 @@
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"উপগ্ৰহৰ জৰিয়তে বাৰ্তা বিনিময় কৰাৰ বিষয়ে অধিক"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> অন কৰিব নোৱাৰি"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g> অন কৰিবলৈ, প্ৰথমে উপগ্ৰহৰ সংযোগ সমাপ্ত কৰক"</string>
+    <!-- no translation found for category_title_satellite_connectivity (7540022356863917632) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"এক্সেছ পইণ্টৰ নাম"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"এপিএন"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>ৰ সৈতে সংযোগ কৰিলে উপলব্ধ নহয়"</string>
@@ -5469,8 +5501,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"ষ্ট্ৰীম শুনক"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>ৰ জৰিয়তে শুনিবলৈ অডিঅ’ ষ্ট্ৰীমৰ কিউআৰ ক’ড এটা স্কেন কৰক"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"শ্বেয়াৰ কৰি থকা সময়ত পাছৱৰ্ড সম্পাদনা কৰিব নোৱাৰি। পাছৱৰ্ডটো সলনি কৰিবলৈ, প্ৰথমে অডিঅ’ শ্বেয়াৰিং অফ কৰক।"</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"আপোনাৰ পাছৱৰ্ডটোত ৪-১৬ টা বৰ্ণসংখ্যা থাকিবই লাগিব আৰু সেইটোত কেৱল বৰ্ণ, সংখ্যা আৰু চিহ্ন ব্যৱহাৰ কৰিব পাৰি"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"কিউআৰ ক’ড স্কেনাৰ"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"সহায় লাগে নেকি?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"সন্ধানৰ ছেটিংসমূহ"</string>
@@ -5482,7 +5513,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"ডিফ’ল্ট একাউণ্ট ছেট কৰোঁতে আসোঁৱাহ হৈছে"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"কোনো ডিফ’ল্ট ছেট কৰা হোৱা নাই"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"ডিভাইচ মাত্ৰ"</string>
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"ডিভাইচ আৰু %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"আৰম্ভ কৰিবলৈ এটা একাউণ্ট যোগ দিয়ক"</string>
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"সম্পৰ্কসমূহ ক’ত ছেভ কৰিব লাগে"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"সন্ধান কৰিবৰ বাবে বৃত্ত"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"আপোনাৰ স্ক্ৰীনত থকা সমলটো ব্যৱহাৰ কৰি সন্ধান কৰিবলৈ গৃহ বুটামটো বা নেভিগেশ্বন হেণ্ডেল স্পৰ্শ কৰি ধৰি ৰাখক।"</string>
 </resources>

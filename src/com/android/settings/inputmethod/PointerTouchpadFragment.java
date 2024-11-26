@@ -16,8 +16,8 @@
 
 package com.android.settings.inputmethod;
 
-import static com.android.settings.inputmethod.NewKeyboardSettingsUtils.isMouse;
-import static com.android.settings.inputmethod.NewKeyboardSettingsUtils.isTouchpad;
+import static com.android.settings.inputmethod.InputPeripheralsSettingsUtils.isMouse;
+import static com.android.settings.inputmethod.InputPeripheralsSettingsUtils.isTouchpad;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;

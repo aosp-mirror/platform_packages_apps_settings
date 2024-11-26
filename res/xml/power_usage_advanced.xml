@@ -59,16 +59,15 @@
 
         <com.android.settingslib.widget.SettingsSpinnerPreference
             android:key="battery_usage_spinner"
+            android:order="0"
             settings:isPreferenceVisible="false" />
 
-        <PreferenceCategory
-            android:key="app_list"
-            android:layout="@layout/preference_category_no_label"
-            settings:isPreferenceVisible="false" />
+        <!-- App usage preference list will be added here with the order in range [100, 1000). -->
 
         <com.android.settingslib.widget.FooterPreference
             android:key="battery_usage_footer"
             android:selectable="false"
+            android:order="1000"
             settings:isPreferenceVisible="false"
             settings:searchable="false" />
 

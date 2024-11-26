@@ -37,11 +37,10 @@
         settings:useAdminDisabledSummary="true"
         settings:userRestriction="no_config_brightness"/>
 
-    <com.android.settingslib.PrimarySwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="@string/preference_key_auto_brightness"
         android:icon="@drawable/ic_suw_brightness_auto"
         android:title="@string/auto_brightness_title"
-        android:fragment="com.android.settings.accessibility.AutoBrightnessPreferenceFragmentForSetupWizard"
         settings:useAdminDisabledSummary="true"
         settings:userRestriction="no_config_brightness"
         settings:controller="com.android.settings.display.AutoBrightnessPreferenceControllerForSetupWizard"/>

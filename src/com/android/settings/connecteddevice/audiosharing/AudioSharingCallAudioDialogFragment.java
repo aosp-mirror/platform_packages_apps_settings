@@ -65,27 +65,32 @@ public class AudioSharingCallAudioDialogFragment extends InstrumentedDialogFragm
      * @param listener The callback to handle the user action on this dialog.
      */
     public static void show(
-            @NonNull Fragment host,
+            @Nullable Fragment host,
             @NonNull List<AudioSharingDeviceItem> deviceItems,
             int checkedItemIndex,
             @NonNull DialogEventListener listener) {
-        if (!BluetoothUtils.isAudioSharingEnabled()) return;
-        final FragmentManager manager;
-        try {
-            manager = host.getChildFragmentManager();
-        } catch (IllegalStateException e) {
-            Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+        if (host == null) {
+            Log.d(TAG, "Fail to show dialog, host is null");
             return;
         }
-        sListener = listener;
-        if (manager.findFragmentByTag(TAG) == null) {
-            final Bundle bundle = new Bundle();
-            bundle.putParcelableList(BUNDLE_KEY_DEVICE_ITEMS, deviceItems);
-            bundle.putInt(BUNDLE_KEY_CHECKED_ITEM_INDEX, checkedItemIndex);
-            final AudioSharingCallAudioDialogFragment dialog =
-                    new AudioSharingCallAudioDialogFragment();
-            dialog.setArguments(bundle);
-            dialog.show(manager, TAG);
+        if (BluetoothUtils.isAudioSharingUIAvailable(host.getContext())) {
+            final FragmentManager manager;
+            try {
+                manager = host.getChildFragmentManager();
+            } catch (IllegalStateException e) {
+                Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+                return;
+            }
+            sListener = listener;
+            if (manager.findFragmentByTag(TAG) == null) {
+                final Bundle bundle = new Bundle();
+                bundle.putParcelableList(BUNDLE_KEY_DEVICE_ITEMS, deviceItems);
+                bundle.putInt(BUNDLE_KEY_CHECKED_ITEM_INDEX, checkedItemIndex);
+                final AudioSharingCallAudioDialogFragment dialog =
+                        new AudioSharingCallAudioDialogFragment();
+                dialog.setArguments(bundle);
+                dialog.show(manager, TAG);
+            }
         }
     }
 

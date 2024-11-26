@@ -16,18 +16,16 @@
 
 package com.android.settings.bluetooth.ui.view
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.media.AudioManager
-import android.net.Uri
 import androidx.fragment.app.FragmentActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import androidx.preference.PreferenceScreen
 import androidx.test.core.app.ApplicationProvider
-import com.android.settings.bluetooth.domain.interactor.SpatialAudioInteractor
 import com.android.settings.bluetooth.ui.model.DeviceSettingPreferenceModel
 import com.android.settings.bluetooth.ui.model.FragmentTypeModel
 import com.android.settings.dashboard.DashboardFragment
@@ -42,6 +40,7 @@ import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSetti
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingStateModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.ToggleModel
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.launchIn
@@ -62,11 +61,11 @@ import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.Shadows
 import org.robolectric.shadows.ShadowLooper
 import org.robolectric.shadows.ShadowLooper.shadowMainLooper
 
 
+@ExperimentalCoroutinesApi
 @RunWith(RobolectricTestRunner::class)
 class DeviceDetailsFragmentFormatterTest {
     @get:Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
@@ -74,8 +73,8 @@ class DeviceDetailsFragmentFormatterTest {
     @Mock private lateinit var cachedDevice: CachedBluetoothDevice
     @Mock private lateinit var bluetoothAdapter: BluetoothAdapter
     @Mock private lateinit var repository: DeviceSettingRepository
-    @Mock private lateinit var spatialAudioInteractor: SpatialAudioInteractor
 
+    private lateinit var context: Context
     private lateinit var fragment: TestFragment
     private lateinit var underTest: DeviceDetailsFragmentFormatter
     private lateinit var featureFactory: FakeFeatureFactory
@@ -84,16 +83,12 @@ class DeviceDetailsFragmentFormatterTest {
 
     @Before
     fun setUp() {
-        val context = ApplicationProvider.getApplicationContext<Context>()
+        context = ApplicationProvider.getApplicationContext()
         featureFactory = FakeFeatureFactory.setupForTest()
         `when`(
                 featureFactory.bluetoothFeatureProvider.getDeviceSettingRepository(
                     eq(context), eq(bluetoothAdapter), any()))
             .thenReturn(repository)
-        `when`(
-                featureFactory.bluetoothFeatureProvider.getSpatialAudioInteractor(
-                    eq(context), any(AudioManager::class.java), any()))
-            .thenReturn(spatialAudioInteractor)
         fragmentActivity = Robolectric.setupActivity(FragmentActivity::class.java)
         assertThat(fragmentActivity.applicationContext).isNotNull()
         fragment = TestFragment(context)
@@ -214,9 +209,22 @@ class DeviceDetailsFragmentFormatterTest {
                         null))
 
             underTest.updateLayout(FragmentTypeModel.DeviceDetailsMainFragment)
+            runCurrent()
 
             assertThat(getDisplayedPreferences().mapNotNull { it.key })
                 .containsExactly("bluetooth_device_header", "keyboard_settings")
+            verify(featureFactory.metricsFeatureProvider)
+                .action(
+                    SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_BLUETOOTH_DEVICE_DETAILS_ITEM_SHOWN,
+                    0,
+                    "bluetooth_device_header", 1)
+            verify(featureFactory.metricsFeatureProvider)
+                .action(
+                    SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_BLUETOOTH_DEVICE_DETAILS_ITEM_SHOWN,
+                    0,
+                    "keyboard_settings", 1)
         }
     }
 
@@ -259,12 +267,20 @@ class DeviceDetailsFragmentFormatterTest {
                             updateState = {})))
 
             underTest.updateLayout(FragmentTypeModel.DeviceDetailsMainFragment)
+            runCurrent()
 
             assertThat(getDisplayedPreferences().mapNotNull { it.key })
                 .containsExactly(
                     "bluetooth_device_header",
                     "DEVICE_SETTING_${DeviceSettingId.DEVICE_SETTING_ID_ANC}",
                     "keyboard_settings")
+            verify(featureFactory.metricsFeatureProvider)
+                .action(
+                    SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_BLUETOOTH_DEVICE_DETAILS_ITEM_SHOWN,
+                    0,
+                    "DEVICE_SETTING_${DeviceSettingId.DEVICE_SETTING_ID_ANC}", 1
+                )
         }
     }
 

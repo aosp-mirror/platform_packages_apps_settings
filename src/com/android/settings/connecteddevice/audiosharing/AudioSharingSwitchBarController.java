@@ -177,6 +177,20 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                                     + broadcastId
                                     + ", metadata = "
                                     + metadata.getBroadcastName());
+                    if (mAssistant == null
+                            || mAssistant.getAllConnectedDevices().stream()
+                                    .anyMatch(
+                                            device -> BluetoothUtils
+                                                    .hasActiveLocalBroadcastSourceForBtDevice(
+                                                            device, mBtManager))) {
+                        Log.d(
+                                TAG,
+                                "Skip handleOnBroadcastReady: null assistant or "
+                                        + "sink has active local source.");
+                        cleanUpStatesForStartSharing();
+                        return;
+                    }
+                    handleOnBroadcastReady();
                 }
 
                 @Override
@@ -221,20 +235,6 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                                     + reason
                                     + ", broadcastId = "
                                     + broadcastId);
-                    if (mAssistant == null
-                            || mAssistant.getAllConnectedDevices().stream()
-                                    .anyMatch(
-                                            device -> BluetoothUtils
-                                                    .hasActiveLocalBroadcastSourceForBtDevice(
-                                                            device, mBtManager))) {
-                        Log.d(
-                                TAG,
-                                "Skip handleOnBroadcastReady: null assistant or "
-                                        + "sink has active local source.");
-                        cleanUpStatesForStartSharing();
-                        return;
-                    }
-                    handleOnBroadcastReady();
                 }
 
                 @Override
@@ -261,7 +261,30 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
 
                 @Override
                 public void onSourceAdded(
-                        @NonNull BluetoothDevice sink, int sourceId, int reason) {}
+                        @NonNull BluetoothDevice sink, int sourceId, int reason) {
+                    if (mSinksInAdding.contains(sink)) {
+                        mSinksInAdding.remove(sink);
+                    }
+                    dismissProgressDialogIfNeeded();
+                    Log.d(TAG, "onSourceAdded(), sink = " + sink + ", remaining sinks = "
+                            + mSinksInAdding);
+                    if (mSinksToWaitFor.contains(sink)) {
+                        mSinksToWaitFor.remove(sink);
+                        if (mSinksToWaitFor.isEmpty()) {
+                            // To avoid users advance to share then pair flow before the
+                            // primary/active sinks successfully join the audio sharing,
+                            // popup dialog till adding source complete for mSinksToWaitFor.
+                            Pair<Integer, Object>[] eventData =
+                                    AudioSharingUtils.buildAudioSharingDialogEventData(
+                                            SettingsEnums.AUDIO_SHARING_SETTINGS,
+                                            SettingsEnums.DIALOG_AUDIO_SHARING_ADD_DEVICE,
+                                            /* userTriggered= */ false,
+                                            /* deviceCountInSharing= */ 1,
+                                            /* candidateDeviceCount= */ 0);
+                            showAudioSharingDialog(eventData);
+                        }
+                    }
+                }
 
                 @Override
                 public void onSourceAddFailed(
@@ -307,34 +330,9 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                         @NonNull BluetoothDevice sink,
                         int sourceId,
                         @NonNull BluetoothLeBroadcastReceiveState state) {
-                    if (mStoppingSharing.get()) {
-                        Log.d(TAG, "Skip onReceiveStateChanged, stopping broadcast");
-                        return;
-                    }
-                    if (BluetoothUtils.isConnected(state)) {
-                        if (mSinksInAdding.contains(sink)) {
-                            mSinksInAdding.remove(sink);
-                        }
-                        dismissProgressDialogIfNeeded();
-                        Log.d(TAG, "onReceiveStateChanged() connected, sink = " + sink
-                                + ", remaining sinks = " + mSinksInAdding);
-                        if (mSinksToWaitFor.contains(sink)) {
-                            mSinksToWaitFor.remove(sink);
-                            if (mSinksToWaitFor.isEmpty()) {
-                                // To avoid users advance to share then pair flow before the
-                                // primary/active sinks successfully join the audio sharing,
-                                // popup dialog till adding source complete for mSinksToWaitFor.
-                                Pair<Integer, Object>[] eventData =
-                                        AudioSharingUtils.buildAudioSharingDialogEventData(
-                                                SettingsEnums.AUDIO_SHARING_SETTINGS,
-                                                SettingsEnums.DIALOG_AUDIO_SHARING_ADD_DEVICE,
-                                                /* userTriggered= */ false,
-                                                /* deviceCountInSharing= */ 1,
-                                                /* candidateDeviceCount= */ 0);
-                                showAudioSharingDialog(eventData);
-                            }
-                        }
-                    }
+                    Log.d(TAG,
+                            "onReceiveStateChanged(), sink = " + sink + ", sourceId = " + sourceId
+                                    + ", state = " + state);
                 }
             };
 
@@ -426,9 +424,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                         () -> {
                             mSwitchBar.setEnabled(true);
                             mSwitchBar.setChecked(false);
-                            if (mFragment != null) {
-                                AudioSharingConfirmDialogFragment.show(mFragment);
-                            }
+                            AudioSharingConfirmDialogFragment.show(mFragment);
                         });
                 return;
             }
@@ -447,7 +443,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return BluetoothUtils.isAudioSharingEnabled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return BluetoothUtils.isAudioSharingUIAvailable(mContext) ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -733,13 +730,8 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                 };
         AudioSharingUtils.postOnMainThread(
                 mContext,
-                () -> {
-                    // Check nullability to pass NullAway check
-                    if (mFragment != null) {
-                        AudioSharingDialogFragment.show(
-                                mFragment, mDeviceItemsForSharing, listener, eventData);
-                    }
-                });
+                () -> AudioSharingDialogFragment.show(
+                        mFragment, mDeviceItemsForSharing, listener, eventData));
     }
 
     private void showErrorDialog() {

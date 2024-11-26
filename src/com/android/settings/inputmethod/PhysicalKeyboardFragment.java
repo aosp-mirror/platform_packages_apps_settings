@@ -317,7 +317,7 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
             final Preference pref = new Preference(getPrefContext());
             pref.setTitle(hardKeyboardDeviceInfo.mDeviceName);
             String currentLayout =
-                    NewKeyboardSettingsUtils.getSelectedKeyboardLayoutLabelForUser(context,
+                    InputPeripheralsSettingsUtils.getSelectedKeyboardLayoutLabelForUser(context,
                             UserHandle.myUserId(), hardKeyboardDeviceInfo.mDeviceIdentifier);
             if (currentLayout != null) {
                 pref.setSummary(currentLayout);
@@ -369,7 +369,7 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
 
     private void showEnabledLocalesKeyboardLayoutList(InputDeviceIdentifier inputDeviceIdentifier) {
         Bundle arguments = new Bundle();
-        arguments.putParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER,
+        arguments.putParcelable(InputPeripheralsSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER,
                 inputDeviceIdentifier);
         new SubSettingLauncher(getContext())
                 .setSourceMetricsCategory(getMetricsCategory())
