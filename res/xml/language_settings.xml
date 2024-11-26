@@ -28,12 +28,13 @@
             android:title="@string/system_language"
             android:fragment="com.android.settings.localepicker.LocaleListEditor"
             settings:controller="com.android.settings.language.PhoneLanguagePreferenceController" />
+
         <Preference
             android:key="apps_language"
             android:title="@string/app_locales_picker_menu_title"
             android:summary="@string/app_locale_picker_summary"
             android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-            settings:controller="com.android.settings.applications.appinfo.ManageAppLocalePreferenceController">
+            settings:controller="com.android.settings.applications.appinfo.AppsLocalePreferenceController">
             <extra
                 android:name="classname"
                 android:value="com.android.settings.applications.appinfo.AppLocaleDetails" />
@@ -46,6 +47,22 @@
             android:fragment="com.android.settings.regionalpreferences.RegionalPreferencesEntriesFragment"
             settings:controller="com.android.settings.regionalpreferences.RegionalPreferencesController" />
 
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="more_language_settings_category"
+        android:title="@string/more_language_settings_category"
+        settings:controller="com.android.settings.language.MoreLanguagesSettingsCategoryController">
+        <Preference
+            android:key="apps_language_in_more_language_settings"
+            android:title="@string/app_locales_picker_menu_title"
+            android:summary="@string/app_locale_picker_summary"
+            android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+            settings:controller="com.android.settings.applications.appinfo.NewAppsLocalePreferenceController">
+            <extra
+                android:name="classname"
+                android:value="com.android.settings.applications.appinfo.AppLocaleDetails" />
+        </Preference>
     </PreferenceCategory>
 
     <PreferenceCategory
