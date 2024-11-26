@@ -28,8 +28,6 @@ import static org.mockito.Mockito.verify;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.AttributeSet;
 import android.widget.SeekBar;
 
@@ -38,7 +36,6 @@ import com.android.settings.Utils;
 import com.android.settings.testutils.shadow.ShadowSystemSettings;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -52,9 +49,6 @@ import java.util.Locale;
         ShadowSystemSettings.class,
 })
 public class BalanceSeekBarTest {
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
-
     // Fix the maximum process value to 200 for testing the BalanceSeekBar.
     // It affects the SeekBar value of center(100) and snapThreshold(200 * SNAP_TO_PERCENTAGE).
     private static final int MAX_PROGRESS_VALUE = 200;
@@ -154,7 +148,6 @@ public class BalanceSeekBarTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_AUDIO_BALANCE_STATE_DESCRIPTION)
     public void onProgressChanged_getStateDescription_centered_leftFirst() {
         // Seek bar centered
         int progress = (int) (0.50f * MAX_PROGRESS_VALUE);
@@ -168,7 +161,6 @@ public class BalanceSeekBarTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_AUDIO_BALANCE_STATE_DESCRIPTION)
     public void onProgressChanged_getStateDescription_centered_rtl_rightFirst() {
         // RTL layout
         mContext.getResources().getConfiguration().setLayoutDirection(new Locale("iw", "IL"));
@@ -184,7 +176,6 @@ public class BalanceSeekBarTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_AUDIO_BALANCE_STATE_DESCRIPTION)
     public void onProgressChanged_getStateDescription_25percent_leftFirst() {
         // Seek bar 3/4th toward the left
         int progress = (int) (0.25f * MAX_PROGRESS_VALUE);
@@ -197,7 +188,6 @@ public class BalanceSeekBarTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_AUDIO_BALANCE_STATE_DESCRIPTION)
     public void onProgressChanged_getStateDescription_75percent_rightFirst() {
         // Seek bar 3/4th toward the right
         int progress = (int) (0.75f * MAX_PROGRESS_VALUE);
