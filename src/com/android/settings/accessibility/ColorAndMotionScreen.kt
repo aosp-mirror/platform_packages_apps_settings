@@ -18,7 +18,10 @@ package com.android.settings.accessibility
 
 import android.content.Context
 import com.android.settings.R
+import com.android.settings.Settings.ColorAndMotionActivity
 import com.android.settings.flags.Flags
+import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
@@ -31,15 +34,22 @@ class ColorAndMotionScreen : PreferenceScreenCreator {
     override val title: Int
         get() = R.string.accessibility_color_and_motion_title
 
+    override val icon: Int
+        get() = R.drawable.ic_color_and_motion
+
     override fun isFlagEnabled(context: Context) = Flags.catalystAccessibilityColorAndMotion()
 
     override fun hasCompleteHierarchy(): Boolean = false
 
     override fun fragmentClass() = ColorAndMotionFragment::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {
-        +RemoveAnimationsPreference();
-    }
+    override fun getPreferenceHierarchy(context: Context) =
+        preferenceHierarchy(this) {
+            +RemoveAnimationsPreference()
+        }
+
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        makeLaunchIntent(context, ColorAndMotionActivity::class.java, metadata?.key)
 
     companion object {
         const val KEY = "accessibility_color_and_motion"

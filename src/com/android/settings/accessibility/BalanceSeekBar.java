@@ -89,7 +89,7 @@ public class BalanceSeekBar extends SeekBar {
                         Settings.System.MASTER_BALANCE, balance, UserHandle.USER_CURRENT);
             }
             final int max = getMax();
-            if (Flags.audioBalanceStateDescription() && max > 0) {
+            if (max > 0) {
                 seekBar.setStateDescription(createStateDescription(mContext,
                         R.string.audio_seek_bar_state_left_first,
                         R.string.audio_seek_bar_state_right_first,

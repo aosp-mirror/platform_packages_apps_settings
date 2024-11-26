@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Android Open Source Project
+ * Copyright 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,37 +18,20 @@ package com.android.settings.inputmethod;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.Bundle;
-import android.util.FeatureFlagUtils;
-
-import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.keyboard.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 @SearchIndexable
-public class TrackpadSettings extends DashboardFragment {
-
-    private static final String TAG = "TrackpadSettings";
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        use(TouchGesturesButtonPreferenceController.class).setFragment(this /*parent*/);
-    }
+public class TouchpadSettingFragment extends DashboardFragment {
+    private static final String TAG = TouchpadSettingFragment.class.getSimpleName();
 
     @Override
-    public void onCreate(@NonNull Bundle icicle) {
-        super.onCreate(icicle);
-        getPreferenceScreen().setTitle(
-                InputPeripheralsSettingsUtils.getTouchpadAndMouseTitleTitleResId());
-    }
-
-    @Override
-    public int getMetricsCategory() {
-        return SettingsEnums.SETTINGS_KEYBOARDS_TOUCHPAD;
+    protected int getPreferenceScreenResId() {
+        return R.xml.touchpad_settings;
     }
 
     @Override
@@ -57,16 +40,15 @@ public class TrackpadSettings extends DashboardFragment {
     }
 
     @Override
-    protected int getPreferenceScreenResId() {
-        return R.xml.trackpad_settings;
+    public int getMetricsCategory() {
+        return SettingsEnums.SETTINGS_KEYBOARDS_TOUCHPAD;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.trackpad_settings) {
+            new BaseSearchIndexProvider(R.xml.touchpad_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return FeatureFlagUtils
-                            .isEnabled(context, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_TRACKPAD)
+                    return Flags.keyboardAndTouchpadA11yNewPageEnabled()
                             && InputPeripheralsSettingsUtils.isTouchpad();
                 }
             };
