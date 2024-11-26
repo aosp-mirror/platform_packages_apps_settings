@@ -98,6 +98,8 @@ public class Settings extends SettingsActivity {
     public static class LanguageSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for the regional preferences settings. */
     public static class RegionalPreferencesActivity extends SettingsActivity { /* empty */ }
+    public static class TemperatureUnitSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class FirstDayOfWeekSettingsActivity extends SettingsActivity { /* empty */ }
     public static class KeyboardSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for the navigation mode settings. */
     public static class NavigationModeSettingsActivity extends SettingsActivity { /* empty */ }
