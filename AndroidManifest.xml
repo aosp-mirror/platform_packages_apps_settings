@@ -2792,6 +2792,10 @@
             android:exported="false"
             android:theme="@style/GlifTheme.Light"
             android:taskAffinity="com.android.settings.root" />
+        <activity android:name=".biometrics.fingerprint.FingerprintEnroll$AddAdditionalFingerprint"
+            android:exported="false"
+            android:theme="@style/GlifTheme.Light"
+            android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollFindSensor"
             android:exported="false"
