@@ -18,41 +18,18 @@ package com.android.settings.accessibility;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.view.accessibility.CaptioningManager;
 
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.accessibility.ListDialogPreference.OnValueChangedListener;
-import com.android.settings.core.BasePreferenceController;
 
 /** Preference controller for captioning window opacity. */
-public class CaptioningWindowOpacityController extends BasePreferenceController
+public class CaptioningWindowOpacityController extends BaseCaptioningCustomController
         implements OnValueChangedListener {
 
-    private final CaptionHelper mCaptionHelper;
-
-    @VisibleForTesting
-    CaptioningWindowOpacityController(Context context, String preferenceKey,
-            CaptionHelper captionHelper) {
-        super(context, preferenceKey);
-        mCaptionHelper = captionHelper;
-    }
-
     public CaptioningWindowOpacityController(Context context, String preferenceKey) {
-        this(context, preferenceKey, new CaptionHelper(context));
-    }
-
-    @Override
-    public int getAvailabilityStatus() {
-        if (com.android.settings.accessibility.Flags.fixA11ySettingsSearch()) {
-            return (mCaptionHelper.getRawUserStyle()
-                    == CaptioningManager.CaptionStyle.PRESET_CUSTOM)
-                    ? AVAILABLE : AVAILABLE_UNSEARCHABLE;
-        } else {
-            return AVAILABLE;
-        }
+        super(context, preferenceKey);
     }
 
     @Override

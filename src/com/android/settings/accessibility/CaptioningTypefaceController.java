@@ -23,22 +23,12 @@ import android.view.accessibility.CaptioningManager.CaptionStyle;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
-import com.android.settings.core.BasePreferenceController;
-
 /** Preference controller for captioning type face. */
-public class CaptioningTypefaceController extends BasePreferenceController
+public class CaptioningTypefaceController extends BaseCaptioningCustomController
         implements Preference.OnPreferenceChangeListener {
-
-    private final CaptionHelper mCaptionHelper;
 
     public CaptioningTypefaceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mCaptionHelper = new CaptionHelper(context);
-    }
-
-    @Override
-    public int getAvailabilityStatus() {
-        return AVAILABLE;
     }
 
     @Override

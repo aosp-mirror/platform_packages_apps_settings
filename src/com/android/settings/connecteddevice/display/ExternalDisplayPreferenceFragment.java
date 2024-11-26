@@ -97,6 +97,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     @Nullable
     private FooterPreference mFooterPreference;
     @Nullable
+    private Preference mDisplayTopologyPreference;
+    @Nullable
     private PreferenceCategory mDisplaysPreference;
     @Nullable
     private Injector mInjector;
@@ -279,6 +281,14 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         return mDisplaysPreference;
     }
 
+    @NonNull Preference getDisplayTopologyPreference(@NonNull Context context) {
+        if (mDisplayTopologyPreference == null) {
+            mDisplayTopologyPreference = new DisplayTopologyPreference(context);
+            mDisplayTopologyPreference.setPersistent(false);
+        }
+        return mDisplayTopologyPreference;
+    }
+
     private void restoreState(@Nullable Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             return;
@@ -296,20 +306,16 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         updateScreenForDisplayId(getDisplayIdArg(), screen, mInjector.getContext());
     }
 
-    private boolean okayToBypassDisplayListSelection() {
-        if (mInjector != null && forceShowDisplayList(mInjector.getFlags())) {
-            return false;
-        }
-        return !mPreviouslyShownListOfDisplays;
-    }
-
     private void updateScreenForDisplayId(final int displayId,
             @NonNull final PreferenceScreen screen, @NonNull Context context) {
+        final boolean forceShowList = displayId == INVALID_DISPLAY
+                && mInjector != null && forceShowDisplayList(mInjector.getFlags());
         final var displaysToShow = getDisplaysToShow(displayId);
-        if (displaysToShow.isEmpty() && displayId == INVALID_DISPLAY) {
+
+        if (!forceShowList && displaysToShow.isEmpty() && displayId == INVALID_DISPLAY) {
             showTextWhenNoDisplaysToShow(screen, context);
-        } else if (displaysToShow.size() == 1
-                && ((displayId == INVALID_DISPLAY && okayToBypassDisplayListSelection())
+        } else if (!forceShowList && displaysToShow.size() == 1
+                && ((displayId == INVALID_DISPLAY && !mPreviouslyShownListOfDisplays)
                         || displaysToShow.get(0).getDisplayId() == displayId)) {
             showDisplaySettings(displaysToShow.get(0), screen, context);
         } else if (displayId == INVALID_DISPLAY) {
@@ -367,6 +373,11 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
 
     private void showDisplaysList(@NonNull List<Display> displaysToShow,
             @NonNull PreferenceScreen screen, @NonNull Context context) {
+        if (mInjector != null
+                && mInjector.getFlags().displayTopologyPaneInDisplayList()) {
+            screen.addPreference(getDisplayTopologyPreference(context));
+        }
+
         var pref = getDisplaysListPreference(context);
         pref.setKey(DISPLAYS_LIST_PREFERENCE_KEY);
         pref.removeAll();

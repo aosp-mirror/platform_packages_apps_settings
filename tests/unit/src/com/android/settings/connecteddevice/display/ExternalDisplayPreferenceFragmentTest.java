@@ -15,7 +15,6 @@
  */
 package com.android.settings.connecteddevice.display;
 
-
 import static android.view.Display.INVALID_DISPLAY;
 
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.PREVIOUSLY_SHOWN_LIST_KEY;
@@ -29,6 +28,7 @@ import static com.android.settings.connecteddevice.display.ExternalDisplayPrefer
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_SETTINGS_RESOURCE;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_USE_PREFERENCE_KEY;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_USE_TITLE_RESOURCE;
+import static com.android.settings.flags.Flags.FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST;
 import static com.android.settingslib.widget.FooterPreference.KEY_FOOTER;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -85,6 +85,8 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
     @Test
     @UiThreadTest
     public void testShowDisplayList() {
+        mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, false);
+
         var fragment = initFragment();
         var outState = new Bundle();
         fragment.onSaveInstanceStateCallback(outState);
@@ -101,6 +103,46 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         assertThat(pref.getPreferenceCount()).isEqualTo(2);
         fragment.onSaveInstanceStateCallback(outState);
         assertThat(outState.getBoolean(PREVIOUSLY_SHOWN_LIST_KEY)).isTrue();
+
+        pref = mPreferenceScreen.findPreference(DisplayTopologyKt.PREFERENCE_KEY);
+        assertThat(pref).isNull();
+    }
+
+    @Test
+    @UiThreadTest
+    public void testShowDisplayListWithPane_OneExternalDisplay() {
+        mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, true);
+
+        initFragment();
+        doReturn(new Display[] {mDisplays[1]}).when(mMockedInjector).getAllDisplays();
+        mHandler.flush();
+
+        var pref = mPreferenceScreen.findPreference(DisplayTopologyKt.PREFERENCE_KEY);
+        assertThat(pref).isNotNull();
+
+        PreferenceCategory listPref =
+                mPreferenceScreen.findPreference(DISPLAYS_LIST_PREFERENCE_KEY);
+        assertThat(listPref).isNotNull();
+        assertThat(listPref.getPreferenceCount()).isEqualTo(1);
+    }
+
+    @Test
+    @UiThreadTest
+    public void testShowDisplayListWithPane_NoExternalDisplays() {
+        mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, true);
+
+        initFragment();
+        doReturn(new Display[0]).when(mMockedInjector).getAllDisplays();
+        mHandler.flush();
+
+        var pref = mPreferenceScreen.findPreference(DisplayTopologyKt.PREFERENCE_KEY);
+        assertThat(pref).isNotNull();
+
+        // TODO: add the built-in display to the list, which will cause this preference to not be
+        // null.
+        PreferenceCategory listPref =
+                mPreferenceScreen.findPreference(DISPLAYS_LIST_PREFERENCE_KEY);
+        assertThat(listPref).isNull();
     }
 
     @Test
