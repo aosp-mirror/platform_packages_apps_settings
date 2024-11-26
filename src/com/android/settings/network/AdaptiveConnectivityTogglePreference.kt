@@ -26,6 +26,7 @@ import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.metadata.MainSwitchPreference
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 
 // LINT.IfChange
 class AdaptiveConnectivityTogglePreference :
@@ -39,6 +40,9 @@ class AdaptiveConnectivityTogglePreference :
 
     override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     @Suppress("UNCHECKED_CAST")
     private class AdaptiveConnectivityToggleStorage(
