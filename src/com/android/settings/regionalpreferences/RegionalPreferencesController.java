@@ -20,6 +20,7 @@ import android.content.Context;
 import android.os.SystemProperties;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.flags.Flags;
 
 /** A controller for the entry of Regional preferences */
 public class RegionalPreferencesController  extends BasePreferenceController {
@@ -42,6 +43,9 @@ public class RegionalPreferencesController  extends BasePreferenceController {
      */
     @Override
     public int getAvailabilityStatus() {
+        if (Flags.regionalPreferencesApiEnabled()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
         return SystemProperties.getBoolean(FEATURE_PROPERTY, true)
                 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }

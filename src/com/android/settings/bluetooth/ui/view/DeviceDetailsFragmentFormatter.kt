@@ -27,6 +27,8 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -187,7 +189,12 @@ class DeviceDetailsFragmentFormatterImpl(
             }
         }
         // TODO(b/343317785): figure out how to remove the foot preference.
-        fragment.preferenceScreen.addPreference(Preference(context).apply { order = 10000 })
+        fragment.preferenceScreen.addPreference(ComposePreference(context).apply {
+            order = 10000
+            isEnabled = false
+            isSelectable = false
+            setContent { Spacer(modifier = Modifier.height(1.dp)) }
+        })
     }
 
     override fun getMenuItem(
