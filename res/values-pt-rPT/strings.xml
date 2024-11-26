@@ -180,7 +180,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"A seleção do idioma para esta app não está disponível a partir das Definições."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"O idioma pode diferir dos idiomas disponíveis na app. Algumas apps podem não suportar esta definição."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Defina o idioma para cada app."</string>
-    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"O seu dispositivo, apps e Websites usam o primeiro idioma suportado da lista dos seus idiomas preferidos.\n\nMuitas apps também usam a região do seu idioma preferido para formatar datas, números e unidades. Para alterar a sua região, adicione um idioma e, em seguida, selecione a sua região preferida."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"O seu dispositivo, apps e Websites usam o primeiro idioma compatível da lista dos seus idiomas preferidos.\n\nMuitas apps também usam a região do seu idioma preferido para formatar datas, números e unidades. Para alterar a sua região, adicione um idioma e, em seguida, selecione a sua região preferida."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Para selecionar um idioma para cada app, aceda às definições de idioma da app."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Saiba mais sobre idiomas de apps"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Alterar o idioma do sistema para %s?"</string>
@@ -282,7 +282,7 @@
     <string name="location_settings_title" msgid="8375074508036087178">"Localização"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Usar localização"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Desativada"</string>
-    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Ativada / # app tem acesso à localização}other{Ativada / # apps têm acesso à localização}}"</string>
+    <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Ativada/# app tem acesso à localização}other{Ativada/# apps têm acesso à localização}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"A carregar…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"As apps com a autorização Dispositivos próximos podem determinar a posição relativa dos dispositivos ligados."</string>
     <string name="location_settings_footer_location_off" msgid="8568995909147566720">"O acesso à localização está desativado para apps e serviços. A localização do dispositivo ainda pode ser enviada para os contactos de resposta a emergências quando liga ou envia uma mensagem de texto para um número de emergência."</string>
@@ -561,7 +561,7 @@
     <string name="private_space_title" msgid="1752064212078238723">"Espaço privado"</string>
     <string name="private_space_summary" msgid="2274405892301976238">"Mantém as apps privadas bloqueadas e ocultas"</string>
     <string name="private_space_description" msgid="4059594203775816136">"Mantenha as apps privadas num espaço separado que pode ocultar ou bloquear"</string>
-    <string name="private_space_lock_title" msgid="7230836881433350526">"Bloqueio do espaço privado"</string>
+    <string name="private_space_lock_title" msgid="7230836881433350526">"Bloquear espaço privado"</string>
     <string name="private_space_one_lock_summary" msgid="2106513606571219068">"Pode desbloquear o espaço privado da mesma forma que desbloqueia o seu dispositivo ou escolher um bloqueio diferente"</string>
     <string name="private_space_screen_lock_title" msgid="8679383894967823163">"Usar bloqueio de ecrã do dispositivo"</string>
     <string name="private_space_biometric_title" msgid="3934339826674553174">"Desbloqueio facial e por impressão digital"</string>
@@ -620,7 +620,7 @@
     <string name="private_space_cancel_label" msgid="379259667396956886">"Cancelar"</string>
     <string name="private_space_setup_button_label" msgid="2094882154623560585">"Configurar"</string>
     <string name="private_space_setup_title" msgid="2272968244329821450">"Espaço privado"</string>
-    <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Oculte ou bloqueie apps privadas num espaço separado. Use uma Conta Google exclusiva para maior segurança."</string>
+    <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Oculte ou bloqueie apps privadas num espaço separado. Use uma Conta Google dedicada para maior segurança."</string>
     <string name="private_space_setup_sub_header" msgid="550476876393954356">"Como funciona"</string>
     <string name="private_space_separate_account_text" msgid="790319706810190320"><b>"Crie uma Conta Google para o seu espaço"</b>\n"Se usar uma conta dedicada, impede que os ficheiros, as fotos e os emails sincronizados sejam apresentados fora do seu espaço"</string>
     <string name="private_space_protected_lock_text" msgid="9123250938334372735"><b>"Defina um bloqueio"</b>\n"Bloqueie o seu espaço para impedir que outras pessoas o abram"</string>
@@ -793,7 +793,7 @@
     <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{Tem de incluir, pelo menos, # caráter}other{Tem de ter, pelo menos, # carateres}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Se usar só números, tem de ter, pelo menos, 1 dígito}other{Se usar só números, tem de ter, pelo menos, # dígitos}}"</string>
     <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{O PIN tem de incluir, pelo menos, # dígito}other{O PIN tem de ter, pelo menos, # dígitos}}"</string>
-    <string name="lockpassword_pin_too_short_autoConfirm_extra_message" msgid="3271351502900762571">"{count,plural, =1{O PIN tem de ter, pelo menos, # dígito, mas recomenda-se um PIN de {minAutoConfirmLen} dígito para uma segurança adicional}other{O PIN tem de ter, pelo menos, # dígitos, mas recomenda-se um PIN de {minAutoConfirmLen} dígitos para uma segurança adicional}}"</string>
+    <string name="lockpassword_pin_too_short_autoConfirm_extra_message" msgid="3271351502900762571">"{count,plural, =1{O PIN tem de ter, pelo menos, # dígito, mas recomenda-se um PIN de {minAutoConfirmLen} dígito para maior segurança}other{O PIN tem de ter, pelo menos, # dígitos, mas recomenda-se um PIN de {minAutoConfirmLen} dígitos para maior segurança}}"</string>
     <string name="lockpassword_password_too_long" msgid="1940345313260498308">"{count,plural, =1{Tem de ter menos de # caráter}other{Tem de ter menos de # carateres}}"</string>
     <string name="lockpassword_pin_too_long" msgid="1678212054564388576">"{count,plural, =1{Tem de ter menos de # dígito}other{Tem de ter menos de # dígitos}}"</string>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"O gestor do dispositivo não permite utilizar um PIN recente"</string>
@@ -1938,7 +1938,7 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opções"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Acessibilidade"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclado físico"</string>
-    <string name="bounce_keys" msgid="7419450970351743904">"Teclas de rejeição"</string>
+    <string name="bounce_keys" msgid="7419450970351743904">"Evitar pressão repetida"</string>
     <string name="bounce_keys_summary" msgid="7347050868868080302">"O teclado ignora os toques rápidos repetidos da mesma tecla no espaço de <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Teclas lentas"</string>
     <string name="slow_keys_summary" msgid="1784371292745423292">"Ajusta o tempo que demora a ativação de uma tecla pressionada para <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
@@ -2675,7 +2675,7 @@
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Utilização da bateria desde o último carregamento completo"</string>
     <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Utilização da bateria: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Tempo ao ecrã desde o último carregamento completo"</string>
-    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Tempo ao ecrão: <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Tempo ao ecrã: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Ver por apps"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Ver por sistemas"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
@@ -3202,7 +3202,7 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Não disponível com o NFC desativado"</string>
-    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Para utilizar, comece por instalar uma app de pagamento"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Para usar, instale primeiro uma app de pagamento"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Apps recentes, apps predefinidas"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"O acesso às notificações não está disponível para aplicações no perfil de trabalho."</string>
     <string name="account_dashboard_title" msgid="8228773251948253914">"Palavras-passe e contas"</string>
@@ -3591,7 +3591,7 @@
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificações no ecrã de bloqueio"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostrar conversas predefinidas e silenciosas"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostrar conversas predefinidas e silenciosas"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Ocultar notificações e conversas silenciosas"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Oculta notificações e conversas silenciosas"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Não mostrar notificações"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Notificações confidenciais"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Mostra conteúdo confidencial com o ecrã bloqueado"</string>
@@ -5198,7 +5198,7 @@
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Reiniciar mais tarde"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Áudio espacial"</string>
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"O áudio de dispositivos multimédia compatíveis torna-se mais envolvente"</string>
-    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Acompanhamento da cabeça"</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Posição da cabeça"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"O áudio muda conforme move a cabeça para soar mais natural"</string>
     <string name="bluetooth_details_permissions_sync_title" msgid="7277580382321003521">"Sincronizar autorizações do telemóvel"</string>
     <string name="bluetooth_details_permissions_sync_summary" msgid="8125037984381432059">"Conceda ao seu relógio as mesmas autorizações da app que concedeu a este telemóvel"</string>
@@ -5298,7 +5298,7 @@
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"Esta app só pode ser aberta em 1 janela"</string>
     <string name="generic_accessibility_service_on" msgid="4466229372357726824">"Funcionalidade ativada"</string>
     <string name="generic_accessibility_service_off" msgid="4759859497651675724">"Funcionalidade desativada"</string>
-    <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"Desativado"</string>
+    <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"Opção desativada"</string>
     <string name="accessibility_shortcut_state_off" msgid="8158137799007601475">"Desativado"</string>
     <string name="daltonizer_state_on" msgid="131013270022603983">"Ativado"</string>
     <string name="daltonizer_state_off" msgid="1162285688069856179">"Desativada"</string>
@@ -5431,7 +5431,7 @@
     <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"Ler código QR"</string>
     <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Comece a ouvir lendo o código QR de uma stream"</string>
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Ouvir stream"</string>
-    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Leia o código QR de uma stream de áudio para ouvir com <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Leia o código QR de uma stream de áudio para ouvir com os <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Não é possível editar a palavra-passe durante a partilha. Para alterar a palavra-passe, primeiro, desative a partilha de áudio."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Leitor de códigos QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Precisa de ajuda?"</annotation></string>

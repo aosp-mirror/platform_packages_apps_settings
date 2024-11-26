@@ -2191,7 +2191,7 @@
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"หากต้องการเริ่มหรือหยุดการขยาย ให้แตะ 3 ครั้งที่ใดก็ได้บนหน้าจอ"</string>
     <string name="accessibility_tutorial_dialog_tripletap_instruction" msgid="7549293553589934">"หากต้องการเริ่มและหยุดการขยาย ให้แตะหน้าจอเร็วๆ %1$d ครั้ง"</string>
     <string name="accessibility_tutorial_dialog_twofinger_doubletap_instruction" msgid="1007756360115974649">"หากต้องการเริ่มและหยุดการขยาย ให้ใช้ %1$d นิ้วแตะหน้าจอเร็วๆ 2 ครั้ง"</string>
-    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{หากต้องการใช้ฟีเจอร์นี้ ให้ปัดลงจากด้านบนของหน้าจอ จากนั้นมองหาการ์ด {featureName}}other{หากต้องการใช้ฟีเจอร์นี้ ให้ใช้ # นิ้วปัดลงจากด้านบนของหน้าจอ จากนั้นมองหาการ์ด {featureName}}}"</string>
+    <string name="accessibility_tutorial_dialog_message_quick_setting" msgid="3715446725334547432">"{count,plural, =1{หากต้องการใช้ฟีเจอร์นี้ ให้ปัดลงจากด้านบนของหน้าจอ จากนั้นมองหาการ์ด \"{featureName}\"}other{หากต้องการใช้ฟีเจอร์นี้ ให้ใช้ # นิ้วปัดลงจากด้านบนของหน้าจอ จากนั้นมองหาการ์ด \"{featureName}\"}}"</string>
     <string name="accessibility_tutorial_dialog_shortcut_unavailable_in_suw" msgid="3847728530771929959">"ทางลัดนี้จะพร้อมใช้งานหลังจากที่คุณตั้งค่าอุปกรณ์เสร็จ"</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"หากต้องการใช้ฟีเจอร์นี้ ให้ใช้ 2 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้ใช้ 2 นิ้วเลื่อนขึ้นแล้วค้างไว้"</string>
     <string name="accessibility_tutorial_dialog_gesture_shortcut_instruction" msgid="7349950768250852308">"{count,plural, =1{หากต้องการใช้ฟีเจอร์นี้ ให้ปัดขึ้นจากด้านล่างของหน้าจอ}other{หากต้องการใช้ฟีเจอร์นี้ ให้ใช้ # นิ้วปัดขึ้นจากด้านล่างของหน้าจอ}}"</string>
@@ -2419,7 +2419,7 @@
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"ตัวเลือกมาตรฐาน"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"ภาษา"</string>
     <string name="captioning_text_size" msgid="8039448543171463017">"ขนาดข้อความ"</string>
-    <string name="captioning_preset" msgid="4174276086501638524">"รูปแบบคำบรรยาย"</string>
+    <string name="captioning_preset" msgid="4174276086501638524">"รูปแบบคำบรรยายแทนเสียง"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"ตัวเลือกที่กำหนดเอง"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"สีพื้นหลัง"</string>
     <string name="captioning_background_opacity" msgid="6453738649182382614">"ความทึบแสงของพื้นหลัง"</string>
@@ -3395,7 +3395,7 @@
     <string name="zen_mode_not_found_text" msgid="692090778655810329">"ไม่พบโหมด"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"จำกัดการรบกวน"</string>
     <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"บล็อกการรบกวนและสิ่งที่จะทำให้เสียสมาธิ"</string>
-    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"ตั้งค่า <xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"ตั้งค่า \"<xliff:g id="MODE">%1$s</xliff:g>\""</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"เปิด \"ห้ามรบกวน\""</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"ให้เสียงของการแจ้งเตือนและสื่อรบกวนได้"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"กำหนดการ"</string>
@@ -3454,7 +3454,7 @@
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"กำหนดเอง"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"เปิดใช้การตั้งค่าที่กำหนดเอง"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"นำการตั้งค่าที่กำหนดเองออก"</string>
-    <string name="zen_mode_restrict_notifications_summary_muted" msgid="2826459087306271381">"แสดงการแจ้งเตือนแล้ว"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="2826459087306271381">"การแจ้งเตือนที่จะแสดง"</string>
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="6455811408721183198">"ซ่อนการแจ้งเตือนบางส่วนแล้ว"</string>
     <string name="zen_mode_restrict_notifications_summary_hidden" msgid="2157279412167366119">"ซ่อนการแจ้งเตือนแล้ว"</string>
     <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"การจำกัดที่กำหนดเอง"</string>
@@ -3669,7 +3669,7 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"แอปจะตอบกลับข้อความและดำเนินการกับปุ่มต่างๆ ในการแจ้งเตือนได้ รวมถึงเลื่อนหรือปิดการแจ้งเตือนและรับสาย"</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"เปลี่ยนการตั้งค่า"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"แอปจะเปิดหรือปิดฟีเจอร์ห้ามรบกวนและเปลี่ยนแปลงการตั้งค่าที่เกี่ยวข้องได้"</string>
-    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"สามารถจัดการและเปิดใช้งานโหมด รวมถึงเปลี่ยนแปลงการตั้งค่าที่เกี่ยวข้องได้"</string>
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"แอปจะสามารถจัดการและเปิดใช้งานโหมด รวมถึงเปลี่ยนแปลงการตั้งค่าที่เกี่ยวข้องได้"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"หากคุณปิดการเข้าถึงการแจ้งเตือนสำหรับ <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> การเข้าถึง \"ห้ามรบกวน\" อาจปิดไปด้วย"</string>
     <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"หากคุณปิดการเข้าถึงการแจ้งเตือนสำหรับ <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> ระบบอาจปิดการเข้าถึงโหมดไปด้วย"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"ปิด"</string>
@@ -3903,10 +3903,10 @@
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"การตั้งค่าแอป"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"ข้อมูลและการตั้งค่าใน <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"จัดการโดย <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"ปิดใช้<xliff:g id="MODE_NAME">%1$s</xliff:g>ใช่ไหม"</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"ปิดใช้ \"<xliff:g id="MODE_NAME">%1$s</xliff:g>\" ใช่ไหม"</string>
     <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"ระบบจะไม่เปิดโหมดนี้เมื่อปิดใช้งานอยู่"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"ปิดใช้"</string>
-    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"เปิดใช้<xliff:g id="MODE_NAME">%1$s</xliff:g>ใช่ไหม"</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"เปิดใช้ \"<xliff:g id="MODE_NAME">%1$s</xliff:g>\" ใช่ไหม"</string>
     <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"โหมดนี้อาจเปิดโดยอัตโนมัติตามการตั้งค่า"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"เปิดใช้"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"ตั้งค่าโหมดที่จะทำตามกำหนดการประจำ"</string>
@@ -4127,9 +4127,9 @@
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"ต้องเปิดไว้เสมอ เนื่องจากการเข้าถึงการแจ้งเตือนเปิดอยู่"</string>
     <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"เพิกถอนสิทธิ์การเข้าถึง \"ห้ามรบกวน\" ของ <xliff:g id="APP">%1$s</xliff:g> ไหม"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"ระบบจะนำกฎ \"ห้ามรบกวน\" ทั้งหมดที่แอปนี้สร้างขึ้นออก"</string>
-    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"อนุญาตสิทธิ์เข้าถึงโหมดสำหรับ <xliff:g id="APP">%1$s</xliff:g> ไหม"</string>
+    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"อนุญาตสิทธิ์เข้าถึงโหมดสำหรับ \"<xliff:g id="APP">%1$s</xliff:g>\" ใช่ไหม"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"แอปจะสามารถเปิด/ปิดโหมดห้ามรบกวน จัดการและเปิดใช้งานโหมด รวมถึงเปลี่ยนแปลงการตั้งค่าที่เกี่ยวข้องได้"</string>
-    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"เพิกถอนสิทธิ์เข้าถึงโหมดสำหรับ <xliff:g id="APP">%1$s</xliff:g> ใช่ไหม"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"เพิกถอนสิทธิ์เข้าถึงโหมดสำหรับ \"<xliff:g id="APP">%1$s</xliff:g>\" ใช่ไหม"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"ระบบจะนำโหมดทั้งหมดที่แอปนี้สร้างออก"</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"ไม่เพิ่มประสิทธิภาพ"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"เพิ่มประสิทธิภาพ"</string>
@@ -4431,7 +4431,7 @@
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"ปัดลงเพื่อ"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"ใช้ทางลัดเพื่อ"</string>
     <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"ดึงครึ่งบนของหน้าจอลงเพื่อให้เข้าถึงได้ง่ายขึ้นด้วยมือเดียว"</string>
-    <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"วิธีใช้โหมดมือเดียว"</b>\n" • ตรวจสอบว่าได้เลือกการนำทางด้วยท่าทางสัมผัสไว้ในการตั้งค่าการไปยังส่วนต่างๆ ของระบบ\n • ปัดลงที่บริเวณขอบด้านล่างของหน้าจอ"</string>
+    <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"วิธีใช้โหมดมือเดียว"</b>\n" • ตรวจสอบว่าได้เลือกการไปยังส่วนต่างๆ ด้วยท่าทางสัมผัสในการตั้งค่าการไปยังส่วนต่างๆ ของระบบ\n • ปัดลงที่บริเวณขอบด้านล่างของหน้าจอ"</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"ดึงหน้าจอเข้ามาใกล้"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"ด้านบนของหน้าจอจะเลื่อนเข้ามาใกล้นิ้วโป้ง"</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"แสดงการแจ้งเตือน"</string>
@@ -5435,5 +5435,5 @@
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"แก้ไขรหัสผ่านในระหว่างการแชร์ไม่ได้ หากต้องการเปลี่ยนรหัสผ่าน โปรดปิดการแชร์เสียงก่อน"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"ตัวสแกนคิวอาร์โค้ด"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"หากต้องการความช่วยเหลือ"</annotation></string>
-    <string name="homepage_search" msgid="6759334912284663559">"ค้นหาในการตั้งค่า"</string>
+    <string name="homepage_search" msgid="6759334912284663559">"ค้นหาการตั้งค่า"</string>
 </resources>
