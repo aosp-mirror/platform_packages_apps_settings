@@ -86,6 +86,7 @@ public class SatelliteSettingPreferenceController extends
     @Override
     public void displayPreference(@NonNull PreferenceScreen screen) {
         super.displayPreference(screen);
+        updateState(screen.findPreference(getPreferenceKey()));
     }
 
     @Override
