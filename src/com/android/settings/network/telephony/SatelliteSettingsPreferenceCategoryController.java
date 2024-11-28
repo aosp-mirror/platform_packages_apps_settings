@@ -34,6 +34,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 
+import java.util.Arrays;
 import java.util.List;
 
 /** Preference controller for Satellite functions in mobile network settings. */
@@ -99,11 +100,12 @@ public class SatelliteSettingsPreferenceCategoryController
     class CarrierRoamingNtnModeCallback extends TelephonyCallback implements
             TelephonyCallback.CarrierRoamingNtnModeListener {
         @Override
-        public void onCarrierRoamingNtnAvailableServicesChanged(List<Integer> availableServices) {
+        public void onCarrierRoamingNtnAvailableServicesChanged(int[] availableServices) {
             CarrierRoamingNtnModeListener.super.onCarrierRoamingNtnAvailableServicesChanged(
                     availableServices);
-            boolean isSmsAvailable = availableServices.contains(SERVICE_TYPE_SMS);
-            boolean isDataAvailable = availableServices.contains(SERVICE_TYPE_DATA);
+            List<Integer> availableServicesList = Arrays.stream(availableServices).boxed().toList();
+            boolean isSmsAvailable = availableServicesList.contains(SERVICE_TYPE_SMS);
+            boolean isDataAvailable = availableServicesList.contains(SERVICE_TYPE_DATA);
             Log.i(TAG, "isSmsAvailable : " + isSmsAvailable
                     + " / isDataAvailable " + isDataAvailable);
             if (mPreferenceCategory == null) {

@@ -187,7 +187,6 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                                 TAG,
                                 "Skip handleOnBroadcastReady: null assistant or "
                                         + "sink has active local source.");
-                        cleanUpStatesForStartSharing();
                         return;
                     }
                     handleOnBroadcastReady();
