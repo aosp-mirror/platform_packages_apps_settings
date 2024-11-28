@@ -43,9 +43,9 @@ import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.RawContacts.DefaultAccount.DefaultAccountAndState;
+import android.provider.Flags;
 
 import com.android.settings.R;
-import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowAuthenticationHelper;
 
 import org.junit.Before;
@@ -108,20 +108,20 @@ public class ContactsStoragePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_CONTACTS_DEFAULT_ACCOUNT_IN_SETTINGS)
+    @EnableFlags(Flags.FLAG_NEW_DEFAULT_ACCOUNT_API_ENABLED)
     public void getAvailabilityStatus_flagIsOn_shouldReturnAvailable() {
         assertThat(mPreferenceController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_CONTACTS_DEFAULT_ACCOUNT_IN_SETTINGS)
+    @RequiresFlagsDisabled(Flags.FLAG_NEW_DEFAULT_ACCOUNT_API_ENABLED)
     public void getAvailabilityStatus_flagIsOff_shouldReturnConditionallyUnavailable() {
         assertThat(mPreferenceController.getAvailabilityStatus()).isEqualTo(
                 CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_CONTACTS_DEFAULT_ACCOUNT_IN_SETTINGS)
+    @EnableFlags(Flags.FLAG_NEW_DEFAULT_ACCOUNT_API_ENABLED)
     public void getAvailabilityStatus_illegalStateExceptionThrown_shouldReturnConditionallyUnavailable()
             throws Exception {
         when(mContentProviderClient.call(eq(QUERY_DEFAULT_ACCOUNT_FOR_NEW_CONTACTS_METHOD), any(),
@@ -135,7 +135,7 @@ public class ContactsStoragePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_CONTACTS_DEFAULT_ACCOUNT_IN_SETTINGS)
+    @EnableFlags(Flags.FLAG_NEW_DEFAULT_ACCOUNT_API_ENABLED)
     public void getAvailabilityStatus_runtimeExceptionThrown_shouldReturnConditionallyUnavailable()
             throws Exception {
         when(mContentProviderClient.call(eq(QUERY_DEFAULT_ACCOUNT_FOR_NEW_CONTACTS_METHOD), any(),
@@ -176,6 +176,24 @@ public class ContactsStoragePreferenceControllerTest {
                 CONTACTS_DEFAULT_ACCOUNT_PREFERENCE_KEY);
 
         assertThat(mPreferenceController.getSummary()).isEqualTo("Device only");
+    }
+
+    @Test
+    public void getSummary_simAccountIsSetAsDefault_shouldReturnSimAccountSummary()
+            throws Exception {
+        Bundle bundle = new Bundle();
+        bundle.putInt(KEY_DEFAULT_ACCOUNT_STATE,
+                DefaultAccountAndState.DEFAULT_ACCOUNT_STATE_SIM);
+        bundle.putString(Settings.ACCOUNT_TYPE, "SIM");
+        bundle.putString(Settings.ACCOUNT_NAME, "SIM");
+        when(mContentProviderClient.call(eq(QUERY_DEFAULT_ACCOUNT_FOR_NEW_CONTACTS_METHOD), any(),
+                any())).thenReturn(bundle);
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mResources.getString(eq(R.string.sim_card_label))).thenReturn("SIM");
+        mPreferenceController = new ContactsStoragePreferenceController(mContext,
+                CONTACTS_DEFAULT_ACCOUNT_PREFERENCE_KEY);
+
+        assertThat(mPreferenceController.getSummary()).isEqualTo("SIM");
     }
 
     @Test

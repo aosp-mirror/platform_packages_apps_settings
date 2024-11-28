@@ -21,11 +21,11 @@ import android.accounts.Account;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.ContactsContract.RawContacts.DefaultAccount.DefaultAccountAndState;
+import android.provider.Flags;
 import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.flags.Flags;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 
 /**
@@ -54,13 +54,16 @@ public class ContactsStoragePreferenceController extends BasePreferenceControlle
 
     @Override
     public int getAvailabilityStatus() {
-        return (Flags.enableContactsDefaultAccountInSettings()
+        return (Flags.newDefaultAccountApiEnabled()
                 && mCurrentDefaultAccountAndState != null) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
     public CharSequence getSummary() {
         if (mCurrentDefaultAccountAndState != null) {
+            // Re-fetch account in controller to refresh the latest set default account.
+            mCurrentDefaultAccountAndState =
+                    DefaultAccount.getDefaultAccountForNewContacts(mContext.getContentResolver());
             int currentDefaultAccountState = mCurrentDefaultAccountAndState.getState();
             Account currentDefaultAccount = mCurrentDefaultAccountAndState.getAccount();
             if (currentDefaultAccountState
@@ -71,7 +74,12 @@ public class ContactsStoragePreferenceController extends BasePreferenceControlle
                     == DefaultAccountAndState.DEFAULT_ACCOUNT_STATE_LOCAL) {
                 return mContext.getResources().getString(
                         R.string.contacts_storage_local_account_summary);
-            } else if (currentDefaultAccount != null) {
+            } else if (currentDefaultAccountState
+                    == DefaultAccountAndState.DEFAULT_ACCOUNT_STATE_SIM) {
+                return mContext.getResources().getString(
+                        R.string.sim_card_label);
+            } else if (currentDefaultAccountState
+                    == DefaultAccountAndState.DEFAULT_ACCOUNT_STATE_CLOUD) {
                 String accountTypeLabel = (String) mAuthenticatorHelper.getLabelForType(mContext,
                         currentDefaultAccount.type);
                 // If there's no account type, or the account type is the same as the

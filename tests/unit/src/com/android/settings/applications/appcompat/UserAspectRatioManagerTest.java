@@ -331,9 +331,7 @@ public class UserAspectRatioManagerTest {
                 .isEqualTo(getUserMinAspectRatioEntry(USER_MIN_ASPECT_RATIO_UNSET, mPackageName));
     }
 
-    @Test
-    public void testGetUserMinAspectRatioEntry_enabledFullscreenOverride_returnsFullscreen() {
-        setIsOverrideToFullscreenEnabled(true);
+    private void assertUnsetIsFullscreen() {
         // Fullscreen option is pre-selected
         assertThat(getUserMinAspectRatioEntry(USER_MIN_ASPECT_RATIO_UNSET, mPackageName))
                 .isEqualTo(ResourcesUtils.getResourcesString(
@@ -347,9 +345,7 @@ public class UserAspectRatioManagerTest {
                         "user_aspect_ratio_app_default"));
     }
 
-    @Test
-    public void testGetUserMinAspectRatioEntry_disabledFullscreenOverride_returnsUnchanged() {
-        setIsOverrideToFullscreenEnabled(false);
+    private void assertUnsetIsAppDefault() {
         // Fullscreen option is not pre-selected
         assertThat(getUserMinAspectRatioEntry(USER_MIN_ASPECT_RATIO_UNSET, mPackageName))
                 .isEqualTo(ResourcesUtils.getResourcesString(
@@ -358,9 +354,43 @@ public class UserAspectRatioManagerTest {
     }
 
     @Test
-    public void testIsOverrideToFullscreenEnabled_returnsTrue()
+    public void testGetUserMinAspectRatioEntry_enabledFullscreenCompatChange_returnsFullscreen() {
+        setIsOverrideToFullscreenEnabledBecauseCompatChange(true);
+        assertUnsetIsFullscreen();
+    }
+
+    @Test
+    public void testGetUserMinAspectRatioEntry_enabledFullscreenOverrideUniRes_returnsFullscreen() {
+        setIsOverrideToFullscreenEnabledBecauseUniversalResizeable(true);
+        assertUnsetIsFullscreen();
+    }
+
+    @Test
+    public void testGetUserMinAspectRatioEntry_noFullscreenCompatChange_returnsUnchanged() {
+        setIsOverrideToFullscreenEnabledBecauseCompatChange(false);
+        assertUnsetIsAppDefault();
+    }
+
+    @Test
+    public void testGetUserMinAspectRatioEntry_noFullscreenUnivRes_returnsUnchanged() {
+        setIsOverrideToFullscreenEnabledBecauseUniversalResizeable(false);
+        assertUnsetIsAppDefault();
+    }
+
+    @Test
+    public void testIsOverrideToFullscreenEnabledCompatChange_returnsTrue()
             throws PackageManager.NameNotFoundException {
-        setIsOverrideToFullscreenEnabled(true);
+        setIsOverrideToFullscreenEnabledBecauseCompatChange(true);
+        assertTrue(mUtils.isOverrideToFullscreenEnabled(mPackageName, mContext.getUserId()));
+
+        mockProperty(PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE, true);
+        assertTrue(mUtils.isOverrideToFullscreenEnabled(mPackageName, mContext.getUserId()));
+    }
+
+    @Test
+    public void testIsOverrideToFullscreenEnabledUnivRes_returnsTrue()
+            throws PackageManager.NameNotFoundException {
+        setIsOverrideToFullscreenEnabledBecauseUniversalResizeable(true);
         assertTrue(mUtils.isOverrideToFullscreenEnabled(mPackageName, mContext.getUserId()));
 
         mockProperty(PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE, true);
@@ -370,13 +400,19 @@ public class UserAspectRatioManagerTest {
     @Test
     public void testIsOverrideToFullscreenEnabled_optOut_returnsFalse()
             throws PackageManager.NameNotFoundException {
-        setIsOverrideToFullscreenEnabled(true);
+        setIsOverrideToFullscreenEnabledBecauseCompatChange(true);
         mockProperty(PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE, false);
         assertFalse(mUtils.isOverrideToFullscreenEnabled(mPackageName, mContext.getUserId()));
     }
 
     @Test
     public void testIsOverrideToFullscreenEnabled_flagDisabled_returnsFalse() {
+        mUtils.setFullscreenCompatChange(true);
+        assertFalse(mUtils.isOverrideToFullscreenEnabled(mPackageName, mContext.getUserId()));
+    }
+
+    @Test
+    public void testIsOverrideToFullscreenEnabledUnivRes_flagDisabled_returnsFalse() {
         mUtils.setFullscreenCompatChange(true);
         assertFalse(mUtils.isOverrideToFullscreenEnabled(mPackageName, mContext.getUserId()));
     }
@@ -389,12 +425,22 @@ public class UserAspectRatioManagerTest {
         assertFalse(mUtils.isOverrideToFullscreenEnabled(mPackageName, mContext.getUserId()));
     }
 
-    private void setIsOverrideToFullscreenEnabled(boolean enabled) {
+    private void setIsOverrideToFullscreenEnabledBecauseCompatChange(boolean enabled) {
         if (enabled) {
             mSetFlagsRule.enableFlags(FLAG_USER_MIN_ASPECT_RATIO_APP_DEFAULT);
             mUtils = new FakeUserAspectRatioManager(mContext, mIPm);
         }
         mUtils.setFullscreenCompatChange(enabled);
+        when(mUtils.hasAspectRatioOption(USER_MIN_ASPECT_RATIO_FULLSCREEN, mPackageName))
+                .thenReturn(enabled);
+    }
+
+    private void setIsOverrideToFullscreenEnabledBecauseUniversalResizeable(boolean enabled) {
+        if (enabled) {
+            mSetFlagsRule.enableFlags(FLAG_USER_MIN_ASPECT_RATIO_APP_DEFAULT);
+            mUtils = new FakeUserAspectRatioManager(mContext, mIPm);
+        }
+        mUtils.setUniversalResizeable(enabled);
         when(mUtils.hasAspectRatioOption(USER_MIN_ASPECT_RATIO_FULLSCREEN, mPackageName))
                 .thenReturn(enabled);
     }
@@ -457,6 +503,7 @@ public class UserAspectRatioManagerTest {
 
     private static class FakeUserAspectRatioManager extends UserAspectRatioManager {
         private boolean mFullscreenCompatChange = false;
+        private boolean mIsUniversalResizeable = false;
 
         private FakeUserAspectRatioManager(@NonNull Context context, IPackageManager pm) {
             super(context, pm);
@@ -467,8 +514,17 @@ public class UserAspectRatioManagerTest {
             return mFullscreenCompatChange;
         }
 
+        @Override
+        boolean isUniversalResizeable(String pkgName, int userId) {
+            return mIsUniversalResizeable;
+        }
+
         void setFullscreenCompatChange(boolean enabled) {
             mFullscreenCompatChange = enabled;
+        }
+
+        void setUniversalResizeable(boolean enabled) {
+            mIsUniversalResizeable = enabled;
         }
     }
 }

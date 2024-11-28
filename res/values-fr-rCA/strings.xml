@@ -67,6 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Associer un autre appareil"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"L\'activer automatiquement demain"</string>
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Si vous désactivez le Bluetooth, il se réactivera le lendemain"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Asso. oreille droite"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Asso. oreille gauche"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Associer l\'autre oreille"</string>
@@ -120,6 +121,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Désactiver le Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Désactive la fonctionnalité Bluetooth LE Audio si l\'appareil prend en charge les capacités matérielles LE Audio."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Mode Bluetooth LE Audio"</string>
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Activer l\'aperçu de l\'IU de diffusion Bluetooth LE Audio"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Active l\'aperçu de l\'IU de diffusion Bluetooth LE Audio, y compris le partage audio personnel et la diffusion privée"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Afficher comm. LE Audio dans les détails"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Contourner la liste verte du Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Utiliser LE Audio par défaut même si le périphérique LE Audio n\'a pas été vérifié en fonction des critères de la liste verte."</string>
@@ -175,6 +178,10 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Langue de l\'appli"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Langues suggérées"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Toutes les langues"</string>
+    <string name="suggested_locales_title" msgid="119908696638862861">"Suggestions"</string>
+    <string name="all_supported_locales_title" msgid="2535112632133166546">"Toutes les langues"</string>
+    <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"Toutes les régions"</string>
+    <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"Tous les systèmes de numérotation"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Langue du système"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Paramètre système par défaut"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La sélection de la langue pour cette appli n\'est pas accessible à partir des paramètres."</string>
@@ -190,6 +197,10 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Modifier"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s non accessible"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Cette langue ne peut pas être utilisée comme langue du système, mais vous avez indiqué aux applis et aux sites Web qu\'il s\'agissait de votre préférence."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"Rechercher"</string>
+    <string name="language_selection_title" msgid="968179636453982415">"Ajouter une langue"</string>
+    <string name="country_selection_title" msgid="5376929821458644732">"Préférences régionales"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"Entrez la langue"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Préférences régionales"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Définissez les préférences relatives aux unités et aux chiffres"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Indiquez aux applis vos préférences régionales afin qu\'elles puissent personnaliser votre expérience."</string>
@@ -551,6 +562,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Relevez le doigt, puis touchez le capteur à nouveau"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Impossible d\'utiliser le capteur d\'empreintes digitales"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Consultez un fournisseur de services de réparation."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Déverrouillage par empreinte digitale lorsque l\'écran est éteint"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Utiliser le Déverrouillage par empreinte digitale même lorsque l\'écran est éteint"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Écran éteint, déverrouiller"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Plus de paramètres de sécurité"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Verrouillage de profil professionnel, chiffrement et plus"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Chiffrement, authentifiants et plus"</string>
@@ -561,7 +575,7 @@
     <string name="privacy_header" msgid="5526002421324257007">"Confidentialité"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Profil professionnel"</string>
     <string name="private_space_title" msgid="1752064212078238723">"Espace privé"</string>
-    <string name="private_space_summary" msgid="2274405892301976238">"Verrouiller et cacher les applis privées"</string>
+    <string name="private_space_summary" msgid="2274405892301976238">"Verrouillez et cachez les applis privées"</string>
     <string name="private_space_description" msgid="4059594203775816136">"Conservez les applis privées dans un espace séparé que vous pouvez masquer ou verrouiller"</string>
     <string name="private_space_lock_title" msgid="7230836881433350526">"Verrouillage de l\'espace privé"</string>
     <string name="private_space_one_lock_summary" msgid="2106513606571219068">"Vous pouvez déverrouiller votre Espace privé de la même manière que votre appareil ou choisir un autre type de verrouillage"</string>
@@ -620,7 +634,7 @@
     <string name="no_device_lock_action_label" msgid="2640487005629001288">"Définir Verrouillage d\'écran"</string>
     <string name="no_device_lock_cancel" msgid="4412602160321228863">"Annuler"</string>
     <string name="private_space_cancel_label" msgid="379259667396956886">"Annuler"</string>
-    <string name="private_space_setup_button_label" msgid="2094882154623560585">"Configuration"</string>
+    <string name="private_space_setup_button_label" msgid="2094882154623560585">"Configurer"</string>
     <string name="private_space_setup_title" msgid="2272968244329821450">"Espace privé"</string>
     <string name="private_space_hide_apps_summary" msgid="4418722947376042418">"Masquez ou verrouillez les applis privées dans un espace à part. Utilisez un compte Google dédié pour plus de sécurité."</string>
     <string name="private_space_setup_sub_header" msgid="550476876393954356">"Fonctionnement"</string>
@@ -629,8 +643,8 @@
     <string name="private_space_install_apps_text" msgid="8072027796190028830"><b>"Installer les applis"</b>\n"Installez les applis que vous voulez garder privées dans votre espace"</string>
     <string name="private_space_keep_in_mind_text" msgid="7721081172657563800">"Garder à l\'esprit"</string>
     <string name="private_space_apps_stopped_text" msgid="4034574118911250169"><b>"Les applis s\'arrêtent lorsque vous verrouillez votre espace"</b>\n"Lorsque vous verrouillez votre espace, les applis qui s\'y trouvent sont arrêtées, et vous ne recevez aucune notification de leur part"</string>
-    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Les espaces privés ne conviennent pas aux applis qui doivent être exécutées en arrière-plan ou qui doivent envoyer des notifications critiques, comme les applis médicales. En effet, les notifications et les activités en arrière-plan sont interrompues lorsque votre espace est verrouillé.\n\nLes applis contenues dans votre espace privé n\'apparaîtront pas dans le gestionnaire des autorisations, sur le tableau de bord de confidentialité ni dans les autres paramètres quand l\'espace privé est verrouillé.\n\nVotre espace privé ne peut être déplacé vers un autre appareil. Vous devrez créer un autre espace privé si vous souhaitez l\'utiliser sur un autre appareil.\n\nToute personne qui connecte votre appareil à un ordinateur ou installe des applis nuisibles sur votre appareil peut être en mesure d\'accéder à votre espace privé."</string>
-    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Les espaces privés ne conviennent pas aux applis qui doivent être exécutées en arrière-plan ou qui doivent envoyer des notifications critiques, comme les applis médicales. En effet, les notifications et les activités en arrière-plan sont interrompues lorsque votre espace est verrouillé.\n\nLes applis contenues dans votre espace privé n\'apparaîtront pas dans le gestionnaire des autorisations, sur le tableau de bord de confidentialité ni dans les autres paramètres quand l\'espace privé est verrouillé.\n\nVotre espace privé ne peut être restauré sur un autre appareil. Vous devrez créer un autre espace si vous souhaitez l\'utiliser sur un autre appareil.\n\nToute personne qui connecte votre appareil à un ordinateur ou installe des applis malveillantes sur votre appareil peut être en mesure d\'accéder à votre espace privé."</string>
+    <string name="private_space_apps_permission_text" msgid="4416201648436201393">"Les espaces privés ne conviennent pas aux applis qui doivent être exécutées en arrière-plan ou qui doivent envoyer des notifications critiques, comme les applis médicales. En effet, les notifications et les activités en arrière-plan sont interrompues lorsque votre espace est verrouillé.\n\nLes applis contenues dans votre espace privé n\'apparaîtront pas dans le gestionnaire des autorisations, sur le tableau de bord de confidentialité ni dans les autres paramètres quand l\'espace privé est verrouillé.\n\nVotre espace privé ne peut pas être déplacé vers un autre appareil. Vous devrez créer un autre espace privé si vous souhaitez l\'utiliser sur un autre appareil.\n\nToute personne qui connecte votre appareil à un ordinateur ou qui installe des applis nuisibles sur votre appareil peut être en mesure d\'accéder à votre espace privé."</string>
+    <string name="private_space_settings_footer_text" msgid="3742468470394835356">"Les espaces privés ne conviennent pas aux applis qui doivent être exécutées en arrière-plan ou qui doivent envoyer des notifications critiques, comme les applis médicales. En effet, les notifications et les activités en arrière-plan sont interrompues lorsque votre espace est verrouillé.\n\nLes applis contenues dans votre espace privé n\'apparaîtront pas dans le gestionnaire des autorisations, sur le tableau de bord de confidentialité ni dans les autres paramètres quand l\'espace privé est verrouillé.\n\nVotre espace privé ne peut pas être restauré sur un autre appareil. Vous devrez créer un autre espace si vous souhaitez l\'utiliser sur un autre appareil.\n\nToute personne qui connecte votre appareil à un ordinateur ou qui installe des applis malveillantes sur votre appareil peut être en mesure d\'accéder à votre espace privé."</string>
     <string name="private_space_learn_more_text" msgid="5314198983263277586">"En savoir plus sur l\'espace privé"</string>
     <string name="private_space_few_moments_text" msgid="7166883272914424011">"L\'opération prendra quelques instants"</string>
     <string name="private_space_setting_up_text" msgid="8458035555212009528">"Configuration de l\'Espace privé en cours…"</string>
@@ -652,11 +666,11 @@
     <string name="private_space_retry_summary" msgid="1920444015972648774">"Connectez-vous à un compte pour l\'utiliser avec votre Espace privé"</string>
     <string name="private_space_skip_login_label" msgid="7078019409056628192">"Pas maintenant"</string>
     <string name="private_space_continue_login_label" msgid="7779965766333065391">"Continuer"</string>
-    <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Choisir un verrouillage pour votre Espace privé"</string>
+    <string name="private_space_lock_setup_title" msgid="6541564212199510787">"Choisir un verrouillage pour votre espace privé"</string>
     <string name="private_space_lock_setup_description" msgid="423405593476300918">"Vous pouvez déverrouiller votre Espace privé à l\'aide de votre empreinte digitale. Pour plus de sécurité, cette option exige un verrouillage secondaire."</string>
-    <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Créer un NIP pour l\'Espace privé"</string>
-    <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Créer un mot de passe pour Espace privé"</string>
-    <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Créer un schéma pour l\'Espace privé"</string>
+    <string name="private_space_choose_your_pin_header" msgid="4560802934975898265">"Créer un NIP d\'espace privé"</string>
+    <string name="private_space_choose_your_password_header" msgid="7660259341095044434">"Créer un mot de passe d\'espace privé"</string>
+    <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"Créer un schéma d\'espace privé"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"Verrouiller"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"Masquer"</string>
     <string name="private_space_confirm_your_pattern_header" msgid="449382220134788771">"Confirmer le schéma de votre espace privé"</string>
@@ -1236,7 +1250,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Adaptatives"</string>
     <string name="brightness" msgid="6216871641021779698">"Niveau de luminosité"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Luminosité adaptative"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"À propos de la luminosité adaptative"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"La luminosité de votre écran s\'adapte automatiquement à votre environnement et à vos activités. Vous pouvez déplacer le curseur manuellement pour aider la luminosité adaptative à apprendre vos préférences."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Activé"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Désactivée"</string>
@@ -1302,7 +1315,7 @@
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Se désactivera automatiquement à <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Se désactivera automatiquement après l\'heure du coucher"</string>
     <string name="dark_ui_summary_on_auto_mode_modes" msgid="7769594183411785087">"Se désactivera lorsque <xliff:g id="ID_1">%1$s</xliff:g> se terminera"</string>
-    <string name="dark_ui_text" msgid="4392646155331126666">"Le thème sombre utilise un arrière-plan noir pour aider à prolonger l\'autonomie de votre pile sur certains écrans. Les horaires du thème sombre attendent que votre écran soit éteint pour s\'activer."</string>
+    <string name="dark_ui_text" msgid="4392646155331126666">"Le thème sombre utilise un arrière-plan noir pour contribuer à prolonger l\'autonomie de votre pile. Les horaires du thème sombre s\'activent une fois que votre écran est éteint."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"L\'activation du thème sombre suit actuellement votre horaire de mode Nuit"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Paramètres du mode Nuit"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Les modes peuvent également activer le thème sombre}=1{{mode_1} active également le thème sombre}=2{{mode_1} et {mode_2} activent également le thème sombre}=3{{mode_1}, {mode_2} et {mode_3} activent également le thème sombre}one{{mode_1}, {mode_2} et # autre activent également le thème sombre}other{{mode_1}, {mode_2} et # autres activent également le thème sombre}}"</string>
@@ -1957,20 +1970,29 @@
     <string name="slow_keys" msgid="2891452895499690837">"Touches lentes"</string>
     <string name="slow_keys_summary" msgid="2914214326648535377">"Règle le temps nécessaire pour qu\'un appui sur une touche soit activé"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Touches rémanentes"</string>
-    <string name="sticky_keys_summary" msgid="1844953803625480623">"Appuyer sur une clé à la fois pour activer les raccourcis plutôt que de maintenir plusieurs touches enfoncées en même temps"</string>
+    <string name="sticky_keys_summary" msgid="1844953803625480623">"Appuyez sur une clé à la fois pour activer les raccourcis plutôt que de maintenir plusieurs touches enfoncées en même temps"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Touches de la souris"</string>
-    <string name="mouse_keys_summary" msgid="7030731235143286467">"Utiliser votre clavier pour contrôler le pointeur"</string>
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Utiliser les touches de la souris"</string>
+    <string name="mouse_keys_summary" msgid="7030731235143286467">"Utilisez votre clavier pour contrôler le pointeur"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Défilement inversé de la souris"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Faites défiler l\'écran vers le haut pour déplacer la page vers le bas"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Inverser les boutons gauche et droit"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Utilisez le bouton gauche de la souris comme bouton droit"</string>
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Touches de la souris pour <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Utilisez les touches <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> pour déplacer le pointeur de la souris"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Utilisez la touche <xliff:g id="CLICK_LABEL">%s</xliff:g> pour cliquer sur le bouton principal de la souris"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"Utilisez la touche <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> pour maintenir le bouton principal de la souris enfoncé"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Utilisez la touche <xliff:g id="RELEASE_LABEL">%s</xliff:g> pour relâcher le bouton principal de la souris"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Utilisez la touche <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> pour activer le mode de défilement. Les touches <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> feront alors défiler l\'affichage vers le haut, le bas, la gauche ou la droite"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Utilisez la touche <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> pour cliquer sur le bouton secondaire de la souris"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Raccourcis clavier"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Afficher la liste de raccourcis"</string>
+    <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Affichez la liste de raccourcis"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Claviers et outils pour le profil professionnel"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Clavier à l\'écran pour le travail"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Par défaut"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Pavé tactile"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Pavé tactile et souris"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"Souris"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Vitesse du pointeur, gestes"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Toucher pour cliquer"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Déplacement tactile"</string>
@@ -1979,9 +2001,11 @@
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Personna. les gestes individuels de navigation du pavé tactile"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Défilement inversé"</string>
     <string name="trackpad_reverse_scrolling_summary" msgid="6048648562887499036">"Le contenu remonte lorsque la page défile vers le bas"</string>
-    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Cliquez en bas à droite"</string>
+    <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Clic en bas à droite"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Cliquez dans le coin inférieur droit du pavé tactile pour plus d\'options"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Vitesse du pointeur"</string>
+    <!-- no translation found for three_finger_tap_preference_title (7130739855086106052) -->
+    <skip />
     <string name="pointer_fill_style" msgid="8794616790175016092">"Couleur du pointeur"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Changez le style du pointeur à noir"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Changez le style du pointeur à vert"</string>
@@ -1996,6 +2020,16 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Apprendre les gestes du pavé tactile"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"pavé tactile, souris, curseur, faire défiler, balayer, faire un clic droit, cliquer, pointeur"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"faire un clic droit, toucher"</string>
+    <!-- no translation found for three_finger_tap_middle_click (5274906692591143158) -->
+    <skip />
+    <!-- no translation found for three_finger_tap_launch_gemini (4030401656711588982) -->
+    <skip />
+    <!-- no translation found for three_finger_tap_go_home (6526301745535089812) -->
+    <skip />
+    <!-- no translation found for three_finger_tap_go_back (2898205524575684271) -->
+    <skip />
+    <!-- no translation found for three_finger_tap_recent_apps (5578228979519733605) -->
+    <skip />
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Retour à la page d\'accueil"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Balayez votre pavé tactile vers le haut avec trois doigts"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Retour"</string>
@@ -2021,7 +2055,7 @@
     <string name="trackpad_switch_apps_title" msgid="7342032935377284039">"Changer d\'appli"</string>
     <string name="trackpad_switch_apps_summary" msgid="9193942041912927440">"Balayez vers la gauche ou vers la droite avec quatre doigts"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"Touches de modification"</string>
-    <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Modifier le comportement des touches"</string>
+    <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"Modifiez le comportement des touches"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"Tout réinitialiser"</string>
     <string name="modifier_keys_default_summary" msgid="8701640508670973258">"Par défaut"</string>
     <string name="modifier_keys_reset_message" msgid="5236994817619936058">"Voulez-vous vraiment réinitialiser toutes les touches de modification à leur valeur par défaut?"</string>
@@ -2333,8 +2367,8 @@
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Le paramètre est désactivé parce que l\'appareil est en mode silencieux"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Appels"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Notifications et alarmes"</string>
-    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Effets tactils interactifs"</string>
-    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Utiliser les vibrations et les effets tactils"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Effets tactiles interactifs"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Utiliser les vibrations et les effets tactiles"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibration pour les alarmes"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibration multimédia"</string>
     <string name="accessibility_keyboard_vibration_title" msgid="7559967730626765441">"Vibration du clavier"</string>
@@ -2567,6 +2601,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Ajuster la consommation"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Modules inclus"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Les applis fonctionnent normalement"</string>
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"Le remplacement de la pile est recommandé"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"La capacité de la pile et les performances de recharge sont réduites; le remplacement de la pile est recommandé."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Pile faible"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Activez l\'économiseur de pile pour prolonger l\'autonomie de la pile"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Améliorer l\'autonomie de la pile"</string>
@@ -3331,14 +3367,14 @@
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"paiement, par défaut"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"notification entrante"</string>
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"partage de connexion usb, partage de connexion bluetooth, partage de connexion wi-fi, fonction modem"</string>
-    <string name="keywords_accessibility_vibration_primary_switch" msgid="730692154347231253">"effets tactils, vibrer, vibration"</string>
+    <string name="keywords_accessibility_vibration_primary_switch" msgid="730692154347231253">"effets tactiles, vibrer, vibration"</string>
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"haptique, vibrer, écran, sensibilité"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"haptique, vibration, téléphone, appel, sensibilité, sonnerie"</string>
     <string name="keywords_ramping_ringer_vibration" msgid="3678966746742257366">"haptique, vibration, téléphone, appel, sonnerie, graduellement"</string>
     <string name="keywords_notification_vibration" msgid="2620799301276142183">"haptique, vibration, sensibilité, notification"</string>
     <string name="keywords_alarm_vibration" msgid="4833220371621521817">"haptique, vibration, sensibilité, alarme"</string>
     <string name="keywords_media_vibration" msgid="723896490102792327">"haptique, vibration, sensibilité, multimédia"</string>
-    <string name="keywords_vibration" msgid="670455132028025952">"effets tactils, vibrer, vibration"</string>
+    <string name="keywords_vibration" msgid="670455132028025952">"effets tactiles, vibrer, vibration"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"économiseur de pile, fixe, persistant, économie d\'énergie, pile"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"routine, horaire, économiseur de pile, économie d\'énergie, pile, automatique, pour cent"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, appels avancés, appels 4g"</string>
@@ -3407,7 +3443,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"« 9 h à 17 h les jours de semaine »"</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Événements d\'agenda"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Le mode {mode_1} est actif}=2{Les modes {mode_1} et {mode_2} sont actifs}=3{Les modes {mode_1}, {mode_2} et {mode_3} sont actifs}one{Les modes {mode_1}, {mode_2}, et # autre sont actifs}other{Les modes {mode_1}, {mode_2}, et # autres sont actifs}}"</string>
-    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{1 mode peut s\'activer automatiquement}one{# mode peut s\'activer automatiquement}other{# modes peuvent s\'activer automatiquement}}"</string>
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Ne pas déranger}=1{{mode_1}}=2{{mode_1}, {mode_2}}one{{mode_1}, {mode_2}, {mode_3}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ACTIVÉ"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Non défini"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Désactivé"</string>
@@ -3432,7 +3468,7 @@
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Horaire"</string>
     <string name="zen_mode_automatic_trigger_title" msgid="6223547583969661361">"Quand l\'activer automatiquement"</string>
     <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Programme de l\'événement"</string>
-    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Activez lors des événements pour"</string>
+    <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Activer lors des événements pour"</string>
     <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Là où la réponse à l\'invitation est"</string>
     <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Programmation de l\'horaire"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Programmer"</string>
@@ -3453,13 +3489,13 @@
     <string name="mode_display_options_section" msgid="5151597748243866532">"Options d\'affichage"</string>
     <string name="mode_grayscale_title" msgid="6027553257331235461">"Nuances de gris"</string>
     <string name="mode_grayscale_title_secondary_list" msgid="2662593380253642581">"nuances de gris"</string>
-    <string name="mode_grayscale_summary" msgid="6682099523626777038">"Activer l\'affichage noir et blanc"</string>
+    <string name="mode_grayscale_summary" msgid="6682099523626777038">"Activez l\'affichage noir et blanc"</string>
     <string name="mode_aod_title" msgid="5903435070341237325">"Garder l\'écran sombre"</string>
     <string name="mode_aod_title_secondary_list" msgid="8268180392811027557">"garder l\'écran sombre"</string>
-    <string name="mode_aod_summary" msgid="7516159044827627065">"Désactiver l\'écran actif en permanence"</string>
+    <string name="mode_aod_summary" msgid="7516159044827627065">"Désactivez l\'écran actif en permanence"</string>
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Assombrir le fond d\'écran"</string>
     <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"assombrir le fond d\'écran"</string>
-    <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtrer la luminosité du fond d\'écran"</string>
+    <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtrez la luminosité du fond d\'écran"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"Activer le thème sombre"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"activer le thème sombre"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"Changez le thème de l\'appareil pour utiliser un arrière-plan sombre qui est plus doux pour les yeux"</string>
@@ -3602,7 +3638,7 @@
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Lorsque le profil professionnel est verrouillé"</string>
     <string name="lock_screen_notif_minimalism" msgid="5556871004042668149">"Minimalisme des notifications sur l\'écran de verrouillage"</string>
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"Afficher moins de notifications sur l\'écran de verrouillage"</string>
-    <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Afficher seul. les nouvelles notifi. sur l\'écran de verrou."</string>
+    <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Afficher seul. les nouv. notif. sur l\'écran de verrouillage"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Retirez automatiquement les notifications consultées de l\'écran de verrouillage"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notifications sur l\'écran de verrouillage"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Afficher les conversations, par défaut et silencieuses"</string>
@@ -3685,7 +3721,7 @@
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Elle peut répondre aux messages et agir sur les boutons dans les notifications, y compris faire répéter ou ignorer des notifications et répondre à des appels."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Modifier les paramètres"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Elle peut activer ou désactiver la fonctionnalité Ne pas déranger et modifier les paramètres connexes."</string>
-    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"Il peut gérer et activer les modes, et modifier les paramètres associés."</string>
+    <string name="nls_feature_modes_settings_summary" msgid="70022458305195595">"Elle peut gérer et activer les modes, et modifier les paramètres associés."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Si vous désactivez l\'accès aux notifications pour <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, l\'accès au mode Ne pas déranger peut également être désactivé."</string>
     <string name="notification_listener_disable_modes_warning_summary" msgid="7528432011433844158">"Si vous désactivez l\'accès aux notifications pour <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, l\'accès aux modes peut également être désactivé."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Désactiver"</string>
@@ -3711,6 +3747,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Lorsque vous recevez de nombreuses notifications pendant un court laps de temps, votre appareil baisse le volume et réduit les alertes pour une période maximale de deux minutes. Les appels, les alarmes et les conversations prioritaires ne sont pas concernés par cette mesure. \n\nVous pouvez afficher les notifications reçues pendant cette période en faisant glisser votre doigt du haut de l\'écran vers le bas."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Appliquer aux profils professionnels"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Appliquez ce paramètre aux applis du profil professionnel"</string>
+    <string name="notification_bundle_title" msgid="460988459835922719">"Notifications groupées"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"Activé"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"Désactivé"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Utiliser le regroupement des notifications"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"Les notifications ayant des thèmes similaires seront désactivées au niveau du son et regroupées pour une expérience plus silencieuse. Le regroupement remplacera les paramètres de notification propres aux applis."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Services d\'assistance pour la réalité virtuelle"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Aucune demande d\'exécution en tant que services d\'assistance pour la réalité virtuelle n\'a été envoyée pour les applis installées."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Autoriser <xliff:g id="SERVICE">%1$s</xliff:g> à accéder au service de réalité virtuelle?"</string>
@@ -3990,7 +4031,7 @@
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"Ouvrir les liens compatibles"</string>
     <string name="app_launch_open_in_app" msgid="2208182888681699512">"Dans l\'appli"</string>
     <string name="app_launch_open_in_browser" msgid="766170191853009756">"Dans votre navigateur"</string>
-    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"Choisir comment ouvrir les liens Web pour cette appli"</string>
+    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"Choisissez comment ouvrir les liens Web pour cette appli"</string>
     <string name="app_launch_links_category" msgid="2380467163878760037">"Liens à ouvrir dans cette appli"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Liens compatibles"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"Autres préférences par défaut"</string>
@@ -4173,6 +4214,9 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notifications en plein écran"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Autoriser les notifications en plein écran de cette appli"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Autoriser cette appli à afficher des notifications en plein écran lorsque l\'appareil est verrouillé. Les applis peuvent s\'en servir pour mettre en évidence des alarmes, des appels entrants ou d\'autres notifications urgentes."</string>
+    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"Écriture des préférences système"</string>
+    <string name="write_system_preferences_switch_title" msgid="213522354119233085">"Autoriser cette appli à modifier les préférences système en votre nom"</string>
+    <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"Cette autorisation permet à une appli de modifier les préférences système principales."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Applis de gestion des fichiers multimédias"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Autoriser l\'appli à gérer fichiers multimédias"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Si vous l\'autorisez à le faire, cette appli peut modifier ou supprimer des fichiers multimédias créés à l\'aide d\'autres applis sans vous le demander. L\'appli doit avoir l\'autorisation d\'accéder aux fichiers et aux fichiers multimédias."</string>
@@ -4831,6 +4875,8 @@
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"En savoir plus sur la messagerie par satellite"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Impossible d\'activer la fonctionnalité <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Pour activer la fonctionnalité <xliff:g id="FUNCTION">%1$s</xliff:g>, mettez d\'abord fin à la connexion par satellite"</string>
+    <!-- no translation found for category_title_satellite_connectivity (7540022356863917632) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Noms des points d\'accès"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"nom du point d\'accès"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Indisponible lorsque vous êtes connectés au réseau de <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5028,7 +5074,7 @@
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Maintenir l\'interrupteur enfoncé pour accéder au menu"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Menu de l\'interrupteur"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Assistant numérique"</string>
-    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Accéder à l\'assistant numérique"</string>
+    <string name="power_menu_summary_long_press_for_assistant" msgid="32706459458422952">"Accédez à l\'assistant numérique"</string>
     <string name="power_menu_summary_long_press_for_power_menu" msgid="7617247135239683710">"Accédez au menu de l\'interrupteur"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Pour l\'utiliser, définissez d\'abord un écran de verrouillage"</string>
     <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"Menu de l\'interrupteur :\nAppuyez simultanément sur l\'interrupteur et sur le bouton d\'augmentation du volume"</string>
@@ -5041,7 +5087,7 @@
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"Autoriser l\'accès au portefeuille à partir de l\'écran de verrouillage"</string>
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"Afficher le lecteur de code QR"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Autorisez l\'accès au lecteur de code QR à partir de l\'écran verrouillé"</string>
-    <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Afficher les commandes des appareils"</string>
+    <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Afficher les commandes de l\'appareil"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"À partir de l\'écran de verrouillage"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Utiliser les commandes de l\'appareil"</string>
     <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Pour les utiliser, activez d\'abord « Afficher les commandes de l\'appareil »"</string>
@@ -5455,6 +5501,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Écouter le flux"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Balayez le code QR d\'un flux audio pour l\'écouter avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Impossible de modifier le mot de passe lors du partage. Pour modifier le mot de passe, désactivez d\'abord le partage audio."</string>
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Votre mot de passe doit contenir de 4 à 16 caractères et utiliser uniquement des lettres, des chiffres et des symboles"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Lecteur de code QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Besoin d\'aide?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Paramètres de recherche"</string>
@@ -5463,13 +5510,12 @@
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Appareil uniquement"</string>
     <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"Les nouveaux contacts ne seront pas synchronisés avec un compte"</string>
     <string name="contacts_storage_selection_message" msgid="8082077300632059003">"Les contacts seront enregistrés sur votre appareil et synchronisés avec votre compte par défaut"</string>
-    <!-- no translation found for contacts_storage_set_default_account_error_message (849847649756411393) -->
-    <skip />
-    <!-- no translation found for contacts_storage_no_account_set_summary (7454973781666475276) -->
-    <skip />
-    <!-- no translation found for contacts_storage_local_account_summary (5034805108128685712) -->
-    <skip />
+    <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Erreur lors de la définition du compte par défaut"</string>
+    <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Aucun compte par défaut n\'a été défini"</string>
+    <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Appareil uniquement"</string>
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Appareil et %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Ajoutez un compte pour commencer"</string>
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Où enregistrer les contacts"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Encercler et rechercher"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Maintenez le doigt sur la touche d\'accueil ou sur la barre de navigation pour effectuer une recherche à l\'aide du contenu de votre écran."</string>
 </resources>

@@ -1128,6 +1128,38 @@
         </activity>
 
         <activity
+            android:name=".Settings$TemperatureUnitSettingsActivity"
+            android:label="@string/temperature_preferences_title"
+            android:exported="true" >
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.TEMPERATURE_UNIT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.regionalpreferences.TemperatureUnitFragment"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_system"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true"/>
+        </activity>
+
+        <activity
+            android:name=".Settings$FirstDayOfWeekSettingsActivity"
+            android:label="@string/first_day_of_week_preferences_title"
+            android:exported="true" >
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.FIRST_DAY_OF_WEEK_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.regionalpreferences.FirstDayOfWeekItemFragment"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_system"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true"/>
+        </activity>
+
+        <activity
             android:name=".Settings$KeyboardSettingsActivity"
             android:label="@string/keyboard_settings"
             android:exported="true"
@@ -1929,6 +1961,20 @@
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                 android:value="@string/menu_key_apps"/>
         </activity-alias>
+
+        <activity android:name="Settings$AppStorageSettingsActivity"
+                  android:label="@string/storage_label"
+                  android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.APP_STORAGE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                   android:value="com.android.settings.applications.AppStorageSettings" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                   android:value="@string/menu_key_apps"/>
+        </activity>
 
         <activity android:name=".applications.InstalledAppOpenByDefaultActivity"
                   android:label="@string/application_info_label"
@@ -3365,6 +3411,21 @@
                        android:value="@string/menu_key_battery"/>
         </activity>
 
+        <activity
+            android:name="Settings$PowerUsageAdvancedActivity"
+            android:label="@string/advanced_battery_title"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.battery.action.POWER_USAGE_ADVANCED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.fuelgauge.batteryusage.PowerUsageAdvanced" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_battery"/>
+        </activity>
+
         <provider
             android:name=".fuelgauge.batteryusage.BatteryUsageContentProvider"
             android:enabled="true"
@@ -4478,6 +4539,10 @@
                   android:label="@string/privacy_settings_title"
                   android:exported="true"
                   android:icon="@drawable/ic_settings_backup">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.BACKUP_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -5297,7 +5362,7 @@
             android:name="Settings$ContactsStorageSettingsActivity"
             android:label="@string/contacts_storage_settings_title"
             android:exported="true"
-            android:featureFlag="com.android.settings.flags.enable_contacts_default_account_in_settings">
+            android:featureFlag="android.provider.new_default_account_api_enabled">
             <intent-filter>
                 <action android:name="android.provider.action.SET_DEFAULT_ACCOUNT" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -5338,6 +5403,23 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="Settings$ChangeNfcTagAppsActivity"
+            android:exported="true"
+            android:label="@string/change_nfc_tag_apps_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.nfc.action.CHANGE_TAG_INTENT_PREFERENCE" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>

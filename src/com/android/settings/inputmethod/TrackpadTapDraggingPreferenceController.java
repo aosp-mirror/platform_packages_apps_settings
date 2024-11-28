@@ -49,7 +49,7 @@ public class TrackpadTapDraggingPreferenceController extends TogglePreferenceCon
 
     @Override
     public int getAvailabilityStatus() {
-        boolean isTouchpad = NewKeyboardSettingsUtils.isTouchpad();
+        boolean isTouchpad = InputPeripheralsSettingsUtils.isTouchpad();
         return (InputSettings.isTouchpadTapDraggingFeatureFlagEnabled() && isTouchpad)
                 ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }

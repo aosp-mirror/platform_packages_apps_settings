@@ -48,14 +48,15 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
-import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.Utils;
+import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.datausage.DataSaverBackend;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.tether.WifiTetherPreferenceController;
@@ -75,7 +76,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * Displays preferences for Tethering.
  */
 @SearchIndexable
-public class TetherSettings extends RestrictedSettingsFragment
+public class TetherSettings extends RestrictedDashboardFragment
         implements DataSaverBackend.Listener {
 
     @VisibleForTesting
@@ -144,10 +145,18 @@ public class TetherSettings extends RestrictedSettingsFragment
     }
 
     @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.tether_prefs;
+    }
+
+    @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        // Even when the UI is restricted, addPreferencesFromResource cannot be omitted.
-        addPreferencesFromResource(R.xml.tether_prefs);
         setIfOnlyAvailableForAdmins(true);
         if (isUiRestricted()) {
             return;
@@ -722,5 +731,10 @@ public class TetherSettings extends RestrictedSettingsFragment
             mAvailableInterfaces.remove(iface);
         }
         updateBluetoothAndEthernetState();
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return TetherScreen.KEY;
     }
 }

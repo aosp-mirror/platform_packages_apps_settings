@@ -73,19 +73,21 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
     public void initialize(Fragment parent) {
         mParent = parent;
         Bundle arguments = parent.getArguments();
-        mTitle = arguments.getCharSequence(NewKeyboardSettingsUtils.EXTRA_TITLE);
-        mUserId = arguments.getInt(NewKeyboardSettingsUtils.EXTRA_USER_ID);
+        mTitle = arguments.getCharSequence(InputPeripheralsSettingsUtils.EXTRA_TITLE);
+        mUserId = arguments.getInt(InputPeripheralsSettingsUtils.EXTRA_USER_ID);
         mInputDeviceIdentifier =
-                arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER);
+                arguments.getParcelable(
+                        InputPeripheralsSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER);
         mInputMethodInfo =
-                arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_METHOD_INFO);
+                arguments.getParcelable(InputPeripheralsSettingsUtils.EXTRA_INPUT_METHOD_INFO);
         mInputMethodSubtype =
-                arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_METHOD_SUBTYPE);
+                arguments.getParcelable(
+                        InputPeripheralsSettingsUtils.EXTRA_INPUT_METHOD_SUBTYPE);
         mLayout = getSelectedLayoutLabel();
         mFinalSelectedLayout = mLayout;
         mKeyboardLayouts = mIm.getKeyboardLayoutListForInputDevice(
                 mInputDeviceIdentifier, mUserId, mInputMethodInfo, mInputMethodSubtype);
-        NewKeyboardSettingsUtils.sortKeyboardLayoutsByLabel(mKeyboardLayouts);
+        InputPeripheralsSettingsUtils.sortKeyboardLayoutsByLabel(mKeyboardLayouts);
         parent.getActivity().setTitle(mTitle);
     }
 
@@ -93,11 +95,13 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
     public void onStart() {
         mIm.registerInputDeviceListener(this, null);
         if (mInputDeviceIdentifier == null
-                || NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier) == null) {
+                || InputPeripheralsSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier)
+                == null) {
             return;
         }
         mInputDeviceId =
-                NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier).getId();
+                InputPeripheralsSettingsUtils.getInputDevice(mIm,
+                        mInputDeviceIdentifier).getId();
     }
 
     @Override
@@ -202,9 +206,9 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
 
     private String getSelectedLayoutLabel() {
         String label = mContext.getString(R.string.keyboard_default_layout);
-        KeyboardLayoutSelectionResult result = NewKeyboardSettingsUtils.getKeyboardLayout(
+        KeyboardLayoutSelectionResult result = InputPeripheralsSettingsUtils.getKeyboardLayout(
                 mIm, mUserId, mInputDeviceIdentifier, mInputMethodInfo, mInputMethodSubtype);
-        KeyboardLayout[] keyboardLayouts = NewKeyboardSettingsUtils.getKeyboardLayouts(
+        KeyboardLayout[] keyboardLayouts = InputPeripheralsSettingsUtils.getKeyboardLayouts(
                 mIm, mUserId, mInputDeviceIdentifier, mInputMethodInfo, mInputMethodSubtype);
         if (result.getLayoutDescriptor() != null) {
             for (KeyboardLayout keyboardLayout : keyboardLayouts) {

@@ -199,10 +199,11 @@
             android:title="@string/enable_terminal_title"
             android:summary="@string/enable_terminal_summary" />
 
-        <SwitchPreferenceCompat
-            android:key="enable_linux_terminal"
+        <Preference
+            android:key="linux_terminal"
             android:title="@string/enable_linux_terminal_title"
-            android:summary="@string/enable_linux_terminal_summary" />
+            android:summary="@string/enable_linux_terminal_summary"
+            android:fragment="com.android.settings.development.linuxterminal.LinuxTerminalDashboardFragment" />
 
         <SwitchPreferenceCompat
             android:key="bugreport_in_power"
@@ -392,6 +393,11 @@
             android:summary="@string/summary_placeholder"
             android:entries="@array/bluetooth_leaudio_mode"
             android:entryValues="@array/bluetooth_leaudio_mode_values"/>
+
+        <SwitchPreferenceCompat
+            android:key="bluetooth_leaudio_broadcast_ui"
+            android:title="@string/bluetooth_leaudio_broadcast_ui"
+            android:summary="@string/bluetooth_leaudio_broadcast_ui_summary"/>
 
         <SwitchPreferenceCompat
             android:key="bluetooth_show_leaudio_device_details"

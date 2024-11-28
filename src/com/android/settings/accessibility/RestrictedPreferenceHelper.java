@@ -110,10 +110,6 @@ public class RestrictedPreferenceHelper {
      */
     public List<AccessibilityActivityPreference> createAccessibilityActivityPreferenceList(
             List<AccessibilityShortcutInfo> installedShortcuts) {
-        final Set<ComponentName> enabledServices =
-                AccessibilityUtils.getEnabledServicesFromSettings(mContext);
-        final List<String> permittedServices = mDpm.getPermittedAccessibilityServices(
-                UserHandle.myUserId());
 
         final int installedShortcutsSize = installedShortcuts.size();
         final List<AccessibilityActivityPreference> preferenceList = new ArrayList<>(
@@ -124,17 +120,12 @@ public class RestrictedPreferenceHelper {
             final ActivityInfo activityInfo = info.getActivityInfo();
             final ComponentName componentName = info.getComponentName();
 
-            final boolean serviceEnabled = enabledServices.contains(componentName);
             AccessibilityActivityPreference preference = new AccessibilityActivityPreference(
                     mContext, componentName.getPackageName(), activityInfo.applicationInfo.uid,
                     info);
-            if (Flags.neverRestrictAccessibilityActivity()) {
-                // Accessibility Activities do not have elevated privileges so restricting
-                // them based on ECM or device admin does not give any value.
-                preference.setEnabled(true);
-            } else {
-                setRestrictedPreferenceEnabled(preference, permittedServices, serviceEnabled);
-            }
+            // Accessibility Activities do not have elevated privileges so restricting
+            // them based on ECM or device admin does not give any value.
+            preference.setEnabled(true);
             preferenceList.add(preference);
         }
         return preferenceList;

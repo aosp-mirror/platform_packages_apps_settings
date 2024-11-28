@@ -30,8 +30,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.core.BasePreferenceController;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -66,13 +64,6 @@ public class CaptioningCustomControllerTest {
         mPreference = new Preference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
-
-    @Test
-    public void getAvailabilityStatus_shouldReturnAvailable() {
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.AVAILABLE);
-    }
-
 
     @Test
     public void displayPreference_byDefault_shouldIsInvisible() {

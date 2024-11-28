@@ -38,6 +38,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LeAudioProfile;
@@ -134,6 +135,9 @@ public class BluetoothDetailsAudioDeviceTypeController extends BluetoothDetailsC
     @Override
     protected void init(PreferenceScreen screen) {
         mProfilesContainer = screen.findPreference(getPreferenceKey());
+        if (Flags.enableBluetoothDeviceDetailsPolish()) {
+            mProfilesContainer.setLayoutResource(R.layout.preference_category_bluetooth_no_padding);
+        }
         refresh();
     }
 

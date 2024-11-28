@@ -18,6 +18,7 @@ package com.android.settings.notification.modes;
 
 import android.annotation.Nullable;
 import android.app.INotificationManager;
+import android.app.ZenBypassingApp;
 import android.content.ContentProvider;
 import android.content.Context;
 import android.content.pm.ParceledListSlice;
@@ -30,6 +31,7 @@ import android.os.UserManager;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.service.notification.ConversationChannelWrapper;
+import android.util.ArrayMap;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -41,8 +43,9 @@ import com.google.common.collect.ImmutableList;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 /**
@@ -76,16 +79,20 @@ class ZenHelperBackend {
     }
 
     /**
-     * Returns all of a user's packages that have at least one channel that will bypass DND
+     * Returns a mapping between a user's packages that have at least one channel that will
+     * bypass DND, and a Boolean indicating whether all of the package's channels bypass.
      */
-    List<String> getPackagesBypassingDnd(int userId,
-            boolean includeConversationChannels) {
+    Map<String, Boolean> getPackagesBypassingDnd(int userId) {
+        Map<String, Boolean> bypassingAppsMap = new HashMap<>();
         try {
-            return mInm.getPackagesBypassingDnd(userId, includeConversationChannels);
+            List<ZenBypassingApp> bypassingApps = mInm.getPackagesBypassingDnd(userId).getList();
+            for (ZenBypassingApp zba : bypassingApps) {
+                bypassingAppsMap.put(zba.getPkg(), zba.doAllChannelsBypass());
+            }
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
-            return new ArrayList<>();
         }
+        return bypassingAppsMap;
     }
 
     /** Returns all conversation channels for profiles of the current user. */

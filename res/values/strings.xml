@@ -136,6 +136,8 @@
     <string name="keywords_add_bt_device">bluetooth</string>
     <!-- Title for bluetooth auto on toggle [CHAR LIMIT=60] -->
     <string name="bluetooth_screen_auto_on_title">Automatically turn on tomorrow</string>
+    <!-- Summary for bluetooth auto on toggle [CHAR LIMIT=60] -->
+    <string name="bluetooth_screen_auto_on_summary">If you turn off Bluetooth, it turns on again the next day</string>
 
 
     <!-- Button to help user to pair right ear of the hearing aid device. It will show when only one of the hearing aid device set is connected. [CHAR LIMIT=20] -->
@@ -260,6 +262,13 @@
     <string name="bluetooth_disable_leaudio_summary">Disables Bluetooth LE audio feature if the device supports LE audio hardware capabilities.</string>
     <!-- Setting toggle title for switch Bluetooth LE Audio mode. [CHAR LIMIT=40] -->
     <string name="bluetooth_leaudio_mode">Bluetooth LE Audio mode</string>
+
+    <!-- Setting toggle title for enabling Bluetooth LE Audio UI preview. [CHAR LIMIT=none] -->
+    <string name="bluetooth_leaudio_broadcast_ui">Enable Bluetooth LE Audio Broadcast UI preview</string>
+    <!-- Summary of toggle for enabling Bluetooth LE Audio UI preview. [CHAR LIMIT=none]-->
+    <string name="bluetooth_leaudio_broadcast_ui_summary">Enables the LE Audio Sharing UI preview
+        including personal audio sharing and private broadcast</string>
+
     <!-- Setting toggle title for enabling Bluetooth LE Audio toggle in Device Details. [CHAR LIMIT=40] -->
     <string name="bluetooth_show_leaudio_device_details">Show LE audio toggle in Device Details</string>
 
@@ -393,6 +402,18 @@
     <!-- Category for the app's locale picker activity. [CHAR LIMIT=50]-->
     <string name="all_supported_app_locales_title">All languages</string>
 
+    <!-- Category for suggested locales. [CHAR LIMIT=50]-->
+    <string name="suggested_locales_title">Suggested</string>
+
+    <!-- Category for the locale picker. [CHAR LIMIT=50]-->
+    <string name="all_supported_locales_title">All languages</string>
+
+    <!-- Category for the locale region picker. [CHAR LIMIT=50]-->
+    <string name="all_supported_locales_regions_title">All regions</string>
+
+    <!-- Category for the numbering system of locale region picker. [CHAR LIMIT=50]-->
+    <string name="all_supported_numbering_system_title">All numbering systems</string>
+
     <!-- Title for preference of the system default locale. [CHAR LIMIT=50]-->
     <string name="preference_of_system_locale_title">System language</string>
 
@@ -441,6 +462,17 @@
     <!-- The text of the confirmation dialog for saying this selected locale is unavailable to use. [CHAR LIMIT=NONE]-->
     <string name="desc_unavailable_locale">This language can’t be used as a system language, but you’ve let apps and websites know you prefer this language.</string>
 
+    <!-- Menu item in the locale menu  [CHAR LIMIT=30] -->
+    <string name="locale_search_menu">Search</string>
+    <!-- Title for the language selection screen [CHAR LIMIT=25] -->
+    <string name="language_selection_title">Add a language</string>
+    <!-- Title for the region selection screen [CHAR LIMIT=25] -->
+    <string name="country_selection_title">Region preference</string>
+    <!-- Hint text in a search edit box (used to filter long language / country lists) [CHAR LIMIT=25] -->
+    <string name="search_language_hint">Type language name</string>
+    <!-- Category for more language settings. [CHAR LIMIT=NONE]-->
+    <string name="more_language_settings_category">More language settings</string>
+
     <!-- Regional Preferences begin -->
     <!-- The title of the menu entry of regional preferences. [CHAR LIMIT=50] -->
     <string name="regional_preferences_title">Regional preferences</string>
@@ -450,6 +482,8 @@
     <string name="regional_preferences_main_page_sub_title">Let apps know your regional preferences so they can personalize your experience.</string>
     <!-- The subtitle of option's page of regional preferences for Temperature units, Calendar and First day of week. [CHAR LIMIT=NONE] -->
     <string name="regional_preferences_option_page_sub_title">Apps will use your regional preferences where possible.</string>
+    <!-- Category for the regional preferences. [CHAR LIMIT=NONE]-->
+    <string name="regional_preferences_category_title">Regional preferences</string>
     <!-- The title of menu entry of Temperature unit preference. [CHAR LIMIT=50] -->
     <string name="temperature_preferences_title">Temperature</string>
     <!-- The title of the  menu entry of First day of week preference. [CHAR LIMIT=50]  -->
@@ -1227,6 +1261,16 @@
     <string name="security_settings_fingerprint_bad_calibration_title">Can\u2019t use fingerprint sensor</string>
     <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
     <string name="security_settings_fingerprint_bad_calibration">Visit a repair provider.</string>
+
+    <!-- Key for screen off udfps unlock feature. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_screen_off_unlock_udfps_key" translatable="false">security_settings_screen_off_unlock_udfps</string>
+    <!-- Title for  Key for screen off udfps unlock feature. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_screen_off_unlock_udfps_title">Screen-off Fingerprint Unlock</string>
+    <!-- Description for screen off udfps unlock feature. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_screen_off_unlock_udfps_description">Use Fingerprint Unlock even when the screen is off</string>
+    <!-- Description for screen off udfps unlock feature. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_screen_off_unlock_udfps_keywords">Screen-off, Unlock</string>
+
     <!-- Title for the section that has additional security settings. [CHAR LIMIT=60] -->
     <string name="security_advanced_settings">More security settings</string>
     <!-- String for the "More security settings" summary when a work profile is on the device. [CHAR_LIMIT=NONE] -->
@@ -1985,6 +2029,8 @@
     <string name="external_display_not_found_footer_title">Your device must be connected to an external display to mirror your screen</string>
     <!-- External Display settings. More resolution options -->
     <string name="external_display_more_options_title">More options</string>
+    <!-- External Display settings. -->
+    <string name="external_display_topology_hint">Hold and drag to rearrange displays.</string>
 
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Cast</string>
@@ -2850,16 +2896,12 @@
     <string name="brightness">Brightness level</string>
     <!-- Sound & display settings screen, setting option name to enable adaptive brightness [CHAR LIMIT=30] -->
     <string name="auto_brightness_title">Adaptive brightness</string>
-    <!-- Note: The content description title is only applied in adaptive brightness detailed page in setup wizard flow, to make the consistency with other accessibility suw pages. -->
-    <!-- ContentDescription title for adaptive brightness detailed page footer. [CHAR LIMIT=60] -->
-    <string name="auto_brightness_content_description_title">About adaptive brightness</string>
     <!-- Description about the feature adaptive brightness -->
     <string name="auto_brightness_description">Your screen brightness will automatically adjust to your environment and activities. You can move the slider manually to help adaptive brightness learn your preferences.</string>
     <!-- Setting option summary when adaptive brightness is on [CHAR LIMIT=NONE] -->
     <string name="auto_brightness_summary_on">On</string>
     <!-- Setting option summary when adaptive brightness is off [CHAR LIMIT=NONE] -->
     <string name="auto_brightness_summary_off">Off</string>
-
     <!-- Display settings screen, display white balance settings title [CHAR LIMIT=30] -->
     <string name="display_white_balance_title">Display white balance</string>
     <!-- Display settings screen, display white balance settings summary [CHAR LIMIT=NONE] -->
@@ -3008,7 +3050,7 @@
     <!-- Dark UI screen footer action text linking to Modes settings. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_modes_footer_action">Modes settings</string>
     <!-- Even Dimmer setting title. Allows device to reduce brightness even further than standard range. [CHAR LIMIT=NONE] -->
-    <string name="even_dimmer_display_title">Even dimmer</string>
+    <string name="even_dimmer_display_title">Extra dim</string>
     <!-- Even Dimmer setting summary. [CHAR LIMIT=NONE] -->
     <string name="even_dimmer_display_summary">Allow device to go dimmer than usual</string>
 
@@ -4588,6 +4630,8 @@
     <string name="trackpad_settings">Touchpad</string>
     <!-- Title for the button to trigger the 'trackpad settings' page if connect with a touchpad and a mouse. [CHAR LIMIT=35] -->
     <string name="trackpad_mouse_settings">Touchpad &amp; mouse</string>
+    <!-- Title for the button to trigger the 'mouse settings' page if connect with a mouse. [CHAR LIMIT=35] -->
+    <string name="mouse_settings">Mouse</string>
     <!-- Summary text for the 'trackpad settings' page. [CHAR LIMIT=100] -->
     <string name="trackpad_settings_summary">Pointer speed, gestures</string>
 
@@ -4611,6 +4655,8 @@
     <string name="trackpad_bottom_right_tap_summary">Click in the bottom right corner of the touchpad for more options</string>
     <!-- Title text for 'Pointer speed'. [CHAR LIMIT=35] -->
     <string name="trackpad_pointer_speed">Pointer speed</string>
+    <!-- Title text for 'Three finger tap' touchpad preference. This preference allows the user to select an action that will trigger when they tap three fingers on a touchpad. [CHAR LIMIT=60] -->
+    <string name="three_finger_tap_preference_title">Use three finger tap</string>
     <!-- Title text for mouse pointer color. [CHAR LIMIT=35] -->
     <string name="pointer_fill_style">Pointer color</string>
     <!-- Content description for black pointer fill style. [CHAR LIMIT=60] -->
@@ -4639,6 +4685,16 @@
     <string name="keywords_touchpad">trackpad, track pad, mouse, cursor, scroll, swipe, right click, click, pointer</string>
     <!-- Search keywords for 'Bottom-right tap', the name of the touchpad setting that allows the user to click the bottom right corner of the touchpad for more options. -->
     <string name="keywords_trackpad_bottom_right_tap">right click, tap</string>
+    <!-- Radio button text for 'middle click' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will act as a middle-click when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
+    <string name="three_finger_tap_middle_click">Middle click</string>
+    <!-- Radio button text for 'launch assistant' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will launch the Assistant when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
+    <string name="three_finger_tap_launch_gemini">Launch Assistant</string>
+    <!-- Radio button text for 'Go home' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will take the user home when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
+    <string name="three_finger_tap_go_home">Go home</string>
+    <!-- Radio button text for 'Go back' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will initiate a back gesture when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
+    <string name="three_finger_tap_go_back">Go back</string>
+    <!-- Radio button text for 'View recent apps' action. This is one of multiple actions the user can select from the three finger tap customization radio group. The action if selected will show the recent apps when a three-finger tap is performed on a touchpad. [CHAR LIMIT=35] -->
+    <string name="three_finger_tap_recent_apps">View recent apps</string>
 
     <!-- Title text for 'Go home' gesture education [CHAR LIMIT=35] -->
     <string name="gesture_title_go_home">Go home</string>
@@ -5995,6 +6051,10 @@
 
     <!-- Title for the battery summary tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_summary_title">Apps are running normally</string>
+    <!-- Title for the battery replacement tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_replacement_title">Battery replacement recommended</string>
+    <!-- Summary for the battery replacement tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_replacement_summary">Battery capacity and charging performance are reduced, and battery replacement is recommended.</string>
     <!-- Title for the low battery tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_low_battery_title">Battery level low</string>
     <!-- Summary for the low battery tip [CHAR LIMIT=NONE] -->
@@ -7417,6 +7477,8 @@
     <string name="help_url_battery" translatable="false"></string>
     <!-- Help URL, Battery Defender [DO NOT TRANSLATE] -->
     <string name="help_url_battery_defender" translatable="false"></string>
+    <!-- Help URL, Battery Replacement [DO NOT TRANSLATE] -->
+    <string name="help_url_battery_replacement" translatable="false"></string>
     <!-- Help URL, Dock Defender [DO NOT TRANSLATE] -->
     <string name="help_url_dock_defender" translatable="false"></string>
     <!-- Help URL, Incompatible charging [DO NOT TRANSLATE] -->
@@ -8149,11 +8211,13 @@
     </string>
 
     <!-- Modes: Summary for the modes segment, when no modes are active. [CHAR LIMIT=NONE]-->
-    <string name="zen_modes_summary_none_active">
+    <!-- Note: The "0" option should never actually occur. -->
+    <string name="zen_modes_summary">
         {count, plural,
-        =0    {}
-        =1    {1 mode can turn on automatically}
-        other {# modes can turn on automatically}
+        =0    {Do Not Disturb}
+        =1    {{mode_1}}
+        =2    {{mode_1}, {mode_2}}
+        other {{mode_1}, {mode_2}, {mode_3}}
         }
     </string>
 
@@ -9013,6 +9077,13 @@
         \n\nNotifications received during the cooldown can be found by pulling down from the top of the screen.</string>
     <string name="notification_polite_work">Apply to work profiles</string>
     <string name="notification_polite_work_summary">Apply to work profile apps</string>
+
+    <!-- Title for Bundled Notifications setting  [CHAR LIMIT=45]-->
+    <string name="notification_bundle_title">Bundled notifications</string>
+    <string name="notification_bundle_on">On</string>
+    <string name="notification_bundle_off">Off</string>
+    <string name="notification_bundle_main_control_title">Use notification bundling</string>
+    <string name="notification_bundle_description">Notifications with similar themes will be silenced and grouped together for a quieter experience. Bundling will override an app\'s own notification settings.</string>
 
 
     <!-- Title for managing VR (virtual reality) helper services. [CHAR LIMIT=50] -->
@@ -10375,6 +10446,10 @@
 
     <!-- Description for setting that allows apps to send full screen intents. [CHAR LIMIT=NONE] -->
     <string name="footer_description_full_screen_intent">Allow this app to show notifications that take up the full screen when the device is locked. Apps may use these to highlight alarms, incoming calls, or other urgent notifications.</string>
+
+    <string name="write_system_preferences_page_title">Write system preferences</string>
+    <string name="write_system_preferences_switch_title">Allow this app to modify system preferences on your behalf</string>
+    <string name="write_system_preferences_footer_description">This permission allows an app to modify core system preferences.</string>
 
     <!-- Media management apps settings title [CHAR LIMIT=40] -->
     <string name="media_management_apps_title">Media management apps</string>
@@ -12229,6 +12304,10 @@
     <string name="satellite_warning_dialog_title">Can’t turn on <xliff:g id="function" example="bluetooth">%1$s</xliff:g></string>
     <!-- Content for satellite warning dialog to avoid user using wifi/bluetooth/airplane mode [CHAR_LIMIT=NONE] -->
     <string name="satellite_warning_dialog_content">To turn on <xliff:g id="function" example="bluetooth">%1$s</xliff:g>, first end the satellite connection</string>
+    <!-- Category title for satellite functions with data transmission in mobile network settings [CHAR LIMIT=60] -->
+    <string name="category_title_satellite_connectivity">Satellite connectivity</string>
+    <!-- Title for satellite functions with data transmission in mobile network settings [CHAR LIMIT=60] -->
+    <string name="satellite_setting_connectivity">Satellite connectivity</string>
 
 
     <!-- Title for Apn settings in mobile network settings [CHAR LIMIT=60] -->
@@ -12705,6 +12784,9 @@
         and select \'Wipe Device\', \'Lock Bootloader\' and \'Force Flash all partitions\'.</string>
     <string name="page_agnostic_notification_channel_name">16KB Page-agnostic Mode</string>
     <string name="page_agnostic_notification_action">Read more</string>
+
+    <string name= "enable_16k_app_compat_title">Run app with page size compat mode</string>
+    <string name= "enable_16k_app_compat_details">App will be run in page size compatibility mode on 16 KB device toggled.</string>
 
     <!-- DSU Loader. Do not translate. -->
 
@@ -13723,8 +13805,10 @@
     <string name="audio_streams_main_page_password_dialog_join_button">Listen to stream</string>
     <!-- Le audio streams main page qr code scanner summary [CHAR LIMIT=NONE] -->
     <string name="audio_streams_main_page_qr_code_scanner_summary">Scan an audio stream QR code to listen with <xliff:g example="LE headset" id="device_name">%1$s</xliff:g></string>
-    <!-- Le audio streams password dialog  [CHAR LIMIT=NONE] -->
+    <!-- Le audio streams password dialog not editable message [CHAR LIMIT=NONE] -->
     <string name="audio_streams_main_page_password_dialog_cannot_edit">Can\u0027t edit password while sharing. To change the password, first turn off audio sharing.</string>
+    <!-- Le audio streams password dialog password format alert [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_main_page_password_dialog_format_alert">Your password must contain 4-16 characters and use only letters, numbers and symbols</string>
     <!-- Text for audio sharing qrcode scanner [CHAR LIMIT=none]-->
     <string name="audio_streams_qr_code_scanner_label">QR code scanner</string>
     <!-- Learn more link for audio sharing qrcode [CHAR LIMIT=none]-->
@@ -13752,9 +13836,12 @@
     <string name="contacts_storage_no_account_set_summary">No default set</string>
     <!-- Text for displaying when default account is set as local only [CHAR LIMIT=50] -->
     <string name="contacts_storage_local_account_summary">Device only</string>
+    <!-- Text for displaying eligible account preference title [CHAR LIMIT=50] -->
+    <string name="contacts_storage_account_title">Device and %1$s</string>
     <!-- Text for add account selection message when no account has been added [CHAR LIMIT=100] -->
     <string name="contacts_storage_first_time_add_account_message">Add an account to get started</string>
-
+    <!-- Text for account preference category title for contacts storage settings page [CHAR LIMIT=100] -->
+    <string name="contacts_storage_account_category_title">Where to save contacts</string>
     <!-- Circle to Search (shared between all entrypoints) -->
     <!-- Name of Google's new feature to circle to search anything on your phone screen,
          without switching apps. Also used as the setting title. [CHAR LIMIT=60] -->

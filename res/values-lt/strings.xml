@@ -67,6 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Susieti naują įrenginį"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Automatiškai įjungti rytoj"</string>
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Jei išjungsite „Bluetooth“, jis vėl bus įjungtas kitą dieną"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Susieti dešinę ausį"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Susieti kairę ausį"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Susiekite kitą ausį"</string>
@@ -120,6 +121,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"„Bluetooth LE Audio“ išjungimas"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Jei įrenginys palaiko „LE Audio“ aparatinės įrangos galimybes, išjungiama funkcija „Bluetooth LE Audio“."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"„Bluetooth LE Audio“ režimas"</string>
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"„Bluetooth LE Audio“ transliacijos NS peržiūros įgalinimas"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Įgalinama „LE Audio“ bendrinimo NS peržiūra, įskaitant asmeninių garso įrašų bendrinimą ir privatų transliavimą"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Rodyti „LE Audio“ jungiklį įrenginio informacijoje"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"„Bluetooth LE Audio“ leidžiamųjų sąrašo išskyrimas"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Naudoti „LE Audio“ pagal numatytuosius nustatymus, net jei „LE Audio“ išorinis įrenginys nebuvo patvirtintas kaip atitinkantis leidžiamųjų sąrašo kriterijus."</string>
@@ -175,6 +178,10 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Programos kalba"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Siūlomos kalbos"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Visos kalbos"</string>
+    <string name="suggested_locales_title" msgid="119908696638862861">"Siūloma"</string>
+    <string name="all_supported_locales_title" msgid="2535112632133166546">"Visos kalbos"</string>
+    <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"Visi regionai"</string>
+    <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"Visos numeravimo sistemos"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Sistemos kalba"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Numatytoji sistemos vertė"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Šios programos kalbos pasirinkimas nepasiekiamas iš skilties „Nustatymai“."</string>
@@ -190,6 +197,10 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Keisti"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s nepasiekiama"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Šios kalbos negalima naudoti kaip sistemos kalbos, bet programoms ir svetainėms nurodėte, kad teikiate pirmenybę šiai kalbai."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"Paieška"</string>
+    <string name="language_selection_title" msgid="968179636453982415">"Pridėti kalbą"</string>
+    <string name="country_selection_title" msgid="5376929821458644732">"Regiono nuostata"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"Įveskite kalbos pav."</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Tinkamumo nustatymai pagal regioną"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Nustatyti vienetus ir numerių nuostatas"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Leiskite programoms žinoti jūsų tinkamumo nustatymus pagal regioną, kad galėtų suasmeninti funkcijas."</string>
@@ -551,6 +562,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Patraukite pirštą, tada vėl palieskite jutiklį"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Negalima naudoti piršto atspaudo jutiklio"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Apsilankykite pas taisymo paslaugos teikėją."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Ekranas išjungtas, atrakinimas piršto atspaudu"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Naudoti atrakinimą piršto atspaudu, net kai ekranas išjungtas"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Ekranas išjungtas, atrakinti"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Daugiau saugos nustatymų"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Darbo profilio užraktas, šifruotė ir kt."</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Šifruotė, prisijungimo duomenys ir kt."</string>
@@ -1236,7 +1250,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Prisitaikanti"</string>
     <string name="brightness" msgid="6216871641021779698">"Šviesumo lygis"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Prisitaikantis šviesumas"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Apie prisitaikantį šviesumą"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Ekrano šviesumas automatiškai prisitaikys prie jūsų aplinkos ir veiklos. Galite šliaužiklį perkelti patys, kad prisitaikantis šviesumas įsimintų jūsų nuostatas."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Įjungta"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Išjungta"</string>
@@ -1959,11 +1972,19 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Atmenieji klavišai"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Norėdami naudoti spartųjį klavišą, vienu metu paspauskite vieną klavišą, užuot laikę nuspaudę kelis klavišus"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Pelės klavišai"</string>
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Naudoti pelės klavišus"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Naudodami klaviatūrą valdykite žymeklį"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Atvirkštinis slinkimas pele"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Slinkite aukštyn, kad pereitumėte puslapiu žemyn"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Sukeisti kairįjį ir dešinįjį mygtukus"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Naudokite kairįjį pelės mygtuką kaip dešinįjį"</string>
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Pelės klavišai, skirti klaviatūrai „<xliff:g id="KEYBOARD_NAME">%s</xliff:g>“"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Perkelkite pelės žymeklį naudodami šiuos klavišus: <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Spustelėkite pagrindinį pelės mygtuką naudodami klavišą „<xliff:g id="CLICK_LABEL">%s</xliff:g>“"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"Paspauskite ir palaikykite pagrindinį pelės mygtuką naudodami klavišą „<xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>“"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Atleiskite pagrindinį pelės mygtuką naudodami klavišą „<xliff:g id="RELEASE_LABEL">%s</xliff:g>“"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Perjunkite slinkimo režimą naudodami klavišą „<xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>“. Tai atlikus bus galima slinkti vaizdu aukštyn, žemyn, kairėn arba dešinėn naudojant šiuos klavišus: <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Spustelėkite antrinį pelės mygtuką naudodami klavišą „<xliff:g id="RELEASE_2_LABEL">%s</xliff:g>“"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Spartieji klavišai"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Rodyti sparčiųjų klavišų sąrašą"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Darbo profilio klaviatūros ir įrankiai"</string>
@@ -1971,6 +1992,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Numatytasis"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Jutiklinė dalis"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Jutiklinė dalis ir pelė"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"Pelė"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Žymiklio greitis, gestai"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Palieskite ir spustelėkite"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Vilkimas palietus"</string>
@@ -1982,6 +2004,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Spustelėti apačioje dešinėje"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Daugiau parinkčių – jutiklinės dalies apačioje dešinėje"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Žymiklio greitis"</string>
+    <string name="three_finger_tap_preference_title" msgid="7130739855086106052">"Naudoti palietimą trimis pirštais"</string>
     <string name="pointer_fill_style" msgid="8794616790175016092">"Rodyklės spalva"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Keisti rodyklės užpildymo stilių į juodą"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Keisti rodyklės užpildymo stilių į žalią"</string>
@@ -1996,6 +2019,12 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Sužinokite jutiklinės dalies gestus"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"jutiklinė dalis, pelė, žymeklis, slinkti, perbraukti, spustelėti dešiniuoju klavišu, spustelėti"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"spustelėti dešiniuoju klavišu, paliesti"</string>
+    <string name="three_finger_tap_middle_click" msgid="5274906692591143158">"Spustelėjimas viduriniuoju klavišu"</string>
+    <!-- no translation found for three_finger_tap_launch_gemini (4030401656711588982) -->
+    <skip />
+    <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Eiti į pagrindinį puslapį"</string>
+    <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Grįžti"</string>
+    <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Peržiūrėti naujausias programas"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Eikite į pagrindinį puslapį"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Braukite viršun trimis pirštais bet kur jutiklinėje dalyje"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Grįžti"</string>
@@ -2567,6 +2596,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"Reguliuoti maitinimo naudojimą"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Įtraukti paketai"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Programos veikia įprastai"</string>
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"Rekomenduojama pakeisti akumuliatorių"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"Sumažinta akumuliatoriaus talpa ir įkrovimo našumas, todėl rekomenduojama pakeisti akumuliatorių."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Žemas akumuliatoriaus lygis"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Įjunkite Akumuliatoriaus tausojimo priemonę, kad akumuliatorius veiktų ilgiau"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Akumuliatoriaus veikimo laiko pailginimas"</string>
@@ -3407,7 +3438,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"„9.00–17.00 darbo dienomis“"</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Kalendoriaus įvykiai"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Aktyvus režimas „{mode_1}“}=2{Aktyvūs režimai „{mode_1}“ ir „{mode_2}“}=3{Aktyvūs režimai „{mode_1}“, „{mode_2}“ ir „{mode_3}“}one{Aktyvūs režimai „{mode_1}“ ir „{mode_2}“ ir dar #}few{Aktyvūs režimai „{mode_1}“ ir „{mode_2}“ ir dar #}many{Aktyvūs režimai „{mode_1}“ ir „{mode_2}“ ir dar #}other{Aktyvūs režimai „{mode_1}“ ir „{mode_2}“ ir dar #}}"</string>
-    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{Vieną režimą galima įjungti automatiškai}one{# režimą galima įjungti automatiškai}few{# režimus galima įjungti automatiškai}many{# režimo galima įjungti automatiškai}other{# režimų galima įjungti automatiškai}}"</string>
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Netrukdymo režimas}=1{{mode_1}}=2{{mode_1}, {mode_2}}one{{mode_1}, {mode_2}, {mode_3}}few{{mode_1}, {mode_2}, {mode_3}}many{{mode_1}, {mode_2}, {mode_3}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ĮJUNGTA"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Nenustatyta"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Išjungta"</string>
@@ -3711,6 +3742,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Kai per trumpą laiką gaunate daug pranešimų, įrenginys sumažina garsumą ir įspėjimų skaičių ekrane ne daugiau nei dviem minutėms. Skambučiai, signalai ir prioritetiniai pokalbiai nepaveikiami. \n\nNeaktyvumo laikotarpiu gautus pranešimus galima rasti perbraukus žemyn iš ekrano viršaus."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Taikyti darbo profiliams"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Taikyti darbo profilio programoms"</string>
+    <string name="notification_bundle_title" msgid="460988459835922719">"Sugrupuoti pranešimai"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"Įjungta"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"Išjungta"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Naudoti pranešimų grupavimą"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"Panašių temų pranešimai bus išjungti ir sugrupuoti, kad būtų tyliau. Grupuojant bus perrašomi pačios programos pranešimų nustatymai."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Pagalbinės virtualiosios realybės paslaugos"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nėra įdiegtų programų, kurios pateikė užklausą būti vykdomos kaip pagalbinės virtualiosios realybės paslaugos."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Leisti „<xliff:g id="SERVICE">%1$s</xliff:g>“ pasiekti virtualiosios realybės paslaugą?"</string>
@@ -4173,6 +4209,9 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Pranešimai viso ekrano režimu"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Leisti pranešimus viso ekrano režimu iš šios programos"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Leiskite šiai programai rodyti pranešimus viso ekrano režimu, kai įrenginys užrakintas. Programos gali juos naudoti, kad paryškintų įspėjimus, gaunamuosius skambučius ar kitus skubius pranešimus."</string>
+    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"Rašyti sistemos nuostatas"</string>
+    <string name="write_system_preferences_switch_title" msgid="213522354119233085">"Leisti šiai programai keisti sistemos nuostatas jūsų vardu"</string>
+    <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"Šis leidimas leidžia programai keisti pagrindines sistemos nuostatas."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Medijos valdymo programos"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Leisti programai valdyti mediją"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Leidus ši programa galės keisti arba ištrinti kitomis programomis sukurtus medijos failus be jūsų sutikimo. Programai turi būti suteiktas leidimas pasiekti failus ir mediją."</string>
@@ -4831,6 +4870,8 @@
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Daugiau apie palydovinius pranešimus"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Nepavyko įjungti „<xliff:g id="FUNCTION">%1$s</xliff:g>“"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Jei norite įjungti „<xliff:g id="FUNCTION">%1$s</xliff:g>“, pirmiausia nutraukite palydovinį ryšį"</string>
+    <!-- no translation found for category_title_satellite_connectivity (7540022356863917632) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Prieigos taškų pavadinimai"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"Prieigos taško pavadinimas"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nepasiekiama, kai prisijungta prie „<xliff:g id="CARRIER">%1$s</xliff:g>“"</string>
@@ -5457,6 +5498,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Klausyti srauto"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Nuskaitykite garso srauto QR kodą, kad galėtumėte klausyti naudodami „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Bendrinant negalima redaguoti slaptažodžio. Jei norite pakeisti slaptažodį, pirmiausia išjunkite garso įrašų bendrinimą."</string>
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Slaptažodį turi sudaryti 4–16 simbolių ir tai gali būti tik raidės, skaičiai bei simboliai"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR kodų skaitytuvas"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Reikia pagalbos?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Nustatymų paieška"</string>
@@ -5465,13 +5507,12 @@
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Tik įrenginys"</string>
     <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"Nauji kontaktai nebus sinchronizuojami su paskyra"</string>
     <string name="contacts_storage_selection_message" msgid="8082077300632059003">"Pagal numatytuosius nustatymus kontaktai bus išsaugomi įrenginyje ir sinchronizuojami su paskyra"</string>
-    <!-- no translation found for contacts_storage_set_default_account_error_message (849847649756411393) -->
-    <skip />
-    <!-- no translation found for contacts_storage_no_account_set_summary (7454973781666475276) -->
-    <skip />
-    <!-- no translation found for contacts_storage_local_account_summary (5034805108128685712) -->
-    <skip />
+    <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Nustatant numatytąją paskyrą įvyko klaida"</string>
+    <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Numatytoji paskyra nenustatyta"</string>
+    <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Tik įrenginys"</string>
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Įrenginys ir %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Jei norite pradėti, pridėkite paskyrą"</string>
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Kur išsaugoti kontaktus"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Paieška apibrėžiant"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Jei norite ieškoti naudodami turinį ekrane, palieskite ir palaikykite pagrindinio puslapio mygtuką arba naršymo rankenėlę."</string>
 </resources>

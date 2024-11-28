@@ -541,7 +541,7 @@ public class UtilsTest {
     @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void testRequestBiometricAuthentication_biometricManagerReturnsSuccess_shouldReturnOk() {
         when(mBiometricManager.canAuthenticate(USER_ID,
-                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
+                BiometricManager.Authenticators.IDENTITY_CHECK))
                 .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
         final Utils.BiometricStatus requestBiometricAuthenticationForMandatoryBiometrics =
                 Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
@@ -554,7 +554,7 @@ public class UtilsTest {
     @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void testRequestBiometricAuthentication_biometricManagerReturnsError_shouldReturnError() {
         when(mBiometricManager.canAuthenticate(anyInt(),
-                eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
+                eq(BiometricManager.Authenticators.IDENTITY_CHECK)))
                 .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
         assertThat(Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
                 false /* biometricsAuthenticationRequested */, USER_ID)).isEqualTo(
@@ -567,10 +567,10 @@ public class UtilsTest {
         when(mContext.getSystemService(UserManager.class)).thenReturn(mMockUserManager);
         when(mMockUserManager.getCredentialOwnerProfile(USER_ID)).thenReturn(USER_ID);
         when(mBiometricManager.canAuthenticate(anyInt(),
-                eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
+                eq(BiometricManager.Authenticators.IDENTITY_CHECK)))
                 .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
         when(mBiometricManager.canAuthenticate(0 /* userId */,
-                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
+                BiometricManager.Authenticators.IDENTITY_CHECK))
                 .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
         assertThat(Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
                 false /* biometricsAuthenticationRequested */, USER_ID)).isEqualTo(
@@ -594,7 +594,7 @@ public class UtilsTest {
         final Intent intent = intentArgumentCaptor.getValue();
 
         assertThat(intent.getExtra(BIOMETRIC_PROMPT_AUTHENTICATORS)).isEqualTo(
-                BiometricManager.Authenticators.MANDATORY_BIOMETRICS);
+                BiometricManager.Authenticators.IDENTITY_CHECK);
         assertThat(intent.getExtra(BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT)).isNotNull();
         assertThat(intent.getExtra(KeyguardManager.EXTRA_DESCRIPTION)).isNotNull();
         assertThat(intent.getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_ALLOW_ANY_USER, false))
