@@ -16,6 +16,9 @@
 
 package com.android.settings.network.telephony;
 
+import static android.telephony.satellite.SatelliteManager.SATELLITE_MODEM_STATE_CONNECTED;
+import static android.telephony.satellite.SatelliteManager.SATELLITE_MODEM_STATE_OFF;
+
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
 
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.CDMA;
@@ -29,12 +32,15 @@ import static com.android.settings.network.telephony.TelephonyConstants.RadioAcc
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.PersistableBundle;
+import android.platform.test.annotations.EnableFlags;
 import android.telephony.CarrierConfigManager;
 import android.telephony.RadioAccessFamily;
 import android.telephony.ServiceState;
@@ -51,6 +57,7 @@ import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.flags.Flags;
 import com.android.settings.network.CarrierConfigCache;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -292,6 +299,48 @@ public class EnabledNetworkModePreferenceControllerTest {
 
         assertThat(mPreference.getValue()).isEqualTo(
                 String.valueOf(TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA));
+    }
+
+    @UiThreadTest
+    @Test
+    @EnableFlags(Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION)
+    public void updateState_satelliteIsStartedAndSelectedSubForSatellite_disablePreference() {
+        mController.mSatelliteModemStateCallback
+                .onSatelliteModemStateChanged(SATELLITE_MODEM_STATE_CONNECTED);
+        mController.mSelectedNbIotSatelliteSubscriptionCallback
+                .onSelectedNbIotSatelliteSubscriptionChanged(SUB_ID);
+
+        mController.updateState(mPreference);
+
+        assertFalse(mPreference.isEnabled());
+    }
+
+    @UiThreadTest
+    @Test
+    @EnableFlags(Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION)
+    public void updateState_satelliteIsIdle_enablePreference() {
+        mController.mSatelliteModemStateCallback
+                .onSatelliteModemStateChanged(SATELLITE_MODEM_STATE_OFF);
+        mController.mSelectedNbIotSatelliteSubscriptionCallback
+                .onSelectedNbIotSatelliteSubscriptionChanged(SUB_ID);
+
+        mController.updateState(mPreference);
+
+        assertTrue(mPreference.isEnabled());
+    }
+
+    @UiThreadTest
+    @Test
+    @EnableFlags(Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION)
+    public void updateState_notSelectedSubForSatellite_enablePreference() {
+        mController.mSatelliteModemStateCallback
+                .onSatelliteModemStateChanged(SATELLITE_MODEM_STATE_CONNECTED);
+        mController.mSelectedNbIotSatelliteSubscriptionCallback
+                .onSelectedNbIotSatelliteSubscriptionChanged(0);
+
+        mController.updateState(mPreference);
+
+        assertTrue(mPreference.isEnabled());
     }
 
     @UiThreadTest
