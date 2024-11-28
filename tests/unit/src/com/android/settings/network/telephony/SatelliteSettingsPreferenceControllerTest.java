@@ -54,8 +54,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import java.util.List;
-
 @RunWith(AndroidJUnit4.class)
 public class SatelliteSettingsPreferenceControllerTest {
     private static final String KEY = "key";
@@ -155,7 +153,7 @@ public class SatelliteSettingsPreferenceControllerTest {
         mController.updateState(preference);
 
         mController.mCarrierRoamingNtnModeCallback.onCarrierRoamingNtnAvailableServicesChanged(
-                List.of(SERVICE_TYPE_SMS, SERVICE_TYPE_DATA));
+                new int[]{SERVICE_TYPE_SMS, SERVICE_TYPE_DATA});
 
         assertThat(preference.getTitle()).isEqualTo(
                 mContext.getString(R.string.title_satellite_setting_connectivity));
@@ -163,7 +161,7 @@ public class SatelliteSettingsPreferenceControllerTest {
 
     @Test
     @EnableFlags(com.android.settings.flags.Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION)
-    public void getAvailabilityStatus_hasServiceDataType_showSmsUi() {
+    public void getAvailabilityStatus_onlyHasServiceSmsType_showSmsUi() {
         mController.init(TEST_SUB_ID);
         Preference preference = new Preference(mContext);
         preference.setKey(KEY);
@@ -171,7 +169,7 @@ public class SatelliteSettingsPreferenceControllerTest {
         mController.updateState(preference);
 
         mController.mCarrierRoamingNtnModeCallback.onCarrierRoamingNtnAvailableServicesChanged(
-                List.of(SERVICE_TYPE_SMS));
+                new int[]{SERVICE_TYPE_SMS});
 
         assertThat(preference.getTitle()).isEqualTo(
                 mContext.getString(R.string.satellite_setting_title));

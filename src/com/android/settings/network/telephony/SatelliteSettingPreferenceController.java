@@ -43,6 +43,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.network.CarrierConfigCache;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -180,11 +181,12 @@ public class SatelliteSettingPreferenceController extends
         Preference mPref = null;
 
         @Override
-        public void onCarrierRoamingNtnAvailableServicesChanged(List<Integer> availableServices) {
+        public void onCarrierRoamingNtnAvailableServicesChanged(int[] availableServices) {
             CarrierRoamingNtnModeListener.super.onCarrierRoamingNtnAvailableServicesChanged(
                     availableServices);
-            boolean isSmsAvailable = availableServices.contains(SERVICE_TYPE_SMS);
-            boolean isDataAvailable = availableServices.contains(SERVICE_TYPE_DATA);
+            List<Integer> availableServicesList = Arrays.stream(availableServices).boxed().toList();
+            boolean isSmsAvailable = availableServicesList.contains(SERVICE_TYPE_SMS);
+            boolean isDataAvailable = availableServicesList.contains(SERVICE_TYPE_DATA);
             logd("isSmsAvailable : " + isSmsAvailable
                     + " / isDataAvailable " + isDataAvailable);
             if (mPref == null) {
