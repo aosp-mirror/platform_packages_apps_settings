@@ -16,6 +16,7 @@
 package com.android.settings.accessibility
 
 import android.content.Context
+import android.os.Vibrator
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.flags.Flags
@@ -25,14 +26,11 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 /**
- * Accessibility settings for vibration intensities.
+ * Accessibility settings for vibration.
  */
-// TODO(b/368360218): investigate if we still need this screen once we finish the migration.
-//  We might be able to consolidate this into VibrationScreen with PreferenceHierarchy choosing
-//  between toggle or slider preferences based on device config, depending on how overlays are done.
 // LINT.IfChange
 @ProvidePreferenceScreen
-class VibrationIntensityScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider {
+class VibrationScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider {
     override val key: String
         get() = KEY
 
@@ -43,21 +41,29 @@ class VibrationIntensityScreen : PreferenceScreenCreator, PreferenceAvailability
         get() = R.string.keywords_vibration
 
     override fun isAvailable(context: Context) =
-        context.isVibratorAvailable() && context.getSupportedVibrationIntensityLevels() > 1
+        context.isVibratorAvailable() && context.getSupportedVibrationIntensityLevels() == 1
 
     override fun isFlagEnabled(context: Context): Boolean = Flags.catalystVibrationIntensityScreen()
 
     override fun hasCompleteHierarchy() = false
 
-    override fun fragmentClass(): Class<out Fragment>? =
-        VibrationIntensitySettingsFragment::class.java
+    override fun fragmentClass(): Class<out Fragment>? = VibrationSettings::class.java
 
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {
         +VibrationMainSwitchPreference()
     }
 
     companion object {
-        const val KEY = "vibration_intensity_screen"
+        const val KEY = "vibration_screen"
     }
 }
+
+/** Returns true if the device has a system vibrator, false otherwise. */
+fun Context.isVibratorAvailable(): Boolean =
+    getSystemService(Vibrator::class.java).hasVibrator()
+
+/** Returns the number of vibration intensity levels supported by this device. */
+fun Context.getSupportedVibrationIntensityLevels(): Int =
+    resources.getInteger(R.integer.config_vibration_supported_intensity_levels)
+
 // LINT.ThenChange(VibrationPreferenceController.java)
