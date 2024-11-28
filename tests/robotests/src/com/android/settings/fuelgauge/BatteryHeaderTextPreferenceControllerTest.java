@@ -47,7 +47,6 @@ import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.fuelgauge.BatteryUtils;
-import com.android.settingslib.widget.UsageProgressBarPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -65,22 +64,21 @@ import org.robolectric.shadows.ShadowPowerManager;
 @Config(shadows = {ShadowEntityHeaderController.class, ShadowUtils.class})
 public class BatteryHeaderTextPreferenceControllerTest {
 
-    private static final String PREF_KEY = "battery_header";
+    private static final String PREF_KEY = "battery_header_text";
     private static final int BATTERY_LEVEL = 60;
-    private static final int BATTERY_MAX_LEVEL = 100;
     private static final String TIME_LEFT = "2h30min";
     private static final String BATTERY_STATUS = "Charging";
 
     @Mock private PreferenceScreen mPreferenceScreen;
     @Mock private BatteryInfo mBatteryInfo;
     @Mock private EntityHeaderController mEntityHeaderController;
-    @Mock private UsageProgressBarPreference mBatteryUsageProgressBarPref;
+    @Mock private BatteryHeaderTextPreference mBatteryHeaderTextPreference;
     @Mock private BatteryStatusFeatureProvider mBatteryStatusFeatureProvider;
     @Mock private UsbPort mUsbPort;
     @Mock private UsbManager mUsbManager;
     @Mock private UsbPortStatus mUsbPortStatus;
 
-    private BatteryHeaderPreferenceController mController;
+    private BatteryHeaderTextPreferenceController mController;
     private Context mContext;
     private ShadowPowerManager mShadowPowerManager;
     private Intent mBatteryIntent;
@@ -100,17 +98,17 @@ public class BatteryHeaderTextPreferenceControllerTest {
         mBatteryIntent.putExtra(BatteryManager.EXTRA_PLUGGED, 1);
         doReturn(mBatteryIntent).when(mContext).registerReceiver(any(), any());
 
-        doReturn(mBatteryUsageProgressBarPref)
+        doReturn(mBatteryHeaderTextPreference)
                 .when(mPreferenceScreen)
-                .findPreference(BatteryHeaderPreferenceController.KEY_BATTERY_HEADER);
+                .findPreference(PREF_KEY);
 
         mBatteryInfo.batteryLevel = BATTERY_LEVEL;
 
         mShadowPowerManager = Shadows.shadowOf(mContext.getSystemService(PowerManager.class));
         mFactory = FakeFeatureFactory.setupForTest();
 
-        mController = spy(new BatteryHeaderPreferenceController(mContext, PREF_KEY));
-        mController.mBatteryUsageProgressBarPref = mBatteryUsageProgressBarPref;
+        mController = spy(new BatteryHeaderTextPreferenceController(mContext, PREF_KEY));
+        mController.mBatteryHeaderTextPreference = mBatteryHeaderTextPreference;
         mController.mBatteryStatusFeatureProvider = mBatteryStatusFeatureProvider;
 
         BatteryUtils.setChargingStringV2Enabled(null);
@@ -123,20 +121,12 @@ public class BatteryHeaderTextPreferenceControllerTest {
     }
 
     @Test
-    public void displayPreference_displayBatteryLevel() {
-        mController.displayPreference(mPreferenceScreen);
-
-        verify(mBatteryUsageProgressBarPref).setUsageSummary(formatBatteryPercentageText());
-        verify(mBatteryUsageProgressBarPref).setPercent(BATTERY_LEVEL, BATTERY_MAX_LEVEL);
-    }
-
-    @Test
     public void updatePreference_hasRemainingTime_showRemainingLabel() {
         mBatteryInfo.remainingLabel = TIME_LEFT;
 
         mController.updateHeaderPreference(mBatteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(mBatteryInfo.remainingLabel);
+        verify(mBatteryHeaderTextPreference).setText(mBatteryInfo.remainingLabel);
     }
 
     @Test
@@ -145,9 +135,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateHeaderPreference(mBatteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setUsageSummary(formatBatteryPercentageText());
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(mBatteryInfo.remainingLabel);
-        verify(mBatteryUsageProgressBarPref).setPercent(BATTERY_LEVEL, BATTERY_MAX_LEVEL);
+        verify(mBatteryHeaderTextPreference).setText(mBatteryInfo.remainingLabel);
     }
 
     @Test
@@ -157,7 +145,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateHeaderPreference(mBatteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(BATTERY_STATUS);
+        verify(mBatteryHeaderTextPreference).setText(BATTERY_STATUS);
     }
 
     @Test
@@ -168,7 +156,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateHeaderPreference(mBatteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(BATTERY_STATUS);
+        verify(mBatteryHeaderTextPreference).setText(BATTERY_STATUS);
     }
 
     @Test
@@ -178,7 +166,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
         mController.updateHeaderPreference(mBatteryInfo);
 
         final String expectedResult = BATTERY_STATUS + " • " + TIME_LEFT;
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedResult);
+        verify(mBatteryHeaderTextPreference).setText(expectedResult);
     }
 
     @Test
@@ -189,17 +177,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
         mController.updateHeaderPreference(mBatteryInfo);
 
         final String expectedResult = "Battery Saver on • " + TIME_LEFT;
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedResult);
-    }
-
-    @Test
-    public void updatePreference_triggerBatteryStatusUpdateTrue_updatePercentageAndUsageOnly() {
-        setChargingState(/* isDischarging */ true, /* updatedByStatusFeature */ true);
-
-        mController.updateHeaderPreference(mBatteryInfo);
-
-        verify(mBatteryUsageProgressBarPref).setUsageSummary(formatBatteryPercentageText());
-        verify(mBatteryUsageProgressBarPref).setPercent(BATTERY_LEVEL, BATTERY_MAX_LEVEL);
+        verify(mBatteryHeaderTextPreference).setText(expectedResult);
     }
 
     @Test
@@ -208,9 +186,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateHeaderPreference(mBatteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setUsageSummary(formatBatteryPercentageText());
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(mBatteryInfo.remainingLabel);
-        verify(mBatteryUsageProgressBarPref).setPercent(BATTERY_LEVEL, BATTERY_MAX_LEVEL);
+        verify(mBatteryHeaderTextPreference).setText(mBatteryInfo.remainingLabel);
     }
 
     @Test
@@ -219,7 +195,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateBatteryStatus(null, mBatteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(mBatteryInfo.remainingLabel);
+        verify(mBatteryHeaderTextPreference).setText(mBatteryInfo.remainingLabel);
     }
 
     @Test
@@ -229,7 +205,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
         final String label = "Update by battery status • " + TIME_LEFT;
         mController.updateBatteryStatus(label, mBatteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(label);
+        verify(mBatteryHeaderTextPreference).setText(label);
     }
 
     @Test
@@ -244,7 +220,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateBatteryStatus(/* label= */ null, batteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
+        verify(mBatteryHeaderTextPreference).setText(expectedChargingString);
     }
 
     @Test
@@ -259,7 +235,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateBatteryStatus(/* label= */ null, batteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
+        verify(mBatteryHeaderTextPreference).setText(expectedChargingString);
     }
 
     @Test
@@ -274,7 +250,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateBatteryStatus(/* label= */ null, batteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
+        verify(mBatteryHeaderTextPreference).setText(expectedChargingString);
     }
 
     @Test
@@ -297,8 +273,8 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateBatteryStatus(/* label= */ null, batteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(label);
-        verify(mBatteryUsageProgressBarPref).setBottomSummaryContentDescription(contentDescription);
+        verify(mBatteryHeaderTextPreference).setText(label);
+        verify(mBatteryHeaderTextPreference).setContentDescription(contentDescription);
     }
 
     @Test
@@ -315,9 +291,8 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateBatteryStatus(/* label= */ null, batteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
-        verify(mBatteryUsageProgressBarPref, never())
-                .setBottomSummaryContentDescription(contentDescription);
+        verify(mBatteryHeaderTextPreference).setText(expectedChargingString);
+        verify(mBatteryHeaderTextPreference, never()).setContentDescription(contentDescription);
     }
 
     @Test
@@ -334,9 +309,8 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateBatteryStatus(/* label= */ null, batteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
-        verify(mBatteryUsageProgressBarPref, never())
-                .setBottomSummaryContentDescription(contentDescription);
+        verify(mBatteryHeaderTextPreference).setText(expectedChargingString);
+        verify(mBatteryHeaderTextPreference, never()).setContentDescription(contentDescription);
     }
 
     @Test
@@ -353,7 +327,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateBatteryStatus(/* label= */ null, batteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
+        verify(mBatteryHeaderTextPreference).setText(expectedChargingString);
     }
 
     @Test
@@ -370,7 +344,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateBatteryStatus(/* label= */ null, batteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
+        verify(mBatteryHeaderTextPreference).setText(expectedChargingString);
     }
 
     @Test
@@ -387,7 +361,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateBatteryStatus(/* label= */ null, batteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedChargingString);
+        verify(mBatteryHeaderTextPreference).setText(expectedChargingString);
     }
 
     @Test
@@ -398,7 +372,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateBatteryStatus(/* label= */ null, mBatteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(expected);
+        verify(mBatteryHeaderTextPreference).setText(expected);
     }
 
     @Test
@@ -409,7 +383,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateBatteryStatus(/* label= */ null, mBatteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(expected);
+        verify(mBatteryHeaderTextPreference).setText(expected);
     }
 
     private BatteryInfo arrangeUpdateBatteryStatusTestWithRemainingLabel(
@@ -436,7 +410,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
         mController.updateHeaderByBatteryTips(lowBatteryTip, mBatteryInfo);
 
         final String expectedResult = "Low battery • " + TIME_LEFT;
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(expectedResult);
+        verify(mBatteryHeaderTextPreference).setText(expectedResult);
     }
 
     @Test
@@ -446,7 +420,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateHeaderByBatteryTips(lowBatteryTip, mBatteryInfo);
 
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(mBatteryInfo.remainingLabel);
+        verify(mBatteryHeaderTextPreference).setText(mBatteryInfo.remainingLabel);
     }
 
     @Test
@@ -455,7 +429,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateHeaderByBatteryTips(null, mBatteryInfo);
 
-        verifyNoInteractions(mBatteryUsageProgressBarPref);
+        verifyNoInteractions(mBatteryHeaderTextPreference);
     }
 
     @Test
@@ -465,7 +439,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateHeaderByBatteryTips(lowBatteryTip, null);
 
-        verifyNoInteractions(mBatteryUsageProgressBarPref);
+        verifyNoInteractions(mBatteryHeaderTextPreference);
     }
 
     @Test
@@ -474,9 +448,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateHeaderPreference(mBatteryInfo);
 
-        verify(mBatteryUsageProgressBarPref)
-                .setBottomSummary(
-                        mContext.getString(
+        verify(mBatteryHeaderTextPreference).setText(mContext.getString(
                                 com.android.settingslib.R.string
                                         .battery_info_status_charging_on_hold));
     }
@@ -487,18 +459,10 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateHeaderPreference(mBatteryInfo);
 
-        verify(mBatteryUsageProgressBarPref)
-                .setBottomSummary(
+        verify(mBatteryHeaderTextPreference)
+                .setText(
                         mContext.getString(
                                 com.android.settingslib.R.string.battery_info_status_not_charging));
-    }
-
-    @Test
-    public void quickUpdateHeaderPreference_onlyUpdateBatteryLevelAndChargingState() {
-        mController.quickUpdateHeaderPreference();
-
-        verify(mBatteryUsageProgressBarPref).setUsageSummary(formatBatteryPercentageText());
-        verify(mBatteryUsageProgressBarPref).setPercent(BATTERY_LEVEL, BATTERY_MAX_LEVEL);
     }
 
     @Test
@@ -513,18 +477,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.displayPreference(mPreferenceScreen);
 
-        assertThat(mBatteryUsageProgressBarPref.isVisible()).isFalse();
-    }
-
-    @Test
-    public void displayPreference_init_showEmptySpace() {
-        mController.displayPreference(mPreferenceScreen);
-
-        verify(mBatteryUsageProgressBarPref).setBottomSummary(" ");
-    }
-
-    private CharSequence formatBatteryPercentageText() {
-        return com.android.settings.Utils.formatPercentage(BATTERY_LEVEL);
+        assertThat(mBatteryHeaderTextPreference.isVisible()).isFalse();
     }
 
     private void setChargingState(boolean isDischarging, boolean updatedByStatusFeature) {

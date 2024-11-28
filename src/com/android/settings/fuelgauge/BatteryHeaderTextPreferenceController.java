@@ -17,11 +17,12 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.BatteryManager;
 import android.os.PowerManager;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
@@ -31,23 +32,20 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
-import com.android.settingslib.widget.UsageProgressBarPreference;
 
 /** Controller that update the battery header view */
 public class BatteryHeaderTextPreferenceController extends BasePreferenceController
         implements PreferenceControllerMixin, BatteryPreferenceController {
-    private static final String TAG = "BatteryHeaderPreferenceController";
-
-    @VisibleForTesting static final String KEY_BATTERY_HEADER = "battery_header";
-    private static final int BATTERY_MAX_LEVEL = 100;
-
-    @VisibleForTesting BatteryStatusFeatureProvider mBatteryStatusFeatureProvider;
-    @VisibleForTesting UsageProgressBarPreference mBatteryUsageProgressBarPref;
+    private static final String TAG = "BatteryHeaderTextPreferenceController";
 
     private final PowerManager mPowerManager;
     private final BatterySettingsFeatureProvider mBatterySettingsFeatureProvider;
 
-    private BatteryTip mBatteryTip;
+    @Nullable private BatteryTip mBatteryTip;
+
+    @VisibleForTesting BatteryStatusFeatureProvider mBatteryStatusFeatureProvider;
+
+    @Nullable @VisibleForTesting BatteryHeaderTextPreference mBatteryHeaderTextPreference;
 
     public BatteryHeaderTextPreferenceController(Context context, String key) {
         super(context, key);
@@ -61,14 +59,11 @@ public class BatteryHeaderTextPreferenceController extends BasePreferenceControl
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mBatteryUsageProgressBarPref = screen.findPreference(getPreferenceKey());
-        // Set up empty space text first to prevent layout flaky before info loaded.
-        mBatteryUsageProgressBarPref.setBottomSummary(" ");
+        mBatteryHeaderTextPreference = screen.findPreference(getPreferenceKey());
 
-        if (com.android.settings.Utils.isBatteryPresent(mContext)) {
-            quickUpdateHeaderPreference();
-        } else {
-            mBatteryUsageProgressBarPref.setVisible(false);
+        if (mBatteryHeaderTextPreference != null
+                && !com.android.settings.Utils.isBatteryPresent(mContext)) {
+            mBatteryHeaderTextPreference.setVisible(false);
         }
     }
 
@@ -77,7 +72,8 @@ public class BatteryHeaderTextPreferenceController extends BasePreferenceControl
         return AVAILABLE_UNSEARCHABLE;
     }
 
-    private CharSequence generateLabel(BatteryInfo info) {
+    @NonNull
+    private CharSequence generateLabel(@NonNull BatteryInfo info) {
         if (Utils.containsIncompatibleChargers(mContext, TAG)) {
             return mContext.getString(
                     com.android.settingslib.R.string.battery_info_status_not_charging);
@@ -99,8 +95,8 @@ public class BatteryHeaderTextPreferenceController extends BasePreferenceControl
         if (info.pluggedStatus == BatteryManager.BATTERY_PLUGGED_WIRELESS) {
             final CharSequence wirelessChargingLabel =
                     mBatterySettingsFeatureProvider.getWirelessChargingLabel(mContext, info);
-            if (wirelessChargingLabel != null) {
-                mBatteryUsageProgressBarPref.setBottomSummaryContentDescription(
+            if (mBatteryHeaderTextPreference != null && wirelessChargingLabel != null) {
+                mBatteryHeaderTextPreference.setContentDescription(
                         mBatterySettingsFeatureProvider
                                 .getWirelessChargingContentDescription(mContext, info));
                 return wirelessChargingLabel;
@@ -138,46 +134,33 @@ public class BatteryHeaderTextPreferenceController extends BasePreferenceControl
         }
     }
 
-    /** Updates the battery header. */
-    public void updateHeaderPreference(BatteryInfo info) {
-        if (!mBatteryStatusFeatureProvider.triggerBatteryStatusUpdate(this, info)) {
-            mBatteryUsageProgressBarPref.setBottomSummary(generateLabel(info));
+    /** Updates the battery header text with the given BatteryInfo. */
+    public void updateHeaderPreference(@NonNull BatteryInfo info) {
+        if (mBatteryHeaderTextPreference != null
+                && !mBatteryStatusFeatureProvider.triggerBatteryStatusUpdate(this, info)) {
+            mBatteryHeaderTextPreference.setText(generateLabel(info));
         }
-
-        mBatteryUsageProgressBarPref.setUsageSummary(
-                formatBatteryPercentageText(info.batteryLevel));
-        mBatteryUsageProgressBarPref.setPercent(info.batteryLevel, BATTERY_MAX_LEVEL);
     }
 
-    /** Callback which receives text for the summary line. */
+    /** Callback which updates the battery header text with the given label. */
+    @Override
     public void updateBatteryStatus(String label, BatteryInfo info) {
+        if (mBatteryHeaderTextPreference == null) {
+            return;
+        }
+
         final CharSequence summary = label != null ? label : generateLabel(info);
-        mBatteryUsageProgressBarPref.setBottomSummary(summary);
+        mBatteryHeaderTextPreference.setText(summary);
         Log.d(TAG, "updateBatteryStatus: " + label + " summary: " + summary);
     }
 
-    /** Updates the battery header quickly. */
-    public void quickUpdateHeaderPreference() {
-        Intent batteryBroadcast =
-                com.android.settingslib.fuelgauge.BatteryUtils.getBatteryIntent(mContext);
-        final int batteryLevel = Utils.getBatteryLevel(batteryBroadcast);
-        final boolean discharging =
-                batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) == 0;
-
-        mBatteryUsageProgressBarPref.setUsageSummary(formatBatteryPercentageText(batteryLevel));
-        mBatteryUsageProgressBarPref.setPercent(batteryLevel, BATTERY_MAX_LEVEL);
-    }
-
-    /** Update summary when battery tips changed. */
-    public void updateHeaderByBatteryTips(BatteryTip batteryTip, BatteryInfo batteryInfo) {
+    /** Update summary when battery tips are changed. */
+    public void updateHeaderByBatteryTips(
+            @Nullable BatteryTip batteryTip, @NonNull BatteryInfo batteryInfo) {
         mBatteryTip = batteryTip;
 
         if (mBatteryTip != null && batteryInfo != null) {
             updateHeaderPreference(batteryInfo);
         }
-    }
-
-    private CharSequence formatBatteryPercentageText(int batteryLevel) {
-        return com.android.settings.Utils.formatPercentage(batteryLevel);
     }
 }
