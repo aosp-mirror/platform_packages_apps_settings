@@ -19,6 +19,7 @@ import android.content.Context
 import com.android.settings.R
 import com.android.settings.display.BatteryPercentageSwitchPreference
 import com.android.settings.flags.Flags
+import com.android.settings.fuelgauge.BatteryHeaderPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -53,8 +54,10 @@ class PowerUsageSummaryScreen :
             R.drawable.ic_settings_battery_white
         }
 
-    override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(this) { +BatteryPercentageSwitchPreference() }
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {
+        +BatteryHeaderPreference()
+        +BatteryPercentageSwitchPreference()
+    }
 
     companion object {
         const val KEY = "power_usage_summary_screen"

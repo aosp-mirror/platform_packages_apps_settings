@@ -45,8 +45,6 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import java.util.List;
-
 @RunWith(AndroidJUnit4.class)
 public class SatelliteSettingsPreferenceCategoryControllerTest {
     private static final String KEY = "key";
@@ -113,7 +111,7 @@ public class SatelliteSettingsPreferenceCategoryControllerTest {
         mController.displayPreference(preferenceScreen);
 
         mController.mCarrierRoamingNtnModeCallback.onCarrierRoamingNtnAvailableServicesChanged(
-                List.of(SERVICE_TYPE_DATA));
+                new int[]{SERVICE_TYPE_DATA});
 
         assertThat(preferenceCategory.getTitle()).isEqualTo(
                 mContext.getString(R.string.satellite_setting_connectivity));
@@ -131,7 +129,7 @@ public class SatelliteSettingsPreferenceCategoryControllerTest {
         mController.displayPreference(preferenceScreen);
 
         mController.mCarrierRoamingNtnModeCallback.onCarrierRoamingNtnAvailableServicesChanged(
-                List.of(SERVICE_TYPE_SMS));
+                new int[]{SERVICE_TYPE_SMS});
 
         assertThat(preferenceCategory.getTitle()).isEqualTo(
                 mContext.getString(R.string.satellite_setting_title));
