@@ -40,26 +40,26 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-/** Tests for {@link TrackpadSettingsController} */
+/** Tests for {@link TouchpadAndMouseSettingsController} */
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         com.android.settings.testutils.shadow.ShadowSystemSettings.class,
         ShadowInputDevice.class,
 })
-public class TrackpadSettingsControllerTest {
+public class TouchpadAndMouseSettingsControllerTest {
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
 
     private static final String PREFERENCE_KEY = "trackpad_settings";
 
     private Context mContext;
-    private TrackpadSettingsController mController;
+    private TouchpadAndMouseSettingsController mController;
     private Preference mPreference;
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
-        mController = new TrackpadSettingsController(mContext, PREFERENCE_KEY);
+        mController = new TouchpadAndMouseSettingsController(mContext, PREFERENCE_KEY);
         mPreference = new Preference(mContext);
         ShadowInputDevice.reset();
     }

@@ -470,6 +470,8 @@
     <string name="country_selection_title">Region preference</string>
     <!-- Hint text in a search edit box (used to filter long language / country lists) [CHAR LIMIT=25] -->
     <string name="search_language_hint">Type language name</string>
+    <!-- Category for more language settings. [CHAR LIMIT=NONE]-->
+    <string name="more_language_settings_category">More language settings</string>
 
     <!-- Regional Preferences begin -->
     <!-- The title of the menu entry of regional preferences. [CHAR LIMIT=50] -->
@@ -480,6 +482,8 @@
     <string name="regional_preferences_main_page_sub_title">Let apps know your regional preferences so they can personalize your experience.</string>
     <!-- The subtitle of option's page of regional preferences for Temperature units, Calendar and First day of week. [CHAR LIMIT=NONE] -->
     <string name="regional_preferences_option_page_sub_title">Apps will use your regional preferences where possible.</string>
+    <!-- Category for the regional preferences. [CHAR LIMIT=NONE]-->
+    <string name="regional_preferences_category_title">Regional preferences</string>
     <!-- The title of menu entry of Temperature unit preference. [CHAR LIMIT=50] -->
     <string name="temperature_preferences_title">Temperature</string>
     <!-- The title of the  menu entry of First day of week preference. [CHAR LIMIT=50]  -->
@@ -2025,6 +2029,8 @@
     <string name="external_display_not_found_footer_title">Your device must be connected to an external display to mirror your screen</string>
     <!-- External Display settings. More resolution options -->
     <string name="external_display_more_options_title">More options</string>
+    <!-- External Display settings. -->
+    <string name="external_display_topology_hint">Hold and drag to rearrange displays.</string>
 
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Cast</string>
@@ -3044,7 +3050,7 @@
     <!-- Dark UI screen footer action text linking to Modes settings. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_modes_footer_action">Modes settings</string>
     <!-- Even Dimmer setting title. Allows device to reduce brightness even further than standard range. [CHAR LIMIT=NONE] -->
-    <string name="even_dimmer_display_title">Even dimmer</string>
+    <string name="even_dimmer_display_title">Extra dim</string>
     <!-- Even Dimmer setting summary. [CHAR LIMIT=NONE] -->
     <string name="even_dimmer_display_summary">Allow device to go dimmer than usual</string>
 
@@ -12298,8 +12304,10 @@
     <string name="satellite_warning_dialog_title">Can’t turn on <xliff:g id="function" example="bluetooth">%1$s</xliff:g></string>
     <!-- Content for satellite warning dialog to avoid user using wifi/bluetooth/airplane mode [CHAR_LIMIT=NONE] -->
     <string name="satellite_warning_dialog_content">To turn on <xliff:g id="function" example="bluetooth">%1$s</xliff:g>, first end the satellite connection</string>
-    <!-- Category title for satellite functions in mobile network settings [CHAR LIMIT=60] -->
+    <!-- Category title for satellite functions with data transmission in mobile network settings [CHAR LIMIT=60] -->
     <string name="category_title_satellite_connectivity">Satellite connectivity</string>
+    <!-- Title for satellite functions with data transmission in mobile network settings [CHAR LIMIT=60] -->
+    <string name="satellite_setting_connectivity">Satellite connectivity</string>
 
 
     <!-- Title for Apn settings in mobile network settings [CHAR LIMIT=60] -->
@@ -12776,6 +12784,9 @@
         and select \'Wipe Device\', \'Lock Bootloader\' and \'Force Flash all partitions\'.</string>
     <string name="page_agnostic_notification_channel_name">16KB Page-agnostic Mode</string>
     <string name="page_agnostic_notification_action">Read more</string>
+
+    <string name= "enable_16k_app_compat_title">Run app with page size compat mode</string>
+    <string name= "enable_16k_app_compat_details">App will be run in page size compatibility mode on 16 KB device toggled.</string>
 
     <!-- DSU Loader. Do not translate. -->
 
