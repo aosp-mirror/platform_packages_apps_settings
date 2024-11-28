@@ -149,6 +149,10 @@ public class SatelliteSettingPreferenceController extends
     }
 
     private void updateSummary(Preference preference) {
+        if (mSatelliteManager == null) {
+            logd("updateSummary - no SatelliteManager");
+            return;
+        }
         try {
             Set<Integer> restrictionReason =
                     mSatelliteManager.getAttachRestrictionReasonsForCarrier(mSubId);
