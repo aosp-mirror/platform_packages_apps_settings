@@ -96,4 +96,10 @@
         android:key="trackpad_touch_gesture"
         android:title="@string/trackpad_touch_gesture"
         settings:controller="com.android.settings.inputmethod.TouchGesturesButtonPreferenceController"/>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="trackpad_gestures_disabled_footer"
+        android:title="@string/trackpad_gestures_disabled_footer_text"
+        settings:searchable="false"
+        settings:controller="com.android.settings.inputmethod.TrackpadGesturesDisabledFooterPreferenceController"/>
 </PreferenceScreen>
