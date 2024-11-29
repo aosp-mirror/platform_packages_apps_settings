@@ -33,6 +33,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 
 import java.util.Arrays;
 import java.util.List;
@@ -87,13 +88,17 @@ public class SatelliteSettingsPreferenceCategoryController
 
     @Override
     public void onResume(@NonNull LifecycleOwner owner) {
-        mTelephonyManager.registerTelephonyCallback(mContext.getMainExecutor(),
-                mCarrierRoamingNtnModeCallback);
+        if (Flags.satelliteOemSettingsUxMigration()) {
+            mTelephonyManager.registerTelephonyCallback(mContext.getMainExecutor(),
+                    mCarrierRoamingNtnModeCallback);
+        }
     }
 
     @Override
     public void onPause(@NonNull LifecycleOwner owner) {
-        mTelephonyManager.unregisterTelephonyCallback(mCarrierRoamingNtnModeCallback);
+        if (Flags.satelliteOemSettingsUxMigration()) {
+            mTelephonyManager.unregisterTelephonyCallback(mCarrierRoamingNtnModeCallback);
+        }
     }
 
     @VisibleForTesting

@@ -46,6 +46,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 public class VibrationPreferenceControllerTest {
     private static final String PREFERENCE_KEY = "preference_key";
@@ -158,3 +159,7 @@ public class VibrationPreferenceControllerTest {
         return controller;
     }
 }
+// LINT.ThenChange(
+//     VibrationIntensityScreenTest.kt,
+//     VibrationScreenTest.kt,
+// )

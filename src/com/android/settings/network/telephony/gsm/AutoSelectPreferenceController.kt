@@ -25,18 +25,22 @@ import android.telephony.CarrierConfigManager
 import android.telephony.ServiceState
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
+import android.telephony.satellite.SatelliteManager
+import android.telephony.satellite.SatelliteModemStateCallback
+import android.telephony.satellite.SelectedNbIotSatelliteSubscriptionCallback
+import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.preference.Preference
-import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.Settings.NetworkSelectActivity
+import com.android.settings.flags.Flags
 import com.android.settings.network.CarrierConfigCache
 import com.android.settings.network.telephony.MobileNetworkUtils
 import com.android.settings.network.telephony.allowedNetworkTypesFlow
@@ -46,8 +50,6 @@ import com.android.settingslib.spa.framework.compose.OverridableFlow
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
-import kotlin.properties.Delegates.notNull
-import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -59,6 +61,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.time.Duration.Companion.seconds
 
 /**
  * Preference controller for "Auto Select Network"
@@ -73,15 +76,34 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
     private val getConfigForSubId: (subId: Int) -> PersistableBundle = { subId ->
         CarrierConfigCache.getInstance(context).getConfigForSubId(subId)
     },
-) : ComposePreferenceController(context, key) {
+) : ComposePreferenceController(context, key), DefaultLifecycleObserver {
+
+    private var isSatelliteSessionStarted = false
+    private var isSelectedSubIdForSatellite = false
 
     private lateinit var telephonyManager: TelephonyManager
+    private lateinit var satelliteManager: SatelliteManager
     private val listeners = mutableListOf<OnNetworkSelectModeListener>()
 
     @VisibleForTesting
     var progressDialog: ProgressDialog? = null
 
     private var subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
+
+    val satelliteModemStateCallback = SatelliteModemStateCallback { state ->
+        isSatelliteSessionStarted = when (state) {
+            SatelliteManager.SATELLITE_MODEM_STATE_OFF,
+            SatelliteManager.SATELLITE_MODEM_STATE_UNAVAILABLE,
+            SatelliteManager.SATELLITE_MODEM_STATE_UNKNOWN -> false
+
+            else -> true
+        }
+    }
+
+    val selectedNbIotSatelliteSubscriptionCallback =
+        SelectedNbIotSatelliteSubscriptionCallback { selectedSubId ->
+            isSelectedSubIdForSatellite = selectedSubId == subId
+        }
 
     /**
      * Initialization based on given subscription id.
@@ -90,7 +112,7 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
         this.subId = subId
         telephonyManager = mContext.getSystemService(TelephonyManager::class.java)!!
             .createForSubscriptionId(subId)
-
+        satelliteManager = mContext.getSystemService(SatelliteManager::class.java)!!
         return this
     }
 
@@ -117,7 +139,10 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
         SwitchPreference(object : SwitchPreferenceModel {
             override val title = stringResource(R.string.select_automatically)
             override val summary = { disallowedSummary }
-            override val changeable = { disallowedSummary.isEmpty() }
+            override val changeable = {
+                disallowedSummary.isEmpty()
+                        && !(isSatelliteSessionStarted && isSelectedSubIdForSatellite)
+            }
             override val checked = { isAuto }
             override val onCheckedChange: (Boolean) -> Unit = { newChecked ->
                 if (newChecked) {
@@ -130,6 +155,38 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
                 }
             }
         })
+    }
+
+    override fun onStart(owner: LifecycleOwner) {
+        if (Flags.satelliteOemSettingsUxMigration()) {
+            if (satelliteManager != null) {
+                try {
+                    satelliteManager.registerForModemStateChanged(
+                        mContext.mainExecutor, satelliteModemStateCallback
+                    )
+                    satelliteManager.registerForSelectedNbIotSatelliteSubscriptionChanged(
+                        mContext.mainExecutor, selectedNbIotSatelliteSubscriptionCallback
+                    )
+                } catch (e: IllegalStateException) {
+                    Log.w(TAG, "IllegalStateException $e")
+                }
+            }
+        }
+    }
+
+    override fun onStop(owner: LifecycleOwner) {
+        if (Flags.satelliteOemSettingsUxMigration()) {
+            if (satelliteManager != null) {
+                try {
+                    satelliteManager.unregisterForModemStateChanged(satelliteModemStateCallback)
+                    satelliteManager.unregisterForSelectedNbIotSatelliteSubscriptionChanged(
+                        selectedNbIotSatelliteSubscriptionCallback
+                    )
+                } catch (e: IllegalStateException) {
+                    Log.w(TAG, "IllegalStateException $e")
+                }
+            }
+        }
     }
 
     private suspend fun getDisallowedSummary(serviceState: ServiceState): String =
@@ -213,6 +270,8 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
     }
 
     companion object {
+        private const val TAG = "AutoSelectPreferenceController"
+
         private val MINIMUM_DIALOG_TIME = 1.seconds
     }
 }

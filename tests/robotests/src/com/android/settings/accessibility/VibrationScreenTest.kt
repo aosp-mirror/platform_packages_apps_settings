@@ -34,7 +34,7 @@ import org.mockito.kotlin.stub
 
 // LINT.IfChange
 @RunWith(AndroidJUnit4::class)
-class VibrationIntensityScreenTest : CatalystScreenTestCase() {
+class VibrationScreenTest : CatalystScreenTestCase() {
     private lateinit var vibrator: Vibrator
 
     private val resourcesSpy: Resources =
@@ -50,28 +50,19 @@ class VibrationIntensityScreenTest : CatalystScreenTestCase() {
             override fun getResources(): Resources = resourcesSpy
         }
 
-    override val preferenceScreenCreator = VibrationIntensityScreen()
+    override val preferenceScreenCreator = VibrationScreen()
 
     override val flagName: String
         get() = Flags.FLAG_CATALYST_VIBRATION_INTENSITY_SCREEN
 
     @Test
     fun key() {
-        assertThat(preferenceScreenCreator.key).isEqualTo(VibrationIntensityScreen.KEY)
+        assertThat(preferenceScreenCreator.key).isEqualTo(VibrationScreen.KEY)
     }
 
     @Test
     fun isAvailable_noVibrator_unavailable() {
         vibrator = mock { on { hasVibrator() } doReturn false }
-        resourcesSpy.stub {
-            on { getInteger(R.integer.config_vibration_supported_intensity_levels) } doReturn 3
-        }
-        assertThat(preferenceScreenCreator.isAvailable(context)).isFalse()
-    }
-
-    @Test
-    fun isAvailable_hasVibratorAndSingleIntensityLevel_unavailable() {
-        vibrator = mock { on { hasVibrator() } doReturn true }
         resourcesSpy.stub {
             on { getInteger(R.integer.config_vibration_supported_intensity_levels) } doReturn 1
         }
@@ -79,13 +70,21 @@ class VibrationIntensityScreenTest : CatalystScreenTestCase() {
     }
 
     @Test
-    fun isAvailable_hasVibratorAndMultipleIntensityLevels_available() {
+    fun isAvailable_hasVibratorAndMultipleIntensityLevels_unavailable() {
         vibrator = mock { on { hasVibrator() } doReturn true }
         resourcesSpy.stub {
-            on { getInteger(R.integer.config_vibration_supported_intensity_levels) } doReturn 2
+            on { getInteger(R.integer.config_vibration_supported_intensity_levels) } doReturn 3
+        }
+        assertThat(preferenceScreenCreator.isAvailable(context)).isFalse()
+    }
+
+    @Test
+    fun isAvailable_hasVibratorAndSingleIntensityLevel_available() {
+        vibrator = mock { on { hasVibrator() } doReturn true }
+        resourcesSpy.stub {
+            on { getInteger(R.integer.config_vibration_supported_intensity_levels) } doReturn 1
         }
         assertThat(preferenceScreenCreator.isAvailable(context)).isTrue()
     }
 }
 // LINT.ThenChange(VibrationPreferenceControllerTest.java)
-
