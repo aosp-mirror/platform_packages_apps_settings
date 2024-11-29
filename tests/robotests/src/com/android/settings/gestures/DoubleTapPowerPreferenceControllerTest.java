@@ -18,9 +18,9 @@ package com.android.settings.gestures;
 
 import static android.provider.Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
 
-import static com.android.settings.gestures.DoubleTapPowerPreferenceController.OFF;
-import static com.android.settings.gestures.DoubleTapPowerPreferenceController.ON;
 import static com.android.settings.gestures.DoubleTapPowerPreferenceController.isSuggestionComplete;
+import static com.android.settings.gestures.DoubleTapPowerToOpenCameraPreferenceController.OFF;
+import static com.android.settings.gestures.DoubleTapPowerToOpenCameraPreferenceController.ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -28,7 +28,9 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings;
+import android.text.TextUtils;
 
+import com.android.settings.R;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 
@@ -71,7 +73,7 @@ public class DoubleTapPowerPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_configIsTrue_shouldReturnFalse() {
+    public void isAvailable_configIsFalse_shouldReturnFalse() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled,
                 Boolean.FALSE);
@@ -80,29 +82,11 @@ public class DoubleTapPowerPreferenceControllerTest {
     }
 
     @Test
-    public void testIsChecked_configIsNotSet_shouldReturnTrue() {
-        // Set the setting to be enabled.
-        Settings.Secure.putInt(mContentResolver, CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, ON);
-        mController = new DoubleTapPowerPreferenceController(mContext, KEY_DOUBLE_TAP_POWER);
-
-        assertThat(mController.isChecked()).isTrue();
-    }
-
-    @Test
-    public void testIsChecked_configIsSet_shouldReturnFalse() {
-        // Set the setting to be disabled.
-        Settings.Secure.putInt(mContentResolver, CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, OFF);
-        mController = new DoubleTapPowerPreferenceController(mContext, KEY_DOUBLE_TAP_POWER);
-
-        assertThat(mController.isChecked()).isFalse();
-    }
-
-    @Test
     public void isSuggestionCompleted_doubleTapPower_trueWhenNotAvailable() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, false);
 
-        assertThat(isSuggestionComplete(mContext, null/* prefs */)).isTrue();
+        assertThat(isSuggestionComplete(mContext, null /* prefs */)).isTrue();
     }
 
     @Test
@@ -112,6 +96,7 @@ public class DoubleTapPowerPreferenceControllerTest {
         // No stored value in shared preferences if not visited yet.
         final SharedPreferences prefs =
                 new SuggestionFeatureProviderImpl().getSharedPrefs(mContext);
+
         assertThat(isSuggestionComplete(mContext, prefs)).isFalse();
     }
 
@@ -128,21 +113,26 @@ public class DoubleTapPowerPreferenceControllerTest {
     }
 
     @Test
-    public void isSliceableCorrectKey_returnsTrue() {
-        final DoubleTapPowerPreferenceController controller =
-                new DoubleTapPowerPreferenceController(mContext, "gesture_double_tap_power");
-        assertThat(controller.isSliceable()).isTrue();
+    public void getSummary_doubleTapPowerEnabled_returnsOn() {
+        // Set the setting to be enabled.
+        Settings.Secure.putInt(mContentResolver, CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, ON);
+
+        assertThat(
+                        TextUtils.equals(
+                                mController.getSummary(),
+                                mContext.getText(R.string.gesture_setting_on)))
+                .isTrue();
     }
 
     @Test
-    public void isSliceableIncorrectKey_returnsFalse() {
-        final DoubleTapPowerPreferenceController controller =
-                new DoubleTapPowerPreferenceController(mContext, "bad_key");
-        assertThat(controller.isSliceable()).isFalse();
-    }
+    public void getSummary_doubleTapPowerDisabled_returnsOff() {
+        // Set the setting to be disabled.
+        Settings.Secure.putInt(mContentResolver, CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, OFF);
 
-    @Test
-    public void isPublicSlice_returnTrue() {
-        assertThat(mController.isPublicSlice()).isTrue();
+        assertThat(
+                        TextUtils.equals(
+                                mController.getSummary(),
+                                mContext.getText(R.string.gesture_setting_on)))
+                .isTrue();
     }
 }

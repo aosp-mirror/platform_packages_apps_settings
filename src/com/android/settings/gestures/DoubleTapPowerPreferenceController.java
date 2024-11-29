@@ -21,22 +21,15 @@ import static android.provider.Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_D
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings;
-import android.text.TextUtils;
 
-import androidx.annotation.VisibleForTesting;
+import androidx.annotation.NonNull;
 
-public class DoubleTapPowerPreferenceController extends GesturePreferenceController {
+import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 
-    @VisibleForTesting
-    static final int ON = 0;
-    @VisibleForTesting
-    static final int OFF = 1;
+public class DoubleTapPowerPreferenceController extends BasePreferenceController {
 
-    private static final String PREF_KEY_VIDEO = "gesture_double_tap_power_video";
-
-    private final String SECURE_KEY = CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
-
-    public DoubleTapPowerPreferenceController(Context context, String key) {
+    public DoubleTapPowerPreferenceController(@NonNull Context context, @NonNull String key) {
         super(context, key);
     }
 
@@ -45,7 +38,7 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
                 || prefs.getBoolean(DoubleTapPowerSettings.PREF_KEY_SUGGESTION_COMPLETE, false);
     }
 
-    private static boolean isGestureAvailable(Context context) {
+    private static boolean isGestureAvailable(@NonNull Context context) {
         return context.getResources()
                 .getBoolean(com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled);
     }
@@ -56,30 +49,17 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
     }
 
     @Override
-    public boolean isSliceable() {
-        return TextUtils.equals(getPreferenceKey(), "gesture_double_tap_power");
-    }
-
-    @Override
-    public boolean isPublicSlice() {
-        return true;
-    }
-
-    @Override
-    protected String getVideoPrefKey() {
-        return PREF_KEY_VIDEO;
-    }
-
-    @Override
-    public boolean isChecked() {
-        final int cameraDisabled = Settings.Secure.getInt(mContext.getContentResolver(),
-                SECURE_KEY, ON);
-        return cameraDisabled == ON;
-    }
-
-    @Override
-    public boolean setChecked(boolean isChecked) {
-        return Settings.Secure.putInt(mContext.getContentResolver(), SECURE_KEY,
-                isChecked ? ON : OFF);
+    @NonNull
+    public CharSequence getSummary() {
+        final boolean isCameraDoubleTapPowerGestureEnabled =
+                Settings.Secure.getInt(
+                                mContext.getContentResolver(),
+                                CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED,
+                                DoubleTapPowerToOpenCameraPreferenceController.ON)
+                        == DoubleTapPowerToOpenCameraPreferenceController.ON;
+        return mContext.getText(
+                isCameraDoubleTapPowerGestureEnabled
+                        ? R.string.gesture_setting_on
+                        : R.string.gesture_setting_off);
     }
 }
