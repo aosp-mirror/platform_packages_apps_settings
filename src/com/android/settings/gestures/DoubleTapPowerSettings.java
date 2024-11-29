@@ -56,9 +56,9 @@ public class DoubleTapPowerSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.double_tap_power_settings;
+        return R.xml.double_tap_power_to_open_camera_settings;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.double_tap_power_settings);
+            new BaseSearchIndexProvider(R.xml.double_tap_power_to_open_camera_settings);
 }

@@ -18,19 +18,18 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/double_tap_power_for_camera_title">
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="gesture_double_tap_power_video"
         settings:searchable="false"
-        app:lottie_rawRes="@drawable/quickly_open_camera"/>
+        settings:lottie_rawRes="@drawable/quickly_open_camera"/>
 
     <SwitchPreferenceCompat
         android:key="gesture_double_tap_power"
         android:title="@string/double_tap_power_for_camera_title"
         android:summary="@string/double_tap_power_for_camera_summary"
-        app:keywords="@string/keywords_gesture"
-        app:controller="com.android.settings.gestures.DoubleTapPowerToOpenCameraPreferenceController"/>
+        settings:keywords="@string/keywords_gesture"
+        settings:controller="com.android.settings.gestures.DoubleTapPowerToOpenCameraPreferenceController"/>
 
 </PreferenceScreen>

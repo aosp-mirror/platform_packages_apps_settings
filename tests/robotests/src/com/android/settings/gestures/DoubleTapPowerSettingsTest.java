@@ -20,6 +20,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.provider.SearchIndexableResource;
 
+import com.android.settings.R;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,10 +41,16 @@ public class DoubleTapPowerSettingsTest {
     }
 
     @Test
+    public void getPreferenceResId_returnsResId() {
+        assertThat(mSettings.getPreferenceScreenResId())
+                .isEqualTo(R.xml.double_tap_power_to_open_camera_settings);
+    }
+
+    @Test
     public void testSearchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
-            DoubleTapPowerSettings.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
-                RuntimeEnvironment.application, true /* enabled */);
+                DoubleTapPowerSettings.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
+                        RuntimeEnvironment.application, true /* enabled */);
 
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mSettings.getPreferenceScreenResId());
