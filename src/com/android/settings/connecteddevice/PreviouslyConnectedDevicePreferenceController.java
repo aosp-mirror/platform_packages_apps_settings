@@ -170,34 +170,36 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
 
     /** Sort the preferenceGroup by most recently used. */
     public void updatePreferenceGroup() {
-        mPreferenceGroup.removeAll();
-        if (mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()) {
-            // Bluetooth is supported
-            int order = 0;
-            for (BluetoothDevice device : mBluetoothAdapter.getMostRecentlyConnectedDevices()) {
-                Preference preference = mDevicePreferenceMap.getOrDefault(device, null);
-                if (preference != null) {
-                    Log.d(TAG, "Adding preference with order " + order + " when there are "
-                            + mPreferenceGroup.getPreferenceCount());
+        mContext.getMainExecutor().execute(() -> {
+            mPreferenceGroup.removeAll();
+            if (mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()) {
+                // Bluetooth is supported
+                int order = 0;
+                for (BluetoothDevice device : mBluetoothAdapter.getMostRecentlyConnectedDevices()) {
+                    Preference preference = mDevicePreferenceMap.getOrDefault(device, null);
+                    if (preference != null) {
+                        Log.d(TAG, "Adding preference with order " + order + " when there are "
+                                + mPreferenceGroup.getPreferenceCount());
+                        preference.setOrder(order);
+                        mPreferenceGroup.addPreference(preference);
+                        order += 1;
+                    }
+                    if (order == MAX_DEVICE_NUM) {
+                        break;
+                    }
+                }
+                for (Preference preference : mDockDevicesList) {
+                    if (order == MAX_DEVICE_NUM) {
+                        break;
+                    }
                     preference.setOrder(order);
                     mPreferenceGroup.addPreference(preference);
                     order += 1;
                 }
-                if (order == MAX_DEVICE_NUM) {
-                    break;
-                }
             }
-            for (Preference preference : mDockDevicesList) {
-                if (order == MAX_DEVICE_NUM) {
-                    break;
-                }
-                preference.setOrder(order);
-                mPreferenceGroup.addPreference(preference);
-                order += 1;
-            }
-        }
-        mPreferenceGroup.addPreference(mSeeAllPreference);
-        updatePreferenceVisibility();
+            mPreferenceGroup.addPreference(mSeeAllPreference);
+            updatePreferenceVisibility();
+        });
     }
 
     @VisibleForTesting
