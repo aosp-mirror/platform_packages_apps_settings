@@ -17,6 +17,7 @@
 package com.android.settings.biometrics.fingerprint;
 
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_POWER_BUTTON;
+import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_REAR;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_OPTICAL;
 
 import static com.android.settings.biometrics.BiometricEnrollBase.BIOMETRIC_AUTH_REQUEST;
@@ -352,6 +353,48 @@ public class FingerprintSettingsFragmentTest {
 
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(addPref.isEnabled()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    public void testCheckEnrolledShown_whenAtLeastOneFingerprintEnrolled_Udfps() {
+        final Fingerprint fingerprint = new Fingerprint("Test", 0, 0);
+        doReturn(List.of(fingerprint)).when(mFingerprintManager).getEnrolledFingerprints(anyInt());
+        setUpFragment(false, PRIMARY_USER_ID, TYPE_UDFPS_OPTICAL, 5);
+
+        shadowOf(Looper.getMainLooper()).idle();
+
+        final Preference checkEnrolledPerf =
+                mFragment.findPreference("key_fingerprint_check_enrolled");
+        assertThat(checkEnrolledPerf).isNotNull();
+        assertThat(checkEnrolledPerf.isVisible()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    public void testCheckEnrolledHide_whenNoFingerprintEnrolled_Udfps() {
+        doReturn(List.of()).when(mFingerprintManager).getEnrolledFingerprints(anyInt());
+        setUpFragment(false, PRIMARY_USER_ID, TYPE_UDFPS_OPTICAL, 5);
+
+        shadowOf(Looper.getMainLooper()).idle();
+
+        final Preference checkEnrolledPerf =
+                mFragment.findPreference("key_fingerprint_check_enrolled");
+        assertThat(checkEnrolledPerf).isNull();
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    public void testCheckEnrolledHide_nonUdfps() {
+        final Fingerprint fingerprint = new Fingerprint("Test", 0, 0);
+        doReturn(List.of(fingerprint)).when(mFingerprintManager).getEnrolledFingerprints(anyInt());
+        setUpFragment(false, PRIMARY_USER_ID, TYPE_REAR, 5);
+
+        shadowOf(Looper.getMainLooper()).idle();
+
+        final Preference checkEnrolledPerf =
+                mFragment.findPreference("key_fingerprint_check_enrolled");
+        assertThat(checkEnrolledPerf).isNull();
     }
 
     private void setSensor(@FingerprintSensorProperties.SensorType int sensorType,
