@@ -114,7 +114,7 @@ public class SatelliteSettingsPreferenceCategoryControllerTest {
                 new int[]{SERVICE_TYPE_DATA});
 
         assertThat(preferenceCategory.getTitle()).isEqualTo(
-                mContext.getString(R.string.satellite_setting_connectivity));
+                mContext.getString(R.string.title_satellite_setting_connectivity));
     }
 
 
