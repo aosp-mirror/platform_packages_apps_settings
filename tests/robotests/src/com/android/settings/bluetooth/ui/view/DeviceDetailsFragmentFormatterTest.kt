@@ -39,6 +39,7 @@ import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSetti
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingStateModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.ToggleModel
+import com.android.settingslib.core.AbstractPreferenceController
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
@@ -73,6 +74,9 @@ class DeviceDetailsFragmentFormatterTest {
     @Mock private lateinit var cachedDevice: CachedBluetoothDevice
     @Mock private lateinit var bluetoothAdapter: BluetoothAdapter
     @Mock private lateinit var repository: DeviceSettingRepository
+    @Mock private lateinit var profileController: AbstractPreferenceController
+    @Mock private lateinit var headerController: AbstractPreferenceController
+    @Mock private lateinit var buttonController: AbstractPreferenceController
 
     private lateinit var context: Context
     private lateinit var fragment: TestFragment
@@ -98,53 +102,20 @@ class DeviceDetailsFragmentFormatterTest {
         fragment.preferenceScreen.run {
             addPreference(Preference(context).apply { key = "bluetooth_device_header" })
             addPreference(Preference(context).apply { key = "action_buttons" })
-            addPreference(Preference(context).apply { key = "keyboard_settings" })
+            addPreference(Preference(context).apply { key = "bluetooth_profiles" })
         }
+        `when`(profileController.preferenceKey).thenReturn("bluetooth_profiles")
+        `when`(headerController.preferenceKey).thenReturn("bluetooth_device_header")
+        `when`(buttonController.preferenceKey).thenReturn("action_buttons")
 
         underTest =
             DeviceDetailsFragmentFormatterImpl(
                 context,
                 fragment,
+                listOf(profileController, headerController, buttonController),
                 bluetoothAdapter,
                 cachedDevice,
                 testScope.testScheduler)
-    }
-
-    @Test
-    fun getVisiblePreferenceKeysForMainPage_hasConfig_returnList() {
-        testScope.runTest {
-            `when`(repository.getDeviceSettingsConfig(cachedDevice))
-                .thenReturn(
-                    DeviceSettingConfigModel(
-                        listOf(
-                            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
-                                DeviceSettingId.DEVICE_SETTING_ID_HEADER,
-                                highlighted = false,
-                                preferenceKey = "bluetooth_device_header"
-                            ),
-                            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
-                                DeviceSettingId.DEVICE_SETTING_ID_ACTION_BUTTONS, highlighted = false, preferenceKey = "action_buttons"),
-                        ),
-                        listOf(),
-                        null))
-
-            val keys =
-                underTest.getVisiblePreferenceKeys(FragmentTypeModel.DeviceDetailsMainFragment)
-
-            assertThat(keys).containsExactly("bluetooth_device_header", "action_buttons")
-        }
-    }
-
-    @Test
-    fun getVisiblePreferenceKeysForMainPage_noConfig_returnNull() {
-        testScope.runTest {
-            `when`(repository.getDeviceSettingsConfig(cachedDevice)).thenReturn(null)
-
-            val keys =
-                underTest.getVisiblePreferenceKeys(FragmentTypeModel.DeviceDetailsMainFragment)
-
-            assertThat(keys).isNull()
-        }
     }
 
     @Test
@@ -187,7 +158,7 @@ class DeviceDetailsFragmentFormatterTest {
             underTest.updateLayout(FragmentTypeModel.DeviceDetailsMainFragment)
 
             assertThat(getDisplayedPreferences().mapNotNull { it.key })
-                .containsExactly("bluetooth_device_header", "action_buttons", "keyboard_settings")
+                .containsExactly("bluetooth_device_header", "action_buttons", "bluetooth_profiles")
         }
     }
 
@@ -202,8 +173,8 @@ class DeviceDetailsFragmentFormatterTest {
                                 DeviceSettingId.DEVICE_SETTING_ID_HEADER,
                                 highlighted = false, preferenceKey = "bluetooth_device_header"),
                             DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
-                                DeviceSettingId.DEVICE_SETTING_ID_KEYBOARD_SETTINGS,
-                                highlighted = false, preferenceKey = "keyboard_settings"),
+                                DeviceSettingId.DEVICE_SETTING_ID_BLUETOOTH_PROFILES,
+                                highlighted = false, preferenceKey = "bluetooth_profiles"),
                         ),
                         listOf(),
                         null))
@@ -212,7 +183,7 @@ class DeviceDetailsFragmentFormatterTest {
             runCurrent()
 
             assertThat(getDisplayedPreferences().mapNotNull { it.key })
-                .containsExactly("bluetooth_device_header", "keyboard_settings")
+                .containsExactly("bluetooth_device_header", "bluetooth_profiles")
             verify(featureFactory.metricsFeatureProvider)
                 .action(
                     SettingsEnums.PAGE_UNKNOWN,
@@ -224,7 +195,7 @@ class DeviceDetailsFragmentFormatterTest {
                     SettingsEnums.PAGE_UNKNOWN,
                     SettingsEnums.ACTION_BLUETOOTH_DEVICE_DETAILS_ITEM_SHOWN,
                     0,
-                    "keyboard_settings", 1)
+                    "bluetooth_profiles", 1)
         }
     }
 
@@ -242,9 +213,9 @@ class DeviceDetailsFragmentFormatterTest {
                             DeviceSettingConfigItemModel.AppProvidedItem(
                                 DeviceSettingId.DEVICE_SETTING_ID_ANC, highlighted = false),
                             DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
-                                DeviceSettingId.DEVICE_SETTING_ID_KEYBOARD_SETTINGS,
+                                DeviceSettingId.DEVICE_SETTING_ID_BLUETOOTH_PROFILES,
                                 highlighted = false,
-                                preferenceKey = "keyboard_settings"),
+                                preferenceKey = "bluetooth_profiles"),
                         ),
                         listOf(),
                         null))
@@ -273,7 +244,7 @@ class DeviceDetailsFragmentFormatterTest {
                 .containsExactly(
                     "bluetooth_device_header",
                     "DEVICE_SETTING_${DeviceSettingId.DEVICE_SETTING_ID_ANC}",
-                    "keyboard_settings")
+                    "bluetooth_profiles")
             verify(featureFactory.metricsFeatureProvider)
                 .action(
                     SettingsEnums.PAGE_UNKNOWN,

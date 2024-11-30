@@ -23,6 +23,7 @@ import androidx.annotation.DrawableRes
 import com.android.settings.R
 import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 
 // LINT.IfChange
@@ -34,6 +35,9 @@ class AirplaneModePreference :
         @DrawableRes get() = R.drawable.ic_airplanemode_active
 
     override fun storage(context: Context) = SettingsGlobalStore.get(context)
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.HIGH_SENSITIVITY
 
     override fun isAvailable(context: Context) =
         (context.resources.getBoolean(R.bool.config_show_toggle_airplane)
