@@ -27,7 +27,6 @@ import android.sysprop.BluetoothProperties;
 import android.text.TextUtils;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -109,28 +108,34 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             PreferenceFragmentCompat fragment,
             LocalBluetoothManager manager,
             CachedBluetoothDevice device,
-            Lifecycle lifecycle,
-            @Nullable List<String> invisibleProfiles,
-            boolean hasExtraSpace) {
+            Lifecycle lifecycle) {
         super(context, fragment, device, lifecycle);
         mManager = manager;
         mProfileManager = mManager.getProfileManager();
         mCachedDevice = device;
         mCachedDeviceGroup = Utils.findAllCachedBluetoothDevicesByGroupId(mManager, mCachedDevice);
+    }
+
+    /** Sets the profiles to be hidden. */
+    public void setInvisibleProfiles(List<String> invisibleProfiles) {
         if (invisibleProfiles != null) {
             mInvisibleProfiles = Set.copyOf(invisibleProfiles);
         }
-        mHasExtraSpace = hasExtraSpace;
     }
 
-    @Override
-    protected void init(PreferenceScreen screen) {
-        mProfilesContainer = (PreferenceCategory)screen.findPreference(getPreferenceKey());
-        if (mHasExtraSpace) {
+    /** Sets whether it should show an extra padding on top of the preference. */
+    public void setHasExtraSpace(boolean hasExtraSpace) {
+        if (hasExtraSpace) {
             mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
         } else {
             mProfilesContainer.setLayoutResource(R.layout.preference_category_bluetooth_no_padding);
         }
+    }
+
+    @Override
+    protected void init(PreferenceScreen screen) {
+        mProfilesContainer = (PreferenceCategory) screen.findPreference(getPreferenceKey());
+        mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
         // Call refresh here even though it will get called later in onResume, to avoid the
         // list of switches appearing to "pop" into the page.
         refresh();
