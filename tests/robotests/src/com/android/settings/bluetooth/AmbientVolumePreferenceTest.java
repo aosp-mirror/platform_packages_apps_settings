@@ -57,6 +57,9 @@ import java.util.Map;
 @RunWith(RobolectricTestRunner.class)
 public class AmbientVolumePreferenceTest {
 
+    private static final int TEST_LEFT_VOLUME_LEVEL = 1;
+    private static final int TEST_RIGHT_VOLUME_LEVEL = 2;
+    private static final int TEST_UNIFIED_VOLUME_LEVEL = 3;
     private static final String KEY_UNIFIED_SLIDER = KEY_AMBIENT_VOLUME_SLIDER + "_" + SIDE_UNIFIED;
     private static final String KEY_LEFT_SLIDER = KEY_AMBIENT_VOLUME_SLIDER + "_" + SIDE_LEFT;
     private static final String KEY_RIGHT_SLIDER = KEY_AMBIENT_VOLUME_SLIDER + "_" + SIDE_RIGHT;
@@ -72,6 +75,7 @@ public class AmbientVolumePreferenceTest {
 
     private AmbientVolumePreference mPreference;
     private ImageView mExpandIcon;
+    private ImageView mVolumeIcon;
     private final Map<Integer, SeekBarPreference> mSideToSlidersMap = new ArrayMap<>();
 
     @Before
@@ -82,13 +86,19 @@ public class AmbientVolumePreferenceTest {
         mPreference.setKey(KEY_AMBIENT_VOLUME);
         mPreference.setOnIconClickListener(mListener);
         mPreference.setExpandable(true);
+        mPreference.setMutable(true);
         preferenceScreen.addPreference(mPreference);
 
         prepareSliders();
         mPreference.setSliders(mSideToSlidersMap);
 
         mExpandIcon = new ImageView(mContext);
+        mVolumeIcon = new ImageView(mContext);
+        mVolumeIcon.setImageResource(com.android.settingslib.R.drawable.ic_ambient_volume);
+        mVolumeIcon.setImageLevel(0);
         when(mItemView.requireViewById(R.id.expand_icon)).thenReturn(mExpandIcon);
+        when(mItemView.requireViewById(com.android.internal.R.id.icon)).thenReturn(mVolumeIcon);
+        when(mItemView.requireViewById(R.id.icon_frame)).thenReturn(mVolumeIcon);
 
         PreferenceViewHolder preferenceViewHolder = PreferenceViewHolder.createInstanceForTests(
                 mItemView);
@@ -123,6 +133,77 @@ public class AmbientVolumePreferenceTest {
         assertControlUiCorrect();
     }
 
+    @Test
+    public void setMutable_mutable_clickOnMuteIconChangeMuteState() {
+        mPreference.setMutable(true);
+        mPreference.setMuted(false);
+
+        mVolumeIcon.callOnClick();
+
+        assertThat(mPreference.isMuted()).isTrue();
+    }
+
+    @Test
+    public void setMutable_notMutable_clickOnMuteIconWontChangeMuteState() {
+        mPreference.setMutable(false);
+        mPreference.setMuted(false);
+
+        mVolumeIcon.callOnClick();
+
+        assertThat(mPreference.isMuted()).isFalse();
+    }
+
+    @Test
+    public void updateLayout_mute_volumeIconIsCorrect() {
+        mPreference.setMuted(true);
+        mPreference.updateLayout();
+
+        assertThat(mVolumeIcon.getDrawable().getLevel()).isEqualTo(0);
+    }
+
+    @Test
+    public void updateLayout_unmuteAndExpanded_volumeIconIsCorrect() {
+        mPreference.setMuted(false);
+        mPreference.setExpanded(true);
+        mPreference.updateLayout();
+
+        int expectedLevel = calculateVolumeLevel(TEST_LEFT_VOLUME_LEVEL, TEST_RIGHT_VOLUME_LEVEL);
+        assertThat(mVolumeIcon.getDrawable().getLevel()).isEqualTo(expectedLevel);
+    }
+
+    @Test
+    public void updateLayout_unmuteAndNotExpanded_volumeIconIsCorrect() {
+        mPreference.setMuted(false);
+        mPreference.setExpanded(false);
+        mPreference.updateLayout();
+
+        int expectedLevel = calculateVolumeLevel(TEST_UNIFIED_VOLUME_LEVEL,
+                TEST_UNIFIED_VOLUME_LEVEL);
+        assertThat(mVolumeIcon.getDrawable().getLevel()).isEqualTo(expectedLevel);
+    }
+
+    @Test
+    public void setSliderEnabled_expandedAndLeftIsDisabled_volumeIconIcCorrect() {
+        mPreference.setExpanded(true);
+        mPreference.setSliderEnabled(SIDE_LEFT, false);
+
+        int expectedLevel = calculateVolumeLevel(0, TEST_RIGHT_VOLUME_LEVEL);
+        assertThat(mVolumeIcon.getDrawable().getLevel()).isEqualTo(expectedLevel);
+    }
+
+    @Test
+    public void setSliderValue_expandedAndLeftValueChanged_volumeIconIcCorrect() {
+        mPreference.setExpanded(true);
+        mPreference.setSliderValue(SIDE_LEFT, 4);
+
+        int expectedLevel = calculateVolumeLevel(4, TEST_RIGHT_VOLUME_LEVEL);
+        assertThat(mVolumeIcon.getDrawable().getLevel()).isEqualTo(expectedLevel);
+    }
+
+    private int calculateVolumeLevel(int left, int right) {
+        return left * 5 + right;
+    }
+
     private void assertControlUiCorrect() {
         final boolean expanded = mPreference.isExpanded();
         assertThat(mSideToSlidersMap.get(SIDE_UNIFIED).isVisible()).isEqualTo(!expanded);
@@ -140,12 +221,17 @@ public class AmbientVolumePreferenceTest {
 
     private void prepareSlider(int side) {
         SeekBarPreference slider = new SeekBarPreference(mContext);
+        slider.setMin(0);
+        slider.setMax(4);
         if (side == SIDE_LEFT) {
             slider.setKey(KEY_LEFT_SLIDER);
+            slider.setProgress(TEST_LEFT_VOLUME_LEVEL);
         } else if (side == SIDE_RIGHT) {
             slider.setKey(KEY_RIGHT_SLIDER);
+            slider.setProgress(TEST_RIGHT_VOLUME_LEVEL);
         } else {
             slider.setKey(KEY_UNIFIED_SLIDER);
+            slider.setProgress(TEST_UNIFIED_VOLUME_LEVEL);
         }
         mSideToSlidersMap.put(side, slider);
     }

@@ -17,6 +17,8 @@
 package com.android.settings.bluetooth;
 
 import static android.view.View.GONE;
+import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO;
+import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_YES;
 import static android.view.View.VISIBLE;
 
 import static com.android.settingslib.bluetooth.HearingAidInfo.DeviceSide.SIDE_LEFT;
@@ -25,6 +27,7 @@ import static com.android.settingslib.bluetooth.HearingAidInfo.DeviceSide.SIDE_R
 import android.content.Context;
 import android.util.ArrayMap;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +36,8 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.widget.SeekBarPreference;
+
+import com.google.common.primitives.Ints;
 
 import java.util.List;
 import java.util.Map;
@@ -50,10 +55,16 @@ public class AmbientVolumePreference extends PreferenceGroup {
     public interface OnIconClickListener {
         /** Called when the expand icon is clicked. */
         void onExpandIconClick();
+
+        /** Called when the ambient volume icon is clicked. */
+        void onAmbientVolumeIconClick();
     };
 
     static final float ROTATION_COLLAPSED = 0f;
     static final float ROTATION_EXPANDED = 180f;
+    static final int AMBIENT_VOLUME_LEVEL_MIN = 0;
+    static final int AMBIENT_VOLUME_LEVEL_MAX = 24;
+    static final int AMBIENT_VOLUME_LEVEL_DEFAULT = 24;
     static final int SIDE_UNIFIED = 999;
     static final List<Integer> VALID_SIDES = List.of(SIDE_UNIFIED, SIDE_LEFT, SIDE_RIGHT);
 
@@ -61,9 +72,32 @@ public class AmbientVolumePreference extends PreferenceGroup {
     private OnIconClickListener mListener;
     @Nullable
     private View mExpandIcon;
+    @Nullable
+    private ImageView mVolumeIcon;
     private boolean mExpandable = true;
     private boolean mExpanded = false;
+    private boolean mMutable = false;
+    private boolean mMuted = false;
     private Map<Integer, SeekBarPreference> mSideToSliderMap = new ArrayMap<>();
+
+    /**
+     * Ambient volume level for hearing device ambient control icon
+     * <p>
+     * This icon visually represents the current ambient gain setting.
+     * It displays separate levels for the left and right sides, each with 5 levels ranging from 0
+     * to 4.
+     * <p>
+     * To represent the combined left/right levels with a single value, the following calculation
+     * is used:
+     *      finalLevel = (leftLevel * 5) + rightLevel
+     * For example:
+     * <ul>
+     *    <li>If left level is 2 and right level is 3, the final level will be 13 (2 * 5 + 3)</li>
+     *    <li>If both left and right levels are 0, the final level will be 0</li>
+     *    <li>If both left and right levels are 4, the final level will be 24</li>
+     * </ul>
+     */
+    private int mVolumeLevel = AMBIENT_VOLUME_LEVEL_DEFAULT;
 
     public AmbientVolumePreference(@NonNull Context context) {
         super(context, null);
@@ -78,6 +112,21 @@ public class AmbientVolumePreference extends PreferenceGroup {
         super.onBindViewHolder(holder);
         holder.setDividerAllowedAbove(false);
         holder.setDividerAllowedBelow(false);
+
+        mVolumeIcon = holder.itemView.requireViewById(com.android.internal.R.id.icon);
+        mVolumeIcon.getDrawable().mutate().setTint(getContext().getColor(
+                com.android.internal.R.color.materialColorOnPrimaryContainer));
+        final View iconView = holder.itemView.requireViewById(R.id.icon_frame);
+        iconView.setOnClickListener(v -> {
+            if (!mMutable) {
+                return;
+            }
+            setMuted(!mMuted);
+            if (mListener != null) {
+                mListener.onAmbientVolumeIconClick();
+            }
+        });
+        updateVolumeIcon();
 
         mExpandIcon = holder.itemView.requireViewById(R.id.expand_icon);
         mExpandIcon.setOnClickListener(v -> {
@@ -114,6 +163,36 @@ public class AmbientVolumePreference extends PreferenceGroup {
         return mExpanded;
     }
 
+    void setMutable(boolean mutable) {
+        mMutable = mutable;
+        if (!mMutable) {
+            mVolumeLevel = AMBIENT_VOLUME_LEVEL_DEFAULT;
+            setMuted(false);
+        }
+        updateVolumeIcon();
+    }
+
+    boolean isMutable() {
+        return mMutable;
+    }
+
+    void setMuted(boolean muted) {
+        if (!mMutable && muted) {
+            return;
+        }
+        mMuted = muted;
+        if (mMutable && mMuted) {
+            for (SeekBarPreference slider : mSideToSliderMap.values()) {
+                slider.setProgress(slider.getMin());
+            }
+        }
+        updateVolumeIcon();
+    }
+
+    boolean isMuted() {
+        return mMuted;
+    }
+
     void setOnIconClickListener(@Nullable OnIconClickListener listener) {
         mListener = listener;
     }
@@ -140,6 +219,7 @@ public class AmbientVolumePreference extends PreferenceGroup {
         SeekBarPreference slider = mSideToSliderMap.get(side);
         if (slider != null && slider.getProgress() != value) {
             slider.setProgress(value);
+            updateVolumeLevel();
         }
     }
 
@@ -162,6 +242,34 @@ public class AmbientVolumePreference extends PreferenceGroup {
                 slider.setProgress(slider.getMin());
             }
         });
+        updateVolumeLevel();
+    }
+
+    private void updateVolumeLevel() {
+        int leftLevel, rightLevel;
+        if (mExpanded) {
+            leftLevel = getVolumeLevel(SIDE_LEFT);
+            rightLevel = getVolumeLevel(SIDE_RIGHT);
+        } else {
+            final int unifiedLevel = getVolumeLevel(SIDE_UNIFIED);
+            leftLevel = unifiedLevel;
+            rightLevel = unifiedLevel;
+        }
+        mVolumeLevel = Ints.constrainToRange(leftLevel * 5 + rightLevel,
+                AMBIENT_VOLUME_LEVEL_MIN, AMBIENT_VOLUME_LEVEL_MAX);
+        updateVolumeIcon();
+    }
+
+    private int getVolumeLevel(int side) {
+        SeekBarPreference slider = mSideToSliderMap.get(side);
+        if (slider == null || !slider.isEnabled()) {
+            return 0;
+        }
+        final double min = slider.getMin();
+        final double max = slider.getMax();
+        final double levelGap = (max - min) / 4.0;
+        final int value = slider.getProgress();
+        return (int) Math.ceil((value - min) / levelGap);
     }
 
     private void updateExpandIcon() {
@@ -177,6 +285,23 @@ public class AmbientVolumePreference extends PreferenceGroup {
             mExpandIcon.setContentDescription(getContext().getString(stringRes));
         } else {
             mExpandIcon.setContentDescription(null);
+        }
+    }
+
+    private void updateVolumeIcon() {
+        if (mVolumeIcon == null) {
+            return;
+        }
+        mVolumeIcon.setImageLevel(mMuted ? 0 : mVolumeLevel);
+        if (mMutable) {
+            final int stringRes = mMuted
+                    ? R.string.bluetooth_ambient_volume_unmute
+                    : R.string.bluetooth_ambient_volume_mute;
+            mVolumeIcon.setContentDescription(getContext().getString(stringRes));
+            mVolumeIcon.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
+        }  else {
+            mVolumeIcon.setContentDescription(null);
+            mVolumeIcon.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
         }
     }
 }

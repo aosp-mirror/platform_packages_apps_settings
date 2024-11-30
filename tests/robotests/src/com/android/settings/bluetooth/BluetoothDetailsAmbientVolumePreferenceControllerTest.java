@@ -16,6 +16,9 @@
 
 package com.android.settings.bluetooth;
 
+import static android.bluetooth.AudioInputControl.MUTE_DISABLED;
+import static android.bluetooth.AudioInputControl.MUTE_NOT_MUTED;
+import static android.bluetooth.AudioInputControl.MUTE_MUTED;
 import static android.bluetooth.BluetoothDevice.BOND_BONDED;
 
 import static com.android.settings.bluetooth.BluetoothDetailsAmbientVolumePreferenceController.KEY_AMBIENT_VOLUME;
@@ -71,6 +74,7 @@ import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowSettings;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executor;
@@ -135,6 +139,9 @@ public class BluetoothDetailsAmbientVolumePreferenceControllerTest extends
                 BluetoothProfile.STATE_CONNECTED);
         when(mVolumeControlProfile.getConnectionStatus(mMemberDevice)).thenReturn(
                 BluetoothProfile.STATE_CONNECTED);
+        when(mCachedDevice.getProfiles()).thenReturn(List.of(mVolumeControlProfile));
+        when(mLocalDataManager.get(any(BluetoothDevice.class))).thenReturn(
+                new HearingDeviceLocalDataManager.Data.Builder().build());
 
         when(mContext.getMainThreadHandler()).thenReturn(mTestHandler);
         when(mTestHandler.postDelayed(any(Runnable.class), anyLong())).thenAnswer(
@@ -307,6 +314,68 @@ public class BluetoothDetailsAmbientVolumePreferenceControllerTest extends
         verify(mController).refresh();
     }
 
+    @Test
+    public void onMuteChanged_refreshWhenNotInitiateFromUi() {
+        prepareDevice(/* hasMember= */ false);
+        mController.init(mScreen);
+        final int testMute = MUTE_NOT_MUTED;
+        AmbientVolumeController.RemoteAmbientState state =
+                new AmbientVolumeController.RemoteAmbientState(testMute, 0);
+        when(mVolumeController.refreshAmbientState(mDevice)).thenReturn(state);
+        getPreference().setMuted(false);
+
+        mController.onMuteChanged(mDevice, testMute);
+        verify(mController, never()).refresh();
+
+        final int updatedTestMute = MUTE_MUTED;
+        mController.onMuteChanged(mDevice, updatedTestMute);
+        verify(mController).refresh();
+    }
+
+    @Test
+    public void refresh_leftAndRightDifferentGainSetting_expandControl() {
+        prepareDevice(/* hasMember= */ true);
+        mController.init(mScreen);
+        prepareRemoteData(mDevice, 10, MUTE_NOT_MUTED);
+        prepareRemoteData(mMemberDevice, 20, MUTE_NOT_MUTED);
+        getPreference().setExpanded(false);
+
+        mController.refresh();
+
+        assertThat(getPreference().isExpanded()).isTrue();
+    }
+
+    @Test
+    public void refresh_oneSideNotMutable_controlNotMutableAndNotMuted() {
+        prepareDevice(/* hasMember= */ true);
+        mController.init(mScreen);
+        prepareRemoteData(mDevice, 10, MUTE_DISABLED);
+        prepareRemoteData(mMemberDevice, 20, MUTE_NOT_MUTED);
+        getPreference().setMutable(true);
+        getPreference().setMuted(true);
+
+        mController.refresh();
+
+        assertThat(getPreference().isMutable()).isFalse();
+        assertThat(getPreference().isMuted()).isFalse();
+    }
+
+    @Test
+    public void refresh_oneSideNotMuted_controlNotMutedAndSyncToRemote() {
+        prepareDevice(/* hasMember= */ true);
+        mController.init(mScreen);
+        prepareRemoteData(mDevice, 10, MUTE_MUTED);
+        prepareRemoteData(mMemberDevice, 20, MUTE_NOT_MUTED);
+        getPreference().setMutable(true);
+        getPreference().setMuted(true);
+
+        mController.refresh();
+
+        assertThat(getPreference().isMutable()).isTrue();
+        assertThat(getPreference().isMuted()).isFalse();
+        verify(mVolumeController).setMuted(mDevice, false);
+    }
+
     private void prepareDevice(boolean hasMember) {
         when(mCachedDevice.getDeviceSide()).thenReturn(SIDE_LEFT);
         when(mCachedDevice.getDevice()).thenReturn(mDevice);
@@ -323,6 +392,12 @@ public class BluetoothDetailsAmbientVolumePreferenceControllerTest extends
             when(mMemberDevice.getAnonymizedAddress()).thenReturn(TEST_MEMBER_ADDRESS);
             when(mMemberDevice.isConnected()).thenReturn(true);
         }
+    }
+
+    private void prepareRemoteData(BluetoothDevice device, int gainSetting, int mute) {
+        when(mVolumeController.isAmbientControlAvailable(device)).thenReturn(true);
+        when(mVolumeController.refreshAmbientState(device)).thenReturn(
+                new AmbientVolumeController.RemoteAmbientState(gainSetting, mute));
     }
 
     private void verifyDeviceDataUpdated(BluetoothDevice device) {

@@ -16,6 +16,8 @@
 
 package com.android.settings.bluetooth;
 
+import static android.bluetooth.AudioInputControl.MUTE_NOT_MUTED;
+import static android.bluetooth.AudioInputControl.MUTE_MUTED;
 import static android.bluetooth.BluetoothDevice.BOND_BONDED;
 
 import static com.android.settings.bluetooth.AmbientVolumePreference.SIDE_UNIFIED;
@@ -180,9 +182,8 @@ public class BluetoothDetailsAmbientVolumePreferenceController extends
 
     @Override
     public boolean isAvailable() {
-        boolean isDeviceSupportVcp = mCachedDevice.getProfiles().stream().anyMatch(
+        return mCachedDevice.getProfiles().stream().anyMatch(
                 profile -> profile instanceof VolumeControlProfile);
-        return isDeviceSupportVcp;
     }
 
     @Nullable
@@ -200,11 +201,30 @@ public class BluetoothDetailsAmbientVolumePreferenceController extends
             }
             setVolumeIfValid(side, value);
 
-            if (side == SIDE_UNIFIED) {
-                mSideToDeviceMap.forEach((s, d) -> mVolumeController.setAmbient(d, value));
+            Runnable setAmbientRunnable = () -> {
+                if (side == SIDE_UNIFIED) {
+                    mSideToDeviceMap.forEach((s, d) -> mVolumeController.setAmbient(d, value));
+                } else {
+                    final BluetoothDevice device = mSideToDeviceMap.get(side);
+                    mVolumeController.setAmbient(device, value);
+                }
+            };
+
+            if (isControlMuted()) {
+                // User drag on the volume slider when muted. Unmute the devices first.
+                if (mPreference != null) {
+                    mPreference.setMuted(false);
+                }
+                for (BluetoothDevice device : mSideToDeviceMap.values()) {
+                    mVolumeController.setMuted(device, false);
+                }
+                // Restore the value before muted
+                loadLocalDataToUi();
+                // Delay set ambient on remote device since the immediately sequential command
+                // might get failed sometimes
+                mContext.getMainThreadHandler().postDelayed(setAmbientRunnable, 1000L);
             } else {
-                final BluetoothDevice device = mSideToDeviceMap.get(side);
-                mVolumeController.setAmbient(device, value);
+                setAmbientRunnable.run();
             }
             return true;
         }
@@ -285,6 +305,24 @@ public class BluetoothDetailsAmbientVolumePreferenceController extends
     }
 
     @Override
+    public void onMuteChanged(@NonNull BluetoothDevice device, int mute) {
+        if (DEBUG) {
+            Log.d(TAG, "onMuteChanged, mute:" + mute + ", device:" + device);
+        }
+        boolean isInitiatedFromUi = (isControlMuted() && mute == MUTE_MUTED)
+                || (!isControlMuted() && mute == MUTE_NOT_MUTED);
+        if (isInitiatedFromUi) {
+            // The change is initiated from UI, no need to update UI
+            return;
+        }
+
+        // We have to check if we need to mute the devices by getting all remote
+        // device's mute state, delay for a while to wait all remote devices update
+        // to the latest value.
+        mContext.getMainThreadHandler().postDelayed(this::refresh, 1200L);
+    }
+
+    @Override
     public void onCommandFailed(@NonNull BluetoothDevice device) {
         Log.w(TAG, "onCommandFailed, device:" + device);
         mContext.getMainExecutor().execute(() -> {
@@ -324,17 +362,33 @@ public class BluetoothDetailsAmbientVolumePreferenceController extends
         mPreference = new AmbientVolumePreference(mDeviceControls.getContext());
         mPreference.setKey(KEY_AMBIENT_VOLUME);
         mPreference.setOrder(ORDER_AMBIENT_VOLUME);
-        mPreference.setOnIconClickListener(() -> {
-            mSideToDeviceMap.forEach((s, d) -> {
-                // Apply previous collapsed/expanded volume to remote device
-                Data data = mLocalDataManager.get(d);
-                int volume = isControlExpanded()
-                        ? data.ambient() : data.groupAmbient();
-                mVolumeController.setAmbient(d, volume);
-                // Update new value to local data
-                mLocalDataManager.updateAmbientControlExpanded(d, isControlExpanded());
-            });
-        });
+        mPreference.setOnIconClickListener(
+                new AmbientVolumePreference.OnIconClickListener() {
+                    @Override
+                    public void onExpandIconClick() {
+                        mSideToDeviceMap.forEach((s, d) -> {
+                            if (!isControlMuted()) {
+                                // Apply previous collapsed/expanded volume to remote device
+                                Data data = mLocalDataManager.get(d);
+                                int volume = isControlExpanded()
+                                        ? data.ambient() : data.groupAmbient();
+                                mVolumeController.setAmbient(d, volume);
+                            }
+                            // Update new value to local data
+                            mLocalDataManager.updateAmbientControlExpanded(d, isControlExpanded());
+                        });
+                    }
+
+                    @Override
+                    public void onAmbientVolumeIconClick() {
+                        if (!isControlMuted()) {
+                            loadLocalDataToUi();
+                        }
+                        for (BluetoothDevice device : mSideToDeviceMap.values()) {
+                            mVolumeController.setMuted(device, isControlMuted());
+                        }
+                    }
+                });
         if (mDeviceControls.findPreference(mPreference.getKey()) == null) {
             mDeviceControls.addPreference(mPreference);
         }
@@ -406,7 +460,7 @@ public class BluetoothDetailsAmbientVolumePreferenceController extends
             Log.d(TAG, "loadLocalDataToUi, data=" + data + ", device=" + device);
         }
         final int side = mSideToDeviceMap.inverse().getOrDefault(device, SIDE_INVALID);
-        if (isDeviceConnectedToVcp(device)) {
+        if (isDeviceConnectedToVcp(device) && !isControlMuted()) {
             setVolumeIfValid(side, data.ambient());
             setVolumeIfValid(SIDE_UNIFIED, data.groupAmbient());
         }
@@ -456,6 +510,26 @@ public class BluetoothDetailsAmbientVolumePreferenceController extends
         // Initialize local data between side and group value
         initLocalDataIfNeeded();
 
+        // Update mute state
+        boolean mutable = true;
+        boolean muted = true;
+        if (isDeviceConnectedToVcp(leftDevice) && leftState != null) {
+            mutable &= leftState.isMutable();
+            muted &= leftState.isMuted();
+        }
+        if (isDeviceConnectedToVcp(rightDevice) && rightState != null) {
+            mutable &= rightState.isMutable();
+            muted &= rightState.isMuted();
+        }
+        if (mPreference != null) {
+            mPreference.setMutable(mutable);
+            mPreference.setMuted(muted);
+        }
+
+        // Ensure remote device mute state is synced
+        syncMuteStateIfNeeded(leftDevice, leftState, muted);
+        syncMuteStateIfNeeded(rightDevice, rightState, muted);
+
         refreshControlUi();
     }
 
@@ -488,6 +562,10 @@ public class BluetoothDetailsAmbientVolumePreferenceController extends
         });
     }
 
+    private boolean isControlMuted() {
+        return mPreference != null && mPreference.isMuted();
+    }
+
     private void initLocalDataIfNeeded() {
         int smallerVolumeAmongGroup = Integer.MAX_VALUE;
         for (BluetoothDevice device : mSideToDeviceMap.values()) {
@@ -506,6 +584,15 @@ public class BluetoothDetailsAmbientVolumePreferenceController extends
                     // Initialize group ambient from smaller side ambient value
                     mLocalDataManager.updateGroupAmbient(device, smallerVolumeAmongGroup);
                 }
+            }
+        }
+    }
+
+    private void syncMuteStateIfNeeded(@Nullable BluetoothDevice device,
+            @Nullable AmbientVolumeController.RemoteAmbientState state, boolean muted) {
+        if (isDeviceConnectedToVcp(device) && state != null && state.isMutable()) {
+            if (state.isMuted() != muted) {
+                mVolumeController.setMuted(device, muted);
             }
         }
     }
