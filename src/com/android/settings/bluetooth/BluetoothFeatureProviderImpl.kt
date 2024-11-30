@@ -23,13 +23,14 @@ import android.media.AudioManager
 import android.media.Spatializer
 import android.net.Uri
 import androidx.preference.Preference
-import com.android.settings.SettingsPreferenceFragment
 import com.android.settings.bluetooth.ui.view.DeviceDetailsFragmentFormatter
 import com.android.settings.bluetooth.ui.view.DeviceDetailsFragmentFormatterImpl
+import com.android.settings.dashboard.DashboardFragment
 import com.android.settingslib.bluetooth.BluetoothUtils
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepository
 import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepositoryImpl
+import com.android.settingslib.core.AbstractPreferenceController
 import com.google.common.collect.ImmutableList
 import com.google.common.collect.ImmutableSet
 import kotlinx.coroutines.CoroutineScope
@@ -78,13 +79,15 @@ open class BluetoothFeatureProviderImpl : BluetoothFeatureProvider {
 
     override fun getDeviceDetailsFragmentFormatter(
         context: Context,
-        fragment: SettingsPreferenceFragment,
+        fragment: DashboardFragment,
         bluetoothAdapter: BluetoothAdapter,
-        cachedDevice: CachedBluetoothDevice
+        cachedDevice: CachedBluetoothDevice,
+        controllers: List<AbstractPreferenceController>,
     ): DeviceDetailsFragmentFormatter {
         return DeviceDetailsFragmentFormatterImpl(
             context,
             fragment,
+            controllers,
             bluetoothAdapter,
             cachedDevice,
             Dispatchers.IO
