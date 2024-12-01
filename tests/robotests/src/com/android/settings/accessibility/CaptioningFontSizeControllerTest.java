@@ -22,7 +22,6 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.when;
-
 import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;

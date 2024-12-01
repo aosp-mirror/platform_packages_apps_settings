@@ -178,14 +178,10 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"აპის ენა"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"შემოთავაზებული ენები"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"ყველა ენა"</string>
-    <!-- no translation found for suggested_locales_title (119908696638862861) -->
-    <skip />
-    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
-    <skip />
-    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
-    <skip />
-    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
-    <skip />
+    <string name="suggested_locales_title" msgid="119908696638862861">"შემოთავაზებული"</string>
+    <string name="all_supported_locales_title" msgid="2535112632133166546">"ყველა ენა"</string>
+    <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"ყველა რეგიონი"</string>
+    <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"ნუმერაციის ყველა სისტემა"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"სისტემის ენა"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"სისტემის ნაგულისხმევი"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"ამ აპისთვის ენის არჩევა პარამეტრებიდან მიუწვდომელია."</string>
@@ -202,14 +198,15 @@
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s მიუწვდომელია"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"ამ ენის სისტემური ენის სახით გამოყენება შეუძლებელია, მაგრამ აპებს და ვებსაიტებს საშუალება მიეცით, იცოდნენ, რომ ამ ენას ანიჭებთ უპირატესობას."</string>
     <string name="locale_search_menu" msgid="297782694044826686">"ძიება"</string>
-    <!-- no translation found for language_selection_title (968179636453982415) -->
-    <skip />
+    <string name="language_selection_title" msgid="968179636453982415">"ენის დამატება"</string>
     <string name="country_selection_title" msgid="5376929821458644732">"რეგიონის პარამეტრები"</string>
     <string name="search_language_hint" msgid="1739082427104506694">"აკრიფეთ ენის სახელი"</string>
+    <string name="more_language_settings_category" msgid="3669703092480725416">"ენის დამატებითი პარამეტრები"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"რეგიონული პარამეტრები"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"რაოდენობის და საზომი ერთეულების პარამეტრების დაყენება"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"აცნობეთ აპებს თქვენი რეგიონული პარამეტრების შესახებ, რათა მათ თქვენი გამოცდილების პერსონალიზება შეძლოს."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"აპები საჭიროებისამებრ გამოიყენებს თქვენს რეგიონულ პარამეტრებს."</string>
+    <string name="regional_preferences_category_title" msgid="6754667410178749022">"რეგიონული პარამეტრები"</string>
     <string name="temperature_preferences_title" msgid="5009881556503629058">"ტემპერატურა"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"კვირის პირველი დღე"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"ნომრების უპირატესობები"</string>
@@ -912,6 +909,8 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"შეტრიალების ან გარჩევადობის შეცვლამ შეიძლება შეწყვიტოს მიმდინარე აპების მუშაობა"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"თქვენი მოწყობილობა დაკავშირებული უნდა იყოს გარე ეკრანთან, რათა თქვენი ეკრანის გამოსახულების ასლი შეიქმნას"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"სხვა ვარიანტები"</string>
+    <!-- no translation found for external_display_topology_hint (854973327795578470) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"ტრანსლირება"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"გამოსახულების ასლი"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"უსადენო ეკრანის ჩართვა"</string>
@@ -1325,7 +1324,8 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"ძილის დროის რეჟიმის პარამეტრები"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{რეჟიმებმა შეიძლება მუქი თემაც გაააქტიუროს}=1{{mode_1} ასევე ააქტიურებს მუქ თემას}=2{{mode_1} და {mode_2} ასევე ააქტიურებს მუქ თემას}=3{{mode_1}, {mode_2} და {mode_3} ასევე ააქტიურებს მუქ თემას}other{{mode_1}, {mode_2} და # სხვა ასევე ააქტიურებს მუქ თემას}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"რეჟიმების პარამეტრები"</string>
-    <string name="even_dimmer_display_title" msgid="6731255736830410149">"უფრო მეტად დაბნელება"</string>
+    <!-- no translation found for even_dimmer_display_title (4509732439977906028) -->
+    <skip />
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"ჩვეულებრივზე უფრო მეტად დააბნელეთ მოწყობილობა"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ეკრანის დროის ლიმიტი"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> უმოქმედობის შემდეგ"</string>
@@ -2009,6 +2009,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"ქვედა მარჯვენა დაწკაპუნება"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"დამატებითი ვარიანტებისთვის დააწკაპუნეთ სენსორული პანელის ქვედა მარჯვენა კუთხეში"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"მანიშნებლის სიჩქარე"</string>
+    <string name="three_finger_tap_preference_title" msgid="7130739855086106052">"სამი თითის შეხების გამოყენება"</string>
     <string name="pointer_fill_style" msgid="8794616790175016092">"კურსორის ფერი"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"კურსორის სტილის შეცვლა შავად"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"კურსორის სტილის შეცვლა მწვანედ"</string>
@@ -2023,6 +2024,11 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"გაეცანით სენსორული ეკრანის ჟესტებს"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"ტრეკპედი, ტრეკ პედი, მაუსი, კურსორი, გადაადგილება, გადაფურცვლა, მარჯვენა დაწკაპუნება, დაწკაპუნება, მანიშნებელი"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"მარჯვენა დაწკაპუნება, შეხება"</string>
+    <string name="three_finger_tap_middle_click" msgid="5274906692591143158">"შუა დაწკაპუნება"</string>
+    <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"ასისტენტის გაშვება"</string>
+    <string name="three_finger_tap_go_home" msgid="6526301745535089812">"მთავარზე გადასვლა"</string>
+    <string name="three_finger_tap_go_back" msgid="2898205524575684271">"უკან დაბრუნება"</string>
+    <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"ბოლო აპების ნახვა"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"მთავარზე გადასვლა"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"სენსორ. პანელზე სამი თითით გადაფურცლეთ ნებისმ. მიმართულებით"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"უკან დაბრუნება"</string>
@@ -4207,12 +4213,9 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"სრული ეკრანის შეტყობინებები"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"ამ აპიდან შეტყობინებების დაშვება სრულ ეკრანზე"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"ნება დართეთ ამ აპს, აჩვენოს შეტყობინებები, რომლებიც სრულ ეკრანს იკავებს, როდესაც მოწყობილობა ჩაკეტილია. აპმა ისინი შეიძლება გამოიყენოს გამაფრთხილებელი სიგნალების და შემომავალი ზარების გამოყოფისთვის ან სხვა გადაუდებელი შეტყობინებებისთვის."</string>
-    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
-    <skip />
-    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
-    <skip />
-    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
-    <skip />
+    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"სისტემის პარამეტრების დაწერა"</string>
+    <string name="write_system_preferences_switch_title" msgid="213522354119233085">"ამ აპისთვის სისტემის პარამეტრების თქვენი სახელით შეცვლის უფლების მიცემა"</string>
+    <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"ეს ნებართვა აპს სისტემის ძირითადი პარამეტრების შეცვლის საშუალებას აძლევს."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"მედიის მართვის აპები"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"აპისთვის მედიის მართვის ნების დართვა"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"თუ დაუშვებთ, ამ აპს თქვენთვის უკითხავად შეუძლია სხვა აპებით შექმნილი მედიაფაილების შეცვლა ან წაშლა. აპს ფაილებზე და მედიაზე წვდომისთვის ნებართვა უნდა ჰქონდეს."</string>
@@ -4871,6 +4874,9 @@
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"მეტი ინფორმაცია შეტყობინებების სატელიტური მიმოცვლის შესახებ"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g>-ის ჩართვა ვერ ხერხდება"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g>-ის ჩასართავად ჯერ დაასრულეთ სატელიტური კავშირი"</string>
+    <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"სატელიტური კავშირი"</string>
+    <!-- no translation found for satellite_setting_connectivity (80680165723879149) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"წვდომის წერტილების სახელები"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"მიუწვდომელია, როცა დაკავშირებულია <xliff:g id="CARRIER">%1$s</xliff:g>-თან"</string>
@@ -5057,6 +5063,10 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"თქვენ იმყოფებით გვერდ-აგნოსტიკური რეჟიმის 16-კილობაიტიან რეჟიმში. აღნიშნულ რეჟიმში პროგრამული უზრუნველყოფის მთლიანობა ვერ იქნება გარანტირებული და სანამ ჩამტვირთავი განბლოკილია, ტელეფონში შენახული ნებისმიერი მონაცემი შეიძლება რისკის ქვეშ იყოს. ამ რეჟიმებში ზოგი ფუნქცია გაითიშება, რის გამოც გარკვეულმა აპლიკაციებმა შეიძლება არ იმუშაოს. მოწყობილობის წარმოების რეჟიმში ხელახლა შესასვლელად უნდა გადაერთოთ 4-კილობაიტიან რეჟიმზე და შემდეგ ჩაკეტოთ მოწყობილობის ჩამტვირთავი. ეს მოწყობილობას კვლავ ქარხნულ პარამეტრებზე დააბრუნებს და შესაბამისად, აღადგენს მისი წარმოების პარამეტრებს. მოწყობილობის Android-ში წარმატებით ჩატვირთვის შემდეგ, დეველოპერთა პარამეტრებში გათიშეთ OEM-ის მხრიდან განბლოკვა. თუ მოწყობილობა ვერ იტვირთება Android-ში ან არასტაბილურია, განაახლეთ ჩაშენებული პროგრამული უზრუნველყოფა უახლესი ქარხნული იმიჯებით შემდეგი ბმულიდან: &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; და აირჩიეთ „მოწყობილობის წაშლა“, „ჩამტვირთავის ჩაკეტვა“ და „ყველა დანაყოფზე იძულებითი ჩატვირთვა“."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16-კბაიტიანი გვერდ-აგნოსტიკური რეჟიმი"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"ვრცლად"</string>
+    <!-- no translation found for enable_16k_app_compat_title (4173159228844992989) -->
+    <skip />
+    <!-- no translation found for enable_16k_app_compat_details (3847293423550174952) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"სისტემის ხარვეზის ანგარიშის დამმუშავებელი"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"განსაზღვრავს, რომელი აპი მართავს სისტემის ხარვეზის ანგარიშის მალსახმობს თქვენს მოწყობილობაზე."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"პირადი"</string>

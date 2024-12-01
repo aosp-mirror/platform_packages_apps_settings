@@ -30,6 +30,7 @@ import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.RangeValue
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
@@ -81,6 +82,9 @@ open class MediaVolumePreference :
 
     override fun getWritePermit(context: Context, value: Int?, myUid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     override fun getMinValue(context: Context) =
         createAudioHelper(context).getMinVolume(STREAM_MUSIC)

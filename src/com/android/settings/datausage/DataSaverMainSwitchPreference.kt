@@ -24,6 +24,7 @@ import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 
 class DataSaverMainSwitchPreference(context: Context) :
     MainSwitchBarMetadata, PreferenceLifecycleProvider {
@@ -44,6 +45,9 @@ class DataSaverMainSwitchPreference(context: Context) :
 
     override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     override fun onStart(context: PreferenceLifecycleContext) {
         val listener = DataSaverBackend.Listener { context.notifyPreferenceChange(KEY) }

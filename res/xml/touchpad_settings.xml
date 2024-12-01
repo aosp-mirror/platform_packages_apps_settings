@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright (C) 2022 The Android Open Source Project
+  Copyright 2024 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -13,12 +13,12 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
-  -->
+-->
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/trackpad_mouse_settings">
+    android:title="@string/trackpad_settings">
     <Preference
         android:key="trackpad_gesture_settings"
         android:title="@string/trackpad_touchpad_gesture_title"
@@ -55,33 +55,12 @@
         settings:controller="com.android.settings.inputmethod.TrackpadTapDraggingPreferenceController"
         android:order="35"/>
 
-    <Preference
-        android:fragment="com.android.settings.inputmethod.TouchpadThreeFingerTapFragment"
-        android:key="three_finger_tap"
-        android:title="@string/three_finger_tap_preference_title"
-        settings:controller="com.android.settings.inputmethod.TouchpadThreeFingerTapPreferenceController"
-        android:order="37"/>
-
     <com.android.settings.widget.SeekBarPreference
         android:key="trackpad_pointer_speed"
         android:title="@string/trackpad_pointer_speed"
         android:order="40"
         android:selectable="false"
         settings:controller="com.android.settings.inputmethod.TrackpadPointerSpeedPreferenceController"/>
-
-    <SwitchPreferenceCompat
-        android:key="mouse_reverse_vertical_scrolling"
-        android:title="@string/mouse_reverse_vertical_scrolling"
-        android:summary="@string/mouse_reverse_vertical_scrolling_summary"
-        settings:controller="com.android.settings.inputmethod.MouseReverseVerticalScrollingPreferenceController"
-        android:order="45"/>
-
-    <SwitchPreferenceCompat
-        android:key="mouse_swap_primary_button"
-        android:title="@string/mouse_swap_primary_button"
-        android:summary="@string/mouse_swap_primary_button_summary"
-        settings:controller="com.android.settings.inputmethod.MouseSwapPrimaryButtonPreferenceController"
-        android:order="47"/>
 
     <Preference
         android:fragment="com.android.settings.inputmethod.PointerTouchpadFragment"

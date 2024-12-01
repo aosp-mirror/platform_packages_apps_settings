@@ -32,6 +32,7 @@ import com.android.settingslib.metadata.MainSwitchPreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 
 // LINT.IfChange
 class BatterySaverPreference :
@@ -48,6 +49,9 @@ class BatterySaverPreference :
 
     override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     override fun isEnabled(context: Context) =
         !BatteryStatus(BatteryUtils.getBatteryIntent(context)).isPluggedIn

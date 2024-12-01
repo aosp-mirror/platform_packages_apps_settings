@@ -56,6 +56,7 @@ class InstallUnknownAppsListModel(private val context: Context) :
             UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES,
             UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY,
         )
+    override val switchifBlockedByAdminOverrideCheckedValueTo = false
     override val enhancedConfirmationKey: String = AppOpsManager.OPSTR_REQUEST_INSTALL_PACKAGES
 
     override fun transformItem(app: ApplicationInfo) =

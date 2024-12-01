@@ -178,14 +178,10 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Rakenduse keel"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Soovitatud keeled"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Kõik keeled"</string>
-    <!-- no translation found for suggested_locales_title (119908696638862861) -->
-    <skip />
-    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
-    <skip />
-    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
-    <skip />
-    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
-    <skip />
+    <string name="suggested_locales_title" msgid="119908696638862861">"Soovitatud"</string>
+    <string name="all_supported_locales_title" msgid="2535112632133166546">"Kõik keeled"</string>
+    <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"Kõik piirkonnad"</string>
+    <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"Kõik nummerdamissüsteemid"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Süsteemi keel"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Süsteemi vaikeseade"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Selle rakenduse jaoks pole seadetes keele valimine saadaval."</string>
@@ -202,14 +198,15 @@
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s pole saadaval"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Seda keelt ei saa süsteemi keelena kasutada, kuid olete teavitanud rakendusi ja veebisaite, et eelistate seda keelt."</string>
     <string name="locale_search_menu" msgid="297782694044826686">"Otsing"</string>
-    <!-- no translation found for language_selection_title (968179636453982415) -->
-    <skip />
+    <string name="language_selection_title" msgid="968179636453982415">"Keele lisamine"</string>
     <string name="country_selection_title" msgid="5376929821458644732">"Piirkonnaeelistus"</string>
     <string name="search_language_hint" msgid="1739082427104506694">"Sisestage keele nimi"</string>
+    <string name="more_language_settings_category" msgid="3669703092480725416">"Rohkem keeleseadeid"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Piirkondlikud eelistused"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Ühikute ja numbrite eelistuste määramine"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Esitage rakendustele oma piirkondlikud eelistused, et need saaks teie kasutuskogemust isikupärastada."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Rakendused kasutavad võimaluse korral teie piirkondlikke eelistusi."</string>
+    <string name="regional_preferences_category_title" msgid="6754667410178749022">"Piirkondlikud eelistused"</string>
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatuur"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Nädala esimene päev"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Numbrite eelistused"</string>
@@ -912,6 +909,8 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Pööramise või eraldusvõime muutmine võib peatada mis tahes rakendused, mis praegu töötavad"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"Teie ekraanikuva peegeldamiseks peab teie seade olema ühendatud välise ekraaniga"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Rohkem valikuid"</string>
+    <!-- no translation found for external_display_topology_hint (854973327795578470) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Ülekandmine"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"peegeldamine"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Luba juhtmeta ekraaniühendus"</string>
@@ -1325,7 +1324,8 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Magamamineku režiimi seaded"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Režiimid võivad samuti tumeda teema aktiveerida}=1{{mode_1} aktiveerib samuti tumeda teema}=2{{mode_1} ja {mode_2} aktiveerivad samuti tumeda teema}=3{{mode_1}, {mode_2} ja {mode_3} aktiveerivad samuti tumeda teema}other{{mode_1}, {mode_2} ja # veel aktiveerivad samuti tumeda teema}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Režiimide seaded"</string>
-    <string name="even_dimmer_display_title" msgid="6731255736830410149">"Veelgi hämaram"</string>
+    <!-- no translation found for even_dimmer_display_title (4509732439977906028) -->
+    <skip />
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Luba seadmel hämardada rohkem kui tavaliselt"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Ekraani ajalõpp"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Pärast <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> tegevusetust"</string>
@@ -2009,6 +2009,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Paremas allnurgas klõpsamine"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Lisavalikute jaoks klõpsake puuteplaadi paremas allnurgas"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Kursori kiirus"</string>
+    <string name="three_finger_tap_preference_title" msgid="7130739855086106052">"Kolme sõrmega topeltpuudutamine"</string>
     <string name="pointer_fill_style" msgid="8794616790175016092">"Hiirekursori värv"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Kursori sisu muutmine mustaks"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Kursori sisu muutmine roheliseks"</string>
@@ -2023,6 +2024,11 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Õppige puuteplaadi liigutusi"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"puuteplaat, hiir, kursor, kerimine, pühkimine, sõrmega tõmbamine, paremklõps, klõpsamine"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"paremklõps, puudutamine"</string>
+    <string name="three_finger_tap_middle_click" msgid="5274906692591143158">"Keskmine klikk"</string>
+    <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Käivita assistent"</string>
+    <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Avalehele"</string>
+    <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Tagasi"</string>
+    <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Hiljutiste rakenduste vaatamine"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Avalehele liikumine"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Pühkige puuteplaadil kolme sõrmega üles"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Tagasiliikumine"</string>
@@ -4207,12 +4213,9 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Kogu ekraani katvad märguanded"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Selle rakenduse kogu ekraani katvate märguannete lubamine"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Lubage sellel rakendusel kuvada kogu ekraani katvaid märguandeid, kui seade on lukustatud. Rakendused võivad selle abil tõsta esile alarme, sissetulevaid kõnesid või muid pakilisi märguandeid."</string>
-    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
-    <skip />
-    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
-    <skip />
-    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
-    <skip />
+    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"Kirjutage süsteemi eelistused"</string>
+    <string name="write_system_preferences_switch_title" msgid="213522354119233085">"Lubage sellel rakendusel teie nimel süsteemieelistusi muuta"</string>
+    <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"See luba võimaldab rakendusel muuta põhisüsteemi eelistusi."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Meediahalduse rakendused"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Rakendusel meedia haldamise lubamine"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Kui lubate, saab see rakendus ilma teilt luba küsimata muuta või kustutada muude rakendustega loodud meediafaile. Rakendusel peab olema failidele ja meediale juurdepääsu luba."</string>
@@ -4871,6 +4874,9 @@
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Lisateave satellidipõhise sõnumside kohta"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Funktsiooni <xliff:g id="FUNCTION">%1$s</xliff:g> ei saa sisse lülitada"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Funktsiooni <xliff:g id="FUNCTION">%1$s</xliff:g> sisselülitamiseks katkestage esmalt satelliitühendus"</string>
+    <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"Satelliidi ühenduvus"</string>
+    <!-- no translation found for satellite_setting_connectivity (80680165723879149) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Pääsupunktide nimed"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Pole saadaval, kui on ühendus on loodud operaatoriga <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5057,6 +5063,10 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Olete lehest sõltumatus 16 kB režiimis. Selles režiimis ei saa garanteerida tarkvara terviklust ja andmed, mis salvestatakse telefoni, kui käivituslaadur on avatud, võivad olla ohus. Mõned funktsioonid on nendes režiimides keelatud, mistõttu ei pruugi kõik rakendused töötada. Selleks et viia seade uuesti tavarežiimile, peate lülituma tagasi 4 kB režiimile ja seejärel lukustama seadme käivituslaaduri. Selle toiminguga lähtestatakse seade jälle tehaseseadetele ja taastatakse tavarežiimi seaded. Pärast seda, kui seade on Androidi käivitanud, keelake arendaja valikutes OEM-tootjaluku avamine. Kui seadmel ei õnnestu Androidi käivitada või see on ebastabiilne, uuendage kogu püsivara uuesti, kasutades tehaseoleku süsteemikujutisi aadressilt &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;, ning tehke valikud „Tühjenda seade“, „Lukusta käivituslaadur“ ja „Sunduuenda kõiki sektsioone“."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Lehest sõltumatu 16 kB režiim"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Lisateave"</string>
+    <!-- no translation found for enable_16k_app_compat_title (4173159228844992989) -->
+    <skip />
+    <!-- no translation found for enable_16k_app_compat_details (3847293423550174952) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Veaaruannete töötleja"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Määrab, milline rakendus kasutab teie seadmes veaaruannete otseteed."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Isiklik"</string>

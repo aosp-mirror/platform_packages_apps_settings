@@ -25,6 +25,7 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.lifecycle.lifecycleScope
 import com.android.settings.R
 import com.android.settings.bluetooth.BluetoothDetailsAudioDeviceTypeController
@@ -33,12 +34,12 @@ import com.android.settings.bluetooth.Utils
 import com.android.settings.bluetooth.ui.model.DeviceSettingPreferenceModel
 import com.android.settings.bluetooth.ui.model.FragmentTypeModel
 import com.android.settings.dashboard.DashboardFragment
+import com.android.settings.flags.Flags
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.LocalBluetoothManager
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingIcon
 import com.android.settingslib.core.AbstractPreferenceController
-import com.android.settingslib.core.lifecycle.LifecycleObserver
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filterNotNull
@@ -88,16 +89,28 @@ class DeviceDetailsMoreSettingsFragment : DashboardFragment() {
         return R.xml.bluetooth_device_more_settings_fragment
     }
 
-    override fun addPreferenceController(controller: AbstractPreferenceController) {
-        val keys: List<String>? =
-            formatter.getVisiblePreferenceKeys(FragmentTypeModel.DeviceDetailsMoreSettingsFragment)
-        val lifecycle = settingsLifecycle
-        if (keys == null || keys.contains(controller.preferenceKey)) {
-            super.addPreferenceController(controller)
-        } else if (controller is LifecycleObserver) {
-            lifecycle.removeObserver((controller as LifecycleObserver))
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (!this::formatter.isInitialized) {
+            val controllers = preferenceControllers.stream()
+                .flatMap { obj: List<AbstractPreferenceController?> -> obj.stream() }
+                .toList()
+            val bluetoothManager = requireContext().getSystemService(BluetoothManager::class.java)
+            formatter =
+                featureFactory
+                    .bluetoothFeatureProvider
+                    .getDeviceDetailsFragmentFormatter(
+                        requireContext(), this, bluetoothManager.adapter, cachedDevice, controllers
+                    )
         }
+        formatter.updateLayout(FragmentTypeModel.DeviceDetailsMoreSettingsFragment)
+        helpItem =
+            formatter
+                .getMenuItem(FragmentTypeModel.DeviceDetailsMoreSettingsFragment)
+                .stateIn(lifecycleScope, SharingStarted.WhileSubscribed(), initialValue = null)
     }
+
+
 
     private fun getCachedDevice(): CachedBluetoothDevice? {
         val bluetoothAddress = arguments?.getString(KEY_DEVICE_ADDRESS) ?: return null
@@ -107,32 +120,13 @@ class DeviceDetailsMoreSettingsFragment : DashboardFragment() {
         return Utils.getLocalBtManager(context).cachedDeviceManager.findDevice(remoteDevice)
     }
 
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        super.onCreatePreferences(savedInstanceState, rootKey)
-        formatter.updateLayout(FragmentTypeModel.DeviceDetailsMoreSettingsFragment)
-    }
-
     override fun createPreferenceControllers(context: Context): List<AbstractPreferenceController> {
-        val bluetoothManager = context.getSystemService(BluetoothManager::class.java)
         cachedDevice =
             getCachedDevice()
                 ?: run {
                     finish()
                     return emptyList()
                 }
-        if (!this::formatter.isInitialized) {
-            formatter =
-                featureFactory.bluetoothFeatureProvider.getDeviceDetailsFragmentFormatter(
-                    requireContext(),
-                    this,
-                    bluetoothManager.adapter,
-                    cachedDevice,
-                )
-        }
-        helpItem =
-            formatter
-                .getMenuItem(FragmentTypeModel.DeviceDetailsMoreSettingsFragment)
-                .stateIn(lifecycleScope, SharingStarted.WhileSubscribed(), initialValue = null)
         return listOf(
             BluetoothDetailsProfilesController(
                 context,
@@ -140,10 +134,6 @@ class DeviceDetailsMoreSettingsFragment : DashboardFragment() {
                 localBluetoothManager,
                 cachedDevice,
                 settingsLifecycle,
-                formatter.getInvisibleBluetoothProfiles(
-                    FragmentTypeModel.DeviceDetailsMoreSettingsFragment
-                ),
-                false,
             ),
             BluetoothDetailsAudioDeviceTypeController(
                 context,
