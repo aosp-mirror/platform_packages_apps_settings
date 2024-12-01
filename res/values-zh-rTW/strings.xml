@@ -178,14 +178,10 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"應用程式語言"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"建議語言"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"所有語言"</string>
-    <!-- no translation found for suggested_locales_title (119908696638862861) -->
-    <skip />
-    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
-    <skip />
-    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
-    <skip />
-    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
-    <skip />
+    <string name="suggested_locales_title" msgid="119908696638862861">"建議"</string>
+    <string name="all_supported_locales_title" msgid="2535112632133166546">"所有語言"</string>
+    <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"所有地區"</string>
+    <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"所有編號系統"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"系統語言"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"系統預設"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"無法從「設定」選取這個應用程式的語言。"</string>
@@ -202,14 +198,15 @@
     <string name="title_unavailable_locale" msgid="2628898110416542386">"「%s」無法使用"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"這個語言無法做為系統語言，但你已在應用程式和網站上將此設為偏好語言。"</string>
     <string name="locale_search_menu" msgid="297782694044826686">"搜尋"</string>
-    <!-- no translation found for language_selection_title (968179636453982415) -->
-    <skip />
+    <string name="language_selection_title" msgid="968179636453982415">"新增語言"</string>
     <string name="country_selection_title" msgid="5376929821458644732">"地區偏好設定"</string>
     <string name="search_language_hint" msgid="1739082427104506694">"請輸入語言"</string>
+    <string name="more_language_settings_category" msgid="3669703092480725416">"更多語言設定"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"地區偏好設定"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"設定單位和數字偏好設定"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"讓應用程式取得地區偏好設定，為你提供個人化體驗。"</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"應用程式會盡可能採用你的地區偏好設定。"</string>
+    <string name="regional_preferences_category_title" msgid="6754667410178749022">"地區偏好設定"</string>
     <string name="temperature_preferences_title" msgid="5009881556503629058">"溫度"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"一週的第一天"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"數字顯示方式偏好"</string>
@@ -912,6 +909,8 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"變更旋轉角度或解析度，可能會導致執行中的應用程式停止運作"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"裝置必須連接外接螢幕，才能鏡像投放畫面"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"更多選項"</string>
+    <!-- no translation found for external_display_topology_hint (854973327795578470) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"投放"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"鏡像"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"啟用無線螢幕分享"</string>
@@ -1325,7 +1324,8 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"就寢模式設定"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{「模式」也可以啟用深色主題}=1{「{mode_1}」也會啟用深色主題}=2{「{mode_1}」和「{mode_2}」也會啟用深色主題}=3{「{mode_1}」、「{mode_2}」和「{mode_3}」也會啟用深色主題}other{「{mode_1}」、「{mode_2}」和另外 # 個模式也會啟用深色主題}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"「模式」設定"</string>
-    <string name="even_dimmer_display_title" msgid="6731255736830410149">"將亮度調得更暗"</string>
+    <!-- no translation found for even_dimmer_display_title (4509732439977906028) -->
+    <skip />
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"允許將裝置螢幕調得比平時暗"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"螢幕自動關閉"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"閒置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>後"</string>
@@ -2009,6 +2009,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"按一下右下角"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"按一下觸控板的右下角即可查看更多選項"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"游標速度"</string>
+    <string name="three_finger_tap_preference_title" msgid="7130739855086106052">"使用三指輕觸"</string>
     <string name="pointer_fill_style" msgid="8794616790175016092">"游標顏色"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"將指標填滿樣式變更為黑色"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"將指標填滿樣式變更為綠色"</string>
@@ -2023,6 +2024,11 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"學習觸控板手勢"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"觸控板, 滑鼠, 游標, 捲動, 滑動, 按滑鼠右鍵, 點按, 指標"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"按滑鼠右鍵, 輕觸"</string>
+    <string name="three_finger_tap_middle_click" msgid="5274906692591143158">"按中間鍵"</string>
+    <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"啟動 Google 助理"</string>
+    <string name="three_finger_tap_go_home" msgid="6526301745535089812">"返回主畫面"</string>
+    <string name="three_finger_tap_go_back" msgid="2898205524575684271">"返回"</string>
+    <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"查看最近使用的應用程式"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"返回主畫面"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"在觸控板任一處使用三指向上滑動"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"返回"</string>
@@ -2881,7 +2887,7 @@
     <string name="device_admin_warning_simplified" msgid="2715756519899116115">"這個裝置將由「<xliff:g id="APP_NAME">%1$s</xliff:g>」管理及監控。"</string>
     <string name="device_admin_status" msgid="6332571781623084064">"這個管理員應用程式已啟用，且允許「<xliff:g id="APP_NAME">%1$s</xliff:g>」應用程式執行以下作業："</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"啟用設定檔管理員？"</string>
-    <string name="profile_owner_add_title_simplified" msgid="2320828996993774182">"要允許啟用監督功能嗎？"</string>
+    <string name="profile_owner_add_title_simplified" msgid="2320828996993774182">"要允許啟用監護功能嗎？"</string>
     <string name="adding_profile_owner_warning" msgid="6868275476058020513">"繼續這項動作，你的使用者將由管理員進行管理，該管理員也能儲存相關資料和你的個人資料。\n\n你的管理員可以監控並管理與這個使用者相關聯的設定、存取權、應用程式和資料，包括網路活動和裝置位置資訊。"</string>
     <string name="admin_disabled_other_options" msgid="8122039047419172139">"其他選項已由你的管理員停用"</string>
     <string name="admin_more_details" msgid="4928985331640193758">"瞭解詳情"</string>
@@ -4207,12 +4213,9 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"全螢幕通知"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"允許這個應用程式顯示全螢幕通知"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"允許這個應用程式在裝置鎖定時顯示全螢幕通知。應用程式可能會利用這類通知顯示鬧鐘、來電或其他緊急通知。"</string>
-    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
-    <skip />
-    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
-    <skip />
-    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
-    <skip />
+    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"寫入系統偏好設定"</string>
+    <string name="write_system_preferences_switch_title" msgid="213522354119233085">"允許這個應用程式代表你修改系統偏好設定"</string>
+    <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"這項權限允許應用程式修改核心系統偏好設定。"</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"媒體管理應用程式"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"允許應用程式管理媒體"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"如果允許，這個應用程式就能直接修改或刪除使用其他應用程式建立的媒體檔案，不用事先取得你的同意。應用程式必須先獲得權限才能存取檔案和媒體。"</string>
@@ -4871,6 +4874,9 @@
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"進一步瞭解衛星訊息"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"無法開啟<xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"如要開啟<xliff:g id="FUNCTION">%1$s</xliff:g>，請先中斷衛星連線"</string>
+    <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"衛星連線"</string>
+    <!-- no translation found for satellite_setting_connectivity (80680165723879149) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"存取點名稱"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"無法在連線到「<xliff:g id="CARRIER">%1$s</xliff:g>」時使用"</string>
@@ -5057,6 +5063,10 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"你目前處於可變頁面模式的 16KB 模式。此模式無法保證軟體完整性，且系統啟動載入程式解鎖時，手機上的資料可能會有風險。在這類模式中，部分功能會停用，因此有些應用程式可能無法運作。如要再次進入實際工作環境模式，必須切換回 4KB 模式，然後鎖定裝置的系統啟動載入程式。這樣做會使裝置再次恢復原廠設定，並還原為實際工作環境設定。裝置成功啟動 Android 系統後，請停用「開發人員選項」中的「OEM 解鎖」設定。如果裝置無法啟動 Android 或狀態不穩，可透過以下任一方式重新刷新裝置：使用最新原廠映像檔 (&lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;)，或前往 &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; 使用工具，依序選取「Wipe Device」、「Lock Bootloader」和「Force Flash all partitions」。"</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB 可變頁面模式"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"閱讀完整內容"</string>
+    <!-- no translation found for enable_16k_app_compat_title (4173159228844992989) -->
+    <skip />
+    <!-- no translation found for enable_16k_app_compat_details (3847293423550174952) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"錯誤報告處理常式"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"選擇要使用哪個應用程式控管「錯誤報告」捷徑。"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"個人"</string>

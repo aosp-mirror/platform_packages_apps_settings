@@ -126,7 +126,7 @@
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Pokazuj przełącznik LE Audio w Szczegółach urządzenia"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Omijaj listę dozwolonych Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Używaj domyślnie technologii LE Audio, nawet jeśli urządzenie peryferyjne LE Audio nie zostało zweryfikowane jako spełniające kryteria listy dozwolonych"</string>
-    <string name="connected_device_media_device_title" msgid="3783388247594566734">"Nośniki danych"</string>
+    <string name="connected_device_media_device_title" msgid="3783388247594566734">"Urządzenia multimedialne"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Urządzenia telefoniczne"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Inne urządzenia"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Zapisane urządzenia"</string>
@@ -178,14 +178,10 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Język aplikacji"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Sugerowane języki"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Wszystkie języki"</string>
-    <!-- no translation found for suggested_locales_title (119908696638862861) -->
-    <skip />
-    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
-    <skip />
-    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
-    <skip />
-    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
-    <skip />
+    <string name="suggested_locales_title" msgid="119908696638862861">"Sugerowane"</string>
+    <string name="all_supported_locales_title" msgid="2535112632133166546">"Wszystkie języki"</string>
+    <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"Wszystkie regiony"</string>
+    <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"Wszystkie systemy numeracji"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Język systemu"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Ustawienie domyślne systemu"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Wybór języka tej aplikacji nie jest dostępny w Ustawieniach."</string>
@@ -202,14 +198,15 @@
     <string name="title_unavailable_locale" msgid="2628898110416542386">"Język %s nie jest dostępny"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Ten język nie może być używany jako język systemu. Jednak aplikacje i witryny wiedzą, że preferujesz ten język."</string>
     <string name="locale_search_menu" msgid="297782694044826686">"Szukaj"</string>
-    <!-- no translation found for language_selection_title (968179636453982415) -->
-    <skip />
+    <string name="language_selection_title" msgid="968179636453982415">"Dodaj język"</string>
     <string name="country_selection_title" msgid="5376929821458644732">"Ustawienie regionu"</string>
     <string name="search_language_hint" msgid="1739082427104506694">"Wpisz nazwę języka"</string>
+    <string name="more_language_settings_category" msgid="3669703092480725416">"Więcej ustawień języka"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferencje regionalne"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Ustaw preferencje dotyczące jednostek i liczb"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Powiadom aplikacje o swoich preferencjach regionalnych, aby mogły dokonać personalizacji."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Aplikacje będą korzystać z preferencji regionalnych, o ile to będzie możliwe."</string>
+    <string name="regional_preferences_category_title" msgid="6754667410178749022">"Preferencje regionalne"</string>
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatura"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Pierwszy dzień tygodnia"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Preferencje dotyczące liczb"</string>
@@ -912,6 +909,8 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Obrót wyświetlacza lub zmiana rozdzielczości mogą spowodować zatrzymanie uruchomionych aktualnie aplikacji"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"Aby można było wyświetlać odbicie lustrzane ekranu, urządzenie musi być podłączone do wyświetlacza zewnętrznego"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Więcej opcji"</string>
+    <!-- no translation found for external_display_topology_hint (854973327795578470) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Przesyłanie ekranu"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"odbicie lustrzane"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Wyświetlacz bezprzewodowy"</string>
@@ -1325,7 +1324,8 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Ustawienia trybu nocnego"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Tryby mogą też aktywować ciemny motyw}=1{Tryb {mode_1} aktywuje też ciemny motyw}=2{Tryby {mode_1} i {mode_2} aktywują też ciemny motyw}=3{Tryby {mode_1}, {mode_2} i {mode_3} aktywują też ciemny motyw}few{Tryb ciemny jest też włączony w przypadku trybów {mode_1}, {mode_2} i jeszcze # trybów}many{Tryb ciemny jest też włączony w przypadku trybów {mode_1}, {mode_2} i jeszcze # trybów}other{Tryb ciemny jest też włączony w przypadku trybów {mode_1}, {mode_2} i jeszcze # trybu}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Ustawienia trybów"</string>
-    <string name="even_dimmer_display_title" msgid="6731255736830410149">"Jeszcze ciemniej"</string>
+    <!-- no translation found for even_dimmer_display_title (4509732439977906028) -->
+    <skip />
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Zezwalaj na przyciemnianie ekranu urządzenia bardziej niż zwykle"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Automatyczne wygaszanie"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Po <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> bezczynności"</string>
@@ -2009,6 +2009,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Kliknięcie w prawym dolnym rogu"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Kliknij prawy dolny róg touchpada, aby zobaczyć więcej opcji"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Szybkość wskaźnika"</string>
+    <string name="three_finger_tap_preference_title" msgid="7130739855086106052">"Używaj kliknięcia trzema palcami"</string>
     <string name="pointer_fill_style" msgid="8794616790175016092">"Kolor wskaźnika"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Zmień styl wypełnienia na czarny"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Zmień styl wypełnienia na zielony"</string>
@@ -2023,6 +2024,11 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Poznaj gesty na touchpada"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"trackpad, track pad, mysz, myszka, kursor, przewijanie, przesuwanie, kliknięcie prawym przyciskiem, klikanie, wskaźnik"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"kliknięcie prawym przyciskiem, klikanie, dotknięcie, wybranie, naciśnięcie"</string>
+    <string name="three_finger_tap_middle_click" msgid="5274906692591143158">"Kliknięcie środkowym przyciskiem"</string>
+    <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Asystent uruchamiania"</string>
+    <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Otwórz stronę główną"</string>
+    <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Wstecz"</string>
+    <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Wyświetlanie ostatnich aplikacji"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Przejście na ekran główny"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Przesuń 3 palcami w górę w dowolnym miejscu na touchpadzie"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Przechodzenie wstecz"</string>
@@ -4207,12 +4213,9 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Powiadomienia pełnoekranowe"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Zezwalaj na powiadomienia pełnoekranowe z tej aplikacji"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Zezwalaj na wyświetlanie przez tę aplikację powiadomień zajmujących cały ekran, gdy urządzenie jest zablokowane. Aplikacje mogą używać tych uprawnień do powiadamiania o alarmach, połączeniach przychodzących i innych pilnych sprawach."</string>
-    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
-    <skip />
-    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
-    <skip />
-    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
-    <skip />
+    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"Zapisuj ustawienia systemowe"</string>
+    <string name="write_system_preferences_switch_title" msgid="213522354119233085">"Zezwalaj tej aplikacji na modyfikowanie ustawień systemu w Twoim imieniu"</string>
+    <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"To uprawnienie umożliwia aplikacji modyfikowanie podstawowych ustawień systemu."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Aplikacje do zarządzania multimediami"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Zezwalaj na zarządzanie multimediami przez aplikację"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Ta aplikacja może bez pytania modyfikować lub usuwać pliki multimedialne utworzone w innych aplikacjach, jeśli ma takie uprawnienia. Aplikacja wymaga dostępu do plików i multimediów."</string>
@@ -4871,6 +4874,9 @@
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Więcej informacji o przesyłaniu wiadomości przez satelitę"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Nie można włączyć funkcji <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Aby włączyć funkcję <xliff:g id="FUNCTION">%1$s</xliff:g>, najpierw zakończ połączenie satelitarne"</string>
+    <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"Łączność satelitarna"</string>
+    <!-- no translation found for satellite_setting_connectivity (80680165723879149) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nazwy punktów dostępu"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Niedostępne po połączeniu z siecią <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5057,6 +5063,10 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Korzystasz z ogólnego trybu strony 16 KB. W tym trybie nie można zagwarantować integralności oprogramowania. Kiedy program rozruchowy będzie odblokowany, dane zapisane na telefonie mogą być zagrożone. W tych trybach niektóre funkcje będą wyłączone, a część aplikacji może nie działać. Aby wrócić do trybu produkcyjnego, musisz przełączyć się z powrotem na tryb 4 KB i zablokować program rozruchowy urządzenia. Spowoduje to ponowne zresetowanie urządzenia i przywrócenie na nim ustawień produkcyjnych. Gdy na urządzeniu uruchomi się Android, wyłącz zdjęcie blokady OEM w Opcjach programisty. Jeśli nie uda się uruchomić Androida lub będzie on działać niestabilnie, sflashuj na urządzeniu najnowszy obraz fabryczny pobrany ze strony &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; lub użyj narzędzia &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; i wybierz kolejno opcje „Wyczyść pamięć urządzenia”, „Zablokuj program rozruchowy” i „Wymuś flashowanie wszystkich partycji”."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Ogólny tryb strony 16 kB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Więcej informacji"</string>
+    <!-- no translation found for enable_16k_app_compat_title (4173159228844992989) -->
+    <skip />
+    <!-- no translation found for enable_16k_app_compat_details (3847293423550174952) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Obsługiwanie zgłaszania błędów"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Określa, która aplikacja ma obsługiwać skrót do zgłaszania błędów na urządzeniu."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Osobista"</string>

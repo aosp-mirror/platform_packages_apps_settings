@@ -178,14 +178,10 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Idioma de la aplicación"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Idiomas recomendados"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Todos los idiomas"</string>
-    <!-- no translation found for suggested_locales_title (119908696638862861) -->
-    <skip />
-    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
-    <skip />
-    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
-    <skip />
-    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
-    <skip />
+    <string name="suggested_locales_title" msgid="119908696638862861">"Sugerencias"</string>
+    <string name="all_supported_locales_title" msgid="2535112632133166546">"Todos los idiomas"</string>
+    <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"Todas las regiones"</string>
+    <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"Todos los sistemas de numeración"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Idioma del sistema"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Predeterminado del sistema"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La selección de idioma para esta aplicación no está disponible en Ajustes."</string>
@@ -202,14 +198,15 @@
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s no está disponible"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Este idioma no se puede usar como idioma del sistema, pero ahora las aplicaciones y sitios web saben qué idioma prefieres."</string>
     <string name="locale_search_menu" msgid="297782694044826686">"Buscar"</string>
-    <!-- no translation found for language_selection_title (968179636453982415) -->
-    <skip />
+    <string name="language_selection_title" msgid="968179636453982415">"Añadir un idioma"</string>
     <string name="country_selection_title" msgid="5376929821458644732">"Preferencia de región"</string>
     <string name="search_language_hint" msgid="1739082427104506694">"Escribe el idioma"</string>
+    <string name="more_language_settings_category" msgid="3669703092480725416">"Más ajustes de idioma"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferencias regionales"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Define preferencias de unidades y números"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Permite que las aplicaciones sepan tus preferencias regionales para que puedan personalizar tu experiencia."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Las aplicaciones usarán tus preferencias regionales siempre que sea posible."</string>
+    <string name="regional_preferences_category_title" msgid="6754667410178749022">"Preferencias regionales"</string>
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatura"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Primer día de la semana"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Preferencias de números"</string>
@@ -912,6 +909,8 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Si cambias la rotación o la resolución, puede que se detengan las aplicaciones que están en funcionamiento"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"Tu dispositivo debe estar conectado a una pantalla externa para proyectar tu pantalla"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Más opciones"</string>
+    <!-- no translation found for external_display_topology_hint (854973327795578470) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Enviar"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"proyectar"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Habilitar pantalla inalámbrica"</string>
@@ -1325,7 +1324,8 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Ajustes del modo Descanso"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Los modos también pueden activar el tema oscuro}=1{{mode_1} también activa el tema oscuro}=2{{mode_1} y {mode_2} también activan el tema oscuro}=3{{mode_1}, {mode_2} y {mode_3} también activan el tema oscuro}other{{mode_1}, {mode_2} y # más también activan el tema oscuro}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Ajustes de modos"</string>
-    <string name="even_dimmer_display_title" msgid="6731255736830410149">"Más tenue"</string>
+    <!-- no translation found for even_dimmer_display_title (4509732439977906028) -->
+    <skip />
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Permite que el dispositivo se atenúe más de lo normal"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Tiempo de espera de la pantalla"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactividad"</string>
@@ -2009,6 +2009,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Clic en la esquina inferior derecha"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Haz clic en la esquina inferior derecha del panel táctil para ver más opciones"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Velocidad del puntero"</string>
+    <string name="three_finger_tap_preference_title" msgid="7130739855086106052">"Usar toque con tres dedos"</string>
     <string name="pointer_fill_style" msgid="8794616790175016092">"Color del puntero"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Cambiar relleno del puntero a negro"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Cambiar relleno del puntero a verde"</string>
@@ -2023,6 +2024,11 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Consultar gestos del panel táctil"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"panel táctil, ratón, cursor, desplazar, deslizar, hacer clic con el botón derecho, clic, puntero"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"hacer clic con el botón derecho, tocar"</string>
+    <string name="three_finger_tap_middle_click" msgid="5274906692591143158">"Clic central"</string>
+    <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Iniciar el Asistente"</string>
+    <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Ir a Inicio"</string>
+    <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Volver"</string>
+    <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Ver aplicaciones recientes"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Ir a inicio"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Desliza tres dedos hacia arriba en el panel táctil"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Ir atrás"</string>
@@ -4207,12 +4213,9 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notificaciones a pantalla completa"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Permitir notificaciones a pantalla completa de esta aplicación"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permite que esta aplicación muestre notificaciones que ocupan toda la pantalla cuando el dispositivo está bloqueado. La aplicación puede usar esta opción para resaltar alarmas, llamadas entrantes u otras notificaciones urgentes."</string>
-    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
-    <skip />
-    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
-    <skip />
-    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
-    <skip />
+    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"Escribir preferencias del sistema"</string>
+    <string name="write_system_preferences_switch_title" msgid="213522354119233085">"Permitir que esta aplicación modifique las preferencias del sistema en tu nombre"</string>
+    <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"Esta opción permite que las aplicaciones modifiquen las preferencias principales del sistema."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Aplicaciones de gestión de multimedia"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Permitir que la aplicación gestione contenido multimedia"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Si se lo permites, esta aplicación podrá modificar o eliminar archivos multimedia creados con otras aplicaciones sin pedírtelo explícitamente. La aplicación debe tener permiso para acceder a archivos y contenido multimedia."</string>
@@ -4871,6 +4874,9 @@
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Más información sobre los mensajes por satélite"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"No se puede activar <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Para activar <xliff:g id="FUNCTION">%1$s</xliff:g>, primero finaliza la conexión por satélite"</string>
+    <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"Conectividad por satélite"</string>
+    <!-- no translation found for satellite_setting_connectivity (80680165723879149) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nombres de puntos de acceso"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"No está disponible cuando se está conectado a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5057,6 +5063,10 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Estás en el modo de 16 KB del modo independiente de la página. En este modo no se puede garantizar la integridad del software, y los datos que haya almacenados en el teléfono mientras el bootloader está desbloqueado pueden correr peligro. Algunas funciones se inhabilitarán en estos modos, por lo que es posible que algunas aplicaciones no funcionen. Para volver al modo de producción, debes volver al modo de 4 KB y luego bloquear el bootloader del dispositivo. Esta acción restablecerá de nuevo el estado de fábrica del dispositivo y restaurará los ajustes de producción. Una vez que el dispositivo se inicie correctamente en Android, inhabilita el desbloqueo de OEM en Opciones para desarrolladores. Si el dispositivo no se puede iniciar en Android o es inestable, vuelve a instalar las últimas imágenes de fábrica de &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; o usa &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; y selecciona Wipe Device (Borrar los datos del dispositivo), Lock Bootloader (Bloquear bootloader) y Force Flash all partitions (Forzar la instalación de todas las particiones)."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Modo independiente de la página de 16 KB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Más información"</string>
+    <!-- no translation found for enable_16k_app_compat_title (4173159228844992989) -->
+    <skip />
+    <!-- no translation found for enable_16k_app_compat_details (3847293423550174952) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Controlador de informes de errores"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determina qué aplicación controla el acceso directo a los informes de errores del dispositivo."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personal"</string>

@@ -463,7 +463,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_CHECK_PREBUNDLED_IS_PREINSTALLED)
     public void testNonPreinstalledApp_IncludedInDownloadedCategory() {
         mShadowAccessibilityManager.setInstalledAccessibilityServiceList(
                 List.of(getMockAccessibilityServiceInfo(

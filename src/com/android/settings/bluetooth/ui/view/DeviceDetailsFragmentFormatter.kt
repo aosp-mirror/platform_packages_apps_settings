@@ -27,6 +27,8 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -43,7 +45,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import com.android.settings.R
-import com.android.settings.SettingsPreferenceFragment
+import com.android.settings.bluetooth.BlockingPrefWithSliceController
+import com.android.settings.bluetooth.BluetoothDetailsProfilesController
 import com.android.settings.bluetooth.ui.composable.Icon
 import com.android.settings.bluetooth.ui.composable.MultiTogglePreference
 import com.android.settings.bluetooth.ui.layout.DeviceSettingLayout
@@ -52,12 +55,18 @@ import com.android.settings.bluetooth.ui.model.FragmentTypeModel
 import com.android.settings.bluetooth.ui.view.DeviceDetailsMoreSettingsFragment.Companion.KEY_DEVICE_ADDRESS
 import com.android.settings.bluetooth.ui.viewmodel.BluetoothDeviceDetailsViewModel
 import com.android.settings.core.SubSettingLauncher
+import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.spa.preference.ComposePreference
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
+import com.android.settingslib.bluetooth.devicesettings.DeviceSettingId
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingActionModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigItemModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingIcon
+import com.android.settingslib.core.AbstractPreferenceController
+import com.android.settingslib.core.lifecycle.LifecycleObserver
+import com.android.settingslib.core.lifecycle.events.OnPause
+import com.android.settingslib.core.lifecycle.events.OnStop
 import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.widget.preference.Preference as SpaPreference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
@@ -79,16 +88,10 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
 
 /** Handles device details fragment layout according to config. */
 interface DeviceDetailsFragmentFormatter {
-    /** Gets keys of visible preferences in built-in preference in xml. */
-    fun getVisiblePreferenceKeys(fragmentType: FragmentTypeModel): List<String>?
-
-    /** Updates device details fragment layout. */
-    fun getInvisibleBluetoothProfiles(fragmentType: FragmentTypeModel): List<String>?
-
     /** Updates device details fragment layout. */
     fun updateLayout(fragmentType: FragmentTypeModel)
 
@@ -102,7 +105,8 @@ interface DeviceDetailsFragmentFormatter {
 @OptIn(ExperimentalCoroutinesApi::class)
 class DeviceDetailsFragmentFormatterImpl(
     private val context: Context,
-    private val fragment: SettingsPreferenceFragment,
+    private val fragment: DashboardFragment,
+    controllers: List<AbstractPreferenceController>,
     private val bluetoothAdapter: BluetoothAdapter,
     private val cachedDevice: CachedBluetoothDevice,
     private val backgroundCoroutineContext: CoroutineContext,
@@ -110,40 +114,32 @@ class DeviceDetailsFragmentFormatterImpl(
     private val metricsFeatureProvider = FeatureFactory.featureFactory.metricsFeatureProvider
     private val prefVisibility = mutableMapOf<String, MutableStateFlow<Boolean>>()
     private val prefVisibilityJobs = mutableListOf<Job>()
+    private var isLoading = false
+    private var prefKeyToController: Map<String, AbstractPreferenceController> =
+        controllers.associateBy { it.preferenceKey }
 
     private val viewModel: BluetoothDeviceDetailsViewModel =
         ViewModelProvider(
-                fragment,
-                BluetoothDeviceDetailsViewModel.Factory(
-                    fragment.requireActivity().application,
-                    bluetoothAdapter,
-                    cachedDevice,
-                    backgroundCoroutineContext,
-                ),
-            )
+            fragment,
+            BluetoothDeviceDetailsViewModel.Factory(
+                fragment.requireActivity().application,
+                bluetoothAdapter,
+                cachedDevice,
+                backgroundCoroutineContext,
+            ),
+        )
             .get(BluetoothDeviceDetailsViewModel::class.java)
 
-    override fun getVisiblePreferenceKeys(fragmentType: FragmentTypeModel): List<String>? =
-        runBlocking {
-            viewModel
-                .getItems(fragmentType)
-                ?.filterIsInstance<DeviceSettingConfigItemModel.BuiltinItem>()
-                ?.map { it.preferenceKey }
-        }
-
-    override fun getInvisibleBluetoothProfiles(fragmentType: FragmentTypeModel): List<String>? =
-        runBlocking {
-            viewModel
-                .getItems(fragmentType)
-                ?.filterIsInstance<DeviceSettingConfigItemModel.BuiltinItem.BluetoothProfilesItem>()
-                ?.firstOrNull()
-                ?.invisibleProfiles
-        }
-
     /** Updates bluetooth device details fragment layout. */
-    override fun updateLayout(fragmentType: FragmentTypeModel) = runBlocking {
-        val items = viewModel.getItems(fragmentType) ?: return@runBlocking
-        val layout = viewModel.getLayout(fragmentType) ?: return@runBlocking
+    override fun updateLayout(fragmentType: FragmentTypeModel) {
+        fragment.setLoading(true, false)
+        isLoading = true
+        fragment.lifecycleScope.launch { updateLayoutInternal(fragmentType) }
+    }
+
+    private suspend fun updateLayoutInternal(fragmentType: FragmentTypeModel) {
+        val items = viewModel.getItems(fragmentType) ?: return
+        val layout = viewModel.getLayout(fragmentType) ?: return
 
         val prefKeyToSettingId =
             items
@@ -154,21 +150,21 @@ class DeviceDetailsFragmentFormatterImpl(
         for (i in 0 until fragment.preferenceScreen.preferenceCount) {
             val pref = fragment.preferenceScreen.getPreference(i)
             prefKeyToSettingId[pref.key]?.let { id -> settingIdToXmlPreferences[id] = pref }
+            if (pref.key !in prefKeyToSettingId) {
+                getController(pref.key)?.let { disableController(it) }
+            }
         }
         fragment.preferenceScreen.removeAll()
         for (job in prefVisibilityJobs) {
             job.cancel()
         }
         prefVisibilityJobs.clear()
-
         for (row in items.indices) {
-            val settingId = items[row].settingId
+            val settingItem = items[row]
+            val settingId = settingItem.settingId
             if (settingIdToXmlPreferences.containsKey(settingId)) {
-                fragment.preferenceScreen.addPreference(
-                    settingIdToXmlPreferences[settingId]!!
-                        .apply { order = row }
-                        .also { logItemShown(it.key, it.isVisible) }
-                )
+                val pref = settingIdToXmlPreferences[settingId]!!.apply { order = row }
+                fragment.preferenceScreen.addPreference(pref)
             } else {
                 val prefKey = getPreferenceKey(settingId)
                 prefVisibilityJobs.add(
@@ -187,7 +183,35 @@ class DeviceDetailsFragmentFormatterImpl(
             }
         }
         // TODO(b/343317785): figure out how to remove the foot preference.
-        fragment.preferenceScreen.addPreference(Preference(context).apply { order = 10000 })
+        fragment.preferenceScreen.addPreference(ComposePreference(context).apply {
+            order = 10000
+            isEnabled = false
+            isSelectable = false
+            setContent { Spacer(modifier = Modifier.height(1.dp)) }
+        })
+
+        for (row in items.indices) {
+            val settingItem = items[row]
+            val settingId = settingItem.settingId
+            if (settingIdToXmlPreferences.containsKey(settingId)) {
+                val pref = fragment.preferenceScreen.getPreference(row)
+                if (settingId == DeviceSettingId.DEVICE_SETTING_ID_BLUETOOTH_PROFILES) {
+                    (getController(pref.key) as? BluetoothDetailsProfilesController)?.run {
+                        if (settingItem is DeviceSettingConfigItemModel.BuiltinItem.BluetoothProfilesItem) {
+                            setInvisibleProfiles(settingItem.invisibleProfiles)
+                            setHasExtraSpace(false)
+                        }
+                    }
+                }
+                getController(pref.key)?.displayPreference(fragment.preferenceScreen)
+                logItemShown(pref.key, pref.isVisible)
+            }
+        }
+
+        if (isLoading) {
+            fragment.setLoading(false, false)
+            isLoading = false
+        }
     }
 
     override fun getMenuItem(
@@ -225,14 +249,14 @@ class DeviceDetailsFragmentFormatterImpl(
     @Composable
     private fun buildPreference(layout: DeviceSettingLayout, row: Int, prefKey: String) {
         val contents by
-            remember(row) { getDevicesSettingForRow(layout, row) }
-                .collectAsStateWithLifecycle(initialValue = listOf())
+        remember(row) { getDevicesSettingForRow(layout, row) }
+            .collectAsStateWithLifecycle(initialValue = listOf())
 
         val highlighted by
-            remember(row) {
-                    layout.rows[row].columns.map { columns -> columns.any { it.highlighted } }
-                }
-                .collectAsStateWithLifecycle(initialValue = false)
+        remember(row) {
+            layout.rows[row].columns.map { columns -> columns.any { it.highlighted } }
+        }
+            .collectAsStateWithLifecycle(initialValue = false)
 
         val settings = contents
         AnimatedVisibility(visible = settings.isNotEmpty(), enter = fadeIn(), exit = fadeOut()) {
@@ -444,6 +468,29 @@ class DeviceDetailsFragmentFormatterImpl(
                         )
                 action.pendingIntent.send(options.toBundle())
             }
+        }
+    }
+
+    private fun getController(key: String): AbstractPreferenceController? {
+        return prefKeyToController[key]
+    }
+
+    private fun disableController(controller: AbstractPreferenceController) {
+        if (controller is LifecycleObserver) {
+            fragment.settingsLifecycle.removeObserver(controller as LifecycleObserver)
+        }
+
+        if (controller is BlockingPrefWithSliceController) {
+            // Make UiBlockListener finished, otherwise UI will flicker.
+            controller.onChanged(null)
+        }
+
+        if (controller is OnPause) {
+            (controller as OnPause).onPause()
+        }
+
+        if (controller is OnStop) {
+            (controller as OnStop).onStop()
         }
     }
 

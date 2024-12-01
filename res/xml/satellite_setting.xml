@@ -22,7 +22,7 @@
     settings:keywords="@string/keywords_satellite_setting">
 
     <PreferenceCategory
-        android:title="@string/category_name_about_satellite_messaging">
+        android:key="key_category_about_satellite">
 
         <com.android.settingslib.widget.TopIntroPreference
             android:key="key_about_satellite_messaging"/>
@@ -35,6 +35,12 @@
         <Preference
             android:key="key_your_satellite_plan"
             android:icon="?android:attr/textColorPrimary"/>
+
+        <Preference
+            android:key="key_your_satellite_data_plan"
+            android:icon="?android:attr/textColorPrimary"
+            settings:isPreferenceVisible="false"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory

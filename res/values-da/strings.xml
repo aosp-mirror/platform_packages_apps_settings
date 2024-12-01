@@ -178,14 +178,10 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Appsprog"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Foreslåede sprog"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Alle sprog"</string>
-    <!-- no translation found for suggested_locales_title (119908696638862861) -->
-    <skip />
-    <!-- no translation found for all_supported_locales_title (2535112632133166546) -->
-    <skip />
-    <!-- no translation found for all_supported_locales_regions_title (8756303246586846613) -->
-    <skip />
-    <!-- no translation found for all_supported_numbering_system_title (7926472764452490800) -->
-    <skip />
+    <string name="suggested_locales_title" msgid="119908696638862861">"Forslag"</string>
+    <string name="all_supported_locales_title" msgid="2535112632133166546">"Alle sprog"</string>
+    <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"Alle regioner"</string>
+    <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"Alle nummersystemer"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Systemsprog"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Systemstandard"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Sprogvalg for denne app er ikke tilgængeligt i Indstillinger."</string>
@@ -202,14 +198,15 @@
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s er ikke tilgængeligt"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Dette sprog kan ikke bruges som et systemsprog, men du har oplyst apps og websites om, at du foretrækker dette sprog."</string>
     <string name="locale_search_menu" msgid="297782694044826686">"Søg"</string>
-    <!-- no translation found for language_selection_title (968179636453982415) -->
-    <skip />
+    <string name="language_selection_title" msgid="968179636453982415">"Tilføj et sprog"</string>
     <string name="country_selection_title" msgid="5376929821458644732">"Regionpræferencer"</string>
     <string name="search_language_hint" msgid="1739082427104506694">"Angiv sprog"</string>
+    <string name="more_language_settings_category" msgid="3669703092480725416">"Flere sprogindstillinger"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionsindstillinger"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Angiv præferencer for måleenheder og numre"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Giv apps besked om dine regionsindstillinger, så de kan foretage personlig tilpasning af din brugeroplevelse."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Apps anvender dine regionsindstillinger, når det er muligt."</string>
+    <string name="regional_preferences_category_title" msgid="6754667410178749022">"Regionsindstillinger"</string>
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatur"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Ugens første dag"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Præferencer for tal"</string>
@@ -912,6 +909,8 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Hvis skærmretningen eller opløsningen ændres, kan du risikere, at aktive apps stopper"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"Din enhed skal have forbindelse til en ekstern skærm for at spejle skærmen"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Flere valgmuligheder"</string>
+    <!-- no translation found for external_display_topology_hint (854973327795578470) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"spejl"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Aktivér trådløs skærm"</string>
@@ -1325,7 +1324,8 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Indstillinger for sengetid"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Tilstande kan også aktivere mørkt tema}=1{{mode_1} aktiverer også mørkt tema}=2{{mode_1} og {mode_2} aktiverer også mørkt tema}=3{{mode_1}, {mode_2} og {mode_3} aktiverer også mørkt tema}one{{mode_1}, {mode_2} og # anden aktiverer også mørkt tema}other{{mode_1}, {mode_2} og # andre aktiverer også mørkt tema}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Indstillinger for tilstande"</string>
-    <string name="even_dimmer_display_title" msgid="6731255736830410149">"Nedton yderligere"</string>
+    <!-- no translation found for even_dimmer_display_title (4509732439977906028) -->
+    <skip />
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Tillad, at enheden nedtones mere end normalt"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Timeout for skærmen"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Efter <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> med inaktivitet"</string>
@@ -2009,6 +2009,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Klik nederst til højre"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Klik nederst til højre på touchpladen for flere valgmuligheder"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Markørens hastighed"</string>
+    <string name="three_finger_tap_preference_title" msgid="7130739855086106052">"Tryk med tre fingre"</string>
     <string name="pointer_fill_style" msgid="8794616790175016092">"Markørfarve"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Skift udfyldningsstil for markør til sort"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Skift udfyldningsstil for markør til grøn"</string>
@@ -2023,6 +2024,11 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Se bevægelser på touchpladen"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"touchplade, touch plade, mus, markør, rul, stryg, højreklik, klik, pointer"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"højreklik, tryk"</string>
+    <string name="three_finger_tap_middle_click" msgid="5274906692591143158">"Midterklik"</string>
+    <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Åbn Assistent"</string>
+    <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Gå til startsiden"</string>
+    <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Gå tilbage"</string>
+    <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Se seneste apps"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Gå til startskærmen"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Stryg opad med tre fingre et vilkårligt sted på touchpladen"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Gå tilbage"</string>
@@ -4207,12 +4213,9 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notifikationer i fuld skærm"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Tillad notifikationer i fuld skærm fra denne app"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Tillad appen at vise notifikationer, der fylder hele skærmen, når enheden er låst. Apps kan benytte denne mulighed til at fremhæve alarmer, indgående opkald og andre presserende notifikationer."</string>
-    <!-- no translation found for write_system_preferences_page_title (4775435310385611055) -->
-    <skip />
-    <!-- no translation found for write_system_preferences_switch_title (213522354119233085) -->
-    <skip />
-    <!-- no translation found for write_system_preferences_footer_description (8645052087619752514) -->
-    <skip />
+    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"Skriv systempræferencer"</string>
+    <string name="write_system_preferences_switch_title" msgid="213522354119233085">"Tillad, at denne app ændrer systemindstillinger på dine vegne"</string>
+    <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"Denne tilladelse giver en app tilladelse til at ændre de grundlæggende systempræferencer."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Apps til administration af medier"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Tillad, at appen administrerer medier"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Hvis du tillader dette, kan denne app redigere og slette mediefiler, der er oprettet med andre apps, uden at spørge dig. Appen skal have adgangstilladelse til filer og medier."</string>
@@ -4871,6 +4874,9 @@
     <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Flere oplysninger om satellitbeskeder"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> kan ikke aktiveres"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Hvis du vil aktivere <xliff:g id="FUNCTION">%1$s</xliff:g>, skal du først afslutte satellitforbindelsen"</string>
+    <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"Satellitforbindelse"</string>
+    <!-- no translation found for satellite_setting_connectivity (80680165723879149) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Adgangspunkter"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Utilgængelig ved forbindelse til <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5057,6 +5063,10 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Du er i den sideagnostiske tilstand med 16 kB. Softwareintegriteten kan ikke garanteres i denne tilstand, og eventuelle data, der gemmes på telefonen, mens bootloaderen er ulåst, kan være sårbare. Nogle funktioner deaktiveres i disse tilstande, så nogle apps fungerer muligvis ikke. Hvis du vil vende tilbage til produktionstilstand, skal du skifte tilbage til tilstanden med 4 kB og derefter låse bootloaderen på enheden. Denne handling gendanner enhedens fabriksindstillinger til produktionsindstillingerne. Når enheden er startet i Android, skal du deaktivere OEM-oplåsning via Indstillinger for udviklere. Hvis enheden ikke kan starte i Android, eller hvis den er ustabil, skal du flashe enheden igen med de oprindelige systembilleder fra &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; eller bruge &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; og vælge \"Ryd enhed\", \"Lås bootloader\" og \"Gennemtving flash af alle partitioner\"."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Den sideagnostiske tilstanden med 16 kB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Læs mere"</string>
+    <!-- no translation found for enable_16k_app_compat_title (4173159228844992989) -->
+    <skip />
+    <!-- no translation found for enable_16k_app_compat_details (3847293423550174952) -->
+    <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Håndtering af fejlrapport"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Afgør, hvilken app der håndterer genvejen til fejlrapporten på din enhed."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personlig"</string>

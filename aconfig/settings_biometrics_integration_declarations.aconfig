@@ -35,3 +35,20 @@ flag {
   }
 }
 
+flag {
+  name: "biometrics_onboarding_education"
+  namespace: "biometrics_integration"
+  description: "This flag controls whether the onboarding education settings UX should be enabled"
+  bug: "370940762"
+}
+
+flag {
+  name: "biometric_onboarding_education"
+  namespace: "biometrics_integration"
+  description: "This flag controls whether the onboarding education settings UX should be enabled"
+  bug: "370940762"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+  }
+}
+
