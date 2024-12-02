@@ -37,6 +37,7 @@ import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.TwoStatePreference
 import com.android.settingslib.preference.PreferenceBindingPlaceholder
 import com.android.settingslib.preference.SwitchPreferenceBinding
@@ -81,6 +82,9 @@ class AdaptiveSleepPreference :
 
     override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     @Suppress("UNCHECKED_CAST")
     private class Storage(

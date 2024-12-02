@@ -2007,6 +2007,8 @@
     <string name="external_display_off">Off</string>
     <!-- External Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="external_display_settings_title">External Display</string>
+    <!-- Built-in display settings category. Appears in External displays and Connected Displays fragments. -->
+    <string name="builtin_display_settings_category">Built-in display</string>
     <!-- External Display use. The title of the use preference. [CHAR LIMIT=40] -->
     <string name="external_display_use_title">Use external display</string>
     <!-- External Display resolution settings. The title of the screen. [CHAR LIMIT=40] -->
@@ -2871,9 +2873,9 @@
     <!-- Display settings screen, screen resolution option for high resolution [CHAR LIMIT=45] -->
     <string name="screen_resolution_option_high">High resolution</string>
     <!-- Display settings screen, screen resolution option for full resolution [CHAR LIMIT=45] -->
-    <string name="screen_resolution_option_full">Full resolution</string>
+    <string name="screen_resolution_option_full">Max resolution</string>
     <!-- The footer message for switch screen resolution [CHAR LIMIT=NONE] -->
-    <string name="screen_resolution_footer">Full resolution uses more of your battery. Switching your resolution may cause some apps to restart.</string>
+    <string name="screen_resolution_footer">Max resolution uses more of your battery. Switching your resolution may cause some apps to restart.</string>
     <!-- Message announced to a11y users when they selected one resolution [CHAR LIMIT=NONE] -->
     <string name="screen_resolution_selected_a11y">Selected</string>
 
@@ -4681,6 +4683,9 @@
     <string name="pointer_stroke_style_name_none">None</string>
     <!-- Title for the button to trigger the 'touch gesture' education. [CHAR LIMIT=35] -->
     <string name="trackpad_touch_gesture">Learn touchpad gestures</string>
+    <!-- TODO(b/353947750): finalize this string and mark it translatable. -->
+    <!-- Notice displayed at the end of the touchpad settings page when the user has disabled system navigation gestures. "Pointer & touchpad accessibility" and "Use touchpad gestures" refer to other labels in Settings, and should be translated in exactly the same way. -->
+    <string name="trackpad_gestures_disabled_footer_text" translatable="false">Some settings are unavailable as touchpad gestures have been turned off. You can turn them on via Pointer &amp; touchpad accessibility > Use touchpad gestures</string>
     <!-- Search keywords for "touchpad" -->
     <string name="keywords_touchpad">trackpad, track pad, mouse, cursor, scroll, swipe, right click, click, pointer</string>
     <!-- Search keywords for 'Bottom-right tap', the name of the touchpad setting that allows the user to click the bottom right corner of the touchpad for more options. -->
@@ -4963,6 +4968,15 @@
     <string name="accessibility_pointer_and_touchpad_summary">Pointer color, pointer size &amp; more</string>
     <!-- Title for the accessibility pointer color customization page. [CHAR LIMIT=50] -->
     <string name="accessibility_pointer_color_customization_title">Pointer color customization</string>
+    <!-- TODO(b/353947750): finalize the four strings below and mark them translatable. -->
+    <!-- Title for the touchpad section of the accessibility pointer and touchpad page. -->
+    <string name="accessibility_touchpad_title" translatable="false">Touchpad</string>
+    <!-- Title for a settings toggle that allows the user to enable or disable system gestures (3- or 4-finger swipes for going home, back, to the overview screen, or between apps) being made on a touchpad. -->
+    <string name="accessibility_touchpad_system_gestures_enable_title" translatable="false">Use system gestures</string>
+    <!-- Description text for a settings toggle that allows the user to enable or disable system gestures (3- or 4-finger swipes for going home, back, to the overview screen, or between apps) being made on a touchpad. -->
+    <string name="accessibility_touchpad_system_gestures_enable_summary" translatable="false">When turned off, 3- or 4-finger gestures are ignored</string>
+    <!-- List of synonyms used in the settings search bar to find the "Use system gestures" touchpad setting, which allows the user to enable or disable system gestures (3- or 4-finger swipes for going home, back, to the overview screen, or between apps) being made on a touchpad. -->
+    <string name="keywords_accessibility_touchpad_system_gestures_enable" translatable="false">touchpad, trackpad, swipe</string>
     <!-- Title for the accessibility color contrast page. [CHAR LIMIT=50] -->
     <string name="accessibility_color_contrast_title">Color contrast</string>
     <!-- Intro for the accessibility color contrast page. [CHAR LIMIT=NONE] -->
@@ -12273,15 +12287,15 @@
     <!-- Summary for _satellite_setting_preference_layout. [CHAR LIMIT=NONE]-->
     <string name="satellite_setting_disabled_summary">Send and receive text messages by satellite. Not included with your account.</string>
     <!-- Search keywords for "_satellite_setting_preference_layout" [CHAR_LIMIT=NONE] -->
-    <string name="keywords_satellite_setting">Satellite messaging</string>
+    <string name="keywords_satellite_setting">Satellite messaging, satellite connectivity</string>
     <!-- Category name "About satellite messaging" [CHAR_LIMIT=NONE] -->
-    <string name="category_name_about_satellite_messaging">About satellite messaging</string>
+    <string name="category_name_about_satellite_messaging">About <xliff:g id="subject" example="satellite messaging">%1$s</xliff:g></string>
     <!-- Summary for category "About satellite messaging" [CHAR_LIMIT=NONE] -->
     <string name="title_about_satellite_setting">You can send and receive text messages by satellite as part of an eligible <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> account</string>
     <!-- Category title "Your mobile plan" [CHAR_LIMIT=NONE] -->
     <string name="category_title_your_satellite_plan">Your <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> plan</string>
     <!-- Title for category "Your mobile plan when satellite is included in plan" [CHAR_LIMIT=NONE] -->
-    <string name="title_have_satellite_plan">Satellite messaging is included with your account</string>
+    <string name="title_have_satellite_plan">Messaging is included with your account</string>
     <!-- Title for category "Your mobile plan when satellite is not included in plan" [CHAR_LIMIT=NONE] -->
     <string name="title_no_satellite_plan">Satellite messaging isn\u2019t included with your account</string>
     <!-- text view "Learn more" [CHAR_LIMIT=NONE] -->
@@ -12297,9 +12311,9 @@
     <!-- Summary for satellite supported service [CHAR_LIMIT=NONE] -->
     <string name="summary_supported_service">You can text anyone, including emergency services. Your phone will reconnect to a mobile network when available.</string>
     <!-- learn more text - more about satellite messaging [CHAR_LIMIT=NONE] -->
-    <string name="satellite_setting_summary_more_information">Satellite messaging may take longer and is available only in some areas. Weather and certain structures may affect your satellite connection. Calling by satellite isn\u2019t available. Emergency calls may still connect.\n\nIt may take some time for account changes to show in Settings. Contact your carrier for details.</string>
+    <string name="satellite_setting_summary_more_information"><xliff:g id="subject" example="satellite messaging">%1$s</xliff:g> may take longer and is available only in some areas. Weather and certain structures may affect your satellite connection. Calling by satellite isn\u2019t available. Emergency calls may still connect.\n\nIt may take some time for account changes to show in Settings. Contact <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> for details.</string>
     <!-- more about satellite messaging [CHAR_LIMIT=NONE] -->
-    <string name="more_about_satellite_messaging">More about satellite messaging</string>
+    <string name="more_about_satellite_messaging">More about <xliff:g id="subject" example="satellite messaging">%1$s</xliff:g></string>
     <!-- Title for satellite warning dialog to avoid user using wifi/bluetooth/airplane mode [CHAR_LIMIT=NONE] -->
     <string name="satellite_warning_dialog_title">Can’t turn on <xliff:g id="function" example="bluetooth">%1$s</xliff:g></string>
     <!-- Content for satellite warning dialog to avoid user using wifi/bluetooth/airplane mode [CHAR_LIMIT=NONE] -->
@@ -12307,7 +12321,49 @@
     <!-- Category title for satellite functions with data transmission in mobile network settings [CHAR LIMIT=60] -->
     <string name="category_title_satellite_connectivity">Satellite connectivity</string>
     <!-- Title for satellite functions with data transmission in mobile network settings [CHAR LIMIT=60] -->
-    <string name="satellite_setting_connectivity">Satellite connectivity</string>
+    <string name="title_satellite_setting_connectivity">Satellite connectivity</string>
+    <!-- Description of satellite function with data transmission [CHAR LIMIT=60] -->
+    <string name="description_satellite_setting_connectivity">satellite connectivity</string>
+    <!-- Description of satellite function [CHAR LIMIT=60] -->
+    <string name="description_satellite_setting_messaging">satellite messaging</string>
+    <!-- Title for notifying user's account be able to use data transmission of Satellite" [CHAR_LIMIT=NONE] -->
+    <string name="title_have_satellite_data_plan">Use of data is included with your account</string>
+    <!-- Title for the entry of Satellite SOS [CHAR_LIMIT=NONE] -->
+    <string name="title_for_satellite_sos">Satellite SOS</string>
+    <!-- Summary for the entry of Satellite SOS [CHAR_LIMIT=NONE] -->
+    <string name="summary_for_satellite_sos_entry">Message with emergency services when you can\u2019t connect to a mobile or Wi\u2011Fi network</string>
+    <!-- Keywords for the entry of Satellite SOS [CHAR_LIMIT=NONE] -->
+    <string name="keywords_satellite_sos">satellite sos, sos</string>
+    <!-- Category title of Satellite SOS [CHAR_LIMIT=60] -->
+    <string name="category_title_about_satellite_sos">About Satellite SOS</string>
+    <!-- Desrciption of introduction for Satellite SOS [CHAR_LIMIT=60] -->
+    <string name="satellite_sos_introduction">You can message with emergency services and share your location when you can’t connect to a mobile or Wi-Fi network. This service may not be available at all times in all locations or circumstances.</string>
+    <!-- Description of how it works step 1 for Satellite SOS. [CHAR_LIMIT=200] -->
+    <string name="satellite_sos_how_it_works_step_1">Call or text emergency services</string>
+    <!-- Description of how it works step 2 for Satellite SOS. [CHAR_LIMIT=200] -->
+    <string name="satellite_sos_how_it_works_step_2">Answer questions about the emergency</string>
+    <!-- Description of how it works step 3 for Satellite SOS. [CHAR_LIMIT=200] -->
+    <string name="satellite_sos_how_it_works_step_3">Follow steps to connect to the satellite</string>
+    <!-- Summary of how it works step 1 for Satellite SOS. [CHAR_LIMIT=NONE] -->
+    <string name="satellite_sos_how_it_works_summary_1">If you don’t have a mobile network, you’ll see an option to use Satellite SOS</string>
+    <!-- Summary of how it works step 2 for Satellite SOS. [CHAR_LIMIT=NONE] -->
+    <string name="satellite_sos_how_it_works_summary_2">Send answers to emergency services to get you the right kind of help</string>
+    <!-- Summary of how it works step 3 for Satellite SOS. [CHAR_LIMIT=NONE] -->
+    <string name="satellite_sos_how_it_works_summary_3">Once you’re connected, you can message with emergency services</string>
+    <!-- Title of button to request Satellite SOS demo-->
+    <string name="satellite_sos_try_demo">Try a demo</string>
+    <!-- Description of Footer text for Satellite SOS settings. [CHAR_LIMIT=NONE] -->
+    <string name="satellite_sos_footer_text">When you connect with emergency services by satellite, your name, email, phone number, location, device information (IMEI, language, model, battery level), and emergency contact information are shared with emergency services and satellite service providers.
+        \n\nTo use Satellite SOS, Google Messages must be your default SMS app.
+        \n\nIf automatic network selection is off, it will be turned on, and your device will automatically connect to any network.</string>
+    <!-- Category title of Sharing preferences for Satellite SOS. [CHAR_LIMIT=40] -->
+    <string name="satellite_sos_sharing_preferences_subheader_title">Sharing preferences</string>
+    <!-- Title of emergency contacts for Satellite SOS. [CHAR_LIMIT=200] -->
+    <string name="satellite_sos_sharing_preferences_step_1">Emergency contacts</string>
+    <!-- Title of viewing google contacts for Satellite SOS. [CHAR_LIMIT=200] -->
+    <string name="satellite_sos_sharing_preferences_step_2">Your Google Account</string>
+    <!-- Description of sharing preference for Satellite SOS. [CHAR_LIMIT=200] -->
+    <string name="satellite_sos_sharing_preferences_description">Review or update info that will be shared with emergency services</string>
 
 
     <!-- Title for Apn settings in mobile network settings [CHAR LIMIT=60] -->

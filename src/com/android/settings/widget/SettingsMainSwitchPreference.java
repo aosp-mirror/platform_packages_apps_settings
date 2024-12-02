@@ -240,6 +240,11 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
         if (mMainSwitchBar != null) {
             mMainSwitchBar.setTitle(getTitle());
             mMainSwitchBar.setDisabledByAdmin(mEnforcedAdmin);
+
+            // Disable the focusability of the switch bar. The parent FrameLayout
+            // will be the only focusable view for the Main Switch Bar to avoid
+            // duplicate a11y focus.
+            mMainSwitchBar.setFocusable(false);
         }
     }
 
