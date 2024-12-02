@@ -159,7 +159,8 @@ class MobileNetworkListScreen :
 
     override fun fragmentClass() = MobileNetworkListFragment::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) =
+        preferenceHierarchy(this) { +MobileDataPreference() }
 
     companion object {
         const val KEY = "mobile_network_list"
