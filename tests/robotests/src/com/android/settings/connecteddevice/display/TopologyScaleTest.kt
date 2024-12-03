@@ -40,11 +40,11 @@ class TopologyScaleTest {
         // blockRatio is higher than 0.05 in order to make the smallest display edge (480 dp) 48dp
         // in the pane.
         assertEquals(
-                "{TopoScale blockRatio=0.100000 originPaneXY=288,216 paneHeight=480}", "" + scale)
+                "{TopoScale blockRatio=0.100000 originPaneXY=288,48 paneHeight=144}", "" + scale)
 
-        assertEquals(Point(352, 264), scale.displayToPaneCoor(PointF(640f, 480f)))
-        assertEquals(Point(320, 240), scale.displayToPaneCoor(PointF(320f, 240f)))
-        assertEquals(PointF(640f, 480f), scale.paneToDisplayCoor(Point(352, 264)))
+        assertEquals(Point(352, 96), scale.displayToPaneCoor(PointF(640f, 480f)))
+        assertEquals(Point(320, 72), scale.displayToPaneCoor(PointF(320f, 240f)))
+        assertEquals(PointF(640f, 480f), scale.paneToDisplayCoor(Point(352, 96)))
     }
 
     @Test
@@ -75,5 +75,23 @@ class TopologyScaleTest {
         assertEquals(Point(192, 256), scale.displayToPaneCoor(PointF(480f, 640f)))
         assertEquals(Point(96, 64), scale.displayToPaneCoor(PointF(0f, -320f)))
         assertPointF(220f, -430f, 0.001f, scale.paneToDisplayCoor(Point(140, 42)))
+    }
+
+    @Test
+    fun paneVerticalPaddingLimitedByTallestDisplay() {
+        val scale = TopologyScale(
+                /* paneWidth= */ 300,
+                listOf(
+                        RectF(0f, 0f, 640f, 480f),
+                        RectF(0f, 480f, 640f, 960f),
+                        RectF(0f, 960f, 640f, 1440f),
+                        RectF(0f, 1440f, 640f, 1920f),
+                        RectF(0f, 1920f, 640f, 2400f),
+                        RectF(0f, 2400f, 640f, 2880f)))
+
+        assertEquals(
+                "{TopoScale blockRatio=0.100000 originPaneXY=118,48 paneHeight=384}", "" + scale)
+        assertEquals(Point(150, 48), scale.displayToPaneCoor(PointF(320f, 0f)))
+        assertPointF(-180f, 2880f, 0.001f, scale.paneToDisplayCoor(Point(100, 336)))
     }
 }

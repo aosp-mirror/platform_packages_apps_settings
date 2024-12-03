@@ -59,12 +59,14 @@ class TopologyScale(paneWidth : Int, displaysPos : Collection<RectF>) {
         val displayBounds = RectF(
                 Float.MAX_VALUE, Float.MAX_VALUE, Float.MIN_VALUE, Float.MIN_VALUE)
         var smallestDisplayDim = Float.MAX_VALUE
+        var biggestDisplayHeight = Float.MIN_VALUE
 
         // displayBounds is the smallest rect encompassing all displays, in display space.
         // smallestDisplayDim is the size of the smallest display edge, in display space.
         for (pos in displaysPos) {
             displayBounds.union(pos)
             smallestDisplayDim = minOf(smallestDisplayDim, pos.height(), pos.width())
+            biggestDisplayHeight = max(biggestDisplayHeight, pos.height())
         }
 
         // Set height according to the width and the aspect ratio of the display bounds.
@@ -81,9 +83,17 @@ class TopologyScale(paneWidth : Int, displaysPos : Collection<RectF>) {
         // Essentially, we just set the pane height based on the pre-determined pane width and the
         // aspect ratio of the display bounds. But we may need to increase it slightly to achieve
         // 20% padding above and below the display bounds - this is where the 0.6 comes from.
-        paneHeight = max(
+        val rawPaneHeight = max(
                 paneWidth.toDouble() / displayBounds.width() * displayBounds.height(),
-                displayBounds.height() * blockRatio / 0.6).toInt()
+                displayBounds.height() * blockRatio / 0.6)
+
+        // It is easy for the aspect ratio to result in an excessively tall pane, since the width is
+        // pre-determined and may be considerably wider than necessary. So we prevent the height
+        // from growing too large here, by limiting vertical padding to the size of the tallest
+        // display. This improves results for very tall display bounds.
+        paneHeight = min(
+                rawPaneHeight.toInt(),
+                (blockRatio * (displayBounds.height() + biggestDisplayHeight * 2f)).toInt())
 
         // Set originPaneXY (the location of 0,0 in display space in the pane's coordinate system)
         // such that the display bounds rect is centered in the pane.
