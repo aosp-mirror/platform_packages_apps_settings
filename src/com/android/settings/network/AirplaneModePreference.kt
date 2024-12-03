@@ -28,8 +28,7 @@ import com.android.settingslib.metadata.SwitchPreference
 
 // LINT.IfChange
 class AirplaneModePreference :
-    SwitchPreference(KEY, R.string.airplane_mode),
-    PreferenceAvailabilityProvider {
+    SwitchPreference(KEY, R.string.airplane_mode), PreferenceAvailabilityProvider {
 
     override val icon: Int
         @DrawableRes get() = R.drawable.ic_airplanemode_active
@@ -40,11 +39,13 @@ class AirplaneModePreference :
         get() = SensitivityLevel.HIGH_SENSITIVITY
 
     override fun isAvailable(context: Context) =
-        (context.resources.getBoolean(R.bool.config_show_toggle_airplane)
-                && !context.packageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK))
+        (context.resources.getBoolean(R.bool.config_show_toggle_airplane) &&
+            !context.packageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK))
 
     companion object {
         const val KEY = Settings.Global.AIRPLANE_MODE_ON
+
+        fun Context.isAirplaneModeOn() = SettingsGlobalStore.get(this).getBoolean(KEY) == true
     }
 }
 // LINT.ThenChange(AirplaneModePreferenceController.java)
