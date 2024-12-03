@@ -22,6 +22,7 @@ import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settings.network.TetherPreferenceController
+import com.android.settings.wifi.tether.WifiHotspotSwitchPreference
 import com.android.settingslib.TetherUtil
 import com.android.settingslib.Utils
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -63,7 +64,9 @@ class TetherScreen :
 
     override fun fragmentClass() = TetherSettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {
+        +WifiHotspotSwitchPreference(context)
+    }
 
     companion object {
         const val KEY = "tether_settings"

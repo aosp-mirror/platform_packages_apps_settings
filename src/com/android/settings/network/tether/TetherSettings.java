@@ -203,7 +203,9 @@ public class TetherSettings extends RestrictedDashboardFragment
             getPreferenceScreen().removePreference(mUsbTether);
         }
 
-        mWifiTetherPreferenceController.displayPreference(getPreferenceScreen());
+        if (!isCatalystEnabled() && mWifiTetherPreferenceController != null) {
+            mWifiTetherPreferenceController.displayPreference(getPreferenceScreen());
+        }
 
         if (!bluetoothAvailable) {
             getPreferenceScreen().removePreference(mBluetoothTether);
@@ -223,8 +225,10 @@ public class TetherSettings extends RestrictedDashboardFragment
     @VisibleForTesting
     void setupViewModel() {
         TetheringManagerModel model = new ViewModelProvider(this).get(TetheringManagerModel.class);
-        mWifiTetherPreferenceController =
-                new WifiTetherPreferenceController(getContext(), getSettingsLifecycle(), model);
+        if (!isCatalystEnabled()) {
+            mWifiTetherPreferenceController =
+                    new WifiTetherPreferenceController(getContext(), getSettingsLifecycle(), model);
+        }
         mTm = model.getTetheringManager();
         model.getTetheredInterfaces().observe(this, this::onTetheredInterfacesChanged);
     }
@@ -261,7 +265,9 @@ public class TetherSettings extends RestrictedDashboardFragment
     @Override
     public void onDataSaverChanged(boolean isDataSaving) {
         mDataSaverEnabled = isDataSaving;
-        mWifiTetherPreferenceController.setDataSaverEnabled(mDataSaverEnabled);
+        if (!isCatalystEnabled()) {
+            mWifiTetherPreferenceController.setDataSaverEnabled(mDataSaverEnabled);
+        }
         mUsbTether.setEnabled(!mDataSaverEnabled);
         mBluetoothTether.setEnabled(!mDataSaverEnabled);
         mEthernetTether.setEnabled(!mDataSaverEnabled);
