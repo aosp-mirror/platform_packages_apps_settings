@@ -24,6 +24,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.`when`
+import org.mockito.kotlin.any
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
@@ -46,7 +47,7 @@ class FingerprintEnrollTest {
     @Before
     fun setUp() {
         featureFactory = FakeFeatureFactory.setupForTest()
-        `when`(featureFactory.fingerprintFeatureProvider.enrollActivityClassProvider)
+        `when`(featureFactory.fingerprintFeatureProvider.getEnrollActivityClassProvider(any()))
             .thenReturn(activityProvider)
     }
 
@@ -79,6 +80,15 @@ class FingerprintEnrollTest {
 
         // Verify
         verifyLaunchNextActivity(activity, activityProvider.internal)
+    }
+
+    @Test
+    fun testAndFinishLaunchAddAdditional() {
+        // Run
+        val activity = setupActivity(FingerprintEnroll.AddAdditionalFingerprint::class.java)
+
+        // Verify
+        verifyLaunchNextActivity(activity, activityProvider.addAnother)
     }
 
     private fun verifyLaunchNextActivity(
