@@ -218,6 +218,20 @@ class AutoSelectPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION)
+    fun initialization_noSatellite_noCrash() {
+        `when`(context.getSystemService(SatelliteManager::class.java)).thenReturn(null)
+
+        AutoSelectPreferenceController(
+            context = context,
+            key = TEST_KEY,
+            allowedNetworkTypesFlowFactory = { emptyFlow() },
+            serviceStateFlowFactory = { flowOf(serviceState) },
+            getConfigForSubId = { carrierConfig },
+        ).init(subId = SUB_ID)
+    }
+
+    @Test
     fun onClick_turnOff_startNetworkSelectActivity() {
         serviceState.isManualSelection = false
 
