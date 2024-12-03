@@ -51,6 +51,7 @@ public class InputPeripheralsSettingsUtils {
     static final String EXTRA_TITLE = "keyboard_layout_picker_title";
     static final String EXTRA_USER_ID = "user_id";
     static final String EXTRA_INPUT_DEVICE_IDENTIFIER = "input_device_identifier";
+    static final String EXTRA_INPUT_DEVICE = "input_device";
     static final String EXTRA_INPUT_METHOD_INFO = "input_method_info";
     static final String EXTRA_INPUT_METHOD_SUBTYPE = "input_method_subtype";
 
