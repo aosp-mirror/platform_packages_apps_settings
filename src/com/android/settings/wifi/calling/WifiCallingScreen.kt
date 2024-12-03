@@ -37,6 +37,8 @@ class WifiCallingScreen : PreferenceScreenCreator {
 
     override fun fragmentClass() = WifiCallingSettingsForSub::class.java
 
+    override fun hasCompleteHierarchy() = false
+
     override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
 
     companion object {
