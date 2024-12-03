@@ -16,6 +16,7 @@
 package com.android.settings.wifi.calling
 
 import android.content.Context
+import android.telephony.SubscriptionManager
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -39,7 +40,13 @@ class WifiCallingScreen : PreferenceScreenCreator {
 
     override fun hasCompleteHierarchy() = false
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) =
+        preferenceHierarchy(this) {
+            val subId = SubscriptionManager.getDefaultSubscriptionId()
+            if (SubscriptionManager.isValidSubscriptionId(subId)) {
+                +WifiCallingMainSwitchPreference(subId)
+            }
+        }
 
     companion object {
         const val KEY = "wifi_calling"
