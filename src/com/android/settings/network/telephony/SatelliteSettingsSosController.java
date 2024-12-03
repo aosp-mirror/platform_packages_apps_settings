@@ -16,30 +16,10 @@
 
 package com.android.settings.network.telephony;
 
-import android.os.UserManager;
+import android.app.Fragment;
 
-import com.android.settings.R;
-import com.android.settings.dashboard.RestrictedDashboardFragment;
+public class SatelliteSettingsSosController {
 
-public class SatelliteSettingsSosFragment extends RestrictedDashboardFragment {
-
-
-    public SatelliteSettingsSosFragment() {
-        super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
-    }
-
-    @Override
-    public int getMetricsCategory() {
-        return 0;
-    }
-
-    @Override
-    protected int getPreferenceScreenResId() {
-        return R.xml.satellite_setting_sos;
-    }
-
-    @Override
-    protected String getLogTag() {
-        return "";
+    public SatelliteSettingsSosController(Fragment fragment) {
     }
 }
