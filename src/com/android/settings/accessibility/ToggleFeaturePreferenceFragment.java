@@ -167,9 +167,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         final List<String> shortcutFeatureKeys = new ArrayList<>();
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
-        }
+        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
         return shortcutFeatureKeys;
     }
 
@@ -750,44 +748,13 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         showQuickSettingsTooltipIfNeeded();
     }
 
+    /**
+     * @deprecated made obsolete by quick settings rollout.
+     *
+     * (TODO 367414968: finish removal.)
+     */
+    @Deprecated
     private void showQuickSettingsTooltipIfNeeded() {
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            // Don't show Quick Settings tooltip
-            return;
-        }
-        final ComponentName tileComponentName = getTileComponentName();
-        if (tileComponentName == null) {
-            // Returns if no tile service assigned.
-            return;
-        }
-
-        Activity activity = getActivity();
-        if (activity != null && WizardManagerHelper.isAnySetupWizard(activity.getIntent())) {
-            // Don't show QuickSettingsTooltip in Setup Wizard
-            return;
-        }
-
-        if (!mNeedsQSTooltipReshow && AccessibilityQuickSettingUtils.hasValueInSharedPreferences(
-                getContext(), tileComponentName)) {
-            // Returns if quick settings tooltip only show once.
-            return;
-        }
-
-        final CharSequence content = getTileTooltipContent(mNeedsQSTooltipType);
-        if (TextUtils.isEmpty(content)) {
-            // Returns if no content of tile tooltip assigned.
-            return;
-        }
-
-        final int imageResId = mNeedsQSTooltipType == QuickSettingsTooltipType.GUIDE_TO_EDIT
-                ? R.drawable.accessibility_qs_tooltip_illustration
-                : R.drawable.accessibility_auto_added_qs_tooltip_illustration;
-        mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(getContext());
-        mTooltipWindow.setup(content, imageResId);
-        mTooltipWindow.showAtTopCenter(getView());
-        AccessibilityQuickSettingUtils.optInValueToSharedPreferences(getContext(),
-                tileComponentName);
-        mNeedsQSTooltipReshow = false;
     }
 
     /** Returns user visible name of the tile by given {@link ComponentName}. */
