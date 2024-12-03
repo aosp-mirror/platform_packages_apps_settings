@@ -41,6 +41,7 @@ import kotlinx.coroutines.flow.Flow
  * - Has subscriptions: click action takes you to a page listing the subscriptions, and the summary
  *   text gives the count of SIMs
  */
+// LINT.IfChange
 class MobileNetworkSummaryController
 @JvmOverloads
 constructor(
@@ -119,3 +120,4 @@ constructor(
         )
     }
 }
+// LINT.ThenChange(MobileNetworkListScreen.kt)
