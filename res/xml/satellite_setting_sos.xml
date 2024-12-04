@@ -77,6 +77,7 @@
         android:key="key_satellite_sos_footer"
         android:title="@string/satellite_sos_footer_text"
         android:selectable="false"
-        settings:searchable="false"/>
+        settings:searchable="false"
+        settings:controller="com.android.settings.network.telephony.SatelliteSettingsSosFooterPreferenceController"/>
     />
 </androidx.preference.PreferenceScreen>

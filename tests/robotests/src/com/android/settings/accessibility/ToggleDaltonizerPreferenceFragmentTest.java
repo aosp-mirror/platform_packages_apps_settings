@@ -107,23 +107,6 @@ public class ToggleDaltonizerPreferenceFragmentTest {
     }
 
     @Test
-    @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void onPreferenceToggled_colorCorrectDisabled_shouldReturnTrueAndShowTooltipView() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED, OFF);
-        ToggleDaltonizerPreferenceFragment fragment = getFragmentInResumedState();
-        SettingsMainSwitchPreference switchPreference = getMainFeatureToggle(fragment);
-
-        fragment.onPreferenceToggled(switchPreference.getKey(), true);
-
-        final boolean isEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED, OFF) == ON;
-        assertThat(isEnabled).isTrue();
-        assertThat(getLatestPopupWindow()).isNotNull();
-        assertThat(getLatestPopupWindow().isShowing()).isTrue();
-    }
-
-    @Test
     public void onPreferenceToggled_colorCorrectEnabled_shouldReturnFalseAndNotShowTooltipView() {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED, ON);

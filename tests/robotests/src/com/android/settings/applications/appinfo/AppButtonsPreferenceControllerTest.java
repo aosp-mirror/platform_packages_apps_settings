@@ -60,6 +60,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
@@ -85,6 +86,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Set;
 
+@Config(shadows = {ShadowUtils.class})
 @RunWith(RobolectricTestRunner.class)
 public class AppButtonsPreferenceControllerTest {
 
@@ -168,6 +170,7 @@ public class AppButtonsPreferenceControllerTest {
     @After
     public void tearDown() {
         ShadowAppUtils.reset();
+        ShadowUtils.reset();
     }
 
     @Test

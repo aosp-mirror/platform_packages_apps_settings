@@ -19,14 +19,11 @@ package com.android.settings.accessibility.shortcuts;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
 
 import android.content.Context;
-import android.provider.Settings;
 import android.view.View;
-import android.view.accessibility.Flags;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityButtonFragment;
-import com.android.settings.accessibility.FloatingMenuSizePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.utils.AnnotationSpan;
 
@@ -61,27 +58,5 @@ public abstract class SoftwareShortcutOptionPreferenceController
                 mContext.getText(
                         R.string.accessibility_shortcut_edit_dialog_summary_software_floating),
                 linkInfo);
-    }
-
-    @Override
-    protected void enableShortcutForTargets(boolean enable) {
-        super.enableShortcutForTargets(enable);
-        if (Flags.a11yQsShortcut()) {
-            return;
-        }
-
-        if (enable) {
-            // Update the A11y FAB size to large when the Magnification shortcut is enabled
-            // and the user hasn't changed the floating button size
-            if (isMagnificationInTargets()
-                    && Settings.Secure.getInt(mContext.getContentResolver(),
-                    Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE,
-                    FloatingMenuSizePreferenceController.Size.UNKNOWN)
-                    == FloatingMenuSizePreferenceController.Size.UNKNOWN) {
-                Settings.Secure.putInt(mContext.getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE,
-                        FloatingMenuSizePreferenceController.Size.LARGE);
-            }
-        }
     }
 }
