@@ -112,7 +112,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        mPackageName = getString(R.string.accessibility_screen_magnification_title);
+        mFeatureName = getString(R.string.accessibility_screen_magnification_title);
         mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                 .authority(getPrefContext().getPackageName())
                 .appendPath(String.valueOf(R.raw.a11y_magnification_banner))
