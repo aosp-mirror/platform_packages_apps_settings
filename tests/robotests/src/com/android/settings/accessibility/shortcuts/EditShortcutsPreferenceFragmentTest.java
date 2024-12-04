@@ -46,7 +46,6 @@ import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.util.Pair;
 import android.view.accessibility.AccessibilityManager;
-import android.view.accessibility.Flags;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -466,7 +465,6 @@ public class EditShortcutsPreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void fragmentResumed_enableTouchExploration_qsShortcutOptionSummaryUpdated() {
         String expectedSummary = StringUtil.getIcuPluralsString(mContext, 2,
                 R.string.accessibility_shortcut_edit_dialog_summary_quick_settings);
@@ -486,7 +484,6 @@ public class EditShortcutsPreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void fragmentPaused_enableTouchExploration_qsShortcutOptionSummaryNotUpdated() {
         String expectedSummary = StringUtil.getIcuPluralsString(mContext, 1,
                 R.string.accessibility_shortcut_edit_dialog_summary_quick_settings);
@@ -644,7 +641,6 @@ public class EditShortcutsPreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void onQuickSettingsShortcutSettingChanged_preferredShortcutsUpdated() {
         final String target = TARGET_FAKE_COMPONENT.flattenToString();
         mFragmentScenario = createFragScenario(

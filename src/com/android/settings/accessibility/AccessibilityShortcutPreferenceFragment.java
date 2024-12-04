@@ -31,7 +31,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,9 +113,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         final List<String> shortcutFeatureKeys = new ArrayList<>();
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
-        }
+        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
         mSettingsContentObserver = new AccessibilitySettingsContentObserver(new Handler());
         mSettingsContentObserver.registerKeysToObserverCallback(shortcutFeatureKeys, key -> {
             updateShortcutPreferenceData();
@@ -374,38 +371,13 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         showQuickSettingsTooltipIfNeeded();
     }
 
+    /**
+     * @deprecated made obsolete by quick settings rollout.
+     *
+     * (TODO 367414968: finish removal.)
+     */
+    @Deprecated
     private void showQuickSettingsTooltipIfNeeded() {
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            // Don't show Quick Settings tooltip
-            return;
-        }
-        final ComponentName tileComponentName = getTileComponentName();
-        if (tileComponentName == null) {
-            // Returns if no tile service assigned.
-            return;
-        }
-
-        if (!mNeedsQSTooltipReshow && AccessibilityQuickSettingUtils.hasValueInSharedPreferences(
-                getContext(), tileComponentName)) {
-            // Returns if quick settings tooltip only show once.
-            return;
-        }
-
-        final CharSequence content = getTileTooltipContent(mNeedsQSTooltipType);
-        if (TextUtils.isEmpty(content)) {
-            // Returns if no content of tile tooltip assigned.
-            return;
-        }
-
-        final int imageResId = mNeedsQSTooltipType == QuickSettingsTooltipType.GUIDE_TO_EDIT
-                ? R.drawable.accessibility_qs_tooltip_illustration
-                : R.drawable.accessibility_auto_added_qs_tooltip_illustration;
-        mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(getContext());
-        mTooltipWindow.setup(content, imageResId);
-        mTooltipWindow.showAtTopCenter(getView());
-        AccessibilityQuickSettingUtils.optInValueToSharedPreferences(getContext(),
-                tileComponentName);
-        mNeedsQSTooltipReshow = false;
     }
 
     /**

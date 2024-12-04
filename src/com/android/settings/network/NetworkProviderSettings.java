@@ -429,6 +429,10 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
     }
 
     private void addWifiSwitchPreferenceController() {
+        if (isCatalystEnabled()) {
+            Log.i(TAG, "WifiSwitchPreferenceController bypassed since Catalyst is enabled!");
+            return;
+        }
         if (!hasWifiManager()) return;
         if (mWifiSwitchPreferenceController == null) {
             mWifiSwitchPreferenceController =
