@@ -72,6 +72,7 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Base class for accessibility fragments with toggle, shortcut, some helper functions
@@ -685,13 +686,12 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         }
 
         final int shortcutTypes = getUserPreferredShortcutTypes();
-        if (preference.isChecked()) {
-            AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes,
-                    mComponentName);
+        final boolean isChecked = preference.isChecked();
+        getPrefContext().getSystemService(AccessibilityManager.class).enableShortcutsForTargets(
+                isChecked, shortcutTypes,
+                Set.of(mComponentName.flattenToString()), getPrefContext().getUserId());
+        if (isChecked) {
             showDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
-        } else {
-            AccessibilityUtil.optOutAllValuesFromSettings(getPrefContext(), shortcutTypes,
-                    mComponentName);
         }
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }

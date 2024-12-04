@@ -60,7 +60,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 
 /** Provides utility methods to accessibility settings only. */
 public final class AccessibilityUtil {
@@ -193,114 +192,6 @@ public final class AccessibilityUtil {
         return requestA11yButton
                 ? AccessibilityServiceFragmentType.INVISIBLE_TOGGLE
                 : AccessibilityServiceFragmentType.TOGGLE;
-    }
-
-    /**
-     * Opts in component name into multiple {@code shortcutTypes} colon-separated string in
-     * Settings.
-     *
-     * @param context       The current context.
-     * @param shortcutTypes A combination of {@link UserShortcutType}.
-     * @param componentName The component name that need to be opted in Settings.
-     *
-     * @deprecated use
-     * {@link AccessibilityManager#enableShortcutsForTargets(boolean, int, Set, int)} instead.
-     *
-     * (TODO 367414968: finish removal.)
-     */
-    @Deprecated
-    static void optInAllValuesToSettings(Context context, int shortcutTypes,
-            @NonNull ComponentName componentName) {
-        AccessibilityManager a11yManager = context.getSystemService(AccessibilityManager.class);
-        if (a11yManager != null) {
-            a11yManager.enableShortcutsForTargets(
-                    /* enable= */ true,
-                    shortcutTypes,
-                    Set.of(componentName.flattenToString()),
-                    UserHandle.myUserId()
-            );
-        }
-    }
-
-    /**
-     * Opts in component name into {@code shortcutType} colon-separated string in Settings.
-     *
-     * @param context       The current context.
-     * @param shortcutType  The preferred shortcut type user selected.
-     * @param componentName The component name that need to be opted in Settings.
-     *
-     * @deprecated use
-     * {@link AccessibilityManager#enableShortcutsForTargets(boolean, int, Set, int)} instead.
-     *
-     * (TODO 367414968: finish removal.)
-     */
-    @Deprecated
-    @VisibleForTesting
-    static void optInValueToSettings(Context context, @UserShortcutType int shortcutType,
-            @NonNull ComponentName componentName) {
-        AccessibilityManager a11yManager = context.getSystemService(AccessibilityManager.class);
-        if (a11yManager != null) {
-            a11yManager.enableShortcutsForTargets(
-                    /* enable= */ true,
-                    shortcutType,
-                    Set.of(componentName.flattenToString()),
-                    UserHandle.myUserId()
-            );
-        }
-    }
-
-    /**
-     * Opts out component name into multiple {@code shortcutTypes} colon-separated string in
-     * Settings.
-     *
-     * @param context       The current context.
-     * @param shortcutTypes A combination of {@link UserShortcutType}.
-     * @param componentName The component name that need to be opted out from Settings.
-     *
-     * @deprecated use
-     * {@link AccessibilityManager#enableShortcutsForTargets(boolean, int, Set, int)} instead.
-     *
-     * (TODO 367414968: finish removal.)
-     */
-    @Deprecated
-    static void optOutAllValuesFromSettings(Context context, int shortcutTypes,
-            @NonNull ComponentName componentName) {
-        AccessibilityManager a11yManager = context.getSystemService(AccessibilityManager.class);
-        if (a11yManager != null) {
-            a11yManager.enableShortcutsForTargets(
-                    /* enable= */ false,
-                    shortcutTypes,
-                    Set.of(componentName.flattenToString()),
-                    UserHandle.myUserId()
-            );
-        }
-    }
-
-    /**
-     * Opts out component name into {@code shortcutType} colon-separated string in Settings.
-     *
-     * @param context       The current context.
-     * @param shortcutType  The preferred shortcut type user selected.
-     * @param componentName The component name that need to be opted out from Settings.
-     *
-     * @deprecated use
-     * {@link AccessibilityManager#enableShortcutsForTargets(boolean, int, Set, int)} instead.
-     *
-     * (TODO 367414968: finish removal.)
-     */
-    @Deprecated
-    @VisibleForTesting
-    static void optOutValueFromSettings(Context context, @UserShortcutType int shortcutType,
-            @NonNull ComponentName componentName) {
-        AccessibilityManager a11yManager = context.getSystemService(AccessibilityManager.class);
-        if (a11yManager != null) {
-            a11yManager.enableShortcutsForTargets(
-                    /* enable= */ false,
-                    shortcutType,
-                    Set.of(componentName.flattenToString()),
-                    UserHandle.myUserId()
-            );
-        }
     }
 
     /**
