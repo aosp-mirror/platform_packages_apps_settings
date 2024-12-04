@@ -27,11 +27,7 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserHandle;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.view.accessibility.AccessibilityManager;
-import android.view.accessibility.Flags;
 
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -45,7 +41,6 @@ import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.utils.StringUtil;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -67,8 +62,6 @@ public class QuickSettingsShortcutOptionControllerTest {
     private static final String TARGET_FLATTEN = TARGET.flattenToString();
     private static final ComponentName TARGET_TILE =
             new ComponentName("FakePackage", "FakeTileClass");
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private final Context mContext = spy(ApplicationProvider.getApplicationContext());
     private QuickSettingsShortcutOptionController mController;
@@ -149,13 +142,6 @@ public class QuickSettingsShortcutOptionControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void isShortcutAvailable_a11yQsShortcutFlagDisabled_returnsFalse() {
-        assertThat(mController.isShortcutAvailable()).isFalse();
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void isShortcutAvailable_qsNotSupported_returnsFalse() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_quickSettingsSupported, false);
@@ -164,7 +150,6 @@ public class QuickSettingsShortcutOptionControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void isShortcutAvailable_qsTileProvided_returnsTrue() {
         when(mAccessibilityManager.getA11yFeatureToTileMap(UserHandle.myUserId()))
                 .thenReturn(Map.of(TARGET, TARGET_TILE));
@@ -173,7 +158,6 @@ public class QuickSettingsShortcutOptionControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void isShortcutAvailable_qsTileNotProvided_returnsFalse() {
         when(mAccessibilityManager.getA11yFeatureToTileMap(UserHandle.myUserId()))
                 .thenReturn(Collections.emptyMap());
@@ -182,7 +166,6 @@ public class QuickSettingsShortcutOptionControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void isShortcutAvailable_qsTileProvided_invalidUseCase_returnFalse() {
         AccessibilityServiceInfo mockStandardA11yService =
                 AccessibilityTestUtils.createAccessibilityServiceInfo(
@@ -197,7 +180,6 @@ public class QuickSettingsShortcutOptionControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void isShortcutAvailable_qsTileProvided_validUseCase_returnTrue() {
         AccessibilityServiceInfo mockAlwaysOnA11yService =
                 AccessibilityTestUtils.createAccessibilityServiceInfo(

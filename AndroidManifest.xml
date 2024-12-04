@@ -1230,6 +1230,21 @@
                        android:value="@string/menu_key_system"/>
         </activity>
 
+        <activity android:name="Settings$PhysicalKeyboardLayoutPickerActivity"
+            android:label="@string/physical_keyboard_layout_picker_title"
+            android:exported="true"
+            android:clearTaskOnLaunch="true"
+            android:featureFlag="com.android.settings.keyboard.keyboard_and_touchpad_a11y_new_page_enabled">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.HARD_KEYBOARD_LAYOUT_PICKER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.inputmethod.NewKeyboardLayoutEnabledLocalesFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_system"/>
+        </activity>
+
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name="LanguageSettings"
                 android:label="@string/language_input_gesture_title"
@@ -2821,6 +2836,10 @@
               android:theme="@style/GlifTheme.Light"
               android:taskAffinity="com.android.settings.root" />
         <activity android:name=".biometrics.fingerprint.FingerprintEnroll$InternalActivity"
+            android:exported="false"
+            android:theme="@style/GlifTheme.Light"
+            android:taskAffinity="com.android.settings.root" />
+        <activity android:name=".biometrics.fingerprint.FingerprintEnroll$AddAdditionalFingerprint"
             android:exported="false"
             android:theme="@style/GlifTheme.Light"
             android:taskAffinity="com.android.settings.root" />
