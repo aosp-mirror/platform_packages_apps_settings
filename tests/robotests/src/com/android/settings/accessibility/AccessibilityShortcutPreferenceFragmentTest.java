@@ -19,7 +19,6 @@ package com.android.settings.accessibility;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
-import static com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment.KEY_SAVED_QS_TOOLTIP_RESHOW;
 import static com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -38,14 +37,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.icu.text.CaseMap;
 import android.os.Bundle;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.accessibility.Flags;
 import android.widget.PopupWindow;
 
 import androidx.annotation.Nullable;
@@ -156,25 +152,6 @@ public class AccessibilityShortcutPreferenceFragmentTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
-    @Config(shadows = ShadowFragment.class)
-    public void restoreValueFromSavedInstanceState_showTooltipView() {
-        mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
-        mFragment.showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_EDIT);
-        assertThat(getLatestPopupWindow().isShowing()).isTrue();
-
-        final Bundle savedInstanceState = new Bundle();
-        savedInstanceState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, /* value= */ true);
-        mFragment.onAttach(mContext);
-        mFragment.onCreate(savedInstanceState);
-        mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
-        mFragment.onViewCreated(mFragment.getView(), savedInstanceState);
-
-        assertThat(getLatestPopupWindow().isShowing()).isTrue();
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     @Config(shadows = ShadowFragment.class)
     public void showQuickSettingsTooltipIfNeeded_qsFlagOn_dontShowTooltipView() {
         mFragment.showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_EDIT);
@@ -219,7 +196,6 @@ public class AccessibilityShortcutPreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void getShortcutTypeSummary_shortcutSummaryIsCorrectlySet() {
         final PreferredShortcut userPreferredShortcut = new PreferredShortcut(
                 PLACEHOLDER_COMPONENT_NAME.flattenToString(),

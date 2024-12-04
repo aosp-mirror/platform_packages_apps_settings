@@ -19,7 +19,6 @@ package com.android.settings.accessibility.shortcuts;
 import android.content.Context;
 import android.os.UserHandle;
 import android.view.accessibility.AccessibilityManager;
-import android.view.accessibility.Flags;
 
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
@@ -111,36 +110,27 @@ public abstract class ShortcutOptionPreferenceController extends BasePreferenceC
         return !targets.isEmpty() && targets.containsAll(getShortcutTargets());
     }
 
+
     /**
      * Enable or disable the shortcut for the given accessibility features.
+     *
+     * @deprecated use
+     * {@link AccessibilityManager#enableShortcutsForTargets(boolean, int, Set, int)} instead.
+     *
+     * (TODO 367414968: finish removal.)
      */
+    @Deprecated
     protected void enableShortcutForTargets(boolean enable) {
         Set<String> shortcutTargets = getShortcutTargets();
         @ShortcutConstants.UserShortcutType int shortcutType = getShortcutType();
 
-        if (Flags.a11yQsShortcut()) {
-            AccessibilityManager a11yManager = mContext.getSystemService(
-                    AccessibilityManager.class);
-            if (a11yManager != null) {
-                a11yManager.enableShortcutsForTargets(enable, shortcutType, shortcutTargets,
-                        UserHandle.myUserId());
-            }
-            return;
+        AccessibilityManager a11yManager = mContext.getSystemService(
+                AccessibilityManager.class);
+        if (a11yManager != null) {
+            a11yManager.enableShortcutsForTargets(enable, shortcutType, shortcutTargets,
+                    UserHandle.myUserId());
         }
-
-        if (enable) {
-            for (String target : shortcutTargets) {
-                ShortcutUtils.optInValueToSettings(mContext, shortcutType, target);
-            }
-        } else {
-            for (String target : shortcutTargets) {
-                ShortcutUtils.optOutValueFromSettings(mContext, shortcutType, target);
-            }
-        }
-        ShortcutUtils.updateInvisibleToggleAccessibilityServiceEnableState(
-                mContext, shortcutTargets, UserHandle.myUserId());
     }
-
     /**
      * Returns true when the user can associate a shortcut to the targets
      */

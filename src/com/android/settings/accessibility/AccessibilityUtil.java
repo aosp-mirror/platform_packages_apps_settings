@@ -61,7 +61,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import java.util.StringJoiner;
 
 /** Provides utility methods to accessibility settings only. */
 public final class AccessibilityUtil {
@@ -203,28 +202,23 @@ public final class AccessibilityUtil {
      * @param context       The current context.
      * @param shortcutTypes A combination of {@link UserShortcutType}.
      * @param componentName The component name that need to be opted in Settings.
+     *
+     * @deprecated use
+     * {@link AccessibilityManager#enableShortcutsForTargets(boolean, int, Set, int)} instead.
+     *
+     * (TODO 367414968: finish removal.)
      */
+    @Deprecated
     static void optInAllValuesToSettings(Context context, int shortcutTypes,
             @NonNull ComponentName componentName) {
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            AccessibilityManager a11yManager = context.getSystemService(AccessibilityManager.class);
-            if (a11yManager != null) {
-                a11yManager.enableShortcutsForTargets(
-                        /* enable= */ true,
-                        shortcutTypes,
-                        Set.of(componentName.flattenToString()),
-                        UserHandle.myUserId()
-                );
-            }
-
-            return;
-        }
-
-        if ((shortcutTypes & SOFTWARE) == SOFTWARE) {
-            optInValueToSettings(context, SOFTWARE, componentName);
-        }
-        if (((shortcutTypes & HARDWARE) == HARDWARE)) {
-            optInValueToSettings(context, HARDWARE, componentName);
+        AccessibilityManager a11yManager = context.getSystemService(AccessibilityManager.class);
+        if (a11yManager != null) {
+            a11yManager.enableShortcutsForTargets(
+                    /* enable= */ true,
+                    shortcutTypes,
+                    Set.of(componentName.flattenToString()),
+                    UserHandle.myUserId()
+            );
         }
     }
 
@@ -234,38 +228,25 @@ public final class AccessibilityUtil {
      * @param context       The current context.
      * @param shortcutType  The preferred shortcut type user selected.
      * @param componentName The component name that need to be opted in Settings.
+     *
+     * @deprecated use
+     * {@link AccessibilityManager#enableShortcutsForTargets(boolean, int, Set, int)} instead.
+     *
+     * (TODO 367414968: finish removal.)
      */
+    @Deprecated
     @VisibleForTesting
     static void optInValueToSettings(Context context, @UserShortcutType int shortcutType,
             @NonNull ComponentName componentName) {
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            AccessibilityManager a11yManager = context.getSystemService(AccessibilityManager.class);
-            if (a11yManager != null) {
-                a11yManager.enableShortcutsForTargets(
-                        /* enable= */ true,
-                        shortcutType,
-                        Set.of(componentName.flattenToString()),
-                        UserHandle.myUserId()
-                );
-            }
-            return;
+        AccessibilityManager a11yManager = context.getSystemService(AccessibilityManager.class);
+        if (a11yManager != null) {
+            a11yManager.enableShortcutsForTargets(
+                    /* enable= */ true,
+                    shortcutType,
+                    Set.of(componentName.flattenToString()),
+                    UserHandle.myUserId()
+            );
         }
-
-        final String targetKey = convertKeyFromSettings(shortcutType);
-        final String targetString = Settings.Secure.getString(context.getContentResolver(),
-                targetKey);
-
-        if (hasValueInSettings(context, shortcutType, componentName)) {
-            return;
-        }
-
-        final StringJoiner joiner = new StringJoiner(String.valueOf(COMPONENT_NAME_SEPARATOR));
-        if (!TextUtils.isEmpty(targetString)) {
-            joiner.add(targetString);
-        }
-        joiner.add(componentName.flattenToString());
-
-        Settings.Secure.putString(context.getContentResolver(), targetKey, joiner.toString());
     }
 
     /**
@@ -275,27 +256,23 @@ public final class AccessibilityUtil {
      * @param context       The current context.
      * @param shortcutTypes A combination of {@link UserShortcutType}.
      * @param componentName The component name that need to be opted out from Settings.
+     *
+     * @deprecated use
+     * {@link AccessibilityManager#enableShortcutsForTargets(boolean, int, Set, int)} instead.
+     *
+     * (TODO 367414968: finish removal.)
      */
+    @Deprecated
     static void optOutAllValuesFromSettings(Context context, int shortcutTypes,
             @NonNull ComponentName componentName) {
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            AccessibilityManager a11yManager = context.getSystemService(AccessibilityManager.class);
-            if (a11yManager != null) {
-                a11yManager.enableShortcutsForTargets(
-                        /* enable= */ false,
-                        shortcutTypes,
-                        Set.of(componentName.flattenToString()),
-                        UserHandle.myUserId()
-                );
-            }
-            return;
-        }
-
-        if ((shortcutTypes & SOFTWARE) == SOFTWARE) {
-            optOutValueFromSettings(context, SOFTWARE, componentName);
-        }
-        if (((shortcutTypes & HARDWARE) == HARDWARE)) {
-            optOutValueFromSettings(context, HARDWARE, componentName);
+        AccessibilityManager a11yManager = context.getSystemService(AccessibilityManager.class);
+        if (a11yManager != null) {
+            a11yManager.enableShortcutsForTargets(
+                    /* enable= */ false,
+                    shortcutTypes,
+                    Set.of(componentName.flattenToString()),
+                    UserHandle.myUserId()
+            );
         }
     }
 
@@ -305,42 +282,25 @@ public final class AccessibilityUtil {
      * @param context       The current context.
      * @param shortcutType  The preferred shortcut type user selected.
      * @param componentName The component name that need to be opted out from Settings.
+     *
+     * @deprecated use
+     * {@link AccessibilityManager#enableShortcutsForTargets(boolean, int, Set, int)} instead.
+     *
+     * (TODO 367414968: finish removal.)
      */
+    @Deprecated
     @VisibleForTesting
     static void optOutValueFromSettings(Context context, @UserShortcutType int shortcutType,
             @NonNull ComponentName componentName) {
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            AccessibilityManager a11yManager = context.getSystemService(AccessibilityManager.class);
-            if (a11yManager != null) {
-                a11yManager.enableShortcutsForTargets(
-                        /* enable= */ false,
-                        shortcutType,
-                        Set.of(componentName.flattenToString()),
-                        UserHandle.myUserId()
-                );
-            }
-            return;
+        AccessibilityManager a11yManager = context.getSystemService(AccessibilityManager.class);
+        if (a11yManager != null) {
+            a11yManager.enableShortcutsForTargets(
+                    /* enable= */ false,
+                    shortcutType,
+                    Set.of(componentName.flattenToString()),
+                    UserHandle.myUserId()
+            );
         }
-
-        final StringJoiner joiner = new StringJoiner(String.valueOf(COMPONENT_NAME_SEPARATOR));
-        final String targetKey = convertKeyFromSettings(shortcutType);
-        final String targetString = Settings.Secure.getString(context.getContentResolver(),
-                targetKey);
-
-        if (TextUtils.isEmpty(targetString)) {
-            return;
-        }
-
-        sStringColonSplitter.setString(targetString);
-        while (sStringColonSplitter.hasNext()) {
-            final String name = sStringColonSplitter.next();
-            if (TextUtils.isEmpty(name) || (componentName.flattenToString()).equals(name)) {
-                continue;
-            }
-            joiner.add(name);
-        }
-
-        Settings.Secure.putString(context.getContentResolver(), targetKey, joiner.toString());
     }
 
     /**
@@ -354,11 +314,6 @@ public final class AccessibilityUtil {
     static boolean hasValuesInSettings(Context context, int shortcutTypes,
             @NonNull ComponentName componentName) {
         for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
-            if (!android.view.accessibility.Flags.a11yQsShortcut()) {
-                if ((shortcutType & QUICK_SETTINGS) == QUICK_SETTINGS) {
-                    continue;
-                }
-            }
             if (!android.provider.Flags.a11yStandaloneGestureEnabled()) {
                 if ((shortcutType & GESTURE) == GESTURE) {
                     continue;
@@ -379,15 +334,16 @@ public final class AccessibilityUtil {
      * @param shortcutType The preferred shortcut type user selected.
      * @param componentName The component name that need to be checked existed in Settings.
      * @return {@code true} if componentName existed in Settings.
+     *
+     * @deprecated use
+     * {@link ShortcutUtils#isShortcutContained(Context, int, String)} instead.
+     *
+     * (TODO 367414968: finish removal.)
      */
+    @Deprecated
     @VisibleForTesting
     static boolean hasValueInSettings(Context context, @UserShortcutType int shortcutType,
             @NonNull ComponentName componentName) {
-        if (!android.view.accessibility.Flags.a11yQsShortcut()
-                && (shortcutType & QUICK_SETTINGS) == QUICK_SETTINGS) {
-            return false;
-        }
-
         return ShortcutUtils.getShortcutTargetsFromSettings(
                 context, shortcutType, UserHandle.myUserId()
         ).contains(componentName.flattenToString());
@@ -405,11 +361,6 @@ public final class AccessibilityUtil {
             @NonNull ComponentName componentName) {
         int shortcutTypes = DEFAULT;
         for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
-            if (!android.view.accessibility.Flags.a11yQsShortcut()) {
-                if ((shortcutType & QUICK_SETTINGS) == QUICK_SETTINGS) {
-                    continue;
-                }
-            }
             if (!android.provider.Flags.a11yStandaloneGestureEnabled()) {
                 if ((shortcutType & GESTURE) == GESTURE) {
                     continue;
@@ -428,23 +379,15 @@ public final class AccessibilityUtil {
      *
      * @param shortcutType The shortcut type.
      * @return Mapping key in Settings.
+     *
+     * @deprecated use
+     * {@link ShortcutUtils#convertToKey(int)} instead.
+     *
+     * (TODO 367414968: finish removal.)
      */
+    @Deprecated
     static String convertKeyFromSettings(@UserShortcutType int shortcutType) {
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            return ShortcutUtils.convertToKey(shortcutType);
-        }
-
-        switch (shortcutType) {
-            case SOFTWARE:
-                return Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
-            case HARDWARE:
-                return Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
-            case TRIPLETAP:
-                return Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED;
-            default:
-                throw new IllegalArgumentException(
-                        "Unsupported userShortcutType " + shortcutType);
-        }
+        return ShortcutUtils.convertToKey(shortcutType);
     }
 
     /**
@@ -521,10 +464,6 @@ public final class AccessibilityUtil {
         final List<CharSequence> list = new ArrayList<>();
 
         for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
-            if (!android.view.accessibility.Flags.a11yQsShortcut()
-                    && (shortcutType & QUICK_SETTINGS) == QUICK_SETTINGS) {
-                continue;
-            }
             if (!android.provider.Flags.a11yStandaloneGestureEnabled()
                     && (shortcutType & GESTURE) == GESTURE) {
                 continue;

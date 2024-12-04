@@ -496,10 +496,6 @@ public final class AccessibilityShortcutsTutorial {
             if ((shortcutTypes & shortcutType) == 0) {
                 continue;
             }
-            if ((shortcutTypes & QUICK_SETTINGS) == QUICK_SETTINGS
-                    && !android.view.accessibility.Flags.a11yQsShortcut()) {
-                continue;
-            }
             tutorialPages.add(
                     createShortcutTutorialPage(
                             context, shortcutType, buttonMode, featureName, inSetupWizard));
