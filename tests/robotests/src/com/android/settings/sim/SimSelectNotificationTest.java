@@ -54,6 +54,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -103,6 +104,8 @@ public class SimSelectNotificationTest {
     private DisplayMetrics mDisplayMetrics;
     @Mock
     private SimDialogActivity mActivity;
+    @Mock
+    private UserManager mUserManager;
 
     private final String mFakeDisplayName = "fake_display_name";
     private final CharSequence mFakeNotificationChannelTitle = "fake_notification_channel_title";
@@ -128,6 +131,8 @@ public class SimSelectNotificationTest {
                 .thenReturn(mNotificationManager);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE))
                 .thenReturn(mTelephonyManager);
+        when(mContext.getSystemService(UserManager.class))
+                .thenReturn(mUserManager);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mContext.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE))
                 .thenReturn(mSubscriptionManager);
@@ -135,6 +140,7 @@ public class SimSelectNotificationTest {
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mPackageManager.checkPermission(any(), any()))
                 .thenReturn(PackageManager.PERMISSION_GRANTED);
+        when(mUserManager.isMainUser()).thenReturn(true);
 
         when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
         when(mTelephonyManager.isDataEnabledForApn(TYPE_MMS)).thenReturn(false);
@@ -211,6 +217,18 @@ public class SimSelectNotificationTest {
         intent.putExtra(EXTRA_SUB_ID, mSubId);
         intent.putExtra(EXTRA_ENABLE_MMS_DATA_REQUEST_REASON,
                 ENABLE_MMS_DATA_REQUEST_REASON_INCOMING_MMS);
+
+        // If MMS data is already enabled, there's no need to trigger the notification.
+        mSimSelectNotification.onReceive(mContext, intent);
+        verify(mNotificationManager, never()).createNotificationChannel(any());
+    }
+
+    @Test
+    public void onReceivePrimarySubListChange_userIdIsNotMain_notificationShouldNotSend() {
+        when(mUserManager.isMainUser()).thenReturn(false);
+        Intent intent = new Intent(TelephonyManager.ACTION_PRIMARY_SUBSCRIPTION_LIST_CHANGED);
+        intent.putExtra(EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE,
+                EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA);
 
         // If MMS data is already enabled, there's no need to trigger the notification.
         mSimSelectNotification.onReceive(mContext, intent);
