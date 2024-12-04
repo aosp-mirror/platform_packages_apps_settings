@@ -16,6 +16,7 @@
 
 package com.android.settings.inputmethod;
 
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
@@ -35,6 +36,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
@@ -106,6 +108,16 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
         mIm = mContext.getSystemService(InputManager.class);
         mImm = mContext.getSystemService(InputMethodManager.class);
         mInputDeviceId = -1;
+
+        Activity activity = Preconditions.checkNotNull(getActivity());
+        InputDevice inputDeviceFromIntent =
+                activity.getIntent().getParcelableExtra(
+                        InputPeripheralsSettingsUtils.EXTRA_INPUT_DEVICE,
+                        InputDevice.class);
+
+        if (inputDeviceFromIntent != null) {
+            launchLayoutPickerWithIdentifier(inputDeviceFromIntent.getIdentifier());
+        }
     }
 
     @Override
@@ -159,6 +171,23 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
         super.onStop();
         mIm.unregisterInputDeviceListener(this);
         mInputDeviceId = -1;
+    }
+
+    private void launchLayoutPickerWithIdentifier(
+            InputDeviceIdentifier inputDeviceIdentifier) {
+        if (InputPeripheralsSettingsUtils.getInputDevice(mIm, inputDeviceIdentifier) == null) {
+            return;
+        }
+        InputMethodInfo info = mImm.getCurrentInputMethodInfoAsUser(UserHandle.of(mUserId));
+        InputMethodSubtype subtype = mImm.getCurrentInputMethodSubtype();
+        CharSequence subtypeLabel = getSubtypeLabel(mContext, info, subtype);
+
+        showKeyboardLayoutPicker(
+                subtypeLabel,
+                inputDeviceIdentifier,
+                mUserId,
+                info,
+                subtype);
     }
 
     private void updateCheckedState() {

@@ -82,7 +82,8 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
     private var isSelectedSubIdForSatellite = false
 
     private lateinit var telephonyManager: TelephonyManager
-    private lateinit var satelliteManager: SatelliteManager
+    private val satelliteManager: SatelliteManager? =
+        context.getSystemService(SatelliteManager::class.java)
     private val listeners = mutableListOf<OnNetworkSelectModeListener>()
 
     @VisibleForTesting
@@ -112,7 +113,6 @@ class AutoSelectPreferenceController @JvmOverloads constructor(
         this.subId = subId
         telephonyManager = mContext.getSystemService(TelephonyManager::class.java)!!
             .createForSubscriptionId(subId)
-        satelliteManager = mContext.getSystemService(SatelliteManager::class.java)!!
         return this
     }
 
