@@ -104,7 +104,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     protected Intent mSettingsIntent;
     // The mComponentName maybe null, such as Magnify
     protected ComponentName mComponentName;
-    protected CharSequence mPackageName;
+    protected CharSequence mFeatureName;
     protected Uri mImageUri;
     protected CharSequence mHtmlDescription;
     protected CharSequence mTopIntroTitle;
@@ -204,12 +204,12 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
                     mDialog = AccessibilityShortcutsTutorial
                             .createAccessibilityTutorialDialogForSetupWizard(
                                     getPrefContext(), getUserPreferredShortcutTypes(),
-                                    this::callOnTutorialDialogButtonClicked, mPackageName);
+                                    this::callOnTutorialDialogButtonClicked, mFeatureName);
                 } else {
                     mDialog = AccessibilityShortcutsTutorial
                             .createAccessibilityTutorialDialog(
                                     getPrefContext(), getUserPreferredShortcutTypes(),
-                                    this::callOnTutorialDialogButtonClicked, mPackageName);
+                                    this::callOnTutorialDialogButtonClicked, mFeatureName);
                 }
                 mDialog.setCanceledOnTouchOutside(false);
                 return mDialog;
@@ -318,7 +318,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
 
     protected void updateToggleServiceTitle(SettingsMainSwitchPreference switchPreference) {
         final CharSequence title =
-                getString(R.string.accessibility_service_primary_switch_title, mPackageName);
+                getString(R.string.accessibility_service_primary_switch_title, mFeatureName);
         switchPreference.setTitle(title);
     }
 
@@ -327,7 +327,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     }
 
     protected CharSequence getShortcutTitle() {
-        return getString(R.string.accessibility_shortcut_title, mPackageName);
+        return getString(R.string.accessibility_shortcut_title, mFeatureName);
     }
 
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
@@ -573,7 +573,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         screen.addPreference(mHtmlFooterPreference);
 
         // TODO(b/171272809): Migrate to DashboardFragment.
-        final String title = getString(R.string.accessibility_introduction_title, mPackageName);
+        final String title = getString(R.string.accessibility_introduction_title, mFeatureName);
         mFooterPreferenceController = new AccessibilityFooterPreferenceController(
                 screen.getContext(), mHtmlFooterPreference.getKey());
         mFooterPreferenceController.setIntroductionTitle(title);
@@ -598,7 +598,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     private void initFooterPreference() {
         if (!TextUtils.isEmpty(mDescription)) {
             createFooterPreference(getPreferenceScreen(), mDescription,
-                    getString(R.string.accessibility_introduction_title, mPackageName));
+                    getString(R.string.accessibility_introduction_title, mFeatureName));
         }
     }
 
