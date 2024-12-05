@@ -27,11 +27,6 @@
         settings:controller="com.android.settings.dream.DreamMainSwitchPreferenceController"
         settings:searchable="false"/>
 
-    <Preference
-        android:key="when_to_start"
-        android:title="@string/screensaver_settings_when_to_dream"
-        android:fragment="com.android.settings.dream.WhenToDreamPicker"/>
-
     <PreferenceCategory
         android:title="@string/dream_picker_category">
         <com.android.settingslib.widget.LayoutPreference
@@ -39,6 +34,11 @@
             android:selectable="false"
             android:layout="@layout/dream_picker_layout"/>
     </PreferenceCategory>
+
+    <Preference
+        android:key="when_to_start"
+        android:title="@string/screensaver_settings_when_to_dream"
+        android:fragment="com.android.settings.dream.WhenToDreamPicker"/>
 
     <SwitchPreferenceCompat
         android:key="dream_complications_toggle"

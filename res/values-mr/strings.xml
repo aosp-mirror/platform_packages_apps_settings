@@ -67,6 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"नवीन डिव्हाइससोबत पेअर करा"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"ब्लूटूथ"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"उद्या आपोआप सुरू करा"</string>
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"तुम्ही ब्लूटूथ बंद केल्यास, ते पुढील दिवशी पुन्हा सुरू होते"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"उजवा कान पेअर करा"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"डावा कान पेअर करा"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"तुमचा दुसरा कान पेअर करा"</string>
@@ -120,10 +121,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"ब्लूटूथ LE ऑडिओ बंद करा"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"डिव्हाइसला LE ऑडिओ हार्डवेअरसंबंधित क्षमतांचा सपोर्ट असल्यास, ब्लूटूथ LE ऑडिओ वैशिष्‍ट्य बंद करते."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"ब्लूटूथ LE ऑडिओ मोड"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"ब्लूटूथ LE ऑडिओ ब्रॉडकास्ट UI पूर्वावलोकन सुरू करा"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"वैयक्तिक ऑडिओ शेअरिंग आणि खाजगी ब्रॉडकास्ट यांच्या समावेशासह LE ऑडिओ शेअरिंग UI पूर्वावलोकन सुरू करते"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"डिव्हाइस तपशील यांत LE ऑडिओ टॉगल दाखवा"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"ब्लूटूथ LE ऑडिओ अनुमती सूची बायपास करा"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"अनुमती सूचीच्या निकषांची पूर्तता करण्यासाठी LE ऑडिओ पेरिफेरलची पडताळणी केली नसली, तरीही बाय डीफॉल्ट LE ऑडिओ वापरा."</string>
@@ -143,7 +142,7 @@
     <string name="stylus_default_notes_app" msgid="4165657465911764628">"टेल बटण प्रेस करा"</string>
     <string name="stylus_default_notes_summary_work" msgid="4554643411627934223">"<xliff:g id="APP_NAME">%s</xliff:g> (कार्य प्रोफाइल)"</string>
     <string name="stylus_textfield_handwriting" msgid="2363579035338976327">"मजकूर फील्डमध्ये लिहा"</string>
-    <string name="stylus_ignore_button" msgid="7734540973145241391">"सर्व स्टायलस बटण दाबण्याकडे दुर्लक्ष करा"</string>
+    <string name="stylus_ignore_button" msgid="7734540973145241391">"सर्व स्टायलस बटण प्रेसकडे दुर्लक्ष करा"</string>
     <string name="stylus_connected_devices_title" msgid="2823967577941359812">"स्टायलस"</string>
     <string name="date_and_time" msgid="1788358029823431692">"तारीख आणि वेळ"</string>
     <string name="proxy_settings_title" msgid="4201866858226087066">"प्रॉक्सी"</string>
@@ -171,7 +170,7 @@
     <string name="language_picker_category_title" msgid="1792199453060454565">"प्राधान्य असलेल्या भाषेचा क्रम"</string>
     <string name="desc_current_default_language" msgid="1901157141663662859">"सिस्टीमची भाषा"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"काढा"</string>
-    <string name="add_a_language" msgid="2126220398077503271">"एक भाषा जोडा"</string>
+    <string name="add_a_language" msgid="2126220398077503271">"भाषा जोडा"</string>
     <string name="app_locale_preference_title" msgid="5513627099300360232">"भाषा"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"प्राधान्य दिलेली भाषा"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"ॲपच्या भाषा"</string>
@@ -179,12 +178,16 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"अ‍ॅपची भाषा"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"सुचवलेल्या भाषा"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"सर्व भाषा"</string>
+    <string name="suggested_locales_title" msgid="119908696638862861">"सुचवलेल्या"</string>
+    <string name="all_supported_locales_title" msgid="2535112632133166546">"सर्व भाषा"</string>
+    <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"सर्व प्रदेश"</string>
+    <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"सर्व नंबरिंग सिस्टीम"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"सिस्टीम भाषा"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"सिस्टीम डीफॉल्ट"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"या अ‍ॅपसाठीची भाषा निवडणे हे सेटिंग्ज मध्ये उपलब्ध नाही."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"अ‍ॅपमध्ये उपलब्ध असलेल्या भाषांपेक्षा भाषा वेगळी असू शकते. काही अ‍ॅप्स कदाचित या सेटिंगला सपोर्ट करत नाहीत."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"प्रत्येक ॲपसाठी भाषा सेट करा."</string>
-    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"तुमचे डिव्हाइस, अ‍ॅप्स आणि वेबसाइट या तुमच्या प्राधान्य दिलेल्या भाषा सूचीमधील पहिली सपोर्ट असलेली भाषा वापरतात.\n\nअनेक ॲप्स तुमच्या प्राध्यान्य दिलेल्या भाषेतील प्रदेशाचा वापर तारखा, संख्या आणि युनिट फॉरमॅट करण्यासाठी करतील. तुमचा प्रदेश बदलण्यासाठी भाषा जोडा त्यानंतर तुम्ही प्राधान्‍य दिलेली भाषा निवडा."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"तुमचे डिव्हाइस, अ‍ॅप्स आणि वेबसाइट या तुमच्या प्राधान्य दिलेल्या भाषा सूचीमधील पहिली सपोर्ट असलेली भाषा वापरतात.\n\nअनेक ॲप्स तुमच्या प्राध्यान्य दिलेल्या भाषेतील प्रदेशाचा वापर तारखा, अंक आणि एकके फॉरमॅट करण्यासाठीदेखील करतील. तुमचा प्रदेश बदलण्यासाठी भाषा जोडा त्यानंतर तुम्ही प्राधान्‍य दिलेली भाषा निवडा."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"प्रत्येक अ‍ॅपसाठी भाषा निवडण्यासाठी, अ‍ॅप भाषा सेटिंग्जवर जा."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"ॲपच्या भाषांविषयी अधिक जाणून घ्या"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"सिस्टीमची भाषा %s वर बदलायची आहे का ?"</string>
@@ -194,10 +197,16 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"बदला"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s उपलब्ध नाही"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"ही भाषा सिस्टीमची भाषा म्हणून वापरली जाऊ शकत नाही, मात्र तुम्ही या भाषेला प्राधान्य देता हे तुम्ही अ‍ॅप्स आणि वेबसाइटना सांगितले आहे."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"शोध"</string>
+    <string name="language_selection_title" msgid="968179636453982415">"भाषा जोडा"</string>
+    <string name="country_selection_title" msgid="5376929821458644732">"प्रदेश प्राधान्य"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"भाषा नाव टाइप करा"</string>
+    <string name="more_language_settings_category" msgid="3669703092480725416">"भाषेसंबंधित आणखी सेटिंग्ज"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"प्रादेशिक प्राधान्ये"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"युनिट आणि नंबर प्राधान्ये सेट करा"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"अ‍ॅप्सना तुमची प्रादेशिक प्राधान्ये सांगा ज्यामुळे ते तुमचा अनुभव पर्सनलाइझ करतील."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"शक्य असेल तेथे ॲप्स तुमची प्रादेशिक प्राधान्ये वापरतील."</string>
+    <string name="regional_preferences_category_title" msgid="6754667410178749022">"प्रादेशिक प्राधान्ये"</string>
     <string name="temperature_preferences_title" msgid="5009881556503629058">"तापमान"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"आठवड्याचा पहिला दिवस"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"क्रमांकांची प्राधान्ये"</string>
@@ -555,6 +564,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"बोट उचला, नंतर पुन्हा सेन्सरला स्पर्श करा"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"फिंगरप्रिंट सेन्सर वापरू शकत नाही"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"दुरुस्तीच्या सेवा पुरवठादाराला भेट द्या."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"स्क्रीन बंद असताना फिंगरप्रिंट अनलॉक"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"स्क्रीन बंद असतानादेखील फिंगरप्रिंट अनलॉक वापरा"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"स्क्रीन बंद असताना अनलॉक करा"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"आणखी सुरक्षा सेटिंग्ज"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"कार्य प्रोफाइल लॉक, एंक्रिप्शन आणि आणखी बरेच काही"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"एंक्रिप्शन, क्रेडेंशियल आणि आणखी बरेच काही"</string>
@@ -886,6 +898,8 @@
     <string name="external_display_on" msgid="2560104443500154333">"सुरू आहे"</string>
     <string name="external_display_off" msgid="5634413756025351374">"बंद आहे"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"बाह्य डिस्प्ले"</string>
+    <!-- no translation found for builtin_display_settings_category (3441388849060771885) -->
+    <skip />
     <string name="external_display_use_title" msgid="8198257340836261386">"बाह्य डिस्प्ले वापरा"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"डिस्प्ले रेझोल्यूशन"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"बाह्य डिस्प्ले डिस्कनेक्ट केला आहे"</string>
@@ -897,6 +911,7 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"रोटेशन किंवा रेझोल्यूशन बदलल्याने सध्या सुरू असलेली कोणतीही अ‍ॅप्स थांबू शकतात"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"तुमची स्क्रीन मिरर करण्यासाठी तुमचे डिव्हाइस बाह्य डिस्प्लेशी कनेक्ट केलेले असणे आवश्यक आहे"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"आणखी पर्याय"</string>
+    <string name="external_display_topology_hint" msgid="854973327795578470">"डिस्प्ले पुन्हा संगतवार लावण्यासाठी धरून ठेवून ड्रॅग करा."</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"कास्‍ट करा"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"मिरर करा"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"वायरलेस डिस्प्ले सुरू करा"</string>
@@ -1230,8 +1245,10 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"ऑटो-रोटेटबद्दल अधिक जाणून घ्या"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"स्क्रीन रेझोल्यूशन"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"उच्च रेझोल्यूशन"</string>
-    <string name="screen_resolution_option_full" msgid="2694003735219114186">"पूर्ण रेझाेल्यूशन"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"पूर्ण रेझोल्यूशन तुमची बॅटरी जास्त वापरते. तुमचे रेझोल्यूशन स्विच केल्याने काही ॲप्स रीस्टार्ट होऊ शकतात."</string>
+    <!-- no translation found for screen_resolution_option_full (4456839315039000517) -->
+    <skip />
+    <!-- no translation found for screen_resolution_footer (1230761249204935717) -->
+    <skip />
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"निवडले"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"रंग"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"नैसर्गिक"</string>
@@ -1240,7 +1257,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"अडॅप्टिव्ह"</string>
     <string name="brightness" msgid="6216871641021779698">"ब्राइटनेस पातळी"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"अडॅप्टिव्ह ब्राइटनेस"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"अडॅप्टिव्ह ब्राइटनेसबद्दल"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"तुमच्या स्क्रीनचा ब्राइटनेस तुमच्या वातावरण आणि अ‍ॅक्टिव्हिटीशी आपोआप अ‍ॅडजस्ट होईल. अडॅप्टिव्ह ब्राइटनेसला तुमची प्राधान्ये जाणून घेण्यात मदत करण्यासाठी तुम्ही स्लाइडर मॅन्युअली हलवू शकता."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"सुरू"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"बंद"</string>
@@ -1290,7 +1306,7 @@
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"सूर्योदयापर्यंत सुरू करा"</string>
     <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"सूर्यास्तापर्यंत बंद करा"</string>
     <string name="dark_ui_title" msgid="3373976268671557416">"गडद मोड"</string>
-    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"शेड्युल करा"</string>
+    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"शेड्यूल करा"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"काहीही नाही"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"सूर्यास्त ते सूर्योदय सुरू राहते"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"कस्टम वेळी सुरू होते"</string>
@@ -1311,7 +1327,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"बेडटाइम मोडशी संबंधित सेटिंग्ज"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{मोड गडद थीमदेखील अ‍ॅक्टिव्हेट करू शकतात}=1{{mode_1} गडद थीमदेखील अ‍ॅक्टिव्हेट करतो}=2{{mode_1} आणि {mode_2} हे गडद थीमदेखील अ‍ॅक्टिव्हेट करतात}=3{{mode_1}, {mode_2} आणि {mode_3} हे गडद थीमदेखील अ‍ॅक्टिव्हेट करतात}other{{mode_1}, {mode_2} आणि आणखी # हे गडद थीमदेखील अ‍ॅक्टिव्हेट करतात}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"मोडची सेटिंग्ज"</string>
-    <string name="even_dimmer_display_title" msgid="6731255736830410149">"आणखी मंद"</string>
+    <string name="even_dimmer_display_title" msgid="4509732439977906028">"आणखी डिम"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"डिव्हाइसचा प्रकाश नेहमीपेक्षा मंद असू द्या"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"स्क्रीन टाइमआउट"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"इनॅक्टिव्हिटीच्या <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> नंतर"</string>
@@ -1949,6 +1965,8 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"पर्याय"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"अ‍ॅक्सेसिबिलिटी"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"वास्तविक कीबोर्ड"</string>
+    <!-- no translation found for physical_keyboard_layout_picker_title (4526600767648916256) -->
+    <skip />
     <string name="bounce_keys" msgid="7419450970351743904">"बाउन्स की"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"कीबोर्ड एकसारख्या की झटपट वारंवार प्रेस करण्याकडे दुर्लक्ष करतो"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"बाउन्स कीची मर्यादा"</string>
@@ -1963,27 +1981,19 @@
     <string name="sticky_keys" msgid="7317317044898161747">"स्टिकी की"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"की एकत्र धरून ठेवण्याऐवजी शॉर्टकटसाठी एकावेळी एक की प्रेस करा"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"माउस की"</string>
-    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
-    <skip />
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"माउस की वापरा"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"पॉइंटर नियंत्रित करण्यासाठी तुमचा कीबोर्ड वापरा"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"माउस रिव्हर्स स्क्रोलिंग"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"पेज खाली हलवण्यासाठी वरती स्क्रोल करा"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"डावे व उजवे बटण स्वॅप करा"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"माऊसच्या डाव्या बटणाला तुमचे उजवे बटण म्हणून वापरा"</string>
-    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
-    <skip />
-    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
-    <skip />
-    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
-    <skip />
-    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
-    <skip />
-    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
-    <skip />
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"<xliff:g id="KEYBOARD_NAME">%s</xliff:g> साठी माउस की"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"माउस पॉइंटर हलवण्यासाठी <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> की वापरा"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"प्राथमिक माउस बटणावर क्लिक करण्यासाठी <xliff:g id="CLICK_LABEL">%s</xliff:g> की वापरा"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"प्रेस करण्यासाठी <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> की वापरा आणि प्राथमिक माउस बटण धरून ठेवा"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"प्राथमिक माउस बटण रिलीझ करण्यासाठी <xliff:g id="RELEASE_LABEL">%s</xliff:g> की वापरा"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"स्क्रोल मोड टॉगल करण्यासाठी <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> वापरा. हे <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> की ला वरती, खाली, डावीकडील किंवा उजवीकडील दृश्यावर स्क्रोल करू देईल"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"दुय्यम माउस बटणावर क्लिक करण्यासाठी <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> की वापरा"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"कीबोर्ड शॉर्टकट"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"शॉर्टकटची सूची दाखवा"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"कार्य प्रोफाइल कीबोर्ड आणि टूल"</string>
@@ -1991,6 +2001,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"डीफॉल्ट"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"टचपॅड"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"टचपॅड आणि माउस"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"माउस"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"पॉइंटर वेग, जेश्चर"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"क्लिक करण्यासाठी टॅप करा"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"टॅप करून ड्रॅग करणे"</string>
@@ -2002,6 +2013,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"तळाशी उजवीकडे क्लिक करा"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"अधिक पर्यायांसाठी टचपॅडच्या तळाशी उजव्या कोपऱ्यावर क्लिक करा"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"पॉइंटर वेग"</string>
+    <string name="three_finger_tap_preference_title" msgid="7130739855086106052">"तीन बोट वापरून टॅप करा"</string>
     <string name="pointer_fill_style" msgid="8794616790175016092">"पॉइंटरचा रंग"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"पॉइंटर फिलची शैली बदलून काळी करा"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"पॉइंटर फिलची शैली बदलून हिरवी करा"</string>
@@ -2016,6 +2028,11 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"टचपॅड जेश्चर जाणून घ्या"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"ट्रॅकपॅड, ट्रॅक पॅड, माउस, कर्सर, स्क्रोल करा, स्‍वाइप करा, राइट-क्लिक करा, क्लिक करा, पॉइंटर"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"राइट-क्लिक करा, टॅप करा"</string>
+    <string name="three_finger_tap_middle_click" msgid="5274906692591143158">"मध्यभागी क्लिक करा"</string>
+    <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Assistant लाँच करा"</string>
+    <string name="three_finger_tap_go_home" msgid="6526301745535089812">"होमवर जा"</string>
+    <string name="three_finger_tap_go_back" msgid="2898205524575684271">"मागे जा"</string>
+    <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"अलीकडील अ‍ॅप्स पहा"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"होमवर जा"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"तुमच्या टचपॅडवर कुठेही तीन बोटांनी वरती स्‍वाइप करा"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"मागे जा"</string>
@@ -2376,9 +2393,9 @@
     <string name="accessibility_font_scaling_auto_added_qs_tooltip_content" msgid="7229921960884718332">"क्विक सेटिंग्ज मध्ये फॉंटचा आकार जोडला आहे. फॉंटचा आकार बदलण्यासाठी खाली स्‍वाइप करा."</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"डिसमिस करा"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"रंग सुधारणा वापरा"</string>
-    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"रंग सुधारण्याचा शॉर्टकट"</string>
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"रंग सुधारणा शॉर्टकट"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"रंग सुधारणेबद्दल"</string>
-    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"रंग सुधारणेबद्दल अधिक जाणून घ्या"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"रंग सुधारणा याबद्दल अधिक जाणून घ्या"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"कलर इन्व्हर्जनबद्दल"</string>
     <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"कलर इन्व्हर्जनबद्दल अधिक जाणून घ्या"</string>
     <string name="accessibility_captioning_primary_switch_title" msgid="3663677340286206100">"कॅप्शन दाखवा"</string>
@@ -2438,8 +2455,8 @@
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"ग्रेस्केल"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"तीव्रता"</string>
     <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"ग्रेस्केल मोडसाठी किंवा रंग सुधारणा बंद असताना उपलब्ध नाही"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"आंशिक हरितवर्णांधता"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"क्षीण रक्तवर्णांधता"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"द्वितीयवर्ण दृष्टिक्षीणता"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"प्रथमवर्ण दृष्टिक्षीणता"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"तृतीयवर्ण दृष्टिक्षीणता"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"आणखी डिम"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"स्क्रीन आणखी डिम करा"</string>
@@ -2587,10 +2604,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"पॉवर वापर समायोजित करा"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"समाविष्ट पॅकेज"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"अ‍ॅप्स नेहमीप्रमाणे चालत आहेत"</string>
-    <!-- no translation found for battery_tip_replacement_title (3932335880485957919) -->
-    <skip />
-    <!-- no translation found for battery_tip_replacement_summary (7892640031317153349) -->
-    <skip />
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"बॅटरी बदलण्याची शिफारस केली आहे"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"बॅटरी क्षमता आणि चार्जिंग परफॉर्मन्स कमी झाला असून, बॅटरी बदलण्याची शिफारस केली आहे."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"बॅटरीची पातळी कमी आहे"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"बॅटरी लाइफ वाढवण्यासाठी बॅटरी सेव्हर सुरू करा"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"बॅटरी लाइफ सुधारा"</string>
@@ -3431,8 +3446,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"आठवड्यातील दिवस सकाळी ९ - संध्याकाळी ५\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"कॅलेंडर इव्हेंट"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} अ‍ॅक्टिव्ह आहे}=2{{mode_1} आणि {mode_2} अ‍ॅक्टिव्ह आहेत}=3{{mode_1}, {mode_2} आणि{mode_3} अ‍ॅक्टिव्ह आहेत}other{{mode_1}, {mode_2} आणि आणखी # अ‍ॅक्टिव्ह आहेत}}"</string>
-    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
-    <skip />
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Do Not Disturb}=1{{mode_1}}=2{{mode_1}, {mode_2}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"सुरू आहे"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"सेट केलेला नाही"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"बंद केला आहे"</string>
@@ -3719,7 +3733,7 @@
     <string name="notif_type_ongoing_summary" msgid="2348867528527573574">"वापरात असलेल्या ॲप्समधील सुरू असलेले संभाषण, नेव्हिगेशन, फोन कॉल आणि आणखी बरेच काही"</string>
     <string name="notif_type_conversation" msgid="4383931408641374979">"संभाषणे"</string>
     <string name="notif_type_conversation_summary" msgid="179142405410217101">"एसएमएस आणि इतर संभाषणे"</string>
-    <string name="notif_type_alerting" msgid="4713073696855718576">"सूचना"</string>
+    <string name="notif_type_alerting" msgid="4713073696855718576">"नोटिफिकेशन"</string>
     <string name="notif_type_alerting_summary" msgid="4681068287836313604">"सेटिंग्जनुसार रिंग किंवा व्हायब्रेट होऊ शकतो"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"सायलंट"</string>
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"कधीही आवाज किंवा व्हायब्रेशन न करणाऱ्या सूचना"</string>
@@ -3736,6 +3750,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"तुम्हाला थोड्या कालावधीमध्ये बरीच नोटिफिकेशन मिळतात, तेव्हा तुमचे डिव्हाइस त्याचा व्हॉल्यूम कमी करेल आणि स्क्रीनवरील सूचनांना २ मिनिटांपर्यंत कमी करेल. कॉल, अलार्म आणि प्राधान्य दिलेल्या संभाषणांवर परिणाम होत नाहीत. \n\nकूलडाउनदरम्यान मिळालेली नोटिफिकेशन स्क्रीनच्या वरून खालपर्यंत स्वाइप करून शोधली जाऊ शकतात."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"कार्य प्रोफाइलला लागू करा"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"कार्य प्रोफाइलच्या अ‍ॅप्सना लागू करा"</string>
+    <string name="notification_bundle_title" msgid="460988459835922719">"बंडल केलेली नोटिफिकेशन"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"सुरू आहे"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"बंद आहे"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"नोटिफिकेशन बंडलिंग वापरा"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"आणखी शांत अनुभवासाठी समान थीम असलेली नोटिफिकेशन सायलंट करून ती एकत्र गटबद्ध केली जातील. बंडलिंग ॲपची स्वतःची नोटिफिकेशन सेटिंग्ज ओव्हरराइड करेल."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR मदतनीस सेवा"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"कोणत्याही इंस्टॉल केलेल्या अ‍ॅप्सनी VR मदतनीस सेवा म्हणून चालवण्यासाठी विनंती केली नाही."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"<xliff:g id="SERVICE">%1$s</xliff:g> साठी VR सेवा प्रवेशाची अनुमती द्यायची?"</string>
@@ -4198,6 +4217,9 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"फुल-स्क्रीन नोटिफिकेशन"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"या ॲपवरील फुल-स्क्रीन नोटिफिकेशनना अनुमती द्या"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"डिव्‍हाइस लॉक असताना या ॲपला फुल स्क्रीन वापरणाऱ्या सूचना दाखवण्‍याची अनुमती द्या. ॲप्स यांचा वापर अलार्म, इनकमिंग कॉल किंवा इतर तातडीच्या सूचना हायलाइट करण्यासाठी करू शकतात."</string>
+    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"सिस्टीमसंबंधित प्राधान्ये राइट करणे"</string>
+    <string name="write_system_preferences_switch_title" msgid="213522354119233085">"या ॲपला सिस्टीमसंबंधित प्राधान्यांमध्ये बदल करण्याची अनुमती द्या"</string>
+    <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"ही परवानगी ॲपला सिस्टीमसंबंधित मुख्य प्राधान्यांमध्ये बदल करण्याची अनुमती देते."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"मीडिया व्यवस्थापन ॲप्स"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"ॲपला मीडिया व्यवस्थापित करण्याची अनुमती द्या"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"अनुमती दिल्यास, हे ॲप तुमची परवानगी न घेता, इतर ॲप्स वापरून तयार केलेल्या मीडिया फाइलमध्ये बदल करू शकते किंवा त्या हटवू शकते. ॲपला फाइल आणि मीडिया अ‍ॅक्सेस करण्याची परवानगी असणे आवश्यक आहे."</string>
@@ -4481,8 +4503,8 @@
     <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"एकहाती मोड कसा वापरायचा"</b>\n" • सिस्टीमच्या नेव्हिगेशन सेटिंग्जमध्ये जेश्चर नेव्हिगेशन निवडले असल्याची खात्री करा\n • स्क्रीनच्या तळाशी कडेजवळ खाली स्‍वाइप करा"</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"पोहोचता येईल अशा अंतरावर स्क्रीन खेचा"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"स्क्रीनचा सर्वात वरचा भाग तुमच्या अंगठ्याने पोहोचण्याच्या अंतरावर येईल."</string>
-    <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"सूचना दाखवा"</string>
-    <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"सूचना आणि सेटिंग्ज दिसतील."</string>
+    <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"नोटिफिकेशन दाखवा"</string>
+    <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"नोटिफिकेशन आणि सेटिंग्ज दिसतील."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"वेळ, सूचना आणि इतर माहिती तपासण्यासाठी, तुमच्या स्क्रीनवर दोनदा टॅप करा."</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"वेक अप डिस्प्ले"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"वेळ, सूचना आणि इतर माहिती तपासण्यासाठी तुमच्या स्क्रीनवर टॅप करा."</string>
@@ -4840,11 +4862,14 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"उपग्रह मेसेजिंग"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"उपग्रहाद्वारे एसएमएस पाठवा आणि मिळवा. तुमच्या खात्यामध्ये समावेश आहे."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"सॅटेलाइटद्वारे एसएमएस पाठवा आणि मिळवा. तुमच्या खात्यात समाविष्ट नाही."</string>
-    <string name="keywords_satellite_setting" msgid="3312183289776517695">"उपग्रह मेसेजिंग"</string>
-    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"उपग्रह मेसेजिंगबद्दल"</string>
+    <!-- no translation found for keywords_satellite_setting (613553612424945946) -->
+    <skip />
+    <!-- no translation found for category_name_about_satellite_messaging (4978095955643523120) -->
+    <skip />
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"तुम्ही <xliff:g id="CARRIER_NAME">%1$s</xliff:g> खात्याच्या पात्रतेचा भाग म्हणून उपग्रहाद्वारे एसएमएस पाठवू आणि मिळवू शकता"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"तुमचा <xliff:g id="CARRIER_NAME">%1$s</xliff:g> प्लॅन"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"तुमच्या खात्यामध्ये उपग्रह मेसेजिंगचा समावेश आहे"</string>
+    <!-- no translation found for title_have_satellite_plan (857337944804101443) -->
+    <skip />
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"उपग्रह मेसेजिंगचा तुमच्या खात्यामध्ये समावेश केलेला नाही"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"अधिक जाणून घ्या"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"ते कसे काम करते"</string>
@@ -4852,10 +4877,55 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"तुमचा फोन उपग्रहाशी ऑटो-कनेक्ट होईल. सर्वोत्तम कनेक्शनसाठी, आकाश स्पष्ट दिसेल अशा ठिकाणी बाहेर उभे रहा."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"तुमचा फोन उपग्रहाशी जोडल्यानंतर"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"आणीबाणी सेवांसह तुम्ही कोणालाही एसएमएस पाठवू शकता. उपलब्ध असेल, तेव्हा तुमचा फोन मोबाइल नेटवर्कशी पुन्हा कनेक्ट होईल."</string>
-    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"उपग्रह मेसेजिंगला जास्त वेळ लागू शकतो आणि ते फक्त काही भागांमध्येच उपलब्ध आहे. हवामान आणि विशिष्ट संरचना तुमच्या उपग्रह कनेक्शनवर परिणाम करू शकतात. उपग्रहाद्वारे कॉल करणे उपलब्ध नाही. आणीबाणी कॉल अजूनही कनेक्ट होऊ शकतात.\n\nखात्यामधील बदल सेटिंग्ज मध्ये दिसण्यासाठी काही वेळ लागू शकतो. तपशिलांसाठी तुमच्या वाहकाशी संपर्क साधा."</string>
-    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"उपग्रह मेसेजिंगबद्दल अधिक"</string>
+    <!-- no translation found for satellite_setting_summary_more_information (1028146147094166868) -->
+    <skip />
+    <!-- no translation found for more_about_satellite_messaging (1039277943532711584) -->
+    <skip />
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> सुरू करू शकत नाही"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g> सुरू करण्यासाठी, सर्वप्रथम उपग्रह कनेक्शन बंद करा"</string>
+    <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"सॅटेलाइट कनेक्टिव्हिटी"</string>
+    <!-- no translation found for title_satellite_setting_connectivity (488626710934668313) -->
+    <skip />
+    <!-- no translation found for description_satellite_setting_connectivity (7337311015334186655) -->
+    <skip />
+    <!-- no translation found for description_satellite_setting_messaging (4367494645429198805) -->
+    <skip />
+    <!-- no translation found for title_have_satellite_data_plan (5614932315409789011) -->
+    <skip />
+    <!-- no translation found for title_for_satellite_sos (4608739357329147285) -->
+    <skip />
+    <!-- no translation found for summary_for_satellite_sos_entry (4981480371923329605) -->
+    <skip />
+    <!-- no translation found for keywords_satellite_sos (6275777197418023949) -->
+    <skip />
+    <!-- no translation found for category_title_about_satellite_sos (7229724397303154919) -->
+    <skip />
+    <!-- no translation found for satellite_sos_introduction (4670230212117495751) -->
+    <skip />
+    <!-- no translation found for satellite_sos_how_it_works_step_1 (4669862942425306921) -->
+    <skip />
+    <!-- no translation found for satellite_sos_how_it_works_step_2 (3558248744927579016) -->
+    <skip />
+    <!-- no translation found for satellite_sos_how_it_works_step_3 (4496038314890474893) -->
+    <skip />
+    <!-- no translation found for satellite_sos_how_it_works_summary_1 (4497178023367920284) -->
+    <skip />
+    <!-- no translation found for satellite_sos_how_it_works_summary_2 (1302661361673503362) -->
+    <skip />
+    <!-- no translation found for satellite_sos_how_it_works_summary_3 (4612675365617172405) -->
+    <skip />
+    <!-- no translation found for satellite_sos_try_demo (1915233782211344468) -->
+    <skip />
+    <!-- no translation found for satellite_sos_footer_text (4454885538165117230) -->
+    <skip />
+    <!-- no translation found for satellite_sos_sharing_preferences_subheader_title (5701538329333628267) -->
+    <skip />
+    <!-- no translation found for satellite_sos_sharing_preferences_step_1 (3106774199702637359) -->
+    <skip />
+    <!-- no translation found for satellite_sos_sharing_preferences_step_2 (738246589687762115) -->
+    <skip />
+    <!-- no translation found for satellite_sos_sharing_preferences_description (782508188142964342) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"अ‍ॅक्सेस पॉइंट"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>शी कनेक्ट केले असल्यास उपलब्ध नाही"</string>
@@ -5042,6 +5112,8 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"तुम्ही पेज-अ‍ॅग्नॉस्टिक मोडच्या १६KB मोडमध्ये आहात. या मोडमध्ये सॉफ्टवेअर इंटेग्रिटीची हमी देता येणार नाही आणि बूटलोडर अनलॉक केलेला असताना फोनवर स्टोअर केलेल्या कोणत्याही डेटाला धोका असू शकतो. या मोडमध्ये काही वैशिष्ट्ये बंद केली जातील, त्यामुळे काही अ‍ॅप्लिकेशन कदाचित काम करणार नाहीत. उत्पादन मोडमध्ये पुन्हा एंटर करण्यासाठी, तुम्हाला ४KB मोडवर परत स्विच करावे लागेल आणि त्यानंतर डिव्हाइसचा बूटलोडर लॉक करावा लागेल. यामुळे डिव्हाइस पुन्हा फॅक्टरी रीसेट होईल आणि उत्पादन सेटिंग्जवर रिस्टोअर केले जाईल. Android मध्ये डिव्हाइस यशस्वीरीत्या बूट झाल्यानंतर, डेव्हलपर पर्यायांमध्ये OEM अनलॉक करणे हे बंद करा. डिव्हाइस Android मध्ये बूट होत नसल्यास किंवा ते अस्थिर असल्यास, &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; येथील नवीनतम फॅक्टरी इमेजच्या मदतीने डिव्हाइस पुन्हा फ्लॅश करा किंवा &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; वापरा आणि \'डिव्हाइस पुसून टाका\', \'बूटलोडर लॉक करा\' व \'सर्व पार्टिशन सक्तीने फ्लॅश करा\' हे निवडा."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"१६KB पेज अज्ञात मोड"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"आणखी वाचा"</string>
+    <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"पेज आकार कंपॅटिबिलिटी मोडसह रन करा"</string>
+    <string name="enable_16k_app_compat_details" msgid="3847293423550174952">"ॲप हे टॉगल केलेल्या १६ KB डिव्हाइसवर पेज आकार कंपॅटिबिलिटी मोडमध्ये रन केले जाईल."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"बग रिपोर्ट हँडलर"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"कोणते ॲप तुमच्या डिव्हाइसवरील बग रिपोर्ट शॉर्टकट हाताळेल हे निर्धारित करते."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"वैयक्तिक"</string>
@@ -5299,7 +5371,7 @@
     <string name="user_aspect_ratio_fullscreen" msgid="1843427242540081996">"फुल स्क्रीन"</string>
     <string name="user_aspect_ratio_half_screen" msgid="1015852057094310209">"अर्धी स्क्रीन"</string>
     <string name="user_aspect_ratio_device_size" msgid="2339820985120881199">"डिव्हाइस आस्पेक्ट रेशो"</string>
-    <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"16:9"</string>
+    <string name="user_aspect_ratio_16_9" msgid="2286644872775170164">"१६:९"</string>
     <string name="user_aspect_ratio_3_2" msgid="199262962518318932">"3:2"</string>
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"४:३"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="DENOMINATOR">%2$s</xliff:g> बाय <xliff:g id="NUMERATOR">%1$s</xliff:g>"</string>
@@ -5480,6 +5552,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"स्ट्रीम ऐका"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> वापरून ऐकण्यासाठी ऑडिओ स्ट्रीमचा QR कोड स्कॅन करा"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"शेअर करताना पासवर्ड संपादित करू शकत नाही. पासवर्ड बदलण्यासाठी सर्वप्रथम ऑडिओ शेअरिंग बंद करा."</string>
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"तुमच्या पासवर्डमध्ये ४ ते १६ वर्णांचा समावेश असणे आवश्यक आहे आणि फक्त अक्षरे, नंबर व चिन्हे वापरा"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR कोड स्कॅनर"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"मदत हवी आहे का?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"शोध सेटिंग्ज"</string>
@@ -5491,7 +5564,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"डीफॉल्ट खाते सेट करताना एरर आली"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"कोणतेही डीफॉल्ट अकाउंट सेट केलेले नाही"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"केवळ डिव्हाइस"</string>
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"डिव्हाइस आणि %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"सुरू करण्यासाठी एखादे खाते जोडा"</string>
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"संपर्क कुठे सेव्ह करावेत"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"शोधण्यासाठी वर्तुळ करा"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"तुमच्या स्क्रीनवरील आशय वापरून शोधण्यासाठी होम बटण किंवा नेव्हिगेशन हँडल स्‍पर्श करून धरून ठेवा."</string>
 </resources>

@@ -57,6 +57,7 @@ import java.text.NumberFormat;
 /**
  * The top-level preference controller that updates the adaptive brightness level.
  */
+// LINT.IfChange
 public class BrightnessLevelPreferenceController extends BasePreferenceController implements
         PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
     private static final Uri BRIGHTNESS_ADJ_URI;
@@ -132,8 +133,8 @@ public class BrightnessLevelPreferenceController extends BasePreferenceControlle
     @Override
     public void onStart() {
         mContentResolver.registerContentObserver(BRIGHTNESS_ADJ_URI, false, mBrightnessObserver);
-        mDisplayManager.registerDisplayListener(mDisplayListener, mHandler,
-                DisplayManager.EVENT_FLAG_DISPLAY_BRIGHTNESS);
+        mDisplayManager.registerDisplayListener(mDisplayListener, mHandler, /* eventFlags= */ 0,
+                DisplayManager.PRIVATE_EVENT_FLAG_DISPLAY_BRIGHTNESS);
         updatedSummary(mPreference);
     }
 
@@ -187,3 +188,4 @@ public class BrightnessLevelPreferenceController extends BasePreferenceControlle
         return (value - min) / (max - min);
     }
 }
+// LINT.ThenChange(BrightnessLevelPreference.kt)

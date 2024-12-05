@@ -17,14 +17,12 @@
 package com.android.settings.accessibility.shortcuts;
 
 import android.content.Context;
-import android.view.accessibility.Flags;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityUtil;
 
 /**
  * A controller handles displaying the volume keys shortcut option preference and
@@ -60,17 +58,5 @@ public class VolumeKeysShortcutOptionController extends ShortcutOptionPreference
     @Override
     protected boolean isShortcutAvailable() {
         return true;
-    }
-
-    @Override
-    protected void enableShortcutForTargets(boolean enable) {
-        super.enableShortcutForTargets(enable);
-        if (Flags.a11yQsShortcut()) {
-            return;
-        }
-
-        if (enable) {
-            AccessibilityUtil.skipVolumeShortcutDialogTimeoutRestriction(mContext);
-        }
     }
 }

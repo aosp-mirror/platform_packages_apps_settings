@@ -110,7 +110,10 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
 
                 @Override
                 public void onSourceAdded(
-                        @NonNull BluetoothDevice sink, int sourceId, int reason) {}
+                        @NonNull BluetoothDevice sink, int sourceId, int reason) {
+                    Log.d(TAG, "onSourceAdded: updateSummary");
+                    updateSummary();
+                }
 
                 @Override
                 public void onSourceAddFailed(
@@ -138,12 +141,7 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
                 public void onReceiveStateChanged(
                         @NonNull BluetoothDevice sink,
                         int sourceId,
-                        @NonNull BluetoothLeBroadcastReceiveState state) {
-                    if (BluetoothUtils.isConnected(state)) {
-                        Log.d(TAG, "onReceiveStateChanged: synced, updateSummary");
-                        updateSummary();
-                    }
-                }
+                        @NonNull BluetoothLeBroadcastReceiveState state) {}
             };
 
     public AudioSharingCallAudioPreferenceController(Context context) {
