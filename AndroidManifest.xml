@@ -852,10 +852,15 @@
         </activity>
 
         <activity android:name=".network.SimOnboardingActivity"
-            android:exported="false"
+            android:exported="true"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-            android:theme="@style/Theme.SpaLib.BottomSheetDialog"/>
+            android:theme="@style/Theme.SpaLib.BottomSheetDialog">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.SIM_PREFERENCE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+      </activity>
 
         <activity android:name=".network.telephony.ToggleSubscriptionDialogActivity"
                   android:exported="false"
