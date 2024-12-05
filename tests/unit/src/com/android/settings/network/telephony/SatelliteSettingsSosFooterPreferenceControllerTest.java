@@ -19,6 +19,7 @@ package com.android.settings.network.telephony;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Looper;
@@ -32,6 +33,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
@@ -42,8 +44,10 @@ public class SatelliteSettingsSosFooterPreferenceControllerTest {
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
-    private Context mContext = null;
+    @Mock
     private FooterPreference mFooterPreference;
+
+    private Context mContext = null;
     private SatelliteSettingsSosFooterPreferenceController mController;
 
     @Before
@@ -52,8 +56,7 @@ public class SatelliteSettingsSosFooterPreferenceControllerTest {
             Looper.prepare();
         }
         mContext = spy(ApplicationProvider.getApplicationContext());
-        mFooterPreference = spy(new FooterPreference(mContext));
-        mFooterPreference.setKey(KEY);
+        when(mFooterPreference.getKey()).thenReturn(KEY);
         mController = new SatelliteSettingsSosFooterPreferenceController(mContext, KEY);
     }
 
