@@ -68,11 +68,13 @@ public class KeyboardLayoutPickerController extends BasePreferenceController imp
     public void onStart() {
         mIm.registerInputDeviceListener(this, null);
         if (mInputDeviceIdentifier == null
-                || NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier) == null) {
+                || InputPeripheralsSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier)
+                == null) {
             return;
         }
         mInputDeviceId =
-                NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier).getId();
+                InputPeripheralsSettingsUtils.getInputDevice(mIm,
+                        mInputDeviceIdentifier).getId();
         updateCheckedState();
     }
 

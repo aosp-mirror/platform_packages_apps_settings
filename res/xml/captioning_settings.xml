@@ -22,7 +22,8 @@
 
     <com.android.settingslib.widget.TopIntroPreference
         android:key="captioning_intro"
-        android:title="@string/accessibility_captioning_preference_intro"/>
+        android:title="@string/accessibility_captioning_preference_intro"
+        settings:searchable="false"/>
 
     <com.android.settingslib.widget.IllustrationPreference
         android:key="captioning_preview"
@@ -44,7 +45,8 @@
     <Preference
         android:fragment="com.android.settings.accessibility.CaptioningMoreOptionsFragment"
         android:key="captioning_more_options"
-        android:title="@string/captioning_more_options_title" />
+        android:title="@string/captioning_more_options_title"
+        settings:searchable="false" />
 
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="captioning_settings_footer"

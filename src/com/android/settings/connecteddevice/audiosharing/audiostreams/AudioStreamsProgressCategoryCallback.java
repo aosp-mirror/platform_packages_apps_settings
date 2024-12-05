@@ -16,19 +16,24 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
-import static com.android.settingslib.flags.Flags.audioSharingHysteresisModeFix;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
+import android.content.Context;
+
+import com.android.settingslib.bluetooth.BluetoothUtils;
 
 public class AudioStreamsProgressCategoryCallback extends AudioStreamsBroadcastAssistantCallback {
     private static final String TAG = "AudioStreamsProgressCategoryCallback";
 
+    private final Context mContext;
     private final AudioStreamsProgressCategoryController mCategoryController;
 
     public AudioStreamsProgressCategoryCallback(
+            Context context,
             AudioStreamsProgressCategoryController audioStreamsProgressCategoryController) {
+        mContext = context;
         mCategoryController = audioStreamsProgressCategoryController;
     }
 
@@ -41,7 +46,8 @@ public class AudioStreamsProgressCategoryCallback extends AudioStreamsBroadcastA
             mCategoryController.handleSourceConnected(state);
         } else if (AudioStreamsHelper.isBadCode(state)) {
             mCategoryController.handleSourceConnectBadCode(state);
-        } else if (audioSharingHysteresisModeFix() && AudioStreamsHelper.hasSourcePresent(state)) {
+        } else if (BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(mContext)
+                && AudioStreamsHelper.hasSourcePresent(state)) {
             // Keep this check as the last, source might also present in above states
             mCategoryController.handleSourcePresent(state);
         }

@@ -16,8 +16,6 @@
 
 package com.android.settings.network;
 
-import static android.provider.SettingsSlicesContract.KEY_AIRPLANE_MODE;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -78,12 +76,12 @@ public class AirplaneModePreferenceControllerTest {
         mResolver = mContext.getContentResolver();
         doReturn(mPackageManager).when(mContext).getPackageManager();
         mController = new AirplaneModePreferenceController(mContext,
-                KEY_AIRPLANE_MODE);
+                AirplaneModePreference.KEY);
 
         mPreferenceManager = new PreferenceManager(mContext);
         mScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mPreference = new RestrictedSwitchPreference(mContext);
-        mPreference.setKey(KEY_AIRPLANE_MODE);
+        mPreference.setKey(AirplaneModePreference.KEY);
         mScreen.addPreference(mPreference);
         mController.setFragment(null);
     }

@@ -43,7 +43,6 @@ import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.development.Enable16kUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.RestrictedPreference;
@@ -95,8 +94,6 @@ public class AccessibilitySettings extends DashboardFragment implements
     static final String EXTRA_HTML_DESCRIPTION = "html_description";
     static final String EXTRA_TIME_FOR_LOGGING = "start_time_to_log_a11y_tool";
     static final String EXTRA_METRICS_CATEGORY = "metrics_category";
-
-    public static final String VOICE_ACCESS_SERVICE = "android.apps.accessibility.voiceaccess";
 
     // Timeout before we update the services if packages are added/removed
     // since the AccessibilityManagerService has to do that processing first
@@ -180,9 +177,7 @@ public class AccessibilitySettings extends DashboardFragment implements
         // Observe changes from accessibility selection menu
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
-        }
+        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_STICKY_KEYS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SLOW_KEYS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BOUNCE_KEYS);
@@ -412,10 +407,8 @@ public class AccessibilitySettings extends DashboardFragment implements
         final List<RestrictedPreference> preferenceList = getInstalledAccessibilityPreferences(
                 getPrefContext(), installedShortcutList, installedServiceList);
 
-        if (Flags.checkPrebundledIsPreinstalled()) {
-            removeNonPreinstalledComponents(mPreBundledServiceComponentToCategoryMap,
-                    installedShortcutList, installedServiceList);
-        }
+        removeNonPreinstalledComponents(mPreBundledServiceComponentToCategoryMap,
+                installedShortcutList, installedServiceList);
 
         final PreferenceCategory downloadedServicesCategory =
                 mCategoryToPrefCategoryMap.get(CATEGORY_DOWNLOADED_SERVICES);
@@ -505,11 +498,6 @@ public class AccessibilitySettings extends DashboardFragment implements
         String[] services = getResources().getStringArray(key);
         PreferenceCategory category = mCategoryToPrefCategoryMap.get(categoryKey);
         for (int i = 0; i < services.length; i++) {
-            // TODO(b/335443194) Voice access is not available in 16kB mode.
-            if (services[i].contains(VOICE_ACCESS_SERVICE)
-                    && Enable16kUtils.isPageAgnosticModeOn(getContext())) {
-                continue;
-            }
             ComponentName component = ComponentName.unflattenFromString(services[i]);
             mPreBundledServiceComponentToCategoryMap.put(component, category);
         }

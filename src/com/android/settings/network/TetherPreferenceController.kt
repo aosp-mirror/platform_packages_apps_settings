@@ -35,19 +35,35 @@ import com.android.settingslib.TetherUtil
 import com.android.settingslib.Utils
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.conflate
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class TetherPreferenceController(context: Context, key: String) :
-    BasePreferenceController(context, key) {
+class TetherPreferenceController(
+    context: Context,
+    key: String,
+    private val tetheredRepository: TetheredRepository = TetheredRepository(context),
+) : BasePreferenceController(context, key) {
 
-    private val tetheredRepository = TetheredRepository(context)
     private val tetheringManager = mContext.getSystemService(TetheringManager::class.java)!!
 
     private var preference: Preference? = null
 
-    override fun getAvailabilityStatus() =
-        if (TetherUtil.isTetherAvailable(mContext)) AVAILABLE else CONDITIONALLY_UNAVAILABLE
+    private val isTetherAvailableFlow =
+        flow { emit(TetherUtil.isTetherAvailable(mContext)) }
+            .distinctUntilChanged()
+            .conflate()
+            .flowOn(Dispatchers.Default)
+
+    /**
+     * Always returns available here to avoid ANR.
+     * - Actual UI visibility is handled in [onViewCreated].
+     * - Search visibility is handled in [updateNonIndexableKeys].
+     */
+    override fun getAvailabilityStatus() = AVAILABLE
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
@@ -55,6 +71,9 @@ class TetherPreferenceController(context: Context, key: String) :
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
+        isTetherAvailableFlow.collectLatestWithLifecycle(viewLifecycleOwner) {
+            preference?.isVisible = it
+        }
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 getTitleResId()?.let { preference?.setTitle(it) }
@@ -81,6 +100,12 @@ class TetherPreferenceController(context: Context, key: String) :
             hotSpotOn -> R.string.tether_settings_summary_hotspot_on_tether_off
             tetherOn -> R.string.tether_settings_summary_hotspot_off_tether_on
             else -> R.string.tether_preference_summary_off
+        }
+    }
+
+    override fun updateNonIndexableKeys(keys: MutableList<String>) {
+        if (!TetherUtil.isTetherAvailable(mContext)) {
+            keys += preferenceKey
         }
     }
 

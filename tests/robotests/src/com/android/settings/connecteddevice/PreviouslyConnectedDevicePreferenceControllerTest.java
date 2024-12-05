@@ -24,6 +24,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -31,6 +32,7 @@ import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.os.Looper;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.util.Pair;
@@ -226,6 +228,7 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
                 mContext, mCachedDevice1, true, BluetoothDevicePreference.SortType.TYPE_NO_SORT);
 
         mPreConnectedDeviceController.onDeviceAdded(preference1);
+        shadowOf(Looper.getMainLooper()).runToEndOfTasks();
 
         assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(2);
     }
@@ -236,6 +239,7 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
                 mContext, null /* AttributeSet */);
 
         mPreConnectedDeviceController.onDeviceAdded(dockPreference);
+        shadowOf(Looper.getMainLooper()).runToEndOfTasks();
 
         assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(2);
     }
@@ -258,6 +262,7 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         mPreConnectedDeviceController.onDeviceAdded(preference3);
         mPreConnectedDeviceController.onDeviceAdded(preference4);
         mPreConnectedDeviceController.onDeviceAdded(dockPreference);
+        shadowOf(Looper.getMainLooper()).runToEndOfTasks();
 
         // 3 BluetoothDevicePreference and 1 see all preference
         assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(4);
@@ -269,6 +274,7 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
                 mContext, mCachedDevice5, true, BluetoothDevicePreference.SortType.TYPE_NO_SORT);
 
         mPreConnectedDeviceController.onDeviceAdded(preference);
+        shadowOf(Looper.getMainLooper()).runToEndOfTasks();
 
         // 1 see all preference
         assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(1);
@@ -280,6 +286,7 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
                 mContext, mCachedDevice5, true, BluetoothDevicePreference.SortType.TYPE_NO_SORT);
 
         mPreConnectedDeviceController.onDeviceAdded(preference);
+        shadowOf(Looper.getMainLooper()).runToEndOfTasks();
 
         // 1 see all preference
         assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(1);
@@ -296,6 +303,7 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
 
         mPreConnectedDeviceController.onDeviceRemoved(preference1);
         mPreConnectedDeviceController.onDeviceRemoved(dockPreference);
+        shadowOf(Looper.getMainLooper()).runToEndOfTasks();
 
         assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(1);
     }
@@ -345,6 +353,7 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         mPreConnectedDeviceController.onDeviceAdded(preference2);
 
         mPreConnectedDeviceController.updatePreferenceGroup();
+        shadowOf(Looper.getMainLooper()).runToEndOfTasks();
 
         // Refer to the order of {@link #mMostRecentlyConnectedDevices}, the first one is see all
         // preference
@@ -380,6 +389,7 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         mPreConnectedDeviceController.onDeviceAdded(preference2);
 
         mPreConnectedDeviceController.updatePreferenceGroup();
+        shadowOf(Looper.getMainLooper()).runToEndOfTasks();
 
         // 1 see all preference
         assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(1);

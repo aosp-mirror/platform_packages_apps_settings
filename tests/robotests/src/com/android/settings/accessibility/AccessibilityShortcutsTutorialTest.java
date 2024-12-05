@@ -133,7 +133,6 @@ public final class AccessibilityShortcutsTutorialTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void createTutorialPages_turnOnQuickSettingShortcut_hasOnePage() {
         mShortcutTypes |= QUICK_SETTINGS;
 
@@ -260,7 +259,6 @@ public final class AccessibilityShortcutsTutorialTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void createAccessibilityTutorialDialog_qsShortcut_inSuwTalkbackOn_verifyText() {
         mShortcutTypes |= QUICK_SETTINGS;
         setTouchExplorationEnabled(true);
@@ -292,7 +290,6 @@ public final class AccessibilityShortcutsTutorialTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void createAccessibilityTutorialDialog_qsShortcut_notInSuwTalkbackOn_verifyText() {
         mShortcutTypes |= QUICK_SETTINGS;
         setTouchExplorationEnabled(true);
@@ -318,7 +315,6 @@ public final class AccessibilityShortcutsTutorialTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void createAccessibilityTutorialDialog_qsShortcut_inSuwTalkbackOff_verifyText() {
         mShortcutTypes |= QUICK_SETTINGS;
         setTouchExplorationEnabled(false);
@@ -349,7 +345,6 @@ public final class AccessibilityShortcutsTutorialTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void createAccessibilityTutorialDialog_qsShortcut_notInSuwTalkbackOff_verifyText() {
         mShortcutTypes |= QUICK_SETTINGS;
         setTouchExplorationEnabled(false);

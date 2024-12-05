@@ -37,9 +37,10 @@ import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUtils.class)
+// LINT.IfChange
 public class BatteryPercentagePreferenceControllerTest {
 
-    private static final String PREF_KEY = "battery_percentage";
+    private static final String PREF_KEY = "status_bar_show_battery_percent";
 
     private Context mContext;
     private BatteryPercentagePreferenceController mController;
@@ -80,3 +81,4 @@ public class BatteryPercentagePreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 }
+// LINT.ThenChange(BatteryPercentageSwitchPreferenceTest.kt)

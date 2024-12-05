@@ -23,7 +23,6 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,7 +33,6 @@ import android.provider.Telephony;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.data.ApnSetting;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -51,7 +49,6 @@ import androidx.preference.PreferenceGroup;
 
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
-import com.android.settings.flags.Flags;
 import com.android.settings.network.telephony.SubscriptionRepository;
 import com.android.settings.spa.SpaActivity;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -59,6 +56,7 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import kotlin.Unit;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /** Handle each different apn setting. */
 public class ApnSettings extends RestrictedSettingsFragment
@@ -68,16 +66,12 @@ public class ApnSettings extends RestrictedSettingsFragment
     public static final String APN_ID = "apn_id";
     public static final String APN_LIST = "apn_list";
     public static final String SUB_ID = "sub_id";
-    public static final String MVNO_TYPE = "mvno_type";
-    public static final String MVNO_MATCH_DATA = "mvno_match_data";
 
     private static final String[] CARRIERS_PROJECTION = new String[] {
             Telephony.Carriers._ID,
             Telephony.Carriers.NAME,
             Telephony.Carriers.APN,
             Telephony.Carriers.TYPE,
-            Telephony.Carriers.MVNO_TYPE,
-            Telephony.Carriers.MVNO_MATCH_DATA,
             Telephony.Carriers.EDITED_STATUS,
     };
 
@@ -85,9 +79,7 @@ public class ApnSettings extends RestrictedSettingsFragment
     private static final int NAME_INDEX = 1;
     private static final int APN_INDEX = 2;
     private static final int TYPES_INDEX = 3;
-    private static final int MVNO_TYPE_INDEX = 4;
-    private static final int MVNO_MATCH_DATA_INDEX = 5;
-    private static final int EDITED_INDEX = 6;
+    private static final int EDITED_INDEX = 4;
 
     private static final int MENU_NEW = Menu.FIRST;
     private static final int MENU_RESTORE = Menu.FIRST + 1;
@@ -101,8 +93,6 @@ public class ApnSettings extends RestrictedSettingsFragment
     private PreferredApnRepository mPreferredApnRepository;
     @Nullable
     private String mPreferredApnKey;
-    private String mMvnoType;
-    private String mMvnoMatchData;
 
     private boolean mUnavailable;
 
@@ -135,9 +125,9 @@ public class ApnSettings extends RestrictedSettingsFragment
         mHideImsApn = b.getBoolean(CarrierConfigManager.KEY_HIDE_IMS_APN_BOOL);
         mAllowAddingApns = b.getBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL);
         if (mAllowAddingApns) {
-            final String[] readOnlyApnTypes = ApnEditor.getReadOnlyApnTypes(b);
+            final List<String> readOnlyApnTypes = ApnTypes.getReadOnlyApnTypes(b);
             // if no apn type can be edited, do not allow adding APNs
-            if (ApnEditor.hasAllApns(readOnlyApnTypes)) {
+            if (ApnTypes.hasAllApnTypes(readOnlyApnTypes)) {
                 Log.d(TAG, "not allowing adding APN because all APN types are read only");
                 mAllowAddingApns = false;
             }
@@ -241,8 +231,6 @@ public class ApnSettings extends RestrictedSettingsFragment
                 final String key = cursor.getString(ID_INDEX);
                 final String type = cursor.getString(TYPES_INDEX);
                 final int edited = cursor.getInt(EDITED_INDEX);
-                mMvnoType = cursor.getString(MVNO_TYPE_INDEX);
-                mMvnoMatchData = cursor.getString(MVNO_MATCH_DATA_INDEX);
 
                 final ApnPreference pref = new ApnPreference(getPrefContext());
 
@@ -310,20 +298,9 @@ public class ApnSettings extends RestrictedSettingsFragment
     }
 
     private void addNewApn() {
-        if (Flags.newApnPageEnabled()) {
-            String route = ApnEditPageProvider.INSTANCE.getRoute(
-                    INSERT_URL, Telephony.Carriers.CONTENT_URI, mSubId);
-            SpaActivity.startSpaActivity(getContext(), route);
-        } else {
-            final Intent intent = new Intent(Intent.ACTION_INSERT, Telephony.Carriers.CONTENT_URI);
-            intent.putExtra(SUB_ID, mSubId);
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            if (!TextUtils.isEmpty(mMvnoType) && !TextUtils.isEmpty(mMvnoMatchData)) {
-                intent.putExtra(MVNO_TYPE, mMvnoType);
-                intent.putExtra(MVNO_MATCH_DATA, mMvnoMatchData);
-            }
-            startActivity(intent);
-        }
+        String route = ApnEditPageProvider.INSTANCE.getRoute(
+                INSERT_URL, Telephony.Carriers.CONTENT_URI, mSubId);
+        SpaActivity.startSpaActivity(getContext(), route);
     }
 
     @Override

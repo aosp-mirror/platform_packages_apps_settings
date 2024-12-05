@@ -23,10 +23,10 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
@@ -46,13 +46,16 @@ import java.util.List;
  * Therefore, as a simple workaround, we use a new class which is enabled by default.
  */
 @SearchIndexable
-public class UserBackupSettingsActivity extends FragmentActivity implements Indexable {
+public class UserBackupSettingsActivity extends SettingsActivity implements Indexable {
     private static final String TAG = "BackupSettingsActivity";
     private FragmentManager mFragmentManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (isFinishing()) {
+            return;
+        }
 
         BackupSettingsHelper backupHelper = new BackupSettingsHelper(this);
 

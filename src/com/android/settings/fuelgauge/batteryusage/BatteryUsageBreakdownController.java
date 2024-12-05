@@ -31,7 +31,6 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
@@ -68,11 +67,11 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     private static final String ROOT_PREFERENCE_KEY = "battery_usage_breakdown";
     private static final String FOOTER_PREFERENCE_KEY = "battery_usage_footer";
     private static final String SPINNER_PREFERENCE_KEY = "battery_usage_spinner";
-    private static final String APP_LIST_PREFERENCE_KEY = "app_list";
     private static final String PACKAGE_NAME_NONE = "none";
     private static final String SLOT_TIMESTAMP = "slot_timestamp";
     private static final String ANOMALY_KEY = "anomaly_key";
     private static final String KEY_SPINNER_POSITION = "spinner_position";
+    private static final int ENTRY_PREF_ORDER_OFFSET = 100;
     private static final List<BatteryDiffEntry> EMPTY_ENTRY_LIST = new ArrayList<>();
 
     private static int sUiMode = Configuration.UI_MODE_NIGHT_UNDEFINED;
@@ -89,8 +88,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     private SettingsSpinnerAdapter<CharSequence> mSpinnerAdapter;
 
     @VisibleForTesting Context mPrefContext;
-    @VisibleForTesting PreferenceCategory mRootPreference;
-    @VisibleForTesting PreferenceGroup mAppListPreferenceGroup;
+    @VisibleForTesting PreferenceGroup mRootPreferenceGroup;
     @VisibleForTesting FooterPreference mFooterPreference;
     @VisibleForTesting BatteryDiffData mBatteryDiffData;
     @VisibleForTesting String mBatteryUsageBreakdownTitleLastFullChargeText;
@@ -143,7 +141,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     public void onDestroy() {
         mHandler.removeCallbacksAndMessages(/* token= */ null);
         mPreferenceCache.clear();
-        mAppListPreferenceGroup.removeAll();
+        mRootPreferenceGroup.removeAll();
     }
 
     @Override
@@ -226,9 +224,8 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPrefContext = screen.getContext();
-        mRootPreference = screen.findPreference(ROOT_PREFERENCE_KEY);
+        mRootPreferenceGroup = screen.findPreference(ROOT_PREFERENCE_KEY);
         mSpinnerPreference = screen.findPreference(SPINNER_PREFERENCE_KEY);
-        mAppListPreferenceGroup = screen.findPreference(APP_LIST_PREFERENCE_KEY);
         mFooterPreference = screen.findPreference(FOOTER_PREFERENCE_KEY);
         mBatteryUsageBreakdownTitleLastFullChargeText =
                 mPrefContext.getString(
@@ -242,7 +239,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
                         R.string.battery_usage_less_than_percent_content_description,
                         formatPercentage);
 
-        mAppListPreferenceGroup.setOrderingAsAdded(false);
+        mRootPreferenceGroup.setOrderingAsAdded(false);
         mSpinnerAdapter = new SettingsSpinnerAdapter<>(mPrefContext);
         mSpinnerAdapter.addAll(
                 new String[] {
@@ -328,8 +325,9 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
                         : mPrefContext.getString(
                                 R.string.battery_usage_breakdown_title_for_slot,
                                 accessibilitySlotTimestamp);
-        mRootPreference.setTitle(Utils.createAccessibleSequence(displayTitle, accessibilityTitle));
-        mRootPreference.setVisible(true);
+        mRootPreferenceGroup.setTitle(
+                Utils.createAccessibleSequence(displayTitle, accessibilityTitle));
+        mRootPreferenceGroup.setVisible(true);
     }
 
     private void showFooterPreference(boolean isAllBatteryUsageEmpty) {
@@ -350,7 +348,6 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
             return;
         }
         mSpinnerPreference.setVisible(true);
-        mAppListPreferenceGroup.setVisible(true);
         mHandler.post(
                 () -> {
                     removeAndCacheAllUnusedPreferences();
@@ -374,7 +371,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         }
         final long start = System.currentTimeMillis();
         final List<BatteryDiffEntry> entries = getBatteryDiffEntries();
-        int prefIndex = mAppListPreferenceGroup.getPreferenceCount();
+        int preferenceOrder = ENTRY_PREF_ORDER_OFFSET;
         for (BatteryDiffEntry entry : entries) {
             boolean isAdded = false;
             final String appLabel = entry.getAppLabel();
@@ -384,33 +381,32 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
                 continue;
             }
             final String prefKey = entry.getKey();
-            AnomalyAppItemPreference pref = mAppListPreferenceGroup.findPreference(prefKey);
-            if (pref != null) {
+            AnomalyAppItemPreference preference = mRootPreferenceGroup.findPreference(prefKey);
+            if (preference != null) {
                 isAdded = true;
             } else {
-                pref = (AnomalyAppItemPreference) mPreferenceCache.get(prefKey);
+                preference = (AnomalyAppItemPreference) mPreferenceCache.get(prefKey);
             }
             // Creates new instance if cached preference is not found.
-            if (pref == null) {
-                pref = new AnomalyAppItemPreference(mPrefContext);
-                pref.setKey(prefKey);
-                mPreferenceCache.put(prefKey, pref);
+            if (preference == null) {
+                preference = new AnomalyAppItemPreference(mPrefContext);
+                preference.setKey(prefKey);
+                mPreferenceCache.put(prefKey, preference);
             }
-            pref.setIcon(appIcon);
-            pref.setTitle(appLabel);
-            pref.setOrder(prefIndex);
-            pref.setSingleLineTitle(true);
+            preference.setIcon(appIcon);
+            preference.setTitle(appLabel);
+            preference.setOrder(++preferenceOrder);
+            preference.setSingleLineTitle(true);
             // Updates App item preference style
-            pref.setAnomalyHint(isAnomalyBatteryDiffEntry(entry) ? mAnomalyHintString : null);
+            preference.setAnomalyHint(isAnomalyBatteryDiffEntry(entry) ? mAnomalyHintString : null);
             // Sets the BatteryDiffEntry to preference for launching detailed page.
-            pref.setBatteryDiffEntry(entry);
-            pref.setSelectable(entry.validForRestriction());
-            setPreferencePercentage(pref, entry);
-            setPreferenceSummary(pref, entry);
+            preference.setBatteryDiffEntry(entry);
+            preference.setSelectable(entry.validForRestriction());
+            setPreferencePercentage(preference, entry);
+            setPreferenceSummary(preference, entry);
             if (!isAdded) {
-                mAppListPreferenceGroup.addPreference(pref);
+                mRootPreferenceGroup.addPreference(preference);
             }
-            prefIndex++;
         }
         Log.d(
                 TAG,
@@ -424,17 +420,22 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         List<BatteryDiffEntry> entries = getBatteryDiffEntries();
         Set<String> entryKeySet = new ArraySet<>(entries.size());
         entries.forEach(entry -> entryKeySet.add(entry.getKey()));
-        final int prefsCount = mAppListPreferenceGroup.getPreferenceCount();
-        for (int index = prefsCount - 1; index >= 0; index--) {
-            final Preference pref = mAppListPreferenceGroup.getPreference(index);
-            if (entryKeySet.contains(pref.getKey())) {
-                // The pref is still used, don't remove.
+        final int preferenceCount = mRootPreferenceGroup.getPreferenceCount();
+        for (int index = preferenceCount - 1; index >= 0; index--) {
+            final Preference preference = mRootPreferenceGroup.getPreference(index);
+            if ((preference instanceof SettingsSpinnerPreference)
+                    || (preference instanceof FooterPreference)) {
+                // Consider the app preference only and skip others
                 continue;
             }
-            if (!TextUtils.isEmpty(pref.getKey())) {
-                mPreferenceCache.put(pref.getKey(), pref);
+            if (entryKeySet.contains(preference.getKey())) {
+                // Don't remove the preference if it is still in use
+                continue;
             }
-            mAppListPreferenceGroup.removePreference(pref);
+            if (!TextUtils.isEmpty(preference.getKey())) {
+                mPreferenceCache.put(preference.getKey(), preference);
+            }
+            mRootPreferenceGroup.removePreference(preference);
         }
     }
 

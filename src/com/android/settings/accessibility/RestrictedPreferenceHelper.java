@@ -16,8 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.AccessibilitySettings.VOICE_ACCESS_SERVICE;
-
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.accessibilityservice.AccessibilityShortcutInfo;
 import android.app.AppOpsManager;
@@ -31,7 +29,6 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 
 import com.android.settings.R;
-import com.android.settings.development.Enable16kUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
@@ -81,12 +78,6 @@ public class RestrictedPreferenceHelper {
             final AccessibilityServiceInfo info = installedServices.get(i);
             final ResolveInfo resolveInfo = info.getResolveInfo();
             final String packageName = resolveInfo.serviceInfo.packageName;
-            // TODO(b/335443194) Voice access is not available in 16kB mode.
-            if (packageName.contains(VOICE_ACCESS_SERVICE)
-                    && Enable16kUtils.isPageAgnosticModeOn(mContext)) {
-                continue;
-            }
-
             final ComponentName componentName = new ComponentName(packageName,
                     resolveInfo.serviceInfo.name);
             final boolean serviceEnabled = enabledServices.contains(componentName);
@@ -110,10 +101,6 @@ public class RestrictedPreferenceHelper {
      */
     public List<AccessibilityActivityPreference> createAccessibilityActivityPreferenceList(
             List<AccessibilityShortcutInfo> installedShortcuts) {
-        final Set<ComponentName> enabledServices =
-                AccessibilityUtils.getEnabledServicesFromSettings(mContext);
-        final List<String> permittedServices = mDpm.getPermittedAccessibilityServices(
-                UserHandle.myUserId());
 
         final int installedShortcutsSize = installedShortcuts.size();
         final List<AccessibilityActivityPreference> preferenceList = new ArrayList<>(
@@ -124,17 +111,12 @@ public class RestrictedPreferenceHelper {
             final ActivityInfo activityInfo = info.getActivityInfo();
             final ComponentName componentName = info.getComponentName();
 
-            final boolean serviceEnabled = enabledServices.contains(componentName);
             AccessibilityActivityPreference preference = new AccessibilityActivityPreference(
                     mContext, componentName.getPackageName(), activityInfo.applicationInfo.uid,
                     info);
-            if (Flags.neverRestrictAccessibilityActivity()) {
-                // Accessibility Activities do not have elevated privileges so restricting
-                // them based on ECM or device admin does not give any value.
-                preference.setEnabled(true);
-            } else {
-                setRestrictedPreferenceEnabled(preference, permittedServices, serviceEnabled);
-            }
+            // Accessibility Activities do not have elevated privileges so restricting
+            // them based on ECM or device admin does not give any value.
+            preference.setEnabled(true);
             preferenceList.add(preference);
         }
         return preferenceList;
