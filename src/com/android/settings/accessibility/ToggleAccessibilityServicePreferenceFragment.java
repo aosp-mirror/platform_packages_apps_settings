@@ -385,8 +385,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         }
 
         // Get Accessibility service name.
-        mPackageName = getAccessibilityServiceInfo().getResolveInfo().loadLabel(
-                getPackageManager());
+        AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+        mFeatureName = info == null ? "" : info.getResolveInfo().loadLabel(getPackageManager());
 
         if (arguments.containsKey(AccessibilitySettings.EXTRA_TILE_SERVICE_COMPONENT_NAME)) {
             final String tileServiceComponentName = arguments.getString(
