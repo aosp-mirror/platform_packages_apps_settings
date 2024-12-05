@@ -16,8 +16,6 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
-import static com.android.settingslib.flags.Flags.audioSharingHysteresisModeFix;
-
 import static java.util.Collections.emptyList;
 
 import android.app.AlertDialog;
@@ -101,7 +99,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                                     (p.getAudioStreamState()
                                                     == AudioStreamsProgressCategoryController
                                                             .AudioStreamState.SOURCE_ADDED
-                                            || (audioSharingHysteresisModeFix()
+                                            || (isAudioSharingHysteresisModeFixAvailable(mContext)
                                                     && p.getAudioStreamState()
                                                             == AudioStreamsProgressCategoryController
                                                                     .AudioStreamState
@@ -147,7 +145,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         mAudioStreamsHelper = new AudioStreamsHelper(mBluetoothManager);
         mMediaControlHelper = new MediaControlHelper(mContext, mBluetoothManager);
         mLeBroadcastAssistant = mAudioStreamsHelper.getLeBroadcastAssistant();
-        mBroadcastAssistantCallback = new AudioStreamsProgressCategoryCallback(this);
+        mBroadcastAssistantCallback = new AudioStreamsProgressCategoryCallback(context, this);
     }
 
     @Override
@@ -258,7 +256,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                         // change it's state.
                         existingPreference.setAudioStreamMetadata(source);
                         if (fromState != AudioStreamState.SOURCE_ADDED
-                                && (!audioSharingHysteresisModeFix()
+                                && (!isAudioSharingHysteresisModeFixAvailable(mContext)
                                         || fromState != AudioStreamState.SOURCE_PRESENT)) {
                             Log.w(
                                     TAG,
@@ -364,7 +362,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
             // not, means the source is removed from the sink, we move back the preference to SYNCED
             // state.
             if ((preference.getAudioStreamState() == AudioStreamState.SOURCE_ADDED
-                            || (audioSharingHysteresisModeFix()
+                            || (isAudioSharingHysteresisModeFixAvailable(mContext)
                                     && preference.getAudioStreamState()
                                             == AudioStreamState.SOURCE_PRESENT))
                     && mAudioStreamsHelper.getAllConnectedSources().stream()
@@ -600,7 +598,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                     // Handle QR code scan, display currently connected streams then start scanning
                     // sequentially
                     handleSourceFromQrCodeIfExists();
-                    if (audioSharingHysteresisModeFix()) {
+                    if (isAudioSharingHysteresisModeFixAvailable(mContext)) {
                         // With hysteresis mode, we prioritize showing connected sources first.
                         // If no connected sources are found, we then show present sources.
                         List<BluetoothLeBroadcastReceiveState> sources =
@@ -701,5 +699,9 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                                     .launch();
                             dialog.dismiss();
                         });
+    }
+
+    private static boolean isAudioSharingHysteresisModeFixAvailable(Context context) {
+        return BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(context);
     }
 }

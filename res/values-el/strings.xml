@@ -67,6 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Σύζευξη νέας συσκευής"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Αυτόματη ενεργοποίηση αύριο"</string>
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Αν απενεργοπ. το Bluetooth, θα ενεργοπ. την επόμενη ημέρα"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Σύζευξη δεξιού"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Σύζευξη αριστερού"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Σύζευξη του άλλου αυτιού"</string>
@@ -120,10 +121,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Απενεργοποίηση Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Απενεργοποιεί τη λειτουργία Bluetooth LE Audio αν η συσκευή υποστηρίζει δυνατότητες εξοπλισμού LE Audio."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Λειτουργία Bluetooth LE Audio"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Ενεργοποίηση προεπισκόπησης διεπαφής χρήστη για μετάδοση Bluetooth LE Audio"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Ενεργοποιεί την προεπισκόπηση της διεπαφής χρήστη για την κοινή χρήση LE Audio, συμπεριλαμβανομένης της κοινής χρήσης προσωπικού ήχου και της ιδιωτικής μετάδοσης"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Εναλλαγή LE Audio στις λεπτομ. συσκευής"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Παράκαμψη λίστας επιτρεπομένων Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Χρήση του LE Audio από προεπιλογή, ακόμα και αν το περιφερειακό LE Audio δεν έχει επαληθευτεί, ώστε να πληροί τα κριτήρια της λίστας επιτρεπομένων."</string>
@@ -179,6 +178,10 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Γλώσσα εφαρμογής"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Προτεινόμενες γλώσσες"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Όλες οι γλώσσες"</string>
+    <string name="suggested_locales_title" msgid="119908696638862861">"Προτεινόμενα"</string>
+    <string name="all_supported_locales_title" msgid="2535112632133166546">"Όλες οι γλώσσες"</string>
+    <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"Όλες οι περιοχές"</string>
+    <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"Όλα τα συστήματα αρίθμησης"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Γλώσσα συστήματος"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Προεπιλογή συστήματος"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Η δυνατότητα επιλογής γλώσσας για αυτή την εφαρμογή δεν είναι διαθέσιμη από τις Ρυθμίσεις."</string>
@@ -194,10 +197,16 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Αλλαγή"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"Τα %s δεν είναι διαθέσιμα"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Αυτή η γλώσσα δεν μπορεί να χρησιμοποιηθεί ως γλώσσα συστήματος, αλλά έχετε ενημερώσει εφαρμογές και ιστοτόπους ότι την προτιμάτε."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"Αναζήτηση"</string>
+    <string name="language_selection_title" msgid="968179636453982415">"Προσθήκη γλώσσας"</string>
+    <string name="country_selection_title" msgid="5376929821458644732">"Προτίμηση περιοχής"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"Εισαγ. όνομα γλώσσας"</string>
+    <string name="more_language_settings_category" msgid="3669703092480725416">"Περισσότερες ρυθμίσεις γλώσσας"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Προτιμήσεις περιοχής"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Ορισμός προτιμήσεων μονάδων και αριθμών"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Επιτρέψτε στις εφαρμογές να γνωρίζουν τις προτιμήσεις περιοχής, ώστε να εξατομικεύουν την εμπειρία σας"</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Οι εφαρμογές θα χρησιμοποιούν τις προτιμήσεις περιοχής όποτε αυτό είναι δυνατόν."</string>
+    <string name="regional_preferences_category_title" msgid="6754667410178749022">"Προτιμήσεις περιοχής"</string>
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Θερμοκρασία"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Πρώτη ημέρα της εβδομάδας"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Προτιμήσεις για αριθμούς"</string>
@@ -367,7 +376,7 @@
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Χρησιμοποιήστε τη λειτουργία Ξεκλείδωμα με το πρόσωπο για το ξεκλείδωμα του τηλεφώνου σας."</string>
     <string name="security_settings_fingerprint" msgid="6387775386189204201">"Δακτυλικό αποτύπωμα"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Δακτυλικό αποτύπωμα"</string>
-    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Στη χρήση του Ξεκλειδώματος με δακτυλικό αποτύπωμα"</string>
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Κατά τη χρήση του Ξεκλειδώματος με δακτυλικό αποτύπωμα"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Δακτυλικό αποτύπωμα για επ. χρήση"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Προσθήκη δακτ. αποτυπώματος"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Προστέθηκε δακτυλικό αποτύπωμα}other{Προστέθηκαν # δακτυλικά αποτυπώματα}}"</string>
@@ -555,6 +564,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Σηκώστε το δάχτυλο και, στη συνέχεια, αγγίξτε ξανά τον αισθητήρα"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Δεν είναι δυνατή η χρήση του αισθητήρα δακτυλικών αποτυπωμάτων"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Επισκεφτείτε έναν πάροχο υπηρεσιών επισκευής."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Ξεκλείδωμα με δακτυλικό αποτύπωμα με απενεργοποιημένη οθόνη"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Χρησιμοποιήστε το Ξεκλείδωμα με δακτυλικό αποτύπωμα ακόμα και όταν η οθόνη είναι απενεργοποιημένη"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Απενεργοποημένη οθόνη, ξεκλείδωμα"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Περισσότερες ρυθμίσεις ασφαλείας"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Κλείδωμα προφίλ εργασίας, κρυπτογράφηση και περισσότερα"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Κρυπτογράφηση, διαπιστευτήρια και περισσότερα"</string>
@@ -886,6 +898,8 @@
     <string name="external_display_on" msgid="2560104443500154333">"Ενεργή"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Ανενεργή"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"Εξωτερική οθόνη"</string>
+    <!-- no translation found for builtin_display_settings_category (3441388849060771885) -->
+    <skip />
     <string name="external_display_use_title" msgid="8198257340836261386">"Χρήση εξωτερικής οθόνης"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Ανάλυση οθόνης"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Η εξωτερική οθόνη δεν είναι συνδεδεμένη"</string>
@@ -897,6 +911,7 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Εάν αλλάξετε την περιστροφή ή την ανάλυση, ενδέχεται να σταματήσουν τυχόν εφαρμογές που εκτελούνται αυτή τη στιγμή"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"Η συσκευή σας πρέπει να είναι συνδεδεμένη σε μια εξωτερική οθόνη προκειμένου να είναι δυνατός ο κατοπτρισμός της οθόνης σας"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Περισσότερες επιλογές"</string>
+    <string name="external_display_topology_hint" msgid="854973327795578470">"Πατήστε παρατεταμένα και σύρετε για αναδιάταξη των οθονών."</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Μετάδοση"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"κατοπτρισμός"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Ενεργοποίηση ασύρματης οθόνης"</string>
@@ -1230,8 +1245,10 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Μάθετε περισσότερα σχετικά με την αυτόματη περιστροφή"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Ανάλυση οθόνης"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Υψηλή ανάλυση"</string>
-    <string name="screen_resolution_option_full" msgid="2694003735219114186">"Πλήρης ανάλυση"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"Η πλήρης ανάλυση χρησιμοποιεί περισσότερο την μπαταρία. Η αλλαγή της ανάλυσης μπορεί να προκαλέσει επανεκκίνηση ορισμένων εφαρμογών."</string>
+    <!-- no translation found for screen_resolution_option_full (4456839315039000517) -->
+    <skip />
+    <!-- no translation found for screen_resolution_footer (1230761249204935717) -->
+    <skip />
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Επιλέχθηκε"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Χρώματα"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Φυσικό"</string>
@@ -1240,7 +1257,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Προσαρμοστικό"</string>
     <string name="brightness" msgid="6216871641021779698">"Επίπεδο φωτεινότητας"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Προσαρμοστική φωτεινότητα"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Σχετικά με την προσαρμοστική φωτεινότητα"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Η φωτεινότητα της οθόνης σας θα προσαρμοστεί αυτόματα στο περιβάλλον και τις δραστηριότητές σας. Μπορείτε να μετακινήσετε χειροκίνητα το ρυθμιστικό, για να ενημερωθεί η προσαρμοστική φωτεινότητα σχετικά με τις ρυθμίσεις σας."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Ενεργή"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Ανενεργή"</string>
@@ -1311,7 +1327,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Ρυθμίσεις λειτουργίας Ώρα για ύπνο"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Οι λειτουργίες μπορούν επίσης να ενεργοποιούν το σκούρο θέμα}=1{Η λειτουργία {mode_1} ενεργοποιεί επίσης το σκούρο θέμα}=2{Οι λειτουργίες {mode_1} και {mode_2} ενεργοποιούν επίσης το σκούρο θέμα}=3{Οι λειτουργίες {mode_1}, {mode_2} και {mode_3} ενεργοποιούν επίσης το σκούρο θέμα}other{Οι λειτουργίες {mode_1}, {mode_2} και # ακόμη ενεργοποιούν επίσης το σκούρο θέμα}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Ρυθμίσεις λειτουργιών"</string>
-    <string name="even_dimmer_display_title" msgid="6731255736830410149">"Ακόμα χαμηλότερη φωτεινότητα"</string>
+    <string name="even_dimmer_display_title" msgid="4509732439977906028">"Επιπλέον μείωση φωτεινότητας"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Να επιτρέπεται χαμηλότερη φωτεινότητα στη συσκευή απ\' ό,τι συνήθως"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Λήξη χρονικού ορίου οθόνης"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Μετά από <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> αδράνειας"</string>
@@ -1949,6 +1965,8 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Επιλογές"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Προσβασιμότητα"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Φυσικό πληκτρολόγιο"</string>
+    <!-- no translation found for physical_keyboard_layout_picker_title (4526600767648916256) -->
+    <skip />
     <string name="bounce_keys" msgid="7419450970351743904">"Ελαστικά πλήκτρα"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"Το πληκτρολόγιο αγνοεί τα γρήγορα, επαναλαμβανόμενα πατήματα του ίδιου πλήκτρου"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Όριο ελαστικών πλήκτρων"</string>
@@ -1963,27 +1981,19 @@
     <string name="sticky_keys" msgid="7317317044898161747">"Ασύγχρονα πλήκτρα"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Για τις συντομεύσεις, αντί να πατάτε παρατεταμένα όλα τα κουμπιά μαζί, φροντίστε να πατάτε ένα πλήκτρο κάθε φορά"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Πλήκτρα ποντικιού"</string>
-    <!-- no translation found for mouse_keys_main_title (3570638931365221460) -->
-    <skip />
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"Χρήση των πλήκτρων ποντικιού"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Χρησιμοποιήστε το πληκτρολόγιο, για να ελέγξετε τον δείκτη"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"Αντίστροφη κύλιση με το ποντίκι"</string>
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Κάντε κύλιση προς τα επάνω, για να μετακινήσετε τη σελίδα προς τα κάτω."</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Εναλλαγή αριστερού και δεξιού κουμπιού"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Χρησιμοποιήστε το αριστερό κουμπί του ποντικιού ως δεξί κουμπί"</string>
-    <!-- no translation found for mouse_key_main_page_title (8051692181770475257) -->
-    <skip />
-    <!-- no translation found for mouse_keys_directional_summary (8108444346340180562) -->
-    <skip />
-    <!-- no translation found for mouse_keys_click_summary (1642125742164614577) -->
-    <skip />
-    <!-- no translation found for mouse_keys_press_hold_summary (2313418505798763112) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release_summary (2379239679203818720) -->
-    <skip />
-    <!-- no translation found for mouse_keys_toggle_scroll_summary (8129249227018251990) -->
-    <skip />
-    <!-- no translation found for mouse_keys_release2_summary (2395196580659122185) -->
-    <skip />
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Πλήκτρα ποντικιού για το <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Χρησιμοποιήστε τα πλήκτρα <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>, για να μετακινήσετε τον δείκτη του ποντικιού"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Χρησιμοποιήστε το πλήκτρο <xliff:g id="CLICK_LABEL">%s</xliff:g>, για να κάνετε κλικ στο κύριο κουμπί του ποντικιού"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"Χρησιμοποιήστε το πλήκτρο <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>, για να πατήσετε παρατεταμένα το κύριο κουμπί του ποντικιού"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Χρησιμοποιήστε το πλήκτρο <xliff:g id="RELEASE_LABEL">%s</xliff:g>, για να απελευθερώσετε το κύριο κουμπί του ποντικιού"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Χρησιμοποιήστε το πλήκτρο <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> για εναλλαγή της λειτουργίας κύλισης. Με αυτόν τον τρόπο, τα πλήκτρα <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> θα μετακινούν με κύλιση την προβολή προς τα επάνω, προς τα κάτω, προς τα αριστερά ή προς τα δεξιά"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Χρησιμοποιήστε το πλήκτρο <xliff:g id="RELEASE_2_LABEL">%s</xliff:g>, για να κάνετε κλικ στο δευτερεύον κουμπί του ποντικιού"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Συντομεύσεις πληκτρολογίου"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Εμφάνιση λίστας συντομεύσεων"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Πληκτρολόγιο και εργαλεία προφίλ εργασίας"</string>
@@ -1991,6 +2001,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Προεπιλογή"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Επιφάνεια αφής"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Επιφάνεια αφής και ποντίκι"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"Ποντίκι"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Ταχύτητα δείκτη, κινήσεις"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Πατήστε για κλικ"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Μεταφορά με πάτημα"</string>
@@ -2002,6 +2013,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Πατήστε κάτω δεξιά για δεξί κλικ"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Πατήστε κάτω δεξιά στην επιφάνεια αφής για άλλες επιλογές"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Ταχύτητα δείκτη"</string>
+    <string name="three_finger_tap_preference_title" msgid="7130739855086106052">"Χρήση πατήματος με τρία δάχτυλα"</string>
     <string name="pointer_fill_style" msgid="8794616790175016092">"Χρώμα δείκτη"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Αλλαγή στιλ γεμίσμ. δείκτη σε μαύρο"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Αλλαγή στιλ γεμίσ. δείκ. σε πράσινο"</string>
@@ -2016,6 +2028,11 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Μάθετε κινήσεις επιφάνειας αφής"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"επιφάνειας αφής, επιφάνεια, ποντίκι, δείκτης, κύλιση, σάρωση, δεξί κλικ, κλικ, δείκτης"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"δεξί κλικ, πάτημα"</string>
+    <string name="three_finger_tap_middle_click" msgid="5274906692591143158">"Μεσαίο κλικ"</string>
+    <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Εκκίνηση Βοηθού"</string>
+    <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Μετάβαση στην αρχική σελίδα"</string>
+    <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Επιστροφή"</string>
+    <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Προβολή πρόσφατων εφαρμογών"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Μετάβαση στην αρχική οθόνη"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Σύρετε επάνω με τρία δάχτ. από οποιοδ. σημείο της επιφ. αφής"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Επιστροφή"</string>
@@ -3429,8 +3446,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"9 π.μ.-5 μ.μ. τις εργάσιμες ημέρες\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"Συμβάντα ημερολογίου"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{Η λειτουργία {mode_1} είναι ενεργή}=2{Οι λειτουργίες {mode_1} και {mode_2} είναι ενεργές}=3{Οι λειτουργίες {mode_1}, {mode_2} και {mode_3} είναι ενεργές}other{Οι λειτουργίες {mode_1}, {mode_2} και # ακόμη είναι ενεργές}}"</string>
-    <!-- no translation found for zen_modes_summary (2576893588489258390) -->
-    <skip />
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{Μην ενοχλείτε}=1{{mode_1}}=2{{mode_1}, {mode_2}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ΕΝΕΡΓΗ"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"Δεν έχει οριστεί"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"Απενεργοποιημένη"</string>
@@ -3734,6 +3750,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Όταν λαμβάνετε πολλές ειδοποιήσεις μέσα σε σύντομο χρονικό διάστημα, η συσκευή σας μειώνει την ένταση του ήχου και ελαχιστοποιεί τις ειδοποιήσεις για έως και 2 λεπτά. Οι κλήσεις, τα ξυπνητήρια και οι συζητήσεις προτεραιότητας δεν επηρεάζονται. \n\nΓια να βρείτε τις ειδοποιήσεις που λαμβάνετε κατά τη διάρκεια της περιόδου cooldown, σύρετε προς τα κάτω από το πάνω μέρος της οθόνης."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Εφαρμογή σε προφίλ εργασίας"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Εφαρμογή σε εφαρμογές με προφίλ εργασίας"</string>
+    <string name="notification_bundle_title" msgid="460988459835922719">"Ομαδοποιημένες ειδοποιήσεις"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"Ενεργό"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"Ανενεργό"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Χρήση ομαδοποίησης ειδοποιήσεων"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"Οι ειδοποιήσεις με παρόμοια θέματα θα τίθενται σε σίγαση και θα ομαδοποιούνται για μια πιο αθόρυβη εμπειρία. Η ομαδοποίηση θα παρακάμψει τις ρυθμίσεις ειδοποιήσεων της εφαρμογής."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Βοηθητικές υπηρεσίες Εικονικής Πραγματικότητας"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Δεν έχει ζητηθεί η εκτέλεση εγκατεστημένων εφαρμογών ως βοηθητικών υπηρεσιών Εικονικής Πραγματικότητας."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Να επιτρέπεται στην υπηρεσία <xliff:g id="SERVICE">%1$s</xliff:g> να έχει πρόσβαση στην υπηρεσία Εικονικής Πραγματικότητας;"</string>
@@ -4196,6 +4217,9 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Ειδοποιήσεις σε πλήρη οθόνη"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Να επιτρέπονται οι ειδοποιήσεις σε πλήρη οθόνη από αυτή την εφαρμογή"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Να επιτρέπεται στην εφαρμογή η εμφάνιση ειδοποιήσεων σε πλήρη οθόνη όταν η συσκευή είναι κλειδωμένη. Οι εφαρμογές ενδέχεται να χρησιμοποιούν αυτή τη λειτουργία για επισήμανση ξυπνητηριών, εισερχόμενων κλήσεων ή άλλων επειγουσών ειδοποιήσεων."</string>
+    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"Εγγραφή προτιμήσεων συστήματος"</string>
+    <string name="write_system_preferences_switch_title" msgid="213522354119233085">"Να επιτρέπεται σε αυτή την εφαρμογή να τροποποιεί τις προτιμήσεις συστήματος εκ μέρους σας"</string>
+    <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"Αυτή η άδεια επιτρέπει σε μια εφαρμογή την τροποποίηση των βασικών προτιμήσεων συστήματος."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Εφαρμογές διαχείρισης μέσων"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Να επιτραπεί στην εφαρμογή η διαχείριση μέσων"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Εάν επιτραπεί, αυτή η εφαρμογή θα μπορεί να τροποποιεί ή να διαγράφει αρχεία μέσων που έχουν δημιουργηθεί με άλλες εφαρμογές, χωρίς να σας ρωτήσει. Η εφαρμογή πρέπει να έχει άδεια για πρόσβαση σε αρχεία και μέσα."</string>
@@ -4838,11 +4862,14 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"Ανταλλαγή μηνυμάτων μέσω δορυφόρου"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Στείλτε και λάβετε μηνύματα κειμένου μέσω δορυφόρου. Περιλαμβάνεται στον λογαριασμό σας."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Στείλτε και λάβετε μηνύματα κειμένου μέσω δορυφόρου. Δεν περιλαμβάνεται στον λογαριασμό σας."</string>
-    <string name="keywords_satellite_setting" msgid="3312183289776517695">"Ανταλλαγή μηνυμάτων μέσω δορυφόρου"</string>
-    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Πληροφορίες για την ανταλλαγή μηνυμάτων μέσω δορυφόρου"</string>
+    <!-- no translation found for keywords_satellite_setting (613553612424945946) -->
+    <skip />
+    <!-- no translation found for category_name_about_satellite_messaging (4978095955643523120) -->
+    <skip />
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Μπορείτε να στέλνετε και να λαμβάνετε μηνύματα κειμένου μέσω δορυφόρου στο πλαίσιο ενός κατάλληλου λογαριασμού <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Το πρόγραμμά σας <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"Η ανταλλαγή μηνυμάτων μέσω δορυφόρου συμπεριλαμβάνεται στον λογαριασμό σας"</string>
+    <!-- no translation found for title_have_satellite_plan (857337944804101443) -->
+    <skip />
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Η ανταλλαγή μηνυμάτων μέσω δορυφόρου δεν συμπεριλαμβάνεται στον λογαριασμό σας"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Μάθετε περισσότερα"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Πώς λειτουργεί"</string>
@@ -4850,10 +4877,55 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Το τηλέφωνό σας θα συνδεθεί αυτόματα με έναν δορυφόρο. Για την καλύτερη δυνατή σύνδεση, φροντίστε να φαίνεται ο ουρανός χωρίς να παρεμβάλλονται εμπόδια."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Μετά τη σύνδεση του τηλεφώνου σας με έναν δορυφόρο"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Μπορείτε να στέλνετε μηνύματα σε οποιονδήποτε, ακόμα και στις υπηρεσίες έκτακτης ανάγκης. Το τηλέφωνό σας θα συνδεθεί ξανά σε ένα δίκτυο κινητής τηλεφωνίας όταν είναι διαθέσιμο."</string>
-    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Η ανταλλαγή μηνυμάτων μέσω δορυφόρου μπορεί να διαρκέσει περισσότερο και είναι διαθέσιμη μόνο σε ορισμένες περιοχές. Ο καιρός και ορισμένες κατασκευές ενδέχεται να επηρεάσουν τη δορυφορική σύνδεση. Η σύνδεση μέσω δορυφόρου δεν είναι διαθέσιμη. Μπορεί να υπάρχει ακόμη δυνατότητα για κλήσεις έκτακτης ανάγκης.\n\nΊσως χρειαστεί λίγος χρόνος για να εμφανιστούν οι αλλαγές λογαριασμού στις Ρυθμίσεις. Επικοινωνήστε με την εταιρεία κινητής τηλεφωνίας που χρησιμοποιείτε για λεπτομέρειες."</string>
-    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Περισσότερες πληροφορίες για την ανταλλαγή μηνυμάτων μέσω δορυφόρου"</string>
+    <!-- no translation found for satellite_setting_summary_more_information (1028146147094166868) -->
+    <skip />
+    <!-- no translation found for more_about_satellite_messaging (1039277943532711584) -->
+    <skip />
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Δεν είναι δυνατή η ενεργοποίηση της επιλογής <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Για να ενεργοποιήσετε την επιλογή <xliff:g id="FUNCTION">%1$s</xliff:g>, αρχικά τερματίστε τη σύνδεση μέσω δορυφόρου"</string>
+    <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"Δορυφορική συνδεσιμότητα"</string>
+    <!-- no translation found for title_satellite_setting_connectivity (488626710934668313) -->
+    <skip />
+    <!-- no translation found for description_satellite_setting_connectivity (7337311015334186655) -->
+    <skip />
+    <!-- no translation found for description_satellite_setting_messaging (4367494645429198805) -->
+    <skip />
+    <!-- no translation found for title_have_satellite_data_plan (5614932315409789011) -->
+    <skip />
+    <!-- no translation found for title_for_satellite_sos (4608739357329147285) -->
+    <skip />
+    <!-- no translation found for summary_for_satellite_sos_entry (4981480371923329605) -->
+    <skip />
+    <!-- no translation found for keywords_satellite_sos (6275777197418023949) -->
+    <skip />
+    <!-- no translation found for category_title_about_satellite_sos (7229724397303154919) -->
+    <skip />
+    <!-- no translation found for satellite_sos_introduction (4670230212117495751) -->
+    <skip />
+    <!-- no translation found for satellite_sos_how_it_works_step_1 (4669862942425306921) -->
+    <skip />
+    <!-- no translation found for satellite_sos_how_it_works_step_2 (3558248744927579016) -->
+    <skip />
+    <!-- no translation found for satellite_sos_how_it_works_step_3 (4496038314890474893) -->
+    <skip />
+    <!-- no translation found for satellite_sos_how_it_works_summary_1 (4497178023367920284) -->
+    <skip />
+    <!-- no translation found for satellite_sos_how_it_works_summary_2 (1302661361673503362) -->
+    <skip />
+    <!-- no translation found for satellite_sos_how_it_works_summary_3 (4612675365617172405) -->
+    <skip />
+    <!-- no translation found for satellite_sos_try_demo (1915233782211344468) -->
+    <skip />
+    <!-- no translation found for satellite_sos_footer_text (4454885538165117230) -->
+    <skip />
+    <!-- no translation found for satellite_sos_sharing_preferences_subheader_title (5701538329333628267) -->
+    <skip />
+    <!-- no translation found for satellite_sos_sharing_preferences_step_1 (3106774199702637359) -->
+    <skip />
+    <!-- no translation found for satellite_sos_sharing_preferences_step_2 (738246589687762115) -->
+    <skip />
+    <!-- no translation found for satellite_sos_sharing_preferences_description (782508188142964342) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Ονόματα σημείων πρόσβασης"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Δεν διατίθεται κατά τη σύνδεση σε <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5040,6 +5112,8 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Βρίσκεστε στη λειτουργία 16 KB της λειτουργίας που δεν εξαρτάται από το μέγεθος σελίδας. Δεν είναι δυνατή η εγγύηση της ακεραιότητας του λογισμικού σε αυτή τη λειτουργία. Επίσης, τυχόν δεδομένα τα οποία αποθηκεύονται στο τηλέφωνο ενώ είναι ξεκλειδωμένο το πρόγραμμα φόρτωσης εκκίνησης ενδέχεται να κινδυνεύουν. Ορισμένες δυνατότητες θα απενεργοποιηθούν σε αυτές τις λειτουργίες, επομένως ορισμένες εφαρμογές ενδέχεται να μην λειτουργούν. Για να εισέλθετε ξανά στη λειτουργία παραγωγής, πρέπει να μεταβείτε ξανά στη λειτουργία 4 KB και κατόπιν να κλειδώσετε το πρόγραμμα φόρτωσης εκκίνησης της συσκευής. Αυτή η ενέργεια θα είχε ως αποτέλεσμα την εκ νέου επαναφορά των εργοστασιακών ρυθμίσεων, καθώς και την επαναφορά της συσκευής στις ρυθμίσεις παραγωγής. Μετά την επιτυχημένη εκκίνηση της συσκευής στο Android, απενεργοποιήστε το OEM ξεκλείδωμα στις Επιλογές για προγραμματιστές. Αν η συσκευή δεν ολοκληρώσει την εκκίνηση στο Android με επιτυχία ή είναι ασταθής, εγκαταστήστε εκ νέου τις πιο πρόσφατες εργοστασιακές εικόνες στη συσκευή από τη διεύθυνση &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; ή χρησιμοποιήστε το &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; και επιλέξτε Εκκαθάριση συσκευής, Κλείδωμα προγράμματος φόρτωσης εκκίνησης και Αναγκαστικό flash όλων των διαμερισμάτων."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Λειτουργία 16 KB που δεν εξαρτάται από το μέγεθος σελίδας"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Διαβάστε περισσότερα"</string>
+    <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"Εκτέλεση εφαρμογής σε λειτουργία συμβατότητας με μέγεθος σελίδας"</string>
+    <string name="enable_16k_app_compat_details" msgid="3847293423550174952">"Η εφαρμογή θα εκτελείται σε λειτουργία συμβατότητας με μέγεθος σελίδας σε συσκευή 16 KB που έχει αλλάξει."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Χειρισμός Αναφοράς σφάλματος"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Καθορίζει ποια εφαρμογή διαχειρίζεται τη συντόμευση της Αναφοράς σφάλματος στη συσκευή σας."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Προσωπικό"</string>
@@ -5047,7 +5121,7 @@
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Προεπιλογή συστήματος"</string>
     <string name="default_app_none" msgid="5420632042222036264">"Καμία"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Αυτή η επιλογή δεν είναι πια έγκυρη. Δοκιμάστε ξανά."</string>
-    <string name="power_menu_setting_name" msgid="2394440932633137229">"Πατήστε παρατεταμένα το κουμπί λειτουργίας"</string>
+    <string name="power_menu_setting_name" msgid="2394440932633137229">"Παρατεταμένο πάτημα κουμπιού λειτουργίας"</string>
     <string name="power_menu_long_press_category_title" msgid="1051146091093775002">"Πατήστε παρατεταμένα το κουμπί λειτουργίας για πρόσβαση"</string>
     <string name="power_menu_long_press_for_power_menu_title" msgid="477584639843663599">"Μενού λειτουργίας"</string>
     <string name="power_menu_long_press_for_assistant_title" msgid="6557738348262616455">"Ψηφιακός βοηθός"</string>
@@ -5478,8 +5552,7 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Ακρόαση ροής"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Σαρώστε τον κωδικό QR μιας ροής ήχου για να ακούσετε με τη συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Δεν είναι δυνατή η επεξεργασία του κωδικού πρόσβασης κατά την κοινή χρήση. Για να αλλάξετε τον κωδικό πρόσβασης, αρχικά, απενεργοποιήστε την κοινή χρήση ήχου."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Ο κωδικός πρόσβασης πρέπει να περιέχει 4-16 χαρακτήρες και να χρησιμοποιεί μόνο γράμματα, αριθμούς και σύμβολα"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Σάρωση κωδικών QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Χρειάζεστε βοήθεια;"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Ρυθμίσεις αναζήτησης"</string>
@@ -5491,7 +5564,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Σφάλμα κατά τον ορισμό προεπιλεγμένου λογαριασμού"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Δεν ορίστηκε προεπιλογή"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Μόνο από συσκευή"</string>
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Συσκευή και %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Για να ξεκινήσετε, προσθέστε λογαριασμό"</string>
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Πού μπορείτε να αποθηκεύσετε επαφές"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Κυκλώστε για αναζήτηση"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Πατήστε παρατεταμένα το κουμπί αρχικής οθόνης ή τη λαβή πλοήγησης, για να κάνετε αναζήτηση χρησιμοποιώντας το περιεχόμενο στην οθόνη σας."</string>
 </resources>

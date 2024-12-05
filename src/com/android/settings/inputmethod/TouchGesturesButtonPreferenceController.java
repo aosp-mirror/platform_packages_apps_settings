@@ -21,6 +21,7 @@ import static com.android.systemui.shared.Flags.newTouchpadGesturesTutorial;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.input.InputSettings;
 import android.os.UserHandle;
 import android.util.FeatureFlagUtils;
 
@@ -74,8 +75,15 @@ public class TouchGesturesButtonPreferenceController extends BasePreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
-        boolean isTouchpad = NewKeyboardSettingsUtils.isTouchpad();
-        return isTouchpad ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        boolean isTouchpad = InputPeripheralsSettingsUtils.isTouchpad();
+        if (isTouchpad) {
+            // If the user's disabled touchpad system gestures in the accessibility settings, the
+            // tutorial won't work or be relevant, so disable the button.
+            return InputSettings.useTouchpadSystemGestures(mContext) ? AVAILABLE
+                    : DISABLED_DEPENDENT_SETTING;
+        } else {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
     }
 
     private void showTouchpadGestureEducation() {

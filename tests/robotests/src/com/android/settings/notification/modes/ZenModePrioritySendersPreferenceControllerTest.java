@@ -1546,6 +1546,21 @@ public final class ZenModePrioritySendersPreferenceControllerTest {
     }
 
     @Test
+    public void contactsSettingsClick_singleProfile_opensActivityWithoutDialog() {
+        String contactsPackage = mContext.getString(R.string.config_contacts_package_name);
+        setUpContactsApp(contactsPackage, /* withPreciseIntents= */ true);
+
+        mCallsController.displayPreference(mPreferenceScreen);
+        mCallsController.updateZenMode(mCallsPrefCategory, TestModeBuilder.EXAMPLE);
+        SelectorWithWidgetPreference contactsPref = getBoundSelectorPreference(KEY_CONTACTS);
+
+        contactsPref.getExtraWidget().performClick();
+
+        assertThat(ShadowDialog.getLatestDialog()).isNull();
+        assertThat(shadowOf(mActivity).getNextStartedActivity()).isNotNull();
+    }
+
+    @Test
     public void contactsSettingsClick_multipleProfiles_showsProfileChooserDialog() {
         String contactsPackage = mContext.getString(R.string.config_contacts_package_name);
         setUpContactsApp(contactsPackage, /* withPreciseIntents= */ true);

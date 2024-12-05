@@ -37,6 +37,7 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenBinding
 import com.android.settingslib.preference.PreferenceScreenCreator
@@ -70,8 +71,14 @@ class DarkModeScreen :
     override val keywords: Int
         get() = R.string.keywords_dark_ui_mode
 
+    override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
     override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     override fun isFlagEnabled(context: Context) = Flags.catalystDarkUiMode()
 
@@ -109,7 +116,7 @@ class DarkModeScreen :
         val broadcastReceiver =
             object : BroadcastReceiver() {
                 override fun onReceive(receiverContext: Context, intent: Intent) {
-                    context.notifyPreferenceChange(this@DarkModeScreen)
+                    context.notifyPreferenceChange(KEY)
                 }
             }
         context.registerReceiver(
@@ -118,7 +125,7 @@ class DarkModeScreen :
         )
 
         val darkModeObserver = DarkModeObserver(context)
-        darkModeObserver.subscribe { context.notifyPreferenceChange(this@DarkModeScreen) }
+        darkModeObserver.subscribe { context.notifyPreferenceChange(KEY) }
 
         fragmentStates[context] = FragmentState(broadcastReceiver, darkModeObserver)
     }

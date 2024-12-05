@@ -34,12 +34,13 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 import kotlin.math.roundToInt
 
 // LINT.IfChange
 class PeakRefreshRateSwitchPreference :
-    SwitchPreference(PEAK_REFRESH_RATE, R.string.peak_refresh_rate_title),
+    SwitchPreference(KEY, R.string.peak_refresh_rate_title),
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider {
@@ -49,8 +50,14 @@ class PeakRefreshRateSwitchPreference :
     override fun storage(context: Context): KeyValueStore =
         PeakRefreshRateStore(context, SettingsSystemStore.get(context))
 
+    override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
     override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_smooth_display) &&
@@ -66,7 +73,7 @@ class PeakRefreshRateSwitchPreference :
                 // KEY_PEAK_REFRESH_RATE_DEFAULT value could be added, changed, removed or
                 // unchanged.
                 // Just force a UI update for any case.
-                context.notifyPreferenceChange(this)
+                context.notifyPreferenceChange(KEY)
             }
 
         propertiesChangedListener = listener
@@ -94,14 +101,13 @@ class PeakRefreshRateSwitchPreference :
         override fun contains(key: String) = settingsStore.contains(key)
 
         override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>): T? {
-            if (key != PEAK_REFRESH_RATE) return super.getDefaultValue(key, valueType)
+            if (key != KEY) return super.getDefaultValue(key, valueType)
             return context.defaultPeakRefreshRate.refreshRateAsBoolean(context) as T
         }
 
         override fun <T : Any> getValue(key: String, valueType: Class<T>): T? {
-            if (key != PEAK_REFRESH_RATE) return null
-            val refreshRate =
-                settingsStore.getFloat(PEAK_REFRESH_RATE) ?: context.defaultPeakRefreshRate
+            if (key != KEY) return null
+            val refreshRate = settingsStore.getFloat(KEY) ?: context.defaultPeakRefreshRate
             return refreshRate.refreshRateAsBoolean(context) as T
         }
 
@@ -110,12 +116,12 @@ class PeakRefreshRateSwitchPreference :
 
         override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) =
             when {
-                key != PEAK_REFRESH_RATE -> {}
-                value == null -> settingsStore.setFloat(PEAK_REFRESH_RATE, null)
+                key != KEY -> {}
+                value == null -> settingsStore.setFloat(KEY, null)
                 else -> {
                     val peakRefreshRate =
                         if (value as Boolean) context.refreshRateIfON() else DEFAULT_REFRESH_RATE
-                    settingsStore.setFloat(PEAK_REFRESH_RATE, peakRefreshRate)
+                    settingsStore.setFloat(KEY, peakRefreshRate)
                 }
             }
 
@@ -127,6 +133,7 @@ class PeakRefreshRateSwitchPreference :
     }
 
     companion object {
+        const val KEY = PEAK_REFRESH_RATE
         private const val INVALIDATE_REFRESH_RATE: Float = -1f
 
         private val Context.peakRefreshRate: Float

@@ -23,22 +23,13 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.ListDialogPreference.OnValueChangedListener;
-import com.android.settings.core.BasePreferenceController;
 
 /** Preference controller for captioning foreground opacity. */
-public class CaptioningForegroundOpacityController extends BasePreferenceController
+public class CaptioningForegroundOpacityController extends BaseCaptioningCustomController
         implements OnValueChangedListener {
-
-    private final CaptionHelper mCaptionHelper;
 
     public CaptioningForegroundOpacityController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mCaptionHelper = new CaptionHelper(context);
-    }
-
-    @Override
-    public int getAvailabilityStatus() {
-        return AVAILABLE;
     }
 
     @Override

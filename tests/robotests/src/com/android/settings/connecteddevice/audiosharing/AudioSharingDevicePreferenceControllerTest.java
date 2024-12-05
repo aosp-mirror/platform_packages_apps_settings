@@ -521,21 +521,9 @@ public class AudioSharingDevicePreferenceControllerTest {
 
     @Test
     public void testBluetoothLeBroadcastAssistantCallbacks_updateGroup() {
-        // onReceiveStateChanged with unconnected state will do nothing
-        when(mState.getBisSyncState()).thenReturn(new ArrayList<>());
-        mController.mBroadcastAssistantCallback.onReceiveStateChanged(
-                mDevice, /* sourceId= */ 1, mState);
-        shadowOf(Looper.getMainLooper()).idle();
-        verify(mBluetoothDeviceUpdater, never()).forceUpdate();
-        verify(mDialogHandler, never()).closeOpeningDialogsForLeaDevice(mCachedDevice);
-
-        // onReceiveStateChanged with connected state will update group preference and handle
-        // stale dialogs
-        List<Long> bisSyncState = new ArrayList<>();
-        bisSyncState.add(1L);
-        when(mState.getBisSyncState()).thenReturn(bisSyncState);
-        mController.mBroadcastAssistantCallback.onReceiveStateChanged(
-                mDevice, /* sourceId= */ 1, mState);
+        // onSourceAdded will update group preference and handle stale dialogs
+        mController.mBroadcastAssistantCallback.onSourceAdded(mDevice, /* sourceId= */
+                1, /* reason= */ 1);
         shadowOf(Looper.getMainLooper()).idle();
         verify(mBluetoothDeviceUpdater).forceUpdate();
         verify(mDialogHandler).closeOpeningDialogsForLeaDevice(mCachedDevice);
@@ -572,8 +560,13 @@ public class AudioSharingDevicePreferenceControllerTest {
         mController.mBroadcastAssistantCallback.onSearchStartFailed(/* reason= */ 1);
         mController.mBroadcastAssistantCallback.onSearchStopped(/* reason= */ 1);
         mController.mBroadcastAssistantCallback.onSearchStopFailed(/* reason= */ 1);
-        mController.mBroadcastAssistantCallback.onSourceAdded(
-                mDevice, /* sourceId= */ 1, /* reason= */ 1);
+        List<Long> bisSyncState = new ArrayList<>();
+        bisSyncState.add(1L);
+        when(mState.getBisSyncState()).thenReturn(bisSyncState);
+        when(mBroadcast.getLatestBroadcastId()).thenReturn(1);
+        when(mState.getBroadcastId()).thenReturn(1);
+        mController.mBroadcastAssistantCallback.onReceiveStateChanged(mDevice, /* sourceId= */ 1,
+                mState);
         mController.mBroadcastAssistantCallback.onSourceModified(
                 mDevice, /* sourceId= */ 1, /* reason= */ 1);
         mController.mBroadcastAssistantCallback.onSourceModifyFailed(

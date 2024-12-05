@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright (C) 2016 The Android Open Source Project
+  Copyright (C) 2024 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -18,19 +18,28 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:title="@string/double_tap_power_for_camera_title">
-
+    android:title="@string/double_tap_power_title">
     <com.android.settingslib.widget.IllustrationPreference
         android:key="gesture_double_tap_power_video"
         settings:searchable="false"
-        app:lottie_rawRes="@drawable/quickly_open_camera"/>
+        settings:lottie_rawRes="@drawable/quickly_open_camera"
+        settings:controller="com.android.settings.gestures.DoubleTapPowerIllustrationPreferenceController"/>
 
-    <SwitchPreferenceCompat
-        android:key="gesture_double_tap_power"
-        android:title="@string/double_tap_power_for_camera_title"
-        android:summary="@string/double_tap_power_for_camera_summary"
-        app:keywords="@string/keywords_gesture"
-        app:controller="com.android.settings.gestures.DoubleTapPowerPreferenceController"/>
-
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="gesture_double_tap_power_enabled_main_switch"
+        android:title="@string/double_tap_power_enabled"
+        settings:keywords="@string/keywords_gesture"
+        settings:controller="com.android.settings.gestures.DoubleTapPowerMainSwitchPreferenceController"/>
+    <PreferenceCategory
+        android:key="gesture_double_tap_power_actions"
+        android:title="@string/double_tap_power_target_action_category">
+        <com.android.settingslib.widget.SelectorWithWidgetPreference
+            android:key="gesture_double_power_tap_camera"
+            android:title="@string/double_tap_power_camera_action_title"
+            settings:controller="com.android.settings.gestures.DoubleTapPowerForCameraPreferenceController"/>
+        <com.android.settingslib.widget.SelectorWithWidgetPreference
+            android:key="gesture_double_power_tap_wallet"
+            android:title="@string/double_tap_power_wallet_action_title"
+            settings:controller="com.android.settings.gestures.DoubleTapPowerForWalletPreferenceController"/>
+    </PreferenceCategory>
 </PreferenceScreen>

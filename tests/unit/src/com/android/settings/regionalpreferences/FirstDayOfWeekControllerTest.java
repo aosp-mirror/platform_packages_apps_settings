@@ -19,14 +19,18 @@ package com.android.settings.regionalpreferences;
 import static org.junit.Assert.assertEquals;
 
 import android.content.Context;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.Locale;
@@ -36,6 +40,8 @@ public class FirstDayOfWeekControllerTest {
     private FirstDayOfWeekController mController;
     private String mCacheProviderContent = "";
     private Locale mCacheLocale;
+
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setUp() throws Exception {
@@ -54,6 +60,7 @@ public class FirstDayOfWeekControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_REGIONAL_PREFERENCES_API_ENABLED)
     public void getSummary_hasProviderValue_resultIsWed() {
         RegionalPreferenceTestUtils.setSettingsProviderContent(mApplicationContext, "und-u-fw-wed");
 
@@ -64,6 +71,7 @@ public class FirstDayOfWeekControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_REGIONAL_PREFERENCES_API_ENABLED)
     public void getSummary_hasProviderValue_resultIsSat() {
         RegionalPreferenceTestUtils.setSettingsProviderContent(mApplicationContext, "und-u-fw-sat");
 
@@ -74,6 +82,7 @@ public class FirstDayOfWeekControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_REGIONAL_PREFERENCES_API_ENABLED)
     public void getSummary_noProviderValueButHasDefaultLocaleWithSubtag_resultIsSat() {
         RegionalPreferenceTestUtils.setSettingsProviderContent(mApplicationContext, "");
         Locale.setDefault(Locale.forLanguageTag("en-US-u-fw-sat"));
@@ -85,6 +94,7 @@ public class FirstDayOfWeekControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_REGIONAL_PREFERENCES_API_ENABLED)
     public void getSummary_noProviderValueAndDefaultLocaleWithoutSubtag_resultIsdefault() {
         RegionalPreferenceTestUtils.setSettingsProviderContent(mApplicationContext, "");
         Locale.setDefault(Locale.forLanguageTag("en-US"));

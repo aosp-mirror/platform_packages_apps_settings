@@ -21,7 +21,8 @@
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="pref_app_header"
-        android:layout="@layout/settings_entity_header" />
+        android:layout="@layout/settings_entity_header"
+        android:selectable="false" />
 
     <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="block" />

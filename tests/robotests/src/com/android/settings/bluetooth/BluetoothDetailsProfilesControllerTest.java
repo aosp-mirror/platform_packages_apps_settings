@@ -120,7 +120,12 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
                 .thenAnswer(invocation -> ImmutableList.of(mConnectableProfiles));
 
         setupDevice(mDeviceConfig);
-        initController(List.of());
+        mController = new BluetoothDetailsProfilesController(mContext, mFragment, mLocalManager,
+                mCachedDevice, mLifecycle);
+        mProfiles.setKey(mController.getPreferenceKey());
+        mController.mProfilesContainer = mProfiles;
+        mScreen.removeAll();
+        mScreen.addPreference(mProfiles);
         BluetoothProperties.le_audio_allow_list(Lists.newArrayList(LE_DEVICE_MODEL));
     }
 
@@ -550,7 +555,8 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
 
     @Test
     public void prefKeyInBlockingList_hideToggle() {
-        initController(List.of("A2DP"));
+        mController.setInvisibleProfiles(List.of("A2DP"));
+        mController.setHasExtraSpace(true);
         setupDevice(makeDefaultDeviceConfig());
 
         addA2dpProfileToDevice(true, true, true);
@@ -565,7 +571,6 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
 
     @Test
     public void prefKeyNotInBlockingList_showToggle() {
-        initController(List.of());
         setupDevice(makeDefaultDeviceConfig());
 
         addA2dpProfileToDevice(true, true, true);
@@ -652,14 +657,5 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         List<SwitchPreferenceCompat> switches = getProfileSwitches(false);
         assertThat(switches.getFirst().getTitle()).isEqualTo(
                 mContext.getString(mLeAudioProfile.getNameResource(mDevice)));
-    }
-
-    private void initController(List<String> invisibleProfiles) {
-        mController = new BluetoothDetailsProfilesController(mContext, mFragment, mLocalManager,
-                mCachedDevice, mLifecycle, invisibleProfiles, true);
-        mProfiles.setKey(mController.getPreferenceKey());
-        mController.mProfilesContainer = mProfiles;
-        mScreen.removeAll();
-        mScreen.addPreference(mProfiles);
     }
 }

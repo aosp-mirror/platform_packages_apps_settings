@@ -17,6 +17,8 @@
 package com.android.settings.network.apn
 
 import android.content.Context
+import android.os.PersistableBundle
+import android.telephony.CarrierConfigManager
 import android.telephony.data.ApnSetting
 import android.util.Log
 import android.widget.Toast
@@ -51,9 +53,7 @@ object ApnTypes {
 
     private fun splitToList(apnType: String): List<String> {
         val types = apnType.split(',').map { it.trim().toLowerCase(Locale.current) }
-        if (ApnSetting.TYPE_ALL_STRING in types || APN_TYPES.all { it in types }) {
-            return listOf(ApnSetting.TYPE_ALL_STRING)
-        }
+        if (hasAllApnTypes(types)) return listOf(ApnSetting.TYPE_ALL_STRING)
         return APN_TYPES.filter { it in types }
     }
 
@@ -132,4 +132,32 @@ object ApnTypes {
     private fun defaultPreSelectedApnTypes(readOnlyApnTypes: List<String>) =
         if (ApnSetting.TYPE_ALL_STRING in readOnlyApnTypes) emptyList()
         else PreSelectedTypes.filterNot { it in readOnlyApnTypes }
+
+    /** Array of APN types that are never user-editable */
+    private val ALWAYS_READ_ONLY_APN_TYPES =
+        arrayOf(ApnSetting.TYPE_OEM_PAID_STRING, ApnSetting.TYPE_OEM_PRIVATE_STRING)
+
+    /**
+     * Fetch complete list of read only APN types.
+     *
+     * The list primarily comes from carrier config, but is also supplied by APN types which are
+     * always read only.
+     */
+    @JvmStatic
+    fun PersistableBundle.getReadOnlyApnTypes(): List<String> {
+        val carrierReadOnlyApnTypes =
+            getStringArray(CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY)?.toList()
+                ?: emptyList()
+        return carrierReadOnlyApnTypes + ALWAYS_READ_ONLY_APN_TYPES
+    }
+
+    /**
+     * Check if passed in array of APN types indicates all APN types
+     *
+     * @param apnTypes array of APN types. "*" indicates all types.
+     * @return true if all apn types are included in the array, false otherwise
+     */
+    @JvmStatic
+    fun hasAllApnTypes(apnTypes: List<String>): Boolean =
+        ApnSetting.TYPE_ALL_STRING in apnTypes || APN_TYPES.all { it in apnTypes }
 }

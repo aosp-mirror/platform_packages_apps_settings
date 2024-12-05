@@ -57,7 +57,7 @@ public interface FingerprintFeatureProvider {
      * @return the provider
      */
     @NonNull
-    default FingerprintEnrollActivityClassProvider getEnrollActivityClassProvider() {
+    default FingerprintEnrollActivityClassProvider getEnrollActivityClassProvider(@NonNull Context context) {
         return FingerprintEnrollActivityClassProvider.getInstance();
     }
 }

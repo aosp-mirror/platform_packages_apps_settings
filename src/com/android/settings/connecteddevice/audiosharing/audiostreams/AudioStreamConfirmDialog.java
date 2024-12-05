@@ -214,15 +214,16 @@ public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
     }
 
     private int getDialogId(boolean hasMetadata, boolean hasConnectedDevice) {
-        if (!BluetoothUtils.isAudioSharingEnabled()) {
+        if (BluetoothUtils.isAudioSharingUIAvailable(mContext)) {
+            if (!hasConnectedDevice) {
+                return SettingsEnums.DIALOG_AUDIO_STREAM_CONFIRM_NO_LE_DEVICE;
+            }
+            return hasMetadata
+                    ? SettingsEnums.DIALOG_AUDIO_STREAM_CONFIRM_LISTEN
+                    : SettingsEnums.DIALOG_AUDIO_STREAM_CONFIRM_DATA_ERROR;
+        } else {
             return SettingsEnums.DIALOG_AUDIO_STREAM_CONFIRM_FEATURE_UNSUPPORTED;
         }
-        if (!hasConnectedDevice) {
-            return SettingsEnums.DIALOG_AUDIO_STREAM_CONFIRM_NO_LE_DEVICE;
-        }
-        return hasMetadata
-                ? SettingsEnums.DIALOG_AUDIO_STREAM_CONFIRM_LISTEN
-                : SettingsEnums.DIALOG_AUDIO_STREAM_CONFIRM_DATA_ERROR;
     }
 
     @Nullable

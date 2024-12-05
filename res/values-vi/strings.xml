@@ -67,6 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Ghép nối thiết bị mới"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"Tự động bật vào ngày mai"</string>
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Bluetooth sẽ bật lại vào ngày hôm sau nếu bạn tắt đi"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"Ghép nối tai phải"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"Ghép nối tai trái"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Ghép nối tai khác"</string>
@@ -120,10 +121,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Tắt âm thanh năng lượng thấp qua Bluetooth"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Tắt tính năng âm thanh năng lượng thấp qua Bluetooth nếu thiết bị hỗ trợ chức năng phần cứng âm thanh năng lượng thấp."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth Âm thanh năng lượng thấp"</string>
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui (3205637582933819543) -->
-    <skip />
-    <!-- no translation found for bluetooth_leaudio_broadcast_ui_summary (3616202872693209662) -->
-    <skip />
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Bật chế độ xem trước giao diện người dùng của tính năng truyền phát qua Bluetooth Âm thanh năng lượng thấp"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Bật chế độ xem trước giao diện người dùng của tính năng Chia sẻ âm thanh năng lượng thấp, bao gồm cả tính năng chia sẻ âm thanh cá nhân và truyền phát ở chế độ riêng tư"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Hiện nút bật/tắt Âm thanh năng lượng thấp"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bỏ qua danh sách cho phép đối với tính năng Bluetooth Âm thanh năng lượng thấp"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Sử dụng Âm thanh năng lượng thấp theo mặc định, ngay cả khi chưa xác minh được rằng thiết bị ngoại vi Âm thanh năng lượng thấp đáp ứng tiêu chí của danh sách cho phép."</string>
@@ -179,6 +178,10 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Ngôn ngữ ứng dụng"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Ngôn ngữ đề xuất"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Tất cả ngôn ngữ"</string>
+    <string name="suggested_locales_title" msgid="119908696638862861">"Đề xuất"</string>
+    <string name="all_supported_locales_title" msgid="2535112632133166546">"Tất cả ngôn ngữ"</string>
+    <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"Tất cả khu vực"</string>
+    <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"Tất cả hệ thống đánh số"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Ngôn ngữ hệ thống"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Theo chế độ mặc định của hệ thống"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Bạn chưa thể chọn ngôn ngữ cho ứng dụng này trong phần Cài đặt."</string>
@@ -194,10 +197,16 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"Thay đổi"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s không dùng được"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Bạn không thể dùng ngôn ngữ này làm ngôn ngữ hệ thống, nhưng đã cho các ứng dụng và trang web biết rằng bạn ưu tiên ngôn ngữ này."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"Tìm kiếm"</string>
+    <string name="language_selection_title" msgid="968179636453982415">"Thêm ngôn ngữ"</string>
+    <string name="country_selection_title" msgid="5376929821458644732">"Tùy chọn khu vực"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"Nhập tên ngôn ngữ"</string>
+    <string name="more_language_settings_category" msgid="3669703092480725416">"Cài đặt ngôn ngữ khác"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Lựa chọn ưu tiên theo khu vực"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Đặt các lựa chọn ưu tiên về số và đơn vị"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Cho ứng dụng biết lựa chọn ưu tiên theo khu vực của bạn để ứng dụng có thể mang đến trải nghiệm phù hợp."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"Ứng dụng sẽ dùng lựa chọn ưu tiên theo khu vực của bạn khi có thể."</string>
+    <string name="regional_preferences_category_title" msgid="6754667410178749022">"Lựa chọn ưu tiên theo khu vực"</string>
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Nhiệt độ"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Ngày đầu tiên trong tuần"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Lựa chọn ưu tiên về số"</string>
@@ -555,6 +564,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Nhấc ngón tay, sau đó chạm lại vào cảm biến"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"Không thể dùng cảm biến vân tay"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"Hãy liên hệ với một nhà cung cấp dịch vụ sửa chữa."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"Mở khoá bằng vân tay khi màn hình tắt"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"Dùng tính năng Mở khoá bằng vân tay ngay cả khi màn hình đang tắt"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"Màn hình tắt, Mở khoá"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Chế độ cài đặt bảo mật khác"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Khoá hồ sơ công việc, mã hoá và chế độ cài đặt khác"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Mã hoá, thông tin xác thực và chế độ cài đặt khác"</string>
@@ -886,6 +898,8 @@
     <string name="external_display_on" msgid="2560104443500154333">"Đang bật"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Đang tắt"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"Màn hình ngoài"</string>
+    <!-- no translation found for builtin_display_settings_category (3441388849060771885) -->
+    <skip />
     <string name="external_display_use_title" msgid="8198257340836261386">"Dùng màn hình ngoài"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Độ phân giải màn hình"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Màn hình ngoài bị ngắt kết nối"</string>
@@ -897,6 +911,7 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Việc thay đổi góc xoay hoặc độ phân giải có thể dừng các ứng dụng đang chạy"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"Thiết bị phải được kết nối với một màn hình ngoài để phản chiếu màn hình của bạn"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Lựa chọn khác"</string>
+    <string name="external_display_topology_hint" msgid="854973327795578470">"Giữ và kéo để sắp xếp lại màn hình."</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Truyền"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"phản chiếu"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Bật hiển thị không dây"</string>
@@ -1230,8 +1245,10 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Tìm hiểu thêm về chế độ tự động xoay"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Độ phân giải màn hình"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Độ phân giải cao"</string>
-    <string name="screen_resolution_option_full" msgid="2694003735219114186">"Độ phân giải đầy đủ"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"Chế độ độ phân giải cao sử dụng nhiều pin hơn. Việc chuyển đổi độ phân giải có thể khiến một số ứng dụng khởi động lại."</string>
+    <!-- no translation found for screen_resolution_option_full (4456839315039000517) -->
+    <skip />
+    <!-- no translation found for screen_resolution_footer (1230761249204935717) -->
+    <skip />
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Đã chọn"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Màu"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Tự nhiên"</string>
@@ -1240,7 +1257,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Thích ứng"</string>
     <string name="brightness" msgid="6216871641021779698">"Độ sáng"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Độ sáng thích ứng"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"Giới thiệu về độ sáng thích ứng"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Độ sáng màn hình sẽ tự động điều chỉnh theo môi trường và hoạt động của bạn. Bạn có thể di chuyển thanh trượt theo cách thủ công để giúp tính năng độ sáng thích ứng học các lựa chọn ưu tiên của bạn."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"Đang bật"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Tắt"</string>
@@ -1311,7 +1327,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Cài đặt Chế độ giờ đi ngủ"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Chế độ cũng có thể kích hoạt giao diện tối}=1{{mode_1} cũng kích hoạt giao diện tối}=2{{mode_1} và {mode_2} cũng kích hoạt giao diện tối}=3{{mode_1}, {mode_2} và {mode_3} cũng kích hoạt giao diện tối}other{{mode_1}, {mode_2} và # chế độ khác cũng kích hoạt giao diện tối}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Cài đặt Chế độ"</string>
-    <string name="even_dimmer_display_title" msgid="6731255736830410149">"Tối hơn nữa"</string>
+    <string name="even_dimmer_display_title" msgid="4509732439977906028">"Siêu tối"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Cho phép thiết bị trở nên tối hơn so với bình thường"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Thời gian chờ khóa màn hình"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Sau <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> không hoạt động"</string>
@@ -1949,6 +1965,8 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Tuỳ chọn"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Hỗ trợ tiếp cận"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Bàn phím vật lý"</string>
+    <!-- no translation found for physical_keyboard_layout_picker_title (4526600767648916256) -->
+    <skip />
     <string name="bounce_keys" msgid="7419450970351743904">"Phím nảy"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"Bàn phím sẽ bỏ qua các lần nhấn nhanh liên tục cùng một phím"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Ngưỡng phím nảy"</string>
@@ -1983,6 +2001,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Mặc định"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Bàn di chuột"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Chuột và bàn di chuột"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"Chuột"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Tốc độ con trỏ, cử chỉ"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Gõ để nhấp"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Kéo khi nhấn"</string>
@@ -1994,6 +2013,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"Nhấp vào góc cuối bên phải"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Nhấp vào góc cuối bên phải bàn di chuột để xem lựa chọn khác"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"Tốc độ con trỏ"</string>
+    <string name="three_finger_tap_preference_title" msgid="7130739855086106052">"Dùng cử chỉ nhấn bằng 3 ngón tay"</string>
     <string name="pointer_fill_style" msgid="8794616790175016092">"Màu con trỏ"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Đổi màu nền con trỏ thành màu đen"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Đổi màu nền con trỏ thành xanh lục"</string>
@@ -2008,6 +2028,11 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"Tìm hiểu về cử chỉ ở bàn di chuột"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"bàn di chuột, bàn rê chuột, chuột, con trỏ chuột, cuộn, vuốt, nhấp chuột phải, nhấp, con trỏ"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"nhấp chuột phải, nhấn"</string>
+    <string name="three_finger_tap_middle_click" msgid="5274906692591143158">"Nhấp chuột giữa"</string>
+    <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Khởi chạy Trợ lý"</string>
+    <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Chuyển đến màn hình chính"</string>
+    <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Quay lại"</string>
+    <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Xem các ứng dụng gần đây"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"Chuyển đến màn hình chính"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Dùng 3 ngón tay vuốt lên vị trí bất kỳ trên bàn di chuột"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Quay lại"</string>
@@ -2212,7 +2237,7 @@
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Cách phóng to:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Dùng lối tắt để bắt đầu phóng to&lt;br/&gt; {1,number,integer}. Nhấn vào màn hình&lt;br/&gt; {2,number,integer}. Kéo 1 hoặc 2 ngón tay để di chuyển xung quanh màn hình&lt;br/&gt; {3,number,integer}. Chụm 2 ngón tay để điều chỉnh mức thu phóng&lt;br/&gt; {4,number,integer}. Dùng lối tắt để dừng phóng to&lt;br/&gt;&lt;br/&gt; Bạn có thể dùng tính năng phóng to tạm thời cùng nhiều tính năng khác."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Khi tính năng phóng to đang bật, bạn có thể phóng to trên màn hình.\n\n"<b>"Để thu phóng"</b>", hãy mở tính năng phóng to rồi nhấn vào vị trí bất kỳ trên màn hình.\n"<ul><li>"Kéo 2 hoặc nhiều ngón tay để cuộn"</li>\n<li>"Chụm 2 hoặc nhiều ngón tay để điều chỉnh mức thu phóng"</li></ul>\n\n<b>"Để thu phóng tạm thời"</b>", hãy mở tính năng phóng to rồi chạm và giữ vị trí bất kỳ trên màn hình.\n"<ul><li>"Kéo để di chuyển quanh màn hình"</li>\n<li>"Nhấc ngón tay để thu nhỏ"</li></ul>\n\n"Bạn không thể phóng to trên bàn phím hoặc thanh điều hướng."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Trang <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>/<xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Phím tắt cho nút hỗ trợ tiếp cận"</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="1924337057649065884">"Lối tắt cho nút hỗ trợ tiếp cận"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="1032323517963429981">"Lối tắt cho phím âm lượng"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="5529704884360240365">"Lối tắt cho cử chỉ nhấn 3 lần"</string>
     <string name="accessibility_tutorial_dialog_title_two_finger_double" msgid="5749704453829390283">"Lối tắt cho cử chỉ nhấn đúp bằng %1$d ngón tay"</string>
@@ -3432,7 +3457,7 @@
     <string name="zen_mode_not_found_text" msgid="692090778655810329">"Không tìm thấy chế độ nào"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Hạn chế bị gián đoạn"</string>
     <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Chặn các yếu tố gây gián đoạn và mất tập trung"</string>
-    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Thiết lập <xliff:g id="MODE">%1$s</xliff:g>"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"Thiết lập chế độ <xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Bật chế độ Không làm phiền"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Chuông báo và âm thanh đa phương tiện có thể làm gián đoạn"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Lịch biểu"</string>
@@ -3491,7 +3516,7 @@
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Tùy chỉnh"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Bật cài đặt tùy chỉnh"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Xóa cài đặt tùy chỉnh"</string>
-    <string name="zen_mode_restrict_notifications_summary_muted" msgid="2826459087306271381">"Đã hiện thông báo"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="2826459087306271381">"Thông báo hiển thị"</string>
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="6455811408721183198">"Đã ẩn một phần thông báo"</string>
     <string name="zen_mode_restrict_notifications_summary_hidden" msgid="2157279412167366119">"Đã ẩn thông báo"</string>
     <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"Hạn chế tùy chỉnh"</string>
@@ -3725,6 +3750,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"Khi bạn nhận được nhiều thông báo trong một thời gian ngắn, thiết bị của bạn sẽ hạ âm lượng và giảm thiểu cảnh báo trong tối đa 2 phút. Cuộc gọi, chuông báo và cuộc trò chuyện ưu tiên sẽ không bị ảnh hưởng. \n\nBạn có thể kéo xuống từ đầu màn hình để xem các thông báo nhận được trong lúc giảm dần âm lượng thông báo."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"Áp dụng cho hồ sơ công việc"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Áp dụng cho các ứng dụng trong hồ sơ công việc"</string>
+    <string name="notification_bundle_title" msgid="460988459835922719">"Thông báo theo nhóm"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"Đang bật"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"Đang tắt"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"Sử dụng tính năng nhóm thông báo"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"Các thông báo có chủ đề tương tự sẽ được tắt tiếng và nhóm lại để mang đến trải nghiệm yên tĩnh hơn. Tính năng nhóm sẽ ghi đè chế độ cài đặt thông báo của một ứng dụng."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Dịch vụ trình trợ giúp thực tế ảo"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Không có ứng dụng đã cài đặt nào yêu cầu được chạy dưới dạng dịch vụ trình trợ giúp thực tế ảo."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Cho phép <xliff:g id="SERVICE">%1$s</xliff:g> truy cập dịch vụ thực tế ảo?"</string>
@@ -4187,6 +4217,9 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Thông báo toàn màn hình"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Cho phép ứng dụng này hiện thông báo toàn màn hình"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Cho phép ứng dụng hiện các thông báo chiếm toàn màn hình khi thiết bị ở trạng thái khoá. Các ứng dụng có thể dùng những thông báo này để làm nổi bật chuông báo, cuộc gọi đến hoặc thông báo khẩn cấp khác."</string>
+    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"Ghi các lựa chọn ưu tiên về hệ thống"</string>
+    <string name="write_system_preferences_switch_title" msgid="213522354119233085">"Cho phép ứng dụng này thay mặt bạn sửa đổi các lựa chọn ưu tiên về hệ thống"</string>
+    <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"Quyền này cho phép ứng dụng sửa đổi các lựa chọn ưu tiên cốt lõi về hệ thống."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Ứng dụng quản lý nội dung nghe nhìn"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Cho phép ứng dụng quản lý nội dung nghe nhìn"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Nếu được cho phép, ứng dụng này có thể sửa đổi hoặc xóa tệp nội dung nghe nhìn đã tạo bằng các ứng dụng khác mà không cần hỏi bạn. Ứng dụng phải có quyền truy cập vào tệp và nội dung nghe nhìn."</string>
@@ -4829,11 +4862,14 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"Nhắn tin qua vệ tinh"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Gửi và nhận tin nhắn văn bản qua vệ tinh. Tài khoản của bạn có sẵn tính năng này."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Gửi và nhận tin nhắn văn bản qua vệ tinh. Dịch vụ này không đi kèm với tài khoản của bạn."</string>
-    <string name="keywords_satellite_setting" msgid="3312183289776517695">"Nhắn tin qua vệ tinh"</string>
-    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Giới thiệu về tính năng nhắn tin qua vệ tinh"</string>
+    <!-- no translation found for keywords_satellite_setting (613553612424945946) -->
+    <skip />
+    <!-- no translation found for category_name_about_satellite_messaging (4978095955643523120) -->
+    <skip />
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Bạn có thể gửi và nhận tin nhắn văn bản qua vệ tinh. Đây là một trong những tính năng của tài khoản <xliff:g id="CARRIER_NAME">%1$s</xliff:g> đủ điều kiện"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Gói <xliff:g id="CARRIER_NAME">%1$s</xliff:g> của bạn"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"Tính năng Nhắn tin qua vệ tinh có sẵn trong tài khoản của bạn"</string>
+    <!-- no translation found for title_have_satellite_plan (857337944804101443) -->
+    <skip />
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Tính năng Nhắn tin qua vệ tinh không có sẵn trong tài khoản của bạn"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Tìm hiểu thêm"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Cách hoạt động"</string>
@@ -4841,10 +4877,55 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Điện thoại của bạn sẽ tự động kết nối với vệ tinh. Để có kết nối chất lượng tốt nhất, hãy tìm đến nơi có thể nhìn rõ bầu trời."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Sau khi điện thoại của bạn kết nối với vệ tinh"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Bạn có thể gửi tin nhắn văn bản cho bất cứ ai, gồm cả các dịch vụ khẩn cấp. Điện thoại của bạn sẽ kết nối lại với mạng di động khi có mạng."</string>
-    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Tính năng Nhắn tin qua vệ tinh có thể mất nhiều thời gian hơn và chỉ dùng được ở một số khu vực. Thời tiết và một số công trình có thể ảnh hưởng đến kết nối vệ tinh của bạn. Không dùng được tính năng gọi điện qua vệ tinh. Cuộc gọi khẩn cấp có thể vẫn kết nối được.\n\nCó thể mất một chút thời gian để các thay đổi đối với tài khoản xuất hiện trong phần Cài đặt. Hãy liên hệ với nhà mạng của bạn để biết thông tin chi tiết."</string>
-    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Tìm hiểu thêm về tính năng nhắn tin qua vệ tinh"</string>
+    <!-- no translation found for satellite_setting_summary_more_information (1028146147094166868) -->
+    <skip />
+    <!-- no translation found for more_about_satellite_messaging (1039277943532711584) -->
+    <skip />
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Không bật được <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Để bật <xliff:g id="FUNCTION">%1$s</xliff:g>, trước tiên hãy ngắt kết nối vệ tinh"</string>
+    <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"Kết nối vệ tinh"</string>
+    <!-- no translation found for title_satellite_setting_connectivity (488626710934668313) -->
+    <skip />
+    <!-- no translation found for description_satellite_setting_connectivity (7337311015334186655) -->
+    <skip />
+    <!-- no translation found for description_satellite_setting_messaging (4367494645429198805) -->
+    <skip />
+    <!-- no translation found for title_have_satellite_data_plan (5614932315409789011) -->
+    <skip />
+    <!-- no translation found for title_for_satellite_sos (4608739357329147285) -->
+    <skip />
+    <!-- no translation found for summary_for_satellite_sos_entry (4981480371923329605) -->
+    <skip />
+    <!-- no translation found for keywords_satellite_sos (6275777197418023949) -->
+    <skip />
+    <!-- no translation found for category_title_about_satellite_sos (7229724397303154919) -->
+    <skip />
+    <!-- no translation found for satellite_sos_introduction (4670230212117495751) -->
+    <skip />
+    <!-- no translation found for satellite_sos_how_it_works_step_1 (4669862942425306921) -->
+    <skip />
+    <!-- no translation found for satellite_sos_how_it_works_step_2 (3558248744927579016) -->
+    <skip />
+    <!-- no translation found for satellite_sos_how_it_works_step_3 (4496038314890474893) -->
+    <skip />
+    <!-- no translation found for satellite_sos_how_it_works_summary_1 (4497178023367920284) -->
+    <skip />
+    <!-- no translation found for satellite_sos_how_it_works_summary_2 (1302661361673503362) -->
+    <skip />
+    <!-- no translation found for satellite_sos_how_it_works_summary_3 (4612675365617172405) -->
+    <skip />
+    <!-- no translation found for satellite_sos_try_demo (1915233782211344468) -->
+    <skip />
+    <!-- no translation found for satellite_sos_footer_text (4454885538165117230) -->
+    <skip />
+    <!-- no translation found for satellite_sos_sharing_preferences_subheader_title (5701538329333628267) -->
+    <skip />
+    <!-- no translation found for satellite_sos_sharing_preferences_step_1 (3106774199702637359) -->
+    <skip />
+    <!-- no translation found for satellite_sos_sharing_preferences_step_2 (738246589687762115) -->
+    <skip />
+    <!-- no translation found for satellite_sos_sharing_preferences_description (782508188142964342) -->
+    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Tên điểm truy cập"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Không sử dụng được khi kết nối với <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5031,6 +5112,8 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Bạn đang ở chế độ 16KB của chế độ không phụ thuộc vào kích thước trang. Ở chế độ này, tính toàn vẹn của phần mềm không được đảm bảo, đồng thời mọi dữ liệu lưu trữ trên điện thoại này có thể gặp rủi ro trong khi trình tải khởi động được mở khoá. Một số tính năng bị tắt ở những chế độ này nên có thể một vài ứng dụng sẽ không hoạt động được. Để đặt lại thiết bị về chế độ cài đặt gốc, bạn phải chuyển lại về chế độ 4K rồi khoá trình tải khởi động của thiết bị. Thao tác này sẽ đặt lại thiết bị về trạng thái ban đầu và khôi phục các chế độ cài đặt gốc. Sau khi thiết bị khởi động thành công vào Android, hãy tắt chế độ mở khoá OEM trong Tuỳ chọn cho nhà phát triển. Nếu thiết bị không khởi động vào Android hoặc không ổn định, hãy cài đặt ROM lại cho thiết bị với hình ảnh gốc mới nhất từ &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; hoặc sử dụng &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; rồi chọn \"Xoá dữ liệu thiết bị\", \"Khoá trình tải khởi động\" và \"Buộc cài đặt ROM cho mọi phân vùng\"."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Chế độ 16 KB của chế độ không xác định kích thước trang"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Đọc thêm"</string>
+    <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"Chạy ứng dụng ở chế độ tương thích với kích thước trang"</string>
+    <string name="enable_16k_app_compat_details" msgid="3847293423550174952">"Ứng dụng sẽ chạy ở chế độ tương thích với kích thước trang trên thiết bị 16 KB đã bật tuỳ chọn này."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Trình xử lý báo cáo lỗi"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Xác định ứng dụng nào xử lý phím tắt Báo cáo lỗi trên thiết bị của bạn."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Cá nhân"</string>
@@ -5281,7 +5364,7 @@
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Hãy thử một tỷ lệ khung hình mới để xem ứng dụng, nếu ứng dụng này chưa được thiết kế cho vừa với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> của bạn"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Hãy thử một tỷ lệ khung hình mới để xem ứng dụng, nếu ứng dụng này chưa được thiết kế cho vừa với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> của bạn. Có thể một số ứng dụng chưa được tối ưu hoá cho một số tỷ lệ khung hình nhất định."</string>
     <string name="aspect_ratio_summary_text" msgid="4737461467467220325">"Hãy thử một tỷ lệ khung hình mới để xem một ứng dụng nếu ứng dụng đó chưa được thiết kế cho vừa với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> của bạn"</string>
-    <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"Hãy thử một tỷ lệ khung hình mới để xem một ứng dụng nếu ứng dụng đó chưa được thiết kế cho vừa với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> của bạn. Có thể một số ứng dụng chưa được tối ưu hoá cho một số tỷ lệ khung hình nhất định."</string>
+    <string name="aspect_ratio_main_summary_text" msgid="5544816872094235840">"Hãy thử một tỷ lệ khung hình mới để xem một ứng dụng nếu ứng dụng đó chưa được thiết kế cho vừa với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> của bạn. Một số ứng dụng có thể chưa được tối ưu hoá cho một số tỷ lệ khung hình nhất định."</string>
     <string name="user_aspect_ratio_suggested_apps_label" msgid="8085934042329632039">"Ứng dụng đề xuất"</string>
     <string name="user_aspect_ratio_changed_apps_label" msgid="2096614916172567672">"Đã thay đổi"</string>
     <string name="user_aspect_ratio_app_default" msgid="270065763307617837">"Theo giá trị mặc định của ứng dụng"</string>
@@ -5469,11 +5552,10 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Nghe luồng âm thanh"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Hãy quét mã QR của luồng âm thanh để nghe bằng <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Không thể chỉnh sửa mật khẩu trong khi chia sẻ. Để đổi mật khẩu, trước tiên hãy tắt tính năng chia sẻ âm thanh."</string>
-    <!-- no translation found for audio_streams_main_page_password_dialog_format_alert (4129498127640454717) -->
-    <skip />
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Mật khẩu của bạn phải có từ 4 đến 16 ký tự và chỉ được sử dụng chữ cái, số và ký hiệu"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Trình quét mã QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Bạn cần được trợ giúp?"</annotation></string>
-    <string name="homepage_search" msgid="6759334912284663559">"Tìm kiếm trong phần Cài đặt"</string>
+    <string name="homepage_search" msgid="6759334912284663559">"Tìm chế độ cài đặt"</string>
     <string name="keywords_contacts_storage" msgid="9061213057165337893">"danh bạ, bộ nhớ, tài khoản"</string>
     <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Bộ nhớ danh bạ"</string>
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Chỉ thiết bị"</string>
@@ -5482,7 +5564,9 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Đã xảy ra lỗi khi đặt tài khoản mặc định"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Chưa đặt tài khoản mặc định nào"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Chỉ thiết bị"</string>
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Thiết bị và %1$s"</string>
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Thêm một tài khoản để bắt đầu"</string>
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Vị trí lưu thông tin liên hệ"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Khoanh tròn để tìm kiếm"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Bạn có thể chạm và giữ nút Màn hình chính hoặc thanh điều hướng để tìm kiếm bằng nội dung có trên màn hình của mình."</string>
 </resources>

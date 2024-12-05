@@ -18,6 +18,8 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -210,5 +212,15 @@ public class CaptionHelper {
     /** Returns the captioning locale language.*/
     public Locale getLocale() {
         return mCaptioningManager.getLocale();
+    }
+
+    /** Returns availability for custom caption preferences, depending on current user style. */
+    public int getCustomCaptionAvailability() {
+        if (com.android.settings.accessibility.Flags.fixA11ySettingsSearch()) {
+            return (getRawUserStyle() == CaptionStyle.PRESET_CUSTOM)
+                    ? AVAILABLE : AVAILABLE_UNSEARCHABLE;
+        } else {
+            return AVAILABLE;
+        }
     }
 }

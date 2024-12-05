@@ -128,22 +128,12 @@ public final class CredentialStorage extends FragmentActivity {
 
         final int uid = bundle.getInt(Credentials.EXTRA_INSTALL_AS_UID, KeyProperties.UID_SELF);
 
-        if (uid != KeyProperties.UID_SELF && !UserHandle.isSameUser(uid, Process.myUid())) {
-            final int dstUserId = UserHandle.getUserId(uid);
-
-            // Restrict install target to the wifi uid.
-            if (uid != Process.WIFI_UID) {
+        if (uid != KeyProperties.UID_SELF && uid != Process.WIFI_UID) {
+            if (!UserHandle.isSameUser(uid, Process.myUid())) {
                 Log.e(TAG, "Failed to install credentials as uid " + uid + ": cross-user installs"
                         + " may only target wifi uids");
                 return true;
             }
-
-            final Intent installIntent = new Intent(ACTION_INSTALL)
-                    .setPackage(getPackageName())
-                    .setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
-                    .putExtras(bundle);
-            startActivityAsUser(installIntent, new UserHandle(dstUserId));
-            return true;
         }
 
         String alias = bundle.getString(Credentials.EXTRA_USER_KEY_ALIAS, null);
