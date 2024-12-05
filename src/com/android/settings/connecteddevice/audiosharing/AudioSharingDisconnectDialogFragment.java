@@ -80,72 +80,67 @@ public class AudioSharingDisconnectDialogFragment extends InstrumentedDialogFrag
      * @param eventData The eventData to log with for dialog onClick events.
      */
     public static void show(
-            @NonNull Fragment host,
+            @Nullable Fragment host,
             @NonNull List<AudioSharingDeviceItem> deviceItems,
             @NonNull CachedBluetoothDevice newDevice,
             @NonNull DialogEventListener listener,
             @NonNull Pair<Integer, Object>[] eventData) {
-        if (!BluetoothUtils.isAudioSharingEnabled()) return;
-        final FragmentManager manager;
-        try {
-            manager = host.getChildFragmentManager();
-        } catch (IllegalStateException e) {
-            Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+        if (host == null) {
+            Log.d(TAG, "Fail to show dialog, host is null");
             return;
         }
-        Lifecycle.State currentState = host.getLifecycle().getCurrentState();
-        if (!currentState.isAtLeast(Lifecycle.State.STARTED)) {
-            Log.d(TAG, "Fail to show dialog with state: " + currentState);
-            return;
-        }
-        AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
-        if (dialog != null) {
-            int newGroupId = BluetoothUtils.getGroupId(newDevice);
-            if (sNewDevice != null && newGroupId == BluetoothUtils.getGroupId(sNewDevice)) {
-                Log.d(
-                        TAG,
-                        String.format(
-                                Locale.US,
-                                "Dialog is showing for the same device group %d, "
-                                        + "update the content.",
-                                newGroupId));
-                sListener = listener;
-                sNewDevice = newDevice;
-                sEventData = eventData;
+        if (BluetoothUtils.isAudioSharingUIAvailable(host.getContext())) {
+            final FragmentManager manager;
+            try {
+                manager = host.getChildFragmentManager();
+            } catch (IllegalStateException e) {
+                Log.d(TAG, "Fail to show dialog: " + e.getMessage());
                 return;
-            } else {
-                Log.d(
-                        TAG,
-                        String.format(
-                                Locale.US,
-                                "Dialog is showing for new device group %d, "
-                                        + "dismiss current dialog.",
-                                newGroupId));
-                dialog.dismiss();
-                var unused =
-                        ThreadUtils.postOnBackgroundThread(
-                                () ->
-                                        FeatureFactory.getFeatureFactory()
-                                                .getMetricsFeatureProvider()
-                                                .action(
-                                                        dialog.getContext(),
-                                                        SettingsEnums
-                                                        .ACTION_AUDIO_SHARING_DIALOG_AUTO_DISMISS,
-                                                        SettingsEnums
-                                                        .DIALOG_AUDIO_SHARING_SWITCH_DEVICE));
             }
+            Lifecycle.State currentState = host.getLifecycle().getCurrentState();
+            if (!currentState.isAtLeast(Lifecycle.State.STARTED)) {
+                Log.d(TAG, "Fail to show dialog with state: " + currentState);
+                return;
+            }
+            AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
+            if (dialog != null) {
+                int newGroupId = BluetoothUtils.getGroupId(newDevice);
+                if (sNewDevice != null && newGroupId == BluetoothUtils.getGroupId(sNewDevice)) {
+                    Log.d(
+                            TAG,
+                            String.format(
+                                    Locale.US,
+                                    "Dialog is showing for the same device group %d, "
+                                            + "update the content.",
+                                    newGroupId));
+                    sListener = listener;
+                    sNewDevice = newDevice;
+                    sEventData = eventData;
+                    return;
+                } else {
+                    Log.d(
+                            TAG,
+                            String.format(
+                                    Locale.US,
+                                    "Dialog is showing for new device group %d, "
+                                            + "dismiss current dialog.",
+                                    newGroupId));
+                    dialog.dismiss();
+                    logDialogAutoDismiss(dialog);
+                }
+            }
+            sListener = listener;
+            sNewDevice = newDevice;
+            sEventData = eventData;
+            Log.d(TAG, "Show up the dialog.");
+            final Bundle bundle = new Bundle();
+            bundle.putParcelableList(BUNDLE_KEY_DEVICE_TO_DISCONNECT_ITEMS, deviceItems);
+            bundle.putString(BUNDLE_KEY_NEW_DEVICE_NAME, newDevice.getName());
+            AudioSharingDisconnectDialogFragment dialogFrag =
+                    new AudioSharingDisconnectDialogFragment();
+            dialogFrag.setArguments(bundle);
+            dialogFrag.show(manager, TAG);
         }
-        sListener = listener;
-        sNewDevice = newDevice;
-        sEventData = eventData;
-        Log.d(TAG, "Show up the dialog.");
-        final Bundle bundle = new Bundle();
-        bundle.putParcelableList(BUNDLE_KEY_DEVICE_TO_DISCONNECT_ITEMS, deviceItems);
-        bundle.putString(BUNDLE_KEY_NEW_DEVICE_NAME, newDevice.getName());
-        AudioSharingDisconnectDialogFragment dialogFrag =
-                new AudioSharingDisconnectDialogFragment();
-        dialogFrag.setArguments(bundle);
-        dialogFrag.show(manager, TAG);
     }
 
     /** Return the tag of {@link AudioSharingDisconnectDialogFragment} dialog. */
@@ -215,5 +210,18 @@ public class AudioSharingDisconnectDialogFragment extends InstrumentedDialogFrag
                         },
                         AudioSharingDeviceAdapter.ActionType.REMOVE));
         return builder.build();
+    }
+
+    private static void logDialogAutoDismiss(AlertDialog dialog) {
+        var unused =
+                ThreadUtils.postOnBackgroundThread(
+                        () -> FeatureFactory.getFeatureFactory()
+                                .getMetricsFeatureProvider()
+                                .action(
+                                        dialog.getContext(),
+                                        SettingsEnums
+                                                .ACTION_AUDIO_SHARING_DIALOG_AUTO_DISMISS,
+                                        SettingsEnums
+                                                .DIALOG_AUDIO_SHARING_SWITCH_DEVICE));
     }
 }

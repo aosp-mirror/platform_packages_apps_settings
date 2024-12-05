@@ -18,6 +18,7 @@ package com.android.settings.bluetooth;
 
 import static android.bluetooth.BluetoothDevice.METADATA_MODEL_NAME;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
@@ -26,7 +27,6 @@ import android.sysprop.BluetoothProperties;
 import android.text.TextUtils;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -83,6 +83,8 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     private static final boolean LE_AUDIO_TOGGLE_VISIBLE_DEFAULT_VALUE = true;
     private static final String LE_AUDIO_TOGGLE_VISIBLE_PROPERTY =
             "persist.bluetooth.leaudio.toggle_visible";
+    private static final String BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY =
+            "persist.bluetooth.leaudio.bypass_allow_list";
 
     private Set<String> mInvisibleProfiles = Collections.emptySet();
     private final AtomicReference<Set<String>> mAdditionalInvisibleProfiles =
@@ -106,28 +108,34 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             PreferenceFragmentCompat fragment,
             LocalBluetoothManager manager,
             CachedBluetoothDevice device,
-            Lifecycle lifecycle,
-            @Nullable List<String> invisibleProfiles,
-            boolean hasExtraSpace) {
+            Lifecycle lifecycle) {
         super(context, fragment, device, lifecycle);
         mManager = manager;
         mProfileManager = mManager.getProfileManager();
         mCachedDevice = device;
         mCachedDeviceGroup = Utils.findAllCachedBluetoothDevicesByGroupId(mManager, mCachedDevice);
+    }
+
+    /** Sets the profiles to be hidden. */
+    public void setInvisibleProfiles(List<String> invisibleProfiles) {
         if (invisibleProfiles != null) {
             mInvisibleProfiles = Set.copyOf(invisibleProfiles);
         }
-        mHasExtraSpace = hasExtraSpace;
     }
 
-    @Override
-    protected void init(PreferenceScreen screen) {
-        mProfilesContainer = (PreferenceCategory)screen.findPreference(getPreferenceKey());
-        if (mHasExtraSpace) {
+    /** Sets whether it should show an extra padding on top of the preference. */
+    public void setHasExtraSpace(boolean hasExtraSpace) {
+        if (hasExtraSpace) {
             mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
         } else {
             mProfilesContainer.setLayoutResource(R.layout.preference_category_bluetooth_no_padding);
         }
+    }
+
+    @Override
+    protected void init(PreferenceScreen screen) {
+        mProfilesContainer = (PreferenceCategory) screen.findPreference(getPreferenceKey());
+        mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
         // Call refresh here even though it will get called later in onResume, to avoid the
         // list of switches appearing to "pop" into the page.
         refresh();
@@ -378,6 +386,16 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         return result;
     }
 
+    private boolean isCurrentDeviceInOrByPassAllowList() {
+        if (!SystemProperties.getBoolean(LE_AUDIO_CONNECTION_BY_DEFAULT_PROPERTY, true)) {
+            return false;
+        }
+        return SystemProperties.getBoolean(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, false)
+                || isModelNameInAllowList(
+                BluetoothUtils.getStringMetaData(
+                        mCachedDevice.getDevice(), METADATA_MODEL_NAME));
+    }
+
     /**
      * Disable the Le Audio profile for each of the Le Audio devices.
      *
@@ -388,6 +406,11 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             Log.e(TAG, "There is no the LE profile or no device in mProfileDeviceMap. Do nothing.");
             return;
         }
+
+        mMetricsFeatureProvider.action(
+                mContext,
+                SettingsEnums.ACTION_BLUETOOTH_PROFILE_LE_AUDIO_OFF,
+                isCurrentDeviceInOrByPassAllowList());
 
         LocalBluetoothProfile asha = mProfileManager.getHearingAidProfile();
         LocalBluetoothProfile broadcastAssistant =
@@ -426,6 +449,11 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             Log.e(TAG, "There is no the LE profile or no device in mProfileDeviceMap. Do nothing.");
             return;
         }
+
+        mMetricsFeatureProvider.action(
+                mContext,
+                SettingsEnums.ACTION_BLUETOOTH_PROFILE_LE_AUDIO_ON,
+                isCurrentDeviceInOrByPassAllowList());
 
         if (!SystemProperties.getBoolean(ENABLE_DUAL_MODE_AUDIO, false)) {
             Log.i(TAG, "Disabling classic audio profiles because dual mode is disabled");

@@ -25,7 +25,6 @@ import android.os.UserHandle;
 import android.service.quicksettings.TileService;
 import android.util.ArraySet;
 import android.view.accessibility.AccessibilityManager;
-import android.view.accessibility.Flags;
 
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
@@ -82,8 +81,7 @@ public class QuickSettingsShortcutOptionController extends ShortcutOptionPrefere
 
     @Override
     protected boolean isShortcutAvailable() {
-        return Flags.a11yQsShortcut()
-                && TileService.isQuickSettingsSupported()
+        return TileService.isQuickSettingsSupported()
                 && allTargetsHasQsTile()
                 && allTargetsHasValidQsTileUseCase();
     }

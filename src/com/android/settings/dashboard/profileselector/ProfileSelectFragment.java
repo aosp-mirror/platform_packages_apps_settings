@@ -331,23 +331,29 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
 
             for (UserInfo userInfo : userInfos) {
                 if (userInfo.isMain()) {
-                    fragments.add(createAndGetFragment(
-                            ProfileType.PERSONAL,
-                            bundle != null ? bundle : new Bundle(),
-                            personalFragmentConstructor));
+                    fragments.add(
+                            createAndGetFragment(
+                                    ProfileType.PERSONAL,
+                                    userInfo.id,
+                                    bundle != null ? bundle : new Bundle(),
+                                    personalFragmentConstructor));
                 } else if (userInfo.isManagedProfile()) {
-                    fragments.add(createAndGetFragment(
-                            ProfileType.WORK,
-                            bundle != null ? bundle.deepCopy() : new Bundle(),
-                            workFragmentConstructor));
+                    fragments.add(
+                            createAndGetFragment(
+                                    ProfileType.WORK,
+                                    userInfo.id,
+                                    bundle != null ? bundle.deepCopy() : new Bundle(),
+                                    workFragmentConstructor));
                 } else if (Flags.allowPrivateProfile()
                         && android.multiuser.Flags.enablePrivateSpaceFeatures()
                         && userInfo.isPrivateProfile()) {
                     if (!privateSpaceInfoProvider.isPrivateSpaceLocked(context)) {
-                        fragments.add(createAndGetFragment(
-                                ProfileType.PRIVATE,
-                                bundle != null ? bundle.deepCopy() : new Bundle(),
-                                privateFragmentConstructor));
+                        fragments.add(
+                                createAndGetFragment(
+                                        ProfileType.PRIVATE,
+                                        userInfo.id,
+                                        bundle != null ? bundle.deepCopy() : new Bundle(),
+                                        privateFragmentConstructor));
                     }
                 } else {
                     Log.d(TAG, "Not showing tab for unsupported user " + userInfo);
@@ -364,8 +370,12 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
     }
 
     private static Fragment createAndGetFragment(
-            @ProfileType int profileType, Bundle bundle, FragmentConstructor fragmentConstructor) {
+            @ProfileType int profileType,
+            int userId,
+            Bundle bundle,
+            FragmentConstructor fragmentConstructor) {
         bundle.putInt(EXTRA_PROFILE, profileType);
+        bundle.putInt(EXTRA_USER_ID, userId);
         final Fragment fragment = fragmentConstructor.constructAndGetFragment();
         fragment.setArguments(bundle);
         return fragment;

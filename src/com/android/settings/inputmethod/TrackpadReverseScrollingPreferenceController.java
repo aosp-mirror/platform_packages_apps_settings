@@ -49,7 +49,7 @@ public class TrackpadReverseScrollingPreferenceController extends TogglePreferen
 
     @Override
     public int getAvailabilityStatus() {
-        boolean isTouchpad = NewKeyboardSettingsUtils.isTouchpad();
+        boolean isTouchpad = InputPeripheralsSettingsUtils.isTouchpad();
         return isTouchpad ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 

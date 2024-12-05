@@ -22,6 +22,7 @@ import android.os.CancellationSignal
 import android.util.Log
 import com.android.settings.biometrics.fingerprint2.conversion.Util.toEnrollError
 import com.android.settings.biometrics.fingerprint2.conversion.Util.toOriginalReason
+import com.android.settings.biometrics.fingerprint2.data.repository.UserRepo
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.EnrollFingerprintInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
@@ -33,10 +34,11 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 
 class EnrollFingerprintInteractorImpl(
-  private val userId: Int,
+  private val userRepo: UserRepo,
   private val fingerprintManager: FingerprintManager,
   private val fingerprintFlow: FingerprintFlow,
 ) : EnrollFingerprintInteractor {
@@ -47,6 +49,7 @@ class EnrollFingerprintInteractorImpl(
     enrollReason: EnrollReason,
     fingerprintEnrollOptions: FingerprintEnrollOptions,
   ): Flow<FingerEnrollState> = callbackFlow {
+    val userId = userRepo.currentUser.first()
     // TODO (b/308456120) Improve this logic
     if (enrollRequestOutstanding.value) {
       Log.d(TAG, "Outstanding enroll request, waiting 150ms")

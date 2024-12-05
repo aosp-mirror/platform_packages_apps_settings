@@ -91,6 +91,68 @@ class ApnTypesTest {
         assertThat(apnType).isEqualTo("default,mms,supl,hipri,fota,cbs,xcap")
     }
 
+    @Test
+    fun hasAllApnTypes_allString() {
+        val apnTypes = listOf(ApnSetting.TYPE_ALL_STRING)
+
+        val hasAllApnTypes = ApnTypes.hasAllApnTypes(apnTypes)
+
+        assertThat(hasAllApnTypes).isTrue()
+    }
+
+    @Test
+    fun hasAllApnTypes_allTypes() {
+        val apnTypes = listOf(
+            ApnSetting.TYPE_DEFAULT_STRING,
+            ApnSetting.TYPE_MMS_STRING,
+            ApnSetting.TYPE_SUPL_STRING,
+            ApnSetting.TYPE_DUN_STRING,
+            ApnSetting.TYPE_HIPRI_STRING,
+            ApnSetting.TYPE_FOTA_STRING,
+            ApnSetting.TYPE_IMS_STRING,
+            ApnSetting.TYPE_CBS_STRING,
+            ApnSetting.TYPE_IA_STRING,
+            ApnSetting.TYPE_EMERGENCY_STRING,
+            ApnSetting.TYPE_MCX_STRING,
+            ApnSetting.TYPE_XCAP_STRING,
+            ApnSetting.TYPE_VSIM_STRING,
+            ApnSetting.TYPE_BIP_STRING,
+            ApnSetting.TYPE_ENTERPRISE_STRING,
+            ApnSetting.TYPE_OEM_PAID_STRING,
+            ApnSetting.TYPE_OEM_PRIVATE_STRING,
+        )
+
+        val hasAllApnTypes = ApnTypes.hasAllApnTypes(apnTypes)
+
+        assertThat(hasAllApnTypes).isTrue()
+    }
+
+    @Test
+    fun hasAllApnTypes_allTypesExceptDefault() {
+        val apnTypes = listOf(
+            ApnSetting.TYPE_MMS_STRING,
+            ApnSetting.TYPE_SUPL_STRING,
+            ApnSetting.TYPE_DUN_STRING,
+            ApnSetting.TYPE_HIPRI_STRING,
+            ApnSetting.TYPE_FOTA_STRING,
+            ApnSetting.TYPE_IMS_STRING,
+            ApnSetting.TYPE_CBS_STRING,
+            ApnSetting.TYPE_IA_STRING,
+            ApnSetting.TYPE_EMERGENCY_STRING,
+            ApnSetting.TYPE_MCX_STRING,
+            ApnSetting.TYPE_XCAP_STRING,
+            ApnSetting.TYPE_VSIM_STRING,
+            ApnSetting.TYPE_BIP_STRING,
+            ApnSetting.TYPE_ENTERPRISE_STRING,
+            ApnSetting.TYPE_OEM_PAID_STRING,
+            ApnSetting.TYPE_OEM_PRIVATE_STRING,
+        )
+
+        val hasAllApnTypes = ApnTypes.hasAllApnTypes(apnTypes)
+
+        assertThat(hasAllApnTypes).isFalse()
+    }
+
     private companion object {
         const val APN_TYPE = "type"
     }

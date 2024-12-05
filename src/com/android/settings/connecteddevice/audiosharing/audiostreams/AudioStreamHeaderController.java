@@ -37,6 +37,7 @@ import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.LayoutPreference;
@@ -86,7 +87,7 @@ public class AudioStreamHeaderController extends BasePreferenceController
                         updateSummary();
                         mAudioStreamsHelper.startMediaService(
                                 mContext, mBroadcastId, mBroadcastName);
-                    } else if (audioSharingHysteresisModeFix()
+                    } else if (BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(mContext)
                             && AudioStreamsHelper.hasSourcePresent(state)) {
                         // if source present but not connected, only update the summary
                         updateSummary();
@@ -171,13 +172,13 @@ public class AudioStreamHeaderController extends BasePreferenceController
                                                             : mContext.getString(
                                                                     AUDIO_STREAM_HEADER_PRESENT_NOW_SUMMARY))
                                             : mAudioStreamsHelper.getAllConnectedSources().stream()
-                                                    .map(
-                                                            BluetoothLeBroadcastReceiveState
-                                                                    ::getBroadcastId)
-                                                    .anyMatch(
-                                                            connectedBroadcastId ->
-                                                                    connectedBroadcastId
-                                                                            == mBroadcastId)
+                                                            .map(
+                                                                    BluetoothLeBroadcastReceiveState
+                                                                            ::getBroadcastId)
+                                                            .anyMatch(
+                                                                    connectedBroadcastId ->
+                                                                            connectedBroadcastId
+                                                                                    == mBroadcastId)
                                                     ? mContext.getString(
                                                             AUDIO_STREAM_HEADER_LISTENING_NOW_SUMMARY)
                                                     : AUDIO_STREAM_HEADER_NOT_LISTENING_SUMMARY;

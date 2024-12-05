@@ -56,8 +56,6 @@ import java.util.List;
 public class LockscreenDashboardFragment extends DashboardFragment
         implements OwnerInfoPreferenceController.OwnerInfoCallback {
 
-    public static final String KEY_AMBIENT_DISPLAY_ALWAYS_ON = "ambient_display_always_on";
-
     private static final String TAG = "LockscreenDashboardFragment";
 
     @VisibleForTesting
@@ -111,7 +109,9 @@ public class LockscreenDashboardFragment extends DashboardFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        use(AmbientDisplayAlwaysOnPreferenceController.class).setConfig(getConfig(context));
+        if (!isCatalystEnabled()) {
+            use(AmbientDisplayAlwaysOnPreferenceController.class).setConfig(getConfig(context));
+        }
         use(AmbientDisplayNotificationsPreferenceController.class).setConfig(getConfig(context));
         use(DoubleTapScreenPreferenceController.class).setConfig(getConfig(context));
         use(PickupGesturePreferenceController.class).setConfig(getConfig(context));

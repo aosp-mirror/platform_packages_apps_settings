@@ -16,11 +16,10 @@
 
 package com.android.settings.network.telephony;
 
-import static androidx.lifecycle.Lifecycle.Event.ON_START;
-import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
-
 import static com.android.settings.network.telephony.EnabledNetworkModePreferenceControllerHelperKt.getNetworkModePreferenceType;
 import static com.android.settings.network.telephony.EnabledNetworkModePreferenceControllerHelperKt.setAllowedNetworkTypes;
+import static com.android.settings.network.telephony.mode.NetworkModes.addNrToLteNetworkMode;
+import static com.android.settings.network.telephony.mode.NetworkModes.reduceNrToLteNetworkMode;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -31,15 +30,17 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
+import android.telephony.satellite.SatelliteManager;
+import android.telephony.satellite.SatelliteModemStateCallback;
+import android.telephony.satellite.SelectedNbIotSatelliteSubscriptionCallback;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.ListPreference;
 import androidx.preference.ListPreferenceDialogFragmentCompat;
 import androidx.preference.Preference;
@@ -53,7 +54,6 @@ import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.SubscriptionsChangeListener;
 import com.android.settings.network.telephony.NetworkModeChoicesProto.EnabledNetworks;
 import com.android.settings.network.telephony.NetworkModeChoicesProto.UiOptions;
-import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,7 +66,7 @@ import java.util.stream.Stream;
  */
 public class EnabledNetworkModePreferenceController extends
         BasePreferenceController implements
-        ListPreference.OnPreferenceChangeListener, LifecycleObserver,
+        ListPreference.OnPreferenceChangeListener, DefaultLifecycleObserver,
         SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
 
     private static final String LOG_TAG = "EnabledNetworkMode";
@@ -82,6 +82,43 @@ public class EnabledNetworkModePreferenceController extends
     private PhoneCallStateTelephonyCallback mTelephonyCallback;
     private FragmentManager mFragmentManager;
     private LifecycleOwner mViewLifecycleOwner;
+    private SatelliteManager mSatelliteManager;
+    private boolean mIsSatelliteSessionStarted = false;
+    private boolean mIsCurrentSubscriptionForSatellite = false;
+
+    @VisibleForTesting
+    final SelectedNbIotSatelliteSubscriptionCallback mSelectedNbIotSatelliteSubscriptionCallback =
+            new SelectedNbIotSatelliteSubscriptionCallback() {
+                @Override
+                public void onSelectedNbIotSatelliteSubscriptionChanged(int selectedSubId) {
+                    mIsCurrentSubscriptionForSatellite = selectedSubId == mSubId;
+                    updatePreference();
+                }
+            };
+
+    @VisibleForTesting
+    final SatelliteModemStateCallback mSatelliteModemStateCallback =
+            new SatelliteModemStateCallback() {
+                @Override
+                public void onSatelliteModemStateChanged(int state) {
+                    switch (state) {
+                        case SatelliteManager.SATELLITE_MODEM_STATE_OFF:
+                        case SatelliteManager.SATELLITE_MODEM_STATE_UNAVAILABLE:
+                        case SatelliteManager.SATELLITE_MODEM_STATE_UNKNOWN:
+                            if (mIsSatelliteSessionStarted) {
+                                mIsSatelliteSessionStarted = false;
+                                updatePreference();
+                            }
+                            break;
+                        default:
+                            if (!mIsSatelliteSessionStarted) {
+                                mIsSatelliteSessionStarted = true;
+                                updatePreference();
+                            }
+                            break;
+                    }
+                }
+            };
 
     public EnabledNetworkModePreferenceController(Context context, String key) {
         super(context, key);
@@ -89,6 +126,7 @@ public class EnabledNetworkModePreferenceController extends
         if (mTelephonyCallback == null) {
             mTelephonyCallback = new PhoneCallStateTelephonyCallback();
         }
+        mSatelliteManager = context.getSystemService(SatelliteManager.class);
     }
 
     @Override
@@ -102,8 +140,22 @@ public class EnabledNetworkModePreferenceController extends
         return mCallState == TelephonyManager.CALL_STATE_IDLE;
     }
 
-    @OnLifecycleEvent(ON_START)
-    public void onStart() {
+    @Override
+    public void onStart(@NonNull LifecycleOwner owner) {
+        if (com.android.settings.flags.Flags.satelliteOemSettingsUxMigration()) {
+            if (mSatelliteManager != null) {
+                try {
+                    mSatelliteManager.registerForModemStateChanged(
+                            mContext.getMainExecutor(), mSatelliteModemStateCallback);
+                    mSatelliteManager.registerForSelectedNbIotSatelliteSubscriptionChanged(
+                            mContext.getMainExecutor(),
+                            mSelectedNbIotSatelliteSubscriptionCallback);
+                } catch (IllegalStateException e) {
+                    Log.w(LOG_TAG, "IllegalStateException : " + e);
+                }
+            }
+        }
+
         mSubscriptionsListener.start();
         if (mAllowedNetworkTypesListener == null || mTelephonyCallback == null) {
             return;
@@ -112,9 +164,21 @@ public class EnabledNetworkModePreferenceController extends
         mTelephonyCallback.register(mTelephonyManager, mSubId);
     }
 
-    @OnLifecycleEvent(ON_STOP)
-    public void onStop() {
+    @Override
+    public void onStop(@NonNull LifecycleOwner owner) {
         mSubscriptionsListener.stop();
+        if (com.android.settings.flags.Flags.satelliteOemSettingsUxMigration()) {
+            if (mSatelliteManager != null) {
+                try {
+                    mSatelliteManager.unregisterForModemStateChanged(mSatelliteModemStateCallback);
+                    mSatelliteManager.unregisterForSelectedNbIotSatelliteSubscriptionChanged(
+                            mSelectedNbIotSatelliteSubscriptionCallback);
+                } catch (IllegalStateException e) {
+                    Log.w(LOG_TAG, "IllegalStateException : " + e);
+                }
+            }
+        }
+
         if (mAllowedNetworkTypesListener == null || mTelephonyCallback == null) {
             return;
         }
@@ -146,7 +210,7 @@ public class EnabledNetworkModePreferenceController extends
         listPreference.setEntryValues(mBuilder.getEntryValues());
         listPreference.setValue(Integer.toString(mBuilder.getSelectedEntryValue()));
         listPreference.setSummary(mBuilder.getSummary());
-        boolean listPreferenceEnabled = isCallStateIdle();
+        boolean listPreferenceEnabled = isPreferenceShallEnabled();
         listPreference.setEnabled(listPreferenceEnabled);
         if (!listPreferenceEnabled) {
             // If dialog is already opened when ListPreference disabled, dismiss them.
@@ -202,6 +266,14 @@ public class EnabledNetworkModePreferenceController extends
         }
     }
 
+    private boolean isPreferenceShallEnabled() {
+        Log.d(LOG_TAG, "isPreferenceShallEnabled, mIsSatelliteSessionStarted : "
+                + mIsSatelliteSessionStarted + " / mIsCurrentSubscriptionForSatellite : "
+                + mIsCurrentSubscriptionForSatellite);
+        return isCallStateIdle()
+                && !(mIsSatelliteSessionStarted && mIsCurrentSubscriptionForSatellite);
+    }
+
     private final class PreferenceEntriesBuilder {
         private CarrierConfigCache mCarrierConfigCache;
         private Context mContext;
@@ -253,7 +325,7 @@ public class EnabledNetworkModePreferenceController extends
 
                 if (flagHidePrefer3gItem) {
                     mDisplay3gOptions = carrierConfig.getBoolean(
-                        CarrierConfigManager.KEY_PREFER_3G_VISIBILITY_BOOL);
+                            CarrierConfigManager.KEY_PREFER_3G_VISIBILITY_BOOL);
                 } else {
                     mDisplay3gOptions = getResourcesForSubId().getBoolean(
                             R.bool.config_display_network_mode_3g_option);
@@ -429,14 +501,14 @@ public class EnabledNetworkModePreferenceController extends
                         addLteEntry(entryValuesInt[entryIndex]);
                         break;
                     case add5gEntry:
-                        add5gEntry(addNrToLteNetworkType(entryValuesInt[entryIndex]));
+                        add5gEntry(addNrToLteNetworkMode(entryValuesInt[entryIndex]));
                         break;
                     case add5gAnd4gEntry:
-                        add5gEntry(addNrToLteNetworkType(entryValuesInt[entryIndex]));
+                        add5gEntry(addNrToLteNetworkMode(entryValuesInt[entryIndex]));
                         add4gEntry(entryValuesInt[entryIndex]);
                         break;
                     case add5gAndLteEntry:
-                        add5gEntry(addNrToLteNetworkType(entryValuesInt[entryIndex]));
+                        add5gEntry(addNrToLteNetworkMode(entryValuesInt[entryIndex]));
                         addLteEntry(entryValuesInt[entryIndex]);
                         break;
                     default:
@@ -451,7 +523,7 @@ public class EnabledNetworkModePreferenceController extends
                             TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
             if (!showNrList()) {
                 Log.d(LOG_TAG, "Network mode :" + networkMode + " reduce NR");
-                networkMode = reduceNrToLteNetworkType(networkMode);
+                networkMode = reduceNrToLteNetworkMode(networkMode);
             }
             Log.d(LOG_TAG, "getPreferredNetworkMode: " + networkMode);
             return networkMode;
@@ -472,16 +544,16 @@ public class EnabledNetworkModePreferenceController extends
                         enabledNetworkType = EnabledNetworks.ENABLED_NETWORKS_CDMA_CHOICES;
                     } else {
                         switch (settingsNetworkMode) {
-                            case TelephonyManagerConstants.NETWORK_MODE_CDMA_EVDO:
-                            case TelephonyManagerConstants.NETWORK_MODE_CDMA_NO_EVDO:
-                            case TelephonyManagerConstants.NETWORK_MODE_EVDO_NO_CDMA:
+                            case TelephonyManager.NETWORK_MODE_CDMA_EVDO:
+                            case TelephonyManager.NETWORK_MODE_CDMA_NO_EVDO:
+                            case TelephonyManager.NETWORK_MODE_EVDO_NO_CDMA:
                                 enabledNetworkType =
                                         EnabledNetworks.ENABLED_NETWORKS_CDMA_NO_LTE_CHOICES;
                                 break;
-                            case TelephonyManagerConstants.NETWORK_MODE_GLOBAL:
-                            case TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO:
-                            case TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA:
-                            case TelephonyManagerConstants.NETWORK_MODE_LTE_ONLY:
+                            case TelephonyManager.NETWORK_MODE_GLOBAL:
+                            case TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO:
+                            case TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA:
+                            case TelephonyManager.NETWORK_MODE_LTE_ONLY:
                                 enabledNetworkType =
                                         EnabledNetworks.ENABLED_NETWORKS_CDMA_ONLY_LTE_CHOICES;
                                 break;
@@ -539,46 +611,42 @@ public class EnabledNetworkModePreferenceController extends
         void setPreferenceValueAndSummary(int networkMode) {
             setSelectedEntry(networkMode);
             switch (networkMode) {
-                case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_WCDMA:
-                case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA:
-                case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM:
-                    setSelectedEntry(
-                            TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA);
+                case TelephonyManager.NETWORK_MODE_TDSCDMA_WCDMA:
+                case TelephonyManager.NETWORK_MODE_TDSCDMA_GSM_WCDMA:
+                case TelephonyManager.NETWORK_MODE_TDSCDMA_GSM:
+                    setSelectedEntry(TelephonyManager.NETWORK_MODE_TDSCDMA_GSM_WCDMA);
                     setSummary(R.string.network_3G);
                     break;
-                case TelephonyManagerConstants.NETWORK_MODE_WCDMA_ONLY:
-                case TelephonyManagerConstants.NETWORK_MODE_GSM_UMTS:
-                case TelephonyManagerConstants.NETWORK_MODE_WCDMA_PREF:
+                case TelephonyManager.NETWORK_MODE_WCDMA_ONLY:
+                case TelephonyManager.NETWORK_MODE_GSM_UMTS:
+                case TelephonyManager.NETWORK_MODE_WCDMA_PREF:
                     if (!mIsGlobalCdma) {
-                        setSelectedEntry(TelephonyManagerConstants.NETWORK_MODE_WCDMA_PREF);
+                        setSelectedEntry(TelephonyManager.NETWORK_MODE_WCDMA_PREF);
                         setSummary(R.string.network_3G);
                     } else {
-                        setSelectedEntry(
-                                TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA);
+                        setSelectedEntry(TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA);
                         setSummary(R.string.network_global);
                     }
                     break;
-                case TelephonyManagerConstants.NETWORK_MODE_GSM_ONLY:
+                case TelephonyManager.NETWORK_MODE_GSM_ONLY:
                     if (!mIsGlobalCdma) {
-                        setSelectedEntry(TelephonyManagerConstants.NETWORK_MODE_GSM_ONLY);
+                        setSelectedEntry(TelephonyManager.NETWORK_MODE_GSM_ONLY);
                         setSummary(R.string.network_2G);
                     } else {
-                        setSelectedEntry(
-                                TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA);
+                        setSelectedEntry(TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA);
                         setSummary(R.string.network_global);
                     }
                     break;
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA:
+                case TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA:
                     if (MobileNetworkUtils.isWorldMode(mContext, mSubId)) {
                         setSummary(
                                 R.string.preferred_network_mode_lte_gsm_umts_summary);
                         break;
                     }
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_ONLY:
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_WCDMA:
+                case TelephonyManager.NETWORK_MODE_LTE_ONLY:
+                case TelephonyManager.NETWORK_MODE_LTE_WCDMA:
                     if (!mIsGlobalCdma) {
-                        setSelectedEntry(
-                                TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
+                        setSelectedEntry(TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
                         if (is5gEntryDisplayed()) {
                             setSummary(mShow4gForLTE
                                     ? R.string.network_4G_pure : R.string.network_lte_pure);
@@ -587,55 +655,52 @@ public class EnabledNetworkModePreferenceController extends
                                     ? R.string.network_4G : R.string.network_lte);
                         }
                     } else {
-                        setSelectedEntry(
-                                TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA);
+                        setSelectedEntry(TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA);
                         setSummary(R.string.network_global);
                     }
                     break;
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO:
+                case TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO:
                     if (MobileNetworkUtils.isWorldMode(mContext, mSubId)) {
                         setSummary(
                                 R.string.preferred_network_mode_lte_cdma_summary);
                     } else {
-                        setSelectedEntry(
-                                TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO);
+                        setSelectedEntry(TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO);
                         setSummary(is5gEntryDisplayed()
                                 ? R.string.network_lte_pure : R.string.network_lte);
                     }
                     break;
-                case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
-                    setSelectedEntry(
-                            TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_CDMA_EVDO_GSM_WCDMA);
+                case TelephonyManager.NETWORK_MODE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
+                    setSelectedEntry(TelephonyManager.NETWORK_MODE_TDSCDMA_CDMA_EVDO_GSM_WCDMA);
                     setSummary(R.string.network_3G);
                     break;
-                case TelephonyManagerConstants.NETWORK_MODE_CDMA_EVDO:
-                case TelephonyManagerConstants.NETWORK_MODE_EVDO_NO_CDMA:
-                case TelephonyManagerConstants.NETWORK_MODE_GLOBAL:
-                    setSelectedEntry(TelephonyManagerConstants.NETWORK_MODE_CDMA_EVDO);
+                case TelephonyManager.NETWORK_MODE_CDMA_EVDO:
+                case TelephonyManager.NETWORK_MODE_EVDO_NO_CDMA:
+                case TelephonyManager.NETWORK_MODE_GLOBAL:
+                    setSelectedEntry(TelephonyManager.NETWORK_MODE_CDMA_EVDO);
                     setSummary(R.string.network_3G);
                     break;
-                case TelephonyManagerConstants.NETWORK_MODE_CDMA_NO_EVDO:
-                    setSelectedEntry(TelephonyManagerConstants.NETWORK_MODE_CDMA_NO_EVDO);
+                case TelephonyManager.NETWORK_MODE_CDMA_NO_EVDO:
+                    setSelectedEntry(TelephonyManager.NETWORK_MODE_CDMA_NO_EVDO);
                     setSummary(R.string.network_1x);
                     break;
-                case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_ONLY:
-                    setSelectedEntry(TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_ONLY);
+                case TelephonyManager.NETWORK_MODE_TDSCDMA_ONLY:
+                    setSelectedEntry(TelephonyManager.NETWORK_MODE_TDSCDMA_ONLY);
                     setSummary(R.string.network_3G);
                     break;
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM:
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA:
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA:
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_WCDMA:
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA:
+                case TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM:
+                case TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA:
+                case TelephonyManager.NETWORK_MODE_LTE_TDSCDMA:
+                case TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_WCDMA:
+                case TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
+                case TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA:
                     if (MobileNetworkUtils.isTdscdmaSupported(mContext, mSubId)) {
-                        setSelectedEntry(TelephonyManagerConstants
-                                .NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA);
+                        setSelectedEntry(
+                                TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA);
                         setSummary(is5gEntryDisplayed()
                                 ? R.string.network_lte_pure : R.string.network_lte);
                     } else {
                         setSelectedEntry(
-                                TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA);
+                                TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA);
                         if (mTelephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA
                                 || mIsGlobalCdma
                                 || MobileNetworkUtils.isWorldMode(mContext, mSubId)) {
@@ -652,30 +717,28 @@ public class EnabledNetworkModePreferenceController extends
                     }
                     break;
 
-                case TelephonyManagerConstants.NETWORK_MODE_NR_ONLY:
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE:
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA:
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_WCDMA:
+                case TelephonyManager.NETWORK_MODE_NR_ONLY:
+                case TelephonyManager.NETWORK_MODE_NR_LTE:
+                case TelephonyManager.NETWORK_MODE_NR_LTE_GSM_WCDMA:
+                case TelephonyManager.NETWORK_MODE_NR_LTE_WCDMA:
+                    setSelectedEntry(TelephonyManager.NETWORK_MODE_NR_LTE_GSM_WCDMA);
+                    setSummary(getResourcesForSubId().getString(R.string.network_5G_recommended));
+                    break;
+                case TelephonyManager.NETWORK_MODE_NR_LTE_TDSCDMA:
+                case TelephonyManager.NETWORK_MODE_NR_LTE_TDSCDMA_GSM:
+                case TelephonyManager.NETWORK_MODE_NR_LTE_TDSCDMA_WCDMA:
+                case TelephonyManager.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA:
+                case TelephonyManager.NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
                     setSelectedEntry(
-                            TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA);
+                            TelephonyManager.NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA);
                     setSummary(getResourcesForSubId().getString(R.string.network_5G_recommended));
                     break;
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA:
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM:
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_WCDMA:
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA:
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
-                    setSelectedEntry(TelephonyManagerConstants
-                            .NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA);
+                case TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO:
+                    setSelectedEntry(TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO);
                     setSummary(getResourcesForSubId().getString(R.string.network_5G_recommended));
                     break;
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO:
-                    setSelectedEntry(TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO);
-                    setSummary(getResourcesForSubId().getString(R.string.network_5G_recommended));
-                    break;
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA:
-                    setSelectedEntry(
-                            TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA);
+                case TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA:
+                    setSelectedEntry(TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA);
                     if (mTelephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA
                             || mIsGlobalCdma
                             || MobileNetworkUtils.isWorldMode(mContext, mSubId)) {
@@ -692,74 +755,6 @@ public class EnabledNetworkModePreferenceController extends
             }
         }
 
-        /**
-         * Transform LTE network mode to 5G network mode.
-         *
-         * @param networkType an LTE network mode without 5G.
-         * @return the corresponding network mode with 5G.
-         */
-        private int addNrToLteNetworkType(int networkType) {
-            switch (networkType) {
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_ONLY:
-                    return TelephonyManagerConstants.NETWORK_MODE_NR_LTE;
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO:
-                    return TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO;
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA:
-                    return TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA;
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA:
-                    return TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA;
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_WCDMA:
-                    return TelephonyManagerConstants.NETWORK_MODE_NR_LTE_WCDMA;
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA:
-                    return TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA;
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM:
-                    return TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM;
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_WCDMA:
-                    return TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_WCDMA;
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA:
-                    return TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA;
-                case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
-                    return TelephonyManagerConstants
-                            .NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA;
-                default:
-                    return networkType; // not LTE
-            }
-        }
-
-        /**
-         * Transform NR5G network mode to LTE network mode.
-         *
-         * @param networkType an 5G network mode.
-         * @return the corresponding network mode without 5G.
-         */
-        private int reduceNrToLteNetworkType(int networkType) {
-            switch (networkType) {
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE:
-                    return TelephonyManagerConstants.NETWORK_MODE_LTE_ONLY;
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO:
-                    return TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO;
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA:
-                    return TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA;
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA:
-                    return TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA;
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_WCDMA:
-                    return TelephonyManagerConstants.NETWORK_MODE_LTE_WCDMA;
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA:
-                    return TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA;
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM:
-                    return TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM;
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_WCDMA:
-                    return TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_WCDMA;
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA:
-                    return TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA;
-                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
-                    return TelephonyManagerConstants
-                            .NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA;
-                default:
-                    return networkType; // do nothing
-            }
-        }
-
         private void setPreferenceValueAndSummary() {
             setPreferenceValueAndSummary(getPreferredNetworkMode());
         }
@@ -772,7 +767,7 @@ public class EnabledNetworkModePreferenceController extends
          * Add 5G option. Only show the UI when device supported 5G and allowed 5G.
          */
         private void add5gEntry(int value) {
-            boolean isNRValue = value >= TelephonyManagerConstants.NETWORK_MODE_NR_ONLY;
+            boolean isNRValue = value >= TelephonyManager.NETWORK_MODE_NR_ONLY;
             if (showNrList() && isNRValue) {
                 mEntries.add(getResourcesForSubId().getString(R.string.network_5G_recommended));
                 mEntriesValue.add(value);
@@ -792,7 +787,7 @@ public class EnabledNetworkModePreferenceController extends
                     + " allowed5GNetworkType: " + mAllowed5gNetworkType);
             mEntries.add(getResourcesForSubId().getString(R.string.network_global));
             if (showNrList()) {
-                value = addNrToLteNetworkType(value);
+                value = addNrToLteNetworkMode(value);
             }
             mEntriesValue.add(value);
         }

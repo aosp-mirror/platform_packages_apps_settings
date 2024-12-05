@@ -19,10 +19,7 @@ package com.android.settings.inputmethod;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.os.Looper;
 
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -45,17 +42,6 @@ public class KeyboardSettingsFeatureProviderImplTest {
     @Test
     public void supportsFirmwareUpdate_defaultValue_returnsFalse() {
         assertThat(mFeatureProvider.supportsFirmwareUpdate()).isFalse();
-    }
-
-    @Test
-    public void addFirmwareUpdateCategory_defaultValue_returnsFalse() {
-        if (Looper.myLooper() == null) {
-            Looper.prepare();
-        }
-        PreferenceManager preferenceManager = new PreferenceManager(mContext);
-        PreferenceScreen screen = preferenceManager.createPreferenceScreen(mContext);
-
-        assertThat(mFeatureProvider.addFirmwareUpdateCategory(mContext, screen)).isFalse();
     }
 
     @Test
