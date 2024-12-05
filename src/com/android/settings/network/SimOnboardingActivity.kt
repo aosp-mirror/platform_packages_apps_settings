@@ -109,6 +109,12 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
         }
 
         var targetSubId = intent.getIntExtra(SUB_ID,SubscriptionManager.INVALID_SUBSCRIPTION_ID)
+        if (targetSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            targetSubId = intent.getIntExtra(
+              Settings.EXTRA_SUB_ID,
+              SubscriptionManager.INVALID_SUBSCRIPTION_ID
+            )
+        }
         initServiceData(this, targetSubId, callbackListener)
         if (!onboardingService.isUsableTargetSubscriptionId) {
             Log.e(TAG, "The subscription id is not usable.")
