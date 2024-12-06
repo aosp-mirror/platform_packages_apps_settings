@@ -214,9 +214,11 @@ class DeviceDetailsFragmentFormatterImpl(
             }
         }
 
-        if (isLoading) {
-            fragment.setLoading(false, false)
-            isLoading = false
+        fragment.listView.post {
+            if (isLoading) {
+                fragment.setLoading(false, false)
+                isLoading = false
+            }
         }
     }
 
