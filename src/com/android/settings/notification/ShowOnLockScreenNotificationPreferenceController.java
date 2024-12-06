@@ -26,6 +26,7 @@ import android.provider.Settings;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.server.notification.Flags;
 import com.android.settings.R;
 import com.android.settings.RestrictedListPreference;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -63,7 +64,8 @@ public class ShowOnLockScreenNotificationPreferenceController extends AbstractPr
 
     @Override
     public boolean isAvailable() {
-        return true;
+        // When notificationLockScreenSettings is enabled, show the lock screen notif settings page
+        return !Flags.notificationLockScreenSettings();
     }
 
     @Override

@@ -78,7 +78,7 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         mComponentName = DALTONIZER_COMPONENT_NAME;
-        mPackageName = getText(com.android.settingslib.R
+        mFeatureName = getText(com.android.settingslib.R
                 .string.accessibility_display_daltonizer_preference_title);
         mHtmlDescription = getText(com.android.settingslib.R
                 .string.accessibility_display_daltonizer_preference_subtitle);
