@@ -527,6 +527,18 @@ public class ZenModeSummaryHelperTest {
     }
 
     @Test
+    public void getModesSummary_excludesImplicitModes() {
+        ImmutableList<ZenMode> modes = ImmutableList.of(
+                TestModeBuilder.MANUAL_DND_INACTIVE,
+                new TestModeBuilder().implicitForPackage("com.annoying.one").build(),
+                new TestModeBuilder().setName("Chirping").build()
+        );
+
+        String summary = mSummaryHelper.getModesSummary(modes);
+        assertThat(summary).isEqualTo("Do Not Disturb, Chirping");
+    }
+
+    @Test
     public void getModesSummary_oneModeActive_listsActiveMode() {
         ImmutableList<ZenMode> modes = ImmutableList.of(
                 TestModeBuilder.MANUAL_DND_ACTIVE,

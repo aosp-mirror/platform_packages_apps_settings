@@ -16,8 +16,8 @@
 
 package com.android.settings.inputmethod;
 
-import static com.android.settings.inputmethod.NewKeyboardSettingsUtils.isMouse;
-import static com.android.settings.inputmethod.NewKeyboardSettingsUtils.isTouchpad;
+import static com.android.settings.inputmethod.InputPeripheralsSettingsUtils.isMouse;
+import static com.android.settings.inputmethod.InputPeripheralsSettingsUtils.isTouchpad;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -25,13 +25,32 @@ import android.content.Context;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.widget.PreferenceCategoryController;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
+
+import java.util.List;
 
 /** Accessibility settings for pointer and touchpad. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class PointerTouchpadFragment extends DashboardFragment {
 
     private static final String TAG = "PointerTouchpadFragment";
+
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context);
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
+        TouchpadSystemGesturesPreferenceController systemGesturesController =
+                new TouchpadSystemGesturesPreferenceController(
+                        context, "touchpad_system_gestures_enable");
+        return List.of(
+                systemGesturesController,
+                new PreferenceCategoryController(context, "touchpad_category")
+                        .setChildren(List.of(systemGesturesController)));
+    }
 
     @Override
     public int getMetricsCategory() {
@@ -53,6 +72,12 @@ public class PointerTouchpadFragment extends DashboardFragment {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return isTouchpad() || isMouse();
+                }
+
+                @Override
+                public List<AbstractPreferenceController> createPreferenceControllers(
+                        Context context) {
+                    return buildPreferenceControllers(context);
                 }
             };
 }

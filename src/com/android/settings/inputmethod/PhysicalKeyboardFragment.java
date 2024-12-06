@@ -164,7 +164,7 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
         mFeatureProvider = featureFactory.getKeyboardSettingsFeatureProvider();
         mSupportsFirmwareUpdate = mFeatureProvider.supportsFirmwareUpdate();
         if (mSupportsFirmwareUpdate) {
-            mFeatureProvider.addFirmwareUpdateCategory(getContext(), getPreferenceScreen());
+            mFeatureProvider.registerKeyboardInformationCategory(getPreferenceScreen());
         }
         boolean isModifierKeySettingsEnabled = FeatureFlagUtils
                 .isEnabled(getContext(), FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_MODIFIER_KEY);
@@ -317,7 +317,7 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
             final Preference pref = new Preference(getPrefContext());
             pref.setTitle(hardKeyboardDeviceInfo.mDeviceName);
             String currentLayout =
-                    NewKeyboardSettingsUtils.getSelectedKeyboardLayoutLabelForUser(context,
+                    InputPeripheralsSettingsUtils.getSelectedKeyboardLayoutLabelForUser(context,
                             UserHandle.myUserId(), hardKeyboardDeviceInfo.mDeviceIdentifier);
             if (currentLayout != null) {
                 pref.setSummary(currentLayout);
@@ -344,7 +344,7 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
         mKeyboardAssistanceCategory.setOrder(1);
         preferenceScreen.addPreference(mKeyboardAssistanceCategory);
         if (mSupportsFirmwareUpdate) {
-            mFeatureProvider.addFirmwareUpdateCategory(getPrefContext(), preferenceScreen);
+            mFeatureProvider.registerKeyboardInformationCategory(preferenceScreen);
         }
 
         if (InputSettings.isAccessibilityBounceKeysFeatureEnabled()
@@ -369,7 +369,7 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
 
     private void showEnabledLocalesKeyboardLayoutList(InputDeviceIdentifier inputDeviceIdentifier) {
         Bundle arguments = new Bundle();
-        arguments.putParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER,
+        arguments.putParcelable(InputPeripheralsSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER,
                 inputDeviceIdentifier);
         new SubSettingLauncher(getContext())
                 .setSourceMetricsCategory(getMetricsCategory())
@@ -423,6 +423,9 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
 
     private void unregisterSettingsObserver() {
         getActivity().getContentResolver().unregisterContentObserver(mContentObserver);
+        if (mSupportsFirmwareUpdate) {
+            mFeatureProvider.unregisterKeyboardInformationCategory();
+        }
     }
 
     private void updateAccessibilityBounceKeysSwitch(@NonNull Context context) {

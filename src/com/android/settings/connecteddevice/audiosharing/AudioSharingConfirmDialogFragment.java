@@ -44,23 +44,28 @@ public class AudioSharingConfirmDialogFragment extends InstrumentedDialogFragmen
      *
      * @param host The Fragment this dialog will be hosted.
      */
-    public static void show(Fragment host) {
-        if (!BluetoothUtils.isAudioSharingEnabled()) return;
-        final FragmentManager manager;
-        try {
-            manager = host.getChildFragmentManager();
-        } catch (IllegalStateException e) {
-            Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+    public static void show(@Nullable Fragment host) {
+        if (host == null) {
+            Log.d(TAG, "Fail to show dialog, host is null");
             return;
         }
-        AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
-        if (dialog != null) {
-            Log.d(TAG, "Dialog is showing, return.");
-            return;
+        if (BluetoothUtils.isAudioSharingUIAvailable(host.getContext())) {
+            final FragmentManager manager;
+            try {
+                manager = host.getChildFragmentManager();
+            } catch (IllegalStateException e) {
+                Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+                return;
+            }
+            AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
+            if (dialog != null) {
+                Log.d(TAG, "Dialog is showing, return.");
+                return;
+            }
+            Log.d(TAG, "Show up the confirm dialog.");
+            AudioSharingConfirmDialogFragment dialogFrag = new AudioSharingConfirmDialogFragment();
+            dialogFrag.show(manager, TAG);
         }
-        Log.d(TAG, "Show up the confirm dialog.");
-        AudioSharingConfirmDialogFragment dialogFrag = new AudioSharingConfirmDialogFragment();
-        dialogFrag.show(manager, TAG);
     }
 
     @Override
@@ -72,7 +77,7 @@ public class AudioSharingConfirmDialogFragment extends InstrumentedDialogFragmen
                         .setTitleIcon(com.android.settingslib.R.drawable.ic_bt_le_audio_sharing)
                         .setIsCustomBodyEnabled(true)
                         .setCustomMessage(R.string.audio_sharing_comfirm_dialog_content)
-                        .setPositiveButton(R.string.okay, (d, w) -> {})
+                        .setPositiveButton(R.string.audio_sharing_close_button_label, (d, w) -> {})
                         .build();
         dialog.setCanceledOnTouchOutside(true);
         return dialog;

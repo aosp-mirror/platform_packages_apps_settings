@@ -46,27 +46,32 @@ public class AudioSharingErrorDialogFragment extends InstrumentedDialogFragment 
      * @param host The Fragment this dialog will be hosted.
      */
     public static void show(@Nullable Fragment host) {
-        if (host == null || !BluetoothUtils.isAudioSharingEnabled()) return;
-        final FragmentManager manager;
-        try {
-            manager = host.getChildFragmentManager();
-        } catch (IllegalStateException e) {
-            Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+        if (host == null) {
+            Log.d(TAG, "Fail to show dialog, host is null");
             return;
         }
-        Lifecycle.State currentState = host.getLifecycle().getCurrentState();
-        if (!currentState.isAtLeast(Lifecycle.State.STARTED)) {
-            Log.d(TAG, "Fail to show dialog with state: " + currentState);
-            return;
+        if (BluetoothUtils.isAudioSharingUIAvailable(host.getContext())) {
+            final FragmentManager manager;
+            try {
+                manager = host.getChildFragmentManager();
+            } catch (IllegalStateException e) {
+                Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+                return;
+            }
+            Lifecycle.State currentState = host.getLifecycle().getCurrentState();
+            if (!currentState.isAtLeast(Lifecycle.State.STARTED)) {
+                Log.d(TAG, "Fail to show dialog with state: " + currentState);
+                return;
+            }
+            AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
+            if (dialog != null) {
+                Log.d(TAG, "Dialog is showing, return.");
+                return;
+            }
+            Log.d(TAG, "Show up the error dialog.");
+            AudioSharingErrorDialogFragment dialogFrag = new AudioSharingErrorDialogFragment();
+            dialogFrag.show(manager, TAG);
         }
-        AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
-        if (dialog != null) {
-            Log.d(TAG, "Dialog is showing, return.");
-            return;
-        }
-        Log.d(TAG, "Show up the error dialog.");
-        AudioSharingErrorDialogFragment dialogFrag = new AudioSharingErrorDialogFragment();
-        dialogFrag.show(manager, TAG);
     }
 
     @Override

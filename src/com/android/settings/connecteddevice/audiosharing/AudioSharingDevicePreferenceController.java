@@ -116,7 +116,18 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
 
                 @Override
                 public void onSourceAdded(
-                        @NonNull BluetoothDevice sink, int sourceId, int reason) {}
+                        @NonNull BluetoothDevice sink, int sourceId, int reason) {
+                    Log.d(TAG, "onSourceAdded: update sharing device list.");
+                    if (mBluetoothDeviceUpdater != null) {
+                        mBluetoothDeviceUpdater.forceUpdate();
+                    }
+                    if (mDeviceManager != null && mDialogHandler != null) {
+                        CachedBluetoothDevice cachedDevice = mDeviceManager.findDevice(sink);
+                        if (cachedDevice != null) {
+                            mDialogHandler.closeOpeningDialogsForLeaDevice(cachedDevice);
+                        }
+                    }
+                }
 
                 @Override
                 public void onSourceAddFailed(
@@ -173,20 +184,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
                 public void onReceiveStateChanged(
                         @NonNull BluetoothDevice sink,
                         int sourceId,
-                        @NonNull BluetoothLeBroadcastReceiveState state) {
-                    if (BluetoothUtils.isConnected(state)) {
-                        Log.d(TAG, "onSourceAdded: update sharing device list.");
-                        if (mBluetoothDeviceUpdater != null) {
-                            mBluetoothDeviceUpdater.forceUpdate();
-                        }
-                        if (mDeviceManager != null && mDialogHandler != null) {
-                            CachedBluetoothDevice cachedDevice = mDeviceManager.findDevice(sink);
-                            if (cachedDevice != null) {
-                                mDialogHandler.closeOpeningDialogsForLeaDevice(cachedDevice);
-                            }
-                        }
-                    }
-                }
+                        @NonNull BluetoothLeBroadcastReceiveState state) {}
             };
 
     public AudioSharingDevicePreferenceController(Context context) {
@@ -308,7 +306,8 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        return BluetoothUtils.isAudioSharingEnabled() && mBluetoothDeviceUpdater != null
+        return (BluetoothUtils.isAudioSharingUIAvailable(mContext)
+                && mBluetoothDeviceUpdater != null)
                 ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
     }

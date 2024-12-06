@@ -23,15 +23,22 @@ import static org.junit.Assert.assertEquals;
 
 import android.content.Context;
 import android.os.LocaleList;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.flags.Flags;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 public class NumberingSystemControllerTest {
     private Context mApplicationContext;
     private NumberingSystemController mController;
+
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setUp() throws Exception {
@@ -39,6 +46,7 @@ public class NumberingSystemControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_REGIONAL_PREFERENCES_API_ENABLED)
     public void getAvailabilityStatus_noLocale_unavailable() {
         LocaleList.setDefault(LocaleList.forLanguageTags("en-US,zh-Hant-TW"));
         mController = new NumberingSystemController(mApplicationContext, "key");
@@ -49,6 +57,7 @@ public class NumberingSystemControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_REGIONAL_PREFERENCES_API_ENABLED)
     public void getAvailabilityStatus_hasLocaleWithNumberingSystems_available() {
         // ar-JO has different numbering system.
         LocaleList.setDefault(LocaleList.forLanguageTags("en-US,zh-Hant-TW,ar-JO"));

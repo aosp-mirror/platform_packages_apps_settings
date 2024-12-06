@@ -25,6 +25,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -39,6 +40,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.InstallSourceInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -51,15 +53,12 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.fuelgauge.batteryusage.BatteryEntry;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.testutils.shadow.ShadowHelpUtils;
-import com.android.settings.widget.EntityHeaderController;
-import com.android.settingslib.applications.AppUtils;
+import com.android.settingslib.Utils;
 import com.android.settingslib.applications.ApplicationsState;
-import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.IntroPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -74,14 +73,14 @@ import org.mockito.junit.MockitoRule;
 import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.util.ReflectionHelpers;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 
 import java.util.concurrent.TimeUnit;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(
         shadows = {
-            ShadowEntityHeaderController.class,
             ShadowHelpUtils.class,
             com.android.settings.testutils.shadow.ShadowFragment.class,
         })
@@ -90,6 +89,7 @@ public class PowerBackgroundUsageDetailTest {
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     private static final String APP_LABEL = "app label";
+    private static final String APP_ENTRY_LABEL = "app entry label";
     private static final String SUMMARY = "summary";
     private static final int ICON_ID = 123;
     private static final int UID = 1;
@@ -97,6 +97,7 @@ public class PowerBackgroundUsageDetailTest {
     private static final String KEY_PREF_HEADER = "header_view";
     private static final String KEY_FOOTER_PREFERENCE = "app_usage_footer_preference";
     private static final String INITIATING_PACKAGE_NAME = "com.android.vending";
+    private static final Drawable TEST_DRAWABLE = new ColorDrawable(0);
 
     private int mTestMode;
     private Context mContext;
@@ -104,11 +105,11 @@ public class PowerBackgroundUsageDetailTest {
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private SettingsActivity mTestActivity;
     private BatteryOptimizeUtils mBatteryOptimizeUtils;
+    private IntroPreference mIntroPreference;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private FragmentActivity mActivity;
 
-    @Mock private EntityHeaderController mEntityHeaderController;
     @Mock private ApplicationsState mState;
     @Mock private Bundle mBundle;
     @Mock private LoaderManager mLoaderManager;
@@ -117,8 +118,15 @@ public class PowerBackgroundUsageDetailTest {
     @Mock private PackageManager mPackageManager;
     @Mock private AppOpsManager mAppOpsManager;
     @Mock private InstallSourceInfo mInstallSourceInfo;
-    @Mock private LayoutPreference mLayoutPreference;
     @Mock private FooterPreference mFooterPreference;
+
+    @Implements(Utils.class)
+    private static class ShadowUtils {
+        @Implementation
+        public static Drawable getBadgedIcon(Context context, ApplicationInfo appInfo) {
+            return PowerBackgroundUsageDetailTest.TEST_DRAWABLE;
+        }
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -134,7 +142,8 @@ public class PowerBackgroundUsageDetailTest {
         mFragment = spy(new PowerBackgroundUsageDetail());
         mFragment.mBatteryOptimizeUtils = mBatteryOptimizeUtils;
         mFragment.mLogStringBuilder = new StringBuilder();
-        doReturn(mLayoutPreference).when(mFragment).findPreference(KEY_PREF_HEADER);
+        mIntroPreference = new IntroPreference(mContext);
+        doReturn(mIntroPreference).when(mFragment).findPreference(KEY_PREF_HEADER);
         doReturn(mFooterPreference).when(mFragment).findPreference(KEY_FOOTER_PREFERENCE);
         doReturn(mContext).when(mFragment).getContext();
         doReturn(mActivity).when(mFragment).getActivity();
@@ -143,35 +152,14 @@ public class PowerBackgroundUsageDetailTest {
         when(mFragment.getArguments()).thenReturn(mBundle);
         doReturn(mLoaderManager).when(mFragment).getLoaderManager();
 
-        ShadowEntityHeaderController.setUseMock(mEntityHeaderController);
-        doReturn(mEntityHeaderController)
-                .when(mEntityHeaderController)
-                .setButtonActions(anyInt(), anyInt());
-        doReturn(mEntityHeaderController)
-                .when(mEntityHeaderController)
-                .setIcon(nullable(Drawable.class));
-        doReturn(mEntityHeaderController)
-                .when(mEntityHeaderController)
-                .setIcon(nullable(ApplicationsState.AppEntry.class));
-        doReturn(mEntityHeaderController)
-                .when(mEntityHeaderController)
-                .setLabel(nullable(String.class));
-        doReturn(mEntityHeaderController)
-                .when(mEntityHeaderController)
-                .setLabel(nullable(String.class));
-        doReturn(mEntityHeaderController)
-                .when(mEntityHeaderController)
-                .setLabel(nullable(ApplicationsState.AppEntry.class));
-        doReturn(mEntityHeaderController)
-                .when(mEntityHeaderController)
-                .setSummary(nullable(String.class));
-
         when(mBatteryEntry.getUid()).thenReturn(UID);
         when(mBatteryEntry.getLabel()).thenReturn(APP_LABEL);
         mBatteryEntry.mIconId = ICON_ID;
 
         mFragment.mState = mState;
+        doNothing().when(mState).ensureIcon(mAppEntry);
         mAppEntry.info = mock(ApplicationInfo.class);
+        mAppEntry.label = APP_ENTRY_LABEL;
 
         mTestActivity = spy(new SettingsActivity());
         doReturn(mPackageManager).when(mTestActivity).getPackageManager();
@@ -194,55 +182,37 @@ public class PowerBackgroundUsageDetailTest {
 
     @After
     public void reset() {
-        ShadowEntityHeaderController.reset();
         ShadowHelpUtils.reset();
     }
 
     @Test
+    @Config(shadows = ShadowUtils.class)
     public void initHeader_NoAppEntry_BuildByBundle() {
         mFragment.mAppEntry = null;
         mFragment.initHeader();
 
-        verify(mEntityHeaderController).setIcon(nullable(Drawable.class));
-        verify(mEntityHeaderController).setLabel(APP_LABEL);
+        assertThat(mIntroPreference.getIcon()).isNotEqualTo(TEST_DRAWABLE);
+        assertThat(mIntroPreference.getTitle()).isEqualTo(APP_LABEL);
     }
 
     @Test
+    @Config(shadows = ShadowUtils.class)
     public void initHeader_HasAppEntry_BuildByAppEntry() {
-        ReflectionHelpers.setStaticField(
-                AppUtils.class,
-                "sInstantAppDataProvider",
-                new InstantAppDataProvider() {
-                    @Override
-                    public boolean isInstantApp(ApplicationInfo info) {
-                        return false;
-                    }
-                });
         mFragment.mAppEntry = mAppEntry;
         mFragment.initHeader();
 
-        verify(mEntityHeaderController).setIcon(mAppEntry);
-        verify(mEntityHeaderController).setLabel(mAppEntry);
-        verify(mEntityHeaderController).setIsInstantApp(false);
+        assertThat(mIntroPreference.getIcon()).isEqualTo(TEST_DRAWABLE);
+        assertThat(mIntroPreference.getTitle()).isEqualTo(mAppEntry.label);
     }
 
     @Test
+    @Config(shadows = ShadowUtils.class)
     public void initHeader_HasAppEntry_InstantApp() {
-        ReflectionHelpers.setStaticField(
-                AppUtils.class,
-                "sInstantAppDataProvider",
-                new InstantAppDataProvider() {
-                    @Override
-                    public boolean isInstantApp(ApplicationInfo info) {
-                        return true;
-                    }
-                });
         mFragment.mAppEntry = mAppEntry;
         mFragment.initHeader();
 
-        verify(mEntityHeaderController).setIcon(mAppEntry);
-        verify(mEntityHeaderController).setLabel(mAppEntry);
-        verify(mEntityHeaderController).setIsInstantApp(true);
+        assertThat(mIntroPreference.getIcon()).isEqualTo(TEST_DRAWABLE);
+        assertThat(mIntroPreference.getTitle()).isEqualTo(mAppEntry.label);
     }
 
     @Test

@@ -486,17 +486,21 @@ public class WifiCallingSettingsForSub extends DashboardFragment
                 .launch();
     }
 
+    private @Nullable Intent getCarrierActivityIntent() {
+        return getCarrierActivityIntent(getActivity(), mSubId);
+    }
+
     /*
      * Get the Intent to launch carrier emergency address management activity.
      * Return null when no activity found.
      */
-    private Intent getCarrierActivityIntent() {
+    static @Nullable Intent getCarrierActivityIntent(Context context, int subId) {
         // Retrieve component name from carrier config
         final CarrierConfigManager configManager =
-                getActivity().getSystemService(CarrierConfigManager.class);
+                context.getSystemService(CarrierConfigManager.class);
         if (configManager == null) return null;
 
-        final PersistableBundle bundle = configManager.getConfigForSubId(mSubId);
+        final PersistableBundle bundle = configManager.getConfigForSubId(subId);
         if (bundle == null) return null;
 
         final String carrierApp = bundle.getString(
@@ -509,7 +513,7 @@ public class WifiCallingSettingsForSub extends DashboardFragment
         // Build and return intent
         final Intent intent = new Intent();
         intent.setComponent(componentName);
-        intent.putExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX, mSubId);
+        intent.putExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX, subId);
         return intent;
     }
 

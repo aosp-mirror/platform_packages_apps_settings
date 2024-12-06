@@ -22,6 +22,12 @@
     <com.android.settingslib.widget.TopIntroPreference
         android:title="@string/contacts_storage_selection_message" />
 
+    <PreferenceCategory
+        android:key="account_category"
+        android:persistent="false"
+        android:title="@string/contacts_storage_account_category_title">
+    </PreferenceCategory>
+
     <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="device_only_account_preference"
         android:summary="@string/contacts_storage_device_only_preference_summary"

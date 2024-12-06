@@ -56,6 +56,7 @@ import com.android.settings.R
 import com.android.settings.SidecarFragment
 import com.android.settings.network.telephony.SimRepository
 import com.android.settings.network.telephony.SubscriptionActionDialogActivity
+import com.android.settings.network.telephony.SubscriptionRepository
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity
 import com.android.settings.network.telephony.requireSubscriptionManager
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
@@ -79,8 +80,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.conflate
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeoutOrNull
 
 class SimOnboardingActivity : SpaBaseDialogActivity() {
     lateinit var scope: CoroutineScope
@@ -106,6 +109,12 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
         }
 
         var targetSubId = intent.getIntExtra(SUB_ID,SubscriptionManager.INVALID_SUBSCRIPTION_ID)
+        if (targetSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            targetSubId = intent.getIntExtra(
+              Settings.EXTRA_SUB_ID,
+              SubscriptionManager.INVALID_SUBSCRIPTION_ID
+            )
+        }
         initServiceData(this, targetSubId, callbackListener)
         if (!onboardingService.isUsableTargetSubscriptionId) {
             Log.e(TAG, "The subscription id is not usable.")
@@ -490,31 +499,25 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
         }
     }
 
-    suspend fun checkSimIsReadyAndGoNext() {
+    private suspend fun checkSimIsReadyAndGoNext() {
         withContext(Dispatchers.Default) {
-            val isEnabled = context.requireSubscriptionManager()
-                .isSubscriptionEnabled(onboardingService.targetSubId)
-            if (!isEnabled) {
-                val latch = CountDownLatch(1)
-                val receiver = CarrierConfigChangedReceiver(latch)
-                try {
-                    val waitingTimeMillis =
-                        Settings.Global.getLong(
-                            context.contentResolver,
-                            Settings.Global.EUICC_SWITCH_SLOT_TIMEOUT_MILLIS,
-                            UiccSlotUtil.DEFAULT_WAIT_AFTER_SWITCH_TIMEOUT_MILLIS
-                        )
-                    receiver.registerOn(context)
-                    Log.d(TAG, "Start waiting, waitingTime is $waitingTimeMillis")
-                    latch.await(waitingTimeMillis, TimeUnit.MILLISECONDS)
-                } catch (e: InterruptedException) {
-                    Thread.currentThread().interrupt()
-                    Log.e(TAG, "Failed switching to physical slot.", e)
-                } finally {
-                    context.unregisterReceiver(receiver)
-                }
-            }
-            Log.d(TAG, "Sim is ready then go to next")
+            val waitingTimeMillis =
+                Settings.Global.getLong(
+                    context.contentResolver,
+                    Settings.Global.EUICC_SWITCH_SLOT_TIMEOUT_MILLIS,
+                    UiccSlotUtil.DEFAULT_WAIT_AFTER_SWITCH_TIMEOUT_MILLIS,
+                )
+            Log.d(TAG, "Start waiting, waitingTime is $waitingTimeMillis")
+            val isTimeout =
+                withTimeoutOrNull(waitingTimeMillis) {
+                    SubscriptionRepository(context)
+                        .isSubscriptionEnabledFlow(onboardingService.targetSubId)
+                        .firstOrNull { it }
+                } == null
+            Log.d(
+                TAG,
+                if (isTimeout) "Sim is not ready after timeout" else "Sim is ready then go to next",
+            )
             callbackListener(CallbackType.CALLBACK_SETUP_NAME)
         }
     }

@@ -29,6 +29,7 @@ import com.android.settings.biometrics.fingerprint2.domain.interactor.Accessibil
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FoldStateInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.OrientationInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.Default
+import com.android.settings.biometrics.fingerprint2.lib.model.Orientation
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSIconTouchViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.BackgroundViewModel
@@ -78,6 +79,7 @@ class Injector(step: FingerprintNavigationStep.UiStep) {
       override val isEnabled: Boolean
         get() = true
       override fun announce(clazz: Class<*>, announcement: CharSequence?) {}
+       override fun interrupt() {}
     }
 
   var foldStateInteractor =
@@ -97,6 +99,7 @@ class Injector(step: FingerprintNavigationStep.UiStep) {
       override val rotationFromDefault: Flow<Int> = rotation
 
       override fun getRotationFromDefault(rotation: Int): Int = rotation
+      override val orientationChanged: Flow<Orientation> = flowOf(Orientation.Portrait)
     }
   var gatekeeperViewModel = FingerprintGatekeeperViewModel(fingerprintManagerInteractor)
 

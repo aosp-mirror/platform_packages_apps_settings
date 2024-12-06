@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2024 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<androidx.preference.PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="satellite_sos"
+    android:title="@string/title_for_satellite_sos">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="key_satellite_sos_illustration"
+        android:selectable="false"
+        settings:lottie_rawRes="@drawable/satellite_sos_illustration"
+        settings:searchable="false" />
+
+    <androidx.preference.PreferenceCategory
+        android:title="@string/category_title_about_satellite_sos">
+        <com.android.settingslib.widget.TopIntroPreference
+            android:key="key_satellite_sos_top_intro"
+            android:title="@string/satellite_sos_introduction" />
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory
+        android:title="@string/category_title_about_satellite_sos">
+
+        <androidx.preference.Preference
+            android:title="@string/satellite_sos_how_it_works_step_1"
+            android:summary="@string/satellite_sos_how_it_works_summary_1"
+            android:icon="@drawable/satellite_sos_counter_1"/>
+
+        <androidx.preference.Preference
+            android:title="@string/satellite_sos_how_it_works_step_2"
+            android:summary="@string/satellite_sos_how_it_works_summary_2"
+            android:icon="@drawable/satellite_sos_counter_2"/>
+
+        <androidx.preference.Preference
+            android:title="@string/satellite_sos_how_it_works_step_3"
+            android:summary="@string/satellite_sos_how_it_works_summary_3"
+            android:icon="@drawable/satellite_sos_counter_3"/>
+
+    </androidx.preference.PreferenceCategory>
+
+    <com.android.settingslib.widget.ButtonPreference
+        android:title="try a demo"
+        android:icon="@drawable/satellite_sos_quantum_gm_ic_hand_gesture_vd_20"/>
+
+    <androidx.preference.PreferenceCategory
+        android:title="@string/satellite_sos_sharing_preferences_subheader_title">
+        <com.android.settingslib.widget.TopIntroPreference
+            android:title="@string/satellite_sos_sharing_preferences_description"/>
+
+        <androidx.preference.Preference
+            android:title="@string/satellite_sos_sharing_preferences_step_1"
+            android:icon="@drawable/contact_emergency_24dp"/>
+
+        <androidx.preference.Preference
+            android:title="@string/satellite_sos_sharing_preferences_step_2"
+            android:icon="@drawable/account_circle_24dp"/>
+
+    </androidx.preference.PreferenceCategory>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="key_satellite_sos_footer"
+        android:title="@string/satellite_sos_footer_text"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.network.telephony.SatelliteSettingsSosFooterPreferenceController"/>
+    />
+</androidx.preference.PreferenceScreen>

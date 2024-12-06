@@ -23,7 +23,7 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 @ProvidePreferenceScreen
-class BatterySaverScreen : PreferenceScreenCreator {
+open class BatterySaverScreen : PreferenceScreenCreator {
     override val key: String
         get() = KEY
 
@@ -39,7 +39,8 @@ class BatterySaverScreen : PreferenceScreenCreator {
 
     override fun hasCompleteHierarchy() = false
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) =
+        preferenceHierarchy(this) { +BatterySaverPreference() order -100 }
 
     companion object {
         const val KEY = "battery_saver_screen"

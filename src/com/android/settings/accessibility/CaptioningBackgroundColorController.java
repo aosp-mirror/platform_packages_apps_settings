@@ -25,23 +25,15 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.ListDialogPreference.OnValueChangedListener;
-import com.android.settings.core.BasePreferenceController;
 
 /** Preference controller for captioning background color. */
-public class CaptioningBackgroundColorController extends BasePreferenceController
+public class CaptioningBackgroundColorController extends BaseCaptioningCustomController
         implements OnValueChangedListener {
 
-    private final CaptionHelper mCaptionHelper;
     private int mCachedNonDefaultOpacity = CaptionStyle.COLOR_UNSPECIFIED;
 
     public CaptioningBackgroundColorController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mCaptionHelper = new CaptionHelper(context);
-    }
-
-    @Override
-    public int getAvailabilityStatus() {
-        return AVAILABLE;
     }
 
     @Override
