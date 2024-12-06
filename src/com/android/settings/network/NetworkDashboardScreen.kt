@@ -47,6 +47,7 @@ class NetworkDashboardScreen : PreferenceScreenCreator, PreferenceIconProvider {
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(this) {
             +MobileNetworkListScreen.KEY order -15
+            +AirplaneModePreference() order -5
             +DataSaverScreen.KEY order 10
         }
 
