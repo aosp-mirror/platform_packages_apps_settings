@@ -16,13 +16,13 @@
 
 package com.android.settings.network
 
+import android.content.Context
 import android.content.ContextWrapper
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.FEATURE_LEANBACK
 import android.content.res.Resources
 import android.provider.Settings
 import android.telephony.TelephonyManager
-import androidx.annotation.DrawableRes
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -37,14 +37,15 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
-open class AirplaneModePreferenceTest {
+class AirplaneModePreferenceTest {
 
     private val mockResources = mock<Resources>()
     private val mockPackageManager = mock<PackageManager>()
     private var mockTelephonyManager = mock<TelephonyManager>()
 
-    private val context =
-        object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
+    private val context = ApplicationProvider.getApplicationContext<Context>()
+    private val contextWrapper =
+        object : ContextWrapper(context) {
             override fun getResources(): Resources = mockResources
 
             override fun getPackageManager(): PackageManager = mockPackageManager
@@ -56,19 +57,14 @@ open class AirplaneModePreferenceTest {
                 }
         }
 
-    private var airplaneModePreference =
-        object : AirplaneModePreference() {
-            // TODO: Remove override
-            override val icon: Int
-                @DrawableRes get() = 0
-        }
+    private val airplaneModePreference = AirplaneModePreference()
 
     @Test
     fun isAvailable_hasConfigAndNoFeatureLeanback_shouldReturnTrue() {
         mockResources.stub { on { getBoolean(anyInt()) } doReturn true }
         mockPackageManager.stub { on { hasSystemFeature(FEATURE_LEANBACK) } doReturn false }
 
-        assertThat(airplaneModePreference.isAvailable(context)).isTrue()
+        assertThat(airplaneModePreference.isAvailable(contextWrapper)).isTrue()
     }
 
     @Test
@@ -76,7 +72,7 @@ open class AirplaneModePreferenceTest {
         mockResources.stub { on { getBoolean(anyInt()) } doReturn false }
         mockPackageManager.stub { on { hasSystemFeature(FEATURE_LEANBACK) } doReturn false }
 
-        assertThat(airplaneModePreference.isAvailable(context)).isFalse()
+        assertThat(airplaneModePreference.isAvailable(contextWrapper)).isFalse()
     }
 
     @Test
@@ -84,7 +80,7 @@ open class AirplaneModePreferenceTest {
         mockResources.stub { on { getBoolean(anyInt()) } doReturn true }
         mockPackageManager.stub { on { hasSystemFeature(FEATURE_LEANBACK) } doReturn true }
 
-        assertThat(airplaneModePreference.isAvailable(context)).isFalse()
+        assertThat(airplaneModePreference.isAvailable(contextWrapper)).isFalse()
     }
 
     @Test
