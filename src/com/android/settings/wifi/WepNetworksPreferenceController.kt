@@ -162,10 +162,10 @@ class WepNetworksPreferenceController(context: Context, preferenceKey: String) :
         emit(aapmManager?.isAdvancedProtectionEnabled ?: false) }.flowOn(Dispatchers.Default)
 
     private fun startSupportIntent() {
-        aapmManager?.createSupportIntent(
+        AdvancedProtectionManager.createSupportIntent(
             AdvancedProtectionManager.FEATURE_ID_DISALLOW_WEP,
             AdvancedProtectionManager.SUPPORT_DIALOG_TYPE_DISABLED_SETTING
-        )?.let { mContext.startActivity(it) }
+        ).let { mContext.startActivity(it) }
     }
 
     val wepAllowedFlow =
