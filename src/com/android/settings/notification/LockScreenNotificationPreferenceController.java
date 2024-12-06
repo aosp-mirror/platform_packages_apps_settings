@@ -37,6 +37,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.server.notification.Flags;
 import com.android.settings.R;
 import com.android.settings.RestrictedListPreference;
 import com.android.settings.Utils;
@@ -94,6 +95,13 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        // Hide the preference when the lock screen notification page shows
+        if (Flags.notificationLockScreenSettings()) {
+            setVisible(screen, mSettingKey, false);
+            setVisible(screen, mWorkSettingKey, false);
+            setVisible(screen, mWorkSettingCategoryKey, false);
+            return;
+        }
         mLockscreen = screen.findPreference(mSettingKey);
         if (mLockscreen == null) {
             Log.i(TAG, "Preference not found: " + mSettingKey);

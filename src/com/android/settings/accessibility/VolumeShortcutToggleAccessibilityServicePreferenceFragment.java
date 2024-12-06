@@ -55,8 +55,8 @@ public class VolumeShortcutToggleAccessibilityServicePreferenceFragment extends
         final boolean isServiceOn =
                 getArguments().getBoolean(AccessibilitySettings.EXTRA_CHECKED);
         final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
-        final boolean hasRequestAccessibilityButtonFlag =
-                (info.flags & AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON) != 0;
+        final boolean hasRequestAccessibilityButtonFlag = info != null
+                && (info.flags & AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON) != 0;
         if (hasRequestAccessibilityButtonFlag && isServiceOn) {
             shortcutTypes |= SOFTWARE;
         } else {

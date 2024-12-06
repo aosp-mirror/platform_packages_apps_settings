@@ -16,8 +16,6 @@
 package com.android.settings.fuelgauge.batterysaver
 
 import android.content.Context
-import android.os.Handler
-import android.os.Looper
 import android.os.PowerManager
 import com.android.settings.R
 import com.android.settings.fuelgauge.BatterySaverReceiver
@@ -32,6 +30,9 @@ import com.android.settingslib.metadata.MainSwitchPreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 // LINT.IfChange
 class BatterySaverPreference :
@@ -39,7 +40,6 @@ class BatterySaverPreference :
     PreferenceLifecycleProvider {
 
     private var batterySaverReceiver: BatterySaverReceiver? = null
-    private val handler by lazy { Handler(Looper.getMainLooper()) }
 
     override fun storage(context: Context) = BatterySaverStore(context)
 
@@ -48,6 +48,9 @@ class BatterySaverPreference :
 
     override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     override fun isEnabled(context: Context) =
         !BatteryStatus(BatteryUtils.getBatteryIntent(context)).isPluggedIn
@@ -58,10 +61,10 @@ class BatterySaverPreference :
             setBatterySaverListener(
                 object : BatterySaverListener {
                     override fun onPowerSaveModeChanged() {
-                        handler.postDelayed(
-                            { context.notifyPreferenceChange(KEY) },
-                            SWITCH_ANIMATION_DURATION,
-                        )
+                        context.lifecycleScope.launch {
+                            delay(SWITCH_ANIMATION_DURATION)
+                            context.notifyPreferenceChange(KEY)
+                        }
                     }
 
                     override fun onBatteryChanged(pluggedIn: Boolean) =
@@ -75,7 +78,6 @@ class BatterySaverPreference :
     override fun onStop(context: PreferenceLifecycleContext) {
         batterySaverReceiver?.setListening(false)
         batterySaverReceiver = null
-        handler.removeCallbacksAndMessages(null /* token */)
     }
 
     @Suppress("UNCHECKED_CAST")

@@ -16,7 +16,6 @@
 
 package com.android.settings.connecteddevice.display;
 
-
 import static android.view.Display.INVALID_DISPLAY;
 
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL;
@@ -46,6 +45,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragmentBase;
+import com.android.settings.accessibility.TextReadingPreferenceFragment;
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DisplayListener;
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.Injector;
 import com.android.settings.core.SubSettingLauncher;
@@ -64,6 +64,7 @@ import java.util.List;
 public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmentBase {
     static final int EXTERNAL_DISPLAY_SETTINGS_RESOURCE = R.xml.external_display_settings;
     static final String DISPLAYS_LIST_PREFERENCE_KEY = "displays_list_preference";
+    static final String BUILTIN_DISPLAY_LIST_PREFERENCE_KEY = "builtin_display_list_preference";
     static final String EXTERNAL_DISPLAY_USE_PREFERENCE_KEY = "external_display_use_preference";
     static final String EXTERNAL_DISPLAY_ROTATION_KEY = "external_display_rotation";
     static final String EXTERNAL_DISPLAY_RESOLUTION_PREFERENCE_KEY = "external_display_resolution";
@@ -83,6 +84,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             R.string.external_display_rotation;
     static final int EXTERNAL_DISPLAY_RESOLUTION_TITLE_RESOURCE =
             R.string.external_display_resolution_settings_title;
+    static final int BUILTIN_DISPLAY_SETTINGS_CATEGORY_RESOURCE =
+            R.string.builtin_display_settings_category;
     @VisibleForTesting
     static final String PREVIOUSLY_SHOWN_LIST_KEY = "mPreviouslyShownListOfDisplays";
     private boolean mStarted;
@@ -97,7 +100,11 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     @Nullable
     private FooterPreference mFooterPreference;
     @Nullable
+    private Preference mDisplayTopologyPreference;
+    @Nullable
     private PreferenceCategory mDisplaysPreference;
+    @Nullable
+    private PreferenceCategory mBuiltinDisplayPreference;
     @Nullable
     private Injector mInjector;
     @Nullable
@@ -198,12 +205,22 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     }
 
     @VisibleForTesting
-    protected void launchDisplaySettings(final int displayId) {
+    protected void launchExternalDisplaySettings(final int displayId) {
         final Bundle args = new Bundle();
         var context = getPrefContext();
         args.putInt(DISPLAY_ID_ARG, displayId);
         new SubSettingLauncher(context)
                 .setDestination(this.getClass().getName())
+                .setArguments(args)
+                .setSourceMetricsCategory(getMetricsCategory()).launch();
+    }
+
+    @VisibleForTesting
+    protected void launchBuiltinDisplaySettings() {
+        final Bundle args = new Bundle();
+        var context = getPrefContext();
+        new SubSettingLauncher(context)
+                .setDestination(TextReadingPreferenceFragment.class.getName())
                 .setArguments(args)
                 .setSourceMetricsCategory(getMetricsCategory()).launch();
     }
@@ -279,6 +296,23 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         return mDisplaysPreference;
     }
 
+    @NonNull
+    private PreferenceCategory getBuiltinDisplayListPreference(@NonNull Context context) {
+        if (mBuiltinDisplayPreference == null) {
+            mBuiltinDisplayPreference = new PreferenceCategory(context);
+            mBuiltinDisplayPreference.setPersistent(false);
+        }
+        return mBuiltinDisplayPreference;
+    }
+
+    @NonNull Preference getDisplayTopologyPreference(@NonNull Context context) {
+        if (mDisplayTopologyPreference == null) {
+            mDisplayTopologyPreference = new DisplayTopologyPreference(context);
+            mDisplayTopologyPreference.setPersistent(false);
+        }
+        return mDisplayTopologyPreference;
+    }
+
     private void restoreState(@Nullable Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             return;
@@ -296,20 +330,16 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         updateScreenForDisplayId(getDisplayIdArg(), screen, mInjector.getContext());
     }
 
-    private boolean okayToBypassDisplayListSelection() {
-        if (mInjector != null && forceShowDisplayList(mInjector.getFlags())) {
-            return false;
-        }
-        return !mPreviouslyShownListOfDisplays;
-    }
-
     private void updateScreenForDisplayId(final int displayId,
             @NonNull final PreferenceScreen screen, @NonNull Context context) {
-        final var displaysToShow = getDisplaysToShow(displayId);
-        if (displaysToShow.isEmpty() && displayId == INVALID_DISPLAY) {
+        final boolean forceShowList = displayId == INVALID_DISPLAY
+                && mInjector != null && forceShowDisplayList(mInjector.getFlags());
+        final var displaysToShow = externalDisplaysToShow(displayId);
+
+        if (!forceShowList && displaysToShow.isEmpty() && displayId == INVALID_DISPLAY) {
             showTextWhenNoDisplaysToShow(screen, context);
-        } else if (displaysToShow.size() == 1
-                && ((displayId == INVALID_DISPLAY && okayToBypassDisplayListSelection())
+        } else if (!forceShowList && displaysToShow.size() == 1
+                && ((displayId == INVALID_DISPLAY && !mPreviouslyShownListOfDisplays)
                         || displaysToShow.get(0).getDisplayId() == displayId)) {
             showDisplaySettings(displaysToShow.get(0), screen, context);
         } else if (displayId == INVALID_DISPLAY) {
@@ -367,6 +397,20 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
 
     private void showDisplaysList(@NonNull List<Display> displaysToShow,
             @NonNull PreferenceScreen screen, @NonNull Context context) {
+        if (mInjector != null && mInjector.getFlags().displayTopologyPaneInDisplayList()) {
+            screen.addPreference(getDisplayTopologyPreference(context));
+
+            // If topology is shown, we also show a preference for the built-in display for
+            // consistency with the topology.
+            var builtinCategory = getBuiltinDisplayListPreference(context);
+            builtinCategory.setKey(BUILTIN_DISPLAY_LIST_PREFERENCE_KEY);
+            builtinCategory.setTitle(BUILTIN_DISPLAY_SETTINGS_CATEGORY_RESOURCE);
+            builtinCategory.removeAll();
+            screen.addPreference(builtinCategory);
+
+            builtinCategory.addPreference(new BuiltinDisplaySizeAndTextPreference(context));
+        }
+
         var pref = getDisplaysListPreference(context);
         pref.setKey(DISPLAYS_LIST_PREFERENCE_KEY);
         pref.removeAll();
@@ -378,7 +422,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         }
     }
 
-    private List<Display> getDisplaysToShow(int displayIdToShow) {
+    private List<Display> externalDisplaysToShow(int displayIdToShow) {
         if (mInjector == null) {
             return List.of();
         }
@@ -519,6 +563,24 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         mInjector.getHandler().removeCallbacks(mUpdateRunnable);
     }
 
+    private class BuiltinDisplaySizeAndTextPreference extends Preference
+            implements Preference.OnPreferenceClickListener {
+        BuiltinDisplaySizeAndTextPreference(@NonNull final Context context) {
+            super(context);
+
+            setPersistent(false);
+            setKey("builtin_display_size_and_text");
+            setTitle(R.string.accessibility_text_reading_options_title);
+            setOnPreferenceClickListener(this);
+        }
+
+        @Override
+        public boolean onPreferenceClick(@NonNull Preference preference) {
+            launchBuiltinDisplaySettings();
+            return true;
+        }
+    }
+
     @VisibleForTesting
     class DisplayPreference extends TwoTargetPreference
             implements Preference.OnPreferenceClickListener {
@@ -527,6 +589,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         DisplayPreference(@NonNull final Context context, @NonNull final Display display) {
             super(context);
             mDisplayId = display.getDisplayId();
+
             setPersistent(false);
             setKey("display_id_" + mDisplayId);
             setTitle(display.getName());
@@ -537,7 +600,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
 
         @Override
         public boolean onPreferenceClick(@NonNull Preference preference) {
-            launchDisplaySettings(mDisplayId);
+            launchExternalDisplaySettings(mDisplayId);
             writePreferenceClickMetric(preference);
             return true;
         }

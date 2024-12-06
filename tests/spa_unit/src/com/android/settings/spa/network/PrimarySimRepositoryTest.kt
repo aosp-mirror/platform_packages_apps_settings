@@ -101,6 +101,16 @@ class PrimarySimRepositoryTest {
             SUB_INFO_1,
             SUB_INFO_2
         )
+
+        context.stub {
+            on { resources } doReturn spyResources
+        }
+        spyResources.stub {
+            on {
+                getBoolean(com.android.internal.R.bool.config_sms_ask_every_time_support)
+            } doReturn true
+        }
+
         val expectedList = listOf(
             ListPreferenceOption(
                 id = SUB_INFO_1.subscriptionId,

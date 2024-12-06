@@ -26,6 +26,9 @@ import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.View;
 import android.view.accessibility.CaptioningManager;
@@ -35,6 +38,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.widget.SubtitleView;
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -54,6 +58,8 @@ public class CaptionHelperTest {
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Mock
     private CaptioningManager mCaptioningManager;
     @Mock
@@ -181,5 +187,41 @@ public class CaptionHelperTest {
         final int style = Settings.Secure.getInt(mContentResolver,
                 Settings.Secure.ACCESSIBILITY_CAPTIONING_PRESET, 0);
         assertThat(style).isEqualTo(CaptionStyle.PRESET_CUSTOM);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    public void getAvailabilityStatus_flagOff_customCaption_shouldReturnAvailable() {
+        when(mCaptioningManager.getRawUserStyle()).thenReturn(CaptionStyle.PRESET_CUSTOM);
+
+        assertThat(mCaptionHelper.getCustomCaptionAvailability())
+                .isEqualTo(BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    public void getAvailabilityStatus_flagOff_notCustom_shouldReturnAvailable() {
+        when(mCaptioningManager.getRawUserStyle()).thenReturn(0);
+
+        assertThat(mCaptionHelper.getCustomCaptionAvailability())
+                .isEqualTo(BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    public void getAvailabilityStatus_customCaption_shouldReturnAvailable() {
+        when(mCaptioningManager.getRawUserStyle()).thenReturn(CaptionStyle.PRESET_CUSTOM);
+
+        assertThat(mCaptionHelper.getCustomCaptionAvailability())
+                .isEqualTo(BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    public void getAvailabilityStatus_notCustom_shouldReturnUnsearchable() {
+        when(mCaptioningManager.getRawUserStyle()).thenReturn(0);
+
+        assertThat(mCaptionHelper.getCustomCaptionAvailability())
+                .isEqualTo(BasePreferenceController.AVAILABLE_UNSEARCHABLE);
     }
 }

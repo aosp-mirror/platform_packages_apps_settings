@@ -16,6 +16,9 @@
 
 package com.android.settings.notification.modes;
 
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static android.view.View.MeasureSpec.makeMeasureSpec;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.verify;
@@ -25,6 +28,8 @@ import android.app.Flags;
 import android.content.Context;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.util.TypedValue;
+import android.view.View.MeasureSpec;
 import android.widget.EditText;
 
 import androidx.preference.PreferenceManager;
@@ -45,6 +50,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.function.Consumer;
 
@@ -55,6 +61,7 @@ public class ZenModeEditNamePreferenceControllerTest {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
+    private Context mContext;
     private ZenModeEditNamePreferenceController mController;
     private LayoutPreference mPreference;
     private TextInputLayout mTextInputLayout;
@@ -65,15 +72,15 @@ public class ZenModeEditNamePreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
-        Context context = RuntimeEnvironment.application;
-        PreferenceManager preferenceManager = new PreferenceManager(context);
+        mContext = RuntimeEnvironment.application;
+        PreferenceManager preferenceManager = new PreferenceManager(mContext);
 
         // Inflation is a test in itself, because it will crash if the Theme isn't set correctly.
-        PreferenceScreen preferenceScreen = preferenceManager.inflateFromResource(context,
+        PreferenceScreen preferenceScreen = preferenceManager.inflateFromResource(mContext,
                 R.xml.modes_edit_name_icon, null);
         mPreference = preferenceScreen.findPreference("name");
 
-        mController = new ZenModeEditNamePreferenceController(context, "name", mNameSetter);
+        mController = new ZenModeEditNamePreferenceController(mContext, "name", mNameSetter);
         mController.displayPreference(preferenceScreen);
         mTextInputLayout = mPreference.findViewById(R.id.edit_input_layout);
         mEditText = mPreference.findViewById(android.R.id.edit);
@@ -113,5 +120,16 @@ public class ZenModeEditNamePreferenceControllerTest {
         mEditText.setText("this is fine");
 
         assertThat(mTextInputLayout.getError()).isNull();
+    }
+
+    @Test
+    @Config(qualifiers = "xxxhdpi")
+    public void onEditTextMeasure_hasRequiredHeightForAccessibility() {
+        mEditText.measure(makeMeasureSpec(1_000, MeasureSpec.AT_MOST),
+                makeMeasureSpec(1_000, MeasureSpec.AT_MOST));
+
+        assertThat(mEditText.getMeasuredHeight()).isAtLeast(
+                (int) TypedValue.applyDimension(COMPLEX_UNIT_DIP, 48,
+                        mContext.getResources().getDisplayMetrics()));
     }
 }
