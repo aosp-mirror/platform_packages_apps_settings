@@ -22,6 +22,7 @@ import android.text.BidiFormatter;
 
 import com.android.settings.core.BasePreferenceController;
 
+// LINT.IfChange
 public class SimpleBuildNumberPreferenceController extends BasePreferenceController {
 
     public SimpleBuildNumberPreferenceController(Context context,
@@ -39,3 +40,4 @@ public class SimpleBuildNumberPreferenceController extends BasePreferenceControl
         return BidiFormatter.getInstance().unicodeWrap(Build.DISPLAY);
     }
 }
+// LINT.ThenChange(SimpleBuildNumberPreference.kt)

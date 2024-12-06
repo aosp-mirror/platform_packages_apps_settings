@@ -42,6 +42,7 @@ import com.android.settings.spa.app.specialaccess.SpecialAppAccessPageProvider
 import com.android.settings.spa.app.specialaccess.TurnScreenOnAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.UseFullScreenIntentAppListProvider
 import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
+import com.android.settings.spa.app.specialaccess.WriteSystemPreferencesAppListProvider
 import com.android.settings.spa.app.storage.StorageAppListPageProvider
 import com.android.settings.spa.core.instrumentation.SpaLogMetricsProvider
 import com.android.settings.spa.core.instrumentation.SpaLogProvider
@@ -80,6 +81,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
             NfcTagAppsSettingsProvider,
             LongBackgroundTasksAppListProvider,
             TurnScreenOnAppsAppListProvider,
+            WriteSystemPreferencesAppListProvider,
         )
     }
 

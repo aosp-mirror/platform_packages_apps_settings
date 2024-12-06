@@ -24,11 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -37,15 +33,12 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.fuelgauge.batteryusage.AppOptModeSharedPreferencesUtils;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.HelpUtils;
-import com.android.settingslib.applications.AppUtils;
+import com.android.settingslib.Utils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.LayoutPreference;
-import com.android.settingslib.widget.MainSwitchPreference;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.IntroPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +46,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /** Allow background usage fragment for each app */
-public class PowerBackgroundUsageDetail extends DashboardFragment
-        implements SelectorWithWidgetPreference.OnClickListener, OnCheckedChangeListener {
+public class PowerBackgroundUsageDetail extends DashboardFragment {
     private static final String TAG = "PowerBackgroundUsageDetail";
 
     public static final String EXTRA_UID = "extra_uid";
@@ -63,21 +55,15 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
     public static final String EXTRA_POWER_USAGE_AMOUNT = "extra_power_usage_amount";
     public static final String EXTRA_ICON_ID = "extra_icon_id";
     private static final String KEY_PREF_HEADER = "header_view";
-    private static final String KEY_PREF_UNRESTRICTED = "unrestricted_preference";
-    private static final String KEY_PREF_OPTIMIZED = "optimized_preference";
-    private static final String KEY_ALLOW_BACKGROUND_USAGE = "allow_background_usage";
     private static final String KEY_FOOTER_PREFERENCE = "app_usage_footer_preference";
+    private static final String KEY_BATTERY_OPTIMIZATION_MODE_CATEGORY =
+            "battery_optimization_mode_category";
 
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 
-    @VisibleForTesting LayoutPreference mHeaderPreference;
     @VisibleForTesting ApplicationsState mState;
     @VisibleForTesting ApplicationsState.AppEntry mAppEntry;
     @VisibleForTesting BatteryOptimizeUtils mBatteryOptimizeUtils;
-    @VisibleForTesting SelectorWithWidgetPreference mOptimizePreference;
-    @VisibleForTesting SelectorWithWidgetPreference mUnrestrictedPreference;
-    @VisibleForTesting MainSwitchPreference mMainSwitchPreference;
-    @VisibleForTesting FooterPreference mFooterPreference;
     @VisibleForTesting StringBuilder mLogStringBuilder;
 
     @VisibleForTesting @BatteryOptimizeUtils.OptimizationMode
@@ -87,17 +73,11 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
+        final Bundle bundle = getArguments();
+        final int uid = bundle.getInt(EXTRA_UID, 0);
+        final String packageName = bundle.getString(EXTRA_PACKAGE_NAME);
+        mBatteryOptimizeUtils = new BatteryOptimizeUtils(getContext(), uid, packageName);
         mState = ApplicationsState.getInstance(getActivity().getApplication());
-    }
-
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-
-        final String packageName = getArguments().getString(EXTRA_PACKAGE_NAME);
-        onCreateBackgroundUsageState(packageName);
-        mHeaderPreference = findPreference(KEY_PREF_HEADER);
-
         if (packageName != null) {
             mAppEntry = mState.getEntry(packageName, UserHandle.myUserId());
         }
@@ -107,8 +87,8 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
     public void onResume() {
         super.onResume();
         initHeader();
-        mOptimizationMode = mBatteryOptimizeUtils.getAppOptimizationMode();
         initFooter();
+        mOptimizationMode = mBatteryOptimizeUtils.getAppOptimizationMode();
         mLogStringBuilder = new StringBuilder("onResume mode = ").append(mOptimizationMode);
     }
 
@@ -137,34 +117,16 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
     }
 
     @Override
-    public void onRadioButtonClicked(SelectorWithWidgetPreference selected) {
-        final String selectedKey = selected == null ? null : selected.getKey();
-        updateSelectorPreferenceState(mUnrestrictedPreference, selectedKey);
-        updateSelectorPreferenceState(mOptimizePreference, selectedKey);
-        mBatteryOptimizeUtils.setAppUsageState(getSelectedPreference(), Action.APPLY);
-    }
-
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        mMainSwitchPreference.setChecked(isChecked);
-        updateSelectorPreference(isChecked);
-    }
-
-    @Override
     public int getMetricsCategory() {
         return SettingsEnums.FUELGAUGE_POWER_USAGE_MANAGE_BACKGROUND;
     }
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final Bundle bundle = getArguments();
-        final int uid = bundle.getInt(EXTRA_UID, 0);
-        final String packageName = bundle.getString(EXTRA_PACKAGE_NAME);
-
-        controllers.add(new AllowBackgroundPreferenceController(context, uid, packageName));
-        controllers.add(new OptimizedPreferenceController(context, uid, packageName));
-        controllers.add(new UnrestrictedPreferenceController(context, uid, packageName));
+        final List<AbstractPreferenceController> controllers = new ArrayList<>(1);
+        controllers.add(
+                new BatteryOptimizationModePreferenceController(
+                        context, KEY_BATTERY_OPTIMIZATION_MODE_CATEGORY, mBatteryOptimizeUtils));
 
         return controllers;
     }
@@ -179,26 +141,6 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
         return TAG;
     }
 
-    @VisibleForTesting
-    void updateSelectorPreference(boolean isEnabled) {
-        mOptimizePreference.setEnabled(isEnabled);
-        mUnrestrictedPreference.setEnabled(isEnabled);
-        onRadioButtonClicked(isEnabled ? mOptimizePreference : null);
-    }
-
-    @VisibleForTesting
-    int getSelectedPreference() {
-        if (!mMainSwitchPreference.isChecked()) {
-            return BatteryOptimizeUtils.MODE_RESTRICTED;
-        } else if (mUnrestrictedPreference.isChecked()) {
-            return BatteryOptimizeUtils.MODE_UNRESTRICTED;
-        } else if (mOptimizePreference.isChecked()) {
-            return BatteryOptimizeUtils.MODE_OPTIMIZED;
-        } else {
-            return BatteryOptimizeUtils.MODE_UNKNOWN;
-        }
-    }
-
     static void startPowerBackgroundUsageDetailPage(Context context, Bundle args) {
         new SubSettingLauncher(context)
                 .setDestination(PowerBackgroundUsageDetail.class.getName())
@@ -209,86 +151,48 @@ public class PowerBackgroundUsageDetail extends DashboardFragment
 
     @VisibleForTesting
     void initHeader() {
-        final View appSnippet = mHeaderPreference.findViewById(R.id.entity_header);
+        final IntroPreference introPreference = findPreference(KEY_PREF_HEADER);
+        if (introPreference == null) {
+            return;
+        }
         final Activity context = getActivity();
         final Bundle bundle = getArguments();
-        EntityHeaderController controller =
-                EntityHeaderController.newInstance(context, this, appSnippet)
-                        .setButtonActions(
-                                EntityHeaderController.ActionType.ACTION_NONE,
-                                EntityHeaderController.ActionType.ACTION_NONE);
 
         if (mAppEntry == null) {
-            controller.setLabel(bundle.getString(EXTRA_LABEL));
+            introPreference.setTitle(bundle.getString(EXTRA_LABEL));
 
             final int iconId = bundle.getInt(EXTRA_ICON_ID, 0);
             if (iconId == 0) {
-                controller.setIcon(context.getPackageManager().getDefaultActivityIcon());
+                introPreference.setIcon(context.getPackageManager().getDefaultActivityIcon());
             } else {
-                controller.setIcon(context.getDrawable(bundle.getInt(EXTRA_ICON_ID)));
+                introPreference.setIcon(context.getDrawable(bundle.getInt(EXTRA_ICON_ID)));
             }
         } else {
             mState.ensureIcon(mAppEntry);
-            controller.setLabel(mAppEntry);
-            controller.setIcon(mAppEntry);
-            controller.setIsInstantApp(AppUtils.isInstant(mAppEntry.info));
+            introPreference.setTitle(mAppEntry.label);
+            introPreference.setIcon(Utils.getBadgedIcon(context, mAppEntry.info));
         }
-
-        controller.done(true /* rebindActions */);
     }
 
     @VisibleForTesting
     void initFooter() {
-        final String stateString;
-        final String footerString;
-        final Context context = getContext();
-
-        if (mBatteryOptimizeUtils.isDisabledForOptimizeModeOnly()) {
-            // Present optimized only string when the package name is invalid.
-            stateString = context.getString(R.string.manager_battery_usage_optimized_only);
-            footerString =
-                    context.getString(R.string.manager_battery_usage_footer_limited, stateString);
-        } else if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
-            // Present unrestricted only string when the package is system or default active app.
-            stateString = context.getString(R.string.manager_battery_usage_unrestricted_only);
-            footerString =
-                    context.getString(R.string.manager_battery_usage_footer_limited, stateString);
-        } else {
-            // Present default string to normal app.
-            footerString = context.getString(R.string.manager_battery_usage_footer);
+        final FooterPreference footerPreference = findPreference(KEY_FOOTER_PREFERENCE);
+        if (footerPreference == null) {
+            return;
         }
-        mFooterPreference.setTitle(footerString);
+        final Context context = getContext();
+        footerPreference.setTitle(context.getString(R.string.manager_battery_usage_footer));
         final Intent helpIntent =
                 HelpUtils.getHelpIntent(
                         context,
                         context.getString(R.string.help_url_app_usage_settings),
                         /* backupContext= */ "");
         if (helpIntent != null) {
-            mFooterPreference.setLearnMoreAction(
+            footerPreference.setLearnMoreAction(
                     v -> startActivityForResult(helpIntent, /* requestCode= */ 0));
-            mFooterPreference.setLearnMoreText(
+            footerPreference.setLearnMoreText(
                     context.getString(R.string.manager_battery_usage_link_a11y));
         }
-    }
-
-    private void onCreateBackgroundUsageState(String packageName) {
-        mOptimizePreference = findPreference(KEY_PREF_OPTIMIZED);
-        mUnrestrictedPreference = findPreference(KEY_PREF_UNRESTRICTED);
-        mMainSwitchPreference = findPreference(KEY_ALLOW_BACKGROUND_USAGE);
-        mFooterPreference = findPreference(KEY_FOOTER_PREFERENCE);
-
-        mOptimizePreference.setOnClickListener(this);
-        mUnrestrictedPreference.setOnClickListener(this);
-        mMainSwitchPreference.addOnSwitchChangeListener(this);
-
-        mBatteryOptimizeUtils =
-                new BatteryOptimizeUtils(
-                        getContext(), getArguments().getInt(EXTRA_UID), packageName);
-    }
-
-    private void updateSelectorPreferenceState(
-            SelectorWithWidgetPreference preference, String selectedKey) {
-        preference.setChecked(TextUtils.equals(selectedKey, preference.getKey()));
     }
 
     private void logMetricCategory(int currentOptimizeMode) {

@@ -17,12 +17,15 @@
 package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.view.accessibility.Flags;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.TwoStatePreference;
@@ -47,7 +50,6 @@ public class ColorAndMotionFragment extends DashboardFragment {
 
     // Preferences
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN = "daltonizer_preference";
-    private static final String TOGGLE_DISABLE_ANIMATIONS = "toggle_disable_animations";
     private static final String TOGGLE_LARGE_POINTER_ICON = "toggle_large_pointer_icon";
     @VisibleForTesting
     static final String TOGGLE_FORCE_INVERT = "toggle_force_invert";
@@ -74,9 +76,7 @@ public class ColorAndMotionFragment extends DashboardFragment {
         mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED);
         mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
         mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
-        }
+        mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
         if (Flags.forceInvertColor()) {
             mShortcutFeatureKeys.add(ToggleForceInvertPreferenceController.SETTINGS_KEY);
         }
@@ -122,7 +122,7 @@ public class ColorAndMotionFragment extends DashboardFragment {
         mDisplayDaltonizerPreferenceScreen = findPreference(DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
 
         // Disable animation.
-        mToggleDisableAnimationsPreference = findPreference(TOGGLE_DISABLE_ANIMATIONS);
+        mToggleDisableAnimationsPreference = findPreference(RemoveAnimationsPreference.KEY);
 
         // Large pointer icon.
         mToggleLargePointerIconPreference = findPreference(TOGGLE_LARGE_POINTER_ICON);
@@ -146,6 +146,12 @@ public class ColorAndMotionFragment extends DashboardFragment {
             experimentalCategory.addPreference(mToggleDisableAnimationsPreference);
             experimentalCategory.addPreference(mToggleLargePointerIconPreference);
         }
+    }
+
+    @Nullable
+    @Override
+    public String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return ColorAndMotionScreen.KEY;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

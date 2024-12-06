@@ -1034,6 +1034,9 @@ public class ManageApplications extends InstrumentedFragment
     }
 
     private void autoSetCollapsingToolbarLayoutScrolling() {
+        if (mAppBarLayout == null) {
+            return;
+        }
         final CoordinatorLayout.LayoutParams params =
                 (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
         final AppBarLayout.Behavior behavior = new AppBarLayout.Behavior();

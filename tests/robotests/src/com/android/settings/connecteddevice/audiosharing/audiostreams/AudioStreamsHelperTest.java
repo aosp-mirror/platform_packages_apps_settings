@@ -19,6 +19,9 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
 
+import static com.android.settingslib.flags.Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX;
+import static com.android.settingslib.flags.Flags.FLAG_ENABLE_LE_AUDIO_SHARING;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -31,17 +34,21 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
+import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
@@ -62,6 +69,7 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -71,9 +79,12 @@ import java.util.List;
 @Config(
         shadows = {
             ShadowThreadUtils.class,
+            ShadowBluetoothAdapter.class,
         })
 public class AudioStreamsHelperTest {
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private static final int GROUP_ID = 1;
     private static final int BROADCAST_ID_1 = 1;
     private static final int BROADCAST_ID_2 = 2;
@@ -86,10 +97,19 @@ public class AudioStreamsHelperTest {
     @Mock private BluetoothLeBroadcastMetadata mMetadata;
     @Mock private CachedBluetoothDevice mCachedDevice;
     @Mock private BluetoothDevice mDevice;
+    @Mock private BluetoothDevice mSourceDevice;
     private AudioStreamsHelper mHelper;
 
     @Before
     public void setUp() {
+        mSetFlagsRule.disableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        ShadowBluetoothAdapter shadowBluetoothAdapter = Shadow.extract(
+                BluetoothAdapter.getDefaultAdapter());
+        shadowBluetoothAdapter.setEnabled(true);
+        shadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
+                BluetoothStatusCodes.FEATURE_SUPPORTED);
+        shadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
+                BluetoothStatusCodes.FEATURE_SUPPORTED);
         when(mLocalBluetoothManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
         when(mLocalBluetoothManager.getCachedDeviceManager()).thenReturn(mDeviceManager);
         when(mLocalBluetoothProfileManager.getLeAudioBroadcastAssistantProfile())
@@ -166,6 +186,7 @@ public class AudioStreamsHelperTest {
 
     @Test
     public void removeSource_memberHasConnectedSource() {
+        String address = "11:22:33:44:55:66";
         List<BluetoothDevice> devices = new ArrayList<>();
         var memberDevice = mock(BluetoothDevice.class);
         devices.add(mDevice);
@@ -184,6 +205,8 @@ public class AudioStreamsHelperTest {
         List<Long> bisSyncState = new ArrayList<>();
         bisSyncState.add(1L);
         when(source.getBisSyncState()).thenReturn(bisSyncState);
+        when(source.getSourceDevice()).thenReturn(mSourceDevice);
+        when(mSourceDevice.getAddress()).thenReturn(address);
 
         mHelper.removeSource(BROADCAST_ID_2);
 
@@ -213,6 +236,54 @@ public class AudioStreamsHelperTest {
         when(source.getBisSyncState()).thenReturn(bisSyncState);
 
         var list = mHelper.getAllConnectedSources();
+        assertThat(list).isNotEmpty();
+        assertThat(list.get(0)).isEqualTo(source);
+    }
+
+    @Test
+    public void getAllPresentSources_noSource() {
+        mSetFlagsRule.enableFlags(FLAG_ENABLE_LE_AUDIO_SHARING);
+        mSetFlagsRule.enableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+
+        List<BluetoothDevice> devices = new ArrayList<>();
+        devices.add(mDevice);
+
+        String address = "00:00:00:00:00:00";
+
+        when(mAssistant.getAllConnectedDevices()).thenReturn(devices);
+        BluetoothLeBroadcastReceiveState source = mock(BluetoothLeBroadcastReceiveState.class);
+        when(mDeviceManager.findDevice(any())).thenReturn(mCachedDevice);
+        when(mCachedDevice.getDevice()).thenReturn(mDevice);
+        when(mCachedDevice.getGroupId()).thenReturn(GROUP_ID);
+        when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(source));
+        when(source.getSourceDevice()).thenReturn(mSourceDevice);
+        when(mSourceDevice.getAddress()).thenReturn(address);
+
+        var list = mHelper.getAllPresentSources();
+        assertThat(list).isEmpty();
+    }
+
+    @Test
+    public void getAllPresentSources_returnSource() {
+        mSetFlagsRule.enableFlags(FLAG_ENABLE_LE_AUDIO_SHARING);
+        mSetFlagsRule.enableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        String address = "11:22:33:44:55:66";
+
+        List<BluetoothDevice> devices = new ArrayList<>();
+        devices.add(mDevice);
+
+        when(mAssistant.getAllConnectedDevices()).thenReturn(devices);
+        BluetoothLeBroadcastReceiveState source = mock(BluetoothLeBroadcastReceiveState.class);
+        when(mDeviceManager.findDevice(any())).thenReturn(mCachedDevice);
+        when(mCachedDevice.getDevice()).thenReturn(mDevice);
+        when(mCachedDevice.getGroupId()).thenReturn(GROUP_ID);
+        when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(source));
+        when(source.getSourceDevice()).thenReturn(mSourceDevice);
+        when(mSourceDevice.getAddress()).thenReturn(address);
+        List<Long> bisSyncState = new ArrayList<>();
+        when(source.getBisSyncState()).thenReturn(bisSyncState);
+
+        var list = mHelper.getAllPresentSources();
         assertThat(list).isNotEmpty();
         assertThat(list.get(0)).isEqualTo(source);
     }

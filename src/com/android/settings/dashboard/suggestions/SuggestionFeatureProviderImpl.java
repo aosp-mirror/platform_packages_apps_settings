@@ -30,8 +30,6 @@ import com.android.settings.biometrics.fingerprint.FingerprintEnrollSuggestionAc
 import com.android.settings.biometrics.fingerprint.FingerprintSuggestionActivity;
 import com.android.settings.display.NightDisplayPreferenceController;
 import com.android.settings.flags.Flags;
-import com.android.settings.notification.zen.ZenOnboardingActivity;
-import com.android.settings.notification.zen.ZenSuggestionActivity;
 import com.android.settings.password.ScreenLockSuggestionActivity;
 import com.android.settings.wallpaper.StyleSuggestionActivity;
 import com.android.settings.wallpaper.WallpaperSuggestionActivity;
@@ -72,8 +70,6 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
             return WifiCallingSuggestionActivity.isSuggestionComplete(context);
         } else if (className.equals(NightDisplaySuggestionActivity.class.getName())) {
             return NightDisplayPreferenceController.isSuggestionComplete(context);
-        } else if (className.equals(ZenSuggestionActivity.class.getName())) {
-            return ZenOnboardingActivity.isSuggestionComplete(context);
         }
         return false;
     }

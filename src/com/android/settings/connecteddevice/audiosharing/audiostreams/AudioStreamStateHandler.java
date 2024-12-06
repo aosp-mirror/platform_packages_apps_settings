@@ -94,8 +94,13 @@ class AudioStreamStateHandler {
                     }
                     preference.setIsConnected(
                             newState
-                                    == AudioStreamsProgressCategoryController.AudioStreamState
-                                            .SOURCE_ADDED);
+                                            == AudioStreamsProgressCategoryController
+                                                    .AudioStreamState.SOURCE_ADDED
+                                    || (BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(
+                                                    preference.getContext())
+                                            && newState
+                                                    == AudioStreamsProgressCategoryController
+                                                            .AudioStreamState.SOURCE_PRESENT));
                     preference.setOnPreferenceClickListener(getOnClickListener(controller));
                 });
     }

@@ -37,7 +37,6 @@ import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.instrumentation.SettingsJankMonitor;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
-import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 
 /**
  * Instrumented fragment that logs visibility state.
@@ -148,7 +147,7 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
         mMetricsFeatureProvider.logClickedPreference(preference, getMetricsCategory());
     }
 
-    private void updateActivityTitleWithScreenTitle(PreferenceScreen screen) {
+    protected void updateActivityTitleWithScreenTitle(PreferenceScreen screen) {
         if (screen != null) {
             final CharSequence title = screen.getTitle();
             if (!TextUtils.isEmpty(title)) {

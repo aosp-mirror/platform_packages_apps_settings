@@ -16,6 +16,9 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static com.android.settingslib.flags.Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX;
+import static com.android.settingslib.flags.Flags.FLAG_ENABLE_LE_AUDIO_SHARING;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -29,11 +32,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.settings.SettingsEnums;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
+import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.view.View;
 
 import androidx.lifecycle.LifecycleOwner;
@@ -43,6 +49,7 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.R;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows.ShadowAudioStreamsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -59,6 +66,7 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -70,10 +78,11 @@ import java.util.concurrent.Executor;
         shadows = {
             ShadowThreadUtils.class,
             ShadowAudioStreamsHelper.class,
+            ShadowBluetoothAdapter.class,
         })
 public class AudioStreamButtonControllerTest {
-
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private static final String KEY = "audio_stream_button";
     private static final int BROADCAST_ID = 1;
     private final Context mContext = ApplicationProvider.getApplicationContext();
@@ -83,6 +92,7 @@ public class AudioStreamButtonControllerTest {
     @Mock private LocalBluetoothLeBroadcastAssistant mAssistant;
     @Mock private AudioStreamsRepository mRepository;
     @Mock private ActionButtonsPreference mPreference;
+    @Mock private BluetoothDevice mSourceDevice;
     private Lifecycle mLifecycle;
     private LifecycleOwner mLifecycleOwner;
     private FakeFeatureFactory mFeatureFactory;
@@ -90,6 +100,14 @@ public class AudioStreamButtonControllerTest {
 
     @Before
     public void setUp() {
+        mSetFlagsRule.disableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        ShadowBluetoothAdapter shadowBluetoothAdapter = Shadow.extract(
+                BluetoothAdapter.getDefaultAdapter());
+        shadowBluetoothAdapter.setEnabled(true);
+        shadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
+                BluetoothStatusCodes.FEATURE_SUPPORTED);
+        shadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
+                BluetoothStatusCodes.FEATURE_SUPPORTED);
         ShadowAudioStreamsHelper.setUseMock(mAudioStreamsHelper);
         when(mAudioStreamsHelper.getLeBroadcastAssistant()).thenReturn(mAssistant);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
@@ -245,6 +263,34 @@ public class AudioStreamButtonControllerTest {
                 mock(BluetoothDevice.class), /* sourceId= */ 0, state);
 
         verify(mFeatureFactory.metricsFeatureProvider)
+                .action(any(), eq(SettingsEnums.ACTION_AUDIO_STREAM_JOIN_SUCCEED), anyInt());
+
+        // Called twice, once in displayPreference, the other one in callback
+        verify(mPreference, times(2)).setButton1Enabled(true);
+        verify(mPreference, times(2)).setButton1Text(R.string.audio_streams_disconnect);
+        verify(mPreference, times(2))
+                .setButton1Icon(com.android.settings.R.drawable.ic_settings_close);
+    }
+
+    @Test
+    public void testCallback_onReceiveStateChangedWithSourcePresent_updateButton() {
+        mSetFlagsRule.enableFlags(FLAG_ENABLE_LE_AUDIO_SHARING);
+        mSetFlagsRule.enableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        String address = "11:22:33:44:55:66";
+
+        BluetoothLeBroadcastReceiveState state = mock(BluetoothLeBroadcastReceiveState.class);
+        when(state.getBroadcastId()).thenReturn(BROADCAST_ID);
+        when(state.getSourceDevice()).thenReturn(mSourceDevice);
+        when(mSourceDevice.getAddress()).thenReturn(address);
+        List<Long> bisSyncState = new ArrayList<>();
+        when(state.getBisSyncState()).thenReturn(bisSyncState);
+        when(mAudioStreamsHelper.getAllPresentSources()).thenReturn(List.of(state));
+
+        mController.displayPreference(mScreen);
+        mController.mBroadcastAssistantCallback.onReceiveStateChanged(
+                mock(BluetoothDevice.class), /* sourceId= */ 0, state);
+
+        verify(mFeatureFactory.metricsFeatureProvider, never())
                 .action(any(), eq(SettingsEnums.ACTION_AUDIO_STREAM_JOIN_SUCCEED), anyInt());
 
         // Called twice, once in displayPreference, the other one in callback

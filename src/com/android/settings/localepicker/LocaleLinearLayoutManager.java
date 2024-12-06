@@ -39,7 +39,10 @@ import com.android.settings.R;
  * <p>It only removes one locale at the time, but most users don't
  * really add many locales "by mistake", so there is no real need
  * to delete a lot of locales at once.</p>
+ *
+ * @deprecated use SettingLib's widget instead of customized UIs.
  */
+@Deprecated
 public class LocaleLinearLayoutManager extends LinearLayoutManager {
     private final LocaleDragAndDropAdapter mAdapter;
     private final Context mContext;

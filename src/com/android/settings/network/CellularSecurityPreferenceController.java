@@ -88,10 +88,10 @@ public class CellularSecurityPreferenceController extends BasePreferenceControll
         } catch (UnsupportedOperationException e) {
             Log.i(LOG_TAG, "Null cipher enablement is unsupported, hiding divider: "
                     + e.getMessage());
-        } catch (Exception e) {
+        } catch (IllegalStateException e) {
             Log.e(LOG_TAG,
                     "Failed isNullCipherAndIntegrityEnabled. Setting availability to "
-                            + "CONDITIONALLY_UNAVAILABLE. Exception: "
+                            + "UNSUPPORTED_ON_DEVICE. Exception: "
                             + e.getMessage());
         }
 
@@ -104,6 +104,12 @@ public class CellularSecurityPreferenceController extends BasePreferenceControll
         } catch (UnsupportedOperationException e) {
             Log.i(LOG_TAG, "Cellular security notifications are unsupported, hiding divider: "
                     + e.getMessage());
+        } catch (IllegalStateException e) {
+            Log.e(LOG_TAG,
+                    "Failed isNullCipherNotificationsEnabled, "
+                            + "isCellularIdentifierDisclosureNotificationsEnabled. "
+                            + "Setting availability to UNSUPPORTED_ON_DEVICE. Exception: "
+                            + e.getMessage());
         }
 
         if (isNullCipherDisablementAvailable || areCellSecNotificationsAvailable) {
@@ -119,7 +125,7 @@ public class CellularSecurityPreferenceController extends BasePreferenceControll
             return super.handlePreferenceTreeClick(preference);
         }
         boolean isSafetyCenterSupported = isSafetyCenterSupported();
-        if (isSafetyCenterSupported) {
+        if (isSafetyCenterSupported && areNotificationsEnabled()) {
             Intent safetyCenterIntent = new Intent(Intent.ACTION_SAFETY_CENTER);
             safetyCenterIntent.putExtra(SafetyCenterManager.EXTRA_SAFETY_SOURCES_GROUP_ID,
                     "AndroidCellularNetworkSecuritySources");

@@ -38,7 +38,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class AudioSharingReceiver extends BroadcastReceiver {
-    private static final String TAG = "AudioSharingNotification";
+    private static final String TAG = "AudioSharingReceiver";
     private static final String ACTION_LE_AUDIO_SHARING_SETTINGS =
             "com.android.settings.BLUETOOTH_AUDIO_SHARING_SETTINGS";
     private static final String ACTION_LE_AUDIO_SHARING_STOP =
@@ -49,10 +49,6 @@ public class AudioSharingReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (!BluetoothUtils.isAudioSharingEnabled()) {
-            Log.w(TAG, "Skip handling received intent, flag is off.");
-            return;
-        }
         String action = intent.getAction();
         if (action == null) {
             Log.w(TAG, "Received unexpected intent with null action.");
@@ -66,13 +62,22 @@ public class AudioSharingReceiver extends BroadcastReceiver {
                         intent.getIntExtra(
                                 LocalBluetoothLeBroadcast.EXTRA_LE_AUDIO_SHARING_STATE, -1);
                 if (state == LocalBluetoothLeBroadcast.BROADCAST_STATE_ON) {
+                    if (!BluetoothUtils.isAudioSharingUIAvailable(context)) {
+                        Log.w(TAG, "Skip showSharingNotification, feature disabled.");
+                        return;
+                    }
                     showSharingNotification(context);
                     metricsFeatureProvider.action(
                             context, SettingsEnums.ACTION_SHOW_AUDIO_SHARING_NOTIFICATION);
                 } else if (state == LocalBluetoothLeBroadcast.BROADCAST_STATE_OFF) {
+                    // TODO: check BluetoothUtils#isAudioSharingEnabled() till BluetoothAdapter#
+                    //       isLeAudioBroadcastSourceSupported() and BluetoothAdapter#
+                    //       isLeAudioBroadcastAssistantSupported() always return FEATURE_SUPPORTED
+                    //       or FEATURE_NOT_SUPPORTED when BT and BLE off
                     cancelSharingNotification(context);
                     metricsFeatureProvider.action(
-                            context, SettingsEnums.ACTION_CANCEL_AUDIO_SHARING_NOTIFICATION);
+                            context, SettingsEnums.ACTION_CANCEL_AUDIO_SHARING_NOTIFICATION,
+                            LocalBluetoothLeBroadcast.ACTION_LE_AUDIO_SHARING_STATE_CHANGE);
                 } else {
                     Log.w(
                             TAG,
@@ -80,16 +85,24 @@ public class AudioSharingReceiver extends BroadcastReceiver {
                 }
                 break;
             case ACTION_LE_AUDIO_SHARING_STOP:
-                LocalBluetoothManager manager = Utils.getLocalBtManager(context);
-                if (BluetoothUtils.isBroadcasting(manager)) {
-                    AudioSharingUtils.stopBroadcasting(manager);
-                    metricsFeatureProvider.action(
-                            context, SettingsEnums.ACTION_STOP_AUDIO_SHARING_FROM_NOTIFICATION);
-                } else {
-                    cancelSharingNotification(context);
-                    metricsFeatureProvider.action(
-                            context, SettingsEnums.ACTION_CANCEL_AUDIO_SHARING_NOTIFICATION);
+                if (BluetoothUtils.isAudioSharingUIAvailable(context)) {
+                    LocalBluetoothManager manager = Utils.getLocalBtManager(context);
+                    if (BluetoothUtils.isBroadcasting(manager)) {
+                        AudioSharingUtils.stopBroadcasting(manager);
+                        metricsFeatureProvider.action(
+                                context, SettingsEnums.ACTION_STOP_AUDIO_SHARING_FROM_NOTIFICATION);
+                        return;
+                    }
                 }
+                Log.w(TAG, "cancelSharingNotification, feature disabled or not in broadcast.");
+                // TODO: check BluetoothUtils#isAudioSharingEnabled() till BluetoothAdapter#
+                //       isLeAudioBroadcastSourceSupported() and BluetoothAdapter#
+                //       isLeAudioBroadcastAssistantSupported() always return FEATURE_SUPPORTED
+                //       or FEATURE_NOT_SUPPORTED when BT and BLE off
+                cancelSharingNotification(context);
+                metricsFeatureProvider.action(
+                        context, SettingsEnums.ACTION_CANCEL_AUDIO_SHARING_NOTIFICATION,
+                        ACTION_LE_AUDIO_SHARING_STOP);
                 break;
             default:
                 Log.w(TAG, "Received unexpected intent " + intent.getAction());
@@ -129,15 +142,15 @@ public class AudioSharingReceiver extends BroadcastReceiver {
                         PendingIntent.FLAG_IMMUTABLE);
         NotificationCompat.Action stopAction =
                 new NotificationCompat.Action.Builder(
-                                0,
-                                context.getString(R.string.audio_sharing_stop_button_label),
-                                stopPendingIntent)
+                        0,
+                        context.getString(R.string.audio_sharing_stop_button_label),
+                        stopPendingIntent)
                         .build();
         NotificationCompat.Action settingsAction =
                 new NotificationCompat.Action.Builder(
-                                0,
-                                context.getString(R.string.audio_sharing_settings_button_label),
-                                settingsPendingIntent)
+                        0,
+                        context.getString(R.string.audio_sharing_settings_button_label),
+                        settingsPendingIntent)
                         .build();
         final Bundle extras = new Bundle();
         extras.putString(

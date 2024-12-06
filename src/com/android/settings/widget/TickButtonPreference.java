@@ -21,6 +21,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
@@ -33,6 +35,10 @@ public class TickButtonPreference extends TwoTargetPreference {
 
     public TickButtonPreference(Context context) {
         super(context);
+    }
+
+    public TickButtonPreference(@NonNull Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
     }
 
     @Override

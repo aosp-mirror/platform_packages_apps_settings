@@ -172,9 +172,6 @@ public class ZenModeBackend {
     }
 
     protected void saveVisualEffectsPolicy(int category, boolean suppress) {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ZEN_SETTINGS_UPDATED, 1);
-
         int suppressedEffects = getNewSuppressedEffects(suppress, category);
         savePolicy(mPolicy.priorityCategories, mPolicy.priorityCallSenders,
                 mPolicy.priorityMessageSenders, suppressedEffects,
@@ -458,7 +455,7 @@ public class ZenModeBackend {
     }
 
     private static List<String> getDefaultRuleIds() {
-        return ZenModeConfig.DEFAULT_RULE_IDS;
+        return ZenModeConfig.getDefaultRuleIds();
     }
 
     NotificationManager.Policy toNotificationPolicy(ZenPolicy policy) {

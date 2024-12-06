@@ -1,5 +1,5 @@
 package: "com.android.settings.flags"
-container: "system_ext"
+container: "system"
 
 flag {
     name: "new_apn_page_enabled"
@@ -17,3 +17,14 @@ flag {
         purpose: PURPOSE_BUGFIX
     }
 }
+
+flag {
+    name: "satellite_oem_settings_ux_migration"
+    namespace: "settings_experience"
+    description: "Migrate satellite UX to Android Settings"
+    bug: "378781925"
+    metadata {
+        purpose: PURPOSE_BUGFIX
+    }
+}
+

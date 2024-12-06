@@ -55,14 +55,17 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -114,6 +117,10 @@ public class MainClearTest {
 
     @Mock
     private Intent mMockIntent;
+    @Mock
+    private FragmentManager mMockFragmentManager;
+    @Mock
+    private FragmentTransaction mMockFragmentTransaction;
 
     private MainClear mMainClear;
     private ShadowActivity mShadowActivity;
@@ -141,8 +148,8 @@ public class MainClearTest {
         doReturn(mMockActivity).when(mMainClear).getActivity();
         when(mMockActivity.getSystemService(BiometricManager.class)).thenReturn(mBiometricManager);
         when(mBiometricManager.canAuthenticate(anyInt(),
-                eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
-                .thenReturn(BiometricManager.BIOMETRIC_ERROR_MANDATORY_NOT_ACTIVE);
+                eq(BiometricManager.Authenticators.IDENTITY_CHECK)))
+                .thenReturn(BiometricManager.BIOMETRIC_ERROR_IDENTITY_CHECK_NOT_ACTIVE);
     }
 
     @After
@@ -255,7 +262,6 @@ public class MainClearTest {
         assertThat(mMainClear.showWipeEuicc()).isTrue();
     }
 
-    @Ignore("b/313566998")
     @Test
     public void testShowWipeEuicc_developerMode_unprovisioned() {
         prepareEuiccState(
@@ -371,7 +377,7 @@ public class MainClearTest {
         when(mMockActivity.getSystemService(BiometricManager.class)).thenReturn(mBiometricManager);
         when(mResources.getString(anyInt())).thenReturn(TEST_ACCOUNT_NAME);
         when(mBiometricManager.canAuthenticate(anyInt(),
-                eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
+                eq(BiometricManager.Authenticators.IDENTITY_CHECK)))
                 .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
         doReturn(true).when(mMainClear).isValidRequestCode(eq(MainClear.KEYGUARD_REQUEST));
         doNothing().when(mMainClear).startActivityForResult(any(), anyInt());
@@ -391,21 +397,29 @@ public class MainClearTest {
     @Test
     @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
     public void testOnActivityResultInternal_keyguardRequestNotTriggeringBiometricPrompt_lockoutError() {
+        final ArgumentCaptor<IdentityCheckBiometricErrorDialog> argumentCaptor =
+                ArgumentCaptor.forClass(IdentityCheckBiometricErrorDialog.class);
+
         when(mContext.getResources()).thenReturn(mResources);
         when(mMockActivity.getSystemService(BiometricManager.class)).thenReturn(mBiometricManager);
         when(mResources.getString(anyInt())).thenReturn(TEST_ACCOUNT_NAME);
         when(mBiometricManager.canAuthenticate(anyInt(),
-                eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
+                eq(BiometricManager.Authenticators.IDENTITY_CHECK)))
                 .thenReturn(BiometricManager.BIOMETRIC_ERROR_LOCKOUT);
         doReturn(true).when(mMainClear).isValidRequestCode(eq(MainClear.KEYGUARD_REQUEST));
         doNothing().when(mMainClear).startActivityForResult(any(), anyInt());
         doReturn(mMockActivity).when(mMainClear).getActivity();
+        doReturn(mMockFragmentManager).when(mMockActivity).getSupportFragmentManager();
+        doReturn(mMockFragmentTransaction).when(mMockFragmentManager).beginTransaction();
         doReturn(mContext).when(mMainClear).getContext();
 
         mMainClear
                 .onActivityResultInternal(MainClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
 
         verify(mMainClear).isValidRequestCode(eq(MainClear.KEYGUARD_REQUEST));
+        verify(mMainClear.getActivity().getSupportFragmentManager().beginTransaction()).add(
+                argumentCaptor.capture(), any());
+        assertThat(argumentCaptor.getValue()).isInstanceOf(IdentityCheckBiometricErrorDialog.class);
         verify(mMainClear, never()).startActivityForResult(any(), eq(MainClear.BIOMETRICS_REQUEST));
         verify(mMainClear, never()).establishInitialState();
         verify(mMainClear, never()).getAccountConfirmationIntent();
@@ -425,6 +439,29 @@ public class MainClearTest {
         verify(mMainClear, never()).establishInitialState();
         verify(mMainClear).getAccountConfirmationIntent();
         verify(mMainClear).showFinalConfirmation();
+    }
+
+    @Test
+    public void testOnActivityResultInternal_biometricRequestTriggeringBiometricErrorDialog() {
+        final ArgumentCaptor<IdentityCheckBiometricErrorDialog> argumentCaptor =
+                ArgumentCaptor.forClass(IdentityCheckBiometricErrorDialog.class);
+
+        doReturn(true).when(mMainClear).isValidRequestCode(
+                eq(MainClear.BIOMETRICS_REQUEST));
+        doNothing().when(mMainClear).establishInitialState();
+        doReturn(mMockActivity).when(mMainClear).getActivity();
+        doReturn(mMockFragmentManager).when(mMockActivity).getSupportFragmentManager();
+        doReturn(mMockFragmentTransaction).when(mMockFragmentManager).beginTransaction();
+        doReturn(mContext).when(mMainClear).getContext();
+
+        mMainClear
+                .onActivityResultInternal(MainClear.BIOMETRICS_REQUEST,
+                        ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT, null);
+
+        verify(mMainClear).isValidRequestCode(eq(MainClear.BIOMETRICS_REQUEST));
+        verify(mMainClear.getActivity().getSupportFragmentManager().beginTransaction()).add(
+                argumentCaptor.capture(), any());
+        verify(mMainClear).establishInitialState();
     }
 
     @Test

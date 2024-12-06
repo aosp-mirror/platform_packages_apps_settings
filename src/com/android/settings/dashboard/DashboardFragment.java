@@ -15,8 +15,6 @@
  */
 package com.android.settings.dashboard;
 
-import static com.android.settingslib.flags.Flags.settingsCatalyst;
-
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
@@ -50,12 +48,14 @@ import com.android.settings.core.CategoryMixin.CategoryListener;
 import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.restriction.UserRestrictionBindingHelper;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.metadata.PreferenceScreenRegistry;
+import com.android.settingslib.preference.PreferenceScreenBindingHelper;
+import com.android.settingslib.preference.PreferenceScreenCreator;
 import com.android.settingslib.search.Indexable;
 
 import java.util.ArrayList;
@@ -63,6 +63,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -93,6 +94,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     private boolean mListeningToCategoryChange;
     private List<String> mSuppressInjectedTileKeys;
 
+    private @Nullable UserRestrictionBindingHelper mUserRestrictionBindingHelper;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -101,8 +104,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         mDashboardFeatureProvider =
                 FeatureFactory.getFeatureFactory().getDashboardFeatureProvider();
 
-        if (!usePreferenceScreenMetadata() || PreferenceScreenRegistry.INSTANCE.get(
-                getPreferenceScreenBindingKey(context)) == null) {
+        PreferenceScreenCreator preferenceScreenCreator = getPreferenceScreenCreator();
+        if (preferenceScreenCreator == null || !preferenceScreenCreator.hasCompleteHierarchy()) {
             // Load preference controllers from code
             final List<AbstractPreferenceController> controllersFromCode =
                     createPreferenceControllers(context);
@@ -179,6 +182,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             // editing dialog is recreated (that would happen before onResume is called).
             updatePreferenceStates();
         }
+        if (isCatalystEnabled()) {
+            PreferenceScreenBindingHelper helper = getPreferenceScreenBindingHelper();
+            if (helper != null) {
+                mUserRestrictionBindingHelper = new UserRestrictionBindingHelper(requireContext(),
+                        helper);
+            }
+        }
     }
 
     @Override
@@ -253,6 +263,15 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
+        if (isCatalystEnabled()) {
+            Intent intent = preference.getIntent();
+            if (intent != null && preference.getContext().getPackageManager().queryIntentActivities(
+                    intent, 0).isEmpty()) {
+                Log.w(TAG, "No activity to start for " + intent);
+                return true;
+            }
+        }
+
         final Collection<List<AbstractPreferenceController>> controllers =
                 mPreferenceControllers.values();
         for (List<AbstractPreferenceController> controllerList : controllers) {
@@ -281,8 +300,12 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    protected final int getPreferenceScreenResId(@NonNull Context context) {
-        return getPreferenceScreenResId();
+    public void onDestroy() {
+        if (mUserRestrictionBindingHelper != null) {
+            mUserRestrictionBindingHelper.close();
+            mUserRestrictionBindingHelper = null;
+        }
+        super.onDestroy();
     }
 
     @Override
@@ -378,10 +401,14 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             return;
         }
         PreferenceScreen screen;
-        if (usePreferenceScreenMetadata()) {
+        PreferenceScreenCreator preferenceScreenCreator = getPreferenceScreenCreator();
+        if (preferenceScreenCreator != null) {
             screen = createPreferenceScreen();
+            if (!preferenceScreenCreator.hasCompleteHierarchy()) {
+                removeControllersForHybridMode();
+            }
             setPreferenceScreen(screen);
-            requireActivity().setTitle(screen.getTitle());
+            updateActivityTitleWithScreenTitle(screen);
         } else {
             addPreferencesFromResource(resId);
             screen = getPreferenceScreen();
@@ -390,17 +417,33 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         displayResourceTilesToScreen(screen);
     }
 
-    @Override
-    protected final boolean usePreferenceScreenMetadata() {
-        return settingsCatalyst() && enableCatalyst();
-    }
-
     /**
-     * Returns if settings catalyst should be enabled (e.g. check trunk stable flag) on current
-     * screen.
+     * Removes preference controllers that have been migrated to catalyst.
+     *
+     * In hybrid mode, preference screen is inflated from XML resource, while preference metadata
+     * in the preference hierarchy are used to update preference widget UI. To avoid conflict,
+     * remove the preference controllers.
      */
-    protected boolean enableCatalyst() {
-        return false;
+    private void removeControllersForHybridMode() {
+        Set<String> keys = getPreferenceKeysInHierarchy();
+        Iterator<AbstractPreferenceController> iterator = mControllers.iterator();
+        Lifecycle lifecycle = getSettingsLifecycle();
+        while (iterator.hasNext()) {
+            AbstractPreferenceController controller = iterator.next();
+            String key = controller.getPreferenceKey();
+            if (keys.contains(key)) {
+                Log.i(TAG, "Remove preference controller for " + key);
+                iterator.remove();
+                List<AbstractPreferenceController> controllers = mPreferenceControllers.get(
+                        controller.getClass());
+                if (controllers != null) {
+                    controllers.remove(controller);
+                }
+                if (controller instanceof LifecycleObserver) {
+                    lifecycle.removeObserver((LifecycleObserver) controller);
+                }
+            }
+        }
     }
 
     /**

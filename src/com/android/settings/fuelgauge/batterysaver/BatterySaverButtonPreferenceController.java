@@ -38,6 +38,7 @@ import com.android.settingslib.fuelgauge.BatterySaverUtils;
 import com.android.settingslib.widget.MainSwitchPreference;
 
 /** Controller to update the battery saver button */
+// LINT.IfChange
 public class BatterySaverButtonPreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnStart, OnStop, BatterySaverReceiver.BatterySaverListener {
     private static final long SWITCH_ANIMATION_DURATION = 350L;
@@ -129,3 +130,4 @@ public class BatterySaverButtonPreferenceController extends TogglePreferenceCont
         }
     }
 }
+// LINT.ThenChange(BatterySaverPreference.kt)
