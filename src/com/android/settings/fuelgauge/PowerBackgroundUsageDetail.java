@@ -25,7 +25,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.Log;
-import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -34,13 +33,12 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.fuelgauge.batteryusage.AppOptModeSharedPreferencesUtils;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.HelpUtils;
-import com.android.settingslib.applications.AppUtils;
+import com.android.settingslib.Utils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.IntroPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -153,36 +151,27 @@ public class PowerBackgroundUsageDetail extends DashboardFragment {
 
     @VisibleForTesting
     void initHeader() {
-        final LayoutPreference headerPreference = findPreference(KEY_PREF_HEADER);
-        if (headerPreference == null) {
+        final IntroPreference introPreference = findPreference(KEY_PREF_HEADER);
+        if (introPreference == null) {
             return;
         }
-        final View appSnippet = headerPreference.findViewById(R.id.entity_header);
         final Activity context = getActivity();
         final Bundle bundle = getArguments();
-        EntityHeaderController controller =
-                EntityHeaderController.newInstance(context, this, appSnippet)
-                        .setButtonActions(
-                                EntityHeaderController.ActionType.ACTION_NONE,
-                                EntityHeaderController.ActionType.ACTION_NONE);
 
         if (mAppEntry == null) {
-            controller.setLabel(bundle.getString(EXTRA_LABEL));
+            introPreference.setTitle(bundle.getString(EXTRA_LABEL));
 
             final int iconId = bundle.getInt(EXTRA_ICON_ID, 0);
             if (iconId == 0) {
-                controller.setIcon(context.getPackageManager().getDefaultActivityIcon());
+                introPreference.setIcon(context.getPackageManager().getDefaultActivityIcon());
             } else {
-                controller.setIcon(context.getDrawable(bundle.getInt(EXTRA_ICON_ID)));
+                introPreference.setIcon(context.getDrawable(bundle.getInt(EXTRA_ICON_ID)));
             }
         } else {
             mState.ensureIcon(mAppEntry);
-            controller.setLabel(mAppEntry);
-            controller.setIcon(mAppEntry);
-            controller.setIsInstantApp(AppUtils.isInstant(mAppEntry.info));
+            introPreference.setTitle(mAppEntry.label);
+            introPreference.setIcon(Utils.getBadgedIcon(context, mAppEntry.info));
         }
-
-        controller.done(true /* rebindActions */);
     }
 
     @VisibleForTesting

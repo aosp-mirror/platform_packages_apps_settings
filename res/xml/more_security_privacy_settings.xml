@@ -83,6 +83,12 @@
             android:summary="@string/summary_placeholder"
             settings:searchable="false"/>
 
+        <Preference
+            android:key="more_security_lock_screen_notifications_page"
+            android:title="@string/lock_screen_notifs_title"
+            android:fragment="com.android.settings.notification.LockScreenNotificationsPreferencePageFragment"
+            settings:controller="com.android.settings.notification.LockScreenNotificationsPreferencePageController" />
+
         <!-- Show media on lock screen -->
         <SwitchPreferenceCompat
             android:key="privacy_media_controls_lockscreen"
