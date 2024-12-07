@@ -348,6 +348,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         return null;
     }
 
+    /** Returns grouped controllers of input type T. */
+    protected <T extends AbstractPreferenceController> List<AbstractPreferenceController> useGroup(
+            Class<T> clazz) {
+        return mPreferenceControllers.values().stream().flatMap(Collection::stream).filter(
+                controller -> clazz.isInstance(controller)).toList();
+    }
+
     /** Returns all controllers of type T. */
     protected <T extends AbstractPreferenceController> List<T> useAll(Class<T> clazz) {
         return (List<T>) mPreferenceControllers.getOrDefault(clazz, Collections.emptyList());
