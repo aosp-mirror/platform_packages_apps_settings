@@ -19,6 +19,7 @@ package com.android.settings.network.telephony;
 import android.content.Context;
 import android.os.Build;
 import android.safetycenter.SafetyCenterManager;
+import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -26,6 +27,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.telephony.flags.Flags;
+import com.android.settings.network.SubscriptionUtil;
+
+import java.util.List;
 
 /**
  * {@link TelephonyTogglePreferenceController} for accessing Cellular Security settings through
@@ -73,6 +77,13 @@ public class CellularSecurityNotificationsPreferenceController extends
 
         if (!areFlagsEnabled()) {
             return UNSUPPORTED_ON_DEVICE;
+        }
+
+        // Check there are valid SIM cards which can be displayed to the user, otherwise this
+        // setting should not be shown.
+        List<SubscriptionInfo> availableSubs = SubscriptionUtil.getAvailableSubscriptions(mContext);
+        if (availableSubs.isEmpty()) {
+            return CONDITIONALLY_UNAVAILABLE;
         }
 
         // Checking for hardware support, i.e. IRadio AIDL version must be >= 2.2
