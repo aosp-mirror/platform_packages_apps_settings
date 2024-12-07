@@ -5412,6 +5412,17 @@
             </intent-filter>
         </service>
 
+        <!-- Service to expose Preference Metadata and Get/Set functionality -->
+        <service
+            android:name=".service.PreferenceService"
+            android:exported="true"
+            android:featureFlag="com.android.settingslib.flags.settings_catalyst"
+            android:permission="android.permission.READ_SYSTEM_PREFERENCES">
+            <intent-filter>
+                <action android:name="android.service.settings.preferences.action.PREFERENCE_SERVICE" />
+            </intent-filter>
+        </service>
+
         <receiver android:name="com.android.settings.connecteddevice.audiosharing.AudioSharingReceiver"
             android:exported="false">
             <intent-filter>
