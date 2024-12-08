@@ -39,6 +39,8 @@ class BluetoothDashboardScreenTest : CatalystScreenTestCase() {
         assertThat(preferenceScreenCreator.key).isEqualTo(BluetoothDashboardScreen.KEY)
     }
 
+    override fun migration() {}
+
     override fun launchFragment(
         fragmentClass: Class<PreferenceFragmentCompat>,
         action: (PreferenceFragmentCompat) -> Unit,
