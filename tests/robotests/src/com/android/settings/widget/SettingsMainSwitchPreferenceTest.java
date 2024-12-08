@@ -41,6 +41,7 @@ public class SettingsMainSwitchPreferenceTest {
     private EnforcedAdmin mEnforcedAdmin;
     private SettingsMainSwitchPreference mPreference;
     private PreferenceViewHolder mHolder;
+    private View mRootView;
 
     @Before
     public void setUp() {
@@ -50,9 +51,9 @@ public class SettingsMainSwitchPreferenceTest {
         mPreference = new SettingsMainSwitchPreference(context);
         ReflectionHelpers.setField(mPreference, "mEnforcedAdmin", mEnforcedAdmin);
         ReflectionHelpers.setField(mPreference, "mMainSwitchBar", switchBar);
-        final View rootView = View.inflate(context, com.android.settings.R.layout.preference_widget_main_switch,
+        mRootView = View.inflate(context, com.android.settings.R.layout.preference_widget_main_switch,
                 null /* parent */);
-        mHolder = PreferenceViewHolder.createInstanceForTests(rootView);
+        mHolder = PreferenceViewHolder.createInstanceForTests(mRootView);
     }
 
     @Test
@@ -73,5 +74,23 @@ public class SettingsMainSwitchPreferenceTest {
 
         assertThat(mPreference.isShowing()).isFalse();
         assertThat(mPreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void focusability_mainSwitchBarIsNotFocusable() {
+        mPreference.show();
+
+        mPreference.onBindViewHolder(mHolder);
+
+        assertThat(mPreference.getSwitchBar().isFocusable()).isFalse();
+    }
+
+    @Test
+    public void focusability_mainSwitchBarFrameLayoutIsFocusable() {
+        mPreference.show();
+
+        mPreference.onBindViewHolder(mHolder);
+
+        assertThat(mRootView.isFocusable()).isTrue();
     }
 }

@@ -898,6 +898,7 @@
     <string name="external_display_on" msgid="2560104443500154333">"Ativado"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Desativado"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"Ecrã externo"</string>
+    <string name="builtin_display_settings_category" msgid="3441388849060771885">"Ecrã integrado"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Usar ecrã externo"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Resolução do ecrã"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"O ecrã externo está desligado"</string>
@@ -1243,8 +1244,8 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Saiba mais sobre a rotação automática"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Resolução de ecrã"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Alta resolução"</string>
-    <string name="screen_resolution_option_full" msgid="2694003735219114186">"Resolução total"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"A resolução total consome mais bateria. Se mudar a resolução, algumas apps podem ser reiniciadas."</string>
+    <string name="screen_resolution_option_full" msgid="4456839315039000517">"Resolução máxima"</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"A resolução máxima consome mais bateria. Se mudar a resolução, algumas apps podem ser reiniciadas."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Selecionada"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Cores"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturais"</string>
@@ -1961,6 +1962,7 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opções"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Acessibilidade"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclado físico"</string>
+    <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Seletor de esquema de tecl. físico"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Evitar pressão repetida"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"O teclado ignora as pressões rápidas repetidas da mesma tecla"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Limiar para evitar pressão repetida"</string>
@@ -2573,8 +2575,8 @@
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Se limitar a atividade em segundo plano de uma aplicação, esta pode apresentar um comportamento anormal."</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"A app não está def. p/ otimizar a bateria, não a pode restringir.\n\nP/ restringir a app, ative a otimiz. da bateria."</string>
     <string name="manager_battery_usage_category_title" msgid="1493303237531629961">"Faça a gestão da utilização da bateria"</string>
-    <string name="manager_battery_usage_allow_background_usage_settings_title" msgid="8150026934645052635">"Permitir a utilização em segundo plano"</string>
-    <string name="manager_battery_usage_allow_background_usage_title" msgid="6294649996820358852">"Permitir a utilização em segundo plano"</string>
+    <string name="manager_battery_usage_allow_background_usage_settings_title" msgid="8150026934645052635">"Permitir utilização em segundo plano"</string>
+    <string name="manager_battery_usage_allow_background_usage_title" msgid="6294649996820358852">"Permitir utilização em segundo plano"</string>
     <string name="manager_battery_usage_allow_background_usage_summary" msgid="8021153755201340819">"Ative para atualizações em tempo real, desative para poupar bateria"</string>
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Sem restrições"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Otimizada"</string>
@@ -3637,6 +3639,14 @@
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"Mostrar menos notificações no ecrã de bloqueio"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Mostrar apenas novas notificações no ecrã de bloqueio"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Remove automaticamente do ecrã de bloqueio as notificações vistas anteriormente"</string>
+    <!-- no translation found for lock_screen_notifs_show_full_list (6767009263807771108) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_full_list_desc (4868489278443057427) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_compact (1133598661314460528) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_compact_desc (2442594880539709057) -->
+    <skip />
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificações no ecrã de bloqueio"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostrar conversas predefinidas e silenciosas"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostrar conversas predefinidas e silenciosas"</string>
@@ -3654,6 +3664,14 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Mostrar todo o conteúdo de notificações de trabalho"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Ocultar conteúdo de trabalho confidencial"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Como quer que as notificações do perfil sejam apresentadas quando o dispositivo estiver bloqueado?"</string>
+    <!-- no translation found for lock_screen_notification_hide_seen_title (6356324850662946426) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_seen_summary (8345971177658888274) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_title (3284314455767315329) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_summary (1934066619526795468) -->
+    <skip />
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Notificações do perfil"</string>
     <string name="notifications_title" msgid="4221655533193721131">"Notificações"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"Notificações de apps"</string>
@@ -4459,6 +4477,13 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"Gestos"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Abrir a câmara rapidamente"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Para abrir rapidamente a câmara, prima duas vezes o botão ligar/desligar. Funciona a partir de qualquer ecrã."</string>
+    <string name="double_tap_power_title" msgid="8705875166298116659">"Toque duas vezes no botão ligar/desligar"</string>
+    <string name="double_tap_power_enabled" msgid="305978257631612678">"Usar o gesto de tocar duas vezes"</string>
+    <string name="double_tap_power_target_action_category" msgid="6186809788568348488">"Tocar duas vezes no botão ligar/desligar"</string>
+    <string name="double_tap_power_camera_action_title" msgid="8398392033718681209">"Abrir Câmara"</string>
+    <string name="double_tap_power_camera_action_summary" msgid="1231656402570674349">"Aceda à Câmara"</string>
+    <string name="double_tap_power_wallet_action_title" msgid="2238628756927241786">"Abrir Carteira"</string>
+    <string name="double_tap_power_wallet_action_summary" msgid="6567586974229774570">"Aceda à Carteira"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Inverter a câmara para tirar uma selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Modo de navegação"</string>
@@ -4856,11 +4881,11 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"Mensagens por satélite"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Envie e receba mensagens de texto por satélite. Incluído na sua conta."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Envie e receba mensagens de texto por satélite. Não está incluído na sua conta."</string>
-    <string name="keywords_satellite_setting" msgid="3312183289776517695">"Mensagens por satélite"</string>
-    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Acerca das mensagens por satélite"</string>
+    <string name="keywords_satellite_setting" msgid="613553612424945946">"Mensagens por satélite, conetividade por satélite"</string>
+    <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"Acerca de <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Pode enviar e receber mensagens de texto por satélite através de uma conta elegível da operadora <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"O seu plano da operadora <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"As mensagens por satélite estão incluídas na sua conta"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"As mensagens estão incluídas na sua conta"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"As mensagens por satélite não estão incluídas na sua conta"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Saiba mais"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Como funciona"</string>
@@ -4868,12 +4893,33 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"O seu telemóvel vai ligar-se automaticamente a um satélite. Para conseguir a melhor ligação, procure uma vista desimpedida para o céu."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Depois de o seu telemóvel estabelecer ligação a um satélite"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Pode enviar mensagens de texto a qualquer pessoa, incluindo aos serviços de emergência. O seu telemóvel vai voltar a ligar-se a uma rede móvel quando esta estiver disponível."</string>
-    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"As mensagens por satélite podem demorar mais tempo e só estão disponíveis em algumas zonas. As condições meteorológicas e determinadas estruturas podem afetar a sua ligação por satélite. As chamadas por satélite não estão disponíveis. Pode continuar a fazer chamadas de emergência.\n\nPode demorar algum tempo até que as alterações à conta sejam apresentadas nas Definições. Contacte a sua operadora para mais detalhes."</string>
-    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Mais acerca das mensagens por satélite"</string>
+    <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"A funcionalidade <xliff:g id="SUBJECT">%1$s</xliff:g> pode demorar mais tempo e só está disponível em algumas áreas. As condições meteorológicas e determinadas estruturas podem afetar a sua ligação por satélite. As chamadas por satélite não estão disponíveis. Pode continuar a fazer chamadas de emergência.\n\nPode demorar algum tempo até que as alterações à conta sejam apresentadas nas Definições. Contacte a operadora <xliff:g id="CARRIER_NAME">%1$s</xliff:g> para mais detalhes."</string>
+    <string name="more_about_satellite_messaging" msgid="1039277943532711584">"Mais acerca de <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Não é possível ativar a função <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Para ativar a função <xliff:g id="FUNCTION">%1$s</xliff:g>, termine primeiro a ligação por satélite"</string>
     <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"Conetividade por satélite"</string>
-    <string name="satellite_setting_connectivity" msgid="80680165723879149">"Conetividade por satélite"</string>
+    <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Conetividade por satélite"</string>
+    <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"conetividade por satélite"</string>
+    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"mensagens por satélite"</string>
+    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"A utilização de dados está incluída na sua conta"</string>
+    <string name="title_for_satellite_sos" msgid="4608739357329147285">"Satélite SOS"</string>
+    <string name="summary_for_satellite_sos_entry" msgid="4981480371923329605">"Envie mensagens para os serviços de emergência quando não conseguir estabelecer ligação a uma rede móvel ou Wi‑Fi"</string>
+    <string name="keywords_satellite_sos" msgid="6275777197418023949">"satélite sos, sos"</string>
+    <string name="category_title_about_satellite_sos" msgid="7229724397303154919">"Acerca do Satélite SOS"</string>
+    <string name="satellite_sos_introduction" msgid="4670230212117495751">"Pode enviar mensagens para serviços de emergência e partilhar a localização mesmo sem ligação à rede móvel ou Wi-Fi. Este serviço pode não estar sempre disponível em todas as localizações ou circunstâncias."</string>
+    <string name="satellite_sos_how_it_works_step_1" msgid="4669862942425306921">"Ligue ou envie uma mensagem de texto para os serviços de emergência"</string>
+    <string name="satellite_sos_how_it_works_step_2" msgid="3558248744927579016">"Responda a perguntas sobre a emergência"</string>
+    <string name="satellite_sos_how_it_works_step_3" msgid="4496038314890474893">"Siga os passos para estabelecer ligação ao satélite"</string>
+    <string name="satellite_sos_how_it_works_summary_1" msgid="4497178023367920284">"Se não tiver uma rede móvel, é apresentada uma opção para usar o Satélite SOS"</string>
+    <string name="satellite_sos_how_it_works_summary_2" msgid="1302661361673503362">"Envie respostas para os serviços de emergência para que lhe seja prestada a ajuda adequada"</string>
+    <string name="satellite_sos_how_it_works_summary_3" msgid="4612675365617172405">"Quando estabelecer ligação, pode enviar mensagens para os serviços de emergência"</string>
+    <string name="satellite_sos_try_demo" msgid="1915233782211344468">"Experimentar demonstração"</string>
+    <string name="satellite_sos_footer_text" msgid="4454885538165117230">"Quando estabelece ligação aos serviços de emergência por satélite, o seu nome, email, número de telefone, localização, informações do dispositivo (IMEI, idioma, modelo e nível da bateria) e informações de contacto de emergência são partilhadas com serviços de emergência e fornecedores de serviços de satélite. \n\nPara usar a app Satélite SOS, a app Mensagens Google tem de ser a sua app de SMS predefinida. \n\nSe a seleção automática de rede estiver desativada, vai ser ativada e o seu dispositivo vai ligar-se automaticamente a qualquer rede."</string>
+    <string name="satellite_sos_sharing_preferences_subheader_title" msgid="5701538329333628267">"Preferências de partilha"</string>
+    <string name="satellite_sos_sharing_preferences_step_1" msgid="3106774199702637359">"Contactos de emergência"</string>
+    <string name="satellite_sos_sharing_preferences_step_2" msgid="738246589687762115">"A sua Conta Google"</string>
+    <string name="satellite_sos_sharing_preferences_description" msgid="782508188142964342">"Reveja ou atualize as informações que são partilhadas com os serviços de emergência"</string>
+    <string name="satellite_sos_learn_more_link" msgid="2442930426165677255">"https://support.google.com/pixelphone/answer/15254448"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nomes dos pontos de acesso"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Indisponível quando ligado a <xliff:g id="CARRIER">%1$s</xliff:g>."</string>
@@ -5060,9 +5106,8 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Está ativado o modo de 16 KB do modo sem página. A integridade do software não pode ser garantida neste modo e quaisquer dados armazenados no telemóvel enquanto o carregador de arranque estiver desbloqueado podem estar em risco. Algumas funcionalidades são desativadas nestes modos, por isso, algumas apps podem não funcionar. Para voltar a ativar o modo de produção, tem de voltar ao modo de 4 KB e, de seguida, bloquear o carregador de arranque do dispositivo. Esta ação permite fazer uma reposição de fábrica do dispositivo e restaurá-lo para as definições de produção. Depois de o dispositivo arrancar com êxito no Android, desative o desbloqueio pelo OEM nas Opções de programador. Se o dispositivo não conseguir arrancar no Android ou estiver instável, volte a atualizar o dispositivo com as imagens de fábrica mais recentes de &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; ou use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; e selecione \"Limpar dispositivo\", \"Bloquear carregador de arranque\" e \"Forçar a atualização de todas as partições\"."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Modo sem página de 16 KB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Ler mais"</string>
-    <!-- no translation found for enable_16k_app_compat_title (4173159228844992989) -->
-    <skip />
-    <!-- no translation found for enable_16k_app_compat_details (3847293423550174952) -->
+    <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"Execute a app com o modo de compatibilidade com o tamanho da página"</string>
+    <!-- no translation found for enable_16k_app_compat_details (3389401258168314266) -->
     <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Controlador do relatório de erro"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determina que aplicação processa o atalho para Relatório de erro no seu dispositivo."</string>

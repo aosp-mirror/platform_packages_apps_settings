@@ -72,7 +72,6 @@ import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.LottieColorUtils;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.airbnb.lottie.LottieDrawable;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -335,7 +334,8 @@ public final class AccessibilityShortcutsTutorial {
                 result -> Log.w(TAG, "Invalid image raw resource id: " + imageRawRes,
                         result));
         lottieView.setAnimation(imageRawRes);
-        lottieView.setRepeatCount(LottieDrawable.INFINITE);
+        // Follow the Motion Stoppable requirement by using a finite animation.
+        lottieView.setRepeatCount(0);
         LottieColorUtils.applyDynamicColors(context, lottieView);
         lottieView.playAnimation();
 
@@ -494,10 +494,6 @@ public final class AccessibilityShortcutsTutorial {
 
         for (int shortcutType: AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
             if ((shortcutTypes & shortcutType) == 0) {
-                continue;
-            }
-            if ((shortcutTypes & QUICK_SETTINGS) == QUICK_SETTINGS
-                    && !android.view.accessibility.Flags.a11yQsShortcut()) {
                 continue;
             }
             tutorialPages.add(

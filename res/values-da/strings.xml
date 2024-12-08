@@ -898,6 +898,7 @@
     <string name="external_display_on" msgid="2560104443500154333">"Til"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Fra"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"Ekstern skærm"</string>
+    <string name="builtin_display_settings_category" msgid="3441388849060771885">"Indbygget skærm"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Brug ekstern skærm"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Skærmopløsning"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Forbindelse til ekstern skærm afbrudt"</string>
@@ -909,8 +910,7 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Hvis skærmretningen eller opløsningen ændres, kan du risikere, at aktive apps stopper"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"Din enhed skal have forbindelse til en ekstern skærm for at spejle skærmen"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Flere valgmuligheder"</string>
-    <!-- no translation found for external_display_topology_hint (854973327795578470) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="854973327795578470">"Hold og træk for at omarrangere skærmene."</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"spejl"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Aktivér trådløs skærm"</string>
@@ -1244,8 +1244,8 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Få flere oplysninger om automatisk rotering"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Skærmopløsning"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Høj opløsning"</string>
-    <string name="screen_resolution_option_full" msgid="2694003735219114186">"Fuld opløsning"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"Fuld opløsning bruger mere batteri. Nogle apps genstarter muligvis, hvis du skifter opløsning."</string>
+    <string name="screen_resolution_option_full" msgid="4456839315039000517">"Maksimal opløsning"</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"Maksimal opløsning bruger mere batteri. Nogle apps genstarter muligvis, hvis du skifter opløsning."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Valgt"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Farver"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturlige"</string>
@@ -1324,8 +1324,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Indstillinger for sengetid"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Tilstande kan også aktivere mørkt tema}=1{{mode_1} aktiverer også mørkt tema}=2{{mode_1} og {mode_2} aktiverer også mørkt tema}=3{{mode_1}, {mode_2} og {mode_3} aktiverer også mørkt tema}one{{mode_1}, {mode_2} og # anden aktiverer også mørkt tema}other{{mode_1}, {mode_2} og # andre aktiverer også mørkt tema}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Indstillinger for tilstande"</string>
-    <!-- no translation found for even_dimmer_display_title (4509732439977906028) -->
-    <skip />
+    <string name="even_dimmer_display_title" msgid="4509732439977906028">"Ekstra dæmpet belysning"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Tillad, at enheden nedtones mere end normalt"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Timeout for skærmen"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Efter <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> med inaktivitet"</string>
@@ -1963,6 +1962,8 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Valgmuligheder"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Hjælpefunktioner"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fysisk tastatur"</string>
+    <!-- no translation found for physical_keyboard_layout_picker_title (4526600767648916256) -->
+    <skip />
     <string name="bounce_keys" msgid="7419450970351743904">"Elastiktaster"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"Tastaturet ignorerer gentagende, hurtige tryk på den samme tast"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Grænse for elastiktaster"</string>
@@ -3639,6 +3640,14 @@
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"Vis færre notifikationer på låseskærmen"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Vis kun nye notifikationer på låseskærmen"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Fjern automatisk tidligere sete notifikationer fra låseskærmen"</string>
+    <!-- no translation found for lock_screen_notifs_show_full_list (6767009263807771108) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_full_list_desc (4868489278443057427) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_compact (1133598661314460528) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_compact_desc (2442594880539709057) -->
+    <skip />
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notifikationer på låseskærmen"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Vis samtaler, standard og lydløs"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Vis samtaler, standard og lydløs"</string>
@@ -3656,6 +3665,14 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Vis alt indhold i arbejdsnotifikationer"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Skjul følsomt arbejdsindhold"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Hvordan skal profilunderretninger vises, når din enhed er låst?"</string>
+    <!-- no translation found for lock_screen_notification_hide_seen_title (6356324850662946426) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_seen_summary (8345971177658888274) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_title (3284314455767315329) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_summary (1934066619526795468) -->
+    <skip />
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Profilunderretninger"</string>
     <string name="notifications_title" msgid="4221655533193721131">"Notifikationer"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"Appnotifikationer"</string>
@@ -4461,6 +4478,20 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"Bevægelser"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Åbn hurtigt kameraet"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Du kan åbne dit kamera hurtigt ved at trykke to gange på afbryderknappen. Denne genvej fungerer fra enhver skærm."</string>
+    <!-- no translation found for double_tap_power_title (8705875166298116659) -->
+    <skip />
+    <!-- no translation found for double_tap_power_enabled (305978257631612678) -->
+    <skip />
+    <!-- no translation found for double_tap_power_target_action_category (6186809788568348488) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_title (8398392033718681209) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_summary (1231656402570674349) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_title (2238628756927241786) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_summary (6567586974229774570) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Vend kameraet for at tage en selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigationstilstand"</string>
@@ -4858,11 +4889,11 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"Satellitbeskeder"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Send og modtag beskeder via satellit. Inkluderet på din konto."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Send og modtag beskeder via satellit. Ikke tilgængeligt på din konto."</string>
-    <string name="keywords_satellite_setting" msgid="3312183289776517695">"Satellitbeskeder"</string>
-    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Om satellitbeskeder"</string>
+    <string name="keywords_satellite_setting" msgid="613553612424945946">"Satellitbeskeder, satellitforbindelse"</string>
+    <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"Om <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Du kan sende og modtage beskeder via satellit som en del af en kvalificeret <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-konto"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Dit <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-abonnement"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"Din konto omfatter satellitbeskeder"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"Muligheden for at sende beskeder er inkluderet på din konto"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Din konto omfatter ikke satellitbeskeder"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Få flere oplysninger"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Sådan fungerer det"</string>
@@ -4870,12 +4901,33 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Din telefon opretter automatisk forbindelse til en satellit. Du opnår den bedst mulige forbindelse, hvis du står udenfor med frit udsyn til himlen."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Når din telefon har oprettet forbindelse til en satellit"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Du kan sende en besked til alle, herunder nødtjenester. Din telefon opretter forbindelse til et mobilnetværk igen, når det er tilgængeligt."</string>
-    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Satellitbeskeder kan tage længere tid og er kun tilgængelige i nogle regioner. Vejret og visse fysiske betingelser kan påvirke din satellitforbindelse. Opkald via satellit er ikke muligt. Nødopkald kan muligvis stadig gå igennem.\n\nDer kan gå lidt tid, før kontoændringerne vises i Indstillinger. Kontakt dit mobilselskab for at få flere oplysninger."</string>
-    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Flere oplysninger om satellitbeskeder"</string>
+    <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"<xliff:g id="SUBJECT">%1$s</xliff:g> kan tage længere tid og er kun tilgængelig i nogle områder. Vejret og visse fysiske betingelser kan påvirke din satellitforbindelse. Opkald via satellit er ikke muligt. Nødopkald kan muligvis stadig gå igennem.\n\nDer kan gå lidt tid, før kontoændringerne vises i Indstillinger. Kontakt <xliff:g id="CARRIER_NAME">%1$s</xliff:g> for at få flere oplysninger."</string>
+    <string name="more_about_satellite_messaging" msgid="1039277943532711584">"Mere om <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> kan ikke aktiveres"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Hvis du vil aktivere <xliff:g id="FUNCTION">%1$s</xliff:g>, skal du først afslutte satellitforbindelsen"</string>
     <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"Satellitforbindelse"</string>
-    <!-- no translation found for satellite_setting_connectivity (80680165723879149) -->
+    <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Satellitforbindelse"</string>
+    <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"satellitforbindelse"</string>
+    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"satellitbeskeder"</string>
+    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Brug af data er inkluderet på din konto"</string>
+    <string name="title_for_satellite_sos" msgid="4608739357329147285">"SOS-meldinger via satellit"</string>
+    <string name="summary_for_satellite_sos_entry" msgid="4981480371923329605">"Send beskeder til nødtjenester, når du ikke kan oprette forbindelse til et mobil- eller Wi-Fi-netværk"</string>
+    <string name="keywords_satellite_sos" msgid="6275777197418023949">"SOS-meldinger via satellit, sos"</string>
+    <string name="category_title_about_satellite_sos" msgid="7229724397303154919">"Om SOS-meldinger via satellit"</string>
+    <string name="satellite_sos_introduction" msgid="4670230212117495751">"Du kan sende beskeder til nødtjenester og dele din lokation, når du ikke kan oprette forbindelse til et mobil- eller Wi-Fi-netværk. Funktionen er muligvis ikke tilgængelig på alle tidspunkter, på alle lokationer og i alle situationer."</string>
+    <string name="satellite_sos_how_it_works_step_1" msgid="4669862942425306921">"Ring eller send en besked til nødtjenester"</string>
+    <string name="satellite_sos_how_it_works_step_2" msgid="3558248744927579016">"Svar på spørgsmål om nødsituationen"</string>
+    <string name="satellite_sos_how_it_works_step_3" msgid="4496038314890474893">"Følg anvisningerne for at oprette forbindelse til satellitten"</string>
+    <string name="satellite_sos_how_it_works_summary_1" msgid="4497178023367920284">"Hvis du ikke har et mobilnetværk, vil du se en valgmulighed for SOS-meldinger via satellit"</string>
+    <string name="satellite_sos_how_it_works_summary_2" msgid="1302661361673503362">"Send svar til nødtjenester, så du kan få den rette hjælp"</string>
+    <string name="satellite_sos_how_it_works_summary_3" msgid="4612675365617172405">"Når du har oprettet forbindelse, kan du sende en besked til nødtjenesterne"</string>
+    <string name="satellite_sos_try_demo" msgid="1915233782211344468">"Prøv en demo"</string>
+    <string name="satellite_sos_footer_text" msgid="4454885538165117230">"Når du kontakter nødtjenester via satellit, deles dit navn, din mailadresse, dit telefonnummer, din lokation, dine enhedsoplysninger (IMEI, sprog, model, batteriniveau) og nødkontaktoplysninger med nødtjenester og udbydere af satellittjenester. \n\nHvis du vil bruge SOS-meldinger via satellit, skal Google Beskeder være din standardapp til sms. \n\nHvis automatisk netværksvalg er deaktiveret, aktiveres det, og din enhed opretter automatisk forbindelse til ethvert netværk."</string>
+    <string name="satellite_sos_sharing_preferences_subheader_title" msgid="5701538329333628267">"Deling af præferencer"</string>
+    <string name="satellite_sos_sharing_preferences_step_1" msgid="3106774199702637359">"Nødkontakter"</string>
+    <string name="satellite_sos_sharing_preferences_step_2" msgid="738246589687762115">"Din Google-konto"</string>
+    <string name="satellite_sos_sharing_preferences_description" msgid="782508188142964342">"Gennemgå eller opdater de oplysninger, der skal deles med nødtjenester"</string>
+    <!-- no translation found for satellite_sos_learn_more_link (2442930426165677255) -->
     <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Adgangspunkter"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
@@ -5063,9 +5115,8 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Du er i den sideagnostiske tilstand med 16 kB. Softwareintegriteten kan ikke garanteres i denne tilstand, og eventuelle data, der gemmes på telefonen, mens bootloaderen er ulåst, kan være sårbare. Nogle funktioner deaktiveres i disse tilstande, så nogle apps fungerer muligvis ikke. Hvis du vil vende tilbage til produktionstilstand, skal du skifte tilbage til tilstanden med 4 kB og derefter låse bootloaderen på enheden. Denne handling gendanner enhedens fabriksindstillinger til produktionsindstillingerne. Når enheden er startet i Android, skal du deaktivere OEM-oplåsning via Indstillinger for udviklere. Hvis enheden ikke kan starte i Android, eller hvis den er ustabil, skal du flashe enheden igen med de oprindelige systembilleder fra &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; eller bruge &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; og vælge \"Ryd enhed\", \"Lås bootloader\" og \"Gennemtving flash af alle partitioner\"."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Den sideagnostiske tilstanden med 16 kB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Læs mere"</string>
-    <!-- no translation found for enable_16k_app_compat_title (4173159228844992989) -->
-    <skip />
-    <!-- no translation found for enable_16k_app_compat_details (3847293423550174952) -->
+    <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"Kør appen i kompatibilitetstilstand for sidestørrelse"</string>
+    <!-- no translation found for enable_16k_app_compat_details (3389401258168314266) -->
     <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Håndtering af fejlrapport"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Afgør, hvilken app der håndterer genvejen til fejlrapporten på din enhed."</string>

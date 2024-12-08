@@ -67,7 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"નવા ડિવાઇસ જોડો"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"બ્લૂટૂથ"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"આવતીકાલે ઑટોમૅટિક રીતે ચાલુ કરો"</string>
-    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"જો તમારું બ્લૂટૂથ બંધ હોય, તો તે બીજે દિવસે ફરી ચાલુ થાય છે"</string>
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"જો તમે બ્લૂટૂથ બંધ કરો છો, તો તે બીજે દિવસે ફરી ચાલુ થાય છે"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"જમણા કાનને જોડો"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"ડાબા કાનને જોડો"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"તમારા બીજા કાનનું જોડો"</string>
@@ -898,6 +898,7 @@
     <string name="external_display_on" msgid="2560104443500154333">"ચાલુ"</string>
     <string name="external_display_off" msgid="5634413756025351374">"બંધ"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"બાહ્ય ડિસ્પ્લે"</string>
+    <string name="builtin_display_settings_category" msgid="3441388849060771885">"બિલ્ટ-ઇન ડિસ્પ્લે"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"બાહ્ય ડિસ્પ્લેનો ઉપયોગ કરો"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"ડિસ્પ્લેનું રિઝોલ્યુશન"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"બાહ્ય ડિસ્પ્લે ડિસ્કનેક્ટેડ છે"</string>
@@ -909,8 +910,7 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"રોટેશન અથવા રિઝોલ્યુશન બદલવાથી હાલમાં ચાલી રહેલી કોઈપણ ઍપ બંધ થઈ શકે છે"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"તમારી સ્ક્રીનને મિરર કરવા માટે તમારું ડિવાઇસ બાહ્ય ડિસ્પ્લે સાથે કનેક્ટેડ હોવું આવશ્યક છે"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"વધુ વિકલ્પો"</string>
-    <!-- no translation found for external_display_topology_hint (854973327795578470) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="854973327795578470">"ડિસ્પ્લેનો ક્રમ બદલવા માટે દબાવી રાખીને ખેંચો."</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"કાસ્ટ કરો"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"મીરર"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"વાયરલેસ ડિસ્પ્લે સક્ષમ કરો"</string>
@@ -1244,8 +1244,8 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"ઑટો રોટેટ (સ્ક્રીનની ઑટોમૅટિક રીતે ફરવાની ક્રિયા) વિશે વધુ જાણો"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"સ્ક્રીન રિઝોલ્યુશન"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"વધુ રિઝોલ્યુશન"</string>
-    <string name="screen_resolution_option_full" msgid="2694003735219114186">"પૂર્ણ રિઝોલ્યુશન"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"પૂર્ણ રિઝોલ્યુશનથી તમારી બૅટરીનો વપરાશ વધુ થાય છે. તમારું રિઝોલ્યુશન સ્વિચ કરવાથી કેટલીક ઍપ કદાચ ફરી શરૂ થઈ શકે છે."</string>
+    <string name="screen_resolution_option_full" msgid="4456839315039000517">"ઉચ્ચ રિઝોલ્યુશન"</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"ઉચ્ચ રિઝોલ્યુશનથી તમારી બૅટરીનો વપરાશ વધુ થાય છે. તમારું રિઝોલ્યુશન સ્વિચ કરવાથી કેટલીક ઍપ કદાચ ફરી શરૂ થઈ શકે છે."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"પસંદ કર્યું"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"રંગો"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"કુદરતી"</string>
@@ -1324,8 +1324,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"બેડટાઇમ મોડનાં સેટિંગ"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{મોડ ડાર્ક થીમને પણ સક્રિય કરી શકે છે}=1{{mode_1} ડાર્ક થીમને પણ સક્રિય કરી શકે છે}=2{{mode_1} અને {mode_2} ડાર્ક થીમને પણ સક્રિય કરી શકે છે}=3{{mode_1}, {mode_2} અને {mode_3} ડાર્ક થીમને પણ સક્રિય કરી શકે છે}one{{mode_1}, {mode_2} અને વધુ # ડાર્ક થીમને પણ સક્રિય કરી શકે છે}other{{mode_1}, {mode_2} અને વધુ # ડાર્ક થીમને પણ સક્રિય કરી શકે છે}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"મોડના સેટિંગ"</string>
-    <!-- no translation found for even_dimmer_display_title (4509732439977906028) -->
-    <skip />
+    <string name="even_dimmer_display_title" msgid="4509732439977906028">"એક્સ્ટ્રા ડિમ"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"ડિવાઇસને સામાન્ય કરતાં વધુ ઝાંખું થવા દો"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"સ્ક્રીનનો ઑટોમૅટિક સમાપ્તિ સમય"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"નિષ્ક્રિયતાના <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> પછી"</string>
@@ -1963,6 +1962,8 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"વિકલ્પો"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"ઍક્સેસિબિલિટી"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"ભૌતિક કીબોર્ડ"</string>
+    <!-- no translation found for physical_keyboard_layout_picker_title (4526600767648916256) -->
+    <skip />
     <string name="bounce_keys" msgid="7419450970351743904">"બાઉન્સ કી"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"એક જ કીને વારંવાર ઝડપથી દબાવવાની પ્રક્રિયાની કીબોર્ડ અવગણના કરે છે"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"બાઉન્સ કી સંબંધિત મર્યાદા"</string>
@@ -3639,6 +3640,14 @@
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"લૉક સ્ક્રીન પર ઓછા નોટિફિકેશન બતાવો"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"લૉક સ્ક્રીન પર માત્ર નવા નોટિફિકેશન બતાવો"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"લૉક સ્ક્રીન પરથી અગાઉ જોયેલા નોટિફિકેશન ઑટોમૅટિક રીતે કાઢી નાખો"</string>
+    <!-- no translation found for lock_screen_notifs_show_full_list (6767009263807771108) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_full_list_desc (4868489278443057427) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_compact (1133598661314460528) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_compact_desc (2442594880539709057) -->
+    <skip />
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"લૉક સ્ક્રીન પર નોટિફિકેશન"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"ડિફૉલ્ટ અને સાઇલન્ટ વાતચીતો બતાવો"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"ડિફૉલ્ટ અને સાઇલન્ટ વાતચીતો બતાવો"</string>
@@ -3656,6 +3665,14 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"કાર્યાલયનું તમામ નોટિફિકેશન કન્ટેન્ટ બતાવો"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"કાર્ય સંબંધિત સંવેદનશીલ કન્ટેન્ટ છુપાવો"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"જ્યારે તમારું ઉપકરણ લૉક કરેલું હોય, ત્યારે તમે પ્રોફાઇલ નોટિફિકેશનો કેવી રીતે બતાવવા માગો છો?"</string>
+    <!-- no translation found for lock_screen_notification_hide_seen_title (6356324850662946426) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_seen_summary (8345971177658888274) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_title (3284314455767315329) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_summary (1934066619526795468) -->
+    <skip />
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"પ્રોફાઇલ સૂચનાઓ"</string>
     <string name="notifications_title" msgid="4221655533193721131">"નોટિફિકેશન"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"ઍપ નોટિફિકેશન"</string>
@@ -3747,7 +3764,7 @@
     <string name="notification_polite_work" msgid="8823596456640216391">"ઑફિસની પ્રોફાઇલ પર લાગુ કરો"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"ઑફિસની પ્રોફાઇલ ઍપ પર લાગુ કરો"</string>
     <string name="notification_bundle_title" msgid="460988459835922719">"બંડલ બનાવેલા નોટિફિકેશન"</string>
-    <string name="notification_bundle_on" msgid="1596327200778050642">"ચાલુ"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"ચાલુ છે"</string>
     <string name="notification_bundle_off" msgid="1550261372988157377">"બંધ"</string>
     <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"નોટિફિકેશન બંડલ બનાવવાની પ્રક્રિયાનો ઉપયોગ કરો"</string>
     <string name="notification_bundle_description" msgid="3896142878395333784">"વધુ શાંત અનુભવ માટે સમાન થીમવાળા નોટિફિકેશનને સાઇલન્ટ કરીને એકસાથે ગ્રૂપ કરવામાં આવશે. બંડલ બનાવવાની પ્રક્રિયા ઍપના પોતાના નોટિફિકેશનના સેટિંગને ઓવરરાઇડ કરશે."</string>
@@ -4461,6 +4478,20 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"સંકેતો"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"ઝડપથી કૅમેરા ખોલો"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"વધુ ઝડપથી કૅમેરા ખોલવા માટે, પાવર બટનને બે વાર દબાવો. કોઈપણ સ્ક્રીન પરથી કામ કરે છે."</string>
+    <!-- no translation found for double_tap_power_title (8705875166298116659) -->
+    <skip />
+    <!-- no translation found for double_tap_power_enabled (305978257631612678) -->
+    <skip />
+    <!-- no translation found for double_tap_power_target_action_category (6186809788568348488) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_title (8398392033718681209) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_summary (1231656402570674349) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_title (2238628756927241786) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_summary (6567586974229774570) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"સેલ્ફી માટે કૅમેરાને ફ્લિપ કરો"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"નૅવિગેશન મોડ"</string>
@@ -4858,11 +4889,11 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"સૅટલાઇટ મેસેજિંગ"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"સૅટલાઇટ મારફતે ટેક્સ્ટ મેસેજ મોકલો અને પ્રાપ્ત કરો. તમારા એકાઉન્ટમાં શામેલ છે."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"સૅટલાઇટ મારફતે ટેક્સ્ટ મેસેજ મોકલો અને પ્રાપ્ત કરો. તમારા એકાઉન્ટ સાથે શામેલ નથી."</string>
-    <string name="keywords_satellite_setting" msgid="3312183289776517695">"સૅટલાઇટ મેસેજિંગ"</string>
-    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"સૅટલાઇટ મેસેજિંગ સેવા વિશે"</string>
+    <string name="keywords_satellite_setting" msgid="613553612424945946">"સૅટલાઇટ મેસેજિંગ, સૅટલાઇટ કનેક્ટિવિટી"</string>
+    <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"<xliff:g id="SUBJECT">%1$s</xliff:g> વિશે"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"યોગ્ય <xliff:g id="CARRIER_NAME">%1$s</xliff:g> એકાઉન્ટના ભાગ તરીકે તમે સૅટલાઇટ મારફતે ટેક્સ્ટ મેસેજ મોકલી અને પ્રાપ્ત કરી શકો છો"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"તમારો <xliff:g id="CARRIER_NAME">%1$s</xliff:g> પ્લાન"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"સૅટલાઇટ મેસેજિંગ તમારા એકાઉન્ટમાં શામેલ છે"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"મેસેજિંગ તમારા એકાઉન્ટમાં શામેલ છે"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"સૅટલાઇટ મેસેજિંગ તમારા એકાઉન્ટમાં શામેલ નથી"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"વધુ જાણો"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"તેની કામ કરવાની રીત"</string>
@@ -4870,12 +4901,33 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"તમારો ફોન સૅટલાઇટ સાથે ઑટોમૅટિક રીતે કનેક્ટ કરવામાં આવશે. શ્રેષ્ઠ કનેક્શન માટે, સ્પષ્ટ રીતે આકાશ જોઈ શકાય તે રીતે બહાર રહો."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"તમારો ફોન સૅટલાઇટ સાથે કનેક્ટ થયા પછી"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"તમે ઇમર્જન્સી સર્વિસ સહિત કોઈને પણ ટેક્સ્ટ કરી શકો છો. જ્યારે કોઈ મોબાઇલ નેટવર્ક ઉપલબ્ધ હશે, ત્યારે તમારો ફોન તેની સાથે ફરીથી કનેક્ટ કરવામાં આવશે."</string>
-    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"સૅટલાઇટ મેસેજિંગને વધુ સમય લાગી શકે છે અને તે માત્ર અમુક વિસ્તારોમાં જ ઉપલબ્ધ છે. વાતાવરણ અને ચોક્કસ સંરચનાઓ તમારા સૅટલાઇટ કનેક્શનને અસર કરી શકે છે. સૅટલાઇટ મારફતે કૉલ કરવાની સુવિધા ઉપલબ્ધ નથી. છતાં પણ ઇમર્જન્સી કૉલ કનેક્ટ થઈ શકે છે.\n\nએકાઉન્ટમાં કરવામાં આવેલા ફેરફારોને સેટિંગમાં દેખાવામાં થોડો સમય લાગી શકે છે. વિગતો માટે તમારા મોબાઇલ ઑપરેટરનો સંપર્ક કરો."</string>
-    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"સૅટલાઇટ મેસેજિંગ વિશે વધુ"</string>
+    <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"<xliff:g id="SUBJECT">%1$s</xliff:g>ને વધુ સમય લાગી શકે છે અને તે માત્ર અમુક વિસ્તારોમાં જ ઉપલબ્ધ છે. વાતાવરણ અને ચોક્કસ સંરચનાઓ તમારા સૅટલાઇટ કનેક્શનને અસર કરી શકે છે. સૅટલાઇટ મારફતે કૉલ કરવાની સુવિધા ઉપલબ્ધ નથી. છતાં પણ ઇમર્જન્સી કૉલ કનેક્ટ થઈ શકે છે.\n\nએકાઉન્ટમાં કરવામાં આવેલા ફેરફારોને સેટિંગમાં દેખાવામાં થોડો સમય લાગી શકે છે. વિગતો માટે <xliff:g id="CARRIER_NAME">%1$s</xliff:g>નો સંપર્ક કરો."</string>
+    <string name="more_about_satellite_messaging" msgid="1039277943532711584">"<xliff:g id="SUBJECT">%1$s</xliff:g> વિશે વધુ માહિતી"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> ચાલુ કરી શકતા નથી"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g> ચાલુ કરવા માટે, પહેલા સૅટલાઇટ કનેક્શન સમાપ્ત કરો"</string>
     <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"સૅટલાઇટની કનેક્ટિવિટી"</string>
-    <!-- no translation found for satellite_setting_connectivity (80680165723879149) -->
+    <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"સૅટલાઇટ કનેક્ટિવિટી"</string>
+    <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"સૅટલાઇટ કનેક્ટિવિટી"</string>
+    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"સૅટલાઇટ મેસેજિંગ"</string>
+    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"ડેટાનો ઉપયોગ તમારા એકાઉન્ટમાં શામેલ છે"</string>
+    <string name="title_for_satellite_sos" msgid="4608739357329147285">"ઇમર્જન્સી સૅટલાઇટ સહાય"</string>
+    <string name="summary_for_satellite_sos_entry" msgid="4981480371923329605">"જ્યારે તમે મોબાઇલ અથવા વાઇ-ફાઇ નેટવર્ક સાથે કનેક્ટ કરી શકતા નથી ત્યારે ઇમર્જન્સી સર્વિસ વડે મેસેજ મોકલો"</string>
+    <string name="keywords_satellite_sos" msgid="6275777197418023949">"ઇમર્જન્સી સૅટલાઇટ સહાય, sos"</string>
+    <string name="category_title_about_satellite_sos" msgid="7229724397303154919">"ઇમર્જન્સી સૅટલાઇટ સહાય વિશે"</string>
+    <string name="satellite_sos_introduction" msgid="4670230212117495751">"જ્યારે તમે મોબાઇલ અથવા વાઇ-ફાઇ નેટવર્કથી કનેક્ટ કરી શકતા નથી ત્યારે તમે ઇમર્જન્સી સર્વિસ વડે મેસેજ કરી શકો છો અને તમારું લોકેશન શેર કરી શકો છો. આ સેવા કદાચ બધા લોકેશનમાં કે અમુક સંજોગોમાં હંમેશાં ઉપલબ્ધ ન પણ હોય."</string>
+    <string name="satellite_sos_how_it_works_step_1" msgid="4669862942425306921">"ઇમર્જન્સી સર્વિસને કૉલ અથવા ટેક્સ્ટ કરો"</string>
+    <string name="satellite_sos_how_it_works_step_2" msgid="3558248744927579016">"ઇમર્જન્સી વિશેના પ્રશ્નોના જવાબ આપો"</string>
+    <string name="satellite_sos_how_it_works_step_3" msgid="4496038314890474893">"સૅટલાઇટ સાથે કનેક્ટ કરવા માટે પગલાં અનુસરો"</string>
+    <string name="satellite_sos_how_it_works_summary_1" msgid="4497178023367920284">"જો તમે કોઈ મોબાઇલ નેટવર્ક ધરાવતા ન હો, તો તમને ઇમર્જન્સી સૅટલાઇટ સહાયનો ઉપયોગ કરવા માટે કોઈ વિકલ્પ દેખાશે"</string>
+    <string name="satellite_sos_how_it_works_summary_2" msgid="1302661361673503362">"તમને યોગ્ય પ્રકારની સહાય મળી રહે તે માટે ઇમર્જન્સી સર્વિસને જવાબ મોકલો"</string>
+    <string name="satellite_sos_how_it_works_summary_3" msgid="4612675365617172405">"એકવાર તમે કનેક્ટેડ થઈ જાઓ, પછી તમે ઇમર્જન્સી સર્વિસ વડે મેસેજ મોકલી શકો છો"</string>
+    <string name="satellite_sos_try_demo" msgid="1915233782211344468">"ડેમો અજમાવી જુઓ"</string>
+    <string name="satellite_sos_footer_text" msgid="4454885538165117230">"જ્યારે તમે સૅટલાઇટ મારફતે ઇમર્જન્સી સર્વિસ સાથે કનેક્ટ કરો, ત્યારે તમારું નામ, ઇમેઇલ, ફોન નંબર, લોકેશન, ડિવાઇસની માહિતી (IMEI, ભાષા, મૉડલ, બૅટરી લેવલ) અને ઇમર્જન્સી માટેના સંપર્કની માહિતીને ઇમર્જન્સી સર્વિસ અને સૅટલાઇટ સેવા પ્રદાતા સાથે શેર કરવામાં આવે છે. \n\nઇમર્જન્સી સૅટલાઇટ સહાયનો ઉપયોગ કરવા માટે, Google Messages તમારી ડિફૉલ્ટ SMS ઍપ હોવી જરૂરી છે. \n\nજો ઑટોમૅટિક નેટવર્કની પસંદગી કરવાની સુવિધા બંધ હોય, તો તે ચાલુ થઈ જશે, અને તમારું ડિવાઇસ ઑટોમૅટિક રીતે બીજા કોઈપણ નેટવર્ક સાથે કનેક્ટ થઈ જશે."</string>
+    <string name="satellite_sos_sharing_preferences_subheader_title" msgid="5701538329333628267">"શેરિંગ સંબંધી પસંદગીઓ"</string>
+    <string name="satellite_sos_sharing_preferences_step_1" msgid="3106774199702637359">"ઇમર્જન્સી માટેના સંપર્કો"</string>
+    <string name="satellite_sos_sharing_preferences_step_2" msgid="738246589687762115">"તમારું Google એકાઉન્ટ"</string>
+    <string name="satellite_sos_sharing_preferences_description" msgid="782508188142964342">"ઇમર્જન્સી સર્વિસ સાથે શેર કરવાની હોય તે માહિતી રિવ્યૂ કે અપડેટ કરો"</string>
+    <!-- no translation found for satellite_sos_learn_more_link (2442930426165677255) -->
     <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ઍક્સેસ પૉઇન્ટના નામ"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
@@ -5063,9 +5115,8 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"તમે પેજ-એગ્નોસ્ટિક મોડના 16KB મોડમાં છો. આ મોડમાં સૉફ્ટવેરની સંપૂર્ણતાની ગૅરંટી આપી શકાતી નથી અને જ્યારે બૂટલોડર અનલૉક કરેલું હોય ત્યારે ફોનમાં સ્ટોર કરેલો કોઈપણ ડેટા જોખમમાં હોઈ શકે છે. આ મોડમાં અમુક સુવિધાઓ બંધ કરવામાં આવશે, તેથી અમુક ઍપ્લિકેશનો કામ ન કરે એવું બની શકે છે. પ્રોડક્શન મોડમાં ફરીથી દાખલ થવા માટે, તમારે 4KB મોડ પર પાછા સ્વિચ કરવું આવશ્યક છે અને પછી ડિવાઇસના બૂટલોડરને લૉક કરો. આ ડિવાઇસને ફરીથી ફેક્ટરી રીસેટ કરશે અને તેને પ્રોડક્શન સેટિંગમાં રિસ્ટોર કરશે. ડિવાઇસ સફળતાપૂર્વક Androidમાં બૂટ થાય તે પછી, ડેવલપરના વિકલ્પોમાં OEM અનલૉક કરવાના સેટિંગને બંધ કરો. જો ડિવાઇસ Android OSથી બૂટ થવાનું નિષ્ફળ રહે અથવા અસ્થિર હોય, તો ડિવાઇસને &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;ની નવીનતમ ફેક્ટરી છબીઓથી OS ફરીથી ફ્લૅશ કરો અથવા &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt;નો ઉપયોગ કરો તેમજ \'ડિવાઇસનો ડેટા વાઇપ કરો\', \'બૂટલોડર લૉક કરો\' અને \'તમામ પાર્ટિશન ફરજિયાત રીતે ફલૅશ કરો\' પસંદ કરો."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB પેજ એગ્નોસ્ટિક મોડ"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"વધુ વાંચો"</string>
-    <!-- no translation found for enable_16k_app_compat_title (4173159228844992989) -->
-    <skip />
-    <!-- no translation found for enable_16k_app_compat_details (3847293423550174952) -->
+    <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"પેજના કદ સુસંગતતા મોડમાં ઍપને ચલાવો"</string>
+    <!-- no translation found for enable_16k_app_compat_details (3389401258168314266) -->
     <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"બગ રિપોર્ટ હૅન્ડલ કરનાર"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"તમારા ડિવાઇસ પર કઈ ઍપ ખામીની જાણકારીના શૉર્ટકટને હૅન્ડલ કરે તે નક્કી કરે છે."</string>
@@ -5231,7 +5282,7 @@
     <string name="uwb_settings_summary" msgid="3074271396764672268">"UWB ધરાવતા નજીકના ડિવાઇસનું સંબંધિત અંતર ઓળખવામાં સહાય કરે છે"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"UWBનો ઉપયોગ કરવા માટે એરપ્લેન મોડ બંધ કરો"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"હાલના લોકેશનમાં UWB અનુપલબ્ધ છે"</string>
-    <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
+    <string name="thread_network_settings_title" msgid="4212301030523859220">"થ્રેડ"</string>
     <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"થ્રેડનો ઉપયોગ કરો"</string>
     <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"થ્રેડ તમારા સ્માર્ટ ઘરના સ્માર્ટ ડિવાઇસ કનેક્ટ કરવામાં, કાર્યક્ષમતા અને પર્ફોર્મન્સને બહેતર બનાવવામાં સહાય કરે છે.\n\nજ્યારે ચાલુ હોય, ત્યારે આ ડિવાઇસ થ્રેડ નેટવર્કમાં જોડાવા માટે યોગ્ય છે, જે આ ફોન મારફતે Matter દ્વારા સપોર્ટ કરવામાં આવતા ડિવાઇસના નિયંત્રણની મંજૂરી આપે છે."</string>
     <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"થ્રેડ વિશે વધુ જાણો"</string>

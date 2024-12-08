@@ -898,6 +898,7 @@
     <string name="external_display_on" msgid="2560104443500154333">"Naka-on"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Naka-off"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"External na Display"</string>
+    <string name="builtin_display_settings_category" msgid="3441388849060771885">"Built-in na display"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Gumamit ng external na display"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Resolution ng display"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Nadiskonekta ang external na display"</string>
@@ -909,8 +910,7 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Posibleng huminto ang anumang app na kasalukuyang gumagana kapag binago ang pag-rotate o resolution"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"Dapat nakakonekta sa external na display ang iyong device para ma-mirror ang screen mo"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Higit pang opsyon"</string>
-    <!-- no translation found for external_display_topology_hint (854973327795578470) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="854973327795578470">"I-hold at i-drag para baguhin ang ayos ng mga display."</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"I-cast"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"mirror"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"I-enable ang wireless display"</string>
@@ -1244,8 +1244,8 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Matuto pa tungkol sa auto-rotate"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Resolusyon ng screen"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Mataas na resolution"</string>
-    <string name="screen_resolution_option_full" msgid="2694003735219114186">"Buong resolution"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"Mas malakas gumamit ng iyong baterya ang buong resolution. Kapag pinalitan mo ang iyong resolution, posible itong maging sanhi ng pag-restart ng ilang app."</string>
+    <string name="screen_resolution_option_full" msgid="4456839315039000517">"Max na resolution"</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"Mas malakas gumamit ng iyong baterya ang max na resolution. Kapag pinalitan mo ang iyong resolution, posible itong maging sanhi ng pag-restart ng ilang app."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Napili"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Mga Kulay"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Natural"</string>
@@ -1324,8 +1324,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Mga setting ng Bedtime mode"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Maa-activate din ng mga mode ang madilim na tema}=1{Maa-activate din ng {mode_1} ang madilim na tema}=2{Maa-activate din ng {mode_1} at {mode_2} ang madilim na tema}=3{Maa-activate din ng {mode_1}, {mode_2}, at {mode_3} ang madilim na tema}one{Maa-activate din ng {mode_1}, {mode_2}, at # pa ang madilim na tema}other{Maa-activate din ng {mode_1}, {mode_2}, at # pa ang madilim na tema}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Mga setting ng mga mode"</string>
-    <!-- no translation found for even_dimmer_display_title (4509732439977906028) -->
-    <skip />
+    <string name="even_dimmer_display_title" msgid="4509732439977906028">"Extra dim"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Payagan ang device na mas dumilim kaysa karaniwan"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Timeout ng screen"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Pagkatapos ng <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ng kawalan ng aktibidad"</string>
@@ -1963,6 +1962,8 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Mga Opsyon"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accessibility"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Pisikal na keyboard"</string>
+    <!-- no translation found for physical_keyboard_layout_picker_title (4526600767648916256) -->
+    <skip />
     <string name="bounce_keys" msgid="7419450970351743904">"Mga bounce key"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"Binabalewala ng keyboard ang mabilis na paulit-ulit na pagpindot sa iisang key"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Limitasyon ng bounce key"</string>
@@ -3639,6 +3640,14 @@
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"Magpakita ng mas kaunting notification sa lock screen"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Ipakita ang mga bagong notification lang sa lock screen"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Awtomatikong alisin ang mga natingnan nang notification sa lock screen"</string>
+    <!-- no translation found for lock_screen_notifs_show_full_list (6767009263807771108) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_full_list_desc (4868489278443057427) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_compact (1133598661314460528) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_compact_desc (2442594880539709057) -->
+    <skip />
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Mga notification sa lock screen"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Ipakita ang mga pag-uusap, default, at naka-silent"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Ipakita ang mga pag-uusap, default, at naka-silent"</string>
@@ -3656,6 +3665,14 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Ipakita, lahat ng content ng notification sa trabaho"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Itago ang sensitibong content ng trabaho"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Kapag naka-lock ang iyong device, paano mo gustong lumabas ang mga notification tungkol sa profile?"</string>
+    <!-- no translation found for lock_screen_notification_hide_seen_title (6356324850662946426) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_seen_summary (8345971177658888274) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_title (3284314455767315329) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_summary (1934066619526795468) -->
+    <skip />
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Mga notification sa profile"</string>
     <string name="notifications_title" msgid="4221655533193721131">"Mga Notification"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"Notification sa app"</string>
@@ -4461,6 +4478,20 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"Mga Galaw"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Mabilis na buksan ang camera"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Para mabuksan kaagad ang camera, pindutin ang power button nang dalawang beses. Gumagana ito sa anumang screen."</string>
+    <!-- no translation found for double_tap_power_title (8705875166298116659) -->
+    <skip />
+    <!-- no translation found for double_tap_power_enabled (305978257631612678) -->
+    <skip />
+    <!-- no translation found for double_tap_power_target_action_category (6186809788568348488) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_title (8398392033718681209) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_summary (1231656402570674349) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_title (2238628756927241786) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_summary (6567586974229774570) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"I-flip ang camera para sa selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigation mode"</string>
@@ -4858,11 +4889,11 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"Satellite na pagmemensahe"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Magpadala at makatanggap ng mga text message sa pamamagitan ng satellite. Kasama sa iyong account."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Magpadala at makatanggap ng mga text message sa pamamagitan ng satellite. Hindi kasama sa iyong account."</string>
-    <string name="keywords_satellite_setting" msgid="3312183289776517695">"Satellite na pagmemensahe"</string>
-    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Tungkol sa satellite na pagmemensahe"</string>
+    <string name="keywords_satellite_setting" msgid="613553612424945946">"Satellite messaging, koneksyon sa satellite"</string>
+    <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"Tungkol sa <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Puwede kang magpadala at makatanggap ng mga text message sa pamamagitan ng satellite bilang bahagi ng isang kwalipikadong <xliff:g id="CARRIER_NAME">%1$s</xliff:g> account"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Ang iyong plan sa <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"Kasama ang satellite na pagmemensahe sa iyong account"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"Kasama sa iyong account ang pagmemensahe"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Hindi kasama ang satellite na pagmemensahe sa iyong account"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Matuto Pa"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Paano ito gumagana"</string>
@@ -4870,12 +4901,33 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Awomatikong kokonekta ang iyong telepono sa satellite. Para sa pinakamahusay na koneksyon, manatili sa kung saan may malinaw na view ng kalangitan."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Kapag nakakoenekta na ang iyong telepono sa satellite"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Puwede kang mag-text sa kahit sino, kasama ang mga serbisyong pang-emergency. Kokonekta ulit ang iyong telepono sa mobile network kapag available."</string>
-    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Posibleng mas magtagal ang satellite na pagmemensahe at available lang sa ilang lugar. Puwedeng makaapekto sa iyong koneksyon sa satellite ang lagay ng panahon at ilang partikular na istruktura. Hindi available ang pagtawag gamit ang satellite. Posibleng kumonekta pa rin ang mga emergency na tawag.\n\nPosibleng abutin nang ilang sandali bago lumabas ang mga pagbabago sa account sa Mga Setting. Makipag-ugnayan sa iyong carrier para sa mga detalye."</string>
-    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Higit pa tungkol sa satellite na pagmemensahe"</string>
+    <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"Posibleng mas matagal at available lang sa ilang lugar ang <xliff:g id="SUBJECT">%1$s</xliff:g>. Puwedeng makaapekto sa iyong koneksyon sa satellite ang lagay ng panahon at ilang partikular na istruktura. Hindi available ang pagtawag gamit ang satellite. Posibleng kumonekta pa rin ang mga emergency na tawag.\n\nPosibleng abutin nang ilang sandali bago lumabas ang mga pagbabago sa account sa Mga Setting. Makipag-ugnayan sa <xliff:g id="CARRIER_NAME">%1$s</xliff:g> para sa mga detalye."</string>
+    <string name="more_about_satellite_messaging" msgid="1039277943532711584">"Higit pa tungkol sa <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Hindi ma-on ang <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Para i-on ang <xliff:g id="FUNCTION">%1$s</xliff:g>, wakasan muna ang koneksyon sa satellite"</string>
     <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"Koneksyon sa satellite"</string>
-    <!-- no translation found for satellite_setting_connectivity (80680165723879149) -->
+    <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Koneksyon sa satellite"</string>
+    <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"koneksyon sa satellite"</string>
+    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"satellite messaging"</string>
+    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Kasama sa iyong account ang paggamit ng data"</string>
+    <string name="title_for_satellite_sos" msgid="4608739357329147285">"SOS Gamit ang Satellite"</string>
+    <string name="summary_for_satellite_sos_entry" msgid="4981480371923329605">"Magmensahe sa mga serbisyong pang-emergency kapag hindi ka makakonekta sa mobile o Wi‑Fi network"</string>
+    <string name="keywords_satellite_sos" msgid="6275777197418023949">"sos gamit ang satellite, sos"</string>
+    <string name="category_title_about_satellite_sos" msgid="7229724397303154919">"Tungkol sa SOS Gamit ang Satellite"</string>
+    <string name="satellite_sos_introduction" msgid="4670230212117495751">"Puwede kang magpadala ng mensahe sa mga serbisyong pang-emergency at magbahagi ng lokasyon mo lokasyon kapag hindi ka makakonekta sa mobile o Wi-Fi network. Posibleng hindi available ang serbisyong ito sa lahat ng oras sa lahat ng lokasyon o sitwasyon."</string>
+    <string name="satellite_sos_how_it_works_step_1" msgid="4669862942425306921">"Tumawag o mag-text sa mga serbisyong pang-emergency"</string>
+    <string name="satellite_sos_how_it_works_step_2" msgid="3558248744927579016">"Magsagot ng mga tanong tungkol sa emergency"</string>
+    <string name="satellite_sos_how_it_works_step_3" msgid="4496038314890474893">"Sundin ang mga hakbang para kumonekta sa satellite"</string>
+    <string name="satellite_sos_how_it_works_summary_1" msgid="4497178023367920284">"Kung wala kang mobile network, makakakita ka ng opsyong gamitin ang SOS gamit ang satellite"</string>
+    <string name="satellite_sos_how_it_works_summary_2" msgid="1302661361673503362">"Magpadala ng mga sagot sa mga serbisyong pang-emergency para makuha mo ang naaangkop na uri ng tulong"</string>
+    <string name="satellite_sos_how_it_works_summary_3" msgid="4612675365617172405">"Kapag nakakonekta ka na, puwede ka nang magmensahe sa mga serbisyong pang-emergency"</string>
+    <string name="satellite_sos_try_demo" msgid="1915233782211344468">"Sumubok ng demo"</string>
+    <string name="satellite_sos_footer_text" msgid="4454885538165117230">"Kapag kumonekta ka sa mga serbisyong pang-emergency sa pamamagitan ng satellite, ibabahagi ang iyong pangalan, email, numero ng telepono, lokasyon, impormasyon ng device (IMEI, wika, modelo, level ng baterya), at impormasyon ng pang-emergency na contact sa mga serbisyong pang-emergency at service provider ng satellite. \n\nPara gamitin ang SOS gamit ang satellite, dapat ay Google Messages ang default mong SMS app. \n\nKung naka-off ang awtomatikong pagpili ng network, mao-on ito, at awtomatikong kokonekta sa anumang network ang iyong device."</string>
+    <string name="satellite_sos_sharing_preferences_subheader_title" msgid="5701538329333628267">"Mga preference sa pagbabahagi"</string>
+    <string name="satellite_sos_sharing_preferences_step_1" msgid="3106774199702637359">"Mga pang-emergency na contact"</string>
+    <string name="satellite_sos_sharing_preferences_step_2" msgid="738246589687762115">"Iyong Google Account"</string>
+    <string name="satellite_sos_sharing_preferences_description" msgid="782508188142964342">"Suriin o i-update ang impormasyong ibabahagi sa mga serbisyong pang-emergency"</string>
+    <!-- no translation found for satellite_sos_learn_more_link (2442930426165677255) -->
     <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Mga Access Point Name"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
@@ -5063,9 +5115,8 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Nasa 16KB mode ka ng page-agnostic mode. Hindi magagarantiya ang integridad ng software sa mode na ito, at posibleng malagay sa panganib ang anumang data na naka-store sa telepono habang naka-unlock ang bootloader. Madi-disable ang ilang feature sa mga mode na ito, kaya posibleng hindi gumana ang ilang application. Para makabalik sa production mode, kailangan mong bumalik sa 4KB mode at pagkatapos ay i-lock ang bootloader ng device. Ifa-factory reset nito ulit ang device at ire-restore ito sa mga setting sa production. Pagkatapos mag-boot ng device sa Android, i-disable ang OEM na pag-unlock sa Mga opsyon ng developer. Kung hindi magbu-boot sa Android ang device o unstable ito, mag-flash ulit sa device ng mga pinakabagong factory image mula sa &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; o gamitin ang &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; at piliin ang \'I-wipe ang Device,\' \'I-lock ang Bootloader,\' at \'Sapilitang I-flash ang lahat ng partition.\'"</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB Page-agnostic Mode"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Magbasa pa"</string>
-    <!-- no translation found for enable_16k_app_compat_title (4173159228844992989) -->
-    <skip />
-    <!-- no translation found for enable_16k_app_compat_details (3847293423550174952) -->
+    <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"Paganahin ang app sa page size compat mode"</string>
+    <!-- no translation found for enable_16k_app_compat_details (3389401258168314266) -->
     <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Tagapangasiwa ng ulat ng bug"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Tinutukoy kung aling app ang mangangasiwa sa shortcut ng Ulat ng Bug sa iyong device."</string>
@@ -5233,7 +5284,7 @@
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"Hindi available sa kasalukuyang lokasyon ang UWB"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
     <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"Gamitin ang Thread"</string>
-    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"Nakakatulong ang Thread na ikonekta ang iyong mga device para sa smart na tahanan, na nagbu-boost ng efficiency, at performance.\n\nKapag naka-enable, kwalipikado ang device na ito na sumali sa isang Thread network, na nagbibigay-daan sa pagkontrol sa mga device na sinusuportahan ng Matter sa pamamagitan ng teleponong ito."</string>
+    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"Nakakatulong ang Thread na ikonekta ang iyong mga device para sa smart na tahanan, na nagbu-boost ng efficiency at performance.\n\nKapag naka-enable, kwalipikado ang device na ito na sumali sa isang Thread network, na nagbibigay-daan sa pagkontrol sa mga device na sinusuportahan ng Matter sa pamamagitan ng teleponong ito."</string>
     <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"Matuto pa tungkol sa Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Access sa camera"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Access sa mikropono"</string>

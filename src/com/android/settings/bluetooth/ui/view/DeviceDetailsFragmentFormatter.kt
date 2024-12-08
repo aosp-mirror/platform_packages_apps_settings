@@ -138,8 +138,14 @@ class DeviceDetailsFragmentFormatterImpl(
     }
 
     private suspend fun updateLayoutInternal(fragmentType: FragmentTypeModel) {
-        val items = viewModel.getItems(fragmentType) ?: return
-        val layout = viewModel.getLayout(fragmentType) ?: return
+        val items = viewModel.getItems(fragmentType) ?: run {
+            fragment.setLoading(false, false)
+            return
+        }
+        val layout = viewModel.getLayout(fragmentType) ?: run {
+            fragment.setLoading(false, false)
+            return
+        }
 
         val prefKeyToSettingId =
             items
@@ -208,9 +214,11 @@ class DeviceDetailsFragmentFormatterImpl(
             }
         }
 
-        if (isLoading) {
-            fragment.setLoading(false, false)
-            isLoading = false
+        fragment.listView.post {
+            if (isLoading) {
+                fragment.setLoading(false, false)
+                isLoading = false
+            }
         }
     }
 

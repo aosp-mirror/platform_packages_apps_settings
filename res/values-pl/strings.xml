@@ -898,6 +898,7 @@
     <string name="external_display_on" msgid="2560104443500154333">"Włączony"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Wyłączony"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"Wyświetlacz zewnętrzny"</string>
+    <string name="builtin_display_settings_category" msgid="3441388849060771885">"Wyświetlacz wbudowany"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Używaj wyświetlacza zewnętrznego"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Rozdzielczość wyświetlacza"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Wyświetlacz zewnętrzny jest odłączony"</string>
@@ -909,8 +910,7 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Obrót wyświetlacza lub zmiana rozdzielczości mogą spowodować zatrzymanie uruchomionych aktualnie aplikacji"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"Aby można było wyświetlać odbicie lustrzane ekranu, urządzenie musi być podłączone do wyświetlacza zewnętrznego"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Więcej opcji"</string>
-    <!-- no translation found for external_display_topology_hint (854973327795578470) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="854973327795578470">"Przytrzymaj i przeciągnij, aby zmienić kolejność wyświetlaczy."</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Przesyłanie ekranu"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"odbicie lustrzane"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Wyświetlacz bezprzewodowy"</string>
@@ -1244,8 +1244,8 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Dowiedz się więcej o autoobracaniu"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Rozdzielczość ekranu"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Wysoka rozdzielczość"</string>
-    <string name="screen_resolution_option_full" msgid="2694003735219114186">"Pełna rozdzielczość"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"Pełna rozdzielczość bardziej zużywa baterię. Po przełączeniu rozdzielczości niektóre aplikacje mogą wymagać ponownego uruchomienia."</string>
+    <string name="screen_resolution_option_full" msgid="4456839315039000517">"Maksymalna rozdzielczość"</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"Maksymalna rozdzielczość bardziej zużywa baterię. Po przełączeniu rozdzielczości niektóre aplikacje mogą wymagać ponownego uruchomienia."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Wybrano"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Kolory"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturalne"</string>
@@ -1324,8 +1324,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Ustawienia trybu nocnego"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Tryby mogą też aktywować ciemny motyw}=1{Tryb {mode_1} aktywuje też ciemny motyw}=2{Tryby {mode_1} i {mode_2} aktywują też ciemny motyw}=3{Tryby {mode_1}, {mode_2} i {mode_3} aktywują też ciemny motyw}few{Tryb ciemny jest też włączony w przypadku trybów {mode_1}, {mode_2} i jeszcze # trybów}many{Tryb ciemny jest też włączony w przypadku trybów {mode_1}, {mode_2} i jeszcze # trybów}other{Tryb ciemny jest też włączony w przypadku trybów {mode_1}, {mode_2} i jeszcze # trybu}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Ustawienia trybów"</string>
-    <!-- no translation found for even_dimmer_display_title (4509732439977906028) -->
-    <skip />
+    <string name="even_dimmer_display_title" msgid="4509732439977906028">"Dodatkowe przyciemnienie"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Zezwalaj na przyciemnianie ekranu urządzenia bardziej niż zwykle"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Automatyczne wygaszanie"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Po <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> bezczynności"</string>
@@ -1963,6 +1962,8 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opcje"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Ułatwienia dostępu"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Klawiatura fizyczna"</string>
+    <!-- no translation found for physical_keyboard_layout_picker_title (4526600767648916256) -->
+    <skip />
     <string name="bounce_keys" msgid="7419450970351743904">"Klawisze z filtrem powtórzeń"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"Klawiatura ignoruje szybko powtarzane naciśnięcia tego samego klawisza"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Próg klawisza z filtrem powtórzeń"</string>
@@ -3639,6 +3640,14 @@
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"Pokaż mniej powiadomień na ekranie blokady"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Na ekranie blokady pokazuj tylko nowe powiadomienia"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Automatycznie usuwaj już wyświetlone powiadomienia z ekranu blokady"</string>
+    <!-- no translation found for lock_screen_notifs_show_full_list (6767009263807771108) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_full_list_desc (4868489278443057427) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_compact (1133598661314460528) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_compact_desc (2442594880539709057) -->
+    <skip />
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Powiadomienia na ekranie blokady"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Pokazuj rozmowy, domyślne i ciche"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Pokazuj rozmowy, domyślne i ciche"</string>
@@ -3656,6 +3665,14 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Pokazuj w całości powiadomienia związane z pracą"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Ukryj poufne informacje związane z pracą"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Jak mają pokazywać się powiadomienia z profilu, gdy urządzenie jest zablokowane?"</string>
+    <!-- no translation found for lock_screen_notification_hide_seen_title (6356324850662946426) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_seen_summary (8345971177658888274) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_title (3284314455767315329) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_summary (1934066619526795468) -->
+    <skip />
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Powiadomienia z profilu"</string>
     <string name="notifications_title" msgid="4221655533193721131">"Powiadomienia"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"Powiadomienia z aplikacji"</string>
@@ -4461,6 +4478,20 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"Gesty"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Szybko otwieraj aparat"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Aby szybko uruchomić aparat, naciśnij dwukrotnie przycisk zasilania. Możesz to zrobić na dowolnym ekranie."</string>
+    <!-- no translation found for double_tap_power_title (8705875166298116659) -->
+    <skip />
+    <!-- no translation found for double_tap_power_enabled (305978257631612678) -->
+    <skip />
+    <!-- no translation found for double_tap_power_target_action_category (6186809788568348488) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_title (8398392033718681209) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_summary (1231656402570674349) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_title (2238628756927241786) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_summary (6567586974229774570) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Odwracaj aparat do selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Tryb nawigacji"</string>
@@ -4858,11 +4889,11 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"Przesyłanie wiadomości przez satelitę"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Wysyłanie i odbieranie SMS-ów przez satelitę. Twoje konto obejmuje tę funkcję."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Wysyłanie i odbieranie SMS-ów przez satelitę. Twoje konto tego nie obejmuje."</string>
-    <string name="keywords_satellite_setting" msgid="3312183289776517695">"Przesyłanie wiadomości przez satelitę"</string>
-    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Informacje o przesyłaniu wiadomości przez satelitę"</string>
+    <string name="keywords_satellite_setting" msgid="613553612424945946">"przesyłanie wiadomości przez satelitę, łączność satelitarna"</string>
+    <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"<xliff:g id="SUBJECT">%1$s</xliff:g> – informacje"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Możesz wymieniać wiadomości przez satelitę w ramach odpowiedniego konta u operatora <xliff:g id="CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Twój abonament u operatora <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"Twoje konto obejmuje funkcję przesyłania wiadomości przez satelitę"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"Twoje konto obejmuje funkcję przesyłania wiadomości"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Twoje konto nie obejmuje funkcji przesyłania wiadomości przez satelitę"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Więcej informacji"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Jak to działa"</string>
@@ -4870,12 +4901,33 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Twój telefon automatycznie połączy się z satelitą. Aby uzyskać najlepszą jakość połączenia, stań w miejscu, w którym nic nie zasłania widoku nieba."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Gdy Twój telefon połączy się z satelitą"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Możesz wysyłać SMS-y do dowolnego adresata, w tym również do służb ratunkowych. Twój telefon ponownie połączy się z siecią komórkową, gdy będzie ona dostępna."</string>
-    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Przesyłanie wiadomości przez satelitę może zająć dłuższą chwilę. Funkcja jest dostępna wyłącznie na niektórych obszarach. Pogoda i inne czynniki mogą wpływać na Twoje połączenie satelitarne. Połączenia przez satelitę są niedostępne. Połączenia alarmowe mogą nadal być nawiązywane.\n\nMoże upłynąć trochę czasu, zanim zmiany dotyczące konta będą widoczne w Ustawieniach. Aby uzyskać szczegółowe informacje, skontaktuj się z operatorem."</string>
-    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Więcej informacji o przesyłaniu wiadomości przez satelitę"</string>
+    <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"<xliff:g id="SUBJECT">%1$s</xliff:g> może zająć dłuższą chwilę. Funkcja jest dostępna wyłącznie na niektórych obszarach. Pogoda i inne czynniki mogą wpływać na Twoje połączenie satelitarne. Połączenia przez satelitę są niedostępne. Połączenia alarmowe mogą nadal być nawiązywane.\n\nMoże upłynąć trochę czasu, zanim zmiany dotyczące konta będą widoczne w Ustawieniach. Skontaktuj się z operatorem <xliff:g id="CARRIER_NAME">%1$s</xliff:g> i dowiedz się więcej."</string>
+    <string name="more_about_satellite_messaging" msgid="1039277943532711584">"<xliff:g id="SUBJECT">%1$s</xliff:g> – więcej informacji"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Nie można włączyć funkcji <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Aby włączyć funkcję <xliff:g id="FUNCTION">%1$s</xliff:g>, najpierw zakończ połączenie satelitarne"</string>
     <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"Łączność satelitarna"</string>
-    <!-- no translation found for satellite_setting_connectivity (80680165723879149) -->
+    <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Łączność satelitarna"</string>
+    <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"łączność satelitarna"</string>
+    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"przesyłanie wiadomości przez satelitę"</string>
+    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Twoje konto obejmuje wykorzystanie danych"</string>
+    <string name="title_for_satellite_sos" msgid="4608739357329147285">"Satelitarne połączenie alarmowe"</string>
+    <string name="summary_for_satellite_sos_entry" msgid="4981480371923329605">"Wysyłaj wiadomości do służb ratunkowych, gdy nie możesz połączyć się z siecią komórkową lub Wi‑Fi"</string>
+    <string name="keywords_satellite_sos" msgid="6275777197418023949">"satelitarne połączenie alarmowe, połączenie alarmowe"</string>
+    <string name="category_title_about_satellite_sos" msgid="7229724397303154919">"Informacje o satelitarnych połączeniach alarmowych"</string>
+    <string name="satellite_sos_introduction" msgid="4670230212117495751">"Możesz wysyłać wiadomości do służb ratunkowych i udostępniać swoją lokalizację bez dostępu do sieci komórkowej lub Wi-Fi. Ta usługa może być niedostępna w niektórych lokalizacjach i określonych okolicznościach."</string>
+    <string name="satellite_sos_how_it_works_step_1" msgid="4669862942425306921">"Zadzwoń lub wyślij SMS-a do służb ratunkowych"</string>
+    <string name="satellite_sos_how_it_works_step_2" msgid="3558248744927579016">"Odpowiedz na pytania dotyczące sytuacji alarmowej"</string>
+    <string name="satellite_sos_how_it_works_step_3" msgid="4496038314890474893">"Postępuj zgodnie z instrukcjami, aby połączyć się z satelitą"</string>
+    <string name="satellite_sos_how_it_works_summary_1" msgid="4497178023367920284">"Jeśli nie ma sygnału sieci komórkowej, zobaczysz opcję użycia satelitarnego połączenia alarmowego"</string>
+    <string name="satellite_sos_how_it_works_summary_2" msgid="1302661361673503362">"Wysyłaj odpowiedzi do służb ratunkowych, które udzielą odpowiedniej pomocy"</string>
+    <string name="satellite_sos_how_it_works_summary_3" msgid="4612675365617172405">"Po nawiązaniu połączenia możesz wysyłać wiadomości do służb ratunkowych"</string>
+    <string name="satellite_sos_try_demo" msgid="1915233782211344468">"Zobacz prezentację"</string>
+    <string name="satellite_sos_footer_text" msgid="4454885538165117230">"Gdy łączysz się ze służbami ratunkowymi przez satelitę, Twoje imię i nazwisko, adres e-mail, numer telefonu, lokalizacja, informacje o urządzeniu (IMEI, język, model, poziom naładowania baterii) i dane kontaktów alarmowych są udostępniane służbom ratunkowym i dostawcom usług satelitarnych. \n\nAby można było korzystać z satelitarnego połączenia alarmowego, Wiadomości Google muszą być domyślną aplikacją do SMS-ów. \n\nJeśli automatyczny wybór sieci jest wyłączony, zostanie włączony, a urządzenie będzie automatycznie łączyć się z dowolną siecią."</string>
+    <string name="satellite_sos_sharing_preferences_subheader_title" msgid="5701538329333628267">"Ustawienia udostępniania"</string>
+    <string name="satellite_sos_sharing_preferences_step_1" msgid="3106774199702637359">"Kontakty alarmowe"</string>
+    <string name="satellite_sos_sharing_preferences_step_2" msgid="738246589687762115">"Twoje konto Google."</string>
+    <string name="satellite_sos_sharing_preferences_description" msgid="782508188142964342">"Sprawdź lub zaktualizuj informacje, które zostaną udostępniane służbom ratunkowym"</string>
+    <!-- no translation found for satellite_sos_learn_more_link (2442930426165677255) -->
     <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nazwy punktów dostępu"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
@@ -5063,9 +5115,8 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Korzystasz z ogólnego trybu strony 16 KB. W tym trybie nie można zagwarantować integralności oprogramowania. Kiedy program rozruchowy będzie odblokowany, dane zapisane na telefonie mogą być zagrożone. W tych trybach niektóre funkcje będą wyłączone, a część aplikacji może nie działać. Aby wrócić do trybu produkcyjnego, musisz przełączyć się z powrotem na tryb 4 KB i zablokować program rozruchowy urządzenia. Spowoduje to ponowne zresetowanie urządzenia i przywrócenie na nim ustawień produkcyjnych. Gdy na urządzeniu uruchomi się Android, wyłącz zdjęcie blokady OEM w Opcjach programisty. Jeśli nie uda się uruchomić Androida lub będzie on działać niestabilnie, sflashuj na urządzeniu najnowszy obraz fabryczny pobrany ze strony &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; lub użyj narzędzia &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; i wybierz kolejno opcje „Wyczyść pamięć urządzenia”, „Zablokuj program rozruchowy” i „Wymuś flashowanie wszystkich partycji”."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Ogólny tryb strony 16 kB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Więcej informacji"</string>
-    <!-- no translation found for enable_16k_app_compat_title (4173159228844992989) -->
-    <skip />
-    <!-- no translation found for enable_16k_app_compat_details (3847293423550174952) -->
+    <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"Uruchamiaj aplikację w trybie zgodności z rozmiarem strony"</string>
+    <!-- no translation found for enable_16k_app_compat_details (3389401258168314266) -->
     <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Obsługiwanie zgłaszania błędów"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Określa, która aplikacja ma obsługiwać skrót do zgłaszania błędów na urządzeniu."</string>
@@ -5268,8 +5319,8 @@
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"Włączenie obsługi okien o dowolnym rozmiarze wymaga ponownego uruchomienia."</string>
     <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"Aktualizacja dostępności dowolnego rozmiaru okien wymaga ponownego uruchomienia."</string>
     <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"Włączenie dowolnego rozmiaru okien na dodatkowych ekranach wymaga ponownego uruchomienia."</string>
-    <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Uruchom ponownie teraz"</string>
-    <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Uruchom ponownie później"</string>
+    <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Uruchom teraz"</string>
+    <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Uruchom później"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Dźwięk przestrzenny"</string>
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Jeszcze lepsza jakość dźwięku z kompatybilnych multimediów"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Monitorowanie ruchów głowy"</string>

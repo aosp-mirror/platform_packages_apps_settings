@@ -67,7 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"จับคู่อุปกรณ์ใหม่"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"บลูทูธ"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"เปิดอัตโนมัติในวันพรุ่งนี้"</string>
-    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"หากปิดบลูทูธ อุปกรณ์จะเปิดอีกครั้งในวันถัดไป"</string>
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"หากปิดบลูทูธ อุปกรณ์จะเปิดบลูทูธอีกครั้งในวันถัดไป"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"จับคู่หูฟังข้างขวา"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"จับคู่หูฟังข้างซ้าย"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"จับคู่หูฟังอีกข้าง"</string>
@@ -898,6 +898,7 @@
     <string name="external_display_on" msgid="2560104443500154333">"เปิด"</string>
     <string name="external_display_off" msgid="5634413756025351374">"ปิด"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"จอแสดงผลภายนอก"</string>
+    <string name="builtin_display_settings_category" msgid="3441388849060771885">"จอแสดงผลในตัว"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"ใช้จอแสดงผลภายนอก"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"ความละเอียดของจอแสดงผล"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"ยกเลิกการเชื่อมต่อกับจอแสดงผลภายนอกแล้ว"</string>
@@ -909,8 +910,7 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"การเปลี่ยนการหมุนหรือความละเอียดอาจหยุดแอปที่กำลังทำงานอยู่"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"อุปกรณ์ของคุณต้องเชื่อมต่อกับจอแสดงผลภายนอกเพื่อมิเรอร์หน้าจอ"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"ตัวเลือกเพิ่มเติม"</string>
-    <!-- no translation found for external_display_topology_hint (854973327795578470) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="854973327795578470">"กดค้างแล้วลากเพื่อจัดเรียงจอแสดงผลใหม่"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"แคสต์"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"มิเรอร์"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"เปิดใช้การแสดงผลแบบไร้สาย"</string>
@@ -1244,8 +1244,8 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"ดูข้อมูลเพิ่มเติมเกี่ยวกับการหมุนอัตโนมัติ"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"ความละเอียดของหน้าจอ"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"ความละเอียดสูง"</string>
-    <string name="screen_resolution_option_full" msgid="2694003735219114186">"ความละเอียดเต็ม"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"ความละเอียดแบบเต็มจะใช้แบตเตอรี่มากขึ้น การเปลี่ยนความละเอียดอาจทำให้บางแอปรีสตาร์ท"</string>
+    <string name="screen_resolution_option_full" msgid="4456839315039000517">"ความละเอียดสูงสุด"</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"ความละเอียดสูงสุดจะใช้แบตเตอรี่มากขึ้น การเปลี่ยนความละเอียดอาจทำให้บางแอปรีสตาร์ท"</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"เลือกแล้ว"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"สี"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"ธรรมชาติ"</string>
@@ -1324,8 +1324,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"การตั้งค่าโหมดเวลาเข้านอน"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{โหมดยังเปิดใช้งานธีมมืดได้ด้วย}=1{{mode_1}ยังเปิดใช้งานธีมมืดด้วย}=2{{mode_1}และ{mode_2}ยังเปิดใช้งานธีมมืดด้วย}=3{{mode_1}, {mode_2} และ{mode_3}ยังเปิดใช้งานธีมมืดด้วย}other{{mode_1}, {mode_2} และอีก # โหมดยังเปิดใช้งานธีมมืดด้วย}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"การตั้งค่าโหมด"</string>
-    <!-- no translation found for even_dimmer_display_title (4509732439977906028) -->
-    <skip />
+    <string name="even_dimmer_display_title" msgid="4509732439977906028">"หรี่แสงเพิ่มเติม"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"อนุญาตให้อุปกรณ์หรี่แสงมากกว่าปกติ"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ระยะหมดเวลาหน้าจอ"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"หลังจากไม่ได้ทำงานเป็นเวลา <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
@@ -1963,6 +1962,7 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"ตัวเลือก"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"การช่วยเหลือพิเศษ"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"แป้นพิมพ์จริง"</string>
+    <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"เครื่องมือเลือกรูปแบบแป้นพิมพ์จริง"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"คีย์ตีกลับ"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"แป้นพิมพ์จะละเว้นการกดปุ่มเดียวกันซ้ำๆ อย่างรวดเร็ว"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"เกณฑ์คีย์ตีกลับ"</string>
@@ -3639,6 +3639,14 @@
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"แสดงการแจ้งเตือนน้อยลงในหน้าจอล็อก"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"แสดงเฉพาะการแจ้งเตือนใหม่บนหน้าจอล็อก"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"นำการแจ้งเตือนที่ดูแล้วก่อนหน้านี้ออกจากหน้าจอล็อกโดยอัตโนมัติ"</string>
+    <!-- no translation found for lock_screen_notifs_show_full_list (6767009263807771108) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_full_list_desc (4868489278443057427) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_compact (1133598661314460528) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_compact_desc (2442594880539709057) -->
+    <skip />
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"การแจ้งเตือนบนหน้าจอล็อก"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"แสดงการสนทนา ค่าเริ่มต้น และการแจ้งเตือนที่ปิดเสียง"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"แสดงการสนทนา ค่าเริ่มต้น และการแจ้งเตือนที่ปิดเสียง"</string>
@@ -3656,6 +3664,14 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"แสดงเนื้อหาการแจ้งเตือนงานทั้งหมด"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"ซ่อนเนื้อหางานที่ละเอียดอ่อน"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"เมื่ออุปกรณ์ล็อกอยู่ คุณต้องการให้แสดงการแจ้งเตือนโปรไฟล์อย่างไร"</string>
+    <!-- no translation found for lock_screen_notification_hide_seen_title (6356324850662946426) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_seen_summary (8345971177658888274) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_title (3284314455767315329) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_summary (1934066619526795468) -->
+    <skip />
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"การแจ้งเตือนโปรไฟล์"</string>
     <string name="notifications_title" msgid="4221655533193721131">"การแจ้งเตือน"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"การแจ้งเตือนของแอป"</string>
@@ -4461,6 +4477,20 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"ท่าทางสัมผัส"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"เปิดกล้องอย่างรวดเร็ว"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"หากต้องการเปิดกล้องอย่างรวดเร็ว ให้กดปุ่มเปิด/ปิด 2 ครั้งจากหน้าจอใดก็ได้"</string>
+    <!-- no translation found for double_tap_power_title (8705875166298116659) -->
+    <skip />
+    <!-- no translation found for double_tap_power_enabled (305978257631612678) -->
+    <skip />
+    <!-- no translation found for double_tap_power_target_action_category (6186809788568348488) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_title (8398392033718681209) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_summary (1231656402570674349) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_title (2238628756927241786) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_summary (6567586974229774570) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"พลิกกล้องเพื่อถ่ายเซลฟี"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"โหมดการไปยังส่วนต่างๆ"</string>
@@ -4858,11 +4888,11 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"การรับส่งข้อความผ่านดาวเทียม"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"รับส่งข้อความผ่านดาวเทียม รวมอยู่ในบัญชี"</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"รับส่งข้อความผ่านดาวเทียม ไม่รวมอยู่ในบัญชี"</string>
-    <string name="keywords_satellite_setting" msgid="3312183289776517695">"การรับส่งข้อความผ่านดาวเทียม"</string>
-    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"เกี่ยวกับการรับส่งข้อความผ่านดาวเทียม"</string>
+    <string name="keywords_satellite_setting" msgid="613553612424945946">"การรับส่งข้อความผ่านดาวเทียม การเชื่อมต่อผ่านดาวเทียม"</string>
+    <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"เกี่ยวกับ <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"คุณรับส่งข้อความผ่านดาวเทียมได้โดยเป็นส่วนหนึ่งของบัญชี <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ที่มีสิทธิ์"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"แพ็กเกจ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ของคุณ"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"การรับส่งข้อความผ่านดาวเทียมรวมอยู่ในบัญชีของคุณ"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"การรับส่งข้อความรวมอยู่ในบัญชีของคุณ"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"การรับส่งข้อความผ่านดาวเทียมไม่รวมอยู่ในบัญชีของคุณ"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"ดูข้อมูลเพิ่มเติม"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"วิธีการทำงาน"</string>
@@ -4870,13 +4900,33 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"โทรศัพท์ของคุณจะเชื่อมต่อกับดาวเทียมโดยอัตโนมัติ โปรดอยู่ในพื้นที่ที่มองเห็นท้องฟ้าได้อย่างชัดเจนเพื่อรับการเชื่อมต่อที่ดีที่สุด"</string>
     <string name="title_supported_service" msgid="4275535165812691571">"หลังจากที่โทรศัพท์เชื่อมต่อกับดาวเทียม"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"คุณส่งข้อความถึงใครก็ได้ รวมถึงบริการช่วยเหลือฉุกเฉิน โดยโทรศัพท์จะเชื่อมต่อกับเครือข่ายมือถืออีกครั้งเมื่อมีให้ใช้งาน"</string>
-    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"การรับส่งข้อความผ่านดาวเทียมอาจใช้เวลานานกว่าปกติและพร้อมให้ใช้งานเฉพาะในบางพื้นที่ โปรดทราบว่าสภาพอากาศและโครงสร้างบางอย่างอาจส่งผลต่อการติดต่อผ่านดาวเทียม การโทรผ่านดาวเทียมไม่พร้อมใช้งาน การโทรฉุกเฉินอาจยังเชื่อมต่ออยู่\n\nระบบอาจใช้เวลาสักครู่กว่าที่การเปลี่ยนแปลงในบัญชีจะแสดงในการตั้งค่า โปรดติดต่อสอบถามรายละเอียดจากผู้ให้บริการ"</string>
-    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"ข้อมูลเพิ่มเติมเกี่ยวกับการรับส่งข้อความผ่านดาวเทียม"</string>
+    <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"<xliff:g id="SUBJECT">%1$s</xliff:g> อาจใช้เวลานานกว่าปกติและพร้อมให้ใช้งานเฉพาะในบางพื้นที่ โปรดทราบว่าสภาพอากาศและโครงสร้างบางอย่างอาจส่งผลต่อการติดต่อผ่านดาวเทียม การโทรผ่านดาวเทียมไม่พร้อมใช้งาน การโทรฉุกเฉินอาจยังเชื่อมต่ออยู่\n\nระบบอาจใช้เวลาสักครู่กว่าที่การเปลี่ยนแปลงในบัญชีจะแสดงในการตั้งค่า โปรดติดต่อ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> เพื่อสอบถามรายละเอียด"</string>
+    <string name="more_about_satellite_messaging" msgid="1039277943532711584">"ข้อมูลเพิ่มเติมเกี่ยวกับ <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"เปิด <xliff:g id="FUNCTION">%1$s</xliff:g> ไม่ได้"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"หากต้องการเปิด <xliff:g id="FUNCTION">%1$s</xliff:g> ให้หยุดการเชื่อมต่อดาวเทียมก่อน"</string>
     <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"การเชื่อมต่อผ่านดาวเทียม"</string>
-    <!-- no translation found for satellite_setting_connectivity (80680165723879149) -->
-    <skip />
+    <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"การเชื่อมต่อผ่านดาวเทียม"</string>
+    <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"การเชื่อมต่อผ่านดาวเทียม"</string>
+    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"การรับส่งข้อความผ่านดาวเทียม"</string>
+    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"การใช้ข้อมูลรวมอยู่ในบัญชีของคุณ"</string>
+    <string name="title_for_satellite_sos" msgid="4608739357329147285">"SOS ดาวเทียม"</string>
+    <string name="summary_for_satellite_sos_entry" msgid="4981480371923329605">"ส่งข้อความหาบริการช่วยเหลือฉุกเฉินเมื่อคุณไม่สามารถเชื่อมต่อเครือข่ายมือถือหรือ Wi-Fi"</string>
+    <string name="keywords_satellite_sos" msgid="6275777197418023949">"SOS ดาวเทียม, SOS"</string>
+    <string name="category_title_about_satellite_sos" msgid="7229724397303154919">"เกี่ยวกับ SOS ดาวเทียม"</string>
+    <string name="satellite_sos_introduction" msgid="4670230212117495751">"คุณจะส่งข้อความหาบริการช่วยเหลือฉุกเฉินและแชร์ตำแหน่งของคุณได้แม้ในเวลาที่ไม่สามารถเชื่อมต่อเครือข่ายมือถือหรือ Wi-Fi บริการนี้อาจใช้งานไม่ได้ในบางครั้ง บางตำแหน่ง หรือบางสถานการณ์"</string>
+    <string name="satellite_sos_how_it_works_step_1" msgid="4669862942425306921">"โทรหรือส่งข้อความหาบริการช่วยเหลือฉุกเฉิน"</string>
+    <string name="satellite_sos_how_it_works_step_2" msgid="3558248744927579016">"ตอบคำถามเกี่ยวกับเหตุฉุกเฉิน"</string>
+    <string name="satellite_sos_how_it_works_step_3" msgid="4496038314890474893">"ทำตามขั้นตอนเพื่อเชื่อมต่อกับดาวเทียม"</string>
+    <string name="satellite_sos_how_it_works_summary_1" msgid="4497178023367920284">"หากไม่มีเครือข่ายมือถือ คุณจะเห็นตัวเลือกในการใช้ SOS ดาวเทียม"</string>
+    <string name="satellite_sos_how_it_works_summary_2" msgid="1302661361673503362">"ส่งคำตอบไปยังบริการช่วยเหลือฉุกเฉินเพื่อให้ได้รับความช่วยเหลืออย่างเหมาะสม"</string>
+    <string name="satellite_sos_how_it_works_summary_3" msgid="4612675365617172405">"เมื่อเชื่อมต่อแล้ว คุณจะส่งข้อความหาบริการช่วยเหลือฉุกเฉินได้"</string>
+    <string name="satellite_sos_try_demo" msgid="1915233782211344468">"ลองใช้เดโม"</string>
+    <string name="satellite_sos_footer_text" msgid="4454885538165117230">"เมื่อคุณเชื่อมต่อกับบริการช่วยเหลือฉุกเฉินผ่านดาวเทียม ระบบจะแชร์ชื่อ อีเมล หมายเลขโทรศัพท์ ตำแหน่ง ข้อมูลอุปกรณ์ (IMEI, ภาษา, รุ่น, ระดับแบตเตอรี่) และข้อมูลผู้ติดต่อกรณีฉุกเฉินของคุณกับบริการช่วยเหลือฉุกเฉินและผู้ให้บริการดาวเทียม \n\nGoogle Messages ต้องเป็นแอป SMS เริ่มต้นจึงจะใช้ SOS ดาวเทียมได้ \n\nระบบจะเปิดการเลือกเครือข่ายอัตโนมัติหากปิดอยู่ก่อนหน้านี้ และอุปกรณ์ของคุณจะเชื่อมต่อกับเครือข่ายโดยอัตโนมัติ"</string>
+    <string name="satellite_sos_sharing_preferences_subheader_title" msgid="5701538329333628267">"ค่ากำหนดการแชร์"</string>
+    <string name="satellite_sos_sharing_preferences_step_1" msgid="3106774199702637359">"ผู้ติดต่อกรณีฉุกเฉิน"</string>
+    <string name="satellite_sos_sharing_preferences_step_2" msgid="738246589687762115">"บัญชี Google ของคุณ"</string>
+    <string name="satellite_sos_sharing_preferences_description" msgid="782508188142964342">"ตรวจสอบหรืออัปเดตข้อมูลที่จะแชร์กับบริการช่วยเหลือฉุกเฉิน"</string>
+    <string name="satellite_sos_learn_more_link" msgid="2442930426165677255">"https://support.google.com/pixelphone/answer/15254448"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"จุดเข้าใช้งาน"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"ใช้ไม่ได้เมื่อเชื่อมต่อกับ <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5063,9 +5113,8 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"คุณอยู่ในโหมด 16KB ของโหมดไม่คำนึงถึงขนาดหน้า ไม่รับประกันความสมบูรณ์ของซอฟต์แวร์ในโหมดนี้ และข้อมูลใดๆ ที่จัดเก็บในโทรศัพท์ในขณะที่ Bootloader ไม่ได้ล็อกอยู่อาจมีความเสี่ยง ฟีเจอร์บางอย่างจะถูกปิดใช้ในโหมดเหล่านี้ ดังนั้นบางแอปพลิเคชันจึงอาจไม่ทำงาน หากต้องการกลับสู่โหมดโปรดักชันอีกครั้ง คุณต้องเปลี่ยนกลับไปใช้โหมด 4KB แล้วล็อก Bootloader ของอุปกรณ์ การดำเนินการนี้จะรีเซ็ตอุปกรณ์เป็นค่าเริ่มต้นอีกครั้งและคืนค่าเป็นโหมดโปรดักชัน หลังจากที่อุปกรณ์เปิดเครื่องเพื่อเข้าสู่ Android ได้สำเร็จ ให้ปิดการปลดล็อก OEM ในตัวเลือกสำหรับนักพัฒนาแอป หากอุปกรณ์ไม่สามารถเปิดเครื่องเพื่อเข้าสู่ Android หรือไม่เสถียร ให้แฟลชอุปกรณ์อีกครั้งโดยใช้ค่าเริ่มต้นล่าสุดจาก &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; หรือใช้ &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; และเลือก \"ล้างข้อมูลอุปกรณ์\" \"ล็อก Bootloader\" และ \"บังคับให้แฟลชทุกพาร์ติชัน\""</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"โหมด 16KB ของโหมดไม่คำนึงถึงขนาดหน้าหน่วยความจำ"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"อ่านเพิ่มเติม"</string>
-    <!-- no translation found for enable_16k_app_compat_title (4173159228844992989) -->
-    <skip />
-    <!-- no translation found for enable_16k_app_compat_details (3847293423550174952) -->
+    <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"เรียกใช้แอปด้วยโหมดความเข้ากันได้กับหน้าหน่วยความจำ"</string>
+    <!-- no translation found for enable_16k_app_compat_details (3389401258168314266) -->
     <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"เครื่องจัดการรายงานข้อบกพร่อง"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"เลือกแอปที่จะให้จัดการทางลัดรายงานข้อบกพร่องในอุปกรณ์"</string>
@@ -5233,7 +5282,7 @@
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB ไม่พร้อมใช้งานในตำแหน่งปัจจุบัน"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
     <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"ใช้ Thread"</string>
-    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"Thread ช่วยเชื่อมต่ออุปกรณ์สมาร์ทโฮมของคุณ โดยเพิ่มประสิทธิภาพการทำงาน\n\nเมื่อเปิดใช้ อุปกรณ์นี้จะมีสิทธิ์เข้าร่วมเครือข่าย Thread ซึ่งช่วยให้สามารถควบคุมอุปกรณ์ที่รองรับ Matter ผ่านโทรศัพท์เครื่องนี้"</string>
+    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"Thread ช่วยเชื่อมต่อและเพิ่มประสิทธิภาพการทำงานให้อุปกรณ์สมาร์ทโฮมของคุณ\n\nเมื่อเปิดใช้ อุปกรณ์นี้จะมีสิทธิ์เข้าร่วมเครือข่าย Thread ซึ่งช่วยให้สามารถควบคุมอุปกรณ์ที่รองรับ Matter ผ่านโทรศัพท์เครื่องนี้"</string>
     <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"ดูข้อมูลเพิ่มเติมเกี่ยวกับ Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"สิทธิ์เข้าถึงกล้อง"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"สิทธิ์เข้าถึงไมโครโฟน"</string>

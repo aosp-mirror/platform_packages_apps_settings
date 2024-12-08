@@ -288,11 +288,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         if (satelliteSettingPreferenceController != null) {
             satelliteSettingPreferenceController.init(mSubId);
         }
-        final SatelliteSettingSosPreferenceController satelliteSettingSosPreferenceController = use(
-                SatelliteSettingSosPreferenceController.class);
-        if (satelliteSettingSosPreferenceController != null) {
-            satelliteSettingSosPreferenceController.init(mSubId);
-        }
+
         use(ApnPreferenceController.class).init(mSubId);
         use(CarrierPreferenceController.class).init(mSubId);
         use(DataUsagePreferenceController.class).init(mSubId);
@@ -338,12 +334,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
             convertToEsimPreferenceController.init(mSubId, mSubscriptionInfoEntity);
         }
 
-        List<AbstractSubscriptionPreferenceController> subscriptionPreferenceControllers =
-                useAll(AbstractSubscriptionPreferenceController.class);
-        for (AbstractSubscriptionPreferenceController controller :
-                subscriptionPreferenceControllers) {
-            controller.init(mSubId);
-        }
+        List<AbstractPreferenceController> subscriptionPreferenceControllers =
+                useGroup(AbstractSubscriptionPreferenceController.class);
+        subscriptionPreferenceControllers.forEach(
+                controller -> ((AbstractSubscriptionPreferenceController) controller).init(mSubId));
     }
 
     @Override
