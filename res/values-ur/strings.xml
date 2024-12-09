@@ -376,7 +376,7 @@
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"اپنے فون کو غیر مقفل کرنے کے لیے فیس اَنلاک کا استعمال کریں"</string>
     <string name="security_settings_fingerprint" msgid="6387775386189204201">"فنگر پرنٹ"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"فنگر پرنٹ"</string>
-    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"فنگر پرنٹ انلاک استعمال کرنے پر"</string>
+    <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"فنگر پرنٹ اَن لاک استعمال کرنے پر"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"کام کیلئے فنگر پرنٹ"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"فنگر پرنٹ شامل کریں"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{فنگر پرنٹ کو شامل کیا گیا}other{# فنگر پرنٹس کو شامل کیا گیا}}"</string>
@@ -565,7 +565,7 @@
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"فنگر پرنٹ سینسر کا استعمال نہیں کر سکتے"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"ایک مرمت فراہم کنندہ کو ملاحظہ کریں۔"</string>
     <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"اسکرین آف ہونے پر فنگر پرنٹ اَن لاک کا استعمال کریں"</string>
-    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"اسکرین آف ہونے پر بھی فنگر پرنٹ انلاک کا استعمال کریں"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"اسکرین آف ہونے پر بھی فنگر پرنٹ اَن لاک کا استعمال کریں"</string>
     <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"اسکرین آف ہونے پر غیر مقفل کریں"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"مزید سیکیورٹی کی ترتیبات"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"دفتری پروفائل لاک، مرموز کاری اور مزید"</string>
@@ -898,6 +898,7 @@
     <string name="external_display_on" msgid="2560104443500154333">"آن ہے"</string>
     <string name="external_display_off" msgid="5634413756025351374">"آف ہے"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"بیرونی ڈسپلے"</string>
+    <string name="builtin_display_settings_category" msgid="3441388849060771885">"پہلے سے شامل ڈسپلے"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"بیرونی ڈسپلے استعمال کریں"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"ڈسپلے ریزولیوشن"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"بیرونی ڈسپلے غیر منسلک ہے"</string>
@@ -909,8 +910,7 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"روٹیشن یا ریزولیوشن تبدیل کرنے سے کوئی بھی ایسی ایپس بند ہو سکتی ہیں جو فی الحال چل رہی ہیں"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"آپ کی اسکرین کو کسی بیرونی ڈسپلے پر دکھانے کے لئے آپ کے آلے کا اس سے منسلک ہونا ضروری ہے"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"مزید اختیارات"</string>
-    <!-- no translation found for external_display_topology_hint (854973327795578470) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="854973327795578470">"ڈسپلیز کو دوبارہ ترتیب دینے کے لیے دبائیں اور گھسیٹیں۔"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"کاسٹ کریں"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"مرر"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"وائرلیس ڈسپلے فعال کریں"</string>
@@ -1244,8 +1244,8 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"\'خودکار طور پر گھمائیں\' کے بارے میں مزید جانیں"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"اسکرین ریزولیوشن"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"اعلی ریزولیوشن"</string>
-    <string name="screen_resolution_option_full" msgid="2694003735219114186">"مکمل ریزولیوشن"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"مکمل ریزولیوشن آپ کی زیادہ بیٹری کا استعمال کرتا ہے۔ آپ کی ریزولیوشن پر سوئچ کرنے سے کچھ ایپس ری سٹارٹ ہو سکتی ہیں۔"</string>
+    <string name="screen_resolution_option_full" msgid="4456839315039000517">"زیادہ سے زیادہ ریزولیوشن"</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"زیادہ سے زیادہ ریزولیوشن آپ کی زیادہ بیٹری کا استعمال کرتا ہے۔ آپ کی ریزولیوشن پر سوئچ کرنے سے کچھ ایپس ری سٹارٹ ہو سکتی ہیں۔"</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"منتخب کردہ"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"رنگ"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"قدرتی"</string>
@@ -1324,8 +1324,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"بیڈ ٹائم وضع کی ترتیبات"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{موڈز گہری تھیم کو بھی فعال کر سکتے ہیں}=1{{mode_1} گہری تھیم کو بھی فعال کرتا ہے}=2{{mode_1} اور {mode_2} گہری تھیم کو بھی فعال کرتے ہیں}=3{{mode_1}، {mode_2} اور {mode_3} گہری تھیم کو بھی فعال کرتے ہیں}other{{mode_1}، {mode_2} اور # مزید گہری تھیم کو بھی فعال کرتے ہیں}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"موڈز کی ترتیبات"</string>
-    <!-- no translation found for even_dimmer_display_title (4509732439977906028) -->
-    <skip />
+    <string name="even_dimmer_display_title" msgid="4509732439977906028">"اضافی دھندلا"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"آلہ کو معمول سے مدھم ہونے دیں"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"اسکرین ٹائم آؤٹ"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"غیر فعالیت کے <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> بعد"</string>
@@ -1963,6 +1962,8 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"اختیارات"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"ایکسیسبیلٹی"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"فزیکل کی بورڈ"</string>
+    <!-- no translation found for physical_keyboard_layout_picker_title (4526600767648916256) -->
+    <skip />
     <string name="bounce_keys" msgid="7419450970351743904">"باؤنس کلیدیں"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"کی بورڈ ایک ہی کلید کے بار بار فوری طور پر دبانے کو نظر انداز کرتا ہے"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"باؤنس کلید کی حد"</string>
@@ -3639,6 +3640,14 @@
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"مقفل اسکرین پر کم اطلاعات دکھائیں"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"مقفل اسکرین پر صرف نئی اطلاعات دکھائیں"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"مقفل اسکرین سے گزشتہ طور پر دیکھی گئی اطلاعات کو خودکار طور پر ہٹا دیں"</string>
+    <!-- no translation found for lock_screen_notifs_show_full_list (6767009263807771108) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_full_list_desc (4868489278443057427) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_compact (1133598661314460528) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_compact_desc (2442594880539709057) -->
+    <skip />
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"لاک اسکرین پر اطلاعات"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"گفتگوئیں، ڈیفالٹ اور خاموش دکھائیں"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"گفتگوئیں، ڈیفالٹ اور خاموش دکھائیں"</string>
@@ -3656,6 +3665,14 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"تمام دفتری اطلاعی مواد دکھائیں"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"دفتر کا حساس مواد چھپائیں"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"اپنا آلہ مقفل ہونے پر آپ پروفائل کی اطلاعات کیسے دیکھنا چاہیں گے؟"</string>
+    <!-- no translation found for lock_screen_notification_hide_seen_title (6356324850662946426) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_seen_summary (8345971177658888274) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_title (3284314455767315329) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_summary (1934066619526795468) -->
+    <skip />
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"پروفائل کی اطلاعات"</string>
     <string name="notifications_title" msgid="4221655533193721131">"اطلاعات"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"ایپ کی اطلاعات"</string>
@@ -4461,6 +4478,20 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"اشارے"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"فوری طور پر کیمرا کھولیں"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"کیمرہ کو تیزی سے کھولنے کیلئے، پاور بٹن کو دوبار دبائیں۔ کسی بھی اسکرین سے ہو جاتا ہے۔"</string>
+    <!-- no translation found for double_tap_power_title (8705875166298116659) -->
+    <skip />
+    <!-- no translation found for double_tap_power_enabled (305978257631612678) -->
+    <skip />
+    <!-- no translation found for double_tap_power_target_action_category (6186809788568348488) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_title (8398392033718681209) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_summary (1231656402570674349) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_title (2238628756927241786) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_summary (6567586974229774570) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"سیلفی کے لیے کیمرا پلٹیں"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"نیویگیشن وضع"</string>
@@ -4858,11 +4889,11 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"سٹلائٹ پیغام رسانی"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"سیٹلائٹ کے ذریعے ٹیکسٹ پیغامات بھیجیں اور موصول کریں۔ آپ کے اکاؤنٹ میں شامل ہے۔"</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"سیٹلائٹ کے ذریعے ٹیکسٹ پیغامات بھیجیں اور موصول کریں۔ آپ کے اکاؤنٹ میں شامل نہیں ہے۔"</string>
-    <string name="keywords_satellite_setting" msgid="3312183289776517695">"سٹلائٹ پیغام رسانی"</string>
-    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"سیٹلائٹ پیغام رسانی کے بارے میں"</string>
+    <string name="keywords_satellite_setting" msgid="613553612424945946">"سیٹلائٹ پیغام رسانی، سیٹلائٹ کنیکٹیوٹی"</string>
+    <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"‫<xliff:g id="SUBJECT">%1$s</xliff:g> کے بارے میں"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"آپ ایک اہل <xliff:g id="CARRIER_NAME">%1$s</xliff:g> اکاؤنٹ کے حصے کے طور پر سیٹلائٹ کے ذریعے ٹیکسٹ پیغامات بھیج اور موصول کر سکتے ہیں۔"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"آپ کا <xliff:g id="CARRIER_NAME">%1$s</xliff:g> پلان"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"سیٹلائٹ پیغام رسانی آپ کے اکاؤنٹ کے ساتھ شامل ہے"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"پیغام رسانی آپ کے اکاؤنٹ میں شامل ہے"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"سیٹلائٹ پیغام رسانی آپ کے اکاؤنٹ میں شامل نہیں ہے"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"مزید جانیں"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"اس کے کام کرنے کا طریقہ"</string>
@@ -4870,12 +4901,33 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"آپ کا فون سیٹلائٹ سے خودکار طور پر منسلک ہو جائے گا۔ بہترین کنکشن کے لیے، ایسی جگہ رہیں جہاں آسمان صاف نظر آ رہا ہو۔"</string>
     <string name="title_supported_service" msgid="4275535165812691571">"آپ کا فون سیٹلائٹ سے منسلک ہونے کے بعد"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"آپ ایمرجنسی سروسز سمیت کسی کو بھی ٹیکسٹ پیغام بھیج سکتے ہیں۔ دستیاب ہونے پر آپ کا فون موبائل نیٹ ورک سے دوبارہ منسلک ہو جائے گا۔"</string>
-    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"سیٹلائٹ پیغام رسانی میں زیادہ وقت لگ سکتا ہے اور یہ صرف کچھ علاقوں میں دستیاب ہے۔ موسم اور کچھ ساختیں آپ کے سیٹلائٹ کنکشن کو متاثر کر سکتی ہیں۔ سیٹلائٹ کالنگ دستیاب نہیں ہے۔ ایمرجنسی کالز اب بھی منسلک ہو سکتی ہیں۔\n\nاکاؤنٹ کی تبدیلیوں کو ترتیبات میں ظاہر ہونے میں کچھ وقت لگ سکتا ہے۔ تفاصیل کے لیے اپنے کیریئر سے رابطہ کریں۔"</string>
-    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"سیٹلائٹ پیغام رسانی کے بارے میں مزید"</string>
+    <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"‫<xliff:g id="SUBJECT">%1$s</xliff:g> میں زیادہ وقت لگ سکتا ہے اور یہ صرف کچھ علاقوں میں دستیاب ہے۔ موسم اور کچھ ساختیں آپ کے سیٹلائٹ کنکشن کو متاثر کر سکتی ہیں۔ سیٹلائٹ کالنگ دستیاب نہیں ہے۔ ایمرجنسی کالز اب بھی منسلک ہو سکتی ہیں۔\n\nاکاؤنٹ کی تبدیلیوں کو ترتیبات میں ظاہر ہونے میں کچھ وقت لگ سکتا ہے۔ تفصیلات کے لیے <xliff:g id="CARRIER_NAME">%1$s</xliff:g> سے رابطہ کریں۔"</string>
+    <string name="more_about_satellite_messaging" msgid="1039277943532711584">"‫<xliff:g id="SUBJECT">%1$s</xliff:g> کے بارے میں مزید"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> آن نہیں ہو سکتا"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g> آن کرنے کے لیے، پہلے سیٹلائٹ کنکشن ختم کریں"</string>
     <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"سیٹلائٹ کنیکٹوٹی"</string>
-    <!-- no translation found for satellite_setting_connectivity (80680165723879149) -->
+    <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"سیٹلائٹ کنیکٹوٹی"</string>
+    <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"سیٹلائٹ کنیکٹوٹی"</string>
+    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"سیٹلائٹ پیغام رسانی"</string>
+    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"ڈیٹا کا استعمال آپ کے اکاؤنٹ میں شامل ہے"</string>
+    <string name="title_for_satellite_sos" msgid="4608739357329147285">"‏سیٹلائٹ SOS"</string>
+    <string name="summary_for_satellite_sos_entry" msgid="4981480371923329605">"‏جب آپ موبائل یا Wi-Fi نیٹ ورک سے منسلک نہیں ہو پا رہے ہوں تو ایمرجنسی سروسز کے ساتھ پیغام بھیجیں"</string>
+    <string name="keywords_satellite_sos" msgid="6275777197418023949">"‏سیٹلائٹ sos, sos"</string>
+    <string name="category_title_about_satellite_sos" msgid="7229724397303154919">"‏سیٹلائٹ SOS کے بارے میں"</string>
+    <string name="satellite_sos_introduction" msgid="4670230212117495751">"‏جب آپ موبائل یا Wi-Fi نیٹ ورک سے منسلک نہیں ہو پا رہے ہوں تو آپ ایمرجنسی سروسز کے ساتھ پیغام بھیج سکتے ہیں اور اپنے مقام کا اشتراک کر سکتے ہیں۔ ہو سکتا ہے یہ سروس ہر وقت ہر جگہ یا حالات میں دستیاب نہ ہو۔"</string>
+    <string name="satellite_sos_how_it_works_step_1" msgid="4669862942425306921">"ایمرجنسی سروسز کو کال کریں یا ٹیکسٹ پیغام بھیجیں"</string>
+    <string name="satellite_sos_how_it_works_step_2" msgid="3558248744927579016">"ایمرجنسی کے بارے میں سوالات کے جوابات دیں"</string>
+    <string name="satellite_sos_how_it_works_step_3" msgid="4496038314890474893">"سیٹلائٹ سے منسلک کرنے کے لیے اقدامات پر عمل کریں"</string>
+    <string name="satellite_sos_how_it_works_summary_1" msgid="4497178023367920284">"‏اگر آپ کے پاس موبائل نیٹ ورک نہیں ہے تو، آپ کو سیٹلائٹ SOS استعمال کرنے کا اختیار نظر آئے گا"</string>
+    <string name="satellite_sos_how_it_works_summary_2" msgid="1302661361673503362">"ایمرجنسی سروسز کو جوابات بھیجیں تاکہ آپ کو صحیح قسم کی مدد ملے"</string>
+    <string name="satellite_sos_how_it_works_summary_3" msgid="4612675365617172405">"آپ کے منسلک ہونے کے بعد، آپ ایمرجنسی سروسز کے ساتھ پیغام بھیج سکتے ہیں"</string>
+    <string name="satellite_sos_try_demo" msgid="1915233782211344468">"ایک ڈیمو آزمائیں"</string>
+    <string name="satellite_sos_footer_text" msgid="4454885538165117230">"‏جب آپ سیٹلائٹ کے ذریعے ایمرجنسی سروسز سے منسلک ہوتے ہیں تو آپ کا نام، ای میل، فون نمبر، مقام، آلہ کی معلومات (IMEI، زبان، ماڈل، بیٹری کی سطح) اور ایمرجنسی رابطہ کی معلومات کا اشتراک ایمرجنسی سروسز اور سیٹلائٹ سروس فراہم کنندگان کے ساتھ کیا جاتا ہے۔ \n\nسیٹلائٹ SOS استعمال کرنے کے لیے، Google پیغامات آپ کی ڈیفالٹ SMS ایپ ہونی چاہیے۔ \n\nاگر خود کار نیٹ ورک کا انتخاب آف ہے تو یہ آن ہو جائے گا اور آپ کا آلہ خودکار طور پر کسی بھی نیٹ ورک سے منسلک ہو جائے گا۔"</string>
+    <string name="satellite_sos_sharing_preferences_subheader_title" msgid="5701538329333628267">"اشتراک کی ترجیحات"</string>
+    <string name="satellite_sos_sharing_preferences_step_1" msgid="3106774199702637359">"ایمرجنسی رابطے"</string>
+    <string name="satellite_sos_sharing_preferences_step_2" msgid="738246589687762115">"‏آپ کا Google اکاؤنٹ"</string>
+    <string name="satellite_sos_sharing_preferences_description" msgid="782508188142964342">"ایمرجنسی سروسز کے ساتھ اشتراک کی جانے والی معلومات کا جائزہ لیں اور انہیں اپ ڈیٹ کریں"</string>
+    <!-- no translation found for satellite_sos_learn_more_link (2442930426165677255) -->
     <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"رسائی کی جگہ کے نام"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
@@ -5063,9 +5115,8 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"‏آپ صفحہ ایگنوسٹک موڈ کے 16KB موڈ میں ہیں۔ اس موڈ میں سافٹ ویئر کی درستگی کی ضمانت نہیں دی جا سکتی، اور بوٹ لوڈر کے غیر مقفل ہونے کے دوران فون پر اسٹور کردہ کسی بھی ڈیٹا کو خطرہ لاحق ہو سکتا ہے۔ ان موڈز میں کچھ خصوصیات غیر فعال ہو جائیں گی، اسلئے ہو سکتا ہے کہ کچھ ایپلیکیشنز کام نہ کریں۔ پروڈکشن موڈ میں دوبارہ داخل ہونے کے لیے، آپ کو 4KB موڈ پر واپس جانا ہوگا اور پھر آلہ کے بوٹ لوڈر کو مقفل کرنا ہوگا۔ یہ آلہ کو دوبارہ فیکٹری ری سیٹ کر دے گا اور اسے پروڈکشن ترتیبات پر بحال کر دے گا۔ آلے کے Android میں کامیابی کے ساتھ بوٹ ہونے کے بعد، ڈویلپر کے اختیارات میں OEM انلاکنگ کو غیر فعال کریں۔ اگر آلہ Android میں بوٹ ہونے میں ناکام ہو جاتا ہے یا غیر مستحکم ہو جاتا ہے، تو &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; سے تازہ ترین فیکٹری امیجز کے ساتھ آلہ کو دوبارہ فلیش کریں یا &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; استعمال کریں اور \'آلہ کو صاف کریں\'، \'بوٹ لوڈر کو مقفل کریں\' اور \'سبھی پارٹیشنز کو فورس فلیش کریں\' کو منتخب کریں۔"</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"‏‫16KB صفحہ ایگنوسٹک موڈ"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"مزید پڑھیں"</string>
-    <!-- no translation found for enable_16k_app_compat_title (4173159228844992989) -->
-    <skip />
-    <!-- no translation found for enable_16k_app_compat_details (3847293423550174952) -->
+    <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"ایپ کو صفحہ کے سائز کے ساتھ موافقت رکھنے والے موڈ میں چلائیں"</string>
+    <!-- no translation found for enable_16k_app_compat_details (3389401258168314266) -->
     <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"بگ رپورٹ کا ہینڈلر"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"آپ کے آلے پر کون سی ایپ بگ رپورٹ شارٹ کٹ ہینڈل کرتی اس کا تعین کرتی ہے۔"</string>

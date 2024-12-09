@@ -898,6 +898,7 @@
     <string name="external_display_on" msgid="2560104443500154333">"開啟"</string>
     <string name="external_display_off" msgid="5634413756025351374">"關閉"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"外接螢幕"</string>
+    <string name="builtin_display_settings_category" msgid="3441388849060771885">"內建螢幕"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"使用外接螢幕"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"螢幕解析度"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"未連接外接螢幕"</string>
@@ -909,8 +910,7 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"變更旋轉角度或解析度，可能會導致執行中的應用程式停止運作"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"裝置必須連接外接螢幕，才能鏡像投放畫面"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"更多選項"</string>
-    <!-- no translation found for external_display_topology_hint (854973327795578470) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="854973327795578470">"按住並拖曳即可重新排列螢幕。"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"投放"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"鏡像"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"啟用無線螢幕分享"</string>
@@ -1244,8 +1244,8 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"進一步瞭解「自動旋轉」功能"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"螢幕解析度"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"高解析度"</string>
-    <string name="screen_resolution_option_full" msgid="2694003735219114186">"全解析度"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"使用全解析度會比較耗電。切換解析度可能會導致部分應用程式重新啟動。"</string>
+    <string name="screen_resolution_option_full" msgid="4456839315039000517">"最大解析度"</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"使用最大解析度會比較耗電。如果切換解析度，部分應用程式可能會重新啟動。"</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"已選取"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"色彩"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"自然"</string>
@@ -1324,8 +1324,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"就寢模式設定"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{「模式」也可以啟用深色主題}=1{「{mode_1}」也會啟用深色主題}=2{「{mode_1}」和「{mode_2}」也會啟用深色主題}=3{「{mode_1}」、「{mode_2}」和「{mode_3}」也會啟用深色主題}other{「{mode_1}」、「{mode_2}」和另外 # 個模式也會啟用深色主題}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"「模式」設定"</string>
-    <!-- no translation found for even_dimmer_display_title (4509732439977906028) -->
-    <skip />
+    <string name="even_dimmer_display_title" msgid="4509732439977906028">"超暗"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"允許將裝置螢幕調得比平時暗"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"螢幕自動關閉"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"閒置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>後"</string>
@@ -1963,6 +1962,7 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"選項"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"無障礙"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"實體鍵盤"</string>
+    <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"實體鍵盤配置挑選器"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"彈回鍵"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"鍵盤會忽略快速重複按下同一按鍵的動作"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"彈回鍵門檻"</string>
@@ -3501,7 +3501,7 @@
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{沒有顯示變更}=1{{effect_1}}=2{{effect_1}和{effect_2}}=3{{effect_1}、{effect_2}和{effect_3}}other{{effect_1}、{effect_2}和另外 # 個設定}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"允許所有通知"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"可接受來自使用者、應用程式和音效的干擾"</string>
-    <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"如何顯示已過濾的通知"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"已過濾通知的顯示選項"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"開啟「零打擾」模式時"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"不發出通知音效"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"通知會顯示在畫面上"</string>
@@ -3639,6 +3639,14 @@
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"減少在螢幕鎖定畫面顯示的通知"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"螢幕鎖定畫面上只顯示新通知"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"自動從螢幕鎖定畫面移除先前看過的通知"</string>
+    <!-- no translation found for lock_screen_notifs_show_full_list (6767009263807771108) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_full_list_desc (4868489278443057427) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_compact (1133598661314460528) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_compact_desc (2442594880539709057) -->
+    <skip />
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"螢幕鎖定畫面通知"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"顯示對話通知、預設通知和已設為靜音的通知"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"顯示對話通知、預設通知和已設為靜音的通知"</string>
@@ -3656,6 +3664,14 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"顯示所有工作通知內容"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"隱藏敏感的工作內容"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"當裝置鎖定時，你要如何顯示個人資料通知？"</string>
+    <!-- no translation found for lock_screen_notification_hide_seen_title (6356324850662946426) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_seen_summary (8345971177658888274) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_title (3284314455767315329) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_summary (1934066619526795468) -->
+    <skip />
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"個人資料通知"</string>
     <string name="notifications_title" msgid="4221655533193721131">"通知"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"應用程式通知"</string>
@@ -4461,6 +4477,20 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"手勢"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"快速開啟相機"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"按兩下電源鍵，即可快速開啟相機，在任何畫面上都可使用。"</string>
+    <!-- no translation found for double_tap_power_title (8705875166298116659) -->
+    <skip />
+    <!-- no translation found for double_tap_power_enabled (305978257631612678) -->
+    <skip />
+    <!-- no translation found for double_tap_power_target_action_category (6186809788568348488) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_title (8398392033718681209) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_summary (1231656402570674349) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_title (2238628756927241786) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_summary (6567586974229774570) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"翻轉相機切換自拍模式"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"操作模式"</string>
@@ -4858,11 +4888,11 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"衛星訊息"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"透過衛星收發訊息。你的帳戶支援這項功能。"</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"透過衛星收發訊息 (你的帳戶不支援這項功能)。"</string>
-    <string name="keywords_satellite_setting" msgid="3312183289776517695">"衛星訊息"</string>
-    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"關於衛星訊息"</string>
+    <string name="keywords_satellite_setting" msgid="613553612424945946">"衛星訊息, 衛星連線"</string>
+    <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"關於<xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"適用的「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」帳戶支援透過衛星收發訊息"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"你的「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」方案"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"你的帳戶支援衛星訊息"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"你的帳戶支援訊息功能"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"你的帳戶不支援衛星訊息"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"瞭解詳情"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"運作方式"</string>
@@ -4870,13 +4900,33 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"手機會自動連上衛星。為獲得最佳連線品質，請在沒有物體遮住天空的地方使用。"</string>
     <string name="title_supported_service" msgid="4275535165812691571">"手機連上衛星後"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"你可以傳送訊息給任何人，包括緊急救援服務。如果有可用的行動網路，手機就會重新連線。"</string>
-    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"衛星訊息可能需要比較長的時間才會送達，而且這項功能僅支援部分地區。天氣和特定結構可能會影響衛星連線的品質。系統不支援衛星電話，但你仍可撥打緊急電話。\n\n「設定」頁面可能要一段時間後才會顯示帳戶變動，詳情請與你的電信業者聯絡。"</string>
-    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"進一步瞭解衛星訊息"</string>
+    <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"<xliff:g id="SUBJECT">%1$s</xliff:g>可能需要比較長的時間才會送達，而且這項功能僅支援部分地區。天氣和特定結構可能會影響衛星連線的品質。系統不支援衛星電話，但你仍可撥打緊急電話。\n\n「設定」頁面可能要一段時間後才會顯示帳戶變動，詳情請洽「<xliff:g id="CARRIER_NAME">%1$s</xliff:g>」。"</string>
+    <string name="more_about_satellite_messaging" msgid="1039277943532711584">"進一步瞭解<xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"無法開啟<xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"如要開啟<xliff:g id="FUNCTION">%1$s</xliff:g>，請先中斷衛星連線"</string>
     <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"衛星連線"</string>
-    <!-- no translation found for satellite_setting_connectivity (80680165723879149) -->
-    <skip />
+    <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"衛星連線"</string>
+    <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"衛星連線"</string>
+    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"衛星訊息"</string>
+    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"你的帳戶可透過衛星傳送資料"</string>
+    <string name="title_for_satellite_sos" msgid="4608739357329147285">"緊急衛星連線"</string>
+    <string name="summary_for_satellite_sos_entry" msgid="4981480371923329605">"無法連上 Wi-Fi 或行動網路時，仍可與緊急救援服務互傳訊息"</string>
+    <string name="keywords_satellite_sos" msgid="6275777197418023949">"緊急衛星連線, 緊急"</string>
+    <string name="category_title_about_satellite_sos" msgid="7229724397303154919">"關於緊急衛星連線"</string>
+    <string name="satellite_sos_introduction" msgid="4670230212117495751">"沒有 Wi-Fi 或行動網路時，可以與緊急救援服務互傳訊息，並分享位置資訊。這項服務在某些地點或情況下可能無法使用。"</string>
+    <string name="satellite_sos_how_it_works_step_1" msgid="4669862942425306921">"撥打電話或傳送訊息給緊急救援服務"</string>
+    <string name="satellite_sos_how_it_works_step_2" msgid="3558248744927579016">"回答有關緊急情況的問題"</string>
+    <string name="satellite_sos_how_it_works_step_3" msgid="4496038314890474893">"按照步驟連上衛星"</string>
+    <string name="satellite_sos_how_it_works_summary_1" msgid="4497178023367920284">"如果沒有行動網路，就會看到使用緊急衛星連線的選項"</string>
+    <string name="satellite_sos_how_it_works_summary_2" msgid="1302661361673503362">"傳送回答給緊急救援服務，以便為你提供適當協助"</string>
+    <string name="satellite_sos_how_it_works_summary_3" msgid="4612675365617172405">"連線後，就能與緊急救援服務互傳訊息"</string>
+    <string name="satellite_sos_try_demo" msgid="1915233782211344468">"立即試用"</string>
+    <string name="satellite_sos_footer_text" msgid="4454885538165117230">"透過衛星聯絡緊急救援服務時，系統會將你的姓名、電子郵件地址、電話號碼、所在位置、裝置資訊 (IMEI、語言、型號、電池電量) 和緊急聯絡人資訊分享給緊急救援服務和衛星服務供應商。\n\n如要使用緊急衛星連線，必須將 Google 訊息設為預設訊息應用程式。\n\n如果自動選擇網路功能處於關閉狀態，系統會將其開啟，讓裝置自動連線到任何網路。"</string>
+    <string name="satellite_sos_sharing_preferences_subheader_title" msgid="5701538329333628267">"分享偏好設定"</string>
+    <string name="satellite_sos_sharing_preferences_step_1" msgid="3106774199702637359">"緊急聯絡人"</string>
+    <string name="satellite_sos_sharing_preferences_step_2" msgid="738246589687762115">"你的 Google 帳戶"</string>
+    <string name="satellite_sos_sharing_preferences_description" msgid="782508188142964342">"查看或更新分享給緊急救援服務的資訊"</string>
+    <string name="satellite_sos_learn_more_link" msgid="2442930426165677255">"https://support.google.com/pixelphone/answer/15254448"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"存取點名稱"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"無法在連線到「<xliff:g id="CARRIER">%1$s</xliff:g>」時使用"</string>
@@ -5063,9 +5113,8 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"你目前處於可變頁面模式的 16KB 模式。此模式無法保證軟體完整性，且系統啟動載入程式解鎖時，手機上的資料可能會有風險。在這類模式中，部分功能會停用，因此有些應用程式可能無法運作。如要再次進入實際工作環境模式，必須切換回 4KB 模式，然後鎖定裝置的系統啟動載入程式。這樣做會使裝置再次恢復原廠設定，並還原為實際工作環境設定。裝置成功啟動 Android 系統後，請停用「開發人員選項」中的「OEM 解鎖」設定。如果裝置無法啟動 Android 或狀態不穩，可透過以下任一方式重新刷新裝置：使用最新原廠映像檔 (&lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;)，或前往 &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; 使用工具，依序選取「Wipe Device」、「Lock Bootloader」和「Force Flash all partitions」。"</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB 可變頁面模式"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"閱讀完整內容"</string>
-    <!-- no translation found for enable_16k_app_compat_title (4173159228844992989) -->
-    <skip />
-    <!-- no translation found for enable_16k_app_compat_details (3847293423550174952) -->
+    <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"以頁面大小相容模式執行應用程式"</string>
+    <!-- no translation found for enable_16k_app_compat_details (3389401258168314266) -->
     <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"錯誤報告處理常式"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"選擇要使用哪個應用程式控管「錯誤報告」捷徑。"</string>
@@ -5083,7 +5132,7 @@
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"必須先設定螢幕鎖定才能使用"</string>
     <string name="power_menu_power_volume_up_hint" msgid="5619917593676125759">"電源鍵選單：\n同時按下電源鍵和調高音量鍵"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="1169955014711158873">"暫停響鈴：\n按下音量鍵即可顯示捷徑"</string>
-    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"需要按住多久"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"長按時間"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"設定需按住電源鍵的時間長度，調整功能靈敏度"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"短"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"長"</string>

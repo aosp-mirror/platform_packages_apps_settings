@@ -898,6 +898,7 @@
     <string name="external_display_on" msgid="2560104443500154333">"ჩართული"</string>
     <string name="external_display_off" msgid="5634413756025351374">"გამორთული"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"გარე ეკრანი"</string>
+    <string name="builtin_display_settings_category" msgid="3441388849060771885">"ჩაშენებული ეკრანი"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"გარე ეკრანის გამოყენება"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"ეკრანის გარჩევადობა"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"გარე ეკრანთან კავშირი გაწყვეტილია"</string>
@@ -909,8 +910,7 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"შეტრიალების ან გარჩევადობის შეცვლამ შეიძლება შეწყვიტოს მიმდინარე აპების მუშაობა"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"თქვენი მოწყობილობა დაკავშირებული უნდა იყოს გარე ეკრანთან, რათა თქვენი ეკრანის გამოსახულების ასლი შეიქმნას"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"სხვა ვარიანტები"</string>
-    <!-- no translation found for external_display_topology_hint (854973327795578470) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="854973327795578470">"ჩავლებით გადაიტანეთ ეკრანების თანმიმდევრობის გადასაწყობად."</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"ტრანსლირება"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"გამოსახულების ასლი"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"უსადენო ეკრანის ჩართვა"</string>
@@ -1244,8 +1244,8 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"შეიტყვეთ მეტი ავტომატური შეტრიალების შესახებ"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"ეკრანის გარჩევადობა"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"მაღალი გარჩევადობა"</string>
-    <string name="screen_resolution_option_full" msgid="2694003735219114186">"სრული გარჩევადობა"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"სრული გარჩევადობა მეტად მოიხმარს ბატარეას. თქვენი გარჩევადობის გადართვამ შეიძლება გამოიწვიოს ზოგიერთი აპის გადატვირთვა."</string>
+    <string name="screen_resolution_option_full" msgid="4456839315039000517">"მაქსიმალური გარჩევადობა"</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"მაქსიმალური გარჩევადობა მეტად მოიხმარს ბატარეას. გარჩევადობის გადართვამ შეიძლება გამოიწვიოს ზოგიერთი აპის გადატვირთვა."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"არჩეულია"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"ფერები"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"ბუნებრივი"</string>
@@ -1324,8 +1324,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"ძილის დროის რეჟიმის პარამეტრები"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{რეჟიმებმა შეიძლება მუქი თემაც გაააქტიუროს}=1{{mode_1} ასევე ააქტიურებს მუქ თემას}=2{{mode_1} და {mode_2} ასევე ააქტიურებს მუქ თემას}=3{{mode_1}, {mode_2} და {mode_3} ასევე ააქტიურებს მუქ თემას}other{{mode_1}, {mode_2} და # სხვა ასევე ააქტიურებს მუქ თემას}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"რეჟიმების პარამეტრები"</string>
-    <!-- no translation found for even_dimmer_display_title (4509732439977906028) -->
-    <skip />
+    <string name="even_dimmer_display_title" msgid="4509732439977906028">"დამატებითი დაბინდვა"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"ჩვეულებრივზე უფრო მეტად დააბნელეთ მოწყობილობა"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ეკრანის დროის ლიმიტი"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> უმოქმედობის შემდეგ"</string>
@@ -1963,6 +1962,8 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"ვარიანტები"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"წვდომა"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"ფიზიკური კლავიატურა"</string>
+    <!-- no translation found for physical_keyboard_layout_picker_title (4526600767648916256) -->
+    <skip />
     <string name="bounce_keys" msgid="7419450970351743904">"კლავიშების ასხლეტა"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"კლავიატურა აიგნორებს ერთსა და იმავე კლავიშზე სწრაფ, განმეორებით დაჭერებს"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"კლავიშების ასხლეტის ზღურბლი"</string>
@@ -3639,6 +3640,14 @@
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"ნაკლები შეტყობინების ჩვენება ჩაკეტილ ეკრანზე"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"ჩაკეტილ ეკრანზე მხოლოდ ახალი შეტყობინებების ჩვენება"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"წინათ ნანახი შეტყობინებების ჩაკეტილი ეკრანიდან ავტომატურად ამოშლა"</string>
+    <!-- no translation found for lock_screen_notifs_show_full_list (6767009263807771108) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_full_list_desc (4868489278443057427) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_compact (1133598661314460528) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_compact_desc (2442594880539709057) -->
+    <skip />
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"შეტყობინებები ჩაკეტილ ეკრანზე"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"მიმოწერების, ნაგულისხმევისა და ჩუმის ჩვენება"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"მიმოწერების, ნაგულისხმევისა და ჩუმის ჩვენება"</string>
@@ -3656,6 +3665,14 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"სამსახურის შეტყობინებების მთელი კონტენტის ჩვენება"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"სამსახურის სენსიტიური კონტენტის დამალვა"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"აირჩიეთ ჩაკეტილ მოწყობილობაზე პროფილის შეტყობინებების ჩვენების რეჟიმი."</string>
+    <!-- no translation found for lock_screen_notification_hide_seen_title (6356324850662946426) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_seen_summary (8345971177658888274) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_title (3284314455767315329) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_summary (1934066619526795468) -->
+    <skip />
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"პროფილის შეტყობინებები"</string>
     <string name="notifications_title" msgid="4221655533193721131">"შეტყობინებები"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"აპის შეტყობინებები"</string>
@@ -4461,6 +4478,20 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"ჟესტები"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"კამერის სწრაფად გახსნა"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"კამერის სწრაფად გასახსნელად, დააჭირეთ ელკვების ღილაკს ორჯერ. მუშაობს ნებისმიერი ეკრანიდან."</string>
+    <!-- no translation found for double_tap_power_title (8705875166298116659) -->
+    <skip />
+    <!-- no translation found for double_tap_power_enabled (305978257631612678) -->
+    <skip />
+    <!-- no translation found for double_tap_power_target_action_category (6186809788568348488) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_title (8398392033718681209) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_summary (1231656402570674349) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_title (2238628756927241786) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_summary (6567586974229774570) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"კამერის ამობრუნება სელფისთვის"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"ნავიგაციის რეჟიმი"</string>
@@ -4858,11 +4889,11 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"შეტყობინებების სატელიტური მიმოცვლა"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"მიიღეთ და გაგზავნეთ ტექსტური შეტყობინებები სატელიტის მეშვეობით. არ შედის თქვენს ანგარიშში."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"მიიღეთ და გაგზავნეთ ტექსტური შეტყობინებები სატელიტის მეშვეობით. არ შედის თქვენს ანგარიშში."</string>
-    <string name="keywords_satellite_setting" msgid="3312183289776517695">"შეტყობინებების სატელიტური მიმოცვლა"</string>
-    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"სატელიტური შეტყობინებების მიმოცვლის შესახებ"</string>
+    <string name="keywords_satellite_setting" msgid="613553612424945946">"შეტყობინებების სატელიტური მიმოცვლა, სატელიტური კავშირი"</string>
+    <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"<xliff:g id="SUBJECT">%1$s</xliff:g>-ის შესახებ"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"თქვენ, როგორც მოთხოვნის შესაბამისი <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-ის ანგარიშის წევრს, შეგიძლიათ სატელიტის მეშვეობით გააგზავნოთ და მიიღოთ ტექსტური შეტყობინებები."</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"თქვენი <xliff:g id="CARRIER_NAME">%1$s</xliff:g> გეგმა"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"შეტყობინებების სატელიტური მიმოცვლის ფუნქცია შედის თქვენს ანგარიშში"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"თქვენი ანგარიში მოიცავს შეტყობინებების მიმოცვლას"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"შეტყობინებების სატელიტური მიმოცვლის ფუნქცია არ შედის თქვენს ანგარიშში"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"შეიტყვეთ მეტი"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"მუშაობის პრინციპი"</string>
@@ -4870,12 +4901,33 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"თქვენი ტელეფონი ავტომატურად დაუკავშირდება სატელიტს. საუკეთესო კავშირისთვის იყავთ ისეთ ადგილას, სადაც ცის ნათელი ხედია."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"თქვენი ტელეფონის სატელიტთან დაკავშირების შემდეგ"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"შეტყობინების ყველგან გაგზავნა შეგიძლიათ, მათ შორის გადაუდებელი დახმარების სამსახურებში. თქვენი ტელეფონი დაუკავშირდება მობილური ქსელს, მისი ხელმისაწვდომობის შემთხვევაში."</string>
-    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"შეტყობინებების სატელიტურ მიმოცვლას შეიძლება უფრო მეტი დრო დასჭირდეს და ხელმისაწვდომია მხოლოდ გარკვეულ ტერიტორიაზე. ამინდმა და გარკვეულმა კონსტრუქციებმა შეიძლება გავლენა მოახდინოს თქვენს კავშირზე სატელიტთან. სატელიტით დარეკვა მიუწვდომელია. გადაუდებელი ზარის განხორციელება მიანც შესაძლებელია.\n\nშესაძლოა გარკვეული დრო დასჭირდეს ანგარიშის პარამეტრების ცვლილებების ასახვას. დეტალური ინფორმაციისთვის მიმართეთ ოპერატორს."</string>
-    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"მეტი ინფორმაცია შეტყობინებების სატელიტური მიმოცვლის შესახებ"</string>
+    <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"<xliff:g id="SUBJECT">%1$s</xliff:g>-ს შეიძლება უფრო მეტი დრო დასჭირდეს და ხელმისაწვდომია მხოლოდ გარკვეულ ადგილებში. ამინდმა და გარკვეულმა კონსტრუქციებმა შეიძლება გავლენა მოახდინოს თქვენს კავშირზე სატელიტთან. სატელიტით დარეკვა მიუწვდომელია. გადაუდებელი ზარის განხორციელება მიანც შესაძლებელია.\n\nშესაძლოა გარკვეული დრო დასჭირდეს ანგარიშის პარამეტრების ცვლილებების ასახვას. დეტალებისთვის დაუკავშირდით: <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="more_about_satellite_messaging" msgid="1039277943532711584">"მეტი <xliff:g id="SUBJECT">%1$s</xliff:g>-ის შესახებ"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g>-ის ჩართვა ვერ ხერხდება"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g>-ის ჩასართავად ჯერ დაასრულეთ სატელიტური კავშირი"</string>
     <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"სატელიტური კავშირი"</string>
-    <!-- no translation found for satellite_setting_connectivity (80680165723879149) -->
+    <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"სატელიტური კავშირი"</string>
+    <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"სატელიტური კავშირი"</string>
+    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"შეტყობინებების სატელიტური მიმოცვლა"</string>
+    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"თქვენი ანგარიში მოიცავს მონაცემების გამოყენებას"</string>
+    <string name="title_for_satellite_sos" msgid="4608739357329147285">"სატელიტური SOS"</string>
+    <string name="summary_for_satellite_sos_entry" msgid="4981480371923329605">"გაუგზავნეთ შეტყობინება გადაუდებელი დახმარების სამსახურებს, როცა ვერ უკავშირდებით მობილურ ან Wi-Fi ქსელს"</string>
+    <string name="keywords_satellite_sos" msgid="6275777197418023949">"სატელიტური SOS, SOS"</string>
+    <string name="category_title_about_satellite_sos" msgid="7229724397303154919">"სატელიტური SOS ფუნქციის შესახებ"</string>
+    <string name="satellite_sos_introduction" msgid="4670230212117495751">"გადაუდებელი დახმარების სამსახურებთან შეტყობინების გაგზავნა და თქვენი მდებარეობის გაზიარება შეგიძლიათ, როცა ვერ უკავშირდებით მობილურ ან Wi-Fi ქსელს. ეს სერვისი შეიძლება ყოველთვის არ იყოს ხელმისაწვდომი ყველა მდებარეობასა და შემთხვევაში."</string>
+    <string name="satellite_sos_how_it_works_step_1" msgid="4669862942425306921">"გადაუდებელი დახმარების სამსახურებთან დარეკვა ან შეტყობინების გაგზავნა"</string>
+    <string name="satellite_sos_how_it_works_step_2" msgid="3558248744927579016">"უპასუხეთ შეკითხვებს საგანგებო სიტუაციასთან დაკავშირებით"</string>
+    <string name="satellite_sos_how_it_works_step_3" msgid="4496038314890474893">"სატელიტთან დასაკავშირებლად მიჰყევით ნაბიჯებს"</string>
+    <string name="satellite_sos_how_it_works_summary_1" msgid="4497178023367920284">"თუ მობილური ქსელით არ სარგებლობთ, დაინახავთ სატელიტური SOS ფუნქციის გამოყენების ვარიანტს"</string>
+    <string name="satellite_sos_how_it_works_summary_2" msgid="1302661361673503362">"გაუგზავნეთ პასუხები გადაუდებელი დახმარების სამსახურებს, რათა მიიღოთ შესაბამისი დახმარება"</string>
+    <string name="satellite_sos_how_it_works_summary_3" msgid="4612675365617172405">"გადაუდებელი დახმარების სამსახურებთან შეტყობინების გაგზავნას შეძლებთ დაკავშირების შემდეგ"</string>
+    <string name="satellite_sos_try_demo" msgid="1915233782211344468">"დემოს ცდა"</string>
+    <string name="satellite_sos_footer_text" msgid="4454885538165117230">"როდესაც გადაუდებელი დახმარების სამსახურებს სატელიტის მეშვეობით უკავშირდებით, გადაუდებელი დახმარების სამსახურებთან და სატელიტური სერვისის პროვაიდერებთან გაზიარდება თქვენი ელფოსტა, ტელეფონის ნომერი, მდებარეობა, მოწყობილობის ინფორმაცია (IMEI, ენა, მოდელი, ბატარეის დონე) და საგანგებო ვითარებაში საკონტაქტო პირის საკონტაქტო ინფორმაცია. \n\nსატელიტური SOS ფუნქციის გამოსაყენებლად საჭიროა, რომ Google Messages იყოს თქვენი ნაგულისხმევი SMS აპი. \n\nთუ ქსელის ავტომატური არჩევა გამორთულია, ჩაირთვება და თქვენი მოწყობილობა ავტომატურად დაუკავშირდება ნებისმიერ ქსელს."</string>
+    <string name="satellite_sos_sharing_preferences_subheader_title" msgid="5701538329333628267">"გაზიარების პარამეტრები"</string>
+    <string name="satellite_sos_sharing_preferences_step_1" msgid="3106774199702637359">"საგანგებო ვითარებაში საკონტაქტო პირები"</string>
+    <string name="satellite_sos_sharing_preferences_step_2" msgid="738246589687762115">"თქვენი Google ანგარიში"</string>
+    <string name="satellite_sos_sharing_preferences_description" msgid="782508188142964342">"გადაუდებელი დახმარების სამსახურებთან გასაზიარებელი ინფორმაციის მიმოხილვა და განახლება"</string>
+    <!-- no translation found for satellite_sos_learn_more_link (2442930426165677255) -->
     <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"წვდომის წერტილების სახელები"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
@@ -5063,9 +5115,8 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"თქვენ იმყოფებით გვერდ-აგნოსტიკური რეჟიმის 16-კილობაიტიან რეჟიმში. აღნიშნულ რეჟიმში პროგრამული უზრუნველყოფის მთლიანობა ვერ იქნება გარანტირებული და სანამ ჩამტვირთავი განბლოკილია, ტელეფონში შენახული ნებისმიერი მონაცემი შეიძლება რისკის ქვეშ იყოს. ამ რეჟიმებში ზოგი ფუნქცია გაითიშება, რის გამოც გარკვეულმა აპლიკაციებმა შეიძლება არ იმუშაოს. მოწყობილობის წარმოების რეჟიმში ხელახლა შესასვლელად უნდა გადაერთოთ 4-კილობაიტიან რეჟიმზე და შემდეგ ჩაკეტოთ მოწყობილობის ჩამტვირთავი. ეს მოწყობილობას კვლავ ქარხნულ პარამეტრებზე დააბრუნებს და შესაბამისად, აღადგენს მისი წარმოების პარამეტრებს. მოწყობილობის Android-ში წარმატებით ჩატვირთვის შემდეგ, დეველოპერთა პარამეტრებში გათიშეთ OEM-ის მხრიდან განბლოკვა. თუ მოწყობილობა ვერ იტვირთება Android-ში ან არასტაბილურია, განაახლეთ ჩაშენებული პროგრამული უზრუნველყოფა უახლესი ქარხნული იმიჯებით შემდეგი ბმულიდან: &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; or use &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; და აირჩიეთ „მოწყობილობის წაშლა“, „ჩამტვირთავის ჩაკეტვა“ და „ყველა დანაყოფზე იძულებითი ჩატვირთვა“."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16-კბაიტიანი გვერდ-აგნოსტიკური რეჟიმი"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"ვრცლად"</string>
-    <!-- no translation found for enable_16k_app_compat_title (4173159228844992989) -->
-    <skip />
-    <!-- no translation found for enable_16k_app_compat_details (3847293423550174952) -->
+    <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"ამუშავეთ აპი გვერდის ზომის თავსებადობის რეჟიმში"</string>
+    <!-- no translation found for enable_16k_app_compat_details (3389401258168314266) -->
     <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"სისტემის ხარვეზის ანგარიშის დამმუშავებელი"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"განსაზღვრავს, რომელი აპი მართავს სისტემის ხარვეზის ანგარიშის მალსახმობს თქვენს მოწყობილობაზე."</string>

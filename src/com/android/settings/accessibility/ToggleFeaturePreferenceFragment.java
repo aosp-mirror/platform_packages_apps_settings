@@ -72,6 +72,7 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Base class for accessibility fragments with toggle, shortcut, some helper functions
@@ -104,7 +105,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     protected Intent mSettingsIntent;
     // The mComponentName maybe null, such as Magnify
     protected ComponentName mComponentName;
-    protected CharSequence mPackageName;
+    protected CharSequence mFeatureName;
     protected Uri mImageUri;
     protected CharSequence mHtmlDescription;
     protected CharSequence mTopIntroTitle;
@@ -167,9 +168,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         final List<String> shortcutFeatureKeys = new ArrayList<>();
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
-        }
+        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
         return shortcutFeatureKeys;
     }
 
@@ -206,12 +205,12 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
                     mDialog = AccessibilityShortcutsTutorial
                             .createAccessibilityTutorialDialogForSetupWizard(
                                     getPrefContext(), getUserPreferredShortcutTypes(),
-                                    this::callOnTutorialDialogButtonClicked, mPackageName);
+                                    this::callOnTutorialDialogButtonClicked, mFeatureName);
                 } else {
                     mDialog = AccessibilityShortcutsTutorial
                             .createAccessibilityTutorialDialog(
                                     getPrefContext(), getUserPreferredShortcutTypes(),
-                                    this::callOnTutorialDialogButtonClicked, mPackageName);
+                                    this::callOnTutorialDialogButtonClicked, mFeatureName);
                 }
                 mDialog.setCanceledOnTouchOutside(false);
                 return mDialog;
@@ -320,7 +319,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
 
     protected void updateToggleServiceTitle(SettingsMainSwitchPreference switchPreference) {
         final CharSequence title =
-                getString(R.string.accessibility_service_primary_switch_title, mPackageName);
+                getString(R.string.accessibility_service_primary_switch_title, mFeatureName);
         switchPreference.setTitle(title);
     }
 
@@ -329,7 +328,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     }
 
     protected CharSequence getShortcutTitle() {
-        return getString(R.string.accessibility_shortcut_title, mPackageName);
+        return getString(R.string.accessibility_shortcut_title, mFeatureName);
     }
 
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
@@ -575,7 +574,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         screen.addPreference(mHtmlFooterPreference);
 
         // TODO(b/171272809): Migrate to DashboardFragment.
-        final String title = getString(R.string.accessibility_introduction_title, mPackageName);
+        final String title = getString(R.string.accessibility_introduction_title, mFeatureName);
         mFooterPreferenceController = new AccessibilityFooterPreferenceController(
                 screen.getContext(), mHtmlFooterPreference.getKey());
         mFooterPreferenceController.setIntroductionTitle(title);
@@ -600,7 +599,7 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     private void initFooterPreference() {
         if (!TextUtils.isEmpty(mDescription)) {
             createFooterPreference(getPreferenceScreen(), mDescription,
-                    getString(R.string.accessibility_introduction_title, mPackageName));
+                    getString(R.string.accessibility_introduction_title, mFeatureName));
         }
     }
 
@@ -687,13 +686,12 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         }
 
         final int shortcutTypes = getUserPreferredShortcutTypes();
-        if (preference.isChecked()) {
-            AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes,
-                    mComponentName);
+        final boolean isChecked = preference.isChecked();
+        getPrefContext().getSystemService(AccessibilityManager.class).enableShortcutsForTargets(
+                isChecked, shortcutTypes,
+                Set.of(mComponentName.flattenToString()), getPrefContext().getUserId());
+        if (isChecked) {
             showDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
-        } else {
-            AccessibilityUtil.optOutAllValuesFromSettings(getPrefContext(), shortcutTypes,
-                    mComponentName);
         }
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }
@@ -750,44 +748,13 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         showQuickSettingsTooltipIfNeeded();
     }
 
+    /**
+     * @deprecated made obsolete by quick settings rollout.
+     *
+     * (TODO 367414968: finish removal.)
+     */
+    @Deprecated
     private void showQuickSettingsTooltipIfNeeded() {
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            // Don't show Quick Settings tooltip
-            return;
-        }
-        final ComponentName tileComponentName = getTileComponentName();
-        if (tileComponentName == null) {
-            // Returns if no tile service assigned.
-            return;
-        }
-
-        Activity activity = getActivity();
-        if (activity != null && WizardManagerHelper.isAnySetupWizard(activity.getIntent())) {
-            // Don't show QuickSettingsTooltip in Setup Wizard
-            return;
-        }
-
-        if (!mNeedsQSTooltipReshow && AccessibilityQuickSettingUtils.hasValueInSharedPreferences(
-                getContext(), tileComponentName)) {
-            // Returns if quick settings tooltip only show once.
-            return;
-        }
-
-        final CharSequence content = getTileTooltipContent(mNeedsQSTooltipType);
-        if (TextUtils.isEmpty(content)) {
-            // Returns if no content of tile tooltip assigned.
-            return;
-        }
-
-        final int imageResId = mNeedsQSTooltipType == QuickSettingsTooltipType.GUIDE_TO_EDIT
-                ? R.drawable.accessibility_qs_tooltip_illustration
-                : R.drawable.accessibility_auto_added_qs_tooltip_illustration;
-        mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(getContext());
-        mTooltipWindow.setup(content, imageResId);
-        mTooltipWindow.showAtTopCenter(getView());
-        AccessibilityQuickSettingUtils.optInValueToSharedPreferences(getContext(),
-                tileComponentName);
-        mNeedsQSTooltipReshow = false;
     }
 
     /** Returns user visible name of the tile by given {@link ComponentName}. */

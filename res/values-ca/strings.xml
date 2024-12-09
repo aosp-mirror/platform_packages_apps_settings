@@ -898,6 +898,7 @@
     <string name="external_display_on" msgid="2560104443500154333">"Activat"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Desactivat"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"Pantalla externa"</string>
+    <string name="builtin_display_settings_category" msgid="3441388849060771885">"Pantalla integrada"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Utilitza la pantalla externa"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Resolució de la pantalla"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"La pantalla externa està desconnectada"</string>
@@ -909,8 +910,7 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Canviar la rotació o la resolució pot aturar les aplicacions que s\'estiguin executant ara mateix"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"El dispositiu ha d\'estar connectat a una pantalla externa per duplicar la pantalla"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Més opcions"</string>
-    <!-- no translation found for external_display_topology_hint (854973327795578470) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="854973327795578470">"Mantén premut i arrossega per reorganitzar les pantalles."</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Emet"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"duplicar"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Activa pantalla sense fil"</string>
@@ -1244,8 +1244,8 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Més informació sobre el gir automàtic"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Resolució de pantalla"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Alta resolució"</string>
-    <string name="screen_resolution_option_full" msgid="2694003735219114186">"Resolució completa"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"La resolució completa consumeix més bateria. Si canvies la resolució, és possible que algunes aplicacions es reiniciïn."</string>
+    <string name="screen_resolution_option_full" msgid="4456839315039000517">"Resolució màxima"</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"La resolució màxima consumeix més bateria. Si canvies la resolució, és possible que algunes aplicacions es reiniciïn."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Seleccionada"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Colors"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturals"</string>
@@ -1324,8 +1324,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Configuració del mode Hora de dormir"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Els modes també poden activar el tema fosc}=1{{mode_1} també activa el tema fosc}=2{{mode_1} i {mode_2} també activen el tema fosc}=3{{mode_1}, {mode_2} i {mode_3} també activen el tema fosc}other{{mode_1}, {mode_2} i # més també activen el tema fosc}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Configuració dels modes"</string>
-    <!-- no translation found for even_dimmer_display_title (4509732439977906028) -->
-    <skip />
+    <string name="even_dimmer_display_title" msgid="4509732439977906028">"Atenuació extra"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Permet que el dispositiu s\'atenuï més de l\'habitual"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Temps d\'espera de la pantalla"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Després de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> d\'inactivitat"</string>
@@ -1963,6 +1962,8 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opcions"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accessibilitat"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclat físic"</string>
+    <!-- no translation found for physical_keyboard_layout_picker_title (4526600767648916256) -->
+    <skip />
     <string name="bounce_keys" msgid="7419450970351743904">"Tecles de rebot"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"El teclat ignora les pulsacions repetides ràpidament de la mateixa tecla"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Llindar de la tecla de rebot"</string>
@@ -3639,6 +3640,14 @@
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"Mostra menys notificacions a la pantalla de bloqueig"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Mostra només notificacions noves a la pantalla de bloqueig"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Suprimeix automàticament de la pantalla de bloqueig les notificacions vistes anteriorment"</string>
+    <!-- no translation found for lock_screen_notifs_show_full_list (6767009263807771108) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_full_list_desc (4868489278443057427) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_compact (1133598661314460528) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_compact_desc (2442594880539709057) -->
+    <skip />
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificacions a la pantalla de bloqueig"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostra les converses, predeterminades i silencioses"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostra les converses, predeterminades i silencioses"</string>
@@ -3656,6 +3665,14 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Mostra tot el contingut de notificacions de feina"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Amaga el contingut de feina sensible"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Com vols que es mostrin les notificacions del perfil quan el dispositiu estigui bloquejat?"</string>
+    <!-- no translation found for lock_screen_notification_hide_seen_title (6356324850662946426) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_seen_summary (8345971177658888274) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_title (3284314455767315329) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_summary (1934066619526795468) -->
+    <skip />
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Notificacions del perfil"</string>
     <string name="notifications_title" msgid="4221655533193721131">"Notificacions"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"Notificacions d\'aplicacions"</string>
@@ -4461,6 +4478,20 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"Gestos"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Obre la càmera ràpidament"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Per obrir ràpidament la càmera, prem el botó d\'engegada dues vegades. Funciona des de qualsevol pantalla."</string>
+    <!-- no translation found for double_tap_power_title (8705875166298116659) -->
+    <skip />
+    <!-- no translation found for double_tap_power_enabled (305978257631612678) -->
+    <skip />
+    <!-- no translation found for double_tap_power_target_action_category (6186809788568348488) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_title (8398392033718681209) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_summary (1231656402570674349) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_title (2238628756927241786) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_summary (6567586974229774570) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Gira la càmera per fer una selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Mode de navegació"</string>
@@ -4858,11 +4889,11 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"Missatges per satèl·lit"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Envia i rep missatges de text per satèl·lit. S\'inclou amb el teu compte."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Envia i rep missatges de text per satèl·lit. No s\'inclou amb el teu compte."</string>
-    <string name="keywords_satellite_setting" msgid="3312183289776517695">"Missatges per satèl·lit"</string>
-    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Sobre els missatges per satèl·lit"</string>
+    <string name="keywords_satellite_setting" msgid="613553612424945946">"Missatges per satèl·lit, connectivitat per satèl·lit"</string>
+    <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"Sobre <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Pots enviar i rebre missatges de text per satèl·lit com a part d\'un compte de <xliff:g id="CARRIER_NAME">%1$s</xliff:g> apte"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"El teu pla de <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"Els missatges per satèl·lit s\'inclouen amb el teu compte"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"Els missatges s\'inclouen amb el teu compte"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Els missatges per satèl·lit no s\'inclouen amb el teu compte"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Més informació"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Com funciona"</string>
@@ -4870,12 +4901,33 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"El telèfon es connectarà automàticament a un satèl·lit. Per obtenir la millor connexió possible, has de ser en una zona en què es vegi bé el cel."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Quan el telèfon es connecti a un satèl·lit"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Pots enviar missatges de text a qualsevol persona, inclosos els serveis d\'emergències. El telèfon es tornarà a connectar a una xarxa mòbil quan estigui disponible."</string>
-    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Els missatges per satèl·lit poden tardar més i només estan disponibles en algunes zones. Les condicions meteorològiques i determinades estructures poden afectar la teva connexió per satèl·lit. Les trucades per satèl·lit no estan disponibles. És possible que puguis continuar fent trucades d\'emergència.\n\nÉs possible que els canvis al teu compte tardin una estona a mostrar-se a Configuració. Contacta amb l\'operador per obtenir-ne més informació."</string>
-    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Més informació sobre els missatges per satèl·lit"</string>
+    <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"Els <xliff:g id="SUBJECT">%1$s</xliff:g> poden tardar més i només estan disponibles en algunes zones. Les condicions meteorològiques i determinades estructures poden afectar la teva connexió per satèl·lit. Les trucades per satèl·lit no estan disponibles. És possible que puguis continuar fent trucades d\'emergència.\n\nÉs possible que els canvis al teu compte tardin una estona a mostrar-se a Configuració. Contacta amb <xliff:g id="CARRIER_NAME">%1$s</xliff:g> per obtenir més informació."</string>
+    <string name="more_about_satellite_messaging" msgid="1039277943532711584">"Més informació sobre <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"No es pot activar <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Per activar <xliff:g id="FUNCTION">%1$s</xliff:g>, primer finalitza la connexió per satèl·lit"</string>
     <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"Connectivitat per satèl·lit"</string>
-    <!-- no translation found for satellite_setting_connectivity (80680165723879149) -->
+    <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Connectivitat per satèl·lit"</string>
+    <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"connectivitat per satèl·lit"</string>
+    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"missatges per satèl·lit"</string>
+    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"L\'ús de dades s\'inclou amb el teu compte"</string>
+    <string name="title_for_satellite_sos" msgid="4608739357329147285">"SOS per satèl·lit"</string>
+    <string name="summary_for_satellite_sos_entry" msgid="4981480371923329605">"Envia missatges als serveis d\'emergències quan no puguis connectar-te a una xarxa mòbil o Wi‑Fi"</string>
+    <string name="keywords_satellite_sos" msgid="6275777197418023949">"SOS per satèl·lit, SOS"</string>
+    <string name="category_title_about_satellite_sos" msgid="7229724397303154919">"Sobre SOS per satèl·lit"</string>
+    <string name="satellite_sos_introduction" msgid="4670230212117495751">"Envia missatges als serveis d\'emergències i comparteix la ubicació quan no puguis connectar-te a una xarxa mòbil o Wi‑Fi És possible que aquest servei no estigui disponible en tot moment ni en totes les ubicacions o circumstàncies."</string>
+    <string name="satellite_sos_how_it_works_step_1" msgid="4669862942425306921">"Truca o envia missatges als serveis d\'emergències"</string>
+    <string name="satellite_sos_how_it_works_step_2" msgid="3558248744927579016">"Respon a preguntes sobre l\'emergència"</string>
+    <string name="satellite_sos_how_it_works_step_3" msgid="4496038314890474893">"Segueix els passos per connectar-te al satèl·lit"</string>
+    <string name="satellite_sos_how_it_works_summary_1" msgid="4497178023367920284">"Si no tens una xarxa mòbil, veuràs una opció per utilitzar SOS per satèl·lit"</string>
+    <string name="satellite_sos_how_it_works_summary_2" msgid="1302661361673503362">"Envia respostes als serveis d\'emergències per poder ajudar-te de la millor manera possible"</string>
+    <string name="satellite_sos_how_it_works_summary_3" msgid="4612675365617172405">"Un cop t\'hagis connectat, podràs enviar missatges als serveis d\'emergències"</string>
+    <string name="satellite_sos_try_demo" msgid="1915233782211344468">"Prova una demostració"</string>
+    <string name="satellite_sos_footer_text" msgid="4454885538165117230">"Quan connectes amb els serveis d\'emergències per satèl·lit, el teu nom, la teva adreça electrònica, el teu número de telèfon, la teva ubicació, la informació del dispositiu (inclosos l\'IMEI, l\'idioma, el model i el nivell de la bateria) i la informació dels contactes d\'emergència es comparteixen amb els serveis d\'emergències i els proveïdors de serveis per satèl·lit. \n\nPer utilitzar SOS per satèl·lit, l\'aplicació d\'SMS predeterminada ha de ser Missatges de Google. \n\nSi la selecció automàtica de xarxes està desactivada, s\'activarà i el dispositiu es connectarà automàticament a qualsevol xarxa."</string>
+    <string name="satellite_sos_sharing_preferences_subheader_title" msgid="5701538329333628267">"Preferències de compartició"</string>
+    <string name="satellite_sos_sharing_preferences_step_1" msgid="3106774199702637359">"Contactes d\'emergència"</string>
+    <string name="satellite_sos_sharing_preferences_step_2" msgid="738246589687762115">"El teu Compte de Google"</string>
+    <string name="satellite_sos_sharing_preferences_description" msgid="782508188142964342">"Revisa o actualitza la informació que es compartirà amb els serveis d\'emergències"</string>
+    <!-- no translation found for satellite_sos_learn_more_link (2442930426165677255) -->
     <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Noms de punts d\'accés"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
@@ -5063,9 +5115,8 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Estàs utilitzant l\'opció de 16 kB del mode independent de la pàgina. No es pot garantir la integritat del programari en aquest mode, i les dades que estiguin emmagatzemades al dispositiu mentre el bootloader està desbloquejat poden estar en perill. Com que es desactivaran algunes funcions en aquests modes, és possible que algunes aplicacions no funcionin. Per entrar al mode de producció de nou, has de tornar al mode de 4 kB i, a continuació, bloquejar el bootloader del dispositiu. Aquesta acció tornarà a restablir les dades de fàbrica del dispositiu i en restaurarà la configuració de producció. Quan el dispositiu s\'iniciï a Android correctament, desactiva el desbloqueig OEM a Opcions per a desenvolupadors. Si el dispositiu no es pot iniciar a Android o és inestable, torna a instal·lar-hi les darreres imatges de fàbrica des de &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; o utilitza &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; i selecciona Neteja el dispositiu, Bloqueja el bootloader i Força la instal·lació de totes les particions."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Mode independent de la pàgina de 16 kB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Més informació"</string>
-    <!-- no translation found for enable_16k_app_compat_title (4173159228844992989) -->
-    <skip />
-    <!-- no translation found for enable_16k_app_compat_details (3847293423550174952) -->
+    <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"Executa l\'aplicació amb el mode de compatibilitat amb la mida de la pàgina"</string>
+    <!-- no translation found for enable_16k_app_compat_details (3389401258168314266) -->
     <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Gestor d\'informes d\'errors"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determina quina aplicació gestiona la drecera de l\'informe d\'errors al dispositiu."</string>

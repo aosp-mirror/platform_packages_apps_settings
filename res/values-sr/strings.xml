@@ -898,6 +898,7 @@
     <string name="external_display_on" msgid="2560104443500154333">"Укључено"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Искључено"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"Спољни екран"</string>
+    <string name="builtin_display_settings_category" msgid="3441388849060771885">"Уграђени екран"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Користи спољни екран"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Резолуција екрана"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Спољни екран је искључен"</string>
@@ -909,8 +910,7 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Промена ротације или резолуције може да заустави све апликације које су тренутно активне"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"Уређај мора да буде повезан са спољним екраном да би се пресликао цео екран"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Још опција"</string>
-    <!-- no translation found for external_display_topology_hint (854973327795578470) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="854973327795578470">"Задржите и превуците да бисте прераспоредили приказ на екранима."</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Пребацивање"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"пресликати"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Омогући бежични приказ"</string>
@@ -1244,8 +1244,8 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Сазнајте више о аутоматском ротирању"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Резолуција екрана"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Висока резолуција"</string>
-    <string name="screen_resolution_option_full" msgid="2694003735219114186">"Пуна резолуција"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"Пуна резолуција користи више батерије. Ако пређете на ову резолуцију, неке апликације ће се можда рестартовати."</string>
+    <string name="screen_resolution_option_full" msgid="4456839315039000517">"Максимална резолуција"</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"Максимална резолуција користи више батерије. Ако пређете на ову резолуцију, неке апликације ће се можда рестартовати."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Изабрано је"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Боје"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Природне"</string>
@@ -1324,8 +1324,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Подешавања режима за спавање"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Режими могу и да активирају тамну тему}=1{{mode_1} активира и тамну тему}=2{{mode_1} и {mode_2} активирају и тамну тему}=3{{mode_1}, {mode_2} и {mode_3} активирају и тамну тему}one{{mode_1}, {mode_2} и још # активирају и тамну тему}few{{mode_1}, {mode_2} и још # активирају и тамну тему}other{{mode_1}, {mode_2} и још # активирају и тамну тему}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Подешавања режима"</string>
-    <!-- no translation found for even_dimmer_display_title (4509732439977906028) -->
-    <skip />
+    <string name="even_dimmer_display_title" msgid="4509732439977906028">"Додатно затамњено"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Дозволите да осветљење уређаја буде слабије него обично"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Гашење екрана"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"После <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> неактивности"</string>
@@ -1963,6 +1962,8 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Опције"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Приступачност"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Физичка тастатура"</string>
+    <!-- no translation found for physical_keyboard_layout_picker_title (4526600767648916256) -->
+    <skip />
     <string name="bounce_keys" msgid="7419450970351743904">"Дужи одзив тастера"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"Тастатура занемарује брзе притиске истог тастера који се понављају"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Праг за дужи одзив тастера"</string>
@@ -3639,6 +3640,14 @@
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"Приказујте мање обавештења на закључаном екрану"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Приказуј само нова обавештења на закључаном екрану"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Аутоматски уклања претходно прегледана обавештења са закључаног екрана"</string>
+    <!-- no translation found for lock_screen_notifs_show_full_list (6767009263807771108) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_full_list_desc (4868489278443057427) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_compact (1133598661314460528) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_compact_desc (2442594880539709057) -->
+    <skip />
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Обавештења на закључаном екрану"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Приказује конверзације, и подразумеване и нечујне"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Приказуј конверзације, и подразумеване и нечујне"</string>
@@ -3656,6 +3665,14 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Приказуј сав садржај обавештења о пословном профилу"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Сакриј осетљив садржај пословног профила"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Када је уређај закључан, како желите да се приказују обавештења о профилу?"</string>
+    <!-- no translation found for lock_screen_notification_hide_seen_title (6356324850662946426) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_seen_summary (8345971177658888274) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_title (3284314455767315329) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_summary (1934066619526795468) -->
+    <skip />
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Обавештења о профилу"</string>
     <string name="notifications_title" msgid="4221655533193721131">"Обавештења"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"Обавештења апликација"</string>
@@ -4461,6 +4478,20 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"Покрети"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Брзо отварајте камеру"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Да бисте брзо отворили камеру, двапут притисните дугме за укључивање. Ово функционише на сваком екрану."</string>
+    <!-- no translation found for double_tap_power_title (8705875166298116659) -->
+    <skip />
+    <!-- no translation found for double_tap_power_enabled (305978257631612678) -->
+    <skip />
+    <!-- no translation found for double_tap_power_target_action_category (6186809788568348488) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_title (8398392033718681209) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_summary (1231656402570674349) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_title (2238628756927241786) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_summary (6567586974229774570) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Обрните камеру да бисте снимили селфи"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Режим навигације"</string>
@@ -4858,11 +4889,11 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"Сателитска размена порука"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Шаљите и примајте текстуалне поруке преко сателита. Обухваћено је налогом."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Шаљите и примајте текстуалне поруке преко сателита. Није обухваћено налогом."</string>
-    <string name="keywords_satellite_setting" msgid="3312183289776517695">"Сателитска размена порука"</string>
-    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"О сателитској размени порука"</string>
+    <string name="keywords_satellite_setting" msgid="613553612424945946">"размена порука преко сателита, сателитска веза"</string>
+    <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"Више информација о: <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Ако код мобилног оператера <xliff:g id="CARRIER_NAME">%1$s</xliff:g> имате налог који испуњава услове, можете да шаљете и примате текстуалне поруке преко сателита."</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Пакет код мобилног оператера <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"Сателитска размена порука је обухваћена налогом"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"Размена порука је обухваћена налогом"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Сателитска размена порука није обухваћена налогом"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Сазнајте више"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Принцип рада"</string>
@@ -4870,12 +4901,33 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Телефон ће се аутоматски повезати на сателит. За најбољи квалитет везе, уверите се да вам ништа не заклања поглед на небо."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Кад се телефон повеже на сателит"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Можете да шаљете поруке било коме, укључујући хитне службе. Телефон ће се поново повезати на мобилну мрежу када буде доступна."</string>
-    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Сателитска размена порука може да траје дуже и доступна је само у одређеним областима. Временски услови и одређене структуре могу да утичу на сателитску везу. Позивање путем сателита није доступно. Хитни позиви и даље могу да се обаве.\n\nТреба мало времена да се промене налога појаве у Подешавањима. Обратите се мобилном оператеру за детаље."</string>
-    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Више о сателитској размени порука"</string>
+    <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"<xliff:g id="SUBJECT">%1$s</xliff:g> може да траје дуже и доступна је само у одређеним областима. Временски услови и одређене структуре могу да утичу на сателитску везу. Позивање путем сателита није доступно. Хитни позиви и даље могу да се обаве.\n\nМоже да прође неко време пре него што се промене налога прикажу у Подешавањима. Обратите се мобилном оператеру <xliff:g id="CARRIER_NAME">%1$s</xliff:g> за више детаља."</string>
+    <string name="more_about_satellite_messaging" msgid="1039277943532711584">"Више о: <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Не може да се укључи <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Да бисте укључили <xliff:g id="FUNCTION">%1$s</xliff:g>, прво завршите сателитску везу"</string>
     <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"Сателитска веза"</string>
-    <!-- no translation found for satellite_setting_connectivity (80680165723879149) -->
+    <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Сателитска веза"</string>
+    <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"сателитска веза"</string>
+    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"размена порука преко сателита"</string>
+    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Коришћење података је обухваћено налогом"</string>
+    <string name="title_for_satellite_sos" msgid="4608739357329147285">"Хитна помоћ преко сателита"</string>
+    <string name="summary_for_satellite_sos_entry" msgid="4981480371923329605">"Шаљите поруке хитним службама када не можете да се повежете на мобилну или WiFi мрежу"</string>
+    <string name="keywords_satellite_sos" msgid="6275777197418023949">"хитна помоћ преко сателита, хитна помоћ"</string>
+    <string name="category_title_about_satellite_sos" msgid="7229724397303154919">"О хитној помоћи преко сателита"</string>
+    <string name="satellite_sos_introduction" msgid="4670230212117495751">"Шаљите поруке хитним службама и делите локацију када нема мобилне ни WiFi мреже. Ова услуга можда није увек доступна на свим локацијама и у свим околностима."</string>
+    <string name="satellite_sos_how_it_works_step_1" msgid="4669862942425306921">"Позовите хитне службе или им пошаљите поруку"</string>
+    <string name="satellite_sos_how_it_works_step_2" msgid="3558248744927579016">"Одговорите на питања о хитном случају"</string>
+    <string name="satellite_sos_how_it_works_step_3" msgid="4496038314890474893">"Пратите кораке да бисте се повезали са сателитом"</string>
+    <string name="satellite_sos_how_it_works_summary_1" msgid="4497178023367920284">"Ако немате везу са мобилном мрежом, видећете опцију да користите хитну помоћ преко сателита"</string>
+    <string name="satellite_sos_how_it_works_summary_2" msgid="1302661361673503362">"Пошаљите одговоре хитним службама да бисте добили одговарајућу помоћ"</string>
+    <string name="satellite_sos_how_it_works_summary_3" msgid="4612675365617172405">"Када се повежете, можете да пошаљете поруку хитним службама"</string>
+    <string name="satellite_sos_try_demo" msgid="1915233782211344468">"Покрени демонстрацију"</string>
+    <string name="satellite_sos_footer_text" msgid="4454885538165117230">"Када се повежете са хитним службама преко сателита, ваше име, имејл, број телефона, локација, информације о уређају (IMEI, језик, модел, ниво батерије) и информације о контактима за хитне случајеве деле се са хитним службама и добављачима сателитских услуга. \n\nДа бисте користили хитну помоћ преко сателита, Google Messages мора да буде подразумевана апликација за SMS поруке. \n\nАко је аутоматски избор мреже искључен, укључиће се и уређај ће се аутоматски повезати на било коју мрежу."</string>
+    <string name="satellite_sos_sharing_preferences_subheader_title" msgid="5701538329333628267">"Подешавања дељења"</string>
+    <string name="satellite_sos_sharing_preferences_step_1" msgid="3106774199702637359">"Контакти за хитне случајеве"</string>
+    <string name="satellite_sos_sharing_preferences_step_2" msgid="738246589687762115">"Google налог"</string>
+    <string name="satellite_sos_sharing_preferences_description" msgid="782508188142964342">"Прегледајте или измените информације које ће се делити са хитним службама"</string>
+    <!-- no translation found for satellite_sos_learn_more_link (2442930426165677255) -->
     <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Називи приступних тачака"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"Назив приступне тачке"</string>
@@ -4981,7 +5033,7 @@
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Повезује се са уређајем…"</string>
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Лево"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Десно"</string>
-    <string name="bluetooth_middle_name" msgid="3909371955137442319">"Футрола"</string>
+    <string name="bluetooth_middle_name" msgid="3909371955137442319">"Кутија"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Батерија"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Табла са подешавањима"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Омогући прозоре произвољног формата"</string>
@@ -5063,9 +5115,8 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Користите режим од 16 KB у оквиру режима независног од величине странице. У овом режиму не може да се гарантује интегритет софтвера, па могу бити угрожени подаци који сe чувају на телефону док је покретачки програм откључан. Неке функције су онемогућене у овим режимима, што значи да неке апликације можда неће радити. Да бисте уређај поново вратили у производни режим, морате да га вратите на режим од 4 KB и закључате покретачки програм уређаја. То ће поново ресетовати уређај на фабричка подешавања и вратити га на производна подешавања. Када се на уређају укључи Android, онемогућите OEM откључавање у Опцијама за програмера. Ако је уређај нестабилан или се на њему не укључи Android, поново га флешујте користећи најновије слике са фабричким подешавањима са &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt;. Можете и да користите &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; и изаберете Обриши уређај, Закључај покретачки програм и Принудно флешуј све партиције."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Режим од 16 kB независан од величине странице"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Прочитајте више"</string>
-    <!-- no translation found for enable_16k_app_compat_title (4173159228844992989) -->
-    <skip />
-    <!-- no translation found for enable_16k_app_compat_details (3847293423550174952) -->
+    <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"Покрените апликацију у режиму компатибилности величине странице"</string>
+    <!-- no translation found for enable_16k_app_compat_details (3389401258168314266) -->
     <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Обрађивач извештаја о грешци"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Одређује која апликација управља пречицом за извештај о грешци на уређају."</string>

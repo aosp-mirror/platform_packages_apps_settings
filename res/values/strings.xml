@@ -771,6 +771,8 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity"></string>
     <!-- Message shown for a toggle which when enabled, allows the user to enroll using a simpler flow for accessibility [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_accessibility_vision"></string>
+    <!-- Message on the face enrollment introduction page that explains privacy controls for face unlock [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_learn_more_message"></string>
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
     <string name="security_settings_face_enroll_introduction_cancel">Cancel</string>
     <!-- Button text to cancel enrollment [CHAR LIMIT=30] -->
@@ -898,6 +900,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1">You and your child are in control</string>
     <!-- Introduction title shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2">Keep in mind</string>
+    <!-- Introduction title shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_3">Secure and helpful</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog, when fingerprint unlock is disabled by device admin [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled">Use your fingerprint to unlock your phone or approve purchases.\n\nNote: You can\u2019t use your fingerprint to unlock this device. For more information, contact your organization\u2019s admin.</string>
     <!-- Button text to cancel enrollment from the introduction [CHAR LIMIT=22] -->
@@ -928,6 +932,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6">For best results, use a screen protector that\u2019s Made for Google certified. With other screen protectors, your child\u2019s fingerprint may not work.</string>
     <!-- Introduction detail message shown in fingerprint enrollment introduction to learn more about fingerprint [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more"></string>
+    <!-- Introduction detail message shown in fingerprint enrollment introduction to learn more about fingerprint [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more_2"></string>
 
     <!-- Watch unlock enrollment and settings --><skip />
     <!-- Title shown for menu item that launches watch unlock settings. [CHAR LIMIT=40] -->
@@ -4561,6 +4567,8 @@
     <string name="keyboard_a11y_category">Accessibility</string>
     <!-- Title for the 'physical keyboard' settings screen. [CHAR LIMIT=35] -->
     <string name="physical_keyboard_title">Physical keyboard</string>
+    <!-- Title for the 'physical keyboard' settings screen. [CHAR LIMIT=35] -->
+    <string name="physical_keyboard_layout_picker_title">Physical keyboard layout picker</string>
     <!-- Title for the 'Bounce keys' preference switch. [CHAR LIMIT=35] -->
     <string name="bounce_keys">Bounce keys</string>
     <!-- Summary text for the 'Bounce keys' preference sub-screen. [CHAR LIMIT=300] -->
@@ -8787,6 +8795,18 @@
     <!-- Configure notifications: Summary for option of showing only new notifications on the lock screen. [CHAR LIMIT=100] -->
     <string name="unseen_notifs_lock_screen_summary">Automatically remove previously viewed notifications from the lock screen</string>
 
+    <!-- Configure notifications: Value for lockscreen notifications: show all notifications [CHAR LIMIT=60] -->
+    <string name="lock_screen_notifs_show_full_list">Full list</string>
+
+    <!-- Configure notifications: Summary for lockscreen notifications: show all notifications [CHAR LIMIT=100] -->
+    <string name="lock_screen_notifs_full_list_desc">The current default placement is a full shelf and notification stack.</string>
+
+    <!-- Configure notifications: Value for lockscreen notifications: show compact notifications (minimalism on) [CHAR LIMIT=60] -->
+    <string name="lock_screen_notifs_show_compact">Compact</string>
+
+    <!-- Configure notifications: Summary for lockscreen notifications: show compact notifications (minimalism on) [CHAR LIMIT=60] -->
+    <string name="lock_screen_notifs_compact_desc">New notifications are collapsed into a shelf on your lockscreen.</string>
+
     <!-- Configure notifications: Title for determining which notifications appear on the lock screen [CHAR LIMIT=60] -->
     <string name="lock_screen_notifs_title">Notifications on lock screen</string>
 
@@ -8848,6 +8868,18 @@
 
     <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Message asking the user how they want their profile notifications to appear when the device is locked [CHAR LIMIT=NONE] -->
     <string name="lock_screen_notifications_interstitial_message_profile">When your device is locked, how do you want profile notifications to show?</string>
+
+    <!-- Notification Settings > Notifications on lock screen > Title for hiding seen notifications toggle. [CHAR LIMIT=30] -->
+    <string name="lock_screen_notification_hide_seen_title">Hide seen notifications</string>
+
+    <!-- Notification Settings > Notifications on lock screen > Summary for hiding seen notifications toggle. [CHAR LIMIT=30] -->
+    <string name="lock_screen_notification_hide_seen_summary">Seen notifications are removed from the lock screen.</string>
+
+    <!-- Notification Settings > Notifications on lock screen > Title for hiding silent notifications toggle. [CHAR LIMIT=30] -->
+    <string name="lock_screen_notification_hide_silent_title">Hide silent notifications</string>
+
+    <!-- Notification Settings > Notifications on lock screen > Summary for hiding seen notifications toggle. [CHAR LIMIT=30] -->
+    <string name="lock_screen_notification_hide_silent_summary">Silent notifications and conversations are removed from the lock screen.</string>
 
     <!-- Security > Choose PIN/PW/Pattern > Notification redaction interstitial: Title for the screen asking the user how they want their profile notifications to appear when the device is locked [CHAR LIMIT=30] -->
     <string name="lock_screen_notifications_interstitial_title_profile">Profile notifications</string>
@@ -11156,6 +11188,23 @@
     <!-- Summary text for double tap power for camera [CHAR LIMIT=160]-->
     <string name="double_tap_power_for_camera_summary">To quickly open camera, press the power button twice. Works from any screen.</string>
 
+    <!-- Title text for double tap power gesture [CHAR LIMIT=80]-->
+    <string name="double_tap_power_title">Double tap power button</string>
+    <!-- Summary for double tap power settings [DO NOT TRANSLATE] -->
+    <string name="double_tap_power_summary" translatable="false"><xliff:g id="double_tap_power_on_off" example="On">%1$s</xliff:g> / <xliff:g id="double_tap_power_actions" example="Access Wallet">%2$s</xliff:g></string>
+    <!-- Switch label to enable/disable double tap power button gesture [CHAR LIMIT=60] -->
+    <string name="double_tap_power_enabled">Use double tap</string>
+    <!-- Category title for double tap power gesture [CHAR_LIMIT=80] -->
+    <string name="double_tap_power_target_action_category">Double Tap Power Button</string>
+    <!-- Double Tap Power Gesture camera launch action title [CHAR_LIMIT=60] -->
+    <string name="double_tap_power_camera_action_title">Open Camera</string>
+    <!-- Setting summary to describe double tap power button will open camera. [CHAR LIMIT=NONE] -->
+    <string name="double_tap_power_camera_action_summary">Access Camera</string>
+    <!-- Double Tap Power Gesture wallet launch action title [CHAR_LIMIT=60] -->
+    <string name="double_tap_power_wallet_action_title">Open Wallet</string>
+    <!-- Setting summary to describe double tap power button will open wallet. [CHAR LIMIT=NONE] -->
+    <string name="double_tap_power_wallet_action_summary">Access Wallet</string>
+
     <!-- Title text for double twist for camera mode [CHAR LIMIT=60]-->
     <string name="double_twist_for_camera_mode_title">Flip camera for selfie</string>
 
@@ -12328,14 +12377,6 @@
     <string name="description_satellite_setting_messaging">satellite messaging</string>
     <!-- Title for notifying user's account be able to use data transmission of Satellite" [CHAR_LIMIT=NONE] -->
     <string name="title_have_satellite_data_plan">Use of data is included with your account</string>
-    <!-- Title for the entry of Satellite SOS [CHAR_LIMIT=NONE] -->
-    <string name="title_for_satellite_sos_entry">Satellite SOS</string>
-    <!-- Summary for the entry of Satellite SOS [CHAR_LIMIT=NONE] -->
-    <string name="summary_for_satellite_sos_entry">Message with emergency services when you can\u2019t connect to a mobile or Wi\u2011Fi network</string>
-    <!-- Keywords for the entry of Satellite SOS [CHAR_LIMIT=NONE] -->
-    <string name="keywords_satellite_sos">satellite sos, sos</string>
-
-
 
     <!-- Title for Apn settings in mobile network settings [CHAR LIMIT=60] -->
     <string name="mobile_network_apn_title">Access Point Names</string>
@@ -12813,7 +12854,7 @@
     <string name="page_agnostic_notification_action">Read more</string>
 
     <string name= "enable_16k_app_compat_title">Run app with page size compat mode</string>
-    <string name= "enable_16k_app_compat_details">App will be run in page size compatibility mode on 16 KB device toggled.</string>
+    <string name= "enable_16k_app_compat_details">App will be run in page size compatibility mode on 16 KB device when toggled.</string>
 
     <!-- DSU Loader. Do not translate. -->
 

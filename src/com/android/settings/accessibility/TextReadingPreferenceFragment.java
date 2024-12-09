@@ -66,7 +66,6 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
     static final String RESET_KEY = "reset";
     static final String PREVIEW_KEY = "preview";
     private static final String NEED_RESET_SETTINGS = "need_reset_settings";
-    private static final String LAST_PREVIEW_INDEX = "last_preview_index";
     private static final int UNKNOWN_INDEX = -1;
 
     private FontWeightAdjustmentPreferenceController mFontWeightAdjustmentController;
@@ -110,13 +109,6 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
         if (savedInstanceState != null) {
             if (savedInstanceState.getBoolean(NEED_RESET_SETTINGS)) {
                 mResetStateListeners.forEach(ResetStateListener::resetState);
-            }
-
-            if (savedInstanceState.containsKey(LAST_PREVIEW_INDEX)) {
-                final int lastPreviewIndex = savedInstanceState.getInt(LAST_PREVIEW_INDEX);
-                if (lastPreviewIndex != UNKNOWN_INDEX) {
-                    mPreviewController.setCurrentItem(lastPreviewIndex);
-                }
             }
         }
     }
@@ -252,8 +244,6 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
         if (mNeedResetSettings) {
             outState.putBoolean(NEED_RESET_SETTINGS, true);
         }
-
-        outState.putInt(LAST_PREVIEW_INDEX, mPreviewController.getCurrentItem());
     }
 
     @Override

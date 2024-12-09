@@ -56,6 +56,10 @@ public class LockscreenNotificationMinimalismPreferenceController
 
     @Override
     public int getAvailabilityStatus() {
+        // Hide when the notifications on lock screen settings page flag is enabled.
+        if (Flags.notificationLockScreenSettings()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
         if (!Flags.notificationMinimalism()) {
             return CONDITIONALLY_UNAVAILABLE;
         }

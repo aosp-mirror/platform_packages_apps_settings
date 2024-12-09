@@ -852,10 +852,15 @@
         </activity>
 
         <activity android:name=".network.SimOnboardingActivity"
-            android:exported="false"
+            android:exported="true"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-            android:theme="@style/Theme.SpaLib.BottomSheetDialog"/>
+            android:theme="@style/Theme.SpaLib.BottomSheetDialog">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.SIM_PREFERENCE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+      </activity>
 
         <activity android:name=".network.telephony.ToggleSubscriptionDialogActivity"
                   android:exported="false"
@@ -1228,6 +1233,21 @@
                 android:value="com.android.settings.inputmethod.PhysicalKeyboardFragment" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_system"/>
+        </activity>
+
+        <activity android:name="Settings$PhysicalKeyboardLayoutPickerActivity"
+            android:label="@string/physical_keyboard_layout_picker_title"
+            android:exported="true"
+            android:clearTaskOnLaunch="true"
+            android:featureFlag="com.android.settings.keyboard.keyboard_and_touchpad_a11y_new_page_enabled">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.HARD_KEYBOARD_LAYOUT_PICKER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.inputmethod.NewKeyboardLayoutEnabledLocalesFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_system"/>
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -2821,6 +2841,10 @@
               android:theme="@style/GlifTheme.Light"
               android:taskAffinity="com.android.settings.root" />
         <activity android:name=".biometrics.fingerprint.FingerprintEnroll$InternalActivity"
+            android:exported="false"
+            android:theme="@style/GlifTheme.Light"
+            android:taskAffinity="com.android.settings.root" />
+        <activity android:name=".biometrics.fingerprint.FingerprintEnroll$AddAdditionalFingerprint"
             android:exported="false"
             android:theme="@style/GlifTheme.Light"
             android:taskAffinity="com.android.settings.root" />
@@ -5385,6 +5409,17 @@
             android:permission="android.permission.READ_BASIC_PHONE_STATE">
             <intent-filter>
                 <action android:name="com.android.settingslib.PREFERENCE_SERVICE" />
+            </intent-filter>
+        </service>
+
+        <!-- Service to expose Preference Metadata and Get/Set functionality -->
+        <service
+            android:name=".service.PreferenceService"
+            android:exported="true"
+            android:featureFlag="com.android.settingslib.flags.settings_catalyst"
+            android:permission="android.permission.READ_SYSTEM_PREFERENCES">
+            <intent-filter>
+                <action android:name="android.service.settings.preferences.action.PREFERENCE_SERVICE" />
             </intent-filter>
         </service>
 

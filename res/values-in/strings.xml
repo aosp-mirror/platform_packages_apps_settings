@@ -898,6 +898,7 @@
     <string name="external_display_on" msgid="2560104443500154333">"Aktif"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Nonaktif"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"Layar Eksternal"</string>
+    <string name="builtin_display_settings_category" msgid="3441388849060771885">"Layar bawaan"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Gunakan layar eksternal"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Resolusi layar"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Layar eksternal tidak terhubung"</string>
@@ -909,8 +910,7 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Mengubah rotasi atau resolusi dapat menghentikan aplikasi yang sedang berjalan"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"Perangkat harus terhubung ke layar eksternal untuk mencerminkan layar Anda"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Opsi lainnya"</string>
-    <!-- no translation found for external_display_topology_hint (854973327795578470) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="854973327795578470">"Tahan dan tarik untuk mengatur ulang tampilan."</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Transmisi"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"cermin"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Aktifkan layar nirkabel"</string>
@@ -1244,8 +1244,8 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Pelajari putar otomatis lebih lanjut"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Resolusi layar"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Resolusi tinggi"</string>
-    <string name="screen_resolution_option_full" msgid="2694003735219114186">"Resolusi penuh"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"Resolusi penuh menggunakan lebih banyak daya baterai. Mengganti resolusi dapat menyebabkan beberapa aplikasi dimulai ulang."</string>
+    <string name="screen_resolution_option_full" msgid="4456839315039000517">"Resolusi maksimum"</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"Resolusi maksimum menggunakan lebih banyak daya baterai. Mengganti resolusi mungkin menyebabkan beberapa aplikasi dimulai ulang."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Dipilih"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Warna"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Alami"</string>
@@ -1324,8 +1324,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Setelan Mode Waktu Tidur"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Mode juga dapat mengaktifkan tema gelap}=1{{mode_1} juga mengaktifkan tema gelap}=2{{mode_1} dan {mode_2} juga mengaktifkan tema gelap}=3{{mode_1}, {mode_2}, dan {mode_3} juga mengaktifkan tema gelap}other{{mode_1}, {mode_2}, dan # lainnya juga mengaktifkan tema gelap}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Setelan Mode"</string>
-    <!-- no translation found for even_dimmer_display_title (4509732439977906028) -->
-    <skip />
+    <string name="even_dimmer_display_title" msgid="4509732439977906028">"Ekstra redup"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Mungkinkan perangkat menjadi lebih redup dari biasanya"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Waktu tunggu layar"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Setelah tidak aktif selama <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
@@ -1963,6 +1962,8 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opsi"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Aksesibilitas"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Keyboard fisik"</string>
+    <!-- no translation found for physical_keyboard_layout_picker_title (4526600767648916256) -->
+    <skip />
     <string name="bounce_keys" msgid="7419450970351743904">"Tombol pantul"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"Keyboard mengabaikan penekanan tombol yang sama secara berulang dan cepat"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Batas tombol pantul"</string>
@@ -2690,7 +2691,7 @@
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Akan aktif saat baterai <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Setel jadwal"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Memperpanjang masa pakai baterai"</string>
-    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Nonaktifkan saat daya penuh"</string>
+    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Nonaktifkan saat daya cukup terisi"</string>
     <string name="battery_saver_sticky_title_percentage" msgid="1178162022087559148">"Nonaktifkan pada <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" msgid="8543277078136947874">"Penghemat Baterai dinonaktifkan saat daya baterai terisi lebih dari <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
@@ -3639,6 +3640,14 @@
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"Tampilkan lebih sedikit notifikasi di layar kunci"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Tampilkan hanya notifikasi baru di layar kunci"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Otomatis hapus notifikasi yang telah dilihat sebelumnya dari layar kunci"</string>
+    <!-- no translation found for lock_screen_notifs_show_full_list (6767009263807771108) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_full_list_desc (4868489278443057427) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_compact (1133598661314460528) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_compact_desc (2442594880539709057) -->
+    <skip />
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notifikasi di layar kunci"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Tampilkan percakapan, default, dan senyap"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Tampilkan percakapan, default, dan senyap"</string>
@@ -3656,6 +3665,14 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Tampilkan semua konten notifikasi profil kerja"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Sembunyikan konten kerja sensitif"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Saat perangkat dikunci, Anda ingin notifikasi ditampilkan seperti apa?"</string>
+    <!-- no translation found for lock_screen_notification_hide_seen_title (6356324850662946426) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_seen_summary (8345971177658888274) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_title (3284314455767315329) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_summary (1934066619526795468) -->
+    <skip />
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Notifikasi profil"</string>
     <string name="notifications_title" msgid="4221655533193721131">"Notifikasi"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"Notifikasi aplikasi"</string>
@@ -4461,6 +4478,20 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"Gestur"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Buka cepat kamera"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Untuk membuka kamera dengan cepat, tekan tombol daya dua kali. Berfungsi di layar mana pun."</string>
+    <!-- no translation found for double_tap_power_title (8705875166298116659) -->
+    <skip />
+    <!-- no translation found for double_tap_power_enabled (305978257631612678) -->
+    <skip />
+    <!-- no translation found for double_tap_power_target_action_category (6186809788568348488) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_title (8398392033718681209) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_summary (1231656402570674349) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_title (2238628756927241786) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_summary (6567586974229774570) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Gelengkan kamera untuk selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Mode navigasi"</string>
@@ -4858,11 +4889,11 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"Fitur pesan satelit"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Kirim dan terima pesan teks melalui satelit. Disertakan dengan akun Anda."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Mengirim dan menerima pesan teks melalui satelit. Tidak disertakan di akun Anda."</string>
-    <string name="keywords_satellite_setting" msgid="3312183289776517695">"Fitur pesan satelit"</string>
-    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Tentang fitur pesan satelit"</string>
+    <string name="keywords_satellite_setting" msgid="613553612424945946">"Fitur pesan satelit, konektivitas satelit"</string>
+    <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"Tentang <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Anda dapat mengirim dan menerima pesan teks melalui satelit sebagai bagian dari akun <xliff:g id="CARRIER_NAME">%1$s</xliff:g> yang valid"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Paket <xliff:g id="CARRIER_NAME">%1$s</xliff:g> Anda"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"Fitur pesan satelit disertakan pada akun Anda"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"Fitur pesan disertakan dalam akun Anda"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Fitur pesan satelit tidak disertakan pada akun Anda"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Pelajari Lebih Lanjut"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Cara kerjanya"</string>
@@ -4870,12 +4901,33 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Ponsel Anda akan terhubung otomatis ke satelit. Untuk koneksi terbaik, pastikan langit terlihat tanpa terhalang."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Setelah ponsel Anda terhubung ke satelit"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Anda dapat mengirim pesan kepada siapa pun, termasuk layanan darurat. Ponsel Anda akan terhubung kembali ke jaringan seluler jika tersedia."</string>
-    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Fitur pesan satelit mungkin memakan waktu lebih lama dan hanya tersedia di wilayah tertentu. Cuaca dan struktur tertentu dapat memengaruhi koneksi satelit Anda. Menelepon dengan bantuan satelit tidak tersedia. Panggilan darurat masih dapat terhubung.\n\nMungkin perlu waktu beberapa saat agar perubahan akun ditampilkan di Setelan. Hubungi operator untuk mengetahui detailnya."</string>
-    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Lebih lanjut tentang fitur pesan satelit"</string>
+    <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"<xliff:g id="SUBJECT">%1$s</xliff:g> mungkin memakan waktu lebih lama dan hanya tersedia di beberapa area. Cuaca dan struktur tertentu dapat memengaruhi koneksi satelit Anda. Menelepon dengan bantuan satelit tidak tersedia. Panggilan darurat masih dapat terhubung.\n\nMungkin perlu waktu beberapa saat agar perubahan akun ditampilkan di Setelan. Hubungi <xliff:g id="CARRIER_NAME">%1$s</xliff:g> untuk mengetahui detailnya."</string>
+    <string name="more_about_satellite_messaging" msgid="1039277943532711584">"Selengkapnya tentang <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Tidak dapat mengaktifkan <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Untuk mengaktifkan <xliff:g id="FUNCTION">%1$s</xliff:g>, akhiri koneksi satelit terlebih dahulu"</string>
     <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"Konektivitas satelit"</string>
-    <!-- no translation found for satellite_setting_connectivity (80680165723879149) -->
+    <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Konektivitas satelit"</string>
+    <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"konektivitas satelit"</string>
+    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"fitur pesan satelit"</string>
+    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Penggunaan data disertakan dalam akun Anda"</string>
+    <string name="title_for_satellite_sos" msgid="4608739357329147285">"SOS via Satelit"</string>
+    <string name="summary_for_satellite_sos_entry" msgid="4981480371923329605">"Kirim pesan ke layanan darurat saat Anda tidak dapat terhubung ke jaringan seluler atau Wi-Fi"</string>
+    <string name="keywords_satellite_sos" msgid="6275777197418023949">"sos via satelit, sos"</string>
+    <string name="category_title_about_satellite_sos" msgid="7229724397303154919">"Tentang SOS via Satelit"</string>
+    <string name="satellite_sos_introduction" msgid="4670230212117495751">"Anda dapat mengirim pesan ke layanan darurat dan membagikan lokasi Anda saat tidak dapat terhubung ke jaringan seluler atau Wi-Fi. Layanan ini mungkin hanya tersedia pada saat-saat tertentu di lokasi atau keadaan tertentu."</string>
+    <string name="satellite_sos_how_it_works_step_1" msgid="4669862942425306921">"Telepon atau kirim pesan ke layanan darurat"</string>
+    <string name="satellite_sos_how_it_works_step_2" msgid="3558248744927579016">"Jawab pertanyaan tentang keadaan darurat"</string>
+    <string name="satellite_sos_how_it_works_step_3" msgid="4496038314890474893">"Ikuti langkah-langkah untuk terhubung ke satelit"</string>
+    <string name="satellite_sos_how_it_works_summary_1" msgid="4497178023367920284">"Jika jaringan seluler tidak tersedia, Anda akan melihat opsi untuk menggunakan SOS via Satelit"</string>
+    <string name="satellite_sos_how_it_works_summary_2" msgid="1302661361673503362">"Kirimkan jawaban ke layanan darurat untuk mendapatkan bantuan yang tepat"</string>
+    <string name="satellite_sos_how_it_works_summary_3" msgid="4612675365617172405">"Setelah terhubung, Anda dapat mengirim pesan ke layanan darurat"</string>
+    <string name="satellite_sos_try_demo" msgid="1915233782211344468">"Coba demo"</string>
+    <string name="satellite_sos_footer_text" msgid="4454885538165117230">"Saat Anda terhubung dengan layanan darurat melalui satelit, nama, email, nomor telepon, lokasi, informasi perangkat (IMEI, bahasa, model, level baterai), dan informasi kontak darurat Anda akan dibagikan ke layanan darurat dan penyedia layanan satelit. \n\nUntuk menggunakan SOS via Satelit, Google Message harus menjadi aplikasi SMS default Anda. \n\nJika pemilihan jaringan otomatis dinonaktifkan, pilihan ini akan diaktifkan dan perangkat Anda akan otomatis terhubung ke jaringan apa pun."</string>
+    <string name="satellite_sos_sharing_preferences_subheader_title" msgid="5701538329333628267">"Preferensi berbagi"</string>
+    <string name="satellite_sos_sharing_preferences_step_1" msgid="3106774199702637359">"Kontak darurat"</string>
+    <string name="satellite_sos_sharing_preferences_step_2" msgid="738246589687762115">"Akun Google Anda"</string>
+    <string name="satellite_sos_sharing_preferences_description" msgid="782508188142964342">"Tinjau atau perbarui info yang akan dibagikan ke layanan darurat"</string>
+    <!-- no translation found for satellite_sos_learn_more_link (2442930426165677255) -->
     <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nama Titik Akses"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
@@ -5063,9 +5115,8 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Anda berada dalam mode 16 KB dari mode yang tidak terikat ukuran halaman. Integritas software tidak dapat dijamin dalam mode ini, dan data apa pun yang disimpan di ponsel saat bootloader dibuka kuncinya dapat berpotensi terkena bahaya. Beberapa fitur akan dinonaktifkan dalam mode ini, sehingga beberapa aplikasi mungkin tidak berfungsi. Agar dapat kembali masuk ke mode produksi, Anda harus beralih kembali ke mode 4 KB dan kemudian mengunci bootloader perangkat. Tindakan ini akan mereset perangkat ke setelan pabrik dan memulihkannya ke setelan produksi. Setelah perangkat berhasil melakukan booting ke Android, nonaktifkan pembukaan kunci OEM di Opsi developer. Jika perangkat gagal melakukan booting ke Android atau tidak stabil, flash ulang perangkat dengan setelan pabrik terbaru dari &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; atau gunakan &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; dan pilih \'Hapus Total Perangkat\', \'Kunci Bootloader\', dan \'Paksa Flash semua partisi\'."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Mode Agnostik halaman 16KB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Baca selengkapnya"</string>
-    <!-- no translation found for enable_16k_app_compat_title (4173159228844992989) -->
-    <skip />
-    <!-- no translation found for enable_16k_app_compat_details (3847293423550174952) -->
+    <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"Jalankan aplikasi dengan mode kompatibilitas ukuran halaman"</string>
+    <!-- no translation found for enable_16k_app_compat_details (3389401258168314266) -->
     <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"Pengendali laporan bug"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Menentukan aplikasi mana yang menangani pintasan Laporan Bug di perangkat."</string>
@@ -5233,7 +5284,7 @@
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"UWB tidak tersedia di lokasi saat ini"</string>
     <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
     <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"Gunakan Thread"</string>
-    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"Thread membantu menghubungkan perangkat smart home Anda, meningkatkan efisiensi, dan performa.\n\nJika diaktifkan, perangkat ini memenuhi syarat untuk bergabung dengan jaringan Thread sehingga memungkinkan kontrol atas perangkat yang didukung Matter melalui ponsel ini."</string>
+    <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"Thread membantu menghubungkan perangkat smart home Anda, meningkatkan efisiensi, dan performa.\n\nJika diaktifkan, perangkat ini memenuhi syarat untuk bergabung dalam jaringan Thread sehingga perangkat yang didukung Matter dapat dikontrol melalui ponsel ini."</string>
     <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"Pelajari lebih lanjut Thread"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Akses kamera"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Akses mikrofon"</string>

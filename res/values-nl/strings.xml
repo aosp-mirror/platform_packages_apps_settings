@@ -898,6 +898,7 @@
     <string name="external_display_on" msgid="2560104443500154333">"Aan"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Uit"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"Extern scherm"</string>
+    <string name="builtin_display_settings_category" msgid="3441388849060771885">"Ingebouwd scherm"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Extern scherm gebruiken"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Schermresolutie"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Extern scherm is losgekoppeld"</string>
@@ -909,8 +910,7 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"Als je de rotatie of resolutie wijzigt, kunnen actieve apps worden gestopt"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"Je apparaat moet verbonden zijn met een extern scherm om je scherm te mirroren"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Meer opties"</string>
-    <!-- no translation found for external_display_topology_hint (854973327795578470) -->
-    <skip />
+    <string name="external_display_topology_hint" msgid="854973327795578470">"Houd vast en sleep om schermen opnieuw te ordenen."</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Casten"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"mirroren"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Draadloze weergave aanzetten"</string>
@@ -1244,8 +1244,8 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Meer informatie over automatisch draaien"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Schermresolutie"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Hoge resolutie"</string>
-    <string name="screen_resolution_option_full" msgid="2694003735219114186">"Volledige resolutie"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"Volledige resolutie gebruikt meer batterijlading. Als je de resolutie wijzigt, worden sommige apps misschien opnieuw opgestart."</string>
+    <string name="screen_resolution_option_full" msgid="4456839315039000517">"Maximale resolutie"</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"De maximale resolutie gebruikt meer batterijlading. Als je de resolutie wijzigt, worden sommige apps misschien opnieuw opgestart."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Geselecteerd"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Kleuren"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Natuurlijk"</string>
@@ -1324,8 +1324,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Instellingen voor Bedtijdmodus"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Modi kunnen ook het donkere thema activeren}=1{{mode_1} activeert ook het donkere thema}=2{{mode_1} en {mode_2} activeren ook het donkere thema}=3{{mode_1}, {mode_2} en {mode_3} activeren ook het donkere thema}other{{mode_1}, {mode_2} en nog # activeren ook het donkere thema}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Instellingen voor modi"</string>
-    <!-- no translation found for even_dimmer_display_title (4509732439977906028) -->
-    <skip />
+    <string name="even_dimmer_display_title" msgid="4509732439977906028">"Extra dimmen"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"Sta toe dat apparaat nog meer wordt gedimd"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Time-out voor scherm"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Na <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> inactiviteit"</string>
@@ -1963,6 +1962,8 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opties"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Toegankelijkheid"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fysiek toetsenbord"</string>
+    <!-- no translation found for physical_keyboard_layout_picker_title (4526600767648916256) -->
+    <skip />
     <string name="bounce_keys" msgid="7419450970351743904">"Bouncetoetsen"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"Het toetsenbord negeert snel herhaald indrukken van dezelfde toets"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Drempelwaarde voor stuitertoetsen"</string>
@@ -3639,6 +3640,14 @@
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"Minder meldingen tonen op het vergrendelscherm"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Alleen nieuwe meldingen tonen op vergrendelscherm"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Verwijder eerder bekeken meldingen automatisch van het vergrendelscherm"</string>
+    <!-- no translation found for lock_screen_notifs_show_full_list (6767009263807771108) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_full_list_desc (4868489278443057427) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_compact (1133598661314460528) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_compact_desc (2442594880539709057) -->
+    <skip />
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Meldingen op vergrendelscherm"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Gesprekken tonen (standaard en stil)"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Toon gesprekken (standaard en stil)"</string>
@@ -3656,6 +3665,14 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Toon content van alle werkmeldingen"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Verberg gevoelige werkcontent"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Hoe moeten profielmeldingen worden getoond als je apparaat is vergrendeld?"</string>
+    <!-- no translation found for lock_screen_notification_hide_seen_title (6356324850662946426) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_seen_summary (8345971177658888274) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_title (3284314455767315329) -->
+    <skip />
+    <!-- no translation found for lock_screen_notification_hide_silent_summary (1934066619526795468) -->
+    <skip />
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Profielmeldingen"</string>
     <string name="notifications_title" msgid="4221655533193721131">"Meldingen"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"App-meldingen"</string>
@@ -4461,6 +4478,20 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"Gebaren"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Camera snel openen"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Druk 2 keer op de aan/uit-knop om de camera snel te openen. Werkt vanuit elk scherm."</string>
+    <!-- no translation found for double_tap_power_title (8705875166298116659) -->
+    <skip />
+    <!-- no translation found for double_tap_power_enabled (305978257631612678) -->
+    <skip />
+    <!-- no translation found for double_tap_power_target_action_category (6186809788568348488) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_title (8398392033718681209) -->
+    <skip />
+    <!-- no translation found for double_tap_power_camera_action_summary (1231656402570674349) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_title (2238628756927241786) -->
+    <skip />
+    <!-- no translation found for double_tap_power_wallet_action_summary (6567586974229774570) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Camera omdraaien voor selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigatiemodus"</string>
@@ -4858,11 +4889,11 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"Satellietberichten"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Stuur en ontvang tekstberichten per satelliet. Inbegrepen bij je account."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Stuur en krijg tekstberichten per satelliet. Niet inbegrepen bij je account."</string>
-    <string name="keywords_satellite_setting" msgid="3312183289776517695">"Satellietberichten"</string>
-    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"Over satellietberichten"</string>
+    <string name="keywords_satellite_setting" msgid="613553612424945946">"Satellietberichten, satellietverbinding"</string>
+    <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"Over <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Je kunt tekstberichten via satelliet sturen en ontvangen als onderdeel van een geschikt <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-account"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"Je <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-abonnement"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"Satellietberichten zijn inbegrepen bij je account"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"Berichten sturen is inbegrepen bij je account"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Satellietberichten zijn niet inbegrepen bij je account"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Meer informatie"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Hoe het werkt"</string>
@@ -4870,12 +4901,33 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"Je telefoon maakt automatisch verbinding met een satelliet. Voor de beste verbinding moet je vrij zicht op de lucht houden."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Nadat je telefoon verbinding maakt met een satelliet"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Je kunt iedereen een tekstbericht sturen, ook hulpdiensten. Je telefoon maakt opnieuw verbinding met een mobiel netwerk zodra het beschikbaar is."</string>
-    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"Satellietberichten kunnen langer duren en zijn alleen in bepaalde gebieden beschikbaar. Het weer en bepaalde constructies kunnen je satellietverbinding beïnvloeden. Bellen via satelliet is niet beschikbaar. Noodoproepen kunnen nog steeds worden verbonden.\n\nHet kan even duren voordat accountwijzigingen in Instellingen worden getoond. Neem contact op met je provider voor meer informatie."</string>
-    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"Meer informatie over satellietberichten"</string>
+    <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"<xliff:g id="SUBJECT">%1$s</xliff:g> kunnen langer duren en zijn alleen in bepaalde gebieden beschikbaar. Het weer en bepaalde constructies kunnen je satellietverbinding beïnvloeden. Bellen via satelliet is niet beschikbaar. Noodoproepen kunnen nog steeds worden verbonden.\n\nHet kan even duren voordat accountwijzigingen in Instellingen worden getoond. Neem voor informatie contact op met <xliff:g id="CARRIER_NAME">%1$s</xliff:g>."</string>
+    <string name="more_about_satellite_messaging" msgid="1039277943532711584">"Meer over <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Kan <xliff:g id="FUNCTION">%1$s</xliff:g> niet aanzetten"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Als je <xliff:g id="FUNCTION">%1$s</xliff:g> wilt aanzetten, verbreek je eerst de satellietverbinding"</string>
     <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"Satellietverbinding"</string>
-    <!-- no translation found for satellite_setting_connectivity (80680165723879149) -->
+    <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Satellietverbinding"</string>
+    <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"satellietverbinding"</string>
+    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"satellietberichten"</string>
+    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Gebruik van gegevens is inbegrepen bij je account"</string>
+    <string name="title_for_satellite_sos" msgid="4608739357329147285">"SOS via satelliet"</string>
+    <string name="summary_for_satellite_sos_entry" msgid="4981480371923329605">"Je kunt berichten naar de hulpdiensten sturen als je geen verbinding kunt maken met een mobiel of wifi-netwerk"</string>
+    <string name="keywords_satellite_sos" msgid="6275777197418023949">"sos via satelliet, sos"</string>
+    <string name="category_title_about_satellite_sos" msgid="7229724397303154919">"Over SOS via satelliet"</string>
+    <string name="satellite_sos_introduction" msgid="4670230212117495751">"Je kunt berichten naar de hulpdiensten sturen en je locatie delen als je geen verbinding kunt maken met een mobiel of wifi-netwerk. Deze service is niet altijd en overal onder alle omstandigheden beschikbaar."</string>
+    <string name="satellite_sos_how_it_works_step_1" msgid="4669862942425306921">"Bel de hulpdiensten of stuur ze een bericht"</string>
+    <string name="satellite_sos_how_it_works_step_2" msgid="3558248744927579016">"Beantwoord vragen over het noodgeval"</string>
+    <string name="satellite_sos_how_it_works_step_3" msgid="4496038314890474893">"Volg de stappen om verbinding te maken met de satelliet"</string>
+    <string name="satellite_sos_how_it_works_summary_1" msgid="4497178023367920284">"Als je geen mobiel netwerk hebt, zie je de optie om SOS via satelliet te gebruiken"</string>
+    <string name="satellite_sos_how_it_works_summary_2" msgid="1302661361673503362">"Stuur antwoorden naar de hulpdiensten zodat je het juiste soort hulp krijgt"</string>
+    <string name="satellite_sos_how_it_works_summary_3" msgid="4612675365617172405">"Zodra je verbonden bent, kun je tekstberichten naar de hulpdiensten sturen"</string>
+    <string name="satellite_sos_try_demo" msgid="1915233782211344468">"Demo proberen"</string>
+    <string name="satellite_sos_footer_text" msgid="4454885538165117230">"Als je verbinding maakt met de hulpdiensten via satelliet, worden je naam, e-mailadres, telefoonnummer, locatie, apparaatinformatie (IMEI, taal, model, batterijniveau) en contactinformatie voor noodgevallen gedeeld met de hulpdiensten en satellietserviceproviders. \n\nAls je SOS via satelliet wilt gebruiken, moet Google Berichten je standaard sms-app zijn. \n\nAls automatische netwerkselectie uitstaat, wordt dit aangezet en maakt je apparaat automatisch verbinding met elk netwerk."</string>
+    <string name="satellite_sos_sharing_preferences_subheader_title" msgid="5701538329333628267">"Voorkeuren voor delen"</string>
+    <string name="satellite_sos_sharing_preferences_step_1" msgid="3106774199702637359">"Contacten voor noodgevallen"</string>
+    <string name="satellite_sos_sharing_preferences_step_2" msgid="738246589687762115">"Je Google-account"</string>
+    <string name="satellite_sos_sharing_preferences_description" msgid="782508188142964342">"Check of update informatie die met de hulpdiensten wordt gedeeld"</string>
+    <!-- no translation found for satellite_sos_learn_more_link (2442930426165677255) -->
     <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Toegangspuntnamen"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
@@ -5063,9 +5115,8 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"Je zit in de 16 KB-modus van de niet-paginagebonden modus. In deze modus kan de software-integriteit niet worden gegarandeerd en kunnen alle gegevens die op de telefoon zijn opgeslagen terwijl de bootloader is ontgrendeld, gevaar lopen. Sommige functies worden in deze modi uitgezet, dus sommige apps werken misschien niet. Als je wilt terugkeren naar de productiemodus, moet je teruggaan naar de 4 KB-modus en daarna de bootloader van het apparaat vergrendelen. Hierdoor worden de fabrieksinstellingen teruggezet en worden de productie-instellingen hersteld op het apparaat. Nadat het apparaat succesvol is opgestart in Android, zet je OEM-ontgrendeling uit via Ontwikkelaarsopties. Als het apparaat niet opstart in Android of instabiel is, flash het apparaat dan opnieuw met de nieuwste fabrieksimages van &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; of gebruik &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; en selecteer Apparaat wissen, Bootloader vergrendelen en Alle partities geforceerd flashen."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Niet-paginagebonden 16 KB-modus"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Meer lezen"</string>
-    <!-- no translation found for enable_16k_app_compat_title (4173159228844992989) -->
-    <skip />
-    <!-- no translation found for enable_16k_app_compat_details (3847293423550174952) -->
+    <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"App uitvoeren met compatibiliteitsmodus voor paginagrootte"</string>
+    <!-- no translation found for enable_16k_app_compat_details (3389401258168314266) -->
     <skip />
     <string name="bug_report_handler_title" msgid="713439959113250125">"App voor verwerking bugrapport"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Hierdoor wordt bepaald welke app de snelkoppeling voor het bugrapport verwerkt op je apparaat."</string>
