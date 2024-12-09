@@ -149,9 +149,6 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        if (enabled) {
-            showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
-        }
         logAccessibilityServiceEnabled(mComponentName, enabled);
         mColorDisplayManager.setReduceBrightColorsActivated(enabled);
     }

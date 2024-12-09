@@ -316,14 +316,6 @@ public class ToggleFeaturePreferenceFragmentTest {
     }
 
     @Test
-    @Config(shadows = ShadowFragment.class)
-    public void showQuickSettingsTooltipIfNeeded_dontShowTooltipView() {
-        mFragment.showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_EDIT);
-
-        assertThat(getLatestPopupWindow()).isNull();
-    }
-
-    @Test
     public void getShortcutTypeSummary_shortcutSummaryIsCorrectlySet() {
         final PreferredShortcut userPreferredShortcut = new PreferredShortcut(
                 PLACEHOLDER_COMPONENT_NAME.flattenToString(),

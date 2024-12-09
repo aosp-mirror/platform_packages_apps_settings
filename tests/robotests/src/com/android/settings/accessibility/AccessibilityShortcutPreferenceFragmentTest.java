@@ -19,7 +19,6 @@ package com.android.settings.accessibility;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
-import static com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -37,7 +36,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.icu.text.CaseMap;
 import android.os.Bundle;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,7 +55,6 @@ import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragm
 import com.android.settings.testutils.shadow.ShadowFragment;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -83,18 +80,11 @@ public class AccessibilityShortcutPreferenceFragmentTest {
             PLACEHOLDER_PACKAGE_NAME + "tile.placeholder";
     private static final ComponentName PLACEHOLDER_COMPONENT_NAME = new ComponentName(
             PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_CLASS_NAME);
-    private static final ComponentName PLACEHOLDER_TILE_COMPONENT_NAME = new ComponentName(
-            PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME);
-    private static final String PLACEHOLDER_TILE_TOOLTIP_CONTENT =
-            PLACEHOLDER_PACKAGE_NAME + "tooltip_content";
-    private static final String PLACEHOLDER_DIALOG_TITLE = "title";
 
     private static final String SOFTWARE_SHORTCUT_KEY =
             Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
     private static final String HARDWARE_SHORTCUT_KEY =
             Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private TestAccessibilityShortcutPreferenceFragment mFragment;
     private PreferenceScreen mScreen;
     private Context mContext = ApplicationProvider.getApplicationContext();
@@ -149,14 +139,6 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 mFragment.getComponentName().flattenToString());
         assertThat(expectedType).isEqualTo(HARDWARE);
-    }
-
-    @Test
-    @Config(shadows = ShadowFragment.class)
-    public void showQuickSettingsTooltipIfNeeded_dontShowTooltipView() {
-        mFragment.showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_EDIT);
-
-        assertThat(getLatestPopupWindow()).isNull();
     }
 
     @Test
@@ -258,16 +240,6 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         @Override
         protected CharSequence getLabelName() {
             return PLACEHOLDER_PACKAGE_NAME;
-        }
-
-        @Override
-        protected ComponentName getTileComponentName() {
-            return PLACEHOLDER_TILE_COMPONENT_NAME;
-        }
-
-        @Override
-        protected CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
-            return PLACEHOLDER_TILE_TOOLTIP_CONTENT;
         }
 
         @Override
