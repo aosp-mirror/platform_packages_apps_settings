@@ -45,12 +45,14 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
+import com.android.settingslib.preference.SwitchPreferenceBinding
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 // LINT.IfChange
-class AirplaneModePreference :
+open class AirplaneModePreference :
     SwitchPreference(KEY, R.string.airplane_mode),
+    SwitchPreferenceBinding,
     PreferenceAvailabilityProvider,
     PreferenceLifecycleProvider,
     PreferenceRestrictionMixin {

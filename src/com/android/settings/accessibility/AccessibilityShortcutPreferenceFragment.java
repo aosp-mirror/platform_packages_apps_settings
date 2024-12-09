@@ -22,7 +22,6 @@ import static com.android.settings.accessibility.AccessibilityUtil.getShortcutSu
 import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_GENERAL_CATEGORY;
 import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_SAVED_QS_TOOLTIP_TYPE;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
@@ -52,7 +51,6 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Base class for accessibility fragments shortcut functions and dialog management.
@@ -234,7 +232,6 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         );
     }
 
-    @SuppressLint("MissingPermission")
     @Override
     public void onToggleClicked(ShortcutPreference preference) {
         if (getComponentName() == null) {
@@ -242,12 +239,13 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         }
 
         final int shortcutTypes = getUserPreferredShortcutTypes();
-        final boolean isChecked = preference.isChecked();
-        getPrefContext().getSystemService(AccessibilityManager.class).enableShortcutsForTargets(
-                isChecked, shortcutTypes,
-                Set.of(getComponentName().flattenToString()), getPrefContext().getUserId());
-        if (isChecked) {
+        if (preference.isChecked()) {
+            AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes,
+                    getComponentName());
             showDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
+        } else {
+            AccessibilityUtil.optOutAllValuesFromSettings(getPrefContext(), shortcutTypes,
+                    getComponentName());
         }
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }

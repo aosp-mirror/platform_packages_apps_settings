@@ -40,9 +40,6 @@ class TetherScreenTest : CatalystScreenTestCase() {
     override val flagName: String
         get() = Flags.FLAG_CATALYST_TETHER_SETTINGS
 
-    // TODO: Remove override (See b/368359963#comment7)
-    override fun migration() {}
-
     @Before
     fun setUp() {
         ShadowConnectivityManager.getShadow().setTetheringSupported(true)
