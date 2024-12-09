@@ -117,11 +117,8 @@ class BatteryPercentageSwitchPreferenceTest {
         batteryPercentageSwitchPreference.createAndBindWidget(context)
 
     private fun showBatteryPercentage(on: Boolean) =
-        batteryPercentageSwitchPreference
-            .storage(context)
-            .setValue(
+        batteryPercentageSwitchPreference.storage(context).setBoolean(
                 Settings.System.SHOW_BATTERY_PERCENT,
-                Boolean::class.javaObjectType,
                 on,
             )
 }

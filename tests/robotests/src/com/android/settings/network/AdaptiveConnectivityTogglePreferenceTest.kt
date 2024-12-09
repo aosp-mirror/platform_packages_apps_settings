@@ -96,11 +96,11 @@ class AdaptiveConnectivityTogglePreferenceTest {
     private fun setAdaptiveConnectivityEnabled(enabled: Boolean) =
         adaptiveConnectivityTogglePreference
             .storage(context)
-            .setValue(ADAPTIVE_CONNECTIVITY_ENABLED, Boolean::class.javaObjectType, enabled)
+            .setBoolean(ADAPTIVE_CONNECTIVITY_ENABLED, enabled)
 
     private fun getAdaptiveConnectivityEnabled() =
         adaptiveConnectivityTogglePreference
             .storage(context)
-            .getValue(ADAPTIVE_CONNECTIVITY_ENABLED, Boolean::class.javaObjectType)
+            .getBoolean(ADAPTIVE_CONNECTIVITY_ENABLED)
 }
 // LINT.ThenChange(AdaptiveConnectivityTogglePreferenceControllerTest.java)
