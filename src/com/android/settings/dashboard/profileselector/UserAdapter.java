@@ -39,7 +39,6 @@ import android.widget.TextView;
 import com.android.internal.util.UserIcons;
 import com.android.internal.widget.RecyclerView;
 import com.android.settings.R;
-import com.android.settingslib.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,8 +61,8 @@ public class UserAdapter extends BaseAdapter {
             mUserHandle = userHandle;
             mUserManager = um;
             UserInfo userInfo = um.getUserInfo(mUserHandle.getIdentifier());
-            int tintColor = Utils.getColorAttrDefaultColor(context,
-                    com.android.internal.R.attr.materialColorPrimary);
+            int tintColor = context.getColor(com.android.internal.R.color.materialColorPrimary);
+
             if (userInfo.isManagedProfile()
                     || (android.os.Flags.allowPrivateProfile()
                         && android.multiuser.Flags.enablePrivateSpaceFeatures()

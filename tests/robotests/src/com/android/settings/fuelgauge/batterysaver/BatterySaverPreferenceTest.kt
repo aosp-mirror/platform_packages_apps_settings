@@ -75,18 +75,14 @@ class BatterySaverPreferenceTest {
 
     @Test
     fun storeSetOn_setPowerSaveMode() {
-        batterySaverPreference
-            .storage(context)
-            .setValue(batterySaverPreference.key, Boolean::class.javaObjectType, true)
+        batterySaverPreference.storage(context).setBoolean(batterySaverPreference.key, true)
 
         verify(powerManager).setPowerSaveModeEnabled(true)
     }
 
     @Test
     fun storeSetOff_unsetPowerSaveMode() {
-        batterySaverPreference
-            .storage(context)
-            .setValue(batterySaverPreference.key, Boolean::class.javaObjectType, false)
+        batterySaverPreference.storage(context).setBoolean(batterySaverPreference.key, false)
 
         verify(powerManager).setPowerSaveModeEnabled(false)
     }
