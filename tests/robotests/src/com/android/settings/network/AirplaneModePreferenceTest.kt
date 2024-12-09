@@ -88,9 +88,7 @@ class AirplaneModePreferenceTest {
         SettingsGlobalStore.get(context).setInt(Settings.Global.AIRPLANE_MODE_ON, 1)
 
         val getValue =
-            airplaneModePreference
-                .storage(context)
-                .getValue(AirplaneModePreference.KEY, Boolean::class.javaObjectType)
+            airplaneModePreference.storage(context).getBoolean(AirplaneModePreference.KEY)
 
         assertThat(getValue).isTrue()
     }
@@ -100,9 +98,7 @@ class AirplaneModePreferenceTest {
         SettingsGlobalStore.get(context).setInt(Settings.Global.AIRPLANE_MODE_ON, 0)
 
         val getValue =
-            airplaneModePreference
-                .storage(context)
-                .getValue(AirplaneModePreference.KEY, Boolean::class.javaObjectType)
+            airplaneModePreference.storage(context).getBoolean(AirplaneModePreference.KEY)
 
         assertThat(getValue).isFalse()
     }

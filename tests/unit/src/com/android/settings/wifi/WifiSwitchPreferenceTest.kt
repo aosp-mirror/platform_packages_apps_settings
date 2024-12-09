@@ -49,9 +49,7 @@ class WifiSwitchPreferenceTest {
     fun getValue_defaultOn_returnOn() {
         mockWifiManager.stub { on { isWifiEnabled } doReturn true }
 
-        val getValue = wifiSwitchPreference
-            .storage(context)
-            .getValue(WifiSwitchPreference.KEY, Boolean::class.javaObjectType)
+        val getValue = wifiSwitchPreference.storage(context).getBoolean(WifiSwitchPreference.KEY)
 
         assertThat(getValue).isTrue()
     }
@@ -60,9 +58,7 @@ class WifiSwitchPreferenceTest {
     fun getValue_defaultOff_returnOff() {
         mockWifiManager.stub { on { isWifiEnabled } doReturn false }
 
-        val getValue = wifiSwitchPreference
-            .storage(context)
-            .getValue(WifiSwitchPreference.KEY, Boolean::class.javaObjectType)
+        val getValue = wifiSwitchPreference.storage(context).getBoolean(WifiSwitchPreference.KEY)
 
         assertThat(getValue).isFalse()
     }
