@@ -22,9 +22,9 @@
         <layer-list>
             <item>
                 <shape android:shape="rectangle">
-                    <solid android:color="?androidprv:attr/materialColorSurfaceContainerHighest" />
+                    <solid android:color="@androidprv:color/materialColorSurfaceContainerHighest" />
                     <stroke
-                        android:color="?androidprv:attr/materialColorSecondary"
+                        android:color="@androidprv:color/materialColorSecondary"
                         android:width="@dimen/contrast_button_stroke_width" />
                     <corners android:radius="@dimen/contrast_button_radius"/>
                 </shape>
@@ -41,7 +41,7 @@
                     android:viewportHeight="24"
                     android:tint="?attr/colorControlNormal">
                     <path
-                        android:fillColor="?androidprv:attr/materialColorPrimary"
+                        android:fillColor="@androidprv:color/materialColorPrimary"
                         android:pathData="M12,2C6.48,2 2,6.48 2,12s4.48,10 10,10c5.52,0 10,-4.48 10,-10S17.52,2 12,2zM10.59,16.6l-4.24,-4.24l1.41,-1.41l2.83,2.83l5.66,-5.66l1.41,1.41L10.59,16.6z"/>
                 </vector>
             </item>
@@ -55,7 +55,7 @@
                   android:left="@dimen/contrast_button_stroke_width"
                   android:right="@dimen/contrast_button_stroke_width">
                 <shape android:shape="rectangle">
-                    <solid android:color="?androidprv:attr/materialColorSurfaceContainerHighest" />
+                    <solid android:color="@androidprv:color/materialColorSurfaceContainerHighest" />
                     <corners android:radius="@dimen/contrast_button_radius"/>
                 </shape>
             </item>
