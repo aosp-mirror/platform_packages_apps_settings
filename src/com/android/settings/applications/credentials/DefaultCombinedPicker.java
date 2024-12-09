@@ -61,6 +61,8 @@ import java.util.List;
 
 public class DefaultCombinedPicker extends DefaultAppPickerFragment {
 
+    private boolean mIsWorkProfile;
+    private boolean mIsPrivateSpace;
     private static final String TAG = "DefaultCombinedPicker";
 
     public static final String AUTOFILL_SETTING = Settings.Secure.AUTOFILL_SERVICE;
@@ -82,6 +84,10 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
         super.onCreate(savedInstanceState);
 
         final Activity activity = getActivity();
+        mIsWorkProfile = activity.getIntent().getBooleanExtra(
+                UserUtils.EXTRA_IS_WORK_PROFILE, false);
+        mIsPrivateSpace = activity.getIntent().getBooleanExtra(
+                UserUtils.EXTRA_IS_PRIVATE_SPACE, false);
         if (activity != null && activity.getIntent().getStringExtra(EXTRA_PACKAGE_NAME) != null) {
             mCancelListener =
                     (d, w) -> {
@@ -520,9 +526,6 @@ public class DefaultCombinedPicker extends DefaultAppPickerFragment {
     }
 
     protected int getUser() {
-        if (mIntentSenderUserId >= 0) {
-            return mIntentSenderUserId;
-        }
-        return UserHandle.myUserId();
+       return  UserUtils.getUser(mIsWorkProfile, mIsPrivateSpace, getContext());
     }
 }

@@ -194,9 +194,6 @@ public class AccountPreferenceController extends AbstractPreferenceController
 
     @Override
     public void updateDynamicRawDataToIndex(List<SearchIndexableRaw> rawData) {
-        if (!isAvailable()) {
-            return;
-        }
         final Resources res = mContext.getResources();
         final String screenTitle = res.getString(R.string.account_settings_title);
 
@@ -288,12 +285,6 @@ public class AccountPreferenceController extends AbstractPreferenceController
     }
 
     private void updateUi() {
-        if (!isAvailable()) {
-            // This should not happen
-            Log.e(TAG, "We should not be showing settings for a managed profile");
-            return;
-        }
-
         for (int i = 0, size = mProfiles.size(); i < size; i++) {
             mProfiles.valueAt(i).pendingRemoval = true;
         }

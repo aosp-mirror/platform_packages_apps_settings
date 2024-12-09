@@ -33,11 +33,12 @@ import com.android.settings.SettingsActivity;
  */
 public class CredentialsPickerActivity extends SettingsActivity {
     private static final String TAG = "CredentialsPickerActivity";
+    private boolean mIsWorkProfile;
+    private boolean mIsPrivateSpace;
 
     /** Injects the fragment name into the intent so the correct fragment is opened. */
     @VisibleForTesting
-    public static void injectFragmentIntoIntent(Context context, Intent intent) {
-        final int userId = UserHandle.myUserId();
+    public static void injectFragmentIntoIntent(Context context, Intent intent, int userId) {
         final UserManager userManager = UserManager.get(context);
 
         if (DefaultCombinedPickerWork.isUserHandledByFragment(userManager, userId)) {
@@ -57,8 +58,12 @@ public class CredentialsPickerActivity extends SettingsActivity {
         final String packageName = getCallingPackage();
         final Intent intent = getIntent();
 
+        mIsWorkProfile = intent.getBooleanExtra(UserUtils.EXTRA_IS_WORK_PROFILE, false);
+        mIsPrivateSpace = intent.getBooleanExtra(UserUtils.EXTRA_IS_PRIVATE_SPACE, false);
+
         intent.putExtra(DefaultCombinedPicker.EXTRA_PACKAGE_NAME, packageName);
-        injectFragmentIntoIntent(this, intent);
+        injectFragmentIntoIntent(this, intent, UserUtils.getUser(
+                mIsWorkProfile, mIsPrivateSpace, this));
 
         super.onCreate(savedInstanceState);
     }
