@@ -29,21 +29,17 @@ import org.junit.runner.RunWith
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
-import org.robolectric.RuntimeEnvironment
 
 @RunWith(AndroidJUnit4::class)
 class BluetoothMainSwitchPreferenceTest {
-    @get:Rule
-    val setFlagsRule = SetFlagsRule()
+    @get:Rule val setFlagsRule = SetFlagsRule()
     private val context: Context = ApplicationProvider.getApplicationContext()
     private lateinit var bluetoothAdapter: BluetoothAdapter
     private lateinit var bluetoothMainSwitchPreference: BluetoothMainSwitchPreference
 
     @Before
     fun setUp() {
-        bluetoothAdapter = spy(
-            BluetoothAdapter.getDefaultAdapter()
-        )
+        bluetoothAdapter = spy(BluetoothAdapter.getDefaultAdapter())
         whenever(bluetoothAdapter.state).thenReturn(BluetoothAdapter.STATE_ON)
         bluetoothMainSwitchPreference = BluetoothMainSwitchPreference(bluetoothAdapter)
     }
@@ -62,18 +58,18 @@ class BluetoothMainSwitchPreferenceTest {
 
     @Test
     fun storageSetOff_turnOff() {
-        bluetoothMainSwitchPreference.storage(context).setValue(
-            bluetoothMainSwitchPreference.key, Boolean::class.javaObjectType, false
-        )
+        bluetoothMainSwitchPreference
+            .storage(context)
+            .setBoolean(bluetoothMainSwitchPreference.key, false)
 
         verify(bluetoothAdapter).disable()
     }
 
     @Test
     fun storageSetOn_turnOn() {
-        bluetoothMainSwitchPreference.storage(context).setValue(
-            bluetoothMainSwitchPreference.key, Boolean::class.javaObjectType, true
-        )
+        bluetoothMainSwitchPreference
+            .storage(context)
+            .setBoolean(bluetoothMainSwitchPreference.key, true)
 
         verify(bluetoothAdapter).enable()
     }
