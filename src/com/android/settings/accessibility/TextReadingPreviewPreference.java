@@ -17,6 +17,8 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -36,6 +38,7 @@ import com.android.settings.widget.DotsPageIndicator;
  * A {@link Preference} that could show the preview related to the text and reading options.
  */
 public class TextReadingPreviewPreference extends Preference {
+    private static final String KEY_LAST_INDEX = "last_preview_index";
     private int mCurrentItem;
     private int mLastLayerIndex;
     private PreviewPagerAdapter mPreviewAdapter;
@@ -97,6 +100,22 @@ public class TextReadingPreviewPreference extends Preference {
         updateAdapterIfNeeded(viewPager, pageIndicator, mPreviewAdapter);
         updatePagerAndIndicator(viewPager, pageIndicator);
     }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Bundle state = new Bundle();
+        state.putParcelable(null, super.onSaveInstanceState());
+        state.putInt(KEY_LAST_INDEX, getCurrentItem());
+        return state;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        Bundle bundle = (Bundle) state;
+        super.onRestoreInstanceState(bundle.getParcelable(null));
+        setCurrentItem(bundle.getInt(KEY_LAST_INDEX));
+    }
+
 
     /**
      * Set the minimum preview layout horizontal inner padding.
