@@ -36,9 +36,11 @@ import android.app.IActivityManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Flags;
 import android.os.RemoteException;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
@@ -46,6 +48,7 @@ import android.provider.Settings;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.compatibility.common.util.BlockingBroadcastReceiver;
 import com.android.settings.privatespace.PrivateSpaceMaintainer.ErrorDeletingPrivateSpace;
 
 import org.junit.After;
@@ -56,6 +59,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 @RunWith(AndroidJUnit4.class)
 public class PrivateSpaceMaintainerTest {
@@ -506,4 +512,25 @@ public class PrivateSpaceMaintainerTest {
                 /* enabled */ 1,
                 privateSpaceMaintainer.getPrivateProfileHandle().getIdentifier());
     }
+
+    @Test
+    public void profileRemovedFromUserManager_privateSpaceNoLongerExists() {
+        PrivateSpaceMaintainer privateSpaceMaintainer = PrivateSpaceMaintainer.getInstance(
+                mContext);
+        privateSpaceMaintainer.createPrivateSpace();
+        UserHandle privateSpaceUserHandle = privateSpaceMaintainer.getPrivateProfileHandle();
+        assertThat(privateSpaceMaintainer.doesPrivateSpaceExist()).isTrue();
+        Intent removedIntent = new Intent(Intent.ACTION_PROFILE_REMOVED);
+        assertThat(privateSpaceUserHandle).isNotNull();
+        final BlockingBroadcastReceiver receiver = new BlockingBroadcastReceiver(mContext,
+                removedIntent.getAction());
+        receiver.register();
+
+        Objects.requireNonNull(mContext.getSystemService(UserManager.class)).removeUser(
+                privateSpaceUserHandle);
+
+        receiver.awaitForBroadcast(TimeUnit.SECONDS.toMillis(10));
+        assertThat(privateSpaceMaintainer.doesPrivateSpaceExist()).isFalse();
+    }
+
 }
