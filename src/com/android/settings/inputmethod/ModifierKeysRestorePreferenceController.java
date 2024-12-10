@@ -28,6 +28,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.Utils;
 
 public class ModifierKeysRestorePreferenceController extends BasePreferenceController {
 
@@ -87,6 +88,7 @@ public class ModifierKeysRestorePreferenceController extends BasePreferenceContr
     }
 
     private int getColorOfMaterialColorPrimary() {
-        return mParent.getActivity().getColor(com.android.internal.R.color.materialColorPrimary);
+        return Utils.getColorAttrDefaultColor(
+                mParent.getActivity(), com.android.internal.R.attr.materialColorPrimary);
     }
 }

@@ -316,6 +316,7 @@ public class ModifierKeysPickerDialogFragment extends DialogFragment {
     }
 
     private int getColorOfMaterialColorPrimary() {
-        return mActivity.getColor(com.android.internal.R.color.materialColorPrimary);
+        return Utils.getColorAttrDefaultColor(
+                mActivity, com.android.internal.R.attr.materialColorPrimary);
     }
 }

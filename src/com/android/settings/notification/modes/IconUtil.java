@@ -23,7 +23,6 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
@@ -37,7 +36,6 @@ import android.util.StateSet;
 import android.view.Gravity;
 
 import androidx.annotation.AttrRes;
-import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -83,19 +81,21 @@ class IconUtil {
         Drawable base = composeIcons(
                 context.getResources(),
                 background,
-                context.getColor(com.android.internal.R.color.materialColorSecondaryContainer),
+                Utils.getColorAttr(context,
+                        com.android.internal.R.attr.materialColorSecondaryContainer),
                 outerSizePx,
                 modeIcon,
-                context.getColor(com.android.internal.R.color.materialColorOnSecondaryContainer),
+                Utils.getColorAttr(context,
+                        com.android.internal.R.attr.materialColorOnSecondaryContainer),
                 innerSizePx);
 
         Drawable selected = composeIcons(
                 context.getResources(),
                 background,
-                context.getColor(com.android.internal.R.color.materialColorPrimary),
+                Utils.getColorAttr(context, com.android.internal.R.attr.materialColorPrimary),
                 outerSizePx,
                 modeIcon,
-                context.getColor(com.android.internal.R.color.materialColorOnPrimary),
+                Utils.getColorAttr(context, com.android.internal.R.attr.materialColorOnPrimary),
                 innerSizePx);
 
         StateListDrawable result = new StateListDrawable();
@@ -114,11 +114,13 @@ class IconUtil {
     static Drawable makeIconPickerHeader(@NonNull Context context, Drawable icon) {
         return composeIconCircle(
                 context.getResources(),
-                context.getColor(com.android.internal.R.color.materialColorSecondaryContainer),
+                Utils.getColorAttr(context,
+                        com.android.internal.R.attr.materialColorSecondaryContainer),
                 context.getResources().getDimensionPixelSize(
                         R.dimen.zen_mode_icon_list_header_circle_diameter),
                 icon,
-                context.getColor(com.android.internal.R.color.materialColorOnSecondaryContainer),
+                Utils.getColorAttr(context,
+                        com.android.internal.R.attr.materialColorOnSecondaryContainer),
                 context.getResources().getDimensionPixelSize(
                         R.dimen.zen_mode_icon_list_header_icon_size));
     }
@@ -149,11 +151,13 @@ class IconUtil {
             @DrawableRes int iconResId) {
         return composeIconCircle(
                 context.getResources(),
-                context.getColor(com.android.internal.R.color.materialColorSecondaryContainer),
+                Utils.getColorAttr(context,
+                        com.android.internal.R.attr.materialColorSecondaryContainer),
                 context.getResources().getDimensionPixelSize(
                         R.dimen.zen_mode_circular_icon_diameter),
                 checkNotNull(context.getDrawable(iconResId)),
-                context.getColor(com.android.internal.R.color.materialColorOnSecondaryContainer),
+                Utils.getColorAttr(context,
+                        com.android.internal.R.attr.materialColorOnSecondaryContainer),
                 context.getResources().getDimensionPixelSize(
                         R.dimen.zen_mode_circular_icon_inner_icon_size));
     }
@@ -168,10 +172,12 @@ class IconUtil {
         if (Strings.isNullOrEmpty(displayName)) {
             return composeIconCircle(
                     context.getResources(),
-                    context.getColor(com.android.internal.R.color.materialColorTertiaryContainer),
+                    Utils.getColorAttr(context,
+                            com.android.internal.R.attr.materialColorTertiaryContainer),
                     res.getDimensionPixelSize(R.dimen.zen_mode_circular_icon_diameter),
                     checkNotNull(context.getDrawable(R.drawable.ic_zen_mode_generic_contact)),
-                    context.getColor(com.android.internal.R.color.materialColorOnTertiaryContainer),
+                    Utils.getColorAttr(context,
+                            com.android.internal.R.attr.materialColorOnTertiaryContainer),
                     res.getDimensionPixelSize(R.dimen.zen_mode_circular_icon_inner_icon_size));
         }
 
@@ -181,14 +187,14 @@ class IconUtil {
         Canvas canvas = new Canvas(bitmap);
 
         Paint circlePaint = new Paint();
-        circlePaint.setColor(context.getColor(
-                com.android.internal.R.color.materialColorTertiaryContainer));
+        circlePaint.setColor(Utils.getColorAttrDefaultColor(context,
+                com.android.internal.R.attr.materialColorTertiaryContainer));
         circlePaint.setFlags(Paint.ANTI_ALIAS_FLAG);
         canvas.drawCircle(diameter / 2f, diameter / 2f, diameter / 2f, circlePaint);
 
         Paint textPaint = new Paint();
-        textPaint.setColor(context.getColor(
-                com.android.internal.R.color.materialColorOnTertiaryContainer));
+        textPaint.setColor(Utils.getColorAttrDefaultColor(context,
+                com.android.internal.R.attr.materialColorOnTertiaryContainer));
         textPaint.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
         textPaint.setTextAlign(Paint.Align.LEFT);
         textPaint.setTextSize(res.getDimensionPixelSize(R.dimen.zen_mode_circular_icon_text_size));
@@ -204,22 +210,10 @@ class IconUtil {
         return new BitmapDrawable(context.getResources(), bitmap);
     }
 
-    private static Drawable composeIconCircle(Resources res, @ColorInt int circleColor,
-            @Px int circleDiameterPx, Drawable icon, @ColorInt int iconColor, @Px int iconSizePx) {
-        return composeIconCircle(res, ColorStateList.valueOf(circleColor), circleDiameterPx, icon,
-                ColorStateList.valueOf(iconColor), iconSizePx);
-    }
-
     private static Drawable composeIconCircle(Resources res, ColorStateList circleColor,
             @Px int circleDiameterPx, Drawable icon, ColorStateList iconColor, @Px int iconSizePx) {
         return composeIcons(res, new ShapeDrawable(new OvalShape()), circleColor, circleDiameterPx,
                 icon, iconColor, iconSizePx);
-    }
-
-    private static Drawable composeIcons(Resources res, Drawable outer, @ColorInt int outerColor,
-            @Px int outerSizePx, Drawable icon, @ColorInt int iconColor, @Px int iconSizePx) {
-        return composeIcons(res, outer, ColorStateList.valueOf(outerColor), outerSizePx, icon,
-                ColorStateList.valueOf(iconColor), iconSizePx);
     }
 
     private static Drawable composeIcons(Resources res, Drawable outer, ColorStateList outerColor,
