@@ -23,12 +23,13 @@ import android.content.IntentFilter
 import android.net.wifi.WifiManager
 import android.os.UserManager
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
 import androidx.preference.Preference
 import androidx.preference.Preference.OnPreferenceChangeListener
 import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
-import com.android.settings.network.SatelliteRepository.Companion.isSatelliteOn
+import com.android.settings.network.SatelliteRepository
 import com.android.settings.network.SatelliteWarningDialogActivity
 import com.android.settingslib.RestrictedSwitchPreference
 import com.android.settingslib.WirelessUtils
@@ -41,6 +42,8 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 import com.android.settingslib.preference.SwitchPreferenceBinding
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 // LINT.IfChange
 class WifiSwitchPreference :
@@ -72,7 +75,7 @@ class WifiSwitchPreference :
         val context = preference.context
 
         // Show dialog and do nothing under satellite mode.
-        if (isSatelliteOn(context)) {
+        if (context.isSatelliteOn()) {
             context.startActivity(
                 Intent(context, SatelliteWarningDialogActivity::class.java)
                     .putExtra(
@@ -97,7 +100,7 @@ class WifiSwitchPreference :
 
     override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
         when {
-            (value == true && !context.isRadioAllowed()) || isSatelliteOn(context) ->
+            (value == true && !context.isRadioAllowed()) || context.isSatelliteOn() ->
                 ReadWritePermit.DISALLOW
             else -> ReadWritePermit.ALLOW
         }
@@ -152,10 +155,21 @@ class WifiSwitchPreference :
     }
 
     companion object {
+        const val TAG = "WifiSwitchPreference"
         const val KEY = "main_toggle_wifi"
 
         private fun Context.isRadioAllowed() =
             WirelessUtils.isRadioAllowed(this, Settings.Global.RADIO_WIFI)
+
+        private fun Context.isSatelliteOn() =
+            try {
+                SatelliteRepository(this)
+                    .requestIsSessionStarted(Executors.newSingleThreadExecutor())
+                    .get(2000, TimeUnit.MILLISECONDS)
+            } catch (e: Exception) {
+                Log.e(TAG, "Error to get satellite status : $e")
+                false
+            }
 
         private val Intent.wifiState
             get() = getIntExtra(WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_UNKNOWN)

@@ -26,7 +26,7 @@ import com.android.settingslib.widget.MainSwitchBar
 
 /** Preference abstraction of the [MainSwitchBar] in settings activity. */
 class MainSwitchBarPreference(context: Context, private val metadata: MainSwitchBarMetadata) :
-    TwoStatePreference(context), OnCheckedChangeListener, MainSwitchBar.PreChangeListener {
+    TwoStatePreference(context), OnCheckedChangeListener {
 
     private val mainSwitchBar: MainSwitchBar = (context as SettingsActivity).switchBar
 
@@ -62,11 +62,8 @@ class MainSwitchBarPreference(context: Context, private val metadata: MainSwitch
 
     override fun onAttached() {
         super.onAttached()
-        mainSwitchBar.setPreChangeListener(this)
         mainSwitchBar.addOnSwitchChangeListener(this)
     }
-
-    override fun preChange(isCheck: Boolean) = callChangeListener(isCheck)
 
     override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
         // prevent user from toggling the switch before data store operation is done
@@ -77,7 +74,6 @@ class MainSwitchBarPreference(context: Context, private val metadata: MainSwitch
 
     override fun onDetached() {
         mainSwitchBar.removeOnSwitchChangeListener(this)
-        mainSwitchBar.setPreChangeListener(null)
         super.onDetached()
     }
 }

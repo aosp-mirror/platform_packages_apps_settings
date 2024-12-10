@@ -31,42 +31,45 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
-class BluetoothPreferenceTest {
+class BluetoothMainSwitchPreferenceTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
     private val context: Context = ApplicationProvider.getApplicationContext()
     private lateinit var bluetoothAdapter: BluetoothAdapter
-    private lateinit var bluetoothPreference: BluetoothPreference
+    private lateinit var bluetoothMainSwitchPreference: BluetoothMainSwitchPreference
 
     @Before
     fun setUp() {
         bluetoothAdapter = spy(BluetoothAdapter.getDefaultAdapter())
         whenever(bluetoothAdapter.state).thenReturn(BluetoothAdapter.STATE_ON)
-        bluetoothPreference =
-            BluetoothPreference(BluetoothPreference.createDataStore(context, bluetoothAdapter))
+        bluetoothMainSwitchPreference = BluetoothMainSwitchPreference(bluetoothAdapter)
     }
 
     @Test
     fun isEnabled_bluetoothOn_returnTrue() {
-        assertThat(bluetoothPreference.isEnabled(context)).isTrue()
+        assertThat(bluetoothMainSwitchPreference.isEnabled(context)).isTrue()
     }
 
     @Test
     fun isEnabled_bluetoothTurningOn_returnFalse() {
         whenever(bluetoothAdapter.state).thenReturn(BluetoothAdapter.STATE_TURNING_ON)
 
-        assertThat(bluetoothPreference.isEnabled(context)).isFalse()
+        assertThat(bluetoothMainSwitchPreference.isEnabled(context)).isFalse()
     }
 
     @Test
     fun storageSetOff_turnOff() {
-        bluetoothPreference.storage(context).setBoolean(bluetoothPreference.key, false)
+        bluetoothMainSwitchPreference
+            .storage(context)
+            .setBoolean(bluetoothMainSwitchPreference.key, false)
 
         verify(bluetoothAdapter).disable()
     }
 
     @Test
     fun storageSetOn_turnOn() {
-        bluetoothPreference.storage(context).setBoolean(bluetoothPreference.key, true)
+        bluetoothMainSwitchPreference
+            .storage(context)
+            .setBoolean(bluetoothMainSwitchPreference.key, true)
 
         verify(bluetoothAdapter).enable()
     }
