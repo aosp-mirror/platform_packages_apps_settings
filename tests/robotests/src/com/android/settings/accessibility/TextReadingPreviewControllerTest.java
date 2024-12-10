@@ -28,7 +28,6 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.display.PreviewPagerAdapter;
 import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
-import com.android.settings.widget.LabeledSeekBarPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,8 +53,8 @@ public class TextReadingPreviewControllerTest {
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private TextReadingPreviewController mPreviewController;
     private TextReadingPreviewPreference mPreviewPreference;
-    private LabeledSeekBarPreference mFontSizePreference;
-    private LabeledSeekBarPreference mDisplaySizePreference;
+    private AccessibilitySeekBarPreference mFontSizePreference;
+    private AccessibilitySeekBarPreference mDisplaySizePreference;
 
     @Mock
     private DisplaySizeData mDisplaySizeData;
@@ -73,8 +72,8 @@ public class TextReadingPreviewControllerTest {
         mPreviewPreference = spy(new TextReadingPreviewPreference(mContext, /* attr= */ null));
         mPreviewController = new TextReadingPreviewController(mContext, PREVIEW_KEY, fontSizeData,
                 mDisplaySizeData);
-        mFontSizePreference = new LabeledSeekBarPreference(mContext, /* attr= */ null);
-        mDisplaySizePreference = new LabeledSeekBarPreference(mContext, /* attr= */ null);
+        mFontSizePreference = new AccessibilitySeekBarPreference(mContext, /* attr= */ null);
+        mDisplaySizePreference = new AccessibilitySeekBarPreference(mContext, /* attr= */ null);
     }
 
     @Test

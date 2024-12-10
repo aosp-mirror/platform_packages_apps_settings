@@ -33,7 +33,6 @@ import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoi
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.instrumentation.SettingsStatsLog;
 import com.android.settings.display.PreviewPagerAdapter;
-import com.android.settings.widget.LabeledSeekBarPreference;
 
 import java.util.Objects;
 
@@ -58,8 +57,8 @@ class TextReadingPreviewController extends BasePreferenceController implements
     private int mLastDisplayProgress;
     private long mLastCommitTime;
     private TextReadingPreviewPreference mPreviewPreference;
-    private LabeledSeekBarPreference mFontSizePreference;
-    private LabeledSeekBarPreference mDisplaySizePreference;
+    private AccessibilitySeekBarPreference mFontSizePreference;
+    private AccessibilitySeekBarPreference mDisplaySizePreference;
 
     @EntryPoint
     private int mEntryPoint;
