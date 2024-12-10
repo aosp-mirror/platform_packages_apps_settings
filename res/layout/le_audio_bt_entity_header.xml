@@ -176,5 +176,23 @@
                 android:padding="@dimen/le_bluetooth_summary_padding"
                 android:drawablePadding="@dimen/le_bluetooth_summary_drawable_padding"/>
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/bt_battery_mono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/le_bluetooth_battery_start_margin"
+            android:layout_marginTop="@dimen/le_bluetooth_battery_top_margin"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:focusable="true">
+            <TextView
+                android:id="@+id/bt_battery_mono_summary"
+                style="@style/TextAppearance.EntityHeaderSummary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/le_bluetooth_summary_padding"
+                android:drawablePadding="@dimen/le_bluetooth_summary_drawable_padding"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
