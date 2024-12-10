@@ -328,6 +328,7 @@
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Usar axustes de accesibilidade"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
+    <string name="security_settings_face_enroll_introduction_learn_more_message" msgid="7728962858407497809"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Cancelar"</string>
     <string name="security_settings_face_enroll_introduction_no_thanks" msgid="6603178409726203187">"Agora non"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"Acepto"</string>
@@ -388,6 +389,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Ti tes o control"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"A túa filla ou fillo e mais ti tedes o control"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Importante"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_footer_title_3 (6474415050918819260) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Utiliza a impresión dixital para desbloquear o teléfono ou autorizar as compras.\n\nNota: Non podes utilizar a impresión dixital para desbloquear este dispositivo. Para obter máis información, ponte en contacto co administrador da túa organización."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Cancelar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Agora non"</string>
@@ -402,6 +405,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Para obter os mellores resultados, utiliza un protector de pantalla que conte coa certificación Made for Google. Se utilizas outros protectores, pode que non se detecte a túa impresión dixital."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Para obter os mellores resultados, utiliza un protector de pantalla que conte coa certificación Made for Google. Se utilizas outros protectores, pode que non se detecte a impresión dixital do teu fillo ou filla."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more_2" msgid="8691531121923020632"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Desbloqueo mediante reloxo"</string>
     <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"Se configuras o desbloqueo facial e o dactilar, o teléfono pedirache a impresión dixital no caso de que leves máscara ou esteas nun espazo escuro.\n\nA función Desbloqueo mediante reloxo ofréceche outra forma de desbloquear o teléfono facilmente en determinadas situacións (por exemplo, cando teñas os dedos mollados ou non se che recoñeza a cara)."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"A función Desbloqueo mediante reloxo ofréceche outra forma de desbloquear o teléfono facilmente en determinadas situacións (por exemplo, cando non se recoñeza a túa impresión dixital)."</string>
@@ -885,7 +889,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Experimental. Mellor calidade de audio."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Esquecer dispositivo"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Desconectar aplicación"</string>
-    <string name="device_details_more_settings" msgid="950302792331611271">"+ Opcións de configuración"</string>
+    <string name="device_details_more_settings" msgid="950302792331611271">"Máis opcións"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Número máximo de dispositivos de audio Bluetooth conectados"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Selecciona o número máximo de dispositivos de audio Bluetooth conectados"</string>
     <string name="nfc_verbose_vendor_log_title" msgid="5554505631122964628">"Rexistro de depuración detallado de NFC sobre provedores"</string>
@@ -898,8 +902,7 @@
     <string name="external_display_on" msgid="2560104443500154333">"Activada"</string>
     <string name="external_display_off" msgid="5634413756025351374">"Desactivada"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"Pantalla externa"</string>
-    <!-- no translation found for builtin_display_settings_category (3441388849060771885) -->
-    <skip />
+    <string name="builtin_display_settings_category" msgid="3441388849060771885">"Pantalla integrada"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"Usar pantalla externa"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"Resolución da pantalla"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"A pantalla externa está desconectada"</string>
@@ -1245,10 +1248,8 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Máis información sobre xirar automaticamente"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Resolución da pantalla"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Alta resolución"</string>
-    <!-- no translation found for screen_resolution_option_full (4456839315039000517) -->
-    <skip />
-    <!-- no translation found for screen_resolution_footer (1230761249204935717) -->
-    <skip />
+    <string name="screen_resolution_option_full" msgid="4456839315039000517">"Máxima resolución"</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"A máxima resolución consome máis batería. Se cambias a resolución, pode que se reinicien algunhas aplicacións."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Seleccionada"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Cores"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturais"</string>
@@ -1965,8 +1966,7 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opcións"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accesibilidade"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclado físico"</string>
-    <!-- no translation found for physical_keyboard_layout_picker_title (4526600767648916256) -->
-    <skip />
+    <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Selector do deseño do teclado fís."</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Teclas de rebote"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"O teclado ignorará as pulsacións repetidas rapidamente da mesma tecla"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Límite das teclas de rebote"</string>
@@ -3643,14 +3643,10 @@
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"Mostraranse menos notificacións na pantalla de bloqueo"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Mostrar só notificacións novas na pantalla de bloqueo"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Quita automaticamente da pantalla de bloqueo as notificacións que xa viches"</string>
-    <!-- no translation found for lock_screen_notifs_show_full_list (6767009263807771108) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_full_list_desc (4868489278443057427) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_compact (1133598661314460528) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_compact_desc (2442594880539709057) -->
-    <skip />
+    <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"Lista completa"</string>
+    <string name="lock_screen_notifs_full_list_desc" msgid="4868489278443057427">"A colocación predeterminada actual é un andel completo e unha pilla de notificacións."</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"Modo compacto"</string>
+    <string name="lock_screen_notifs_compact_desc" msgid="2442594880539709057">"As notif. novas contráense nun andel na pantalla de bloqueo."</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificacións na pantalla de bloqueo"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Mostra conversas predeterminadas e silenciadas"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostrar conversas predeterminadas e silenciadas"</string>
@@ -3668,14 +3664,10 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Mostrar todo nas notificacións de traballo"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Oculta o contido laboral confidencial"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Cando o teu dispositivo estea bloqueado, como queres que se mostren as notificacións do perfil?"</string>
-    <!-- no translation found for lock_screen_notification_hide_seen_title (6356324850662946426) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_hide_seen_summary (8345971177658888274) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_hide_silent_title (3284314455767315329) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_hide_silent_summary (1934066619526795468) -->
-    <skip />
+    <string name="lock_screen_notification_hide_seen_title" msgid="6356324850662946426">"Ocultar notificacións vistas"</string>
+    <string name="lock_screen_notification_hide_seen_summary" msgid="8345971177658888274">"As notif. vistas quítanse da pantalla de bloqueo."</string>
+    <string name="lock_screen_notification_hide_silent_title" msgid="3284314455767315329">"Ocultar notif. silenciadas"</string>
+    <string name="lock_screen_notification_hide_silent_summary" msgid="1934066619526795468">"As notif. e conversas silenciadas quítanse da pantalla de bloqueo."</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Notificacións do perfil"</string>
     <string name="notifications_title" msgid="4221655533193721131">"Notificacións"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"Notificacións de aplicacións"</string>
@@ -4481,20 +4473,13 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"Xestos"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Abrir cámara rapidamente"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Para abrir rapidamente a cámara, preme dúas veces o botón de acendido. Isto funciona en calquera pantalla."</string>
-    <!-- no translation found for double_tap_power_title (8705875166298116659) -->
-    <skip />
-    <!-- no translation found for double_tap_power_enabled (305978257631612678) -->
-    <skip />
-    <!-- no translation found for double_tap_power_target_action_category (6186809788568348488) -->
-    <skip />
-    <!-- no translation found for double_tap_power_camera_action_title (8398392033718681209) -->
-    <skip />
-    <!-- no translation found for double_tap_power_camera_action_summary (1231656402570674349) -->
-    <skip />
-    <!-- no translation found for double_tap_power_wallet_action_title (2238628756927241786) -->
-    <skip />
-    <!-- no translation found for double_tap_power_wallet_action_summary (6567586974229774570) -->
-    <skip />
+    <string name="double_tap_power_title" msgid="8705875166298116659">"Tocar dúas veces o botón de acendido"</string>
+    <string name="double_tap_power_enabled" msgid="305978257631612678">"Tocar dúas veces"</string>
+    <string name="double_tap_power_target_action_category" msgid="6186809788568348488">"Tocar dúas veces o botón de acendido"</string>
+    <string name="double_tap_power_camera_action_title" msgid="8398392033718681209">"Abrir a cámara"</string>
+    <string name="double_tap_power_camera_action_summary" msgid="1231656402570674349">"Acceder á cámara"</string>
+    <string name="double_tap_power_wallet_action_title" msgid="2238628756927241786">"Abrir Wallet"</string>
+    <string name="double_tap_power_wallet_action_summary" msgid="6567586974229774570">"Acceder a Wallet"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Xirar para cambiar á cámara dianteira"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Modo de navegación"</string>
@@ -4892,14 +4877,11 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"Mensaxaría por satélite"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"Envía e recibe mensaxes de texto por satélite. Inclúese na túa conta."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Envía e recibe mensaxes de texto por satélite. Servizo non incluído na túa conta."</string>
-    <!-- no translation found for keywords_satellite_setting (613553612424945946) -->
-    <skip />
-    <!-- no translation found for category_name_about_satellite_messaging (4978095955643523120) -->
-    <skip />
+    <string name="keywords_satellite_setting" msgid="613553612424945946">"Mensaxaría por satélite, conectividade por satélite"</string>
+    <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"Acerca de <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"Podes enviar e recibir mensaxes de texto por satélite como parte dunha conta de <xliff:g id="CARRIER_NAME">%1$s</xliff:g> que cumpre os requisitos"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"O teu plan de <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for title_have_satellite_plan (857337944804101443) -->
-    <skip />
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"A mensaxaría está incluída na túa conta"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"A mensaxaría por satélite non se inclúe na túa conta"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Máis información"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"Como funciona?"</string>
@@ -4907,57 +4889,15 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"O teu teléfono conectarase automaticamente cun satélite. Para ter unha mellor conexión, debes situarte nunha zona onde o ceo estea despexado."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"Despois de que o teléfono se conecte a un satélite"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"Podes intercambiar mensaxes de texto con calquera persoa, mesmo cos servizos de emerxencia. O teléfono volverá conectarse a unha rede de telefonía móbil en canto haxa unha dispoñible."</string>
-    <!-- no translation found for satellite_setting_summary_more_information (1028146147094166868) -->
-    <skip />
-    <!-- no translation found for more_about_satellite_messaging (1039277943532711584) -->
-    <skip />
+    <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"<xliff:g id="SUBJECT">%1$s</xliff:g> pode tardar máis e só está dispoñible en certas zonas. As condiciones meteorolóxicas e algunhas estruturas poden afectar á túa conexión por satélite. A función de chamada por satélite non está dispoñible. É posible que poidas facer chamadas de emerxencia.\n\nOs cambios na conta poden tardar algo en aparecer na configuración. Contacta con <xliff:g id="CARRIER_NAME">%1$s</xliff:g> para ter máis información."</string>
+    <string name="more_about_satellite_messaging" msgid="1039277943532711584">"Máis información sobre <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Non se pode activar a función <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Para activar a función <xliff:g id="FUNCTION">%1$s</xliff:g>, primeiro pecha a conexión por satélite"</string>
     <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"Conectividade por satélite"</string>
-    <!-- no translation found for title_satellite_setting_connectivity (488626710934668313) -->
-    <skip />
-    <!-- no translation found for description_satellite_setting_connectivity (7337311015334186655) -->
-    <skip />
-    <!-- no translation found for description_satellite_setting_messaging (4367494645429198805) -->
-    <skip />
-    <!-- no translation found for title_have_satellite_data_plan (5614932315409789011) -->
-    <skip />
-    <!-- no translation found for title_for_satellite_sos (4608739357329147285) -->
-    <skip />
-    <!-- no translation found for summary_for_satellite_sos_entry (4981480371923329605) -->
-    <skip />
-    <!-- no translation found for keywords_satellite_sos (6275777197418023949) -->
-    <skip />
-    <!-- no translation found for category_title_about_satellite_sos (7229724397303154919) -->
-    <skip />
-    <!-- no translation found for satellite_sos_introduction (4670230212117495751) -->
-    <skip />
-    <!-- no translation found for satellite_sos_how_it_works_step_1 (4669862942425306921) -->
-    <skip />
-    <!-- no translation found for satellite_sos_how_it_works_step_2 (3558248744927579016) -->
-    <skip />
-    <!-- no translation found for satellite_sos_how_it_works_step_3 (4496038314890474893) -->
-    <skip />
-    <!-- no translation found for satellite_sos_how_it_works_summary_1 (4497178023367920284) -->
-    <skip />
-    <!-- no translation found for satellite_sos_how_it_works_summary_2 (1302661361673503362) -->
-    <skip />
-    <!-- no translation found for satellite_sos_how_it_works_summary_3 (4612675365617172405) -->
-    <skip />
-    <!-- no translation found for satellite_sos_try_demo (1915233782211344468) -->
-    <skip />
-    <!-- no translation found for satellite_sos_footer_text (4454885538165117230) -->
-    <skip />
-    <!-- no translation found for satellite_sos_sharing_preferences_subheader_title (5701538329333628267) -->
-    <skip />
-    <!-- no translation found for satellite_sos_sharing_preferences_step_1 (3106774199702637359) -->
-    <skip />
-    <!-- no translation found for satellite_sos_sharing_preferences_step_2 (738246589687762115) -->
-    <skip />
-    <!-- no translation found for satellite_sos_sharing_preferences_description (782508188142964342) -->
-    <skip />
-    <!-- no translation found for satellite_sos_learn_more_link (2442930426165677255) -->
-    <skip />
+    <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Conectividade por satélite"</string>
+    <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"conectividade por satélite"</string>
+    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"mensaxaría por satélite"</string>
+    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"O uso de datos está incluído na túa conta"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nomes dos puntos de acceso"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Non dispoñible cando o dispositivo está conectado a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5062,7 +5002,7 @@
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Conectando co dispositivo…"</string>
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Esquerdo"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Dereito"</string>
-    <string name="bluetooth_middle_name" msgid="3909371955137442319">"Carcasa"</string>
+    <string name="bluetooth_middle_name" msgid="3909371955137442319">"Estoxo"</string>
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batería"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panel de configuración"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Activar ventás de forma libre"</string>
@@ -5145,8 +5085,7 @@
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Modo independente de páxina de 16 kB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Ler máis"</string>
     <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"Executar a aplicación no modo de compatibilidade co tamaño de páxina"</string>
-    <!-- no translation found for enable_16k_app_compat_details (3389401258168314266) -->
-    <skip />
+    <string name="enable_16k_app_compat_details" msgid="3389401258168314266">"A aplicación executarase no modo de compatibilidade co tamaño de páxina en dispositivos de 16 kB cando se active esta opción."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Controlador do Informe de erros"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determina que aplicación xestiona o atallo aos informes de erros no teu dispositivo."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Persoal"</string>

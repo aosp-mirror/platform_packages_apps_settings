@@ -328,6 +328,7 @@
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Maxsus imkoniyatlarni sozlash"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
+    <string name="security_settings_face_enroll_introduction_learn_more_message" msgid="7728962858407497809"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Bekor qilish"</string>
     <string name="security_settings_face_enroll_introduction_no_thanks" msgid="6603178409726203187">"Hozir emas"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"Roziman"</string>
@@ -388,6 +389,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Boshqaruv oʻz qoʻlingizda"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Siz va farzandingiz boshqarasiz"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Yodda tuting"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_footer_title_3 (6474415050918819260) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Telefonni qulfdan chiqarish yoki xaridlarni tasdiqlash uchun barmoq izingizdan foydalaning.\n\nEslatma: barmoq izi orqali bu qurilmani qulfdan chiqara olmaysiz. Batafsil axborot olish uchun tashkilot administratori bilan bog‘laning."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Bekor qilish"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Hozir emas"</string>
@@ -402,6 +405,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Eng yaxshi natijalarga erishish uchun Made for Google sertifikatiga ega ekran himoyasidan foydalaning. Boshqa ekran himoyasida barmoq izi ishlamasligi mumkin."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Eng yaxshi natijalarga erishish uchun Made for Google sertifikatiga ega ekran himoyasidan foydalaning. Boshqa ekran himoyasida farzandingizning barmoq izi ishlamasligi mumkin."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more_2" msgid="8691531121923020632"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Soat bilan ochish"</string>
     <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"Yuz va barmoq izi bilan ochish sozlanganda, telefoningiz yuz niqobi taqqaningizda yoki qorongʻi joylarda barmoq izingizni soʻraydi.\n\nBarmoqlar hoʻl boʻlsa yoki yuzingizni tanimasa, soat bilan ochish funksiyasi telefonni qulfdan chiqarishning yana bir qulay usuli hisoblanadi."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"Barmoqlar hoʻl boʻlsa, soat bilan ochish funksiyasi telefonni qulfdan chiqarishning yana bir qulay usuli hisoblanadi."</string>
@@ -3639,14 +3643,10 @@
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"Ekran qulfida kamroq bildirishnoma chiqsin"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Ekran qulfida faqat yangi bildirishnomalarni chiqarish"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Bloklangan ekrandan oldin ochilgan bildirishnomalarni avtomatik olib tashlash"</string>
-    <!-- no translation found for lock_screen_notifs_show_full_list (6767009263807771108) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_full_list_desc (4868489278443057427) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_compact (1133598661314460528) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_compact_desc (2442594880539709057) -->
-    <skip />
+    <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"Butun roʻyxat"</string>
+    <string name="lock_screen_notifs_full_list_desc" msgid="4868489278443057427">"Joriy standart holati toʻliq javon va bildirishnomalar taxlamidir."</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"Ixcham"</string>
+    <string name="lock_screen_notifs_compact_desc" msgid="2442594880539709057">"Yangi bildirishnomalar ekran qulfidagi panelga yigʻiladi."</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Ekran qulfida bildirishnomalar"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Suhbatlarni chiqarish, standart holatda, sokin"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Suhbatlarni chiqarish, standart holatda, sokin"</string>
@@ -3664,14 +3664,10 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Ish bildirishnomalarini toʻliq chiqarish"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Ish profili ma’lumotlari berkitilsin"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Qurilmangiz qulflanganda, profil bildirishnomalari qanday chiqsin?"</string>
-    <!-- no translation found for lock_screen_notification_hide_seen_title (6356324850662946426) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_hide_seen_summary (8345971177658888274) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_hide_silent_title (3284314455767315329) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_hide_silent_summary (1934066619526795468) -->
-    <skip />
+    <string name="lock_screen_notification_hide_seen_title" msgid="6356324850662946426">"Koʻrilganlarni berkitish"</string>
+    <string name="lock_screen_notification_hide_seen_summary" msgid="8345971177658888274">"Koʻrilganlar ekrandan oʻchadi."</string>
+    <string name="lock_screen_notification_hide_silent_title" msgid="3284314455767315329">"Sukut qilingan bildirishnomalarni berkitish"</string>
+    <string name="lock_screen_notification_hide_silent_summary" msgid="1934066619526795468">"Sokin bildirishnoma va suhbatlar ekran qulfidan olib tashlanadi."</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Profil bildirishnomalari"</string>
     <string name="notifications_title" msgid="4221655533193721131">"Bildirishnomalar"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"Ilovalar bildirishnomalari"</string>
@@ -4902,24 +4898,6 @@
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"sunʼiy yoʻldosh aloqasi"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"sunʼiy yoʻldosh orqali xabarlashuv"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Internetdan foydalanish hisobingizga kiritilgan"</string>
-    <string name="title_for_satellite_sos" msgid="4608739357329147285">"Sputnik SOS"</string>
-    <string name="summary_for_satellite_sos_entry" msgid="4981480371923329605">"Mobil yoki Wi‐Fi tarmoqqa ulana olmaganingizda favqulodda xizmatlarga xabar yuborish"</string>
-    <string name="keywords_satellite_sos" msgid="6275777197418023949">"sputnik sos, sos"</string>
-    <string name="category_title_about_satellite_sos" msgid="7229724397303154919">"Sputnik SOS haqida"</string>
-    <string name="satellite_sos_introduction" msgid="4670230212117495751">"Mobil yoki Wi-Fi tarmoq aloqasi boʻlmaganda favqulodda xizmatlarga xabar yuborish va joylashuv axborotini ulashish mumkin. Bu xizmat har qanday vaqt, joylashuv yoki vaziyatlarda ishlamasligi mumkin."</string>
-    <string name="satellite_sos_how_it_works_step_1" msgid="4669862942425306921">"Favqulodda xizmatlarni chaqirish yoki xabar yuborish"</string>
-    <string name="satellite_sos_how_it_works_step_2" msgid="3558248744927579016">"Favqulodda vaziyat haqida savollarga javob bering"</string>
-    <string name="satellite_sos_how_it_works_step_3" msgid="4496038314890474893">"Sputnikka ulanish uchun quyidagi amallarni bajaring"</string>
-    <string name="satellite_sos_how_it_works_summary_1" msgid="4497178023367920284">"Mobil tarmoq mavjud boʻlmasa, Sputnik SOS bandi chiqadi"</string>
-    <string name="satellite_sos_how_it_works_summary_2" msgid="1302661361673503362">"Kerakli yordam olishingiz uchun javoblarni favqulodda xizmatlarga yuboring"</string>
-    <string name="satellite_sos_how_it_works_summary_3" msgid="4612675365617172405">"Ulanganda favqulodda xizmatlarga xabar yuborish mumkin"</string>
-    <string name="satellite_sos_try_demo" msgid="1915233782211344468">"Demo rejim"</string>
-    <string name="satellite_sos_footer_text" msgid="4454885538165117230">"Favqulodda xizmatlarga sputnik orqali ulanishda ism, email, telefon raqam(lar)i, joylashuv, qurilma haqidagi (IMEI, til, modeli, batareya quvvati darajasi) hamda favqulodda vaziyatlar uchun kontaktlaringiz maʼlumotlari favqulodda xizmat va sputnik operatorlariga ulashiladi. \n\nSputnik SOS xizmatidan foydalanish uchun Google Xabarlar asosiy SMS ilovasi etib tayinlanishi kerak. \n\nAgar tarmoqni avtomatik tanlash oʻchiq boʻlsa, u yoqiladi va qurilmangiz istalgan tarmoqqa avtomatik ulanadi."</string>
-    <string name="satellite_sos_sharing_preferences_subheader_title" msgid="5701538329333628267">"Ulashuv parametrlari"</string>
-    <string name="satellite_sos_sharing_preferences_step_1" msgid="3106774199702637359">"Favqulodda kontaktlar"</string>
-    <string name="satellite_sos_sharing_preferences_step_2" msgid="738246589687762115">"Google hisobingiz"</string>
-    <string name="satellite_sos_sharing_preferences_description" msgid="782508188142964342">"Favqulodda xizmatlarga ulashiladigan axborotlarni tekshiring va yangilang"</string>
-    <string name="satellite_sos_learn_more_link" msgid="2442930426165677255">"https://support.google.com/pixelphone/answer/15254448"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Internetga ulanish nuqtalari (APN)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> bilan ishlamaydi"</string>
@@ -5107,8 +5085,7 @@
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16 KB sahifadan mustaqil rejim"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Batafsil"</string>
     <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"Ilovani sahifa hajmiga muvofiq rejimda ishga tushirish"</string>
-    <!-- no translation found for enable_16k_app_compat_details (3389401258168314266) -->
-    <skip />
+    <string name="enable_16k_app_compat_details" msgid="3389401258168314266">"Bu yoqilsa, ilova 16 KB qurilmada sahifa oʻlchamiga moslik rejimida ishga tushadi."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Xatoliklarni xabar qilish vositasi"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Qurilmadagi qaysi ilova xatoliklarni xabar qilish vositasi bilan ishlashini aniqlaydi."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Shaxsiy"</string>

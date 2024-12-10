@@ -328,6 +328,7 @@
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"使用无障碍设置"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
+    <string name="security_settings_face_enroll_introduction_learn_more_message" msgid="7728962858407497809"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"取消"</string>
     <string name="security_settings_face_enroll_introduction_no_thanks" msgid="6603178409726203187">"以后再说"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"我同意"</string>
@@ -388,6 +389,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"一切由您掌控"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"一切由您和您的孩子掌握"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"注意事项"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_footer_title_3 (6474415050918819260) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"使用指纹解锁手机或批准购买交易。\n\n请注意：您无法使用指纹来解锁此设备。要了解详情，请与贵单位的管理员联系。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"取消"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"以后再说"</string>
@@ -402,6 +405,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"为获得最佳效果，请使用获得 Made For Google 认证的屏幕保护膜。如果使用其他屏幕保护膜，系统可能无法识别您的指纹。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"为获得最佳效果，请使用获得 Made For Google 认证的屏幕保护膜。如果使用其他屏幕保护膜，系统可能无法识别您孩子的指纹。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more_2" msgid="8691531121923020632"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"手表解锁"</string>
     <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"设置“人脸解锁”和“指纹解锁”功能后，如果您戴着口罩或所在区域光线较暗，手机会要求您使用指纹解锁。\n\n“手表解锁”功能是解锁手机的另一种便捷方式。例如，当您的手指潮湿或设备未能识别出您的面孔时，“手表解锁”功能将非常有用。"</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"“手表解锁”功能是解锁手机的另一种便捷方式。例如，当设备未能识别出您的指纹时，“手表解锁”功能将非常有用。"</string>
@@ -855,7 +859,7 @@
     <string name="bluetooth_paring_group_msg" msgid="2455293929036668131">"确认与音频设备配对"</string>
     <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"允许访问您的通讯录和通话记录"</string>
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"同时允许访问通讯录和通话记录"</string>
-    <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"信息将用于来电通知等用途"</string>
+    <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"这些信息将用于来电通知等用途"</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"无法连接到<xliff:g id="DEVICE_NAME">%1$s</xliff:g>。"</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"可用的设备"</string>
@@ -1962,8 +1966,7 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"选项"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"无障碍功能"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"实体键盘"</string>
-    <!-- no translation found for physical_keyboard_layout_picker_title (4526600767648916256) -->
-    <skip />
+    <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"实体键盘布局选择器"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"防抖键"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"键盘会忽略快速重复按下同一按键的操作"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"防抖键阈值"</string>
@@ -3640,14 +3643,10 @@
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"在锁定屏幕上少显示些通知"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"锁屏时仅显示新通知"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"自动从锁定的屏幕中移除之前看过的通知"</string>
-    <!-- no translation found for lock_screen_notifs_show_full_list (6767009263807771108) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_full_list_desc (4868489278443057427) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_compact (1133598661314460528) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_compact_desc (2442594880539709057) -->
-    <skip />
+    <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"完整列表"</string>
+    <string name="lock_screen_notifs_full_list_desc" msgid="4868489278443057427">"当前的默认布局是一个由搁架和通知栏构成的完整堆栈。"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"紧凑"</string>
+    <string name="lock_screen_notifs_compact_desc" msgid="2442594880539709057">"新通知会折叠到锁定的屏幕上的搁架中。"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"锁屏通知"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"显示对话通知、默认通知和无声通知"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"显示默认对话和已设为静音的对话"</string>
@@ -3665,14 +3664,10 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"显示所有工作通知内容"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"隐藏敏感工作内容"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"在设备锁定时，您希望个人资料通知如何显示？"</string>
-    <!-- no translation found for lock_screen_notification_hide_seen_title (6356324850662946426) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_hide_seen_summary (8345971177658888274) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_hide_silent_title (3284314455767315329) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_hide_silent_summary (1934066619526795468) -->
-    <skip />
+    <string name="lock_screen_notification_hide_seen_title" msgid="6356324850662946426">"隐藏已读通知"</string>
+    <string name="lock_screen_notification_hide_seen_summary" msgid="8345971177658888274">"已读通知会从锁定的屏幕中移除。"</string>
+    <string name="lock_screen_notification_hide_silent_title" msgid="3284314455767315329">"隐藏静音通知"</string>
+    <string name="lock_screen_notification_hide_silent_summary" msgid="1934066619526795468">"静音通知和对话会从锁定的屏幕中移除。"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"个人资料通知"</string>
     <string name="notifications_title" msgid="4221655533193721131">"通知"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"应用通知"</string>
@@ -4478,20 +4473,13 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"手势"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"快速打开相机"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"在任意界面按两次电源按钮，即可快速打开相机。"</string>
-    <!-- no translation found for double_tap_power_title (8705875166298116659) -->
-    <skip />
-    <!-- no translation found for double_tap_power_enabled (305978257631612678) -->
-    <skip />
-    <!-- no translation found for double_tap_power_target_action_category (6186809788568348488) -->
-    <skip />
-    <!-- no translation found for double_tap_power_camera_action_title (8398392033718681209) -->
-    <skip />
-    <!-- no translation found for double_tap_power_camera_action_summary (1231656402570674349) -->
-    <skip />
-    <!-- no translation found for double_tap_power_wallet_action_title (2238628756927241786) -->
-    <skip />
-    <!-- no translation found for double_tap_power_wallet_action_summary (6567586974229774570) -->
-    <skip />
+    <string name="double_tap_power_title" msgid="8705875166298116659">"点按两次电源按钮"</string>
+    <string name="double_tap_power_enabled" msgid="305978257631612678">"使用“点按两次”"</string>
+    <string name="double_tap_power_target_action_category" msgid="6186809788568348488">"点按两次电源按钮"</string>
+    <string name="double_tap_power_camera_action_title" msgid="8398392033718681209">"打开相机"</string>
+    <string name="double_tap_power_camera_action_summary" msgid="1231656402570674349">"使用相机"</string>
+    <string name="double_tap_power_wallet_action_title" msgid="2238628756927241786">"打开 Google 钱包"</string>
+    <string name="double_tap_power_wallet_action_summary" msgid="6567586974229774570">"访问 Google 钱包"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"翻转切换自拍模式"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"导航模式"</string>
@@ -4910,25 +4898,6 @@
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"卫星连接"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"卫星消息"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"您的账号支持卫星数据传输功能"</string>
-    <string name="title_for_satellite_sos" msgid="4608739357329147285">"卫星紧急呼救"</string>
-    <string name="summary_for_satellite_sos_entry" msgid="4981480371923329605">"当您无法连接到移动网络或 WLAN 网络时，可与应急服务互发消息"</string>
-    <string name="keywords_satellite_sos" msgid="6275777197418023949">"卫星紧急呼救, 紧急呼救, satellite sos, sos"</string>
-    <string name="category_title_about_satellite_sos" msgid="7229724397303154919">"关于卫星紧急呼救"</string>
-    <string name="satellite_sos_introduction" msgid="4670230212117495751">"当您无法连接到移动网络或 WLAN 网络时，您可以与应急服务互发消息并分享您的位置信息。此服务在某些时间、地点或情形下可能无法使用。"</string>
-    <string name="satellite_sos_how_it_works_step_1" msgid="4669862942425306921">"向应急服务致电或发短信"</string>
-    <string name="satellite_sos_how_it_works_step_2" msgid="3558248744927579016">"回答有关紧急情况的问题"</string>
-    <string name="satellite_sos_how_it_works_step_3" msgid="4496038314890474893">"按照步骤连接到卫星"</string>
-    <string name="satellite_sos_how_it_works_summary_1" msgid="4497178023367920284">"如果没有移动网络，您将看到使用“卫星紧急呼救”的选项"</string>
-    <string name="satellite_sos_how_it_works_summary_2" msgid="1302661361673503362">"向应急服务发送回答，以获得合适的帮助"</string>
-    <string name="satellite_sos_how_it_works_summary_3" msgid="4612675365617172405">"连接后，您可以与应急服务互发消息"</string>
-    <string name="satellite_sos_try_demo" msgid="1915233782211344468">"试用演示"</string>
-    <string name="satellite_sos_footer_text" msgid="4454885538165117230">"当您通过卫星联系应急服务时，您的姓名、电子邮件地址、电话号码、位置信息、设备信息（IMEI、语言、型号、电池电量）和紧急情况联系人信息将与应急服务及卫星服务提供商分享。\n\n若要使用“卫星紧急呼救”功能，您必须将“Google 信息”设为默认短信应用。\n\n如果自动选择网络功能处于关闭状态，系统会将其开启，您的设备将自动连接到任何网络。"</string>
-    <string name="satellite_sos_sharing_preferences_subheader_title" msgid="5701538329333628267">"分享偏好设置"</string>
-    <string name="satellite_sos_sharing_preferences_step_1" msgid="3106774199702637359">"紧急情况联系人"</string>
-    <string name="satellite_sos_sharing_preferences_step_2" msgid="738246589687762115">"您的 Google 账号"</string>
-    <string name="satellite_sos_sharing_preferences_description" msgid="782508188142964342">"查看或更新将与应急服务分享的信息"</string>
-    <!-- no translation found for satellite_sos_learn_more_link (2442930426165677255) -->
-    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"接入点名称"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"连接到<xliff:g id="CARRIER">%1$s</xliff:g>时无法使用"</string>
@@ -5116,8 +5085,7 @@
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB 页面通用模式"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"了解详情"</string>
     <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"以页面大小兼容模式运行应用"</string>
-    <!-- no translation found for enable_16k_app_compat_details (3389401258168314266) -->
-    <skip />
+    <string name="enable_16k_app_compat_details" msgid="3389401258168314266">"此设置开启后，在 16 KB 设备上，应用将以页面大小兼容模式运行。"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Bug 报告处理程序"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"确定要使用哪款应用来处理设备上的错误报告快捷方式。"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"个人"</string>
