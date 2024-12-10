@@ -100,7 +100,7 @@ class WifiHotspotSwitchPreference(context: Context, dataSaverStore: KeyValueStor
             .toIntent()
 
     override fun isEnabled(context: Context) =
-        wifiHotspotStore.dataSaverStore.getBoolean(DATA_SAVER_KEY) == true &&
+        wifiHotspotStore.dataSaverStore.getBoolean(DATA_SAVER_KEY) != true &&
             super<PreferenceRestrictionMixin>.isEnabled(context)
 
     override val restrictionKeys
@@ -193,6 +193,7 @@ class WifiHotspotSwitchPreference(context: Context, dataSaverStore: KeyValueStor
         super.bind(preference, metadata)
         (preference as PrimarySwitchPreference).apply {
             isChecked = preferenceDataStore!!.getBoolean(key, false)
+            isSwitchEnabled = isEnabled
         }
     }
 
