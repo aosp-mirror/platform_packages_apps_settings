@@ -90,7 +90,6 @@ public class KeyboardSettingsPreferenceControllerTest {
                 new HardKeyboardDeviceInfo(
                         "TEST_DEVICE",
                         mInputDeviceIdentifier,
-                        "TEST_DEVICE_LABEL",
                         address,
                         VENDOR_ID,
                         PRODUCT_ID);
