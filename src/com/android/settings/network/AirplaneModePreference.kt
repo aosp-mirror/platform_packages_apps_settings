@@ -152,7 +152,7 @@ class AirplaneModePreference :
         data: Intent?,
     ): Boolean {
         if (requestCode == REQUEST_CODE_EXIT_ECM && resultCode == Activity.RESULT_OK) {
-            storage(context).setValue(KEY, Boolean::class.javaObjectType, true)
+            context.getKeyValueStore(KEY)?.setBoolean(KEY, true)
         }
         return true
     }
