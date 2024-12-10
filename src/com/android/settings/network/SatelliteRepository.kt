@@ -26,6 +26,8 @@ import androidx.concurrent.futures.CallbackToFutureAdapter
 import com.google.common.util.concurrent.Futures.immediateFuture
 import com.google.common.util.concurrent.ListenableFuture
 import java.util.concurrent.Executor
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
@@ -203,5 +205,15 @@ class SatelliteRepository(
         fun setIsSessionStartedForTesting(isEnabled: Boolean) {
             this.isSessionStarted = isEnabled
         }
+
+        fun isSatelliteOn(context: Context, timeoutMs: Long = 2000): Boolean =
+            try {
+                SatelliteRepository(context)
+                    .requestIsSessionStarted(Executors.newSingleThreadExecutor())
+                    .get(timeoutMs, TimeUnit.MILLISECONDS)
+            } catch (e: Exception) {
+                Log.e(TAG, "Error to get satellite status : $e")
+                false
+            }
     }
 }
