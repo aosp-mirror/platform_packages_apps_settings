@@ -109,7 +109,7 @@ public class SettingsMainSwitchBar extends MainSwitchBar {
             return true;
         }
 
-        return mSwitch.performClick();
+        return callPreChangeListener() && mSwitch.performClick();
     }
 
     @Override
