@@ -19,6 +19,7 @@ package com.android.settings.service
 import android.content.Context
 import android.service.settings.preferences.GetValueRequest
 import android.service.settings.preferences.GetValueResult
+import android.service.settings.preferences.MetadataResult
 import android.service.settings.preferences.SetValueRequest
 import android.service.settings.preferences.SetValueResult
 import android.service.settings.preferences.SettingsPreferenceMetadata
@@ -34,8 +35,54 @@ import com.android.settingslib.graph.preferenceValueProto
 import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.graph.getText
+import com.android.settingslib.graph.proto.PreferenceGraphProto
+import com.android.settingslib.graph.proto.PreferenceOrGroupProto
 import com.android.settingslib.graph.toIntent
 import com.android.settingslib.metadata.SensitivityLevel
+
+/** Transform Catalyst Graph result to Framework GET METADATA result */
+fun transformCatalystGetMetadataResponse(
+    context: Context,
+    graph: PreferenceGraphProto
+): MetadataResult {
+    val preferences = mutableSetOf<PreferenceWithScreen>()
+    // recursive function to visit all nodes in preference group
+    fun traverseGroupOrPref(
+        screenKey: String,
+        groupOrPref: PreferenceOrGroupProto,
+    ) {
+        when (groupOrPref.kindCase) {
+            PreferenceOrGroupProto.KindCase.PREFERENCE ->
+                preferences.add(
+                    PreferenceWithScreen(screenKey, groupOrPref.preference)
+                )
+            PreferenceOrGroupProto.KindCase.GROUP -> {
+                for (child in groupOrPref.group.preferencesList) {
+                    traverseGroupOrPref(screenKey, child)
+                }
+            }
+            else -> {}
+        }
+    }
+    // traverse all screens and all preferences on screen
+    for ((screenKey, screen) in graph.screensMap) {
+        for (groupOrPref in screen.root.preferencesList) {
+            traverseGroupOrPref(screenKey, groupOrPref)
+        }
+    }
+
+    return if (preferences.isNotEmpty()) {
+        MetadataResult.Builder(MetadataResult.RESULT_OK)
+            .setMetadataList(
+                preferences.map {
+                    it.preference.toMetadata(context, it.screenKey)
+                }
+            )
+            .build()
+    } else {
+        MetadataResult.Builder(MetadataResult.RESULT_UNSUPPORTED).build()
+    }
+}
 
 /** Translate Framework GET VALUE request to Catalyst GET VALUE request */
 fun transformFrameworkGetValueRequest(
@@ -132,6 +179,11 @@ fun transformCatalystSetValueResponse(@PreferenceSetterResult response: Int): Se
     }
     return SetValueResult.Builder(resultCode).build()
 }
+
+private data class PreferenceWithScreen(
+    val screenKey: String,
+    val preference: PreferenceProto,
+)
 
 private fun PreferenceProto.toMetadata(
     context: Context,

@@ -16,7 +16,6 @@
 
 package com.android.settings.service
 
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.platform.test.annotations.RequiresFlagsEnabled
@@ -24,6 +23,7 @@ import android.platform.test.flag.junit.CheckFlagsRule
 import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.service.settings.preferences.GetValueRequest
 import android.service.settings.preferences.GetValueResult
+import android.service.settings.preferences.MetadataResult
 import android.service.settings.preferences.SetValueRequest
 import android.service.settings.preferences.SetValueResult
 import android.service.settings.preferences.SettingsPreferenceMetadata
@@ -37,9 +37,15 @@ import com.android.settingslib.graph.PreferenceGetterErrorCode
 import com.android.settingslib.graph.PreferenceGetterFlags
 import com.android.settingslib.graph.PreferenceGetterResponse
 import com.android.settingslib.graph.PreferenceSetterResult
+import com.android.settingslib.graph.preferenceGroupProto
+import com.android.settingslib.graph.preferenceOrGroupProto
+import com.android.settingslib.graph.preferenceProto
+import com.android.settingslib.graph.preferenceScreenProto
+import com.android.settingslib.graph.proto.PreferenceGraphProto
 import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.graph.proto.TextProto
+import com.android.settingslib.graph.textProto
 import com.android.settingslib.graph.toProto
 import com.android.settingslib.metadata.SensitivityLevel
 import com.google.common.truth.Truth.assertThat
@@ -53,6 +59,73 @@ class PreferenceServiceRequestTransformerTest {
 
     @get:Rule
     val checkFlagsRule: CheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
+
+    @Test
+    fun transformCatalystGetMetadataResponse_emptyGraph_returnsFrameworkResponseWithError() {
+        val context: Context = ApplicationProvider.getApplicationContext()
+        val graphProto = PreferenceGraphProto.newBuilder().build()
+        val fResult = transformCatalystGetMetadataResponse(context, graphProto)
+        with(fResult) {
+            assertThat(resultCode).isEqualTo(MetadataResult.RESULT_UNSUPPORTED)
+            assertThat(metadataList).isEmpty()
+        }
+    }
+
+    @Test
+    fun transformCatalystGetMetadataResponse_populatedGraph_returnsFrameworkResponseWithSuccess() {
+        val context: Context = ApplicationProvider.getApplicationContext()
+        val screen = preferenceScreenProto {
+            root = preferenceGroupProto {
+                addAllPreferences(
+                    listOf(
+                        preferenceOrGroupProto {
+                            group = preferenceGroupProto {
+                                addPreferences(
+                                    preferenceOrGroupProto {
+                                        preference = preferenceProto {
+                                            key = "key1"
+                                            title = textProto { string = "title1" }
+                                            enabled = true
+                                        }
+                                    }
+                                )
+                            }
+                        },
+                        preferenceOrGroupProto {
+                            preference = preferenceProto {
+                                key = "key2"
+                                title = textProto { string = "title2" }
+                                enabled = false
+                            }
+                        }
+                    )
+                )
+            }
+        }
+        val graphProto = PreferenceGraphProto.newBuilder().putScreens("screen", screen).build()
+
+        val fResult = transformCatalystGetMetadataResponse(context, graphProto)
+        with(fResult) {
+            assertThat(resultCode).isEqualTo(MetadataResult.RESULT_OK)
+            assertThat(metadataList.size).isEqualTo(2)
+        }
+        assertThat(
+            fResult.metadataList.any {
+                it.key == "key1" &&
+                it.screenKey == "screen" &&
+                it.title == "title1" &&
+                it.isEnabled == true
+            }
+        ).isTrue()
+        assertThat(
+            fResult.metadataList.any {
+                it.key == "key2" &&
+                it.screenKey == "screen" &&
+                it.title == "title2" &&
+                it.isEnabled == false
+            }
+        ).isTrue()
+    }
 
     @Test
     fun transformFrameworkGetValueRequest_returnsValidCatalystRequest() {
