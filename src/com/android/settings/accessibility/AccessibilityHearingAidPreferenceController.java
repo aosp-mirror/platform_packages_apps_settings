@@ -162,18 +162,13 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
         }
 
         final int side = device.getDeviceSide();
-        if (side == HearingAidInfo.DeviceSide.SIDE_LEFT_AND_RIGHT) {
-            return mContext.getString(
-                    R.string.accessibility_hearingaid_left_and_right_side_device_summary, name);
-        } else if (side == HearingAidInfo.DeviceSide.SIDE_LEFT) {
+        if (side == HearingAidInfo.DeviceSide.SIDE_LEFT) {
             return mContext.getString(
                     R.string.accessibility_hearingaid_left_side_device_summary, name);
         } else if (side == HearingAidInfo.DeviceSide.SIDE_RIGHT) {
             return mContext.getString(
                     R.string.accessibility_hearingaid_right_side_device_summary, name);
         }
-
-        // Invalid side
         return mContext.getString(
                 R.string.accessibility_hearingaid_active_device_summary, name);
     }

@@ -15,11 +15,16 @@
  */
 package com.android.settings.connecteddevice;
 
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityEvent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +33,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.bluetooth.AlwaysDiscoverable;
 import com.android.settings.bluetooth.BluetoothDeviceRenamePreferenceController;
 import com.android.settings.bluetooth.BluetoothSwitchPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
@@ -47,13 +53,14 @@ import com.android.settingslib.widget.FooterPreference;
 public class BluetoothDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "BluetoothDashboardFrag";
-    private static final String KEY_BLUETOOTH_SCREEN_FOOTER = "bluetooth_screen_footer";
     private static final String SLICE_ACTION = "com.android.settings.SEARCH_RESULT_TRAMPOLINE";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private FooterPreference mFooterPreference;
     private SettingsMainSwitchBar mSwitchBar;
     private BluetoothSwitchPreferenceController mController;
+
+    private @Nullable AlwaysDiscoverable mAlwaysDiscoverable;
 
     @Override
     public int getMetricsCategory() {
@@ -78,7 +85,9 @@ public class BluetoothDashboardFragment extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        mFooterPreference = findPreference(KEY_BLUETOOTH_SCREEN_FOOTER);
+        if (!isCatalystEnabled()) {
+            mFooterPreference = findPreference(BluetoothFooterPreference.KEY);
+        }
     }
 
     @Override
@@ -90,6 +99,9 @@ public class BluetoothDashboardFragment extends DashboardFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        if (isCatalystEnabled()) {
+            return;
+        }
         String callingAppPackageName = PasswordUtils.getCallingAppPackageName(
                 getActivity().getActivityToken());
         String action = getIntent() != null ? getIntent().getAction() : "";
@@ -101,6 +113,7 @@ public class BluetoothDashboardFragment extends DashboardFragment {
         SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
         mSwitchBar.setTitle(getContext().getString(R.string.bluetooth_main_switch_title));
+        mSwitchBar.getRootView().setAccessibilityDelegate(new MainSwitchAccessibilityDelegate());
         mController = new BluetoothSwitchPreferenceController(activity,
                 new MainSwitchBarController(mSwitchBar), mFooterPreference);
         mController.setAlwaysDiscoverable(isAlwaysDiscoverable(callingAppPackageName, action));
@@ -110,8 +123,37 @@ public class BluetoothDashboardFragment extends DashboardFragment {
         }
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (isCatalystEnabled()) {
+            Activity activity = requireActivity();
+            String callingAppPackageName = PasswordUtils.getCallingAppPackageName(
+                    activity.getActivityToken());
+            Intent intent = activity.getIntent();
+            String action = intent != null ? intent.getAction() : "";
+            if (DEBUG) {
+                Log.d(TAG, "onActivityCreated() calling package name is : " + callingAppPackageName
+                        + ", action : " + action);
+            }
+            if (isAlwaysDiscoverable(callingAppPackageName, action)) {
+                mAlwaysDiscoverable = new AlwaysDiscoverable(activity);
+                mAlwaysDiscoverable.start();
+            }
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAlwaysDiscoverable != null) {
+            mAlwaysDiscoverable.stop();
+            mAlwaysDiscoverable = null;
+        }
+    }
+
     @VisibleForTesting
-    boolean isAlwaysDiscoverable(String callingAppPackageName, String action) {
+    boolean isAlwaysDiscoverable(@Nullable String callingAppPackageName, @Nullable String action) {
         return TextUtils.equals(SLICE_ACTION, action) ? false
             : TextUtils.equals(Utils.SETTINGS_PACKAGE_NAME, callingAppPackageName)
                 || TextUtils.equals(Utils.SYSTEMUI_PACKAGE_NAME, callingAppPackageName);
@@ -126,5 +168,20 @@ public class BluetoothDashboardFragment extends DashboardFragment {
     @Override
     public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
         return BluetoothDashboardScreen.KEY;
+    }
+
+    private static final class MainSwitchAccessibilityDelegate extends View.AccessibilityDelegate {
+        @Override
+        public boolean onRequestSendAccessibilityEvent(
+                @NonNull ViewGroup host, @NonNull View view, @NonNull AccessibilityEvent event) {
+            if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED
+                    && (event.getContentChangeTypes()
+                    & AccessibilityEvent.CONTENT_CHANGE_TYPE_ENABLED)
+                    != 0) {
+                Log.d(TAG, "Skip accessibility event for CONTENT_CHANGE_TYPE_ENABLED");
+                return false;
+            }
+            return super.onRequestSendAccessibilityEvent(host, view, event);
+        }
     }
 }
