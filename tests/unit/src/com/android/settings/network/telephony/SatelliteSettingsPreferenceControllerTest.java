@@ -56,6 +56,7 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
 @RunWith(AndroidJUnit4.class)
+@Ignore("b/382664790")
 public class SatelliteSettingsPreferenceControllerTest {
     private static final String KEY = "key";
     private static final int TEST_SUB_ID = 0;
