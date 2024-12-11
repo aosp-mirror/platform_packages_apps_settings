@@ -26,8 +26,10 @@ import static com.android.settingslib.bluetooth.HearingAidInfo.DeviceSide.SIDE_R
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.util.ArrayMap;
 import android.view.View;
@@ -40,6 +42,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.widget.SeekBarPreference;
+import com.android.settingslib.bluetooth.AmbientVolumeUi;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -69,14 +72,14 @@ public class AmbientVolumePreferenceTest {
     @Spy
     private Context mContext = ApplicationProvider.getApplicationContext();
     @Mock
-    private AmbientVolumePreference.OnIconClickListener mListener;
+    private AmbientVolumeUi.AmbientVolumeUiListener mListener;
     @Mock
     private View mItemView;
 
     private AmbientVolumePreference mPreference;
     private ImageView mExpandIcon;
     private ImageView mVolumeIcon;
-    private final Map<Integer, SeekBarPreference> mSideToSlidersMap = new ArrayMap<>();
+    private final Map<Integer, BluetoothDevice> mSideToDeviceMap = new ArrayMap<>();
 
     @Before
     public void setUp() {
@@ -84,13 +87,27 @@ public class AmbientVolumePreferenceTest {
         PreferenceScreen preferenceScreen = preferenceManager.createPreferenceScreen(mContext);
         mPreference = new AmbientVolumePreference(mContext);
         mPreference.setKey(KEY_AMBIENT_VOLUME);
-        mPreference.setOnIconClickListener(mListener);
+        mPreference.setListener(mListener);
         mPreference.setExpandable(true);
         mPreference.setMutable(true);
         preferenceScreen.addPreference(mPreference);
 
-        prepareSliders();
-        mPreference.setSliders(mSideToSlidersMap);
+        prepareDevices();
+        mPreference.setupSliders(mSideToDeviceMap);
+        mPreference.getSliders().forEach((side, slider) -> {
+            slider.setMin(0);
+            slider.setMax(4);
+            if (side == SIDE_LEFT) {
+                slider.setKey(KEY_LEFT_SLIDER);
+                slider.setProgress(TEST_LEFT_VOLUME_LEVEL);
+            } else if (side == SIDE_RIGHT) {
+                slider.setKey(KEY_RIGHT_SLIDER);
+                slider.setProgress(TEST_RIGHT_VOLUME_LEVEL);
+            } else {
+                slider.setKey(KEY_UNIFIED_SLIDER);
+                slider.setProgress(TEST_UNIFIED_VOLUME_LEVEL);
+            }
+        });
 
         mExpandIcon = new ImageView(mContext);
         mVolumeIcon = new ImageView(mContext);
@@ -206,33 +223,16 @@ public class AmbientVolumePreferenceTest {
 
     private void assertControlUiCorrect() {
         final boolean expanded = mPreference.isExpanded();
-        assertThat(mSideToSlidersMap.get(SIDE_UNIFIED).isVisible()).isEqualTo(!expanded);
-        assertThat(mSideToSlidersMap.get(SIDE_LEFT).isVisible()).isEqualTo(expanded);
-        assertThat(mSideToSlidersMap.get(SIDE_RIGHT).isVisible()).isEqualTo(expanded);
+        Map<Integer, SeekBarPreference> sliders = mPreference.getSliders();
+        assertThat(sliders.get(SIDE_UNIFIED).isVisible()).isEqualTo(!expanded);
+        assertThat(sliders.get(SIDE_LEFT).isVisible()).isEqualTo(expanded);
+        assertThat(sliders.get(SIDE_RIGHT).isVisible()).isEqualTo(expanded);
         final float rotation = expanded ? ROTATION_EXPANDED : ROTATION_COLLAPSED;
         assertThat(mExpandIcon.getRotation()).isEqualTo(rotation);
     }
 
-    private void prepareSliders() {
-        prepareSlider(SIDE_UNIFIED);
-        prepareSlider(SIDE_LEFT);
-        prepareSlider(SIDE_RIGHT);
-    }
-
-    private void prepareSlider(int side) {
-        SeekBarPreference slider = new SeekBarPreference(mContext);
-        slider.setMin(0);
-        slider.setMax(4);
-        if (side == SIDE_LEFT) {
-            slider.setKey(KEY_LEFT_SLIDER);
-            slider.setProgress(TEST_LEFT_VOLUME_LEVEL);
-        } else if (side == SIDE_RIGHT) {
-            slider.setKey(KEY_RIGHT_SLIDER);
-            slider.setProgress(TEST_RIGHT_VOLUME_LEVEL);
-        } else {
-            slider.setKey(KEY_UNIFIED_SLIDER);
-            slider.setProgress(TEST_UNIFIED_VOLUME_LEVEL);
-        }
-        mSideToSlidersMap.put(side, slider);
+    private void prepareDevices() {
+        mSideToDeviceMap.put(SIDE_LEFT, mock(BluetoothDevice.class));
+        mSideToDeviceMap.put(SIDE_RIGHT, mock(BluetoothDevice.class));
     }
 }
