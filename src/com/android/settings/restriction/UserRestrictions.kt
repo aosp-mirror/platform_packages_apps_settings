@@ -16,68 +16,58 @@
 
 package com.android.settings.restriction
 
+import android.content.BroadcastReceiver
 import android.content.Context
-import android.os.Bundle
-import android.os.IUserRestrictionsListener
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.UserManager
-import com.android.settingslib.datastore.KeyedDataObservable
+import com.android.settingslib.datastore.AbstractKeyedDataObservable
+import com.android.settingslib.datastore.DataChangeReason
 import com.android.settingslib.datastore.KeyedObserver
 import java.util.concurrent.Executor
-import java.util.concurrent.atomic.AtomicBoolean
 
 /** Helper class to monitor user restriction changes. */
-object UserRestrictions {
-    private val observable = KeyedDataObservable<String>()
+class UserRestrictions private constructor(private val applicationContext: Context) {
 
-    private val userRestrictionsListener =
-        object : IUserRestrictionsListener.Stub() {
-            override fun onUserRestrictionsChanged(
-                userId: Int,
-                newRestrictions: Bundle,
-                prevRestrictions: Bundle,
-            ) {
-                // there is no API to remove listener, do a quick check to avoid unnecessary work
-                if (!observable.hasAnyObserver()) return
+    private val observable =
+        object : AbstractKeyedDataObservable<String>() {
+            override fun onFirstObserverAdded() {
+                val intentFilter = IntentFilter()
+                intentFilter.addAction(UserManager.ACTION_USER_RESTRICTIONS_CHANGED)
+                applicationContext.registerReceiver(broadcastReceiver, intentFilter)
+            }
 
-                val changedKeys = mutableSetOf<String>()
-                val keys = newRestrictions.keySet() + prevRestrictions.keySet()
-                for (key in keys) {
-                    if (newRestrictions.getBoolean(key) != prevRestrictions.getBoolean(key)) {
-                        changedKeys.add(key)
-                    }
-                }
-
-                for (key in changedKeys) observable.notifyChange(key, 0)
+            override fun onLastObserverRemoved() {
+                applicationContext.unregisterReceiver(broadcastReceiver)
             }
         }
 
-    private val listenerAdded = AtomicBoolean()
+    private val broadcastReceiver: BroadcastReceiver =
+        object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                // there is no way to get the changed keys, just notify all observers
+                observable.notifyChange(DataChangeReason.UPDATE)
+            }
+        }
 
-    fun addObserver(context: Context, observer: KeyedObserver<String?>, executor: Executor) {
-        context.addUserRestrictionsListener()
+    fun addObserver(observer: KeyedObserver<String?>, executor: Executor) =
         observable.addObserver(observer, executor)
-    }
 
-    fun addObserver(
-        context: Context,
-        key: String,
-        observer: KeyedObserver<String>,
-        executor: Executor,
-    ) {
-        context.addUserRestrictionsListener()
+    fun addObserver(key: String, observer: KeyedObserver<String>, executor: Executor) =
         observable.addObserver(key, observer, executor)
-    }
-
-    private fun Context.addUserRestrictionsListener() {
-        if (listenerAdded.getAndSet(true)) return
-        // surprisingly, there is no way to remove the listener
-        applicationContext
-            .getSystemService(UserManager::class.java)
-            .addUserRestrictionsListener(userRestrictionsListener)
-    }
 
     fun removeObserver(observer: KeyedObserver<String?>) = observable.removeObserver(observer)
 
     fun removeObserver(key: String, observer: KeyedObserver<String>) =
         observable.removeObserver(key, observer)
+
+    companion object {
+        @Volatile private var instance: UserRestrictions? = null
+
+        fun get(context: Context) =
+            instance
+                ?: synchronized(this) {
+                    instance ?: UserRestrictions(context.applicationContext).also { instance = it }
+                }
+    }
 }

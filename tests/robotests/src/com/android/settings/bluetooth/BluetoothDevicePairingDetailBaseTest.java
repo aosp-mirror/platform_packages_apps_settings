@@ -308,6 +308,9 @@ public class BluetoothDevicePairingDetailBaseTest {
         shadowOf(Looper.getMainLooper()).idle();
 
         when(mCachedBluetoothDevice.isConnected()).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedLeAudioDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedLeAudioBroadcastAssistantDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedVolumeControlDevice()).thenReturn(true);
 
         mFragment.onProfileConnectionStateChanged(mCachedBluetoothDevice,
                 BluetoothAdapter.STATE_CONNECTED, BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT);

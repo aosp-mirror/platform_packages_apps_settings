@@ -116,6 +116,7 @@ public class SimStatusDialogControllerTest {
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
                 anyInt());
         doReturn(2).when(mTelephonyManager).getCardIdForDefaultEuicc();
+        doReturn(TelephonyManager.NETWORK_TYPE_LTE).when(mTelephonyManager).getVoiceNetworkType();
         doReturn(TelephonyManager.NETWORK_TYPE_LTE).when(mTelephonyManager).getDataNetworkType();
 
         mUpdatePhoneNumberCount = new AtomicInteger();
