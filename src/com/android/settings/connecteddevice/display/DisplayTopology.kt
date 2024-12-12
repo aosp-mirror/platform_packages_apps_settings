@@ -41,8 +41,20 @@ import kotlin.math.min
  * left corner of the pane. It uses a scale optimized for showing all displays with minimal or no
  * scrolling. The display coordinates are floating point and the origin can be in any position. In
  * practice the origin will be the upper-left coordinate of the primary display.
+ *
+ * @param paneWidth width of the pane in view coordinates
+ * @param minEdgeLength the smallest length permitted of a display block. This should be set based
+ *                      on accessibility requirements, but also accounting for padding that appears
+ *                      around each button.
+ * @param maxBlockRatio the highest allowed ratio of block size to display size. For instance, a
+ *                      value of 0.05 means the block will at most be 1/20 the size of the display
+ *                      it represents. This limit may be breached to account for minEdgeLength,
+ *                      which is considered an a11y requirement.
+ * @param displaysPos the absolute topology coordinates for each display in the topology.
  */
-class TopologyScale(paneWidth : Int, displaysPos : Collection<RectF>) {
+class TopologyScale(
+        paneWidth : Int, minEdgeLength : Int, maxBlockRatio : Float,
+        displaysPos : Collection<RectF>) {
     /** Scale of block sizes to real-world display sizes. Should be less than 1. */
     val blockRatio : Float
 
@@ -69,16 +81,14 @@ class TopologyScale(paneWidth : Int, displaysPos : Collection<RectF>) {
             biggestDisplayHeight = max(biggestDisplayHeight, pos.height())
         }
 
-        // Set height according to the width and the aspect ratio of the display bounds.
-        // 0.05 is a reasonable limit to the size of display blocks. It appears to match the
-        // ratio used in the ChromeOS topology editor. It prevents blocks from being too large,
-        // which would make dragging and dropping awkward.
-        val rawBlockRatio = min(0.05, paneWidth.toDouble() * 0.6 / displayBounds.width())
+        // Set height according to the width and the aspect ratio of the display bounds limitted by
+        // maxBlockRatio. It prevents blocks from being too large, which would make dragging and
+        // dropping awkward.
+        val rawBlockRatio = min(maxBlockRatio, paneWidth.toFloat() * 0.6f / displayBounds.width())
 
         // If the `ratio` is set too low because one of the displays will have an edge less than
-        // 48dp long, increase it such that the smallest edge is that long. This may override the
-        // 0.05 limit since it is more important than it.
-        blockRatio = max(48.0 / smallestDisplayDim, rawBlockRatio).toFloat()
+        // minEdgeLength(dp) long, increase it such that the smallest edge is that long.
+        blockRatio = max(minEdgeLength.toFloat() / smallestDisplayDim, rawBlockRatio).toFloat()
 
         // Essentially, we just set the pane height based on the pre-determined pane width and the
         // aspect ratio of the display bounds. But we may need to increase it slightly to achieve
@@ -99,9 +109,9 @@ class TopologyScale(paneWidth : Int, displaysPos : Collection<RectF>) {
         // such that the display bounds rect is centered in the pane.
         // It is unlikely that either of these coordinates will be negative since blockRatio has
         // been chosen to allow 20% padding around each side of the display blocks. However, the
-        // a11y requirement applied above (48.0 / smallestDisplayDim) may cause the blocks to not
-        // fit. This should be rare in practice, and can be worked around by moving the settings UI
-        // to a larger display.
+        // a11y requirement applied above (minEdgeLength / smallestDisplayDim) may cause the blocks
+        // to not fit. This should be rare in practice, and can be worked around by moving the
+        // settings UI to a larger display.
         val blockMostLeft = (paneWidth - displayBounds.width() * blockRatio) / 2
         val blockMostTop = (paneHeight - displayBounds.height() * blockRatio) / 2
 
