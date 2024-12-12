@@ -17,8 +17,10 @@
 package com.android.settings.wifi
 
 import android.content.Context
+import android.content.Intent
 import android.net.wifi.WifiInfo
 import android.net.wifi.WifiManager
+import android.security.advancedprotection.AdvancedProtectionManager
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
 import androidx.compose.ui.test.isDisplayed
@@ -43,9 +45,12 @@ import org.mockito.Mockito
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.doNothing
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
 class WepNetworksPreferenceControllerTest {
@@ -71,9 +76,15 @@ class WepNetworksPreferenceControllerTest {
             on { connectionInfo } doReturn mockWifiInfo
         }
 
+    private var mockAapmManager =
+        mock<AdvancedProtectionManager> {
+            on { isAdvancedProtectionEnabled } doReturn false
+        }
+
     private var context: Context =
         spy(ApplicationProvider.getApplicationContext()) {
             on { getSystemService(WifiManager::class.java) } doReturn mockWifiManager
+            on { getSystemService(AdvancedProtectionManager::class.java) } doReturn mockAapmManager
         }
 
     private var controller = WepNetworksPreferenceController(context, TEST_KEY)
@@ -183,6 +194,23 @@ class WepNetworksPreferenceControllerTest {
         composeTestRule
             .onDialogText(context.getString(R.string.wifi_disconnect_button_text))
             .isNotDisplayed()
+    }
+
+    @Test
+    fun whenClick_aapmEnabled_openDialog() {
+        mockAapmManager.stub {
+            on { isAdvancedProtectionEnabled } doReturn true
+            on { createSupportIntent(any(), any()) } doReturn Intent()
+        }
+        doNothing().whenever(context).startActivity(any())
+        composeTestRule.setContent { controller.Content() }
+
+        composeTestRule.onRoot().performClick()
+
+        composeTestRule
+            .onDialogText(context.getString(R.string.wifi_disconnect_button_text))
+            .isNotDisplayed()
+        verify(context).startActivity(any())
     }
 
     private companion object {
