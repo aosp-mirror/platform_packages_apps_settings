@@ -328,6 +328,7 @@
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"使用無障礙設定"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
+    <string name="security_settings_face_enroll_introduction_learn_more_message" msgid="7728962858407497809"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"取消"</string>
     <string name="security_settings_face_enroll_introduction_no_thanks" msgid="6603178409726203187">"暫時不要"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"我同意"</string>
@@ -388,6 +389,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"一切由你掌控"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"一切由你和孩子做主"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"注意事項"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_footer_title_3 (6474415050918819260) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"使用你的指紋將手機解鎖或核准購物交易。\n\n注意：你無法使用指紋將這個裝置解鎖，詳情請洽貴機構的管理員。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"取消"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"暫時不要"</string>
@@ -402,6 +405,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"為獲得最佳效果，請使用 Made For Google 認證的螢幕保護貼。如果使用其他螢幕保護貼，系統可能無法辨識你的指紋。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"為獲得最佳效果，請使用 Made For Google 認證的螢幕保護貼。如果使用其他螢幕保護貼，系統可能無法辨識孩子的指紋。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more_2" msgid="8691531121923020632"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"智慧手錶解鎖"</string>
     <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"設定「人臉解鎖」和「指紋解鎖」功能後，如果你戴口罩或人在光線昏暗的環境，手機會要求你使用指紋解鎖。\n\n如要解鎖這支手機，「智慧手錶解鎖」功能也很方便。舉例來說，手指有水或臉部辨識失敗時，使用智慧手錶即可輕鬆解鎖。"</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"如要解鎖這支手機，「智慧手錶解鎖」功能也很方便。舉例來說，指紋辨識失敗時，使用智慧手錶即可輕鬆解鎖。"</string>
@@ -3639,14 +3643,10 @@
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"減少在螢幕鎖定畫面顯示的通知"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"螢幕鎖定畫面上只顯示新通知"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"自動從螢幕鎖定畫面移除先前看過的通知"</string>
-    <!-- no translation found for lock_screen_notifs_show_full_list (6767009263807771108) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_full_list_desc (4868489278443057427) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_compact (1133598661314460528) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_compact_desc (2442594880539709057) -->
-    <skip />
+    <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"完整清單"</string>
+    <string name="lock_screen_notifs_full_list_desc" msgid="4868489278443057427">"目前預設配置是完整顯示專區和通知堆疊內容。"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"精簡"</string>
+    <string name="lock_screen_notifs_compact_desc" msgid="2442594880539709057">"系統會收合新通知，並以專區形式顯示在螢幕鎖定畫面。"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"螢幕鎖定畫面通知"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"顯示對話通知、預設通知和已設為靜音的通知"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"顯示對話通知、預設通知和已設為靜音的通知"</string>
@@ -3664,14 +3664,10 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"顯示所有工作通知內容"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"隱藏敏感的工作內容"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"當裝置鎖定時，你要如何顯示個人資料通知？"</string>
-    <!-- no translation found for lock_screen_notification_hide_seen_title (6356324850662946426) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_hide_seen_summary (8345971177658888274) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_hide_silent_title (3284314455767315329) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_hide_silent_summary (1934066619526795468) -->
-    <skip />
+    <string name="lock_screen_notification_hide_seen_title" msgid="6356324850662946426">"隱藏已讀通知"</string>
+    <string name="lock_screen_notification_hide_seen_summary" msgid="8345971177658888274">"將已讀通知從螢幕鎖定畫面移除。"</string>
+    <string name="lock_screen_notification_hide_silent_title" msgid="3284314455767315329">"隱藏靜音通知"</string>
+    <string name="lock_screen_notification_hide_silent_summary" msgid="1934066619526795468">"將靜音通知和對話從螢幕鎖定畫面移除。"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"個人資料通知"</string>
     <string name="notifications_title" msgid="4221655533193721131">"通知"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"應用程式通知"</string>
@@ -4477,20 +4473,13 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"手勢"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"快速開啟相機"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"按兩下電源鍵，即可快速開啟相機，在任何畫面上都可使用。"</string>
-    <!-- no translation found for double_tap_power_title (8705875166298116659) -->
-    <skip />
-    <!-- no translation found for double_tap_power_enabled (305978257631612678) -->
-    <skip />
-    <!-- no translation found for double_tap_power_target_action_category (6186809788568348488) -->
-    <skip />
-    <!-- no translation found for double_tap_power_camera_action_title (8398392033718681209) -->
-    <skip />
-    <!-- no translation found for double_tap_power_camera_action_summary (1231656402570674349) -->
-    <skip />
-    <!-- no translation found for double_tap_power_wallet_action_title (2238628756927241786) -->
-    <skip />
-    <!-- no translation found for double_tap_power_wallet_action_summary (6567586974229774570) -->
-    <skip />
+    <string name="double_tap_power_title" msgid="8705875166298116659">"輕觸兩下電源鍵"</string>
+    <string name="double_tap_power_enabled" msgid="305978257631612678">"使用「輕觸兩下」手勢"</string>
+    <string name="double_tap_power_target_action_category" msgid="6186809788568348488">"輕觸兩下電源鍵"</string>
+    <string name="double_tap_power_camera_action_title" msgid="8398392033718681209">"開啟相機"</string>
+    <string name="double_tap_power_camera_action_summary" msgid="1231656402570674349">"存取相機"</string>
+    <string name="double_tap_power_wallet_action_title" msgid="2238628756927241786">"開啟 Google 錢包"</string>
+    <string name="double_tap_power_wallet_action_summary" msgid="6567586974229774570">"存取 Google 錢包"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"翻轉相機切換自拍模式"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"操作模式"</string>
@@ -4909,24 +4898,6 @@
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"衛星連線"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"衛星訊息"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"你的帳戶可透過衛星傳送資料"</string>
-    <string name="title_for_satellite_sos" msgid="4608739357329147285">"緊急衛星連線"</string>
-    <string name="summary_for_satellite_sos_entry" msgid="4981480371923329605">"無法連上 Wi-Fi 或行動網路時，仍可與緊急救援服務互傳訊息"</string>
-    <string name="keywords_satellite_sos" msgid="6275777197418023949">"緊急衛星連線, 緊急"</string>
-    <string name="category_title_about_satellite_sos" msgid="7229724397303154919">"關於緊急衛星連線"</string>
-    <string name="satellite_sos_introduction" msgid="4670230212117495751">"沒有 Wi-Fi 或行動網路時，可以與緊急救援服務互傳訊息，並分享位置資訊。這項服務在某些地點或情況下可能無法使用。"</string>
-    <string name="satellite_sos_how_it_works_step_1" msgid="4669862942425306921">"撥打電話或傳送訊息給緊急救援服務"</string>
-    <string name="satellite_sos_how_it_works_step_2" msgid="3558248744927579016">"回答有關緊急情況的問題"</string>
-    <string name="satellite_sos_how_it_works_step_3" msgid="4496038314890474893">"按照步驟連上衛星"</string>
-    <string name="satellite_sos_how_it_works_summary_1" msgid="4497178023367920284">"如果沒有行動網路，就會看到使用緊急衛星連線的選項"</string>
-    <string name="satellite_sos_how_it_works_summary_2" msgid="1302661361673503362">"傳送回答給緊急救援服務，以便為你提供適當協助"</string>
-    <string name="satellite_sos_how_it_works_summary_3" msgid="4612675365617172405">"連線後，就能與緊急救援服務互傳訊息"</string>
-    <string name="satellite_sos_try_demo" msgid="1915233782211344468">"立即試用"</string>
-    <string name="satellite_sos_footer_text" msgid="4454885538165117230">"透過衛星聯絡緊急救援服務時，系統會將你的姓名、電子郵件地址、電話號碼、所在位置、裝置資訊 (IMEI、語言、型號、電池電量) 和緊急聯絡人資訊分享給緊急救援服務和衛星服務供應商。\n\n如要使用緊急衛星連線，必須將 Google 訊息設為預設訊息應用程式。\n\n如果自動選擇網路功能處於關閉狀態，系統會將其開啟，讓裝置自動連線到任何網路。"</string>
-    <string name="satellite_sos_sharing_preferences_subheader_title" msgid="5701538329333628267">"分享偏好設定"</string>
-    <string name="satellite_sos_sharing_preferences_step_1" msgid="3106774199702637359">"緊急聯絡人"</string>
-    <string name="satellite_sos_sharing_preferences_step_2" msgid="738246589687762115">"你的 Google 帳戶"</string>
-    <string name="satellite_sos_sharing_preferences_description" msgid="782508188142964342">"查看或更新分享給緊急救援服務的資訊"</string>
-    <string name="satellite_sos_learn_more_link" msgid="2442930426165677255">"https://support.google.com/pixelphone/answer/15254448"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"存取點名稱"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"無法在連線到「<xliff:g id="CARRIER">%1$s</xliff:g>」時使用"</string>
@@ -5114,8 +5085,7 @@
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB 可變頁面模式"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"閱讀完整內容"</string>
     <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"以頁面大小相容模式執行應用程式"</string>
-    <!-- no translation found for enable_16k_app_compat_details (3389401258168314266) -->
-    <skip />
+    <string name="enable_16k_app_compat_details" msgid="3389401258168314266">"切換為 16 KB 裝置後，應用程式將以頁面大小相容模式執行。"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"錯誤報告處理常式"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"選擇要使用哪個應用程式控管「錯誤報告」捷徑。"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"個人"</string>

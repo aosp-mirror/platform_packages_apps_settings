@@ -144,7 +144,7 @@ public class FaceEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     @Override
     protected void startEnrollmentInternal() {
-        super.startEnrollment();
+        super.startEnrollmentInternal();
         mPreviewFragment = (FaceEnrollPreviewFragment) getSupportFragmentManager()
                 .findFragmentByTag(TAG_FACE_PREVIEW);
         if (mPreviewFragment == null) {
