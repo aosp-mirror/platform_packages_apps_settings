@@ -463,7 +463,8 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         int pos = 0;
-        if (!isCurrentUserAdmin() && canSwitchUserNow() && !isCurrentUserGuest()) {
+        if (!isCurrentUserAdmin() && canSwitchUserNow() && !isCurrentUserGuest()
+                && !mUserManager.isProfile()) {
             String nickname = mUserManager.getUserName();
             MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, pos++,
                     getResources().getString(R.string.user_remove_user_menu, nickname));
