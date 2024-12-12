@@ -16,6 +16,8 @@
 
 package com.android.settings.testutils.shadow;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.accessibilityservice.AccessibilityShortcutInfo;
 import android.annotation.NonNull;
 import android.annotation.UserIdInt;
@@ -24,11 +26,12 @@ import android.content.Context;
 import android.util.ArrayMap;
 import android.view.accessibility.AccessibilityManager;
 
-import com.android.internal.accessibility.common.ShortcutConstants;
+import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +42,7 @@ import java.util.Map;
 public class ShadowAccessibilityManager extends org.robolectric.shadows.ShadowAccessibilityManager {
     private Map<ComponentName, ComponentName> mA11yFeatureToTileMap = new ArrayMap<>();
     private List<AccessibilityShortcutInfo> mInstalledAccessibilityShortcutList = List.of();
+    private Map<Integer, List<String>> mShortcutTargets = new ArrayMap<>();
 
     /**
      * Implements a hidden method {@link AccessibilityManager#getA11yFeatureToTileMap}
@@ -80,7 +84,20 @@ public class ShadowAccessibilityManager extends org.robolectric.shadows.ShadowAc
      */
     @Implementation
     public List<String> getAccessibilityShortcutTargets(
-            @ShortcutConstants.UserShortcutType int shortcutType) {
-        return List.of();
+            @UserShortcutType int shortcutType) {
+        if (!mShortcutTargets.containsKey(shortcutType)) {
+            mShortcutTargets.put(shortcutType, new ArrayList<>());
+        }
+        List<String> targets = mShortcutTargets.get(shortcutType);
+        assertThat(targets).isNotNull();
+        return targets;
+    }
+
+    /**
+     * Used by tests to easily write directly to a shortcut targets value
+     */
+    public void setAccessibilityShortcutTargets(
+            @UserShortcutType int shortcutType, List<String> targets) {
+        mShortcutTargets.put(shortcutType, targets);
     }
 }

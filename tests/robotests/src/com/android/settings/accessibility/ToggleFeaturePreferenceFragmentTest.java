@@ -43,6 +43,7 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.PopupWindow;
 
 import androidx.fragment.app.FragmentActivity;
@@ -54,6 +55,7 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.flags.Flags;
+import com.android.settings.testutils.shadow.ShadowAccessibilityManager;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.widget.TopIntroPreference;
 
@@ -72,12 +74,14 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
 
+import java.util.List;
 import java.util.Locale;
 
 /** Tests for {@link ToggleFeaturePreferenceFragment} */
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowFragment.class,
+        ShadowAccessibilityManager.class
 })
 public class ToggleFeaturePreferenceFragmentTest {
     @Rule
@@ -109,6 +113,7 @@ public class ToggleFeaturePreferenceFragmentTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceManager mPreferenceManager;
+    private ShadowAccessibilityManager mShadowAccessibilityManager;
 
     @Mock
     private FragmentActivity mActivity;
@@ -120,6 +125,8 @@ public class ToggleFeaturePreferenceFragmentTest {
     @Before
     public void setUpTestFragment() {
         MockitoAnnotations.initMocks(this);
+        mShadowAccessibilityManager = Shadow.extract(
+                mContext.getSystemService(AccessibilityManager.class));
 
         mFragment = spy(new TestToggleFeaturePreferenceFragment());
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
@@ -178,10 +185,10 @@ public class ToggleFeaturePreferenceFragmentTest {
     @Test
     public void updateShortcutPreferenceData_hasValueInSettings_assignToVariable() {
         mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
-        putSecureStringIntoSettings(SOFTWARE_SHORTCUT_KEY,
-                PLACEHOLDER_COMPONENT_NAME.flattenToString());
-        putSecureStringIntoSettings(HARDWARE_SHORTCUT_KEY,
-                PLACEHOLDER_COMPONENT_NAME.flattenToString());
+        mShadowAccessibilityManager.setAccessibilityShortcutTargets(
+                SOFTWARE, List.of(PLACEHOLDER_COMPONENT_NAME.flattenToString()));
+        mShadowAccessibilityManager.setAccessibilityShortcutTargets(
+                HARDWARE, List.of(PLACEHOLDER_COMPONENT_NAME.flattenToString()));
 
         mFragment.updateShortcutPreferenceData();
 
@@ -337,10 +344,6 @@ public class ToggleFeaturePreferenceFragmentTest {
         String summary = mFragment.getShortcutTypeSummary(mContext).toString();
 
         assertThat(summary).isEqualTo(expected);
-    }
-
-    private void putSecureStringIntoSettings(String key, String componentName) {
-        Settings.Secure.putString(mContext.getContentResolver(), key, componentName);
     }
 
     private String getSecureStringFromSettings(String key) {

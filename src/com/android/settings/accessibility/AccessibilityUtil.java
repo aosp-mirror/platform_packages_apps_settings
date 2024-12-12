@@ -21,7 +21,6 @@ import static android.view.WindowInsets.Type.displayCutout;
 import static android.view.WindowInsets.Type.systemBars;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
-import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.GESTURE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
@@ -37,7 +36,6 @@ import android.graphics.Insets;
 import android.graphics.Rect;
 import android.icu.text.CaseMap;
 import android.os.Build;
-import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.TypedValue;
@@ -195,52 +193,6 @@ public final class AccessibilityUtil {
     }
 
     /**
-     * Returns if component name existed in one of {@code shortcutTypes} string in Settings.
-     *
-     * @param context The current context.
-     * @param shortcutTypes A combination of {@link UserShortcutType}.
-     * @param componentName The component name that need to be checked existed in Settings.
-     * @return {@code true} if componentName existed in Settings.
-     */
-    static boolean hasValuesInSettings(Context context, int shortcutTypes,
-            @NonNull ComponentName componentName) {
-        for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
-            if (!android.provider.Flags.a11yStandaloneGestureEnabled()) {
-                if ((shortcutType & GESTURE) == GESTURE) {
-                    continue;
-                }
-            }
-            if ((shortcutTypes & shortcutType) == shortcutType
-                    && hasValueInSettings(context, shortcutType, componentName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Returns if component name existed in {@code shortcutType} string Settings.
-     *
-     * @param context The current context.
-     * @param shortcutType The preferred shortcut type user selected.
-     * @param componentName The component name that need to be checked existed in Settings.
-     * @return {@code true} if componentName existed in Settings.
-     *
-     * @deprecated use
-     * {@link ShortcutUtils#isShortcutContained(Context, int, String)} instead.
-     *
-     * (TODO 367414968: finish removal.)
-     */
-    @Deprecated
-    @VisibleForTesting
-    static boolean hasValueInSettings(Context context, @UserShortcutType int shortcutType,
-            @NonNull ComponentName componentName) {
-        return ShortcutUtils.getShortcutTargetsFromSettings(
-                context, shortcutType, UserHandle.myUserId()
-        ).contains(componentName.flattenToString());
-    }
-
-    /**
      * Gets the corresponding user shortcut type of a given accessibility service.
      *
      * @param context The current context.
@@ -250,14 +202,15 @@ public final class AccessibilityUtil {
      */
     static int getUserShortcutTypesFromSettings(Context context,
             @NonNull ComponentName componentName) {
-        int shortcutTypes = DEFAULT;
+        int shortcutTypes = UserShortcutType.DEFAULT;
         for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
             if (!android.provider.Flags.a11yStandaloneGestureEnabled()) {
                 if ((shortcutType & GESTURE) == GESTURE) {
                     continue;
                 }
             }
-            if (hasValueInSettings(context, shortcutType, componentName)) {
+            if (ShortcutUtils.isShortcutContained(
+                    context, shortcutType, componentName.flattenToString())) {
                 shortcutTypes |= shortcutType;
             }
         }
