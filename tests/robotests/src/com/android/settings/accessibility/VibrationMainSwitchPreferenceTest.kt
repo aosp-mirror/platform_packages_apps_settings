@@ -72,6 +72,6 @@ class VibrationMainSwitchPreferenceTest {
         preference.createAndBindWidget(context)
 
     private fun setVibrateOn(enabled: Boolean?) =
-        preference.storage(context).setValue(VIBRATE_ON, Boolean::class.javaObjectType, enabled)
+        preference.storage(context).setBoolean(VIBRATE_ON, enabled)
 }
 // LINT.ThenChange(VibrationMainSwitchPreferenceControllerTest.java)

@@ -208,7 +208,24 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         ShadowLooper.idleMainLooper();
 
         assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
-                "TEST_HEARING_AID_BT_DEVICE_NAME / Left and right")).isTrue();
+                "TEST_HEARING_AID_BT_DEVICE_NAME active")).isTrue();
+    }
+
+    @Test
+    public void getSummary_connectedLeAudioHearingAidMonoSide_connectedSummary() {
+        when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
+                HearingAidInfo.DeviceSide.SIDE_MONO);
+        when(mCachedBluetoothDevice.getMemberDevice()).thenReturn(new HashSet<>());
+        when(mHapClientProfile.getConnectedDevices()).thenReturn(generateHearingAidDeviceList());
+
+        mPreferenceController.onStart();
+        Intent intent = new Intent(BluetoothHapClient.ACTION_HAP_CONNECTION_STATE_CHANGED);
+        intent.putExtra(BluetoothHearingAid.EXTRA_STATE, BluetoothHapClient.STATE_CONNECTED);
+        sendIntent(intent);
+        ShadowLooper.idleMainLooper();
+
+        assertThat(mHearingAidPreference.getSummary().toString().contentEquals(
+                "TEST_HEARING_AID_BT_DEVICE_NAME active")).isTrue();
     }
 
     @Test

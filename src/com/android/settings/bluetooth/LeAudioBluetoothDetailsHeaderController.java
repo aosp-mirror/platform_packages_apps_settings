@@ -225,6 +225,8 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
             return R.id.bt_battery_left_summary;
         } else if (containerId == R.id.bt_battery_right) {
             return R.id.bt_battery_right_summary;
+        } else if (containerId == R.id.bt_battery_mono) {
+            return R.id.bt_battery_mono_summary;
         }
         Log.d(TAG, "No summary resource id. The containerId is " + containerId);
         return INVALID_RESOURCE_ID;
@@ -237,6 +239,8 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
         updateBatteryLayout(R.id.bt_battery_left, BluetoothUtils.META_INT_ERROR);
         // hide the right
         updateBatteryLayout(R.id.bt_battery_right, BluetoothUtils.META_INT_ERROR);
+        // hide the mono
+        updateBatteryLayout(R.id.bt_battery_mono, BluetoothUtils.META_INT_ERROR);
     }
 
     private void updateBatteryLayout() {
@@ -261,11 +265,6 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
             int deviceId = leAudioProfile.getAudioLocation(cachedDevice.getDevice());
             Log.d(TAG, "LeAudioDevices:" + cachedDevice.getDevice().getAnonymizedAddress()
                     + ", deviceId:" + deviceId);
-
-            if (deviceId == BluetoothLeAudio.AUDIO_LOCATION_INVALID) {
-                Log.d(TAG, "The device does not support the AUDIO_LOCATION.");
-                return;
-            }
             boolean isLeft = (deviceId & LEFT_DEVICE_ID) != 0;
             boolean isRight = (deviceId & RIGHT_DEVICE_ID) != 0;
             boolean isLeftRight = isLeft && isRight;
@@ -280,6 +279,8 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
                 updateBatteryLayout(R.id.bt_battery_left, cachedDevice.getBatteryLevel());
             } else if (isRight) {
                 updateBatteryLayout(R.id.bt_battery_right, cachedDevice.getBatteryLevel());
+            } else if (deviceId == BluetoothLeAudio.AUDIO_LOCATION_MONO) {
+                updateBatteryLayout(R.id.bt_battery_mono, cachedDevice.getBatteryLevel());
             } else {
                 Log.d(TAG, "The device id is other Audio Location. Do nothing.");
             }
