@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2024 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/language_and_region_settings"
+    android:key="language_and_region_settings">
+  <PreferenceCategory
+      android:key="languages_category"
+      android:title="@string/locale_picker_category_title">
+    <Preference
+        android:key="phone_language"
+        android:title="@string/system_language"
+        android:fragment="com.android.settings.localepicker.LocaleListEditor"
+        settings:controller="com.android.settings.language.PhoneLanguagePreferenceController" />
+  </PreferenceCategory>
+
+  <PreferenceCategory
+      android:key="more_language_settings_category"
+      android:title="@string/more_language_settings_category"
+      settings:controller="com.android.settings.language.MoreLanguagesSettingsCategoryController">
+    <Preference
+        android:key="apps_language_in_more_language_settings"
+        android:title="@string/app_locales_picker_menu_title"
+        android:summary="@string/app_locale_picker_summary"
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+        settings:controller="com.android.settings.applications.appinfo.NewAppsLocalePreferenceController">
+      <extra
+          android:name="classname"
+          android:value="com.android.settings.applications.appinfo.AppLocaleDetails" />
+    </Preference>
+  </PreferenceCategory>
+
+  <PreferenceCategory
+      android:key="regional_preferences_category"
+      android:title="@string/regional_preferences_category_title"
+      settings:controller="com.android.settings.regionalpreferences.RegionalPreferencesCategoryController">
+
+    <Preference
+        android:key="temperature_preference"
+        android:title="@string/temperature_preferences_title"
+        android:summary="@string/default_string_of_regional_preference"
+        settings:controller="com.android.settings.regionalpreferences.NewTemperatureUnitController"
+        settings:fragment="com.android.settings.regionalpreferences.TemperatureUnitFragment">
+      <extra
+          android:name="arg_key_regional_preference"
+          android:value="mu"/>
+    </Preference>
+
+    <Preference
+        android:key="key_measurement_system"
+        android:title="@string/measurement_system_preferences_title"
+        android:summary="@string/default_string_of_regional_preference"
+        settings:controller="com.android.settings.regionalpreferences.MeasurementSystemController"
+        settings:fragment="com.android.settings.regionalpreferences.MeasurementSystemItemFragment">
+      <extra
+          android:name="arg_key_regional_preference"
+          android:value="ms"/>
+    </Preference>
+
+    <Preference
+        android:key="first_day_of_week_preference"
+        android:title="@string/first_day_of_week_preferences_title"
+        android:summary="@string/default_string_of_regional_preference"
+        settings:controller="com.android.settings.regionalpreferences.NewFirstDayOfWeekController"
+        settings:fragment="com.android.settings.regionalpreferences.FirstDayOfWeekItemFragment">
+      <extra
+          android:name="arg_key_regional_preference"
+          android:value="fw"/>
+    </Preference>
+
+    <Preference
+        android:key="numbering_system_preference"
+        android:title="@string/numbers_preferences_title"
+        android:summary="@string/default_string_of_regional_preference"
+        settings:controller="com.android.settings.regionalpreferences.NewNumberingSystemController"
+        settings:fragment="com.android.settings.regionalpreferences.NumberingPreferencesFragment">
+      <extra
+          android:name="arg_key_regional_preference"
+          android:value="arg_value_language_select"/>
+    </Preference>
+  </PreferenceCategory>
+
+  <PreferenceCategory
+      android:key="speech_category"
+      android:title="@string/speech_category_title">
+    <com.android.settings.widget.GearPreference
+        android:key="voice_input_settings"
+        android:title="@string/voice_input_settings_title"
+        android:fragment="com.android.settings.language.DefaultVoiceInputPicker" />
+
+    <Preference
+        android:key="on_device_recognition_settings"
+        android:title="@string/on_device_recognition_settings_title"
+        android:summary="@string/on_device_recognition_settings_summary"
+        settings:controller=
+            "com.android.settings.language.OnDeviceRecognitionPreferenceController" />
+
+    <Preference
+        android:key="tts_settings_summary"
+        android:title="@string/tts_settings_title"
+        android:fragment="com.android.settings.tts.TextToSpeechSettings"
+        settings:searchable="false"/>
+  </PreferenceCategory>
+
+  <com.android.settingslib.widget.FooterPreference
+      android:key="new_regional_pref_footer"
+      android:title="@string/title_regional_pref_footer"
+      android:selectable="false"
+      settings:searchable="false"
+      settings:controller="com.android.settings.regionalpreferences.NewRegionalFooterPreferenceController"/>
+</PreferenceScreen>

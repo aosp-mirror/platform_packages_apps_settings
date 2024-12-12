@@ -63,7 +63,7 @@ public class MeasurementSystemItemFragment extends DashboardFragment {
             new BaseSearchIndexProvider(R.xml.regional_preferences_measurement_system) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    if (Flags.regionalPreferencesApiEnabled()) {
+                    if (!Flags.regionalPreferencesApiEnabled()) {
                         return false;
                     }
                     return true;

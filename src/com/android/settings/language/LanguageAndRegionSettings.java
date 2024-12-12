@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,13 +36,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class LanguageSettings extends DashboardFragment {
+public class LanguageAndRegionSettings extends DashboardFragment {
 
     private static final String KEY_SPEECH_CATEGORY = "speech_category";
     private static final String KEY_ON_DEVICE_RECOGNITION = "on_device_recognition_settings";
     private static final String KEY_TEXT_TO_SPEECH = "tts_settings_summary";
 
-    private static final String TAG = "LanguageSettings";
+    private static final String TAG = "LanguageAndRegionSettings";
 
     @Override
     public int getMetricsCategory() {
@@ -74,7 +74,7 @@ public class LanguageSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.language_settings;
+        return R.xml.language_and_region_settings;
     }
 
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
@@ -109,18 +109,21 @@ public class LanguageSettings extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.language_settings) {
+            new BaseSearchIndexProvider(R.xml.language_and_region_settings) {
+
                 @Override
+                @NonNull
                 public List<AbstractPreferenceController> createPreferenceControllers(
-                        Context context) {
+                        @NonNull Context context) {
                     return buildPreferenceControllers(context, null);
                 }
+
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     if (Flags.regionalPreferencesApiEnabled()) {
-                        return false;
+                        return true;
                     }
-                    return true;
+                    return false;
                 }
             };
 }
