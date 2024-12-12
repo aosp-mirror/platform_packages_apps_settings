@@ -54,7 +54,7 @@ class AccessibilityInteractorImpl(private val accessibilityManager: Accessibilit
       .stateIn(
         scope,
         SharingStarted.WhileSubscribed(), // When no longer subscribed, we removeTheListener
-        false,
+        accessibilityManager.isEnabled,
       )
 
   override val isEnabled: Boolean

@@ -19,24 +19,30 @@ package com.android.settings.datausage
 import android.content.Context
 import android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID
 import com.android.settings.R
+import com.android.settings.Settings.DataSaverSummaryActivity
 import com.android.settings.flags.Flags
+import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.datastore.HandlerExecutor
+import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
+import com.android.settings.datausage.DataSaverMainSwitchPreference.Companion.KEY as DATA_SAVER_KEY
 
 @ProvidePreferenceScreen
-class DataSaverScreen :
+class DataSaverScreen(context: Context) :
     PreferenceScreenCreator,
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider {
 
-    private var dataSaverBackend: DataSaverBackend? = null
-    private var dataSaverBackendListener: DataSaverBackend.Listener? = null
+    private val dataSaverStore = DataSaverMainSwitchPreference.createDataStore(context)
+    private lateinit var keyedObserver: KeyedObserver<String>
 
     override val key
         get() = KEY
@@ -53,7 +59,7 @@ class DataSaverScreen :
 
     override fun getSummary(context: Context): CharSequence? =
         when {
-            DataSaverBackend(context).isDataSaverEnabled ->
+            dataSaverStore.getBoolean(DATA_SAVER_KEY) == true ->
                 context.getString(R.string.data_saver_on)
             else -> context.getString(R.string.data_saver_off)
         }
@@ -65,21 +71,21 @@ class DataSaverScreen :
 
     override fun fragmentClass() = DataSaverSummary::class.java
 
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        makeLaunchIntent(context, DataSaverSummaryActivity::class.java, metadata?.key)
+
     override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(this) { +DataSaverMainSwitchPreference(context) }
+        preferenceHierarchy(this) { +DataSaverMainSwitchPreference() }
 
     override fun hasCompleteHierarchy() = false
 
-    override fun onStart(context: PreferenceLifecycleContext) {
-        val listener = DataSaverBackend.Listener { context.notifyPreferenceChange(KEY) }
-        dataSaverBackendListener = listener
-        dataSaverBackend = DataSaverBackend(context).apply { addListener(listener) }
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        keyedObserver = KeyedObserver { _, _ -> context.notifyPreferenceChange(KEY) }
+        dataSaverStore.addObserver(DATA_SAVER_KEY, keyedObserver, HandlerExecutor.main)
     }
 
-    override fun onStop(context: PreferenceLifecycleContext) {
-        dataSaverBackend?.remListener(dataSaverBackendListener)
-        dataSaverBackend = null
-        dataSaverBackendListener = null
+    override fun onDestroy(context: PreferenceLifecycleContext) {
+        dataSaverStore.removeObserver(DATA_SAVER_KEY, keyedObserver)
     }
 
     companion object {

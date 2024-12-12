@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -44,6 +45,7 @@ public class BatteryHeaderTextPreference extends Preference implements GroupSect
     public void onBindViewHolder(PreferenceViewHolder view) {
         final TextView textView = (TextView) view.findViewById(R.id.text);
         textView.setText(mText);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
         if (!TextUtils.isEmpty(mContentDescription)) {
             textView.setContentDescription(mContentDescription);
         }

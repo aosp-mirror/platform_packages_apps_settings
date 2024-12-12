@@ -28,8 +28,7 @@
         android:title="@string/wifi_hotspot_checkbox_text"
         android:summary="@string/wifi_hotspot_off_subtext"
         android:fragment="com.android.settings.wifi.tether.WifiTetherSettings"
-        settings:allowDividerAbove="true"
-        settings:maxLines="2"/>
+        settings:allowDividerAbove="true"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="usb_tether_settings"
