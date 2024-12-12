@@ -317,7 +317,7 @@ public class ToggleFeaturePreferenceFragmentTest {
 
     @Test
     @Config(shadows = ShadowFragment.class)
-    public void showQuickSettingsTooltipIfNeeded_qsFlagOn_dontShowTooltipView() {
+    public void showQuickSettingsTooltipIfNeeded_dontShowTooltipView() {
         mFragment.showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_EDIT);
 
         assertThat(getLatestPopupWindow()).isNull();

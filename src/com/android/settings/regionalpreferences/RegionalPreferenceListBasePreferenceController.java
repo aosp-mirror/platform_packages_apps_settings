@@ -65,8 +65,8 @@ public abstract class RegionalPreferenceListBasePreferenceController extends
                 RegionalPreferencesDataUtils.savePreference(mContext, getExtensionTypes(),
                         item.equals(RegionalPreferencesDataUtils.DEFAULT_VALUE)
                                 ? null : item);
-                String metrics =
-                        getMetricsActionKey() == SettingsEnums.ACTION_SET_FIRST_DAY_OF_WEEK ? ""
+                String metrics = shouldUseEmptyMetrics()
+                                ? ""
                                 : getPreferenceTitle(value) + " > " + getPreferenceTitle(item);
                 mMetricsFeatureProvider.action(mContext, getMetricsActionKey(), metrics);
             });
@@ -77,6 +77,14 @@ public abstract class RegionalPreferenceListBasePreferenceController extends
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
+    }
+
+    private boolean shouldUseEmptyMetrics() {
+        if (getMetricsActionKey() == SettingsEnums.ACTION_SET_FIRST_DAY_OF_WEEK
+                || getMetricsActionKey() == SettingsEnums.ACTION_SET_MEASUREMENT_SYSTEM) {
+            return true;
+        }
+        return false;
     }
 
     protected abstract String getPreferenceTitle(String item);

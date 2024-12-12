@@ -33,8 +33,7 @@ public class LockScreenNotificationsPreferencePageFragment extends DashboardFrag
 
     @Override
     public int getMetricsCategory() {
-        //TODO(b/367455695): create a new metrics category
-        return SettingsEnums.SETTINGS_LOCK_SCREEN_PREFERENCES;
+        return SettingsEnums.SETTINGS_NOTIFICATIONS_ON_LOCK_SCREEN;
     }
 
     @Override
