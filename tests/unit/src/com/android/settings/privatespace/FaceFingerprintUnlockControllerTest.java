@@ -34,8 +34,8 @@ import com.android.settings.privatespace.onelock.FaceFingerprintUnlockController
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,6 +51,7 @@ public class FaceFingerprintUnlockControllerTest {
     @Mock LockPatternUtils mLockPatternUtils;
 
     private Preference mPreference;
+    private PrivateSpaceMaintainer mPrivateSpaceMaintainer;
     private FaceFingerprintUnlockController mFaceFingerprintUnlockController;
 
     /** Required setup before a test. */
@@ -68,12 +69,26 @@ public class FaceFingerprintUnlockControllerTest {
                 .thenReturn(mLockPatternUtils);
         doReturn(true).when(mLockPatternUtils).isSecure(anyInt());
 
+
+        mPrivateSpaceMaintainer  = PrivateSpaceMaintainer.getInstance(mContext);
+        assertThat(mPrivateSpaceMaintainer.createPrivateSpace()).isTrue();
+        assertThat(mPrivateSpaceMaintainer.doesPrivateSpaceExist()).isTrue();
+
         mFaceFingerprintUnlockController =
                 new FaceFingerprintUnlockController(mContext, mLifecycle);
     }
 
+    @After
+    public void tearDown() {
+        // Ensure PSMaintainer is able to remove PS.
+        mSetFlagsRule.enableFlags(
+                android.os.Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
+        assertThat(mPrivateSpaceMaintainer.deletePrivateSpace())
+                .isEqualTo(PrivateSpaceMaintainer.ErrorDeletingPrivateSpace.DELETE_PS_ERROR_NONE);
+    }
+
     /** Tests that the controller is always available. */
-    @Ignore("b/323652985")
     @Test
     public void getAvailabilityStatus_whenFlagsEnabled_returnsAvailable() {
         mSetFlagsRule.enableFlags(
@@ -134,7 +149,6 @@ public class FaceFingerprintUnlockControllerTest {
     }
 
     /** Tests that preference is enabled and summary is not same as device lock. */
-    @Ignore("b/323652985")
     @Test
     public void getSummary_whenSeparateProfileLock() {
         doReturn(true).when(mLockPatternUtils).isSeparateProfileChallengeEnabled(anyInt());
