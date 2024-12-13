@@ -5439,6 +5439,16 @@
             </intent-filter>
         </receiver>
 
+        <receiver
+            android:name=".accessibility.HighContrastTextMigrationReceiver"
+            android:permission="android.permission.MANAGE_ACCESSIBILITY"
+            android:exported="true"> <!-- Exported for SettingsProvider restore from backup. -->
+            <intent-filter>
+                <action android:name="android.intent.action.PRE_BOOT_COMPLETED"/>
+                <action android:name="com.android.settings.accessibility.ACTION_HIGH_CONTRAST_TEXT_RESTORED"/>
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name="Settings$ChangeNfcTagAppsActivity"
             android:exported="true"
