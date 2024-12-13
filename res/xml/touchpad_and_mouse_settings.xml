@@ -75,6 +75,12 @@
         settings:controller="com.android.settings.inputmethod.MouseSwapPrimaryButtonPreferenceController"
         android:order="47"/>
 
+    <SwitchPreferenceCompat
+        android:key="mouse_scrolling_acceleration"
+        android:title="@string/mouse_scrolling_acceleration"
+        settings:controller="com.android.settings.inputmethod.MouseScrollingAccelerationPreferenceController"
+        android:order="48"/>
+
     <Preference
         android:fragment="com.android.settings.inputmethod.PointerTouchpadFragment"
         android:key="pointer_and_touchpad"
