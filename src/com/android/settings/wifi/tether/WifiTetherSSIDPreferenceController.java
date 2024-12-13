@@ -123,7 +123,7 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
     }
 
     private void shareHotspotNetwork(Intent intent) {
-        WifiDppUtils.showLockScreen(mContext, () -> {
+        WifiDppUtils.showLockScreenForWifiSharing(mContext, () -> {
             mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
                     SettingsEnums.ACTION_SETTINGS_SHARE_WIFI_HOTSPOT_QR_CODE,
                     SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR,
