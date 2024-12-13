@@ -19,18 +19,14 @@ package com.android.settings.datausage
 import android.content.Context
 import com.android.settings.R
 import com.android.settings.widget.MainSwitchBarMetadata
+import com.android.settingslib.datastore.AbstractKeyedDataObservable
+import com.android.settingslib.datastore.DataChangeReason
 import com.android.settingslib.datastore.KeyValueStore
-import com.android.settingslib.datastore.NoOpKeyedObservable
-import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 
-class DataSaverMainSwitchPreference(context: Context) :
-    MainSwitchBarMetadata, PreferenceLifecycleProvider {
-
-    private val dataSaverBackend = DataSaverBackend(context)
-    private var dataSaverBackendListener: DataSaverBackend.Listener? = null
+class DataSaverMainSwitchPreference : MainSwitchBarMetadata, PreferenceLifecycleProvider {
 
     override val key
         get() = KEY
@@ -38,7 +34,7 @@ class DataSaverMainSwitchPreference(context: Context) :
     override val title
         get() = R.string.data_saver_switch_title
 
-    override fun storage(context: Context): KeyValueStore = DataSaverStore(dataSaverBackend)
+    override fun storage(context: Context) = createDataStore(context)
 
     override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
@@ -49,24 +45,11 @@ class DataSaverMainSwitchPreference(context: Context) :
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
-    override fun onStart(context: PreferenceLifecycleContext) {
-        val listener = DataSaverBackend.Listener { context.notifyPreferenceChange(KEY) }
-        dataSaverBackendListener = listener
-        dataSaverBackend.addListener(listener)
-    }
-
-    override fun onStop(context: PreferenceLifecycleContext) {
-        dataSaverBackendListener?.let {
-            dataSaverBackend.remListener(it)
-            dataSaverBackendListener = null
-        }
-    }
-
     @Suppress("UNCHECKED_CAST")
     private class DataSaverStore(private val dataSaverBackend: DataSaverBackend) :
-        NoOpKeyedObservable<String>(), KeyValueStore {
+        AbstractKeyedDataObservable<String>(), KeyValueStore, DataSaverBackend.Listener {
 
-        override fun contains(key: String) = true // just assume the datastore contains the value
+        override fun contains(key: String) = key == KEY
 
         override fun <T : Any> getValue(key: String, valueType: Class<T>): T? =
             dataSaverBackend.isDataSaverEnabled as T?
@@ -74,9 +57,20 @@ class DataSaverMainSwitchPreference(context: Context) :
         override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
             dataSaverBackend.isDataSaverEnabled = value as Boolean
         }
+
+        override fun onFirstObserverAdded() = dataSaverBackend.addListener(this)
+
+        override fun onLastObserverRemoved() = dataSaverBackend.remListener(this)
+
+        override fun onDataSaverChanged(isDataSaving: Boolean) =
+            notifyChange(KEY, DataChangeReason.UPDATE)
     }
 
     companion object {
         const val KEY = "use_data_saver"
+
+        /** Creates [KeyValueStore] for data saver preference. */
+        fun createDataStore(context: Context): KeyValueStore =
+            DataSaverStore(DataSaverBackend(context))
     }
 }

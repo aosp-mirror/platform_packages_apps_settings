@@ -26,13 +26,13 @@ import android.os.UserManager
 import android.provider.Settings
 import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.preference.Preference
 import com.android.settings.AirplaneModeEnabler
 import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.network.SatelliteRepository.Companion.isSatelliteOn
 import com.android.settingslib.RestrictedSwitchPreference
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.DataChangeReason
@@ -45,8 +45,6 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
-import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
 
 // LINT.IfChange
 class AirplaneModePreference :
@@ -113,9 +111,7 @@ class AirplaneModePreference :
             context.getSystemService(TelephonyManager::class.java)?.let {
                 phoneStateListener =
                     object : PhoneStateListener(Looper.getMainLooper()) {
-                        @Deprecated("Deprecated in Java")
                         override fun onRadioPowerStateChanged(state: Int) {
-                            Log.d(TAG, "onRadioPowerStateChanged(), state=$state")
                             notifyChange(KEY, DataChangeReason.UPDATE)
                         }
                     }
@@ -152,7 +148,7 @@ class AirplaneModePreference :
         data: Intent?,
     ): Boolean {
         if (requestCode == REQUEST_CODE_EXIT_ECM && resultCode == Activity.RESULT_OK) {
-            storage(context).setValue(KEY, Boolean::class.javaObjectType, true)
+            context.getKeyValueStore(KEY)?.setBoolean(KEY, true)
         }
         return true
     }
@@ -162,17 +158,6 @@ class AirplaneModePreference :
             context,
             context.getSystemService(TelephonyManager::class.java),
         )
-
-    private fun isSatelliteOn(context: Context): Boolean {
-        try {
-            return SatelliteRepository(context)
-                .requestIsSessionStarted(Executors.newSingleThreadExecutor())
-                .get(2000, TimeUnit.MILLISECONDS)
-        } catch (e: Exception) {
-            Log.e(TAG, "Error to get satellite status : $e")
-        }
-        return false
-    }
 
     private fun showEcmDialog(context: PreferenceLifecycleContext) {
         val intent =
@@ -192,7 +177,6 @@ class AirplaneModePreference :
     }
 
     companion object {
-        const val TAG = "AirplaneModePreference"
         const val KEY = Settings.Global.AIRPLANE_MODE_ON
         const val DEFAULT_VALUE = false
         const val REQUEST_CODE_EXIT_ECM = 1

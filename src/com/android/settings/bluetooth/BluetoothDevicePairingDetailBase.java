@@ -48,6 +48,8 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HearingAidStatsLogUtils;
 import com.android.settingslib.utils.ThreadUtils;
 
+import com.google.common.collect.ImmutableList;
+
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -58,8 +60,11 @@ import java.util.concurrent.TimeUnit;
  * device pairing detail page.
  */
 public abstract class BluetoothDevicePairingDetailBase extends DeviceListPreferenceFragment {
-    private static final long AUTO_DISMISS_TIME_THRESHOLD_MS = TimeUnit.SECONDS.toMillis(10);
+    private static final long AUTO_DISMISS_TIME_THRESHOLD_MS = TimeUnit.SECONDS.toMillis(15);
     private static final int AUTO_DISMISS_MESSAGE_ID = 1001;
+    private static final ImmutableList<Integer> AUDIO_SHARING_PROFILES = ImmutableList.of(
+            BluetoothProfile.LE_AUDIO,
+            BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT, BluetoothProfile.VOLUME_CONTROL);
 
     protected boolean mInitialScanStarted;
     @VisibleForTesting
@@ -229,12 +234,13 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
             if (device != null
                     && mSelectedList.contains(device)) {
                 if (BluetoothUtils.isAudioSharingUIAvailable(getContext())) {
-                    if (bluetoothProfile == BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT
+                    if (mShouldTriggerAudioSharingShareThenPairFlow
                             && state == BluetoothAdapter.STATE_CONNECTED
                             && device.equals(mJustBonded)
-                            && mShouldTriggerAudioSharingShareThenPairFlow) {
+                            && AUDIO_SHARING_PROFILES.contains(bluetoothProfile)
+                            && isReadyForAudioSharing(cachedDevice, bluetoothProfile)) {
                         Log.d(getLogTag(),
-                                "onProfileConnectionStateChanged, assistant profile connected");
+                                "onProfileConnectionStateChanged, ready for audio sharing");
                         dismissConnectingDialog();
                         mHandler.removeMessages(AUTO_DISMISS_MESSAGE_ID);
                         finishFragmentWithResultForAudioSharing(device);
@@ -320,6 +326,35 @@ public abstract class BluetoothDevicePairingDetailBase extends DeviceListPrefere
                     && args.getBoolean(EXTRA_PAIR_AND_JOIN_SHARING, false);
         }
         return false;
+    }
+
+    private boolean isReadyForAudioSharing(@NonNull CachedBluetoothDevice cachedDevice,
+            int justConnectedProfile) {
+        for (int profile : AUDIO_SHARING_PROFILES) {
+            // Skip checking connection state for just connected profile
+            if (profile == justConnectedProfile) continue;
+            switch (profile) {
+                case BluetoothProfile.LE_AUDIO -> {
+                    if (!cachedDevice.isConnectedLeAudioDevice()) {
+                        Log.d(getLogTag(), "isReadyForAudioSharing, LE_AUDIO not ready");
+                        return false;
+                    }
+                }
+                case BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT -> {
+                    if (!cachedDevice.isConnectedLeAudioBroadcastAssistantDevice()) {
+                        Log.d(getLogTag(), "isReadyForAudioSharing, ASSISTANT not ready");
+                        return false;
+                    }
+                }
+                case BluetoothProfile.VOLUME_CONTROL -> {
+                    if (!cachedDevice.isConnectedVolumeControlDevice()) {
+                        Log.d(getLogTag(), "isReadyForAudioSharing, VC not ready");
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     private void addOnMetadataChangedListener(@Nullable BluetoothDevice device) {

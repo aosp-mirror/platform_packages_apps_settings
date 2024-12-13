@@ -17,6 +17,7 @@
 package com.android.settings.regionalpreferences;
 
 import android.content.Context;
+import android.icu.util.LocaleData;
 import android.icu.util.ULocale;
 import android.os.LocaleList;
 import android.provider.Settings;
@@ -32,6 +33,10 @@ import java.util.Locale;
 /** Provides utils for regional preferences. */
 public class RegionalPreferencesDataUtils {
     static final String DEFAULT_VALUE = "default";
+    static final String EXTENSION_TYPE_MEASUREMENT_SYSTEM = "ms";
+    static final String MEASUREMENT_SYSTEM_METRIC = "metric";
+    static final String MEASUREMENT_SYSTEM_UK = "uksystem";
+    static final String MEASUREMENT_SYSTEM_US = "ussystem";
 
     static String getDefaultUnicodeExtensionData(Context contxt, String type) {
         // 1. Check cache data in Settings provider.
@@ -117,5 +122,31 @@ public class RegionalPreferencesDataUtils {
             default:
                 return context.getString(R.string.default_string_of_regional_preference);
         }
+    }
+
+    static String measurementSystemConverter(Context context, String unit) {
+        switch (unit) {
+            case MEASUREMENT_SYSTEM_METRIC:
+                return context.getString(R.string.metric_measurement_system);
+            case MEASUREMENT_SYSTEM_UK:
+                return context.getString(R.string.uk_measurement_system);
+            case MEASUREMENT_SYSTEM_US:
+                return context.getString(R.string.us_measurement_system);
+            default:
+                return context.getString(R.string.default_string_of_regional_preference);
+        }
+    }
+
+    static String getDefaultMeasurementSystem() {
+        LocaleList localeList = LocaleList.getDefault();
+        Locale locale = localeList.get(0);
+        ULocale uLocale = ULocale.forLocale(locale);
+        if (LocaleData.getMeasurementSystem(uLocale) == LocaleData.MeasurementSystem.SI) {
+            return RegionalPreferencesDataUtils.MEASUREMENT_SYSTEM_METRIC;
+        }
+        if (LocaleData.getMeasurementSystem(uLocale) == LocaleData.MeasurementSystem.UK) {
+            return RegionalPreferencesDataUtils.MEASUREMENT_SYSTEM_UK;
+        }
+        return RegionalPreferencesDataUtils.MEASUREMENT_SYSTEM_US;
     }
 }
