@@ -25,7 +25,7 @@
         android:key="preview"
         android:selectable="false"/>
 
-    <com.android.settings.widget.LabeledSeekBarPreference
+    <com.android.settings.accessibility.AccessibilitySeekBarPreference
         android:key="font_size"
         android:summary="@string/short_summary_font_size"
         android:title="@string/title_font_size"
@@ -35,7 +35,7 @@
         settings:iconStartContentDescription="@string/font_size_make_smaller_desc"
         settings:keywords="@string/keywords_font_size" />
 
-    <com.android.settings.widget.LabeledSeekBarPreference
+    <com.android.settings.accessibility.AccessibilitySeekBarPreference
         android:key="display_size"
         android:summary="@string/screen_zoom_short_summary"
         android:title="@string/screen_zoom_title"
