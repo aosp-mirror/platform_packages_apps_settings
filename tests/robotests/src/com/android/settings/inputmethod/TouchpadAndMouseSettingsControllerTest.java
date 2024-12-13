@@ -23,12 +23,15 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assume.assumeTrue;
 
 import android.content.Context;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.view.InputDevice;
 
 import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.keyboard.Flags;
 import com.android.settings.testutils.shadow.ShadowInputDevice;
 
 import org.junit.Before;
@@ -47,6 +50,8 @@ import org.robolectric.annotation.Config;
         ShadowInputDevice.class,
 })
 public class TouchpadAndMouseSettingsControllerTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
 
@@ -80,6 +85,7 @@ public class TouchpadAndMouseSettingsControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_KEYBOARD_AND_TOUCHPAD_A11Y_NEW_PAGE_ENABLED)
     public void getAvailabilityStatus_isTouchpadAvailable() {
         int deviceId = 1;
         ShadowInputDevice.sDeviceIds = new int[]{deviceId};
@@ -92,6 +98,7 @@ public class TouchpadAndMouseSettingsControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_KEYBOARD_AND_TOUCHPAD_A11Y_NEW_PAGE_ENABLED)
     public void getAvailabilityStatus_isMouseAvailable() {
         assumeTrue(enableVectorCursorA11ySettings());
 

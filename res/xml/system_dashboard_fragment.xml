@@ -47,6 +47,24 @@
         settings:controller="com.android.settings.inputmethod.TouchpadAndMouseSettingsController"/>
 
     <Preference
+        android:key="touchpad_settings"
+        android:title="@string/trackpad_settings"
+        android:summary="@string/trackpad_settings_summary"
+        android:icon="@drawable/ic_settings_trackpad"
+        android:order="-253"
+        android:fragment="com.android.settings.inputmethod.TouchpadSettingFragment"
+        settings:controller="com.android.settings.inputmethod.TouchpadSettingsController"/>
+
+    <Preference
+        android:key="mouse_settings"
+        android:title="@string/mouse_settings"
+        android:summary="@string/mouse_settings_summary"
+        android:icon="@drawable/ic_settings_mouse"
+        android:order="-252"
+        android:fragment="com.android.settings.inputmethod.MouseSettingFragment"
+        settings:controller="com.android.settings.inputmethod.MouseSettingsController"/>
+
+    <Preference
         android:key="gesture_settings"
         android:title="@string/gesture_preference_title"
         android:icon="@drawable/ic_settings_gestures"
