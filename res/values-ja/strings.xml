@@ -328,6 +328,7 @@
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"ユーザー補助の設定を使用"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
+    <string name="security_settings_face_enroll_introduction_learn_more_message" msgid="7728962858407497809"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"キャンセル"</string>
     <string name="security_settings_face_enroll_introduction_no_thanks" msgid="6603178409726203187">"後で"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"同意する"</string>
@@ -388,6 +389,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"データはデバイス内だけに保存"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"あなたとお子様が管理できます"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"注意事項"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_footer_title_3 (6474415050918819260) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"指紋を使ってスマートフォンのロック解除や購入の承認を行えるようにします。\n\n注: 指紋を使ってこのデバイスのロックを解除することはできません。詳しくは、組織の管理者にお問い合わせください。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"キャンセル"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"後で"</string>
@@ -402,6 +405,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"最適な結果を得るには、Made For Google 認定の画面保護シートを使用してください。これ以外の画面保護シートを使うと、指紋が認識されないおそれがあります。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"最適な結果を得るには、Made For Google 認定の画面保護シートを使用してください。認定されていないシートを使うと、お子様の指紋が認識されない可能性があります。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more_2" msgid="8691531121923020632"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"ウォッチ認証"</string>
     <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"顔認証と指紋認証を設定した場合、マスク着用時や暗い場所にいるときは指紋認証が求められます。\n\nウォッチ認証を使用すると、指が濡れているときや顔が認識されないときなどでも、このスマートフォンをロック解除できます。"</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"ウォッチ認証を使用すると、指紋が認識されないときなどでも、スマートフォンをロック解除できます。"</string>
@@ -3639,14 +3643,10 @@
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"ロック画面上の通知を減らす"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"ロック画面に新着の通知のみを表示する"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"以前表示された通知をロック画面から自動的に削除します"</string>
-    <!-- no translation found for lock_screen_notifs_show_full_list (6767009263807771108) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_full_list_desc (4868489278443057427) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_compact (1133598661314460528) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_compact_desc (2442594880539709057) -->
-    <skip />
+    <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"一覧"</string>
+    <string name="lock_screen_notifs_full_list_desc" msgid="4868489278443057427">"現在のデフォルトの配置は、フルシェルフと通知スタックです。"</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"コンパクト"</string>
+    <string name="lock_screen_notifs_compact_desc" msgid="2442594880539709057">"新しい通知はロック画面のシェルフにまとめて表示されます。"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"ロック画面上の通知"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"会話、デフォルト、サイレントを表示する"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"デフォルト モードとサイレント モードの会話と通知を表示する"</string>
@@ -3664,14 +3664,10 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"仕事用のすべての通知の内容を表示する"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"機密性の高い仕事の内容を非表示"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"デバイスがロックされている場合、プロファイル通知をどのように表示しますか？"</string>
-    <!-- no translation found for lock_screen_notification_hide_seen_title (6356324850662946426) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_hide_seen_summary (8345971177658888274) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_hide_silent_title (3284314455767315329) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_hide_silent_summary (1934066619526795468) -->
-    <skip />
+    <string name="lock_screen_notification_hide_seen_title" msgid="6356324850662946426">"表示済みの通知を非表示にする"</string>
+    <string name="lock_screen_notification_hide_seen_summary" msgid="8345971177658888274">"表示済みの通知はロック画面から削除されます。"</string>
+    <string name="lock_screen_notification_hide_silent_title" msgid="3284314455767315329">"サイレント通知を非表示にする"</string>
+    <string name="lock_screen_notification_hide_silent_summary" msgid="1934066619526795468">"サイレントの通知と会話はロック画面から削除されます。"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"プロファイル通知"</string>
     <string name="notifications_title" msgid="4221655533193721131">"通知"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"アプリの通知"</string>
@@ -4902,24 +4898,6 @@
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"衛星接続"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"衛星通信メッセージ"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"お客様のアカウントはデータの送信が可能です"</string>
-    <string name="title_for_satellite_sos" msgid="4608739357329147285">"衛星 SOS"</string>
-    <string name="summary_for_satellite_sos_entry" msgid="4981480371923329605">"モバイル ネットワークや Wi-Fi ネットワークに接続できなくても、緊急サービスにメッセージを送信できます"</string>
-    <string name="keywords_satellite_sos" msgid="6275777197418023949">"衛星 SOS, SOS"</string>
-    <string name="category_title_about_satellite_sos" msgid="7229724397303154919">"衛星 SOS について"</string>
-    <string name="satellite_sos_introduction" msgid="4670230212117495751">"モバイル ネットワークや Wi-Fi ネットワークに接続できなくても、緊急サービスにメッセージを送信して位置情報を共有できます。この機能は、常にあらゆる場所や状況で利用できるとは限りません。"</string>
-    <string name="satellite_sos_how_it_works_step_1" msgid="4669862942425306921">"緊急サービスに電話またはテキスト メッセージで通報します"</string>
-    <string name="satellite_sos_how_it_works_step_2" msgid="3558248744927579016">"緊急事態についての質問に回答します"</string>
-    <string name="satellite_sos_how_it_works_step_3" msgid="4496038314890474893">"手順に沿って衛星に接続します"</string>
-    <string name="satellite_sos_how_it_works_summary_1" msgid="4497178023367920284">"モバイル ネットワークを利用できない場合、衛星 SOS を使用するためのオプションが表示されます"</string>
-    <string name="satellite_sos_how_it_works_summary_2" msgid="1302661361673503362">"適切な支援を受けられるよう緊急サービスに回答が送信されます"</string>
-    <string name="satellite_sos_how_it_works_summary_3" msgid="4612675365617172405">"つながったら、緊急サービスにメッセージを送信できます"</string>
-    <string name="satellite_sos_try_demo" msgid="1915233782211344468">"デモを試す"</string>
-    <string name="satellite_sos_footer_text" msgid="4454885538165117230">"衛星を介して緊急サービスにつながると、あなたの名前、メールアドレス、電話番号、位置情報、デバイス情報（IMEI、言語、モデル、バッテリー残量）、緊急連絡先情報が、緊急サービスおよび衛星サービス プロバイダと共有されます。\n\n衛星 SOS を使用するには、Google メッセージがデフォルトの SMS アプリに設定されている必要があります。\n\nネットワークの自動選択が無効になっている場合は有効になり、デバイスは自動的にネットワークに接続されます。"</string>
-    <string name="satellite_sos_sharing_preferences_subheader_title" msgid="5701538329333628267">"共有の設定"</string>
-    <string name="satellite_sos_sharing_preferences_step_1" msgid="3106774199702637359">"緊急連絡先"</string>
-    <string name="satellite_sos_sharing_preferences_step_2" msgid="738246589687762115">"Google アカウント"</string>
-    <string name="satellite_sos_sharing_preferences_description" msgid="782508188142964342">"緊急サービスと共有する情報を確認、更新します"</string>
-    <string name="satellite_sos_learn_more_link" msgid="2442930426165677255">"https://support.google.com/pixelphone/answer/15254448"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"アクセス ポイント名"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> への接続時は利用できません"</string>
@@ -5107,8 +5085,7 @@
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB のページ非依存モード"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"詳細"</string>
     <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"ページサイズ互換モードでアプリを実行する"</string>
-    <!-- no translation found for enable_16k_app_compat_details (3389401258168314266) -->
-    <skip />
+    <string name="enable_16k_app_compat_details" msgid="3389401258168314266">"16 KB デバイスに切り替わると、アプリはページサイズ互換モードで実行されます。"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"バグレポート ハンドラ"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"デバイスでバグレポートのショートカットを処理するアプリを選択します。"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"個人用"</string>

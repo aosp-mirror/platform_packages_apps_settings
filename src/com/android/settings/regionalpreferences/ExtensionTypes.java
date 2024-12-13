@@ -25,12 +25,14 @@ public class ExtensionTypes {
     public static final String FIRST_DAY_OF_WEEK = "fw";
     public static final String NUMBERING_SYSTEM = "nu";
     public static final String TEMPERATURE_UNIT = "mu";
+    public static final String MEASUREMENT_SYSTEM = "ms";
 
     @StringDef({
             FIRST_DAY_OF_WEEK,
             CALENDAR,
             TEMPERATURE_UNIT,
-            NUMBERING_SYSTEM
+            NUMBERING_SYSTEM,
+            MEASUREMENT_SYSTEM
     })
     public @interface Values {}
 }
