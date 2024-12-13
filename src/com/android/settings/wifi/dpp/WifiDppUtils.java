@@ -16,6 +16,8 @@
 
 package com.android.settings.wifi.dpp;
 
+import android.annotation.NonNull;
+import android.annotation.SuppressLint;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -33,6 +35,9 @@ import android.os.Vibrator;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
 import android.text.TextUtils;
+import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -58,6 +63,8 @@ import javax.crypto.SecretKey;
  * @see WifiQrCode
  */
 public class WifiDppUtils {
+    private static final String TAG = "WifiDppUtils";
+
     /**
      * The fragment tag specified to FragmentManager for container activities to manage fragments.
      */
@@ -109,7 +116,15 @@ public class WifiDppUtils {
 
     private static final Duration VIBRATE_DURATION_QR_CODE_RECOGNITION = Duration.ofMillis(3);
 
-    private static final String AES_CBC_PKCS7_PADDING = "AES/CBC/PKCS7Padding";
+    /**
+     * Parameters to check whether the device has been locked recently
+     */
+    @VisibleForTesting
+    public static final String AES_CBC_PKCS7_PADDING = "AES/CBC/PKCS7Padding";
+    @VisibleForTesting
+    public static final String WIFI_SHARING_KEY_ALIAS = "wifi_sharing_auth_key";
+    @VisibleForTesting
+    public static final int WIFI_SHARING_MAX_UNLOCK_SECONDS = 60;
 
     /**
      * Returns whether the device support WiFi DPP.
@@ -426,51 +441,75 @@ public class WifiDppUtils {
      * Shows authentication screen to confirm credentials (pin, pattern or password) for the current
      * user of the device.
      *
-     * @param context The {@code Context} used to get {@code KeyguardManager} service
+     * @param context         The {@code Context} used to get {@code KeyguardManager} service
      * @param successRunnable The {@code Runnable} which will be executed if the user does not setup
      *                        device security or if lock screen is unlocked
      */
-    public static void showLockScreen(Context context, Runnable successRunnable) {
-        final KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(
-                Context.KEYGUARD_SERVICE);
-
-        if (keyguardManager.isKeyguardSecure()) {
-            final BiometricPrompt.AuthenticationCallback authenticationCallback =
-                    new BiometricPrompt.AuthenticationCallback() {
-                        @Override
-                        public void onAuthenticationSucceeded(
-                                    BiometricPrompt.AuthenticationResult result) {
-                            successRunnable.run();
-                        }
-
-                        @Override
-                        public void onAuthenticationError(int errorCode, CharSequence errString) {
-                            //Do nothing
-                        }
-            };
-
-            final int userId = UserHandle.myUserId();
-
-            final BiometricPrompt.Builder builder = new BiometricPrompt.Builder(context)
-                    .setTitle(context.getText(R.string.wifi_dpp_lockscreen_title));
-
-            if (keyguardManager.isDeviceSecure()) {
-                builder.setDeviceCredentialAllowed(true);
-                builder.setTextForDeviceCredential(
-                        null /* title */,
-                        Utils.getConfirmCredentialStringForUser(
-                                context, userId, Utils.getCredentialType(context, userId)),
-                        null /* description */);
-            }
-
-            final BiometricPrompt bp = builder.build();
-            final Handler handler = new Handler(Looper.getMainLooper());
-            bp.authenticate(new CancellationSignal(),
-                    runnable -> handler.post(runnable),
-                    authenticationCallback);
-        } else {
+    public static void showLockScreen(@NonNull Context context, @NonNull Runnable successRunnable) {
+        KeyguardManager keyguardManager = context.getSystemService(KeyguardManager.class);
+        if (keyguardManager == null || !keyguardManager.isKeyguardSecure()) {
             successRunnable.run();
+            return;
         }
+        showLockScreen(context, successRunnable, keyguardManager);
+    }
+
+    /**
+     * Shows authentication screen to confirm credentials (pin, pattern or password) for the
+     * current user of the device. But if the device has been unlocked recently, the
+     * authentication screen will be skipped.
+     *
+     * @param context         The {@code Context} used to get {@code KeyguardManager} service
+     * @param successRunnable The {@code Runnable} which will be executed if the user does not setup
+     *                        device security or if lock screen is unlocked
+     */
+    public static void showLockScreenForWifiSharing(@NonNull Context context,
+            @NonNull Runnable successRunnable) {
+        KeyguardManager keyguardManager = context.getSystemService(KeyguardManager.class);
+        if (keyguardManager == null || !keyguardManager.isKeyguardSecure()) {
+            successRunnable.run();
+            return;
+        }
+        if (isUnlockedWithinSeconds(WIFI_SHARING_KEY_ALIAS, WIFI_SHARING_MAX_UNLOCK_SECONDS)) {
+            Log.d(TAG, "Bypassing the lock screen because the device was unlocked recently.");
+            successRunnable.run();
+            return;
+        }
+        showLockScreen(context, successRunnable, keyguardManager);
+    }
+
+    @SuppressLint("MissingPermission")
+    private static void showLockScreen(@NonNull Context context, @NonNull Runnable successRunnable,
+            @NonNull KeyguardManager keyguardManager) {
+        BiometricPrompt.AuthenticationCallback authenticationCallback =
+                new BiometricPrompt.AuthenticationCallback() {
+                    @Override
+                    public void onAuthenticationSucceeded(
+                            BiometricPrompt.AuthenticationResult result) {
+                        successRunnable.run();
+                    }
+
+                    @Override
+                    public void onAuthenticationError(int errorCode, CharSequence errString) {
+                        //Do nothing
+                    }
+                };
+        int userId = UserHandle.myUserId();
+        BiometricPrompt.Builder builder = new BiometricPrompt.Builder(context)
+                .setTitle(context.getText(R.string.wifi_dpp_lockscreen_title));
+        if (keyguardManager.isDeviceSecure()) {
+            builder.setDeviceCredentialAllowed(true);
+            builder.setTextForDeviceCredential(
+                    null /* title */,
+                    Utils.getConfirmCredentialStringForUser(
+                            context, userId, Utils.getCredentialType(context, userId)),
+                    null /* description */);
+        }
+        BiometricPrompt bp = builder.build();
+        Handler handler = new Handler(Looper.getMainLooper());
+        bp.authenticate(new CancellationSignal(),
+                runnable -> handler.post(runnable),
+                authenticationCallback);
     }
 
     /**

@@ -57,7 +57,8 @@ public class AddDevicePreferenceController2 extends BasePreferenceController {
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_ADD_DEVICE.equals(preference.getKey())) {
-            WifiDppUtils.showLockScreen(mContext, () -> launchWifiDppConfiguratorQrCodeScanner());
+            WifiDppUtils.showLockScreenForWifiSharing(mContext,
+                    () -> launchWifiDppConfiguratorQrCodeScanner());
             return true; /* click is handled */
         }
 

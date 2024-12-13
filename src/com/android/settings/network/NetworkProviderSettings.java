@@ -706,7 +706,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
                 forget(mSelectedWifiEntry);
                 return true;
             case MENU_ID_SHARE:
-                WifiDppUtils.showLockScreen(getContext(),
+                WifiDppUtils.showLockScreenForWifiSharing(getContext(),
                         () -> launchWifiDppConfiguratorActivity(mSelectedWifiEntry));
                 return true;
             case MENU_ID_MODIFY:
