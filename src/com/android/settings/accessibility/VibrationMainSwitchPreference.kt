@@ -30,16 +30,16 @@ import com.android.settingslib.metadata.MainSwitchPreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
-import com.android.settingslib.preference.MainSwitchPreferenceBinding
 
-/**
- * Accessibility settings for vibration.
- */
+/** Accessibility settings for vibration. */
 // LINT.IfChange
-class VibrationMainSwitchPreference : MainSwitchPreference(
-    key = Settings.System.VIBRATE_ON,
-    title = R.string.accessibility_vibration_primary_switch_title,
-), PreferenceLifecycleProvider, OnCheckedChangeListener {
+class VibrationMainSwitchPreference :
+    MainSwitchPreference(
+        key = Settings.System.VIBRATE_ON,
+        title = R.string.accessibility_vibration_primary_switch_title,
+    ),
+    PreferenceLifecycleProvider,
+    OnCheckedChangeListener {
     override val keywords: Int
         get() = R.string.keywords_accessibility_vibration_primary_switch
 
@@ -48,20 +48,26 @@ class VibrationMainSwitchPreference : MainSwitchPreference(
     override fun storage(context: Context): KeyValueStore =
         VibrationMainSwitchToggleStorage(SettingsSystemStore.get(context))
 
-    override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
+    override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
-    override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
-        ReadWritePermit.ALLOW
+    override fun getWritePermit(
+        context: Context,
+        value: Boolean?,
+        callingPid: Int,
+        callingUid: Int,
+    ) = ReadWritePermit.ALLOW
 
     override fun onResume(context: PreferenceLifecycleContext) {
         vibrator = context.getSystemService(Vibrator::class.java)
-        context.findPreference<com.android.settingslib.widget.MainSwitchPreference>(key)
+        context
+            .findPreference<com.android.settingslib.widget.MainSwitchPreference>(key)
             ?.addOnSwitchChangeListener(this)
     }
 
     override fun onPause(context: PreferenceLifecycleContext) {
-        context.findPreference<com.android.settingslib.widget.MainSwitchPreference>(key)
+        context
+            .findPreference<com.android.settingslib.widget.MainSwitchPreference>(key)
             ?.removeOnSwitchChangeListener(this)
     }
 
@@ -69,16 +75,16 @@ class VibrationMainSwitchPreference : MainSwitchPreference(
         if (isChecked) {
             // Play a haptic as preview for the main toggle only when touch feedback is enabled.
             VibrationPreferenceConfig.playVibrationPreview(
-                vibrator, VibrationAttributes.USAGE_TOUCH
+                vibrator,
+                VibrationAttributes.USAGE_TOUCH,
             )
         }
     }
 
     /** Provides SettingsStore for vibration main switch with custom default value. */
     @Suppress("UNCHECKED_CAST")
-    private class VibrationMainSwitchToggleStorage(
-        private val settingsStore: SettingsStore,
-    ) : KeyedObservableDelegate<String>(settingsStore), KeyValueStore {
+    private class VibrationMainSwitchToggleStorage(private val settingsStore: SettingsStore) :
+        KeyedObservableDelegate<String>(settingsStore), KeyValueStore {
 
         override fun contains(key: String) = settingsStore.contains(key)
 

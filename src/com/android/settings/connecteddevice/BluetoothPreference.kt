@@ -52,10 +52,15 @@ class BluetoothPreference(private val bluetoothDataStore: BluetoothDataStore) :
     override val restrictionKeys: Array<String>
         get() = arrayOf(UserManager.DISALLOW_BLUETOOTH, UserManager.DISALLOW_CONFIG_BLUETOOTH)
 
-    override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
+    override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
-    override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
+    override fun getWritePermit(
+        context: Context,
+        value: Boolean?,
+        callingPid: Int,
+        callingUid: Int,
+    ) =
         when {
             isSatelliteOn(context, 3000) ||
                 (value == true &&
