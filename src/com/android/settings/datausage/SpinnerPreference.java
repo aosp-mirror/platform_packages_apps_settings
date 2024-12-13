@@ -25,8 +25,10 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
+import com.android.settingslib.widget.GroupSectionDividerMixin;
 
-public class SpinnerPreference extends Preference implements CycleAdapter.SpinnerInterface {
+public class SpinnerPreference extends Preference implements CycleAdapter.SpinnerInterface,
+        GroupSectionDividerMixin {
 
     private CycleAdapter mAdapter;
     @Nullable
