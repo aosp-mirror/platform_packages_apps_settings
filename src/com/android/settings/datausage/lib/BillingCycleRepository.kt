@@ -21,7 +21,7 @@ import android.os.INetworkManagementService
 import android.os.ServiceManager
 import android.util.Log
 import androidx.annotation.OpenForTesting
-import com.android.settings.network.telephony.TelephonyRepository
+import com.android.settings.network.telephony.MobileDataRepository
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -36,13 +36,13 @@ open class BillingCycleRepository @JvmOverloads constructor(
         INetworkManagementService.Stub.asInterface(
             ServiceManager.getService(Context.NETWORKMANAGEMENT_SERVICE)
         ),
-    private val telephonyRepository: TelephonyRepository = TelephonyRepository(context),
+    private val mobileDataRepository: MobileDataRepository = MobileDataRepository(context),
 ) {
     private val userManager = context.userManager
 
     fun isModifiableFlow(subId: Int): Flow<Boolean> =
-        telephonyRepository.isDataEnabledFlow(subId).map { isDataEnabled ->
-            isDataEnabled && isBandwidthControlEnabled() && userManager.isAdminUser
+        mobileDataRepository.isMobileDataEnabledFlow(subId).map { mobileDataEnabled ->
+            mobileDataEnabled && isBandwidthControlEnabled() && userManager.isAdminUser
         }.conflate().flowOn(Dispatchers.Default)
 
     open fun isBandwidthControlEnabled(): Boolean = try {

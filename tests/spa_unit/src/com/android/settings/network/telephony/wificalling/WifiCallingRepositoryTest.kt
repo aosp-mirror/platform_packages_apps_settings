@@ -55,7 +55,8 @@ class WifiCallingRepositoryTest {
         on { getWiFiCallingMode(any()) } doReturn ImsMmTelManager.WIFI_MODE_UNKNOWN
     }
 
-    private val repository = WifiCallingRepository(context, SUB_ID, mockImsMmTelRepository)
+    private val repository =
+        WifiCallingRepository(context, SUB_ID, imsMmTelRepository = mockImsMmTelRepository)
 
     @Test
     fun getWiFiCallingMode_roamingAndNotUseWfcHomeModeForRoaming_returnRoamingSetting() {
@@ -99,22 +100,6 @@ class WifiCallingRepositoryTest {
         val wiFiCallingMode = repository.getWiFiCallingMode()
 
         assertThat(wiFiCallingMode).isEqualTo(ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED)
-    }
-
-    @Test
-    fun isWifiCallingSupported() = runBlocking {
-        mockImsMmTelRepository.stub {
-            onBlocking {
-                isSupported(
-                    capability = MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
-                    transportType = AccessNetworkConstants.TRANSPORT_TYPE_WLAN,
-                )
-            } doReturn true
-        }
-
-        val isSupported = repository.isWifiCallingSupported()
-
-        assertThat(isSupported).isTrue()
     }
 
     private fun mockUseWfcHomeModeForRoaming(config: Boolean) {

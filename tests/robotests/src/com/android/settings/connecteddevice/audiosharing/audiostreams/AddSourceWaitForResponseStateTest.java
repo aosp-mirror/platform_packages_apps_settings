@@ -22,11 +22,21 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
+import android.content.Context;
+
+import androidx.test.core.app.ApplicationProvider;
+
+import com.android.settings.R;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -36,27 +46,41 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.ShadowLooper;
 
 import java.util.concurrent.TimeUnit;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(
+        shadows = {
+            ShadowAlertDialog.class,
+        })
 public class AddSourceWaitForResponseStateTest {
-    private static final int BROADCAST_ID = 1;
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    private static final int BROADCAST_ID = 1;
+    private final Context mContext = spy(ApplicationProvider.getApplicationContext());
     @Mock private AudioStreamPreference mMockPreference;
     @Mock private AudioStreamsProgressCategoryController mMockController;
     @Mock private AudioStreamsHelper mMockHelper;
     @Mock private BluetoothLeBroadcastMetadata mMockMetadata;
+    @Mock private AudioStreamsRepository mMockRepository;
+    private FakeFeatureFactory mFeatureFactory;
     private AddSourceWaitForResponseState mInstance;
 
     @Before
     public void setUp() {
-        mInstance = AddSourceWaitForResponseState.getInstance();
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        mInstance = new AddSourceWaitForResponseState();
+        when(mMockPreference.getContext()).thenReturn(mContext);
+        when(mMockPreference.getSourceOriginForLogging())
+                .thenReturn(SourceOriginForLogging.QR_CODE_SCAN_SETTINGS);
     }
 
     @Test
     public void testGetInstance() {
+        mInstance = AddSourceWaitForResponseState.getInstance();
         assertThat(mInstance).isNotNull();
         assertThat(mInstance).isInstanceOf(AudioStreamStateHandler.class);
     }
@@ -93,11 +117,18 @@ public class AddSourceWaitForResponseStateTest {
     public void testPerformAction_metadataIsNotNull_addSource() {
         when(mMockPreference.getAudioStreamMetadata()).thenReturn(mMockMetadata);
         when(mMockPreference.getSourceOriginForLogging())
-                .thenReturn(SourceOriginForLogging.UNKNOWN);
+                .thenReturn(SourceOriginForLogging.QR_CODE_SCAN_SETTINGS);
+        mInstance.setAudioStreamsRepositoryForTesting(mMockRepository);
 
         mInstance.performAction(mMockPreference, mMockController, mMockHelper);
 
         verify(mMockHelper).addSource(mMockMetadata);
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        eq(mContext),
+                        eq(SettingsEnums.ACTION_AUDIO_STREAM_JOIN),
+                        eq(SourceOriginForLogging.QR_CODE_SCAN_SETTINGS.ordinal()));
+        verify(mMockRepository).cacheMetadata(mMockMetadata);
         verify(mMockController, never()).handleSourceFailedToConnect(anyInt());
     }
 
@@ -108,12 +139,28 @@ public class AddSourceWaitForResponseStateTest {
         when(mMockPreference.getAudioStreamState()).thenReturn(mInstance.getStateEnum());
         when(mMockPreference.getAudioStreamBroadcastId()).thenReturn(BROADCAST_ID);
         when(mMockPreference.getSourceOriginForLogging())
-                .thenReturn(SourceOriginForLogging.UNKNOWN);
+                .thenReturn(SourceOriginForLogging.QR_CODE_SCAN_SETTINGS);
+        when(mMockController.getFragment()).thenReturn(mock(AudioStreamsDashboardFragment.class));
+        mInstance.setAudioStreamsRepositoryForTesting(mMockRepository);
 
         mInstance.performAction(mMockPreference, mMockController, mMockHelper);
         ShadowLooper.idleMainLooper(ADD_SOURCE_WAIT_FOR_RESPONSE_TIMEOUT_MILLIS, TimeUnit.SECONDS);
 
         verify(mMockHelper).addSource(mMockMetadata);
         verify(mMockController).handleSourceFailedToConnect(BROADCAST_ID);
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        eq(mContext),
+                        eq(SettingsEnums.ACTION_AUDIO_STREAM_JOIN),
+                        eq(SourceOriginForLogging.QR_CODE_SCAN_SETTINGS.ordinal()));
+        verify(mMockRepository).cacheMetadata(mMockMetadata);
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        eq(mContext),
+                        eq(SettingsEnums.ACTION_AUDIO_STREAM_JOIN_FAILED_TIMEOUT),
+                        eq(SourceOriginForLogging.QR_CODE_SCAN_SETTINGS.ordinal()));
+        verify(mContext).getString(R.string.audio_streams_dialog_stream_is_not_available);
+        verify(mContext).getString(R.string.audio_streams_is_not_playing);
+        verify(mContext).getString(R.string.audio_streams_dialog_close);
     }
 }

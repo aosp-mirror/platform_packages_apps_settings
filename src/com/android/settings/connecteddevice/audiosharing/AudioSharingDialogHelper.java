@@ -51,12 +51,13 @@ public class AudioSharingDialogHelper {
     public static AlertDialog getDialogIfShowing(
             @NonNull FragmentManager manager, @NonNull String tag) {
         Fragment dialog = manager.findFragmentByTag(tag);
-        return dialog != null
-                        && dialog instanceof DialogFragment
-                        && ((DialogFragment) dialog).getDialog() != null
-                        && ((DialogFragment) dialog).getDialog().isShowing()
-                        && ((DialogFragment) dialog).getDialog() instanceof AlertDialog
+        return dialog instanceof DialogFragment
+                && ((DialogFragment) dialog).getDialog() != null
+                && ((DialogFragment) dialog).getDialog().isShowing()
+                && ((DialogFragment) dialog).getDialog() instanceof AlertDialog
                 ? (AlertDialog) ((DialogFragment) dialog).getDialog()
                 : null;
     }
+
+    private AudioSharingDialogHelper() {}
 }

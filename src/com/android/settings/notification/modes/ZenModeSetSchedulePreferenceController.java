@@ -16,9 +16,7 @@
 
 package com.android.settings.notification.modes;
 
-import android.app.Flags;
 import android.content.Context;
-import android.service.notification.SystemZenRules;
 import android.service.notification.ZenModeConfig;
 import android.text.format.DateFormat;
 import android.util.ArraySet;
@@ -33,6 +31,8 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.text.SimpleDateFormat;
@@ -67,12 +67,18 @@ class ZenModeSetSchedulePreferenceController extends AbstractZenModePreferenceCo
         LayoutPreference layoutPref = (LayoutPreference) preference;
 
         TextView start = layoutPref.findViewById(R.id.start_time);
-        start.setText(timeString(mSchedule.startHour, mSchedule.startMinute));
+        String startTimeString = timeString(mSchedule.startHour, mSchedule.startMinute);
+        start.setText(startTimeString);
+        start.setContentDescription(
+                mContext.getString(R.string.zen_mode_start_time) + "\n" + startTimeString);
         start.setOnClickListener(
                 timePickerLauncher(mSchedule.startHour, mSchedule.startMinute, mStartSetter));
 
         TextView end = layoutPref.findViewById(R.id.end_time);
-        end.setText(timeString(mSchedule.endHour, mSchedule.endMinute));
+        String endTimeString = timeString(mSchedule.endHour, mSchedule.endMinute);
+        end.setText(endTimeString);
+        end.setContentDescription(
+                mContext.getString(R.string.zen_mode_end_time) + "\n" + endTimeString);
         end.setOnClickListener(
                 timePickerLauncher(mSchedule.endHour, mSchedule.endMinute, mEndSetter));
 
@@ -116,16 +122,13 @@ class ZenModeSetSchedulePreferenceController extends AbstractZenModePreferenceCo
     @VisibleForTesting
     protected Function<ZenMode, ZenMode> updateScheduleMode(ZenModeConfig.ScheduleInfo schedule) {
         return (zenMode) -> {
-            zenMode.getRule().setConditionId(ZenModeConfig.toScheduleConditionId(schedule));
-            if (Flags.modesApi() && Flags.modesUi()) {
-                zenMode.getRule().setTriggerDescription(
-                        SystemZenRules.getTriggerDescriptionForScheduleTime(mContext, schedule));
-            }
+            zenMode.setCustomModeConditionId(mContext,
+                    ZenModeConfig.toScheduleConditionId(schedule));
             return zenMode;
         };
     }
 
-    private ZenModeTimePickerFragment.TimeSetter mStartSetter = (hour, minute) -> {
+    private final ZenModeTimePickerFragment.TimeSetter mStartSetter = (hour, minute) -> {
         if (!isValidTime(hour, minute)) {
             return;
         }
@@ -137,7 +140,7 @@ class ZenModeSetSchedulePreferenceController extends AbstractZenModePreferenceCo
         saveMode(updateScheduleMode(mSchedule));
     };
 
-    private ZenModeTimePickerFragment.TimeSetter mEndSetter = (hour, minute) -> {
+    private final ZenModeTimePickerFragment.TimeSetter mEndSetter = (hour, minute) -> {
         if (!isValidTime(hour, minute)) {
             return;
         }
@@ -201,7 +204,10 @@ class ZenModeSetSchedulePreferenceController extends AbstractZenModePreferenceCo
             // day label.
             dayToggle.setTextOn(mShortDayFormat.format(c.getTime()));
             dayToggle.setTextOff(mShortDayFormat.format(c.getTime()));
-            dayToggle.setContentDescription(mLongDayFormat.format(c.getTime()));
+            String state = dayEnabled
+                    ? mContext.getString(com.android.internal.R.string.capital_on)
+                    : mContext.getString(com.android.internal.R.string.capital_off);
+            dayToggle.setStateDescription(mLongDayFormat.format(c.getTime()) + ", " + state);
 
             dayToggle.setChecked(dayEnabled);
             dayToggle.setOnCheckedChangeListener((buttonView, isChecked) -> {

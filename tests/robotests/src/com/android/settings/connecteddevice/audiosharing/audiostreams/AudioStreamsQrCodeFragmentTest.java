@@ -98,6 +98,22 @@ public class AudioStreamsQrCodeFragmentTest {
     }
 
     @Test
+    public void onCreateView_noProfile_noQrCode() {
+        when(mBtProfileManager.getLeAudioBroadcastProfile()).thenReturn(null);
+        FragmentController.setupFragment(
+                mFragment, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
+        View view = mFragment.getView();
+
+        assertThat(view).isNotNull();
+        ImageView qrCodeView = view.findViewById(R.id.qrcode_view);
+        TextView passwordView = view.requireViewById(R.id.password);
+        assertThat(qrCodeView).isNotNull();
+        assertThat(qrCodeView.getDrawable()).isNull();
+        assertThat(passwordView).isNotNull();
+        assertThat(passwordView.getText().toString()).isEqualTo("");
+    }
+
+    @Test
     public void onCreateView_noMetadata_noQrCode() {
         List<BluetoothLeBroadcastMetadata> list = new ArrayList<>();
         when(mBroadcast.getAllBroadcastMetadata()).thenReturn(list);

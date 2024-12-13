@@ -18,10 +18,13 @@ package com.android.settings.notification.modes;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
@@ -42,8 +45,10 @@ class FutureUtil {
             }
 
             @Override
-            public void onFailure(Throwable throwable) {
-                Log.e(TAG, String.format(errorLogMessage, errorLogMessageArgs), throwable);
+            public void onFailure(@NonNull Throwable throwable) {
+                if (!(throwable instanceof CancellationException)) {
+                    Log.e(TAG, String.format(errorLogMessage, errorLogMessageArgs), throwable);
+                }
             }
         }, executor);
     }

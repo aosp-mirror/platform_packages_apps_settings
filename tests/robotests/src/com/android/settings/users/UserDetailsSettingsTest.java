@@ -22,7 +22,7 @@ import static android.os.UserManager.SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -42,9 +42,13 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
+import android.multiuser.Flags;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.FragmentActivity;
@@ -63,7 +67,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -124,6 +128,8 @@ public class UserDetailsSettingsTest {
     private Bundle mArguments;
     private UserInfo mUserInfo;
 
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -222,8 +228,8 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore("b/313530297")
     public void onResume_canSwitch_shouldEnableSwitchPref() {
+        setupSelectedUser();
         mUserManager.setSwitchabilityStatus(SWITCHABILITY_STATUS_OK);
         mFragment.mSwitchUserPref = mSwitchUserPref;
         mFragment.onAttach(mContext);
@@ -234,8 +240,8 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore("b/313530297")
     public void onResume_userInCall_shouldDisableSwitchPref() {
+        setupSelectedUser();
         mUserManager.setSwitchabilityStatus(SWITCHABILITY_STATUS_USER_IN_CALL);
         mFragment.mSwitchUserPref = mSwitchUserPref;
         mFragment.onAttach(mContext);
@@ -246,8 +252,21 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore("b/313530297")
+    @RequiresFlagsEnabled({Flags.FLAG_NEW_MULTIUSER_SETTINGS_UX})
+    public void onResume_UserSwitcherDisabled_shouldDisableSwitchPref() {
+        setupSelectedUser();
+        mUserCapabilities.mUserSwitcherEnabled = false;
+        mFragment.mSwitchUserPref = mSwitchUserPref;
+        mFragment.onAttach(mContext);
+
+        mFragment.onResume();
+
+        verify(mSwitchUserPref).setEnabled(false);
+    }
+
+    @Test
     public void onResume_switchDisallowed_shouldDisableSwitchPref() {
+        setupSelectedUser();
         mUserManager.setSwitchabilityStatus(SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED);
         mFragment.mSwitchUserPref = mSwitchUserPref;
         mFragment.onAttach(mContext);
@@ -258,8 +277,8 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore("b/313530297")
     public void onResume_systemUserLocked_shouldDisableSwitchPref() {
+        setupSelectedUser();
         mUserManager.setSwitchabilityStatus(UserManager.SWITCHABILITY_STATUS_SYSTEM_USER_LOCKED);
         mFragment.mSwitchUserPref = mSwitchUserPref;
         mFragment.onAttach(mContext);
@@ -269,7 +288,6 @@ public class UserDetailsSettingsTest {
         verify(mSwitchUserPref).setEnabled(false);
     }
 
-    @Ignore("b/313530297")
     @Test
     public void initialize_adminWithTelephony_shouldShowPhonePreference() {
         setupSelectedUser();
@@ -315,7 +333,6 @@ public class UserDetailsSettingsTest {
         verify(mFragment).removePreference(KEY_APP_AND_CONTENT_ACCESS);
     }
 
-    @Ignore("b/313530297")
     @Test
     public void initialize_adminSelectsSecondaryUser_shouldShowRemovePreference() {
         setupSelectedUser();
@@ -328,7 +345,6 @@ public class UserDetailsSettingsTest {
         verify(mFragment, never()).removePreference(KEY_REMOVE_USER);
     }
 
-    @Ignore("b/313530297")
     @Test
     public void initialize_adminSelectsNewRestrictedUser_shouldOpenAppContentScreen() {
         setupSelectedRestrictedUser();
@@ -351,7 +367,6 @@ public class UserDetailsSettingsTest {
                 .isEqualTo(true);
     }
 
-    @Ignore("b/313530297")
     @Test
     public void initialize_adminSelectsRestrictedUser_shouldSetupPreferences() {
         setupSelectedRestrictedUser();
@@ -381,7 +396,6 @@ public class UserDetailsSettingsTest {
         verify(mActivity, never()).startActivity(any(Intent.class));
     }
 
-    @Ignore("b/313530297")
     @Test
     public void initialize_adminSelectsGuest_shouldShowRemovePreference() {
         setupSelectedGuest();
@@ -425,7 +439,6 @@ public class UserDetailsSettingsTest {
         verify(mFragment).removePreference(KEY_REMOVE_USER);
     }
 
-    @Ignore("b/313530297")
     @Test
     public void initialize_userHasCallRestriction_shouldSetPhoneSwitchUnChecked() {
         setupSelectedUser();
@@ -438,7 +451,6 @@ public class UserDetailsSettingsTest {
         verify(mPhonePref).setChecked(false);
     }
 
-    @Ignore("b/313530297")
     @Test
     public void initialize_noCallRestriction_shouldSetPhoneSwitchChecked() {
         setupSelectedUser();
@@ -537,7 +549,6 @@ public class UserDetailsSettingsTest {
         verify(mFragment, never()).switchUser();
     }
 
-    @Ignore("b/313530297")
     @Test
     public void onPreferenceClick_removeGuestClicked_canDelete_shouldShowDialog() {
         setupSelectedGuest();
@@ -555,7 +566,6 @@ public class UserDetailsSettingsTest {
         verify(mFragment).showDialog(DIALOG_CONFIRM_RESET_GUEST);
     }
 
-    @Ignore("b/313530297")
     @Test
     public void onPreferenceClick_removeRestrictedClicked_canDelete_shouldShowDialog() {
         setupSelectedRestrictedUser();
@@ -574,7 +584,6 @@ public class UserDetailsSettingsTest {
         verify(mFragment).showDialog(DIALOG_CONFIRM_REMOVE);
     }
 
-    @Ignore("b/313530297")
     @Test
     public void onPreferenceClick_removeClicked_canDelete_shouldShowDialog() {
         setupSelectedUser();
@@ -666,7 +675,6 @@ public class UserDetailsSettingsTest {
         assertThat(result).isFalse();
     }
 
-    @Ignore("b/313530297")
     @Test
     public void canDeleteUser_adminSelectsUser_noRestrictions_shouldReturnTrue() {
         setupSelectedUser();
@@ -700,17 +708,16 @@ public class UserDetailsSettingsTest {
         assertThat(result).isFalse();
     }
 
-    @Ignore("b/313530297")
     @Test
     public void initialize_userSelected_shouldShowGrantAdminPref_MultipleAdminEnabled() {
+        assumeTrue(UserManager.isHeadlessSystemUserMode());
         setupSelectedUser();
+        mUserManager.setIsAdminUser(true);
         ShadowUserManager.setIsMultipleAdminEnabled(true);
         mFragment.initialize(mActivity, mArguments);
-        assertTrue(UserManager.isMultipleAdminEnabled());
         verify(mFragment, never()).removePreference(KEY_GRANT_ADMIN);
     }
 
-    @Ignore("b/313530297")
     @Test
     public void initialize_userSelected_shouldNotShowGrantAdminPref() {
         setupSelectedUser();
@@ -718,18 +725,29 @@ public class UserDetailsSettingsTest {
         verify(mFragment).removePreference(KEY_GRANT_ADMIN);
     }
 
-    @Ignore("b/313530297")
     @Test
     public void initialize_restrictUserSelected_shouldNotShowGrantAdminPref_MultipleAdminEnabled() {
         setupSelectedUser();
         ShadowUserManager.setIsMultipleAdminEnabled(true);
+        // target user has DISALLOW_GRANT_ADMIN restriction
         mUserManager.setUserRestriction(mUserInfo.getUserHandle(),
                 UserManager.DISALLOW_GRANT_ADMIN, true);
         mFragment.initialize(mActivity, mArguments);
         verify(mFragment).removePreference(KEY_GRANT_ADMIN);
     }
 
-    @Ignore("b/313530297")
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_UNICORN_MODE_REFACTORING_FOR_HSUM_READ_ONLY)
+    public void initialize_currentUserRestrict_shouldNotShowGrantAdminPref_MultipleAdminEnabled() {
+        setupSelectedUser();
+        ShadowUserManager.setIsMultipleAdminEnabled(true);
+        // current user has DISALLOW_GRANT_ADMIN restriction
+        mUserManager.setUserRestriction(mContext.getUser(),
+                UserManager.DISALLOW_GRANT_ADMIN, true);
+        mFragment.initialize(mActivity, mArguments);
+        verify(mFragment).removePreference(KEY_GRANT_ADMIN);
+    }
+
     @Test
     public void initialize_mainUserSelected_shouldShowGrantAdminPref_MultipleAdminEnabled() {
         setupSelectedMainUser();
@@ -738,7 +756,6 @@ public class UserDetailsSettingsTest {
         verify(mFragment).removePreference(KEY_GRANT_ADMIN);
     }
 
-    @Ignore("b/313530297")
     @Test
     public void initialize_guestSelected_shouldNotShowGrantAdminPref_MultipleAdminEnabled() {
         setupSelectedGuest();
@@ -778,7 +795,7 @@ public class UserDetailsSettingsTest {
         mUserInfo = new UserInfo(1, "Tom", null,
                 UserInfo.FLAG_FULL | UserInfo.FLAG_INITIALIZED,
                 UserManager.USER_TYPE_FULL_SECONDARY);
-
+        mFragment.mUserInfo = mUserInfo;
         mUserManager.addProfile(mUserInfo);
     }
 
@@ -787,7 +804,7 @@ public class UserDetailsSettingsTest {
         mUserInfo = new UserInfo(11, "Jerry", null,
                 UserInfo.FLAG_FULL | UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_MAIN,
                 UserManager.USER_TYPE_FULL_SECONDARY);
-
+        mFragment.mUserInfo = mUserInfo;
         mUserManager.addProfile(mUserInfo);
     }
 
@@ -796,7 +813,7 @@ public class UserDetailsSettingsTest {
         mUserInfo = new UserInfo(12, "Andy", null,
                 UserInfo.FLAG_FULL | UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_ADMIN,
                 UserManager.USER_TYPE_FULL_SECONDARY);
-
+        mFragment.mUserInfo = mUserInfo;
         mUserManager.addProfile(mUserInfo);
     }
 
@@ -805,7 +822,7 @@ public class UserDetailsSettingsTest {
         mUserInfo = new UserInfo(23, "Guest", null,
                 UserInfo.FLAG_FULL | UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_GUEST,
                 UserManager.USER_TYPE_FULL_GUEST);
-
+        mFragment.mUserInfo = mUserInfo;
         mUserManager.addProfile(mUserInfo);
     }
 
@@ -814,7 +831,7 @@ public class UserDetailsSettingsTest {
         mUserInfo = new UserInfo(21, "Bob", null,
                 UserInfo.FLAG_FULL | UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_RESTRICTED,
                 UserManager.USER_TYPE_FULL_RESTRICTED);
-
+        mFragment.mUserInfo = mUserInfo;
         mUserManager.addProfile(mUserInfo);
     }
 }

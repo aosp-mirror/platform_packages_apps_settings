@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows;
 
+import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 
 import androidx.annotation.Nullable;
@@ -32,7 +33,7 @@ import org.robolectric.annotation.Resetter;
 import java.util.List;
 import java.util.Optional;
 
-@Implements(value = AudioStreamsHelper.class, callThroughByDefault = false)
+@Implements(value = AudioStreamsHelper.class, callThroughByDefault = true)
 public class ShadowAudioStreamsHelper {
     private static AudioStreamsHelper sMockHelper;
     @Nullable private static CachedBluetoothDevice sCachedBluetoothDevice;
@@ -58,6 +59,11 @@ public class ShadowAudioStreamsHelper {
         return sMockHelper.getAllConnectedSources();
     }
 
+    @Implementation
+    public List<BluetoothLeBroadcastReceiveState> getAllPresentSources() {
+        return sMockHelper.getAllPresentSources();
+    }
+
     /** Gets {@link CachedBluetoothDevice} in sharing or le connected */
     @Implementation
     public static Optional<CachedBluetoothDevice> getCachedBluetoothDeviceInSharingOrLeConnected(
@@ -68,5 +74,17 @@ public class ShadowAudioStreamsHelper {
     @Implementation
     public LocalBluetoothLeBroadcastAssistant getLeBroadcastAssistant() {
         return sMockHelper.getLeBroadcastAssistant();
+    }
+
+    /** Removes sources from LE broadcasts associated for all active sinks based on broadcast Id. */
+    @Implementation
+    public void removeSource(int broadcastId) {
+        sMockHelper.removeSource(broadcastId);
+    }
+
+    /** Adds the specified LE broadcast source to all active sinks. */
+    @Implementation
+    public void addSource(BluetoothLeBroadcastMetadata source) {
+        sMockHelper.addSource(source);
     }
 }

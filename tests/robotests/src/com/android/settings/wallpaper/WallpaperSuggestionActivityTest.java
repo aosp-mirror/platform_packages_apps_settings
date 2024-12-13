@@ -118,7 +118,7 @@ public class WallpaperSuggestionActivityTest {
     }
 
     @Test
-    public void addExtras_intentNotFromSetupWizard_extrasHasFocusWallpaper() {
+    public void addExtras_intentNotFromSetupWizard_extrasHasFocusWallpaperAndLaunchedSettingsSearch() {
         WallpaperSuggestionActivity activity = Robolectric.buildActivity(
                 WallpaperSuggestionActivity.class, new Intent(Intent.ACTION_MAIN).setComponent(
                         new ComponentName(RuntimeEnvironment.application,
@@ -127,6 +127,8 @@ public class WallpaperSuggestionActivityTest {
 
         assertThat(intent).isNotNull();
         assertThat(intent.getStringExtra(WALLPAPER_FLAVOR)).isEqualTo("focus_wallpaper");
+        assertThat(intent.getStringExtra(WALLPAPER_LAUNCH_SOURCE))
+                .isEqualTo("app_launched_settings_search");
     }
 
 

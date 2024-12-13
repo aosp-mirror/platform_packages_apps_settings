@@ -84,6 +84,7 @@ import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.safetycenter.LockScreenSafetySource;
@@ -160,11 +161,14 @@ public class ChooseLockGeneric extends SettingsActivity {
         static final int CHOOSE_LOCK_BEFORE_BIOMETRIC_REQUEST = 103;
         @VisibleForTesting
         static final int SKIP_FINGERPRINT_REQUEST = 104;
+        @VisibleForTesting
+        static final int BIOMETRIC_AUTH_REQUEST = 105;
 
         private LockPatternUtils mLockPatternUtils;
         private DevicePolicyManager mDpm;
         private boolean mRequestGatekeeperPasswordHandle = false;
         private boolean mPasswordConfirmed = false;
+        private boolean mBiometricsAuthSuccessful = false;
         private boolean mWaitingForConfirmation = false;
         private boolean mWaitingForActivityResult = false;
         private LockscreenCredential mUserPassword;
@@ -488,6 +492,30 @@ public class ChooseLockGeneric extends SettingsActivity {
                     ? data.getParcelableExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD)
                     : null;
                 updatePreferencesOrFinish(false /* isRecreatingActivity */);
+                final Utils.BiometricStatus biometricAuthStatus =
+                        Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
+                                false /* biometricsAuthenticationRequested */,
+                                mUserId);
+                if (biometricAuthStatus == Utils.BiometricStatus.OK) {
+                    Utils.launchBiometricPromptForMandatoryBiometrics(this,
+                            BIOMETRIC_AUTH_REQUEST,
+                            mUserId, true /* hideBackground */);
+                } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
+                    IdentityCheckBiometricErrorDialog
+                            .showBiometricErrorDialogAndFinishActivityOnDismiss(getActivity(),
+                                    biometricAuthStatus);
+                }
+            } else if (requestCode == BIOMETRIC_AUTH_REQUEST) {
+                if (resultCode == Activity.RESULT_OK) {
+                    mBiometricsAuthSuccessful = true;
+                } else if (resultCode
+                        == ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT) {
+                    IdentityCheckBiometricErrorDialog
+                            .showBiometricErrorDialogAndFinishActivityOnDismiss(getActivity(),
+                                    Utils.BiometricStatus.LOCKOUT);
+                } else {
+                    finish();
+                }
             } else if (requestCode == CHOOSE_LOCK_REQUEST) {
                 if (resultCode != RESULT_CANCELED) {
                     getActivity().setResult(resultCode, data);
@@ -763,6 +791,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                         entries.removePreference(pref);
                     } else if (!enabled) {
                         pref.setEnabled(false);
+                        pref.setSummary(
+                                com.android.settingslib.widget
+                                        .restricted.R.string.disabled_by_admin);
                     }
                 }
             }

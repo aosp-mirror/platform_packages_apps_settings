@@ -19,6 +19,7 @@ package com.android.settings.widget
 import android.content.Context
 import android.content.res.Resources
 import android.util.AttributeSet
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import com.android.settings.spa.preference.ComposePreference
@@ -36,6 +37,9 @@ constructor(
 
     /** A icon resource id for displaying icon on tips card. */
     var iconResId: Int? = null
+
+    /** A color resource id for displaying icon and button text on tips card. */
+    var tintColorResId: Int? = null
 
     /** The primary button's text. */
     var primaryButtonText: String = ""
@@ -85,6 +89,8 @@ constructor(
                     title = title?.toString() ?: "",
                     text = summary?.toString() ?: "",
                     buttons = listOfNotNull(configPrimaryButton(), configSecondaryButton()),
+                    tintColor = tintColorResId?.let { Color(context.getColor(it)) }
+                        ?: Color.Unspecified,
                     onDismiss = onDismiss,
                     imageVector =
                     iconResId

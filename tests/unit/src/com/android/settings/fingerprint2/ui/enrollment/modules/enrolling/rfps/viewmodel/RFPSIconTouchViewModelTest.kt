@@ -49,8 +49,7 @@ class RFPSIconTouchViewModelTest {
   fun setup() {
     Dispatchers.setMain(backgroundDispatcher)
     testScope = TestScope(backgroundDispatcher)
-    rfpsIconTouchViewModel =
-      RFPSIconTouchViewModel()
+    rfpsIconTouchViewModel = RFPSIconTouchViewModel()
   }
 
   @After

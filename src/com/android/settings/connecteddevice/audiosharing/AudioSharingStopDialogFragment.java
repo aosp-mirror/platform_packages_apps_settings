@@ -32,6 +32,7 @@ import androidx.fragment.app.FragmentManager;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -80,13 +81,19 @@ public class AudioSharingStopDialogFragment extends InstrumentedDialogFragment {
             @NonNull CachedBluetoothDevice newDevice,
             @NonNull DialogEventListener listener,
             @NonNull Pair<Integer, Object>[] eventData) {
-        if (!AudioSharingUtils.isFeatureEnabled()) return;
-        final FragmentManager manager = host.getChildFragmentManager();
+        if (!BluetoothUtils.isAudioSharingEnabled()) return;
+        final FragmentManager manager;
+        try {
+            manager = host.getChildFragmentManager();
+        } catch (IllegalStateException e) {
+            Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+            return;
+        }
         AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
         if (dialog != null) {
-            int newGroupId = AudioSharingUtils.getGroupId(newDevice);
+            int newGroupId = BluetoothUtils.getGroupId(newDevice);
             if (sCachedDevice != null
-                    && newGroupId == AudioSharingUtils.getGroupId(sCachedDevice)) {
+                    && newGroupId == BluetoothUtils.getGroupId(sCachedDevice)) {
                 Log.d(
                         TAG,
                         String.format(
@@ -138,6 +145,13 @@ public class AudioSharingStopDialogFragment extends InstrumentedDialogFragment {
     /** Get the latest connected device which triggers the dialog. */
     public @Nullable CachedBluetoothDevice getDevice() {
         return sCachedDevice;
+    }
+
+    /** Test only: get the {@link DialogEventListener} passed to the dialog. */
+    @VisibleForTesting
+    @Nullable
+    DialogEventListener getListener() {
+        return sListener;
     }
 
     /** Test only: get the event data passed to the dialog. */

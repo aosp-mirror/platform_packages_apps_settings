@@ -32,6 +32,7 @@ import androidx.core.app.NotificationCompat;
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -48,7 +49,7 @@ public class AudioSharingReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (!AudioSharingUtils.isFeatureEnabled()) {
+        if (!BluetoothUtils.isAudioSharingEnabled()) {
             Log.w(TAG, "Skip handling received intent, flag is off.");
             return;
         }
@@ -80,9 +81,15 @@ public class AudioSharingReceiver extends BroadcastReceiver {
                 break;
             case ACTION_LE_AUDIO_SHARING_STOP:
                 LocalBluetoothManager manager = Utils.getLocalBtManager(context);
-                AudioSharingUtils.stopBroadcasting(manager);
-                metricsFeatureProvider.action(
-                        context, SettingsEnums.ACTION_STOP_AUDIO_SHARING_FROM_NOTIFICATION);
+                if (BluetoothUtils.isBroadcasting(manager)) {
+                    AudioSharingUtils.stopBroadcasting(manager);
+                    metricsFeatureProvider.action(
+                            context, SettingsEnums.ACTION_STOP_AUDIO_SHARING_FROM_NOTIFICATION);
+                } else {
+                    cancelSharingNotification(context);
+                    metricsFeatureProvider.action(
+                            context, SettingsEnums.ACTION_CANCEL_AUDIO_SHARING_NOTIFICATION);
+                }
                 break;
             default:
                 Log.w(TAG, "Received unexpected intent " + intent.getAction());

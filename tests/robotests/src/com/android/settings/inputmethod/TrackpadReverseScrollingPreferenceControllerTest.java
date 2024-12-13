@@ -26,12 +26,14 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.view.InputDevice;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowInputDevice;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -46,6 +48,7 @@ import org.robolectric.annotation.Config;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         com.android.settings.testutils.shadow.ShadowSystemSettings.class,
+        com.android.settings.testutils.shadow.ShadowInputDevice.class,
 })
 public class TrackpadReverseScrollingPreferenceControllerTest {
     @Rule
@@ -67,6 +70,12 @@ public class TrackpadReverseScrollingPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_expected() {
+        int deviceId = 1;
+        ShadowInputDevice.sDeviceIds = new int[]{deviceId};
+        InputDevice device = ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId,
+                InputDevice.SOURCE_TOUCHPAD);
+        ShadowInputDevice.addDevice(deviceId, device);
+
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
     }

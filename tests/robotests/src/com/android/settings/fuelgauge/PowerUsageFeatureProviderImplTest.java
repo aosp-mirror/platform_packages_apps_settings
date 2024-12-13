@@ -78,6 +78,16 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
+    public void isRestrictedModeOverwriteEnabled_returnFalse() {
+        assertThat(mPowerFeatureProvider.isRestrictedModeOverwriteEnabled()).isFalse();
+    }
+
+    @Test
+    public void isForceExpireAppOptimizationModeEnabled_returnFalse() {
+        assertThat(mPowerFeatureProvider.isForceExpireAppOptimizationModeEnabled()).isFalse();
+    }
+
+    @Test
     public void isAppOptimizationModeLogged_returnFalse() {
         assertThat(mPowerFeatureProvider.isAppOptimizationModeLogged()).isFalse();
     }
@@ -160,7 +170,7 @@ public class PowerUsageFeatureProviderImplTest {
 
     @Test
     public void isBatteryDefend_defenderModeAndExtraDefendAreFalse_returnFalse() {
-        mBatteryInfo.isBatteryDefender = false;
+        mBatteryInfo.isLongLife = false;
         doReturn(false).when(mPowerFeatureProvider).isExtraDefend();
 
         assertThat(mPowerFeatureProvider.isBatteryDefend(mBatteryInfo)).isFalse();
@@ -168,7 +178,7 @@ public class PowerUsageFeatureProviderImplTest {
 
     @Test
     public void isBatteryDefend_defenderModeIsFalse_returnFalse() {
-        mBatteryInfo.isBatteryDefender = false;
+        mBatteryInfo.isLongLife = false;
         doReturn(true).when(mPowerFeatureProvider).isExtraDefend();
 
         assertThat(mPowerFeatureProvider.isBatteryDefend(mBatteryInfo)).isFalse();
@@ -176,7 +186,7 @@ public class PowerUsageFeatureProviderImplTest {
 
     @Test
     public void isBatteryDefend_defenderModeAndExtraDefendAreTrue_returnFalse() {
-        mBatteryInfo.isBatteryDefender = true;
+        mBatteryInfo.isLongLife = true;
         doReturn(true).when(mPowerFeatureProvider).isExtraDefend();
 
         assertThat(mPowerFeatureProvider.isBatteryDefend(mBatteryInfo)).isFalse();
@@ -184,7 +194,7 @@ public class PowerUsageFeatureProviderImplTest {
 
     @Test
     public void isBatteryDefend_extraDefendIsFalse_returnTrue() {
-        mBatteryInfo.isBatteryDefender = true;
+        mBatteryInfo.isLongLife = true;
         doReturn(false).when(mPowerFeatureProvider).isExtraDefend();
 
         assertThat(mPowerFeatureProvider.isBatteryDefend(mBatteryInfo)).isTrue();

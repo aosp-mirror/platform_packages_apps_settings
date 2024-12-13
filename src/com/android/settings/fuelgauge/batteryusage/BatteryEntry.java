@@ -22,7 +22,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryConsumer;
@@ -176,18 +175,7 @@ public class BatteryEntry {
                 }
             }
             if (mDefaultPackageName != null) {
-                PackageManager pm = context.getPackageManager();
-                try {
-                    ApplicationInfo appInfo =
-                            pm.getApplicationInfo(mDefaultPackageName, 0 /* no flags */);
-                    mName = pm.getApplicationLabel(appInfo).toString();
-                } catch (NameNotFoundException e) {
-                    Log.d(
-                            TAG,
-                            "PackageManager failed to retrieve ApplicationInfo for: "
-                                    + mDefaultPackageName);
-                    mName = mDefaultPackageName;
-                }
+                mName = mDefaultPackageName;
             }
             mTimeInForegroundMs =
                     uidBatteryConsumer.getTimeInProcessStateMs(

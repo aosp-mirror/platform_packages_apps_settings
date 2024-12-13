@@ -122,6 +122,7 @@ public class SimDialogActivity extends FragmentActivity {
 
     private void showOrUpdateDialog() {
         final int dialogType = getIntent().getIntExtra(DIALOG_TYPE_KEY, INVALID_PICK);
+        Log.d(TAG, "dialogType:" + dialogType);
 
         if (dialogType == PICK_DISMISS) {
             finishAndRemoveTask();
@@ -379,8 +380,6 @@ public class SimDialogActivity extends FragmentActivity {
 
     private void setPreferredSim(final int subId) {
         setDefaultDataSubId(subId);
-        setDefaultSmsSubId(subId);
-        setDefaultCallsSubId(subId);
     }
 
     private PhoneAccountHandle subscriptionIdToPhoneAccountHandle(final int subId) {

@@ -28,6 +28,10 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
+import android.provider.Flags;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
@@ -57,6 +61,8 @@ import java.util.List;
 public class AccessibilityButtonFragmentTest {
 
     @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+    @Rule
     public MockitoRule mMockitoRule = MockitoJUnit.rule();
     @Spy
     private final Context mContext = ApplicationProvider.getApplicationContext();
@@ -84,6 +90,7 @@ public class AccessibilityButtonFragmentTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
     public void onCreate_navigationGestureEnabled_setCorrectTitle() {
         when(mResources.getInteger(com.android.internal.R.integer.config_navBarInteractionMode))
                 .thenReturn(NAV_BAR_MODE_GESTURAL);
@@ -96,7 +103,20 @@ public class AccessibilityButtonFragmentTest {
     }
 
     @Test
-    public void onCreate_navigationGestureDisabled_setCorrectTitle() {
+    @EnableFlags(Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
+    public void onCreate_navigationGestureEnabled_gestureFlag_setCorrectTitle() {
+        when(mResources.getInteger(com.android.internal.R.integer.config_navBarInteractionMode))
+                .thenReturn(NAV_BAR_MODE_GESTURAL);
+
+        mFragment.onAttach(mContext);
+        mFragment.onCreate(Bundle.EMPTY);
+
+        assertThat(mFragment.getActivity().getTitle().toString()).isEqualTo(
+                mContext.getString(R.string.accessibility_button_title));
+    }
+
+    @Test
+    public void onCreate_navigationBarEnabled_setCorrectTitle() {
         when(mResources.getInteger(com.android.internal.R.integer.config_navBarInteractionMode))
                 .thenReturn(NAV_BAR_MODE_2BUTTON);
 

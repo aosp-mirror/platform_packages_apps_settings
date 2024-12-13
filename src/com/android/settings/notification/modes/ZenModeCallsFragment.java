@@ -18,6 +18,7 @@ package com.android.settings.notification.modes;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -34,7 +35,7 @@ public class ZenModeCallsFragment extends ZenModeFragmentBase {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModePrioritySendersPreferenceController(context,
-                "zen_mode_settings_category_calls", false, mBackend));
+                "zen_mode_settings_category_calls", false, mBackend, mHelperBackend));
         controllers.add(new ZenModeRepeatCallersPreferenceController(context,
                 "zen_mode_repeat_callers", mBackend,
                 context.getResources().getInteger(com.android.internal.R.integer
@@ -49,7 +50,6 @@ public class ZenModeCallsFragment extends ZenModeFragmentBase {
 
     @Override
     public int getMetricsCategory() {
-        // TODO: b/332937635 - make this the correct metrics category
         return SettingsEnums.DND_CALLS;
     }
 

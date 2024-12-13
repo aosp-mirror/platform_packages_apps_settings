@@ -111,7 +111,7 @@ public class RegionZonePicker extends BaseTimeZoneInfoPicker {
 
     /**
      * Returns a list of {@link TimeZoneInfo} objects. The returned list will be sorted properly for
-     * display in the locale.It may be smaller than the input collection, if equivalent IDs are
+     * display in the locale. It may be smaller than the input collection, if equivalent IDs are
      * passed in.
      *
      * @param timeZoneIds a list of Olson IDs.

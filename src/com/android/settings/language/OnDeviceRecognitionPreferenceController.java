@@ -20,7 +20,6 @@ import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
@@ -80,10 +79,7 @@ public class OnDeviceRecognitionPreferenceController extends BasePreferenceContr
     }
 
     private void show(Preference preference) {
-        final List<UserHandle> userHandles = new ArrayList<>();
-        for (UserInfo userInfo : UserManager.get(mContext).getUsers()) {
-            userHandles.add(userInfo.getUserHandle());
-        }
+        final List<UserHandle> userHandles = UserManager.get(mContext).getEnabledProfiles();
 
         // Only a single profile is installed. Proceed with its settings.
         if (userHandles.size() == 1) {

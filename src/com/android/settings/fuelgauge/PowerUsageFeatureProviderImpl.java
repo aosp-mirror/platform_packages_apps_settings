@@ -89,6 +89,16 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public boolean isRestrictedModeOverwriteEnabled() {
+        return false;
+    }
+
+    @Override
+    public boolean isForceExpireAppOptimizationModeEnabled() {
+        return false;
+    }
+
+    @Override
     public boolean isAppOptimizationModeLogged() {
         return false;
     }
@@ -243,7 +253,7 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     @Override
     public boolean isBatteryDefend(BatteryInfo info) {
-        return info.isBatteryDefender && !isExtraDefend();
+        return info.isLongLife && !isExtraDefend();
     }
 
     @Override

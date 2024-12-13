@@ -67,22 +67,23 @@ public class FlashNotificationsPreviewPreferenceControllerTest {
     public MockitoRule mMockitoRule = MockitoJUnit.rule();
     @Spy
     private final Context mContext = ApplicationProvider.getApplicationContext();
-    @Mock
-    private PreferenceScreen mPreferenceScreen;
-    @Mock
-    private Preference mPreference;
     @Spy
     private ContentResolver mContentResolver = mContext.getContentResolver();
-
+    @Mock
+    private PreferenceScreen mPreferenceScreen;
+    private Preference mPreference;
     private FlashNotificationsPreviewPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(mPreferenceScreen.findPreference(PREFERENCE_KEY)).thenReturn(mPreference);
-        when(mPreference.getKey()).thenReturn(PREFERENCE_KEY);
 
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
+
+        mPreference = new Preference(mContext);
+        mPreference.setKey(PREFERENCE_KEY);
+        when(mPreferenceScreen.findPreference(PREFERENCE_KEY)).thenReturn(mPreference);
+
         mController = new FlashNotificationsPreviewPreferenceController(mContext, PREFERENCE_KEY);
     }
 
@@ -97,40 +98,45 @@ public class FlashNotificationsPreviewPreferenceControllerTest {
     }
 
     @Test
-    public void testDisplayPreference_torchPresent_cameraOff_screenOff_verifyDisabled() {
+    public void testDisplayPreference_torchPresent_cameraOff_screenOff_notVisible() {
         setFlashNotificationsState(FlashNotificationsUtil.State.OFF);
 
         mController.displayPreference(mPreferenceScreen);
-        verify(mPreference).setEnabled(eq(false));
+
+        assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
-    public void testDisplayPreference_torchPresent_cameraOn_screenOff_verifyEnabled() {
+    public void testDisplayPreference_torchPresent_cameraOn_screenOff_isVisible() {
         setFlashNotificationsState(FlashNotificationsUtil.State.CAMERA);
 
         mController.displayPreference(mPreferenceScreen);
-        verify(mPreference).setEnabled(eq(true));
+
+        assertThat(mPreference.isVisible()).isTrue();
     }
 
     @Test
-    public void testDisplayPreference_torchPresent_cameraOff_screenOn_verifyEnabled() {
+    public void testDisplayPreference_torchPresent_cameraOff_screenOn_isVisible() {
         setFlashNotificationsState(FlashNotificationsUtil.State.SCREEN);
 
         mController.displayPreference(mPreferenceScreen);
-        verify(mPreference).setEnabled(eq(true));
+
+        assertThat(mPreference.isVisible()).isTrue();
     }
 
     @Test
-    public void testDisplayPreference_torchPresent_cameraOn_screenOn_verifyEnabled() {
+    public void testDisplayPreference_torchPresent_cameraOn_screenOn_isVisible() {
         setFlashNotificationsState(FlashNotificationsUtil.State.CAMERA_SCREEN);
 
         mController.displayPreference(mPreferenceScreen);
-        verify(mPreference).setEnabled(eq(true));
+
+        assertThat(mPreference.isVisible()).isTrue();
     }
 
     @Test
     public void testHandlePreferenceTreeClick_invalidPreference() {
         mController.handlePreferenceTreeClick(mock(Preference.class));
+
         verify(mContext, never()).sendBroadcastAsUser(any(), any());
     }
 
@@ -160,6 +166,7 @@ public class FlashNotificationsPreviewPreferenceControllerTest {
     @Test
     public void onStateChanged_onResume_cameraUri_verifyRegister() {
         mController.onStateChanged(mock(LifecycleOwner.class), Lifecycle.Event.ON_RESUME);
+
         verify(mContentResolver).registerContentObserver(
                 eq(Settings.System.getUriFor(Settings.System.CAMERA_FLASH_NOTIFICATION)),
                 anyBoolean(), eq(mController.mContentObserver));
@@ -168,6 +175,7 @@ public class FlashNotificationsPreviewPreferenceControllerTest {
     @Test
     public void onStateChanged_onResume_screenUri_verifyRegister() {
         mController.onStateChanged(mock(LifecycleOwner.class), Lifecycle.Event.ON_RESUME);
+
         verify(mContentResolver).registerContentObserver(
                 eq(Settings.System.getUriFor(Settings.System.SCREEN_FLASH_NOTIFICATION)),
                 anyBoolean(), eq(mController.mContentObserver));
@@ -176,6 +184,7 @@ public class FlashNotificationsPreviewPreferenceControllerTest {
     @Test
     public void onStateChanged_onPause_verifyUnregister() {
         mController.onStateChanged(mock(LifecycleOwner.class), Lifecycle.Event.ON_PAUSE);
+
         verify(mContentResolver).unregisterContentObserver(eq(mController.mContentObserver));
     }
 }

@@ -31,7 +31,6 @@ import com.android.settings.biometrics.face.FaceFeatureProvider
 import com.android.settings.biometrics.face.FaceFeatureProviderImpl
 import com.android.settings.biometrics.fingerprint.FingerprintFeatureProvider
 import com.android.settings.biometrics.fingerprint.FingerprintFeatureProviderImpl
-import com.android.settings.biometrics2.factory.BiometricsRepositoryProviderImpl
 import com.android.settings.bluetooth.BluetoothFeatureProvider
 import com.android.settings.bluetooth.BluetoothFeatureProviderImpl
 import com.android.settings.connecteddevice.dock.DockUpdaterFeatureProviderImpl
@@ -151,8 +150,6 @@ open class FeatureFactoryImpl : FeatureFactory() {
     override val fingerprintFeatureProvider: FingerprintFeatureProvider by lazy {
         FingerprintFeatureProviderImpl()
     }
-
-    override val biometricsRepositoryProvider by lazy { BiometricsRepositoryProviderImpl() }
 
     override val wifiTrackerLibProvider: WifiTrackerLibProvider by lazy {
         WifiTrackerLibProviderImpl()

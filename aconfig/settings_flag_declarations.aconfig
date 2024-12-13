@@ -1,5 +1,5 @@
 package: "com.android.settings.flags"
-container: "system_ext"
+container: "system"
 
 flag {
     name: "show_factory_reset_cancel_button"
@@ -41,4 +41,25 @@ flag {
     namespace: "android_settings"
     description: "Feature flag to remove relevant slices dependencies."
     bug: "297367302"
+}
+
+flag {
+    name: "support_raw_dynamic_icons"
+    namespace: "android_settings"
+    description: "Flag to gate support of injected preference icons containing raw data"
+    bug: "351884562"
+}
+
+flag {
+    name: "updated_suggestion_card_aosp"
+    namespace: "android_settings"
+    description: "Use updated suggestion card(s) in AOSP Settings"
+    bug: "323258154"
+}
+
+flag {
+  name: "catalyst"
+  namespace: "android_settings"
+  description: "Flag for all screens"
+  bug: "323791114"
 }

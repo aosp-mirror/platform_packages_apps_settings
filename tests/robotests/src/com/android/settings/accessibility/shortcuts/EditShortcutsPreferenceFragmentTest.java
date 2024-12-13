@@ -18,6 +18,7 @@ package com.android.settings.accessibility.shortcuts;
 
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
 import static com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment.SHORTCUT_SETTINGS;
 
 import static com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_DEFERRED_SETUP;
@@ -36,6 +37,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
@@ -240,6 +242,7 @@ public class EditShortcutsPreferenceFragmentTest {
     }
 
     @Test
+    @DisableFlags(android.provider.Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
     public void onSoftwareShortcutSettingChanged_softwareControllersUpdated() {
         mFragmentScenario = createFragScenario(/* isInSuw= */ false, TARGET);
         mFragmentScenario.moveToState(Lifecycle.State.CREATED);
@@ -256,6 +259,27 @@ public class EditShortcutsPreferenceFragmentTest {
     }
 
     @Test
+    @EnableFlags(android.provider.Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
+    public void onSoftwareShortcutSettingsChanged_softwareControllersUpdated() {
+        mFragmentScenario = createFragScenario(/* isInSuw= */ false, TARGET);
+        mFragmentScenario.moveToState(Lifecycle.State.CREATED);
+
+        ShortcutUtils.optInValueToSettings(
+                mContext, ShortcutConstants.UserShortcutType.SOFTWARE, TARGET);
+        ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
+
+        mFragmentScenario.onFragment(fragment -> {
+            TwoStatePreference preference = fragment.findPreference(
+                    mContext.getString(R.string.accessibility_shortcut_fab_pref));
+            assertThat(preference.isChecked()).isTrue();
+            preference = fragment.findPreference(
+                    mContext.getString(R.string.accessibility_shortcut_gesture_pref));
+            assertThat(preference.isChecked()).isFalse();
+        });
+    }
+
+    @Test
+    @DisableFlags(android.provider.Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
     public void onSoftwareShortcutModeChanged_softwareControllersUpdated() {
         mFragmentScenario = createFragScenario(/* isInSuw= */ false, TARGET);
         mFragmentScenario.moveToState(Lifecycle.State.CREATED);
@@ -309,6 +333,7 @@ public class EditShortcutsPreferenceFragmentTest {
     }
 
     @Test
+    @DisableFlags(android.provider.Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
     public void fragmentResumed_enableTouchExploration_gestureShortcutOptionSummaryUpdated() {
         String expectedSummary = StringUtil.getIcuPluralsString(mContext, 3,
                 R.string.accessibility_shortcut_edit_dialog_summary_gesture)
@@ -330,12 +355,51 @@ public class EditShortcutsPreferenceFragmentTest {
     }
 
     @Test
+    @EnableFlags(android.provider.Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
+    public void fragmentResumed_enableTouchExploration_gestureFlag_gestureSummaryUpdated() {
+        String expectedSummary = StringUtil.getIcuPluralsString(mContext, 3,
+                R.string.accessibility_shortcut_edit_dialog_summary_gesture);
+        mFragmentScenario = createFragScenario(/* isInSuw= */ false, TARGET);
+        mFragmentScenario.moveToState(Lifecycle.State.RESUMED);
+
+        ShadowAccessibilityManager am = shadowOf(
+                mContext.getSystemService(AccessibilityManager.class));
+        am.setTouchExplorationEnabled(true);
+
+        mFragmentScenario.onFragment(fragment -> {
+            Preference preference = fragment.findPreference(
+                    mContext.getString(R.string.accessibility_shortcut_gesture_pref));
+            assertThat(preference.getSummary().toString()).isEqualTo(expectedSummary);
+        });
+    }
+
+    @Test
+    @DisableFlags(android.provider.Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
     public void fragmentPaused_enableTouchExploration_gestureShortcutOptionSummaryNotUpdated() {
         String expectedSummary = StringUtil.getIcuPluralsString(mContext, 2,
                 R.string.accessibility_shortcut_edit_dialog_summary_gesture)
                 + "\n\n"
                 + mContext.getString(
                 R.string.accessibility_shortcut_edit_dialog_summary_software_floating);
+        mFragmentScenario = createFragScenario(/* isInSuw= */ false, TARGET);
+        mFragmentScenario.moveToState(Lifecycle.State.RESUMED).moveToState(Lifecycle.State.STARTED);
+
+        ShadowAccessibilityManager am = shadowOf(
+                mContext.getSystemService(AccessibilityManager.class));
+        am.setTouchExplorationEnabled(true);
+
+        mFragmentScenario.onFragment(fragment -> {
+            Preference preference = fragment.findPreference(
+                    mContext.getString(R.string.accessibility_shortcut_gesture_pref));
+            assertThat(preference.getSummary().toString()).isEqualTo(expectedSummary);
+        });
+    }
+
+    @Test
+    @EnableFlags(android.provider.Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
+    public void fragmentPaused_enableTouchExploration_gestureFlag_gestureSummaryNotUpdated() {
+        String expectedSummary = StringUtil.getIcuPluralsString(mContext, 2,
+                R.string.accessibility_shortcut_edit_dialog_summary_gesture);
         mFragmentScenario = createFragScenario(/* isInSuw= */ false, TARGET);
         mFragmentScenario.moveToState(Lifecycle.State.RESUMED).moveToState(Lifecycle.State.STARTED);
 
@@ -441,7 +505,7 @@ public class EditShortcutsPreferenceFragmentTest {
         assertThat(
                 PreferredShortcuts.retrieveUserShortcutType(
                         mContext, TARGET)
-        ).isEqualTo(ShortcutConstants.UserShortcutType.SOFTWARE);
+        ).isEqualTo(SOFTWARE);
         // Update the chosen shortcut type to Volume keys while the fragment is in the background
         ShortcutUtils.optInValueToSettings(
                 mContext, ShortcutConstants.UserShortcutType.HARDWARE, TARGET);
@@ -461,7 +525,7 @@ public class EditShortcutsPreferenceFragmentTest {
         assertThat(
                 PreferredShortcuts.retrieveUserShortcutType(
                         mContext, TARGET)
-        ).isEqualTo(ShortcutConstants.UserShortcutType.SOFTWARE);
+        ).isEqualTo(SOFTWARE);
 
         ShortcutUtils.optInValueToSettings(
                 mContext, ShortcutConstants.UserShortcutType.HARDWARE, TARGET);

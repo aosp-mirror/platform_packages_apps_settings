@@ -441,4 +441,9 @@ public class AdvancedPowerUsageDetailTest {
         TimeUnit.SECONDS.sleep(1);
         verifyNoInteractions(mMetricsFeatureProvider);
     }
+
+    @Test
+    public void shouldSkipForInitialSUW_returnTrue() {
+        assertThat(mFragment.shouldSkipForInitialSUW()).isTrue();
+    }
 }
