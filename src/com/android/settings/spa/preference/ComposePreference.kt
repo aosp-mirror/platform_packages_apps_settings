@@ -28,7 +28,7 @@ import com.android.settings.R
 import com.android.settingslib.spa.framework.theme.SettingsTheme
 import com.android.settingslib.widget.GroupSectionDividerMixin
 
-open class ComposeMainSwitchPreference @JvmOverloads constructor(
+open class ComposeGroupSectionPreference @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
