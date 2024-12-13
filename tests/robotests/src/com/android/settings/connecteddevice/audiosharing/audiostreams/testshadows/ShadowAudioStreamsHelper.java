@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows;
 
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 
@@ -31,6 +32,7 @@ import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Implements(value = AudioStreamsHelper.class, callThroughByDefault = true)
@@ -57,6 +59,11 @@ public class ShadowAudioStreamsHelper {
     @Implementation
     public List<BluetoothLeBroadcastReceiveState> getAllConnectedSources() {
         return sMockHelper.getAllConnectedSources();
+    }
+
+    @Implementation
+    public Map<BluetoothDevice, List<BluetoothLeBroadcastReceiveState>> getAllSourcesByDevice() {
+        return sMockHelper.getAllSourcesByDevice();
     }
 
     @Implementation
