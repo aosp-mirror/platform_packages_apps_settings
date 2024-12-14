@@ -60,10 +60,15 @@ class WifiCallingMainSwitchPreference(private val subId: Int) :
 
     override fun createWidget(context: Context) = SettingsMainSwitchPreference(context)
 
-    override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
+    override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
-    override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
+    override fun getWritePermit(
+        context: Context,
+        value: Boolean?,
+        callingPid: Int,
+        callingUid: Int,
+    ) =
         when {
             value == true &&
                 (DisclaimerItemFactory.create(context, subId).isNotEmpty() ||

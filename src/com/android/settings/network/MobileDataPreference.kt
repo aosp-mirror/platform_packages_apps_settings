@@ -16,6 +16,7 @@
 
 package com.android.settings.network
 
+import android.Manifest
 import android.content.Context
 import android.telephony.SubscriptionManager
 import com.android.settings.R
@@ -45,11 +46,30 @@ class MobileDataPreference :
 
     override fun storage(context: Context): KeyValueStore = MobileDataStorage(context)
 
-    override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
+    override fun getReadPermissions(context: Context) =
+        arrayOf(
+            // required by TelephonyManager.isDataEnabledForReason
+            Manifest.permission.ACCESS_NETWORK_STATE,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.MODIFY_PHONE_STATE,
+            Manifest.permission.READ_BASIC_PHONE_STATE,
+        )
+
+    override fun getWritePermissions(context: Context) =
+        arrayOf(
+            // required by TelephonyManager.setDataEnabledForReason
+            Manifest.permission.MODIFY_PHONE_STATE
+        )
+
+    override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
-    override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
-        ReadWritePermit.ALLOW
+    override fun getWritePermit(
+        context: Context,
+        value: Boolean?,
+        callingPid: Int,
+        callingUid: Int,
+    ) = ReadWritePermit.ALLOW
 
     override val sensitivityLevel
         get() = SensitivityLevel.LOW_SENSITIVITY

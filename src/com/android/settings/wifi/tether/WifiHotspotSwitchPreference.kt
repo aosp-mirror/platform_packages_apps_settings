@@ -106,11 +106,15 @@ class WifiHotspotSwitchPreference(context: Context, dataSaverStore: KeyValueStor
     override val restrictionKeys
         get() = arrayOf(UserManager.DISALLOW_WIFI_TETHERING)
 
-    override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
+    override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
-    override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
-        ReadWritePermit.ALLOW
+    override fun getWritePermit(
+        context: Context,
+        value: Boolean?,
+        callingPid: Int,
+        callingUid: Int,
+    ) = ReadWritePermit.ALLOW
 
     override val sensitivityLevel
         get() = SensitivityLevel.HIGH_SENSITIVITY

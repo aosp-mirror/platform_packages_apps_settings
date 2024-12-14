@@ -102,10 +102,10 @@ class BatteryHeaderPreference :
 
     override fun getMaxValue(context: Context): Int = 100
 
-    override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
+    override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
-    override fun getWritePermit(context: Context, value: Int?, myUid: Int, callingUid: Int) =
+    override fun getWritePermit(context: Context, value: Int?, callingPid: Int, callingUid: Int) =
         ReadWritePermit.DISALLOW
 
     companion object {

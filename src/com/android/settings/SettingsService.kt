@@ -41,7 +41,7 @@ private class SetterPermissionChecker : ApiPermissionChecker<PreferenceSetterReq
 
     override fun hasPermission(
         application: Application,
-        myUid: Int,
+        callingPid: Int,
         callingUid: Int,
         request: PreferenceSetterRequest,
     ) = true
@@ -52,7 +52,7 @@ private class GetterPermissionChecker : ApiPermissionChecker<PreferenceGetterReq
 
     override fun hasPermission(
         application: Application,
-        myUid: Int,
+        callingPid: Int,
         callingUid: Int,
         request: PreferenceGetterRequest,
     ) = true
