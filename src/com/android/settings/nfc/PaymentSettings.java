@@ -30,6 +30,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -120,6 +121,9 @@ public class PaymentSettings extends DashboardFragment {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
+                    if (Flags.walletRoleEnabled()) {
+                        return false;
+                    }
                     final UserManager userManager = context.getSystemService(UserManager.class);
                     final UserInfo myUserInfo = userManager.getUserInfo(UserHandle.myUserId());
                     if (myUserInfo.isGuest()) {

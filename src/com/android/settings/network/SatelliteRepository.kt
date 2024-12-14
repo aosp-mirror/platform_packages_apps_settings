@@ -25,6 +25,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.concurrent.futures.CallbackToFutureAdapter
 import com.google.common.util.concurrent.Futures.immediateFuture
 import com.google.common.util.concurrent.ListenableFuture
+import java.util.concurrent.Executor
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
@@ -32,7 +33,6 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flowOf
-import java.util.concurrent.Executor
 import kotlinx.coroutines.flow.flowOn
 
 /**
@@ -58,20 +58,26 @@ class SatelliteRepository(
         }
 
         return CallbackToFutureAdapter.getFuture { completer ->
-            satelliteManager.requestIsEnabled(executor,
-                object : OutcomeReceiver<Boolean, SatelliteManager.SatelliteException> {
-                    override fun onResult(result: Boolean) {
-                        Log.i(TAG, "Satellite modem enabled status: $result")
-                        completer.set(result)
-                    }
+            try {
+                satelliteManager.requestIsEnabled(executor,
+                    object : OutcomeReceiver<Boolean, SatelliteManager.SatelliteException> {
+                        override fun onResult(result: Boolean) {
+                            Log.i(TAG, "Satellite modem enabled status: $result")
+                            completer.set(result)
+                        }
 
-                    override fun onError(error: SatelliteManager.SatelliteException) {
-                        super.onError(error)
-                        Log.w(TAG, "Can't get satellite modem enabled status", error)
-                        completer.set(false)
-                    }
-                })
-            "requestIsEnabled"
+                        override fun onError(error: SatelliteManager.SatelliteException) {
+                            super.onError(error)
+                            Log.w(TAG, "Can't get satellite modem enabled status", error)
+                            completer.set(false)
+                        }
+                    })
+                "requestIsEnabled"
+            } catch (e: IllegalStateException) {
+                Log.w(TAG, "IllegalStateException $e")
+                completer.set(false)
+            }
+
         }
     }
 
@@ -96,14 +102,21 @@ class SatelliteRepository(
             val callback = object : SatelliteModemStateCallback {
                 override fun onSatelliteModemStateChanged(state: Int) {
                     val isSessionStarted = isSatelliteSessionStarted(state)
-                    Log.i(TAG, "Satellite modem state changed: state=$state"
-                            + ", isSessionStarted=$isSessionStarted")
+                    Log.i(
+                        TAG, "Satellite modem state changed: state=$state"
+                            + ", isSessionStarted=$isSessionStarted"
+                    )
                     completer.set(isSessionStarted)
                     satelliteManager.unregisterForModemStateChanged(this)
                 }
             }
 
-            val registerResult = satelliteManager.registerForModemStateChanged(executor, callback)
+            var registerResult = SatelliteManager.SATELLITE_MODEM_STATE_UNKNOWN
+            try {
+                registerResult = satelliteManager.registerForModemStateChanged(executor, callback)
+            } catch (e: IllegalStateException) {
+                Log.w(TAG, "IllegalStateException $e")
+            }
             if (registerResult != SatelliteManager.SATELLITE_RESULT_SUCCESS) {
                 Log.w(TAG, "Failed to register for satellite modem state change: $registerResult")
                 completer.set(false)
@@ -132,15 +145,21 @@ class SatelliteRepository(
         return callbackFlow {
             val callback = SatelliteModemStateCallback { state ->
                 val isSessionStarted = isSatelliteSessionStarted(state)
-                Log.i(TAG, "Satellite modem state changed: state=$state"
-                    + ", isSessionStarted=$isSessionStarted")
+                Log.i(
+                    TAG, "Satellite modem state changed: state=$state"
+                        + ", isSessionStarted=$isSessionStarted"
+                )
                 trySend(isSessionStarted)
             }
-
-            val registerResult = satelliteManager.registerForModemStateChanged(
-                defaultDispatcher.asExecutor(),
-                callback
-            )
+            var registerResult: Int = SatelliteManager.SATELLITE_RESULT_ERROR
+            try {
+                registerResult = satelliteManager.registerForModemStateChanged(
+                    defaultDispatcher.asExecutor(),
+                    callback
+                )
+            } catch (e: IllegalStateException) {
+                Log.w(TAG, "IllegalStateException $e")
+            }
 
             if (registerResult != SatelliteManager.SATELLITE_RESULT_SUCCESS) {
                 // If the registration failed (e.g., device doesn't support satellite),
@@ -150,7 +169,13 @@ class SatelliteRepository(
                 trySend(false)
             }
 
-            awaitClose { satelliteManager.unregisterForModemStateChanged(callback) }
+            awaitClose {
+                try {
+                    satelliteManager.unregisterForModemStateChanged(callback)
+                } catch (e: IllegalStateException) {
+                    Log.w(TAG, "IllegalStateException $e")
+                }
+            }
         }.flowOn(Dispatchers.Default)
     }
 

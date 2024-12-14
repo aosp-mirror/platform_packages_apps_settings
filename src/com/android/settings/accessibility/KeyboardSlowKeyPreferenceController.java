@@ -19,15 +19,21 @@ package com.android.settings.accessibility;
 
 import android.content.Context;
 import android.hardware.input.InputSettings;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 
+import java.util.List;
+
 /**
  * A toggle preference controller for keyboard slow key.
  */
 public class KeyboardSlowKeyPreferenceController extends TogglePreferenceController {
+    private static final String TAG = "SlowKeyPrefController";
 
     static final String PREF_KEY = "toggle_keyboard_slow_keys";
 
@@ -57,5 +63,18 @@ public class KeyboardSlowKeyPreferenceController extends TogglePreferenceControl
     @Override
     public int getSliceHighlightMenuRes() {
         return R.string.menu_key_accessibility;
+    }
+
+    @Override
+    public void updateNonIndexableKeys(@NonNull List<String> keys) {
+        super.updateNonIndexableKeys(keys);
+
+        if (Flags.fixA11ySettingsSearch() && !AccessibilitySettings.isAnyHardKeyboardsExist()) {
+            if (keys.contains(getPreferenceKey())) {
+                Log.w(TAG, "Skipping updateNonIndexableKeys, key already in list.");
+                return;
+            }
+            keys.add(getPreferenceKey());
+        }
     }
 }

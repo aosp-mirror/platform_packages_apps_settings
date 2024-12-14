@@ -37,10 +37,13 @@ import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
+import android.provider.Settings;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.testing.FragmentScenario;
 import androidx.lifecycle.Lifecycle;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeTimer;
@@ -56,23 +59,26 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 import java.util.Timer;
-import java.util.function.Consumer;
 
 @RunWith(RobolectricTestRunner.class)
 public class ScreenFlashNotificationColorDialogFragmentTest {
+
+    private static final int DEFAULT_COLOR = ROSE.mColorInt;
 
     private FragmentScenario<TestScreenFlashNotificationColorDialogFragment> mFragmentScenario;
     private ScreenFlashNotificationColorDialogFragment mDialogFragment;
     private AlertDialog mAlertDialog;
     private ColorSelectorLayout mColorSelectorLayout;
-    private int mCurrentColor;
 
     @Before
     public void setUp() {
-        mCurrentColor = ROSE.mColorInt;
+        Settings.System.putInt(ApplicationProvider.getApplicationContext().getContentResolver(),
+                Settings.System.SCREEN_FLASH_NOTIFICATION_COLOR, DEFAULT_COLOR);
+        Bundle fragmentArgs = new Bundle();
+        fragmentArgs.putInt(ScreenFlashNotificationColorDialogFragment.EXTRA_COLOR, DEFAULT_COLOR);
         mFragmentScenario = FragmentScenario.launch(
                 TestScreenFlashNotificationColorDialogFragment.class,
-                /* fragmentArgs= */ null,
+                fragmentArgs,
                 R.style.Theme_AlertDialog_SettingsLib,
                 Lifecycle.State.INITIALIZED);
         setupFragment();
@@ -99,7 +105,7 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
         performClickOnDialog(BUTTON_NEUTRAL);
         getTimerFromFragment().runOneTask();
 
-        assertStartPreview(ROSE.mColorInt);
+        assertStartPreview(DEFAULT_COLOR);
     }
 
     @Test
@@ -168,20 +174,26 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
     }
 
     @Test
-    public void clickColorAndClickNegative_assertColor() {
+    public void clickColorAndClickNegative_assertDefaultColor() {
         checkColorButton(AZURE);
         performClickOnDialog(BUTTON_NEGATIVE);
 
         assertThat(getTimerFromFragment()).isNull();
-        assertThat(mCurrentColor).isEqualTo(ROSE.mColorInt);
+        assertThat(Settings.System.getInt(
+                ApplicationProvider.getApplicationContext().getContentResolver(),
+                Settings.System.SCREEN_FLASH_NOTIFICATION_COLOR, AZURE.mColorInt)).isEqualTo(
+                DEFAULT_COLOR);
     }
 
     @Test
-    public void clickColorAndClickPositive_assertColor() {
+    public void clickColorAndClickPositive_assertSameColor() {
         checkColorButton(BLUE);
         performClickOnDialog(BUTTON_POSITIVE);
 
-        assertThat(mCurrentColor).isEqualTo(BLUE.mColorInt);
+        assertThat(Settings.System.getInt(
+                ApplicationProvider.getApplicationContext().getContentResolver(),
+                Settings.System.SCREEN_FLASH_NOTIFICATION_COLOR, DEFAULT_COLOR)).isEqualTo(
+                BLUE.mColorInt);
     }
 
     private void checkColorButton(ScreenFlashNotificationColor color) {
@@ -201,11 +213,6 @@ public class ScreenFlashNotificationColorDialogFragmentTest {
     }
 
     private void setupFragment() {
-        mFragmentScenario.onFragment(fragment -> {
-            ReflectionHelpers.setField(fragment, "mCurrentColor", mCurrentColor);
-            ReflectionHelpers.setField(fragment, "mConsumer",
-                    (Consumer<Integer>) selectedColor -> mCurrentColor = selectedColor);
-        });
         mFragmentScenario.moveToState(Lifecycle.State.RESUMED);
 
         mFragmentScenario.onFragment(fragment -> {

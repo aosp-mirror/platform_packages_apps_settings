@@ -68,6 +68,9 @@ android_library {
     static_libs: [
         // External dependencies
         "androidx.navigation_navigation-fragment-ktx",
+        "androidx.slice_slice-builders",
+        "androidx.slice_slice-core",
+        "androidx.slice_slice-view",
         "androidx.window_window-java",
         "gson",
         "guava",
@@ -79,40 +82,41 @@ android_library {
         "android.hardware.dumpstate-V1-java",
         "android.hardware.dumpstate-V1.0-java",
         "android.hardware.dumpstate-V1.1-java",
-        "android.view.accessibility.flags-aconfig-java",
         "com_android_server_accessibility_flags_lib",
         "net-utils-framework-common",
         "notification_flags_lib",
         "securebox",
-        "android.os.flags-aconfig-java",
+        "//frameworks/libs/systemui:com_android_systemui_shared_flags_lib",
+        "WindowManager-Shell-shared-desktopMode",
 
         // Settings dependencies
         "FingerprintManagerInteractor",
         "MediaDrmSettingsFlagsLib",
         "Settings-change-ids",
         "SettingsLib",
-        "SettingsLibDataStore",
         "SettingsLibActivityEmbedding",
+        "SettingsLibDataStore",
+        "SettingsLibMetadata",
+        "SettingsLibPreference",
         "aconfig_settings_flags_lib",
         "accessibility_settings_flags_lib",
         "contextualcards",
         "development_settings_flag_lib",
         "factory_reset_flags_lib",
-        "fuelgauge-log-protos-lite",
+        "settings-protos-lite",
         "fuelgauge-protos-lite",
-        "settings-contextual-card-protos-lite",
-        "settings-log-bridge-protos-lite",
         "settings-logtags",
-        "settings-telephony-protos-lite",
         "statslog-settings",
         "telephony_flags_core_java_lib",
         "setupdesign-lottie-loading-layout",
         "device_policy_aconfig_flags_lib",
-        "kotlinx-coroutines-core",
-        "kotlinx-coroutines-android",
+        "keyboard_flags_lib",
     ],
 
-    plugins: ["androidx.room_room-compiler-plugin"],
+    plugins: [
+        "SettingsLibMetadata-processor",
+        "androidx.room_room-compiler-plugin",
+    ],
 
     errorprone: {
         extra_check_modules: ["//external/nullaway:nullaway_plugin"],
@@ -124,6 +128,9 @@ android_library {
     libs: [
         "telephony-common",
         "ims-common",
+    ],
+    flags_packages: [
+        "android.app.flags-aconfig",
     ],
 }
 
@@ -155,6 +162,9 @@ android_app {
     optimize: {
         proguard_flags_files: ["proguard.flags"],
     },
+    flags_packages: [
+        "android.app.flags-aconfig",
+    ],
 }
 
 android_library_import {

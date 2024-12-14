@@ -51,6 +51,7 @@ import com.android.settings.Utils;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.wifi.WepLessSecureWarningController;
 import com.android.settings.wifi.WifiConfigUiBase2;
 import com.android.settings.wifi.WifiDialog2;
 import com.android.settings.wifi.WifiUtils;
@@ -131,6 +132,8 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
         use(CertificateDetailsPreferenceController.class)
                 .setWifiEntry(mNetworkDetailsTracker.getWifiEntry());
         use(ServerNamePreferenceController.class)
+                .setWifiEntry(mNetworkDetailsTracker.getWifiEntry());
+        use(WepLessSecureWarningController.class)
                 .setWifiEntry(mNetworkDetailsTracker.getWifiEntry());
     }
 
@@ -397,6 +400,9 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
 
     @VisibleForTesting
     void onHotspotNetworkChanged(WifiNetworkDetailsViewModel.HotspotNetworkData data) {
+        if (mIsUiRestricted) {
+            return;
+        }
         PreferenceScreen screen = getPreferenceScreen();
         if (screen == null) {
             return;

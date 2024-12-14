@@ -16,6 +16,7 @@
 
 package com.android.settings.notification.zen;
 
+import android.app.Flags;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -68,6 +69,9 @@ public class ZenAccessSettings extends EmptyTextSettings implements
         mContext = getActivity();
         mPkgMan = mContext.getPackageManager();
         mNoMan = mContext.getSystemService(NotificationManager.class);
+        requireActivity().setTitle(Flags.modesApi() && Flags.modesUi()
+                ? R.string.manage_zen_modes_access_title
+                : R.string.manage_zen_access_title);
         getSettingsLifecycle().addObserver(
                 new ZenAccessSettingObserverMixin(getContext(), this /* listener */));
     }
@@ -75,7 +79,9 @@ public class ZenAccessSettings extends EmptyTextSettings implements
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setEmptyText(R.string.zen_access_empty_text);
+        setEmptyText(Flags.modesApi() && Flags.modesUi()
+                ? R.string.zen_modes_access_empty_text
+                : R.string.zen_access_empty_text);
     }
 
     @Override
@@ -139,7 +145,9 @@ public class ZenAccessSettings extends EmptyTextSettings implements
             pref.setOnPreferenceClickListener(preference -> {
                 AppInfoBase.startAppInfoFragment(
                         ZenAccessDetails.class  /* fragment */,
-                        getString(R.string.manage_zen_access_title) /* titleRes */,
+                        getString(Flags.modesApi() && Flags.modesUi()
+                                ? R.string.manage_zen_modes_access_title
+                                : R.string.manage_zen_access_title),
                         pkg,
                         app.uid,
                         this /* source */,
@@ -154,7 +162,7 @@ public class ZenAccessSettings extends EmptyTextSettings implements
 
     /**
      * @return the summary for the current state of whether the app associated with the given
-     * {@param packageName} is allowed to enter picture-in-picture.
+     * {@param packageName} is allowed to manage DND / Priority Modes.
      */
     private int getPreferenceSummary(String packageName) {
         final boolean enabled = ZenAccessController.hasAccess(getContext(), packageName);

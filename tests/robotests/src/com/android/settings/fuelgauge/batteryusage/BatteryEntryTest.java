@@ -132,7 +132,7 @@ public class BatteryEntryTest {
                 createBatteryEntryForApp(null, APP_DEFAULT_PACKAGE_NAME, HIGH_DRAIN_PACKAGE);
 
         assertThat(entry.getDefaultPackageName()).isEqualTo(APP_DEFAULT_PACKAGE_NAME);
-        assertThat(entry.getLabel()).isEqualTo(LABEL_PREFIX + APP_DEFAULT_PACKAGE_NAME);
+        assertThat(entry.getLabel()).isEqualTo(APP_DEFAULT_PACKAGE_NAME);
     }
 
     @Test
@@ -152,7 +152,7 @@ public class BatteryEntryTest {
 
         BatteryEntry entry = createBatteryEntryForApp(null, null, HIGH_DRAIN_PACKAGE);
 
-        assertThat(entry.getLabel()).isEqualTo(LABEL_PREFIX + HIGH_DRAIN_PACKAGE);
+        assertThat(entry.getLabel()).isEqualTo(HIGH_DRAIN_PACKAGE);
     }
 
     @Test
@@ -163,7 +163,7 @@ public class BatteryEntryTest {
                         null,
                         HIGH_DRAIN_PACKAGE);
 
-        assertThat(entry.getLabel()).isEqualTo(LABEL_PREFIX + HIGH_DRAIN_PACKAGE);
+        assertThat(entry.getLabel()).isEqualTo(HIGH_DRAIN_PACKAGE);
     }
 
     @Test

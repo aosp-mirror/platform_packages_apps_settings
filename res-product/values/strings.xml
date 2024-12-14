@@ -338,23 +338,23 @@
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (default) [CHAR LIMIT=NONE] -->
     <string name="lock_screen_password_skip_face_message" product="default">A password is required to set up Face Unlock.\n\nA password protects the phone if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pin_skip_biometrics_message" product="tablet">A PIN is required to set up Face Unlock and Fingerprint Unlock.\n\nA PIN protects the tablet if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="tablet">A PIN is required to set up Fingerprint Unlock and Face Unlock.\n\nA PIN protects the tablet if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet">A pattern is required to set up Face Unlock and Fingerprint Unlock.\n\nA pattern protects the tablet if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="tablet">A pattern is required to set up Fingerprint Unlock and Face Unlock.\n\nA pattern protects the tablet if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (tablet) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_password_skip_biometrics_message" product="tablet">A password is required to set up Face Unlock and Fingerprint Unlock.\n\nA password protects the tablet if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="tablet">A password is required to set up Fingerprint Unlock and Face Unlock.\n\nA password protects the tablet if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (device) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pin_skip_biometrics_message" product="device">A PIN is required to set up Face Unlock and Fingerprint Unlock.\n\nA PIN protects the device if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="device">A PIN is required to set up Fingerprint Unlock and Face Unlock.\n\nA PIN protects the device if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (device) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pattern_skip_biometrics_message" product="device">A pattern is required to set up Face Unlock and Fingerprint Unlock.\n\nA pattern protects the device if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="device">A pattern is required to set up Fingerprint Unlock and Face Unlock.\n\nA pattern protects the device if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (device) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_password_skip_biometrics_message" product="device">A password is required to set up Face Unlock and Fingerprint Unlock.\n\nA password protects the device if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="device">A password is required to set up Fingerprint Unlock and Face Unlock.\n\nA password protects the device if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (default) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pin_skip_biometrics_message" product="default">A PIN is required to set up Face Unlock and Fingerprint Unlock.\n\nA PIN protects the phone if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="default">A PIN is required to set up Fingerprint Unlock and Face Unlock.\n\nA PIN protects the phone if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (default) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pattern_skip_biometrics_message" product="default">A pattern is required to set up Face Unlock and Fingerprint Unlock.\n\nA pattern protects the phone if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="default">A pattern is required to set up Fingerprint Unlock and Face Unlock.\n\nA pattern protects the phone if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (default) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_password_skip_biometrics_message" product="default">A password is required to set up Face Unlock and Fingerprint Unlock.\n\nA password protects the phone if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="default">A password is required to set up Fingerprint Unlock and Face Unlock.\n\nA password protects the phone if it\u2019s lost or stolen.</string>
     <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
     <string name="fingerprint_v2_delete_message" product="default">This deletes the fingerprint images and model associated with \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\' that are stored on your phone</string>
     <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
@@ -758,8 +758,16 @@
     <string name="audio_streams_dialog_no_le_device_subtitle" product="default">To listen to an audio stream, first connect headphones that support LE Audio to this phone.</string>
     <string name="audio_streams_dialog_no_le_device_subtitle" product="tablet">To listen to an audio stream, first connect headphones that support LE Audio to this tablet.</string>
     <string name="audio_streams_dialog_no_le_device_subtitle" product="device">To listen to an audio stream, first connect headphones that support LE Audio to this device.</string>
+    <!-- Le audio streams no le device dialog subtitle with learn more link [CHAR LIMIT=NONE] -->
+    <string name="audio_streams_dialog_no_le_device_subtitle_with_link" product="default">To listen to an audio stream, first connect headphones that support LE Audio to this phone. <annotation id="link">Learn more</annotation></string>
+    <string name="audio_streams_dialog_no_le_device_subtitle_with_link" product="tablet">To listen to an audio stream, first connect headphones that support LE Audio to this tablet. <annotation id="link">Learn more</annotation></string>
+    <string name="audio_streams_dialog_no_le_device_subtitle_with_link" product="device">To listen to an audio stream, first connect headphones that support LE Audio to this device. <annotation id="link">Learn more</annotation></string>
     <!-- Le audio streams unsupported device subtitle [CHAR LIMIT=NONE] -->
     <string name="audio_streams_dialog_unsupported_device_subtitle" product="default">This phone doesn\'t support LE Audio, which is needed to listen to audio streams.</string>
     <string name="audio_streams_dialog_unsupported_device_subtitle" product="tablet">This tablet doesn\'t support LE Audio, which is needed to listen to audio streams.</string>
     <string name="audio_streams_dialog_unsupported_device_subtitle" product="device">This device doesn\'t support LE Audio, which is needed to listen to audio streams.</string>
+    <!-- Content for audio sharing confirm dialog with learn more link [CHAR LIMIT=none]-->
+    <string name="audio_sharing_confirm_dialog_content_with_link" product="default">To start sharing audio, first connect LE Audio headphones to your phone. <annotation id="link">Learn more about compatible devices</annotation></string>
+    <string name="audio_sharing_confirm_dialog_content_with_link" product="tablet">To start sharing audio, first connect LE Audio headphones to your tablet. <annotation id="link">Learn more about compatible devices</annotation></string>
+    <string name="audio_sharing_confirm_dialog_content_with_link" product="device">To start sharing audio, first connect LE Audio headphones to your device. <annotation id="link">Learn more about compatible devices</annotation></string>
 </resources>

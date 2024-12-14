@@ -91,7 +91,8 @@ class SatelliteRepositoryTest {
 
     @Test
     fun requestIsSessionStarted_resultIsTrue() = runBlocking {
-        `when`(mockSatelliteManager.registerForModemStateChanged(any(), any())
+        `when`(
+            mockSatelliteManager.registerForModemStateChanged(any(), any())
         ).thenAnswer { invocation ->
             val callback = invocation.getArgument<SatelliteModemStateCallback>(1)
             callback.onSatelliteModemStateChanged(SatelliteManager.SATELLITE_MODEM_STATE_CONNECTED)
@@ -105,7 +106,8 @@ class SatelliteRepositoryTest {
 
     @Test
     fun requestIsSessionStarted_resultIsFalse() = runBlocking {
-        `when`(mockSatelliteManager.registerForModemStateChanged(any(), any())
+        `when`(
+            mockSatelliteManager.registerForModemStateChanged(any(), any())
         ).thenAnswer { invocation ->
             val callback = invocation.getArgument<SatelliteModemStateCallback>(1)
             callback.onSatelliteModemStateChanged(SatelliteManager.SATELLITE_MODEM_STATE_OFF)
@@ -119,10 +121,22 @@ class SatelliteRepositoryTest {
 
     @Test
     fun requestIsSessionStarted_registerFailed() = runBlocking {
-        `when`(mockSatelliteManager.registerForModemStateChanged(any(), any())
+        `when`(
+            mockSatelliteManager.registerForModemStateChanged(any(), any())
         ).thenAnswer {
             SatelliteManager.SATELLITE_RESULT_ERROR
         }
+
+        val result: ListenableFuture<Boolean> = repository.requestIsSessionStarted(mockExecutor)
+        assertFalse(result.get())
+        verify(mockSatelliteManager, never()).unregisterForModemStateChanged(any())
+    }
+
+    @Test
+    fun requestIsSessionStarted_phoneCrash_registerFailed() = runBlocking {
+        `when`(
+            mockSatelliteManager.registerForModemStateChanged(any(), any())
+        ).thenThrow(IllegalStateException("Telephony is null"))
 
         val result: ListenableFuture<Boolean> = repository.requestIsSessionStarted(mockExecutor)
         assertFalse(result.get())
@@ -151,6 +165,17 @@ class SatelliteRepositoryTest {
                 receiver.onResult(false)
                 null
             }
+
+        val result: ListenableFuture<Boolean> =
+            repository.requestIsEnabled(mockExecutor)
+        assertFalse(result.get())
+    }
+
+    @Test
+    fun requestIsEnabled_phoneCrash_resultIsFalse() = runBlocking {
+        `when`(
+            mockSatelliteManager.requestIsEnabled(any(), any())
+        ).thenThrow(IllegalStateException("Telephony is null"))
 
         val result: ListenableFuture<Boolean> =
             repository.requestIsEnabled(mockExecutor)
@@ -232,7 +257,8 @@ class SatelliteRepositoryTest {
 
     @Test
     fun getIsSessionStartedFlow_registerFailed() = runBlocking {
-        `when`(mockSatelliteManager.registerForModemStateChanged(any(), any())
+        `when`(
+            mockSatelliteManager.registerForModemStateChanged(any(), any())
         ).thenAnswer {
             SatelliteManager.SATELLITE_RESULT_ERROR
         }

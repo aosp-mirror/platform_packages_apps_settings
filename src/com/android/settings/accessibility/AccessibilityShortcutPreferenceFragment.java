@@ -16,6 +16,10 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
 import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_GENERAL_CATEGORY;
 import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_SAVED_QS_TOOLTIP_TYPE;
@@ -35,7 +39,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.CheckBox;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
@@ -43,6 +46,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
+import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
@@ -61,19 +65,13 @@ import java.util.Locale;
 public abstract class AccessibilityShortcutPreferenceFragment extends RestrictedDashboardFragment
         implements ShortcutPreference.OnClickCallback {
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
-    protected static final String KEY_SAVED_USER_SHORTCUT_TYPE = "shortcut_type";
     protected static final String KEY_SAVED_QS_TOOLTIP_RESHOW = "qs_tooltip_reshow";
-    protected static final int NOT_SET = -1;
-    // Save user's shortcutType value when savedInstance has value (e.g. device rotated).
-    protected int mSavedCheckBoxValue = NOT_SET;
 
     protected ShortcutPreference mShortcutPreference;
     protected Dialog mDialog;
     private AccessibilityManager.TouchExplorationStateChangeListener
             mTouchExplorationStateChangeListener;
     private AccessibilitySettingsContentObserver mSettingsContentObserver;
-    private CheckBox mSoftwareTypeCheckBox;
-    private CheckBox mHardwareTypeCheckBox;
     private AccessibilityQuickSettingsTooltipWindow mTooltipWindow;
     private boolean mNeedsQSTooltipReshow = false;
     private int mNeedsQSTooltipType = QuickSettingsTooltipType.GUIDE_TO_EDIT;
@@ -100,10 +98,6 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
 
         // Restore the user shortcut type and tooltip.
         if (savedInstanceState != null) {
-            if (savedInstanceState.containsKey(KEY_SAVED_USER_SHORTCUT_TYPE)) {
-                mSavedCheckBoxValue = savedInstanceState.getInt(KEY_SAVED_USER_SHORTCUT_TYPE,
-                        NOT_SET);
-            }
             if (savedInstanceState.containsKey(KEY_SAVED_QS_TOOLTIP_RESHOW)) {
                 mNeedsQSTooltipReshow = savedInstanceState.getBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW);
             }
@@ -148,7 +142,6 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         getPreferenceScreen().addPreference(mShortcutPreference);
 
         mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
-            removeDialog(DialogEnums.EDIT_SHORTCUT);
             mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
         };
 
@@ -180,8 +173,6 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         mSettingsContentObserver.register(getContentResolver());
         updateShortcutPreferenceData();
         updateShortcutPreference();
-
-        updateEditShortcutDialogIfNeeded();
     }
 
     @Override
@@ -195,10 +186,6 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        final int value = getShortcutTypeCheckBoxValue();
-        if (value != NOT_SET) {
-            outState.putInt(KEY_SAVED_USER_SHORTCUT_TYPE, value);
-        }
         final boolean isTooltipWindowShowing = mTooltipWindow != null && mTooltipWindow.isShowing();
         if (mNeedsQSTooltipReshow || isTooltipWindowShowing) {
             outState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, /* value= */ true);
@@ -210,15 +197,6 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
     @Override
     public Dialog onCreateDialog(int dialogId) {
         switch (dialogId) {
-            case DialogEnums.EDIT_SHORTCUT:
-                final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
-                        ? AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC_SUW :
-                        AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC;
-                mDialog = AccessibilityDialogUtils.showEditShortcutDialog(
-                        getPrefContext(), dialogType, getShortcutTitle(),
-                        this::callOnAlertDialogCheckboxClicked);
-                setupEditShortcutDialog(mDialog);
-                return mDialog;
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
                 if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
                     mDialog = AccessibilityShortcutsTutorial
@@ -245,8 +223,6 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
     @Override
     public int getDialogMetricsCategory(int dialogId) {
         switch (dialogId) {
-            case DialogEnums.EDIT_SHORTCUT:
-                return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_EDIT_SHORTCUT;
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
                 return SettingsEnums.DIALOG_ACCESSIBILITY_TUTORIAL;
             default:
@@ -256,17 +232,13 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
 
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
-        if (Flags.editShortcutsInFullScreen()) {
-            EditShortcutsPreferenceFragment.showEditShortcutScreen(
-                    getContext(),
-                    getMetricsCategory(),
-                    getShortcutTitle(),
-                    getComponentName(),
-                    getIntent()
-            );
-        } else {
-            showDialog(DialogEnums.EDIT_SHORTCUT);
-        }
+        EditShortcutsPreferenceFragment.showEditShortcutScreen(
+                getContext(),
+                getMetricsCategory(),
+                getShortcutTitle(),
+                getComponentName(),
+                getIntent()
+        );
     }
 
     @Override
@@ -294,38 +266,6 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
      */
     protected String getShortcutPreferenceKey() {
         return KEY_SHORTCUT_PREFERENCE;
-    }
-
-    @VisibleForTesting
-    void setupEditShortcutDialog(Dialog dialog) {
-        final View dialogSoftwareView = dialog.findViewById(R.id.software_shortcut);
-        mSoftwareTypeCheckBox = dialogSoftwareView.findViewById(R.id.checkbox);
-        setDialogTextAreaClickListener(dialogSoftwareView, mSoftwareTypeCheckBox);
-
-        final View dialogHardwareView = dialog.findViewById(R.id.hardware_shortcut);
-        mHardwareTypeCheckBox = dialogHardwareView.findViewById(R.id.checkbox);
-        setDialogTextAreaClickListener(dialogHardwareView, mHardwareTypeCheckBox);
-
-        updateEditShortcutDialogCheckBox();
-    }
-
-    /**
-     * Returns accumulated {@link AccessibilityUtil.UserShortcutType} checkbox value or
-     * {@code NOT_SET} if checkboxes did not exist.
-     */
-    protected int getShortcutTypeCheckBoxValue() {
-        if (mSoftwareTypeCheckBox == null || mHardwareTypeCheckBox == null) {
-            return NOT_SET;
-        }
-
-        int value = AccessibilityUtil.UserShortcutType.EMPTY;
-        if (mSoftwareTypeCheckBox.isChecked()) {
-            value |= AccessibilityUtil.UserShortcutType.SOFTWARE;
-        }
-        if (mHardwareTypeCheckBox.isChecked()) {
-            value |= AccessibilityUtil.UserShortcutType.HARDWARE;
-        }
-        return value;
     }
 
     /**
@@ -359,35 +299,6 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         showQuickSettingsTooltipIfNeeded();
     }
 
-    /**
-     * This method will be invoked when a button in the edit shortcut dialog is clicked.
-     *
-     * @param dialog The dialog that received the click
-     * @param which  The button that was clicked
-     */
-    protected void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
-        if (getComponentName() == null) {
-            return;
-        }
-
-        final int value = getShortcutTypeCheckBoxValue();
-        saveNonEmptyUserShortcutType(value);
-        AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), value, getComponentName());
-        AccessibilityUtil.optOutAllValuesFromSettings(getPrefContext(), ~value, getComponentName());
-        final boolean shortcutAssigned = value != AccessibilityUtil.UserShortcutType.EMPTY;
-        mShortcutPreference.setChecked(shortcutAssigned);
-        mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
-
-        if (mHardwareTypeCheckBox.isChecked()) {
-            AccessibilityUtil.skipVolumeShortcutDialogTimeoutRestriction(getPrefContext());
-        }
-
-        // Show the quick setting tooltip if the shortcut assigned in the first time
-        if (shortcutAssigned) {
-            showQuickSettingsTooltipIfNeeded();
-        }
-    }
-
     @VisibleForTesting
     void initGeneralCategory() {
         final PreferenceCategory generalCategory = new PreferenceCategory(getPrefContext());
@@ -395,24 +306,6 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         generalCategory.setTitle(getGeneralCategoryDescription(null));
 
         getPreferenceScreen().addPreference(generalCategory);
-    }
-
-    private void updateEditShortcutDialogIfNeeded() {
-        if (mDialog == null || !mDialog.isShowing()) {
-            return;
-        }
-        AccessibilityDialogUtils.updateShortcutInDialog(getContext(), mDialog);
-    }
-
-    @VisibleForTesting
-    void saveNonEmptyUserShortcutType(int type) {
-        if (type == AccessibilityUtil.UserShortcutType.EMPTY) {
-            return;
-        }
-
-        final PreferredShortcut shortcut = new PreferredShortcut(
-                getComponentName().flattenToString(), type);
-        PreferredShortcuts.saveUserShortcutType(getPrefContext(), shortcut);
     }
 
     /**
@@ -437,11 +330,6 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         return false;
     }
 
-    private void setDialogTextAreaClickListener(View dialogView, CheckBox checkBox) {
-        final View dialogTextArea = dialogView.findViewById(R.id.container);
-        dialogTextArea.setOnClickListener(v -> checkBox.toggle());
-    }
-
     protected CharSequence getShortcutTypeSummary(Context context) {
         if (!mShortcutPreference.isSettingsEditable()) {
             return context.getText(R.string.accessibility_shortcut_edit_dialog_title_hardware);
@@ -456,16 +344,16 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         // LINT.IfChange(shortcut_type_ui_order)
         final List<CharSequence> list = new ArrayList<>();
         if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            if (hasShortcutType(shortcutTypes, AccessibilityUtil.UserShortcutType.QUICK_SETTINGS)) {
+            if (hasShortcutType(shortcutTypes, QUICK_SETTINGS)) {
                 final CharSequence qsTitle = context.getText(
                         R.string.accessibility_feature_shortcut_setting_summary_quick_settings);
                 list.add(qsTitle);
             }
         }
-        if (hasShortcutType(shortcutTypes, AccessibilityUtil.UserShortcutType.SOFTWARE)) {
+        if (hasShortcutType(shortcutTypes, SOFTWARE)) {
             list.add(getSoftwareShortcutTypeSummary(context));
         }
-        if (hasShortcutType(shortcutTypes, AccessibilityUtil.UserShortcutType.HARDWARE)) {
+        if (hasShortcutType(shortcutTypes, HARDWARE)) {
             final CharSequence hardwareTitle = context.getText(
                     R.string.accessibility_shortcut_hardware_keyword);
             list.add(hardwareTitle);
@@ -481,29 +369,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
                 null, LocaleUtils.getConcatenatedString(list));
     }
 
-    private void updateEditShortcutDialogCheckBox() {
-        // If it is during onConfigChanged process then restore the value, or get the saved value
-        // when shortcutPreference is checked.
-        int value = restoreOnConfigChangedValue();
-        if (value == NOT_SET) {
-            final int lastNonEmptyUserShortcutType = getUserPreferredShortcutTypes();
-            value = mShortcutPreference.isChecked() ? lastNonEmptyUserShortcutType
-                    : AccessibilityUtil.UserShortcutType.EMPTY;
-        }
-
-        mSoftwareTypeCheckBox.setChecked(
-                hasShortcutType(value, AccessibilityUtil.UserShortcutType.SOFTWARE));
-        mHardwareTypeCheckBox.setChecked(
-                hasShortcutType(value, AccessibilityUtil.UserShortcutType.HARDWARE));
-    }
-
-    private int restoreOnConfigChangedValue() {
-        final int savedValue = mSavedCheckBoxValue;
-        mSavedCheckBoxValue = NOT_SET;
-        return savedValue;
-    }
-
-    private boolean hasShortcutType(int value, @AccessibilityUtil.UserShortcutType int type) {
+    private boolean hasShortcutType(int value, @UserShortcutType int type) {
         return (value & type) == type;
     }
 
@@ -514,7 +380,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
 
         final int shortcutTypes = AccessibilityUtil.getUserShortcutTypesFromSettings(
                 getPrefContext(), getComponentName());
-        if (shortcutTypes != AccessibilityUtil.UserShortcutType.EMPTY) {
+        if (shortcutTypes != DEFAULT) {
             final PreferredShortcut shortcut = new PreferredShortcut(
                     getComponentName().flattenToString(), shortcutTypes);
             PreferredShortcuts.saveUserShortcutType(getPrefContext(), shortcut);

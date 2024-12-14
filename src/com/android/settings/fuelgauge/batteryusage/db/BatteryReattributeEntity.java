@@ -18,13 +18,13 @@ package com.android.settings.fuelgauge.batteryusage.db;
 
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.utcToLocalTimeForLogging;
 
-import com.android.settings.fuelgauge.batteryusage.BatteryReattribute;
-import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.android.settings.fuelgauge.batteryusage.BatteryReattribute;
+import com.android.settings.fuelgauge.batteryusage.ConvertUtils;
 
 /** A {@link Entity} for battery usage reattribution data in the database. */
 @Entity
@@ -38,7 +38,7 @@ public class BatteryReattributeEntity {
     public final long timestampEnd;
 
     /** The battery usage reattribution data for corresponding  uids. */
-    public final String reattributeData;
+    @NonNull public final String reattributeData;
 
     public BatteryReattributeEntity(@NonNull BatteryReattribute batteryReattribute) {
         this(

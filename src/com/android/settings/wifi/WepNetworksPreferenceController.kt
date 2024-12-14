@@ -42,6 +42,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 /** Controller that controls whether the WEP network can be connected. */
 class WepNetworksPreferenceController(context: Context, preferenceKey: String) :
@@ -49,68 +51,74 @@ class WepNetworksPreferenceController(context: Context, preferenceKey: String) :
 
     var wifiManager = context.getSystemService(WifiManager::class.java)!!
 
-    override fun getAvailabilityStatus() = if (Flags.androidVWifiApi()) AVAILABLE
-    else UNSUPPORTED_ON_DEVICE
+    override fun getAvailabilityStatus() =
+        if (Flags.androidVWifiApi()) AVAILABLE else UNSUPPORTED_ON_DEVICE
 
     @Composable
     override fun Content() {
-        val checked by wepAllowedFlow.flow.collectAsStateWithLifecycle(initialValue = null)
+        val isWepSupported: Boolean? =
+            isWepSupportedFlow.collectAsStateWithLifecycle(initialValue = null).value
+        val isWepAllowed: Boolean? =
+            wepAllowedFlow.flow.collectAsStateWithLifecycle(initialValue = null).value
         var openDialog by rememberSaveable { mutableStateOf(false) }
-        val wifiInfo = wifiManager.connectionInfo
-        SwitchPreference(object : SwitchPreferenceModel {
-            override val title = stringResource(R.string.wifi_allow_wep_networks)
-            override val summary = { getSummary() }
-            override val checked = { checked }
-            override val changeable: () -> Boolean
-                get() = { carrierAllowed }
-            override val onCheckedChange: (Boolean) -> Unit = { newChecked ->
-                if (!newChecked && wifiInfo.currentSecurityType == WifiEntry.SECURITY_WEP) {
-                    openDialog = true
-                } else {
-                    wifiManager.setWepAllowed(newChecked)
-                    wepAllowedFlow.override(newChecked)
+        SwitchPreference(
+            object : SwitchPreferenceModel {
+                override val title = stringResource(R.string.wifi_allow_wep_networks)
+                override val summary = { getSummary(isWepSupported) }
+                override val checked = {
+                    if (isWepSupported == true) isWepAllowed else isWepSupported
                 }
-            }
-        })
+                override val changeable: () -> Boolean
+                    get() = { isWepSupported == true }
+
+                override val onCheckedChange: (Boolean) -> Unit = { newChecked ->
+                    val wifiInfo = wifiManager.connectionInfo
+                    if (!newChecked && wifiInfo.currentSecurityType == WifiEntry.SECURITY_WEP) {
+                        openDialog = true
+                    } else {
+                        wifiManager.setWepAllowed(newChecked)
+                        wepAllowedFlow.override(newChecked)
+                    }
+                }
+            })
         if (openDialog) {
             SettingsAlertDialogWithIcon(
                 onDismissRequest = { openDialog = false },
-                confirmButton = AlertDialogButton(
-                    stringResource(R.string.sim_action_yes)
-                ) {
-                    wifiManager.setWepAllowed(false)
-                    wepAllowedFlow.override(false)
-                    openDialog = false
-                },
+                confirmButton =
+                    AlertDialogButton(stringResource(R.string.sim_action_yes)) {
+                        wifiManager.setWepAllowed(false)
+                        wepAllowedFlow.override(false)
+                        openDialog = false
+                    },
                 dismissButton =
-                AlertDialogButton(
-                    stringResource(R.string.wifi_cancel)
-                ) { openDialog = false },
+                    AlertDialogButton(stringResource(R.string.wifi_cancel)) { openDialog = false },
                 title = stringResource(R.string.wifi_settings_wep_networks_disconnect_title),
                 text = {
                     Text(
                         stringResource(R.string.wifi_settings_wep_networks_disconnect_summary),
                         modifier = Modifier.fillMaxWidth(),
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
                     )
                 })
         }
     }
 
-    override fun getSummary(): String = mContext.getString(
-        if (carrierAllowed) {
-            R.string.wifi_allow_wep_networks_summary
-        } else {
-            R.string.wifi_allow_wep_networks_summary_carrier_not_allow
-        }
-    )
+    private fun getSummary(isWepSupported: Boolean?): String =
+        mContext.getString(
+            when (isWepSupported) {
+                true -> R.string.wifi_allow_wep_networks_summary
+                false -> R.string.wifi_allow_wep_networks_summary_carrier_not_allow
+                null -> R.string.summary_placeholder
+            })
 
-    private val carrierAllowed: Boolean
-        get() = wifiManager.isWepSupported
+    private val isWepSupportedFlow =
+        flow { emit(wifiManager.isWepSupported) }.flowOn(Dispatchers.Default)
 
-    val wepAllowedFlow = OverridableFlow(callbackFlow {
-        wifiManager.queryWepAllowed(Dispatchers.Default.asExecutor(), ::trySend)
+    val wepAllowedFlow =
+        OverridableFlow(
+            callbackFlow {
+                wifiManager.queryWepAllowed(Dispatchers.Default.asExecutor(), ::trySend)
 
-        awaitClose { }
-    })
+                awaitClose {}
+            })
 }

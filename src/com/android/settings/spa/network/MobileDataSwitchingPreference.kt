@@ -16,12 +16,10 @@
 
 package com.android.settings.spa.network
 
-import android.telephony.TelephonyManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
-import com.android.settings.network.telephony.TelephonyRepository
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
 import kotlinx.coroutines.Dispatchers

@@ -16,29 +16,42 @@
 
 package com.android.settings.backup;
 
-
 import android.app.backup.BackupAgentHelper;
+import android.util.Log;
 
 import com.android.settings.flags.Flags;
 import com.android.settings.onboarding.OnboardingFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.shortcut.CreateShortcutPreferenceController;
+import com.android.settings.shortcut.ShortcutsUpdater;
 import com.android.settingslib.datastore.BackupRestoreStorageManager;
 
 /** Backup agent for Settings APK */
 public class SettingsBackupHelper extends BackupAgentHelper {
+    private static final String TAG = "SettingsBackupHelper";
+
     public static final String SOUND_BACKUP_HELPER = "SoundSettingsBackup";
+    public static final String ACCESSIBILITY_APPEARANCE_BACKUP_HELPER =
+            "AccessibilityAppearanceSettingsBackup";
 
     @Override
     public void onCreate() {
         super.onCreate();
         BackupRestoreStorageManager.getInstance(this).addBackupAgentHelpers(this);
+        OnboardingFeatureProvider onboardingFeatureProvider =
+                FeatureFactory.getFeatureFactory().getOnboardingFeatureProvider();
+
         if (Flags.enableSoundBackup()) {
-            OnboardingFeatureProvider onboardingFeatureProvider =
-                    FeatureFactory.getFeatureFactory().getOnboardingFeatureProvider();
             if (onboardingFeatureProvider != null) {
                 addHelper(SOUND_BACKUP_HELPER, onboardingFeatureProvider.
                         getSoundBackupHelper(this, this.getBackupRestoreEventLogger()));
+            }
+        }
+
+        if (Flags.accessibilityAppearanceSettingsBackupEnabled()) {
+            if (onboardingFeatureProvider != null) {
+                addHelper(ACCESSIBILITY_APPEARANCE_BACKUP_HELPER,
+                        onboardingFeatureProvider.getAccessibilityAppearanceBackupHelper(
+                            this, this.getBackupRestoreEventLogger()));
             }
         }
     }
@@ -47,6 +60,10 @@ public class SettingsBackupHelper extends BackupAgentHelper {
     public void onRestoreFinished() {
         super.onRestoreFinished();
         BackupRestoreStorageManager.getInstance(this).onRestoreFinished();
-        CreateShortcutPreferenceController.updateRestoredShortcuts(this);
+        try {
+            ShortcutsUpdater.updatePinnedShortcuts(this);
+        } catch (Exception e) {
+            Log.e(TAG, "Error updating shortcuts after restoring backup", e);
+        }
     }
 }

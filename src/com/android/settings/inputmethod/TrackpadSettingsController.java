@@ -84,6 +84,10 @@ public class TrackpadSettingsController extends BasePreferenceController
         boolean isFeatureOn = FeatureFlagUtils
                 .isEnabled(mContext, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_TRACKPAD);
         boolean isTouchpad = NewKeyboardSettingsUtils.isTouchpad();
-        return (isFeatureOn && isTouchpad) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        boolean isPointerCustomizationEnabled =
+                android.view.flags.Flags.enableVectorCursorA11ySettings();
+        boolean isMouse = NewKeyboardSettingsUtils.isMouse();
+        return (isFeatureOn && isTouchpad) || (isPointerCustomizationEnabled && isMouse) ? AVAILABLE
+                : CONDITIONALLY_UNAVAILABLE;
     }
 }

@@ -16,6 +16,8 @@
 
 package com.android.settings.network.telephony;
 
+import static com.android.settings.network.telephony.EnabledNetworkModePreferenceControllerHelperKt.getNetworkModePreferenceType;
+
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
@@ -27,16 +29,18 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 
 /**
  * Preference controller for "Preferred network mode"
  */
-public class PreferredNetworkModePreferenceController extends TelephonyBasePreferenceController
+public class PreferredNetworkModePreferenceController extends BasePreferenceController
         implements ListPreference.OnPreferenceChangeListener {
     private static final String TAG = "PrefNetworkModeCtrl";
 
+    private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private CarrierConfigCache mCarrierConfigCache;
     private TelephonyManager mTelephonyManager;
     private boolean mIsGlobalCdma;
@@ -47,25 +51,10 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
     }
 
     @Override
-    public int getAvailabilityStatus(int subId) {
-        final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(subId);
-        boolean visible;
-        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            visible = false;
-        } else if (carrierConfig == null) {
-            visible = false;
-        } else if (carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)
-                || carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_HIDE_PREFERRED_NETWORK_TYPE_BOOL)) {
-            visible = false;
-        } else if (carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
-            visible = true;
-        } else {
-            visible = false;
-        }
-
-        return visible ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+    public int getAvailabilityStatus() {
+        return getNetworkModePreferenceType(mContext, mSubId)
+                == NetworkModePreferenceType.PreferredNetworkMode
+                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

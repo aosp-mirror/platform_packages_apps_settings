@@ -50,7 +50,6 @@ public class BluetoothDetailsPairOtherController extends BluetoothDetailsControl
             CachedBluetoothDevice device,
             Lifecycle lifecycle) {
         super(context, fragment, device, lifecycle);
-        lifecycle.addObserver(this);
     }
 
     @Override

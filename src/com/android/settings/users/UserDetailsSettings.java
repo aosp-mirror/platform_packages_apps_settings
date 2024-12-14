@@ -126,7 +126,11 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        mSwitchUserPref.setEnabled(canSwitchUserNow());
+        if (android.multiuser.Flags.newMultiuserSettingsUx()) {
+            mSwitchUserPref.setEnabled(canSwitchUserNow() && mUserCaps.mUserSwitcherEnabled);
+        } else {
+            mSwitchUserPref.setEnabled(canSwitchUserNow());
+        }
         if (mUserInfo.isGuest() && mGuestUserAutoCreated) {
             mRemoveUserPref.setEnabled((mUserInfo.flags & UserInfo.FLAG_INITIALIZED) != 0);
         }
@@ -358,18 +362,29 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             mSwitchUserPref.setDisabledByAdmin(RestrictedLockUtilsInternal.getDeviceOwner(context));
         } else {
             mSwitchUserPref.setDisabledByAdmin(null);
-            mSwitchUserPref.setSelectable(true);
+            if (android.multiuser.Flags.newMultiuserSettingsUx()) {
+                mSwitchUserPref.setEnabled(mUserCaps.mUserSwitcherEnabled);
+                mSwitchUserPref.setSelectable(mUserCaps.mUserSwitcherEnabled);
+            } else {
+                mSwitchUserPref.setSelectable(true);
+            }
             mSwitchUserPref.setOnPreferenceClickListener(this);
         }
-        if (mUserInfo.isMain() || mUserInfo.isGuest() || !UserManager.isMultipleAdminEnabled()
-                || mUserManager.hasUserRestrictionForUser(UserManager.DISALLOW_GRANT_ADMIN,
-                mUserInfo.getUserHandle())) {
-            removePreference(KEY_GRANT_ADMIN);
+        if (android.multiuser.Flags.unicornModeRefactoringForHsumReadOnly()) {
+            if (isChangingAdminStatusRestricted()) {
+                removePreference(KEY_GRANT_ADMIN);
+            }
+        } else {
+            if (mUserInfo.isMain() || mUserInfo.isGuest() || !UserManager.isMultipleAdminEnabled()
+                    || mUserManager.hasUserRestrictionForUser(UserManager.DISALLOW_GRANT_ADMIN,
+                    mUserInfo.getUserHandle()) || !mUserManager.isAdminUser()) {
+                removePreference(KEY_GRANT_ADMIN);
+            }
         }
+
         if (!mUserManager.isAdminUser()) { // non admin users can't remove users and allow calls
             removePreference(KEY_ENABLE_TELEPHONY);
             removePreference(KEY_REMOVE_USER);
-            removePreference(KEY_GRANT_ADMIN);
             removePreference(KEY_APP_AND_CONTENT_ACCESS);
             removePreference(KEY_APP_COPYING);
         } else {
@@ -543,5 +558,36 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         //  completed. After the user cancels the setup process, mUserInfo.isInitialized() will
         //  return true so there will be no setup prompt dialog shown to the user anymore.
         return isSecondaryUser(mUserInfo) && !mUserInfo.isInitialized();
+    }
+
+    /**
+     * Determines if changing admin status is restricted.
+     *
+     * <p>Admin status change is restricted under the following conditions of current & target user.
+     *
+     * <ul>
+     *   <li>The <b>current</b> user is NOT an admin user.</li>
+     *   <li>OR multiple admin support is NOT enabled.</li>
+     *   <li>OR the <b>current</b> user has DISALLOW_GRANT_ADMIN restriction applied</li>
+     *
+     *   <li>OR the <b>target</b> user ('mUserInfo') is a main user</li>
+     *   <li>OR the <b>target</b> user ('mUserInfo') is not of type
+     *   {@link UserManager#USER_TYPE_FULL_SECONDARY}</li>
+     *   <li>OR the <b>target</b> user ('mUserInfo') has DISALLOW_GRANT_ADMIN restriction.</li>
+     * </ul>
+     *
+     * @return true if changing admin status is restricted, false otherwise
+     */
+    private boolean isChangingAdminStatusRestricted() {
+        boolean currentUserRestricted = !mUserManager.isAdminUser()
+                || !UserManager.isMultipleAdminEnabled()
+                || mUserManager.hasUserRestriction(UserManager.DISALLOW_GRANT_ADMIN);
+
+        boolean targetUserRestricted = mUserInfo.isMain()
+                || !(UserManager.USER_TYPE_FULL_SECONDARY.equals(mUserInfo.userType))
+                || mUserManager.hasUserRestrictionForUser(UserManager.DISALLOW_GRANT_ADMIN,
+                mUserInfo.getUserHandle());
+
+        return currentUserRestricted || targetUserRestricted;
     }
 }

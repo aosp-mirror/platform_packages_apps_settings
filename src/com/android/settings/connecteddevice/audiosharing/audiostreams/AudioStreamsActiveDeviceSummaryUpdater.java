@@ -16,24 +16,22 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settingslib.bluetooth.BluetoothCallback;
-import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.utils.ThreadUtils;
 
 public class AudioStreamsActiveDeviceSummaryUpdater implements BluetoothCallback {
-    private static final String TAG = "AudioStreamsActiveDeviceSummaryUpdater";
-    private static final boolean DEBUG = BluetoothUtils.D;
     private final LocalBluetoothManager mBluetoothManager;
     private Context mContext;
     @Nullable private String mSummary;
@@ -47,17 +45,20 @@ public class AudioStreamsActiveDeviceSummaryUpdater implements BluetoothCallback
     }
 
     @Override
-    public void onActiveDeviceChanged(
-            @Nullable CachedBluetoothDevice activeDevice, int bluetoothProfile) {
-        if (DEBUG) {
-            Log.d(
-                    TAG,
-                    "onActiveDeviceChanged() with activeDevice : "
-                            + (activeDevice == null ? "null" : activeDevice.getAddress())
-                            + " on profile : "
-                            + bluetoothProfile);
+    public void onBluetoothStateChanged(@AdapterState int bluetoothState) {
+        if (bluetoothState == BluetoothAdapter.STATE_OFF) {
+            notifyChangeIfNeeded();
         }
-        if (bluetoothProfile == BluetoothProfile.LE_AUDIO) {
+    }
+
+    @Override
+    public void onProfileConnectionStateChanged(
+            @NonNull CachedBluetoothDevice cachedDevice,
+            @ConnectionState int state,
+            int bluetoothProfile) {
+        if (bluetoothProfile == BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT
+                && (state == BluetoothAdapter.STATE_CONNECTED
+                        || state == BluetoothAdapter.STATE_DISCONNECTED)) {
             notifyChangeIfNeeded();
         }
     }

@@ -28,7 +28,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceViewHolder;
 import androidx.test.core.app.ApplicationProvider;
 
@@ -94,17 +93,6 @@ public class AudioStreamPreferenceTest {
     }
 
     @Test
-    public void setConnected_shouldUpdatePreferenceUI() {
-        String summary = "Connected";
-        OnPreferenceClickListener listener = mock(OnPreferenceClickListener.class);
-        mPreference.setIsConnected(true, summary, listener);
-
-        assertThat(mPreference.getSummary()).isNotNull();
-        assertThat(mPreference.getSummary().toString()).isEqualTo(summary);
-        assertThat(mPreference.getOnPreferenceClickListener()).isEqualTo(listener);
-    }
-
-    @Test
     public void setAudioStreamMetadata_shouldUpdateMetadata() {
         AudioStreamPreference p =
                 AudioStreamPreference.fromMetadata(
@@ -147,7 +135,7 @@ public class AudioStreamPreferenceTest {
 
     @Test
     public void shouldHideSecondTarget_connected() {
-        mPreference.setIsConnected(true, "", null);
+        mPreference.setIsConnected(true);
         assertThat(mPreference.shouldHideSecondTarget()).isTrue();
     }
 

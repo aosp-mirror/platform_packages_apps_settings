@@ -175,4 +175,31 @@ public final class BatteryEventDaoTest {
         mBatteryEventDao.clearAll();
         assertThat(mBatteryEventDao.getAll()).isEmpty();
     }
+
+    @Test
+    public void clearEvenHourEvent_normalFlow_expectedBehavior() {
+        mBatteryEventDao.insert(
+                BatteryEventEntity.newBuilder()
+                        .setTimestamp(100L)
+                        .setBatteryEventType(1)
+                        .setBatteryLevel(66)
+                        .build());
+        mBatteryEventDao.insert(
+                BatteryEventEntity.newBuilder()
+                        .setTimestamp(200L)
+                        .setBatteryEventType(4)
+                        .setBatteryLevel(88)
+                        .build());
+        assertThat(mBatteryEventDao.getAll()).hasSize(2);
+
+        mBatteryEventDao.clearEvenHourEvent();
+
+        final List<BatteryEventEntity> events = mBatteryEventDao.getAll();
+        assertThat(events).hasSize(1);
+        assertThat(events.get(0).timestamp).isEqualTo(100L);
+        assertThat(events.get(0).batteryEventType).isEqualTo(1);
+        assertThat(events.get(0).batteryLevel).isEqualTo(66);
+        mBatteryEventDao.clearAll();
+        assertThat(mBatteryEventDao.getAll()).isEmpty();
+    }
 }

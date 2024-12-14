@@ -44,11 +44,10 @@ data class ApnData(
     val apnType: String = "",
     val apnProtocol: Int = -1,
     val apnRoaming: Int = -1,
-    val apnEnable: Boolean = true,
+    val carrierEnabled: Boolean = true,
     val networkType: Long = 0,
     val edited: Int = Telephony.Carriers.USER_EDITED,
     val userEditable: Int = 1,
-    val apnEnableEnabled: Boolean = true,
     val newApn: Boolean = false,
     val subId: Int = -1,
     val validEnabled: Boolean = false,
@@ -72,7 +71,7 @@ data class ApnData(
         Telephony.Carriers.NETWORK_TYPE_BITMASK to networkType,
         // Copy network type into lingering network type.
         Telephony.Carriers.LINGERING_NETWORK_TYPE_BITMASK to networkType,
-        Telephony.Carriers.CARRIER_ENABLED to apnEnable,
+        Telephony.Carriers.CARRIER_ENABLED to carrierEnabled,
         Telephony.Carriers.EDITED_STATUS to Telephony.Carriers.USER_EDITED,
     )
 
@@ -134,10 +133,6 @@ fun getApnDataInit(arguments: Bundle, context: Context, uriInit: Uri, subId: Int
         )
     }
 
-    apnDataInit = apnDataInit.copy(
-        apnEnableEnabled =
-        context.resources.getBoolean(R.bool.config_allow_edit_carrier_enabled)
-    )
     // TODO: mIsCarrierIdApn
     return disableInit(apnDataInit)
 }

@@ -30,63 +30,79 @@
     android:paddingBottom="24dp">
 
     <!-- Start time & end time row -->
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="fill_horizontal"
         android:orientation="horizontal">
 
-        <!-- Start time: title (non-clickable preference), time setter -->
-        <LinearLayout
-            android:layout_width="0dp"
+        <!-- Start time title (non-clickable preference) -->
+        <TextView
+            android:id="@+id/start_time_label"
+            android:clickable="false"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintHorizontal_bias="0"
+            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Medium"
+            android:text="@string/zen_mode_start_time"
+            android:importantForAccessibility="no" />
 
-            <TextView
-                android:id="@+id/start_time_label"
-                android:clickable="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Medium"
-                android:text="@string/zen_mode_start_time" />
-
-            <TextView
-                android:id="@+id/start_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Title"
-                android:textColor="?android:attr/colorAccent"
-                android:textSize="40sp" />
-
-        </LinearLayout>
-
-        <!-- End time: title (non-clickable preference), time setter -->
-        <LinearLayout
-            android:layout_width="0dp"
+        <!-- Start time display + setter -->
+        <TextView
+            android:id="@+id/start_time"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/start_time_label"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintHorizontal_bias="0"
+            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Title"
+            android:textColor="?android:attr/colorAccent"
+            android:textSize="40sp" />
 
-            <TextView
-                android:id="@+id/end_time_label"
-                android:clickable="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Medium"
-                android:text="@string/zen_mode_end_time" />
+        <!-- Center boundary to make sure each only expands to take up at most half the space -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
-            <TextView
-                android:id="@+id/end_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Title"
-                android:textColor="?android:attr/colorAccent"
-                android:textSize="40sp" />
+        <!-- End time title (non-clickable preference), right-aligned -->
+        <TextView
+            android:id="@+id/end_time_label"
+            android:clickable="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintHorizontal_bias="1"
+            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Medium"
+            android:text="@string/zen_mode_end_time"
+            android:importantForAccessibility="no" />
 
-        </LinearLayout>
+        <!-- End time setter; right-aligned -->
+        <TextView
+            android:id="@+id/end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/end_time_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guideline"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintHorizontal_bias="1"
+            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Title"
+            android:textColor="?android:attr/colorAccent"
+            android:textSize="40sp" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Schedule duration display row -->
     <LinearLayout

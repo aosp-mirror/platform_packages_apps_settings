@@ -18,13 +18,15 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/zen_modes_list_title">
+    android:title="@string/zen_modes_list_title"
+    android:key="modes_list_settings">
 
-    <!-- TODO: b/333682392 - add strings for summary as appropriate -->
+    <com.android.settingslib.widget.TopIntroPreference
+        android:title="@string/zen_modes_list_intro" />
 
     <PreferenceCategory
         android:key="zen_modes_list">
-        <!-- Preferences leading to rules are added in this PreferenceCategory. -->
+        <!-- Preferences leading to individual mode pages are added in this PreferenceCategory. -->
     </PreferenceCategory>
 
     <Preference

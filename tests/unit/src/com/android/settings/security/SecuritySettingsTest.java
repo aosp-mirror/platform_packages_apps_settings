@@ -339,6 +339,30 @@ public class SecuritySettingsTest {
         assertThat(mPreferenceCombined.isVisible()).isFalse();
     }
 
+    @Test
+    public void noFace_isNotIndexable() throws Exception {
+        when(mFaceManager.isHardwareDetected()).thenReturn(false);
+        final BaseSearchIndexProvider indexProvider = SecuritySettings.SEARCH_INDEX_DATA_PROVIDER;
+
+        final List<String> allXmlKeys = TestUtils.getAllXmlKeys(mContext, indexProvider);
+        final List<String> nonIndexableKeys = indexProvider.getNonIndexableKeys(mContext);
+        allXmlKeys.removeAll(nonIndexableKeys);
+
+        assertThat(allXmlKeys).doesNotContain(SecuritySettings.KEY_FACE_SETTINGS);
+    }
+
+    @Test
+    public void noFingerprint_isNotIndexable() throws Exception {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
+        final BaseSearchIndexProvider indexProvider = SecuritySettings.SEARCH_INDEX_DATA_PROVIDER;
+
+        final List<String> allXmlKeys = TestUtils.getAllXmlKeys(mContext, indexProvider);
+        final List<String> nonIndexableKeys = indexProvider.getNonIndexableKeys(mContext);
+        allXmlKeys.removeAll(nonIndexableKeys);
+
+        assertThat(allXmlKeys).doesNotContain(SecuritySettings.KEY_FINGERPRINT_SETTINGS);
+    }
+
     boolean isFacePrefAvailable(List<AbstractPreferenceController> controllers) {
         return controllers.stream().filter(
                 controller -> controller instanceof FaceStatusPreferenceController

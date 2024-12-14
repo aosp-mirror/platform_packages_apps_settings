@@ -76,7 +76,7 @@ public class ZenModeBehaviorFooterPreferenceController extends AbstractZenModePr
 
             // DND turned on by an automatic rule with deprecated zen mode
             for (ZenModeConfig.ZenRule automaticRule : config.automaticRules.values()) {
-                if (automaticRule.isAutomaticActive() && isDeprecatedZenMode(
+                if (automaticRule.isActive() && isDeprecatedZenMode(
                         automaticRule.zenMode)) {
                     ComponentName component = automaticRule.component;
                     if (component != null) {

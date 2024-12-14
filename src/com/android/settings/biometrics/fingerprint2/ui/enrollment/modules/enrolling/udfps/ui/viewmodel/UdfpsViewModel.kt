@@ -38,7 +38,7 @@ import com.android.settings.biometrics.fingerprint2.domain.interactor.Orientatio
 import com.android.settings.biometrics.fingerprint2.domain.interactor.TouchEventInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.UdfpsEnrollInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.VibrationInteractor
-import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.SensorInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.model.DescriptionText
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.udfps.ui.model.HeaderText
@@ -76,17 +76,17 @@ class UdfpsViewModel(
   enrollStageInteractor: EnrollStageInteractor,
   orientationInteractor: OrientationInteractor,
   udfpsEnrollInteractor: UdfpsEnrollInteractor,
-  fingerprintManager: FingerprintManagerInteractor,
   accessibilityInteractor: AccessibilityInteractor,
   sensorRepository: FingerprintSensorInteractor,
   touchEventInteractor: TouchEventInteractor,
+  sensorInteractor: SensorInteractor,
 ) : ViewModel() {
 
   private val isSetupWizard = flowOf(false)
   private var shouldResetErollment = false
 
   private var _enrollState: Flow<FingerEnrollState?> =
-    fingerprintManager.sensorPropertiesInternal.filterNotNull().combine(
+    sensorInteractor.sensorPropertiesInternal.filterNotNull().combine(
       fingerprintEnrollEnrollingViewModel.enrollFlow
     ) { props, enroll ->
       if (props.sensorType.isUdfps()) {
@@ -198,8 +198,7 @@ class UdfpsViewModel(
       .distinctUntilChanged()
 
   private val _touchEvent: MutableStateFlow<MotionEvent?> = MutableStateFlow(null)
-  val touchEvent =
-    _touchEvent.asStateFlow().filterNotNull()
+  val touchEvent = _touchEvent.asStateFlow().filterNotNull()
 
   /** Determines the current [EnrollStageModel] enrollment is in */
   private val enrollStage: Flow<EnrollStageModel> =
@@ -267,11 +266,7 @@ class UdfpsViewModel(
       backgroundViewModel.background.filter { it }.collect { didGoToBackground() }
     }
 
-    viewModelScope.launch {
-      touchEventInteractor.touchEvent.collect {
-        _touchEvent.update { it }
-      }
-    }
+    viewModelScope.launch { touchEventInteractor.touchEvent.collect { _touchEvent.update { it } } }
   }
 
   /** Indicates if we should show the lottie. */
@@ -430,10 +425,10 @@ class UdfpsViewModel(
           biometricEnvironment.enrollStageInteractor,
           biometricEnvironment.orientationInteractor,
           biometricEnvironment.udfpsEnrollInteractor,
-          biometricEnvironment.fingerprintManagerInteractor,
           biometricEnvironment.accessibilityInteractor,
           biometricEnvironment.sensorInteractor,
           biometricEnvironment.touchEventInteractor,
+          biometricEnvironment.createSensorPropertiesInteractor(),
         )
       }
     }

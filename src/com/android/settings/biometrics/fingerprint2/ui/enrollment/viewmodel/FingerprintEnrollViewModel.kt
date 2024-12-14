@@ -24,7 +24,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.android.settings.SettingsApplication
-import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.EnrollFingerprintInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.SensorInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintNavigationStep.Education
@@ -42,9 +43,10 @@ import kotlinx.coroutines.flow.update
 
 /** Represents all of the fingerprint information needed for a fingerprint enrollment process. */
 class FingerprintEnrollViewModel(
-  private val fingerprintManagerInteractor: FingerprintManagerInteractor,
-  gatekeeperViewModel: FingerprintGatekeeperViewModel,
-  val navigationViewModel: FingerprintNavigationViewModel,
+    gatekeeperViewModel: FingerprintGatekeeperViewModel,
+    val navigationViewModel: FingerprintNavigationViewModel,
+    private val sensorInteractor: SensorInteractor,
+    private val fingerprintEnrollInteractor: EnrollFingerprintInteractor,
 ) : ViewModel() {
 
   /**
@@ -67,7 +69,7 @@ class FingerprintEnrollViewModel(
 
   /** Represents the stream of [FingerprintSensorType] */
   val sensorType: Flow<FingerprintSensorType?> =
-    fingerprintManagerInteractor.sensorPropertiesInternal.filterNotNull().map { it.sensorType }
+    sensorInteractor.sensorPropertiesInternal.filterNotNull().map { it.sensorType }
 
   /**
    * A flow that contains a [FingerprintEnrollViewModel] which contains the relevant information for
@@ -90,7 +92,7 @@ class FingerprintEnrollViewModel(
             enrollReason != null &&
             enrollOptions != null
         ) {
-          fingerprintManagerInteractor
+          fingerprintEnrollInteractor
             .enroll(hardwareAuthToken.token, enrollReason, enrollOptions)
             .collect { emit(it) }
         }
@@ -137,9 +139,10 @@ class FingerprintEnrollViewModel(
         val biometricEnvironment = settingsApplication.biometricEnvironment
         val provider = ViewModelProvider(this[VIEW_MODEL_STORE_OWNER_KEY]!!)
         FingerprintEnrollViewModel(
-          biometricEnvironment!!.fingerprintManagerInteractor,
           provider[FingerprintGatekeeperViewModel::class],
           provider[FingerprintNavigationViewModel::class],
+          biometricEnvironment!!.createSensorPropertiesInteractor(),
+          biometricEnvironment!!.createFingerprintEnrollInteractor(),
         )
       }
     }

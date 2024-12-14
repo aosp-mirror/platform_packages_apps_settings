@@ -35,19 +35,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
-import com.android.internal.widget.LockPatternUtils
 import com.android.settings.R
+import com.android.settings.SettingsApplication
 import com.android.settings.Utils.SETTINGS_PACKAGE_NAME
 import com.android.settings.biometrics.BiometricEnrollBase
 import com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST
 import com.android.settings.biometrics.BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY
 import com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED
-import com.android.settings.biometrics.GatekeeperPasswordProvider
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollEnrolling
-import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroductionInternal
+import com.android.settings.biometrics.fingerprint.FingerprintEnroll.InternalActivity
 import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepositoryImpl
-import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintEnrollInteractorImpl
-import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractorImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.PressToAuthInteractorImpl
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
@@ -223,35 +220,24 @@ class FingerprintSettingsV2Fragment :
     val fingerprintSensorProvider =
       FingerprintSensorRepositoryImpl(fingerprintManager, backgroundDispatcher, lifecycleScope)
     val pressToAuthInteractor = PressToAuthInteractorImpl(context, backgroundDispatcher)
-    val fingerprintEnrollStateRepository =
-      FingerprintEnrollInteractorImpl(
-        requireContext().applicationContext,
-        fingerprintManager,
-        Settings,
-      )
-
-    val interactor =
-      FingerprintManagerInteractorImpl(
-        context.applicationContext,
-        backgroundDispatcher,
-        fingerprintManager,
-        fingerprintSensorProvider,
-        GatekeeperPasswordProvider(LockPatternUtils(context.applicationContext)),
-        fingerprintEnrollStateRepository,
-      )
 
     val token = intent.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN)
     val challenge = intent.getLongExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, -1L)
+    val application = requireActivity().application as SettingsApplication
+    val environment =
+      application.biometricEnvironment
+        ?: throw IllegalStateException("The biometric environment must be present")
 
     navigationViewModel =
       ViewModelProvider(
         this,
         FingerprintSettingsNavigationViewModel.FingerprintSettingsNavigationModelFactory(
           userId,
-          interactor,
           backgroundDispatcher,
           token,
           challenge,
+          environment.createFingerprintsEnrolledInteractor(),
+          environment.createGenerateChallengeInteractor(),
         ),
       )[FingerprintSettingsNavigationViewModel::class.java]
 
@@ -260,9 +246,14 @@ class FingerprintSettingsV2Fragment :
         this,
         FingerprintSettingsViewModel.FingerprintSettingsViewModelFactory(
           userId,
-          interactor,
           backgroundDispatcher,
           navigationViewModel,
+          environment.createCanEnrollFingerprintsInteractor(),
+          environment.createSensorPropertiesInteractor(),
+          environment.createAuthenticateInteractor(),
+          environment.createRenameFingerprintInteractor(),
+          environment.createRemoveFingerprintInteractor(),
+          environment.createFingerprintsEnrolledInteractor(),
         ),
       )[FingerprintSettingsViewModel::class.java]
 
@@ -523,7 +514,7 @@ class FingerprintSettingsV2Fragment :
     val intent = Intent()
     intent.setClassName(
       SETTINGS_PACKAGE_NAME,
-      FingerprintEnrollIntroductionInternal::class.java.name,
+      InternalActivity::class.java.name,
     )
     intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, true)
     intent.putExtra(

@@ -16,15 +16,23 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.ComponentName;
 import android.content.Context;
+import android.media.AudioManager;
 import android.media.Spatializer;
 import android.net.Uri;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleCoroutineScope;
 import androidx.preference.Preference;
 
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.bluetooth.domain.interactor.SpatialAudioInteractor;
+import com.android.settings.bluetooth.ui.view.DeviceDetailsFragmentFormatter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepository;
 
 import java.util.List;
 import java.util.Set;
@@ -84,4 +92,26 @@ public interface BluetoothFeatureProvider {
      */
     Set<String> getInvisibleProfilePreferenceKeys(
             Context context, BluetoothDevice bluetoothDevice);
+
+    /** Gets DeviceSettingRepository. */
+    @NonNull
+    DeviceSettingRepository getDeviceSettingRepository(
+            @NonNull Context context,
+            @NonNull BluetoothAdapter bluetoothAdapter,
+            @NonNull LifecycleCoroutineScope scope);
+
+    /** Gets spatial audio interactor. */
+    @NonNull
+    SpatialAudioInteractor getSpatialAudioInteractor(
+            @NonNull Context context,
+            @NonNull AudioManager audioManager,
+            @NonNull LifecycleCoroutineScope scope);
+
+    /** Gets device details fragment layout formatter. */
+    @NonNull
+    DeviceDetailsFragmentFormatter getDeviceDetailsFragmentFormatter(
+            @NonNull Context context,
+            @NonNull SettingsPreferenceFragment fragment,
+            @NonNull BluetoothAdapter bluetoothAdapter,
+            @NonNull CachedBluetoothDevice cachedDevice);
 }

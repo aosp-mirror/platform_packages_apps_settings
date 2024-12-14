@@ -26,7 +26,6 @@ import static org.mockito.Mockito.when;
 import android.bluetooth.BluetoothDevice;
 import android.graphics.drawable.Drawable;
 
-import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
@@ -127,24 +126,10 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
     }
 
     @Test
-    public void isAvailable_untetheredHeadsetWithConfigOn_returnFalse() {
-        android.provider.DeviceConfig.setProperty(
-                android.provider.DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "true", true);
+    public void isAvailable_untetheredHeadset_returnFalse() {
         when(mBluetoothDevice.getMetadata(
                 BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn("true".getBytes());
 
         assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void isAvailable_untetheredHeadsetWithConfigOff_returnTrue() {
-        android.provider.DeviceConfig.setProperty(
-                android.provider.DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_ADVANCED_HEADER_ENABLED, "false", true);
-        when(mBluetoothDevice.getMetadata(
-                BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET)).thenReturn("true".getBytes());
-
-        assertThat(mController.isAvailable()).isTrue();
     }
 }

@@ -120,6 +120,16 @@ public class SettingsSliceProvider extends SliceProvider {
      * permission can use them.
      */
     private static final List<Uri> PUBLICLY_SUPPORTED_CUSTOM_SLICE_URIS =
+            android.app.Flags.modesUi()
+                    ?
+                    Arrays.asList(
+                            CustomSliceRegistry.BLUETOOTH_URI,
+                            CustomSliceRegistry.FLASHLIGHT_SLICE_URI,
+                            CustomSliceRegistry.LOCATION_SLICE_URI,
+                            CustomSliceRegistry.MOBILE_DATA_SLICE_URI,
+                            CustomSliceRegistry.WIFI_CALLING_URI,
+                            CustomSliceRegistry.WIFI_SLICE_URI
+                    ) :
             Arrays.asList(
                     CustomSliceRegistry.BLUETOOTH_URI,
                     CustomSliceRegistry.FLASHLIGHT_SLICE_URI,
@@ -184,7 +194,9 @@ public class SettingsSliceProvider extends SliceProvider {
         }
 
         if (CustomSliceRegistry.ZEN_MODE_SLICE_URI.equals(sliceUri)) {
-            registerIntentToUri(ZenModeSliceBuilder.INTENT_FILTER, sliceUri);
+            if (!android.app.Flags.modesUi()) {
+                registerIntentToUri(ZenModeSliceBuilder.INTENT_FILTER, sliceUri);
+            }
             return;
         } else if (CustomSliceRegistry.BLUETOOTH_URI.equals(sliceUri)) {
             registerIntentToUri(BluetoothSliceBuilder.INTENT_FILTER, sliceUri);
@@ -256,7 +268,8 @@ public class SettingsSliceProvider extends SliceProvider {
                         .getSlicesFeatureProvider()
                         .getNewWifiCallingSliceHelper(getContext())
                         .createWifiCallingSlice(sliceUri);
-            } else if (CustomSliceRegistry.ZEN_MODE_SLICE_URI.equals(sliceUri)) {
+            } else if (!android.app.Flags.modesUi()
+                    && CustomSliceRegistry.ZEN_MODE_SLICE_URI.equals(sliceUri)) {
                 return ZenModeSliceBuilder.getSlice(getContext());
             } else if (CustomSliceRegistry.BLUETOOTH_URI.equals(sliceUri)) {
                 return BluetoothSliceBuilder.getSlice(getContext());

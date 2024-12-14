@@ -16,7 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
-import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.isBroadcasting;
+import static com.android.settingslib.bluetooth.BluetoothUtils.isBroadcasting;
 
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothLeBroadcast;
@@ -26,6 +26,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
@@ -56,7 +57,8 @@ public class AudioSharingNamePreferenceController extends BasePreferenceControll
     private static final boolean DEBUG = BluetoothUtils.D;
     private static final String PREF_KEY = "audio_sharing_stream_name";
 
-    private final BluetoothLeBroadcast.Callback mBroadcastCallback =
+    @VisibleForTesting
+    final BluetoothLeBroadcast.Callback mBroadcastCallback =
             new BluetoothLeBroadcast.Callback() {
                 @Override
                 public void onBroadcastMetadataChanged(
@@ -172,7 +174,7 @@ public class AudioSharingNamePreferenceController extends BasePreferenceControll
 
     @Override
     public int getAvailabilityStatus() {
-        return AudioSharingUtils.isFeatureEnabled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return BluetoothUtils.isAudioSharingEnabled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

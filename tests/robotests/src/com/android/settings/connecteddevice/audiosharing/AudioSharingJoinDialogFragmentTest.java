@@ -31,6 +31,7 @@ import android.content.Context;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.Pair;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -164,8 +165,23 @@ public class AudioSharingJoinDialogFragmentTest {
     }
 
     @Test
+    public void onCreateDialog_unattachedFragment_dialogNotExist() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        AudioSharingJoinDialogFragment.show(
+                new Fragment(),
+                new ArrayList<>(),
+                mCachedDevice2,
+                EMPTY_EVENT_LISTENER,
+                TEST_EVENT_DATA_LIST);
+        shadowMainLooper().idle();
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNull();
+    }
+
+    @Test
     public void onCreateDialog_flagOn_dialogShowTextForSingleDevice() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        when(mBroadcast.isEnabled(null)).thenReturn(true);
         AudioSharingJoinDialogFragment.show(
                 mParent,
                 new ArrayList<>(),
@@ -178,6 +194,10 @@ public class AudioSharingJoinDialogFragmentTest {
         assertThat(dialog.isShowing()).isTrue();
         ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
         assertThat(shadowDialog.getMessage().toString()).isEqualTo(TEST_DEVICE_NAME2);
+        Button btnView = dialog.findViewById(R.id.negative_btn);
+        assertThat(btnView).isNotNull();
+        assertThat(btnView.getText().toString())
+                .isEqualTo(mParent.getString(R.string.audio_sharing_no_thanks_button_label));
     }
 
     @Test
@@ -197,6 +217,13 @@ public class AudioSharingJoinDialogFragmentTest {
                         mParent.getString(
                                 R.string.audio_sharing_share_dialog_subtitle,
                                 TEST_DEVICE_NAME1,
+                                TEST_DEVICE_NAME2));
+        Button btnView = dialog.findViewById(R.id.negative_btn);
+        assertThat(btnView).isNotNull();
+        assertThat(btnView.getText().toString())
+                .isEqualTo(
+                        mParent.getString(
+                                R.string.audio_sharing_switch_active_button_label,
                                 TEST_DEVICE_NAME2));
     }
 

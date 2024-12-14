@@ -79,6 +79,8 @@ public class StylusDevicesController extends AbstractPreferenceController implem
 
     private static final String TAG = "StylusDevicesController";
 
+    private final boolean mConfigEnableDefaultNotesForWorkProfile;
+
     @Nullable
     private final InputDevice mInputDevice;
 
@@ -97,6 +99,8 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         mInputDevice = inputDevice;
         mCachedBluetoothDevice = cachedBluetoothDevice;
         lifecycle.addObserver(this);
+        mConfigEnableDefaultNotesForWorkProfile = mContext.getResources().getBoolean(
+                android.R.bool.config_enableDefaultNotesForWorkProfile);
     }
 
     @Override
@@ -317,25 +321,27 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         final List<UserHandle> userProfiles = new ArrayList<>();
         userProfiles.add(currentUser);
 
-        final List<UserInfo> userInfos = um.getProfiles(currentUser.getIdentifier());
-        for (UserInfo userInfo : userInfos) {
-            if (userInfo.isManagedProfile()
-                    || (android.os.Flags.allowPrivateProfile()
-                        && android.multiuser.Flags.enablePrivateSpaceFeatures()
-                        && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
-                        && userInfo.isPrivateProfile())) {
-                userProfiles.add(userInfo.getUserHandle());
+        if (mConfigEnableDefaultNotesForWorkProfile) {
+            final List<UserInfo> userInfos = um.getProfiles(currentUser.getIdentifier());
+            for (UserInfo userInfo : userInfos) {
+                if (userInfo.isManagedProfile()) {
+                    userProfiles.add(userInfo.getUserHandle());
+                }
             }
         }
         return userProfiles;
     }
 
     private UserHandle getDefaultNoteTaskProfile() {
-        final int userId = Secure.getInt(
-                mContext.getContentResolver(),
-                Secure.DEFAULT_NOTE_TASK_PROFILE,
-                UserHandle.myUserId());
-        return UserHandle.of(userId);
+        final int currentUserId = UserHandle.myUserId();
+        if (mConfigEnableDefaultNotesForWorkProfile) {
+            final int userId = Secure.getInt(
+                    mContext.getContentResolver(),
+                    Secure.DEFAULT_NOTE_TASK_PROFILE,
+                    currentUserId);
+            return UserHandle.of(userId);
+        }
+        return UserHandle.of(currentUserId);
     }
 
     @VisibleForTesting

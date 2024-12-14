@@ -16,16 +16,10 @@
 
 package com.android.settings.notification.app;
 
-import static com.android.server.notification.Flags.notificationHideUnusedChannels;
-
-
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -107,38 +101,9 @@ public class AppNotificationSettings extends NotificationSettings {
         mControllers.add(new BubbleSummaryPreferenceController(context, mBackend));
         mControllers.add(new NotificationsOffPreferenceController(context));
         mControllers.add(new DeletedChannelsPreferenceController(context, mBackend));
+        mControllers.add(new ShowMorePreferenceController(
+                context, mDependentFieldListener, mBackend));
+        mControllers.add(new BundleListPreferenceController(context, mBackend));
         return new ArrayList<>(mControllers);
-    }
-
-    private final int SHOW_ALL_CHANNELS = 1;
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (notificationHideUnusedChannels()) {
-            menu.add(Menu.NONE, SHOW_ALL_CHANNELS, Menu.NONE,
-                    mShowAll ? R.string.hide_unused_channels : R.string.show_unused_channels);
-        }
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (!notificationHideUnusedChannels()) {
-            return super.onOptionsItemSelected(item);
-        }
-        switch (item.getItemId()) {
-            case SHOW_ALL_CHANNELS:
-                mShowAll = !mShowAll;
-                item.setTitle(mShowAll
-                        ? R.string.hide_unused_channels
-                        : R.string.show_unused_channels);
-                ChannelListPreferenceController list =
-                        use(ChannelListPreferenceController.class);
-                list.setShowAll(mShowAll);
-                list.updateState(findPreference(list.getPreferenceKey()));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 }

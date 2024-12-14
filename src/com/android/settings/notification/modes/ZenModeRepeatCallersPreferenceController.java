@@ -26,6 +26,8 @@ import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 class ZenModeRepeatCallersPreferenceController extends AbstractZenModePreferenceController
         implements Preference.OnPreferenceChangeListener {

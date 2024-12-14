@@ -23,28 +23,40 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.content.pm.UserInfo;
+import android.multiuser.Flags;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.widget.SwitchWidgetController;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class})
+@Config(shadows = {ShadowUserManager.class, ShadowDevicePolicyManager.class})
 public class MultiUserSwitchBarControllerTest {
 
     private Context mContext;
     private ShadowUserManager mUserManager;
     private SwitchWidgetController mSwitchWidgetController;
 
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Before
     public void setUp() {
@@ -60,6 +72,7 @@ public class MultiUserSwitchBarControllerTest {
     }
 
     @Test
+    @RequiresFlagsDisabled({Flags.FLAG_FIX_DISABLING_OF_MU_TOGGLE_WHEN_RESTRICTION_APPLIED})
     public void onStart_disallowUserSwitch_shouldSetDisabledByAdmin() {
         mUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
                 UserManager.DISALLOW_USER_SWITCH, true);
@@ -68,6 +81,48 @@ public class MultiUserSwitchBarControllerTest {
                 mSwitchWidgetController, null);
 
         verify(mSwitchWidgetController).setDisabledByAdmin(any());
+    }
+
+    @Test
+    @RequiresFlagsEnabled({Flags.FLAG_FIX_DISABLING_OF_MU_TOGGLE_WHEN_RESTRICTION_APPLIED})
+    public void onStart_disallowUserSwitchEnforcedByAdmin_shouldSetDisabledByAdminUnchecked() {
+        int userId = UserHandle.myUserId();
+        List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
+        enforcingUsers.add(new UserManager.EnforcingUser(userId,
+                UserManager.RESTRICTION_SOURCE_DEVICE_OWNER));
+        // Ensure that RestrictedLockUtils.checkIfRestrictionEnforced doesn't return null.
+        ShadowUserManager.getShadow().setUserRestrictionSources(
+                UserManager.DISALLOW_USER_SWITCH,
+                UserHandle.of(userId),
+                enforcingUsers);
+
+        new MultiUserSwitchBarController(mContext, mSwitchWidgetController, null);
+        verify(mSwitchWidgetController).setChecked(false);
+        verify(mSwitchWidgetController).setDisabledByAdmin(any());
+    }
+
+    @Test
+    @RequiresFlagsEnabled({Flags.FLAG_FIX_DISABLING_OF_MU_TOGGLE_WHEN_RESTRICTION_APPLIED})
+    public void onStart_disallowUserSwitch_userNotMain_shouldSetDisabledUnchecked() {
+        mUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
+                UserManager.DISALLOW_USER_SWITCH, true);
+        new MultiUserSwitchBarController(mContext, mSwitchWidgetController, null);
+
+        verify(mSwitchWidgetController).setChecked(false);
+        verify(mSwitchWidgetController).setEnabled(false);
+        verify(mSwitchWidgetController, never()).setDisabledByAdmin(any());
+    }
+
+    @Test
+    @RequiresFlagsEnabled({Flags.FLAG_FIX_DISABLING_OF_MU_TOGGLE_WHEN_RESTRICTION_APPLIED})
+    public void onStart_allowUserSwitch_notMainUser_shouldSetDisabled() {
+        mUserManager.setUserRestriction(UserHandle.of(UserHandle.myUserId()),
+                UserManager.DISALLOW_USER_SWITCH, false);
+        mUserManager.addUser(10, "Test", UserInfo.FLAG_ADMIN);
+        mUserManager.switchUser(10);
+        new MultiUserSwitchBarController(mContext, mSwitchWidgetController, null);
+
+        verify(mSwitchWidgetController).setEnabled(false);
     }
 
     @Test
