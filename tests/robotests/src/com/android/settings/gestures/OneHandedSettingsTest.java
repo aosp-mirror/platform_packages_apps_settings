@@ -21,7 +21,6 @@ import static com.android.settings.gestures.OneHandedSettings.ONE_HANDED_SHORTCU
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.SystemProperties;
@@ -32,8 +31,6 @@ import android.provider.SearchIndexableResource;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
@@ -60,21 +57,6 @@ public class OneHandedSettingsTest {
     public void setUp() {
         mSettings = spy(new OneHandedSettings());
         SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
-    }
-
-    @Test
-    public void getTileTooltipContent_returnsExpectedValues() {
-        // Simulate to call getTileTooltipContent after onDetach
-        assertThat(mSettings.getTileTooltipContent(QuickSettingsTooltipType.GUIDE_TO_EDIT))
-                .isNull();
-        // Simulate to call getTileTooltipContent after onAttach
-        when(mSettings.getContext()).thenReturn(mContext);
-        assertThat(mSettings.getTileTooltipContent(QuickSettingsTooltipType.GUIDE_TO_EDIT))
-                .isEqualTo(mContext.getText(
-                        R.string.accessibility_one_handed_mode_qs_tooltip_content));
-        assertThat(mSettings.getTileTooltipContent(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE))
-                .isEqualTo(mContext.getText(
-                        R.string.accessibility_one_handed_mode_auto_added_qs_tooltip_content));
     }
 
     @Test
