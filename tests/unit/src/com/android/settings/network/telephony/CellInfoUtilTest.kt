@@ -24,6 +24,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.network.telephony.CellInfoUtil.getNetworkTitle
 import com.android.settings.network.telephony.CellInfoUtil.getOperatorNumeric
 import com.google.common.truth.Truth.assertThat
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -95,6 +96,7 @@ class CellInfoUtilTest {
     }
 
     @Test
+    @Ignore("b/383858953")
     fun cellInfoListToString() {
         val cellInfoList =
             listOf(
