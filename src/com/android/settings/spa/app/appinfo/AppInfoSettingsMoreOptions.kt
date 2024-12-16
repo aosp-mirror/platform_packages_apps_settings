@@ -167,7 +167,7 @@ private fun ApplicationInfo.isShowUninstallUpdates(context: Context): Boolean =
 private fun ApplicationInfo.isShowUninstallForAllUsers(
     userManager: UserManager,
     packageManagers: IPackageManagers,
-): Boolean = userId == 0 && !isSystemApp && !isInstantApp &&
+): Boolean = userManager.isUserAdmin(userId) && !isSystemApp && !isInstantApp &&
     isOtherUserHasInstallPackage(userManager, packageManagers)
 
 private fun ApplicationInfo.isOtherUserHasInstallPackage(

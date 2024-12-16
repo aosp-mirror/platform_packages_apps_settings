@@ -572,7 +572,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
             showIt = false;
         } else if (mPackageInfo == null || mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
             showIt = false;
-        } else if (UserHandle.myUserId() != 0) {
+        } else if (!mUserManager.isAdminUser()) {
             showIt = false;
         } else if (mUserManager.getUsers().size() < 2) {
             showIt = false;
