@@ -156,6 +156,7 @@ import com.android.settings.network.telephony.SatelliteSetting;
 import com.android.settings.network.tether.TetherSettings;
 import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
+import com.android.settings.notification.LockScreenNotificationsPreferencePageFragment;
 import com.android.settings.notification.NotificationAccessSettings;
 import com.android.settings.notification.NotificationAssistantPicker;
 import com.android.settings.notification.PoliteNotificationsPreferenceFragment;
@@ -365,6 +366,7 @@ public class SettingsGateway {
             EnterprisePrivacySettings.class.getName(),
             WebViewAppPicker.class.getName(),
             LockscreenDashboardFragment.class.getName(),
+            LockScreenNotificationsPreferencePageFragment.class.getName(),
             MemtagPage.class.getName(),
             BluetoothDeviceDetailsFragment.class.getName(),
             BluetoothBroadcastDialog.class.getName(),
