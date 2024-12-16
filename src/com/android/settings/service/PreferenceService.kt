@@ -19,7 +19,6 @@ package com.android.settings.service
 import android.app.Application
 import android.os.Binder
 import android.os.OutcomeReceiver
-import android.os.Process
 import android.service.settings.preferences.GetValueRequest
 import android.service.settings.preferences.GetValueResult
 import android.service.settings.preferences.MetadataRequest
@@ -37,7 +36,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class PreferenceService : SettingsPreferenceService() {
 
@@ -49,14 +47,22 @@ class PreferenceService : SettingsPreferenceService() {
 
     override fun onGetAllPreferenceMetadata(
         request: MetadataRequest,
-        callback: OutcomeReceiver<MetadataResult, Exception>
+        callback: OutcomeReceiver<MetadataResult, Exception>,
     ) {
+        // MUST get pid/uid in binder thread
+        val callingPid = Binder.getCallingPid()
+        val callingUid = Binder.getCallingUid()
         scope.launch {
-            val graphProto = graphApi.invoke(application, Process.myUid(), Binder.getCallingUid(),
-                GetPreferenceGraphRequest(
-                    includeValue = false,
-                    flags = PreferenceGetterFlags.METADATA
-                ))
+            val graphProto =
+                graphApi.invoke(
+                    application,
+                    callingPid,
+                    callingUid,
+                    GetPreferenceGraphRequest(
+                        includeValue = false,
+                        flags = PreferenceGetterFlags.METADATA,
+                    ),
+                )
             val result = transformCatalystGetMetadataResponse(this@PreferenceService, graphProto)
             callback.onResult(result)
         }
@@ -64,17 +70,16 @@ class PreferenceService : SettingsPreferenceService() {
 
     override fun onGetPreferenceValue(
         request: GetValueRequest,
-        callback: OutcomeReceiver<GetValueResult, Exception>
+        callback: OutcomeReceiver<GetValueResult, Exception>,
     ) {
+        // MUST get pid/uid in binder thread
+        val callingPid = Binder.getCallingPid()
+        val callingUid = Binder.getCallingUid()
         scope.launch {
             val apiRequest = transformFrameworkGetValueRequest(request)
-            val response = getApiHandler.invoke(application, Process.myUid(),
-                Binder.getCallingUid(), apiRequest)
-            val result = transformCatalystGetValueResponse(
-                this@PreferenceService,
-                request,
-                response
-            )
+            val response = getApiHandler.invoke(application, callingPid, callingUid, apiRequest)
+            val result =
+                transformCatalystGetValueResponse(this@PreferenceService, request, response)
             if (result == null) {
                 callback.onError(IllegalStateException("No response"))
             } else {
@@ -85,8 +90,11 @@ class PreferenceService : SettingsPreferenceService() {
 
     override fun onSetPreferenceValue(
         request: SetValueRequest,
-        callback: OutcomeReceiver<SetValueResult, Exception>
+        callback: OutcomeReceiver<SetValueResult, Exception>,
     ) {
+        // MUST get pid/uid in binder thread
+        val callingPid = Binder.getCallingPid()
+        val callingUid = Binder.getCallingUid()
         scope.launch {
             val apiRequest = transformFrameworkSetValueRequest(request)
             if (apiRequest == null) {
@@ -94,8 +102,7 @@ class PreferenceService : SettingsPreferenceService() {
                     SetValueResult.Builder(SetValueResult.RESULT_INVALID_REQUEST).build()
                 )
             } else {
-                val response = setApiHandler.invoke(application, Process.myUid(),
-                    Binder.getCallingUid(), apiRequest)
+                val response = setApiHandler.invoke(application, callingPid, callingUid, apiRequest)
 
                 callback.onResult(transformCatalystSetValueResponse(response))
             }
@@ -106,9 +113,9 @@ class PreferenceService : SettingsPreferenceService() {
     private class GraphProvider(override val id: Int) : GetPreferenceGraphApiHandler(emptySet()) {
         override fun hasPermission(
             application: Application,
-            myUid: Int,
+            callingPid: Int,
             callingUid: Int,
-            request: GetPreferenceGraphRequest
+            request: GetPreferenceGraphRequest,
         ) = true
     }
 }
