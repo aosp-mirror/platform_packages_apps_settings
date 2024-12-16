@@ -65,7 +65,8 @@ public class DoubleTapPowerForWalletPreferenceController extends BasePreferenceC
 
     @Override
     public int getAvailabilityStatus() {
-        if (!DoubleTapPowerSettingsUtils.isDoubleTapPowerButtonGestureAvailable(mContext)) {
+        if (!DoubleTapPowerSettingsUtils
+                .isMultiTargetDoubleTapPowerButtonGestureAvailable(mContext)) {
             return UNSUPPORTED_ON_DEVICE;
         }
         return DoubleTapPowerSettingsUtils.isDoubleTapPowerButtonGestureEnabled(mContext)

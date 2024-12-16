@@ -39,9 +39,11 @@ public class DoubleTapPowerSettings extends DashboardFragment {
 
     public static final String PREF_KEY_SUGGESTION_COMPLETE =
             "pref_double_tap_power_suggestion_complete";
+    private Context mContext;
 
     @Override
     public void onAttach(Context context) {
+        mContext = context;
         super.onAttach(context);
         SuggestionFeatureProvider suggestionFeatureProvider =
                 FeatureFactory.getFeatureFactory().getSuggestionFeatureProvider();
@@ -61,7 +63,15 @@ public class DoubleTapPowerSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return android.service.quickaccesswallet.Flags.launchWalletOptionOnPowerDoubleTap()
+        return getDoubleTapPowerSettingsResId(mContext);
+    }
+
+    private static int getDoubleTapPowerSettingsResId(Context context) {
+        if (!android.service.quickaccesswallet.Flags.launchWalletOptionOnPowerDoubleTap()) {
+            return R.xml.double_tap_power_to_open_camera_settings;
+        }
+        return DoubleTapPowerSettingsUtils
+                .isMultiTargetDoubleTapPowerButtonGestureAvailable(context)
                 ? R.xml.double_tap_power_settings
                 : R.xml.double_tap_power_to_open_camera_settings;
     }
@@ -73,11 +83,7 @@ public class DoubleTapPowerSettings extends DashboardFragment {
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         @NonNull Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId =
-                            android.service.quickaccesswallet.Flags
-                                            .launchWalletOptionOnPowerDoubleTap()
-                                    ? R.xml.double_tap_power_settings
-                                    : R.xml.double_tap_power_to_open_camera_settings;
+                    sir.xmlResId = getDoubleTapPowerSettingsResId(context);
                     return List.of(sir);
                 }
             };

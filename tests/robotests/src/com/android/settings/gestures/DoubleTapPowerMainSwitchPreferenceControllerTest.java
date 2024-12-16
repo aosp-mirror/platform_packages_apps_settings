@@ -16,6 +16,9 @@
 
 package com.android.settings.gestures;
 
+import static com.android.settings.gestures.DoubleTapPowerSettingsUtils.DOUBLE_TAP_POWER_DISABLED_MODE;
+import static com.android.settings.gestures.DoubleTapPowerSettingsUtils.DOUBLE_TAP_POWER_MULTI_TARGET_MODE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.mock;
@@ -54,7 +57,8 @@ public class DoubleTapPowerMainSwitchPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_setDoubleTapPowerGestureAvailable_preferenceEnabled() {
-        when(mResources.getBoolean(R.bool.config_doubleTapPowerGestureEnabled)).thenReturn(true);
+        when(mResources.getInteger(R.integer.config_doubleTapPowerGestureMode)).thenReturn(
+                DOUBLE_TAP_POWER_MULTI_TARGET_MODE);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
@@ -62,7 +66,8 @@ public class DoubleTapPowerMainSwitchPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_setDoubleTapPowerGestureUnavailable_preferenceUnsupported() {
-        when(mResources.getBoolean(R.bool.config_doubleTapPowerGestureEnabled)).thenReturn(false);
+        when(mResources.getInteger(R.integer.config_doubleTapPowerGestureMode)).thenReturn(
+                DOUBLE_TAP_POWER_DISABLED_MODE);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
