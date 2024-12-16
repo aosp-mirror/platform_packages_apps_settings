@@ -36,6 +36,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 
 // LINT.IfChange
@@ -70,11 +71,18 @@ class AmbientDisplayAlwaysOnPreference :
 
     override fun storage(context: Context): KeyValueStore = Storage(context)
 
-    override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
+    override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
-    override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
-        ReadWritePermit.ALLOW
+    override fun getWritePermit(
+        context: Context,
+        value: Boolean?,
+        callingPid: Int,
+        callingUid: Int,
+    ) = ReadWritePermit.ALLOW
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         val storage = SettingsSecureStore.get(context)

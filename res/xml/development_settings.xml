@@ -569,6 +569,13 @@
             android:entries="@array/overlay_display_devices_entries"
             android:entryValues="@array/overlay_display_devices_values" />
 
+        <ListPreference
+            android:entries="@array/shade_display_awareness_entries"
+            android:entryValues="@array/shade_display_awareness_values"
+            android:key="shade_display_awareness"
+            android:summary="@string/summary_placeholder"
+            android:title="@string/shade_display_awareness_title" />
+
         <com.android.settings.display.DensityPreference
             android:key="density"
             android:title="@string/developer_smallest_width" />

@@ -29,7 +29,6 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.PopupWindow;
 import android.widget.SeekBar;
@@ -44,7 +43,6 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.testutils.shadow.ShadowFragment;
-import com.android.settings.widget.LabeledSeekBarPreference;
 import com.android.settingslib.testutils.shadow.ShadowInteractionJankMonitor;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -77,7 +75,7 @@ public class PreviewSizeSeekBarControllerTest {
     private Activity mContext;
     private PreviewSizeSeekBarController mSeekBarController;
     private FontSizeData mFontSizeData;
-    private LabeledSeekBarPreference mSeekBarPreference;
+    private AccessibilitySeekBarPreference mSeekBarPreference;
 
     private PreferenceScreen mPreferenceScreen;
     private TestFragment mFragment;
@@ -109,7 +107,7 @@ public class PreviewSizeSeekBarControllerTest {
         mPreferenceScreen = spy(new PreferenceScreen(mContext, /* attrs= */ null));
         when(mPreferenceScreen.getPreferenceManager()).thenReturn(mPreferenceManager);
         doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
-        mSeekBarPreference = spy(new LabeledSeekBarPreference(mContext, /* attrs= */ null));
+        mSeekBarPreference = spy(new AccessibilitySeekBarPreference(mContext, /* attrs= */ null));
         mSeekBarPreference.setKey(FONT_SIZE_KEY);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
@@ -246,12 +244,11 @@ public class PreviewSizeSeekBarControllerTest {
 
     @Test
     @Config(shadows = ShadowFragment.class)
-    public void restoreValueFromSavedInstanceState_showTooltipView() {
-        final Bundle savedInstanceState = new Bundle();
-        savedInstanceState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, /* value= */ true);
-        mSeekBarController.onCreate(savedInstanceState);
+    public void enabledNeedsQSTooltipReshow_showTooltipView() {
+        mSeekBarPreference.setNeedsQSTooltipReshow(true);
 
         mSeekBarController.displayPreference(mPreferenceScreen);
+        mSeekBarController.onStart();
         ShadowLooper.idleMainLooper();
 
         assertThat(getLatestPopupWindow().isShowing()).isTrue();

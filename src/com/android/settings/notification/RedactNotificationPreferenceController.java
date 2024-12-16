@@ -33,6 +33,7 @@ import android.provider.Settings;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.server.notification.Flags;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -120,6 +121,11 @@ public class RedactNotificationPreferenceController extends TogglePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
+        // Hide when the notifications on lock screen settings page flag is enabled.
+        if (Flags.notificationLockScreenSettings()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
         // hide work profile setting if no work profile
         if (KEY_LOCKSCREEN_WORK_PROFILE_REDACT.equals(getPreferenceKey())
                 && mProfileUserId == UserHandle.myUserId()) {

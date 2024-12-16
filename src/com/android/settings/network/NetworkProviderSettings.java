@@ -429,6 +429,10 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
     }
 
     private void addWifiSwitchPreferenceController() {
+        if (isCatalystEnabled()) {
+            Log.i(TAG, "WifiSwitchPreferenceController bypassed since Catalyst is enabled!");
+            return;
+        }
         if (!hasWifiManager()) return;
         if (mWifiSwitchPreferenceController == null) {
             mWifiSwitchPreferenceController =
@@ -702,7 +706,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
                 forget(mSelectedWifiEntry);
                 return true;
             case MENU_ID_SHARE:
-                WifiDppUtils.showLockScreen(getContext(),
+                WifiDppUtils.showLockScreenForWifiSharing(getContext(),
                         () -> launchWifiDppConfiguratorActivity(mSelectedWifiEntry));
                 return true;
             case MENU_ID_MODIFY:

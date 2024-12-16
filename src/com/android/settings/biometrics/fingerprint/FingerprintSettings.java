@@ -537,8 +537,9 @@ public class FingerprintSettings extends SubSettings {
                     activity, DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, mUserId);
             final Intent helpIntent = HelpUtils.getHelpIntent(
                     activity, getString(getHelpResource()), activity.getClass().getName());
-            final View.OnClickListener learnMoreClickListener = (v) ->
-                    activity.startActivityForResult(helpIntent, 0);
+            final View.OnClickListener learnMoreClickListener = (v) -> {
+                activity.startActivityForResult(helpIntent, 0);
+            };
 
             mFooterColumns.clear();
             if (admin != null) {
@@ -910,7 +911,7 @@ public class FingerprintSettings extends SubSettings {
                 mIsEnrolling = true;
                 Intent intent = new Intent();
                 intent.setClassName(SETTINGS_PACKAGE_NAME,
-                        FingerprintEnrollEnrolling.class.getName());
+                    FingerprintEnroll.AddAdditionalFingerprint.class.getName());
                 intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
                 if (mCalibrator != null) {

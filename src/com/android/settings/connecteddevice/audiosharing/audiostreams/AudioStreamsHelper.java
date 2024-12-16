@@ -21,6 +21,8 @@ import static com.android.settings.connecteddevice.audiosharing.audiostreams.Aud
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamMediaService.DEVICES;
 
 import static java.util.Collections.emptyList;
+import static java.util.Collections.emptyMap;
+import static java.util.stream.Collectors.toMap;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeAudioContentMetadata;
@@ -48,7 +50,9 @@ import com.google.common.base.Strings;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
@@ -147,6 +151,16 @@ public class AudioStreamsHelper {
                 .flatMap(sink -> mLeBroadcastAssistant.getAllSources(sink).stream())
                 .filter(AudioStreamsHelper::isConnected)
                 .toList();
+    }
+
+    /** Retrieves a list of all LE broadcast receive states keyed by each active device. */
+    public Map<BluetoothDevice, List<BluetoothLeBroadcastReceiveState>> getAllSourcesByDevice() {
+        if (mLeBroadcastAssistant == null) {
+            Log.w(TAG, "getAllSourcesByDevice(): LeBroadcastAssistant is null!");
+            return emptyMap();
+        }
+        return getConnectedBluetoothDevices(mBluetoothManager, /* inSharingOnly= */ true).stream()
+                .collect(toMap(Function.identity(), mLeBroadcastAssistant::getAllSources));
     }
 
     /** Retrieves a list of all LE broadcast receive states from sinks with source present. */

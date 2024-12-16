@@ -18,6 +18,9 @@ package com.android.settings.network
 
 import android.content.Context
 import android.net.TetheringManager
+import androidx.lifecycle.testing.TestLifecycleOwner
+import androidx.preference.PreferenceCategory
+import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito
@@ -25,11 +28,15 @@ import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settingslib.TetherUtil
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.MockitoSession
+import org.mockito.kotlin.mock
 import org.mockito.quality.Strictness
 
 @RunWith(AndroidJUnit4::class)
@@ -38,7 +45,14 @@ class TetherPreferenceControllerTest {
 
     private val context: Context = ApplicationProvider.getApplicationContext()
 
-    private val controller = TetherPreferenceController(context, TEST_KEY)
+    private val mockTetheredRepository =
+        mock<TetheredRepository> { on { tetheredTypesFlow() }.thenReturn(flowOf(emptySet())) }
+
+    private val controller = TetherPreferenceController(context, TEST_KEY, mockTetheredRepository)
+
+    private val preference = PreferenceCategory(context).apply { key = TEST_KEY }
+
+    private val preferenceScreen = PreferenceManager(context).createPreferenceScreen(context)
 
     @Before
     fun setUp() {
@@ -49,6 +63,9 @@ class TetherPreferenceControllerTest {
             .startMocking()
 
         ExtendedMockito.doReturn(true).`when` { TetherUtil.isTetherAvailable(context) }
+
+        preferenceScreen.addPreference(preference)
+        controller.displayPreference(preferenceScreen)
     }
 
     @After
@@ -57,21 +74,30 @@ class TetherPreferenceControllerTest {
     }
 
     @Test
-    fun getAvailabilityStatus_whenTetherAvailable() {
-        ExtendedMockito.doReturn(true).`when` { TetherUtil.isTetherAvailable(context) }
-
+    fun getAvailabilityStatus_alwaysReturnAvailable() {
         val availabilityStatus = controller.availabilityStatus
 
         assertThat(availabilityStatus).isEqualTo(BasePreferenceController.AVAILABLE)
     }
 
     @Test
-    fun getAvailabilityStatus_whenTetherNotAvailable() {
+    fun onViewCreated_whenTetherAvailable() = runBlocking {
+        ExtendedMockito.doReturn(true).`when` { TetherUtil.isTetherAvailable(context) }
+
+        controller.onViewCreated(TestLifecycleOwner())
+        delay(100)
+
+        assertThat(preference.isVisible).isTrue()
+    }
+
+    @Test
+    fun onViewCreated_whenTetherNotAvailable() = runBlocking {
         ExtendedMockito.doReturn(false).`when` { TetherUtil.isTetherAvailable(context) }
 
-        val availabilityStatus = controller.availabilityStatus
+        controller.onViewCreated(TestLifecycleOwner())
+        delay(100)
 
-        assertThat(availabilityStatus).isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE)
+        assertThat(preference.isVisible).isFalse()
     }
 
     @Test

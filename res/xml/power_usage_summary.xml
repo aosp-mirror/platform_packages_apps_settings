@@ -25,7 +25,13 @@
         android:key="battery_header"
         android:title="@string/summary_placeholder"
         android:selectable="false"
+        android:paddingBottom="0px"
         settings:controller="com.android.settings.fuelgauge.BatteryHeaderPreferenceController" />
+
+    <com.android.settings.fuelgauge.BatteryHeaderTextPreference
+        android:key="battery_header_text"
+        android:selectable="false"
+        settings:controller="com.android.settings.fuelgauge.BatteryHeaderTextPreferenceController" />
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="battery_help_message"

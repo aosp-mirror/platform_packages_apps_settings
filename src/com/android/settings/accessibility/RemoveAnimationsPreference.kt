@@ -28,6 +28,7 @@ import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 
 class RemoveAnimationsPreference :
@@ -64,11 +65,18 @@ class RemoveAnimationsPreference :
 
     override fun storage(context: Context): KeyValueStore = RemoveAnimationsStorage(context)
 
-    override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
+    override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
-    override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
-        ReadWritePermit.ALLOW
+    override fun getWritePermit(
+        context: Context,
+        value: Boolean?,
+        callingPid: Int,
+        callingUid: Int,
+    ) = ReadWritePermit.ALLOW
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     @Suppress("UNCHECKED_CAST")
     private class RemoveAnimationsStorage(private val context: Context) :

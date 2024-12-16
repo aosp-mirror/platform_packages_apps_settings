@@ -140,25 +140,6 @@ public class ToggleColorInversionPreferenceFragmentTest {
     }
 
     @Test
-    @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void onPreferenceToggled_colorCorrectDisabled_shouldReturnTrueAndShowTooltipView() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, OFF);
-        mSwitchPreference.setChecked(false);
-        mFragment.onAttach(mContext);
-        mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
-        mFragment.onViewCreated(mFragment.getView(), Bundle.EMPTY);
-
-        mFragment.onPreferenceToggled(mSwitchPreference.getKey(), true);
-
-        final boolean isEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, OFF) == ON;
-        assertThat(isEnabled).isTrue();
-        assertThat(getLatestPopupWindow()).isNotNull();
-        assertThat(getLatestPopupWindow().isShowing()).isTrue();
-    }
-
-    @Test
     public void onPreferenceToggled_colorCorrectEnabled_shouldReturnFalseAndNotShowTooltipView() {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, ON);

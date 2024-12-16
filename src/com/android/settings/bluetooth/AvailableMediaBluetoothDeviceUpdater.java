@@ -39,6 +39,7 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
 
     private final AudioManager mAudioManager;
     private final LocalBluetoothManager mLocalBtManager;
+    private int mAudioMode;
 
     public AvailableMediaBluetoothDeviceUpdater(
             Context context,
@@ -47,21 +48,23 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         super(context, devicePreferenceCallback, metricsCategory);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         mLocalBtManager = Utils.getLocalBtManager(context);
+        mAudioMode = mAudioManager.getMode();
     }
 
     @Override
     public void onAudioModeChanged() {
+        // TODO: move to background thread
+        mAudioMode = mAudioManager.getMode();
         forceUpdate();
     }
 
     @Override
     public boolean isFilterMatched(CachedBluetoothDevice cachedDevice) {
-        final int audioMode = mAudioManager.getMode();
         final int currentAudioProfile;
 
-        if (audioMode == AudioManager.MODE_RINGTONE
-                || audioMode == AudioManager.MODE_IN_CALL
-                || audioMode == AudioManager.MODE_IN_COMMUNICATION) {
+        if (mAudioMode == AudioManager.MODE_RINGTONE
+                || mAudioMode == AudioManager.MODE_IN_CALL
+                || mAudioMode == AudioManager.MODE_IN_COMMUNICATION) {
             // in phone call
             currentAudioProfile = BluetoothProfile.HEADSET;
         } else {

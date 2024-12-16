@@ -54,7 +54,7 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 @Config(
         shadows = {
-                ShadowBluetoothAdapter.class,
+            ShadowBluetoothAdapter.class,
         })
 public class AudioStreamsProgressCategoryCallbackTest {
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
@@ -70,8 +70,8 @@ public class AudioStreamsProgressCategoryCallbackTest {
     @Before
     public void setUp() {
         mSetFlagsRule.disableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
-        ShadowBluetoothAdapter shadowBluetoothAdapter = Shadow.extract(
-                BluetoothAdapter.getDefaultAdapter());
+        ShadowBluetoothAdapter shadowBluetoothAdapter =
+                Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         shadowBluetoothAdapter.setEnabled(true);
         shadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
@@ -87,7 +87,7 @@ public class AudioStreamsProgressCategoryCallbackTest {
         when(mState.getBisSyncState()).thenReturn(bisSyncState);
         mCallback.onReceiveStateChanged(mDevice, /* sourceId= */ 0, mState);
 
-        verify(mController).handleSourceConnected(any());
+        verify(mController).handleSourceConnected(any(), any());
     }
 
     @Test
@@ -102,7 +102,7 @@ public class AudioStreamsProgressCategoryCallbackTest {
         when(mSourceDevice.getAddress()).thenReturn(address);
         mCallback.onReceiveStateChanged(mDevice, /* sourceId= */ 0, mState);
 
-        verify(mController).handleSourcePresent(any());
+        verify(mController).handleSourcePresent(any(), any());
     }
 
     @Test

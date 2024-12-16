@@ -36,7 +36,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.fuelgauge.BatteryHeaderPreferenceController;
+import com.android.settings.fuelgauge.BatteryHeaderTextPreferenceController;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.BatteryInfoLoader;
 import com.android.settings.fuelgauge.BatteryUtils;
@@ -67,7 +67,7 @@ public class PowerUsageSummary extends PowerUsageBase
     @VisibleForTesting BatteryUtils mBatteryUtils;
     @VisibleForTesting BatteryInfo mBatteryInfo;
 
-    @VisibleForTesting BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
+    @VisibleForTesting BatteryHeaderTextPreferenceController mBatteryHeaderTextPreferenceController;
     @VisibleForTesting BatteryTipPreferenceController mBatteryTipPreferenceController;
     @VisibleForTesting boolean mNeedUpdateBatteryTip;
     @VisibleForTesting Preference mHelpPreference;
@@ -93,8 +93,8 @@ public class PowerUsageSummary extends PowerUsageBase
 
                 @Override
                 public void onLoadFinished(Loader<BatteryInfo> loader, BatteryInfo batteryInfo) {
-                    mBatteryHeaderPreferenceController.updateHeaderPreference(batteryInfo);
-                    mBatteryHeaderPreferenceController.updateHeaderByBatteryTips(
+                    mBatteryHeaderTextPreferenceController.updateHeaderPreference(batteryInfo);
+                    mBatteryHeaderTextPreferenceController.updateHeaderByBatteryTips(
                             mBatteryTipPreferenceController.getCurrentBatteryTip(), batteryInfo);
                     mBatteryInfo = batteryInfo;
                 }
@@ -116,7 +116,7 @@ public class PowerUsageSummary extends PowerUsageBase
                 @Override
                 public void onLoadFinished(Loader<List<BatteryTip>> loader, List<BatteryTip> data) {
                     mBatteryTipPreferenceController.updateBatteryTips(data);
-                    mBatteryHeaderPreferenceController.updateHeaderByBatteryTips(
+                    mBatteryHeaderTextPreferenceController.updateHeaderByBatteryTips(
                             mBatteryTipPreferenceController.getCurrentBatteryTip(), mBatteryInfo);
                 }
 
@@ -129,7 +129,7 @@ public class PowerUsageSummary extends PowerUsageBase
         super.onAttach(context);
         final Activity activity = getActivity();
 
-        mBatteryHeaderPreferenceController = use(BatteryHeaderPreferenceController.class);
+        mBatteryHeaderTextPreferenceController = use(BatteryHeaderTextPreferenceController.class);
 
         mBatteryTipPreferenceController = use(BatteryTipPreferenceController.class);
         mBatteryTipPreferenceController.setActivity(activity);
@@ -248,15 +248,6 @@ public class PowerUsageSummary extends PowerUsageBase
     @VisibleForTesting
     void updateBatteryTipFlag(Bundle icicle) {
         mNeedUpdateBatteryTip = icicle == null || mBatteryTipPreferenceController.needUpdate();
-    }
-
-    @Override
-    protected void restartBatteryStatsLoader(@BatteryUpdateType int refreshType) {
-        super.restartBatteryStatsLoader(refreshType);
-        // Update battery header if battery is present.
-        if (mIsBatteryPresent) {
-            mBatteryHeaderPreferenceController.quickUpdateHeaderPreference();
-        }
     }
 
     @Override

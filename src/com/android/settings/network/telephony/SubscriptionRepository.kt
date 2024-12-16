@@ -40,6 +40,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.shareIn
+import java.util.stream.Collectors
 
 private const val TAG = "SubscriptionRepository"
 
@@ -153,6 +154,18 @@ class SubscriptionRepository(private val context: Context) {
             .distinctUntilChanged()
             .conflate()
             .flowOn(Dispatchers.Default)
+
+    fun removableSubscriptionInfoListFlow(): Flow<List<SubscriptionInfo>> {
+        return subscriptionsChangedFlow()
+            .map {
+                subscriptionManager.availableSubscriptionInfoList?.stream()
+                    ?.filter { sub: SubscriptionInfo -> !sub.isEmbedded }
+                    ?.collect(Collectors.toList()) ?: emptyList()
+            }
+            .conflate()
+            .onEach { Log.d(TAG, "getRemovableSubscriptionVisibleFlow: $it") }
+            .flowOn(Dispatchers.Default)
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun phoneNumberFlow(subId: Int): Flow<String?> =

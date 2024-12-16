@@ -25,11 +25,8 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserHandle;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.view.accessibility.AccessibilityManager;
-import android.view.accessibility.Flags;
 
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -111,17 +108,6 @@ public class VolumeKeysShortcutOptionControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void enableShortcutForTargets_enableVolumeKeysShortcut_shortcutSet() {
-        mController.enableShortcutForTargets(true);
-
-        assertThat(
-                ShortcutUtils.isComponentIdExistingInSettings(
-                        mContext, ShortcutConstants.UserShortcutType.HARDWARE, TARGET)).isTrue();
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_enableVolumeKeysShortcut_callA11yManager() {
         mController.enableShortcutForTargets(true);
 
@@ -135,17 +121,6 @@ public class VolumeKeysShortcutOptionControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void enableShortcutForTargets_disableVolumeKeysShortcut_shortcutNotSet() {
-        mController.enableShortcutForTargets(false);
-
-        assertThat(
-                ShortcutUtils.isComponentIdExistingInSettings(
-                        mContext, ShortcutConstants.UserShortcutType.HARDWARE, TARGET)).isFalse();
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_disableVolumeKeysShortcut_callA11yManager() {
         mController.enableShortcutForTargets(false);
 
