@@ -210,6 +210,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"तापमान"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"हफ़्ते का पहला दिन"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"नंबर की प्राथमिकताएं"</string>
+    <string name="measurement_system_preferences_title" msgid="5539250190895110890">"मेज़रमेंट सिस्टम"</string>
     <string name="default_string_of_regional_preference" msgid="3428899072914884203">"डिफ़ॉल्ट सेटिंग का इस्तेमाल करें"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"सेल्सियस (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"फ़ैरनहाइट (°F)"</string>
@@ -222,6 +223,9 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"शनिवार"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"अगर कोई ऐप्लिकेशन जगह के हिसाब से तय की गई प्राथमिकताओं के साथ काम नहीं करता, तो वह जगह के हिसाब से दी गई डिफ़ॉल्ट सेटिंग का इस्तेमाल करेगा."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"भाषा की प्राथमिकताएं चुनने के बारे में ज़्यादा जानें."</string>
+    <string name="metric_measurement_system" msgid="7489725697268321541">"मेट्रिक"</string>
+    <string name="us_measurement_system" msgid="8738587232938189052">"इंपीरियल (अमेरिका)"</string>
+    <string name="uk_measurement_system" msgid="4196897001775627597">"इंपीरियल (यूनाइटेड किंगडम)"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"अन्य सेटिंग"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"चुनें कि आपको कैसे बुलाया जाए"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"अपने डिवाइस के लिए यह तय किया जा सकता है कि वह आपको कैसे बुलाए"</string>
@@ -389,8 +393,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"इस सुविधा का कंट्रोल आपके पास है"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"आपका बच्चा और आप, इन सेटिंग को कंट्रोल कर सकते हैं"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"ध्यान रखें"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_footer_title_3 (6474415050918819260) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_3" msgid="6474415050918819260">"सुरक्षित और मददगार"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"अपना फ़ोन अनलॉक करने या खरीदारियों को मंज़ूरी देने के लिए अपने फ़िंगरप्रिंट का इस्तेमाल करें.\n\nनोट: आप इस डिवाइस का लॉक खोलने के लिए अपने फ़िंगरप्रिंट का इस्तेमाल नहीं कर सकते हैं. और जानकारी के लिए, अपने संगठन के एडमिन से संपर्क करें."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"रद्द करें"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"अभी नहीं"</string>
@@ -1968,16 +1971,16 @@
     <string name="physical_keyboard_title" msgid="3328134097512350958">"सामान्य कीबोर्ड"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"फ़िज़िकल कीबोर्ड का लेआउट पिकर"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"बाउंस बटन"</string>
-    <string name="bounce_keys_summary" msgid="7418024428905737729">"एक ही बटन को बार-बार दबाने पर, कीबोर्ड तुरंत कोई कार्रवाई नहीं करेगा"</string>
-    <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"बाउंस बटन का थ्रेशोल्ड"</string>
-    <string name="bounce_keys_dialog_subtitle" msgid="5640575860258120026">"चुनें कि किसी बटन को कितनी देर तक बार-बार दबाने पर कीबोर्ड कोई कार्रवाई नहीं करेगा"</string>
-    <string name="input_setting_keys_dialog_option_200" msgid="3121006986226247560">"0.2 सेकंड"</string>
-    <string name="input_setting_keys_dialog_option_400" msgid="2634500629396699440">"0.4 सेकंड"</string>
-    <string name="input_setting_keys_dialog_option_600" msgid="3828362866751805146">"0.6 सेकंड"</string>
+    <string name="bounce_keys_summary" msgid="8890925059943636911">"एक ही बटन को लगातार दबाने पर, कोई कार्रवाई नहीं होगी"</string>
+    <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"\'बाउंस बटन\' सुविधा के लिए थ्रेशोल्ड"</string>
+    <string name="bounce_keys_dialog_subtitle" msgid="6804676895876861863">"चुनें कि बटन को लगातार कितनी बार दबाने तक, कीबोर्ड कोई कार्रवाई नहीं करेगा"</string>
+    <string name="input_setting_keys_dialog_option_200" msgid="2785528287150314940">"0.2 सेकंड"</string>
+    <string name="input_setting_keys_dialog_option_400" msgid="91571674179896177">"0.4 सेकंड"</string>
+    <string name="input_setting_keys_dialog_option_600" msgid="6983252972219539375">"0.6 सेकंड"</string>
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"अपने हिसाब से सेट करें"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"अपने हिसाब से वैल्यू सेट करें"</string>
     <string name="slow_keys" msgid="2891452895499690837">"स्लो बटन"</string>
-    <string name="slow_keys_summary" msgid="2914214326648535377">"किसी बटन को दबाने पर स्क्रीन पर होने वाली प्रतिक्रिया के समय में बदलाव करें"</string>
+    <string name="slow_keys_summary" msgid="3852534180402969185">"यह तय करें कि किसी बटन को कितनी देर तक दबाने के बाद, कार्रवाई होगी"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"स्टिकी बटन"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"शॉर्टकट के लिए, कई कुंजियों को एक साथ दबाकर रखने के बजाय एक बार में एक कुंजी दबाएं"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"माउस का काम करने वाले बटन"</string>
@@ -2002,6 +2005,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"टचपैड"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"टचपैड और माउस"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"माउस"</string>
+    <string name="mouse_settings_summary" msgid="4609720443781972646">"पॉइंटर की स्पीड सेट करना, बटन के फ़ंक्शन स्वैप करना, बटन को मनमुताबिक बनाना"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"पॉइंटर की स्पीड, हाथ के जेस्चर"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"क्लिक करने के लिए टैप करें"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"टैप करके खींचें और छोड़ें"</string>
@@ -2313,6 +2317,8 @@
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"नेविगेशन बार के बटन मोड में सेटिंग उपलब्ध नहीं है."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"टेक्स्ट का कंट्रास्ट बढ़ाएं"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"टेक्स्ट का रंग बदलकर काला या सफ़ेद करें. इससे बैकग्राउंड के मुताबिक कंट्रास्ट बढ़ जाता है."</string>
+    <string name="accessibility_notification_high_contrast_text_content" msgid="2143888096871993191">"ज़्यादा कंट्रास्ट वाला टेक्स्ट, अब नए लुक और स्टाइल में उपलब्ध है."</string>
+    <string name="accessibility_notification_high_contrast_text_action" msgid="7190559555068414342">"सेटिंग खोलें"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"टेक्स्ट का कंट्रास्ट बढ़ाएं"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"कंट्रास्ट बढ़ाने के लिए, टेक्स्ट के चारों ओर काले या सफ़ेद रंग का बैकग्राउंड जोड़ें"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"स्क्रीन को बड़ा करने की सुविधा को अपने आप अपडेट करें"</string>
@@ -5541,4 +5547,5 @@
     <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"संपर्कों को कहां सेव करना है"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"सर्कल बनाकर ढूंढें"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"स्क्रीन पर दिख रहे कॉन्टेंट की मदद से कोई चीज़ खोजने के लिए, होम बटन या नेविगेशन हैंडल को दबाकर रखें."</string>
+    <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. डिवाइस की जानकारी कॉन्फ़िगर करें."</string>
 </resources>

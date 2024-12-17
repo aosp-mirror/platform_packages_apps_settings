@@ -210,6 +210,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Teplota"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"První den týdne"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Předvolby číslic"</string>
+    <string name="measurement_system_preferences_title" msgid="5539250190895110890">"Měrné jednotky"</string>
     <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Použít výchozí"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"Stupně Celsia (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Stupně Fahrenheita (°F)"</string>
@@ -222,6 +223,9 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"sobota"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Pokud aplikace regionální preference nepodporuje, použije výchozí nastavení národního prostředí."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Další informace o jazykových preferencích"</string>
+    <string name="metric_measurement_system" msgid="7489725697268321541">"Metrika"</string>
+    <string name="us_measurement_system" msgid="8738587232938189052">"Imperiální (USA)"</string>
+    <string name="uk_measurement_system" msgid="4196897001775627597">"Imperiální (Spojené království)"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Další předvolby"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"Zvolte oslovení"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"Vaše zařízení může upravit, jak budete oslovováni"</string>
@@ -389,8 +393,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Vše máte ve svých rukou"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Vy a dítě máte vše pod kontrolou"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Upozornění"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_footer_title_3 (6474415050918819260) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_3" msgid="6474415050918819260">"Bezpečné a užitečné"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Odemykejte telefon a schvalujte nákupy otiskem prstu.\n\nPoznámka: Otisk prstu nelze použít k odemykání tohoto zařízení. Další informace vám poskytne administrátor vaší organizace."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Zrušit"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Teď ne"</string>
@@ -1968,16 +1971,23 @@
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fyzická klávesnice"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Výběr fyzického rozložení klávesnice"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Ignorovat opakovaná stisknutí"</string>
-    <string name="bounce_keys_summary" msgid="7418024428905737729">"Klávesnice ignoruje opakovaná stisknutí jedné klávesy"</string>
-    <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Limit opakovaného stisknutí"</string>
-    <string name="bounce_keys_dialog_subtitle" msgid="5640575860258120026">"Vyberte dobu, po kterou bude klávesnice ignorovat opakované stisknutí klávesy"</string>
-    <string name="input_setting_keys_dialog_option_200" msgid="3121006986226247560">"0,2 s"</string>
-    <string name="input_setting_keys_dialog_option_400" msgid="2634500629396699440">"0,4 s"</string>
-    <string name="input_setting_keys_dialog_option_600" msgid="3828362866751805146">"0,6 s"</string>
+    <!-- no translation found for bounce_keys_summary (8890925059943636911) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_title (1090578395028456023) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_subtitle (6804676895876861863) -->
+    <skip />
+    <!-- no translation found for input_setting_keys_dialog_option_200 (2785528287150314940) -->
+    <skip />
+    <!-- no translation found for input_setting_keys_dialog_option_400 (91571674179896177) -->
+    <skip />
+    <!-- no translation found for input_setting_keys_dialog_option_600 (6983252972219539375) -->
+    <skip />
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"Vlastní"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"vlastní hodnota"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Zpomalení kláves"</string>
-    <string name="slow_keys_summary" msgid="2914214326648535377">"Upraví čas aktivace po stisknutí klávesy"</string>
+    <!-- no translation found for slow_keys_summary (3852534180402969185) -->
+    <skip />
     <string name="sticky_keys" msgid="7317317044898161747">"Jedním prstem"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Místo držení více kláves aktivujte zkratky postupným tisknutím jednotlivých kláves"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Klávesy pro myš"</string>
@@ -2002,6 +2012,8 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad a myš"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Myš"</string>
+    <!-- no translation found for mouse_settings_summary (4609720443781972646) -->
+    <skip />
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Rychlost kurzoru, gesta"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Kliknutí klepnutím"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Přesunutí klepnutím a tažením"</string>
@@ -2313,6 +2325,10 @@
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"V režimu s tlačítkem navigačního panelu nedostupné."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Text s vysokým kontrastem"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Změnit barvu textu na černou nebo bílou, čímž se maximalizuje kontrast vůči pozadí."</string>
+    <!-- no translation found for accessibility_notification_high_contrast_text_content (2143888096871993191) -->
+    <skip />
+    <!-- no translation found for accessibility_notification_high_contrast_text_action (7190559555068414342) -->
+    <skip />
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maximalizovat kontrast textu"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Zvýšit kontrast přidáním černého nebo bílého pozadí kolem textu"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Automaticky aktualizovat přiblížení"</string>
@@ -4573,9 +4589,9 @@
     <string name="enterprise_privacy_enterprise_installed_packages" msgid="9114143640515900082">"Nainstalované aplikace"</string>
     <string name="enterprise_privacy_apps_count_estimation_info" msgid="7959907857710107792">"Počet aplikací je odhad. Nemusí zahrnovat aplikace nainstalované mimo Obchod Play."</string>
     <string name="enterprise_privacy_number_packages_lower_bound" msgid="5317634640873658149">"{count,plural, =1{Minimálně # aplikace}few{Minimálně # aplikace}many{Minimálně # aplikace}other{Minimálně # aplikací}}"</string>
-    <string name="enterprise_privacy_location_access" msgid="8023838718108456971">"Oprávnění přístupu k poloze"</string>
-    <string name="enterprise_privacy_microphone_access" msgid="7242958026470143653">"Oprávnění přístupu k mikrofonu"</string>
-    <string name="enterprise_privacy_camera_access" msgid="7685460535880069016">"Oprávnění přístupu k fotoaparátu"</string>
+    <string name="enterprise_privacy_location_access" msgid="8023838718108456971">"Oprávnění pro přístup k poloze"</string>
+    <string name="enterprise_privacy_microphone_access" msgid="7242958026470143653">"Oprávnění pro přístup k mikrofonu"</string>
+    <string name="enterprise_privacy_camera_access" msgid="7685460535880069016">"Oprávnění pro přístup k fotoaparátu"</string>
     <string name="enterprise_privacy_enterprise_set_default_apps" msgid="7498546659083996300">"Výchozí aplikace"</string>
     <string name="enterprise_privacy_number_packages" msgid="5294444005035188274">"{count,plural, =1{# aplikace}few{# aplikace}many{# aplikace}other{# aplikací}}"</string>
     <string name="enterprise_privacy_input_method" msgid="3278314982700662246">"Výchozí klávesnice"</string>
@@ -5543,4 +5559,5 @@
     <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Kam uložit kontakty"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Zakroužkuj a hledej"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Pokud chcete vyhledávat pomocí obsahu na obrazovce, podržte tlačítko plochy nebo navigační úchyt."</string>
+    <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Konfigurovat podrobnosti o zařízení."</string>
 </resources>

@@ -210,6 +210,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"ఉష్ణోగ్రత"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"వారంలో మొదటి రోజు"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"నంబర్‌ల ప్రాధాన్యతలు"</string>
+    <string name="measurement_system_preferences_title" msgid="5539250190895110890">"మెజర్‌మెంట్ సిస్టమ్"</string>
     <string name="default_string_of_regional_preference" msgid="3428899072914884203">"ఆటోమేటిక్ సెట్టింగ్‌ను ఉపయోగించండి"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"సెల్సియస్ (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"ఫారెన్‌హీట్ (°F)"</string>
@@ -222,6 +223,9 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"శనివారం"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"ప్రాంతీయ భాషా ప్రాధాన్యతలకు యాప్, సపోర్ట్ చేయకపోతే, ఆటోమేటిక్ భాషా సెట్టింగ్‌లను యాప్ ఉపయోగిస్తుంది."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"భాషా ప్రాధాన్యతల గురించి మరింత తెలుసుకోండి."</string>
+    <string name="metric_measurement_system" msgid="7489725697268321541">"కొలమానం"</string>
+    <string name="us_measurement_system" msgid="8738587232938189052">"ఇంపీరియల్ (US)"</string>
+    <string name="uk_measurement_system" msgid="4196897001775627597">"ఇంపీరియల్ (UK)"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"అదనపు ప్రాధాన్యతలు"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"మిమ్మల్ని ఎలా అడ్రస్ చేయాలో ఎంచుకోండి"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"మీ పరికరం మిమ్మల్ని అడ్రస్ చేసే విధానాన్ని అనుకూలీకరించవచ్చు"</string>
@@ -389,8 +393,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"కంట్రోల్ మీ చేతిలో ఉంది"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"మీరు అలాగే మీ చిన్నారి కంట్రోల్‌లో ఉన్నారు"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"గుర్తుంచుకోండి"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_footer_title_3 (6474415050918819260) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_3" msgid="6474415050918819260">"సురక్షితంగా, సహాయకరంగా ఉంటుంది"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"మీ ఫోన్‌ని అన్‌లాక్ చేయడం లేదా కొనుగోళ్లను ఆమోదించడం కోసం మీ వేలిముద్రను ఉపయోగించండి.\n\nగమనించండి: మీరు మీ వేలిముద్రను ఉపయోగించి ఈ డివైజ్‌ను అన్‌లాక్ చేయలేరు. మరింత సమాచారం కావాలంటే మీ నిర్వాహకులను సంప్రదించండి."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"రద్దు చేయండి"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"ఇప్పుడు కాదు"</string>
@@ -1968,16 +1971,23 @@
     <string name="physical_keyboard_title" msgid="3328134097512350958">"భౌతిక కీబోర్డ్"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"భౌతిక కీబోర్డ్ లేఅవుట్ సెలెక్టర్"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"బౌన్స్ కీలు"</string>
-    <string name="bounce_keys_summary" msgid="7418024428905737729">"ఏదైనా ఒక కీని వేగంగా మళ్లీ మళ్లీ నొక్కుతుంటే, కీబోర్డ్ దాన్ని విస్మరిస్తుంది"</string>
-    <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"బౌన్స్ కీ పరిమితి"</string>
-    <string name="bounce_keys_dialog_subtitle" msgid="5640575860258120026">"ఏదైనా ఒక కీని మళ్లీ మళ్లీ నొక్కుతుంటే మీ కీబోర్డ్ దాన్ని ఎంత సమయం పాటు విస్మరించాలో ఎంచుకోండి"</string>
-    <string name="input_setting_keys_dialog_option_200" msgid="3121006986226247560">"0.2 సెకన్లు"</string>
-    <string name="input_setting_keys_dialog_option_400" msgid="2634500629396699440">"0.4 సెకన్లు"</string>
-    <string name="input_setting_keys_dialog_option_600" msgid="3828362866751805146">"0.6 సెకన్లు"</string>
+    <!-- no translation found for bounce_keys_summary (8890925059943636911) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_title (1090578395028456023) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_subtitle (6804676895876861863) -->
+    <skip />
+    <!-- no translation found for input_setting_keys_dialog_option_200 (2785528287150314940) -->
+    <skip />
+    <!-- no translation found for input_setting_keys_dialog_option_400 (91571674179896177) -->
+    <skip />
+    <!-- no translation found for input_setting_keys_dialog_option_600 (6983252972219539375) -->
+    <skip />
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"అనుకూలంగా మార్చుకోండి"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"అనుకూల విలువ"</string>
     <string name="slow_keys" msgid="2891452895499690837">"నిదానంగా పనిచేసే కీలు"</string>
-    <string name="slow_keys_summary" msgid="2914214326648535377">"ఒక కీని నొక్కితే, అది యాక్టివేట్ అయ్యేందుకు పట్టే సమయాన్ని సర్దుబాటు చేస్తుంది"</string>
+    <!-- no translation found for slow_keys_summary (3852534180402969185) -->
+    <skip />
     <string name="sticky_keys" msgid="7317317044898161747">"స్టిక్కీ కీలు"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"షార్ట్‌కట్‌ల కోసం కీలను కలిపి హోల్డ్ చేయడానికి బదులు ఒకసారి ఒక కీని నొక్కండి"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"మౌస్ కీలు"</string>
@@ -2002,6 +2012,8 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"టచ్‌ప్యాడ్"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"టచ్‌ప్యాడ్ &amp; మౌస్"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"మౌస్"</string>
+    <!-- no translation found for mouse_settings_summary (4609720443781972646) -->
+    <skip />
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"పాయింటర్ స్పీడ్, సంజ్ఞలు"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"క్లిక్ కోసం ట్యాప్ చేయండి"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"ట్యాప్ చేసి లాగండి"</string>
@@ -2313,6 +2325,10 @@
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"నావిగేషన్ బార్ బటన్ మోడ్‌‌ను ఉపయోగించేటప్పుడు అందుబాటులో ఉండదు."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"అధిక కాంట్రాస్ట్ టెక్స్ట్"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"టెక్స్ట్ రంగును నలుపు లేదా తెలుపు రంగుకు మార్చండి. బ్యాక్‌గ్రౌండ్‌తో కాంట్రాస్ట్‌ను పెంచుతుంది."</string>
+    <!-- no translation found for accessibility_notification_high_contrast_text_content (2143888096871993191) -->
+    <skip />
+    <!-- no translation found for accessibility_notification_high_contrast_text_action (7190559555068414342) -->
+    <skip />
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"టెక్స్ట్ కాంట్రాస్ట్‌ను పెంచండి"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"కాంట్రాస్ట్‌ను పెంచడానికి టెక్స్ట్ చుట్టూ నలుపు లేదా తెలుపు బ్యాక్‌గ్రౌండ్‌ను జోడించండి"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"స్క్రీన్ వర్ధనాన్ని ఆటోమేటిక్‌గా అప్‌డేట్ చేయండి"</string>
@@ -3502,7 +3518,7 @@
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"డార్క్ థీమ్‌ను ఎనేబుల్ చేయండి"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"డార్క్ థీమ్‌ను ఎనేబుల్ చేయండి"</string>
     <string name="mode_dark_theme_summary" msgid="2808149708986602464">"కంటికి హాయిగా ఉండే డార్క్ బ్యాక్‌గ్రౌండ్‌ను ఉపయోగించడానికి డివైజ్ థీమ్‌ను మార్చండి"</string>
-    <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{అదనపు మార్పులు ఏవీ లేవు}=1{{effect_1}}=2{{effect_1}, {effect_2}}=3{{effect_1}, {effect_2}, {effect_3}}other{{effect_1}, {effect_2}, అలాగే మరో # ఎఫెక్ట్‌లు}}"</string>
+    <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{డిస్‌ప్లేలో మార్పులు ఏవీ లేవు}=1{{effect_1}}=2{{effect_1}, {effect_2}}=3{{effect_1}, {effect_2}, {effect_3}}other{{effect_1}, {effect_2}, అలాగే మరో # ఎఫెక్ట్‌లు}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"అన్ని నోటిఫికేషన్‌లను అనుమతించండి"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"వ్యక్తులు, యాప్స్, ఇంకా సౌండ్‌లు అంతరాయాన్ని కలిగించవచ్చు"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4926944083757096458">"ఫిల్టర్ చేసిన నోటిఫికేషన్‌ల కోసం డిస్‌ప్లే ఆప్షన్‌లు"</string>
@@ -3723,7 +3739,7 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"ఇన్‌స్టాల్ చేసిన అనువర్తనాలేవీ నోటిఫికేషన్ యాక్సెస్‌ను రిక్వెస్ట్ చేయలేదు."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"నోటిఫికేషన్ యాక్సెస్‌ను అనుమతించండి"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Android 12లో \'మెరుగైన నోటిఫికేషన్‌లు\', \'Android అనుకూల నోటిఫికేషన్‌ల\'ను రీప్లేస్ చేశాయి. చేయాల్సిన పనులను, రిప్లయిలను ఈ ఫీచర్ మీకు చూపిస్తుంది. అలాగే మీ నోటిఫికేషన్‌లను ఆర్గనైజ్ చేస్తుంది. \n\nనోటిఫికేషన్ కంటెంట్‌ను \'మెరుగైన నోటిఫికేషన్‌లు\' ఫీచర్ యాక్సెస్ చేయగలదు. కాంటాక్ట్ పేర్లు, మెసేజ్‌ల వంటి వ్యక్తిగత సమాచారం కూడా ఈ కంటెంట్‌లో ఉంటుంది. ఈ ఫీచర్, నోటిఫికేషన్‌లను విస్మరించగలదు (డిస్మిస్ చేయగలదు) లేదా వాటికి ప్రతిస్పందించగలదు (రెస్పాండ్ కాగలదు). ఫోన్ కాల్స్‌కు సమాధానమివ్వడం, \'అంతరాయం కలిగించవద్దు\' ఆప్షన్‌ను కంట్రోల్ చేయడం లాంటి పనులు కూడా ఇందులో ఉంటాయి."</string>
-    <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g> కోసం నోటిఫికేషన్ యాక్సెస్‌ను అనుమతించాలా?"</string>
+    <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"<xliff:g id="SERVICE">%1$s</xliff:g>, నోటిఫికేషన్లను యాక్సెస్ చేయగలిగేలా అనుమతించాలా?"</string>
     <string name="notification_listener_security_warning_summary" msgid="1131986567509818121">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> యాప్ కాంటాక్ట్ పేర్లు, ఫోటోలు, ఇంకా మీరు అందుకున్న మెసేజ్‌ల టెక్స్ట్ వంటి వ్యక్తిగత సమాచారంతో పాటు అన్ని నోటిఫికేషన్‌లను చదవగలదు. ఈ యాప్ ఫోన్ కాల్స్‌కు సమాధానం ఇవ్వడంతో పాటు నోటిఫికేషన్‌లను తాత్కాలికంగా వాయిదా వేయగలదు లేదా విస్మరించగలదు లేదా నోటిఫికేషన్‌లలోని బటన్‌లపై చర్యను తీసుకోగలదు. \n\nదీని వలన, \'అంతరాయం కలిగించవద్దు\' ఎంపికను ఆన్ చేయగల లేదా ఆఫ్ చేయగలిగే సామర్థ్యం ఈ యాప్‌నకు వస్తుంది, సంబంధిత సెట్టింగ్‌లు కూడా మారతాయి."</string>
     <string name="nls_warning_prompt" msgid="1486887096703743841">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> యాప్ వీటిని చేయగలుగుతుంది:"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"మీ నోటిఫికేషన్‌లను చదవగలదు"</string>
@@ -5018,7 +5034,7 @@
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Keep"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"ఈ సూచనని తీసివేయలా?"</string>
     <string name="low_storage_summary" msgid="1979492757417779718">"స్టోరేజ్‌ తక్కువగా ఉంది: <xliff:g id="PERCENTAGE">%1$s</xliff:g> వినియోగించబడింది - <xliff:g id="FREE_SPACE">%2$s</xliff:g> ఖాళీగా ఉంది"</string>
-    <string name="contextual_card_feedback_send" msgid="7409408664417908922">"ఫీడ్‌బ్యాక్‌ను పంపు"</string>
+    <string name="contextual_card_feedback_send" msgid="7409408664417908922">"ఫీడ్‌బ్యాక్‌ను పంపండి"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"ఈ సూచనపై మీ అభిప్రాయాన్ని మాతో పంచుకోవాలనుకుంటున్నారా?"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g> క్లిప్‌బోర్డ్‌కు కాపీ చేయబడింది."</string>
     <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
@@ -5541,4 +5557,5 @@
     <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"కాంటాక్ట్‌లను ఎక్కడ సేవ్ చేయాలి"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"సెర్చ్ చేయడానికి సర్కిల్ గీయండి"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"మీ స్క్రీన్‌పై ఉన్న కంటెంట్‌ను ఉపయోగించి సెర్చ్ చేయడానికి హోమ్ బటన్ లేదా నావిగేషన్ హ్యాండిల్‌ను నొక్కి, పట్టుకోండి."</string>
+    <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. పరికర వివరాలను కాన్ఫిగర్ చేయండి."</string>
 </resources>

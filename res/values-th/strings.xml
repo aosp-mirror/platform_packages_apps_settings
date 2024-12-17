@@ -210,6 +210,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"อุณหภูมิ"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"วันแรกของสัปดาห์"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"ค่ากำหนดตัวเลข"</string>
+    <string name="measurement_system_preferences_title" msgid="5539250190895110890">"ระบบการวัด"</string>
     <string name="default_string_of_regional_preference" msgid="3428899072914884203">"ใช้ค่าเริ่มต้น"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"เซลเซียส (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"ฟาเรนไฮต์ (°F)"</string>
@@ -222,6 +223,9 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"วันเสาร์"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"หากแอปไม่รองรับค่ากำหนดตามพื้นที่ แอปจะใช้การตั้งค่าภาษาเริ่มต้นแทน"</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"ดูข้อมูลเพิ่มเติมเกี่ยวกับค่ากำหนดภาษา"</string>
+    <string name="metric_measurement_system" msgid="7489725697268321541">"เมตริก"</string>
+    <string name="us_measurement_system" msgid="8738587232938189052">"อิมพีเรียล (สหรัฐอเมริกา)"</string>
+    <string name="uk_measurement_system" msgid="4196897001775627597">"อิมพีเรียล (สหราชอาณาจักร)"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"ค่ากำหนดเพิ่มเติม"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"เลือกว่าจะให้เรียกหรือพูดถึงตัวคุณอย่างไร"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"อุปกรณ์สามารถปรับเปลี่ยนวิธีเรียกหรือพูดถึงตัวคุณได้อย่างเหมาะสม"</string>
@@ -389,8 +393,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"คุณควบคุมได้"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"คุณและบุตรหลานจะเป็นผู้ควบคุม"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"โปรดทราบ"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_footer_title_3 (6474415050918819260) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_3" msgid="6474415050918819260">"ปลอดภัยและเป็นประโยชน์"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"ใช้ลายนิ้วมือเพื่อปลดล็อกโทรศัพท์หรืออนุมัติการซื้อ\n\nหมายเหตุ: คุณไม่สามารถใช้ลายนิ้วมือเพื่อปลดล็อกอุปกรณ์นี้ โปรดติดต่อผู้ดูแลระบบขององค์กรสำหรับข้อมูลเพิ่มเติม"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"ยกเลิก"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"ไว้ทีหลัง"</string>
@@ -1968,16 +1971,16 @@
     <string name="physical_keyboard_title" msgid="3328134097512350958">"แป้นพิมพ์จริง"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"เครื่องมือเลือกรูปแบบแป้นพิมพ์จริง"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"คีย์ตีกลับ"</string>
-    <string name="bounce_keys_summary" msgid="7418024428905737729">"แป้นพิมพ์จะละเว้นการกดปุ่มเดียวกันซ้ำๆ อย่างรวดเร็ว"</string>
-    <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"เกณฑ์คีย์ตีกลับ"</string>
-    <string name="bounce_keys_dialog_subtitle" msgid="5640575860258120026">"เลือกระยะเวลาที่แป้นพิมพ์จะละเว้นการกดปุ่มซ้ำ"</string>
-    <string name="input_setting_keys_dialog_option_200" msgid="3121006986226247560">"0.2 วินาที"</string>
-    <string name="input_setting_keys_dialog_option_400" msgid="2634500629396699440">"0.4 วินาที"</string>
-    <string name="input_setting_keys_dialog_option_600" msgid="3828362866751805146">"0.6 วินาที"</string>
+    <string name="bounce_keys_summary" msgid="8890925059943636911">"ละเว้นการกดปุ่มเดียวกันซ้ำๆ อย่างรวดเร็ว"</string>
+    <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"การหน่วงเวลาคีย์ตีกลับ"</string>
+    <string name="bounce_keys_dialog_subtitle" msgid="6804676895876861863">"เลือกระยะเวลาที่แป้นพิมพ์จะละเว้นการกดแป้นพิมพ์ซ้ำ"</string>
+    <string name="input_setting_keys_dialog_option_200" msgid="2785528287150314940">"0.2 วินาที"</string>
+    <string name="input_setting_keys_dialog_option_400" msgid="91571674179896177">"0.4 วินาที"</string>
+    <string name="input_setting_keys_dialog_option_600" msgid="6983252972219539375">"0.6 วินาที"</string>
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"กำหนดเอง"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"ค่าที่กำหนดเอง"</string>
     <string name="slow_keys" msgid="2891452895499690837">"เพิ่มระยะเวลาในการกดปุ่ม"</string>
-    <string name="slow_keys_summary" msgid="2914214326648535377">"ปรับเวลาที่ใช้ในการกดปุ่มเพื่อเปิดใช้งาน"</string>
+    <string name="slow_keys_summary" msgid="3852534180402969185">"เปลี่ยนระยะเวลาที่ต้องกดแป้นค้างไว้ก่อนที่จะลงทะเบียน"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"คีย์ติดหนึบ"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"กดทีละปุ่มเพื่อใช้แป้นพิมพ์ลัดแทนการกดปุ่มค้างไว้พร้อมกัน"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"แป้นเมาส์"</string>
@@ -2002,6 +2005,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"ทัชแพด"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"ทัชแพดและเมาส์"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"เมาส์"</string>
+    <string name="mouse_settings_summary" msgid="4609720443781972646">"ความเร็วของตัวชี้ สลับปุ่ม การปรับแต่งปุ่ม"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"ความเร็วของตัวชี้ ท่าทางสัมผัส"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"แตะเพื่อคลิก"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"การแตะแล้วลาก"</string>
@@ -2313,6 +2317,8 @@
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"ไม่ทำงานขณะใช้โหมดปุ่มแถบนำทาง"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"ข้อความคอนทราสต์สูง"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"เปลี่ยนสีข้อความเป็นสีดำหรือสีขาว เพิ่มความ​​คอนทราสต์เมื่อเทียบกับพื้นหลังให้สูงสุด"</string>
+    <string name="accessibility_notification_high_contrast_text_content" msgid="2143888096871993191">"ข้อความคอนทราสต์สูงให้รูปลักษณ์และความรู้สึกใหม่"</string>
+    <string name="accessibility_notification_high_contrast_text_action" msgid="7190559555068414342">"เปิดการตั้งค่า"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"เพิ่มคอนทราสต์ของข้อความให้สูงสุด"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"เพิ่มพื้นหลังสีดำหรือขาวรอบๆ ข้อความเพื่อเพิ่มคอนทราสต์"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"อัปเดตการขยายหน้าจอโดยอัตโนมัติ"</string>
@@ -3709,7 +3715,7 @@
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"ไม่มีเสียงหรือการสั่น และปรากฏต่ำลงมาในส่วนการสนทนา"</string>
     <string name="notification_channel_summary_default" msgid="1168420867670390611">"อาจส่งเสียงหรือสั่นโดยขึ้นอยู่กับการตั้งค่าอุปกรณ์"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"เมื่ออุปกรณ์ปลดล็อกอยู่ ให้แสดงการแจ้งเตือนเป็นแบนเนอร์ที่ด้านบนของหน้าจอ"</string>
-    <string name="notification_switch_label" msgid="8029371325967501557">"การแจ้งเตือนทั้งหมดของ \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
+    <string name="notification_switch_label" msgid="8029371325967501557">"การแจ้งเตือน \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" ทั้งหมด"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"การแจ้งเตือนทั้งหมดของ <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{การแจ้งเตือนประมาณ # ครั้งต่อวัน}other{การแจ้งเตือนประมาณ # ครั้งต่อวัน}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{การแจ้งเตือนประมาณ # ครั้งต่อสัปดาห์}other{การแจ้งเตือนประมาณ # ครั้งต่อสัปดาห์}}"</string>
@@ -5541,4 +5547,5 @@
     <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"ตำแหน่งที่จะบันทึกรายชื่อติดต่อ"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"วงเพื่อค้นหา"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"แตะปุ่มหน้าแรกหรือแฮนเดิลนำทางค้างไว้เพื่อค้นหาโดยใช้เนื้อหาบนหน้าจอ"</string>
+    <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> กำหนดค่ารายละเอียดอุปกรณ์"</string>
 </resources>

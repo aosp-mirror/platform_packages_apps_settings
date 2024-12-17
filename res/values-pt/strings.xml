@@ -210,6 +210,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatura"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Primeiro dia da semana"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Preferências de números"</string>
+    <string name="measurement_system_preferences_title" msgid="5539250190895110890">"Sistema de medida"</string>
     <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Usar padrão"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"Celsius (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Fahrenheit (°F)"</string>
@@ -222,6 +223,9 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Sábado"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Se um app não oferecer suporte a preferências regionais, ele usará as configurações padrão de localidade."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Saiba mais sobre as preferências de idioma."</string>
+    <string name="metric_measurement_system" msgid="7489725697268321541">"Métrico"</string>
+    <string name="us_measurement_system" msgid="8738587232938189052">"Imperial (EUA)"</string>
+    <string name="uk_measurement_system" msgid="4196897001775627597">"Imperial (Reino Unido)"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Preferências adicionais"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"Escolha suas preferências de tratamento"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"Seu dispositivo pode personalizar a forma como ele se dirige a você"</string>
@@ -389,8 +393,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Você no controle"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Você e a criança estão no controle"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Não esqueça"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_footer_title_3 (6474415050918819260) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_3" msgid="6474415050918819260">"Seguro e útil"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Use sua impressão digital para desbloquear o smartphone ou aprovar compras.\n\nNota: não é possível usar sua impressão digital para desbloquear este dispositivo. Para mais informações, entre em contato com o administrador da organização."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Cancelar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Agora não"</string>
@@ -1968,16 +1971,23 @@
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclado físico"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Seletor de layout do teclado físico"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Teclas de filtragem"</string>
-    <string name="bounce_keys_summary" msgid="7418024428905737729">"O teclado ignora pressionamentos rápidos e repetidos da mesma tecla"</string>
-    <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Limite da tecla de filtragem"</string>
-    <string name="bounce_keys_dialog_subtitle" msgid="5640575860258120026">"Escolha por quanto tempo o teclado ignora pressionamentos repetidos"</string>
-    <string name="input_setting_keys_dialog_option_200" msgid="3121006986226247560">"0,2s"</string>
-    <string name="input_setting_keys_dialog_option_400" msgid="2634500629396699440">"0,4s"</string>
-    <string name="input_setting_keys_dialog_option_600" msgid="3828362866751805146">"0,6s"</string>
+    <!-- no translation found for bounce_keys_summary (8890925059943636911) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_title (1090578395028456023) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_subtitle (6804676895876861863) -->
+    <skip />
+    <!-- no translation found for input_setting_keys_dialog_option_200 (2785528287150314940) -->
+    <skip />
+    <!-- no translation found for input_setting_keys_dialog_option_400 (91571674179896177) -->
+    <skip />
+    <!-- no translation found for input_setting_keys_dialog_option_600 (6983252972219539375) -->
+    <skip />
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"Personalizado"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"valor personalizado"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Teclas lentas"</string>
-    <string name="slow_keys_summary" msgid="2914214326648535377">"Ajusta o tempo que leva para um pressionamento de tecla ser ativado"</string>
+    <!-- no translation found for slow_keys_summary (3852534180402969185) -->
+    <skip />
     <string name="sticky_keys" msgid="7317317044898161747">"Teclas de aderência"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Pressione uma tecla por vez para usar atalhos em vez de manter as teclas pressionadas juntas"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Teclas do mouse"</string>
@@ -2002,6 +2012,8 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad e mouse"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Mouse"</string>
+    <!-- no translation found for mouse_settings_summary (4609720443781972646) -->
+    <skip />
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Velocidade do cursor, gestos"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Tocar para clicar"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Arrastar com toque"</string>
@@ -2313,6 +2325,10 @@
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"Indisponível ao usar o modo de botão da barra de navegação."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Texto em alto contraste"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Muda a cor do texto para preto ou branco, maximizando o contraste com o plano de fundo."</string>
+    <!-- no translation found for accessibility_notification_high_contrast_text_content (2143888096871993191) -->
+    <skip />
+    <!-- no translation found for accessibility_notification_high_contrast_text_action (7190559555068414342) -->
+    <skip />
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Realce o texto aumentando o contraste"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Adicionar um fundo preto ou branco ao redor do texto para aumentar o contraste"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Atual. autom. da ampliação da tela"</string>
@@ -5541,4 +5557,5 @@
     <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Onde salvar contatos"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Circule para pesquisar"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Toque no botão home ou na alça de navegação e pressione para pesquisar usando o conteúdo na tela."</string>
+    <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Configure os detalhes do dispositivo."</string>
 </resources>
