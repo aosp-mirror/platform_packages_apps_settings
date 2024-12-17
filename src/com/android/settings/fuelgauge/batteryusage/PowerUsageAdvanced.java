@@ -503,9 +503,11 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
                 @Override
                 public BatteryLevelData loadInBackground() {
+                    Context context = getContext();
                     return DataProcessManager.getBatteryLevelData(
-                            getContext(),
-                            new UserIdsSeries(getContext(), /* isNonUIRequest= */ false),
+                            context,
+                            getLifecycle(),
+                            new UserIdsSeries(context, /* isNonUIRequest= */ false),
                             /* isFromPeriodJob= */ false,
                             PowerUsageAdvanced.this::onBatteryDiffDataMapUpdate);
                 }

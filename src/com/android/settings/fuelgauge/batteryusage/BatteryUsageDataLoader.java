@@ -118,6 +118,7 @@ public final class BatteryUsageDataLoader {
         final BatteryLevelData batteryLevelData =
                 DataProcessManager.getBatteryLevelData(
                         context,
+                        null,
                         userIdsSeries,
                         /* isFromPeriodJob= */ true,
                         batteryDiffDataMap -> {
