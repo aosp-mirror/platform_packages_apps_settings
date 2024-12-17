@@ -107,10 +107,6 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
         if (enabled == isEnabled) {
             return;
         }
-
-        if (enabled) {
-            showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
-        }
         logAccessibilityServiceEnabled(mComponentName, enabled);
         Settings.Secure.putInt(getContentResolver(), ENABLED, enabled ? ON : OFF);
     }

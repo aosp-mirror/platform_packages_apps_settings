@@ -28,11 +28,13 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -42,6 +44,7 @@ import android.os.Bundle;
 import android.os.Process;
 import android.telephony.SubscriptionManager;
 import android.util.ArraySet;
+import android.util.FeatureFlagUtils;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
@@ -51,22 +54,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
-import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
-import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
+import com.android.settingslib.widget.IntroPreference;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
@@ -79,27 +80,25 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowEntityHeaderController.class, ShadowRestrictedLockUtilsInternal.class})
+@Config(shadows = {ShadowRestrictedLockUtilsInternal.class})
 public class AppDataUsageTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private EntityHeaderController mHeaderController;
     @Mock
     private PackageManager mPackageManager;
 
+    private IntroPreference mIntroPreference;
+
     private AppDataUsage mFragment;
+
+    private Context mContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        ShadowEntityHeaderController.setUseMock(mHeaderController);
-        when(mHeaderController.setUid(anyInt())).thenReturn(mHeaderController);
-    }
-
-    @After
-    public void tearDown() {
-        ShadowEntityHeaderController.reset();
+        mContext = spy(RuntimeEnvironment.application);
+        mIntroPreference = new IntroPreference(mContext);
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_ENABLE_SPA, true);
     }
 
     @Test
@@ -161,6 +160,7 @@ public class AppDataUsageTest {
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
     public void bindAppHeader_allWorkApps_shouldNotShowAppInfoLink() {
         mFragment = spy(new TestFragment());
 
@@ -169,12 +169,20 @@ public class AppDataUsageTest {
         doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
         ReflectionHelpers.setField(mFragment, "mAppItem", mock(AppItem.class));
 
-        mFragment.addEntityHeader();
+        when(mFragment.getPreferenceScreen().findPreference(AppDataUsage.ARG_APP_HEADER))
+                .thenReturn(mIntroPreference);
+        when(mFragment.getContext()).thenReturn(mContext);
+        doNothing().when(mContext).startActivity(any());
 
-        verify(mHeaderController).setHasAppInfoLink(false);
+        mFragment.setupIntroPreference();
+        mFragment.onPreferenceTreeClick(mIntroPreference);
+
+        verify(mFragment, never()).getActivity();
+        verify(mContext, never()).startActivity(any(Intent.class));
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
     public void bindAppHeader_workApp_shouldSetWorkAppUid()
             throws PackageManager.NameNotFoundException {
         final int fakeUserId = 100;
@@ -188,19 +196,21 @@ public class AppDataUsageTest {
         ReflectionHelpers.setField(mFragment, "mAppItem", appItem);
         ReflectionHelpers.setField(mFragment, "mPackages", packages);
 
-        when(mPackageManager.getPackageUidAsUser(anyString(), anyInt()))
-                .thenReturn(fakeUserId);
-
-        when(mHeaderController.setHasAppInfoLink(anyBoolean())).thenReturn(mHeaderController);
-
+        when(mPackageManager.getPackageUidAsUser(anyString(), anyInt())).thenReturn(fakeUserId);
         when(mFragment.getPreferenceManager())
                 .thenReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS));
         doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
 
-        mFragment.addEntityHeader();
+        when(mFragment.getPreferenceScreen().findPreference(AppDataUsage.ARG_APP_HEADER))
+                .thenReturn(mIntroPreference);
+        when(mFragment.getContext()).thenReturn(mContext);
+        doNothing().when(mContext).startActivity(any());
 
-        verify(mHeaderController).setHasAppInfoLink(true);
-        verify(mHeaderController).setUid(fakeUserId);
+        mFragment.setupIntroPreference();
+        mFragment.onPreferenceTreeClick(mIntroPreference);
+
+        ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        verify(mContext).startActivity(argumentCaptor.capture());
     }
 
     @Test

@@ -18,12 +18,12 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import android.app.usage.UsageEvents;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.util.ArrayMap;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
@@ -80,6 +80,7 @@ public class DataProcessManager {
     private final long mLastFullChargeTimestamp;
     private final boolean mIsFromPeriodJob;
     private final Context mContext;
+    private final @Nullable Lifecycle mLifecycle;
     private final UserIdsSeries mUserIdsSeries;
     private final OnBatteryDiffDataMapLoadedListener mCallbackFunction;
     private final List<AppUsageEvent> mAppUsageEventList = new ArrayList<>();
@@ -120,6 +121,7 @@ public class DataProcessManager {
     /** Constructor when there exists battery level data. */
     DataProcessManager(
             Context context,
+            @Nullable Lifecycle lifecycle,
             final UserIdsSeries userIdsSeries,
             final boolean isFromPeriodJob,
             final long rawStartTimestamp,
@@ -128,6 +130,7 @@ public class DataProcessManager {
             @NonNull final List<BatteryLevelData.PeriodBatteryLevelData> hourlyBatteryLevelsPerDay,
             @NonNull final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap) {
         mContext = context.getApplicationContext();
+        mLifecycle = lifecycle;
         mUserIdsSeries = userIdsSeries;
         mIsFromPeriodJob = isFromPeriodJob;
         mRawStartTimestamp = rawStartTimestamp;
@@ -140,9 +143,11 @@ public class DataProcessManager {
     /** Constructor when there is no battery level data. */
     DataProcessManager(
             Context context,
+            @Nullable Lifecycle lifecycle,
             final UserIdsSeries userIdsSeries,
             @NonNull final OnBatteryDiffDataMapLoadedListener callbackFunction) {
         mContext = context.getApplicationContext();
+        mLifecycle = lifecycle;
         mUserIdsSeries = userIdsSeries;
         mCallbackFunction = callbackFunction;
         mIsFromPeriodJob = false;
@@ -223,7 +228,7 @@ public class DataProcessManager {
     }
 
     private void loadCurrentBatteryHistoryMap() {
-        new AsyncTask<Void, Void, Map<String, BatteryHistEntry>>() {
+        new LifecycleAwareAsyncTask<Map<String, BatteryHistEntry>>(mLifecycle) {
             @Override
             protected Map<String, BatteryHistEntry> doInBackground(Void... voids) {
                 final long startTime = System.currentTimeMillis();
@@ -242,6 +247,7 @@ public class DataProcessManager {
             @Override
             protected void onPostExecute(
                     final Map<String, BatteryHistEntry> currentBatteryHistoryMap) {
+                super.onPostExecute(currentBatteryHistoryMap);
                 if (mBatteryHistoryMap != null) {
                     // Replaces the placeholder in mBatteryHistoryMap.
                     for (Map.Entry<Long, Map<String, BatteryHistEntry>> mapEntry :
@@ -256,11 +262,11 @@ public class DataProcessManager {
                 mIsCurrentBatteryHistoryLoaded = true;
                 tryToGenerateFinalDataAndApplyCallback();
             }
-        }.execute();
+        }.start();
     }
 
     private void loadCurrentAppUsageList() {
-        new AsyncTask<Void, Void, List<AppUsageEvent>>() {
+        new LifecycleAwareAsyncTask<List<AppUsageEvent>>(mLifecycle) {
             @Override
             @Nullable
             protected List<AppUsageEvent> doInBackground(Void... voids) {
@@ -299,6 +305,7 @@ public class DataProcessManager {
 
             @Override
             protected void onPostExecute(final List<AppUsageEvent> currentAppUsageList) {
+                super.onPostExecute(currentAppUsageList);
                 if (currentAppUsageList == null || currentAppUsageList.isEmpty()) {
                     Log.d(TAG, "currentAppUsageList is null or empty");
                 } else {
@@ -307,11 +314,11 @@ public class DataProcessManager {
                 mIsCurrentAppUsageLoaded = true;
                 tryToProcessAppUsageData();
             }
-        }.execute();
+        }.start();
     }
 
     private void loadDatabaseAppUsageList() {
-        new AsyncTask<Void, Void, List<AppUsageEvent>>() {
+        new LifecycleAwareAsyncTask<List<AppUsageEvent>>(mLifecycle) {
             @Override
             protected List<AppUsageEvent> doInBackground(Void... voids) {
                 if (!shouldLoadAppUsageData()) {
@@ -337,6 +344,7 @@ public class DataProcessManager {
 
             @Override
             protected void onPostExecute(final List<AppUsageEvent> databaseAppUsageList) {
+                super.onPostExecute(databaseAppUsageList);
                 if (databaseAppUsageList == null || databaseAppUsageList.isEmpty()) {
                     Log.d(TAG, "databaseAppUsageList is null or empty");
                 } else {
@@ -345,11 +353,11 @@ public class DataProcessManager {
                 mIsDatabaseAppUsageLoaded = true;
                 tryToProcessAppUsageData();
             }
-        }.execute();
+        }.start();
     }
 
     private void loadPowerConnectionBatteryEventList() {
-        new AsyncTask<Void, Void, List<BatteryEvent>>() {
+        new LifecycleAwareAsyncTask<List<BatteryEvent>>(mLifecycle) {
             @Override
             protected List<BatteryEvent> doInBackground(Void... voids) {
                 final long startTime = System.currentTimeMillis();
@@ -370,6 +378,7 @@ public class DataProcessManager {
 
             @Override
             protected void onPostExecute(final List<BatteryEvent> batteryEventList) {
+                super.onPostExecute(batteryEventList);
                 if (batteryEventList == null || batteryEventList.isEmpty()) {
                     Log.d(TAG, "batteryEventList is null or empty");
                 } else {
@@ -379,11 +388,11 @@ public class DataProcessManager {
                 mIsBatteryEventLoaded = true;
                 tryToProcessAppUsageData();
             }
-        }.execute();
+        }.start();
     }
 
     private void loadBatteryUsageSlotList() {
-        new AsyncTask<Void, Void, List<BatteryUsageSlot>>() {
+        new LifecycleAwareAsyncTask<List<BatteryUsageSlot>>(mLifecycle) {
             @Override
             protected List<BatteryUsageSlot> doInBackground(Void... voids) {
                 final long startTime = System.currentTimeMillis();
@@ -402,6 +411,7 @@ public class DataProcessManager {
 
             @Override
             protected void onPostExecute(final List<BatteryUsageSlot> batteryUsageSlotList) {
+                super.onPostExecute(batteryUsageSlotList);
                 if (batteryUsageSlotList == null || batteryUsageSlotList.isEmpty()) {
                     Log.d(TAG, "batteryUsageSlotList is null or empty");
                 } else {
@@ -411,11 +421,11 @@ public class DataProcessManager {
                 mIsBatteryUsageSlotLoaded = true;
                 tryToGenerateFinalDataAndApplyCallback();
             }
-        }.execute();
+        }.start();
     }
 
     private void loadAndApplyBatteryMapFromServiceOnly() {
-        new AsyncTask<Void, Void, Map<Long, BatteryDiffData>>() {
+        new LifecycleAwareAsyncTask<Map<Long, BatteryDiffData>>(mLifecycle) {
             @Override
             protected Map<Long, BatteryDiffData> doInBackground(Void... voids) {
                 final long startTime = System.currentTimeMillis();
@@ -437,11 +447,12 @@ public class DataProcessManager {
 
             @Override
             protected void onPostExecute(final Map<Long, BatteryDiffData> batteryDiffDataMap) {
+                super.onPostExecute(batteryDiffDataMap);
                 if (mCallbackFunction != null) {
                     mCallbackFunction.onBatteryDiffDataMapLoaded(batteryDiffDataMap);
                 }
             }
-        }.execute();
+        }.start();
     }
 
     private void tryToProcessAppUsageData() {
@@ -481,7 +492,7 @@ public class DataProcessManager {
     }
 
     private synchronized void generateFinalDataAndApplyCallback() {
-        new AsyncTask<Void, Void, Map<Long, BatteryDiffData>>() {
+        new LifecycleAwareAsyncTask<Map<Long, BatteryDiffData>>(mLifecycle) {
             @Override
             protected Map<Long, BatteryDiffData> doInBackground(Void... voids) {
                 final long startTime = System.currentTimeMillis();
@@ -523,11 +534,12 @@ public class DataProcessManager {
 
             @Override
             protected void onPostExecute(final Map<Long, BatteryDiffData> batteryDiffDataMap) {
+                super.onPostExecute(batteryDiffDataMap);
                 if (mCallbackFunction != null) {
                     mCallbackFunction.onBatteryDiffDataMapLoaded(batteryDiffDataMap);
                 }
             }
-        }.execute();
+        }.start();
     }
 
     // Whether we should load app usage data from service or database.
@@ -566,6 +578,7 @@ public class DataProcessManager {
     @Nullable
     public static BatteryLevelData getBatteryLevelData(
             Context context,
+            @Nullable Lifecycle lifecycle,
             final UserIdsSeries userIdsSeries,
             final boolean isFromPeriodJob,
             final OnBatteryDiffDataMapLoadedListener onBatteryUsageMapLoadedListener) {
@@ -585,6 +598,7 @@ public class DataProcessManager {
         final BatteryLevelData batteryLevelData =
                 getPeriodBatteryLevelData(
                         context,
+                        lifecycle,
                         userIdsSeries,
                         startTimestamp,
                         lastFullChargeTime,
@@ -604,6 +618,7 @@ public class DataProcessManager {
 
     private static BatteryLevelData getPeriodBatteryLevelData(
             Context context,
+            @Nullable Lifecycle lifecycle,
             final UserIdsSeries userIdsSeries,
             final long startTimestamp,
             final long lastFullChargeTime,
@@ -631,7 +646,8 @@ public class DataProcessManager {
                                 lastFullChargeTime);
         if (batteryHistoryMap == null || batteryHistoryMap.isEmpty()) {
             Log.d(TAG, "batteryHistoryMap is null in getPeriodBatteryLevelData()");
-            new DataProcessManager(context, userIdsSeries, onBatteryDiffDataMapLoadedListener)
+            new DataProcessManager(context, lifecycle, userIdsSeries,
+                    onBatteryDiffDataMapLoadedListener)
                     .start();
             return null;
         }
@@ -660,7 +676,8 @@ public class DataProcessManager {
                 DataProcessor.getLevelDataThroughProcessedHistoryMap(
                         context, processedBatteryHistoryMap);
         if (batteryLevelData == null) {
-            new DataProcessManager(context, userIdsSeries, onBatteryDiffDataMapLoadedListener)
+            new DataProcessManager(context, lifecycle, userIdsSeries,
+                    onBatteryDiffDataMapLoadedListener)
                     .start();
             Log.d(TAG, "getBatteryLevelData() returns null");
             return null;
@@ -669,6 +686,7 @@ public class DataProcessManager {
         // Start the async task to compute diff usage data and load labels and icons.
         new DataProcessManager(
                         context,
+                        lifecycle,
                         userIdsSeries,
                         isFromPeriodJob,
                         startTimestamp,

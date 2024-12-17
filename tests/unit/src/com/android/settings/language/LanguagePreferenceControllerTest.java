@@ -21,17 +21,23 @@ import static org.junit.Assert.assertTrue;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.Settings;
+import com.android.settings.flags.Flags;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 public class LanguagePreferenceControllerTest {
     private Context mContext;
     private LanguagePreferenceController mController;
+
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setup() {
@@ -40,6 +46,7 @@ public class LanguagePreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_REGIONAL_PREFERENCES_API_ENABLED)
     public void getAvailabilityStatus_featureFlagOff_LanguageSettingsActivitydisabled() {
         mController.getAvailabilityStatus();
 

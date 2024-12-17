@@ -110,6 +110,7 @@ public final class DataProcessManagerTest {
         mDataProcessManager =
                 new DataProcessManager(
                         mContext,
+                        null,
                         mUserIdsSeries,
                         /* isFromPeriodJob= */ false,
                         /* rawStartTimestamp= */ 0L,
@@ -130,6 +131,7 @@ public final class DataProcessManagerTest {
         final DataProcessManager dataProcessManager =
                 new DataProcessManager(
                         mContext,
+                        null,
                         mUserIdsSeries,
                         /* callbackFunction= */ null);
         assertThat(dataProcessManager.getShowScreenOnTime()).isFalse();
@@ -255,6 +257,7 @@ public final class DataProcessManagerTest {
         final DataProcessManager dataProcessManager =
                 new DataProcessManager(
                         mContext,
+                        null,
                         mUserIdsSeries,
                         /* isFromPeriodJob= */ false,
                         /* rawStartTimestamp= */ 2L,
@@ -346,6 +349,7 @@ public final class DataProcessManagerTest {
         assertThat(
                         DataProcessManager.getBatteryLevelData(
                                 mContext,
+                                null,
                                 mUserIdsSeries,
                                 /* isFromPeriodJob= */ false,
                                 /* asyncResponseDelegate= */ null))
@@ -353,6 +357,7 @@ public final class DataProcessManagerTest {
         assertThat(
                         DataProcessManager.getBatteryLevelData(
                                 mContext,
+                                null,
                                 mUserIdsSeries,
                                 /* isFromPeriodJob= */ true,
                                 /* asyncResponseDelegate= */ null))
@@ -374,6 +379,7 @@ public final class DataProcessManagerTest {
         final BatteryLevelData resultData =
                 DataProcessManager.getBatteryLevelData(
                         mContext,
+                        null,
                         mUserIdsSeries,
                         /* isFromPeriodJob= */ false,
                         /* asyncResponseDelegate= */ null);
@@ -402,6 +408,7 @@ public final class DataProcessManagerTest {
         final BatteryLevelData resultData =
                 DataProcessManager.getBatteryLevelData(
                         mContext,
+                        null,
                         mUserIdsSeries,
                         /* isFromPeriodJob= */ false,
                         /* asyncResponseDelegate= */ null);

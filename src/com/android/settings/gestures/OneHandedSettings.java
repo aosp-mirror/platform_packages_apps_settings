@@ -22,9 +22,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,7 +33,6 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityFragmentUtils;
 import com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment;
-import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
@@ -82,12 +81,7 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
 
         final MainSwitchPreference mainSwitchPreference =
                 getPreferenceScreen().findPreference(ONE_HANDED_MAIN_SWITCH_KEY);
-        mainSwitchPreference.addOnSwitchChangeListener((switchView, isChecked) -> {
-            switchView.setChecked(isChecked);
-            if (isChecked) {
-                showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
-            }
-        });
+        mainSwitchPreference.addOnSwitchChangeListener(CompoundButton::setChecked);
     }
 
     @Override
@@ -143,24 +137,6 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
     @Override
     protected CharSequence getLabelName() {
         return mFeatureName;
-    }
-
-    @Override
-    protected ComponentName getTileComponentName() {
-        return AccessibilityShortcutController.ONE_HANDED_TILE_COMPONENT_NAME;
-    }
-
-    @Override
-    protected CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
-        final Context context = getContext();
-        if (context == null) {
-            Log.w(TAG, "OneHandedSettings not attached to a context.");
-            return null;
-        }
-        return type == QuickSettingsTooltipType.GUIDE_TO_EDIT
-                ? context.getText(R.string.accessibility_one_handed_mode_qs_tooltip_content)
-                : context.getText(
-                        R.string.accessibility_one_handed_mode_auto_added_qs_tooltip_content);
     }
 
     @Override

@@ -20,7 +20,6 @@
 <resources>
 
     <style name="SettingsPreferenceTheme" parent="@style/PreferenceTheme.SettingsLib">
-        <item name="apnPreferenceStyle">@style/ApnPreference</item>
         <item name="cardPreferenceStyle">@style/CardPreference</item>
         <item name="slicePreferenceStyle">@style/SlicePreference</item>
         <item name="seekBarPreferenceStyle">@style/SettingsSeekBarPreference</item>
@@ -30,10 +29,6 @@
 
     <style name="PreferenceTheme.SetupWizard" parent="@style/SettingsPreferenceTheme">
         <item name="preferenceFragmentCompatStyle">@style/SetupWizardPreferenceFragmentStyle</item>
-    </style>
-
-    <style name="ApnPreference" parent="@style/Preference.Material">
-        <item name="android:layout">@layout/apn_preference_layout</item>
     </style>
 
     <style name="CardPreference" parent="@style/Preference.Material">

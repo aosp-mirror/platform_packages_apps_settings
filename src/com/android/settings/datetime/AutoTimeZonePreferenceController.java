@@ -32,7 +32,6 @@ import androidx.preference.Preference;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.flags.Flags;
 
 public class AutoTimeZonePreferenceController extends TogglePreferenceController {
 
@@ -107,19 +106,17 @@ public class AutoTimeZonePreferenceController extends TogglePreferenceController
         TimeZoneConfiguration.Builder configuration = new TimeZoneConfiguration.Builder()
                 .setAutoDetectionEnabled(isChecked);
 
-        if (Flags.revampToggles()) {
-            // "Use location for time zone" is only used if "Automatic time zone" is enabled. If
-            // the user toggles off automatic time zone, set the toggle off and disable the toggle.
-            int geoDetectionCapability = mTimeManager
-                    .getTimeZoneCapabilitiesAndConfig()
-                    .getCapabilities()
-                    .getConfigureGeoDetectionEnabledCapability();
+        // "Use location for time zone" is only used if "Automatic time zone" is enabled. If
+        // the user toggles off automatic time zone, set the toggle off and disable the toggle.
+        int geoDetectionCapability = mTimeManager
+                .getTimeZoneCapabilitiesAndConfig()
+                .getCapabilities()
+                .getConfigureGeoDetectionEnabledCapability();
 
-            if (!isChecked
-                    && (geoDetectionCapability == CAPABILITY_NOT_APPLICABLE
-                    || geoDetectionCapability == CAPABILITY_POSSESSED)) {
-                configuration.setGeoDetectionEnabled(false);
-            }
+        if (!isChecked
+                && (geoDetectionCapability == CAPABILITY_NOT_APPLICABLE
+                || geoDetectionCapability == CAPABILITY_POSSESSED)) {
+            configuration.setGeoDetectionEnabled(false);
         }
 
         boolean result = mTimeManager.updateTimeZoneConfiguration(configuration.build());

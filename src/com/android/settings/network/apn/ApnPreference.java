@@ -24,31 +24,29 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.Telephony;
 import android.telephony.SubscriptionManager;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.flags.Flags;
 import com.android.settings.spa.SpaActivity;
+import com.android.settingslib.widget.TwoTargetPreference;
 
 /**
  * Preference of APN UI entry
  */
-public class ApnPreference extends Preference
-        implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
+public class ApnPreference extends TwoTargetPreference
+        implements CompoundButton.OnCheckedChangeListener, Preference.OnPreferenceClickListener {
     private static final String TAG = "ApnPreference";
     private boolean mIsChecked = false;
-    @Nullable
-    private RadioButton mRadioButton = null;
+    private RadioButton mRadioButton;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private boolean mProtectFromCheckedChange = false;
     private boolean mDefaultSelectable = true;
@@ -57,50 +55,36 @@ public class ApnPreference extends Preference
     /**
      * Constructor of Preference
      */
-    public ApnPreference(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        // Primary target and radio button could be selectable, but entire preference itself is not
-        // selectable.
-        setSelectable(false);
-    }
-
-    /**
-     * Constructor of Preference
-     */
-    public ApnPreference(Context context, AttributeSet attrs) {
-        this(context, attrs, R.attr.apnPreferenceStyle);
-    }
-
-    /**
-     * Constructor of Preference
-     */
     public ApnPreference(Context context) {
-        this(context, null);
+        super(context);
+        setOnPreferenceClickListener(this);
     }
 
     @Override
-    public void onBindViewHolder(PreferenceViewHolder view) {
-        super.onBindViewHolder(view);
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
 
-        final RelativeLayout textArea = (RelativeLayout) view.findViewById(R.id.text_layout);
-        textArea.setOnClickListener(this);
-
-        final View radioButtonFrame = view.itemView.requireViewById(R.id.apn_radio_button_frame);
-        final RadioButton rb = view.itemView.requireViewById(R.id.apn_radiobutton);
-        mRadioButton = rb;
-        if (mDefaultSelectable) {
-            radioButtonFrame.setOnClickListener((v) -> {
-                rb.performClick();
-            });
-            rb.setOnCheckedChangeListener(this);
-
-            mProtectFromCheckedChange = true;
-            rb.setChecked(mIsChecked);
-            mProtectFromCheckedChange = false;
-            radioButtonFrame.setVisibility(View.VISIBLE);
-        } else {
-            radioButtonFrame.setVisibility(View.GONE);
+        final RadioButton rb = (RadioButton) holder.findViewById(android.R.id.checkbox);
+        final View radioButtonFrame = holder.findViewById(android.R.id.widget_frame);
+        if (rb == null || radioButtonFrame == null) {
+            throw new RuntimeException("Failed to load system layout.");
         }
+
+        mRadioButton = rb;
+        radioButtonFrame.setOnClickListener(v -> rb.performClick());
+        rb.setOnCheckedChangeListener(this);
+        setIsChecked(mIsChecked);
+        rb.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected boolean shouldHideSecondTarget() {
+        return !mDefaultSelectable;
+    }
+
+    @Override
+    protected int getSecondTargetResId() {
+        return R.layout.preference_widget_radiobutton;
     }
 
     /**
@@ -118,6 +102,7 @@ public class ApnPreference extends Preference
     /**
      * Change the preference status.
      */
+    @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         Log.i(TAG, "ID: " + getKey() + " :" + isChecked);
         if (mProtectFromCheckedChange) {
@@ -130,19 +115,14 @@ public class ApnPreference extends Preference
     }
 
     @Override
-    public void onClick(View layoutView) {
-        super.onClick();
+    public boolean onPreferenceClick(@NonNull Preference preference) {
         final Context context = getContext();
         final int pos = Integer.parseInt(getKey());
-        if (context == null) {
-            Log.w(TAG, "No context available for pos=" + pos);
-            return;
-        }
 
         if (mHideDetails) {
             Toast.makeText(context, context.getString(R.string.cannot_change_apn_toast),
                     Toast.LENGTH_LONG).show();
-            return;
+            return true;
         }
 
         final Uri url = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI, pos);
@@ -156,6 +136,7 @@ public class ApnPreference extends Preference
             editIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             context.startActivity(editIntent);
         }
+        return true;
     }
 
     public void setDefaultSelectable(boolean defaultSelectable) {

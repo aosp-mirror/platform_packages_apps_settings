@@ -30,6 +30,15 @@
         settings:controller="com.android.settings.language.LanguagePreferenceController"/>
 
     <Preference
+        android:key="language_and_region_settings"
+        android:title="@string/language_and_region_settings"
+        android:summary="@string/languages_setting_summary"
+        android:icon="@drawable/ic_settings_languages"
+        android:order="-260"
+        android:fragment="com.android.settings.language.LanguageAndRegionSettings"
+        settings:controller="com.android.settings.language.LanguageAndRegionPreferenceController"/>
+
+    <Preference
         android:key="Keyboard_settings"
         android:title="@string/keyboard_settings"
         android:icon="@drawable/ic_settings_keyboards"
