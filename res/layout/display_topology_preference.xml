@@ -16,8 +16,9 @@
 
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/display_topology_pane_holder"
     android:importantForAccessibility="no"
-    android:layout_height="160dp"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:paddingHorizontal="@dimen/display_topology_pane_margin"
     android:orientation="horizontal">
@@ -27,14 +28,14 @@
         android:layout_width="match_parent"
         android:src="@drawable/display_topology_background"/>
     <FrameLayout
-        android:id="@+id/display_topology_container"
+        android:id="@+id/display_topology_pane_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
     <TextView
         android:id="@+id/topology_hint"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_gravity="top|center_horizontal"
-        android:paddingTop="10dp"
-        android:text="@string/external_display_topology_hint"/>
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" />
 </FrameLayout>

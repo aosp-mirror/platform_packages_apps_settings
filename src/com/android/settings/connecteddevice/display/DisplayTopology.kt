@@ -16,14 +16,32 @@
 
 package com.android.settings.connecteddevice.display
 
+import android.app.WallpaperManager
 import com.android.settings.R
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Point
 import android.graphics.PointF
 import android.graphics.RectF
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.ColorDrawable
+import android.hardware.display.DisplayManager
+import android.hardware.display.DisplayTopology
+import android.hardware.display.DisplayTopology.TreeNode.POSITION_BOTTOM
+import android.hardware.display.DisplayTopology.TreeNode.POSITION_LEFT
+import android.hardware.display.DisplayTopology.TreeNode.POSITION_RIGHT
+import android.hardware.display.DisplayTopology.TreeNode.POSITION_TOP
+import android.util.Log
+import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.TextView
 
+import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
+import androidx.preference.PreferenceViewHolder
 
 import java.util.Locale
 
@@ -143,11 +161,27 @@ class TopologyScale(
 
 const val PREFERENCE_KEY = "display_topology_preference"
 
+/** dp of padding on each side of a display block. */
+const val BLOCK_PADDING = 2
+
 /**
  * DisplayTopologyPreference allows the user to change the display topology
  * when there is one or more extended display attached.
  */
-class DisplayTopologyPreference(context : Context) : Preference(context) {
+class DisplayTopologyPreference(context : Context)
+        : Preference(context), ViewTreeObserver.OnGlobalLayoutListener {
+    @VisibleForTesting lateinit var mPaneContent : FrameLayout
+    @VisibleForTesting lateinit var mPaneHolder : FrameLayout
+    @VisibleForTesting lateinit var mTopologyHint : TextView
+
+    @VisibleForTesting var injector : Injector
+
+    /**
+     * This is needed to prevent a repopulation of the pane causing another
+     * relayout and vice-versa ad infinitum.
+     */
+    private var mPaneNeedsRefresh = false
+
     init {
         layoutResource = R.layout.display_topology_preference
 
@@ -155,5 +189,108 @@ class DisplayTopologyPreference(context : Context) : Preference(context) {
         isSelectable = false
 
         key = PREFERENCE_KEY
+
+        injector = Injector()
+    }
+
+    override fun onBindViewHolder(holder: PreferenceViewHolder) {
+        super.onBindViewHolder(holder)
+
+        val newPane = holder.findViewById(R.id.display_topology_pane_content) as FrameLayout
+        if (this::mPaneContent.isInitialized) {
+            if (newPane == mPaneContent) {
+                return
+            }
+            mPaneContent.viewTreeObserver.removeOnGlobalLayoutListener(this)
+        }
+        mPaneContent = newPane
+        mPaneHolder = holder.itemView as FrameLayout
+        mTopologyHint = holder.findViewById(R.id.topology_hint) as TextView
+        mPaneContent.viewTreeObserver.addOnGlobalLayoutListener(this)
+    }
+
+    override fun onAttached() {
+        // We don't know if topology changes happened when we were detached, as it is impossible to
+        // listen at that time (we must remove listeners when detaching). Setting this flag makes
+        // the following onGlobalLayout call refresh the pane.
+        mPaneNeedsRefresh = true
+    }
+
+    override fun onGlobalLayout() {
+        if (mPaneNeedsRefresh) {
+            mPaneNeedsRefresh = false
+            refreshPane()
+        }
+    }
+
+    open class Injector {
+        open fun displayTopology(context : Context) : DisplayTopology? {
+            val displayManager = context.getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
+            return displayManager.displayTopology
+        }
+
+        open fun wallpaper(context : Context) : Drawable {
+            return WallpaperManager.getInstance(context).drawable ?: ColorDrawable(Color.BLACK)
+        }
+    }
+
+    private fun calcAbsRects(
+            dest : MutableMap<Int, RectF>, n : DisplayTopology.TreeNode, x : Float, y : Float) {
+        dest.put(n.displayId, RectF(x, y, x + n.width, y + n.height))
+
+        for (c in n.children) {
+            val (xoff, yoff) = when (c.position) {
+                POSITION_LEFT -> Pair(-c.width, +c.offset)
+                POSITION_RIGHT -> Pair(+n.width, +c.offset)
+                POSITION_TOP -> Pair(+c.offset, -c.height)
+                POSITION_BOTTOM -> Pair(+c.offset, +n.height)
+                else -> throw IllegalStateException("invalid position for display: ${c}")
+            }
+            calcAbsRects(dest, c, x + xoff, y + yoff)
+        }
+    }
+
+    private fun refreshPane() {
+        mPaneContent.removeAllViews()
+
+        val root = injector.displayTopology(context)?.root
+        if (root == null) {
+            // This occurs when no topology is active.
+            // TODO(b/352648432): show main display or mirrored displays rather than an empty pane.
+            mTopologyHint.text = ""
+            return
+        }
+        mTopologyHint.text = context.getString(R.string.external_display_topology_hint)
+
+        val blocksPos = buildMap { calcAbsRects(this, root, x = 0f, y = 0f) }
+
+        val scaling = TopologyScale(
+                mPaneContent.width, minEdgeLength = 60, maxBlockRatio = 0.12f, blocksPos.values)
+        mPaneHolder.layoutParams.let {
+            if (it.height != scaling.paneHeight) {
+                it.height = scaling.paneHeight
+                mPaneHolder.layoutParams = it
+            }
+        }
+        val wallpaper = injector.wallpaper(context)
+        blocksPos.values.forEach { p ->
+            Button(context).apply {
+                isScrollContainer = false
+                isVerticalScrollBarEnabled = false
+                isHorizontalScrollBarEnabled = false
+                background = wallpaper
+                val topLeft = scaling.displayToPaneCoor(PointF(p.left, p.top))
+                val bottomRight = scaling.displayToPaneCoor(PointF(p.right, p.bottom))
+
+                mPaneContent.addView(this)
+
+                val layout = layoutParams
+                layout.width = bottomRight.x - topLeft.x - BLOCK_PADDING * 2
+                layout.height = bottomRight.y - topLeft.y - BLOCK_PADDING * 2
+                layoutParams = layout
+                x = (topLeft.x + BLOCK_PADDING).toFloat()
+                y = (topLeft.y + BLOCK_PADDING).toFloat()
+            }
+        }
     }
 }
