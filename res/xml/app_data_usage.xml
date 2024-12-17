@@ -20,11 +20,15 @@
     android:key="app_data_usage_screen"
     android:title="@string/data_usage_app_summary_title">
 
+    <com.android.settingslib.widget.IntroPreference
+        android:key="app_header"
+        android:order="-10000"/>
+
     <com.android.settings.datausage.SpinnerPreference
         android:key="cycle"
         settings:controller="com.android.settings.datausage.AppDataUsageCycleController" />
 
-    <com.android.settings.spa.preference.ComposePreference
+    <com.android.settings.spa.preference.ComposeGroupSectionPreference
         android:key="app_data_usage_summary"
         settings:controller="com.android.settings.datausage.AppDataUsageSummaryController"/>
 
