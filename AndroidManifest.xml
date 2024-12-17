@@ -5424,7 +5424,7 @@
         </service>
 
         <receiver android:name="com.android.settings.connecteddevice.audiosharing.AudioSharingReceiver"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.android.settings.action.BLUETOOTH_LE_AUDIO_SHARING_STATE_CHANGE" />
                 <action android:name="com.android.settings.action.BLUETOOTH_LE_AUDIO_SHARING_STOP" />
