@@ -28,11 +28,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.provider.Settings;
 import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
@@ -40,8 +42,6 @@ import com.android.settings.R;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.function.Consumer;
-
 
 /**
  * DialogFragment for Screen flash notification color picker.
@@ -49,30 +49,33 @@ import java.util.function.Consumer;
 public class ScreenFlashNotificationColorDialogFragment extends DialogFragment implements
         ColorSelectorLayout.OnCheckedChangeListener {
 
+    private static final int DEFAULT_COLOR = Color.TRANSPARENT;
     private static final int PREVIEW_LONG_TIME_MS = 5000;
     private static final int BETWEEN_STOP_AND_START_DELAY_MS = 250;
     private static final int MARGIN_FOR_STOP_DELAY_MS = 100;
 
+    @VisibleForTesting
+    static final String EXTRA_COLOR = "extra_color";
     @ColorInt
-    private int mCurrentColor = Color.TRANSPARENT;
-    private Consumer<Integer> mConsumer;
+    private int mCurrentColor = DEFAULT_COLOR;
 
     private Timer mTimer = null;
     private Boolean mIsPreview = false;
 
-    static ScreenFlashNotificationColorDialogFragment getInstance(int initialColor,
-            Consumer<Integer> colorConsumer) {
+    static ScreenFlashNotificationColorDialogFragment getInstance(int initialColor) {
         final ScreenFlashNotificationColorDialogFragment result =
                 new ScreenFlashNotificationColorDialogFragment();
-        result.mCurrentColor = initialColor;
-        result.mConsumer = colorConsumer != null ? colorConsumer : i -> {
-        };
+        Bundle bundle = new Bundle();
+        bundle.putInt(EXTRA_COLOR, initialColor);
+        result.setArguments(bundle);
         return result;
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        mCurrentColor = getArguments().getInt(EXTRA_COLOR, DEFAULT_COLOR);
+
         final View dialogView = getLayoutInflater().inflate(R.layout.layout_color_selector_dialog,
                 null);
 
@@ -89,9 +92,10 @@ public class ScreenFlashNotificationColorDialogFragment extends DialogFragment i
                 .setNeutralButton(R.string.flash_notifications_preview, null)
                 .setNegativeButton(R.string.color_selector_dialog_cancel, (dialog, which) -> {
                 })
-                .setPositiveButton(R.string.color_selector_dialog_done, (dialog, which) -> {
+                .setPositiveButton(R.string.color_selector_dialog_save, (dialog, which) -> {
                     mCurrentColor = colorSelectorLayout.getCheckedColor(DEFAULT_SCREEN_FLASH_COLOR);
-                    mConsumer.accept(mCurrentColor);
+                    Settings.System.putInt(getContext().getContentResolver(),
+                            Settings.System.SCREEN_FLASH_NOTIFICATION_COLOR, mCurrentColor);
                 })
                 .create();
         createdDialog.setOnShowListener(

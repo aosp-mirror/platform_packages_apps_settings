@@ -1,0 +1,9 @@
+package: "com.android.settings.keyboard"
+container: "system"
+
+flag {
+  name: "keyboard_and_touchpad_a11y_new_page_enabled"
+  namespace: "input"
+  description: "This flag enables or disables new page for physical keyboard and touchpad a11y features"
+  bug: "345399212"
+}

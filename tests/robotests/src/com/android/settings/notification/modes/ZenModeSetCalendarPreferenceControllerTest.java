@@ -28,17 +28,20 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.when;
 
-import android.app.AutomaticZenRule;
 import android.app.Flags;
 import android.content.Context;
-import android.net.Uri;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.service.notification.SystemZenRules;
 import android.service.notification.ZenModeConfig;
 
 import androidx.preference.DropDownPreference;
 import androidx.preference.PreferenceCategory;
 import androidx.test.core.app.ApplicationProvider;
+
+import com.android.settingslib.notification.modes.TestModeBuilder;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -84,9 +87,9 @@ public class ZenModeSetCalendarPreferenceControllerTest {
     @Test
     @EnableFlags({Flags.FLAG_MODES_API, Flags.FLAG_MODES_UI})
     public void updateEventMode_updatesConditionAndTriggerDescription() {
-        ZenMode mode = new ZenMode("id",
-                new AutomaticZenRule.Builder("name", Uri.parse("condition")).build(),
-                true);  // is active
+        ZenMode mode = new TestModeBuilder()
+                .setPackage(SystemZenRules.PACKAGE_ANDROID)
+                .build();
 
         // Explicitly update preference controller with mode info first, which will also call
         // updateState()
@@ -99,6 +102,7 @@ public class ZenModeSetCalendarPreferenceControllerTest {
         // apply event mode updater to existing mode
         ZenMode out = mPrefController.updateEventMode(eventInfo).apply(mode);
 
+        assertThat(out.getRule().getOwner()).isEqualTo(ZenModeConfig.getEventConditionProvider());
         assertThat(out.getRule().getConditionId()).isEqualTo(
                 ZenModeConfig.toEventConditionId(eventInfo));
         assertThat(out.getRule().getTriggerDescription()).isEqualTo("My events");
@@ -111,10 +115,9 @@ public class ZenModeSetCalendarPreferenceControllerTest {
         eventInfo.calName = "Definitely A Calendar";
         eventInfo.reply = REPLY_YES;
 
-        ZenMode mode = new ZenMode("id",
-                new AutomaticZenRule.Builder("name",
-                        ZenModeConfig.toEventConditionId(eventInfo)).build(),
-                true);  // is active
+        ZenMode mode = new TestModeBuilder()
+                .setConditionId(ZenModeConfig.toEventConditionId(eventInfo))
+                .build();
         mPrefController.updateZenMode(mPrefCategory, mode);
 
         // We should see mCalendar, mReply have their values set

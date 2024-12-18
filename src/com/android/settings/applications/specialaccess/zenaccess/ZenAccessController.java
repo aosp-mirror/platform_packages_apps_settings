@@ -18,6 +18,7 @@ package com.android.settings.applications.specialaccess.zenaccess;
 
 import android.app.ActivityManager;
 import android.app.AppGlobals;
+import android.app.Flags;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -28,7 +29,10 @@ import android.util.ArraySet;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 
@@ -46,6 +50,16 @@ public class ZenAccessController extends BasePreferenceController {
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        Preference preference = screen.findPreference(getPreferenceKey());
+        if (preference != null) {
+            preference.setTitle(Flags.modesApi() && Flags.modesUi()
+                    ? R.string.manage_zen_modes_access_title
+                    : R.string.manage_zen_access_title);
+        }
     }
 
     public static Set<String> getPackagesRequestingNotificationPolicyAccess() {

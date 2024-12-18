@@ -29,6 +29,7 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -80,6 +81,18 @@ public class FloatingMenuSizePreferenceController extends BasePreferenceControll
     }
 
     @Override
+    public CharSequence getSummary() {
+        if (mPreference != null) {
+            return mPreference.isEnabled()
+                    ? "%s"
+                    : mContext.getString(
+                            R.string.accessibility_button_disabled_button_mode_summary);
+        } else {
+            return "%s";
+        }
+    }
+
+    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
@@ -119,6 +132,7 @@ public class FloatingMenuSizePreferenceController extends BasePreferenceControll
 
     private void updateAvailabilityStatus() {
         mPreference.setEnabled(AccessibilityUtil.isFloatingMenuEnabled(mContext));
+        refreshSummary(mPreference);
     }
 
     @Size

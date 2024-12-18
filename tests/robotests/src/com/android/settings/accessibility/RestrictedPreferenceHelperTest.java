@@ -31,9 +31,8 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
-import android.platform.test.annotations.RequiresFlagsEnabled;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -83,8 +82,6 @@ public class RestrictedPreferenceHelperTest {
 
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
-    @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Test
     public void createAccessibilityServicePreferenceList_hasOneInfo_containsSameKey() {
@@ -100,7 +97,7 @@ public class RestrictedPreferenceHelperTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(value = {android.security.Flags.FLAG_EXTEND_ECM_TO_ALL_SETTINGS,
+    @EnableFlags(value = {android.security.Flags.FLAG_EXTEND_ECM_TO_ALL_SETTINGS,
             android.permission.flags.Flags.FLAG_ENHANCED_CONFIRMATION_MODE_APIS_ENABLED})
     public void createAccessibilityServicePreferenceList_ecmRestricted_prefIsEcmRestricted() {
         ShadowRestrictedLockUtilsInternal.setEcmRestrictedPkgs(
@@ -116,7 +113,7 @@ public class RestrictedPreferenceHelperTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(value = {android.security.Flags.FLAG_EXTEND_ECM_TO_ALL_SETTINGS,
+    @EnableFlags(value = {android.security.Flags.FLAG_EXTEND_ECM_TO_ALL_SETTINGS,
             android.permission.flags.Flags.FLAG_ENHANCED_CONFIRMATION_MODE_APIS_ENABLED})
     public void createAccessibilityServicePreferenceList_ecmNotRestricted_prefIsNotEcmRestricted() {
         ShadowRestrictedLockUtilsInternal.setEcmRestrictedPkgs();
@@ -142,6 +139,40 @@ public class RestrictedPreferenceHelperTest {
         final RestrictedPreference preference = preferenceList.get(0);
 
         assertThat(preference.getKey()).isEqualTo(key);
+    }
+
+    @Test
+    @EnableFlags(value = {android.security.Flags.FLAG_EXTEND_ECM_TO_ALL_SETTINGS,
+            android.permission.flags.Flags.FLAG_ENHANCED_CONFIRMATION_MODE_APIS_ENABLED})
+    @DisableFlags(Flags.FLAG_NEVER_RESTRICT_ACCESSIBILITY_ACTIVITY)
+    public void createAccessibilityActivityPreference_ecmRestricted_prefIsEcmRestricted() {
+        setMockAccessibilityShortcutInfo(mShortcutInfo);
+        ShadowRestrictedLockUtilsInternal.setEcmRestrictedPkgs(PACKAGE_NAME);
+
+        final List<AccessibilityActivityPreference> preferenceList =
+                mHelper.createAccessibilityActivityPreferenceList(List.of(mShortcutInfo));
+        assertThat(preferenceList).hasSize(1);
+        final RestrictedPreference preference = preferenceList.get(0);
+
+        assertThat(preference.isDisabledByEcm()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(value = {
+            android.security.Flags.FLAG_EXTEND_ECM_TO_ALL_SETTINGS,
+            android.permission.flags.Flags.FLAG_ENHANCED_CONFIRMATION_MODE_APIS_ENABLED,
+            Flags.FLAG_NEVER_RESTRICT_ACCESSIBILITY_ACTIVITY,
+    })
+    public void createAccessibilityActivityPreference_ecmRestricted_prefIsNotEcmRestricted() {
+        setMockAccessibilityShortcutInfo(mShortcutInfo);
+        ShadowRestrictedLockUtilsInternal.setEcmRestrictedPkgs(PACKAGE_NAME);
+
+        final List<AccessibilityActivityPreference> preferenceList =
+                mHelper.createAccessibilityActivityPreferenceList(List.of(mShortcutInfo));
+        assertThat(preferenceList).hasSize(1);
+        final RestrictedPreference preference = preferenceList.get(0);
+
+        assertThat(preference.isDisabledByEcm()).isFalse();
     }
 
     private AccessibilityServiceInfo getMockAccessibilityServiceInfo(String packageName,

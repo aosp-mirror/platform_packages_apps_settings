@@ -22,12 +22,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.Settings.NightDisplaySuggestionActivity;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollSuggestionActivity;
 import com.android.settings.biometrics.fingerprint.FingerprintSuggestionActivity;
 import com.android.settings.display.NightDisplayPreferenceController;
+import com.android.settings.flags.Flags;
 import com.android.settings.notification.zen.ZenOnboardingActivity;
 import com.android.settings.notification.zen.ZenSuggestionActivity;
 import com.android.settings.password.ScreenLockSuggestionActivity;
@@ -81,8 +83,13 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         return context.getSharedPreferences(SHARED_PREF_FILENAME, Context.MODE_PRIVATE);
     }
 
+    @Nullable
     @Override
-    public Class<? extends Fragment> getContextualSuggestionFragment() {
-        return null;
+    public Class<? extends Fragment> getSuggestionFragment() {
+        if (Flags.updatedSuggestionCardAosp()) {
+            return SuggestionFragment.class;
+        } else {
+            return null;
+        }
     }
 }

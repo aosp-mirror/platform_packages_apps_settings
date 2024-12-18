@@ -23,37 +23,59 @@
             android:key="header"
             android:layout="@layout/settings_entity_header" />
 
+    <com.android.settings.applications.SpacePreference
+        android:layout_height="16dp" />
+
+    <com.android.settings.notification.modes.ZenModeBlurbPreference
+        android:key="mode_blurb" />
+
+    <com.android.settings.applications.SpacePreference
+        android:layout_height="8dp" />
+
     <com.android.settingslib.widget.LayoutPreference
             android:key="activate"
             android:selectable="false"
             android:layout="@layout/modes_activation_button"/>
 
-    <com.android.settingslib.widget.ActionButtonsPreference
-        android:key="actions"
-        android:selectable="true" />
-
-    <PreferenceCategory
-            android:title="@string/mode_interruption_filter_title"
-            android:key="modes_filters">
-        <Preference
-                android:key="zen_mode_people"
-                android:title="@string/zen_category_people"/>
-
-        <Preference
-            android:key="zen_mode_apps"
-            android:title="@string/zen_category_apps" />
-
-        <Preference
-                android:key="zen_other_settings"
-                android:title="@string/zen_category_exceptions" />
-    </PreferenceCategory>
+    <com.android.settings.applications.SpacePreference
+        android:layout_height="16dp" />
 
     <!-- automatic trigger section; preference changes programmatically depending on type -->
     <PreferenceCategory
         android:key="zen_automatic_trigger_category"
         android:title="@string/zen_mode_automatic_trigger_title">
+        <!-- For configuring the trigger on tap  and enabling/disabling the mode with the switch. -->
         <com.android.settingslib.PrimarySwitchPreference
             android:key="zen_automatic_trigger_settings" />
+        <!-- For adding a trigger for custom manual modes (no switch). -->
+        <Preference
+            android:key="zen_add_automatic_trigger"
+            android:title="@string/zen_mode_select_schedule"
+            android:icon="@drawable/ic_add_24dp" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:title="@string/mode_interruption_filter_title"
+            android:key="modes_filters">
+
+        <SwitchPreferenceCompat
+            android:key="allow_all"
+            android:title="@string/zen_mode_allow_all_notifications"/>
+
+        <com.android.settings.notification.modes.CircularIconsPreference
+            android:key="zen_mode_people"
+            android:title="@string/zen_category_people"
+            android:icon="@drawable/ic_zen_mode_category_people" />
+
+        <com.android.settings.notification.modes.CircularIconsPreference
+            android:key="zen_mode_apps"
+            android:title="@string/zen_category_apps"
+            android:icon="@drawable/ic_zen_mode_category_apps" />
+
+        <com.android.settings.notification.modes.CircularIconsPreference
+            android:key="zen_other_settings"
+            android:title="@string/zen_category_exceptions"
+            android:icon="@drawable/ic_zen_mode_category_other" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -61,6 +83,12 @@
             android:key="modes_additional_actions">
         <Preference
                 android:key="mode_display_settings"
-                android:title="@string/mode_display_settings_title" />
+                android:title="@string/mode_display_settings_title"
+                android:icon="@drawable/ic_zen_mode_category_display" />
+
+        <Preference
+                android:key="mode_manual_duration"
+                android:title="@string/zen_category_duration"
+                android:icon="@drawable/ic_zen_mode_category_duration" />
     </PreferenceCategory>
 </PreferenceScreen>

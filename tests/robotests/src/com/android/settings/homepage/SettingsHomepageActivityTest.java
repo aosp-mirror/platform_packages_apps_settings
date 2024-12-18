@@ -444,7 +444,7 @@ public class SettingsHomepageActivityTest {
     public static class ShadowSuggestionFeatureProviderImpl {
 
         @Implementation
-        public Class<? extends Fragment> getContextualSuggestionFragment() {
+        public Class<? extends Fragment> getSuggestionFragment() {
             return Fragment.class;
         }
     }

@@ -110,6 +110,16 @@
             settings:keywords="@string/keywords_vibration"
             android:summary="@string/accessibility_vibration_settings_summary"/>
 
+        <Preference
+            android:fragment="com.android.settings.inputmethod.PointerTouchpadFragment"
+            android:key="pointer_and_touchpad"
+            android:icon="@drawable/ic_pointer_and_touchpad"
+            android:persistent="false"
+            android:title="@string/accessibility_pointer_and_touchpad_title"
+            android:summary="@string/accessibility_pointer_and_touchpad_summary"
+            settings:controller="com.android.settings.inputmethod.PointerTouchpadPreferenceController"
+            settings:searchable="true"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory

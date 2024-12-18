@@ -1,44 +1,12 @@
 package {
     default_team: "trendy_team_android_settings_app",
-    // See: http://go/android-license-faq
-    // A large-scale-change added 'default_applicable_licenses' to import
-    // all of the 'license_kinds' from "packages_apps_Settings_license"
-    // to get the below license kinds:
-    //   SPDX-license-identifier-Apache-2.0
     default_applicable_licenses: ["packages_apps_Settings_license"],
 }
 
-java_library_static {
-    name: "settings-contextual-card-protos-lite",
-    host_supported: true,
-    proto: {
-        type: "lite",
-    },
-    srcs: ["contextual_card_list.proto"],
-}
-
-java_library_static {
-    name: "settings-log-bridge-protos-lite",
-    host_supported: true,
-    proto: {
-        type: "lite",
-    },
-    srcs: ["settings_log_bridge.proto"],
-}
-
-java_library_static {
-    name: "settings-telephony-protos-lite",
-    host_supported: true,
-    proto: {
-        type: "lite",
-    },
-    srcs: ["network_mode_choices.proto"],
-}
-
 java_library {
-    name: "fuelgauge-log-protos-lite",
+    name: "settings-protos-lite",
     proto: {
         type: "lite",
     },
-    srcs: ["fuelgauge_log.proto"],
+    srcs: ["*.proto"],
 }

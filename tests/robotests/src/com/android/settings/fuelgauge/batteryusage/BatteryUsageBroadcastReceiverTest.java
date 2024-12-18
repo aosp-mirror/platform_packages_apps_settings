@@ -28,9 +28,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.BatteryManager;
 import android.os.SystemClock;
+import android.os.UserManager;
 import android.text.format.DateUtils;
 
-import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -49,6 +49,7 @@ public final class BatteryUsageBroadcastReceiverTest {
     private FakeFeatureFactory mFakeFeatureFactory;
 
     @Mock private PackageManager mPackageManager;
+    @Mock private UserManager mUserManager;
 
     @Before
     public void setUp() {
@@ -57,6 +58,7 @@ public final class BatteryUsageBroadcastReceiverTest {
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mBatteryUsageBroadcastReceiver = new BatteryUsageBroadcastReceiver();
         doReturn(mPackageManager).when(mContext).getPackageManager();
+        doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
         DatabaseUtils.getSharedPreferences(mContext).edit().clear().apply();
     }
 
@@ -69,7 +71,17 @@ public final class BatteryUsageBroadcastReceiverTest {
 
     @Test
     public void onReceive_workProfile_doNothing() {
-        BatteryTestUtils.setWorkProfile(mContext);
+        doReturn(true).when(mUserManager).isManagedProfile();
+
+        mBatteryUsageBroadcastReceiver.onReceive(
+                mContext, new Intent(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING));
+
+        assertThat(mBatteryUsageBroadcastReceiver.mFetchBatteryUsageData).isFalse();
+    }
+
+    @Test
+    public void onReceive_privateProfile_doNothing() {
+        doReturn(true).when(mUserManager).isPrivateProfile();
 
         mBatteryUsageBroadcastReceiver.onReceive(
                 mContext, new Intent(BatteryUsageBroadcastReceiver.ACTION_BATTERY_UNPLUGGING));

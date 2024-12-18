@@ -38,6 +38,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.HapClientProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -111,6 +112,7 @@ public class BluetoothDetailsHearingAidsPresetsController extends
                 final int index = listPreference.findIndexOfValue(value);
                 final String presetName = listPreference.getEntries()[index].toString();
                 final int presetIndex = Integer.parseInt(value);
+                logPresetChangedIfNeeded();
                 listPreference.setSummary(presetName);
                 if (DEBUG) {
                     Log.d(TAG, "onPreferenceChange"
@@ -159,19 +161,22 @@ public class BluetoothDetailsHearingAidsPresetsController extends
         mPreference.setEnabled(mCachedDevice.isConnectedHapClientDevice());
 
         loadAllPresetInfo();
+        mPreference.setSummary(null);
         if (mPreference.getEntries().length == 0) {
-            if (DEBUG) {
-                Log.w(TAG, "Disable the preference since preset info size = 0");
+            if (mPreference.isEnabled()) {
+                if (DEBUG) {
+                    Log.w(TAG, "Disable the preference since preset info size = 0");
+                }
+                mPreference.setEnabled(false);
+                mPreference.setSummary(mContext.getString(
+                        R.string.bluetooth_hearing_aids_presets_empty_list_message));
             }
-            mPreference.setEnabled(false);
         } else {
             int activePresetIndex = mHapClientProfile.getActivePresetIndex(
                     mCachedDevice.getDevice());
             if (activePresetIndex != BluetoothHapClient.PRESET_INDEX_UNAVAILABLE) {
                 mPreference.setValue(Integer.toString(activePresetIndex));
                 mPreference.setSummary(mPreference.getEntry());
-            } else {
-                mPreference.setSummary(null);
             }
         }
     }
@@ -273,7 +278,8 @@ public class BluetoothDetailsHearingAidsPresetsController extends
             return;
         }
         List<BluetoothHapPresetInfo> infoList = mHapClientProfile.getAllPresetInfo(
-                mCachedDevice.getDevice());
+                mCachedDevice.getDevice()).stream().filter(
+                BluetoothHapPresetInfo::isAvailable).toList();
         CharSequence[] presetNames = new CharSequence[infoList.size()];
         CharSequence[] presetIndexes = new CharSequence[infoList.size()];
         for (int i = 0; i < infoList.size(); i++) {
@@ -367,6 +373,17 @@ public class BluetoothDetailsHearingAidsPresetsController extends
                 Log.d(TAG, "selectPreset for memberDevice, device: " + memberDevice);
             }
             mHapClientProfile.selectPreset(memberDevice.getDevice(), presetIndex);
+        }
+    }
+
+    private void logPresetChangedIfNeeded() {
+        if (mPreference == null || mPreference.getEntries() == null) {
+            return;
+        }
+        if (mFragment instanceof BluetoothDeviceDetailsFragment) {
+            int category = ((BluetoothDeviceDetailsFragment) mFragment).getMetricsCategory();
+            FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().changed(category,
+                    getPreferenceKey(), mPreference.getEntries().length);
         }
     }
 }

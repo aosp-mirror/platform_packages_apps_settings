@@ -19,10 +19,10 @@ package com.android.settings.notification.zen;
 import static android.platform.test.flag.junit.SetFlagsRule.DefaultInitValueType.DEVICE_DEFAULT;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -39,8 +39,6 @@ import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.Preference;
-
-import com.android.settings.notification.modes.ZenModesListFragment;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -85,7 +83,14 @@ public class ZenModePreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_unsearchable() {
+    @EnableFlags(Flags.FLAG_MODES_UI)
+    public void isAvailable_modesUi_unavailable() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_MODES_UI)
+    public void isAvailable_notModesUi_unsearchable() {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 
@@ -108,21 +113,5 @@ public class ZenModePreferenceControllerTest {
         mController.updateState(mPreference);
 
         verify(mPreference, never()).setSummary(anyString());
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_MODES_UI)
-    public void updateState_modesUi_resetsTitleAndFragment() {
-        mController.updateState(mPreference);
-        verify(mPreference).setTitle(anyInt());  // Resource IDs are ints
-        verify(mPreference).setFragment(ZenModesListFragment.class.getCanonicalName());
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_MODES_UI)
-    public void updateState_noModesUi_doesNotSetTitleAndFragment() {
-        mController.updateState(mPreference);
-        verify(mPreference, never()).setTitle(anyInt());
-        verify(mPreference, never()).setFragment(anyString());
     }
 }

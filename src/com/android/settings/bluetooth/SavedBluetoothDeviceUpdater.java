@@ -41,7 +41,7 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
 
     private static final String TAG = "SavedBluetoothDeviceUpdater";
 
-    private static final String PREF_KEY = "saved_bt";
+    private static final String PREF_KEY_PREFIX = "saved_bt_";
 
     private final boolean mShowConnectedDevice;
 
@@ -134,8 +134,8 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     }
 
     @Override
-    protected String getPreferenceKey() {
-        return PREF_KEY;
+    protected String getPreferenceKeyPrefix() {
+        return PREF_KEY_PREFIX;
     }
 
     @Override

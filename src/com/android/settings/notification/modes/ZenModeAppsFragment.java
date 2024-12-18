@@ -37,10 +37,6 @@ public class ZenModeAppsFragment extends ZenModeFragmentBase {
                 context, ZenModeAppsPreferenceController.KEY_PRIORITY, mBackend));
         controllers.add(new ZenModeAppsPreferenceController(
                 context, ZenModeAppsPreferenceController.KEY_NONE, mBackend));
-        // TODO: b/308819928 - The manual DND mode cannot have the ALL type;
-        // unify the controllers into one and only create a preference if isManualDnd is false.
-        controllers.add(new ZenModeAppsPreferenceController(
-                context, ZenModeAppsPreferenceController.KEY_ALL, mBackend));
         return controllers;
     }
 
@@ -51,7 +47,6 @@ public class ZenModeAppsFragment extends ZenModeFragmentBase {
 
     @Override
     public int getMetricsCategory() {
-        // TODO: b/332937635 - make this the correct metrics category
-        return SettingsEnums.NOTIFICATION_ZEN_MODE_PRIORITY;
+        return SettingsEnums.NOTIFICATION_ZEN_MODE_OVERRIDING_APPS;
     }
 }

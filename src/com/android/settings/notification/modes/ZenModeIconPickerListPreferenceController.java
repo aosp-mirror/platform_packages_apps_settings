@@ -17,6 +17,7 @@
 package com.android.settings.notification.modes;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,24 +31,36 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import com.android.settings.R;
-import com.android.settings.dashboard.DashboardFragment;
+import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.widget.LayoutPreference;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
+
+import java.util.HashMap;
+import java.util.Map;
 
 class ZenModeIconPickerListPreferenceController extends AbstractZenModePreferenceController {
 
-    private final DashboardFragment mFragment;
     private final IconOptionsProvider mIconOptionsProvider;
+    private final IconPickerListener mListener;
     @Nullable private IconAdapter mAdapter;
+    private @DrawableRes int mCurrentIconResId;
 
     ZenModeIconPickerListPreferenceController(@NonNull Context context, @NonNull String key,
-            @NonNull DashboardFragment fragment, @NonNull IconOptionsProvider iconOptionsProvider,
-            @Nullable ZenModesBackend backend) {
-        super(context, key, backend);
-        mFragment = fragment;
+            @NonNull IconPickerListener listener) {
+        this(context, key, listener, new IconOptionsProviderImpl(context));
+    }
+
+    @VisibleForTesting
+    ZenModeIconPickerListPreferenceController(@NonNull Context context, @NonNull String key,
+            @NonNull IconPickerListener listener,
+            @NonNull IconOptionsProvider iconOptionsProvider) {
+        super(context, key);
+        mListener = listener;
         mIconOptionsProvider = iconOptionsProvider;
     }
 
@@ -66,20 +79,35 @@ class ZenModeIconPickerListPreferenceController extends AbstractZenModePreferenc
         recyclerView.setLayoutManager(new AutoFitGridLayoutManager(mContext));
         recyclerView.setAdapter(mAdapter);
         recyclerView.setHasFixedSize(true);
-    }
-
-    @VisibleForTesting
-    void onIconSelected(@DrawableRes int resId) {
-        saveMode(mode -> {
-            mode.getRule().setIconResId(resId);
-            return mode;
-        });
-        mFragment.finish();
+        if (recyclerView.getItemAnimator() instanceof SimpleItemAnimator animator) {
+            animator.setSupportsChangeAnimations(true);
+        }
     }
 
     @Override
     void updateState(Preference preference, @NonNull ZenMode zenMode) {
-        // Nothing to do, the current icon is shown in a different preference.
+        @DrawableRes int iconResId = zenMode.getIconKey().resId();
+        updateIconSelection(iconResId);
+    }
+
+    private void updateIconSelection(@DrawableRes int iconResId) {
+        if (iconResId != mCurrentIconResId) {
+            int oldIconResId = mCurrentIconResId;
+            mCurrentIconResId = iconResId;
+            if (mAdapter != null) {
+                mAdapter.notifyIconChanged(oldIconResId);
+                mAdapter.notifyIconChanged(mCurrentIconResId);
+            }
+        }
+    }
+
+    private void onIconSelected(@DrawableRes int iconResId) {
+        updateIconSelection(iconResId);
+        mListener.onIconSelected(iconResId);
+    }
+
+    interface IconPickerListener {
+        void onIconSelected(@DrawableRes int iconResId);
     }
 
     private class IconHolder extends RecyclerView.ViewHolder {
@@ -91,20 +119,25 @@ class ZenModeIconPickerListPreferenceController extends AbstractZenModePreferenc
             mImageView = itemView.findViewById(R.id.icon_image_view);
         }
 
-        void bindIcon(IconOptionsProvider.IconInfo icon) {
-            mImageView.setImageDrawable(
-                    IconUtil.makeIconCircle(itemView.getContext(), icon.resId()));
+        void bindIcon(IconOptionsProvider.IconInfo icon, Drawable iconDrawable) {
+            mImageView.setImageDrawable(iconDrawable);
             itemView.setContentDescription(icon.description());
-            itemView.setOnClickListener(v -> onIconSelected(icon.resId()));
+            itemView.setOnClickListener(v -> {
+                itemView.setSelected(true); // Immediately, to avoid flicker until we rebind.
+                onIconSelected(icon.resId());
+            });
+            itemView.setSelected(icon.resId() == mCurrentIconResId);
         }
     }
 
     private class IconAdapter extends RecyclerView.Adapter<IconHolder> {
 
         private final ImmutableList<IconOptionsProvider.IconInfo> mIconResources;
+        private final Map<IconOptionsProvider.IconInfo, Drawable> mIconCache;
 
         private IconAdapter(IconOptionsProvider iconOptionsProvider) {
             mIconResources = iconOptionsProvider.getIcons();
+            mIconCache = new HashMap<>();
         }
 
         @NonNull
@@ -117,12 +150,23 @@ class ZenModeIconPickerListPreferenceController extends AbstractZenModePreferenc
 
         @Override
         public void onBindViewHolder(@NonNull IconHolder holder, int position) {
-            holder.bindIcon(mIconResources.get(position));
+            IconOptionsProvider.IconInfo iconInfo = mIconResources.get(position);
+            Drawable iconDrawable = mIconCache.computeIfAbsent(iconInfo,
+                    info -> IconUtil.makeIconPickerItem(mContext, info.resId()));
+            holder.bindIcon(iconInfo, iconDrawable);
         }
 
         @Override
         public int getItemCount() {
             return mIconResources.size();
+        }
+
+        private void notifyIconChanged(@DrawableRes int iconResId) {
+            int position = Iterables.indexOf(mIconResources,
+                    iconInfo -> iconInfo.resId() == iconResId);
+            if (position != -1) {
+                notifyItemChanged(position);
+            }
         }
     }
 

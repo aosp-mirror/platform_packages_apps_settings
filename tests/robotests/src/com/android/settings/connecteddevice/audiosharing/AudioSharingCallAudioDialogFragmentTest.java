@@ -23,6 +23,7 @@ import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothStatusCodes;
+import android.os.Bundle;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.appcompat.app.AlertDialog;
@@ -78,10 +79,6 @@ public class AudioSharingCallAudioDialogFragmentTest {
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
         shadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
-        mFragment = new AudioSharingCallAudioDialogFragment();
-        mParent = new Fragment();
-        FragmentController.setupFragment(
-                mParent, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
     }
 
     @After
@@ -91,6 +88,7 @@ public class AudioSharingCallAudioDialogFragmentTest {
 
     @Test
     public void getMetricsCategory_correctValue() {
+        mFragment = new AudioSharingCallAudioDialogFragment();
         assertThat(mFragment.getMetricsCategory())
                 .isEqualTo(SettingsEnums.DIALOG_AUDIO_SHARING_CALL_AUDIO);
     }
@@ -98,21 +96,52 @@ public class AudioSharingCallAudioDialogFragmentTest {
     @Test
     public void onCreateDialog_flagOff_dialogNotExist() {
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-        mFragment.show(mParent, new ArrayList<>(), (item) -> {});
+        mParent = new Fragment();
+        FragmentController.setupFragment(
+                mParent, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
+        AudioSharingCallAudioDialogFragment.show(mParent, new ArrayList<>(), -1, (item) -> {});
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
     }
 
     @Test
+    public void onCreateDialog_unattachedFragment_dialogNotExist() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        mParent = new Fragment();
+        AudioSharingCallAudioDialogFragment.show(mParent, new ArrayList<>(), -1, (item) -> {});
+        shadowMainLooper().idle();
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNull();
+    }
+
+    @Test
+    public void onCreateDialog_nullDeviceItems_showEmptyDialog() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        mFragment = new AudioSharingCallAudioDialogFragment();
+        mFragment.setArguments(Bundle.EMPTY);
+        FragmentController.setupFragment(
+                mFragment, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
+        AlertDialog dialog = (AlertDialog) mFragment.onCreateDialog(Bundle.EMPTY);
+        dialog.show();
+        shadowMainLooper().idle();
+        assertThat(dialog.isShowing()).isTrue();
+        assertThat(dialog.getListView()).isNull();
+    }
+
+    @Test
     public void onCreateDialog_showCorrectItems() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        mParent = new Fragment();
+        FragmentController.setupFragment(
+                mParent, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
         ArrayList<AudioSharingDeviceItem> deviceItemList = new ArrayList<>();
         deviceItemList.add(TEST_DEVICE_ITEM1);
         deviceItemList.add(TEST_DEVICE_ITEM2);
-        mFragment.show(mParent, deviceItemList, (item) -> {});
+        AudioSharingCallAudioDialogFragment.show(mParent, deviceItemList, 0, (item) -> {});
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNotNull();
         assertThat(dialog.getListView().getCount()).isEqualTo(2);
     }
 }

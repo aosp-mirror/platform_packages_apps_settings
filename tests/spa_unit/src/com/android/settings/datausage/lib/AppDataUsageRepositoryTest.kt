@@ -38,48 +38,55 @@ import org.mockito.junit.MockitoRule
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
 class AppDataUsageRepositoryTest {
-    @get:Rule
-    val mockito: MockitoRule = MockitoJUnit.rule()
+    @get:Rule val mockito: MockitoRule = MockitoJUnit.rule()
 
-    private val mockUserManager = mock<UserManager> {
-        on { userProfiles } doReturn listOf(UserHandle.of(USER_ID))
-        on { getUserInfo(USER_ID) } doReturn UserInfo(USER_ID, "", 0)
-    }
+    private val mockUserManager =
+        mock<UserManager> {
+            on { userProfiles } doReturn listOf(UserHandle.of(USER_ID))
+            on { getUserInfo(USER_ID) } doReturn UserInfo(USER_ID, "", 0)
+        }
 
-    private val mockNetworkPolicyManager = mock<NetworkPolicyManager> {
-        on { getUidsWithPolicy(NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND) } doReturn
-            intArrayOf()
-    }
+    private val mockNetworkPolicyManager =
+        mock<NetworkPolicyManager> {
+            on { getUidsWithPolicy(NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND) } doReturn
+                intArrayOf()
+        }
 
-    private val mockResources = mock<Resources> {
-        on { getIntArray(R.array.datausage_hiding_carrier_service_carrier_id) } doReturn
-            intArrayOf(HIDING_CARRIER_ID)
+    private val mockResources =
+        mock<Resources> {
+            on { getIntArray(R.array.datausage_hiding_carrier_service_carrier_id) } doReturn
+                intArrayOf(HIDING_CARRIER_ID)
 
-        on { getStringArray(R.array.datausage_hiding_carrier_service_package_names) } doReturn
-            arrayOf(HIDING_PACKAGE_NAME)
-    }
+            on { getStringArray(R.array.datausage_hiding_carrier_service_package_names) } doReturn
+                arrayOf(HIDING_PACKAGE_NAME)
+        }
 
-    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
-        on { userManager } doReturn mockUserManager
-        on { getSystemService(NetworkPolicyManager::class.java) } doReturn mockNetworkPolicyManager
-        on { resources } doReturn mockResources
-    }
+    private val context: Context =
+        spy(ApplicationProvider.getApplicationContext()) {
+            on { userManager } doReturn mockUserManager
+            on { getSystemService(NetworkPolicyManager::class.java) } doReturn
+                mockNetworkPolicyManager
+            on { resources } doReturn mockResources
+        }
 
     @Test
     fun getAppPercent_noAppToHide() {
-        val repository = AppDataUsageRepository(
-            context = context,
-            currentUserId = USER_ID,
-            template = Template,
-            getPackageName = { null },
-        )
-        val buckets = listOf(
-            Bucket(uid = APP_ID_1, bytes = 1, startTimeStamp = 0, endTimeStamp = 0),
-            Bucket(uid = APP_ID_2, bytes = 2, startTimeStamp = 0, endTimeStamp = 0),
-        )
+        val repository =
+            AppDataUsageRepository(
+                context = context,
+                currentUserId = USER_ID,
+                template = Template,
+                getPackageName = { null },
+            )
+        val buckets =
+            listOf(
+                Bucket(uid = APP_ID_1, bytes = 1, startTimeStamp = 0, endTimeStamp = 0),
+                Bucket(uid = APP_ID_2, bytes = 2, startTimeStamp = 0, endTimeStamp = 0),
+            )
 
         val appPercentList = repository.getAppPercent(null, buckets)
 
@@ -100,16 +107,18 @@ class AppDataUsageRepositoryTest {
 
     @Test
     fun getAppPercent_hasAppToHide() {
-        val repository = AppDataUsageRepository(
-            context = context,
-            currentUserId = USER_ID,
-            template = Template,
-            getPackageName = { if (it.key == APP_ID_1) HIDING_PACKAGE_NAME else null },
-        )
-        val buckets = listOf(
-            Bucket(uid = APP_ID_1, bytes = 1, startTimeStamp = 0, endTimeStamp = 0),
-            Bucket(uid = APP_ID_2, bytes = 2, startTimeStamp = 0, endTimeStamp = 0),
-        )
+        val repository =
+            AppDataUsageRepository(
+                context = context,
+                currentUserId = USER_ID,
+                template = Template,
+                getPackageName = { if (it.key == APP_ID_1) HIDING_PACKAGE_NAME else null },
+            )
+        val buckets =
+            listOf(
+                Bucket(uid = APP_ID_1, bytes = 1, startTimeStamp = 0, endTimeStamp = 0),
+                Bucket(uid = APP_ID_2, bytes = 2, startTimeStamp = 0, endTimeStamp = 0),
+            )
 
         val appPercentList = repository.getAppPercent(HIDING_CARRIER_ID, buckets)
 
@@ -120,6 +129,43 @@ class AppDataUsageRepositoryTest {
             assertThat(total).isEqualTo(2)
         }
         assertThat(appPercentList[0].second).isEqualTo(100)
+    }
+
+    @Test
+    fun getAppPercent_restricted() {
+        mockNetworkPolicyManager.stub {
+            on { getUidsWithPolicy(NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND) } doReturn
+                intArrayOf(APP_ID_1)
+        }
+        val repository =
+            AppDataUsageRepository(
+                context = context,
+                currentUserId = USER_ID,
+                template = Template,
+                getPackageName = { null },
+            )
+        val buckets =
+            listOf(
+                Bucket(uid = APP_ID_2, bytes = 2, startTimeStamp = 0, endTimeStamp = 0),
+            )
+
+        val appPercentList = repository.getAppPercent(null, buckets)
+
+        assertThat(appPercentList).hasSize(2)
+        appPercentList[0].first.apply {
+            assertThat(key).isEqualTo(APP_ID_2)
+            assertThat(category).isEqualTo(AppItem.CATEGORY_APP)
+            assertThat(total).isEqualTo(2)
+            assertThat(restricted).isFalse()
+        }
+        assertThat(appPercentList[0].second).isEqualTo(100)
+        appPercentList[1].first.apply {
+            assertThat(key).isEqualTo(APP_ID_1)
+            assertThat(category).isEqualTo(AppItem.CATEGORY_APP)
+            assertThat(total).isEqualTo(0)
+            assertThat(restricted).isTrue()
+        }
+        assertThat(appPercentList[1].second).isEqualTo(0)
     }
 
     private companion object {

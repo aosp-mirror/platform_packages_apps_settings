@@ -26,6 +26,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -47,7 +48,10 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
 
     @Override
     public boolean isAvailable() {
-        boolean hasLeAudio = mCachedDevice.getConnectableProfiles()
+        if (Flags.enableBluetoothDeviceDetailsPolish()) {
+            return false;
+        }
+        boolean hasLeAudio = mCachedDevice.getUiAccessibleProfiles()
                 .stream()
                 .anyMatch(profile -> profile.getProfileId() == BluetoothProfile.LE_AUDIO);
         return !BluetoothUtils.isAdvancedDetailsHeader(mCachedDevice.getDevice()) && !hasLeAudio;

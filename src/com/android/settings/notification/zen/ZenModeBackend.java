@@ -116,7 +116,7 @@ public class ZenModeBackend {
                 ActivityManager.getCurrentUser(), true).id;
         if (android.app.Flags.modesApi()) {
             mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS,
-                        conditionId, TAG, /* fromUser= */ true);
+                    conditionId, TAG, /* fromUser= */ true);
         } else {
             mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS,
                     conditionId, TAG);
@@ -241,12 +241,14 @@ public class ZenModeBackend {
         }
 
         savePolicy(getNewDefaultPriorityCategories(allowSenders, category),
-            priorityCallSenders, priorityMessagesSenders, mPolicy.suppressedVisualEffects,
+                priorityCallSenders, priorityMessagesSenders, mPolicy.suppressedVisualEffects,
                 mPolicy.priorityConversationSenders);
 
-        if (ZenModeSettingsBase.DEBUG) Log.d(TAG, "onPrefChange allow" +
-                stringCategory + "=" + allowSenders + " allow" + stringCategory + "From="
-                + ZenModeConfig.sourceToString(allowSendersFrom));
+        if (ZenModeSettingsBase.DEBUG) {
+            Log.d(TAG, "onPrefChange allow"
+                    + stringCategory + "=" + allowSenders + " allow" + stringCategory + "From="
+                    + ZenModeConfig.sourceToString(allowSendersFrom));
+        }
     }
 
     protected void saveConversationSenders(int val) {
@@ -280,7 +282,7 @@ public class ZenModeBackend {
         switch (contactType) {
             case ZenPolicy.PEOPLE_TYPE_ANYONE:
                 return ZEN_MODE_FROM_ANYONE;
-            case  ZenPolicy.PEOPLE_TYPE_CONTACTS:
+            case ZenPolicy.PEOPLE_TYPE_CONTACTS:
                 return ZEN_MODE_FROM_CONTACTS;
             case ZenPolicy.PEOPLE_TYPE_STARRED:
                 return ZEN_MODE_FROM_STARRED;
@@ -308,7 +310,7 @@ public class ZenModeBackend {
         switch (setting) {
             case ZenPolicy.PEOPLE_TYPE_ANYONE:
                 return NotificationManager.Policy.PRIORITY_SENDERS_ANY;
-            case  ZenPolicy.PEOPLE_TYPE_CONTACTS:
+            case ZenPolicy.PEOPLE_TYPE_CONTACTS:
                 return NotificationManager.Policy.PRIORITY_SENDERS_CONTACTS;
             case ZenPolicy.PEOPLE_TYPE_STARRED:
                 return NotificationManager.Policy.PRIORITY_SENDERS_STARRED;
@@ -321,7 +323,7 @@ public class ZenModeBackend {
     protected int getAlarmsTotalSilencePeopleSummary(int category) {
         if (category == NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES) {
             return R.string.zen_mode_none_messages;
-        } else if (category == NotificationManager.Policy.PRIORITY_CATEGORY_CALLS){
+        } else if (category == NotificationManager.Policy.PRIORITY_CATEGORY_CALLS) {
             return R.string.zen_mode_none_calls;
         } else if (category == NotificationManager.Policy.PRIORITY_CATEGORY_CONVERSATIONS) {
             return R.string.zen_mode_from_no_conversations;
@@ -456,7 +458,7 @@ public class ZenModeBackend {
     }
 
     private static List<String> getDefaultRuleIds() {
-        return ZenModeConfig.DEFAULT_RULE_IDS;
+        return ZenModeConfig.getDefaultRuleIds();
     }
 
     NotificationManager.Policy toNotificationPolicy(ZenPolicy policy) {
@@ -470,8 +472,8 @@ public class ZenModeBackend {
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 String contact = cursor.getString(0);
-                starredContacts.add(contact != null ? contact :
-                        mContext.getString(R.string.zen_mode_starred_contacts_empty_name));
+                int emptyNameId = R.string.zen_mode_starred_contacts_empty_name;
+                starredContacts.add(contact != null ? contact : mContext.getString(emptyNameId));
 
             } while (cursor.moveToNext());
         }

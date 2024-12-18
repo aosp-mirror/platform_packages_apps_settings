@@ -16,8 +16,6 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
-import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.SETTINGS_KEY_FALLBACK_DEVICE_GROUP_ID;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -59,6 +57,7 @@ import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
@@ -208,7 +207,8 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
                 .registerCallback(any(Executor.class), any(BluetoothVolumeControl.Callback.class));
         verify(mContentResolver, never())
                 .registerContentObserver(
-                        Settings.Secure.getUriFor(SETTINGS_KEY_FALLBACK_DEVICE_GROUP_ID),
+                        Settings.Secure.getUriFor(
+                                BluetoothUtils.getPrimaryGroupIdUriForBroadcast()),
                         false,
                         mContentObserver);
     }
@@ -223,11 +223,9 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
         verify(mDeviceUpdater).registerCallback();
         verify(mVolumeControl)
                 .registerCallback(any(Executor.class), any(BluetoothVolumeControl.Callback.class));
-        verify(mContentResolver)
-                .registerContentObserver(
-                        Settings.Secure.getUriFor(SETTINGS_KEY_FALLBACK_DEVICE_GROUP_ID),
-                        false,
-                        mContentObserver);
+        verify(mContentResolver).registerContentObserver(
+                Settings.Secure.getUriFor(BluetoothUtils.getPrimaryGroupIdUriForBroadcast()), false,
+                mContentObserver);
     }
 
     @Test
@@ -242,7 +240,8 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
                 .registerCallback(any(Executor.class), any(BluetoothVolumeControl.Callback.class));
         verify(mContentResolver)
                 .registerContentObserver(
-                        Settings.Secure.getUriFor(SETTINGS_KEY_FALLBACK_DEVICE_GROUP_ID),
+                        Settings.Secure.getUriFor(
+                                BluetoothUtils.getPrimaryGroupIdUriForBroadcast()),
                         false,
                         mContentObserver);
     }
@@ -317,7 +316,8 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
     @Test
     public void onDeviceAdded_rankFallbackDeviceOnTop() {
         Settings.Secure.putInt(
-                mContentResolver, SETTINGS_KEY_FALLBACK_DEVICE_GROUP_ID, TEST_DEVICE_GROUP_ID2);
+                mContentResolver, BluetoothUtils.getPrimaryGroupIdUriForBroadcast(),
+                TEST_DEVICE_GROUP_ID2);
         when(mPreference1.getProgress()).thenReturn(TEST_VOLUME_VALUE);
         when(mPreference2.getProgress()).thenReturn(TEST_VOLUME_VALUE);
         mController.setPreferenceGroup(mPreferenceGroup);
@@ -427,7 +427,8 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
     @Test
     public void settingsObserverOnChange_updatePreferenceOrder() {
         Settings.Secure.putInt(
-                mContentResolver, SETTINGS_KEY_FALLBACK_DEVICE_GROUP_ID, TEST_DEVICE_GROUP_ID2);
+                mContentResolver, BluetoothUtils.getPrimaryGroupIdUriForBroadcast(),
+                TEST_DEVICE_GROUP_ID2);
         when(mPreference1.getProgress()).thenReturn(TEST_VOLUME_VALUE);
         when(mPreference2.getProgress()).thenReturn(TEST_VOLUME_VALUE);
         mController.setPreferenceGroup(mPreferenceGroup);
@@ -435,8 +436,8 @@ public class AudioSharingDeviceVolumeGroupControllerTest {
         mController.onDeviceAdded(mPreference2);
         shadowOf(Looper.getMainLooper()).idle();
 
-        Settings.Secure.putInt(
-                mContentResolver, SETTINGS_KEY_FALLBACK_DEVICE_GROUP_ID, TEST_DEVICE_GROUP_ID1);
+        Settings.Secure.putInt(mContentResolver, BluetoothUtils.getPrimaryGroupIdUriForBroadcast(),
+                TEST_DEVICE_GROUP_ID1);
         mContentObserver.onChange(true);
         shadowOf(Looper.getMainLooper()).idle();
 

@@ -53,6 +53,8 @@ public class AudioStreamsProgressCategoryPreferenceTest {
 
     @Test
     public void addAudioStreamPreference_singlePreference() {
+        mPreference = spy(new AudioStreamsProgressCategoryPreference(mContext, null));
+        when(mPreference.getPreferenceManager()).thenReturn(mPreferenceManager);
         AudioStreamPreference first = new AudioStreamPreference(mContext, null);
         mPreference.addAudioStreamPreference(first, (p1, p2) -> 0);
 
@@ -62,6 +64,8 @@ public class AudioStreamsProgressCategoryPreferenceTest {
 
     @Test
     public void addAudioStreamPreference_multiPreference_sorted() {
+        mPreference = spy(new AudioStreamsProgressCategoryPreference(mContext, null, 0));
+        when(mPreference.getPreferenceManager()).thenReturn(mPreferenceManager);
         Comparator<AudioStreamPreference> c =
                 Comparator.comparingInt(AudioStreamPreference::getOrder);
         AudioStreamPreference first = new AudioStreamPreference(mContext, null);
@@ -78,6 +82,8 @@ public class AudioStreamsProgressCategoryPreferenceTest {
 
     @Test
     public void removeAudioStreamPreferences_shouldBeEmpty() {
+        mPreference = spy(new AudioStreamsProgressCategoryPreference(mContext, null, 0, 0));
+        when(mPreference.getPreferenceManager()).thenReturn(mPreferenceManager);
         Comparator<AudioStreamPreference> c =
                 Comparator.comparingInt(AudioStreamPreference::getOrder);
         AudioStreamPreference first = new AudioStreamPreference(mContext, null);

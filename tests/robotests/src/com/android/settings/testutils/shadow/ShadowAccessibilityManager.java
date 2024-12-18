@@ -16,15 +16,18 @@
 
 package com.android.settings.testutils.shadow;
 
+import android.accessibilityservice.AccessibilityShortcutInfo;
 import android.annotation.NonNull;
 import android.annotation.UserIdInt;
 import android.content.ComponentName;
+import android.content.Context;
 import android.util.ArrayMap;
 import android.view.accessibility.AccessibilityManager;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,9 +36,10 @@ import java.util.Map;
 @Implements(AccessibilityManager.class)
 public class ShadowAccessibilityManager extends org.robolectric.shadows.ShadowAccessibilityManager {
     private Map<ComponentName, ComponentName> mA11yFeatureToTileMap = new ArrayMap<>();
+    private List<AccessibilityShortcutInfo> mInstalledAccessibilityShortcutList = List.of();
 
     /**
-     * Implements a hidden method {@link AccessibilityManager.getA11yFeatureToTileMap}
+     * Implements a hidden method {@link AccessibilityManager#getA11yFeatureToTileMap}
      */
     @Implementation
     public Map<ComponentName, ComponentName> getA11yFeatureToTileMap(@UserIdInt int userId) {
@@ -48,5 +52,23 @@ public class ShadowAccessibilityManager extends org.robolectric.shadows.ShadowAc
     public void setA11yFeatureToTileMap(
             @NonNull Map<ComponentName, ComponentName> a11yFeatureToTileMap) {
         mA11yFeatureToTileMap = a11yFeatureToTileMap;
+    }
+
+    /**
+     * Implements the hidden method
+     * {@link AccessibilityManager#getInstalledAccessibilityShortcutListAsUser}.
+     */
+    @Implementation
+    public List<AccessibilityShortcutInfo> getInstalledAccessibilityShortcutListAsUser(
+            @NonNull Context context, @UserIdInt int userId) {
+        return mInstalledAccessibilityShortcutList;
+    }
+
+    /**
+     * Sets the value to be returned by {@link #getInstalledAccessibilityShortcutListAsUser}.
+     */
+    public void setInstalledAccessibilityShortcutListAsUser(
+            @NonNull List<AccessibilityShortcutInfo> installedAccessibilityShortcutList) {
+        mInstalledAccessibilityShortcutList = installedAccessibilityShortcutList;
     }
 }

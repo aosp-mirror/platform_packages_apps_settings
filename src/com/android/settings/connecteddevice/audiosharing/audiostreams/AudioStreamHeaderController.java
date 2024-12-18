@@ -16,6 +16,10 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static com.android.settingslib.flags.Flags.audioSharingHysteresisModeFix;
+
+import static java.util.stream.Collectors.toList;
+
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
@@ -48,13 +52,17 @@ public class AudioStreamHeaderController extends BasePreferenceController
     static final int AUDIO_STREAM_HEADER_LISTENING_NOW_SUMMARY =
             R.string.audio_streams_listening_now;
 
+    static final int AUDIO_STREAM_HEADER_PRESENT_NOW_SUMMARY = R.string.audio_streams_present_now;
+
     @VisibleForTesting static final String AUDIO_STREAM_HEADER_NOT_LISTENING_SUMMARY = "";
     private static final String TAG = "AudioStreamHeaderController";
     private static final String KEY = "audio_stream_header";
     private final Executor mExecutor;
     private final AudioStreamsHelper mAudioStreamsHelper;
     @Nullable private final LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
-    private final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
+
+    @VisibleForTesting
+    final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
             new AudioStreamsBroadcastAssistantCallback() {
                 @Override
                 public void onSourceRemoved(BluetoothDevice sink, int sourceId, int reason) {
@@ -78,6 +86,10 @@ public class AudioStreamHeaderController extends BasePreferenceController
                         updateSummary();
                         mAudioStreamsHelper.startMediaService(
                                 mContext, mBroadcastId, mBroadcastName);
+                    } else if (audioSharingHysteresisModeFix()
+                            && AudioStreamsHelper.hasSourcePresent(state)) {
+                        // if source present but not connected, only update the summary
+                        updateSummary();
                     }
                 }
             };
@@ -138,8 +150,27 @@ public class AudioStreamHeaderController extends BasePreferenceController
         var unused =
                 ThreadUtils.postOnBackgroundThread(
                         () -> {
+                            var connectedSourceList =
+                                    mAudioStreamsHelper.getAllPresentSources().stream()
+                                            .filter(
+                                                    state ->
+                                                            (state.getBroadcastId()
+                                                                    == mBroadcastId))
+                                            .collect(toList());
+
                             var latestSummary =
-                                    mAudioStreamsHelper.getAllConnectedSources().stream()
+                                    audioSharingHysteresisModeFix()
+                                            ? connectedSourceList.isEmpty()
+                                                    ? AUDIO_STREAM_HEADER_NOT_LISTENING_SUMMARY
+                                                    : (connectedSourceList.stream()
+                                                                    .anyMatch(
+                                                                            AudioStreamsHelper
+                                                                                    ::isConnected)
+                                                            ? mContext.getString(
+                                                                    AUDIO_STREAM_HEADER_LISTENING_NOW_SUMMARY)
+                                                            : mContext.getString(
+                                                                    AUDIO_STREAM_HEADER_PRESENT_NOW_SUMMARY))
+                                            : mAudioStreamsHelper.getAllConnectedSources().stream()
                                                     .map(
                                                             BluetoothLeBroadcastReceiveState
                                                                     ::getBroadcastId)
@@ -147,9 +178,10 @@ public class AudioStreamHeaderController extends BasePreferenceController
                                                             connectedBroadcastId ->
                                                                     connectedBroadcastId
                                                                             == mBroadcastId)
-                                            ? mContext.getString(
-                                                    AUDIO_STREAM_HEADER_LISTENING_NOW_SUMMARY)
-                                            : AUDIO_STREAM_HEADER_NOT_LISTENING_SUMMARY;
+                                                    ? mContext.getString(
+                                                            AUDIO_STREAM_HEADER_LISTENING_NOW_SUMMARY)
+                                                    : AUDIO_STREAM_HEADER_NOT_LISTENING_SUMMARY;
+
                             ThreadUtils.postOnMainThread(
                                     () -> {
                                         if (mHeaderController != null) {

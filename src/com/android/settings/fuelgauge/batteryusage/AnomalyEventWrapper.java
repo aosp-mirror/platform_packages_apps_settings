@@ -28,10 +28,11 @@ import androidx.annotation.Nullable;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.widget.TipCardPreference;
 
 import java.util.function.Function;
 
-final class AnomalyEventWrapper {
+class AnomalyEventWrapper {
     private static final String TAG = "AnomalyEventWrapper";
 
     private final Context mContext;
@@ -235,16 +236,16 @@ final class AnomalyEventWrapper {
         return mHighlightSlotPair;
     }
 
-    boolean updateTipsCardPreference(BatteryTipsCardPreference preference) {
+    boolean updateTipsCardPreference(TipCardPreference preference) {
         final String titleString = getTitleString();
         if (TextUtils.isEmpty(titleString)) {
             return false;
         }
         preference.setTitle(titleString);
-        preference.setIconResourceId(getIconResId());
-        preference.setButtonColorResourceId(getColorResId());
-        preference.setMainButtonLabel(getMainBtnString());
-        preference.setDismissButtonLabel(getDismissBtnString());
+        preference.setIconResId(getIconResId());
+        preference.setTintColorResId(getColorResId());
+        preference.setPrimaryButtonText(getDismissBtnString());
+        preference.setSecondaryButtonText(getMainBtnString());
         return true;
     }
 
