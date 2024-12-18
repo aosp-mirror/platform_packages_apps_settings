@@ -63,4 +63,32 @@ class WifiPrivacyPreferenceController(context: Context, preferenceKey: String) :
                 }
         })
     }
+
+    companion object {
+        private const val PREF_SEND_DHCP_HOST_NAME_ENABLE = 0
+        private const val PREF_SEND_DHCP_HOST_NAME_DISABLE = 1
+
+        /**
+         * Returns preference index value.
+         *
+         * @param isSendDhcpHostnameEnabled determines whether device name can be sent.
+         * @return index value of preference
+         */
+        fun translateSendDhcpHostnameEnabledToPrefValue(
+            isSendDhcpHostnameEnabled: Boolean
+        ): Int {
+            return if (isSendDhcpHostnameEnabled) PREF_SEND_DHCP_HOST_NAME_ENABLE
+            else PREF_SEND_DHCP_HOST_NAME_DISABLE
+        }
+
+        /**
+         * Returns whether device name can be sent.
+         *
+         * @param prefDhcpRandomized is preference index value
+         * @return is send dhcp host name enabled
+         */
+        fun translatePrefValueToSendDhcpHostnameEnabled(prefDhcpRandomized: Int): Boolean {
+            return prefDhcpRandomized == PREF_SEND_DHCP_HOST_NAME_ENABLE
+        }
+    }
 }

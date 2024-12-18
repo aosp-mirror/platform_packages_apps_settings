@@ -28,7 +28,8 @@ import androidx.compose.runtime.Composable
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.R
 import com.android.settingslib.spa.lifecycle.collectAsCallbackWithLifecycle
-import com.android.settingslib.spaprivileged.model.app.AppOpsController
+import com.android.settingslib.spaprivileged.model.app.AppOps
+import com.android.settingslib.spaprivileged.model.app.AppOpsPermissionController
 import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.model.app.IPackageManagers
 import com.android.settingslib.spaprivileged.model.app.PackageManagers
@@ -48,7 +49,7 @@ data class AlarmsAndRemindersAppRecord(
     override val app: ApplicationInfo,
     val isTrumped: Boolean,
     val isChangeable: Boolean,
-    var controller: AppOpsController,
+    val controller: AppOpsPermissionController,
 ) : AppRecord
 
 class AlarmsAndRemindersAppListModel(
@@ -83,7 +84,7 @@ class AlarmsAndRemindersAppListModel(
     @Composable
     override fun isAllowed(record: AlarmsAndRemindersAppRecord): () -> Boolean? = when {
         record.isTrumped -> ({ true })
-        else -> record.controller.isAllowed.collectAsCallbackWithLifecycle()
+        else -> record.controller.isAllowedFlow.collectAsCallbackWithLifecycle()
     }
 
     override fun isChangeable(record: AlarmsAndRemindersAppRecord) = record.isChangeable
@@ -113,11 +114,11 @@ class AlarmsAndRemindersAppListModel(
             app = app,
             isTrumped = isTrumped,
             isChangeable = hasRequestPermission && !isTrumped,
-            controller = AppOpsController(
+            controller = AppOpsPermissionController(
                 context = context,
                 app = app,
-                op = AppOpsManager.OP_SCHEDULE_EXACT_ALARM,
-                setModeByUid = true,
+                appOps = APP_OPS,
+                permission = PERMISSION,
             ),
         )
     }
@@ -136,6 +137,11 @@ class AlarmsAndRemindersAppListModel(
     }
 
     companion object {
+        private val APP_OPS = AppOps(
+            op = AppOpsManager.OP_SCHEDULE_EXACT_ALARM,
+            setModeByUid = true,
+        )
+
         private const val PERMISSION: String = Manifest.permission.SCHEDULE_EXACT_ALARM
 
         /** Checks whether [Manifest.permission.SCHEDULE_EXACT_ALARM] is enabled. */

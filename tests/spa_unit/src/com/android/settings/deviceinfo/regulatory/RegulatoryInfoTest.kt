@@ -35,14 +35,12 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.MockitoSession
-import org.mockito.Spy
 import org.mockito.quality.Strictness
 
 @RunWith(AndroidJUnit4::class)
 class RegulatoryInfoTest {
     private lateinit var mockSession: MockitoSession
 
-    @Spy
     private val context: Context = ApplicationProvider.getApplicationContext()
 
     @Before
@@ -98,8 +96,31 @@ class RegulatoryInfoTest {
         assertDrawableSameAs(regulatoryInfo, R.drawable.regulatory_info_sku)
     }
 
+    @Test
+    fun getCoo() {
+        doReturn(COO).`when` { SystemProperties.get(KEY_COO) }
+
+        val coo = RegulatoryInfo.getCoo()
+
+        assertThat(coo).isEqualTo(COO)
+    }
+
+    @Test
+    fun getSku() {
+        doReturn(SKU).`when` { SystemProperties.get(KEY_SKU) }
+
+        val coo = RegulatoryInfo.getSku()
+
+        assertThat(coo).isEqualTo(SKU)
+    }
+
     private fun assertDrawableSameAs(drawable: Drawable?, @DrawableRes resId: Int) {
         val expected = context.getDrawable(resId)!!.toBitmap()
         assertThat(drawable!!.toBitmap().sameAs(expected)).isTrue()
+    }
+
+    private companion object {
+        const val SKU = "ABC"
+        const val COO = "CN"
     }
 }

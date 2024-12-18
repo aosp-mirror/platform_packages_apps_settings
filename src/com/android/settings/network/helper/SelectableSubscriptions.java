@@ -24,7 +24,6 @@ import android.util.Log;
 import androidx.annotation.Keep;
 import androidx.annotation.VisibleForTesting;
 
-import com.android.settings.network.helper.SubscriptionAnnotation;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Collections;
@@ -104,15 +103,6 @@ public class SelectableSubscriptions implements Callable<List<SubscriptionAnnota
 
         try {
             // query in background thread
-            Future<AtomicIntegerArray> eSimCardId =
-                    ThreadUtils.postOnBackgroundThread(new QueryEsimCardId(telMgr));
-
-            // query in background thread
-            Future<AtomicIntegerArray> simSlotIndex =
-                    ThreadUtils.postOnBackgroundThread(
-                    new QuerySimSlotIndex(telMgr, true, true));
-
-            // query in background thread
             Future<AtomicIntegerArray> activeSimSlotIndex =
                     ThreadUtils.postOnBackgroundThread(
                     new QuerySimSlotIndex(telMgr, false, true));
@@ -120,16 +110,13 @@ public class SelectableSubscriptions implements Callable<List<SubscriptionAnnota
             List<SubscriptionInfo> subInfoList = mSubscriptions.get();
 
             // wait for result from background thread
-            List<Integer> eSimCardIdList = atomicToList(eSimCardId.get());
-            List<Integer> simSlotIndexList = atomicToList(simSlotIndex.get());
             List<Integer> activeSimSlotIndexList = atomicToList(activeSimSlotIndex.get());
 
             // build a list of SubscriptionAnnotation
             return IntStream.range(0, subInfoList.size())
                     .mapToObj(subInfoIndex ->
                             new SubscriptionAnnotation.Builder(subInfoList, subInfoIndex))
-                    .map(annoBdr -> annoBdr.build(mContext,
-                            eSimCardIdList, simSlotIndexList, activeSimSlotIndexList))
+                    .map(annoBdr -> annoBdr.build(mContext, activeSimSlotIndexList))
                     .filter(mFilter)
                     .collect(Collectors.collectingAndThen(Collectors.toList(), mFinisher));
         } catch (Exception exception) {

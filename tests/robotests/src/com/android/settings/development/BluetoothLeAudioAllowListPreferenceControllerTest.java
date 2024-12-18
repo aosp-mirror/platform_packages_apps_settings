@@ -18,14 +18,13 @@ package com.android.settings.development;
 
 import static android.bluetooth.BluetoothStatusCodes.FEATURE_SUPPORTED;
 
-import static com.android.settings.development.BluetoothLeAudioAllowListPreferenceController
-        .BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY;
+import static com.android.settings.development.BluetoothLeAudioAllowListPreferenceController.BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
@@ -48,8 +47,6 @@ public class BluetoothLeAudioAllowListPreferenceControllerTest {
     @Mock
     private PreferenceScreen mPreferenceScreen;
     @Mock
-    private DevelopmentSettingsDashboardFragment mFragment;
-    @Mock
     private BluetoothAdapter mBluetoothAdapter;
     @Mock
     private SwitchPreference mPreference;
@@ -60,7 +57,7 @@ public class BluetoothLeAudioAllowListPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = spy(new BluetoothLeAudioAllowListPreferenceController(mContext, mFragment));
+        mController = spy(new BluetoothLeAudioAllowListPreferenceController(mContext));
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
             .thenReturn(mPreference);
         mController.mBluetoothAdapter = mBluetoothAdapter;

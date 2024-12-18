@@ -46,6 +46,7 @@ import com.android.settings.R;
 import com.android.settingslib.applications.StorageStatsSource;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -172,6 +173,7 @@ public class StorageAsyncLoaderTest {
     }
 
     @Test
+    @Ignore("b/337417819")
     public void testRemovedPackageDoesNotCrash() throws Exception {
         ApplicationInfo info = new ApplicationInfo();
         info.packageName = PACKAGE_NAME_1;

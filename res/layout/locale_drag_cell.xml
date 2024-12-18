@@ -38,7 +38,9 @@
             style="@style/LanguageCheckboxAndLabel"
             android:layout_marginRight="0dp"
             android:minWidth="24dp"
-            android:paddingEnd="-8dp"/>
+            android:paddingEnd="-8dp"
+            android:clickable="false"
+            android:focusable="false"/>
 
         <TextView
             android:id="@+id/miniLabel"

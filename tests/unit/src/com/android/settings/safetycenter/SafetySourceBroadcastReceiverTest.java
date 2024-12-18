@@ -247,7 +247,8 @@ public class SafetySourceBroadcastReceiverTest {
     @Test
     public void onReceive_onRefresh_withPrivateSpaceFeatureDisabled_setsNullData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
-        mSetFlagsRule.disableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.disableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         Intent intent =
                 new Intent()

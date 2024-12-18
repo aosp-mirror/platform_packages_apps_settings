@@ -24,6 +24,7 @@ import com.android.settings.homepage.contextualcards.ContextualCardLookupTable.C
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
+@Ignore("b/337417898")
 public class ContextualCardLookupTableTest {
 
     private static final int UNSUPPORTED_CARD_TYPE = -99999;

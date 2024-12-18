@@ -43,8 +43,11 @@ class BatteryChartViewModel {
         /** Generates the label text. The text may be abbreviated to save space. */
         String generateText(List<Long> timestamps, int index);
 
-        /** Generates the full text for accessibility. */
+        /** Generates the full text for slot information. */
         String generateFullText(List<Long> timestamps, int index);
+
+        /** Generates the full text for accessibility. */
+        String generateContentDescription(List<Long> timestamps, int index);
 
         /** Generates the battery level text of a slot for accessibility.*/
         String generateSlotBatteryLevelText(List<Integer> levels, int index);
@@ -56,6 +59,7 @@ class BatteryChartViewModel {
     private final LabelTextGenerator mLabelTextGenerator;
     private final String[] mTexts;
     private final String[] mFullTexts;
+    private final String[] mContentDescription;
     private final String[] mBatteryLevelTexts;
 
     private int mSelectedIndex = SELECTED_INDEX_ALL;
@@ -79,6 +83,7 @@ class BatteryChartViewModel {
         mLabelTextGenerator = labelTextGenerator;
         mTexts = new String[size()];
         mFullTexts = new String[size()];
+        mContentDescription = new String[size()];
         // Last one for SELECTED_INDEX_ALL
         mBatteryLevelTexts = new String[size() + 1];
     }
@@ -103,6 +108,14 @@ class BatteryChartViewModel {
             mFullTexts[index] = mLabelTextGenerator.generateFullText(mTimestamps, index);
         }
         return mFullTexts[index];
+    }
+
+    public String getContentDescription(int index) {
+        if (mContentDescription[index] == null) {
+            mContentDescription[index] =
+                    mLabelTextGenerator.generateContentDescription(mTimestamps, index);
+        }
+        return mContentDescription[index];
     }
 
     public String getSlotBatteryLevelText(int index) {

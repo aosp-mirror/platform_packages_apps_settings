@@ -42,7 +42,8 @@ public abstract class AbnormalRingerConditionController implements ConditionalCa
 
     @Override
     public void onPrimaryClick(Context context) {
-        context.startActivity(new Intent(Settings.ACTION_SOUND_SETTINGS));
+        context.startActivity(new Intent(Settings.ACTION_SOUND_SETTINGS)
+                .setPackage(context.getPackageName()));
     }
 
     @Override

@@ -44,6 +44,7 @@ import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.datausage.lib.DataUsageFormatter;
 import com.android.settings.datausage.lib.NetworkTemplates;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.MobileNetworkUtils;
@@ -322,8 +323,8 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
                     : editor.getPolicyWarningBytes(template);
 
             final String[] unitNames = new String[] {
-                    DataUsageFormatter.INSTANCE.getBytesDisplayUnit(getResources(), MIB_IN_BYTES),
-                    DataUsageFormatter.INSTANCE.getBytesDisplayUnit(getResources(), GIB_IN_BYTES),
+                    DataUsageFormatter.Companion.getBytesDisplayUnit(getResources(), MIB_IN_BYTES),
+                    DataUsageFormatter.Companion.getBytesDisplayUnit(getResources(), GIB_IN_BYTES),
             };
             final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                     getContext(), android.R.layout.simple_spinner_item, unitNames);

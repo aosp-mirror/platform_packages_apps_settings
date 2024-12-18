@@ -19,6 +19,7 @@ package com.android.settings.biometrics;
 import static android.provider.Settings.ACTION_BIOMETRIC_ENROLL;
 import static android.provider.Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED;
 
+import static com.android.settings.biometrics.BiometricEnrollBase.BIOMETRIC_AUTH_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_CONSENT_DENIED;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_CONSENT_GRANTED;
 
@@ -51,11 +52,13 @@ import com.android.internal.util.FrameworkStatsLog;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockPattern;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.transition.TransitionHelper;
@@ -86,6 +89,10 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     // Intent extra. If true, biometric enrollment should skip introductory screens. Currently
     // this only applies to fingerprint.
     public static final String EXTRA_SKIP_INTRO = "skip_intro";
+
+    // Intent extra. If true, support fingerprint enrollment only and skip other biometric
+    // enrollment methods like face unlock.
+    public static final String EXTRA_FINGERPRINT_ENROLLMENT_ONLY = "fingerprint_enrollment_only";
 
     // Intent extra. If true, parental consent will be requested before user enrollment.
     public static final String EXTRA_REQUIRE_PARENTAL_CONSENT = "require_consent";
@@ -194,7 +201,8 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
 
         final PackageManager pm = getApplicationContext().getPackageManager();
         mHasFeatureFingerprint = pm.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT);
-        mHasFeatureFace = pm.hasSystemFeature(PackageManager.FEATURE_FACE);
+        mHasFeatureFace = pm.hasSystemFeature(PackageManager.FEATURE_FACE)
+                && !(intent.getBooleanExtra(EXTRA_FINGERPRINT_ENROLLMENT_ONLY, false));
 
         // Default behavior is to enroll BIOMETRIC_WEAK or above. See ACTION_BIOMETRIC_ENROLL.
         final int authenticators = getIntent().getIntExtra(
@@ -437,6 +445,18 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                     if (!mParentalConsentHelper.launchNext(this, REQUEST_CHOOSE_OPTIONS)) {
                         Log.e(TAG, "Nothing to prompt for consent (no modalities enabled)!");
                         finish();
+                    } else {
+                        final Utils.BiometricStatus biometricStatus =
+                                Utils.requestBiometricAuthenticationForMandatoryBiometrics(this,
+                                        false /* biometricsAuthenticationRequested */, mUserId);
+                        if (biometricStatus == Utils.BiometricStatus.OK) {
+                            Utils.launchBiometricPromptForMandatoryBiometrics(this,
+                                    BIOMETRIC_AUTH_REQUEST, mUserId, true /* hideBackground */);
+                        } else if (biometricStatus != Utils.BiometricStatus.NOT_ACTIVE) {
+                            IdentityCheckBiometricErrorDialog
+                                    .showBiometricErrorDialogAndFinishActivityOnDismiss(this,
+                                            biometricStatus);
+                        }
                     }
                 } else {
                     Log.d(TAG, "Unknown result for set/choose lock: " + resultCode);
@@ -468,6 +488,14 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                     finish();
                 }
                 break;
+            case BIOMETRIC_AUTH_REQUEST:
+                if (resultCode == ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT) {
+                    IdentityCheckBiometricErrorDialog
+                            .showBiometricErrorDialogAndFinishActivityOnDismiss(this,
+                                    Utils.BiometricStatus.LOCKOUT);
+                } else if (resultCode != RESULT_OK) {
+                    finish();
+                }
             default:
                 Log.w(TAG, "Unknown consenting requestCode: " + requestCode + ", finishing");
                 finish();

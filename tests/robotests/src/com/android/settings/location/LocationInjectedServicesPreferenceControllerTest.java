@@ -31,8 +31,10 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.util.ArrayMap;
+import android.util.ArraySet;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
@@ -50,6 +52,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
@@ -65,6 +68,8 @@ import java.util.Map;
 public class LocationInjectedServicesPreferenceControllerTest {
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private static final String KEY_LOCATION_SERVICES = "location_service";
 
@@ -140,8 +145,13 @@ public class LocationInjectedServicesPreferenceControllerTest {
         when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(componentName);
 
         mController.displayPreference(mScreen);
+
+        ArgumentCaptor<ArraySet<UserHandle>> profilesArgumentCaptor =
+                ArgumentCaptor.forClass(ArraySet.class);
         verify(mSettingsInjector).getInjectedSettings(
-                any(Context.class), eq(UserHandle.myUserId()));
+                any(Context.class), profilesArgumentCaptor.capture());
+        assertThat(profilesArgumentCaptor.getValue())
+                .doesNotContain(UserHandle.of(fakeWorkProfileId));
     }
 
     @Test
@@ -149,6 +159,9 @@ public class LocationInjectedServicesPreferenceControllerTest {
         final int fakeWorkProfileId = 123;
         ShadowUserManager.getShadow().setProfileIdsWithDisabled(
                 new int[]{UserHandle.myUserId(), fakeWorkProfileId});
+        ShadowUserManager.getShadow().addProfile(new UserInfo(UserHandle.myUserId(), "", 0));
+        ShadowUserManager.getShadow().addProfile(new UserInfo(fakeWorkProfileId, "",
+                UserInfo.FLAG_MANAGED_PROFILE | UserInfo.FLAG_PROFILE));
 
         // Mock RestrictedLockUtils.checkIfRestrictionEnforced and let it return null.
         // Empty enforcing users.
@@ -159,8 +172,77 @@ public class LocationInjectedServicesPreferenceControllerTest {
                 enforcingUsers);
 
         mController.displayPreference(mScreen);
+
+        ArgumentCaptor<ArraySet<UserHandle>> profilesArgumentCaptor =
+                ArgumentCaptor.forClass(ArraySet.class);
         verify(mSettingsInjector).getInjectedSettings(
-                any(Context.class), eq(UserHandle.USER_CURRENT));
+                any(Context.class), profilesArgumentCaptor.capture());
+        assertThat(profilesArgumentCaptor.getValue()).contains(UserHandle.of(fakeWorkProfileId));
+    }
+
+    @Test
+    public void privateProfileDisallowShareLocationOn_getParentUserLocationServicesOnly() {
+        mSetFlagsRule.enableFlags(
+                android.os.Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES,
+                android.multiuser.Flags.FLAG_HANDLE_INTERLEAVED_SETTINGS_FOR_PRIVATE_SPACE);
+        final int fakePrivateProfileId = 123;
+        ShadowUserManager.getShadow().setProfileIdsWithDisabled(
+                new int[]{UserHandle.myUserId(), fakePrivateProfileId});
+        ShadowUserManager.getShadow().addProfile(new UserInfo(UserHandle.myUserId(), "", 0));
+        ShadowUserManager.getShadow().setPrivateProfile(fakePrivateProfileId, "private", 0);
+        ShadowUserManager.getShadow().addUserProfile(UserHandle.of(fakePrivateProfileId));
+
+        // Mock RestrictedLockUtils.checkIfRestrictionEnforced and let it return non-null.
+        final List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
+        enforcingUsers.add(new UserManager.EnforcingUser(fakePrivateProfileId,
+                UserManager.RESTRICTION_SOURCE_DEVICE_OWNER));
+        final ComponentName componentName = new ComponentName("test", "test");
+        // Ensure that RestrictedLockUtils.checkIfRestrictionEnforced doesn't return null.
+        ShadowUserManager.getShadow().setUserRestrictionSources(
+                UserManager.DISALLOW_SHARE_LOCATION,
+                UserHandle.of(fakePrivateProfileId),
+                enforcingUsers);
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(componentName);
+
+        mController.displayPreference(mScreen);
+
+        ArgumentCaptor<ArraySet<UserHandle>> profilesArgumentCaptor =
+                ArgumentCaptor.forClass(ArraySet.class);
+        verify(mSettingsInjector).getInjectedSettings(
+                any(Context.class), profilesArgumentCaptor.capture());
+        assertThat(profilesArgumentCaptor.getValue())
+                .doesNotContain(UserHandle.of(fakePrivateProfileId));
+    }
+
+    @Test
+    public void privateProfileDisallowShareLocationOff_getAllUserLocationServices() {
+        mSetFlagsRule.enableFlags(
+                android.os.Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES,
+                android.multiuser.Flags.FLAG_HANDLE_INTERLEAVED_SETTINGS_FOR_PRIVATE_SPACE);
+        final int fakePrivateProfileId = 123;
+        ShadowUserManager.getShadow().setProfileIdsWithDisabled(
+                new int[]{UserHandle.myUserId(), fakePrivateProfileId});
+        ShadowUserManager.getShadow().addProfile(new UserInfo(UserHandle.myUserId(), "", 0));
+        ShadowUserManager.getShadow().setPrivateProfile(fakePrivateProfileId, "private", 0);
+        ShadowUserManager.getShadow().addUserProfile(UserHandle.of(fakePrivateProfileId));
+
+        // Mock RestrictedLockUtils.checkIfRestrictionEnforced and let it return null.
+        // Empty enforcing users.
+        final List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
+        ShadowUserManager.getShadow().setUserRestrictionSources(
+                UserManager.DISALLOW_SHARE_LOCATION,
+                UserHandle.of(fakePrivateProfileId),
+                enforcingUsers);
+
+        mController.displayPreference(mScreen);
+
+        ArgumentCaptor<ArraySet<UserHandle>> profilesArgumentCaptor =
+                ArgumentCaptor.forClass(ArraySet.class);
+        verify(mSettingsInjector).getInjectedSettings(
+                any(Context.class), profilesArgumentCaptor.capture());
+        assertThat(profilesArgumentCaptor.getValue()).contains(UserHandle.of(fakePrivateProfileId));
     }
 
     @Test
@@ -180,7 +262,7 @@ public class LocationInjectedServicesPreferenceControllerTest {
         final Map<Integer, List<Preference>> map = new ArrayMap<>();
         map.put(UserHandle.myUserId(), preferences);
         doReturn(map).when(mSettingsInjector)
-                .getInjectedSettings(any(Context.class), anyInt());
+                .getInjectedSettings(any(Context.class), any(ArraySet.class));
         ShadowUserManager.getShadow().setProfileIdsWithDisabled(new int[]{UserHandle.myUserId()});
 
         final int userId = UserHandle.myUserId();

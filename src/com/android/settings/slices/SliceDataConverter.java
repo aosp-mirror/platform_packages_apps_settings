@@ -274,6 +274,12 @@ class SliceDataConverter {
             final ServiceInfo serviceInfo = resolveInfo.serviceInfo;
             final String packageName = serviceInfo.packageName;
             final ComponentName componentName = new ComponentName(packageName, serviceInfo.name);
+
+            // If we change the flattenedName that is used to be set as a key of the Slice, we
+            // need to make corresponding change in SliceBuilderUtils, since we rely on the
+            // the A11y Service Slice's key to be a ComponentName to get the correct package name
+            // to grab the icon belongs to that package.
+            // LINT.IfChange
             final String flattenedName = componentName.flattenToString();
 
             if (!a11yServiceNames.contains(flattenedName)) {
@@ -287,6 +293,7 @@ class SliceDataConverter {
             }
 
             sliceDataBuilder.setKey(flattenedName)
+                    // LINT.ThenChange(SliceBuilderUtils.java:createA11yIcon)
                     .setTitle(title)
                     .setUri(new Uri.Builder()
                             .scheme(ContentResolver.SCHEME_CONTENT)

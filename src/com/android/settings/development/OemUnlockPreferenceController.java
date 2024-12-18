@@ -21,6 +21,7 @@ import static com.android.settings.development.DevelopmentOptionsActivityRequest
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.SystemProperties;
 import android.os.UserHandle;
@@ -30,6 +31,7 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -53,11 +55,11 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
     private final UserManager mUserManager;
     private final TelephonyManager mTelephonyManager;
     private final Activity mActivity;
-    private final DevelopmentSettingsDashboardFragment mFragment;
+    @Nullable private final DevelopmentSettingsDashboardFragment mFragment;
     private RestrictedSwitchPreference mPreference;
 
     public OemUnlockPreferenceController(Context context, Activity activity,
-            DevelopmentSettingsDashboardFragment fragment) {
+            @Nullable DevelopmentSettingsDashboardFragment fragment) {
         super(context);
 
         if (!TextUtils.equals(SystemProperties.get(OEM_UNLOCK_SUPPORTED_KEY, UNSUPPORTED),
@@ -176,6 +178,13 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
 
     /** Returns {@code true} if the device is SIM-locked. Otherwise, returns {@code false}. */
     private boolean isSimLockedDevice() {
+        if (!mContext.getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_TELEPHONY_CARRIERLOCK)) {
+            Log.w(TAG,
+                    "getAllowedCarriers is unsupported without "
+                            + "PackageManager#FEATURE_TELEPHONY_CARRIERLOCK");
+            return false;
+        }
         int phoneCount = mTelephonyManager.getPhoneCount();
         for (int i = 0; i < phoneCount; i++) {
             if (mTelephonyManager.getAllowedCarriers(i).size() > 0) {

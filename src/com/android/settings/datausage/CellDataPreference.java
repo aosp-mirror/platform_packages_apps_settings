@@ -152,8 +152,7 @@ public class CellDataPreference extends CustomDialogPreferenceCompat
     }
 
     private void setMobileDataEnabled(boolean enabled) {
-        if (DataUsageSummary.LOGD) Log.d(TAG, "setMobileDataEnabled(" + enabled + ","
-                + mSubId + ")");
+        Log.d(TAG, "setDataEnabledForReason (" + enabled + "," + mSubId + ")");
         getContext().getSystemService(TelephonyManager.class).setDataEnabled(mSubId, enabled);
         setChecked(enabled);
     }

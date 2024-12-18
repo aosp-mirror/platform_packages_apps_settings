@@ -93,8 +93,7 @@ fun HibernationSwitchPreference(
 }
 
 private fun isArchivingEnabled() =
-        PmFlags.archiving() || SystemProperties.getBoolean("pm.archiving.enabled", false)
-                || Flags.appArchiving()
+        PmFlags.archiving() || Flags.appArchiving()
 
 private class HibernationSwitchPresenter(context: Context, private val app: ApplicationInfo) {
     private val appOpsManager = context.appOpsManager

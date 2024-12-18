@@ -167,6 +167,16 @@ public class BaseSearchIndexProviderTest {
             }
 
             @Override
+            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
+                List<SearchIndexableRaw> rawData = super.getRawDataToIndex(context, enabled);
+                SearchIndexableRaw raw = new SearchIndexableRaw(context);
+                raw.key = TEST_PREF_KEY;
+                raw.title = "title";
+                rawData.add(raw);
+                return rawData;
+            }
+
+            @Override
             protected boolean isPageSearchEnabled(Context context) {
                 return false;
             }
@@ -176,6 +186,7 @@ public class BaseSearchIndexProviderTest {
             provider.getNonIndexableKeys(RuntimeEnvironment.application);
 
         assertThat(nonIndexableKeys).contains("status_header");
+        assertThat(nonIndexableKeys).contains(TEST_PREF_KEY);
     }
 
     @Test

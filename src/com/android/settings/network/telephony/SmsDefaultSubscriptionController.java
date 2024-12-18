@@ -35,6 +35,12 @@ public class SmsDefaultSubscriptionController extends DefaultSubscriptionControl
                 .getBoolean(com.android.internal.R.bool.config_sms_ask_every_time_support);
     }
 
+    public SmsDefaultSubscriptionController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
+        mIsAskEverytimeSupported = mContext.getResources()
+                .getBoolean(com.android.internal.R.bool.config_sms_ask_every_time_support);
+    }
+
     @Override
     protected int getDefaultSubscriptionId() {
         int defaultSmsSubId = SubscriptionManager.getDefaultSmsSubscriptionId();

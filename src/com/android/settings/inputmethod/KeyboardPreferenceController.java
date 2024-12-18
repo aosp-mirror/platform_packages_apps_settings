@@ -18,7 +18,6 @@ package com.android.settings.inputmethod;
 
 import android.content.Context;
 import android.hardware.input.InputManager;
-import android.util.FeatureFlagUtils;
 
 import androidx.preference.Preference;
 
@@ -78,9 +77,7 @@ public class KeyboardPreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI)
-                ? AVAILABLE
-                : CONDITIONALLY_UNAVAILABLE;
+        return AVAILABLE;
     }
 
     private void updateSummary() {

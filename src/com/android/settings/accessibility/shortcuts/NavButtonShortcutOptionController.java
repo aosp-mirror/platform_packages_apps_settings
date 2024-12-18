@@ -47,7 +47,8 @@ public class NavButtonShortcutOptionController extends SoftwareShortcutOptionPre
         if (preference instanceof ShortcutOptionPreference shortcutOptionPreference) {
             shortcutOptionPreference.setTitle(
                     R.string.accessibility_shortcut_edit_dialog_title_software);
-            shortcutOptionPreference.setIntroImageResId(R.drawable.a11y_shortcut_type_software);
+            shortcutOptionPreference.setIntroImageResId(
+                    R.drawable.accessibility_shortcut_type_navbar);
             shortcutOptionPreference.setSummaryProvider(
                     new Preference.SummaryProvider<ShortcutOptionPreference>() {
                         @Override

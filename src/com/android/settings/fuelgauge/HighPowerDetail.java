@@ -142,9 +142,9 @@ public class HighPowerDetail extends InstrumentedDialogFragment
                 if (newValue) {
                     mBatteryUtils.setForceAppStandby(
                             mPackageUid, mPackageName, AppOpsManager.MODE_ALLOWED);
-                    mBackend.addApp(mPackageName);
+                    mBackend.addApp(mPackageName, mPackageUid);
                 } else {
-                    mBackend.removeApp(mPackageName);
+                    mBackend.removeApp(mPackageName, mPackageUid);
                 }
             }
         }

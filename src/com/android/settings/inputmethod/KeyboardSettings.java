@@ -23,7 +23,6 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROF
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.FeatureFlagUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -111,11 +110,5 @@ public class KeyboardSettings extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.keyboard_settings) {
-                @Override
-                protected boolean isPageSearchEnabled(Context context) {
-                    return FeatureFlagUtils
-                            .isEnabled(context, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_UI);
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.keyboard_settings);
 }

@@ -77,6 +77,13 @@
     <item msgid="6556827947082659801">"ലഭ്യം"</item>
     <item msgid="6096962300722555553">"പരിധിക്കു പുറത്ത്"</item>
   </string-array>
+  <string-array name="bt_stack_log_level_entries">
+    <item msgid="7872226620825638673">"വെർ‌ബോസ്"</item>
+    <item msgid="4414817955073540319">"ഡീബഗ് ചെയ്യൽ"</item>
+    <item msgid="9152250562693119681">"വിവരങ്ങൾ"</item>
+    <item msgid="8884807223431437262">"മുന്നറിയിപ്പ് നൽകുക"</item>
+    <item msgid="1154843682335941096">"പിശക്"</item>
+  </string-array>
   <string-array name="bluetooth_leaudio_mode">
     <item msgid="5307106570247137458">"Disabled"</item>
     <item msgid="7781484297606806796">"Unicast"</item>
@@ -409,8 +416,12 @@
     <item msgid="2047166446768045816">"മീറ്റർ ചെയ്യാത്തതായി കണക്കാക്കുക"</item>
   </string-array>
   <string-array name="wifi_privacy_entries">
-    <item msgid="3485945604919292489">"ക്രമരഹിതമാക്കിയ MAC (ഡിഫോൾട്ട്)"</item>
+    <item msgid="91222619458919148">"ക്രമരഹിതമാക്കിയ MAC ഉപയോഗിക്കുക"</item>
     <item msgid="741680937828608749">"ഉപകരണ MAC ഉപയോഗിക്കുക"</item>
+  </string-array>
+  <string-array name="wifi_dhcp_entries">
+    <item msgid="2532836996945493932">"നെറ്റ്‌വർക്കിലേക്ക് ഉപകരണത്തിന്റെ പേര് അയയ്ക്കുക"</item>
+    <item msgid="7928900271137707489">"നെറ്റ്‌വർക്കിലേക്ക് ഉപകരണത്തിന്റെ പേര് അയയ്ക്കരുത്"</item>
   </string-array>
   <string-array name="wifi_hidden_entries">
     <item msgid="342232116597649254">"ഇല്ല"</item>
@@ -484,10 +495,51 @@
     <item msgid="7025253383416830453">"ഒരു മിനിറ്റിന് ശേഷം"</item>
     <item msgid="1574040255478150028">"5 മിനിറ്റിന് ശേഷം"</item>
   </string-array>
-    <!-- no translation found for notification_polite_options:0 (4617190141263245257) -->
-    <!-- no translation found for notification_polite_options:1 (3884076684767467743) -->
-    <!-- no translation found for notification_polite_options:2 (8765197536079931966) -->
     <!-- no translation found for private_space_auto_lock_options:0 (551584871228110817) -->
     <!-- no translation found for private_space_auto_lock_options:1 (3263162333754809690) -->
     <!-- no translation found for private_space_auto_lock_options:2 (1575103586471380629) -->
+  <string-array name="zen_mode_icon_options_descriptions">
+    <item msgid="1216815120972438676">"ബ്രീഫ്കെയ്‌സ്"</item>
+    <item msgid="184985872234062767">"ക്ലാസിക്കൽ ബില്‍ഡിംഗ്"</item>
+    <item msgid="9189550412466785530">"അപ്പാർട്ട്മെന്റ് ബിൽഡിംഗ്"</item>
+    <item msgid="2142527562511049422">"സ്പീച്ച് ബബിൾ"</item>
+    <item msgid="2548100558260478605">"ആളുകളുടെ കൂട്ടം"</item>
+    <item msgid="2270003903304578284">"ലൈറ്റ്ബൾബ്"</item>
+    <item msgid="4793496619091161864">"കലണ്ടർ"</item>
+    <item msgid="5673625795644364100">"ശല്യപ്പെടുത്തരുത്"</item>
+    <item msgid="1423820834865831361">"ഓടുന്ന വ്യക്തി"</item>
+    <item msgid="2037298830718732608">"ഗോൾഫ്"</item>
+    <item msgid="2197835014443491074">"ജിം ഡംബെൽ"</item>
+    <item msgid="2730180105015616518">"നീന്തൽ"</item>
+    <item msgid="2666922823253345958">"ഹൈക്ക് ചെയ്യുന്ന വ്യക്തി"</item>
+    <item msgid="8234880356472211396">"പന്ത് എറിയുന്ന വ്യക്തി"</item>
+    <item msgid="4642980625253001443">"കിക്ക് ചെയ്യുന്ന വ്യക്തി"</item>
+    <item msgid="4324795269518833500">"ഗെയിം കൺട്രോളർ"</item>
+    <item msgid="7789966425125441125">"ആർട്ടിസ്റ്റിന്റെ വർണ്ണ പാലെറ്റ്"</item>
+    <item msgid="663512680597461570">"മഞ്ഞുകട്ട"</item>
+    <item msgid="7952183800501346803">"ബീച്ച് കുട"</item>
+    <item msgid="799139025758265891">"വർക്ക്‌ഷോപ്പ് ടൂളുകൾ"</item>
+    <item msgid="1330084588359129896">"ടെന്റ്"</item>
+    <item msgid="3861584909935022342">"ഫിലിം റീൽ"</item>
+    <item msgid="5827426100157335512">"പുസ്‌തകം"</item>
+    <item msgid="8585828346253128384">"താമരപ്പൂവ്"</item>
+    <item msgid="8788370542815300188">"മനസ്സ്"</item>
+    <item msgid="7287354964767553293">"ഹെഡ്‌ഫോണുകൾ"</item>
+    <item msgid="2530059623783800987">"ടിവി"</item>
+    <item msgid="5307182323469376758">"ട്രെയിൻ"</item>
+    <item msgid="4903790544026923026">"കാർ"</item>
+    <item msgid="5010405583912314582">"ഫോർക്കും കത്തിയും"</item>
+    <item msgid="8939998598599064900">"ഷോപ്പിംഗ് കാർട്ട്"</item>
+    <item msgid="3379605903308731893">"കുട്ടി"</item>
+    <item msgid="7808668968550293112">"മൃഗത്തിന്റെ കാൽപ്പാദം"</item>
+    <item msgid="1000692647524056504">"സ്റ്റാർ ബാഡ്‌ജ്"</item>
+    <item msgid="8270261073421676502">"രണ്ട് പേർ"</item>
+    <item msgid="5767782819651505460">"നക്ഷത്രം"</item>
+    <item msgid="4368451291862729334">"ഹൃദയം"</item>
+    <item msgid="2613199102208419986">"വീട്"</item>
+    <item msgid="3022279986430275040">"അർദ്ധ ചന്ദ്രൻ"</item>
+    <item msgid="5421089790869483206">"ക്ലോക്ക്"</item>
+  </string-array>
+  <string-array name="display_over_apps_permission_change_exempt">
+  </string-array>
 </resources>

@@ -21,7 +21,10 @@ package com.android.settings.panel;
  * <p>
  *    Constants should only be removed if underlying panel, or use case is removed.
  * </p>
+ *
+ * @deprecated this is no longer used after V and will be removed.
  */
+@Deprecated(forRemoval = true)
 public class PanelLoggingContract {
 
     /**

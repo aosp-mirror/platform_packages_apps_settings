@@ -40,7 +40,7 @@ public class BackAnimationPreferenceController extends DeveloperOptionsPreferenc
 
     private static final int SETTING_VALUE_OFF = 0;
     private static final int SETTING_VALUE_ON = 1;
-    private final DevelopmentSettingsDashboardFragment mFragment;
+    @Nullable private final DevelopmentSettingsDashboardFragment mFragment;
 
     @VisibleForTesting
     BackAnimationPreferenceController(Context context) {

@@ -95,7 +95,7 @@ class FingerprintSettingsRenameDialog : InstrumentedDialogFragment() {
   }
 
   override fun getMetricsCategory(): Int {
-    return SettingsEnums.DIALOG_FINGERPINT_EDIT
+    return SettingsEnums.DIALOG_FINGERPRINT_RENAME
   }
 
   companion object {

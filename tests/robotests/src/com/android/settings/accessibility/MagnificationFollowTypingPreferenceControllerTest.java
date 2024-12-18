@@ -17,10 +17,12 @@
 package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
-import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -56,38 +58,24 @@ public class MagnificationFollowTypingPreferenceControllerTest {
         mSwitchPreference.setKey(MagnificationFollowTypingPreferenceController.PREF_KEY);
         screen.addPreference(mSwitchPreference);
         mController.displayPreference(screen);
+
+        mController.updateState(mSwitchPreference);
+        reset(mSwitchPreference);
     }
 
     @Test
-    public void isChecked_defaultStateForFollowTyping_onResumeShouldReturnTrue() {
-        mController.onResume();
-
-        assertThat(mController.isChecked()).isTrue();
-        assertThat(mSwitchPreference.isChecked()).isTrue();
+    public void getAvailableStatus_notInSetupWizard_returnAvailable() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    public void isChecked_enableFollowTyping_onResumeShouldReturnTrue() {
-        Settings.Secure.putInt(mContext.getContentResolver(), KEY_FOLLOW_TYPING, ON);
-        mController.onResume();
-
-        assertThat(mController.isChecked()).isTrue();
-        assertThat(mSwitchPreference.isChecked()).isTrue();
-    }
-
-    @Test
-    public void isChecked_disableFollowTyping_onResumeShouldReturnFalse() {
-        Settings.Secure.putInt(mContext.getContentResolver(), KEY_FOLLOW_TYPING, OFF);
-        mController.onResume();
-
-        assertThat(mController.isChecked()).isFalse();
-        assertThat(mSwitchPreference.isChecked()).isFalse();
+    public void getAvailableStatus_inSetupWizard_returnConditionallyUnavailable() {
+        mController.setInSetupWizard(true);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
     public void performClick_switchDefaultStateForFollowTyping_shouldReturnFalse() {
-        mController.onResume();
-
         mSwitchPreference.performClick();
 
         verify(mSwitchPreference).setChecked(false);
@@ -99,7 +87,7 @@ public class MagnificationFollowTypingPreferenceControllerTest {
     public void updateState_disableFollowTyping_shouldReturnFalse() {
         Settings.Secure.putInt(mContext.getContentResolver(), KEY_FOLLOW_TYPING, OFF);
 
-        mController.updateState();
+        mController.updateState(mSwitchPreference);
 
         verify(mSwitchPreference).setChecked(false);
         assertThat(mController.isChecked()).isFalse();

@@ -20,38 +20,71 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import android.content.Context;
+import android.database.ContentObserver;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
-import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 /**
  * Controller that accesses and switches the preference status of the magnification always on
  * feature, where the magnifier will not deactivate on Activity transitions; it will only zoom out
  * to 100%.
  */
-public class MagnificationAlwaysOnPreferenceController extends TogglePreferenceController
-        implements LifecycleObserver {
+public class MagnificationAlwaysOnPreferenceController extends
+        MagnificationFeaturePreferenceController implements LifecycleObserver, OnResume, OnPause {
 
     private static final String TAG =
             MagnificationAlwaysOnPreferenceController.class.getSimpleName();
     static final String PREF_KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_ALWAYS_ON_ENABLED;
 
-    private TwoStatePreference mSwitchPreference;
+    private Preference mPreference;
+
+    @VisibleForTesting
+    final ContentObserver mContentObserver = new ContentObserver(
+            new Handler(Looper.getMainLooper())) {
+        @Override
+        public void onChange(boolean selfChange, @Nullable Uri uri) {
+            updateState(mPreference);
+        }
+    };
 
     public MagnificationAlwaysOnPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
     @Override
+    public void onResume() {
+        MagnificationCapabilities.registerObserver(mContext, mContentObserver);
+    }
+
+    @Override
+    public void onPause() {
+        MagnificationCapabilities.unregisterObserver(mContext, mContentObserver);
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+        updateState(mPreference);
+    }
+
+    @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return isInSetupWizard() ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
     }
 
     @Override
@@ -73,22 +106,24 @@ public class MagnificationAlwaysOnPreferenceController extends TogglePreferenceC
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mSwitchPreference = screen.findPreference(getPreferenceKey());
+    public CharSequence getSummary() {
+        @StringRes int resId = mPreference.isEnabled()
+                ? R.string.accessibility_screen_magnification_always_on_summary
+                : R.string.accessibility_screen_magnification_always_on_unavailable_summary;
+        return mContext.getString(resId);
     }
 
-    // TODO(b/186731461): Remove it when this controller is used in DashBoardFragment only.
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    void onResume() {
-        updateState();
-    }
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
 
-    /**
-     * Updates the state of preference components which has been displayed by
-     * {@link MagnificationAlwaysOnPreferenceController#displayPreference}.
-     */
-    void updateState() {
-        updateState(mSwitchPreference);
+        if (preference == null) {
+            return;
+        }
+        @MagnificationMode int mode =
+                MagnificationCapabilities.getCapabilities(mContext);
+        preference.setEnabled(
+                mode == MagnificationMode.FULLSCREEN || mode == MagnificationMode.ALL);
+        refreshSummary(preference);
     }
 }

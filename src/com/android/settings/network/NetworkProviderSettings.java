@@ -19,6 +19,8 @@ package com.android.settings.network;
 import static android.net.wifi.WifiConfiguration.NetworkSelectionStatus.NETWORK_SELECTION_ENABLED;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
+import static com.android.wifitrackerlib.WifiEntry.CONNECTED_STATE_CONNECTED;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
@@ -36,6 +38,7 @@ import android.os.PowerManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.EventLog;
@@ -99,17 +102,12 @@ import java.util.Optional;
 
 /**
  * UI for Mobile network and Wi-Fi network settings.
- *
- * TODO(b/167474581): Define the intent android.settings.NETWORK_PROVIDER_SETTINGS in Settings.java.
  */
 @SearchIndexable
 public class NetworkProviderSettings extends RestrictedSettingsFragment
         implements Indexable, WifiPickerTracker.WifiPickerTrackerCallback,
         WifiDialog2.WifiDialog2Listener, DialogInterface.OnDismissListener,
         AirplaneModeEnabler.OnAirplaneModeChangedListener, InternetUpdater.InternetChangeListener {
-
-    public static final String ACTION_NETWORK_PROVIDER_SETTINGS =
-            "android.settings.NETWORK_PROVIDER_SETTINGS";
 
     private static final String TAG = "NetworkProviderSettings";
     // IDs of context menu
@@ -295,6 +293,12 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        final Context context = getContext();
+        if (context != null && !context.getResources().getBoolean(
+                R.bool.config_show_internet_settings)) {
+            finish();
+            return;
+        }
         mAirplaneModeEnabler = new AirplaneModeEnabler(getContext(), this);
 
         // TODO(b/37429702): Add animations and preference comparator back after initial screen is
@@ -369,7 +373,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         mDataUsagePreference = findPreference(PREF_KEY_DATA_USAGE);
         mDataUsagePreference.setVisible(DataUsageUtils.hasWifiRadio(getContext()));
         mDataUsagePreference.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI)
-                        .build(), 0 /*subId*/);
+                        .build(), SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         mResetInternetPreference = findPreference(PREF_KEY_RESET_INTERNET);
         if (mResetInternetPreference != null) {
             mResetInternetPreference.setVisible(false);
@@ -475,10 +479,6 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
         if (intent.hasExtra(EXTRA_START_CONNECT_SSID)) {
             mOpenSsid = intent.getStringExtra(EXTRA_START_CONNECT_SSID);
-        }
-
-        if (mNetworkMobileProviderController != null) {
-            mNetworkMobileProviderController.setWifiPickerTrackerHelper(mWifiPickerTrackerHelper);
         }
 
         requireActivity().addMenuProvider(mMenuProvider);
@@ -671,7 +671,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     void addModifyMenuIfSuitable(ContextMenu menu, WifiEntry wifiEntry) {
         if (mIsAdmin && wifiEntry.isSaved()
-                && wifiEntry.getConnectedState() != WifiEntry.CONNECTED_STATE_CONNECTED) {
+                && wifiEntry.getConnectedState() != CONNECTED_STATE_CONNECTED) {
             menu.add(Menu.NONE, MENU_ID_MODIFY, 0 /* order */, R.string.wifi_modify);
         }
     }
@@ -767,7 +767,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     private void showDialog(WifiEntry wifiEntry, int dialogMode) {
         if (WifiUtils.isNetworkLockedDown(getActivity(), wifiEntry.getWifiConfiguration())
-                && wifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED) {
+                && wifiEntry.getConnectedState() == CONNECTED_STATE_CONNECTED) {
             RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(),
                     RestrictedLockUtilsInternal.getDeviceOwner(getActivity()));
             return;
@@ -1070,6 +1070,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     void launchNetworkDetailsFragment(LongPressWifiEntryPreference pref) {
         final WifiEntry wifiEntry = pref.getWifiEntry();
+        if (!wifiEntry.isSaved() && wifiEntry.getConnectedState() != CONNECTED_STATE_CONNECTED) {
+            Log.w(TAG, "Don't launch Wi-Fi details because WifiEntry is not saved or connected!");
+            return;
+        }
         final Context context = requireContext();
 
         final Bundle bundle = new Bundle();

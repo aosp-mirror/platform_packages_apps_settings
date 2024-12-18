@@ -16,16 +16,19 @@
 
 package com.android.settings.applications.appcompat;
 
+import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_3_2;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_APP_DEFAULT;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_FULLSCREEN;
 import static android.content.pm.PackageManager.USER_MIN_ASPECT_RATIO_UNSET;
 
 import static com.android.settings.applications.AppInfoBase.ARG_PACKAGE_NAME;
+import static com.android.settings.applications.appcompat.UserAspectRatioDetails.KEY_HEADER_BUTTONS;
 import static com.android.settings.applications.appcompat.UserAspectRatioDetails.KEY_PREF_3_2;
 import static com.android.settings.applications.appcompat.UserAspectRatioDetails.KEY_PREF_DEFAULT;
 import static com.android.settings.applications.appcompat.UserAspectRatioDetails.KEY_PREF_FULLSCREEN;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -36,23 +39,26 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.Manifest;
+import android.app.Application;
 import android.app.IActivityManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.os.UserHandle;
 
-import androidx.fragment.app.testing.EmptyFragmentActivity;
 import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
+import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InOrder;
@@ -68,14 +74,14 @@ import org.robolectric.annotation.Config;
 @Config(shadows = {ShadowActivityManager.class, ShadowFragment.class})
 public class UserAspectRatioDetailsTest {
 
-    @Rule
-    public ActivityScenarioRule<EmptyFragmentActivity> rule =
-            new ActivityScenarioRule<>(EmptyFragmentActivity.class);
-
     @Mock
     private UserAspectRatioManager mUserAspectRatioManager;
     @Mock
     private IActivityManager mAm;
+    @Mock
+    private PackageManager mPackageManager;
+    @Mock
+    private SettingsActivity mSettingsActivity;
 
     private RadioWithImagePreference mRadioButtonPref;
     private Context mContext;
@@ -90,12 +96,45 @@ public class UserAspectRatioDetailsTest {
         mFragment = spy(new UserAspectRatioDetails());
         when(mFragment.getContext()).thenReturn(mContext);
         when(mFragment.getAspectRatioManager()).thenReturn(mUserAspectRatioManager);
+        when(mFragment.getActivity()).thenReturn(mSettingsActivity);
+        when(mSettingsActivity.getApplication()).thenReturn((Application) mContext);
+        when(mSettingsActivity.getInitialCallingPackage()).thenReturn("test.package");
+        when(mSettingsActivity.getPackageManager()).thenReturn(mPackageManager);
+        when(mPackageManager.checkPermission(eq(Manifest.permission.INTERACT_ACROSS_USERS_FULL),
+                any())).thenReturn(PackageManager.PERMISSION_GRANTED);
         when(mUserAspectRatioManager.isOverrideToFullscreenEnabled(anyString(), anyInt()))
                 .thenReturn(false);
         ShadowActivityManager.setService(mAm);
         mRadioButtonPref = new RadioWithImagePreference(mContext);
         final FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = featureFactory.metricsFeatureProvider;
+    }
+
+    @Test
+    public void testOrderOfOptionsFollowsConfig() {
+        doReturn(true).when(mUserAspectRatioManager)
+                .hasAspectRatioOption(anyInt(), anyString());
+        doReturn(0).when(mUserAspectRatioManager)
+                .getUserMinAspectRatioOrder(USER_MIN_ASPECT_RATIO_3_2);
+        doReturn(1).when(mUserAspectRatioManager)
+                .getUserMinAspectRatioOrder(USER_MIN_ASPECT_RATIO_FULLSCREEN);
+        doReturn(2).when(mUserAspectRatioManager)
+                .getUserMinAspectRatioOrder(USER_MIN_ASPECT_RATIO_UNSET);
+        final Bundle args = new Bundle();
+        Intent intent = new Intent();
+        intent.putExtra(Intent.EXTRA_USER_HANDLE, new UserHandle(0));
+        args.putParcelable("intent", intent);
+        args.putString(ARG_PACKAGE_NAME, anyString());
+        mFragment.setArguments(args);
+        mFragment.onCreate(Bundle.EMPTY);
+
+        final int topOfList = mFragment.findPreference(KEY_HEADER_BUTTONS).getOrder();
+
+        assertTrue(topOfList < mFragment.findPreference(KEY_PREF_3_2).getOrder());
+        assertTrue(mFragment.findPreference(KEY_PREF_3_2).getOrder()
+                < mFragment.findPreference(KEY_PREF_FULLSCREEN).getOrder());
+        assertTrue(mFragment.findPreference(KEY_PREF_FULLSCREEN).getOrder()
+                < mFragment.findPreference(KEY_PREF_DEFAULT).getOrder());
     }
 
     @Test
@@ -168,8 +207,10 @@ public class UserAspectRatioDetailsTest {
         doReturn(true).when(mUserAspectRatioManager)
                 .hasAspectRatioOption(anyInt(), anyString());
 
-        rule.getScenario().onActivity(a -> doReturn(a).when(mFragment).getActivity());
         final Bundle args = new Bundle();
+        Intent intent = new Intent();
+        intent.putExtra(Intent.EXTRA_USER_HANDLE, new UserHandle(0));
+        args.putParcelable("intent", intent);
         args.putString(ARG_PACKAGE_NAME, anyString());
         mFragment.setArguments(args);
         mFragment.onCreate(Bundle.EMPTY);

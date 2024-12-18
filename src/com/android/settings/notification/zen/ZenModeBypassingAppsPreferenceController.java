@@ -82,7 +82,10 @@ public class ZenModeBypassingAppsPreferenceController extends AbstractZenModePre
             return;
         }
 
-        ApplicationsState.AppFilter filter = ApplicationsState.FILTER_ALL_ENABLED;
+        ApplicationsState.AppFilter filter = android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
+                ? ApplicationsState.FILTER_ENABLED_NOT_QUIET
+                : ApplicationsState.FILTER_ALL_ENABLED;
         List<ApplicationsState.AppEntry> apps = mAppSession.rebuild(filter,
                 ApplicationsState.ALPHA_COMPARATOR);
         updateAppsBypassingDndSummaryText(apps);

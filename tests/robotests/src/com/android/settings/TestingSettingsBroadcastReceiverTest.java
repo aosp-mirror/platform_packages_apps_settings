@@ -18,9 +18,13 @@ package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.telephony.TelephonyManager;
 
 import org.junit.Before;
@@ -29,6 +33,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
+import org.robolectric.shadows.ShadowBuild;
 
 @RunWith(RobolectricTestRunner.class)
 public class TestingSettingsBroadcastReceiverTest {
@@ -77,5 +82,69 @@ public class TestingSettingsBroadcastReceiverTest {
         assertThat(next).isNotNull();
         final String dest = next.getComponent().getClassName();
         assertThat(dest).isEqualTo(Settings.TestingSettingsActivity.class.getName());
+    }
+
+    @Test
+    public void onReceive_disabledForUserBuild_BuildType_User_shouldNotStartActivity() {
+        // TestingSettingsMenu should be disabled if current Build.TYPE is "user" and
+        // 'config_hide_testing_settings_menu_for_user_builds' is true
+        ShadowBuild.setType("user");
+
+        mContext = spy(RuntimeEnvironment.application);
+        setUpConfig(mContext, true /*disable for user build*/);
+
+        final Intent intent = new Intent();
+        intent.setAction(TelephonyManager.ACTION_SECRET_CODE);
+
+        mReceiver.onReceive(mContext, intent);
+
+        final Intent next = Shadows.shadowOf(mApplication).getNextStartedActivity();
+        assertThat(next).isNull();
+    }
+
+    @Test
+    public void onReceive_disabledForUserBuild_BuildType_Userdebug_shouldStartActivity() {
+        // TestingSettingsMenu should not be disabled if current Build.TYPE is "userdebug" and
+        // 'config_hide_testing_settings_menu_for_user_builds' is true
+        ShadowBuild.setType("userdebug");
+
+        mContext = spy(RuntimeEnvironment.application);
+        setUpConfig(mContext, true /*disable for user build*/);
+
+        final Intent intent = new Intent();
+        intent.setAction(TelephonyManager.ACTION_SECRET_CODE);
+
+        mReceiver.onReceive(mContext, intent);
+
+        final Intent next = Shadows.shadowOf(mApplication).getNextStartedActivity();
+        assertThat(next).isNotNull();
+        final String dest = next.getComponent().getClassName();
+        assertThat(dest).isEqualTo(Settings.TestingSettingsActivity.class.getName());
+    }
+
+    @Test
+    public void onReceive_notDisabledForUserBuildType_shouldStartActivity() {
+        // TestingSettingsMenu should not be disabled if
+        // 'config_hide_testing_settings_menu_for_user_builds' is false, regardless of Build.TYPE
+        mContext = spy(RuntimeEnvironment.application);
+        setUpConfig(mContext, false /*disable for user build*/);
+
+        final Intent intent = new Intent();
+        intent.setAction(TelephonyManager.ACTION_SECRET_CODE);
+
+        mReceiver.onReceive(mContext, intent);
+
+        final Intent next = Shadows.shadowOf(mApplication).getNextStartedActivity();
+        assertThat(next).isNotNull();
+        final String dest = next.getComponent().getClassName();
+        assertThat(dest).isEqualTo(Settings.TestingSettingsActivity.class.getName());
+    }
+
+    private static void setUpConfig(Context context, boolean disabledForUserBuild) {
+        when(context.getApplicationContext()).thenReturn(context);
+        Resources spiedResources = spy(context.getResources());
+        when(context.getResources()).thenReturn(spiedResources);
+        when(spiedResources.getBoolean(R.bool.config_hide_testing_settings_menu_for_user_builds))
+                .thenReturn(disabledForUserBuild);
     }
 }

@@ -20,6 +20,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
+import androidx.preference.PreferenceManager;
+
 import com.android.settings.R;
 import com.android.settings.slices.FakePreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -38,10 +40,12 @@ import java.util.List;
 public class PreferenceControllerListHelperTest {
 
     private Context mContext;
+    private PreferenceManager mPreferenceManager;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
+        mPreferenceManager = new PreferenceManager(mContext);
     }
 
     @Test
@@ -66,6 +70,30 @@ public class PreferenceControllerListHelperTest {
 
         assertThat(controllers).hasSize(1);
         assertThat(controllers.get(0)).isInstanceOf(FakePreferenceController.class);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void areAllPreferencesUnavailable_allAvailable() {
+        // All preferences have controllers indicating they are available.
+        assertThat(PreferenceControllerListHelper.areAllPreferencesUnavailable(mContext,
+                mPreferenceManager, R.xml.location_settings)).isFalse();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc997")
+    public void areAllPreferencesUnavailable_allUnavailable() {
+        // All preferences have controllers indicating they are unavailable. (note the qualifier)
+        assertThat(PreferenceControllerListHelper.areAllPreferencesUnavailable(mContext,
+                mPreferenceManager, R.xml.location_settings)).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void areAllPreferencesUnavailable_noControllersShouldAssumeAvailable() {
+        // None of the preferences have controllers, so they are assumed available.
+        assertThat(PreferenceControllerListHelper.areAllPreferencesUnavailable(mContext,
+                mPreferenceManager, R.xml.display_settings)).isFalse();
     }
 
     @Test

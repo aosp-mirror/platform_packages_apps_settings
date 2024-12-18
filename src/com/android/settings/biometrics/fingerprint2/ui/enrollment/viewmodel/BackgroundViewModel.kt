@@ -18,6 +18,8 @@ package com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -39,10 +41,9 @@ class BackgroundViewModel : ViewModel() {
     _background.update { false }
   }
 
-  class BackgroundViewModelFactory : ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-      return BackgroundViewModel() as T
+  companion object {
+    val Factory: ViewModelProvider.Factory = viewModelFactory {
+      initializer { BackgroundViewModel() }
     }
   }
 }

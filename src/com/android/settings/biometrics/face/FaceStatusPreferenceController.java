@@ -42,7 +42,7 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
     @VisibleForTesting
     RestrictedPreference mPreference;
     private PreferenceScreen mPreferenceScreen;
-    private final FaceStatusUtils mFaceStatusUtils;
+    protected final FaceStatusUtils mFaceStatusUtils;
 
     public FaceStatusPreferenceController(Context context) {
         this(context, KEY_FACE_SETTINGS, null /* lifecycle */);

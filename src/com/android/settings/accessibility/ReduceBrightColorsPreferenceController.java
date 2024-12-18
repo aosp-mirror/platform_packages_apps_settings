@@ -29,9 +29,11 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.server.display.feature.flags.Flags;
 import com.android.settings.R;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -88,6 +90,15 @@ public class ReduceBrightColorsPreferenceController
 
     @Override
     public int getAvailabilityStatus() {
+        // Successor to this feature is Even Dimmer
+        // found in display/EvenDimmerPreferenceController
+        // Only allow RBC if even dimmer is not possible on this device
+        if (Flags.evenDimmer() && mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_evenDimmerEnabled)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
+
         return ColorDisplayManager.isReduceBrightColorsAvailable(mContext) ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
@@ -115,9 +126,14 @@ public class ReduceBrightColorsPreferenceController
         mContext.getContentResolver().unregisterContentObserver(mSettingsContentObserver);
     }
 
+    @Nullable
     @Override
     protected ComponentName getTileComponentName() {
-        return REDUCE_BRIGHT_COLORS_TILE_SERVICE_COMPONENT_NAME;
+        // TODO: When clean up the feature flag, change the parent class from
+        // AccessibilityQuickSettingsPrimarySwitchPreferenceController to
+        // TogglePreferenceController
+        return android.view.accessibility.Flags.a11yQsShortcut()
+                ? null : REDUCE_BRIGHT_COLORS_TILE_SERVICE_COMPONENT_NAME;
     }
 
     @Override

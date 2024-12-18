@@ -15,12 +15,17 @@
  */
 package com.android.settings.security;
 
+import static android.view.contentprotection.flags.Flags.manageDevicePolicyEnabled;
+
+import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -40,12 +45,22 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
     static final String KEY_CONTENT_PROTECTION_PREFERENCE = "content_protection_user_consent";
 
     @Nullable private SettingsMainSwitchPreference mSwitchBar;
+
     @Nullable private RestrictedLockUtils.EnforcedAdmin mEnforcedAdmin;
-    private final ContentResolver mContentResolver;
+
+    @NonNull private final ContentResolver mContentResolver;
+
+    @DevicePolicyManager.ContentProtectionPolicy
+    private int mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_DISABLED;
 
     public ContentProtectionTogglePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mContentResolver = context.getContentResolver();
+
+        if (manageDevicePolicyEnabled()) {
+            mEnforcedAdmin = getEnforcedAdmin();
+            mContentProtectionPolicy = getContentProtectionPolicy(getManagedProfile());
+        }
     }
 
     @Override
@@ -56,14 +71,30 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
     @Override
     public boolean isChecked() {
         if (mEnforcedAdmin != null) {
-            // If fully managed device, it should always unchecked
-            return false;
+            if (!manageDevicePolicyEnabled()) {
+                // If fully managed device, it should always unchecked
+                return false;
+            }
+
+            if (mContentProtectionPolicy == DevicePolicyManager.CONTENT_PROTECTION_DISABLED) {
+                return false;
+            }
+            if (mContentProtectionPolicy == DevicePolicyManager.CONTENT_PROTECTION_ENABLED) {
+                return true;
+            }
         }
         return Settings.Global.getInt(mContentResolver, KEY_CONTENT_PROTECTION_PREFERENCE, 0) >= 0;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        if (manageDevicePolicyEnabled()) {
+            if (mEnforcedAdmin != null
+                    && mContentProtectionPolicy
+                            != DevicePolicyManager.CONTENT_PROTECTION_NOT_CONTROLLED_BY_POLICY) {
+                return false;
+            }
+        }
         Settings.Global.putInt(
                 mContentResolver, KEY_CONTENT_PROTECTION_PREFERENCE, isChecked ? 1 : -1);
         return true;
@@ -80,16 +111,20 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
         }
     }
 
-    /**
-     * Temporary workaround for SettingsMainSwitchPreference.setDisabledByAdmin without user
-     * restriction.
-     */
+    // Workaround for SettingsMainSwitchPreference.setDisabledByAdmin without user restriction.
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        // Assign the value to mEnforcedAdmin since it's needed in isChecked()
-        mEnforcedAdmin = getEnforcedAdmin();
-        if (mSwitchBar != null && mEnforcedAdmin != null) {
+
+        if (!manageDevicePolicyEnabled()) {
+            // Assign the value to mEnforcedAdmin since it's needed in isChecked()
+            mEnforcedAdmin = getEnforcedAdmin();
+            mContentProtectionPolicy = DevicePolicyManager.CONTENT_PROTECTION_DISABLED;
+        }
+        if (mSwitchBar != null
+                && mEnforcedAdmin != null
+                && mContentProtectionPolicy
+                        != DevicePolicyManager.CONTENT_PROTECTION_NOT_CONTROLLED_BY_POLICY) {
             mSwitchBar.setDisabledByAdmin(mEnforcedAdmin);
         }
     }
@@ -107,7 +142,20 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
     }
 
     @VisibleForTesting
+    @Nullable
+    protected UserHandle getManagedProfile() {
+        return ContentProtectionPreferenceUtils.getManagedProfile(mContext);
+    }
+
+    @VisibleForTesting
+    @Nullable
     protected RestrictedLockUtils.EnforcedAdmin getEnforcedAdmin() {
         return RestrictedLockUtilsInternal.getDeviceOwner(mContext);
+    }
+
+    @VisibleForTesting
+    @DevicePolicyManager.ContentProtectionPolicy
+    protected int getContentProtectionPolicy(@Nullable UserHandle userHandle) {
+        return ContentProtectionPreferenceUtils.getContentProtectionPolicy(mContext, userHandle);
     }
 }

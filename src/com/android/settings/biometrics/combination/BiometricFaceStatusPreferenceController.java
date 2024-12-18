@@ -15,12 +15,17 @@
  */
 package com.android.settings.biometrics.combination;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 
 import androidx.lifecycle.Lifecycle;
+import androidx.preference.Preference;
 
 import com.android.settings.Utils;
 import com.android.settings.biometrics.face.FaceStatusPreferenceController;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.RestrictedPreference;
 
 /**
  * Preference controller for face settings within the biometrics settings page, that controls the
@@ -35,6 +40,20 @@ public class BiometricFaceStatusPreferenceController extends FaceStatusPreferenc
     public BiometricFaceStatusPreferenceController(
             Context context, String key, Lifecycle lifecycle) {
         super(context, key, lifecycle);
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        final boolean isFaceEnrolled = mFaceStatusUtils.hasEnrolled();
+        final RestrictedLockUtils.EnforcedAdmin admin =
+                RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
+                        mContext, DevicePolicyManager.KEYGUARD_DISABLE_FACE, getUserId());
+        if (admin != null && !isFaceEnrolled) {
+            ((RestrictedPreference) preference).setDisabledByAdmin(admin);
+        } else {
+            preference.setEnabled(true);
+        }
     }
 
     @Override

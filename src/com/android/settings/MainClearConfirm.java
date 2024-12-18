@@ -19,8 +19,6 @@ package com.android.settings;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.FactoryResetProtectionPolicy;
@@ -28,7 +26,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemProperties;
@@ -36,12 +33,10 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.service.oemlock.OemLockManager;
 import android.service.persistentdata.PersistentDataBlockManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -62,7 +57,7 @@ import com.google.android.setupdesign.GlifLayout;
  * has defined one, followed by a final strongly-worded "THIS WILL ERASE EVERYTHING
  * ON THE PHONE" prompt.  If at any time the phone is allowed to go to sleep, is
  * locked, et cetera, then the confirmation sequence is abandoned.
- *
+ * <p>
  * This is the confirmation screen.
  */
 public class MainClearConfirm extends InstrumentedFragment {
@@ -70,9 +65,11 @@ public class MainClearConfirm extends InstrumentedFragment {
 
     private static final String PERSISTENT_DATA_BLOCK_PROP = "ro.frp.pst";
 
-    @VisibleForTesting View mContentView;
+    @VisibleForTesting
+    GlifLayout mContentView;
     private boolean mEraseSdCard;
-    @VisibleForTesting boolean mEraseEsims;
+    @VisibleForTesting
+    boolean mEraseEsims;
 
     /**
      * The user has gone through the multiple confirmation, so now we go ahead
@@ -89,8 +86,7 @@ public class MainClearConfirm extends InstrumentedFragment {
             final PersistentDataBlockManager pdbManager;
             // pre-flight check hardware support PersistentDataBlockManager
             if (!SystemProperties.get(PERSISTENT_DATA_BLOCK_PROP).equals("")) {
-                pdbManager = (PersistentDataBlockManager)
-                    getActivity().getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
+                pdbManager = getActivity().getSystemService(PersistentDataBlockManager.class);
             } else {
                 pdbManager = null;
             }
@@ -151,15 +147,25 @@ public class MainClearConfirm extends InstrumentedFragment {
         if (pdbManager == null) {
             return false;
         }
+
+        // Do not try to erase factory reset protection data if the protection is alive.
+        if (pdbManager.isFactoryResetProtectionActive()) {
+            return false;
+        }
+
         // The persistent data block will persist if the device is still being provisioned.
         if (isDeviceStillBeingProvisioned()) {
             return false;
         }
-        // If OEM unlock is allowed, the persistent data block will be wiped during FR
-        // process. If disabled, it will be wiped here instead.
-        if (isOemUnlockedAllowed()) {
+
+        // If OEM unlock is allowed, the persistent data block will be wiped during the FR
+        // process on devices without FRP Hardening. If disabled, it will be wiped here instead.
+        // On devices with FRP Hardening, the persistent data block should always be wiped,
+        // regardless of the OEM Unlocking state.
+        if (!android.security.Flags.frpEnforcement() && isOemUnlockedAllowed()) {
             return false;
         }
+
         final DevicePolicyManager dpm = (DevicePolicyManager) getActivity()
                 .getSystemService(Context.DEVICE_POLICY_SERVICE);
         // Do not erase the factory reset protection data (from Settings) if factory reset
@@ -167,6 +173,7 @@ public class MainClearConfirm extends InstrumentedFragment {
         if (!dpm.isFactoryResetProtectionPolicySupported()) {
             return false;
         }
+
         // Do not erase the factory reset protection data (from Settings) if the
         // device is an organization-owned managed profile device and a factory
         // reset protection policy has been set.
@@ -175,6 +182,7 @@ public class MainClearConfirm extends InstrumentedFragment {
                 && frpPolicy.isNotEmpty()) {
             return false;
         }
+
         return true;
     }
 
@@ -204,9 +212,7 @@ public class MainClearConfirm extends InstrumentedFragment {
      * Configure the UI for the final confirmation interaction
      */
     private void establishFinalConfirmationState() {
-        final GlifLayout layout = mContentView.findViewById(R.id.setup_wizard_layout);
-
-        final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
+        final FooterBarMixin mixin = mContentView.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getActivity())
                         .setText(R.string.main_clear_button_text)
@@ -215,21 +221,6 @@ public class MainClearConfirm extends InstrumentedFragment {
                         .setTheme(com.google.android.setupdesign.R.style.SudGlifButton_Primary)
                         .build()
         );
-    }
-
-    private void setUpActionBarAndTitle() {
-        final Activity activity = getActivity();
-        if (activity == null) {
-            Log.e(TAG, "No activity attached, skipping setUpActionBarAndTitle");
-            return;
-        }
-        final ActionBar actionBar = activity.getActionBar();
-        if (actionBar == null) {
-            Log.e(TAG, "No actionbar, skipping setUpActionBarAndTitle");
-            return;
-        }
-        actionBar.hide();
-        activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
 
     @Override
@@ -247,32 +238,26 @@ public class MainClearConfirm extends InstrumentedFragment {
                     .show();
             return new View(getActivity());
         }
-        mContentView = inflater.inflate(R.layout.main_clear_confirm, null);
-        setUpActionBarAndTitle();
+        mContentView = (GlifLayout) inflater.inflate(R.layout.main_clear_confirm, null);
         establishFinalConfirmationState();
-        setAccessibilityTitle();
         setSubtitle();
+        setAccessibilityTitle();
         return mContentView;
     }
 
     private void setAccessibilityTitle() {
         CharSequence currentTitle = getActivity().getTitle();
-        TextView confirmationMessage = mContentView.findViewById(R.id.sud_layout_description);
+        CharSequence confirmationMessage = mContentView.getDescriptionText();
         if (confirmationMessage != null) {
-            String accessibleText = new StringBuilder(currentTitle).append(",").append(
-                    confirmationMessage.getText()).toString();
+            String accessibleText = currentTitle + "," + confirmationMessage;
             getActivity().setTitle(Utils.createAccessibleSequence(currentTitle, accessibleText));
         }
     }
 
     @VisibleForTesting
     void setSubtitle() {
-        if (mEraseEsims) {
-            TextView confirmationMessage = mContentView.findViewById(R.id.sud_layout_description);
-            if (confirmationMessage != null) {
-                confirmationMessage.setText(R.string.main_clear_final_desc_esim);
-                }
-        }
+        mContentView.setDescriptionText(
+                mEraseEsims ? R.string.main_clear_final_desc_esim : R.string.main_clear_final_desc);
     }
 
     @Override

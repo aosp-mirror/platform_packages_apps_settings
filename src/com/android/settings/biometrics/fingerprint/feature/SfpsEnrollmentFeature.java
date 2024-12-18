@@ -18,6 +18,7 @@ package com.android.settings.biometrics.fingerprint.feature;
 
 import android.animation.Animator;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -93,4 +94,34 @@ public interface SfpsEnrollmentFeature {
      * @param lottieView the view related to the lottie
      */
     default void handleOnEnrollmentLottieComposition(LottieAnimationView lottieView) {}
+
+    /**
+     * Indicates if the title and description should be updated.
+     * @return true to update the title and description; false otherwise.
+     */
+    default boolean shouldUpdateTitleAndDescription() {
+        return true;
+    }
+
+    /**
+     * Notifies an acquisition happens.
+     * @param isAcquiredGood isAcquiredGood
+     */
+    default void handleOnAcquired(boolean isAcquiredGood) {}
+
+    /**
+     * Notifies an enrollment progress changes event.
+     * @param steps steps
+     * @param remaining remaining
+     */
+    default void handleOnEnrollmentProgressChange(int steps, int remaining) {}
+
+    /**
+     * Indicates if the properties of header text view like auto text size or min / max lines
+     * should be adjusted.
+     * @param conf the current configuration
+     * @param isFolded is the device folded
+     * @return true if should adjust auto size and max lines of header; otherwise false
+     */
+    boolean shouldAdjustHeaderText(@NonNull Configuration conf, boolean isFolded);
 }

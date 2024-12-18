@@ -29,6 +29,7 @@ import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.util.trace
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
@@ -36,10 +37,10 @@ import com.android.settingslib.spa.testutils.delay
 import com.android.settingslib.spaprivileged.framework.common.devicePolicyManager
 import com.android.settingslib.spaprivileged.model.app.userId
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
@@ -54,51 +55,30 @@ class AppForceStopButtonTest {
 
     private val mockDevicePolicyManager = mock<DevicePolicyManager>()
 
-    private val mockUserManager = mock<UserManager> {
-        on { getUserRestrictionSources(any(), any()) } doReturn emptyList()
-    }
-
     private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
         on { packageManager } doReturn mockPackageManager
         on { devicePolicyManager } doReturn mockDevicePolicyManager
         on { getSystemService(Context.DEVICE_POLICY_SERVICE) } doReturn mockDevicePolicyManager
-        on { getSystemService(Context.USER_SERVICE) } doReturn mockUserManager
     }
 
     private val packageInfoPresenter = mock<PackageInfoPresenter> {
         on { context } doReturn context
     }
 
-    private val appForceStopButton = AppForceStopButton(packageInfoPresenter)
-
-    @Test
-    fun getActionButton_isActiveAdmin_buttonDisabled() {
-        val app = createApp()
-        mockDevicePolicyManager.stub {
-            on { packageHasActiveAdmins(PACKAGE_NAME, app.userId) } doReturn true
-        }
-
-        setForceStopButton(app)
-
-        composeTestRule.onNodeWithText(context.getString(R.string.force_stop)).assertIsNotEnabled()
+    private val mockAppForceStopRepository = mock<AppForceStopRepository> {
+        on { canForceStopFlow() } doReturn flowOf(false)
     }
 
-    @Test
-    fun getActionButton_isUninstallInQueue_buttonDisabled() {
-        val app = createApp()
-        mockDevicePolicyManager.stub {
-            on { isUninstallInQueue(PACKAGE_NAME) } doReturn true
-        }
-
-        setForceStopButton(app)
-
-        composeTestRule.onNodeWithText(context.getString(R.string.force_stop)).assertIsNotEnabled()
-    }
+    private val appForceStopButton = AppForceStopButton(
+        packageInfoPresenter = packageInfoPresenter,
+        appForceStopRepository = mockAppForceStopRepository,
+    )
 
     @Test
     fun getActionButton_isStopped_buttonDisabled() {
-        val app = createApp {
-            flags = ApplicationInfo.FLAG_STOPPED
+        val app = createApp()
+        mockAppForceStopRepository.stub {
+            on { canForceStopFlow() } doReturn flowOf(false)
         }
 
         setForceStopButton(app)
@@ -109,6 +89,9 @@ class AppForceStopButtonTest {
     @Test
     fun getActionButton_regularApp_buttonEnabled() {
         val app = createApp()
+        mockAppForceStopRepository.stub {
+            on { canForceStopFlow() } doReturn flowOf(true)
+        }
 
         setForceStopButton(app)
 

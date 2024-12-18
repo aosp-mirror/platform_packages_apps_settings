@@ -61,7 +61,7 @@ import java.util.Map;
  */
 @SearchIndexable
 public class WirelessDebuggingFragment extends DashboardFragment
-        implements WirelessDebuggingEnabler.OnEnabledListener {
+        implements WirelessDebuggingEnabler.OnEnabledListener, DeveloperOptionAwareMixin {
 
     private static final String TAG = "WirelessDebuggingFrag";
 

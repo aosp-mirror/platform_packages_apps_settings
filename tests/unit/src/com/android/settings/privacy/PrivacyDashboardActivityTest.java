@@ -36,6 +36,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -58,6 +59,7 @@ public class PrivacyDashboardActivityTest {
     }
 
     @Test
+    @Ignore("b/339544085")
     public void onCreate_whenSafetyCenterEnabled_redirectsToSafetyCenter() throws Exception {
         startActivityUsingIntent(android.provider.Settings.ACTION_PRIVACY_SETTINGS);
         when(mSafetyCenterManagerWrapper.isEnabled(any(Context.class))).thenReturn(true);

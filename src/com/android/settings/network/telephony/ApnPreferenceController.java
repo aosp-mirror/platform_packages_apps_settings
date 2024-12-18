@@ -108,6 +108,7 @@ public class ApnPreferenceController extends TelephonyBasePreferenceController i
         if (getPreferenceKey().equals(preference.getKey())) {
             // This activity runs in phone process, we must use intent to start
             final Intent intent = new Intent(Settings.ACTION_APN_SETTINGS);
+            intent.setPackage(mContext.getPackageName());
             // This will setup the Home and Search affordance
             intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, true);
             intent.putExtra(ApnSettings.SUB_ID, mSubId);

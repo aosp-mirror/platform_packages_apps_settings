@@ -21,14 +21,10 @@ import static com.google.common.truth.Truth.assertThat;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.content.pm.ServiceInfo;
+import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
 import android.service.trust.TrustAgentService;
 
-import android.text.TextUtils;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
@@ -38,34 +34,30 @@ import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 
-import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowApplicationPackageManager;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowLockPatternUtils.class,
         ShadowRestrictedLockUtilsInternal.class,
-        ShadowDevicePolicyManager.class,
-        ShadowApplicationPackageManager.class,
-        TrustAgentsPreferenceControllerTest.ShadowTrustAgentManager.class
+        ShadowDevicePolicyManager.class, ShadowApplicationPackageManager.class
 })
 public class TrustAgentsPreferenceControllerTest {
-
-    private static final Intent TEST_INTENT =
-            new Intent(TrustAgentService.SERVICE_INTERFACE);
+    private static final ComponentName TRUST_AGENT_A = new ComponentName(
+            "test.data.packageA", "clzAAA");
+    private static final ComponentName TRUST_AGENT_B = new ComponentName(
+            "test.data.packageB", "clzBBB");
+    private static final ComponentName TRUST_AGENT_C = new ComponentName(
+            "test.data.packageC", "clzCCC");
+    private static final ComponentName TRUST_AGENT_D = new ComponentName(
+            "test.data.packageD", "clzDDD");
 
     private Context mContext;
     private ShadowApplicationPackageManager mPackageManager;
@@ -84,11 +76,6 @@ public class TrustAgentsPreferenceControllerTest {
         mPreferenceScreen.setKey("pref_key");
     }
 
-    @After
-    public void tearDown() {
-        ShadowTrustAgentManager.clearPermissionGrantedList();
-    }
-
     @Test
     public void getAvailabilityStatus_byDefault_shouldBeShown() {
         assertThat(mController.getAvailabilityStatus())
@@ -97,8 +84,7 @@ public class TrustAgentsPreferenceControllerTest {
 
     @Test
     public void onStart_noTrustAgent_shouldNotAddPreference() {
-        final List<ResolveInfo> availableAgents = createFakeAvailableAgents();
-        mPackageManager.setResolveInfosForIntent(TEST_INTENT, availableAgents);
+        installFakeAvailableAgents(/* grantPermission= */ false);
 
         mController.displayPreference(mPreferenceScreen);
         mController.onStart();
@@ -106,57 +92,34 @@ public class TrustAgentsPreferenceControllerTest {
         assertThat(mPreferenceScreen.getPreferenceCount()).isEqualTo(0);
     }
 
-    @Ignore("b/313612480")
     @Test
-    public void
-    onStart_hasAUninstalledTrustAgent_shouldRemoveOnePreferenceAndLeaveTwoPreferences() {
-        final List<ResolveInfo> availableAgents = createFakeAvailableAgents();
-        final ResolveInfo uninstalledTrustAgent = availableAgents.get(0);
-
-        for (ResolveInfo rInfo : availableAgents) {
-            ShadowTrustAgentManager.grantPermissionToResolveInfo(rInfo);
-        }
-        mPackageManager.setResolveInfosForIntent(TEST_INTENT, availableAgents);
+    public void onStart_uninstalledTrustAgent_shouldRemoveOnePreferenceAndLeaveTwoPreferences() {
+        installFakeAvailableAgents(/* grantPermission= */ true);
         mController.displayPreference(mPreferenceScreen);
         mController.onStart();
-        availableAgents.remove(uninstalledTrustAgent);
+        uninstallAgent(TRUST_AGENT_A);
 
-        mPackageManager.setResolveInfosForIntent(TEST_INTENT, availableAgents);
         mController.onStart();
 
         assertThat(mPreferenceScreen.getPreferenceCount()).isEqualTo(2);
     }
 
-    @Ignore("b/313612480")
     @Test
     public void onStart_hasANewTrustAgent_shouldAddOnePreferenceAndHaveFourPreferences() {
-        final List<ResolveInfo> availableAgents = createFakeAvailableAgents();
-        final ComponentName newComponentName = new ComponentName("test.data.packageD", "clzDDD");
-        final ResolveInfo newTrustAgent = createFakeResolveInfo(newComponentName);
-        for (ResolveInfo rInfo : availableAgents) {
-            ShadowTrustAgentManager.grantPermissionToResolveInfo(rInfo);
-        }
-        mPackageManager.setResolveInfosForIntent(TEST_INTENT, availableAgents);
+        installFakeAvailableAgents(/* grantPermission= */ true);
         mController.displayPreference(mPreferenceScreen);
         mController.onStart();
-        availableAgents.add(newTrustAgent);
-        ShadowTrustAgentManager.grantPermissionToResolveInfo(newTrustAgent);
+        installFakeAvailableAgent(TRUST_AGENT_D, /* grantPermission= */ true);
 
-        mPackageManager.setResolveInfosForIntent(TEST_INTENT, availableAgents);
         mController.onStart();
 
         assertThat(mPreferenceScreen.getPreferenceCount()).isEqualTo(4);
     }
 
-    @Ignore("b/313612480")
     @Test
     public void onStart_hasUnrestrictedTrustAgent_shouldAddThreeChangeablePreferences() {
         ShadowRestrictedLockUtilsInternal.setKeyguardDisabledFeatures(0);
-        final List<ResolveInfo> availableAgents = createFakeAvailableAgents();
-        for (ResolveInfo rInfo : availableAgents) {
-            ShadowTrustAgentManager.grantPermissionToResolveInfo(rInfo);
-        }
-        mPackageManager.setResolveInfosForIntent(TEST_INTENT, availableAgents);
+        installFakeAvailableAgents(/* grantPermission= */ true);
 
         mController.displayPreference(mPreferenceScreen);
         mController.onStart();
@@ -169,14 +132,9 @@ public class TrustAgentsPreferenceControllerTest {
         }
     }
 
-    @Ignore("b/313612480")
     @Test
-    public void onStart_hasRestrictedTructAgent_shouldAddThreeUnchangeablePreferences() {
-        final List<ResolveInfo> availableAgents = createFakeAvailableAgents();
-        for (ResolveInfo rInfo : availableAgents) {
-            ShadowTrustAgentManager.grantPermissionToResolveInfo(rInfo);
-        }
-        mPackageManager.setResolveInfosForIntent(TEST_INTENT, availableAgents);
+    public void onStart_hasRestrictedTrustAgent_shouldAddThreeUnchangeablePreferences() {
+        installFakeAvailableAgents(/* grantPermission= */ true);
         ShadowRestrictedLockUtilsInternal.setKeyguardDisabledFeatures(
                 DevicePolicyManager.KEYGUARD_DISABLE_TRUST_AGENTS);
 
@@ -191,51 +149,30 @@ public class TrustAgentsPreferenceControllerTest {
         }
     }
 
-    private List<ResolveInfo> createFakeAvailableAgents() {
-        final List<ComponentName> componentNames = new ArrayList<>();
-        componentNames.add(new ComponentName("test.data.packageA", "clzAAA"));
-        componentNames.add(new ComponentName("test.data.packageB", "clzBBB"));
-        componentNames.add(new ComponentName("test.data.packageC", "clzCCC"));
-        final List<ResolveInfo> result = new ArrayList<>();
-        for (ComponentName cn : componentNames) {
-            final ResolveInfo ri = createFakeResolveInfo(cn);
-            result.add(ri);
-        }
-        return result;
+    private void installFakeAvailableAgents(boolean grantPermission) {
+        installFakeAvailableAgent(TRUST_AGENT_A, grantPermission);
+        installFakeAvailableAgent(TRUST_AGENT_B, grantPermission);
+        installFakeAvailableAgent(TRUST_AGENT_C, grantPermission);
     }
 
-    private ResolveInfo createFakeResolveInfo(ComponentName cn) {
-        final ResolveInfo ri = new ResolveInfo();
-        ri.serviceInfo = new ServiceInfo();
-        ri.serviceInfo.packageName = cn.getPackageName();
-        ri.serviceInfo.name = cn.getClassName();
-        ri.serviceInfo.applicationInfo = new ApplicationInfo();
-        ri.serviceInfo.applicationInfo.packageName = cn.getPackageName();
-        ri.serviceInfo.applicationInfo.name = cn.getClassName();
-        return ri;
+    private void installFakeAvailableAgent(ComponentName name,
+            boolean grantPermission) {
+        mPackageManager.addServiceIfNotPresent(name);
+        mPackageManager.addIntentFilterForService(name,
+                new IntentFilter(TrustAgentService.SERVICE_INTERFACE));
+        if (!grantPermission) {
+            return;
+        }
+        PackageInfo pkgInfo = mPackageManager.getInternalMutablePackageInfo(
+                name.getPackageName());
+        pkgInfo.requestedPermissions =
+                new String[]{android.Manifest.permission.PROVIDE_TRUST_AGENT};
+        pkgInfo.requestedPermissionsFlags =
+                new int[]{PackageInfo.REQUESTED_PERMISSION_GRANTED};
     }
 
-    @Implements(TrustAgentManager.class)
-    public static class ShadowTrustAgentManager {
-        private final static List<ResolveInfo> sPermissionGrantedList = new ArrayList<>();
-
-        @Implementation
-        protected boolean shouldProvideTrust(ResolveInfo resolveInfo, PackageManager pm) {
-            for (ResolveInfo info : sPermissionGrantedList) {
-                if (info.serviceInfo.equals(resolveInfo.serviceInfo)) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private static void grantPermissionToResolveInfo(ResolveInfo rInfo) {
-            sPermissionGrantedList.add(rInfo);
-        }
-
-        private static void clearPermissionGrantedList() {
-            sPermissionGrantedList.clear();
-        }
+    private void uninstallAgent(ComponentName name) {
+        mPackageManager.removeService(name);
+        mPackageManager.removePackage(name.getPackageName());
     }
 }

@@ -23,6 +23,7 @@ import android.telephony.PhoneStateListener;
 import android.telephony.PreciseDataConnectionState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
@@ -32,6 +33,7 @@ import com.android.settings.network.GlobalSettingsChangeListener;
 import java.util.Objects;
 
 public class CellularDataConditionController implements ConditionalCardController {
+    private static final String TAG = "CellularDataConditionController";
 
     static final int ID = Objects.hash("CellularDataConditionController");
 
@@ -85,6 +87,7 @@ public class CellularDataConditionController implements ConditionalCardControlle
 
     @Override
     public void onActionClick() {
+        Log.d(TAG, "setDataEnabledForReason true");
         mTelephonyManager.setDataEnabled(true);
     }
 

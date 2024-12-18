@@ -27,6 +27,7 @@ import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_C
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FINGERPRINT_ENROLLMENT_ONLY;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_IS_CALLING_APP_ADMIN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 
@@ -123,15 +124,15 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
 
     @Override
     public void launchChooseLock(Bundle chooseLockFingerprintExtras) {
-        final boolean isInSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
-        Intent intent = isInSetupWizard ? new Intent(this, SetupChooseLockGeneric.class)
-                : new Intent(this, ChooseLockGeneric.class);
+        final Intent intent = new Intent(this, SetupChooseLockGeneric.class);
         intent.setAction(mNewPasswordAction);
         intent.putExtras(chooseLockFingerprintExtras);
         intent.putExtra(EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE,
                 getIntent().getIntExtra(EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE, -1));
         intent.putExtra(EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION,
                 getIntent().getIntExtra(EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION, -1));
+        intent.putExtra(EXTRA_KEY_FINGERPRINT_ENROLLMENT_ONLY,
+                getIntent().getBooleanExtra(EXTRA_KEY_FINGERPRINT_ENROLLMENT_ONLY, false));
         if (mCallerAppName != null) {
             intent.putExtra(EXTRA_KEY_CALLER_APP_NAME, mCallerAppName);
         }

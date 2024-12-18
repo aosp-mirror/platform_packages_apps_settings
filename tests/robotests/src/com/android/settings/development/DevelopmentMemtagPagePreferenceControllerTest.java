@@ -27,7 +27,6 @@ import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -40,8 +39,6 @@ public class DevelopmentMemtagPagePreferenceControllerTest {
 
     private DevelopmentMemtagPagePreferenceController mController;
     private Context mContext;
-
-    @Mock private DevelopmentSettingsDashboardFragment mFragment;
     private static final String FRAGMENT_TAG = "memtag_page";
 
     @Before
@@ -49,7 +46,7 @@ public class DevelopmentMemtagPagePreferenceControllerTest {
         ShadowSystemProperties.override(mMemtagSupportedProperty, "true");
 
         mContext = RuntimeEnvironment.application;
-        mController = new DevelopmentMemtagPagePreferenceController(mContext, mFragment);
+        mController = new DevelopmentMemtagPagePreferenceController(mContext);
     }
 
     @Test

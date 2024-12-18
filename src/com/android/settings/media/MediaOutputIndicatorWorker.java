@@ -92,8 +92,7 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
             }
             if (mLocalMediaManager == null || !TextUtils.equals(mPackageName,
                     mLocalMediaManager.getPackageName())) {
-                mLocalMediaManager = new LocalMediaManager(mContext, mPackageName,
-                        null /* notification */);
+                mLocalMediaManager = new LocalMediaManager(mContext, mPackageName);
             }
             mLocalMediaManager.registerCallback(this);
             mLocalMediaManager.startScan();

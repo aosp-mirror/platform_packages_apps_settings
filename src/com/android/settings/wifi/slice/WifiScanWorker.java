@@ -39,7 +39,10 @@ import java.util.List;
 
 /**
  * {@link SliceBackgroundWorker} for Wi-Fi, used by {@link WifiSlice}.
+ *
+ * @deprecated this is not used after V and will be removed.
  */
+@Deprecated(forRemoval = true)
 public class WifiScanWorker extends SliceBackgroundWorker<WifiSliceItem> implements
         WifiPickerTracker.WifiPickerTrackerCallback, LifecycleOwner, WifiEntryCallback {
 

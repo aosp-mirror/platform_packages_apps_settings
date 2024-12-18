@@ -17,6 +17,7 @@
 package com.android.settings.dashboard.profileselector;
 
 import static android.content.Intent.EXTRA_USER_ID;
+import static android.content.pm.UserInfo.FLAG_MAIN;
 import static android.os.UserManager.USER_TYPE_FULL_SYSTEM;
 import static android.os.UserManager.USER_TYPE_PROFILE_MANAGED;
 import static android.os.UserManager.USER_TYPE_PROFILE_PRIVATE;
@@ -118,7 +119,9 @@ public class ProfileSelectFragmentTest {
         profileSelectFragment.setViewPager(viewPager);
         mFragmentManager.beginTransaction().add(profileSelectFragment, "tag");
 
-        assertThat(mFragment.getTabId(mActivity, bundle)).isEqualTo(WORK_TAB);
+        // The expected position '2' comes from the order in which fragments are added in
+        // TestProfileSelectFragment#getFragments()
+        assertThat(mFragment.getTabId(mActivity, bundle)).isEqualTo(2);
     }
 
     @Test
@@ -136,7 +139,9 @@ public class ProfileSelectFragmentTest {
         profileSelectFragment.setViewPager(viewPager);
         mFragmentManager.beginTransaction().add(profileSelectFragment, "tag");
 
-        assertThat(mFragment.getTabId(mActivity, bundle)).isEqualTo(PRIVATE_TAB);
+        // The expected position '1' comes from the order in which fragments are added in
+        // TestProfileSelectFragment#getFragments()
+        assertThat(mFragment.getTabId(mActivity, bundle)).isEqualTo(1);
     }
 
     @Test
@@ -170,7 +175,8 @@ public class ProfileSelectFragmentTest {
 
     @Test
     public void getTabId_setPrivateId_getCorrectTab() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         final Bundle bundle = new Bundle();
         bundle.putInt(EXTRA_USER_ID, 11);
         mUserManager.setPrivateProfile(11, "private", 0);
@@ -200,9 +206,10 @@ public class ProfileSelectFragmentTest {
 
     @Test
     public void testGetFragments_whenOnlyPersonal_returnsOneFragment() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.disableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         mUserManager.addProfile(
-                new UserInfo(0, PRIMARY_USER_NAME, null, 0, USER_TYPE_FULL_SYSTEM));
+                new UserInfo(0, PRIMARY_USER_NAME, null, FLAG_MAIN, USER_TYPE_FULL_SYSTEM));
         Fragment[] fragments = ProfileSelectFragment.getFragments(
                 mContext,
                 null /* bundle */,
@@ -215,7 +222,7 @@ public class ProfileSelectFragmentTest {
     @Test
     public void testGetFragments_whenPrivateDisabled_returnsOneFragment() {
         mUserManager.addProfile(
-                new UserInfo(0, PRIMARY_USER_NAME, null, 0, USER_TYPE_FULL_SYSTEM));
+                new UserInfo(0, PRIMARY_USER_NAME, null, FLAG_MAIN, USER_TYPE_FULL_SYSTEM));
         mUserManager.addProfile(
                 new UserInfo(11, PRIVATE_USER_NAME, null, 0, USER_TYPE_PROFILE_PRIVATE));
         Fragment[] fragments = ProfileSelectFragment.getFragments(
@@ -235,9 +242,10 @@ public class ProfileSelectFragmentTest {
 
     @Test
     public void testGetFragments_whenPrivateEnabled_returnsTwoFragments() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         mUserManager.addProfile(
-                new UserInfo(0, PRIMARY_USER_NAME, null, 0, USER_TYPE_FULL_SYSTEM));
+                new UserInfo(0, PRIMARY_USER_NAME, null, FLAG_MAIN, USER_TYPE_FULL_SYSTEM));
         mUserManager.addProfile(
                 new UserInfo(11, PRIVATE_USER_NAME, null, 0, USER_TYPE_PROFILE_PRIVATE));
         Fragment[] fragments = ProfileSelectFragment.getFragments(
@@ -257,9 +265,10 @@ public class ProfileSelectFragmentTest {
 
     @Test
     public void testGetFragments_whenManagedProfile_returnsTwoFragments() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.disableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         mUserManager.addProfile(
-                new UserInfo(0, PRIMARY_USER_NAME, null, 0, USER_TYPE_FULL_SYSTEM));
+                new UserInfo(0, PRIMARY_USER_NAME, null, FLAG_MAIN, USER_TYPE_FULL_SYSTEM));
         mUserManager.addProfile(
                 new UserInfo(10, MANAGED_USER_NAME, null, 0, USER_TYPE_PROFILE_MANAGED));
         Fragment[] fragments = ProfileSelectFragment.getFragments(
@@ -279,9 +288,10 @@ public class ProfileSelectFragmentTest {
 
     @Test
     public void testGetFragments_whenAllProfiles_returnsThreeFragments() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         mUserManager.addProfile(
-                new UserInfo(0, PRIMARY_USER_NAME, null, 0, USER_TYPE_FULL_SYSTEM));
+                new UserInfo(0, PRIMARY_USER_NAME, null, FLAG_MAIN, USER_TYPE_FULL_SYSTEM));
         mUserManager.addProfile(
                 new UserInfo(10, MANAGED_USER_NAME, null, 0, USER_TYPE_PROFILE_MANAGED));
         mUserManager.addProfile(
@@ -303,9 +313,10 @@ public class ProfileSelectFragmentTest {
 
     @Test
     public void testGetFragments_whenAvailableBundle_returnsFragmentsWithCorrectBundles() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+                android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
         mUserManager.addProfile(
-                new UserInfo(0, PRIMARY_USER_NAME, null, 0, USER_TYPE_FULL_SYSTEM));
+                new UserInfo(0, PRIMARY_USER_NAME, null, FLAG_MAIN, USER_TYPE_FULL_SYSTEM));
         mUserManager.addProfile(
                 new UserInfo(10, MANAGED_USER_NAME, null, 0, USER_TYPE_PROFILE_MANAGED));
         mUserManager.addProfile(
@@ -343,10 +354,25 @@ public class ProfileSelectFragmentTest {
 
         @Override
         public Fragment[] getFragments() {
+            Fragment personalFragment = new SettingsPreferenceFragmentTest.TestFragment();
+            Bundle personalBundle = new Bundle();
+            personalBundle.putInt(EXTRA_PROFILE, ProfileType.PERSONAL);
+            personalFragment.setArguments(personalBundle);
+
+            Fragment workFragment = new SettingsPreferenceFragmentTest.TestFragment();
+            Bundle workBundle = new Bundle();
+            workBundle.putInt(EXTRA_PROFILE, ProfileType.WORK);
+            workFragment.setArguments(workBundle);
+
+            Fragment privateFragment = new SettingsPreferenceFragmentTest.TestFragment();
+            Bundle privateBundle = new Bundle();
+            privateBundle.putInt(EXTRA_PROFILE, ProfileType.PRIVATE);
+            privateFragment.setArguments(privateBundle);
+
             return new Fragment[]{
-                    new SettingsPreferenceFragmentTest.TestFragment(), //0
-                    new SettingsPreferenceFragmentTest.TestFragment(),
-                    new SettingsPreferenceFragmentTest.TestFragment()
+                    personalFragment, //0
+                    privateFragment,
+                    workFragment
             };
         }
     }

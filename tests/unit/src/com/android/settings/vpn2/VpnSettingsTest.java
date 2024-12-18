@@ -130,6 +130,7 @@ public class VpnSettingsTest {
     }
 
     @Test
+    @UiThreadTest
     public void setShownAdvancedPreferences_hasGeneralVpn_returnsVpnCountAs1() {
         Set<Preference> updates = new ArraySet<>();
         AppPreference pref =
@@ -144,6 +145,7 @@ public class VpnSettingsTest {
     }
 
     @Test
+    @UiThreadTest
     public void setShownAdvancedPreferences_hasAdvancedVpn_returnsAdvancedVpnCountAs1() {
         Set<Preference> updates = new ArraySet<>();
         AppPreference pref =
@@ -158,6 +160,7 @@ public class VpnSettingsTest {
     }
 
     @Test
+    @UiThreadTest
     public void setShownAdvancedPreferences_noVpn_returnsEmpty() {
         Set<Preference> updates = new ArraySet<>();
 
@@ -198,6 +201,7 @@ public class VpnSettingsTest {
     }
 
     @Test
+    @UiThreadTest
     public void clickVpn_VpnConnected_doesNotStartVpnLaunchIntent()
             throws PackageManager.NameNotFoundException {
         Set<Preference> updates = new ArraySet<>();
@@ -217,6 +221,7 @@ public class VpnSettingsTest {
     }
 
     @Test
+    @UiThreadTest
     public void clickVpn_VpnDisconnected_startsVpnLaunchIntent()
             throws PackageManager.NameNotFoundException {
         Set<Preference> updates = new ArraySet<>();
@@ -238,6 +243,7 @@ public class VpnSettingsTest {
     }
 
     @Test
+    @UiThreadTest
     public void clickAdvancedVpn_VpnConnectedDisconnectDialogDisabled_startsAppLaunchIntent()
             throws PackageManager.NameNotFoundException {
         Set<Preference> updates = new ArraySet<>();
@@ -262,6 +268,7 @@ public class VpnSettingsTest {
     }
 
     @Test
+    @UiThreadTest
     public void clickAdvancedVpn_VpnConnectedDisconnectDialogEnabled_doesNotStartAppLaunchIntent()
             throws PackageManager.NameNotFoundException {
         Set<Preference> updates = new ArraySet<>();

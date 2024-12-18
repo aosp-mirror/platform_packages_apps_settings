@@ -16,8 +16,9 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.FreeformWindowsPreferenceController
-        .SETTING_VALUE_OFF;
+import static android.content.pm.PackageManager.FEATURE_FREEFORM_WINDOW_MANAGEMENT;
+
+import static com.android.settings.development.FreeformWindowsPreferenceController.SETTING_VALUE_OFF;
 import static com.android.settings.development.FreeformWindowsPreferenceController.SETTING_VALUE_ON;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -29,6 +30,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.provider.Settings;
 
 import androidx.fragment.app.FragmentActivity;
@@ -43,7 +45,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
@@ -52,9 +53,10 @@ import org.robolectric.annotation.Config;
 })
 public class FreeformWindowsPreferenceControllerTest {
 
-    private static final String ENG_BUILD_TYPE = "eng";
-    private static final String USER_BUILD_TYPE = "user";
-
+    @Mock
+    Context mContext;
+    @Mock
+    private PackageManager mPackageManager;
     @Mock
     private SwitchPreference mPreference;
     @Mock
@@ -68,33 +70,33 @@ public class FreeformWindowsPreferenceControllerTest {
     @Mock
     private FragmentTransaction mTransaction;
 
-    private Context mContext;
     private FreeformWindowsPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
         doReturn(mTransaction).when(mFragmentManager).beginTransaction();
         doReturn(mFragmentManager).when(mActivity).getSupportFragmentManager();
         doReturn(mActivity).when(mFragment).getActivity();
         mController = new FreeformWindowsPreferenceController(mContext, mFragment);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
         mController.displayPreference(mScreen);
     }
 
     @Test
-    public void isAvailable_engBuild_shouldBeTrue() {
+    public void isAvailable_deviceHasFreeformWindowSystemFeature_returnsFalse() {
         mController = spy(mController);
-        doReturn(ENG_BUILD_TYPE).when(mController).getBuildType();
+        when(mPackageManager.hasSystemFeature(FEATURE_FREEFORM_WINDOW_MANAGEMENT)).thenReturn(true);
 
-        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
-    public void isAvailable_userBuild_shouldBeTrue() {
+    public void isAvailable_deviceDoesNotHaveFreeformWindowSystemFeature_returnsTrue() {
         mController = spy(mController);
-        doReturn(USER_BUILD_TYPE).when(mController).getBuildType();
+        when(mPackageManager.hasSystemFeature(FEATURE_FREEFORM_WINDOW_MANAGEMENT)).thenReturn(
+                false);
 
         assertThat(mController.isAvailable()).isTrue();
     }

@@ -17,15 +17,18 @@
 package com.android.settings.network.telephony.wificalling
 
 import android.content.Context
+import android.telephony.AccessNetworkConstants
 import android.telephony.CarrierConfigManager
 import android.telephony.CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL
 import android.telephony.TelephonyManager
 import android.telephony.ims.ImsMmTelManager
+import android.telephony.ims.feature.MmTelFeature
 import androidx.core.os.persistableBundleOf
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.network.telephony.ims.ImsMmTelRepository
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
@@ -52,7 +55,8 @@ class WifiCallingRepositoryTest {
         on { getWiFiCallingMode(any()) } doReturn ImsMmTelManager.WIFI_MODE_UNKNOWN
     }
 
-    private val repository = WifiCallingRepository(context, SUB_ID, mockImsMmTelRepository)
+    private val repository =
+        WifiCallingRepository(context, SUB_ID, imsMmTelRepository = mockImsMmTelRepository)
 
     @Test
     fun getWiFiCallingMode_roamingAndNotUseWfcHomeModeForRoaming_returnRoamingSetting() {

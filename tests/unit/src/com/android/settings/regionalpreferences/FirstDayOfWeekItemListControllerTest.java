@@ -97,7 +97,8 @@ public class FirstDayOfWeekItemListControllerTest {
                 mContext.getContentResolver(), Settings.System.LOCALE_PREFERENCES);
 
         assertThat(pref.getKey()).isEqualTo("default");
-        assertThat(record).contains("default");
+        assertThat(
+                RegionalPreferencesDataUtils.dayConverter(mContext, record)).contains("default");
     }
 
     @Test

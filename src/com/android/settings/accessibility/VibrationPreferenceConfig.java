@@ -27,6 +27,7 @@ import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -68,19 +69,8 @@ public abstract class VibrationPreferenceConfig {
     /** Play a vibration effect with intensity just selected by the user. */
     public static void playVibrationPreview(Vibrator vibrator,
             @VibrationAttributes.Usage int vibrationUsage) {
-        playVibrationPreview(vibrator, createPreviewVibrationAttributes(vibrationUsage));
-    }
-
-    /**
-     * Play a vibration effect with intensity just selected by the user.
-     *
-     * @param vibrator The {@link Vibrator} used to play the vibration.
-     * @param vibrationAttributes The {@link VibrationAttributes} to indicate the
-     *        vibration information.
-     */
-    public static void playVibrationPreview(Vibrator vibrator,
-            VibrationAttributes vibrationAttributes) {
-        vibrator.vibrate(PREVIEW_VIBRATION_EFFECT, vibrationAttributes);
+        vibrator.vibrate(PREVIEW_VIBRATION_EFFECT,
+                createPreviewVibrationAttributes(vibrationUsage));
     }
 
     public VibrationPreferenceConfig(Context context, String settingKey,
@@ -176,7 +166,7 @@ public abstract class VibrationPreferenceConfig {
 
         /** Creates observer for given preference. */
         public SettingObserver(VibrationPreferenceConfig preferenceConfig) {
-            super(new Handler(/* async= */ true));
+            super(Looper.myLooper() != null ? new Handler(/* async= */ true) : null);
             mUri = Settings.System.getUriFor(preferenceConfig.getSettingKey());
 
             if (preferenceConfig.isRestrictedByRingerModeSilent()) {

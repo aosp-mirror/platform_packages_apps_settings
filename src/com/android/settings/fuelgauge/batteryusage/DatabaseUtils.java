@@ -16,8 +16,6 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
-import static android.content.Intent.FLAG_RECEIVER_REPLACE_PENDING;
-
 import static com.android.settings.fuelgauge.batteryusage.ConvertUtils.utcToLocalTimeForLogging;
 
 import android.app.usage.IUsageStatsManager;
@@ -59,6 +57,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -67,6 +66,7 @@ import java.util.stream.Collectors;
 public final class DatabaseUtils {
     private static final String TAG = "DatabaseUtils";
     private static final String SHARED_PREFS_FILE = "battery_usage_shared_prefs";
+    private static final boolean EXPLICIT_CLEAR_MEMORY_ENABLED = false;
 
     /** Clear memory threshold for device booting phase. */
     private static final long CLEAR_MEMORY_THRESHOLD_MS = Duration.ofMinutes(5).toMillis();
@@ -430,8 +430,42 @@ public final class DatabaseUtils {
                         database.batteryEventDao().clearAll();
                         database.batteryStateDao().clearAll();
                         database.batteryUsageSlotDao().clearAll();
+                        database.batteryReattributeDao().clearAll();
                     } catch (RuntimeException e) {
                         Log.e(TAG, "clearAll() failed", e);
+                    }
+                });
+    }
+
+    /** Clears data after a specific startTimestamp in the battery usage database. */
+    public static void clearAllAfter(Context context, long startTimestamp) {
+        AsyncTask.execute(
+                () -> {
+                    try {
+                        final BatteryStateDatabase database =
+                                BatteryStateDatabase.getInstance(context.getApplicationContext());
+                        database.appUsageEventDao().clearAllAfter(startTimestamp);
+                        database.batteryEventDao().clearAllAfter(startTimestamp);
+                        database.batteryStateDao().clearAllAfter(startTimestamp);
+                        database.batteryUsageSlotDao().clearAllAfter(startTimestamp);
+                        database.batteryReattributeDao().clearAllAfter(startTimestamp);
+                    } catch (RuntimeException e) {
+                        Log.e(TAG, "clearAllAfter() failed", e);
+                    }
+                });
+    }
+
+    /** Clears generated cache data in the battery usage database. */
+    public static void clearEvenHourCacheData(Context context) {
+        AsyncTask.execute(
+                () -> {
+                    try {
+                        final BatteryStateDatabase database =
+                                BatteryStateDatabase.getInstance(context.getApplicationContext());
+                        database.batteryEventDao().clearEvenHourEvent();
+                        database.batteryUsageSlotDao().clearAll();
+                    } catch (RuntimeException e) {
+                        Log.e(TAG, "clearEvenHourCacheData() failed", e);
                     }
                 });
     }
@@ -450,20 +484,21 @@ public final class DatabaseUtils {
                         database.batteryEventDao().clearAllBefore(earliestTimestamp);
                         database.batteryStateDao().clearAllBefore(earliestTimestamp);
                         database.batteryUsageSlotDao().clearAllBefore(earliestTimestamp);
+                        database.batteryReattributeDao().clearAllBefore(earliestTimestamp);
                     } catch (RuntimeException e) {
                         Log.e(TAG, "clearAllBefore() failed", e);
                     }
                 });
     }
 
-    /** Clears all data and jobs if current timestamp is out of the range of last recorded job. */
+    /** Clears data after new updated time and refresh periodic job. */
     public static void clearDataAfterTimeChangedIfNeeded(Context context, Intent intent) {
-        if ((intent.getFlags() & FLAG_RECEIVER_REPLACE_PENDING) != 0) {
+        if ((intent.hasExtra(Intent.EXTRA_TIME_PREF_24_HOUR_FORMAT))) {
             BatteryUsageLogUtils.writeLog(
                     context,
                     Action.TIME_UPDATED,
-                    "Database is not cleared because the time change intent is only"
-                            + " for the existing pending receiver.");
+                    "Database is not cleared because the time change intent is"
+                            + " for time format change");
             return;
         }
         AsyncTask.execute(
@@ -480,6 +515,22 @@ public final class DatabaseUtils {
                 });
     }
 
+    /** Clears all data and reset jobs if timezone changed. */
+    public static void clearDataAfterTimeZoneChangedIfNeeded(Context context) {
+        AsyncTask.execute(
+                () -> {
+                    try {
+                        clearDataAfterTimeZoneChangedIfNeededInternal(context);
+                    } catch (RuntimeException e) {
+                        Log.e(TAG, "clearDataAfterTimeZoneChangedIfNeeded() failed", e);
+                        BatteryUsageLogUtils.writeLog(
+                                context,
+                                Action.TIMEZONE_UPDATED,
+                                "clearDataAfterTimeZoneChangedIfNeeded() failed" + e);
+                    }
+                });
+    }
+
     /** Returns the timestamp for 00:00 6 days before the calendar date. */
     public static long getTimestampSixDaysAgo(Calendar calendar) {
         Calendar startCalendar =
@@ -492,9 +543,11 @@ public final class DatabaseUtils {
         return startCalendar.getTimeInMillis();
     }
 
-    /** Returns the context with profile parent identity when current user is work profile. */
+    /**
+     * Returns the context with profile parent identity when current user is an additional profile.
+     */
     public static Context getParentContext(Context context) {
-        if (com.android.settingslib.fuelgauge.BatteryUtils.isWorkProfile(context)) {
+        if (com.android.settingslib.fuelgauge.BatteryUtils.isAdditionalProfile(context)) {
             try {
                 return context.createPackageContextAsUser(
                         /* packageName= */ context.getPackageName(),
@@ -861,37 +914,36 @@ public final class DatabaseUtils {
     }
 
     private static void clearDataAfterTimeChangedIfNeededInternal(Context context) {
+        final long currentTime = System.currentTimeMillis();
+        final String logInfo =
+                String.format(Locale.ENGLISH, "clear data after current time = %d", currentTime);
+        Log.d(TAG, logInfo);
+        BatteryUsageLogUtils.writeLog(context, Action.TIME_UPDATED, logInfo);
+        DatabaseUtils.clearAllAfter(context, currentTime);
+        PeriodicJobManager.getInstance(context).refreshJob(/* fromBoot= */ false);
+
         final List<BatteryEvent> batteryLevelRecordEvents =
                 DatabaseUtils.getBatteryEvents(
                         context,
                         Calendar.getInstance(),
                         getLastFullChargeTime(context),
                         BATTERY_LEVEL_RECORD_EVENTS);
-        final long lastRecordTimestamp =
-                batteryLevelRecordEvents.isEmpty()
-                        ? INVALID_TIMESTAMP
-                        : batteryLevelRecordEvents.get(0).getTimestamp();
-        final long nextRecordTimestamp =
-                TimestampUtils.getNextEvenHourTimestamp(lastRecordTimestamp);
-        final long currentTime = System.currentTimeMillis();
-        final boolean isOutOfTimeRange =
-                lastRecordTimestamp == INVALID_TIMESTAMP
-                        || currentTime < lastRecordTimestamp
-                        || currentTime > nextRecordTimestamp;
+        if (batteryLevelRecordEvents.isEmpty()) {
+            // Take a snapshot of battery usage data immediately if there's no battery events.
+            BatteryUsageDataLoader.enqueueWork(context, /* isFullChargeStart= */ true);
+        }
+    }
+
+    private static void clearDataAfterTimeZoneChangedIfNeededInternal(Context context) {
         final String logInfo =
                 String.format(
                         Locale.ENGLISH,
-                        "clear database = %b, current time = %d, last record time = %d",
-                        isOutOfTimeRange,
-                        currentTime,
-                        lastRecordTimestamp);
+                        "clear database cache for new time zone = %s",
+                        TimeZone.getDefault().toString());
+        BatteryUsageLogUtils.writeLog(context, Action.TIMEZONE_UPDATED, logInfo);
         Log.d(TAG, logInfo);
-        BatteryUsageLogUtils.writeLog(context, Action.TIME_UPDATED, logInfo);
-        if (isOutOfTimeRange) {
-            DatabaseUtils.clearAll(context);
-            PeriodicJobManager.getInstance(context)
-                    .refreshJob(/* fromBoot= */ false);
-        }
+        DatabaseUtils.clearEvenHourCacheData(context);
+        PeriodicJobManager.getInstance(context).refreshJob(/* fromBoot= */ false);
     }
 
     private static long loadLongFromContentProvider(
@@ -942,7 +994,8 @@ public final class DatabaseUtils {
     }
 
     private static void clearMemory() {
-        if (SystemClock.uptimeMillis() > CLEAR_MEMORY_THRESHOLD_MS) {
+        if (!EXPLICIT_CLEAR_MEMORY_ENABLED
+                || SystemClock.uptimeMillis() > CLEAR_MEMORY_THRESHOLD_MS) {
             return;
         }
         final Handler mainHandler = new Handler(Looper.getMainLooper());

@@ -22,6 +22,9 @@
     android:title="@string/account_dashboard_title_with_passkeys"
     settings:keywords="@string/keywords_accounts">
 
+    <com.android.settingslib.widget.TopIntroPreference
+      android:title="@string/credman_main_settings_intro_text" />
+
     <PreferenceCategory
         android:key="default_service_category"
         android:order="10"

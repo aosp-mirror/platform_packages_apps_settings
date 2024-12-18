@@ -16,6 +16,7 @@
 
 package com.android.settings.network.apn
 
+import android.provider.Telephony
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
@@ -24,18 +25,17 @@ import com.android.settingslib.spa.widget.editor.SettingsDropdownCheckBox
 
 @Composable
 fun ApnNetworkTypeCheckBox(apnData: ApnData, onNetworkTypeChanged: (Long) -> Unit) {
-    val options = remember { ApnNetworkTypes.getNetworkTypeOptions() }
-    val selectedStateMap = remember {
-        ApnNetworkTypes.networkTypeToSelectedStateMap(options, apnData.networkType)
-    }
+    val options = remember { ApnNetworkTypes.getNetworkTypeOptions(apnData.networkType) }
     SettingsDropdownCheckBox(
         label = stringResource(R.string.network_type),
         options = options,
         emptyText = stringResource(R.string.network_type_unspecified),
-        enabled = apnData.networkTypeEnabled,
+        enabled = apnData.isFieldEnabled(
+            Telephony.Carriers.BEARER,
+            Telephony.Carriers.BEARER_BITMASK,
+            Telephony.Carriers.NETWORK_TYPE_BITMASK
+        ),
     ) {
-        onNetworkTypeChanged(
-            ApnNetworkTypes.selectedStateMapToNetworkType(options, selectedStateMap)
-        )
+        onNetworkTypeChanged(ApnNetworkTypes.optionsToNetworkType(options))
     }
 }

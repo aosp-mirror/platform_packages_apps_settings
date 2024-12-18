@@ -17,13 +17,11 @@
 package com.android.settings.localepicker;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Looper;
 
@@ -64,14 +62,6 @@ public class TermsOfAddressCategoryControllerTest {
     @After
     public void tearDown() throws Exception {
         Locale.setDefault(mCacheLocale);
-    }
-
-    @Test
-    public void getAvailabilityStatus_returnUnavailable() {
-        Locale.setDefault(Locale.forLanguageTag("fr-CA"));
-
-        assertThat(mTermsOfAddressCategoryController.getAvailabilityStatus()).isEqualTo(
-                CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test

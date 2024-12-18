@@ -18,6 +18,8 @@ package com.android.settings.wifi;
 
 import static com.android.settings.wifi.WifiConfigController.PRIVACY_SPINNER_INDEX_DEVICE_MAC;
 import static com.android.settings.wifi.WifiConfigController.PRIVACY_SPINNER_INDEX_RANDOMIZED_MAC;
+import static com.android.settings.wifi.WifiConfigController.DHCP_SPINNER_INDEX_SEND_DHCP_HOST_NAME_ENABLE;
+import static com.android.settings.wifi.WifiConfigController.DHCP_SPINNER_INDEX_SEND_DHCP_HOST_NAME_DISABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -448,6 +450,41 @@ public class WifiConfigControllerTest {
 
         WifiConfiguration config = mController.getConfig();
         assertThat(config.macRandomizationSetting).isEqualTo(WifiConfiguration.RANDOMIZATION_NONE);
+    }
+
+    @Test
+    public void loadSavedDhcpValue_true() {
+        checkSavedDhcpValue(true);
+    }
+
+    @Test
+    public void loadSavedDhcpValue_false() {
+        checkSavedDhcpValue(false);
+    }
+
+    private void checkSavedDhcpValue(boolean dhcpValue) {
+        when(mAccessPoint.isSaved()).thenReturn(true);
+        final WifiConfiguration mockWifiConfig = mock(WifiConfiguration.class);
+        when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
+        when(mockWifiConfig.isSendDhcpHostnameEnabled()).thenReturn(dhcpValue);
+        when(mAccessPoint.getConfig()).thenReturn(mockWifiConfig);
+        mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
+                WifiConfigUiBase.MODE_CONNECT);
+        final Spinner dhcpSetting = mView.findViewById(R.id.dhcp_settings);
+
+        assertThat(dhcpSetting.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(dhcpSetting.getSelectedItemPosition()).isEqualTo(
+                dhcpValue ? DHCP_SPINNER_INDEX_SEND_DHCP_HOST_NAME_ENABLE :
+                        DHCP_SPINNER_INDEX_SEND_DHCP_HOST_NAME_DISABLE);
+    }
+
+    @Test
+    public void saveDhcpValue_changedToFalse() {
+        final Spinner privacySetting = mView.findViewById(R.id.dhcp_settings);
+        privacySetting.setSelection(DHCP_SPINNER_INDEX_SEND_DHCP_HOST_NAME_DISABLE);
+
+        WifiConfiguration config = mController.getConfig();
+        assertThat(config.isSendDhcpHostnameEnabled()).isEqualTo(false);
     }
 
     @Test

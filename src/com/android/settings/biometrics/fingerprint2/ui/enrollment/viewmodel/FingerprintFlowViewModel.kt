@@ -19,21 +19,28 @@ package com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintFlow
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.shareIn
+import kotlinx.coroutines.flow.update
 
-class FingerprintFlowViewModel(private val fingerprintFlowType: FingerprintFlow) : ViewModel() {
-  val fingerprintFlow: Flow<FingerprintFlow> =
-    flowOf(fingerprintFlowType).shareIn(viewModelScope, SharingStarted.Eagerly, 1)
+class FingerprintFlowViewModel() : ViewModel() {
+  val _mutableFingerprintFlow: MutableStateFlow<FingerprintFlow?> = MutableStateFlow(null)
+  val fingerprintFlow: Flow<FingerprintFlow?> =
+    _mutableFingerprintFlow.shareIn(viewModelScope, SharingStarted.Eagerly, 1)
 
-  class FingerprintFlowViewModelFactory(val flowType: FingerprintFlow) : ViewModelProvider.Factory {
+  /** Used to set the fingerprint flow type */
+  fun updateFlowType(fingerprintFlowType: FingerprintFlow) {
+    _mutableFingerprintFlow.update { fingerprintFlowType }
+  }
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-      return FingerprintFlowViewModel(flowType) as T
+  companion object {
+    val Factory: ViewModelProvider.Factory = viewModelFactory {
+      initializer { FingerprintFlowViewModel() }
     }
   }
 }

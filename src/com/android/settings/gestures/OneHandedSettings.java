@@ -23,9 +23,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityFragmentUtils;
 import com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -176,4 +181,12 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
                     return OneHandedSettingsUtils.isSupportOneHandedMode();
                 }
             };
+
+    @Override
+    public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
+            Bundle savedInstanceState) {
+        RecyclerView recyclerView =
+                super.onCreateRecyclerView(inflater, parent, savedInstanceState);
+        return AccessibilityFragmentUtils.addCollectionInfoToAccessibilityDelegate(recyclerView);
+    }
 }

@@ -35,6 +35,11 @@
         android:icon="@drawable/ic_info_outline_24dp"
         android:selectable="false"/>
 
+    <com.android.settingslib.widget.BannerMessagePreference
+        android:key="wep_less_secure_warning"
+        android:title="@string/wep_network_less_secure_warning_title"
+        settings:controller="com.android.settings.wifi.WepLessSecureWarningController"/>
+
     <!-- Buttons -->
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="buttons"
@@ -112,6 +117,10 @@
         android:title="@string/wifi_auto_connect_title"
         android:summary="@string/wifi_auto_connect_summary"/>
 
+    <com.android.settings.spa.preference.ComposePreference
+        android:key="certificate_details"
+        settings:controller="com.android.settings.wifi.details2.CertificateDetailsPreferenceController"/>
+
     <!-- Add device Preference -->
     <Preference
         android:key="add_device_to_network"
@@ -122,6 +131,9 @@
     <PreferenceCategory
             android:key="ip_details_category"
             android:title="@string/wifi_setup_detail">
+        <com.android.settings.spa.preference.ComposePreference
+            android:key="server_name"
+            settings:controller="com.android.settings.wifi.details2.ServerNamePreferenceController"/>
         <Preference
                 android:key="type"
                 android:title="@string/wifi_type_title"

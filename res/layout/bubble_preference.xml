@@ -15,13 +15,12 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:padding="@dimen/notification_importance_toggle_marginTop"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="@dimen/notification_importance_toggle_marginTop">
 
     <!-- If bubbles is managed by the admin this is used to inform the user. -->
     <TextView
@@ -30,102 +29,45 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/notification_importance_button_padding"
         android:textAppearance="@style/TextAppearance.Small"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
-    <com.android.settings.notification.NotificationButtonRelativeLayout
-        android:id="@+id/bubble_all"
+    <RadioGroup
+        android:id="@+id/radio_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/notification_importance_button_padding"
-        android:clickable="true"
-        android:focusable="true">
-        <ImageView
-            android:id="@+id/bubble_all_icon"
-            android:src="@drawable/ic_bubble_all"
-            android:background="@android:color/transparent"
-            android:layout_centerVertical="true"
+        android:checkedButton="@+id/redact_sensitive">
+
+        <RadioButton
+            android:id="@+id/bubble_all"
+            style="@style/SudRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="false"
-            android:focusable="false"/>
-        <TextView
-            android:id="@+id/bubble_all_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:clickable="false"
-            android:focusable="false"
-            android:layout_toEndOf="@id/bubble_all_icon"
-            android:layout_marginStart="@dimen/notification_importance_drawable_padding"
-            android:textAppearance="@style/TextAppearance.NotificationImportanceButton.Unselected"
-            android:text="@string/bubble_app_setting_all"/>
-    </com.android.settings.notification.NotificationButtonRelativeLayout>
+            android:layout_marginVertical="0dp"
+            android:fontFamily="@*android:string/config_headlineFontFamily"
+            android:minHeight="56dp"
+            android:text="@string/bubble_app_setting_all"
+            android:textColor="?android:attr/textColorSecondary" />
 
-    <com.android.settings.notification.NotificationButtonRelativeLayout
-        android:id="@+id/bubble_selected"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/notification_importance_button_padding"
-        android:layout_marginTop="@dimen/notification_importance_button_separation"
-        android:clickable="true"
-        android:focusable="true">
-        <ImageView
-            android:id="@+id/bubble_selected_icon"
-            android:src="@drawable/ic_bubble_selected"
-            android:background="@android:color/transparent"
-            android:layout_centerVertical="true"
+        <RadioButton
+            android:id="@+id/bubble_selected"
+            style="@style/SudRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="false"
-            android:focusable="false"/>
-        <TextView
-            android:id="@+id/bubble_selected_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:clickable="false"
-            android:focusable="false"
-            android:layout_toEndOf="@id/bubble_selected_icon"
-            android:layout_marginStart="@dimen/notification_importance_drawable_padding"
-            android:textAppearance="@style/TextAppearance.NotificationImportanceButton.Unselected"
-            android:text="@string/bubble_app_setting_selected"/>
-    </com.android.settings.notification.NotificationButtonRelativeLayout>
+            android:layout_marginVertical="0dp"
+            android:fontFamily="@*android:string/config_headlineFontFamily"
+            android:minHeight="56dp"
+            android:text="@string/bubble_app_setting_selected"
+            android:textColor="?android:attr/textColorSecondary" />
 
-    <com.android.settings.notification.NotificationButtonRelativeLayout
-        android:id="@+id/bubble_none"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/notification_importance_button_padding"
-        android:layout_marginTop="@dimen/notification_importance_button_separation"
-        android:clickable="true"
-        android:focusable="true">
-        <ImageView
-            android:id="@+id/bubble_none_icon"
-            android:src="@drawable/ic_bubble_none"
-            android:background="@android:color/transparent"
-            android:layout_centerVertical="true"
+        <RadioButton
+            android:id="@+id/bubble_none"
+            style="@style/SudRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="false"
-            android:focusable="false"/>
-        <TextView
-            android:id="@+id/bubble_none_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:clickable="false"
-            android:focusable="false"
-            android:layout_toEndOf="@id/bubble_none_icon"
-            android:layout_marginStart="@dimen/notification_importance_drawable_padding"
-            android:textAppearance="@style/TextAppearance.NotificationImportanceButton.Unselected"
-            android:text="@string/bubble_app_setting_none"/>
-    </com.android.settings.notification.NotificationButtonRelativeLayout>
-
+            android:layout_marginVertical="0dp"
+            android:fontFamily="@*android:string/config_headlineFontFamily"
+            android:minHeight="56dp"
+            android:text="@string/bubble_app_setting_none"
+            android:textColor="?android:attr/textColorSecondary" />
+    </RadioGroup>
 </LinearLayout>

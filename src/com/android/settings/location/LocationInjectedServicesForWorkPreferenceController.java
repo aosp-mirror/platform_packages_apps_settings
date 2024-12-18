@@ -22,6 +22,7 @@ import android.os.UserHandle;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.Utils;
 import com.android.settings.widget.RestrictedAppPreference;
 
 import java.util.List;
@@ -40,6 +41,7 @@ public class LocationInjectedServicesForWorkPreferenceController extends
 
     @Override
     protected void injectLocationServices(PreferenceScreen screen) {
+        final int managedProfileId = Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());
         final Map<Integer, List<Preference>> prefs = getLocationServices();
         for (Map.Entry<Integer, List<Preference>> entry : prefs.entrySet()) {
             for (Preference pref : entry.getValue()) {
@@ -47,7 +49,7 @@ public class LocationInjectedServicesForWorkPreferenceController extends
                     ((RestrictedAppPreference) pref).checkRestrictionAndSetDisabled();
                 }
             }
-            if (entry.getKey() != UserHandle.myUserId()) {
+            if (entry.getKey() == managedProfileId) {
                 LocationSettings.addPreferencesSorted(entry.getValue(), screen);
             }
         }

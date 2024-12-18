@@ -30,6 +30,7 @@ import com.android.settings.slices.SliceBuilderUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated(forRemoval = true)
 public class NfcPanel implements PanelContent {
 
     private final Context mContext;

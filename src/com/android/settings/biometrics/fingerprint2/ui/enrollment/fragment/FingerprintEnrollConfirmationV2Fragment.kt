@@ -20,8 +20,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -39,31 +39,11 @@ import kotlinx.coroutines.launch
  * This page will display basic information about what a fingerprint can be used for and acts as the
  * final step of enrollment.
  */
-class FingerprintEnrollConfirmationV2Fragment() :
+class FingerprintEnrollConfirmationV2Fragment(factory: ViewModelProvider.Factory? = null) :
   Fragment(R.layout.fingerprint_enroll_finish_base) {
 
-  companion object {
-    const val TAG = "FingerprintEnrollConfirmationV2Fragment"
-  }
-
-  /** Used for testing purposes */
-  private var factory: ViewModelProvider.Factory? = null
-
-  @VisibleForTesting
-  constructor(theFactory: ViewModelProvider.Factory) : this() {
-    factory = theFactory
-  }
-
-  private val viewModelProvider: ViewModelProvider by lazy {
-    if (factory != null) {
-      ViewModelProvider(requireActivity(), factory!!)
-    } else {
-      ViewModelProvider(requireActivity())
-    }
-  }
-
-  private val viewModel: FingerprintEnrollConfirmationViewModel by lazy {
-    viewModelProvider[FingerprintEnrollConfirmationViewModel::class.java]
+  private val viewModel: FingerprintEnrollConfirmationViewModel by activityViewModels {
+    factory ?: FingerprintEnrollConfirmationViewModel.Factory
   }
 
   override fun onCreateView(
@@ -105,5 +85,9 @@ class FingerprintEnrollConfirmationV2Fragment() :
   @Suppress("UNUSED_PARAMETER")
   private fun onNextButtonClick(view: View?) {
     viewModel.onNextButtonClicked()
+  }
+
+  companion object {
+    const val TAG = "FingerprintEnrollConfirmationV2Fragment"
   }
 }

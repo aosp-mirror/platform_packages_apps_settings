@@ -24,6 +24,10 @@ import static android.os.UserManager.USER_TYPE_PROFILE_PRIVATE;
 import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
 import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 
+import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_AUTHENTICATORS;
+import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_HIDE_BACKGROUND;
+import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -54,8 +58,11 @@ import android.graphics.drawable.AdaptiveIconDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
+import android.hardware.biometrics.BiometricManager;
+import android.hardware.biometrics.SensorProperties;
 import android.hardware.face.Face;
 import android.hardware.face.FaceManager;
+import android.hardware.face.FaceSensorPropertiesInternal;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.ConnectivityManager;
@@ -103,10 +110,14 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.core.graphics.Insets;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Lifecycle;
 
 import com.android.internal.app.UnlaunchableAppActivity;
@@ -116,6 +127,7 @@ import com.android.settings.dashboard.profileselector.ProfileFragmentBridge;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settingslib.widget.ActionBarShadowController;
 import com.android.settingslib.widget.AdaptiveIcon;
 
@@ -139,6 +151,8 @@ public final class Utils extends com.android.settingslib.Utils {
     public static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
 
     public static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
+
+    public static final String PHONE_PACKAGE_NAME = "com.android.phone";
 
     public static final String OS_PKG = "os";
 
@@ -184,6 +198,15 @@ public final class Utils extends com.android.settingslib.Utils {
     public static boolean isMonkeyRunning() {
         return ActivityManager.isUserAMonkey();
     }
+
+    /**
+     * Enum for returning biometric status.
+     * {@link OK} no error detected when requesting mandatory biometrics authentication
+     * {@link NOT_ACTIVE} mandatory biometrics is not active
+     * {@link LOCKOUT} biometric sensors are in lockout mode
+     * {@link ERROR} corresponds to other errors
+     */
+    public enum BiometricStatus {OK, NOT_ACTIVE, LOCKOUT, ERROR}
 
     /**
      * Returns whether the device is voice-capable (meaning, it is also a phone).
@@ -922,6 +945,23 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
+     * Return true if face is supported as Class 2 biometrics and above on the device, false
+     * otherwise.
+     */
+    public static boolean isFaceNotConvenienceBiometric(@NonNull Context context) {
+        FaceManager faceManager = getFaceManagerOrNull(context);
+        if (faceManager != null) {
+            final List<FaceSensorPropertiesInternal> faceProperties =
+                    faceManager.getSensorPropertiesInternal();
+            if (!faceProperties.isEmpty()) {
+                final FaceSensorPropertiesInternal props = faceProperties.get(0);
+                return props.sensorStrength != SensorProperties.STRENGTH_CONVENIENCE;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Launches an intent which may optionally have a user id defined.
      * @param fragment Fragment to use to launch the activity.
      * @param intent Intent to launch.
@@ -1228,6 +1268,7 @@ public final class Utils extends com.android.settingslib.Utils {
             UserProperties userProperties = userManager.getUserProperties(userHandle);
             if (userProperties.getShowInSettings() == UserProperties.SHOW_IN_SETTINGS_SEPARATE) {
                 if (Flags.allowPrivateProfile()
+                        && android.multiuser.Flags.enablePrivateSpaceFeatures()
                         && userProperties.getShowInQuietMode()
                         == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN) {
                     if (!userManager.isQuietModeEnabled(userHandle)) {
@@ -1288,7 +1329,8 @@ public final class Utils extends com.android.settingslib.Utils {
      */
     @ColorInt
     public static int getHomepageIconColor(Context context) {
-        return getColorAttrDefaultColor(context, android.R.attr.textColorPrimary);
+        return getColorAttrDefaultColor(
+                context, com.android.internal.R.attr.materialColorOnSurface);
     }
 
     /**
@@ -1363,6 +1405,50 @@ public final class Utils extends com.android.settingslib.Utils {
         }
     }
 
+    /**
+     * Returns true if the user should be hidden in Settings when it's in quiet mode.
+     */
+    public static boolean shouldHideUser(
+            @NonNull UserHandle userHandle, @NonNull UserManager userManager) {
+        UserProperties userProperties = userManager.getUserProperties(userHandle);
+        return userProperties.getShowInQuietMode() == UserProperties.SHOW_IN_QUIET_MODE_HIDDEN
+                && userManager.isQuietModeEnabled(userHandle);
+    }
+
+    /**
+     * Returns true if the userId is a private profile, false otherwise.
+     */
+    public static boolean isPrivateProfile(int userId, @NonNull Context context) {
+        final UserManager userManager = context.getSystemService(UserManager.class);
+        UserInfo userInfo = userManager.getUserInfo(userId);
+        return Flags.allowPrivateProfile() && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && userInfo.isPrivateProfile();
+    }
+
+    /**
+     * Enable new edge to edge feature.
+     *
+     * @param activity the Activity need to setup the edge to edge feature.
+     */
+    public static void setupEdgeToEdge(@NonNull FragmentActivity activity) {
+        ViewCompat.setOnApplyWindowInsetsListener(activity.findViewById(android.R.id.content),
+                (v, windowInsets) -> {
+                    final Insets insets = windowInsets.getInsets(
+                            WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime()
+                                    | WindowInsetsCompat.Type.displayCutout());
+                    int newInsetsTop = activity.getWindow().getDecorView().getRootWindowInsets()
+                            .getInsets(WindowInsetsCompat.Type.statusBars()
+                                    | WindowInsetsCompat.Type.captionBar()).top;
+
+                    // Apply the insets paddings to the view.
+                    v.setPadding(insets.left, newInsetsTop, insets.right, insets.bottom);
+
+                    // Return CONSUMED if you don't want the window insets to keep being
+                    // passed down to descendant views.
+                    return WindowInsetsCompat.CONSUMED;
+                });
+    }
+
     private static FaceManager.RemovalCallback faceManagerRemovalCallback(int userId) {
         return new FaceManager.RemovalCallback() {
             @Override
@@ -1394,5 +1480,124 @@ public final class Utils extends com.android.settingslib.Utils {
                 }
             }
         };
+    }
+
+    /**
+     * Disables the launcher icon and shortcut picker component for the Settings app corresponding
+     * to the context user.
+     */
+    public static void disableComponentsToHideSettings(@NonNull Context context,
+            @NonNull PackageManager pm) {
+        // Disable settings app launcher icon
+        disableComponent(pm, new ComponentName(context, Settings.class));
+
+        //Disable Shortcut picker
+        disableComponent(pm, new ComponentName(context, Settings.CreateShortcutActivity.class));
+    }
+
+    /**
+     * Request biometric authentication if all requirements for mandatory biometrics is satisfied.
+     *
+     * @param context                           of the corresponding activity/fragment
+     * @param biometricsAuthenticationRequested if the activity/fragment has already requested for
+     *                                          biometric prompt
+     * @param userId                            user id for the authentication request
+     * @return biometric status when mandatory biometrics authentication is requested
+     */
+    public static BiometricStatus requestBiometricAuthenticationForMandatoryBiometrics(
+            @NonNull Context context, boolean biometricsAuthenticationRequested, int userId) {
+        final BiometricManager biometricManager = context.getSystemService(BiometricManager.class);
+        if (biometricManager == null) {
+            Log.e(TAG, "Biometric Manager is null.");
+            return BiometricStatus.NOT_ACTIVE;
+        }
+        if (android.hardware.biometrics.Flags.mandatoryBiometrics()
+                && !biometricsAuthenticationRequested) {
+            final UserManager userManager = context.getSystemService(
+                    UserManager.class);
+            final int status = biometricManager.canAuthenticate(getEffectiveUserId(
+                    userManager, userId), BiometricManager.Authenticators.MANDATORY_BIOMETRICS);
+            switch(status) {
+                case BiometricManager.BIOMETRIC_SUCCESS:
+                    return BiometricStatus.OK;
+                case BiometricManager.BIOMETRIC_ERROR_LOCKOUT:
+                    return BiometricStatus.LOCKOUT;
+                case BiometricManager.BIOMETRIC_ERROR_MANDATORY_NOT_ACTIVE:
+                case BiometricManager.BIOMETRIC_ERROR_NOT_ENABLED_FOR_APPS:
+                    return BiometricStatus.NOT_ACTIVE;
+                default:
+                    return BiometricStatus.ERROR;
+            }
+        }
+        return BiometricStatus.NOT_ACTIVE;
+    }
+
+    /**
+     * Launch biometric prompt for mandatory biometrics. Call
+     * {@link #requestBiometricAuthenticationForMandatoryBiometrics(Context, boolean, int)}
+     * to check if all requirements for mandatory biometrics is satisfied
+     * before launching biometric prompt.
+     *
+     * @param fragment       corresponding fragment of the surface
+     * @param requestCode    for starting the new activity
+     * @param userId         user id for the authentication request
+     * @param hideBackground if the background activity screen needs to be hidden
+     */
+    public static void launchBiometricPromptForMandatoryBiometrics(@NonNull Fragment fragment,
+            int requestCode, int userId, boolean hideBackground) {
+        final UserManager userManager = (UserManager) fragment.getContext().getSystemService(
+                UserManager.class);
+        fragment.startActivityForResult(getIntentForBiometricAuthentication(fragment.getResources(),
+                getEffectiveUserId(userManager, userId), hideBackground), requestCode);
+    }
+
+    /**
+     * Launch biometric prompt for mandatory biometrics. Call
+     * {@link #requestBiometricAuthenticationForMandatoryBiometrics(Context, boolean, int)}
+     * to check if all requirements for mandatory biometrics is satisfied
+     * before launching biometric prompt.
+     *
+     * @param activity       corresponding activity of the surface
+     * @param requestCode    for starting the new activity
+     * @param userId         user id for the authentication request
+     * @param hideBackground if the background activity screen needs to be hidden
+     */
+    public static void launchBiometricPromptForMandatoryBiometrics(@NonNull Activity activity,
+            int requestCode, int userId, boolean hideBackground) {
+        final UserManager userManager = activity.getSystemService(UserManager.class);
+        activity.startActivityForResult(getIntentForBiometricAuthentication(
+                activity.getResources(), getEffectiveUserId(userManager, userId),
+                hideBackground), requestCode);
+    }
+
+    private static int getEffectiveUserId(UserManager userManager, int userId) {
+        if (userManager != null) {
+            return userManager.getCredentialOwnerProfile(userId);
+        }
+        return userId;
+    }
+
+    private static Intent getIntentForBiometricAuthentication(Resources resources,
+            int effectiveUserId, boolean hideBackground) {
+        final Intent intent = new Intent();
+        if (android.hardware.biometrics.Flags.mandatoryBiometrics()) {
+            intent.putExtra(BIOMETRIC_PROMPT_AUTHENTICATORS,
+                    BiometricManager.Authenticators.MANDATORY_BIOMETRICS);
+        }
+        intent.putExtra(BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT,
+                resources.getString(R.string.cancel));
+        intent.putExtra(KeyguardManager.EXTRA_DESCRIPTION,
+                resources.getString(R.string.mandatory_biometrics_prompt_description));
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_ALLOW_ANY_USER, true);
+        intent.putExtra(EXTRA_USER_ID, effectiveUserId);
+        intent.putExtra(BIOMETRIC_PROMPT_HIDE_BACKGROUND, hideBackground);
+        intent.setClassName(SETTINGS_PACKAGE_NAME,
+                ConfirmDeviceCredentialActivity.InternalActivity.class.getName());
+        return intent;
+    }
+
+    private static void disableComponent(PackageManager pm, ComponentName componentName) {
+        pm.setComponentEnabledSetting(componentName,
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
     }
 }

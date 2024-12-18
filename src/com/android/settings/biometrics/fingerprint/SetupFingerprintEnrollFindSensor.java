@@ -51,7 +51,7 @@ public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSenso
         SetupWizardUtils.copySetupExtras(getIntent(), intent);
         if (Flags.udfpsEnrollCalibration()) {
             if (mCalibrator != null) {
-                intent.putExtras(mCalibrator.getExtrasForNextIntent(true));
+                intent.putExtras(mCalibrator.getExtrasForNextIntent());
             }
         }
         return intent;

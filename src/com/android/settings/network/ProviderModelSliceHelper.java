@@ -264,7 +264,8 @@ public class ProviderModelSliceHelper {
         }
         String summary = networkTypeDescription;
         if (isDataSimActive()) {
-            summary = mContext.getString(R.string.preference_summary_default_combination,
+            summary = mContext.getString(
+                    com.android.settingslib.R.string.preference_summary_default_combination,
                     mContext.getString(R.string.mobile_data_connection_active),
                     networkTypeDescription);
         }

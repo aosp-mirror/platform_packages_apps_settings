@@ -41,8 +41,11 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityGestureNavigationTutorial;
+import com.android.settings.accessibility.AccessibilityShortcutsTutorial;
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
@@ -99,7 +102,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
             mA11yTutorialDialogShown =
                     savedInstanceState.getBoolean(KEY_SHOW_A11Y_TUTORIAL_DIALOG, false);
             if (mA11yTutorialDialogShown) {
-                AccessibilityGestureNavigationTutorial.showGestureNavigationTutorialDialog(
+                AccessibilityShortcutsTutorial.showGestureNavigationTutorialDialog(
                         getContext(), dialog -> mA11yTutorialDialogShown = false);
             }
         }
@@ -147,14 +150,20 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
         screen.addPreference(mVideoPreference);
+        addPreferencesFromResource(getPreferenceScreenResId());
+        final List<BasePreferenceController> preferenceControllers = PreferenceControllerListHelper
+                .getPreferenceControllersFromXml(getContext(), getPreferenceScreenResId());
+        preferenceControllers.forEach(controller -> {
+            controller.updateState(findPreference(controller.getPreferenceKey()));
+            controller.displayPreference(screen);
+        });
 
         final List<? extends CandidateInfo> candidateList = getCandidates();
         if (candidateList == null) {
             return;
         }
         for (CandidateInfo info : candidateList) {
-            SelectorWithWidgetPreference pref =
-                    new SelectorWithWidgetPreference(getPrefContext());
+            SelectorWithWidgetPreference pref = new SelectorWithWidgetPreference(getPrefContext());
             bindPreference(pref, info.getKey(), info, defaultKey);
             bindPreferenceExtra(pref, info.getKey(), info, defaultKey, systemDefaultKey);
             screen.addPreference(pref);
@@ -173,11 +182,15 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
 
         if (KEY_SYSTEM_NAV_GESTURAL.equals(info.getKey())) {
             pref.setExtraWidgetOnClickListener((v) -> startActivity(new Intent(
-                    GestureNavigationSettingsFragment.GESTURE_NAVIGATION_SETTINGS)));
+                    GestureNavigationSettingsFragment.GESTURE_NAVIGATION_SETTINGS)
+                    .setPackage(getContext().getPackageName())));
         }
 
-        if (KEY_SYSTEM_NAV_2BUTTONS.equals(info.getKey()) || KEY_SYSTEM_NAV_3BUTTONS.equals(
-                info.getKey())) {
+        if ((KEY_SYSTEM_NAV_2BUTTONS.equals(info.getKey())
+                || KEY_SYSTEM_NAV_3BUTTONS.equals(info.getKey()))
+                // Don't add the settings button if that page will be blank.
+                && !PreferenceControllerListHelper.areAllPreferencesUnavailable(
+                        getContext(), getPreferenceManager(), R.xml.button_navigation_settings)) {
             pref.setExtraWidgetOnClickListener((v) ->
                     new SubSettingLauncher(getContext())
                             .setDestination(ButtonNavigationSettingsFragment.class.getName())
@@ -247,6 +260,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         switch (systemNavKey) {
             case KEY_SYSTEM_NAV_GESTURAL:
                 if (isGestureTutorialAvailable()){
+                    videoPref.setContentDescription(R.string.nav_tutorial_button_description);
                     videoPref.setOnPreferenceClickListener(preference -> {
                         startActivity(mLaunchSandboxIntent);
                         return true;
@@ -343,7 +357,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
                 && !isAccessibilityFloatingMenuEnabled()
                 && (isAnyServiceSupportAccessibilityButton() || isNavBarMagnificationEnabled())) {
             mA11yTutorialDialogShown = true;
-            AccessibilityGestureNavigationTutorial.showGestureNavigationTutorialDialog(getContext(),
+            AccessibilityShortcutsTutorial.showGestureNavigationTutorialDialog(getContext(),
                     dialog -> mA11yTutorialDialogShown = false);
         } else {
             mA11yTutorialDialogShown = false;
@@ -353,7 +367,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
     private boolean isAnyServiceSupportAccessibilityButton() {
         final AccessibilityManager ams = getContext().getSystemService(AccessibilityManager.class);
         final List<String> targets = ams.getAccessibilityShortcutTargets(
-                AccessibilityManager.ACCESSIBILITY_BUTTON);
+                ShortcutConstants.UserShortcutType.SOFTWARE);
         return !targets.isEmpty();
     }
 

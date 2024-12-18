@@ -138,6 +138,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_REMOVE_GUEST_ON_EXIT = "remove_guest_on_exit";
     private static final String KEY_GUEST_USER_CATEGORY = "guest_user_category";
     private static final String KEY_ALLOW_MULTIPLE_USERS = "allow_multiple_users";
+    private static final String KEY_USER_SETTINGS_SCREEN = "user_settings_screen";
 
     private static final String SETTING_GUEST_HAS_LOGGED_IN = "systemui.guest_has_logged_in";
 
@@ -286,7 +287,7 @@ public class UserSettings extends SettingsPreferenceFragment
         final SettingsActivity activity = (SettingsActivity) getActivity();
         final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
         switchBar.setTitle(getContext().getString(R.string.multiple_users_main_switch_title));
-        if (isCurrentUserAdmin()) {
+        if (!mUserCaps.mIsGuest) {
             switchBar.show();
         } else {
             switchBar.hide();
@@ -368,9 +369,6 @@ public class UserSettings extends SettingsPreferenceFragment
         mMePreference = new UserPreference(getPrefContext(), null /* attrs */, myUserId);
         mMePreference.setKey(KEY_USER_ME);
         mMePreference.setOnPreferenceClickListener(this);
-        if (isCurrentUserAdmin()) {
-            mMePreference.setSummary(R.string.user_admin);
-        }
 
         mGuestCategory = findPreference(KEY_GUEST_CATEGORY);
 
@@ -421,6 +419,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 mTimeoutToDockUserPreferenceController.getPreferenceKey()));
         mRemoveGuestOnExitPreferenceController.updateState(screen.findPreference(
                 mRemoveGuestOnExitPreferenceController.getPreferenceKey()));
+        mSwitchBarController.updateState();
         if (mShouldUpdateUserList) {
             updateUI();
         }
@@ -465,7 +464,8 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         int pos = 0;
-        if (!isCurrentUserAdmin() && canSwitchUserNow() && !isCurrentUserGuest()) {
+        if (!isCurrentUserAdmin() && (canSwitchUserNow() || Flags.newMultiuserSettingsUx())
+                && !isCurrentUserGuest()) {
             String nickname = mUserManager.getUserName();
             MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, pos++,
                     getResources().getString(R.string.user_remove_user_menu, nickname));
@@ -555,7 +555,8 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void launchChooseLockscreen() {
-        Intent chooseLockIntent = new Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD);
+        Intent chooseLockIntent = new Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD)
+                .setPackage(getContext().getPackageName());
         chooseLockIntent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS,
                 true);
         startActivityForResult(chooseLockIntent, REQUEST_CHOOSE_LOCK);
@@ -919,7 +920,7 @@ public class UserSettings extends SettingsPreferenceFragment
             d = mCreateUserDialogController.createDialog(
                     getActivity(),
                     this::startActivityForResult,
-                    UserManager.isMultipleAdminEnabled(),
+                    canCreateAdminUser(),
                     (userName, userIcon, isAdmin) -> {
                         mPendingUserIcon = userIcon;
                         mPendingUserName = userName;
@@ -935,6 +936,19 @@ public class UserSettings extends SettingsPreferenceFragment
             );
         }
         return d;
+    }
+
+    /**
+     * Checks if the creation of a new admin user is allowed.
+     * @return {@code true} if creating a new admin is allowed, {@code false} otherwise.
+     */
+    private boolean canCreateAdminUser() {
+        if (Flags.unicornModeRefactoringForHsumReadOnly()) {
+            return UserManager.isMultipleAdminEnabled()
+                    && !mUserManager.hasUserRestriction(UserManager.DISALLOW_GRANT_ADMIN);
+        } else {
+            return UserManager.isMultipleAdminEnabled();
+        }
     }
 
     @Override
@@ -1199,15 +1213,23 @@ public class UserSettings extends SettingsPreferenceFragment
         }
 
         List<UserInfo> users;
-        if (mUserCaps.mUserSwitcherEnabled) {
+        if (Flags.newMultiuserSettingsUx()) {
             // Only users that can be switched to should show up here.
             // e.g. Managed profiles appear under Accounts Settings instead
             users = mUserManager.getAliveUsers().stream()
                     .filter(UserInfo::supportsSwitchToByUser)
                     .collect(Collectors.toList());
         } else {
-            // Only current user will be displayed in case of multi-user switch is disabled
-            users = List.of(mUserManager.getUserInfo(context.getUserId()));
+            if (mUserCaps.mUserSwitcherEnabled) {
+                // Only users that can be switched to should show up here.
+                // e.g. Managed profiles appear under Accounts Settings instead
+                users = mUserManager.getAliveUsers().stream()
+                        .filter(UserInfo::supportsSwitchToByUser)
+                        .collect(Collectors.toList());
+            } else {
+                // Only current user will be displayed in case of multi-user switch is disabled
+                users = List.of(mUserManager.getUserInfo(context.getUserId()));
+            }
         }
 
         final ArrayList<Integer> missingIcons = new ArrayList<>();
@@ -1240,12 +1262,14 @@ public class UserSettings extends SettingsPreferenceFragment
                 pref.setEnabled(canOpenUserDetails);
                 pref.setSelectable(true);
                 pref.setKey("id=" + user.id);
-                if (user.isAdmin()) {
-                    pref.setSummary(R.string.user_admin);
-                }
             }
             if (pref == null) {
                 continue;
+            }
+            if (user.isMain()) {
+                pref.setSummary(R.string.user_owner);
+            } else if (user.isAdmin()) {
+                pref.setSummary(R.string.user_admin);
             }
             if (user.id != UserHandle.myUserId() && !user.isGuest() && !user.isInitialized()) {
                 // sometimes after creating a guest the initialized flag isn't immediately set
@@ -1256,7 +1280,10 @@ public class UserSettings extends SettingsPreferenceFragment
                     pref.setSummary(R.string.user_summary_not_set_up);
                     // Disallow setting up user which results in user switching when the
                     // restriction is set.
-                    pref.setEnabled(!mUserCaps.mDisallowSwitchUser && canSwitchUserNow());
+                    // If newMultiuserSettingsUx flag is enabled, allow opening user details page
+                    // since switch to user will be disabled
+                    pref.setEnabled((!mUserCaps.mDisallowSwitchUser && canSwitchUserNow())
+                            || Flags.newMultiuserSettingsUx());
                 }
             } else if (user.isRestricted()) {
                 pref.setSummary(R.string.user_summary_restricted_profile);
@@ -1416,16 +1443,22 @@ public class UserSettings extends SettingsPreferenceFragment
                             getContext().getResources(), icon)));
             pref.setKey(KEY_USER_GUEST);
             pref.setOrder(Preference.DEFAULT_ORDER);
-            if (mUserCaps.mDisallowSwitchUser) {
+            if (mUserCaps.mDisallowSwitchUser && !Flags.newMultiuserSettingsUx()) {
                 pref.setDisabledByAdmin(
                         RestrictedLockUtilsInternal.getDeviceOwner(context));
             } else {
                 pref.setDisabledByAdmin(null);
             }
-            if (mUserCaps.mUserSwitcherEnabled) {
+            if (Flags.newMultiuserSettingsUx()) {
                 mGuestUserCategory.addPreference(pref);
                 // guest user preference is shown hence also make guest category visible
                 mGuestUserCategory.setVisible(true);
+            } else {
+                if (mUserCaps.mUserSwitcherEnabled) {
+                    mGuestUserCategory.addPreference(pref);
+                    // guest user preference is shown hence also make guest category visible
+                    mGuestUserCategory.setVisible(true);
+                }
             }
             isGuestAlreadyCreated = true;
         }
@@ -1449,10 +1482,11 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private boolean updateAddGuestPreference(Context context, boolean isGuestAlreadyCreated) {
         boolean isVisible = false;
-        if (!isGuestAlreadyCreated && mUserCaps.mCanAddGuest
+        if (!isGuestAlreadyCreated && (mUserCaps.mCanAddGuest
+                || (Flags.newMultiuserSettingsUx() && mUserCaps.mDisallowAddUser))
                 && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_GUEST)
                 && WizardManagerHelper.isDeviceProvisioned(context)
-                && mUserCaps.mUserSwitcherEnabled) {
+                && (mUserCaps.mUserSwitcherEnabled || Flags.newMultiuserSettingsUx())) {
             Drawable icon = context.getDrawable(
                     com.android.settingslib.R.drawable.ic_account_circle);
             mAddGuest.setIcon(centerAndTint(icon));
@@ -1465,7 +1499,25 @@ public class UserSettings extends SettingsPreferenceFragment
                 mAddGuest.setEnabled(false);
             } else {
                 mAddGuest.setTitle(com.android.settingslib.R.string.guest_new_guest);
-                mAddGuest.setEnabled(canSwitchUserNow());
+                if (Flags.newMultiuserSettingsUx()
+                        && mUserCaps.mDisallowAddUserSetByAdmin) {
+                    mAddGuest.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
+                } else if (Flags.newMultiuserSettingsUx() && mUserCaps.mDisallowAddUser) {
+                    final List<UserManager.EnforcingUser> enforcingUsers =
+                            mUserManager.getUserRestrictionSources(UserManager.DISALLOW_ADD_USER,
+                                    UserHandle.of(UserHandle.myUserId()));
+                    if (!enforcingUsers.isEmpty()) {
+                        final UserManager.EnforcingUser enforcingUser = enforcingUsers.get(0);
+                        final int restrictionSource = enforcingUser.getUserRestrictionSource();
+                        if (restrictionSource == UserManager.RESTRICTION_SOURCE_SYSTEM) {
+                            mAddGuest.setEnabled(false);
+                        } else {
+                            mAddGuest.setVisible(false);
+                        }
+                    }
+                } else {
+                    mAddGuest.setEnabled(canSwitchUserNow() || Flags.newMultiuserSettingsUx());
+                }
             }
         } else {
             mAddGuest.setVisible(false);
@@ -1493,16 +1545,18 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void updateAddUserCommon(Context context, RestrictedPreference addUser,
             boolean canAddRestrictedProfile) {
-        if ((mUserCaps.mCanAddUser && !mUserCaps.mDisallowAddUserSetByAdmin)
+        if ((mUserCaps.mCanAddUser
+                && !(mUserCaps.mDisallowAddUserSetByAdmin && Flags.newMultiuserSettingsUx()))
                 && WizardManagerHelper.isDeviceProvisioned(context)
-                && mUserCaps.mUserSwitcherEnabled) {
+                && (mUserCaps.mUserSwitcherEnabled || Flags.newMultiuserSettingsUx())) {
             addUser.setVisible(true);
             addUser.setSelectable(true);
             final boolean canAddMoreUsers =
                     mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_SECONDARY)
                             || (canAddRestrictedProfile
                             && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_RESTRICTED));
-            addUser.setEnabled(canAddMoreUsers && !mAddingUser && canSwitchUserNow());
+            addUser.setEnabled(canAddMoreUsers && !mAddingUser
+                    && (canSwitchUserNow() || Flags.newMultiuserSettingsUx()));
 
             if (!canAddMoreUsers) {
                 addUser.setSummary(getString(R.string.user_add_max_count));
@@ -1512,6 +1566,23 @@ public class UserSettings extends SettingsPreferenceFragment
             if (addUser.isEnabled()) {
                 addUser.setDisabledByAdmin(
                         mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
+            }
+        } else if (Flags.newMultiuserSettingsUx() && mUserCaps.mDisallowAddUserSetByAdmin) {
+            addUser.setVisible(true);
+            addUser.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
+        } else if (Flags.newMultiuserSettingsUx() && mUserCaps.mDisallowAddUser) {
+            final List<UserManager.EnforcingUser> enforcingUsers =
+                    mUserManager.getUserRestrictionSources(UserManager.DISALLOW_ADD_USER,
+                            UserHandle.of(UserHandle.myUserId()));
+            if (!enforcingUsers.isEmpty()) {
+                final UserManager.EnforcingUser enforcingUser = enforcingUsers.get(0);
+                final int restrictionSource = enforcingUser.getUserRestrictionSource();
+                if (restrictionSource == UserManager.RESTRICTION_SOURCE_SYSTEM) {
+                    addUser.setVisible(true);
+                    addUser.setEnabled(false);
+                } else {
+                    addUser.setVisible(false);
+                }
             }
         } else {
             addUser.setVisible(false);
@@ -1739,6 +1810,16 @@ public class UserSettings extends SettingsPreferenceFragment
                     if (!UserManager.supportsMultipleUsers()) {
                         return rawData;
                     }
+
+                    SearchIndexableRaw multipleUsersData = new SearchIndexableRaw(context);
+                    multipleUsersData.key = KEY_USER_SETTINGS_SCREEN;
+                    multipleUsersData.title =
+                            context.getString(R.string.user_settings_title);
+                    multipleUsersData.keywords =
+                            context.getString(R.string.multiple_users_title_keywords);
+                    multipleUsersData.screenTitle =
+                            context.getString(R.string.user_settings_title);
+                    rawData.add(multipleUsersData);
 
                     SearchIndexableRaw allowMultipleUsersResult = new SearchIndexableRaw(context);
 

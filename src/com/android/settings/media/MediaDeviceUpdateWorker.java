@@ -81,7 +81,7 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         mIsTouched = false;
         if (mLocalMediaManager == null || !TextUtils.equals(mPackageName,
                 mLocalMediaManager.getPackageName())) {
-            mLocalMediaManager = new LocalMediaManager(mContext, mPackageName, null);
+            mLocalMediaManager = new LocalMediaManager(mContext, mPackageName);
         }
 
         // Delaying initialization to allow mocking in Roboelectric tests.

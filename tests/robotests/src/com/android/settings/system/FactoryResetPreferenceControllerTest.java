@@ -46,7 +46,6 @@ import com.google.common.collect.ImmutableList;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -107,7 +106,6 @@ public class FactoryResetPreferenceControllerTest {
                 Settings.Global.DEVICE_DEMO_MODE, 0);
     }
 
-    @Ignore("b/314930928")
     @Test
     public void isAvailable_systemUser() {
         when(mUserManager.isAdminUser()).thenReturn(true);
@@ -147,10 +145,13 @@ public class FactoryResetPreferenceControllerTest {
 
     @Test
     @RequiresFlagsEnabled(com.android.settings.factory_reset.Flags.FLAG_ENABLE_FACTORY_RESET_WIZARD)
-    public void handlePreference_factoryResetWizardEnabled() {
+    public void handlePreference_factoryResetWizardEnabled()
+            throws PackageManager.NameNotFoundException {
         ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
+        verify(mPackageManager).getPackageInfo(eq(FACTORY_RESET_APP_PACKAGE),
+                eq(PackageManager.GET_PERMISSIONS));
         verify(mFactoryResetLauncher).launch(intentArgumentCaptor.capture());
         assertThat(intentArgumentCaptor.getValue()).isNotNull();
         assertThat(intentArgumentCaptor.getValue().getAction())

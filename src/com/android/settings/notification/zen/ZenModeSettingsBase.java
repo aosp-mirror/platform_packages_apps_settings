@@ -29,6 +29,7 @@ import android.util.Log;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -59,7 +60,12 @@ abstract public class ZenModeSettingsBase extends RestrictedDashboardFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
-        mBackend = ZenModeBackend.getInstance(mContext);
+        setBackend(ZenModeBackend.getInstance(mContext));
+    }
+
+    @VisibleForTesting
+    void setBackend(ZenModeBackend backend) {
+        mBackend = backend;
     }
 
     @Override

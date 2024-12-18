@@ -16,9 +16,9 @@
 
 package com.android.settings.localepicker;
 
-import android.app.GrammaticalInflectionManager;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
@@ -26,18 +26,24 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.TickButtonPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 public abstract class TermsOfAddressBaseController extends BasePreferenceController {
 
+    private static final Executor sExecutor = Executors.newSingleThreadExecutor();
     private PreferenceScreen mPreferenceScreen;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private TickButtonPreference mPreference;
-    private GrammaticalInflectionManager mGrammaticalInflectionManager;
+    private TermsOfAddressHelper mTermsOfAddressHelper;
 
     public TermsOfAddressBaseController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
-        mGrammaticalInflectionManager = context.getSystemService(
-                GrammaticalInflectionManager.class);
+    }
+
+    public void setTermsOfAddressHelper(@NonNull TermsOfAddressHelper termsOfAddressHelper) {
+        mTermsOfAddressHelper = termsOfAddressHelper;
     }
 
     @Override
@@ -46,8 +52,11 @@ public abstract class TermsOfAddressBaseController extends BasePreferenceControl
         mPreferenceScreen = screen;
         mPreference = screen.findPreference(getPreferenceKey());
         mPreference.setOnPreferenceClickListener(clickedPref -> {
-            mGrammaticalInflectionManager.setSystemWideGrammaticalGender(
-                    getGrammaticalGenderType());
+            sExecutor.execute(
+                    () -> {
+                        mTermsOfAddressHelper.setSystemGrammaticalGender(
+                                getGrammaticalGenderType());
+                    });
             setSelected(mPreference);
             mMetricsFeatureProvider.action(mContext, getMetricsActionKey());
             return true;
@@ -67,8 +76,7 @@ public abstract class TermsOfAddressBaseController extends BasePreferenceControl
             return;
         }
         mPreference.setSelected(
-                mGrammaticalInflectionManager.getSystemGrammaticalGender()
-                        == getGrammaticalGenderType());
+                mTermsOfAddressHelper.getSystemGrammaticalGender() == getGrammaticalGenderType());
     }
 
     @Override

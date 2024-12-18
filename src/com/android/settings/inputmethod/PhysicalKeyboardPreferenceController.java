@@ -67,6 +67,7 @@ public class PhysicalKeyboardPreferenceController extends AbstractPreferenceCont
             return false;
         }
         Intent intent = new Intent(Settings.ACTION_HARD_KEYBOARD_SETTINGS);
+        intent.setPackage(mContext.getPackageName());
         intent.putExtra(Settings.EXTRA_ENTRYPOINT, SettingsEnums.KEYBOARD_SETTINGS);
         mContext.startActivity(intent);
         return true;

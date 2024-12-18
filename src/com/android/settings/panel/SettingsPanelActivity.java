@@ -42,7 +42,10 @@ import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 /**
  * Dialog Activity to host Settings Slices.
+ *
+ * @deprecated this is no longer used after V and will be removed.
  */
+@Deprecated(forRemoval = true)
 public class SettingsPanelActivity extends FragmentActivity {
 
     private static final String TAG = "SettingsPanelActivity";

@@ -45,7 +45,6 @@ import com.android.settingslib.widget.AppPreference;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * Adds a preference to the PreferenceScreen for each notification channel that can bypass DND.
  */
@@ -107,7 +106,10 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
             return;
         }
 
-        ApplicationsState.AppFilter filter = ApplicationsState.FILTER_ALL_ENABLED;
+        ApplicationsState.AppFilter filter = android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
+                ? ApplicationsState.FILTER_ENABLED_NOT_QUIET
+                : ApplicationsState.FILTER_ALL_ENABLED;
         mAppSession.rebuild(filter, ApplicationsState.ALPHA_COMPARATOR);
     }
 

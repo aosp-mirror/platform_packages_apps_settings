@@ -21,6 +21,8 @@ import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_CACHED;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_DYNAMIC;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED_BY_ANY_LAUNCHER;
 
+import static com.android.server.notification.Flags.notificationHideUnusedChannels;
+
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
@@ -78,6 +80,9 @@ public class NotificationBackend {
 
     public AppRow loadAppRow(Context context, PackageManager pm, ApplicationInfo app) {
         final AppRow row = new AppRow();
+        if (notificationHideUnusedChannels()) {
+            row.showAllChannels = false;
+        }
         row.pkg = app.packageName;
         row.uid = app.uid;
         try {
@@ -686,5 +691,6 @@ public class NotificationBackend {
         public int channelCount;
         public Map<String, NotificationsSentState> sentByChannel;
         public NotificationsSentState sentByApp;
+        public boolean showAllChannels = true;
     }
 }

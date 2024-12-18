@@ -32,6 +32,7 @@ public class UserCapabilities {
     boolean mEnabled = true;
     boolean mCanAddUser = true;
     boolean mCanAddRestrictedProfile;
+    boolean mIsMain;
     boolean mIsAdmin;
     boolean mIsGuest;
     boolean mIsEphemeral;
@@ -57,6 +58,7 @@ public class UserCapabilities {
         final UserInfo myUserInfo = userManager.getUserInfo(UserHandle.myUserId());
         caps.mIsGuest = myUserInfo.isGuest();
         caps.mIsAdmin = myUserInfo.isAdmin();
+        caps.mIsMain = myUserInfo.isMain();
         caps.mIsEphemeral = myUserInfo.isEphemeral();
         DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
@@ -74,6 +76,9 @@ public class UserCapabilities {
     public void updateAddUserCapabilities(Context context) {
         final UserManager userManager =
                 (UserManager) context.getSystemService(Context.USER_SERVICE);
+        final UserInfo myUserInfo = userManager.getUserInfo(UserHandle.myUserId());
+        mIsAdmin = myUserInfo.isAdmin();
+
         mEnforcedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(context,
                 UserManager.DISALLOW_ADD_USER, UserHandle.myUserId());
         final boolean hasBaseUserRestriction = RestrictedLockUtilsInternal.hasBaseUserRestriction(

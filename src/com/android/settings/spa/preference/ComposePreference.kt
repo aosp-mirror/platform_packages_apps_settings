@@ -47,6 +47,7 @@ open class ComposePreference @JvmOverloads constructor(
 
     init {
         layoutResource = R.layout.preference_compose
+        isSelectable = false
     }
 
     override fun onBindViewHolder(holder: PreferenceViewHolder) {

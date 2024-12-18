@@ -122,6 +122,7 @@ public class SimDialogActivity extends FragmentActivity {
 
     private void showOrUpdateDialog() {
         final int dialogType = getIntent().getIntExtra(DIALOG_TYPE_KEY, INVALID_PICK);
+        Log.d(TAG, "dialogType:" + dialogType);
 
         if (dialogType == PICK_DISMISS) {
             finishAndRemoveTask();
@@ -359,6 +360,7 @@ public class SimDialogActivity extends FragmentActivity {
                 TelephonyManager.class).createForSubscriptionId(subId);
         subscriptionManager.setDefaultDataSubId(subId);
         if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            Log.d(TAG, "setDataEnabledForReason true");
             telephonyManager.setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER,
                     true);
             Toast.makeText(this, R.string.data_switch_started, Toast.LENGTH_LONG).show();
@@ -378,8 +380,6 @@ public class SimDialogActivity extends FragmentActivity {
 
     private void setPreferredSim(final int subId) {
         setDefaultDataSubId(subId);
-        setDefaultSmsSubId(subId);
-        setDefaultCallsSubId(subId);
     }
 
     private PhoneAccountHandle subscriptionIdToPhoneAccountHandle(final int subId) {

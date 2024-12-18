@@ -19,6 +19,7 @@ package com.android.settings.privatespace;
 import static com.android.settings.privatespace.PrivateSpaceAuthenticationActivity.EXTRA_SHOW_PRIVATE_SPACE_UNLOCKED;
 
 import android.app.settings.SettingsEnums;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -32,12 +33,20 @@ public class PrivateSpaceDashboardFragment extends DashboardFragment {
 
     @Override
     public void onCreate(Bundle icicle) {
-        if (android.os.Flags.allowPrivateProfile()) {
+        if (android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             super.onCreate(icicle);
             if (icicle == null
                     && getIntent().getBooleanExtra(EXTRA_SHOW_PRIVATE_SPACE_UNLOCKED, false)) {
                 Log.i(TAG, "Private space unlocked showing toast");
-                Toast.makeText(getContext(), R.string.private_space_unlocked, Toast.LENGTH_SHORT)
+                Drawable drawable =
+                        getContext().getDrawable(R.drawable.ic_private_space_unlock_icon);
+                Toast.makeCustomToastWithIcon(
+                                getContext(),
+                                null /* looper */,
+                                getContext().getString(R.string.private_space_unlocked),
+                                Toast.LENGTH_SHORT,
+                                drawable)
                         .show();
             }
         }
@@ -47,7 +56,8 @@ public class PrivateSpaceDashboardFragment extends DashboardFragment {
     public void onStart() {
         super.onStart();
         if (PrivateSpaceMaintainer.getInstance(getContext()).isPrivateSpaceLocked()) {
-            finish();
+            // To make sure the task is removed if it is the last activity in that stack.
+            getActivity().finishAndRemoveTask();
         }
     }
 

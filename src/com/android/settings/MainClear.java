@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.PERSONAL_CATEGORY_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.PRIVATE_CATEGORY_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_CATEGORY_HEADER;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -64,11 +65,13 @@ import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.flags.Flags;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -98,6 +101,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
     static final int KEYGUARD_REQUEST = 55;
     @VisibleForTesting
     static final int CREDENTIAL_CONFIRM_REQUEST = 56;
+    static final int BIOMETRICS_REQUEST = 57;
     private static final String KEY_SHOW_ESIM_RESET_CHECKBOX =
             "masterclear.allow_retain_esim_profiles_after_fdr";
 
@@ -155,7 +159,8 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
 
     @VisibleForTesting
     boolean isValidRequestCode(int requestCode) {
-        return !((requestCode != KEYGUARD_REQUEST) && (requestCode != CREDENTIAL_CONFIRM_REQUEST));
+        return !((requestCode != KEYGUARD_REQUEST) && (requestCode != CREDENTIAL_CONFIRM_REQUEST)
+                && (requestCode != BIOMETRICS_REQUEST));
     }
 
     @Override
@@ -175,12 +180,35 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
 
         if (resultCode != Activity.RESULT_OK) {
             establishInitialState();
+            if (requestCode == BIOMETRICS_REQUEST) {
+                if (resultCode == ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT) {
+                    IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(getActivity(),
+                            Utils.BiometricStatus.LOCKOUT, true /* twoFactorAuthentication */);
+                }
+            }
             return;
+        }
+
+        if (requestCode == KEYGUARD_REQUEST) {
+            final int userId = getActivity().getUserId();
+            final Utils.BiometricStatus biometricAuthStatus =
+                    Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
+                            false /* biometricsAuthenticationRequested */,
+                            userId);
+            if (biometricAuthStatus == Utils.BiometricStatus.OK) {
+                Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRICS_REQUEST,
+                        userId, false /* hideBackground */);
+                return;
+            } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
+                IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(getActivity(),
+                        biometricAuthStatus, true /* twoFactorAuthentication */);
+                return;
+            }
         }
 
         Intent intent = null;
         // If returning from a Keyguard request, try to show an account confirmation request if
-        // applciable.
+        // applicable.
         if (CREDENTIAL_CONFIRM_REQUEST != requestCode
                 && (intent = getAccountConfirmationIntent()) != null) {
             showAccountCredentialConfirmation(intent);
@@ -426,7 +454,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
     @VisibleForTesting
     protected boolean isEuiccEnabled(Context context) {
         EuiccManager euiccManager = (EuiccManager) context.getSystemService(Context.EUICC_SERVICE);
-        return euiccManager.isEnabled();
+        return euiccManager != null && euiccManager.isEnabled();
     }
 
     @VisibleForTesting
@@ -505,6 +533,9 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
             final UserInfo userInfo = profiles.get(profileIndex);
             final int profileId = userInfo.id;
             final UserHandle userHandle = new UserHandle(profileId);
+            if (Utils.shouldHideUser(userHandle, um)) {
+                continue;
+            }
             Account[] accounts = mgr.getAccountsAsUser(profileId);
             final int accountLength = accounts.length;
             if (accountLength == 0) {
@@ -529,6 +560,13 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
                     titleText.setText(devicePolicyManager.getResources().getString(
                             WORK_CATEGORY_HEADER, () -> getString(
                                     com.android.settingslib.R.string.category_work)));
+                } else if (android.os.Flags.allowPrivateProfile()
+                        && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                        && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()
+                        && userInfo.isPrivateProfile()) {
+                    titleText.setText(devicePolicyManager.getResources().getString(
+                            PRIVATE_CATEGORY_HEADER, () -> getString(
+                                    com.android.settingslib.R.string.category_private)));
                 } else {
                     titleText.setText(devicePolicyManager.getResources().getString(
                             PERSONAL_CATEGORY_HEADER, () -> getString(

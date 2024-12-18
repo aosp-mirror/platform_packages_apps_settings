@@ -29,33 +29,32 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
+import com.android.settings.core.BasePreferenceController
 import com.android.settings.datausage.DataUsageUtils
+import com.android.settings.datausage.lib.DataUsageFormatter.FormattedDataUsage
 import com.android.settings.datausage.lib.DataUsageLib
 import com.android.settings.datausage.lib.NetworkCycleDataRepository
 import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.AllTimeRange
+import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchItem
+import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchResult
+import com.android.settingslib.spaprivileged.framework.compose.getPlaceholder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-/**
- * Preference controller for "Data usage"
- */
+/** Preference controller for "Data usage" */
 class DataUsagePreferenceController(context: Context, key: String) :
-    TelephonyBasePreferenceController(context, key) {
+    BasePreferenceController(context, key) {
 
+    private var subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
     private lateinit var preference: Preference
     private var networkTemplate: NetworkTemplate? = null
 
     fun init(subId: Int) {
-        mSubId = subId
+        this.subId = subId
     }
 
-    override fun getAvailabilityStatus(subId: Int): Int = when {
-        SubscriptionManager.isValidSubscriptionId(subId) &&
-            DataUsageUtils.hasMobileData(mContext) -> AVAILABLE
-
-        else -> AVAILABLE_UNSEARCHABLE
-    }
+    override fun getAvailabilityStatus() = AVAILABLE
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
@@ -63,6 +62,7 @@ class DataUsagePreferenceController(context: Context, key: String) :
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
+        preference.summary = mContext.getPlaceholder()
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 update()
@@ -72,10 +72,12 @@ class DataUsagePreferenceController(context: Context, key: String) :
 
     override fun handlePreferenceTreeClick(preference: Preference): Boolean {
         if (preference.key != preferenceKey || networkTemplate == null) return false
-        val intent = Intent(Settings.ACTION_MOBILE_DATA_USAGE).apply {
-            putExtra(Settings.EXTRA_NETWORK_TEMPLATE, networkTemplate)
-            putExtra(Settings.EXTRA_SUB_ID, mSubId)
-        }
+        val intent =
+            Intent(Settings.ACTION_MOBILE_DATA_USAGE).apply {
+                setPackage(mContext.packageName)
+                putExtra(Settings.EXTRA_NETWORK_TEMPLATE, networkTemplate)
+                putExtra(Settings.EXTRA_SUB_ID, subId)
+            }
         mContext.startActivity(intent)
         return true
     }
@@ -86,34 +88,41 @@ class DataUsagePreferenceController(context: Context, key: String) :
             getDataUsageSummaryAndEnabled()
         }
         preference.isEnabled = enabled
-        preference.summary = summary
+        preference.summary = summary?.displayText
     }
 
-    private fun getNetworkTemplate(): NetworkTemplate? = when {
-        SubscriptionManager.isValidSubscriptionId(mSubId) -> {
-            DataUsageLib.getMobileTemplate(mContext, mSubId)
-        }
-
-        else -> null
-    }
+    private fun getNetworkTemplate(): NetworkTemplate? =
+        if (SubscriptionManager.isValidSubscriptionId(subId)) {
+            DataUsageLib.getMobileTemplate(mContext, subId)
+        } else null
 
     @VisibleForTesting
     fun createNetworkCycleDataRepository(): NetworkCycleDataRepository? =
         networkTemplate?.let { NetworkCycleDataRepository(mContext, it) }
 
-    private fun getDataUsageSummaryAndEnabled(): Pair<String?, Boolean> {
+    private fun getDataUsageSummaryAndEnabled(): Pair<FormattedDataUsage?, Boolean> {
         val repository = createNetworkCycleDataRepository() ?: return null to false
 
         repository.loadFirstCycle()?.let { usageData ->
-            return mContext.getString(
-                R.string.data_usage_template,
-                usageData.formatUsage(mContext),
-                usageData.formatDateRange(mContext),
-            ) to (usageData.usage > 0 || repository.queryUsage(AllTimeRange).usage > 0)
+            val formattedDataUsage = usageData.formatUsage(mContext)
+                .format(mContext, R.string.data_usage_template, usageData.formatDateRange(mContext))
+            val hasUsage = usageData.usage > 0 || repository.queryUsage(AllTimeRange).usage > 0
+            return formattedDataUsage to hasUsage
         }
 
         val allTimeUsage = repository.queryUsage(AllTimeRange)
-        if (allTimeUsage.usage > 0) return allTimeUsage.getDataUsedString(mContext) to true
-        return null to false
+        return allTimeUsage.getDataUsedString(mContext) to (allTimeUsage.usage > 0)
+    }
+
+    companion object {
+        class DataUsageSearchItem(private val context: Context) : MobileNetworkSettingsSearchItem {
+            override fun getSearchResult(subId: Int): MobileNetworkSettingsSearchResult? {
+                if (!DataUsageUtils.hasMobileData(context)) return null
+                return MobileNetworkSettingsSearchResult(
+                    key = "data_usage_summary",
+                    title = context.getString(R.string.app_cellular_data_usage),
+                )
+            }
+        }
     }
 }

@@ -1,5 +1,5 @@
 package: "com.android.settings.flags"
-container: "system_ext"
+container: "system"
 
 flag {
     name: "terms_of_address_enabled"
@@ -13,4 +13,11 @@ flag {
     namespace: "globalintl"
     description: "Feature flag for locale notification"
     bug: "301380610"
+}
+
+flag {
+    name: "accessibility_appearance_settings_backup_enabled"
+    namespace: "globalintl"
+    description: "Feature flag for B&R accessibility appearance settings"
+    bug: "341210043"
 }

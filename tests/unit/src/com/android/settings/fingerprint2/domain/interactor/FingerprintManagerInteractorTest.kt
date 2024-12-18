@@ -16,33 +16,50 @@
 
 package com.android.settings.fingerprint2.domain.interactor
 
-import android.content.Context
 import android.content.Intent
+import android.hardware.biometrics.ComponentInfoInternal
+import android.hardware.biometrics.SensorLocationInternal
+import android.hardware.biometrics.SensorProperties
 import android.hardware.fingerprint.Fingerprint
 import android.hardware.fingerprint.FingerprintEnrollOptions
 import android.hardware.fingerprint.FingerprintManager
 import android.hardware.fingerprint.FingerprintManager.CryptoObject
 import android.hardware.fingerprint.FingerprintManager.FINGERPRINT_ERROR_LOCKOUT_PERMANENT
+import android.hardware.fingerprint.FingerprintSensorProperties
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal
 import android.os.CancellationSignal
 import android.os.Handler
-import androidx.test.core.app.ApplicationProvider
 import com.android.settings.biometrics.GatekeeperPasswordProvider
+import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintEnrollmentRepositoryImpl
 import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSensorRepository
-import com.android.settings.biometrics.fingerprint2.domain.interactor.PressToAuthInteractor
-import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintManagerInteractorImpl
-import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.data.repository.FingerprintSettingsRepositoryImpl
+import com.android.settings.biometrics.fingerprint2.data.repository.UserRepo
+import com.android.settings.biometrics.fingerprint2.domain.interactor.AuthenticateInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.CanEnrollFingerprintsInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.EnrollFingerprintInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.EnrolledFingerprintsInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.GenerateChallengeInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.RemoveFingerprintsInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.RenameFingerprintsInteractorImpl
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.CanEnrollFingerprintsInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.EnrollFingerprintInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.EnrolledFingerprintsInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.GenerateChallengeInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.RemoveFingerprintInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.RenameFingerprintInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.Default
 import com.android.settings.biometrics.fingerprint2.lib.model.EnrollReason
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerEnrollState
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
+import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintFlow
 import com.android.settings.password.ChooseLockSettingsHelper
 import com.android.systemui.biometrics.shared.model.FingerprintSensor
-import com.android.systemui.biometrics.shared.model.FingerprintSensorType
-import com.android.systemui.biometrics.shared.model.SensorStrength
+import com.android.systemui.biometrics.shared.model.toFingerprintSensor
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
@@ -71,37 +88,74 @@ import org.mockito.stubbing.OngoingStubbing
 class FingerprintManagerInteractorTest {
 
   @JvmField @Rule var rule = MockitoJUnit.rule()
-  private lateinit var underTest: FingerprintManagerInteractor
-  private var context: Context = ApplicationProvider.getApplicationContext()
+  private lateinit var enrolledFingerprintsInteractorUnderTest: EnrolledFingerprintsInteractor
+  private lateinit var generateChallengeInteractorUnderTest: GenerateChallengeInteractor
+  private lateinit var removeFingerprintsInteractorUnderTest: RemoveFingerprintInteractor
+  private lateinit var renameFingerprintsInteractorUnderTest: RenameFingerprintInteractor
+  private lateinit var authenticateInteractorImplUnderTest: AuthenticateInteractorImpl
+  private lateinit var canEnrollFingerprintsInteractorUnderTest: CanEnrollFingerprintsInteractor
+  private lateinit var enrollInteractorUnderTest: EnrollFingerprintInteractor
+
+  private val userId = 0
   private var backgroundDispatcher = StandardTestDispatcher()
   @Mock private lateinit var fingerprintManager: FingerprintManager
   @Mock private lateinit var gateKeeperPasswordProvider: GatekeeperPasswordProvider
 
   private var testScope = TestScope(backgroundDispatcher)
-  private var pressToAuthInteractor =
-    object : PressToAuthInteractor {
-      override val isEnabled = flowOf(false)
+  private var backgroundScope = testScope.backgroundScope
+  private val flow: FingerprintFlow = Default
+  private val maxFingerprints = 5
+  private val currUser = MutableStateFlow(0)
+  private val userRepo =
+    object : UserRepo {
+      override val currentUser: Flow<Int> = currUser
     }
 
   @Before
   fun setup() {
-    val sensor = FingerprintSensor(1, SensorStrength.STRONG, 5, FingerprintSensorType.POWER_BUTTON)
+    val sensor =
+      FingerprintSensorPropertiesInternal(
+          0 /* sensorId */,
+          SensorProperties.STRENGTH_STRONG,
+          maxFingerprints,
+          listOf<ComponentInfoInternal>(),
+          FingerprintSensorProperties.TYPE_POWER_BUTTON,
+          false /* halControlsIllumination */,
+          true /* resetLockoutRequiresHardwareAuthToken */,
+          listOf<SensorLocationInternal>(SensorLocationInternal.DEFAULT),
+        )
+        .toFingerprintSensor()
+
     val fingerprintSensorRepository =
       object : FingerprintSensorRepository {
         override val fingerprintSensor: Flow<FingerprintSensor> = flowOf(sensor)
+        override val hasSideFps: Flow<Boolean> = flowOf(false)
       }
 
-    underTest =
-      FingerprintManagerInteractorImpl(
-        context,
-        backgroundDispatcher,
+    val settingsRepository = FingerprintSettingsRepositoryImpl(maxFingerprints)
+    val fingerprintEnrollmentRepository =
+      FingerprintEnrollmentRepositoryImpl(
         fingerprintManager,
-        fingerprintSensorRepository,
-        gateKeeperPasswordProvider,
-        pressToAuthInteractor,
-        Default,
-        Intent(),
+        userRepo,
+        settingsRepository,
+        backgroundDispatcher,
+        backgroundScope,
       )
+
+    enrolledFingerprintsInteractorUnderTest =
+      EnrolledFingerprintsInteractorImpl(fingerprintManager, userId)
+    generateChallengeInteractorUnderTest =
+      GenerateChallengeInteractorImpl(fingerprintManager, userId, gateKeeperPasswordProvider)
+    removeFingerprintsInteractorUnderTest =
+      RemoveFingerprintsInteractorImpl(fingerprintManager, userId)
+    renameFingerprintsInteractorUnderTest =
+      RenameFingerprintsInteractorImpl(fingerprintManager, userId, backgroundDispatcher)
+    authenticateInteractorImplUnderTest = AuthenticateInteractorImpl(fingerprintManager, userId)
+
+    canEnrollFingerprintsInteractorUnderTest =
+      CanEnrollFingerprintsInteractorImpl(fingerprintEnrollmentRepository)
+
+    enrollInteractorUnderTest = EnrollFingerprintInteractorImpl(userId, fingerprintManager, flow)
   }
 
   @Test
@@ -110,7 +164,8 @@ class FingerprintManagerInteractorTest {
       whenever(fingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(emptyList())
 
       val emptyFingerprintList: List<Fingerprint> = emptyList()
-      assertThat(underTest.enrolledFingerprints.last()).isEqualTo(emptyFingerprintList)
+      assertThat(enrolledFingerprintsInteractorUnderTest.enrolledFingerprints.last())
+        .isEqualTo(emptyFingerprintList)
     }
 
   @Test
@@ -120,8 +175,8 @@ class FingerprintManagerInteractorTest {
       val fingerprintList: List<Fingerprint> = listOf(expected)
       whenever(fingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(fingerprintList)
 
-      val list = underTest.enrolledFingerprints.last()
-      assertThat(list.size).isEqualTo(fingerprintList.size)
+      val list = enrolledFingerprintsInteractorUnderTest.enrolledFingerprints.last()
+      assertThat(list!!.size).isEqualTo(fingerprintList.size)
       val actual = list[0]
       assertThat(actual.name).isEqualTo(expected.name)
       assertThat(actual.fingerId).isEqualTo(expected.biometricId)
@@ -129,24 +184,51 @@ class FingerprintManagerInteractorTest {
     }
 
   @Test
-  fun testCanEnrollFingerprint() =
+  fun testCanEnrollFingerprintSucceeds() =
     testScope.runTest {
-      val fingerprintList1: List<Fingerprint> =
+      val fingerprintList: List<Fingerprint> =
         listOf(
-          Fingerprint("Finger 1,", 2, 3L),
-          Fingerprint("Finger 2,", 3, 3L),
-          Fingerprint("Finger 3,", 4, 3L)
+          Fingerprint("Finger 1", 2, 3L),
+          Fingerprint("Finger 2", 3, 3L),
+          Fingerprint("Finger 3", 4, 3L),
         )
-      val fingerprintList2: List<Fingerprint> =
-        fingerprintList1.plus(
-          listOf(Fingerprint("Finger 4,", 5, 3L), Fingerprint("Finger 5,", 6, 3L))
-        )
-      whenever(fingerprintManager.getEnrolledFingerprints(anyInt()))
-        .thenReturn(fingerprintList1)
-        .thenReturn(fingerprintList2)
+      whenever(fingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(fingerprintList)
 
-      assertThat(underTest.canEnrollFingerprints.last()).isTrue()
-      assertThat(underTest.canEnrollFingerprints.last()).isFalse()
+      var result: Boolean? = null
+      val job =
+        testScope.launch {
+          canEnrollFingerprintsInteractorUnderTest.canEnrollFingerprints.collect { result = it }
+        }
+
+      runCurrent()
+      job.cancelAndJoin()
+
+      assertThat(result).isTrue()
+    }
+
+  @Test
+  fun testCanEnrollFingerprintFails() =
+    testScope.runTest {
+      val fingerprintList: List<Fingerprint> =
+        listOf(
+          Fingerprint("Finger 1", 2, 3L),
+          Fingerprint("Finger 2", 3, 3L),
+          Fingerprint("Finger 3", 4, 3L),
+          Fingerprint("Finger 4", 5, 3L),
+          Fingerprint("Finger 5", 6, 3L),
+        )
+      whenever(fingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(fingerprintList)
+
+      var result: Boolean? = null
+      val job =
+        testScope.launch {
+          canEnrollFingerprintsInteractorUnderTest.canEnrollFingerprints.collect { result = it }
+        }
+
+      runCurrent()
+      job.cancelAndJoin()
+
+      assertThat(result).isFalse()
     }
 
   @Test
@@ -160,7 +242,7 @@ class FingerprintManagerInteractorTest {
           gateKeeperPasswordProvider.requestGatekeeperHat(
             any(Intent::class.java),
             anyLong(),
-            anyInt()
+            anyInt(),
           )
         )
         .thenReturn(byteArray)
@@ -169,7 +251,8 @@ class FingerprintManagerInteractorTest {
         argumentCaptor()
 
       var result: Pair<Long, ByteArray?>? = null
-      val job = testScope.launch { result = underTest.generateChallenge(1L) }
+      val job =
+        testScope.launch { result = generateChallengeInteractorUnderTest.generateChallenge(1L) }
       runCurrent()
 
       verify(fingerprintManager).generateChallenge(anyInt(), capture(generateChallengeCallback))
@@ -192,7 +275,10 @@ class FingerprintManagerInteractorTest {
 
       var result: Boolean? = null
       val job =
-        testScope.launch { result = underTest.removeFingerprint(fingerprintViewModelToRemove) }
+        testScope.launch {
+          result =
+            removeFingerprintsInteractorUnderTest.removeFingerprint(fingerprintViewModelToRemove)
+        }
       runCurrent()
 
       verify(fingerprintManager)
@@ -215,7 +301,10 @@ class FingerprintManagerInteractorTest {
 
       var result: Boolean? = null
       val job =
-        testScope.launch { result = underTest.removeFingerprint(fingerprintViewModelToRemove) }
+        testScope.launch {
+          result =
+            removeFingerprintsInteractorUnderTest.removeFingerprint(fingerprintViewModelToRemove)
+        }
       runCurrent()
 
       verify(fingerprintManager)
@@ -223,7 +312,7 @@ class FingerprintManagerInteractorTest {
       removalCallback.value.onRemovalError(
         fingerprintToRemove,
         100,
-        "Oh no, we couldn't find that one"
+        "Oh no, we couldn't find that one",
       )
 
       runCurrent()
@@ -237,7 +326,7 @@ class FingerprintManagerInteractorTest {
     testScope.runTest {
       val fingerprintToRename = FingerprintData("Finger 2", 1, 2L)
 
-      underTest.renameFingerprint(fingerprintToRename, "Woo")
+      renameFingerprintsInteractorUnderTest.renameFingerprint(fingerprintToRename, "Woo")
 
       verify(fingerprintManager).rename(eq(fingerprintToRename.fingerId), anyInt(), safeEq("Woo"))
     }
@@ -248,7 +337,7 @@ class FingerprintManagerInteractorTest {
       val fingerprint = Fingerprint("Woooo", 100, 101L)
 
       var result: FingerprintAuthAttemptModel? = null
-      val job = launch { result = underTest.authenticate() }
+      val job = launch { result = authenticateInteractorImplUnderTest.authenticate() }
 
       val authCallback: ArgumentCaptor<FingerprintManager.AuthenticationCallback> = argumentCaptor()
 
@@ -260,7 +349,7 @@ class FingerprintManagerInteractorTest {
           any(CancellationSignal::class.java),
           capture(authCallback),
           nullable(Handler::class.java),
-          anyInt()
+          anyInt(),
         )
       authCallback.value.onAuthenticationSucceeded(
         FingerprintManager.AuthenticationResult(null, fingerprint, 1, false)
@@ -275,7 +364,7 @@ class FingerprintManagerInteractorTest {
   fun testAuth_lockout() =
     testScope.runTest {
       var result: FingerprintAuthAttemptModel? = null
-      val job = launch { result = underTest.authenticate() }
+      val job = launch { result = authenticateInteractorImplUnderTest.authenticate() }
 
       val authCallback: ArgumentCaptor<FingerprintManager.AuthenticationCallback> = argumentCaptor()
 
@@ -287,7 +376,7 @@ class FingerprintManagerInteractorTest {
           any(CancellationSignal::class.java),
           capture(authCallback),
           nullable(Handler::class.java),
-          anyInt()
+          anyInt(),
         )
       authCallback.value.onAuthenticationError(FINGERPRINT_ERROR_LOCKOUT_PERMANENT, "Lockout!!")
 
@@ -304,7 +393,11 @@ class FingerprintManagerInteractorTest {
     testScope.runTest {
       val token = byteArrayOf(5, 3, 2)
       var result: FingerEnrollState? = null
-      val job = launch { underTest.enroll(token, EnrollReason.FindSensor).collect { result = it } }
+      val job = launch {
+        enrollInteractorUnderTest
+          .enroll(token, EnrollReason.FindSensor, FingerprintEnrollOptions.Builder().build())
+          .collect { result = it }
+      }
       val enrollCallback: ArgumentCaptor<FingerprintManager.EnrollmentCallback> = argumentCaptor()
       runCurrent()
 
@@ -329,7 +422,11 @@ class FingerprintManagerInteractorTest {
     testScope.runTest {
       val token = byteArrayOf(5, 3, 2)
       var result: FingerEnrollState? = null
-      val job = launch { underTest.enroll(token, EnrollReason.FindSensor).collect { result = it } }
+      val job = launch {
+        enrollInteractorUnderTest
+          .enroll(token, EnrollReason.FindSensor, FingerprintEnrollOptions.Builder().build())
+          .collect { result = it }
+      }
       val enrollCallback: ArgumentCaptor<FingerprintManager.EnrollmentCallback> = argumentCaptor()
       runCurrent()
 
@@ -354,7 +451,11 @@ class FingerprintManagerInteractorTest {
     testScope.runTest {
       val token = byteArrayOf(5, 3, 2)
       var result: FingerEnrollState? = null
-      val job = launch { underTest.enroll(token, EnrollReason.FindSensor).collect { result = it } }
+      val job = launch {
+        enrollInteractorUnderTest
+          .enroll(token, EnrollReason.FindSensor, FingerprintEnrollOptions.Builder().build())
+          .collect { result = it }
+      }
       val enrollCallback: ArgumentCaptor<FingerprintManager.EnrollmentCallback> = argumentCaptor()
       runCurrent()
 

@@ -75,6 +75,13 @@
             android:entryValues="@array/hdcp_checking_values" />
 
         <ListPreference
+            android:key="bt_stack_log_level"
+            android:title="@string/bt_stack_log_level"
+            android:dialogTitle="@string/bt_stack_log_level_summary"
+            android:entries="@array/bt_stack_log_level_entries"
+            android:entryValues="@array/bt_stack_log_level_values" />
+
+        <ListPreference
             android:key="bt_hci_snoop_log"
             android:title="@string/bt_hci_snoop_log"
             android:dialogTitle="@string/bt_hci_snoop_log_summary"
@@ -145,7 +152,8 @@
         <Preference
             android:key="demo_mode"
             android:title="@string/demo_mode">
-            <intent android:action="com.android.settings.action.DEMO_MODE" />
+            <intent android:action="com.android.settings.action.DEMO_MODE"
+                    android:targetPackage="com.android.systemui"/>
         </Preference>
 
         <Preference
@@ -190,6 +198,12 @@
             android:key="enable_terminal"
             android:title="@string/enable_terminal_title"
             android:summary="@string/enable_terminal_summary" />
+
+        <Preference
+            android:key="linux_terminal"
+            android:title="@string/enable_linux_terminal_title"
+            android:summary="@string/enable_linux_terminal_summary"
+            android:fragment="com.android.settings.development.linuxterminal.LinuxTerminalDashboardFragment" />
 
         <SwitchPreferenceCompat
             android:key="bugreport_in_power"
@@ -468,11 +482,6 @@
             android:entryValues="@array/bluetooth_max_connected_audio_devices_values" />
 
         <SwitchPreferenceCompat
-            android:key="nfc_stack_debuglog_enabled"
-            android:title="@string/nfc_stack_debuglog_title"
-            android:summary="@string/nfc_stack_debuglog_summary" />
-
-        <SwitchPreferenceCompat
             android:key="nfc_verbose_vendor_log"
             android:title="@string/nfc_verbose_vendor_log_title"
             android:summary="@string/nfc_verbose_vendor_log_summary" />
@@ -503,6 +512,11 @@
             android:key="show_key_presses"
             android:title="@string/show_key_presses"
             android:summary="@string/show_key_presses_summary" />
+
+        <SwitchPreference
+            android:key="touchpad_visualizer"
+            android:title="@string/touchpad_visualizer"
+            android:summary="@string/touchpad_visualizer_summary" />
 
     </PreferenceCategory>
 
@@ -563,12 +577,6 @@
             android:key="transparent_navigation_bar"
             android:title="@string/transparent_navigation_bar"
             android:summary="@string/transparent_navigation_bar_summary" />
-
-        <Preference
-            android:key="contrast_preference"
-            android:title="@string/contrast_title"
-            android:persistent="false"
-            settings:keywords="@string/keywords_contrast" />
 
     </PreferenceCategory>
 
@@ -643,9 +651,9 @@
             android:fragment="com.android.settings.development.transcode.TranscodeSettingsFragment" />
 
         <Preference
-            android:key="widevine_settings"
-            android:title="@string/widevine_settings_title"
-            android:fragment="com.android.settings.development.widevine.WidevineSettingsFragment" />
+            android:key="media_drm_settings"
+            android:title="@string/media_drm_settings_title"
+            android:fragment="com.android.settings.development.mediadrm.MediaDrmSettingsFragment" />
 
     </PreferenceCategory>
 
@@ -725,11 +733,6 @@
             android:title="@string/inactive_apps_title"
             android:fragment="com.android.settings.fuelgauge.InactiveApps" />
 
-        <Preference
-            android:key="tare"
-            android:title="@string/tare_title" >
-        </Preference>
-
         <SwitchPreferenceCompat
             android:key="force_allow_on_external"
             android:title="@string/force_allow_on_external"
@@ -741,14 +744,16 @@
             android:summary="@string/force_resizable_activities_summary" />
 
         <SwitchPreferenceCompat
+            android:key="override_desktop_mode_features"
+            android:title="@string/enable_desktop_mode" />
+
+        <SwitchPreferenceCompat
             android:key="enable_freeform_support"
-            android:title="@string/enable_freeform_support"
-            android:summary="@string/enable_freeform_support_summary" />
+            android:title="@string/enable_freeform_support" />
 
         <SwitchPreferenceCompat
             android:key="force_desktop_mode_on_external_displays"
-            android:title="@string/force_desktop_mode"
-            android:summary="@string/force_desktop_mode_summary" />
+            android:title="@string/enable_desktop_mode_on_secondary_display"/>
 
         <SwitchPreferenceCompat
             android:key="enable_non_resizable_multi_window"
@@ -773,12 +778,6 @@
             android:key="force_enable_notes_role"
             android:title="@string/enable_notes_role_title"
             android:summary="@string/enable_notes_role_summary" />
-
-        <Preference
-            android:key="quarantined_apps"
-            android:title="@string/quarantined_apps_title"
-            settings:controller="com.android.settings.development.quarantine.QuarantinedAppsPreferenceController"
-            android:fragment="com.android.settings.development.quarantine.QuarantinedAppsFragment" />
 
     </PreferenceCategory>
 

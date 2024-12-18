@@ -29,10 +29,12 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
@@ -64,6 +66,7 @@ import java.util.List;
  *
  */
 public class MobileDataSlice implements CustomSliceable {
+    private static final String TAG = "MobileDataSlice";
 
     private final Context mContext;
     private final SubscriptionManager mSubscriptionManager;
@@ -77,19 +80,24 @@ public class MobileDataSlice implements CustomSliceable {
 
     @Override
     public Slice getSlice() {
+        ListBuilder listBuilder = createListBuilder();
+        if (!isConfigMobileNetworksAllowed()) {
+            return listBuilder.build();
+        }
+
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_network_cell);
         final String title = mContext.getText(R.string.mobile_data_settings_title).toString();
         @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
 
-        // Return null until we can show a disabled-action Slice, blaming Airplane mode.
+        // Return empty slice until we can show a disabled-action Slice, blaming Airplane mode.
         if (isAirplaneModeEnabled()) {
-            return null;
+            return listBuilder.build();
         }
 
-        // Return null until we can show a disabled-action Slice.
+        // Return empty slice until we can show a disabled-action Slice.
         if (!isMobileDataAvailable()) {
-            return null;
+            return listBuilder.build();
         }
 
         final CharSequence summary = getSummary();
@@ -107,11 +115,15 @@ public class MobileDataSlice implements CustomSliceable {
             rowBuilder.setSubtitle(summary);
         }
 
-        final ListBuilder listBuilder = new ListBuilder(mContext, getUri(),
-                ListBuilder.INFINITY)
+        return listBuilder
                 .setAccentColor(color)
-                .addRow(rowBuilder);
-        return listBuilder.build();
+                .addRow(rowBuilder)
+                .build();
+    }
+
+    @VisibleForTesting
+    ListBuilder createListBuilder() {
+        return new ListBuilder(mContext, getUri(), ListBuilder.INFINITY);
     }
 
     @Override
@@ -128,7 +140,7 @@ public class MobileDataSlice implements CustomSliceable {
         if (defaultSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return; // No subscription - do nothing.
         }
-
+        Log.d(TAG, "setMobileDataEnabled: " + newState);
         MobileNetworkUtils.setMobileDataEnabled(mContext, defaultSubId, newState,
                 false /* disableOtherSubscriptions */);
         // Do not notifyChange on Uri. The service takes longer to update the current value than it
@@ -207,6 +219,19 @@ public class MobileDataSlice implements CustomSliceable {
         }
 
         return mTelephonyManager.isDataEnabled();
+    }
+
+    @VisibleForTesting
+    boolean isConfigMobileNetworksAllowed() {
+        if (mContext == null) return true;
+        UserManager userManager = mContext.getSystemService(UserManager.class);
+        if (userManager == null) return true;
+        boolean isAllowed = userManager.isAdminUser() && !userManager.hasUserRestriction(
+                UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
+        if (!isAllowed) {
+            Log.w(TAG, "The user is not allowed to configure Mobile Networks.");
+        }
+        return isAllowed;
     }
 
     /**

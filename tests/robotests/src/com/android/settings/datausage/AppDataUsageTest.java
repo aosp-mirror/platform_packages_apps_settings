@@ -42,16 +42,13 @@ import android.os.Bundle;
 import android.os.Process;
 import android.telephony.SubscriptionManager;
 import android.util.ArraySet;
-import android.util.Range;
 
 import androidx.fragment.app.FragmentActivity;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.datausage.lib.NetworkUsageDetailsData;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
@@ -250,34 +247,6 @@ public class AppDataUsageTest {
 
         verify(restrictBackgroundPref).setDisabledByAdmin(any(EnforcedAdmin.class));
         verify(unrestrictedDataPref).setDisabledByAdmin(any(EnforcedAdmin.class));
-    }
-
-    @Test
-    public void bindData_shouldUpdateUsageSummary() {
-        mFragment = spy(new TestFragment());
-        final Context context = RuntimeEnvironment.application;
-        ReflectionHelpers.setField(mFragment, "mContext", context);
-        final long backgroundBytes = 1234L;
-        final long foregroundBytes = 5678L;
-        final NetworkUsageDetailsData appUsage = new NetworkUsageDetailsData(
-                new Range<>(1L, 2L),
-                backgroundBytes + foregroundBytes,
-                foregroundBytes,
-                backgroundBytes
-        );
-        final Preference backgroundPref = mock(Preference.class);
-        ReflectionHelpers.setField(mFragment, "mBackgroundUsage", backgroundPref);
-        final Preference foregroundPref = mock(Preference.class);
-        ReflectionHelpers.setField(mFragment, "mForegroundUsage", foregroundPref);
-        final Preference totalPref = mock(Preference.class);
-        ReflectionHelpers.setField(mFragment, "mTotalUsage", totalPref);
-
-        mFragment.bindData(appUsage);
-
-        verify(totalPref).setSummary(
-                DataUsageUtils.formatDataUsage(context, backgroundBytes + foregroundBytes));
-        verify(backgroundPref).setSummary(DataUsageUtils.formatDataUsage(context, backgroundBytes));
-        verify(foregroundPref).setSummary(DataUsageUtils.formatDataUsage(context, foregroundBytes));
     }
 
     @Test

@@ -38,6 +38,8 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
+import com.android.settings.fuelgauge.batteryusage.AppOptModeSharedPreferencesUtils;
+import com.android.settings.fuelgauge.batteryusage.AppOptimizationModeEvent;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
@@ -47,6 +49,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /** An implementation to backup and restore battery configurations. */
 public final class BatteryBackupHelper implements BackupHelper {
@@ -181,13 +185,18 @@ public final class BatteryBackupHelper implements BackupHelper {
         final StringBuilder builder = new StringBuilder();
         final AppOpsManager appOps = mContext.getSystemService(AppOpsManager.class);
         final SharedPreferences sharedPreferences = getSharedPreferences(mContext);
+        final Map<Integer, AppOptimizationModeEvent> appOptModeMap =
+                AppOptModeSharedPreferencesUtils.getAllEvents(mContext).stream()
+                        .collect(Collectors.toMap(AppOptimizationModeEvent::getUid, e -> e));
         // Converts application into the AppUsageState.
         for (ApplicationInfo info : applications) {
             final int mode = BatteryOptimizeUtils.getMode(appOps, info.uid, info.packageName);
             @BatteryOptimizeUtils.OptimizationMode
             final int optimizationMode =
-                    BatteryOptimizeUtils.getAppOptimizationMode(
-                            mode, allowlistedApps.contains(info.packageName));
+                    appOptModeMap.containsKey(info.uid)
+                            ? (int) appOptModeMap.get(info.uid).getResetOptimizationMode()
+                            : BatteryOptimizeUtils.getAppOptimizationMode(
+                                    mode, allowlistedApps.contains(info.packageName));
             // Ignores default optimized/unknown state or system/default apps.
             if (optimizationMode == BatteryOptimizeUtils.MODE_OPTIMIZED
                     || optimizationMode == BatteryOptimizeUtils.MODE_UNKNOWN

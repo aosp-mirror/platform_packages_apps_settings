@@ -15,30 +15,48 @@
  */
 package com.android.settings.connecteddevice;
 
+import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isExternalDisplaySettingsPageEnabled;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.input.InputManager;
 import android.util.FeatureFlagUtils;
+import android.util.Log;
 import android.view.InputDevice;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.ConnectedBluetoothDeviceUpdater;
+import com.android.settings.bluetooth.Utils;
+import com.android.settings.connecteddevice.display.ExternalDisplayUpdater;
 import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.connecteddevice.stylus.StylusDeviceUpdater;
 import com.android.settings.connecteddevice.usb.ConnectedUsbDeviceUpdater;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.flags.FeatureFlags;
+import com.android.settings.flags.FeatureFlagsImpl;
+import com.android.settings.flags.Flags;
 import com.android.settings.overlay.DockUpdaterFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
+import com.android.settingslib.bluetooth.BluetoothUtils;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.search.SearchIndexableRaw;
+
+import java.util.List;
 
 /**
  * Controller to maintain the {@link androidx.preference.PreferenceGroup} for all
@@ -49,24 +67,35 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
         DevicePreferenceCallback {
 
     private static final String KEY = "connected_device_list";
+    private static final String TAG = "ConnectedDeviceGroupController";
 
     @VisibleForTesting
     PreferenceGroup mPreferenceGroup;
+    @Nullable
+    private ExternalDisplayUpdater mExternalDisplayUpdater;
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
     private ConnectedUsbDeviceUpdater mConnectedUsbDeviceUpdater;
     private DockUpdater mConnectedDockUpdater;
     private StylusDeviceUpdater mStylusDeviceUpdater;
     private final PackageManager mPackageManager;
     private final InputManager mInputManager;
+    private final LocalBluetoothManager mLocalBluetoothManager;
+    @NonNull
+    private final FeatureFlags mFeatureFlags = new FeatureFlagsImpl();
 
     public ConnectedDeviceGroupController(Context context) {
         super(context, KEY);
         mPackageManager = context.getPackageManager();
         mInputManager = context.getSystemService(InputManager.class);
+        mLocalBluetoothManager = Utils.getLocalBluetoothManager(context);
     }
 
     @Override
     public void onStart() {
+        if (mExternalDisplayUpdater != null) {
+            mExternalDisplayUpdater.registerCallback();
+        }
+
         if (mBluetoothDeviceUpdater != null) {
             mBluetoothDeviceUpdater.registerCallback();
             mBluetoothDeviceUpdater.refreshPreference();
@@ -87,6 +116,10 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
 
     @Override
     public void onStop() {
+        if (mExternalDisplayUpdater != null) {
+            mExternalDisplayUpdater.unregisterCallback();
+        }
+
         if (mBluetoothDeviceUpdater != null) {
             mBluetoothDeviceUpdater.unregisterCallback();
         }
@@ -113,6 +146,10 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
 
         if (isAvailable()) {
             final Context context = screen.getContext();
+            if (mExternalDisplayUpdater != null) {
+                mExternalDisplayUpdater.initPreference(context);
+            }
+
             if (mBluetoothDeviceUpdater != null) {
                 mBluetoothDeviceUpdater.setPrefContext(context);
                 mBluetoothDeviceUpdater.forceUpdate();
@@ -136,7 +173,8 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return (hasBluetoothFeature()
+        return (hasExternalDisplayFeature()
+                || hasBluetoothFeature()
                 || hasUsbFeature()
                 || hasUsiStylusFeature()
                 || mConnectedDockUpdater != null)
@@ -166,11 +204,13 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
     }
 
     @VisibleForTesting
-    void init(BluetoothDeviceUpdater bluetoothDeviceUpdater,
+    void init(@Nullable ExternalDisplayUpdater externalDisplayUpdater,
+            BluetoothDeviceUpdater bluetoothDeviceUpdater,
             ConnectedUsbDeviceUpdater connectedUsbDeviceUpdater,
             DockUpdater connectedDockUpdater,
             StylusDeviceUpdater connectedStylusDeviceUpdater) {
 
+        mExternalDisplayUpdater = externalDisplayUpdater;
         mBluetoothDeviceUpdater = bluetoothDeviceUpdater;
         mConnectedUsbDeviceUpdater = connectedUsbDeviceUpdater;
         mConnectedDockUpdater = connectedDockUpdater;
@@ -183,7 +223,10 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
                 FeatureFactory.getFeatureFactory().getDockUpdaterFeatureProvider();
         final DockUpdater connectedDockUpdater =
                 dockUpdaterFeatureProvider.getConnectedDockUpdater(context, this);
-        init(hasBluetoothFeature()
+        init(hasExternalDisplayFeature()
+                        ? new ExternalDisplayUpdater(this, fragment.getMetricsCategory())
+                        : null,
+                hasBluetoothFeature()
                         ? new ConnectedBluetoothDeviceUpdater(context, this,
                         fragment.getMetricsCategory())
                         : null,
@@ -194,6 +237,19 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
                 hasUsiStylusFeature()
                         ? new StylusDeviceUpdater(context, fragment, this)
                         : null);
+    }
+
+    /**
+     * @return trunk stable feature flags.
+     */
+    @VisibleForTesting
+    @NonNull
+    public FeatureFlags getFeatureFlags() {
+        return mFeatureFlags;
+    }
+
+    private boolean hasExternalDisplayFeature() {
+        return isExternalDisplaySettingsPageEnabled(getFeatureFlags());
     }
 
     private boolean hasBluetoothFeature() {
@@ -220,5 +276,32 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
             }
         }
         return false;
+    }
+
+    @Override
+    public void updateDynamicRawDataToIndex(List<SearchIndexableRaw> rawData) {
+        if (!Flags.enableBondedBluetoothDeviceSearchable()) {
+            return;
+        }
+        if (mLocalBluetoothManager == null) {
+            Log.d(TAG, "Bluetooth is not supported");
+            return;
+        }
+        for (CachedBluetoothDevice cachedDevice :
+                mLocalBluetoothManager.getCachedDeviceManager().getCachedDevicesCopy()) {
+            if (!BluetoothDeviceFilter.BONDED_DEVICE_FILTER.matches(cachedDevice.getDevice())) {
+                continue;
+            }
+            if (BluetoothUtils.isExclusivelyManagedBluetoothDevice(mContext,
+                    cachedDevice.getDevice())) {
+                continue;
+            }
+            SearchIndexableRaw data = new SearchIndexableRaw(mContext);
+            // Include the identity address as well to ensure the key is unique.
+            data.key = cachedDevice.getName() + cachedDevice.getIdentityAddress();
+            data.title = cachedDevice.getName();
+            data.summaryOn = mContext.getString(R.string.connected_devices_dashboard_title);
+            rawData.add(data);
+        }
     }
 }

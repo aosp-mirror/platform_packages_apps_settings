@@ -22,7 +22,9 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -30,6 +32,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
 import androidx.preference.Preference;
@@ -55,6 +58,7 @@ public class TimeSpentInAppPreferenceControllerTest {
     private static final String TEST_KEY = "test_tey";
     private static final Intent TEST_INTENT = new Intent(
             TimeSpentInAppPreferenceController.SEE_TIME_IN_APP_TEMPLATE)
+            .setPackage("com.wellbeing")
             .putExtra(EXTRA_PACKAGE_NAME, "com.android.settings");
 
     @Mock
@@ -70,8 +74,11 @@ public class TimeSpentInAppPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mContext = RuntimeEnvironment.application;
-        mPackageManager = Shadows.shadowOf(mContext.getPackageManager());
+        mContext = spy(RuntimeEnvironment.application);
+        PackageManager pm = spy(mContext.getPackageManager());
+        doReturn(pm).when(mContext).getPackageManager();
+        doReturn(TEST_INTENT.getPackage()).when(pm).getWellbeingPackageName();
+        mPackageManager = Shadows.shadowOf(pm);
         mController = new TimeSpentInAppPreferenceController(mContext, TEST_KEY);
         mPreference = new Preference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);

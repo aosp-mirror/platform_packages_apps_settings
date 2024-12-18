@@ -44,6 +44,7 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.provider.DeviceConfig;
 import android.util.ArrayMap;
+import android.util.SparseIntArray;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -76,6 +77,7 @@ public class UserAspectRatioManager {
     /** Apps that have launcher entry defined in manifest */
     private final Map<Integer, String> mUserAspectRatioMap;
     private final Map<Integer, CharSequence> mUserAspectRatioA11yMap;
+    private final SparseIntArray mUserAspectRatioOrder;
 
     public UserAspectRatioManager(@NonNull Context context) {
         this(context, AppGlobals.getPackageManager());
@@ -86,6 +88,7 @@ public class UserAspectRatioManager {
         mContext = context;
         mIPm = pm;
         mUserAspectRatioA11yMap = new ArrayMap<>();
+        mUserAspectRatioOrder = new SparseIntArray();
         mUserAspectRatioMap = getUserMinAspectRatioMapping();
     }
 
@@ -150,6 +153,14 @@ public class UserAspectRatioManager {
             throws RemoteException {
         final int aspectRatio = getUserMinAspectRatioValue(packageName, userId);
         return getUserMinAspectRatioEntry(aspectRatio, packageName, userId);
+    }
+
+    /**
+     * @return the order of the aspect ratio option corresponding to
+     * config_userAspectRatioOverrideValues
+     */
+    int getUserMinAspectRatioOrder(@PackageManager.UserMinAspectRatio int option) {
+        return mUserAspectRatioOrder.get(option);
     }
 
     /**
@@ -224,7 +235,6 @@ public class UserAspectRatioManager {
                 && isFullscreenCompatChangeEnabled(pkgName, userId);
     }
 
-    @VisibleForTesting
     boolean isFullscreenCompatChangeEnabled(String pkgName, int userId) {
         return CompatChanges.isChangeEnabled(
                 OVERRIDE_ANY_ORIENTATION_TO_USER, pkgName, UserHandle.of(userId));
@@ -281,6 +291,7 @@ public class UserAspectRatioManager {
                         mUserAspectRatioA11yMap.put(aspectRatioVal, accessibleSequence);
                     }
                     userMinAspectRatioMap.put(aspectRatioVal, aspectRatioString);
+                    mUserAspectRatioOrder.put(aspectRatioVal, i);
             }
         }
         if (!userMinAspectRatioMap.containsKey(USER_MIN_ASPECT_RATIO_UNSET)) {
@@ -290,6 +301,8 @@ public class UserAspectRatioManager {
         if (mIsUserMinAspectRatioAppDefaultFlagEnabled) {
             userMinAspectRatioMap.put(USER_MIN_ASPECT_RATIO_APP_DEFAULT,
                     userMinAspectRatioMap.get(USER_MIN_ASPECT_RATIO_UNSET));
+            mUserAspectRatioOrder.put(USER_MIN_ASPECT_RATIO_APP_DEFAULT,
+                    mUserAspectRatioOrder.get(USER_MIN_ASPECT_RATIO_UNSET));
             if (mUserAspectRatioA11yMap.containsKey(USER_MIN_ASPECT_RATIO_UNSET)) {
                 mUserAspectRatioA11yMap.put(USER_MIN_ASPECT_RATIO_APP_DEFAULT,
                         mUserAspectRatioA11yMap.get(USER_MIN_ASPECT_RATIO_UNSET));

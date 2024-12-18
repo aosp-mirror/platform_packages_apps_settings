@@ -23,6 +23,7 @@ import android.os.Bundle;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.development.DeveloperOptionAwareMixin;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.MainSwitchBarController;
 import com.android.settings.widget.SettingsMainSwitchBar;
@@ -33,7 +34,8 @@ import com.android.settingslib.search.SearchIndexable;
  * Dashboard for Graphics Driver preferences.
  */
 @SearchIndexable
-public class GraphicsDriverDashboard extends DashboardFragment {
+public class GraphicsDriverDashboard extends DashboardFragment implements
+        DeveloperOptionAwareMixin {
 
     private static final String TAG = "GraphicsDriverDashboard";
 

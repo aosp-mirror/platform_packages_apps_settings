@@ -43,6 +43,7 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.UserManager;
+import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
@@ -390,7 +391,7 @@ public class ProviderModelSliceTest {
     }
 
     private PendingIntent getPrimaryAction() {
-        final Intent intent = new Intent("android.settings.NETWORK_PROVIDER_SETTINGS")
+        final Intent intent = new Intent(Settings.ACTION_NETWORK_PROVIDER_SETTINGS)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return PendingIntent.getActivity(mContext, 0 /* requestCode */,
                 intent, PendingIntent.FLAG_IMMUTABLE /* flags */);

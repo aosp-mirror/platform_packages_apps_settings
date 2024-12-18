@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.android.settings.fuelgauge.batteryusage";
+option java_outer_classname = "BatteryReaatributeProto";
+
+// Battery usage reattribute data for a specific timestamp slot.
+message BatteryReattribute {
+    optional int64 timestamp_start = 1;
+    optional int64 timestamp_end = 2;
+    // Battery reattribute data for uid and its corresponding ratio.
+    map<int32, float> reattribute_data = 3;
+}

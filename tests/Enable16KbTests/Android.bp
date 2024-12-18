@@ -33,10 +33,9 @@ android_test {
     ],
     platform_apis: true,
     certificate: "platform",
-    test_suites: ["device-tests"],
     libs: [
-        "android.test.runner",
-        "android.test.base",
+        "android.test.runner.stubs.system",
+        "android.test.base.stubs.system",
     ],
 }
 
@@ -54,9 +53,9 @@ java_test_host {
         "compatibility-host-util",
         "compatibility-tradefed",
     ],
-    data: [
+    device_common_data: [
         ":test_16kb_app",
     ],
-    test_suites: ["device-tests"],
+    test_suites: ["general-tests"],
     test_config: "AndroidTest.xml",
 }

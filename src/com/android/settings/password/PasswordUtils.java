@@ -116,7 +116,7 @@ public final class PasswordUtils extends com.android.settingslib.Utils {
             final ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT);
-            lp.leftMargin = layoutTitleParams.leftMargin;
+            lp.setMarginStart(layoutTitleParams.leftMargin);
             lp.topMargin = (int) context.getResources().getDimensionPixelSize(
                     R.dimen.screen_lock_options_button_margin_top);
             optButton.setPadding(0, 0, 0, 0);

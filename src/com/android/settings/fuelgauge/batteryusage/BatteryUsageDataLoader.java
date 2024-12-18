@@ -27,6 +27,7 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
+import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.fuelgauge.batteryusage.bugreport.BatteryUsageLogUtils;
 import com.android.settings.overlay.FeatureFactory;
 
@@ -84,12 +85,12 @@ public final class BatteryUsageDataLoader {
     }
 
     @VisibleForTesting
-    static void loadAppUsageData(final Context context) {
+    static void loadAppUsageData(final Context context, final UserIdsSeries userIdsSeries) {
         final long start = System.currentTimeMillis();
         final Map<Long, UsageEvents> appUsageEvents =
                 sFakeAppUsageEventsSupplier != null
                         ? sFakeAppUsageEventsSupplier.get()
-                        : DataProcessor.getAppUsageEvents(context);
+                        : DataProcessor.getAppUsageEvents(context, userIdsSeries);
         if (appUsageEvents == null) {
             Log.w(TAG, "loadAppUsageData() returns null");
             return;
@@ -113,18 +114,26 @@ public final class BatteryUsageDataLoader {
         DatabaseUtils.sendAppUsageEventData(context, appUsageEventList);
     }
 
-    private static void preprocessBatteryUsageSlots(final Context context) {
+    private static void preprocessBatteryUsageSlots(
+            final Context context, final UserIdsSeries userIdsSeries) {
         final long start = System.currentTimeMillis();
         final Handler handler = new Handler(Looper.getMainLooper());
         final BatteryLevelData batteryLevelData =
                 DataProcessManager.getBatteryLevelData(
                         context,
                         handler,
+                        userIdsSeries,
                         /* isFromPeriodJob= */ true,
                         batteryDiffDataMap -> {
+                            final PowerUsageFeatureProvider featureProvider =
+                                    FeatureFactory.getFeatureFactory()
+                                            .getPowerUsageFeatureProvider();
                             DatabaseUtils.sendBatteryUsageSlotData(
                                     context,
-                                    ConvertUtils.convertToBatteryUsageSlotList(batteryDiffDataMap));
+                                    ConvertUtils.convertToBatteryUsageSlotList(
+                                            context,
+                                            batteryDiffDataMap,
+                                            featureProvider.isAppOptimizationModeLogged()));
                             if (batteryDiffDataMap.values().stream()
                                     .anyMatch(
                                             data ->
@@ -133,12 +142,10 @@ public final class BatteryUsageDataLoader {
                                                                             .isEmpty()
                                                                     || !data.getAppDiffEntryList()
                                                                             .isEmpty()))) {
-                                FeatureFactory.getFeatureFactory()
-                                        .getPowerUsageFeatureProvider()
-                                        .detectSettingsAnomaly(
-                                                context,
-                                                /* displayDrain= */ 0,
-                                                DetectRequestSourceType.TYPE_DATA_LOADER);
+                                featureProvider.detectPowerAnomaly(
+                                        context,
+                                        /* displayDrain= */ 0,
+                                        DetectRequestSourceType.TYPE_DATA_LOADER);
                             }
                         });
         if (batteryLevelData == null) {
@@ -160,10 +167,16 @@ public final class BatteryUsageDataLoader {
         try {
             final long start = System.currentTimeMillis();
             loadBatteryStatsData(context, isFullChargeStart);
+            AppOptModeSharedPreferencesUtils.resetExpiredAppOptModeBeforeTimestamp(
+                    context, System.currentTimeMillis());
             if (!isFullChargeStart) {
                 // No app usage data or battery diff data at this time.
-                loadAppUsageData(context);
-                preprocessBatteryUsageSlots(context);
+                final UserIdsSeries userIdsSeries =
+                        new UserIdsSeries(context, /* isNonUIRequest= */ true);
+                if (!userIdsSeries.isCurrentUserLocked()) {
+                    loadAppUsageData(context, userIdsSeries);
+                    preprocessBatteryUsageSlots(context, userIdsSeries);
+                }
             }
             Log.d(
                     TAG,

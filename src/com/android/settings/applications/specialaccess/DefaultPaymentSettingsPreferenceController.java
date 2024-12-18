@@ -71,7 +71,8 @@ public class DefaultPaymentSettingsPreferenceController extends BasePreferenceCo
                 && mPreferenceKey.equals(preference.getKey())) {
             RoleManager roleManager = mContext.getSystemService(RoleManager.class);
             if (roleManager.isRoleAvailable(RoleManager.ROLE_WALLET)) {
-                Intent intent = new Intent(CardEmulation.ACTION_CHANGE_DEFAULT);
+                Intent intent = new Intent(CardEmulation.ACTION_CHANGE_DEFAULT)
+                        .setPackage(mPackageManager.getPermissionControllerPackageName());
                 mContext.startActivity(intent);
                 return true;
             }

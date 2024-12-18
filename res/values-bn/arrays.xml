@@ -77,6 +77,13 @@
     <item msgid="6556827947082659801">"উপলব্ধ"</item>
     <item msgid="6096962300722555553">"পরিষেবার বাইরে"</item>
   </string-array>
+  <string-array name="bt_stack_log_level_entries">
+    <item msgid="7872226620825638673">"ভার্বোস"</item>
+    <item msgid="4414817955073540319">"ডিবাগ করুন"</item>
+    <item msgid="9152250562693119681">"তথ্য"</item>
+    <item msgid="8884807223431437262">"সতর্ক করুন"</item>
+    <item msgid="1154843682335941096">"সমস্যা"</item>
+  </string-array>
   <string-array name="bluetooth_leaudio_mode">
     <item msgid="5307106570247137458">"বন্ধ করা আছে"</item>
     <item msgid="7781484297606806796">"ইউনিকাস্ট"</item>
@@ -385,7 +392,7 @@
     <item msgid="7582717864806562725">"?"</item>
   </string-array>
   <string-array name="color_picker">
-    <item msgid="7216413848731287689">"নীলাভ রঙ"</item>
+    <item msgid="7216413848731287689">"নীলাভ সবুজ"</item>
     <item msgid="5661027589207588703">"নীল"</item>
     <item msgid="1219738214736244749">"সবুজ রঙ"</item>
     <item msgid="6331809026622602308">"বেগুনী"</item>
@@ -409,8 +416,12 @@
     <item msgid="2047166446768045816">"অসীমিত ইন্টারনেট ডেটা"</item>
   </string-array>
   <string-array name="wifi_privacy_entries">
-    <item msgid="3485945604919292489">"র‍্যান্ডমাইজ করা MAC ব্যবহার করুন (ডিফল্ট)"</item>
+    <item msgid="91222619458919148">"র‍্যান্ডমাইজড MAC ব্যবহার করুন"</item>
     <item msgid="741680937828608749">"ডিভাইসের MAC ব্যবহার করুন"</item>
+  </string-array>
+  <string-array name="wifi_dhcp_entries">
+    <item msgid="2532836996945493932">"নেটওয়ার্কে ডিভাইসের নাম পাঠান"</item>
+    <item msgid="7928900271137707489">"নেটওয়ার্কে ডিভাইসের নাম পাঠাবেন না"</item>
   </string-array>
   <string-array name="wifi_hidden_entries">
     <item msgid="342232116597649254">"না"</item>
@@ -484,10 +495,51 @@
     <item msgid="7025253383416830453">"১ মিনিট পর"</item>
     <item msgid="1574040255478150028">"৫ মিনিট পর"</item>
   </string-array>
-    <!-- no translation found for notification_polite_options:0 (4617190141263245257) -->
-    <!-- no translation found for notification_polite_options:1 (3884076684767467743) -->
-    <!-- no translation found for notification_polite_options:2 (8765197536079931966) -->
     <!-- no translation found for private_space_auto_lock_options:0 (551584871228110817) -->
     <!-- no translation found for private_space_auto_lock_options:1 (3263162333754809690) -->
     <!-- no translation found for private_space_auto_lock_options:2 (1575103586471380629) -->
+  <string-array name="zen_mode_icon_options_descriptions">
+    <item msgid="1216815120972438676">"ব্রিফকেস"</item>
+    <item msgid="184985872234062767">"ক্লাসিক্যাল বিল্ডিং"</item>
+    <item msgid="9189550412466785530">"অ্যাপার্টমেন্ট বিল্ডিং"</item>
+    <item msgid="2142527562511049422">"স্পিচ বাবল"</item>
+    <item msgid="2548100558260478605">"লোকজনের গ্রুপ"</item>
+    <item msgid="2270003903304578284">"লাইট বাল্ব"</item>
+    <item msgid="4793496619091161864">"ক্যালেন্ডার"</item>
+    <item msgid="5673625795644364100">"বিরক্ত করবে না"</item>
+    <item msgid="1423820834865831361">"দৌড়াচ্ছেন এমন ব্যক্তি"</item>
+    <item msgid="2037298830718732608">"গল্ফ খেলা"</item>
+    <item msgid="2197835014443491074">"জিম ডাম্বেল"</item>
+    <item msgid="2730180105015616518">"সাঁতার কাটা"</item>
+    <item msgid="2666922823253345958">"হাইকিং করছেন এমন ব্যক্তি"</item>
+    <item msgid="8234880356472211396">"বল ছুঁড়ছেন এমন ব্যক্তি"</item>
+    <item msgid="4642980625253001443">"কিক মারছেন এমন ব্যক্তি"</item>
+    <item msgid="4324795269518833500">"গেম কন্ট্রোলার"</item>
+    <item msgid="7789966425125441125">"শিল্পীর জন্য রঙের প্যালেট"</item>
+    <item msgid="663512680597461570">"বরফের কণা"</item>
+    <item msgid="7952183800501346803">"বিচ আমব্রেলা"</item>
+    <item msgid="799139025758265891">"ওয়ার্কশপ টুল"</item>
+    <item msgid="1330084588359129896">"তাঁবু"</item>
+    <item msgid="3861584909935022342">"ফিল্ম রিল"</item>
+    <item msgid="5827426100157335512">"বই"</item>
+    <item msgid="8585828346253128384">"পদ্ম ফুল"</item>
+    <item msgid="8788370542815300188">"ব্যক্তির মন"</item>
+    <item msgid="7287354964767553293">"হেডফোন"</item>
+    <item msgid="2530059623783800987">"টিভি"</item>
+    <item msgid="5307182323469376758">"ট্রেন"</item>
+    <item msgid="4903790544026923026">"গাড়ি"</item>
+    <item msgid="5010405583912314582">"কাঁটা চামচ ও ছুরি"</item>
+    <item msgid="8939998598599064900">"শপিং কার্ট"</item>
+    <item msgid="3379605903308731893">"বাচ্চা"</item>
+    <item msgid="7808668968550293112">"পশুর পাঞ্জা"</item>
+    <item msgid="1000692647524056504">"স্টার ব্যাজ"</item>
+    <item msgid="8270261073421676502">"দুজন ব্যক্তি"</item>
+    <item msgid="5767782819651505460">"স্টার"</item>
+    <item msgid="4368451291862729334">"হার্ট"</item>
+    <item msgid="2613199102208419986">"বাড়ি-ঘর"</item>
+    <item msgid="3022279986430275040">"হাফ-মুন"</item>
+    <item msgid="5421089790869483206">"ঘড়ি"</item>
+  </string-array>
+  <string-array name="display_over_apps_permission_change_exempt">
+  </string-array>
 </resources>

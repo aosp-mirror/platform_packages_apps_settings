@@ -23,20 +23,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import com.android.settings.homepage.contextualcards.ContextualCard;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.LooperMode;
+import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 public class AbnormalRingerConditionControllerBaseTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     @Mock
     private ConditionManager mConditionManager;
@@ -46,8 +51,7 @@ public class AbnormalRingerConditionControllerBaseTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = ApplicationProvider.getApplicationContext();
 
         mCondition = new TestCondition(mContext, mConditionManager);
     }
@@ -60,9 +64,13 @@ public class AbnormalRingerConditionControllerBaseTest {
         mCondition.startMonitoringStateChange();
 
         mContext.sendBroadcast(broadcast1);
+        ShadowLooper.idleMainLooper();
+
         verify(mConditionManager, never()).onConditionChanged();
 
         mContext.sendBroadcast(broadcast2);
+        ShadowLooper.idleMainLooper();
+
         verify(mConditionManager).onConditionChanged();
     }
 

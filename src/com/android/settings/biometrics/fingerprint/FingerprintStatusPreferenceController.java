@@ -40,7 +40,7 @@ public class FingerprintStatusPreferenceController extends BiometricStatusPrefer
     protected final FingerprintManager mFingerprintManager;
     @VisibleForTesting
     RestrictedPreference mPreference;
-    private final FingerprintStatusUtils mFingerprintStatusUtils;
+    protected final FingerprintStatusUtils mFingerprintStatusUtils;
     private PreferenceScreen mPreferenceScreen;
 
     public FingerprintStatusPreferenceController(Context context) {

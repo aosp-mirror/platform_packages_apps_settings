@@ -1,0 +1,12 @@
+package: "com.android.settings.flags"
+container: "system"
+
+# NOTE: Keep alphabetized to help limit merge conflicts from multiple simultaneous editors.
+
+flag {
+    name: "enable_wifi_sharing_runtime_fragment"
+    namespace: "prism_qr"
+    description: "Use WifiFeatureProvider to get the instance of WifiDppQrCodeGeneratorFragment."
+    bug: "329012096"
+}
+

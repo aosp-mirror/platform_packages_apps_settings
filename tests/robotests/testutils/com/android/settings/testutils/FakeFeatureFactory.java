@@ -25,15 +25,11 @@ import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
 import com.android.settings.biometrics.fingerprint.FingerprintFeatureProvider;
-import com.android.settings.biometrics2.factory.BiometricsRepositoryProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
-import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProvider;
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider;
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
-import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider;
-import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProviderImpl;
 import com.android.settings.display.DisplayFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.fuelgauge.BatterySettingsFeatureProvider;
@@ -42,6 +38,7 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
+import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProvider;
 import com.android.settings.onboarding.OnboardingFeatureProvider;
 import com.android.settings.overlay.DockUpdaterFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
@@ -85,7 +82,6 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final BluetoothFeatureProvider mBluetoothFeatureProvider;
     public final FaceFeatureProvider mFaceFeatureProvider;
     public final FingerprintFeatureProvider mFingerprintFeatureProvider;
-    public final BiometricsRepositoryProvider mBiometricsRepositoryProvider;
 
     public PanelFeatureProvider panelFeatureProvider;
     public SlicesFeatureProvider slicesFeatureProvider;
@@ -104,7 +100,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public FastPairFeatureProvider mFastPairFeatureProvider;
     public PrivateSpaceLoginFeatureProvider mPrivateSpaceLoginFeatureProvider;
     public DisplayFeatureProvider mDisplayFeatureProvider;
-    public AudioSharingFeatureProvider mAudioSharingFeatureProvider;
+    public SyncAcrossDevicesFeatureProvider mSyncAcrossDevicesFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -141,7 +137,6 @@ public class FakeFeatureFactory extends FeatureFactory {
         mBluetoothFeatureProvider = mock(BluetoothFeatureProvider.class);
         mFaceFeatureProvider = mock(FaceFeatureProvider.class);
         mFingerprintFeatureProvider = mock(FingerprintFeatureProvider.class);
-        mBiometricsRepositoryProvider = mock(BiometricsRepositoryProvider.class);
         wifiTrackerLibProvider = mock(WifiTrackerLibProvider.class);
         securitySettingsFeatureProvider = mock(SecuritySettingsFeatureProvider.class);
         mAccessibilitySearchFeatureProvider = mock(AccessibilitySearchFeatureProvider.class);
@@ -152,9 +147,9 @@ public class FakeFeatureFactory extends FeatureFactory {
         mStylusFeatureProvider = mock(StylusFeatureProvider.class);
         mOnboardingFeatureProvider = mock(OnboardingFeatureProvider.class);
         mFastPairFeatureProvider = mock(FastPairFeatureProvider.class);
-        mPrivateSpaceLoginFeatureProvider =  mock(PrivateSpaceLoginFeatureProvider.class);
+        mPrivateSpaceLoginFeatureProvider = mock(PrivateSpaceLoginFeatureProvider.class);
         mDisplayFeatureProvider = mock(DisplayFeatureProvider.class);
-        mAudioSharingFeatureProvider = mock(AudioSharingFeatureProvider.class);
+        mSyncAcrossDevicesFeatureProvider = mock(SyncAcrossDevicesFeatureProvider.class);
     }
 
     @Override
@@ -274,11 +269,6 @@ public class FakeFeatureFactory extends FeatureFactory {
     }
 
     @Override
-    public BiometricsRepositoryProvider getBiometricsRepositoryProvider() {
-        return mBiometricsRepositoryProvider;
-    }
-
-    @Override
     public WifiTrackerLibProvider getWifiTrackerLibProvider() {
         return wifiTrackerLibProvider;
     }
@@ -296,11 +286,6 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public AccessibilityMetricsFeatureProvider getAccessibilityMetricsFeatureProvider() {
         return mAccessibilityMetricsFeatureProvider;
-    }
-
-    @Override
-    public HardwareInfoFeatureProvider getHardwareInfoFeatureProvider() {
-        return HardwareInfoFeatureProviderImpl.INSTANCE;
     }
 
     @Override
@@ -344,8 +329,8 @@ public class FakeFeatureFactory extends FeatureFactory {
     }
 
     @Override
-    public AudioSharingFeatureProvider getAudioSharingFeatureProvider() {
-        return mAudioSharingFeatureProvider;
+    public SyncAcrossDevicesFeatureProvider getSyncAcrossDevicesFeatureProvider() {
+        return mSyncAcrossDevicesFeatureProvider;
     }
 }
 

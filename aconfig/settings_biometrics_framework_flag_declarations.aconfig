@@ -1,5 +1,5 @@
 package: "com.android.settings.flags"
-container: "system_ext"
+container: "system"
 
 flag {
   name: "biometric_settings_provider"
@@ -13,4 +13,11 @@ flag {
   namespace: "biometrics_framework"
   description: "This flag enables or disables the Fingerprint v2 enrollment"
   bug: "295206723"
+}
+
+flag {
+  name: "active_unlock_finish_parent"
+  namespace: "biometrics_framework"
+  description: "This flag enables the Active Unlock settings activity to finish its parent activity"
+  bug: "343576960"
 }

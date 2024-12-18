@@ -46,10 +46,12 @@ import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricStatusPreferenceController;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.transition.SettingsTransitionHelper;
 
@@ -65,6 +67,8 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
     static final int CONFIRM_REQUEST = 2001;
     private static final int CHOOSE_LOCK_REQUEST = 2002;
     protected static final int ACTIVE_UNLOCK_REQUEST = 2003;
+    @VisibleForTesting
+    static final int BIOMETRIC_AUTH_REQUEST = 2004;
 
     private static final String SAVE_STATE_CONFIRM_CREDETIAL = "confirm_credential";
     private static final String DO_NOT_FINISH_ACTIVITY = "do_not_finish_activity";
@@ -72,10 +76,12 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
     static final String RETRY_PREFERENCE_KEY = "retry_preference_key";
     @VisibleForTesting
     static final String RETRY_PREFERENCE_BUNDLE = "retry_preference_bundle";
+    private static final String BIOMETRICS_AUTH_REQUESTED = "biometrics_auth_requested";
 
     protected int mUserId;
     protected long mGkPwHandle;
     private boolean mConfirmCredential;
+    private boolean mBiometricsAuthenticationRequested;
     @Nullable private FaceManager mFaceManager;
     @Nullable private FingerprintManager mFingerprintManager;
     // Do not finish() if choosing/confirming credential, showing fp/face settings, or launching
@@ -123,13 +129,14 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
                 mGkPwHandle = savedInstanceState.getLong(
                         ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE);
             }
+            mBiometricsAuthenticationRequested = savedInstanceState.getBoolean(
+                    BIOMETRICS_AUTH_REQUESTED);
         }
 
         if (mGkPwHandle == 0L && !mConfirmCredential) {
             mConfirmCredential = true;
             launchChooseOrConfirmLock();
         }
-
         updateUnlockPhonePreferenceSummary();
 
         final Preference useInAppsPreference = findPreference(getUseInAppsPreferenceKey());
@@ -288,6 +295,8 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
             outState.putString(RETRY_PREFERENCE_KEY, mRetryPreferenceKey);
             outState.putBundle(RETRY_PREFERENCE_BUNDLE, mRetryPreferenceExtra);
         }
+        outState.putBoolean(BIOMETRICS_AUTH_REQUESTED,
+                mBiometricsAuthenticationRequested);
     }
 
     @Override
@@ -305,6 +314,22 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
                                 com.google.android.setupdesign.R.anim.sud_slide_next_out);
                         retryPreferenceKey(mRetryPreferenceKey, mRetryPreferenceExtra);
                     }
+                    final Utils.BiometricStatus biometricAuthStatus =
+                            Utils.requestBiometricAuthenticationForMandatoryBiometrics(
+                                    getActivity(),
+                                    mBiometricsAuthenticationRequested,
+                                    mUserId);
+                    if (biometricAuthStatus == Utils.BiometricStatus.OK) {
+                        mBiometricsAuthenticationRequested = true;
+                        Utils.launchBiometricPromptForMandatoryBiometrics(this,
+                                BIOMETRIC_AUTH_REQUEST,
+                                mUserId, true /* hideBackground */);
+                    } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
+                        IdentityCheckBiometricErrorDialog
+                                .showBiometricErrorDialogAndFinishActivityOnDismiss(getActivity(),
+                                        biometricAuthStatus);
+                        return;
+                    }
                 } else {
                     Log.d(getLogTag(), "Data null or GK PW missing.");
                     finish();
@@ -315,6 +340,17 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
             }
             mRetryPreferenceKey = null;
             mRetryPreferenceExtra = null;
+        } else if (requestCode == BIOMETRIC_AUTH_REQUEST) {
+            mBiometricsAuthenticationRequested = false;
+            if (resultCode != RESULT_OK) {
+                if (resultCode == ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT) {
+                    IdentityCheckBiometricErrorDialog
+                            .showBiometricErrorDialogAndFinishActivityOnDismiss(getActivity(),
+                                    Utils.BiometricStatus.LOCKOUT);
+                } else {
+                    finish();
+                }
+            }
         }
     }
 

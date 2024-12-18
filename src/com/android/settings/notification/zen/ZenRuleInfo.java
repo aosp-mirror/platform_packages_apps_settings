@@ -1,5 +1,7 @@
 package com.android.settings.notification.zen;
 
+import android.annotation.Nullable;
+import android.app.AutomaticZenRule;
 import android.content.ComponentName;
 import android.net.Uri;
 
@@ -35,7 +37,9 @@ public class ZenRuleInfo {
     public String title;
     public String settingsAction;
     public ComponentName configurationActivity;
+    @AutomaticZenRule.Type public int type;
     public Uri defaultConditionId;
+    @Nullable public String defaultTriggerDescription;
     public ComponentName serviceComponent;
     public boolean isSystem;
     public CharSequence packageLabel;

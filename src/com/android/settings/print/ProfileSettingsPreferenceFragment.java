@@ -55,7 +55,8 @@ public abstract class ProfileSettingsPreferenceFragment extends RestrictedDashbo
                     final UserHandle selectedUser = profileSpinnerAdapter.getUserHandle(position);
                     if (selectedUser.getIdentifier() != UserHandle.myUserId()) {
                         final Activity activity = getActivity();
-                        Intent intent = new Intent(getIntentActionString());
+                        Intent intent = new Intent(getIntentActionString())
+                                .setPackage(getContext().getPackageName());
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         activity.startActivityAsUser(intent, selectedUser);

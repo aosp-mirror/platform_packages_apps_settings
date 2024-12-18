@@ -16,17 +16,26 @@
 
 package com.android.settings.notification.zen;
 
+import static android.platform.test.flag.junit.SetFlagsRule.DefaultInitValueType.DEVICE_DEFAULT;
+
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.AutomaticZenRule;
+import android.app.Flags;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Looper;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
+import android.service.notification.ZenModeConfig;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.test.core.app.ApplicationProvider;
@@ -34,13 +43,17 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.R;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowToast;
+
+import java.util.Calendar;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
@@ -48,11 +61,15 @@ import org.robolectric.shadows.ShadowToast;
 })
 public class ZenModeScheduleRuleSettingsTest {
 
-    @Mock
-    private FragmentActivity mActivity;
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule(DEVICE_DEFAULT);
 
     @Mock
+    private FragmentActivity mActivity;
+    @Mock
     private Intent mIntent;
+    @Mock
+    private ZenModeBackend mBackend;
 
     private ZenModeScheduleRuleSettings mFragment;
     private Context mContext;
@@ -87,5 +104,26 @@ public class ZenModeScheduleRuleSettingsTest {
         verify(mActivity).finish();
 
         //should not crash
+    }
+
+    @Test
+    @EnableFlags({Flags.FLAG_MODES_API, Flags.FLAG_MODES_UI})
+    public void updateScheduleRule_updatesConditionAndTriggerDescription() {
+        mFragment.setBackend(mBackend);
+        mFragment.mId = "id";
+        mFragment.mRule = new AutomaticZenRule.Builder("name", Uri.parse("condition")).build();
+
+        ZenModeConfig.ScheduleInfo scheduleInfo = new ZenModeConfig.ScheduleInfo();
+        scheduleInfo.days = new int[] { Calendar.MONDAY };
+        scheduleInfo.startHour = 1;
+        scheduleInfo.endHour = 2;
+        mFragment.updateScheduleRule(scheduleInfo);
+
+        ArgumentCaptor<AutomaticZenRule> updatedRuleCaptor = ArgumentCaptor.forClass(
+                AutomaticZenRule.class);
+        verify(mBackend).updateZenRule(eq("id"), updatedRuleCaptor.capture());
+        assertThat(updatedRuleCaptor.getValue().getConditionId())
+                .isEqualTo(ZenModeConfig.toScheduleConditionId(scheduleInfo));
+        assertThat(updatedRuleCaptor.getValue().getTriggerDescription()).isNotEmpty();
     }
 }
