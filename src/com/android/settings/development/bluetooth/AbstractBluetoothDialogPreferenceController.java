@@ -85,6 +85,8 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
         if (bluetoothA2dp == null) {
             return;
         }
+        // update the cache of a2dp config(mBluetoothA2dpConfigStore) before writing config.
+        initConfigStore();
         writeConfigurationValues(index);
         final BluetoothCodecConfig codecConfig = mBluetoothA2dpConfigStore.createCodecConfig();
         BluetoothDevice activeDevice = getA2dpActiveDevice();
