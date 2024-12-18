@@ -24,9 +24,10 @@ import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.service.notification.ConditionProviderService;
+import android.service.notification.SystemZenRules;
+import android.service.notification.ZenModeConfig;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -162,8 +163,21 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
         updatePreference(mActionButtons);
     }
 
-    protected void updateRule(Uri newConditionId) {
-        mRule.setConditionId(newConditionId);
+    protected void updateScheduleRule(ZenModeConfig.ScheduleInfo schedule) {
+        mRule.setConditionId(ZenModeConfig.toScheduleConditionId(schedule));
+        if (Flags.modesApi() && Flags.modesUi()) {
+            mRule.setTriggerDescription(
+                    SystemZenRules.getTriggerDescriptionForScheduleTime(mContext, schedule));
+        }
+        mBackend.updateZenRule(mId, mRule);
+    }
+
+    protected void updateEventRule(ZenModeConfig.EventInfo event) {
+        mRule.setConditionId(ZenModeConfig.toEventConditionId(event));
+        if (Flags.modesApi() && Flags.modesUi()) {
+            mRule.setTriggerDescription(
+                    SystemZenRules.getTriggerDescriptionForScheduleEvent(mContext, event));
+        }
         mBackend.updateZenRule(mId, mRule);
     }
 

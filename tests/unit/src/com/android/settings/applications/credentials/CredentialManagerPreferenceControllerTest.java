@@ -17,7 +17,6 @@
 package com.android.settings.applications.credentials;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -36,7 +35,9 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Looper;
 import android.provider.Settings;
+import android.util.Pair;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
@@ -124,19 +125,37 @@ public class CredentialManagerPreferenceControllerTest {
         controller.setSimulateConnectedForTests(true);
         assertThat(controller.isConnected()).isTrue();
         controller.setSimulateHiddenForTests(Optional.of(false));
-        assertThat(controller.isHiddenDueToNoProviderSet()).isFalse();
+        assertThat(controller.isHiddenDueToNoProviderSet(createPair())).isFalse();
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_isHidden_returnsConditionallyUnavailable() {
+    public void isHiddenDueToNoProviderSet_hiddenDueToEmptyPair() {
         CredentialManagerPreferenceController controller =
                 createControllerWithServices(Lists.newArrayList(createCredentialProviderInfo()));
-        controller.setSimulateConnectedForTests(true);
-        assertThat(controller.isConnected()).isTrue();
-        controller.setSimulateHiddenForTests(Optional.of(true));
-        assertThat(controller.isHiddenDueToNoProviderSet()).isTrue();
-        assertThat(controller.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+        assertThat(controller.isHiddenDueToNoProviderSet(createPair())).isTrue();
+    }
+
+    @Test
+    public void isHiddenDueToNoProviderSet_hiddenDueToNoPrimaryProvider() {
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(Lists.newArrayList(createCredentialProviderInfo()));
+
+        Pair<List<CombinedProviderInfo>, CombinedProviderInfo> testPair =
+                new Pair<>(Lists.newArrayList(createCombinedProviderInfo()), null);
+        assertThat(controller.isHiddenDueToNoProviderSet(testPair)).isTrue();
+    }
+
+    @Test
+    public void isHiddenDueToNoProviderSet_validDataSoNotHidden() {
+        CredentialManagerPreferenceController controller =
+                createControllerWithServices(Lists.newArrayList(createCredentialProviderInfo()));
+
+        Pair<List<CombinedProviderInfo>, CombinedProviderInfo> testPair =
+                new Pair<>(
+                        Lists.newArrayList(createCombinedProviderInfo()),
+                        createCombinedProviderInfo());
+        assertThat(controller.isHiddenDueToNoProviderSet(testPair)).isFalse();
     }
 
     @Test
@@ -146,7 +165,7 @@ public class CredentialManagerPreferenceControllerTest {
         controller.setSimulateConnectedForTests(true);
         controller.setSimulateHiddenForTests(Optional.of(false));
 
-        assertThat(controller.isHiddenDueToNoProviderSet()).isFalse();
+        assertThat(controller.isHiddenDueToNoProviderSet(createPair())).isFalse();
         assertThat(controller.isConnected()).isTrue();
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
 
@@ -170,7 +189,7 @@ public class CredentialManagerPreferenceControllerTest {
         controller.setSimulateConnectedForTests(true);
         assertThat(controller.isConnected()).isTrue();
         controller.setSimulateHiddenForTests(Optional.of(false));
-        assertThat(controller.isHiddenDueToNoProviderSet()).isFalse();
+        assertThat(controller.isHiddenDueToNoProviderSet(createPair())).isFalse();
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
 
         // Test the data is correct.
@@ -214,7 +233,7 @@ public class CredentialManagerPreferenceControllerTest {
         controller.setSimulateConnectedForTests(true);
         assertThat(controller.isConnected()).isTrue();
         controller.setSimulateHiddenForTests(Optional.of(false));
-        assertThat(controller.isHiddenDueToNoProviderSet()).isFalse();
+        assertThat(controller.isHiddenDueToNoProviderSet(createPair())).isFalse();
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
 
         // Ensure that we stay under 5 providers (one is reserved for primary).
@@ -283,7 +302,7 @@ public class CredentialManagerPreferenceControllerTest {
         controller.setSimulateConnectedForTests(true);
         assertThat(controller.isConnected()).isTrue();
         controller.setSimulateHiddenForTests(Optional.of(false));
-        assertThat(controller.isHiddenDueToNoProviderSet()).isFalse();
+        assertThat(controller.isHiddenDueToNoProviderSet(createPair())).isFalse();
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
 
         // Test the data is correct.
@@ -336,17 +355,26 @@ public class CredentialManagerPreferenceControllerTest {
                 createControllerWithServices(
                         Lists.newArrayList(serviceA1, serviceB1, serviceC1, serviceC2, serviceC3));
         controller.setSimulateConnectedForTests(true);
-        controller.setSimulateHiddenForTests(Optional.of(false));
 
-        assertThat(controller.isHiddenDueToNoProviderSet()).isFalse();
         assertThat(controller.isConnected()).isTrue();
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
 
-        controller.displayPreference(mScreen);
-        assertThat(mCredentialsPreferenceCategory.getPreferenceCount()).isEqualTo(3);
+        CombinedProviderInfo combinedProviderA =
+                new CombinedProviderInfo(Lists.newArrayList(serviceA1), null, false, false);
+        CombinedProviderInfo combinedProviderB =
+                new CombinedProviderInfo(Lists.newArrayList(serviceB1), null, false, false);
+        CombinedProviderInfo combinedProviderC =
+                new CombinedProviderInfo(
+                        Lists.newArrayList(serviceC1, serviceC2, serviceC3), null, false, false);
+        Pair<List<CombinedProviderInfo>, CombinedProviderInfo> providerPair =
+                createPair(
+                        Lists.newArrayList(combinedProviderA, combinedProviderB, combinedProviderC),
+                        createCombinedProviderInfo());
+
+        assertThat(controller.isHiddenDueToNoProviderSet(providerPair)).isFalse();
 
         Map<String, CredentialManagerPreferenceController.CombiPreference> prefs =
-                controller.buildPreferenceList(mContext, mCredentialsPreferenceCategory);
+                controller.buildPreferenceList(mContext, providerPair);
         assertThat(prefs.keySet())
                 .containsExactly(TEST_PACKAGE_NAME_A, TEST_PACKAGE_NAME_B, TEST_PACKAGE_NAME_C);
         assertThat(prefs.size()).isEqualTo(3);
@@ -531,8 +559,7 @@ public class CredentialManagerPreferenceControllerTest {
     @Test
     public void hasNonPrimaryServices_allServicesArePrimary() {
         CredentialManagerPreferenceController controller =
-                createControllerWithServices(
-                    Lists.newArrayList(createCredentialProviderPrimary()));
+                createControllerWithServices(Lists.newArrayList(createCredentialProviderPrimary()));
         assertThat(controller.hasNonPrimaryServices()).isFalse();
     }
 
@@ -540,8 +567,8 @@ public class CredentialManagerPreferenceControllerTest {
     public void hasNonPrimaryServices_mixtureOfServices() {
         CredentialManagerPreferenceController controller =
                 createControllerWithServices(
-                    Lists.newArrayList(createCredentialProviderInfo(),
-                        createCredentialProviderPrimary()));
+                        Lists.newArrayList(
+                                createCredentialProviderInfo(), createCredentialProviderPrimary()));
         assertThat(controller.hasNonPrimaryServices()).isTrue();
     }
 
@@ -599,9 +626,23 @@ public class CredentialManagerPreferenceControllerTest {
 
     private CredentialProviderInfo createCredentialProviderPrimary() {
         return createCredentialProviderInfoBuilder(
-            "com.android.primary", "CredManProvider", "Service Label", "App Name")
+                        "com.android.primary", "CredManProvider", "Service Label", "App Name")
                 .setPrimary(true)
                 .build();
+    }
+
+    private Pair<List<CombinedProviderInfo>, CombinedProviderInfo> createPair() {
+        return createPair(Lists.newArrayList(), null);
+    }
+
+    private Pair<List<CombinedProviderInfo>, CombinedProviderInfo> createPair(
+            List<CombinedProviderInfo> providers, @Nullable CombinedProviderInfo primaryProvider) {
+        return new Pair<>(providers, primaryProvider);
+    }
+
+    private CombinedProviderInfo createCombinedProviderInfo() {
+        return new CombinedProviderInfo(
+                Lists.newArrayList(createCredentialProviderInfo()), null, false, false);
     }
 
     private CredentialProviderInfo createCredentialProviderInfoWithSubtitle(

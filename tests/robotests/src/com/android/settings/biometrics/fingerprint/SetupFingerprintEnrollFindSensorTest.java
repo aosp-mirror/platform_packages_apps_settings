@@ -18,13 +18,12 @@ package com.android.settings.biometrics.fingerprint;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.robolectric.RuntimeEnvironment.application;
-
 import android.content.Intent;
 import android.content.res.Resources.Theme;
 import android.hardware.fingerprint.FingerprintManager;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -37,21 +36,25 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.LooperMode;
+import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 @Config(shadows = {ShadowUtils.class, ShadowAlertDialogCompat.class})
 public class SetupFingerprintEnrollFindSensorTest {
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
-    @Mock private FingerprintManager mFingerprintManager;
+    @Mock
+    private FingerprintManager mFingerprintManager;
 
     private Theme mTheme;
 
@@ -59,7 +62,6 @@ public class SetupFingerprintEnrollFindSensorTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         ShadowUtils.setFingerprintManager(mFingerprintManager);
         FakeFeatureFactory.setupForTest();
 
@@ -83,7 +85,8 @@ public class SetupFingerprintEnrollFindSensorTest {
                 alertDialog);
         final int titleRes = R.string.setup_fingerprint_enroll_skip_title;
 
-        assertThat(application.getString(titleRes)).isEqualTo(shadowAlertDialog.getTitle());
+        assertThat(ApplicationProvider.getApplicationContext().getString(titleRes)).isEqualTo(
+                shadowAlertDialog.getTitle());
     }
 
     @Test
@@ -105,7 +108,7 @@ public class SetupFingerprintEnrollFindSensorTest {
     private AlertDialog setupAlertDialog() {
         PartnerCustomizationLayout layout = mActivity.findViewById(R.id.setup_wizard_layout);
         layout.getMixin(FooterBarMixin.class).getSecondaryButtonView().performClick();
-
+        ShadowLooper.idleMainLooper();
         final AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(alertDialog).isNotNull();
 

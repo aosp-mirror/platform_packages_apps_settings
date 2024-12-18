@@ -283,7 +283,7 @@ public class SettingsActivity extends SettingsBaseActivity
         createUiFromIntent(savedState, intent);
     }
 
-    protected void createUiFromIntent(Bundle savedState, Intent intent) {
+    protected void createUiFromIntent(@Nullable Bundle savedState, Intent intent) {
         long startTime = System.currentTimeMillis();
 
         final FeatureFactory factory = FeatureFactory.getFeatureFactory();

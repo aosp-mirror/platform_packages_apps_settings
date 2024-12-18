@@ -48,9 +48,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.ParameterizedRobolectricTestRunner;
-import org.robolectric.annotation.LooperMode;
+import org.robolectric.shadows.ShadowLooper;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -58,8 +59,11 @@ import java.util.List;
 
 
 @RunWith(ParameterizedRobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 public class ManagedProfileQuietModeEnablerTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
     private static final int MANAGED_USER_ID = 10;
     private Context mContext;
     private ManagedProfileQuietModeEnabler mQuietModeEnabler;
@@ -96,7 +100,6 @@ public class ManagedProfileQuietModeEnablerTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mUserInfo.isManagedProfile()).thenReturn(true);
@@ -140,6 +143,7 @@ public class ManagedProfileQuietModeEnablerTest {
                 Intent.EXTRA_USER_HANDLE, MANAGED_USER_ID));
         mContext.sendBroadcast(new Intent(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE).putExtra(
                 Intent.EXTRA_USER_HANDLE, MANAGED_USER_ID));
+        ShadowLooper.idleMainLooper();
 
         verify(mOnQuietModeChangeListener, times(2)).onQuietModeChanged();
     }

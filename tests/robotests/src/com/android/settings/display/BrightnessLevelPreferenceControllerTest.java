@@ -33,16 +33,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.hardware.display.BrightnessInfo;
 import android.os.PowerManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings.System;
 import android.view.Display;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
+import com.android.settings.accessibility.Flags;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settingslib.transition.SettingsTransitionHelper;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -57,6 +63,9 @@ import org.robolectric.shadows.ShadowContentResolver;
 
 @RunWith(RobolectricTestRunner.class)
 public class BrightnessLevelPreferenceControllerTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private PowerManager mPowerManager;
@@ -90,8 +99,22 @@ public class BrightnessLevelPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_shouldAlwaysReturnTrue() {
+    public void isAvailable_shouldAlwaysReturnTrueWhenNotInSetupWizard() {
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
+    public void isAvailable_inSetupWizardAndFlagOn_shouldReturnTrue() {
+        mController.setInSetupWizard(true);
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
+    public void isAvailable_inSetupWizardAndFlagOff_shouldReturnFalse() {
+        mController.setInSetupWizard(true);
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
@@ -169,13 +192,14 @@ public class BrightnessLevelPreferenceControllerTest {
         final BrightnessLevelPreferenceController controller =
                 new BrightnessLevelPreferenceController(activity, null);
         final ShadowActivity shadowActivity = shadowOf(activity);
-        when(mPreference.getKey()).thenReturn("brightness");
+
+        String preferenceKey = mContext.getString(R.string.preference_key_brightness_level);
+        when(mPreference.getKey()).thenReturn(preferenceKey);
 
         controller.handlePreferenceTreeClick(mPreference);
 
         final Intent intent = shadowActivity.getNextStartedActivity();
         assertThat(intent.getIntExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE, 0))
                 .isEqualTo(SettingsTransitionHelper.TransitionType.TRANSITION_NONE);
-
     }
 }

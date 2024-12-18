@@ -43,7 +43,6 @@ import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.datausage.lib.AppDataUsageDetailsRepository;
 import com.android.settings.datausage.lib.NetworkTemplates;
-import com.android.settings.datausage.lib.NetworkUsageDetailsData;
 import com.android.settings.fuelgauge.datasaver.DynamicDenylistManager;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.widget.EntityHeaderController;
@@ -70,17 +69,11 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     static final String ARG_NETWORK_CYCLES = "network_cycles";
     static final String ARG_SELECTED_CYCLE = "selected_cycle";
 
-    private static final String KEY_TOTAL_USAGE = "total_usage";
-    private static final String KEY_FOREGROUND_USAGE = "foreground_usage";
-    private static final String KEY_BACKGROUND_USAGE = "background_usage";
     private static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
     private static final String KEY_UNRESTRICTED_DATA = "unrestricted_data_saver";
 
     private PackageManager mPackageManager;
     private final ArraySet<String> mPackages = new ArraySet<>();
-    private Preference mTotalUsage;
-    private Preference mForegroundUsage;
-    private Preference mBackgroundUsage;
     private RestrictedSwitchPreference mRestrictBackground;
 
     private Drawable mIcon;
@@ -138,10 +131,6 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
                 addUid(mAppItem.uids.keyAt(i));
             }
         }
-
-        mTotalUsage = findPreference(KEY_TOTAL_USAGE);
-        mForegroundUsage = findPreference(KEY_FOREGROUND_USAGE);
-        mBackgroundUsage = findPreference(KEY_BACKGROUND_USAGE);
 
         final List<Integer> uidList = getAppUidList(mAppItem.uids);
         initCycle(uidList);
@@ -255,15 +244,17 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
 
     @VisibleForTesting
     void initCycle(List<Integer> uidList) {
-        var controller = use(AppDataUsageCycleController.class);
+        var cycleController = use(AppDataUsageCycleController.class);
+        var summaryController = use(AppDataUsageSummaryController.class);
         var repository = new AppDataUsageDetailsRepository(mContext, mTemplate, mCycles, uidList);
-        controller.init(repository, data -> {
-            bindData(data);
+        cycleController.init(repository, data -> {
+            mIsLoading = false;
+            summaryController.update(data);
             return Unit.INSTANCE;
         });
         if (mCycles != null) {
             Log.d(TAG, "setInitialCycles: " + mCycles + " " + mSelectedCycle);
-            controller.setInitialCycles(mCycles, mSelectedCycle);
+            cycleController.setInitialCycles(mCycles, mSelectedCycle);
         }
     }
 
@@ -312,16 +303,6 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
         if (packages != null) {
             Collections.addAll(mPackages, packages);
         }
-    }
-
-    @VisibleForTesting
-    void bindData(@NonNull NetworkUsageDetailsData data) {
-        mIsLoading = false;
-        mTotalUsage.setSummary(DataUsageUtils.formatDataUsage(mContext, data.getTotalUsage()));
-        mForegroundUsage.setSummary(
-                DataUsageUtils.formatDataUsage(mContext, data.getForegroundUsage()));
-        mBackgroundUsage.setSummary(
-                DataUsageUtils.formatDataUsage(mContext, data.getBackgroundUsage()));
     }
 
     private boolean getAppRestrictBackground() {

@@ -19,7 +19,10 @@ package com.android.settings.localepicker;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
+
+import com.android.settingslib.datastore.SharedPreferencesStorage;
 
 import com.google.gson.Gson;
 
@@ -41,6 +44,12 @@ public class LocaleNotificationDataManager {
      */
     public LocaleNotificationDataManager(Context context) {
         this.mContext = context;
+    }
+
+    /** Returns the underlying {@link SharedPreferences} storage. */
+    @NonNull
+    public static SharedPreferencesStorage getSharedPreferencesStorage(@NonNull Context context) {
+        return new SharedPreferencesStorage(context, LOCALE_NOTIFICATION, Context.MODE_PRIVATE);
     }
 
     private static SharedPreferences getSharedPreferences(Context context) {

@@ -263,6 +263,16 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
                 || availabilityStatus == DISABLED_DEPENDENT_SETTING);
     }
 
+    private boolean isAvailableForSearch() {
+        if (mIsForWork && mWorkProfileUser == null) {
+            return false;
+        }
+
+        final int availabilityStatus = getAvailabilityStatus();
+        return (availabilityStatus == AVAILABLE
+                || availabilityStatus == DISABLED_DEPENDENT_SETTING);
+    }
+
     /**
      * @return {@code false} if the setting is not applicable to the device. This covers both
      * settings which were only introduced in future versions of android, or settings that have
@@ -303,18 +313,12 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      * Called by SearchIndexProvider#getNonIndexableKeys
      */
     public void updateNonIndexableKeys(List<String> keys) {
-        final boolean shouldSuppressFromSearch = !isAvailable()
-                || getAvailabilityStatus() == AVAILABLE_UNSEARCHABLE;
-        if (shouldSuppressFromSearch) {
-            final String key = getPreferenceKey();
-            if (TextUtils.isEmpty(key)) {
-                Log.w(TAG, "Skipping updateNonIndexableKeys due to empty key " + toString());
-                return;
-            }
-            if (keys.contains(key)) {
-                Log.w(TAG, "Skipping updateNonIndexableKeys, key already in list. " + toString());
-                return;
-            }
+        final String key = getPreferenceKey();
+        if (TextUtils.isEmpty(key)) {
+            Log.w(TAG, "Skipping updateNonIndexableKeys due to empty key " + this);
+            return;
+        }
+        if (!keys.contains(key) && !isAvailableForSearch()) {
             keys.add(key);
         }
     }

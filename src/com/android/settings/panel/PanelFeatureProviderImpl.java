@@ -22,11 +22,16 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.FeatureFlagUtils;
 
-import com.android.settings.Utils;
+import androidx.annotation.Nullable;
 
+import com.android.settings.Utils;
+import com.android.settings.flags.Flags;
+
+@Deprecated(forRemoval = true)
 public class PanelFeatureProviderImpl implements PanelFeatureProvider {
 
     @Override
+    @Nullable
     public PanelContent getPanel(Context context, Bundle bundle) {
         if (context == null) {
             return null;
@@ -46,9 +51,23 @@ public class PanelFeatureProviderImpl implements PanelFeatureProvider {
                 context.sendBroadcast(intent);
                 return null;
             case Settings.Panel.ACTION_NFC:
-                return NfcPanel.create(context);
+                if (Flags.slicesRetirement()) {
+                    Intent nfcIntent = new Intent(Settings.ACTION_NFC_SETTINGS);
+                    nfcIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(nfcIntent);
+                    return null;
+                } else {
+                    return NfcPanel.create(context);
+                }
             case Settings.Panel.ACTION_WIFI:
-                return WifiPanel.create(context);
+                if (Flags.slicesRetirement()) {
+                    Intent wifiIntent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+                    wifiIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(wifiIntent);
+                    return null;
+                } else {
+                    return WifiPanel.create(context);
+                }
             case Settings.Panel.ACTION_VOLUME:
                 if (FeatureFlagUtils.isEnabled(context,
                         FeatureFlagUtils.SETTINGS_VOLUME_PANEL_IN_SYSTEMUI)) {
@@ -59,7 +78,14 @@ public class PanelFeatureProviderImpl implements PanelFeatureProvider {
                     context.sendBroadcast(volumeIntent);
                     return null;
                 } else {
-                    return VolumePanel.create(context);
+                    if (Flags.slicesRetirement()) {
+                        Intent volIntent = new Intent(Settings.ACTION_SOUND_SETTINGS);
+                        volIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(volIntent);
+                        return null;
+                    } else {
+                        return VolumePanel.create(context);
+                    }
                 }
         }
 

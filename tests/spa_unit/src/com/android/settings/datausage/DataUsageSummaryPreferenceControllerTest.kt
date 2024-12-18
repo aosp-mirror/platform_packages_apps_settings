@@ -32,8 +32,10 @@ import com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILA
 import com.android.settings.datausage.lib.INetworkCycleDataRepository
 import com.android.settings.datausage.lib.NetworkUsageData
 import com.android.settings.network.ProxySubscriptionManager
+import com.android.settings.network.policy.NetworkPolicyRepository
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -41,6 +43,7 @@ import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.clearInvocations
+import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
@@ -69,6 +72,10 @@ class DataUsageSummaryPreferenceControllerTest {
         on { get() } doReturn mockSubscriptionManager
     }
 
+    private val mockNetworkPolicyRepository = mock<NetworkPolicyRepository> {
+        on { networkPolicyFlow(any()) } doAnswer { flowOf(policy) }
+    }
+
     private val fakeNetworkCycleDataRepository = object : INetworkCycleDataRepository {
         override fun getCycles(): List<Range<Long>> = emptyList()
         override fun getPolicy() = policy
@@ -86,6 +93,7 @@ class DataUsageSummaryPreferenceControllerTest {
         context = context,
         subId = SUB_ID,
         proxySubscriptionManager = mockProxySubscriptionManager,
+        networkPolicyRepository = mockNetworkPolicyRepository,
         networkCycleDataRepositoryFactory = { fakeNetworkCycleDataRepository },
         dataPlanRepositoryFactory = { fakeDataPlanRepository },
     )
@@ -112,7 +120,7 @@ class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    fun getAvailabilityStatus_hasSubInfoAndPolicy_available() {
+    fun getAvailabilityStatus_hasSubInfo_available() {
         mockProxySubscriptionManager.stub {
             on { getAccessibleSubscriptionInfo(SUB_ID) } doReturn SubscriptionInfo.Builder().build()
         }
@@ -134,35 +142,42 @@ class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    fun getAvailabilityStatus_noPolicy_conditionallyUnavailable() {
+    fun onViewCreated_noPolicy_setInvisible() = runBlocking {
         policy = null
+        controller.displayPreference(preferenceScreen)
+        clearInvocations(preference)
 
-        val availabilityStatus = controller.getAvailabilityStatus(SUB_ID)
+        controller.onViewCreated(TestLifecycleOwner())
+        delay(100)
 
-        assertThat(availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
+        verify(preference).isVisible = false
     }
 
     @Test
-    fun displayPreference_policyHasNoLimitInfo() {
+    fun onViewCreated_policyHasNoLimitInfo() = runBlocking {
         policy = mock<NetworkPolicy>().apply {
             warningBytes = NetworkPolicy.WARNING_DISABLED
             limitBytes = NetworkPolicy.LIMIT_DISABLED
         }
-
         controller.displayPreference(preferenceScreen)
+
+        controller.onViewCreated(TestLifecycleOwner())
+        delay(100)
 
         verify(preference).setLimitInfo(null)
         verify(preference, never()).setLabels(any(), any())
     }
 
     @Test
-    fun displayPreference_policyWarningOnly() {
+    fun onViewCreated_policyWarningOnly() = runBlocking {
         policy = mock<NetworkPolicy>().apply {
             warningBytes = 1L
             limitBytes = NetworkPolicy.LIMIT_DISABLED
         }
-
         controller.displayPreference(preferenceScreen)
+
+        controller.onViewCreated(TestLifecycleOwner())
+        delay(100)
 
         val limitInfo = argumentCaptor {
             verify(preference).setLimitInfo(capture())
@@ -172,13 +187,15 @@ class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    fun displayPreference_policyLimitOnly() {
+    fun onViewCreated_policyLimitOnly() = runBlocking {
         policy = mock<NetworkPolicy>().apply {
             warningBytes = NetworkPolicy.WARNING_DISABLED
             limitBytes = 1L
         }
-
         controller.displayPreference(preferenceScreen)
+
+        controller.onViewCreated(TestLifecycleOwner())
+        delay(100)
 
         val limitInfo = argumentCaptor {
             verify(preference).setLimitInfo(capture())
@@ -188,13 +205,15 @@ class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    fun displayPreference_policyHasWarningAndLimit() {
+    fun onViewCreated_policyHasWarningAndLimit() = runBlocking {
         policy = mock<NetworkPolicy>().apply {
             warningBytes = BillingCycleSettings.GIB_IN_BYTES / 2
             limitBytes = BillingCycleSettings.GIB_IN_BYTES
         }
-
         controller.displayPreference(preferenceScreen)
+
+        controller.onViewCreated(TestLifecycleOwner())
+        delay(100)
 
         val limitInfo = argumentCaptor {
             verify(preference).setLimitInfo(capture())
@@ -207,7 +226,6 @@ class DataUsageSummaryPreferenceControllerTest {
     fun onViewCreated_emptyDataPlanInfo() = runBlocking {
         dataPlanInfo = EMPTY_DATA_PLAN_INFO
         controller.displayPreference(preferenceScreen)
-        clearInvocations(preference)
 
         controller.onViewCreated(TestLifecycleOwner())
         delay(100)
@@ -229,7 +247,6 @@ class DataUsageSummaryPreferenceControllerTest {
     fun onViewCreated_positiveDataPlanInfo() = runBlocking {
         dataPlanInfo = POSITIVE_DATA_PLAN_INFO
         controller.displayPreference(preferenceScreen)
-        clearInvocations(preference)
 
         controller.onViewCreated(TestLifecycleOwner())
         delay(100)

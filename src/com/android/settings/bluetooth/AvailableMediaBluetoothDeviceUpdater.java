@@ -23,9 +23,10 @@ import android.util.Log;
 import androidx.preference.Preference;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.utils.ThreadUtils;
 
 /** Controller to maintain available media Bluetooth devices */
 public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
@@ -34,7 +35,7 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     private static final String TAG = "AvailableMediaBluetoothDeviceUpdater";
     private static final boolean DBG = Log.isLoggable(BluetoothDeviceUpdater.TAG, Log.DEBUG);
 
-    private static final String PREF_KEY = "available_media_bt";
+    private static final String PREF_KEY_PREFIX = "available_media_bt_";
 
     private final AudioManager mAudioManager;
     private final LocalBluetoothManager mLocalBtManager;
@@ -76,11 +77,17 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
             // It would show in Available Devices group if the audio sharing flag is disabled or
             // the device is not in the audio sharing session.
             if (cachedDevice.isConnectedLeAudioDevice()) {
-                boolean isAudioSharingFilterMatched =
-                        FeatureFactory.getFeatureFactory()
-                                .getAudioSharingFeatureProvider()
-                                .isAudioSharingFilterMatched(cachedDevice, mLocalManager);
-                if (!isAudioSharingFilterMatched) {
+                if (BluetoothUtils.isAudioSharingEnabled()
+                        && BluetoothUtils.hasConnectedBroadcastSource(
+                                cachedDevice, mLocalBtManager)) {
+                    Log.d(
+                            TAG,
+                            "Filter out device : "
+                                    + cachedDevice.getName()
+                                    + ", it is in audio sharing.");
+                    return false;
+
+                } else {
                     Log.d(
                             TAG,
                             "isFilterMatched() device : "
@@ -88,13 +95,6 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
                                     + ", the LE Audio profile is connected and not in sharing "
                                     + "if broadcast enabled.");
                     return true;
-                } else {
-                    Log.d(
-                            TAG,
-                            "Filter out device : "
-                                    + cachedDevice.getName()
-                                    + ", it is in audio sharing.");
-                    return false;
                 }
             }
 
@@ -136,17 +136,15 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     @Override
     public boolean onPreferenceClick(Preference preference) {
         mMetricsFeatureProvider.logClickedPreference(preference, mMetricsCategory);
-        final CachedBluetoothDevice device =
-                ((BluetoothDevicePreference) preference).getBluetoothDevice();
-        FeatureFactory.getFeatureFactory()
-                .getAudioSharingFeatureProvider()
-                .handleMediaDeviceOnClick(mLocalManager);
-        return device.setActive();
+        var unused =
+                ThreadUtils.postOnBackgroundThread(
+                        () -> mDevicePreferenceCallback.onDeviceClick(preference));
+        return true;
     }
 
     @Override
-    protected String getPreferenceKey() {
-        return PREF_KEY;
+    protected String getPreferenceKeyPrefix() {
+        return PREF_KEY_PREFIX;
     }
 
     @Override

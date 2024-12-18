@@ -48,6 +48,12 @@
         settings:isPreferenceVisible="@bool/config_show_sim_info"
         settings:controller="com.android.settings.network.EraseEuiccDataController" />
 
+    <!-- Delete private space -->
+    <Preference
+        android:key="reset_delete_private_space"
+        android:title="@string/reset_private_space_delete_title"
+        settings:controller="com.android.settings.privatespace.delete.ResetOptionsDeletePrivateSpaceController" />
+
     <!-- Factory reset -->
     <com.android.settingslib.RestrictedPreference
         android:key="factory_reset"

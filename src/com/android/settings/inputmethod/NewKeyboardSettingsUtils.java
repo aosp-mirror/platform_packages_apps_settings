@@ -66,6 +66,20 @@ public class NewKeyboardSettingsUtils {
         return false;
     }
 
+    static boolean isMouse() {
+        for (int deviceId : InputDevice.getDeviceIds()) {
+            final InputDevice device = InputDevice.getDevice(deviceId);
+            if (device == null) {
+                continue;
+            }
+            if ((device.getSources() & InputDevice.SOURCE_MOUSE)
+                    == InputDevice.SOURCE_MOUSE) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @SuppressLint("MissingPermission")
     @Nullable
     static String getSelectedKeyboardLayoutLabelForUser(Context context, @UserIdInt int userId,

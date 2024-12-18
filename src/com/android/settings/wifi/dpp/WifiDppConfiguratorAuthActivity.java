@@ -75,6 +75,7 @@ public class WifiDppConfiguratorAuthActivity extends InstrumentedActivity {
         Intent qrCodeIntent = new Intent();
         qrCodeIntent.setAction(
                 WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_GENERATOR);
+        qrCodeIntent.setPackage(getPackageName());
         qrCodeIntent.putExtras(getIntent());
         startActivity(qrCodeIntent);
     }

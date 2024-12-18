@@ -68,6 +68,7 @@ import com.android.settingslib.mobile.MobileMappings.Config;
 import com.android.settingslib.mobile.TelephonyIcons;
 import com.android.settingslib.net.SignalStrengthUtil;
 import com.android.wifitrackerlib.WifiEntry;
+import com.android.wifitrackerlib.WifiPickerTracker;
 
 import java.util.Collections;
 import java.util.List;
@@ -82,7 +83,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         LifecycleObserver, SubscriptionsChangeListener.SubscriptionsChangeListenerClient,
         MobileDataEnabledListener.Client, DataConnectivityListener.Client,
         SignalStrengthListener.Callback, TelephonyDisplayInfoListener.Callback,
-        TelephonyCallback.CarrierNetworkListener {
+        TelephonyCallback.CarrierNetworkListener, WifiPickerTracker.WifiPickerTrackerCallback {
     private static final String TAG = "SubscriptionsPrefCntrlr";
 
     private UpdateListener mUpdateListener;
@@ -95,7 +96,8 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     private DataConnectivityListener mConnectivityListener;
     private SignalStrengthListener mSignalStrengthListener;
     private TelephonyDisplayInfoListener mTelephonyDisplayInfoListener;
-    private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
+    @VisibleForTesting
+    WifiPickerTrackerHelper mWifiPickerTrackerHelper;
     private final WifiManager mWifiManager;
     private boolean mCarrierNetworkChangeMode;
 
@@ -163,6 +165,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mSignalStrengthListener = new SignalStrengthListener(context, this);
         mTelephonyDisplayInfoListener = new TelephonyDisplayInfoListener(context, this);
         lifecycle.addObserver(this);
+        mWifiPickerTrackerHelper = new WifiPickerTrackerHelper(lifecycle, context, this);
         mSubsPrefCtrlInjector = createSubsPrefCtrlInjector();
         mConfig = mSubsPrefCtrlInjector.getConfig(mContext);
     }
@@ -238,6 +241,8 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         if (mSubsGearPref == null) {
             mPreferenceGroup.removeAll();
             mSubsGearPref = new MutableGearPreference(mContext, null);
+            mSubsGearPref
+                    .checkRestrictionAndSetDisabled(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
             mSubsGearPref.setOnPreferenceClickListener(preference -> {
                 connectCarrierNetwork();
                 return true;
@@ -298,7 +303,8 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                 return connectionState;
             } else {
                 result = mContext.getString(
-                        R.string.preference_summary_default_combination, connectionState, result);
+                        com.android.settingslib.R.string.preference_summary_default_combination,
+                        connectionState, result);
             }
         } else if (!isDataInService) {
             return mContext.getString(R.string.mobile_data_no_connection);
@@ -485,8 +491,24 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         update();
     }
 
-    public void setWifiPickerTrackerHelper(WifiPickerTrackerHelper helper) {
-        mWifiPickerTrackerHelper = helper;
+    @Override
+    public void onNumSavedNetworksChanged() {
+        //Do nothing
+    }
+
+    @Override
+    public void onNumSavedSubscriptionsChanged() {
+        //Do nothing
+    }
+
+    @Override
+    public void onWifiStateChanged() {
+        update();
+    }
+
+    @Override
+    public void onWifiEntriesChanged() {
+        update();
     }
 
     @VisibleForTesting

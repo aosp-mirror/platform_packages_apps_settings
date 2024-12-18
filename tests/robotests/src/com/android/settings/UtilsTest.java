@@ -16,6 +16,15 @@
 
 package com.android.settings;
 
+import static android.hardware.biometrics.SensorProperties.STRENGTH_CONVENIENCE;
+import static android.hardware.biometrics.SensorProperties.STRENGTH_STRONG;
+import static android.hardware.biometrics.SensorProperties.STRENGTH_WEAK;
+
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_AUTHENTICATORS;
+import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_HIDE_BACKGROUND;
+import static com.android.settings.password.ConfirmDeviceCredentialActivity.BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertNull;
@@ -31,10 +40,12 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.ActionBar;
+import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.DevicePolicyResourcesManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
@@ -43,6 +54,11 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.VectorDrawable;
+import android.hardware.biometrics.BiometricManager;
+import android.hardware.biometrics.Flags;
+import android.hardware.face.FaceManager;
+import android.hardware.face.FaceSensorProperties;
+import android.hardware.face.FaceSensorPropertiesInternal;
 import android.net.ConnectivityManager;
 import android.net.LinkAddress;
 import android.net.LinkProperties;
@@ -54,21 +70,28 @@ import android.os.UserManager;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.IconDrawableFactory;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.core.graphics.drawable.IconCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
@@ -84,6 +107,9 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowLockPatternUtils.class)
 public class UtilsTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private static final String PACKAGE_NAME = "com.android.app";
     private static final int USER_ID = 1;
@@ -106,6 +132,11 @@ public class UtilsTest {
     private IconDrawableFactory mIconDrawableFactory;
     @Mock
     private ApplicationInfo mApplicationInfo;
+    @Mock
+    private BiometricManager mBiometricManager;
+    @Mock
+    private Fragment mFragment;
+
     private Context mContext;
     private UserManager mUserManager;
     private static final int FLAG_SYSTEM = 0x00000000;
@@ -121,6 +152,7 @@ public class UtilsTest {
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
                 .thenReturn(connectivityManager);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mContext.getSystemService(BiometricManager.class)).thenReturn(mBiometricManager);
     }
 
     @After
@@ -431,6 +463,148 @@ public class UtilsTest {
                 USER_ID, LockPatternUtils.CREDENTIAL_TYPE_NONE);
 
         assertNull(confirmCredentialString);
+    }
+
+    @Test
+    public void isFaceNotConvenienceBiometric_faceStrengthStrong_shouldReturnTrue() {
+        FaceManager mockFaceManager = mock(FaceManager.class);
+        when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mockFaceManager);
+        doReturn(true).when(mPackageManager).hasSystemFeature(anyString());
+        List<FaceSensorPropertiesInternal> props = List.of(new FaceSensorPropertiesInternal(
+                0 /* id */,
+                STRENGTH_STRONG,
+                1 /* maxTemplatesAllowed */,
+                new ArrayList<>() /* componentInfo */,
+                FaceSensorProperties.TYPE_UNKNOWN,
+                true /* supportsFaceDetection */,
+                true /* supportsSelfIllumination */,
+                false /* resetLockoutRequiresChallenge */));
+        doReturn(props).when(mockFaceManager).getSensorPropertiesInternal();
+
+        assertThat(Utils.isFaceNotConvenienceBiometric(mContext)).isTrue();
+    }
+
+    @Test
+    public void isFaceNotConvenienceBiometric_faceStrengthWeak_shouldReturnTrue() {
+        FaceManager mockFaceManager = mock(FaceManager.class);
+        when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mockFaceManager);
+        doReturn(true).when(mPackageManager).hasSystemFeature(anyString());
+        List<FaceSensorPropertiesInternal> props = List.of(new FaceSensorPropertiesInternal(
+                0 /* id */,
+                STRENGTH_WEAK,
+                1 /* maxTemplatesAllowed */,
+                new ArrayList<>() /* componentInfo */,
+                FaceSensorProperties.TYPE_UNKNOWN,
+                true /* supportsFaceDetection */,
+                true /* supportsSelfIllumination */,
+                false /* resetLockoutRequiresChallenge */));
+        doReturn(props).when(mockFaceManager).getSensorPropertiesInternal();
+
+        assertThat(Utils.isFaceNotConvenienceBiometric(mContext)).isTrue();
+    }
+
+    @Test
+    public void isFaceNotConvenienceBiometric_faceStrengthConvenience_shouldReturnFalse() {
+        FaceManager mockFaceManager = mock(FaceManager.class);
+        when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mockFaceManager);
+        doReturn(true).when(mPackageManager).hasSystemFeature(anyString());
+        List<FaceSensorPropertiesInternal> props = List.of(new FaceSensorPropertiesInternal(
+                0 /* id */,
+                STRENGTH_CONVENIENCE,
+                1 /* maxTemplatesAllowed */,
+                new ArrayList<>() /* componentInfo */,
+                FaceSensorProperties.TYPE_UNKNOWN,
+                true /* supportsFaceDetection */,
+                true /* supportsSelfIllumination */,
+                false /* resetLockoutRequiresChallenge */));
+        doReturn(props).when(mockFaceManager).getSensorPropertiesInternal();
+
+        assertThat(Utils.isFaceNotConvenienceBiometric(mContext)).isFalse();
+    }
+
+    @Test
+    public void isFaceNotConvenienceBiometric_faceManagerNull_shouldReturnFalse() {
+        when(mContext.getSystemService(Context.FACE_SERVICE)).thenReturn(null);
+        assertThat(Utils.isFaceNotConvenienceBiometric(mContext)).isFalse();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
+    public void testRequestBiometricAuthentication_biometricManagerNull_shouldReturnNotActive() {
+        when(mContext.getSystemService(BiometricManager.class)).thenReturn(null);
+        assertThat(Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
+                false /* biometricsAuthenticationRequested */, USER_ID)).isEqualTo(
+                        Utils.BiometricStatus.NOT_ACTIVE);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
+    public void testRequestBiometricAuthentication_biometricManagerReturnsSuccess_shouldReturnOk() {
+        when(mBiometricManager.canAuthenticate(USER_ID,
+                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
+                .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
+        final Utils.BiometricStatus requestBiometricAuthenticationForMandatoryBiometrics =
+                Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
+                        false /* biometricsAuthenticationRequested */, USER_ID);
+        assertThat(requestBiometricAuthenticationForMandatoryBiometrics).isEqualTo(
+                Utils.BiometricStatus.OK);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
+    public void testRequestBiometricAuthentication_biometricManagerReturnsError_shouldReturnError() {
+        when(mBiometricManager.canAuthenticate(anyInt(),
+                eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
+                .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
+        assertThat(Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
+                false /* biometricsAuthenticationRequested */, USER_ID)).isEqualTo(
+                        Utils.BiometricStatus.ERROR);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
+    public void testRequestBiometricAuthentication_biometricManagerReturnsSuccessForDifferentUser_shouldReturnError() {
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mMockUserManager);
+        when(mMockUserManager.getCredentialOwnerProfile(USER_ID)).thenReturn(USER_ID);
+        when(mBiometricManager.canAuthenticate(anyInt(),
+                eq(BiometricManager.Authenticators.MANDATORY_BIOMETRICS)))
+                .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
+        when(mBiometricManager.canAuthenticate(0 /* userId */,
+                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
+                .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
+        assertThat(Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
+                false /* biometricsAuthenticationRequested */, USER_ID)).isEqualTo(
+                        Utils.BiometricStatus.ERROR);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
+    public void testLaunchBiometricPrompt_checkIntentValues() {
+        when(mFragment.getContext()).thenReturn(mContext);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mMockUserManager);
+        when(mMockUserManager.getCredentialOwnerProfile(USER_ID)).thenReturn(USER_ID);
+
+        final int requestCode = 1;
+        final ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
+        Utils.launchBiometricPromptForMandatoryBiometrics(mFragment, requestCode, USER_ID,
+                false /* hideBackground */);
+
+        verify(mFragment).startActivityForResult(intentArgumentCaptor.capture(), eq(requestCode));
+
+        final Intent intent = intentArgumentCaptor.getValue();
+
+        assertThat(intent.getExtra(BIOMETRIC_PROMPT_AUTHENTICATORS)).isEqualTo(
+                BiometricManager.Authenticators.MANDATORY_BIOMETRICS);
+        assertThat(intent.getExtra(BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT)).isNotNull();
+        assertThat(intent.getExtra(KeyguardManager.EXTRA_DESCRIPTION)).isNotNull();
+        assertThat(intent.getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_ALLOW_ANY_USER, false))
+                .isTrue();
+        assertThat(intent.getBooleanExtra(BIOMETRIC_PROMPT_HIDE_BACKGROUND, true))
+                .isFalse();
+        assertThat(intent.getIntExtra(Intent.EXTRA_USER_ID, 0)).isEqualTo(USER_ID);
+        assertThat(intent.getComponent().getPackageName()).isEqualTo(SETTINGS_PACKAGE_NAME);
+        assertThat(intent.getComponent().getClassName()).isEqualTo(
+                ConfirmDeviceCredentialActivity.InternalActivity.class.getName());
     }
 
     private void setUpForConfirmCredentialString(boolean isEffectiveUserManagedProfile) {

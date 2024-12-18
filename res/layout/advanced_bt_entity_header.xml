@@ -17,6 +17,7 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/entity_header"
     style="@style/EntityHeader"
     android:layout_width="match_parent"
@@ -25,15 +26,41 @@
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/entity_header_title"
-        style="@style/TextAppearance.EntityHeaderTitle"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:ellipsize="marquee"
-        android:textDirection="locale"/>
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/entity_header_title"
+            style="@style/TextAppearance.EntityHeaderTitle"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:ellipsize="marquee"
+            android:textDirection="locale"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="48dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constrainedWidth="true" />
+        <ImageButton
+            android:id="@+id/rename_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="@dimen/min_tap_target_size"
+            android:minHeight="@dimen/min_tap_target_size"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_mode_edit"
+            android:contentDescription="@string/bluetooth_rename_button"
+            android:tint="@color/settingslib_materialColorOnSurface"
+            app:layout_constraintStart_toEndOf="@+id/entity_header_title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/entity_header_summary"

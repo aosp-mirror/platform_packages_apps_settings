@@ -21,20 +21,18 @@ import android.net.NetworkPolicy
 import android.net.NetworkTemplate
 import android.text.TextUtils
 import android.util.Log
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.datausage.lib.DataUsageLib.getMobileTemplate
 import com.android.settings.datausage.lib.INetworkCycleDataRepository
 import com.android.settings.datausage.lib.NetworkCycleDataRepository
 import com.android.settings.network.ProxySubscriptionManager
+import com.android.settings.network.policy.NetworkPolicyRepository
 import com.android.settings.network.telephony.TelephonyBasePreferenceController
+import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import kotlin.math.max
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
@@ -47,6 +45,7 @@ open class DataUsageSummaryPreferenceController @JvmOverloads constructor(
     subId: Int,
     private val proxySubscriptionManager: ProxySubscriptionManager =
         ProxySubscriptionManager.getInstance(context),
+    private val networkPolicyRepository: NetworkPolicyRepository = NetworkPolicyRepository(context),
     private val networkCycleDataRepositoryFactory: (
         template: NetworkTemplate,
     ) -> INetworkCycleDataRepository = { NetworkCycleDataRepository(context, it) },
@@ -64,37 +63,37 @@ open class DataUsageSummaryPreferenceController @JvmOverloads constructor(
             proxySubscriptionManager.getAccessibleSubscriptionInfo(mSubId)
         } else null
     }
+
+    private val networkTemplate by lazy { getMobileTemplate(mContext, mSubId) }
+
     private val networkCycleDataRepository by lazy {
-        networkCycleDataRepositoryFactory(getMobileTemplate(mContext, mSubId))
+        networkCycleDataRepositoryFactory(networkTemplate)
     }
-    private val policy by lazy { networkCycleDataRepository.getPolicy() }
+
     private lateinit var preference: DataUsageSummaryPreference
 
     override fun getAvailabilityStatus(subId: Int) =
-        if (subInfo != null && policy != null) AVAILABLE else CONDITIONALLY_UNAVAILABLE
+        if (subInfo != null) AVAILABLE else CONDITIONALLY_UNAVAILABLE
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)
         preference = screen.findPreference(preferenceKey)!!
-        policy?.let {
-            preference.setLimitInfo(it.getLimitInfo())
-            val dataBarSize = max(it.limitBytes, it.warningBytes)
-            if (dataBarSize > NetworkPolicy.WARNING_DISABLED) {
-                setDataBarSize(dataBarSize)
-            }
-        }
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                update()
+        networkPolicyRepository.networkPolicyFlow(networkTemplate)
+            .collectLatestWithLifecycle(viewLifecycleOwner) { policy ->
+                preference.isVisible = subInfo != null && policy != null
+                if (policy != null) update(policy)
             }
-        }
     }
 
-    private suspend fun update() {
-        val policy = policy ?: return
+    private suspend fun update(policy: NetworkPolicy) {
+        preference.setLimitInfo(policy.getLimitInfo())
+        val dataBarSize = max(policy.limitBytes, policy.warningBytes)
+        if (dataBarSize > NetworkPolicy.WARNING_DISABLED) {
+            setDataBarSize(dataBarSize)
+        }
         val dataPlanInfo = withContext(Dispatchers.Default) {
             dataPlanRepositoryFactory(networkCycleDataRepository).getDataPlanInfo(
                 policy = policy,

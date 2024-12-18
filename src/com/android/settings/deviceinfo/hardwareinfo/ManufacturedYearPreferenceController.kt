@@ -22,7 +22,8 @@ import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 /** Preference controller for Manufactured Year. */
 class ManufacturedYearPreferenceController(context: Context, preferenceKey: String) :
     BasePreferenceController(context, preferenceKey) {
-    private val year: String? = featureFactory.hardwareInfoFeatureProvider.manufacturedYear
+
+    private val year: String? = featureFactory.hardwareInfoFeatureProvider?.manufacturedYear
 
     override fun getAvailabilityStatus(): Int =
         if (!year.isNullOrEmpty()) AVAILABLE else UNSUPPORTED_ON_DEVICE

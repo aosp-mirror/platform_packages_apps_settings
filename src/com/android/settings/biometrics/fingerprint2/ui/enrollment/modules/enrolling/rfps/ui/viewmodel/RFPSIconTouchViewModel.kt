@@ -19,6 +19,8 @@ package com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrol
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -27,6 +29,7 @@ import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.flow.update
 
 private const val touchesToShowDialog = 3
+
 /**
  * This class is responsible for counting the number of touches on the fingerprint icon, and if this
  * number reaches a threshold it will produce an action via [shouldShowDialog] to indicate the ui
@@ -52,10 +55,9 @@ class RFPSIconTouchViewModel : ViewModel() {
     _touches.update { _touches.value + 1 }
   }
 
-  class RFPSIconTouchViewModelFactory : ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-      return RFPSIconTouchViewModel() as T
+  companion object {
+    val Factory: ViewModelProvider.Factory = viewModelFactory {
+      initializer { RFPSIconTouchViewModel() }
     }
   }
 }

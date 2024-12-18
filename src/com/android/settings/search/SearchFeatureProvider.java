@@ -30,6 +30,7 @@ import android.view.ViewGroup;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
@@ -80,8 +81,9 @@ public interface SearchFeatureProvider {
     /**
      * Initializes the search toolbar.
      */
-    default void initSearchToolbar(FragmentActivity activity, Toolbar toolbar, int pageId) {
-        if (activity == null || toolbar == null) {
+    default void initSearchToolbar(@NonNull FragmentActivity activity, @Nullable View toolbar,
+            int pageId) {
+        if (toolbar == null) {
             return;
         }
 
@@ -98,11 +100,13 @@ public interface SearchFeatureProvider {
         //
         // Need to make the navigation icon non-clickable so that the entire card is clickable
         // and goes to the search UI. Also set the background to null so there's no ripple.
-        final View navView = toolbar.getNavigationView();
-        navView.setClickable(false);
-        navView.setFocusable(false);
-        navView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
-        navView.setBackground(null);
+        if (toolbar instanceof Toolbar) {
+            final View navView = ((Toolbar) toolbar).getNavigationView();
+            navView.setClickable(false);
+            navView.setFocusable(false);
+            navView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
+            navView.setBackground(null);
+        }
 
         final Context context = activity.getApplicationContext();
         final Intent intent = buildSearchIntent(context, pageId)

@@ -18,7 +18,8 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/security_settings_fingerprint_preference_title">
+    android:title="@string/security_settings_fingerprint_preference_title"
+    settings:searchable="false">
 
     <PreferenceCategory
         android:key="security_settings_fingerprints_enrolled"

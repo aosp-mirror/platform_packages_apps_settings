@@ -37,22 +37,23 @@ import org.mockito.kotlin.verify
 class TelephonyRepositoryTest {
     private var telephonyCallback: TelephonyCallback? = null
 
-    private val mockTelephonyManager = mock<TelephonyManager> {
-        on { createForSubscriptionId(SUB_ID) } doReturn mock
-        on { registerTelephonyCallback(any(), any()) } doAnswer {
-            telephonyCallback = it.arguments[1] as TelephonyCallback
+    private val mockTelephonyManager =
+        mock<TelephonyManager> {
+            on { createForSubscriptionId(SUB_ID) } doReturn mock
+            on { registerTelephonyCallback(any(), any()) } doAnswer
+                {
+                    telephonyCallback = it.arguments[1] as TelephonyCallback
+                }
         }
-    }
 
-    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
-        on { getSystemService(TelephonyManager::class.java) } doReturn mockTelephonyManager
-    }
+    private val context: Context =
+        spy(ApplicationProvider.getApplicationContext()) {
+            on { getSystemService(TelephonyManager::class.java) } doReturn mockTelephonyManager
+        }
 
     @Test
     fun telephonyCallbackFlow_callbackRegistered() = runBlocking {
-        val flow = context.telephonyCallbackFlow<Unit>(SUB_ID) {
-            object : TelephonyCallback() {}
-        }
+        val flow = context.telephonyCallbackFlow<Unit>(SUB_ID) { object : TelephonyCallback() {} }
 
         flow.firstWithTimeoutOrNull()
 
@@ -61,9 +62,7 @@ class TelephonyRepositoryTest {
 
     @Test
     fun telephonyCallbackFlow_callbackUnregistered() = runBlocking {
-        val flow = context.telephonyCallbackFlow<Unit>(SUB_ID) {
-            object : TelephonyCallback() {}
-        }
+        val flow = context.telephonyCallbackFlow<Unit>(SUB_ID) { object : TelephonyCallback() {} }
 
         flow.firstWithTimeoutOrNull()
 

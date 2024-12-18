@@ -28,7 +28,6 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.CardPreference;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -80,9 +79,9 @@ public class BatteryDefenderTip extends BatteryTip {
         super.updatePreference(preference);
         final Context context = preference.getContext();
 
-        CardPreference cardPreference = castToCardPreferenceSafely(preference);
+        var cardPreference = castToTipCardPreferenceSafely(preference);
         if (cardPreference == null) {
-            Log.e(TAG, "cast Preference to CardPreference failed");
+            Log.e(TAG, "cast Preference to TipCardPreference failed");
             return;
         }
 

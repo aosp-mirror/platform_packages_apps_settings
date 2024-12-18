@@ -20,6 +20,7 @@ import android.annotation.AttrRes;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.icu.text.MessageFormat;
+import android.telephony.SubscriptionPlan;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -66,7 +67,7 @@ public class DataUsageSummaryPreference extends Preference {
     @Nullable
     private Long mCycleEndTimeMs;
     /** The time of the last update in standard milliseconds since the epoch */
-    private long mSnapshotTimeMs;
+    private long mSnapshotTimeMs = SubscriptionPlan.TIME_UNKNOWN;
     /** Name of carrier, or null if not available */
     private CharSequence mCarrierName;
     private CharSequence mLimitInfoText;

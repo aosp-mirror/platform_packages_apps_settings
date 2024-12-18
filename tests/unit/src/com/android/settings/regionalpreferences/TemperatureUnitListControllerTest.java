@@ -94,7 +94,9 @@ public class TemperatureUnitListControllerTest {
                 mContext.getContentResolver(), Settings.System.LOCALE_PREFERENCES);
 
         assertThat(pref.getKey()).isEqualTo("default");
-        assertThat(record).contains("default");
+        assertThat(
+                RegionalPreferencesDataUtils.temperatureUnitsConverter(mContext, record))
+                .contains("default");
     }
 
     @Test

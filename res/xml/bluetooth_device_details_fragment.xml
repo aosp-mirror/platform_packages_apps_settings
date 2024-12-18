@@ -27,6 +27,13 @@
         settings:searchable="false"/>
 
     <com.android.settingslib.widget.LayoutPreference
+        android:key="general_bluetooth_device_header"
+        android:layout="@layout/general_bt_entity_header"
+        android:selectable="false"
+        settings:allowDividerBelow="true"
+        settings:searchable="false"/>
+
+    <com.android.settingslib.widget.LayoutPreference
         android:key="advanced_bluetooth_device_header"
         android:layout="@layout/advanced_bt_entity_header"
         android:selectable="false"
@@ -69,7 +76,7 @@
         android:key="device_companion_apps"/>
 
     <PreferenceCategory
-        android:key="device_controls_general" />
+        android:key="hearing_device_group" />
 
     <PreferenceCategory
         android:key="bluetooth_audio_device_type_group"/>

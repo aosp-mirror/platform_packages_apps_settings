@@ -16,30 +16,20 @@
 
 package com.android.settings.applications.credentials;
 
+import android.os.UserHandle;
 import android.os.UserManager;
-import android.util.Slog;
-
-import com.android.settings.Utils;
-import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType;
 
 public class DefaultCombinedPickerPrivate extends DefaultCombinedPicker {
-    private static final String TAG = "DefaultCombinedPickerPrivate";
 
     @Override
     protected int getUser() {
-        UserManager userManager = getContext().getSystemService(UserManager.class);
-        return Utils.getCurrentUserIdOfType(userManager, ProfileType.PRIVATE);
+        return UserHandle.myUserId();
     }
 
     /** Returns whether the user is handled by this fragment. */
     public static boolean isUserHandledByFragment(UserManager userManager) {
-        try {
-            // If there is no private profile then this will throw an exception.
-            Utils.getCurrentUserIdOfType(userManager, ProfileType.PRIVATE);
-            return true;
-        } catch (IllegalStateException e) {
-            Slog.e(TAG, "Failed to get private profile user id", e);
-            return false;
-        }
+        return android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && userManager.isPrivateProfile();
     }
 }

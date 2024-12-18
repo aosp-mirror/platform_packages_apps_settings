@@ -25,10 +25,12 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
+@Ignore("b/340657656")
 public class LinkifyUtilsTest {
     private static final String TEST_STRING = "to LINK_BEGINscanning settingsLINK_END.";
     private static final String WRONG_STRING = "to scanning settingsLINK_END.";

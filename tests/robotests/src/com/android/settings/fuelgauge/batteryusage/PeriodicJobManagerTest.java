@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.AlarmManager;
@@ -25,7 +26,7 @@ import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.testutils.FakeClock;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.After;
 import org.junit.Before;
@@ -35,6 +36,8 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowAlarmManager;
 
 import java.time.Duration;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 /** Tests of {@link PeriodicJobManager}. */
 @RunWith(RobolectricTestRunner.class)
@@ -42,11 +45,14 @@ public final class PeriodicJobManagerTest {
     private Context mContext;
     private ShadowAlarmManager mShadowAlarmManager;
     private PeriodicJobManager mPeriodicJobManager;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
         mPeriodicJobManager = PeriodicJobManager.getInstance(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        doReturn(false).when(mFeatureFactory.powerUsageFeatureProvider).delayHourlyJobWhenBooting();
         mShadowAlarmManager = shadowOf(mContext.getSystemService(AlarmManager.class));
     }
 
@@ -68,28 +74,102 @@ public final class PeriodicJobManagerTest {
     }
 
     @Test
-    public void getTriggerAtMillis_withoutOffset_returnsExpectedResult() {
-        long timeSlotUnit = PeriodicJobManager.DATA_FETCH_INTERVAL_MINUTE;
-        // Sets the current time.
-        Duration currentTimeDuration = Duration.ofMinutes(timeSlotUnit * 2);
-        FakeClock fakeClock = new FakeClock();
-        fakeClock.setCurrentTime(currentTimeDuration);
+    public void getTriggerAtMillis_halfFullHourTimeZoneWithoutOffset_returnsExpectedResult() {
+        final int minutesOffset = 0;
+        final long currentTimestamp =
+                setTimeZoneAndGenerateTestTimestamp(/* isFullHourTimeZone= */ false, minutesOffset);
+        final long expectedTimestamp =
+                currentTimestamp + Duration.ofMinutes(60 - minutesOffset).toMillis();
 
         assertThat(
                         PeriodicJobManager.getTriggerAtMillis(
-                                mContext, fakeClock, /* fromBoot= */ false))
-                .isEqualTo(currentTimeDuration.plusMinutes(timeSlotUnit).toMillis());
+                                /* currentTimeMillis= */ currentTimestamp, /* fromBoot= */ false))
+                .isEqualTo(expectedTimestamp);
     }
 
     @Test
-    public void getTriggerAtMillis_withOffset_returnsExpectedResult() {
-        long timeSlotUnit = PeriodicJobManager.DATA_FETCH_INTERVAL_MINUTE;
-        // Sets the current time.
-        Duration currentTimeDuration = Duration.ofMinutes(timeSlotUnit * 2);
-        FakeClock fakeClock = new FakeClock();
-        fakeClock.setCurrentTime(currentTimeDuration.plusMinutes(1L).plusMillis(51L));
+    public void getTriggerAtMillis_halfFullHourTimeZoneWithOffset_returnsExpectedResult() {
+        final int minutesOffset = 21;
+        final long currentTimestamp =
+                setTimeZoneAndGenerateTestTimestamp(/* isFullHourTimeZone= */ false, minutesOffset);
+        final long expectedTimestamp =
+                currentTimestamp + Duration.ofMinutes(60 - minutesOffset).toMillis();
 
-        assertThat(PeriodicJobManager.getTriggerAtMillis(mContext, fakeClock, /* fromBoot= */ true))
-                .isEqualTo(currentTimeDuration.plusMinutes(timeSlotUnit).toMillis());
+        assertThat(
+                        PeriodicJobManager.getTriggerAtMillis(
+                                /* currentTimeMillis= */ currentTimestamp, /* fromBoot= */ false))
+                .isEqualTo(expectedTimestamp);
+    }
+
+    @Test
+    public void getTriggerAtMillis_halfFullHourTimeZoneWithBroadcastDelay_returnsExpectedResult() {
+        doReturn(true).when(mFeatureFactory.powerUsageFeatureProvider).delayHourlyJobWhenBooting();
+
+        final int minutesOffset = 21;
+        final long currentTimestamp =
+                setTimeZoneAndGenerateTestTimestamp(/* isFullHourTimeZone= */ false, minutesOffset);
+        final long expectedTimestamp =
+                currentTimestamp + Duration.ofMinutes(60 * 2 - minutesOffset).toMillis();
+
+        assertThat(
+                        PeriodicJobManager.getTriggerAtMillis(
+                                /* currentTimeMillis= */ currentTimestamp, /* fromBoot= */ true))
+                .isEqualTo(expectedTimestamp);
+    }
+
+    @Test
+    public void getTriggerAtMillis_fullHourTimeZoneWithoutOffset_returnsExpectedResult() {
+        final int minutesOffset = 0;
+        final long currentTimestamp =
+                setTimeZoneAndGenerateTestTimestamp(/* isFullHourTimeZone= */ true, minutesOffset);
+        final long expectedTimestamp =
+                currentTimestamp + Duration.ofMinutes(60 - minutesOffset).toMillis();
+
+        assertThat(
+                        PeriodicJobManager.getTriggerAtMillis(
+                                /* currentTimeMillis= */ currentTimestamp, /* fromBoot= */ false))
+                .isEqualTo(expectedTimestamp);
+    }
+
+    @Test
+    public void getTriggerAtMillis_fullHourTimeZoneWithOffset_returnsExpectedResult() {
+        final int minutesOffset = 21;
+        final long currentTimestamp =
+                setTimeZoneAndGenerateTestTimestamp(/* isFullHourTimeZone= */ true, minutesOffset);
+        final long expectedTimestamp =
+                currentTimestamp + Duration.ofMinutes(60 - minutesOffset).toMillis();
+
+        assertThat(
+                        PeriodicJobManager.getTriggerAtMillis(
+                                /* currentTimeMillis= */ currentTimestamp, /* fromBoot= */ false))
+                .isEqualTo(expectedTimestamp);
+    }
+
+    @Test
+    public void getTriggerAtMillis_fullHourTimeZoneWithBroadcastDelay_returnsExpectedResult() {
+        doReturn(true).when(mFeatureFactory.powerUsageFeatureProvider).delayHourlyJobWhenBooting();
+
+        final int minutesOffset = 21;
+        final long currentTimestamp =
+                setTimeZoneAndGenerateTestTimestamp(/* isFullHourTimeZone= */ true, minutesOffset);
+        final long expectedTimestamp =
+                currentTimestamp + Duration.ofMinutes(60 * 2 - minutesOffset).toMillis();
+
+        assertThat(
+                        PeriodicJobManager.getTriggerAtMillis(
+                                /* currentTimeMillis= */ currentTimestamp, /* fromBoot= */ true))
+                .isEqualTo(expectedTimestamp);
+    }
+
+    private static long setTimeZoneAndGenerateTestTimestamp(
+            final boolean isFullHourTimeZone, final int minutesOffset) {
+        final TimeZone timeZone =
+                TimeZone.getTimeZone(isFullHourTimeZone ? "UTC" : /* GMT+05:30 */ "Asia/Kalkata");
+        TimeZone.setDefault(timeZone);
+        Calendar calendar = (Calendar) Calendar.getInstance().clone();
+        calendar.set(Calendar.MINUTE, minutesOffset);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTimeInMillis();
     }
 }

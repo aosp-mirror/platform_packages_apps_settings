@@ -16,9 +16,14 @@
 
 package com.android.settings.network.apn
 
+import android.content.Context
 import android.os.PersistableBundle
+import android.provider.Telephony
 import android.telephony.CarrierConfigManager
+import android.telephony.TelephonyManager
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
@@ -26,11 +31,8 @@ import org.mockito.kotlin.mock
 
 @RunWith(AndroidJUnit4::class)
 class ApnStatusTest {
-    private val apnData = mock<ApnData> {
-        on {
-            it.subId
-        } doReturn 1
-    }
+    private val apnData = ApnData(subId = 1)
+
     private val configManager = mock<CarrierConfigManager> {
         val p = PersistableBundle()
         p.putBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL, true)
@@ -47,8 +49,51 @@ class ApnStatusTest {
         } doReturn p
     }
 
+    private val context: Context = ApplicationProvider.getApplicationContext()
+
     @Test
     fun getCarrierCustomizedConfig_test() {
         assert(getCarrierCustomizedConfig(apnData, configManager).isAddApnAllowed)
+    }
+
+    @Test
+    fun isFieldEnabled_default() {
+        val apnData = ApnData()
+
+        val enabled = apnData.isFieldEnabled(Telephony.Carriers.NAME)
+
+        assertThat(enabled).isTrue()
+    }
+
+    @Test
+    fun isFieldEnabled_readOnlyApn() {
+        val apnData = ApnData(customizedConfig = CustomizedConfig(readOnlyApn = true))
+
+        val enabled = apnData.isFieldEnabled(Telephony.Carriers.NAME)
+
+        assertThat(enabled).isFalse()
+    }
+
+    @Test
+    fun isFieldEnabled_readOnlyApnFields() {
+        val apnData = ApnData(
+            customizedConfig = CustomizedConfig(
+                readOnlyApnFields = listOf(Telephony.Carriers.NAME, Telephony.Carriers.PROXY),
+            ),
+        )
+
+        assertThat(apnData.isFieldEnabled(Telephony.Carriers.NAME)).isFalse()
+        assertThat(apnData.isFieldEnabled(Telephony.Carriers.PROXY)).isFalse()
+        assertThat(apnData.isFieldEnabled(Telephony.Carriers.APN)).isTrue()
+    }
+
+    @Test
+    fun getContentValueMap_copyNetworkTypeIntoLingeringNetworkType() {
+        val apnData = ApnData(networkType = TelephonyManager.NETWORK_TYPE_NR.toLong())
+
+        val contentValueMap = apnData.getContentValueMap(context)
+
+        assertThat(contentValueMap.getValue(Telephony.Carriers.LINGERING_NETWORK_TYPE_BITMASK))
+            .isEqualTo(TelephonyManager.NETWORK_TYPE_NR.toLong())
     }
 }

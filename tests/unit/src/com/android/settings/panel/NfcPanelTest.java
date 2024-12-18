@@ -31,6 +31,7 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
+@Deprecated(forRemoval = true)
 @RunWith(AndroidJUnit4.class)
 public class NfcPanelTest {
 

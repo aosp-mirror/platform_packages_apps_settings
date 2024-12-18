@@ -84,7 +84,13 @@ open class MobileNetworkEidPreferenceController(context: Context, key: String) :
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
-        preference.isVisible = false
+        if (!this::lazyViewModel.isInitialized) {
+            Log.e(
+                this.javaClass.simpleName,
+                "lateinit property lazyViewModel has not been initialized"
+            )
+            return
+        }
 
         val viewModel by lazyViewModel
         coroutineScope = viewLifecycleOwner.lifecycleScope
@@ -120,7 +126,6 @@ open class MobileNetworkEidPreferenceController(context: Context, key: String) :
         preference.title = title
         preference.dialogTitle = title
         preference.summary = eid
-        preference.isVisible = eid.isNotEmpty()
     }
 
     override fun handlePreferenceTreeClick(preference: Preference): Boolean {

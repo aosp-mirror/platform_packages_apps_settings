@@ -27,6 +27,7 @@ import android.content.pm.UserInfo;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -40,6 +41,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -52,6 +54,7 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.deviceinfo.storage.StorageUtils.SystemInfoFragment;
+import com.android.settings.deviceinfo.storage.StorageUtils.TemporaryFilesInfoFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -74,6 +77,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     private static final String TAG = "StorageItemPreference";
 
     private static final String SYSTEM_FRAGMENT_TAG = "SystemInfo";
+    private static final String TEMPORARY_FILES_FRAGMENT_TAG = "TemporaryFilesInfo";
 
     @VisibleForTesting
     static final String PUBLIC_STORAGE_KEY = "pref_public_storage";
@@ -88,9 +92,15 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     @VisibleForTesting
     static final String GAMES_KEY = "pref_games";
     @VisibleForTesting
-    static final String DOCUMENTS_AND_OTHER_KEY = "pref_documents_and_other";
+    static final String DOCUMENTS_KEY = "pref_documents";
+    @VisibleForTesting
+    static final String OTHER_KEY = "pref_other";
     @VisibleForTesting
     static final String SYSTEM_KEY = "pref_system";
+    @VisibleForTesting
+    static final String TEMPORARY_FILES_KEY = "temporary_files";
+    @VisibleForTesting
+    static final String CATEGORY_SPLITTER = "storage_category_splitter";
     @VisibleForTesting
     static final String TRASH_KEY = "pref_trash";
 
@@ -101,7 +111,9 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     @VisibleForTesting
     final Uri mAudioUri;
     @VisibleForTesting
-    final Uri mDocumentsAndOtherUri;
+    final Uri mDocumentsUri;
+    @VisibleForTesting
+    final Uri mOtherUri;
 
     // This value should align with the design of storage_dashboard_fragment.xml
     private static final int LAST_STORAGE_CATEGORY_PREFERENCE_ORDER = 200;
@@ -131,11 +143,17 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     @VisibleForTesting
     @Nullable StorageItemPreference mGamesPreference;
     @VisibleForTesting
-    @Nullable StorageItemPreference mDocumentsAndOtherPreference;
+    @Nullable StorageItemPreference mDocumentsPreference;
+    @VisibleForTesting
+    @Nullable StorageItemPreference mOtherPreference;
+    @VisibleForTesting
+    @Nullable StorageItemPreference mTrashPreference;
     @VisibleForTesting
     @Nullable StorageItemPreference mSystemPreference;
     @VisibleForTesting
-    @Nullable StorageItemPreference mTrashPreference;
+    @Nullable StorageItemPreference mTemporaryFilesPreference;
+    @VisibleForTesting
+    @Nullable PreferenceCategory mCategorySplitterPreferenceCategory;
 
     private final int mProfileType;
 
@@ -174,8 +192,10 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 .getString(R.string.config_videos_storage_category_uri));
         mAudioUri = Uri.parse(context.getResources()
                 .getString(R.string.config_audio_storage_category_uri));
-        mDocumentsAndOtherUri = Uri.parse(context.getResources()
-                .getString(R.string.config_documents_and_other_storage_category_uri));
+        mDocumentsUri = Uri.parse(context.getResources()
+                .getString(R.string.config_documents_storage_category_uri));
+        mOtherUri = Uri.parse(context.getResources()
+                .getString(R.string.config_other_storage_category_uri));
     }
 
     @VisibleForTesting
@@ -212,13 +232,23 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
             case GAMES_KEY:
                 launchGamesIntent();
                 return true;
-            case DOCUMENTS_AND_OTHER_KEY:
-                launchActivityWithUri(mDocumentsAndOtherUri);
+            case DOCUMENTS_KEY:
+                launchActivityWithUri(mDocumentsUri);
+                return true;
+            case OTHER_KEY:
+                launchActivityWithUri(mOtherUri);
                 return true;
             case SYSTEM_KEY:
                 final SystemInfoFragment dialog = new SystemInfoFragment();
                 dialog.setTargetFragment(mFragment, 0);
                 dialog.show(mFragment.getFragmentManager(), SYSTEM_FRAGMENT_TAG);
+                return true;
+            case TEMPORARY_FILES_KEY:
+                final TemporaryFilesInfoFragment temporaryFilesDialog =
+                        new TemporaryFilesInfoFragment();
+                temporaryFilesDialog.setTargetFragment(mFragment, 0);
+                temporaryFilesDialog.show(mFragment.getFragmentManager(),
+                        TEMPORARY_FILES_FRAGMENT_TAG);
                 return true;
             case TRASH_KEY:
                 launchTrashIntent();
@@ -285,14 +315,18 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mAppsPreference.setVisible(visible);
         mGamesPreference.setVisible(visible);
         mSystemPreference.setVisible(visible);
+        mTemporaryFilesPreference.setVisible(visible);
+        mCategorySplitterPreferenceCategory.setVisible(visible);
         mTrashPreference.setVisible(visible);
 
         // If we don't have a shared volume for our internal storage (or the shared volume isn't
         // mounted as readable for whatever reason), we should hide the File preference.
         if (visible) {
-            mDocumentsAndOtherPreference.setVisible(mIsDocumentsPrefShown);
+            mDocumentsPreference.setVisible(mIsDocumentsPrefShown);
+            mOtherPreference.setVisible(mIsDocumentsPrefShown);
         } else {
-            mDocumentsAndOtherPreference.setVisible(false);
+            mDocumentsPreference.setVisible(false);
+            mOtherPreference.setVisible(false);
         }
     }
 
@@ -309,22 +343,24 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         if (mPrivateStorageItemPreferences == null) {
             mPrivateStorageItemPreferences = new ArrayList<>();
 
-            mPrivateStorageItemPreferences.add(mImagesPreference);
-            mPrivateStorageItemPreferences.add(mVideosPreference);
-            mPrivateStorageItemPreferences.add(mAudioPreference);
-            mPrivateStorageItemPreferences.add(mAppsPreference);
-            mPrivateStorageItemPreferences.add(mGamesPreference);
-            mPrivateStorageItemPreferences.add(mDocumentsAndOtherPreference);
-            mPrivateStorageItemPreferences.add(mSystemPreference);
+            // Adding categories in the reverse order so that
+            // They would be in the right order after sorting
             mPrivateStorageItemPreferences.add(mTrashPreference);
+            mPrivateStorageItemPreferences.add(mOtherPreference);
+            mPrivateStorageItemPreferences.add(mDocumentsPreference);
+            mPrivateStorageItemPreferences.add(mGamesPreference);
+            mPrivateStorageItemPreferences.add(mAppsPreference);
+            mPrivateStorageItemPreferences.add(mAudioPreference);
+            mPrivateStorageItemPreferences.add(mVideosPreference);
+            mPrivateStorageItemPreferences.add(mImagesPreference);
         }
         mScreen.removePreference(mImagesPreference);
         mScreen.removePreference(mVideosPreference);
         mScreen.removePreference(mAudioPreference);
         mScreen.removePreference(mAppsPreference);
         mScreen.removePreference(mGamesPreference);
-        mScreen.removePreference(mDocumentsAndOtherPreference);
-        mScreen.removePreference(mSystemPreference);
+        mScreen.removePreference(mDocumentsPreference);
+        mScreen.removePreference(mOtherPreference);
         mScreen.removePreference(mTrashPreference);
 
         // Sort display order by size.
@@ -359,8 +395,10 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         tintPreference(mAudioPreference);
         tintPreference(mAppsPreference);
         tintPreference(mGamesPreference);
-        tintPreference(mDocumentsAndOtherPreference);
+        tintPreference(mDocumentsPreference);
+        tintPreference(mOtherPreference);
         tintPreference(mSystemPreference);
+        tintPreference(mTemporaryFilesPreference);
         tintPreference(mTrashPreference);
     }
 
@@ -388,8 +426,11 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mAudioPreference = screen.findPreference(AUDIO_KEY);
         mAppsPreference = screen.findPreference(APPS_KEY);
         mGamesPreference = screen.findPreference(GAMES_KEY);
-        mDocumentsAndOtherPreference = screen.findPreference(DOCUMENTS_AND_OTHER_KEY);
+        mDocumentsPreference = screen.findPreference(DOCUMENTS_KEY);
+        mOtherPreference = screen.findPreference(OTHER_KEY);
+        mCategorySplitterPreferenceCategory = screen.findPreference(CATEGORY_SPLITTER);
         mSystemPreference = screen.findPreference(SYSTEM_KEY);
+        mTemporaryFilesPreference = screen.findPreference(TEMPORARY_FILES_KEY);
         mTrashPreference = screen.findPreference(TRASH_KEY);
     }
 
@@ -412,11 +453,17 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mAudioPreference.setStorageSize(storageCache.audioSize, mTotalSize, animate);
         mAppsPreference.setStorageSize(storageCache.allAppsExceptGamesSize, mTotalSize, animate);
         mGamesPreference.setStorageSize(storageCache.gamesSize, mTotalSize, animate);
-        mDocumentsAndOtherPreference.setStorageSize(storageCache.documentsAndOtherSize, mTotalSize,
-                animate);
+        mDocumentsPreference.setStorageSize(storageCache.documentsSize, mTotalSize, animate);
+        mOtherPreference.setStorageSize(storageCache.otherSize, mTotalSize, animate);
         mTrashPreference.setStorageSize(storageCache.trashSize, mTotalSize, animate);
         if (mSystemPreference != null) {
             mSystemPreference.setStorageSize(storageCache.systemSize, mTotalSize, animate);
+            mSystemPreference.setTitle(mContext.getString(R.string.storage_os_name,
+                    Build.VERSION.RELEASE));
+        }
+        if (mTemporaryFilesPreference != null) {
+            mTemporaryFilesPreference.setStorageSize(storageCache.temporaryFilesSize, mTotalSize,
+                    animate);
         }
         // Cache the size info
         if (result != null) {
@@ -443,8 +490,10 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         storageCache.audioSize = data.audioSize;
         storageCache.allAppsExceptGamesSize = data.allAppsExceptGamesSize;
         storageCache.gamesSize = data.gamesSize;
-        storageCache.documentsAndOtherSize = data.documentsAndOtherSize;
+        storageCache.documentsSize = data.documentsSize;
+        storageCache.otherSize = data.otherSize;
         storageCache.trashSize = data.trashSize;
+        storageCache.systemSize = data.systemSize;
         // Everything else that hasn't already been attributed is tracked as
         // belonging to system.
         long attributedSize = 0;
@@ -455,12 +504,15 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                             + otherData.audioSize
                             + otherData.videosSize
                             + otherData.imagesSize
-                            + otherData.documentsAndOtherSize
+                            + otherData.documentsSize
+                            + otherData.otherSize
                             + otherData.trashSize
                             + otherData.allAppsExceptGamesSize;
             attributedSize -= otherData.duplicateCodeSize;
         }
-        storageCache.systemSize = Math.max(DataUnit.GIBIBYTES.toBytes(1),
+        // System size is equal for each user and should be added only once
+        attributedSize += data.systemSize;
+        storageCache.temporaryFilesSize = Math.max(DataUnit.GIBIBYTES.toBytes(1),
                 mUsedBytes - attributedSize);
         return storageCache;
     }

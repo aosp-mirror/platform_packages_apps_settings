@@ -22,8 +22,8 @@ import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.development.DeveloperOptionAwareMixin;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.Indexable;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -31,7 +31,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class FeatureFlagsDashboard extends DashboardFragment {
+public class FeatureFlagsDashboard extends DashboardFragment implements
+        DeveloperOptionAwareMixin {
 
     private static final String TAG = "FeatureFlagsDashboard";
 
@@ -48,11 +49,6 @@ public class FeatureFlagsDashboard extends DashboardFragment {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.feature_flags_settings;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
     }
 
     @Override

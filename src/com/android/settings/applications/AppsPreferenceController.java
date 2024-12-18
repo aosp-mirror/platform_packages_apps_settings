@@ -206,7 +206,7 @@ public class AppsPreferenceController extends BasePreferenceController implement
                 pref.setIcon(Utils.getBadgedIcon(mContext, appEntry.info));
                 pref.setSummary(StringUtil.formatRelativeTime(mContext,
                         System.currentTimeMillis() - stats.getLastTimeUsed(), false,
-                        RelativeDateTimeFormatter.Style.SHORT));
+                        RelativeDateTimeFormatter.Style.LONG));
                 pref.setOrder(showAppsCount++);
                 pref.setOnPreferenceClickListener(preference -> {
                     startAppInfoSettings(pkgName, appEntry.info.uid,

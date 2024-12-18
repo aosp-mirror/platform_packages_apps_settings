@@ -167,7 +167,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                         .getUdfpsEnrollCalibrator(getApplicationContext(), savedInstanceState,
                                 getIntent());
                 if (mCalibrator != null) {
-                    mCalibrator.onFindSensorPage(
+                    mCalibrator.onWaitingPage(
                             getLifecycle(),
                             getSupportFragmentManager(),
                             this::enableUdfpsLottieAndNextButton
@@ -296,7 +296,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                 getIntent().getIntExtra(BiometricUtils.EXTRA_ENROLL_REASON, -1));
         if (Flags.udfpsEnrollCalibration()) {
             if (mCalibrator != null) {
-                ret.putExtras(mCalibrator.getExtrasForNextIntent(true));
+                ret.putExtras(mCalibrator.getExtrasForNextIntent());
             }
         }
         return ret;

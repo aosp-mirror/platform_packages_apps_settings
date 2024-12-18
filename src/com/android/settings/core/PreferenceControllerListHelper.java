@@ -27,6 +27,8 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -91,6 +93,25 @@ public class PreferenceControllerListHelper {
             controllers.add(controller);
         }
         return controllers;
+    }
+
+    /**
+     * Checks if the given PreferenceScreen will be empty due to all preferences being unavailable.
+     *
+     * @param xmlResId resource id of the PreferenceScreen to check
+     * @return {@code true} if none of the preferences in the given screen will appear
+     */
+    public static boolean areAllPreferencesUnavailable(@NonNull Context context,
+            @NonNull PreferenceManager preferenceManager, @XmlRes int xmlResId) {
+        PreferenceScreen screen = preferenceManager.inflateFromResource(context, xmlResId,
+                /* rootPreferences= */ null);
+        List<BasePreferenceController> preferenceControllers =
+                getPreferenceControllersFromXml(context, xmlResId);
+        if (screen.getPreferenceCount() != preferenceControllers.size()) {
+            // There are some preferences without controllers, which will show regardless.
+            return false;
+        }
+        return preferenceControllers.stream().noneMatch(BasePreferenceController::isAvailable);
     }
 
     /**

@@ -22,8 +22,10 @@ import android.os.UserManager
 import android.telephony.TelephonyManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settingslib.spa.testutils.firstWithTimeoutOrNull
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
@@ -55,43 +57,43 @@ class BillingCycleRepositoryTest {
     private val repository = BillingCycleRepository(context, mockNetworkManagementService)
 
     @Test
-    fun isModifiable_bandwidthControlDisabled_returnFalse() {
+    fun isModifiable_bandwidthControlDisabled_returnFalse() = runBlocking {
         whenever(mockNetworkManagementService.isBandwidthControlEnabled).thenReturn(false)
 
-        val modifiable = repository.isModifiable(SUB_ID)
+        val modifiable = repository.isModifiableFlow(SUB_ID).firstWithTimeoutOrNull()
 
         assertThat(modifiable).isFalse()
     }
 
     @Test
-    fun isModifiable_notAdminUser_returnFalse() {
+    fun isModifiable_notAdminUser_returnFalse() = runBlocking {
         whenever(mockUserManager.isAdminUser).thenReturn(false)
 
-        val modifiable = repository.isModifiable(SUB_ID)
+        val modifiable = repository.isModifiableFlow(SUB_ID).firstWithTimeoutOrNull()
 
         assertThat(modifiable).isFalse()
     }
 
     @Test
-    fun isModifiable_dataDisabled_returnFalse() {
+    fun isModifiable_dataDisabled_returnFalse() = runBlocking {
         whenever(
             mockTelephonyManager.isDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER)
         ).thenReturn(false)
 
-        val modifiable = repository.isModifiable(SUB_ID)
+        val modifiable = repository.isModifiableFlow(SUB_ID).firstWithTimeoutOrNull()
 
         assertThat(modifiable).isFalse()
     }
 
     @Test
-    fun isModifiable_meetAllRequirements_returnTrue() {
+    fun isModifiable_meetAllRequirements_returnTrue() = runBlocking {
         whenever(mockNetworkManagementService.isBandwidthControlEnabled).thenReturn(true)
         whenever(mockUserManager.isAdminUser).thenReturn(true)
         whenever(
             mockTelephonyManager.isDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER)
         ).thenReturn(true)
 
-        val modifiable = repository.isModifiable(SUB_ID)
+        val modifiable = repository.isModifiableFlow(SUB_ID).firstWithTimeoutOrNull()
 
         assertThat(modifiable).isTrue()
     }

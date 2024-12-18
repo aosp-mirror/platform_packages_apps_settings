@@ -31,6 +31,10 @@ public class CallsDefaultSubscriptionController extends DefaultSubscriptionContr
         super(context, preferenceKey, lifecycle, lifecycleOwner);
     }
 
+    public CallsDefaultSubscriptionController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
+    }
+
     @Override
     protected int getDefaultSubscriptionId() {
         int defaultCallSubId = SubscriptionManager.getDefaultVoiceSubscriptionId();

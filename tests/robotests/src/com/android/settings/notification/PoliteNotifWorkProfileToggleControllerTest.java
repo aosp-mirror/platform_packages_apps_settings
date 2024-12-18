@@ -18,7 +18,9 @@ package com.android.settings.notification;
 
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -26,6 +28,8 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
+
+import androidx.preference.Preference;
 
 import com.android.server.notification.Flags;
 import com.android.settings.core.BasePreferenceController;
@@ -50,6 +54,7 @@ public class PoliteNotifWorkProfileToggleControllerTest {
 
     private Context mContext;
     PoliteNotifWorkProfileToggleController mController;
+    private Preference mPreference;
     @Mock
     private AudioHelper mAudioHelper;
 
@@ -58,17 +63,32 @@ public class PoliteNotifWorkProfileToggleControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         when(mAudioHelper.getManagedProfileId(any())).thenReturn(UserHandle.MIN_SECONDARY_USER_ID);
+        setCoolDownEnabled(true);
+        assertThat(isCoolDownEnabled()).isTrue();
         mController = new PoliteNotifWorkProfileToggleController(mContext, PREFERENCE_KEY,
                 mAudioHelper);
+        mPreference = new Preference(RuntimeEnvironment.application);
+        mPreference.setKey(mController.getPreferenceKey());
     }
 
     @Test
-    public void isAvailable_flagEnabled_workProfileExists_shouldReturnTrue() {
+    public void isAvailable_flagEnabled_coolDownEnabled_workProfileExists_shouldReturnTrue() {
         // TODO: b/291907312 - remove feature flags
         mSetFlagsRule.enableFlags(Flags.FLAG_POLITE_NOTIFICATIONS);
         assertThat(mController.isAvailable()).isTrue();
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void isAvailable_flagEnabled_coolDownDisabled_workProfileExists_shouldReturnFalse() {
+        // TODO: b/291907312 - remove feature flags
+        mSetFlagsRule.enableFlags(Flags.FLAG_POLITE_NOTIFICATIONS);
+        setCoolDownEnabled(false);
+        assertThat(isCoolDownEnabled()).isFalse();
+        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
@@ -84,7 +104,7 @@ public class PoliteNotifWorkProfileToggleControllerTest {
     }
 
     @Test
-    public void isAvailable_flagDisabled_shouldReturnFalse() {
+    public void isAvailable_coolDownEnabled_flagDisabled_shouldReturnFalse() {
         // TODO: b/291907312 - remove feature flags
         mSetFlagsRule.disableFlags(Flags.FLAG_POLITE_NOTIFICATIONS);
         assertThat(mController.isAvailable()).isFalse();
@@ -94,7 +114,7 @@ public class PoliteNotifWorkProfileToggleControllerTest {
 
     @Test
     @Config(shadows = ShadowSystemSettings.class)
-    public void isChecked_enabledForWorkProfile_shouldReturnTrue() {
+    public void isChecked_coolDownEnabled_enabledForWorkProfile_shouldReturnTrue() {
         Settings.System.putIntForUser(mContext.getContentResolver(),
                 Settings.System.NOTIFICATION_COOLDOWN_ENABLED, ON,
                 UserHandle.MIN_SECONDARY_USER_ID);
@@ -103,7 +123,18 @@ public class PoliteNotifWorkProfileToggleControllerTest {
 
     @Test
     @Config(shadows = ShadowSystemSettings.class)
-    public void isChecked_disabledForWorkProfile_shouldReturnFalse() {
+    public void isChecked_coolDownDisabled_enabledForWorkProfile_shouldReturnFalse() {
+        setCoolDownEnabled(false);
+        assertThat(isCoolDownEnabled()).isFalse();
+        Settings.System.putIntForUser(mContext.getContentResolver(),
+                Settings.System.NOTIFICATION_COOLDOWN_ENABLED, ON,
+                UserHandle.MIN_SECONDARY_USER_ID);
+        assertThat(mController.isChecked()).isFalse();
+    }
+
+    @Test
+    @Config(shadows = ShadowSystemSettings.class)
+    public void isChecked_coolDownEnabled_disabledForWorkProfile_shouldReturnFalse() {
         Settings.System.putIntForUser(mContext.getContentResolver(),
                 Settings.System.NOTIFICATION_COOLDOWN_ENABLED, OFF,
                 UserHandle.MIN_SECONDARY_USER_ID);
@@ -112,7 +143,7 @@ public class PoliteNotifWorkProfileToggleControllerTest {
 
     @Test
     @Config(shadows = ShadowSystemSettings.class)
-    public void setChecked_setTrue_shouldEnablePoliteNotifForWorkProfile() {
+    public void setChecked_coolDownEnabled_setTrue_shouldEnablePoliteNotifForWorkProfile() {
         Settings.System.putIntForUser(mContext.getContentResolver(),
                 Settings.System.NOTIFICATION_COOLDOWN_ENABLED, OFF,
                 UserHandle.MIN_SECONDARY_USER_ID);
@@ -124,7 +155,7 @@ public class PoliteNotifWorkProfileToggleControllerTest {
 
     @Test
     @Config(shadows = ShadowSystemSettings.class)
-    public void setChecked_setFalse_shouldDisablePoliteNotifForWorkProfile() {
+    public void setChecked_coolDownEnabled_setFalse_shouldDisablePoliteNotifForWorkProfile() {
         Settings.System.putIntForUser(mContext.getContentResolver(),
                 Settings.System.NOTIFICATION_COOLDOWN_ENABLED, ON,
                 UserHandle.MIN_SECONDARY_USER_ID);
@@ -132,5 +163,37 @@ public class PoliteNotifWorkProfileToggleControllerTest {
         assertThat(Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.NOTIFICATION_COOLDOWN_ENABLED, ON,
                 UserHandle.MIN_SECONDARY_USER_ID)).isEqualTo(OFF);
+    }
+
+    @Test
+    public void isVisible_coolDownSetToBeDisabled_shouldReturnFalse() {
+        assertThat(mPreference.isVisible()).isTrue();
+        setCoolDownEnabled(false);
+        assertThat(isCoolDownEnabled()).isFalse();
+        mController.updateState(mPreference);
+        assertThat(mPreference.isVisible()).isFalse();
+    }
+    @Test
+    public void isVisible_coolDownSetToBeEnabled_shouldReturnTrue() {
+        setCoolDownEnabled(false);
+        assertThat(isCoolDownEnabled()).isFalse();
+        mController.updateState(mPreference);
+        assertThat(mPreference.isVisible()).isFalse();
+
+        setCoolDownEnabled(true);
+        assertThat(isCoolDownEnabled()).isTrue();
+        mController.updateState(mPreference);
+        assertThat(mPreference.isVisible()).isTrue();
+    }
+
+
+    private void setCoolDownEnabled(boolean enabled) {
+        Settings.System.putInt(mContext.getContentResolver(),
+                Settings.System.NOTIFICATION_COOLDOWN_ENABLED, (enabled ? ON : OFF));
+    }
+
+    private boolean isCoolDownEnabled() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.NOTIFICATION_COOLDOWN_ENABLED, ON) == ON;
     }
 }

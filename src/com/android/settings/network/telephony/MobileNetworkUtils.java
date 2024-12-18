@@ -31,7 +31,7 @@ import static com.android.settings.network.telephony.TelephonyConstants.Telephon
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO;
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA;
 
-import android.content.ContentResolver;
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -41,13 +41,16 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.hardware.biometrics.BiometricPrompt;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.os.Bundle;
+import android.os.CancellationSignal;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.PersistableBundle;
-import android.os.SystemClock;
-import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
@@ -68,6 +71,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
@@ -82,32 +86,17 @@ import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 import com.android.settings.network.telephony.wificalling.WifiCallingRepository;
 import com.android.settingslib.core.instrumentation.Instrumentable;
-import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.graph.SignalDrawable;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
-import com.android.settingslib.utils.ThreadUtils;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 public class MobileNetworkUtils {
 
     private static final String TAG = "MobileNetworkUtils";
 
-    // CID of the device.
-    private static final String KEY_CID = "ro.boot.cid";
-    // CIDs of devices which should not show anything related to eSIM.
-    private static final String KEY_ESIM_CID_IGNORE = "ro.setupwizard.esim_cid_ignore";
-    // System Property which is used to decide whether the default eSIM UI will be shown,
-    // the default value is false.
-    private static final String KEY_ENABLE_ESIM_UI_BY_DEFAULT =
-            "esim.enable_esim_system_ui_by_default";
     private static final String LEGACY_ACTION_CONFIGURE_PHONE_ACCOUNT =
             "android.telecom.action.CONNECTION_SERVICE_CONFIGURE";
     private static final String RTL_MARK = "\u200F";
@@ -276,64 +265,6 @@ public class MobileNetworkUtils {
     }
 
     /**
-     * Whether to show the entry point to eUICC settings.
-     *
-     * <p>We show the entry point on any device which supports eUICC as long as either the eUICC
-     * was ever provisioned (that is, at least one profile was ever downloaded onto it), or if
-     * the user has enabled development mode.
-     */
-    public static boolean showEuiccSettings(Context context) {
-        if (!SubscriptionUtil.isSimHardwareVisible(context)) {
-            return false;
-        }
-        long timeForAccess = SystemClock.elapsedRealtime();
-        try {
-            Boolean isShow = ((Future<Boolean>) ThreadUtils.postOnBackgroundThread(() -> {
-                        try {
-                            return showEuiccSettingsDetecting(context);
-                        } catch (Exception threadException) {
-                            Log.w(TAG, "Accessing Euicc failure", threadException);
-                        }
-                        return Boolean.FALSE;
-                    })).get(3, TimeUnit.SECONDS);
-            return ((isShow != null) && isShow.booleanValue());
-        } catch (ExecutionException | InterruptedException | TimeoutException exception) {
-            timeForAccess = SystemClock.elapsedRealtime() - timeForAccess;
-            Log.w(TAG, "Accessing Euicc takes too long: +" + timeForAccess + "ms");
-        }
-        return false;
-    }
-
-    // The same as #showEuiccSettings(Context context)
-    public static Boolean showEuiccSettingsDetecting(Context context) {
-        final EuiccManager euiccManager =
-                (EuiccManager) context.getSystemService(EuiccManager.class);
-        if (!euiccManager.isEnabled()) {
-            Log.w(TAG, "EuiccManager is not enabled.");
-            return false;
-        }
-
-        final ContentResolver cr = context.getContentResolver();
-        final boolean esimIgnoredDevice =
-                Arrays.asList(TextUtils.split(SystemProperties.get(KEY_ESIM_CID_IGNORE, ""), ","))
-                        .contains(SystemProperties.get(KEY_CID));
-        final boolean enabledEsimUiByDefault =
-                SystemProperties.getBoolean(KEY_ENABLE_ESIM_UI_BY_DEFAULT, true);
-        final boolean euiccProvisioned =
-                Settings.Global.getInt(cr, Settings.Global.EUICC_PROVISIONED, 0) != 0;
-        final boolean inDeveloperMode =
-                DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context);
-        Log.i(TAG,
-                String.format("showEuiccSettings: esimIgnoredDevice: %b, enabledEsimUiByDefault: "
-                        + "%b, euiccProvisioned: %b, inDeveloperMode: %b.",
-                esimIgnoredDevice, enabledEsimUiByDefault, euiccProvisioned, inDeveloperMode));
-        return (euiccProvisioned
-                || (!esimIgnoredDevice && inDeveloperMode)
-                || (!esimIgnoredDevice && enabledEsimUiByDefault
-                        && isCurrentCountrySupported(context)));
-    }
-
-    /**
      * Return {@code true} if mobile data is enabled
      */
     public static boolean isMobileDataEnabled(Context context) {
@@ -359,6 +290,7 @@ public class MobileNetworkUtils {
                 .createForSubscriptionId(subId);
         final SubscriptionManager subscriptionManager = context.getSystemService(
                 SubscriptionManager.class).createForAllUserProfiles();
+        Log.d(TAG, "setDataEnabledForReason: " + enabled);
         telephonyManager.setDataEnabledForReason(TelephonyManager.DATA_ENABLED_REASON_USER,
                 enabled);
 
@@ -701,12 +633,13 @@ public class MobileNetworkUtils {
         return tm.getNetworkOperatorName();
     }
 
-    private static int[] getActiveSubscriptionIdList(Context context) {
+    @VisibleForTesting
+    static int[] getActiveSubscriptionIdList(Context context) {
         final SubscriptionManager subscriptionManager = context.getSystemService(
                 SubscriptionManager.class).createForAllUserProfiles();
         final List<SubscriptionInfo> subInfoList =
-                subscriptionManager.getActiveSubscriptionInfoList();
-        if (subInfoList == null) {
+                SubscriptionUtil.getActiveSubscriptions(subscriptionManager);
+        if (subInfoList == null || subInfoList.isEmpty()) {
             return new int[0];
         }
         int[] activeSubIds = new int[subInfoList.size()];
@@ -1049,4 +982,53 @@ public class MobileNetworkUtils {
                 .launch();
     }
 
+    /**
+     * Shows authentication screen to confirm credentials (pin/pattern/password) for the current
+     * user of the device.
+     *
+     * <p>Similar to WifiDppUtils.showLockScreen(), but doesn't check for the existence of
+     * SIM PIN lock, only screen PIN lock.
+     *
+     * @param context The {@code Context} used to get {@link KeyguardManager} service
+     * @param onSuccess The {@code Runnable} which will be executed if the user does not setup
+     *                  device security or if lock screen is unlocked
+     */
+    public static void showLockScreen(@NonNull Context context, @NonNull Runnable onSuccess) {
+        final KeyguardManager keyguardManager =
+                context.getSystemService(KeyguardManager.class);
+
+        if (keyguardManager.isDeviceSecure()) {
+            final BiometricPrompt.AuthenticationCallback authenticationCallback =
+                    new BiometricPrompt.AuthenticationCallback() {
+                        @Override
+                        public void onAuthenticationSucceeded(
+                                    BiometricPrompt.AuthenticationResult result) {
+                            onSuccess.run();
+                        }
+
+                        @Override
+                        public void onAuthenticationError(int errorCode, CharSequence errString) {
+                            // Do nothing
+                        }
+            };
+
+            final int userId = UserHandle.myUserId();
+            final BiometricPrompt biometricPrompt = new BiometricPrompt.Builder(context)
+                    .setTitle(context.getText(R.string.wifi_dpp_lockscreen_title))
+                    .setDeviceCredentialAllowed(true)
+                    .setTextForDeviceCredential(
+                        /* title= */ null,
+                        Utils.getConfirmCredentialStringForUser(
+                                context, userId, Utils.getCredentialType(context, userId)),
+                        /* description= */ null)
+                    .build();
+            final Handler handler = new Handler(Looper.getMainLooper());
+            biometricPrompt.authenticate(
+                    new CancellationSignal(),
+                    handler::post,
+                    authenticationCallback);
+        } else {
+            onSuccess.run();
+        }
+    }
 }

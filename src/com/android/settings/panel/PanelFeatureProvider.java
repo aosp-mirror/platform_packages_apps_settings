@@ -19,6 +19,7 @@ package com.android.settings.panel;
 import android.content.Context;
 import android.os.Bundle;
 
+@Deprecated(forRemoval = true)
 public interface PanelFeatureProvider {
 
     /**

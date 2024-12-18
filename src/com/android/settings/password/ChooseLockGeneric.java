@@ -33,6 +33,7 @@ import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_C
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_DESCRIPTION;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_DEVICE_PASSWORD_REQUIREMENT_ONLY;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FINGERPRINT_ENROLLMENT_ONLY;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_IS_CALLING_APP_ADMIN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_WRITE_REPAIR_MODE_PW;
@@ -63,6 +64,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
@@ -82,6 +84,7 @@ import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.safetycenter.LockScreenSafetySource;
@@ -158,16 +161,19 @@ public class ChooseLockGeneric extends SettingsActivity {
         static final int CHOOSE_LOCK_BEFORE_BIOMETRIC_REQUEST = 103;
         @VisibleForTesting
         static final int SKIP_FINGERPRINT_REQUEST = 104;
+        @VisibleForTesting
+        static final int BIOMETRIC_AUTH_REQUEST = 105;
 
         private LockPatternUtils mLockPatternUtils;
         private DevicePolicyManager mDpm;
         private boolean mRequestGatekeeperPasswordHandle = false;
         private boolean mPasswordConfirmed = false;
+        private boolean mBiometricsAuthSuccessful = false;
         private boolean mWaitingForConfirmation = false;
         private boolean mWaitingForActivityResult = false;
         private LockscreenCredential mUserPassword;
         private FingerprintManager mFingerprintManager;
-        private FaceManager mFaceManager;
+        @Nullable private FaceManager mFaceManager;
         private int mUserId;
         private boolean mIsManagedProfile;
         private ManagedLockPasswordProvider mManagedPasswordProvider;
@@ -206,6 +212,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         private int mExtraLockScreenTitleResId;
         private int mExtraLockScreenDescriptionResId;
         private boolean mWaitingForBiometricEnrollment = false;
+        private boolean mEnrollFingerPrintOnly = false;
 
         @Override
         public int getMetricsCategory() {
@@ -225,8 +232,10 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
             final Intent intent = activity.getIntent();
             String chooseLockAction = intent.getAction();
+            mEnrollFingerPrintOnly =
+                    intent.getBooleanExtra(EXTRA_KEY_FINGERPRINT_ENROLLMENT_ONLY, false);
             mFingerprintManager = Utils.getFingerprintManagerOrNull(activity);
-            mFaceManager = Utils.getFaceManagerOrNull(activity);
+            mFaceManager = !mEnrollFingerPrintOnly ? Utils.getFaceManagerOrNull(activity) : null;
             mDpm = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
             mLockPatternUtils = new LockPatternUtils(activity);
             mIsSetNewPassword = ACTION_SET_NEW_PARENT_PROFILE_PASSWORD.equals(chooseLockAction)
@@ -483,6 +492,30 @@ public class ChooseLockGeneric extends SettingsActivity {
                     ? data.getParcelableExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD)
                     : null;
                 updatePreferencesOrFinish(false /* isRecreatingActivity */);
+                final Utils.BiometricStatus biometricAuthStatus =
+                        Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
+                                false /* biometricsAuthenticationRequested */,
+                                mUserId);
+                if (biometricAuthStatus == Utils.BiometricStatus.OK) {
+                    Utils.launchBiometricPromptForMandatoryBiometrics(this,
+                            BIOMETRIC_AUTH_REQUEST,
+                            mUserId, true /* hideBackground */);
+                } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
+                    IdentityCheckBiometricErrorDialog
+                            .showBiometricErrorDialogAndFinishActivityOnDismiss(getActivity(),
+                                    biometricAuthStatus);
+                }
+            } else if (requestCode == BIOMETRIC_AUTH_REQUEST) {
+                if (resultCode == Activity.RESULT_OK) {
+                    mBiometricsAuthSuccessful = true;
+                } else if (resultCode
+                        == ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT) {
+                    IdentityCheckBiometricErrorDialog
+                            .showBiometricErrorDialogAndFinishActivityOnDismiss(getActivity(),
+                                    Utils.BiometricStatus.LOCKOUT);
+                } else {
+                    finish();
+                }
             } else if (requestCode == CHOOSE_LOCK_REQUEST) {
                 if (resultCode != RESULT_CANCELED) {
                     getActivity().setResult(resultCode, data);
@@ -530,6 +563,9 @@ public class ChooseLockGeneric extends SettingsActivity {
             final Intent intent =
                     new Intent(context, BiometricEnrollActivity.InternalActivity.class);
             intent.putExtra(BiometricEnrollActivity.EXTRA_SKIP_INTRO, true);
+            if (mEnrollFingerPrintOnly) {
+                intent.putExtra(BiometricEnrollActivity.EXTRA_FINGERPRINT_ENROLLMENT_ONLY, true);
+            }
             return intent;
         }
 
@@ -755,6 +791,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                         entries.removePreference(pref);
                     } else if (!enabled) {
                         pref.setEnabled(false);
+                        pref.setSummary(
+                                com.android.settingslib.widget
+                                        .restricted.R.string.disabled_by_admin);
                     }
                 }
             }
@@ -927,34 +966,45 @@ public class ChooseLockGeneric extends SettingsActivity {
             switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(mUserId)) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                     if (hasFingerprints && hasFace) {
-                        return R.string.unlock_disable_frp_warning_content_pattern_face_fingerprint;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_face_fingerprint_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_pattern_face_fingerprint;
                     } else if (hasFingerprints) {
-                        return R.string.unlock_disable_frp_warning_content_pattern_fingerprint;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_fingerprint_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_pattern_fingerprint;
                     } else if (hasFace) {
-                        return R.string.unlock_disable_frp_warning_content_pattern_face;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_face_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_pattern_face;
                     } else {
-                        return R.string.unlock_disable_frp_warning_content_pattern;
+                        return hasAppsWithAuthBoundKeys
+                                ? R.string.unlock_disable_frp_warning_content_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_pattern;
                     }
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
                     if (hasFingerprints && hasFace) {
                         return hasAppsWithAuthBoundKeys
                                 ?
-                                R.string.unlock_disable_frp_warning_content_pin_face_fingerprint_authbound_keys
+                                R.string.unlock_disable_frp_warning_content_face_fingerprint_authbound_keys
                                 : R.string.unlock_disable_frp_warning_content_pin_face_fingerprint;
                     } else if (hasFingerprints) {
                         return hasAppsWithAuthBoundKeys
                                 ?
-                                R.string.unlock_disable_frp_warning_content_pin_fingerprint_authbound_keys
+                                R.string.unlock_disable_frp_warning_content_fingerprint_authbound_keys
                                 : R.string.unlock_disable_frp_warning_content_pin_fingerprint;
                     } else if (hasFace) {
                         return hasAppsWithAuthBoundKeys
                                 ?
-                                R.string.unlock_disable_frp_warning_content_pin_face_authbound_keys
+                                R.string.unlock_disable_frp_warning_content_face_authbound_keys
                                 : R.string.unlock_disable_frp_warning_content_pin_face;
                     } else {
                         return hasAppsWithAuthBoundKeys
-                                ? R.string.unlock_disable_frp_warning_content_pin_authbound_keys
+                                ? R.string.unlock_disable_frp_warning_content_authbound_keys
                                 : R.string.unlock_disable_frp_warning_content_pin;
                     }
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
@@ -962,24 +1012,45 @@ public class ChooseLockGeneric extends SettingsActivity {
                 case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
                 case DevicePolicyManager.PASSWORD_QUALITY_MANAGED:
                     if (hasFingerprints && hasFace) {
-                        return R.string
-                                .unlock_disable_frp_warning_content_password_face_fingerprint;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_face_fingerprint_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_password_face_fingerprint;
                     } else if (hasFingerprints) {
-                        return R.string.unlock_disable_frp_warning_content_password_fingerprint;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_fingerprint_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_password_fingerprint;
                     } else if (hasFace) {
-                        return R.string.unlock_disable_frp_warning_content_password_face;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_face_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_password_face;
                     } else {
-                        return R.string.unlock_disable_frp_warning_content_password;
+                        return hasAppsWithAuthBoundKeys
+                                ? R.string.unlock_disable_frp_warning_content_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_password;
                     }
                 default:
                     if (hasFingerprints && hasFace) {
-                        return R.string.unlock_disable_frp_warning_content_unknown_face_fingerprint;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_face_fingerprint_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_unknown_face_fingerprint;
                     } else if (hasFingerprints) {
-                        return R.string.unlock_disable_frp_warning_content_unknown_fingerprint;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_fingerprint_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_unknown_fingerprint;
                     } else if (hasFace) {
-                        return R.string.unlock_disable_frp_warning_content_unknown_face;
+                        return hasAppsWithAuthBoundKeys
+                                ?
+                                R.string.unlock_disable_frp_warning_content_face_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_unknown_face;
                     } else {
-                        return R.string.unlock_disable_frp_warning_content_unknown;
+                        return hasAppsWithAuthBoundKeys
+                                ? R.string.unlock_disable_frp_warning_content_authbound_keys
+                                : R.string.unlock_disable_frp_warning_content_unknown;
                     }
             }
         }

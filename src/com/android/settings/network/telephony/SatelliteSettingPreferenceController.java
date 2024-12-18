@@ -64,6 +64,10 @@ public class SatelliteSettingPreferenceController extends
             return UNSUPPORTED_ON_DEVICE;
         }
 
+        if (mSatelliteManager == null) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
+
         final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(subId);
         final boolean isSatelliteAttachSupported = carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL);
@@ -96,7 +100,8 @@ public class SatelliteSettingPreferenceController extends
     public boolean handlePreferenceTreeClick(@NonNull Preference preference) {
         if (getPreferenceKey().equals(preference.getKey())) {
             // This activity runs in phone process, we must use intent to start
-            final Intent intent = new Intent(Settings.ACTION_SATELLITE_SETTING);
+            final Intent intent = new Intent(Settings.ACTION_SATELLITE_SETTING)
+                    .setPackage(mContext.getPackageName());
             // This will setup the Home and Search affordance
             intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, true);
             intent.putExtra(SatelliteSetting.SUB_ID, mSubId);

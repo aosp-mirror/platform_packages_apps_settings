@@ -16,7 +16,9 @@
 
 package com.android.settings.notification.zen;
 
+import android.app.AutomaticZenRule;
 import android.app.Dialog;
+import android.app.Flags;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -29,6 +31,7 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.service.notification.SystemZenRules;
 import android.service.notification.ZenModeConfig;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -178,6 +181,11 @@ public class ZenRuleSelectionDialog extends InstrumentedDialogFragment {
         rt.title = mContext.getString(R.string.zen_schedule_rule_type_name);
         rt.packageName = ZenModeConfig.getEventConditionProvider().getPackageName();
         rt.defaultConditionId = ZenModeConfig.toScheduleConditionId(schedule);
+        if (Flags.modesApi() && Flags.modesUi()) {
+            rt.type = AutomaticZenRule.TYPE_SCHEDULE_TIME;
+            rt.defaultTriggerDescription = SystemZenRules.getTriggerDescriptionForScheduleTime(
+                    mContext, schedule);
+        }
         rt.serviceComponent = ZenModeConfig.getScheduleConditionProvider();
         rt.isSystem = true;
         return rt;
@@ -193,6 +201,11 @@ public class ZenRuleSelectionDialog extends InstrumentedDialogFragment {
         rt.title = mContext.getString(R.string.zen_event_rule_type_name);
         rt.packageName = ZenModeConfig.getScheduleConditionProvider().getPackageName();
         rt.defaultConditionId = ZenModeConfig.toEventConditionId(event);
+        if (Flags.modesApi() && Flags.modesUi()) {
+            rt.type = AutomaticZenRule.TYPE_SCHEDULE_CALENDAR;
+            rt.defaultTriggerDescription = SystemZenRules.getTriggerDescriptionForScheduleEvent(
+                    mContext, event);
+        }
         rt.serviceComponent = ZenModeConfig.getEventConditionProvider();
         rt.isSystem = true;
         return rt;

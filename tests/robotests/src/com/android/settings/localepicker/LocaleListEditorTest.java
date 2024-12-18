@@ -57,6 +57,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
@@ -72,12 +73,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.LooperMode;
+import org.robolectric.shadows.ShadowLooper;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -90,8 +91,10 @@ import java.util.Locale;
         ShadowActivityManager.class,
         com.android.settings.testutils.shadow.ShadowFragment.class,
 })
-@LooperMode(LooperMode.Mode.LEGACY)
 public class LocaleListEditorTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     private static final String ARG_DIALOG_TYPE = "arg_dialog_type";
     private static final String TAG_DIALOG_CONFIRM_SYSTEM_DEFAULT = "dialog_confirm_system_default";
@@ -147,8 +150,8 @@ public class LocaleListEditorTest {
 
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
+        Context context = ApplicationProvider.getApplicationContext();
+        mContext = spy(context);
         mLocaleListEditor = spy(new LocaleListEditor());
         when(mLocaleListEditor.getContext()).thenReturn(mContext);
         mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).get());
@@ -156,11 +159,11 @@ public class LocaleListEditorTest {
         when(mLocaleListEditor.getNotificationController()).thenReturn(
                 mNotificationController);
         ReflectionHelpers.setField(mLocaleListEditor, "mEmptyTextView",
-                new TextView(RuntimeEnvironment.application));
+                new TextView(context));
         ReflectionHelpers.setField(mLocaleListEditor, "mRestrictionsManager",
-                RuntimeEnvironment.application.getSystemService(Context.RESTRICTIONS_SERVICE));
+                context.getSystemService(Context.RESTRICTIONS_SERVICE));
         ReflectionHelpers.setField(mLocaleListEditor, "mUserManager",
-                RuntimeEnvironment.application.getSystemService(Context.USER_SERVICE));
+                context.getSystemService(Context.USER_SERVICE));
         ReflectionHelpers.setField(mLocaleListEditor, "mAdapter", mAdapter);
         ReflectionHelpers.setField(mLocaleListEditor, "mAddLanguage", mAddLanguage);
         ReflectionHelpers.setField(mLocaleListEditor, "mFragmentManager", mFragmentManager);
@@ -283,6 +286,7 @@ public class LocaleListEditorTest {
 
         // click the remove button
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
+        ShadowLooper.idleMainLooper();
 
         assertThat(dialog.isShowing()).isFalse();
 

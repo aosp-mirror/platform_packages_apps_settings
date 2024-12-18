@@ -19,11 +19,14 @@ package com.android.settings.spa.app
 import android.os.UserManager
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.applications.manageapplications.ResetAppsHelper
+import com.android.settings.network.telephony.CallStateRepository
 import com.android.settingslib.spa.widget.dialog.AlertDialogButton
 import com.android.settingslib.spa.widget.dialog.AlertDialogPresenter
 import com.android.settingslib.spa.widget.dialog.rememberAlertDialogPresenter
@@ -35,9 +38,7 @@ import com.android.settingslib.spaprivileged.template.scaffold.RestrictedMenuIte
 fun MoreOptionsScope.ResetAppPreferences(onClick: () -> Unit) {
     RestrictedMenuItem(
         text = stringResource(R.string.reset_app_preferences),
-        restrictions = remember {
-            Restrictions(keys = listOf(UserManager.DISALLOW_APPS_CONTROL))
-        },
+        restrictions = Restrictions(keys = listOf(UserManager.DISALLOW_APPS_CONTROL)),
         onClick = onClick,
     )
 }
@@ -45,8 +46,15 @@ fun MoreOptionsScope.ResetAppPreferences(onClick: () -> Unit) {
 @Composable
 fun rememberResetAppDialogPresenter(): AlertDialogPresenter {
     val context = LocalContext.current
+    // Reset app preference will dismiss all the notification, disable "Reset app preference" during
+    // call so in call notification not get dismissed.
+    val isInCall by remember { CallStateRepository(context).isInCallFlow() }
+        .collectAsStateWithLifecycle(initialValue = false)
     return rememberAlertDialogPresenter(
-        confirmButton = AlertDialogButton(stringResource(R.string.reset_app_preferences_button)) {
+        confirmButton = AlertDialogButton(
+            text = stringResource(R.string.reset_app_preferences_button),
+            enabled = !isInCall,
+        ) {
             ResetAppsHelper(context).resetApps()
         },
         dismissButton = AlertDialogButton(stringResource(R.string.cancel)),

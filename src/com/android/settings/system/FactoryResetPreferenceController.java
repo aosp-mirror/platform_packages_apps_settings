@@ -16,6 +16,7 @@
 package com.android.settings.system;
 
 import android.Manifest;
+import android.annotation.RequiresPermission;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -37,8 +38,8 @@ public class FactoryResetPreferenceController extends BasePreferenceController {
 
     private static final String TAG = "FactoryResetPreference";
 
-    @VisibleForTesting
-    static final String ACTION_PREPARE_FACTORY_RESET =
+    @RequiresPermission(Manifest.permission.PREPARE_FACTORY_RESET)
+    public static final String ACTION_PREPARE_FACTORY_RESET =
             "com.android.settings.ACTION_PREPARE_FACTORY_RESET";
 
     private final UserManager mUm;
@@ -90,7 +91,8 @@ public class FactoryResetPreferenceController extends BasePreferenceController {
             String packageName = resolution.activityInfo.packageName;
             PackageInfo factoryResetWizardPackageInfo;
             try {
-                factoryResetWizardPackageInfo = pm.getPackageInfo(packageName, 0);
+                factoryResetWizardPackageInfo = pm.getPackageInfo(packageName,
+                        PackageManager.GET_PERMISSIONS);
             } catch (PackageManager.NameNotFoundException e) {
                 Log.e(TAG, "Unable to resolve a Factory Reset Handler Application");
                 return null;

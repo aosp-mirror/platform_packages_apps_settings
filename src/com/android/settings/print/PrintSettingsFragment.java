@@ -46,6 +46,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.AsyncTaskLoader;
@@ -54,7 +55,9 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.spa.SpaActivity;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.AppPreference;
@@ -99,6 +102,15 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
 
     public PrintSettingsFragment() {
         super(UserManager.DISALLOW_PRINTING);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (Flags.refactorPrintSettings()) {
+            SpaActivity.startSpaActivity(context, PrintSettingsPageProvider.INSTANCE.getName());
+            finish();
+        }
     }
 
     @Override

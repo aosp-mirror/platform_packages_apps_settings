@@ -61,7 +61,8 @@ public class RTTSettingPreferenceController extends BasePreferenceController {
         mDialerPackage = mContext.getString(R.string.config_rtt_setting_package_name);
         mPackageManager = mContext.getPackageManager();
         mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
-        mRTTIntent = new Intent(context.getString(R.string.config_rtt_setting_intent_action));
+        mRTTIntent = new Intent(context.getString(R.string.config_rtt_setting_intent_action))
+                .setPackage(mDialerPackage);
         Log.d(TAG, "init controller");
     }
 

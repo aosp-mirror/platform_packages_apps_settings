@@ -72,6 +72,7 @@ import org.robolectric.shadows.ShadowBinder;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated(forRemoval = true)
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         WifiSliceTest.ShadowSliceBackgroundWorker.class,

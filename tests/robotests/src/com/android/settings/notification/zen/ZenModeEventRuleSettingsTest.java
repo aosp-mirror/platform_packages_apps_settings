@@ -16,17 +16,26 @@
 
 package com.android.settings.notification.zen;
 
+import static android.platform.test.flag.junit.SetFlagsRule.DefaultInitValueType.DEVICE_DEFAULT;
+
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.AutomaticZenRule;
+import android.app.Flags;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Looper;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
+import android.service.notification.ZenModeConfig;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.test.core.app.ApplicationProvider;
@@ -34,6 +43,7 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.R;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -51,11 +61,15 @@ import java.util.List;
 })
 public class ZenModeEventRuleSettingsTest {
 
-    @Mock
-    private FragmentActivity mActivity;
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule(DEVICE_DEFAULT);
 
     @Mock
+    private FragmentActivity mActivity;
+    @Mock
     private Intent mIntent;
+    @Mock
+    private ZenModeBackend mBackend;
 
     private ZenModeEventRuleSettings mFragment;
     private Context mContext;
@@ -90,6 +104,26 @@ public class ZenModeEventRuleSettingsTest {
         verify(mActivity).finish();
 
         //should not crash
+    }
+
+    @Test
+    @EnableFlags({Flags.FLAG_MODES_API, Flags.FLAG_MODES_UI})
+    public void updateEventRule_updatesConditionAndTriggerDescription() {
+        mFragment.setBackend(mBackend);
+        mFragment.mId = "id";
+        mFragment.mRule = new AutomaticZenRule.Builder("name", Uri.parse("condition")).build();
+
+        ZenModeConfig.EventInfo eventInfo = new ZenModeConfig.EventInfo();
+        eventInfo.calendarId = 1L;
+        eventInfo.calName = "My events";
+        mFragment.updateEventRule(eventInfo);
+
+        verify(mBackend).updateZenRule(eq("id"),
+                eq(new AutomaticZenRule.Builder(
+                        "name",
+                        ZenModeConfig.toEventConditionId(eventInfo))
+                        .setTriggerDescription("My events")
+                        .build()));
     }
 
     @Test

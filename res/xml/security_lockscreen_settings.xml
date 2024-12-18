@@ -69,9 +69,11 @@
             android:summary="@string/lockscreen_trivial_controls_summary"
             settings:controller="com.android.settings.display.ControlsTrivialPrivacyPreferenceController"/>
 
+        <!-- Shortcuts -->
         <Preference
             android:key="customizable_lock_screen_quick_affordances"
             android:title="@string/lockscreen_quick_affordances_title"
+            android:summary="@string/summary_placeholder"
             settings:controller="com.android.settings.display.CustomizableLockScreenQuickAffordancesPreferenceController" />
 
         <SwitchPreferenceCompat

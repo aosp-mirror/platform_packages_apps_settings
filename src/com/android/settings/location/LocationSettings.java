@@ -119,6 +119,7 @@ public class LocationSettings extends DashboardFragment implements
         use(RecentLocationAccessSeeAllButtonPreferenceController.class).init(this);
         use(LocationForWorkPreferenceController.class).init(this);
         use(LocationSettingsFooterPreferenceController.class).init(this);
+        use(LocationForPrivateProfilePreferenceController.class).init(this);
     }
 
     @Override

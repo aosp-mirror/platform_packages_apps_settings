@@ -43,6 +43,7 @@ import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action;
+import com.android.settings.fuelgauge.batteryusage.AppOptModeSharedPreferencesUtils;
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry;
 import com.android.settings.fuelgauge.batteryusage.BatteryEntry;
 import com.android.settings.overlay.FeatureFactory;
@@ -52,7 +53,6 @@ import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.Instrumentable;
-import com.android.settingslib.datastore.ChangeReason;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
@@ -269,31 +269,32 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
     }
 
     @Override
+    protected boolean shouldSkipForInitialSUW() {
+        return true;
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
 
-        notifyBackupManager();
         final int currentOptimizeMode = mBatteryOptimizeUtils.getAppOptimizationMode();
+        final Context applicationContext = requireContext().getApplicationContext();
         mLogStringBuilder.append(", onPause mode = ").append(currentOptimizeMode);
         logMetricCategory(currentOptimizeMode);
-
         mExecutor.execute(
                 () -> {
+                    if (currentOptimizeMode != mOptimizationMode) {
+                        AppOptModeSharedPreferencesUtils.deleteAppOptimizationModeEventByUid(
+                                applicationContext, mBatteryOptimizeUtils.getUid());
+                    }
                     BatteryOptimizeLogUtils.writeLog(
-                            getContext().getApplicationContext(),
+                            applicationContext,
                             Action.LEAVE,
                             BatteryOptimizeLogUtils.getPackageNameWithUserId(
                                     mBatteryOptimizeUtils.getPackageName(), UserHandle.myUserId()),
                             mLogStringBuilder.toString());
                 });
         Log.d(TAG, "Leave with mode: " + currentOptimizeMode);
-    }
-
-    @VisibleForTesting
-    void notifyBackupManager() {
-        if (mOptimizationMode != mBatteryOptimizeUtils.getAppOptimizationMode()) {
-            BatterySettingsStorage.get(getContext()).notifyChange(ChangeReason.UPDATE);
-        }
     }
 
     @VisibleForTesting

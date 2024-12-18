@@ -21,7 +21,11 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.provider.Settings;
 
@@ -48,7 +52,10 @@ public class LiveCaptionPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        mContext = ApplicationProvider.getApplicationContext();
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        PackageManager pm = spy(mContext.getPackageManager());
+        doReturn(pm).when(mContext).getPackageManager();
+        doReturn("com.caption").when(pm).getSystemCaptionsServicePackageName();
         mController = new LiveCaptionPreferenceController(mContext, "test_key");
         mLiveCaptionPreference = new Preference(mContext);
         mLiveCaptionPreference.setSummary(R.string.live_caption_summary);

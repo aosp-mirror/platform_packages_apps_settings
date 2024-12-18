@@ -20,6 +20,7 @@ import android.app.AppOpsManager
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settingslib.spaprivileged.model.app.AppOps
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,8 +36,12 @@ class TurnScreenOnAppsTest {
         assertThat(listModel.pageTitleResId).isEqualTo(com.android.settingslib.R.string.turn_screen_on_title)
         assertThat(listModel.switchTitleResId).isEqualTo(com.android.settingslib.R.string.allow_turn_screen_on)
         assertThat(listModel.footerResId).isEqualTo(com.android.settingslib.R.string.allow_turn_screen_on_description)
-        assertThat(listModel.appOp).isEqualTo(AppOpsManager.OP_TURN_SCREEN_ON)
+        assertThat(listModel.appOps).isEqualTo(
+            AppOps(
+                op = AppOpsManager.OP_TURN_SCREEN_ON,
+                setModeByUid = true,
+            )
+        )
         assertThat(listModel.permission).isEqualTo(Manifest.permission.TURN_SCREEN_ON)
-        assertThat(listModel.setModeByUid).isTrue()
     }
 }

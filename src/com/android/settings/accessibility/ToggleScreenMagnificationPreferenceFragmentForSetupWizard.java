@@ -72,10 +72,6 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
         if (mSettingsPreference != null) {
             mSettingsPreference.setVisible(false);
         }
-        // Setting of following typing
-        if (mFollowingTypingSwitchPreference != null) {
-            mFollowingTypingSwitchPreference.setVisible(false);
-        }
     }
 
     @Override
@@ -83,7 +79,8 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
             Bundle savedInstanceState) {
         if (parent instanceof GlifPreferenceLayout) {
             final GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
-            return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
+            return AccessibilityFragmentUtils.addCollectionInfoToAccessibilityDelegate(
+                    layout.onCreateRecyclerView(inflater, parent, savedInstanceState));
         }
         return super.onCreateRecyclerView(inflater, parent, savedInstanceState);
     }

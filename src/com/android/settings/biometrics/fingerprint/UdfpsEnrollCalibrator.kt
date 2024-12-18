@@ -6,13 +6,14 @@ import androidx.lifecycle.Lifecycle
 
 interface UdfpsEnrollCalibrator {
 
-    fun getExtrasForNextIntent(isEnrolling: Boolean): Bundle
+    fun getExtrasForNextIntent(): Bundle
 
     fun onSaveInstanceState(outState: Bundle)
 
-    fun onFindSensorPage(
+    fun onWaitingPage(
             lifecycle: Lifecycle,
             fragmentManager: FragmentManager,
-            enableEnrollingRunnable: Runnable
+            enableEnrollingRunnable: Runnable?
     )
+
 }

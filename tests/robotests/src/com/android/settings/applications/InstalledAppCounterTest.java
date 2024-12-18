@@ -50,9 +50,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
@@ -62,8 +62,10 @@ import java.util.List;
 import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 public final class InstalledAppCounterTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     private static final String APP_1 = "app1";
     private static final String APP_2 = "app2";
@@ -103,7 +105,6 @@ public final class InstalledAppCounterTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         mFakeFeatureFlags = new FakeFeatureFlagsImpl();
         mFakeFeatureFlags.setFlag(Flags.FLAG_ARCHIVING, true);

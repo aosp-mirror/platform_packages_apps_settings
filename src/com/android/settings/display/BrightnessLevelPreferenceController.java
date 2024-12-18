@@ -20,6 +20,7 @@ import static com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MAX;
 import static com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MIN;
 import static com.android.settingslib.display.BrightnessUtils.convertLinearToGammaFloat;
 
+import android.annotation.Nullable;
 import android.app.ActivityOptions;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -31,15 +32,20 @@ import android.hardware.display.DisplayManager.DisplayListener;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Process;
+import android.os.UserManager;
 import android.provider.Settings.System;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
+import com.android.settings.Utils;
+import com.android.settings.accessibility.Flags;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SettingsBaseActivity;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -48,17 +54,18 @@ import com.android.settingslib.transition.SettingsTransitionHelper;
 
 import java.text.NumberFormat;
 
-public class BrightnessLevelPreferenceController extends AbstractPreferenceController implements
+public class BrightnessLevelPreferenceController extends BasePreferenceController implements
         PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
 
     private static final String TAG = "BrightnessPrefCtrl";
-    private static final String KEY_BRIGHTNESS = "brightness";
+
     private static final Uri BRIGHTNESS_ADJ_URI;
     private final ContentResolver mContentResolver;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final DisplayManager mDisplayManager;
-
+    @Nullable
     private Preference mPreference;
+    private boolean mInSetupWizard;
 
     static {
         BRIGHTNESS_ADJ_URI = System.getUriFor(System.SCREEN_AUTO_BRIGHTNESS_ADJ);
@@ -87,9 +94,12 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
         }
     };
 
-
     public BrightnessLevelPreferenceController(Context context, Lifecycle lifecycle) {
-        super(context);
+        this(context, context.getString(R.string.preference_key_brightness_level), lifecycle);
+    }
+
+    private BrightnessLevelPreferenceController(Context context, String key, Lifecycle lifecycle) {
+        super(context, key);
         mDisplayManager = context.getSystemService(DisplayManager.class);
 
         if (lifecycle != null) {
@@ -98,24 +108,30 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
         mContentResolver = mContext.getContentResolver();
     }
 
-    @Override
-    public boolean isAvailable() {
-        return true;
+    public void setInSetupWizard(boolean inSetupWizard) {
+        mInSetupWizard = inSetupWizard;
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_BRIGHTNESS;
+    public int getAvailabilityStatus() {
+        if (mInSetupWizard && !Flags.addBrightnessSettingsInSuw()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+        return AVAILABLE;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(KEY_BRIGHTNESS);
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
     public void updateState(Preference preference) {
+        if (preference.isEnabled() && UserManager.get(mContext).hasBaseUserRestriction(
+                UserManager.DISALLOW_CONFIG_BRIGHTNESS, Process.myUserHandle())) {
+            preference.setEnabled(false);
+        }
         updatedSummary(preference);
     }
 
@@ -139,6 +155,7 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
             return false;
         }
         final Intent intent = new Intent(ACTION_SHOW_BRIGHTNESS_DIALOG);
+        intent.setPackage(Utils.SYSTEMUI_PACKAGE_NAME);
         intent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
                 SettingsTransitionHelper.TransitionType.TRANSITION_NONE);
         intent.putExtra(EXTRA_BRIGHTNESS_DIALOG_IS_FULL_WIDTH, true);

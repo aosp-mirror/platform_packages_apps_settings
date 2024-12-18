@@ -25,6 +25,7 @@ import android.content.Context
 import com.android.media.flags.Flags;
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
+import com.android.settingslib.spaprivileged.model.app.AppOps
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionListModel
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionRecord
 import com.android.settingslib.spaprivileged.template.app.TogglePermissionAppListProvider
@@ -38,9 +39,11 @@ class MediaRoutingControlAppsListModel(context: Context) : AppOpPermissionListMo
     override val pageTitleResId = R.string.media_routing_control_title
     override val switchTitleResId = R.string.allow_media_routing_control
     override val footerResId = R.string.allow_media_routing_description
-    override val appOp = AppOpsManager.OP_MEDIA_ROUTING_CONTROL
+    override val appOps = AppOps(
+        op = AppOpsManager.OP_MEDIA_ROUTING_CONTROL,
+        setModeByUid = true,
+    )
     override val permission = Manifest.permission.MEDIA_ROUTING_CONTROL
-    override val setModeByUid = true
     private val roleManager = context.getSystemService(RoleManager::class.java)
 
     override fun setAllowed(record: AppOpPermissionRecord, newAllowed: Boolean) {

@@ -27,6 +27,8 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.datausage.lib.BillingCycleRepository
+import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -39,7 +41,9 @@ class BillingCyclePreferenceTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private val mockBillingCycleRepository = mock<BillingCycleRepository>()
+    private val mockBillingCycleRepository = mock<BillingCycleRepository> {
+        on { isModifiableFlow(SUB_ID) } doReturn emptyFlow()
+    }
 
     private val context: Context = ApplicationProvider.getApplicationContext()
 
@@ -56,7 +60,7 @@ class BillingCyclePreferenceTest {
     @Test
     fun setTemplate_modifiable_enabled() {
         mockBillingCycleRepository.stub {
-            on { isModifiable(SUB_ID) } doReturn true
+            on { isModifiableFlow(SUB_ID) } doReturn flowOf(true)
         }
 
         setTemplate()
@@ -67,7 +71,7 @@ class BillingCyclePreferenceTest {
     @Test
     fun setTemplate_notModifiable_notEnabled() {
         mockBillingCycleRepository.stub {
-            on { isModifiable(SUB_ID) } doReturn false
+            on { isModifiableFlow(SUB_ID) } doReturn flowOf(false)
         }
 
         setTemplate()

@@ -25,6 +25,7 @@ import android.sysprop.AdbProperties;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -40,10 +41,10 @@ public class ClearAdbKeysPreferenceController extends DeveloperOptionsPreference
     private static final String CLEAR_ADB_KEYS = "clear_adb_keys";
 
     private final IAdbManager mAdbManager;
-    private final DevelopmentSettingsDashboardFragment mFragment;
+    @Nullable private final DevelopmentSettingsDashboardFragment mFragment;
 
     public ClearAdbKeysPreferenceController(Context context,
-            DevelopmentSettingsDashboardFragment fragment) {
+            @Nullable DevelopmentSettingsDashboardFragment fragment) {
         super(context);
 
         mFragment = fragment;

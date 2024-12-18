@@ -24,18 +24,23 @@ import android.content.Context;
 import android.net.Uri;
 import android.provider.Settings;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-// import org.robolectric.annotation.LooperMode;
 
 @RunWith(RobolectricTestRunner.class)
-// @LooperMode(LooperMode.Mode.LEGACY)
 public class MobileDataEnabledListenerTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
     private static final int SUB_ID_ONE = 111;
     private static final int SUB_ID_TWO = 222;
 
@@ -47,8 +52,7 @@ public class MobileDataEnabledListenerTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = ApplicationProvider.getApplicationContext();
         mListener = new MobileDataEnabledListener(mContext, mClient);
     }
 

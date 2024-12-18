@@ -16,9 +16,13 @@
 
 package com.android.settings.accounts;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -30,6 +34,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
 
+import androidx.collection.ArraySet;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceGroup;
@@ -51,9 +56,13 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
+import java.util.Set;
+
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         com.android.settings.testutils.shadow.ShadowFragment.class,
+        ShadowAccountManager.class,
+        ShadowContentResolver.class,
 })
 public class AccountTypePreferenceLoaderTest {
 
@@ -63,6 +72,8 @@ public class AccountTypePreferenceLoaderTest {
     private PreferenceFragmentCompat mPreferenceFragment;
     @Mock
     private PackageManager mPackageManager;
+    @Mock
+    private PreferenceManager mManager;
 
     private Context mContext;
     private Account mAccount;
@@ -91,18 +102,16 @@ public class AccountTypePreferenceLoaderTest {
     }
 
     @Test
-    @Config(shadows = {ShadowAccountManager.class, ShadowContentResolver.class})
     public void updatePreferenceIntents_shouldRunRecursively() {
-        final PreferenceManager preferenceManager = mock(PreferenceManager.class);
         // Top level
         PreferenceGroup prefRoot = spy(new PreferenceScreen(mContext, null));
-        when(prefRoot.getPreferenceManager()).thenReturn(preferenceManager);
+        when(prefRoot.getPreferenceManager()).thenReturn(mManager);
         Preference pref1 = mock(Preference.class);
         PreferenceGroup prefGroup2 = spy(new PreferenceScreen(mContext, null));
-        when(prefGroup2.getPreferenceManager()).thenReturn(preferenceManager);
+        when(prefGroup2.getPreferenceManager()).thenReturn(mManager);
         Preference pref3 = mock(Preference.class);
         PreferenceGroup prefGroup4 = spy(new PreferenceScreen(mContext, null));
-        when(prefGroup4.getPreferenceManager()).thenReturn(preferenceManager);
+        when(prefGroup4.getPreferenceManager()).thenReturn(mManager);
         prefRoot.addPreference(pref1);
         prefRoot.addPreference(prefGroup2);
         prefRoot.addPreference(pref3);
@@ -114,7 +123,7 @@ public class AccountTypePreferenceLoaderTest {
         prefGroup2.addPreference(pref21);
         prefGroup2.addPreference(pref22);
         PreferenceGroup prefGroup41 = spy(new PreferenceScreen(mContext, null));
-        when(prefGroup41.getPreferenceManager()).thenReturn(preferenceManager);
+        when(prefGroup41.getPreferenceManager()).thenReturn(mManager);
         Preference pref42 = mock(Preference.class);
         prefGroup4.addPreference(prefGroup41);
         prefGroup4.addPreference(pref42);
@@ -131,5 +140,114 @@ public class AccountTypePreferenceLoaderTest {
         verify(mPrefLoader).updatePreferenceIntents(prefGroup2, acctType, mAccount);
         verify(mPrefLoader).updatePreferenceIntents(prefGroup4, acctType, mAccount);
         verify(mPrefLoader).updatePreferenceIntents(prefGroup41, acctType, mAccount);
+    }
+
+    @Test
+    public void generateFragmentAllowlist_nullPrefGroup_emptyList() {
+        Set<String> allowed = mPrefLoader.generateFragmentAllowlist(null);
+
+        assertThat(allowed).isEmpty();
+    }
+
+    @Test
+    public void generateFragmentAllowlist_simpleGroupNoFragment_emptyList() {
+        Preference pref = new Preference(mContext);
+        PreferenceScreen screen = spy(new PreferenceScreen(mContext, null));
+        when(screen.getPreferenceManager()).thenReturn(mManager);
+        screen.addPreference(pref);
+
+        Set<String> allowed = mPrefLoader.generateFragmentAllowlist(screen);
+
+        assertThat(allowed).isEmpty();
+    }
+
+    @Test
+    public void generateFragmentAllowlist_simpleGroupOneFragment_populatedList() {
+        Preference pref = new Preference(mContext);
+        pref.setFragment("test");
+        PreferenceScreen screen = spy(new PreferenceScreen(mContext, null));
+        when(screen.getPreferenceManager()).thenReturn(mManager);
+        screen.addPreference(pref);
+
+        Set<String> allowed = mPrefLoader.generateFragmentAllowlist(screen);
+
+        assertThat(allowed).isNotEmpty();
+    }
+
+    @Test
+    public void generateFragmentAllowlist_nestedGroupWithFragments_populatedList() {
+        Preference pref = new Preference(mContext);
+        pref.setFragment("test");
+        PreferenceScreen nested = spy(new PreferenceScreen(mContext, null));
+        PreferenceScreen parent = spy(new PreferenceScreen(mContext, null));
+        when(nested.getPreferenceManager()).thenReturn(mManager);
+        when(parent.getPreferenceManager()).thenReturn(mManager);
+        parent.addPreference(nested);
+        nested.addPreference(pref);
+
+        Set<String> allowed = mPrefLoader.generateFragmentAllowlist(parent);
+
+        assertThat(allowed).isNotEmpty();
+    }
+
+    @Test
+    public void filterBlockedFragments_nullPrefGroup_noop() {
+        // verify no NPE
+        mPrefLoader.filterBlockedFragments(null, new ArraySet<>());
+    }
+
+    @Test
+    public void filterBlockedFragments_simplePrefGroupNoFragment_noop() {
+        Preference pref = spy(new Preference(mContext));
+        PreferenceScreen screen = spy(new PreferenceScreen(mContext, null));
+        when(screen.getPreferenceManager()).thenReturn(mManager);
+        screen.addPreference(pref);
+
+        mPrefLoader.filterBlockedFragments(screen, new ArraySet<>());
+
+        verify(screen, never()).setOnPreferenceClickListener(any());
+        verify(pref, never()).setOnPreferenceClickListener(any());
+    }
+
+    @Test
+    public void filterBlockedFragments_simplePrefGroupWithAllowedFragment_noop() {
+        Preference pref = spy(new Preference(mContext));
+        pref.setFragment("test");
+        PreferenceScreen screen = spy(new PreferenceScreen(mContext, null));
+        when(screen.getPreferenceManager()).thenReturn(mManager);
+        screen.addPreference(pref);
+
+        mPrefLoader.filterBlockedFragments(screen, Set.of("test"));
+
+        verify(screen, never()).setOnPreferenceClickListener(any());
+        verify(pref, never()).setOnPreferenceClickListener(any());
+    }
+
+    @Test
+    public void filterBlockedFragments_simplePrefGroupNoMatchFragment_overrideClick() {
+        Preference pref = spy(new Preference(mContext));
+        pref.setFragment("test");
+        PreferenceScreen screen = spy(new PreferenceScreen(mContext, null));
+        when(screen.getPreferenceManager()).thenReturn(mManager);
+        screen.addPreference(pref);
+
+        mPrefLoader.filterBlockedFragments(screen, new ArraySet<>());
+
+        verify(pref).setOnPreferenceClickListener(any());
+    }
+
+    @Test
+    public void filterBlockedFragments_nestedPrefGroupWithNoMatchFragment_overrideClick() {
+        Preference pref = spy(new Preference(mContext));
+        pref.setFragment("test");
+        PreferenceScreen nested = spy(new PreferenceScreen(mContext, null));
+        PreferenceScreen parent = spy(new PreferenceScreen(mContext, null));
+        when(nested.getPreferenceManager()).thenReturn(mManager);
+        when(parent.getPreferenceManager()).thenReturn(mManager);
+        parent.addPreference(nested);
+        nested.addPreference(pref);
+
+        mPrefLoader.filterBlockedFragments(parent, Set.of("nomatch", "other"));
+        verify(pref).setOnPreferenceClickListener(any());
     }
 }

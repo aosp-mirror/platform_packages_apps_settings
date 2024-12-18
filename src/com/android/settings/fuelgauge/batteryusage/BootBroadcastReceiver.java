@@ -54,8 +54,8 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         final String action = intent == null ? "" : intent.getAction();
-        if (BatteryUtils.isWorkProfile(context)) {
-            Log.w(TAG, "do not start job for work profile action=" + action);
+        if (BatteryUtils.isAdditionalProfile(context)) {
+            Log.w(TAG, "do not start job for an additional profile action=" + action);
             return;
         }
 
@@ -67,8 +67,12 @@ public final class BootBroadcastReceiver extends BroadcastReceiver {
                 refreshJobs(context);
                 break;
             case Intent.ACTION_TIME_CHANGED:
-                Log.d(TAG, "refresh job and clear all data from action=" + action);
+                Log.d(TAG, "refresh job and clear data from action=" + action);
                 DatabaseUtils.clearDataAfterTimeChangedIfNeeded(context, intent);
+                break;
+            case Intent.ACTION_TIMEZONE_CHANGED:
+                Log.d(TAG, "refresh job and clear all data from action=" + action);
+                DatabaseUtils.clearDataAfterTimeZoneChangedIfNeeded(context);
                 break;
             default:
                 Log.w(TAG, "receive unsupported action=" + action);

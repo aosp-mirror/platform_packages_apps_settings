@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -216,7 +217,11 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
             trustAgentPreference.setIntent(new Intent(Intent.ACTION_MAIN)
                     .setComponent(agent.componentName));
             trustAgentPreference.setDisabledByAdmin(agent.admin);
-            if (!trustAgentPreference.isDisabledByAdmin() && !hasSecurity) {
+            if (trustAgentPreference.isDisabledByAdmin()) {
+                // Ensure visibility by setting non-empty summary text.
+                trustAgentPreference.setSummary(TextUtils.firstNotEmpty(agent.summary, " "));
+                trustAgentPreference.useAdminDisabledSummary(true);
+            } else if (!trustAgentPreference.isDisabledByAdmin() && !hasSecurity) {
                 trustAgentPreference.setEnabled(false);
                 trustAgentPreference.setSummary(R.string.disabled_because_no_backup_security);
             }

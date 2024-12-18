@@ -32,6 +32,7 @@ import android.content.pm.PackageManager;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
@@ -41,12 +42,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.LooperMode;
+import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 @Config(shadows = ShadowAlertDialogCompat.class)
 public class InstantAppButtonDialogFragmentTest {
 
@@ -58,9 +57,10 @@ public class InstantAppButtonDialogFragmentTest {
     @Before
     public void setUp() {
         final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = spy(ApplicationProvider.getApplicationContext());
         mFragment = InstantAppButtonDialogFragment.newInstance(TEST_PACKAGE);
         mFragment.show(activity.getSupportFragmentManager(), "InstantAppButtonDialogFragment");
+        ShadowLooper.idleMainLooper();
     }
 
     @Test

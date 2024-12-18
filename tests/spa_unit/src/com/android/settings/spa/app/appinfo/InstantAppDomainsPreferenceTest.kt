@@ -22,8 +22,9 @@ import android.content.pm.PackageManager
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotDisplayed
+import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.isEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
@@ -35,42 +36,41 @@ import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settingslib.spa.testutils.delay
 import com.android.settingslib.spa.testutils.onDialogText
+import com.android.settingslib.spa.testutils.waitUntilExists
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito
-import org.mockito.Mockito.any
-import org.mockito.Mockito.anyInt
 import org.mockito.MockitoSession
-import org.mockito.Spy
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.spy
+import org.mockito.kotlin.whenever
 import org.mockito.quality.Strictness
-import org.mockito.Mockito.`when` as whenever
 
 @RunWith(AndroidJUnit4::class)
 class InstantAppDomainsPreferenceTest {
-    @get:Rule
-    val composeTestRule = createComposeRule()
+    @get:Rule val composeTestRule = createComposeRule()
 
     private lateinit var mockSession: MockitoSession
 
-    @Spy
-    private val context: Context = ApplicationProvider.getApplicationContext()
+    private val packageManager = mock<PackageManager>()
 
-    @Mock
-    private lateinit var packageManager: PackageManager
+    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
+        on { packageManager } doReturn packageManager
+        doReturn(mock).whenever(mock).createContextAsUser(any(), any())
+    }
 
     @Before
     fun setUp() {
-        mockSession = ExtendedMockito.mockitoSession()
-            .initMocks(this)
-            .mockStatic(Utils::class.java)
-            .strictness(Strictness.LENIENT)
-            .startMocking()
-        whenever(context.packageManager).thenReturn(packageManager)
-        Mockito.doReturn(context).`when`(context).createContextAsUser(any(), anyInt())
+        mockSession =
+            ExtendedMockito.mockitoSession()
+                .mockStatic(Utils::class.java)
+                .strictness(Strictness.LENIENT)
+                .startMocking()
+
         mockDomains(emptySet())
     }
 
@@ -96,10 +96,9 @@ class InstantAppDomainsPreferenceTest {
     fun title_displayed() {
         setContent()
 
-        composeTestRule
-            .onNodeWithText(context.getString(R.string.app_launch_supported_domain_urls_title))
-            .assertIsDisplayed()
-            .assertIsEnabled()
+        composeTestRule.waitUntilExists(
+            hasText(context.getString(R.string.app_launch_supported_domain_urls_title)) and
+                isEnabled())
     }
 
     @Test
@@ -108,8 +107,8 @@ class InstantAppDomainsPreferenceTest {
 
         setContent()
 
-        composeTestRule.onNodeWithText(context.getString(R.string.domain_urls_summary_none))
-            .assertIsDisplayed()
+        composeTestRule.waitUntilExists(
+            hasText(context.getString(R.string.domain_urls_summary_none)))
     }
 
     @Test
@@ -138,9 +137,9 @@ class InstantAppDomainsPreferenceTest {
         composeTestRule.onRoot().performClick()
         composeTestRule.delay()
 
-        composeTestRule.onDialogText(
-            context.getString(R.string.app_launch_supported_domain_urls_title)
-        ).assertIsDisplayed()
+        composeTestRule
+            .onDialogText(context.getString(R.string.app_launch_supported_domain_urls_title))
+            .assertIsDisplayed()
         composeTestRule.onDialogText("abc").assertIsDisplayed()
         composeTestRule.onDialogText("def").assertIsDisplayed()
     }
@@ -157,10 +156,11 @@ class InstantAppDomainsPreferenceTest {
         const val PACKAGE_NAME = "package.name"
         const val UID = 123
 
-        val INSTANT_APP = ApplicationInfo().apply {
-            packageName = PACKAGE_NAME
-            uid = UID
-            privateFlags = ApplicationInfo.PRIVATE_FLAG_INSTANT
-        }
+        val INSTANT_APP =
+            ApplicationInfo().apply {
+                packageName = PACKAGE_NAME
+                uid = UID
+                privateFlags = ApplicationInfo.PRIVATE_FLAG_INSTANT
+            }
     }
 }

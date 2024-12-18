@@ -25,13 +25,19 @@ import static org.mockito.Mockito.when;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.FactoryResetProtectionPolicy;
 import android.content.Context;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
+import android.security.Flags;
 import android.service.persistentdata.PersistentDataBlockManager;
 import android.view.LayoutInflater;
-import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.google.android.setupdesign.GlifLayout;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -47,6 +53,9 @@ import java.util.ArrayList;
         com.android.settings.testutils.shadow.ShadowFragment.class,
 })
 public class MainClearConfirmTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private FragmentActivity mActivity;
 
@@ -66,6 +75,10 @@ public class MainClearConfirmTest {
         MockitoAnnotations.initMocks(this);
         mActivity = Robolectric.setupActivity(FragmentActivity.class);
         mMainClearConfirm = spy(new MainClearConfirm());
+
+        when(mMockActivity.getSystemService(Context.DEVICE_POLICY_SERVICE))
+                .thenReturn(mDevicePolicyManager);
+        when(mPersistentDataBlockManager.isFactoryResetProtectionActive()).thenReturn(false);
     }
 
     @Test
@@ -73,12 +86,12 @@ public class MainClearConfirmTest {
         MainClearConfirm mainClearConfirm = new MainClearConfirm();
         mainClearConfirm.mEraseEsims = true;
         mainClearConfirm.mContentView =
-                LayoutInflater.from(mActivity).inflate(R.layout.main_clear_confirm, null);
+                (GlifLayout) LayoutInflater.from(mActivity)
+                        .inflate(R.layout.main_clear_confirm, null);
 
         mainClearConfirm.setSubtitle();
 
-        assertThat(((TextView) mainClearConfirm.mContentView
-                .findViewById(R.id.sud_layout_description)).getText())
+        assertThat(mainClearConfirm.mContentView.getDescriptionText())
                 .isEqualTo(mActivity.getString(R.string.main_clear_final_desc_esim));
     }
 
@@ -87,18 +100,25 @@ public class MainClearConfirmTest {
         MainClearConfirm mainClearConfirm = new MainClearConfirm();
         mainClearConfirm.mEraseEsims = false;
         mainClearConfirm.mContentView =
-                LayoutInflater.from(mActivity).inflate(R.layout.main_clear_confirm, null);
+                (GlifLayout) LayoutInflater.from(mActivity)
+                        .inflate(R.layout.main_clear_confirm, null);
 
         mainClearConfirm.setSubtitle();
 
-        assertThat(((TextView) mainClearConfirm.mContentView
-                .findViewById(R.id.sud_layout_description)).getText())
+        assertThat(mainClearConfirm.mContentView.getDescriptionText())
                 .isEqualTo(mActivity.getString(R.string.main_clear_final_desc));
     }
 
     @Test
     public void shouldWipePersistentDataBlock_noPersistentDataBlockManager_shouldReturnFalse() {
         assertThat(mMainClearConfirm.shouldWipePersistentDataBlock(null)).isFalse();
+    }
+
+    @Test
+    public void shouldWipePersistentDataBlock_frpIsAlive_shouldReturnFalse() {
+        when(mPersistentDataBlockManager.isFactoryResetProtectionActive()).thenReturn(true);
+        assertThat(mMainClearConfirm.shouldWipePersistentDataBlock(mPersistentDataBlockManager))
+                .isFalse();
     }
 
     @Test
@@ -110,12 +130,29 @@ public class MainClearConfirmTest {
     }
 
     @Test
-    public void shouldWipePersistentDataBlock_oemUnlockAllowed_shouldReturnFalse() {
+    @DisableFlags(Flags.FLAG_FRP_ENFORCEMENT)
+    public void shouldWipePersistentDataBlock_oemUnlockAllowedAndFlagDiscabled_shouldReturnFalse() {
+        when(mMainClearConfirm.getActivity()).thenReturn(mMockActivity);
+
+        when(mDevicePolicyManager.isFactoryResetProtectionPolicySupported()).thenReturn(true);
         doReturn(false).when(mMainClearConfirm).isDeviceStillBeingProvisioned();
         doReturn(true).when(mMainClearConfirm).isOemUnlockedAllowed();
 
-        assertThat(mMainClearConfirm.shouldWipePersistentDataBlock(
-                mPersistentDataBlockManager)).isFalse();
+        assertThat(mMainClearConfirm.shouldWipePersistentDataBlock(mPersistentDataBlockManager))
+                .isFalse();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_FRP_ENFORCEMENT)
+    public void shouldWipePersistentDataBlock_oemUnlockAllowedAndFlagEnabled_shouldReturnTrue() {
+        when(mMainClearConfirm.getActivity()).thenReturn(mMockActivity);
+
+        when(mDevicePolicyManager.isFactoryResetProtectionPolicySupported()).thenReturn(true);
+        doReturn(false).when(mMainClearConfirm).isDeviceStillBeingProvisioned();
+        doReturn(true).when(mMainClearConfirm).isOemUnlockedAllowed();
+
+        assertThat(mMainClearConfirm.shouldWipePersistentDataBlock(mPersistentDataBlockManager))
+                .isTrue();
     }
 
     @Test
@@ -124,8 +161,7 @@ public class MainClearConfirmTest {
 
         doReturn(false).when(mMainClearConfirm).isDeviceStillBeingProvisioned();
         doReturn(false).when(mMainClearConfirm).isOemUnlockedAllowed();
-        when(mMockActivity.getSystemService(Context.DEVICE_POLICY_SERVICE))
-                .thenReturn(mDevicePolicyManager);
+
         when(mDevicePolicyManager.isFactoryResetProtectionPolicySupported()).thenReturn(false);
 
         assertThat(mMainClearConfirm.shouldWipePersistentDataBlock(
@@ -144,8 +180,6 @@ public class MainClearConfirmTest {
                 .setFactoryResetProtectionAccounts(accounts)
                 .setFactoryResetProtectionEnabled(true)
                 .build();
-        when(mMockActivity.getSystemService(Context.DEVICE_POLICY_SERVICE))
-                .thenReturn(mDevicePolicyManager);
         when(mDevicePolicyManager.isFactoryResetProtectionPolicySupported()).thenReturn(true);
         when(mDevicePolicyManager.getFactoryResetProtectionPolicy(null)).thenReturn(frp);
         when(mDevicePolicyManager.isOrganizationOwnedDeviceWithManagedProfile()).thenReturn(true);
@@ -161,8 +195,6 @@ public class MainClearConfirmTest {
         doReturn(false).when(mMainClearConfirm).isDeviceStillBeingProvisioned();
         doReturn(false).when(mMainClearConfirm).isOemUnlockedAllowed();
 
-        when(mMockActivity.getSystemService(Context.DEVICE_POLICY_SERVICE))
-                .thenReturn(mDevicePolicyManager);
         when(mDevicePolicyManager.isFactoryResetProtectionPolicySupported()).thenReturn(true);
         when(mDevicePolicyManager.getFactoryResetProtectionPolicy(null)).thenReturn(null);
         when(mDevicePolicyManager.isOrganizationOwnedDeviceWithManagedProfile()).thenReturn(false);

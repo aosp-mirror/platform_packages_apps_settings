@@ -63,7 +63,7 @@ public class EvenDimmerPreferenceControllerTest {
 
     @RequiresFlagsDisabled(Flags.FLAG_EVEN_DIMMER)
     @Test
-    public void testGetAvailabilityStatus_flagOffconfigTrue() {
+    public void testGetAvailabilityStatus_flagOffConfigTrue() {
         when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_evenDimmerEnabled)).thenReturn(true);
@@ -96,9 +96,24 @@ public class EvenDimmerPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
+
+    @RequiresFlagsEnabled(Flags.FLAG_EVEN_DIMMER)
+    @Test
+    public void testGetAvailabilityStatus_flagOnConfigFalse() {
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_evenDimmerEnabled)).thenReturn(false);
+        // setup
+        mController = new EvenDimmerPreferenceController(mContext, "key");
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_EVEN_DIMMER)
     public void testSetChecked_enable() throws Settings.SettingNotFoundException {
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_evenDimmerEnabled)).thenReturn(true);
         mController.setChecked(true);
         assertThat(Settings.Secure.getFloat(mContext.getContentResolver(),
                 Settings.Secure.EVEN_DIMMER_ACTIVATED)).isEqualTo(1.0f); // true
@@ -107,6 +122,8 @@ public class EvenDimmerPreferenceControllerTest {
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_EVEN_DIMMER)
     public void testSetChecked_disable() throws Settings.SettingNotFoundException {
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_evenDimmerEnabled)).thenReturn(true);
         mController.setChecked(false);
         assertThat(Settings.Secure.getFloat(mContext.getContentResolver(),
                 Settings.Secure.EVEN_DIMMER_ACTIVATED)).isEqualTo(0.0f); // false

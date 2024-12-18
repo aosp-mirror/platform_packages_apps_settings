@@ -56,7 +56,8 @@ public class TrackpadSettings extends DashboardFragment {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return FeatureFlagUtils
-                            .isEnabled(context, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_TRACKPAD);
+                            .isEnabled(context, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_TRACKPAD)
+                            && NewKeyboardSettingsUtils.isTouchpad();
                 }
             };
 }

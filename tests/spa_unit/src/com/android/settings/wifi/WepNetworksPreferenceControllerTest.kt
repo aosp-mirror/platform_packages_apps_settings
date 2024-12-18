@@ -17,6 +17,7 @@
 package com.android.settings.wifi
 
 import android.content.Context
+import android.net.wifi.WifiInfo
 import android.net.wifi.WifiManager
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
@@ -30,7 +31,6 @@ import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.spa.preference.ComposePreference
 import com.android.settingslib.spa.testutils.onDialogText
 import com.android.wifitrackerlib.WifiEntry
@@ -45,29 +45,31 @@ import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
 class WepNetworksPreferenceControllerTest {
 
-    @get:Rule
-    val composeTestRule = createComposeRule()
+    @get:Rule val composeTestRule = createComposeRule()
 
     private var wepAllowed = true
 
-    private var mockWifiInfo = mock<android.net.wifi.WifiInfo> {
-        on { it.currentSecurityType } doReturn WifiEntry.SECURITY_EAP
-        on { it.ssid } doReturn SSID
-    }
-
-    private var mockWifiManager = mock<WifiManager> {
-        on { queryWepAllowed(any(), any()) } doAnswer {
-            @Suppress("UNCHECKED_CAST")
-            val consumer = it.arguments[1] as Consumer<Boolean>
-            consumer.accept(wepAllowed)
+    private var mockWifiInfo =
+        mock<WifiInfo> {
+            on { currentSecurityType } doReturn WifiEntry.SECURITY_EAP
+            on { ssid } doReturn SSID
         }
-        on { it.isWepSupported } doReturn true
-        on { it.connectionInfo } doReturn mockWifiInfo
-    }
+
+    private var mockWifiManager =
+        mock<WifiManager> {
+            on { queryWepAllowed(any(), any()) } doAnswer
+                {
+                    @Suppress("UNCHECKED_CAST") val consumer = it.arguments[1] as Consumer<Boolean>
+                    consumer.accept(wepAllowed)
+                }
+            on { isWepSupported } doReturn true
+            on { connectionInfo } doReturn mockWifiInfo
+        }
 
     private var context: Context =
         spy(ApplicationProvider.getApplicationContext()) {
@@ -85,74 +87,101 @@ class WepNetworksPreferenceControllerTest {
     }
 
     @Test
-    fun wepAllowedTrue_turnOn() {
+    fun isChecked_wepSupportedAndAllowed_isOn() {
+        mockWifiManager.stub { on { isWepSupported } doReturn true }
         wepAllowed = true
-        composeTestRule.setContent {
-            controller.Content()
-        }
 
-        composeTestRule.onNodeWithText(context.getString(R.string.wifi_allow_wep_networks))
+        composeTestRule.setContent { controller.Content() }
+
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.wifi_allow_wep_networks))
             .assertIsOn()
     }
 
     @Test
-    fun wepAllowedFalse_turnOff() {
+    fun isChecked_wepSupportedAndNotAllowed_isOff() {
+        mockWifiManager.stub { on { isWepSupported } doReturn true }
         wepAllowed = false
-        composeTestRule.setContent {
-            controller.Content()
-        }
 
-        composeTestRule.onNodeWithText(context.getString(R.string.wifi_allow_wep_networks))
+        composeTestRule.setContent { controller.Content() }
+
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.wifi_allow_wep_networks))
+            .assertIsOff()
+    }
+
+    @Test
+    fun isChecked_wepNotSupportedAndAllowed_isOff() {
+        mockWifiManager.stub { on { isWepSupported } doReturn false }
+        wepAllowed = true
+
+        composeTestRule.setContent { controller.Content() }
+
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.wifi_allow_wep_networks))
+            .assertIsOff()
+    }
+
+    @Test
+    fun isChecked_wepNotSupportedAndNotAllowed_isOff() {
+        mockWifiManager.stub { on { isWepSupported } doReturn false }
+        wepAllowed = false
+
+        composeTestRule.setContent { controller.Content() }
+
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.wifi_allow_wep_networks))
             .assertIsOff()
     }
 
     @Test
     fun onClick_turnOn() {
         wepAllowed = false
-        composeTestRule.setContent {
-            controller.Content()
-        }
+        composeTestRule.setContent { controller.Content() }
 
         composeTestRule.onRoot().performClick()
-        composeTestRule.onNodeWithText(context.getString(R.string.wifi_allow_wep_networks))
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.wifi_allow_wep_networks))
             .assertIsOn()
     }
 
     @Test
     fun onClick_turnOff() {
         wepAllowed = true
-        composeTestRule.setContent {
-            controller.Content()
-        }
+        composeTestRule.setContent { controller.Content() }
 
         composeTestRule.onRoot().performClick()
-        composeTestRule.onNodeWithText(context.getString(R.string.wifi_allow_wep_networks))
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.wifi_allow_wep_networks))
             .assertIsOff()
     }
 
     @Test
     fun whenClick_wepAllowed_openDialog() {
         wepAllowed = true
-        Mockito.`when`(mockWifiInfo.currentSecurityType).thenReturn(WifiEntry.SECURITY_WEP)
-        composeTestRule.setContent {
-            controller.Content()
+        mockWifiInfo.stub {
+            on { currentSecurityType } doReturn WifiEntry.SECURITY_WEP
         }
+        composeTestRule.setContent { controller.Content() }
 
         composeTestRule.onRoot().performClick()
-        composeTestRule.onDialogText(context.getString(R.string.wifi_disconnect_button_text))
+        composeTestRule
+            .onDialogText(context.getString(R.string.wifi_disconnect_button_text))
             .isDisplayed()
     }
 
     @Test
     fun whenClick_wepDisallowed_openDialog() {
         wepAllowed = false
-        Mockito.`when`(mockWifiInfo.currentSecurityType).thenReturn(WifiEntry.SECURITY_WEP)
-        composeTestRule.setContent {
-            controller.Content()
+        mockWifiInfo.stub {
+            on { currentSecurityType } doReturn WifiEntry.SECURITY_WEP
         }
 
+        composeTestRule.setContent { controller.Content() }
+
         composeTestRule.onRoot().performClick()
-        composeTestRule.onDialogText(context.getString(R.string.wifi_disconnect_button_text))
+        composeTestRule
+            .onDialogText(context.getString(R.string.wifi_disconnect_button_text))
             .isNotDisplayed()
     }
 

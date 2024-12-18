@@ -46,6 +46,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.CategoryMixin.CategoryHandler;
 import com.android.settings.core.CategoryMixin.CategoryListener;
 import com.android.settings.core.PreferenceControllerListHelper;
+import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -96,30 +97,34 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 R.array.config_suppress_injected_tile_keys));
         mDashboardFeatureProvider =
                 FeatureFactory.getFeatureFactory().getDashboardFeatureProvider();
-        // Load preference controllers from code
-        final List<AbstractPreferenceController> controllersFromCode =
-                createPreferenceControllers(context);
-        // Load preference controllers from xml definition
-        final List<BasePreferenceController> controllersFromXml = PreferenceControllerListHelper
-                .getPreferenceControllersFromXml(context, getPreferenceScreenResId());
-        // Filter xml-based controllers in case a similar controller is created from code already.
-        final List<BasePreferenceController> uniqueControllerFromXml =
-                PreferenceControllerListHelper.filterControllers(
-                        controllersFromXml, controllersFromCode);
 
-        // Add unique controllers to list.
-        if (controllersFromCode != null) {
-            mControllers.addAll(controllersFromCode);
-        }
-        mControllers.addAll(uniqueControllerFromXml);
+        if (!isCatalystEnabled()) {
+            // Load preference controllers from code
+            final List<AbstractPreferenceController> controllersFromCode =
+                    createPreferenceControllers(context);
+            // Load preference controllers from xml definition
+            final List<BasePreferenceController> controllersFromXml = PreferenceControllerListHelper
+                    .getPreferenceControllersFromXml(context, getPreferenceScreenResId());
+            // Filter xml-based controllers in case a similar controller is created from code
+            // already.
+            final List<BasePreferenceController> uniqueControllerFromXml =
+                    PreferenceControllerListHelper.filterControllers(
+                            controllersFromXml, controllersFromCode);
 
-        // And wire up with lifecycle.
-        final Lifecycle lifecycle = getSettingsLifecycle();
-        uniqueControllerFromXml.forEach(controller -> {
-            if (controller instanceof LifecycleObserver) {
-                lifecycle.addObserver((LifecycleObserver) controller);
+            // Add unique controllers to list.
+            if (controllersFromCode != null) {
+                mControllers.addAll(controllersFromCode);
             }
-        });
+            mControllers.addAll(uniqueControllerFromXml);
+
+            // And wire up with lifecycle.
+            final Lifecycle lifecycle = getSettingsLifecycle();
+            uniqueControllerFromXml.forEach(controller -> {
+                if (controller instanceof LifecycleObserver) {
+                    lifecycle.addObserver((LifecycleObserver) controller);
+                }
+            });
+        }
 
         // Set metrics category for BasePreferenceController.
         final int metricCategory = getMetricsCategory();
@@ -272,6 +277,11 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     }
 
     @Override
+    protected final int getPreferenceScreenResId(@NonNull Context context) {
+        return getPreferenceScreenResId();
+    }
+
+    @Override
     protected abstract int getPreferenceScreenResId();
 
     @Override
@@ -363,10 +373,26 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         if (resId <= 0) {
             return;
         }
-        addPreferencesFromResource(resId);
-        final PreferenceScreen screen = getPreferenceScreen();
+        PreferenceScreen screen;
+        if (isCatalystEnabled()) {
+            screen = createPreferenceScreen();
+            setPreferenceScreen(screen);
+            requireActivity().setTitle(screen.getTitle());
+        } else {
+            addPreferencesFromResource(resId);
+            screen = getPreferenceScreen();
+        }
         screen.setOnExpandButtonClickListener(this);
         displayResourceTilesToScreen(screen);
+    }
+
+    /** Returns if catalyst is enabled on current screen. */
+    protected final boolean isCatalystEnabled() {
+        if (!Flags.catalyst()) {
+            return false;
+        }
+        Context context = getContext();
+        return context != null ? getPreferenceScreenCreator(context) != null : false;
     }
 
     /**
@@ -543,13 +569,27 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 observers = mDashboardFeatureProvider.bindPreferenceToTileAndGetObservers(
                         getActivity(), this, forceRoundedIcons, pref, tile, key,
                         mPlaceholderPreferenceController.getOrder());
-                if (tile.hasGroupKey() && mDashboardTilePrefKeys.containsKey(tile.getGroupKey())) {
-                    final Preference group = screen.findPreference(tile.getGroupKey());
-                    if (group instanceof PreferenceCategory) {
-                        ((PreferenceCategory) group).addPreference(pref);
+                if (Flags.dynamicInjectionCategory()) {
+                    if (tile.hasGroupKey()) {
+                        Preference group = screen.findPreference(tile.getGroupKey());
+                        if (group instanceof PreferenceCategory) {
+                            ((PreferenceCategory) group).addPreference(pref);
+                        } else {
+                            screen.addPreference(pref);
+                        }
+                    } else {
+                        screen.addPreference(pref);
                     }
                 } else {
-                    screen.addPreference(pref);
+                    if (tile.hasGroupKey()
+                            && mDashboardTilePrefKeys.containsKey(tile.getGroupKey())) {
+                        Preference group = screen.findPreference(tile.getGroupKey());
+                        if (group instanceof PreferenceCategory) {
+                            ((PreferenceCategory) group).addPreference(pref);
+                        }
+                    } else {
+                        screen.addPreference(pref);
+                    }
                 }
                 registerDynamicDataObservers(observers);
                 mDashboardTilePrefKeys.put(key, observers);
@@ -564,9 +604,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         for (Map.Entry<String, List<DynamicDataObserver>> entry : remove.entrySet()) {
             final String key = entry.getKey();
             mDashboardTilePrefKeys.remove(key);
-            final Preference preference = screen.findPreference(key);
-            if (preference != null) {
-                screen.removePreference(preference);
+            if (Flags.dynamicInjectionCategory()) {
+                screen.removePreferenceRecursively(key);
+            } else {
+                Preference preference = screen.findPreference(key);
+                if (preference != null) {
+                    screen.removePreference(preference);
+                }
             }
             unregisterDynamicDataObservers(entry.getValue());
         }
@@ -630,8 +674,12 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             DynamicDataObserver observer) {
         Log.d(TAG, "register observer: @" + Integer.toHexString(observer.hashCode())
                 + ", uri: " + observer.getUri());
-        resolver.registerContentObserver(observer.getUri(), false, observer);
-        mRegisteredObservers.add(observer);
+        try {
+            resolver.registerContentObserver(observer.getUri(), false, observer);
+            mRegisteredObservers.add(observer);
+        } catch (Exception e) {
+            Log.w(TAG, "Cannot register observer: " + observer.getUri(), e);
+        }
     }
 
     private void unregisterDynamicDataObservers(List<DynamicDataObserver> observers) {
@@ -642,8 +690,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         observers.forEach(observer -> {
             Log.d(TAG, "unregister observer: @" + Integer.toHexString(observer.hashCode())
                     + ", uri: " + observer.getUri());
-            mRegisteredObservers.remove(observer);
-            resolver.unregisterContentObserver(observer);
+            if (mRegisteredObservers.remove(observer)) {
+                try {
+                    resolver.unregisterContentObserver(observer);
+                } catch (Exception e) {
+                    Log.w(TAG, "Cannot unregister observer: " + observer.getUri(), e);
+                }
+            }
         });
     }
 

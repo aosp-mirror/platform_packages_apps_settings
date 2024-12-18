@@ -65,6 +65,7 @@ public class CdmaSystemSelectPreferenceControllerTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
+        when(mTelephonyManager.getPhoneType()).thenReturn(TelephonyManager.PHONE_TYPE_CDMA);
 
         mPreference = new ListPreference(mContext);
         mController = new CdmaSystemSelectPreferenceController(mContext, "mobile_data");

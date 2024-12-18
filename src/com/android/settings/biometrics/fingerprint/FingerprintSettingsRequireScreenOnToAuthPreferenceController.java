@@ -86,6 +86,8 @@ public class FingerprintSettingsRequireScreenOnToAuthPreferenceController
             preference.setEnabled(false);
         } else if (!mFingerprintManager.hasEnrolledTemplates(getUserId())) {
             preference.setEnabled(false);
+        } else if (getRestrictingAdmin() != null) {
+            preference.setEnabled(false);
         } else {
             preference.setEnabled(true);
         }

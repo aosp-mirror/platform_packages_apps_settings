@@ -32,7 +32,10 @@ import java.util.List;
 
 /**
  * Panel data class for Wifi settings.
+ *
+ * @deprecated this is not used after V and will be removed.
  */
+@Deprecated(forRemoval = true)
 public class WifiPanel implements PanelContent {
 
     private final Context mContext;

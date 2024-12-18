@@ -31,7 +31,6 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -101,7 +100,6 @@ public class WallpaperSuggestionActivityTest {
                 .isTrue();
     }
 
-    @Ignore("b/315124270")
     @Test
     public void addExtras_intentFromSetupWizard_extrasHasWallpaperOnlyAndLaunchedSuw() {
         WallpaperSuggestionActivity activity =
@@ -119,9 +117,8 @@ public class WallpaperSuggestionActivityTest {
                 .isEqualTo("app_launched_suw");
     }
 
-    @Ignore("b/315124270")
     @Test
-    public void addExtras_intentNotFromSetupWizard_extrasHasFocusWallpaper() {
+    public void addExtras_intentNotFromSetupWizard_extrasHasFocusWallpaperAndLaunchedSettingsSearch() {
         WallpaperSuggestionActivity activity = Robolectric.buildActivity(
                 WallpaperSuggestionActivity.class, new Intent(Intent.ACTION_MAIN).setComponent(
                         new ComponentName(RuntimeEnvironment.application,
@@ -130,12 +127,14 @@ public class WallpaperSuggestionActivityTest {
 
         assertThat(intent).isNotNull();
         assertThat(intent.getStringExtra(WALLPAPER_FLAVOR)).isEqualTo("focus_wallpaper");
+        assertThat(intent.getStringExtra(WALLPAPER_LAUNCH_SOURCE))
+                .isEqualTo("app_launched_settings_search");
     }
 
 
     @Implements(WallpaperManager.class)
     public static class ShadowWallpaperManager extends
-        org.robolectric.shadows.ShadowWallpaperManager {
+            org.robolectric.shadows.ShadowWallpaperManager {
 
         private static int sWallpaperId;
 

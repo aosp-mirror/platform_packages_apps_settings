@@ -16,15 +16,20 @@
 
 package com.android.settings.biometrics.face;
 
+import static android.hardware.biometrics.BiometricFaceConstants.FEATURE_REQUIRE_ATTENTION;
+
 import android.content.Context;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceManager.GetFeatureCallback;
 import android.hardware.face.FaceManager.SetFeatureCallback;
 import android.provider.Settings;
 
+import androidx.annotation.Nullable;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
 
 /**
@@ -42,7 +47,7 @@ public class FaceSettingsAttentionPreferenceController extends FaceSettingsPrefe
     private final SetFeatureCallback mSetFeatureCallback = new SetFeatureCallback() {
         @Override
         public void onCompleted(boolean success, int feature) {
-            if (feature == FaceManager.FEATURE_REQUIRE_ATTENTION) {
+            if (feature == FEATURE_REQUIRE_ATTENTION) {
                 mPreference.setEnabled(true);
                 if (!success) {
                     mPreference.setChecked(!mPreference.isChecked());
@@ -60,12 +65,16 @@ public class FaceSettingsAttentionPreferenceController extends FaceSettingsPrefe
         public void onCompleted(boolean success, int[] features, boolean[] featureState) {
             boolean requireAttentionEnabled = false;
             for (int i = 0; i < features.length; i++) {
-                if (features[i] == FaceManager.FEATURE_REQUIRE_ATTENTION) {
+                if (features[i] == FEATURE_REQUIRE_ATTENTION) {
                     requireAttentionEnabled = featureState[i];
                 }
             }
-            mPreference.setEnabled(success);
             mPreference.setChecked(requireAttentionEnabled);
+            if (getRestrictingAdmin() != null) {
+                mPreference.setEnabled(false);
+            } else {
+                mPreference.setEnabled(success);
+            }
         }
     };
 
@@ -92,13 +101,25 @@ public class FaceSettingsAttentionPreferenceController extends FaceSettingsPrefe
     }
 
     @Override
+    public void updateState(@Nullable Preference preference) {
+        if (preference == null) {
+            return;
+        }
+        super.updateState(preference);
+        if (Utils.isPrivateProfile(getUserId(), mContext)) {
+            preference.setSummary(mContext.getString(
+                    R.string.private_space_face_settings_require_attention_details));
+        }
+    }
+
+    @Override
     public boolean isChecked() {
         if (!FaceSettings.isFaceHardwareDetected(mContext)) {
             return true;
         }
         // Set to disabled until we know the true value.
         mPreference.setEnabled(false);
-        mFaceManager.getFeature(getUserId(), FaceManager.FEATURE_REQUIRE_ATTENTION,
+        mFaceManager.getFeature(getUserId(), FEATURE_REQUIRE_ATTENTION,
                 mGetFeatureCallback);
 
         // Ideally returns a cached value.
@@ -111,8 +132,8 @@ public class FaceSettingsAttentionPreferenceController extends FaceSettingsPrefe
         mPreference.setEnabled(false);
         mPreference.setChecked(isChecked);
 
-        mFaceManager.setFeature(getUserId(), FaceManager.FEATURE_REQUIRE_ATTENTION, isChecked,
-                mToken, mSetFeatureCallback);
+        mFaceManager.setFeature(getUserId(), FEATURE_REQUIRE_ATTENTION,
+                isChecked, mToken, mSetFeatureCallback);
         return true;
     }
 

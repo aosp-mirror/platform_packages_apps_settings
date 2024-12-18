@@ -50,6 +50,8 @@ public class OneHandedSettingsUtils {
             Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
     static final Uri HARDWARE_SHORTCUT_ENABLED_URI =
             Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
+    static final Uri QS_SHORTCUT_ENABLED_URI =
+            Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
 
     public enum OneHandedTimeout {
         NEVER(0), SHORT(4), MEDIUM(8), LONG(12);
@@ -254,6 +256,16 @@ public class OneHandedSettingsUtils {
         if (!TextUtils.isEmpty(targetsHW) && targetsHW.contains(ONE_HANDED_MODE_TARGET_NAME)) {
             return true;
         }
+
+        if (android.view.accessibility.Flags.a11yQsShortcut()) {
+            // Checks QS_SHORTCUT_KEY
+            final String targetsQs = Settings.Secure.getStringForUser(context.getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_QS_TARGETS, sCurrentUserId);
+            if (!TextUtils.isEmpty(targetsQs) && targetsQs.contains(ONE_HANDED_MODE_TARGET_NAME)) {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -301,6 +313,9 @@ public class OneHandedSettingsUtils {
             resolver.registerContentObserver(SHOW_NOTIFICATION_ENABLED_URI, true, this);
             resolver.registerContentObserver(SOFTWARE_SHORTCUT_ENABLED_URI, true, this);
             resolver.registerContentObserver(HARDWARE_SHORTCUT_ENABLED_URI, true, this);
+            if (android.view.accessibility.Flags.a11yQsShortcut()) {
+                resolver.registerContentObserver(QS_SHORTCUT_ENABLED_URI, true, this);
+            }
         }
 
         @Override

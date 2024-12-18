@@ -24,6 +24,7 @@ import static com.android.settingslib.widget.TwoTargetPreference.ICON_SIZE_MEDIU
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.pm.ServiceInfo;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -40,11 +41,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.display.AutoBrightnessPreferenceController;
+import com.android.settings.display.BrightnessLevelPreferenceController;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupdesign.GlifPreferenceLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -159,6 +164,21 @@ public class AccessibilitySettingsForSetupWizard extends DashboardFragment
     @Override
     protected String getLogTag() {
         return TAG;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        BrightnessLevelPreferenceController brightnessLevelPreferenceController =
+                new BrightnessLevelPreferenceController(context, getSettingsLifecycle());
+        brightnessLevelPreferenceController.setInSetupWizard(true);
+        controllers.add(brightnessLevelPreferenceController);
+        String autoBrightnessKey = context.getString(R.string.preference_key_auto_brightness);
+        AutoBrightnessPreferenceController autoBrightnessPreferenceController =
+                new AutoBrightnessPreferenceController(context, autoBrightnessKey);
+        autoBrightnessPreferenceController.setInSetupWizard(true);
+        controllers.add(autoBrightnessPreferenceController);
+        return controllers;
     }
 
     /**

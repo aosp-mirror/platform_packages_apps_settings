@@ -31,7 +31,6 @@ import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.util.Pair;
@@ -45,7 +44,6 @@ import com.android.settings.bluetooth.BluetoothDevicePreference;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.flags.Flags;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -177,7 +175,6 @@ public class SavedDeviceGroupControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SAVED_DEVICES_ORDER_BY_RECENCY)
     public void updatePreferenceGroup_bluetoothIsEnable_shouldOrderByMostRecentlyConnected() {
         when(mBluetoothAdapter.isEnabled()).thenReturn(true);
         final BluetoothDevicePreference preference3 =
@@ -213,7 +210,6 @@ public class SavedDeviceGroupControllerTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_SAVED_DEVICES_ORDER_BY_RECENCY)
     public void updatePreferenceGroup_bluetoothIsDisable_shouldShowNoPreference() {
         when(mBluetoothAdapter.isEnabled()).thenReturn(false);
         final BluetoothDevicePreference preference3 =

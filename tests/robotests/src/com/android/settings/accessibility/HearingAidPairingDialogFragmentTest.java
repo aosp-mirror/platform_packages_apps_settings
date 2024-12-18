@@ -60,12 +60,11 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.LooperMode;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowLooper;
 
 /** Tests for {@link HearingAidPairingDialogFragment}. */
 @RunWith(RobolectricTestRunner.class)
-@LooperMode(LooperMode.Mode.LEGACY)
 @Config(shadows = {
         com.android.settings.testutils.shadow.ShadowAlertDialogCompat.class,
         com.android.settings.testutils.shadow.ShadowBluetoothAdapter.class,
@@ -122,6 +121,7 @@ public class HearingAidPairingDialogFragmentTest {
         dialog.show();
 
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
+        ShadowLooper.idleMainLooper();
 
         final Intent intent = shadowOf(mActivity).getNextStartedActivity();
         assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
@@ -135,6 +135,7 @@ public class HearingAidPairingDialogFragmentTest {
         dialog.show();
 
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
+        ShadowLooper.idleMainLooper();
 
         final Intent intent = shadowOf(mActivity).getNextStartedActivity();
         assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
@@ -147,6 +148,7 @@ public class HearingAidPairingDialogFragmentTest {
         dialog.show();
 
         dialog.getButton(DialogInterface.BUTTON_NEGATIVE).performClick();
+        ShadowLooper.idleMainLooper();
 
         assertThat(dialog.isShowing()).isFalse();
     }

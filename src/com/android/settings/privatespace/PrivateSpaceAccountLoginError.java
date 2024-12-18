@@ -16,8 +16,12 @@
 
 package com.android.settings.privatespace;
 
+import static com.android.settings.privatespace.PrivateSpaceSetupActivity.ACCOUNT_LOGIN_ACTION;
+import static com.android.settings.privatespace.PrivateSpaceSetupActivity.EXTRA_ACTION_TYPE;
+
 import android.annotation.SuppressLint;
 import android.app.settings.SettingsEnums;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,8 +89,7 @@ public class PrivateSpaceAccountLoginError extends InstrumentedFragment {
             mMetricsFeatureProvider.action(
                     getContext(),
                     SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_TRY_CREATE_ACCOUNT_AGAIN);
-            NavHostFragment.findNavController(PrivateSpaceAccountLoginError.this)
-                    .navigate(R.id.action_advance_login_error);
+            startAccountLogin();
         };
     }
 
@@ -101,5 +104,14 @@ public class PrivateSpaceAccountLoginError extends InstrumentedFragment {
             NavHostFragment.findNavController(PrivateSpaceAccountLoginError.this)
                     .navigate(R.id.action_skip_account_login);
         };
+    }
+
+    /** Start new activity in private profile to add an account to private profile */
+    private void startAccountLogin() {
+        Intent intent = new Intent(getContext(), PrivateProfileContextHelperActivity.class);
+        intent.putExtra(EXTRA_ACTION_TYPE, ACCOUNT_LOGIN_ACTION);
+        mMetricsFeatureProvider.action(
+                getContext(), SettingsEnums.ACTION_PRIVATE_SPACE_SETUP_ACCOUNT_LOGIN_START);
+        getActivity().startActivityForResult(intent, ACCOUNT_LOGIN_ACTION);
     }
 }

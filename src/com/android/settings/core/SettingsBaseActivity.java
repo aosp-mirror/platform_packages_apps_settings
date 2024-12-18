@@ -42,9 +42,11 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.SubSettings;
+import com.android.settings.Utils;
 import com.android.settings.core.CategoryMixin.CategoryHandler;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 import com.android.settingslib.transition.SettingsTransitionHelper.TransitionType;
+import com.android.window.flags.Flags;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -92,6 +94,10 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             finish();
         }
         final long startTime = System.currentTimeMillis();
+        if (Flags.enforceEdgeToEdge()) {
+            Utils.setupEdgeToEdge(this);
+            hideInternalActionBar();
+        }
         getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
         TextAppearanceConfig.setShouldLoadFontSynchronously(true);
 
@@ -288,5 +294,19 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             return TransitionType.TRANSITION_NONE;
         }
         return intent.getIntExtra(EXTRA_PAGE_TRANSITION_TYPE, TransitionType.TRANSITION_NONE);
+    }
+
+    /**
+     * This internal ActionBar will be appeared automatically when the
+     * Utils.setupEdgeToEdge is invoked.
+     *
+     * @see Utils.setupEdgeToEdge
+     */
+    private void hideInternalActionBar() {
+        final View actionBarContainer =
+                findViewById(com.android.internal.R.id.action_bar_container);
+        if (actionBarContainer != null) {
+            actionBarContainer.setVisibility(View.GONE);
+        }
     }
 }

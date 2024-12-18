@@ -54,29 +54,40 @@ object FingerprintSettingsViewBinder {
       challenge: Long?,
       challengeToken: ByteArray?,
     )
+
     /** Helper to launch an add fingerprint request */
     fun launchAddFingerprint(userId: Int, challengeToken: ByteArray?)
+
     /**
      * Helper function that will try and launch confirm lock, if that fails we will prompt user to
      * choose a PIN/PATTERN/PASS.
      */
     fun launchConfirmOrChooseLock(userId: Int)
+
     /** Used to indicate that FingerprintSettings is finished. */
     fun finish()
+
     /** Indicates what result should be set for the returning callee */
     fun setResultExternal(resultCode: Int)
+
     /** Indicates the settings UI should be shown */
     fun showSettings(enrolledFingerprints: List<FingerprintData>)
+
     /** Updates the add fingerprints preference */
     fun updateAddFingerprintsPreference(canEnroll: Boolean, maxFingerprints: Int)
+
     /** Updates the sfps fingerprints preference */
     fun updateSfpsPreference(isSfpsPrefVisible: Boolean)
+
     /** Indicates that a user has been locked out */
     fun userLockout(authAttemptViewModel: FingerprintAuthAttemptModel.Error)
+
     /** Indicates a fingerprint preference should be highlighted */
     suspend fun highlightPref(fingerId: Int)
+
     /** Indicates a user should be prompted to delete a fingerprint */
     suspend fun askUserToDeleteDialog(fingerprintViewModel: FingerprintData): Boolean
+
     /** Indicates a user should be asked to renae ma dialog */
     suspend fun askUserToRenameDialog(
       fingerprintViewModel: FingerprintData

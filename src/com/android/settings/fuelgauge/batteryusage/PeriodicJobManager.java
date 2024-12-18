@@ -28,7 +28,6 @@ import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
 import com.android.settings.fuelgauge.batteryusage.bugreport.BatteryUsageLogUtils;
 import com.android.settings.overlay.FeatureFactory;
 
-import java.time.Clock;
 import java.time.Duration;
 
 /** Manages the periodic job to schedule or cancel the next job. */
@@ -40,8 +39,6 @@ public final class PeriodicJobManager {
 
     private final Context mContext;
     private final AlarmManager mAlarmManager;
-
-    @VisibleForTesting static final int DATA_FETCH_INTERVAL_MINUTE = 60;
 
     @VisibleForTesting static long sBroadcastDelayFromBoot = Duration.ofMinutes(40).toMillis();
 
@@ -76,20 +73,21 @@ public final class PeriodicJobManager {
         // Cancels the previous alert job and schedules the next one.
         final PendingIntent pendingIntent = getPendingIntent();
         cancelJob(pendingIntent);
-        // Uses UTC time to avoid scheduler is impacted by different timezone.
-        final long triggerAtMillis = getTriggerAtMillis(mContext, Clock.systemUTC(), fromBoot);
+        // Uses the timestamp of next full hour in local timezone.
+        long currentTimeMillis = System.currentTimeMillis();
+        final long triggerAtMillis = getTriggerAtMillis(currentTimeMillis, fromBoot);
         mAlarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
 
-        final String utcToLocalTime = ConvertUtils.utcToLocalTimeForLogging(triggerAtMillis);
+        final String timeForLogging = ConvertUtils.utcToLocalTimeForLogging(triggerAtMillis);
         BatteryUsageLogUtils.writeLog(
                 mContext,
                 Action.SCHEDULE_JOB,
-                String.format("triggerTime=%s, fromBoot=%b", utcToLocalTime, fromBoot));
-        Log.d(TAG, "schedule next alarm job at " + utcToLocalTime);
+                String.format("triggerTime=%s, fromBoot=%b", timeForLogging, fromBoot));
+        Log.d(TAG, "schedule next alarm job at " + timeForLogging);
     }
 
-    void cancelJob(PendingIntent pendingIntent) {
+    private void cancelJob(PendingIntent pendingIntent) {
         if (mAlarmManager != null) {
             mAlarmManager.cancel(pendingIntent);
         } else {
@@ -97,22 +95,21 @@ public final class PeriodicJobManager {
         }
     }
 
-    /** Gets the next alarm trigger UTC time in milliseconds. */
-    static long getTriggerAtMillis(Context context, Clock clock, final boolean fromBoot) {
-        long currentTimeMillis = clock.millis();
+    /** Gets the next alarm trigger time in milliseconds. */
+    @VisibleForTesting
+    static long getTriggerAtMillis(final long currentTimeMillis, final boolean fromBoot) {
         final boolean delayHourlyJobWhenBooting =
                 FeatureFactory.getFeatureFactory()
                         .getPowerUsageFeatureProvider()
                         .delayHourlyJobWhenBooting();
-        // Rounds to the previous nearest time slot and shifts to the next one.
-        long timeSlotUnit = Duration.ofMinutes(DATA_FETCH_INTERVAL_MINUTE).toMillis();
-        long targetTime = (currentTimeMillis / timeSlotUnit) * timeSlotUnit + timeSlotUnit;
+        long targetTimeMillis = TimestampUtils.getNextHourTimestamp(currentTimeMillis);
         if (delayHourlyJobWhenBooting
                 && fromBoot
-                && (targetTime - currentTimeMillis) <= sBroadcastDelayFromBoot) {
-            targetTime += timeSlotUnit;
+                && (targetTimeMillis - currentTimeMillis) <= sBroadcastDelayFromBoot) {
+            // Skips this time broadcast, schedule in the next alarm trigger.
+            targetTimeMillis = TimestampUtils.getNextHourTimestamp(targetTimeMillis);
         }
-        return targetTime;
+        return targetTimeMillis;
     }
 
     private PendingIntent getPendingIntent() {

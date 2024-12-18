@@ -29,18 +29,14 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.app.usage.NetworkStatsManager;
 import android.content.Context;
-import android.content.res.Resources;
 import android.net.NetworkPolicyManager;
 import android.os.Bundle;
-import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.android.settings.R;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
-import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -53,7 +49,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
@@ -73,17 +68,12 @@ public class MobileNetworkSettingsTest {
     private FragmentActivity mActivity;
 
     private Context mContext;
-    private Resources mResources;
     private MobileNetworkSettings mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-
-        mResources = spy(mContext.getResources());
-        when(mContext.getResources()).thenReturn(mResources);
-        when(mResources.getBoolean(R.bool.config_show_sim_info)).thenReturn(true);
 
         when(mActivity.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
@@ -122,35 +112,5 @@ public class MobileNetworkSettingsTest {
     public void onActivityResult_deleteSubscription_activityFinishes() {
         mFragment.onActivityResult(REQUEST_CODE_DELETE_SUBSCRIPTION, Activity.RESULT_OK, null);
         verify(mActivity).finish();
-    }
-
-    @Test
-    public void isPageSearchEnabled_adminUser_shouldReturnTrue() {
-        final UserManager userManager = mock(UserManager.class);
-        when(mContext.getSystemService(UserManager.class)).thenReturn(userManager);
-        when(userManager.isAdminUser()).thenReturn(true);
-        final BaseSearchIndexProvider provider =
-                (BaseSearchIndexProvider) mFragment.SEARCH_INDEX_DATA_PROVIDER;
-
-        final Object obj = ReflectionHelpers.callInstanceMethod(provider, "isPageSearchEnabled",
-                ReflectionHelpers.ClassParameter.from(Context.class, mContext));
-        final boolean isEnabled = (Boolean) obj;
-
-        assertThat(isEnabled).isTrue();
-    }
-
-    @Test
-    public void isPageSearchEnabled_nonAdminUser_shouldReturnFalse() {
-        final UserManager userManager = mock(UserManager.class);
-        when(mContext.getSystemService(UserManager.class)).thenReturn(userManager);
-        when(userManager.isAdminUser()).thenReturn(false);
-        final BaseSearchIndexProvider provider =
-                (BaseSearchIndexProvider) mFragment.SEARCH_INDEX_DATA_PROVIDER;
-
-        final Object obj = ReflectionHelpers.callInstanceMethod(provider, "isPageSearchEnabled",
-                ReflectionHelpers.ClassParameter.from(Context.class, mContext));
-        final boolean isEnabled = (Boolean) obj;
-
-        assertThat(isEnabled).isFalse();
     }
 }

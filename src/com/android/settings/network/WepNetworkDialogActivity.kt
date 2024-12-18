@@ -18,6 +18,7 @@ package com.android.settings.network
 
 import android.app.settings.SettingsEnums
 import android.net.wifi.WifiManager
+import android.view.WindowManager
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,18 +28,19 @@ import androidx.compose.ui.text.style.TextAlign
 import com.android.settings.R
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.wifi.ConfigureWifiSettings
-import com.android.settingslib.spa.SpaBaseDialogActivity
+import com.android.settingslib.spa.SpaDialogWindowTypeActivity
 import com.android.settingslib.spa.widget.dialog.AlertDialogButton
-import com.android.settingslib.spa.widget.dialog.SettingsAlertDialogWithIcon
+import com.android.settingslib.spa.widget.dialog.SettingsAlertDialogContent
+import com.android.settingslib.wifi.WifiUtils.Companion.DIALOG_WINDOW_TYPE
 import com.android.settingslib.wifi.WifiUtils.Companion.SSID
 
-class WepNetworkDialogActivity : SpaBaseDialogActivity() {
+class WepNetworkDialogActivity : SpaDialogWindowTypeActivity() {
+
     @Composable
     override fun Content() {
         val context = LocalContext.current
         val wifiManager = context.getSystemService(WifiManager::class.java)
-        SettingsAlertDialogWithIcon(
-            onDismissRequest = { finish() },
+        SettingsAlertDialogContent(
             confirmButton = AlertDialogButton(
                 getString(R.string.wifi_settings_ssid_block_button_close)
             ) { finish() },
@@ -66,5 +68,12 @@ class WepNetworkDialogActivity : SpaBaseDialogActivity() {
                     textAlign = TextAlign.Center
                 )
             })
+    }
+
+    override fun getDialogWindowType(): Int {
+        return intent.getIntExtra(
+            DIALOG_WINDOW_TYPE,
+            WindowManager.LayoutParams.FIRST_APPLICATION_WINDOW
+        )
     }
 }

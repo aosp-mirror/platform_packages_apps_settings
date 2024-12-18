@@ -26,6 +26,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -36,13 +37,19 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.fragment.app.FragmentTransaction;
 import androidx.test.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
 
+import com.android.settings.flags.Flags;
+
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -55,6 +62,7 @@ public class WifiDppQrCodeGeneratorFragmentTest {
     private WifiDppQrCodeGeneratorFragment mFragment;
     private Context mContext;
 
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setUp() {
@@ -162,5 +170,19 @@ public class WifiDppQrCodeGeneratorFragmentTest {
 
         assertThat(mFragment.createNearbyButton(new Intent(), v -> {
         })).isNotNull();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_SHARING_RUNTIME_FRAGMENT)
+    public void getMetricsCatetory_shouldReturnDppQrSharing() {
+        assertThat(mFragment.getMetricsCategory())
+                .isEqualTo(SettingsEnums.SETTINGS_WIFI_DPP_QR_SHARING);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_WIFI_SHARING_RUNTIME_FRAGMENT)
+    public void getMetricsCatetory_shouldReturnDppConfigurator() {
+        assertThat(mFragment.getMetricsCategory())
+                .isEqualTo(SettingsEnums.SETTINGS_WIFI_DPP_CONFIGURATOR);
     }
 }

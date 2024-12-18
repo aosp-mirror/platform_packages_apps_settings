@@ -77,6 +77,13 @@
     <item msgid="6556827947082659801">"ਉਪਲਬਧ"</item>
     <item msgid="6096962300722555553">"ਰੇਂਜ-ਤੋਂ-ਬਾਹਰ"</item>
   </string-array>
+  <string-array name="bt_stack_log_level_entries">
+    <item msgid="7872226620825638673">"ਜ਼ਿਆਦਾ ਸ਼ਬਦ"</item>
+    <item msgid="4414817955073540319">"ਡੀਬੱਗ ਕਰੋ"</item>
+    <item msgid="9152250562693119681">"ਜਾਣਕਾਰੀ"</item>
+    <item msgid="8884807223431437262">"ਚਿਤਾਵਨੀ"</item>
+    <item msgid="1154843682335941096">"ਗੜਬੜ"</item>
+  </string-array>
   <string-array name="bluetooth_leaudio_mode">
     <item msgid="5307106570247137458">"ਬੰਦ ਹੈ"</item>
     <item msgid="7781484297606806796">"ਯੂਨੀਕਾਸਟ"</item>
@@ -174,7 +181,7 @@
     <item msgid="3439658954936709507">"ਕਾਲ ਲੌਗ ਪੜ੍ਹੋ"</item>
     <item msgid="1908944516631132130">"ਕਾਲ ਲੌਗ ਸੰਸ਼ੋਧਿਤ ਕਰੋ"</item>
     <item msgid="9066115715905100138">"ਕੈਲੰਡਰ ਪੜ੍ਹੋ"</item>
-    <item msgid="1664720478157892566">"ਕੈਲੰਡਰ ਸੰਸ਼ੋਧਿਤ ਕਰੋੇ"</item>
+    <item msgid="1664720478157892566">"ਕੈਲੰਡਰ ਵਿੱਚ ਸੋਧ ਕਰੋ"</item>
     <item msgid="5478277451617814822">"ਵਾਈ-ਫਾਈ ਸਕੈਨ"</item>
     <item msgid="2429454210217003798">"ਸੂਚਨਾ"</item>
     <item msgid="8909068846471624576">"ਸੈਲ ਸਕੈਨ"</item>
@@ -241,7 +248,7 @@
     <item msgid="7451260062940797278">"ਕਾਲ ਲੌਗ ਪੜ੍ਹੋ"</item>
     <item msgid="2348589304974534308">"ਕਾਲ ਲੌਗ ਸੰਸ਼ੋਧਿਤ ਕਰੋ"</item>
     <item msgid="4089146706115315300">"ਕੈਲੰਡਰ ਪੜ੍ਹੋ"</item>
-    <item msgid="1305780729690198918">"ਕੈਲੰਡਰ ਸੰਸ਼ੋਧਿਤ ਕਰੋੇ"</item>
+    <item msgid="1305780729690198918">"ਕੈਲੰਡਰ ਵਿੱਚ ਸੋਧ ਕਰੋ"</item>
     <item msgid="3461096740171440592">"ਟਿਕਾਣਾ"</item>
     <item msgid="6657539556093198883">"ਸੂਚਨਾ ਪੋਸਟ ਕਰੋ"</item>
     <item msgid="8112680908829570200">"ਟਿਕਾਣਾ"</item>
@@ -409,8 +416,12 @@
     <item msgid="2047166446768045816">"ਗੈਰ-ਮੀਟਰਬੱਧ ਮੰਨੋ"</item>
   </string-array>
   <string-array name="wifi_privacy_entries">
-    <item msgid="3485945604919292489">"ਬੇਤਰਤੀਬਵਾਰ MAC (ਪੂਰਵ-ਨਿਰਧਾਰਿਤ) ਵਰਤੋ"</item>
+    <item msgid="91222619458919148">"ਬੇਤਰਤੀਬੇ MAC ਦੀ ਵਰਤੋਂ ਕਰੋ"</item>
     <item msgid="741680937828608749">"ਡੀਵਾਈਸ MAC ਵਰਤੋ"</item>
+  </string-array>
+  <string-array name="wifi_dhcp_entries">
+    <item msgid="2532836996945493932">"ਨੈੱਟਵਰਕ ਨੂੰ ਡੀਵਾਈਸ ਦਾ ਨਾਮ ਭੇਜੋ"</item>
+    <item msgid="7928900271137707489">"ਨੈੱਟਵਰਕ ਨੂੰ ਡੀਵਾਈਸ ਦਾ ਨਾਮ ਨਾ ਭੇਜੋ"</item>
   </string-array>
   <string-array name="wifi_hidden_entries">
     <item msgid="342232116597649254">"ਨਹੀਂ"</item>
@@ -484,10 +495,51 @@
     <item msgid="7025253383416830453">"1 ਮਿੰਟ ਬਾਅਦ"</item>
     <item msgid="1574040255478150028">"5 ਮਿੰਟਾਂ ਬਾਅਦ"</item>
   </string-array>
-    <!-- no translation found for notification_polite_options:0 (4617190141263245257) -->
-    <!-- no translation found for notification_polite_options:1 (3884076684767467743) -->
-    <!-- no translation found for notification_polite_options:2 (8765197536079931966) -->
     <!-- no translation found for private_space_auto_lock_options:0 (551584871228110817) -->
     <!-- no translation found for private_space_auto_lock_options:1 (3263162333754809690) -->
     <!-- no translation found for private_space_auto_lock_options:2 (1575103586471380629) -->
+  <string-array name="zen_mode_icon_options_descriptions">
+    <item msgid="1216815120972438676">"ਬ੍ਰੀਫ਼ਕੇਸ"</item>
+    <item msgid="184985872234062767">"ਕਲਾਸਿਕਲ ਇਮਾਰਤ"</item>
+    <item msgid="9189550412466785530">"ਅਪਾਰਟਮੈਂਟ ਇਮਾਰਤ"</item>
+    <item msgid="2142527562511049422">"ਵਾਕ ਬੱਬਲ"</item>
+    <item msgid="2548100558260478605">"ਲੋਕਾਂ ਦਾ ਗਰੁੱਪ"</item>
+    <item msgid="2270003903304578284">"ਲਾਈਟ ਬਲਬ"</item>
+    <item msgid="4793496619091161864">"ਕੈਲੰਡਰ"</item>
+    <item msgid="5673625795644364100">"ਪਰੇਸ਼ਾਨ ਨਾ ਕਰੋ"</item>
+    <item msgid="1423820834865831361">"ਦੌੜਦਾ ਹੋਇਆ ਵਿਅਕਤੀ"</item>
+    <item msgid="2037298830718732608">"ਗੌਲਫ਼"</item>
+    <item msgid="2197835014443491074">"ਜਿਮ ਦਾ ਡੰਬਲ"</item>
+    <item msgid="2730180105015616518">"ਤੈਰਾਕੀ"</item>
+    <item msgid="2666922823253345958">"ਹਾਈਕਿੰਗ ਕਰਦਾ ਵਿਅਕਤੀ"</item>
+    <item msgid="8234880356472211396">"ਗੇਂਦ ਸੁੱਟਦਾ ਵਿਅਕਤੀ"</item>
+    <item msgid="4642980625253001443">"ਕਿੱਕ ਮਾਰਦਾ ਵਿਅਕਤੀ"</item>
+    <item msgid="4324795269518833500">"ਗੇਮ ਕੰਟਰੋਲਰ"</item>
+    <item msgid="7789966425125441125">"ਕਲਾਕਾਰ ਲਈ ਰੰਗ ਪਟਲ"</item>
+    <item msgid="663512680597461570">"ਸਨੋਫਲੇਕ"</item>
+    <item msgid="7952183800501346803">"ਬੀਚ ਵਾਲੀ ਛੱਤਰੀ"</item>
+    <item msgid="799139025758265891">"ਵਰਕਸ਼ਾਪ ਦੇ ਔਜ਼ਾਰ"</item>
+    <item msgid="1330084588359129896">"ਤੰਬੂ"</item>
+    <item msgid="3861584909935022342">"ਫ਼ਿਲਮ ਰੀਲ"</item>
+    <item msgid="5827426100157335512">"ਬੁੱਕ ਕਰੋ"</item>
+    <item msgid="8585828346253128384">"ਕਮਲ ਦਾ ਫੁੱਲ"</item>
+    <item msgid="8788370542815300188">"ਵਿਅਕਤੀ ਦਾ ਮਨ"</item>
+    <item msgid="7287354964767553293">"ਹੈੱਡਫ਼ੋਨ"</item>
+    <item msgid="2530059623783800987">"ਟੀਵੀ"</item>
+    <item msgid="5307182323469376758">"ਰੇਲ ਗੱਡੀ"</item>
+    <item msgid="4903790544026923026">"ਕਾਰ"</item>
+    <item msgid="5010405583912314582">"ਕਾਂਟਾ ਅਤੇ ਛੁਰੀ"</item>
+    <item msgid="8939998598599064900">"ਖ਼ਰੀਦਦਾਰੀ ਕਾਰਟ"</item>
+    <item msgid="3379605903308731893">"ਬੱਚਾ"</item>
+    <item msgid="7808668968550293112">"ਜਾਨਵਰ ਦਾ ਪੰਜਾ"</item>
+    <item msgid="1000692647524056504">"ਸਟਾਰ ਬੈਜ"</item>
+    <item msgid="8270261073421676502">"ਦੋ ਲੋਕ"</item>
+    <item msgid="5767782819651505460">"ਤਾਰਾ"</item>
+    <item msgid="4368451291862729334">"ਦਿਲ"</item>
+    <item msgid="2613199102208419986">"ਘਰ"</item>
+    <item msgid="3022279986430275040">"ਅੱਧਾ-ਚੰਨ"</item>
+    <item msgid="5421089790869483206">"ਘੜੀ"</item>
+  </string-array>
+  <string-array name="display_over_apps_permission_change_exempt">
+  </string-array>
 </resources>

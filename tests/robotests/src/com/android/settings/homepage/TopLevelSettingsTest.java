@@ -16,8 +16,6 @@
 
 package com.android.settings.homepage;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doReturn;
@@ -28,15 +26,19 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -44,6 +46,8 @@ import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class TopLevelSettingsTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private Context mContext;
     private TopLevelSettings mSettings;
 
@@ -60,11 +64,7 @@ public class TopLevelSettingsTest {
     }
 
     @Test
-    public void shouldForceRoundedIcon_true() {
-        assertThat(mSettings.shouldForceRoundedIcon()).isTrue();
-    }
-
-    @Test
+    @DisableFlags(Flags.FLAG_HOMEPAGE_REVAMP)
     public void onCreatePreferences_shouldTintPreferenceIcon() {
         final Preference preference = new Preference(mContext);
         preference.setTitle(R.string.network_dashboard_title);

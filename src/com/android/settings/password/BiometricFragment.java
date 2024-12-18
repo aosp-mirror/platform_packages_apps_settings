@@ -16,7 +16,10 @@
 
 package com.android.settings.password;
 
+import static android.hardware.biometrics.BiometricConstants.BIOMETRIC_ERROR_USER_CANCELED;
+
 import android.app.settings.SettingsEnums;
+import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricPrompt;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationResult;
@@ -24,6 +27,7 @@ import android.hardware.biometrics.PromptInfo;
 import android.multiuser.Flags;
 import android.os.Bundle;
 import android.os.CancellationSignal;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
@@ -126,11 +130,10 @@ public class BiometricFragment extends InstrumentedFragment {
 
         final Bundle bundle = getArguments();
         final PromptInfo promptInfo = bundle.getParcelable(KEY_PROMPT_INFO);
-
         BiometricPrompt.Builder promptBuilder = new BiometricPrompt.Builder(getContext())
                 .setTitle(promptInfo.getTitle())
                 .setUseDefaultTitle() // use default title if title is null/empty
-                .setDeviceCredentialAllowed(true)
+                .setAllowedAuthenticators(promptInfo.getAuthenticators())
                 .setSubtitle(promptInfo.getSubtitle())
                 .setDescription(promptInfo.getDescription())
                 .setTextForDeviceCredential(
@@ -141,9 +144,19 @@ public class BiometricFragment extends InstrumentedFragment {
                 .setDisallowBiometricsIfPolicyExists(
                         promptInfo.isDisallowBiometricsIfPolicyExists())
                 .setShowEmergencyCallButton(promptInfo.isShowEmergencyCallButton())
-                .setReceiveSystemEvents(true);
+                .setReceiveSystemEvents(true)
+                .setRealCallerForConfirmDeviceCredentialActivity(
+                        promptInfo.getRealCallerForConfirmDeviceCredentialActivity());
+        if (promptInfo.getLogoRes() != 0){
+            promptBuilder.setLogoRes(promptInfo.getLogoRes());
+        }
+        String logoDescription = promptInfo.getLogoDescription();
+        if (!TextUtils.isEmpty(logoDescription)) {
+            promptBuilder.setLogoDescription(logoDescription);
+        }
 
-        if (Flags.enableBiometricsToUnlockPrivateSpace()) {
+        if (android.os.Flags.allowPrivateProfile() && Flags.enablePrivateSpaceFeatures()
+                && Flags.enableBiometricsToUnlockPrivateSpace()) {
             promptBuilder = promptBuilder.setAllowBackgroundAuthentication(true /* allow */,
                     promptInfo.shouldUseParentProfileForDeviceCredential());
         } else {
@@ -153,6 +166,15 @@ public class BiometricFragment extends InstrumentedFragment {
         // Check if the default subtitle should be used if subtitle is null/empty
         if (promptInfo.isUseDefaultSubtitle()) {
             promptBuilder.setUseDefaultSubtitle();
+        }
+
+        if ((promptInfo.getAuthenticators()
+                & BiometricManager.Authenticators.DEVICE_CREDENTIAL) == 0) {
+            promptBuilder.setNegativeButton(promptInfo.getNegativeButtonText(),
+                    getContext().getMainExecutor(),
+                    (dialog, which) -> mAuthenticationCallback.onAuthenticationError(
+                            BIOMETRIC_ERROR_USER_CANCELED,
+                            null /* errString */));
         }
         mBiometricPrompt = promptBuilder.build();
     }

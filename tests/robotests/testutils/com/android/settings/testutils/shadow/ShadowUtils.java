@@ -50,6 +50,7 @@ public class ShadowUtils {
     private static ArraySet<String> sResultLinks = new ArraySet<>();
     private static boolean sIsBatteryPresent;
     private static boolean sIsMultipleBiometricsSupported;
+    private static boolean sIsPrivateProfile;
 
     @Implementation
     protected static int enforceSameOwner(Context context, int userId) {
@@ -82,6 +83,7 @@ public class ShadowUtils {
         sResultLinks = new ArraySet<>();
         sIsBatteryPresent = true;
         sIsMultipleBiometricsSupported = false;
+        sIsPrivateProfile = false;
     }
 
     public static void setIsDemoUser(boolean isDemoUser) {
@@ -187,5 +189,14 @@ public class ShadowUtils {
 
     public static void setIsMultipleBiometricsSupported(boolean isMultipleBiometricsSupported) {
         sIsMultipleBiometricsSupported = isMultipleBiometricsSupported;
+    }
+
+    @Implementation
+    protected static boolean isPrivateProfile(int userId, Context context) {
+        return sIsPrivateProfile;
+    }
+
+    public static void setIsPrivateProfile(boolean isPrivateProfile) {
+        sIsPrivateProfile = isPrivateProfile;
     }
 }

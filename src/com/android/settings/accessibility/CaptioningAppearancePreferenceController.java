@@ -42,7 +42,8 @@ public class CaptioningAppearancePreferenceController extends BasePreferenceCont
 
     @Override
     public CharSequence getSummary() {
-        return mContext.getString(R.string.preference_summary_default_combination,
+        return mContext.getString(
+                com.android.settingslib.R.string.preference_summary_default_combination,
                 geFontScaleSummary(), getPresetSummary());
     }
 

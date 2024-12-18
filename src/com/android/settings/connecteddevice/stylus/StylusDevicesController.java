@@ -79,6 +79,8 @@ public class StylusDevicesController extends AbstractPreferenceController implem
 
     private static final String TAG = "StylusDevicesController";
 
+    private final boolean mConfigEnableDefaultNotesForWorkProfile;
+
     @Nullable
     private final InputDevice mInputDevice;
 
@@ -97,6 +99,8 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         mInputDevice = inputDevice;
         mCachedBluetoothDevice = cachedBluetoothDevice;
         lifecycle.addObserver(this);
+        mConfigEnableDefaultNotesForWorkProfile = mContext.getResources().getBoolean(
+                android.R.bool.config_enableDefaultNotesForWorkProfile);
     }
 
     @Override
@@ -214,7 +218,7 @@ public class StylusDevicesController extends AbstractPreferenceController implem
                 Intent intent = new Intent(Intent.ACTION_MANAGE_DEFAULT_APP).setPackage(
                         packageName).putExtra(Intent.EXTRA_ROLE_NAME, RoleManager.ROLE_NOTES);
 
-                List<UserHandle> users = getUserAndManagedProfiles();
+                List<UserHandle> users = getUserProfiles();
                 if (users.size() <= 1) {
                     mContext.startActivity(intent);
                 } else {
@@ -311,30 +315,33 @@ public class StylusDevicesController extends AbstractPreferenceController implem
         return inputMethod != null && inputMethod.supportsStylusHandwriting();
     }
 
-    private List<UserHandle> getUserAndManagedProfiles() {
+    private List<UserHandle> getUserProfiles() {
         UserManager um = mContext.getSystemService(UserManager.class);
-        final List<UserHandle> userManagedProfiles = new ArrayList<>();
-        // Add the current user, then add all the associated managed profiles.
         final UserHandle currentUser = Process.myUserHandle();
-        userManagedProfiles.add(currentUser);
+        final List<UserHandle> userProfiles = new ArrayList<>();
+        userProfiles.add(currentUser);
 
-        final List<UserInfo> userInfos = um.getUsers();
-        for (UserInfo info : userInfos) {
-            int userId = info.id;
-            if (um.isManagedProfile(userId)
-                    && um.getProfileParent(userId).id == currentUser.getIdentifier()) {
-                userManagedProfiles.add(UserHandle.of(userId));
+        if (mConfigEnableDefaultNotesForWorkProfile) {
+            final List<UserInfo> userInfos = um.getProfiles(currentUser.getIdentifier());
+            for (UserInfo userInfo : userInfos) {
+                if (userInfo.isManagedProfile()) {
+                    userProfiles.add(userInfo.getUserHandle());
+                }
             }
         }
-        return userManagedProfiles;
+        return userProfiles;
     }
 
     private UserHandle getDefaultNoteTaskProfile() {
-        final int userId = Secure.getInt(
-                mContext.getContentResolver(),
-                Secure.DEFAULT_NOTE_TASK_PROFILE,
-                UserHandle.myUserId());
-        return UserHandle.of(userId);
+        final int currentUserId = UserHandle.myUserId();
+        if (mConfigEnableDefaultNotesForWorkProfile) {
+            final int userId = Secure.getInt(
+                    mContext.getContentResolver(),
+                    Secure.DEFAULT_NOTE_TASK_PROFILE,
+                    currentUserId);
+            return UserHandle.of(userId);
+        }
+        return UserHandle.of(currentUserId);
     }
 
     @VisibleForTesting

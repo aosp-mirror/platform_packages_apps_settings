@@ -38,7 +38,8 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-@RequiresFlagsEnabled(Flags.FLAG_ALLOW_PRIVATE_PROFILE)
+@RequiresFlagsEnabled(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+        android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES)
 class PrivateSpaceAuthenticationActivityTest {
     private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 

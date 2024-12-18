@@ -22,23 +22,6 @@ package com.android.settings.core;
  */
 public class SettingsUIDeviceConfig {
     /**
-     * {@code true} if slice settings is enabled in BT device detail page
-     */
-    public static final String BT_SLICE_SETTINGS_ENABLED = "bt_slice_settings_enabled";
-    /**
-     * {@code true} if advanced header is enabled in BT device detail page
-     */
-    public static final String BT_ADVANCED_HEADER_ENABLED = "bt_advanced_header_enabled";
-    /**
-     * {@code true} if near by device suggestion is enabled in connected device page
-     */
-    public static final String BT_NEAR_BY_SUGGESTION_ENABLED = "bt_near_by_suggestion_enabled";
-    /**
-     * {@code true} if le audio contact sharing is enabled in BT device detail page
-     */
-    public static final String BT_LE_AUDIO_CONTACT_SHARING_ENABLED =
-            "bt_le_audio_contact_sharing_enabled";
-    /**
      * {@code true} whether or not event_log for generic actions is enabled. Default is true.
      */
     public static final String GENERIC_EVENT_LOGGING_ENABLED = "event_logging_enabled";

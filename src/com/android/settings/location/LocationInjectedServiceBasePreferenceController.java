@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.SettingInjectorService;
 import android.os.UserHandle;
+import android.util.ArraySet;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -32,6 +33,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 
 import java.util.List;
@@ -110,13 +112,28 @@ public abstract class LocationInjectedServiceBasePreferenceController
     }
 
     protected Map<Integer, List<Preference>> getLocationServices() {
+        ArraySet<UserHandle> userHandles = new ArraySet<>();
+        userHandles.add(UserHandle.of(UserHandle.myUserId()));
+
         // If location access is locked down by device policy then we only show injected settings
         // for the primary profile.
-        final int profileUserId = Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());
+        final int managedProfileId = Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());
+        if (managedProfileId != UserHandle.USER_NULL
+                && mLocationEnabler.getShareLocationEnforcedAdmin(managedProfileId) == null) {
+            userHandles.add(UserHandle.of(managedProfileId));
+        }
+        if (android.os.Flags.allowPrivateProfile()
+                && android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && android.multiuser.Flags.handleInterleavedSettingsForPrivateSpace()) {
+            final UserHandle privateProfile = Utils.getProfileOfType(mUserManager,
+                    ProfileSelectFragment.ProfileType.PRIVATE);
+            if (privateProfile != null && mLocationEnabler
+                    .getShareLocationEnforcedAdmin(privateProfile.getIdentifier()) == null) {
+                userHandles.add(privateProfile);
+            }
+        }
 
         return mInjector.getInjectedSettings(mFragment.getPreferenceManager().getContext(),
-                (profileUserId != UserHandle.USER_NULL
-                        && mLocationEnabler.getShareLocationEnforcedAdmin(profileUserId) != null)
-                        ? UserHandle.myUserId() : UserHandle.USER_CURRENT);
+                userHandles);
     }
 }

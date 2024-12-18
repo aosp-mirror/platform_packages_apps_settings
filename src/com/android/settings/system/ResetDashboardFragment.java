@@ -18,6 +18,9 @@ package com.android.settings.system;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
+
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.applications.manageapplications.ResetAppPrefPreferenceController;
@@ -25,6 +28,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.EraseEuiccDataController;
 import com.android.settings.network.NetworkResetPreferenceController;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.privatespace.delete.ResetOptionsDeletePrivateSpaceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -38,6 +42,7 @@ import java.util.List;
 public class ResetDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "ResetDashboardFragment";
+    public static final int PRIVATE_SPACE_DELETE_CREDENTIAL_REQUEST = 1;
 
     @Override
     public int getMetricsCategory() {
@@ -64,6 +69,14 @@ public class ResetDashboardFragment extends DashboardFragment {
         super.onAttach(context);
         if (SubscriptionUtil.isSimHardwareVisible(context)) {
             use(EraseEuiccDataController.class).setFragment(this);
+        }
+        if (android.multiuser.Flags.enablePrivateSpaceFeatures()
+                && android.multiuser.Flags.deletePrivateSpaceFromReset()) {
+            ResetOptionsDeletePrivateSpaceController resetOptionsDeletePrivateSpaceController =
+                    use(ResetOptionsDeletePrivateSpaceController.class);
+            if (resetOptionsDeletePrivateSpaceController != null) {
+                resetOptionsDeletePrivateSpaceController.setFragment(this);
+            }
         }
         FactoryResetPreferenceController factoryResetPreferenceController =
                 use(FactoryResetPreferenceController.class);
@@ -96,4 +109,13 @@ public class ResetDashboardFragment extends DashboardFragment {
                     return buildPreferenceControllers(context, null /* lifecycle */);
                 }
             };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (use(ResetOptionsDeletePrivateSpaceController.class)
+                .handleActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

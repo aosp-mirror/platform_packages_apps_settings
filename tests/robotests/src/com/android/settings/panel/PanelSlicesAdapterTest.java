@@ -67,6 +67,7 @@ import org.robolectric.annotation.Implements;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+@Deprecated(forRemoval = true)
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = PanelSlicesAdapterTest.ShadowLayoutInflater.class)
 public class PanelSlicesAdapterTest {

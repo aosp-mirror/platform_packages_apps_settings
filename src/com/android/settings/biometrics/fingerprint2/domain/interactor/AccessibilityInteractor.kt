@@ -17,7 +17,7 @@
 package com.android.settings.biometrics.fingerprint2.domain.interactor
 
 import android.view.accessibility.AccessibilityManager
-import androidx.lifecycle.LifecycleCoroutineScope
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
@@ -26,27 +26,27 @@ import kotlinx.coroutines.flow.stateIn
 
 /** Represents all of the information on accessibility state. */
 interface AccessibilityInteractor {
-    /** A flow that contains whether or not accessibility is enabled */
-    val isAccessibilityEnabled: Flow<Boolean>
+  /** A flow that contains whether or not accessibility is enabled */
+  val isAccessibilityEnabled: Flow<Boolean>
 }
 
 class AccessibilityInteractorImpl(
-    accessibilityManager: AccessibilityManager,
-    activityScope: LifecycleCoroutineScope
+  accessibilityManager: AccessibilityManager,
+  applicationScope: CoroutineScope,
 ) : AccessibilityInteractor {
   /** A flow that contains whether or not accessibility is enabled */
   override val isAccessibilityEnabled: Flow<Boolean> =
     callbackFlow {
         val listener =
-            AccessibilityManager.AccessibilityStateChangeListener { enabled -> trySend(enabled) }
+          AccessibilityManager.AccessibilityStateChangeListener { enabled -> trySend(enabled) }
         accessibilityManager.addAccessibilityStateChangeListener(listener)
 
         // This clause will be called when no one is listening to the flow
         awaitClose { accessibilityManager.removeAccessibilityStateChangeListener(listener) }
-    }
+      }
       .stateIn(
-        activityScope, // This is going to tied to the activity scope
-          SharingStarted.WhileSubscribed(), // When no longer subscribed, we removeTheListener
-        false
+        applicationScope, // This is going to tied to the activity scope
+        SharingStarted.WhileSubscribed(), // When no longer subscribed, we removeTheListener
+        false,
       )
 }

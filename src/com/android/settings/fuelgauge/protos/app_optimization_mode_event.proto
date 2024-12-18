@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.android.settings.fuelgauge.batteryusage";
+option java_outer_classname = "AppOptimizationModeEventProto";
+
+message AppOptimizationModeEvents {
+  // Map of uid to AppOptimizationModeEvent
+  map<int32, AppOptimizationModeEvent> events = 1;
+}
+
+message AppOptimizationModeEvent {
+  optional int32 uid = 1;
+  optional string package_name = 2;
+  // Value of BatteryUsageSlot.BatteryOptimizationMode, range = [0,3]
+  optional int32 reset_optimization_mode = 3;
+  optional int64 expiration_time = 4;
+}

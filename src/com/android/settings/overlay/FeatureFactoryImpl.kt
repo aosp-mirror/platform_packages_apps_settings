@@ -31,11 +31,8 @@ import com.android.settings.biometrics.face.FaceFeatureProvider
 import com.android.settings.biometrics.face.FaceFeatureProviderImpl
 import com.android.settings.biometrics.fingerprint.FingerprintFeatureProvider
 import com.android.settings.biometrics.fingerprint.FingerprintFeatureProviderImpl
-import com.android.settings.biometrics2.factory.BiometricsRepositoryProviderImpl
 import com.android.settings.bluetooth.BluetoothFeatureProvider
 import com.android.settings.bluetooth.BluetoothFeatureProviderImpl
-import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProvider
-import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProviderImpl
 import com.android.settings.connecteddevice.dock.DockUpdaterFeatureProviderImpl
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProviderImpl
@@ -45,8 +42,6 @@ import com.android.settings.core.instrumentation.SettingsMetricsFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProviderImpl
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl
-import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider
-import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProviderImpl
 import com.android.settings.display.DisplayFeatureProvider
 import com.android.settings.display.DisplayFeatureProviderImpl
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl
@@ -57,6 +52,8 @@ import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvid
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProviderImpl
 import com.android.settings.localepicker.LocaleFeatureProviderImpl
+import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProvider
+import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProviderImpl
 import com.android.settings.panel.PanelFeatureProviderImpl
 import com.android.settings.search.SearchFeatureProvider
 import com.android.settings.search.SearchFeatureProviderImpl
@@ -80,9 +77,6 @@ open class FeatureFactoryImpl : FeatureFactory() {
     private val contextualCardFeatureProvider by lazy {
         ContextualCardFeatureProviderImpl(appContext)
     }
-
-    override val hardwareInfoFeatureProvider: HardwareInfoFeatureProvider =
-        HardwareInfoFeatureProviderImpl
 
     override val metricsFeatureProvider by lazy { SettingsMetricsFeatureProvider() }
 
@@ -157,8 +151,6 @@ open class FeatureFactoryImpl : FeatureFactory() {
         FingerprintFeatureProviderImpl()
     }
 
-    override val biometricsRepositoryProvider by lazy { BiometricsRepositoryProviderImpl() }
-
     override val wifiTrackerLibProvider: WifiTrackerLibProvider by lazy {
         WifiTrackerLibProviderImpl()
     }
@@ -199,7 +191,7 @@ open class FeatureFactoryImpl : FeatureFactory() {
         DisplayFeatureProviderImpl()
     }
 
-    override val audioSharingFeatureProvider: AudioSharingFeatureProvider by lazy {
-        AudioSharingFeatureProviderImpl()
+    override val syncAcrossDevicesFeatureProvider: SyncAcrossDevicesFeatureProvider by lazy {
+        SyncAcrossDevicesFeatureProviderImpl()
     }
 }

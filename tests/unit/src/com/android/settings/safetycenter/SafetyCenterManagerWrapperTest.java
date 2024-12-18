@@ -40,6 +40,7 @@ public class SafetyCenterManagerWrapperTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        SafetyCenterManagerWrapper.sInstance = null;
     }
 
     @Test

@@ -30,6 +30,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
@@ -45,12 +46,12 @@ public class MockLocationAppPreferenceController extends DeveloperOptionsPrefere
     private static final String MOCK_LOCATION_APP_KEY = "mock_location_app";
     private static final int[] MOCK_LOCATION_APP_OPS = new int[]{AppOpsManager.OP_MOCK_LOCATION};
 
-    private final DevelopmentSettingsDashboardFragment mFragment;
+    @Nullable private final DevelopmentSettingsDashboardFragment mFragment;
     private final AppOpsManager mAppsOpsManager;
     private final PackageManager mPackageManager;
 
     public MockLocationAppPreferenceController(Context context,
-            DevelopmentSettingsDashboardFragment fragment) {
+            @Nullable DevelopmentSettingsDashboardFragment fragment) {
         super(context);
 
         mFragment = fragment;

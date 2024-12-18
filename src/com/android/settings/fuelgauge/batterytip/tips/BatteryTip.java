@@ -23,10 +23,11 @@ import android.util.SparseIntArray;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-import com.android.settings.widget.CardPreference;
+import com.android.settings.widget.TipCardPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.lang.annotation.Retention;
@@ -62,8 +63,7 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         TipType.BATTERY_DEFENDER,
         TipType.DOCK_DEFENDER,
         TipType.INCOMPATIBLE_CHARGER,
-        TipType.BATTERY_WARNING,
-        TipType.WIRELESS_CHARGING_WARNING
+        TipType.BATTERY_WARNING
     })
     public @interface TipType {
         int SMART_BATTERY_MANAGER = 0;
@@ -78,7 +78,6 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         int DOCK_DEFENDER = 9;
         int INCOMPATIBLE_CHARGER = 10;
         int BATTERY_WARNING = 11;
-        int WIRELESS_CHARGING_WARNING = 12;
     }
 
     @VisibleForTesting static final SparseIntArray TIP_ORDER;
@@ -97,7 +96,6 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         TIP_ORDER.append(TipType.REDUCED_BATTERY, 9);
         TIP_ORDER.append(TipType.REMOVE_APP_RESTRICTION, 10);
         TIP_ORDER.append(TipType.BATTERY_WARNING, 11);
-        TIP_ORDER.append(TipType.WIRELESS_CHARGING_WARNING, 12);
     }
 
     private static final String KEY_PREFIX = "key_battery_tip";
@@ -168,7 +166,7 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         preference.setTitle(getTitle(context));
         preference.setSummary(getSummary(context));
         preference.setIcon(getIconId());
-        final CardPreference cardPreference = castToCardPreferenceSafely(preference);
+        final TipCardPreference cardPreference = castToTipCardPreferenceSafely(preference);
         if (cardPreference != null) {
             cardPreference.resetLayoutState();
         }
@@ -209,7 +207,9 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         return "type=" + mType + " state=" + mState;
     }
 
-    public CardPreference castToCardPreferenceSafely(Preference preference) {
-        return preference instanceof CardPreference ? (CardPreference) preference : null;
+    /** Returns the converted {@link TipCardPreference} if it is valid. */
+    @Nullable
+    public TipCardPreference castToTipCardPreferenceSafely(Preference preference) {
+        return preference instanceof TipCardPreference ? (TipCardPreference) preference : null;
     }
 }

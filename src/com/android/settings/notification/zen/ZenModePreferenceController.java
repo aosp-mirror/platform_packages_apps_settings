@@ -16,6 +16,7 @@
 
 package com.android.settings.notification.zen;
 
+import android.app.Flags;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -46,7 +47,8 @@ public class ZenModePreferenceController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mSettingObserver = new SettingObserver(screen.findPreference(getPreferenceKey()));
+        Preference preference = screen.findPreference(getPreferenceKey());
+        mSettingObserver = new SettingObserver(preference);
     }
 
     @Override
@@ -65,7 +67,7 @@ public class ZenModePreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE_UNSEARCHABLE;
+        return Flags.modesUi() ? UNSUPPORTED_ON_DEVICE : AVAILABLE_UNSEARCHABLE;
     }
 
     @Override

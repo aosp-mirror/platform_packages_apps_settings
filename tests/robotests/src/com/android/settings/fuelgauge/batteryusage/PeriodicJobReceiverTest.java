@@ -18,11 +18,15 @@ package com.android.settings.fuelgauge.batteryusage;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.AlarmManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.UserManager;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -34,6 +38,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowAlarmManager;
 
@@ -53,12 +59,17 @@ public final class PeriodicJobReceiverTest {
     private PeriodicJobManager mPeriodicJobManager;
     private ShadowAlarmManager mShadowAlarmManager;
 
+    @Mock
+    private UserManager mUserManager;
+
     @Before
     public void setUp() {
-        mContext = ApplicationProvider.getApplicationContext();
+        MockitoAnnotations.initMocks(this);
+        mContext = spy(ApplicationProvider.getApplicationContext());
         mPeriodicJobManager = PeriodicJobManager.getInstance(mContext);
         mShadowAlarmManager = shadowOf(mContext.getSystemService(AlarmManager.class));
         mReceiver = new PeriodicJobReceiver();
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
 
         // Inserts fake data into database for testing.
         final BatteryStateDatabase database = BatteryTestUtils.setUpBatteryStateDatabase(mContext);
@@ -97,7 +108,7 @@ public final class PeriodicJobReceiverTest {
 
         mReceiver.onReceive(mContext, JOB_UPDATE_INTENT);
 
-        TimeUnit.MILLISECONDS.sleep(100);
+        TimeUnit.MILLISECONDS.sleep(1000);
         assertThat(mDao.getAllAfter(0)).hasSize(1);
     }
 
@@ -108,13 +119,20 @@ public final class PeriodicJobReceiverTest {
 
         mReceiver.onReceive(mContext, JOB_UPDATE_INTENT);
 
-        TimeUnit.MILLISECONDS.sleep(100);
+        TimeUnit.MILLISECONDS.sleep(1000);
         assertThat(mDao.getAllAfter(0)).hasSize(3);
     }
 
     @Test
     public void onReceive_inWorkProfileMode_notRefreshesJob() {
-        BatteryTestUtils.setWorkProfile(mContext);
+        doReturn(true).when(mUserManager).isManagedProfile();
+        mReceiver.onReceive(mContext, JOB_UPDATE_INTENT);
+        assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNull();
+    }
+
+    @Test
+    public void onReceive_inPrivateProfileMode_notRefreshesJob() {
+        doReturn(true).when(mUserManager).isPrivateProfile();
         mReceiver.onReceive(mContext, JOB_UPDATE_INTENT);
         assertThat(mShadowAlarmManager.peekNextScheduledAlarm()).isNull();
     }

@@ -22,6 +22,7 @@ import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.development.DeveloperOptionAwareMixin;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.search.SearchIndexable;
@@ -32,7 +33,8 @@ import java.util.List;
  * Bluetooth Snoop Logger Filters Dashboard
  */
 @SearchIndexable
-public class SnoopLoggerFiltersDashboard extends DashboardFragment {
+public class SnoopLoggerFiltersDashboard extends DashboardFragment implements
+        DeveloperOptionAwareMixin {
 
     private static final String TAG = "SnoopLoggerFiltersDashboard";
 

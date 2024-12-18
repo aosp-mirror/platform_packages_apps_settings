@@ -78,7 +78,10 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
             setContentView(R.layout.fingerprint_enroll_finish);
         }
         setHeaderText(R.string.security_settings_fingerprint_enroll_finish_title);
-        setDescriptionText(R.string.security_settings_fingerprint_enroll_finish_v2_message);
+        setDescriptionText(Utils.isPrivateProfile(mUserId, getApplicationContext())
+                ? R.string.private_space_fingerprint_enroll_finish_message
+                : R.string.security_settings_fingerprint_enroll_finish_v2_message);
+
         final String sfpsDescription = mSfpsRestToUnlockFeature != null
                 ? mSfpsRestToUnlockFeature.getDescriptionForSfps(this)
                 : null;

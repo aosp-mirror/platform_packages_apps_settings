@@ -1,0 +1,9 @@
+package: "com.android.settings.flags"
+container: "system"
+
+flag {
+  name: "enable_device_diagnostics_in_settings"
+  namespace: "phoenix"
+  description: "Enable the Device Diagnostics app in Settings"
+  bug: "309886423"
+}

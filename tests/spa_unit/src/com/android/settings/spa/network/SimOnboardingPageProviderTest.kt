@@ -45,7 +45,6 @@ class SimOnboardingPageProviderTest {
         on { targetSubInfo }.doReturn(null)
         on { availableSubInfoList }.doReturn(listOf())
         on { activeSubInfoList }.doReturn(listOf())
-        on { slotInfoList }.doReturn(listOf())
         on { uiccCardInfoList }.doReturn(listOf())
 
         on { targetPrimarySimCalls }.doReturn(PRIMARY_SIM_ASK_EVERY_TIME)
@@ -91,6 +90,7 @@ class SimOnboardingPageProviderTest {
         mockSimOnboardingService.stub {
             on { isMultipleEnabledProfilesSupported }.thenReturn(true)
             on { isAllOfSlotAssigned }.thenReturn(true)
+            on { doesTargetSimActive }.thenReturn(false)
         }
 
         composeTestRule.setContent {

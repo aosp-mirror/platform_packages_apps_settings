@@ -68,6 +68,7 @@ public class AdaptiveSleepPermissionPreferenceController {
                     mContext.getPackageManager().getAttentionServicePackageName();
             final Intent intent = new Intent(
                     android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            intent.setPackage(mContext.getPackageName());
             intent.setData(Uri.parse("package:" + packageName));
             mPreference = new BannerMessagePreference(mContext);
             mPreference.setTitle(R.string.adaptive_sleep_title_no_permission);

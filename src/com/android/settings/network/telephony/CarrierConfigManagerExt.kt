@@ -24,6 +24,7 @@ import androidx.core.os.persistableBundleOf
 /**
  * Gets the configuration values of the specified config keys applied.
  */
+@Deprecated("Use CarrierConfigRepository instead")
 fun CarrierConfigManager.safeGetConfig(
     keys: List<String>,
     subId: Int = SubscriptionManager.getDefaultSubscriptionId(),
@@ -35,5 +36,8 @@ fun CarrierConfigManager.safeGetConfig(
     // process has been restarted.
     // Settings should not assume Carrier config loader (and any other system services as well) are
     // always available. If not available, use default value instead.
+    persistableBundleOf()
+} catch (e: RuntimeException) {
+    // The reason is same with above.
     persistableBundleOf()
 }

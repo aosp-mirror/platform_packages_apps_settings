@@ -48,6 +48,7 @@ import org.robolectric.RobolectricTestRunner;
 
 import java.util.Arrays;
 
+@Deprecated(forRemoval = true)
 @RunWith(RobolectricTestRunner.class)
 public class WifiScanWorkerTest {
 

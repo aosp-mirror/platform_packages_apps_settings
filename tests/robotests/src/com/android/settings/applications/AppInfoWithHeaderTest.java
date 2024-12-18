@@ -19,6 +19,7 @@ package com.android.settings.applications;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -48,12 +49,13 @@ import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -62,6 +64,8 @@ import org.robolectric.util.ReflectionHelpers;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowEntityHeaderController.class, ShadowSettingsLibUtils.class})
 public class AppInfoWithHeaderTest {
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private EntityHeaderController mHeaderController;
@@ -71,7 +75,6 @@ public class AppInfoWithHeaderTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mFactory = FakeFeatureFactory.setupForTest();
         when(mFactory.metricsFeatureProvider.getMetricsCategory(any(Object.class)))
                 .thenReturn(MetricsProto.MetricsEvent.SETTINGS_APP_NOTIF_CATEGORY);
@@ -120,7 +123,6 @@ public class AppInfoWithHeaderTest {
         assertThat(mAppInfoWithHeader.mPackageRemovedCalled).isTrue();
     }
 
-    @Ignore("b/315135755")
     @Test
     public void noExtraUserHandleInIntent_retrieveAppEntryWithMyUserId()
             throws PackageManager.NameNotFoundException {
@@ -133,10 +135,8 @@ public class AppInfoWithHeaderTest {
 
         when(mAppInfoWithHeader.mState.getEntry(packageName,
                 UserHandle.myUserId())).thenReturn(entry);
-        when(mAppInfoWithHeader.mPm.getPackageInfoAsUser(entry.info.packageName,
-                PackageManager.MATCH_DISABLED_COMPONENTS |
-                        PackageManager.GET_SIGNING_CERTIFICATES |
-                        PackageManager.GET_PERMISSIONS, UserHandle.myUserId())).thenReturn(
+        when(mAppInfoWithHeader.mPm.getPackageInfoAsUser(eq(entry.info.packageName),
+                any(), eq(UserHandle.myUserId()))).thenReturn(
                 mAppInfoWithHeader.mPackageInfo);
 
         mAppInfoWithHeader.retrieveAppEntry();
@@ -146,7 +146,6 @@ public class AppInfoWithHeaderTest {
         assertThat(mAppInfoWithHeader.mAppEntry).isNotNull();
     }
 
-    @Ignore("b/315135755")
     @Test
     public void extraUserHandleInIntent_retrieveAppEntryWithMyUserId()
             throws PackageManager.NameNotFoundException {
@@ -161,10 +160,8 @@ public class AppInfoWithHeaderTest {
         entry.info.packageName = packageName;
 
         when(mAppInfoWithHeader.mState.getEntry(packageName, USER_ID)).thenReturn(entry);
-        when(mAppInfoWithHeader.mPm.getPackageInfoAsUser(entry.info.packageName,
-                PackageManager.MATCH_DISABLED_COMPONENTS |
-                        PackageManager.GET_SIGNING_CERTIFICATES |
-                        PackageManager.GET_PERMISSIONS, USER_ID)).thenReturn(
+        when(mAppInfoWithHeader.mPm.getPackageInfoAsUser(eq(entry.info.packageName),
+                any(), eq(USER_ID))).thenReturn(
                 mAppInfoWithHeader.mPackageInfo);
 
         mAppInfoWithHeader.retrieveAppEntry();
@@ -172,6 +169,32 @@ public class AppInfoWithHeaderTest {
         assertThat(mAppInfoWithHeader.mUserId).isEqualTo(USER_ID);
         assertThat(mAppInfoWithHeader.mPackageInfo).isNotNull();
         assertThat(mAppInfoWithHeader.mAppEntry).isNotNull();
+    }
+
+    @Test
+    public void noCrossUserPermission_retrieveAppEntry_fail()
+            throws PackageManager.NameNotFoundException {
+        TestFragmentWithoutPermission testFragmentWithoutPermission =
+                new TestFragmentWithoutPermission();
+        final int userId = 1002;
+        final String packageName = "com.android.settings";
+
+        testFragmentWithoutPermission.mIntent.putExtra(Intent.EXTRA_USER_HANDLE,
+                new UserHandle(userId));
+        testFragmentWithoutPermission.mIntent.setData(Uri.fromParts("package",
+                packageName, null));
+        final ApplicationsState.AppEntry entry = mock(ApplicationsState.AppEntry.class);
+        entry.info = new ApplicationInfo();
+        entry.info.packageName = packageName;
+
+        when(testFragmentWithoutPermission.mState.getEntry(packageName, userId)).thenReturn(entry);
+        when(testFragmentWithoutPermission.mPm.getPackageInfoAsUser(eq(entry.info.packageName),
+                any(), eq(userId))).thenReturn(
+                testFragmentWithoutPermission.mPackageInfo);
+
+        testFragmentWithoutPermission.retrieveAppEntry();
+
+        assertThat(testFragmentWithoutPermission.mAppEntry).isNull();
     }
 
     public static class TestFragment extends AppInfoWithHeader {
@@ -227,11 +250,25 @@ public class AppInfoWithHeaderTest {
         }
 
         @Override
+        protected boolean hasInteractAcrossUsersFullPermission() {
+            return true;
+        }
+
+        @Override
         protected void onPackageRemoved() {
             mPackageRemovedCalled = true;
         }
 
         @Override
-        protected Intent getIntent() { return mIntent; }
+        protected Intent getIntent() {
+            return mIntent;
+        }
+    }
+
+    private static final class TestFragmentWithoutPermission extends TestFragment {
+        @Override
+        protected boolean hasInteractAcrossUsersFullPermission() {
+            return false;
+        }
     }
 }
