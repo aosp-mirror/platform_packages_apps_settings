@@ -214,20 +214,22 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         if (!isResumed() || mBatteryLevelData == null) {
             return;
         }
-        mBatteryUsageMap =
-                DataProcessor.generateBatteryUsageMap(
-                        getContext(), batteryDiffDataMap, mBatteryLevelData.orElse(null));
-        Log.d(TAG, "onBatteryDiffDataMapUpdate: " + mBatteryUsageMap);
-        DataProcessor.loadLabelAndIcon(mBatteryUsageMap);
-        onSelectedSlotDataUpdated();
-        detectAnomaly();
-        logScreenUsageTime();
-        if (mBatteryChartPreferenceController != null
-                && mBatteryLevelData.isEmpty()
-                && isBatteryUsageMapNullOrEmpty()) {
-            // No available battery usage and battery level data.
-            mBatteryChartPreferenceController.showEmptyChart();
-        }
+        mHandler.post(() -> {
+            mBatteryUsageMap =
+                    DataProcessor.generateBatteryUsageMap(
+                            getContext(), batteryDiffDataMap, mBatteryLevelData.orElse(null));
+            Log.d(TAG, "onBatteryDiffDataMapUpdate: " + mBatteryUsageMap);
+            DataProcessor.loadLabelAndIcon(mBatteryUsageMap);
+            onSelectedSlotDataUpdated();
+            detectAnomaly();
+            logScreenUsageTime();
+            if (mBatteryChartPreferenceController != null
+                    && mBatteryLevelData.isEmpty()
+                    && isBatteryUsageMapNullOrEmpty()) {
+                // No available battery usage and battery level data.
+                mBatteryChartPreferenceController.showEmptyChart();
+            }
+        });
     }
 
     private void onSelectedSlotDataUpdated() {
@@ -501,10 +503,11 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
                 @Override
                 public BatteryLevelData loadInBackground() {
+                    Context context = getContext();
                     return DataProcessManager.getBatteryLevelData(
-                            getContext(),
-                            mHandler,
-                            new UserIdsSeries(getContext(), /* isNonUIRequest= */ false),
+                            context,
+                            getLifecycle(),
+                            new UserIdsSeries(context, /* isNonUIRequest= */ false),
                             /* isFromPeriodJob= */ false,
                             PowerUsageAdvanced.this::onBatteryDiffDataMapUpdate);
                 }

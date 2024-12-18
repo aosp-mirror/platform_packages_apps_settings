@@ -33,6 +33,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -52,7 +54,10 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     private static final String TAG = "ToggleColorInversionPreferenceFragment";
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
 
-    private static final String KEY_SHORTCUT_PREFERENCE = "color_inversion_shortcut_key";
+    @VisibleForTesting
+    static final String KEY_SHORTCUT_PREFERENCE = "color_inversion_shortcut_key";
+    @VisibleForTesting
+    static final String KEY_SWITCH_PREFERENCE = "color_inversion_switch_preference_key";
 
     @Override
     protected void registerKeysToObserverCallback(
@@ -69,13 +74,13 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         mComponentName = COLOR_INVERSION_COMPONENT_NAME;
-        mPackageName = getText(R.string.accessibility_display_inversion_preference_title);
+        mFeatureName = getText(R.string.accessibility_display_inversion_preference_title);
         mHtmlDescription = getText(R.string.accessibility_display_inversion_preference_subtitle);
         mTopIntroTitle = getText(R.string.accessibility_display_inversion_preference_intro_text);
         mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
-            .authority(getPrefContext().getPackageName())
-            .appendPath(String.valueOf(R.raw.a11y_color_inversion_banner))
-            .build();
+                .authority(getPrefContext().getPackageName())
+                .appendPath(String.valueOf(R.raw.a11y_color_inversion_banner))
+                .build();
         final View view = super.onCreateView(inflater, container, savedInstanceState);
         updateFooterPreference();
         return view;
@@ -102,10 +107,6 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
         if (enabled == isEnabled) {
             return;
         }
-
-        if (enabled) {
-            showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
-        }
         logAccessibilityServiceEnabled(mComponentName, enabled);
         Settings.Secure.putInt(getContentResolver(), ENABLED, enabled ? ON : OFF);
     }
@@ -129,6 +130,11 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     @Override
     protected void updateToggleServiceTitle(SettingsMainSwitchPreference switchPreference) {
         switchPreference.setTitle(R.string.accessibility_display_inversion_switch_title);
+    }
+
+    @Override
+    protected String getUseServicePreferenceKey() {
+        return KEY_SWITCH_PREFERENCE;
     }
 
     @Override
@@ -165,7 +171,7 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     @Override
     int getUserShortcutTypes() {
         return AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
-            mComponentName);
+                mComponentName);
     }
 
     @Override
@@ -176,8 +182,8 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     @Override
     CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
         return getText(type == QuickSettingsTooltipType.GUIDE_TO_EDIT
-            ? R.string.accessibility_color_inversion_qs_tooltip_content
-            : R.string.accessibility_color_inversion_auto_added_qs_tooltip_content);
+                ? R.string.accessibility_color_inversion_qs_tooltip_content
+                : R.string.accessibility_color_inversion_auto_added_qs_tooltip_content);
     }
 
     @Override
@@ -194,12 +200,22 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
                 @Override
                 public List<SearchIndexableRaw> getRawDataToIndex(Context context,
                         boolean enabled) {
-                    final List<SearchIndexableRaw> rawData = new ArrayList<>();
+                    final List<SearchIndexableRaw> rawData =
+                            super.getRawDataToIndex(context, enabled);
+
                     SearchIndexableRaw raw = new SearchIndexableRaw(context);
                     raw.key = KEY_SHORTCUT_PREFERENCE;
                     raw.title = context.getString(
-                        R.string.accessibility_display_inversion_shortcut_title);
+                            R.string.accessibility_display_inversion_shortcut_title);
                     rawData.add(raw);
+
+                    if (Flags.fixA11ySettingsSearch()) {
+                        SearchIndexableRaw mainPreferenceRaw = new SearchIndexableRaw(context);
+                        mainPreferenceRaw.key = KEY_SWITCH_PREFERENCE;
+                        mainPreferenceRaw.title = context.getString(
+                                R.string.accessibility_display_inversion_switch_title);
+                        rawData.add(mainPreferenceRaw);
+                    }
                     return rawData;
                 }
             };

@@ -124,6 +124,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
                 mCachedDevice, mLifecycle);
         mProfiles.setKey(mController.getPreferenceKey());
         mController.mProfilesContainer = mProfiles;
+        mScreen.removeAll();
         mScreen.addPreference(mProfiles);
         BluetoothProperties.le_audio_allow_list(Lists.newArrayList(LE_DEVICE_MODEL));
     }
@@ -554,6 +555,36 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
 
     @Test
     public void prefKeyInBlockingList_hideToggle() {
+        mController.setInvisibleProfiles(List.of("A2DP"));
+        mController.setHasExtraSpace(true);
+        setupDevice(makeDefaultDeviceConfig());
+
+        addA2dpProfileToDevice(true, true, true);
+        when(mFeatureProvider.getInvisibleProfilePreferenceKeys(any(), any()))
+                .thenReturn(ImmutableSet.of());
+
+        showScreen(mController);
+
+        List<SwitchPreferenceCompat> switches = getProfileSwitches(false);
+        assertThat(switches.get(0).isVisible()).isFalse();
+    }
+
+    @Test
+    public void prefKeyNotInBlockingList_showToggle() {
+        setupDevice(makeDefaultDeviceConfig());
+
+        addA2dpProfileToDevice(true, true, true);
+        when(mFeatureProvider.getInvisibleProfilePreferenceKeys(any(), any()))
+                .thenReturn(ImmutableSet.of());
+
+        showScreen(mController);
+
+        List<SwitchPreferenceCompat> switches = getProfileSwitches(false);
+        assertThat(switches.get(0).isVisible()).isTrue();
+    }
+
+    @Test
+    public void prefKeyInFeatureProviderBlockingList_hideToggle() {
         setupDevice(makeDefaultDeviceConfig());
 
         addA2dpProfileToDevice(true, true, true);
@@ -567,7 +598,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
     }
 
     @Test
-    public void prefKeyNotInBlockingList_showToggle() {
+    public void prefKeyNotInFeatureProviderBlockingList_showToggle() {
         setupDevice(makeDefaultDeviceConfig());
 
         addA2dpProfileToDevice(true, true, true);

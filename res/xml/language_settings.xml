@@ -19,7 +19,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/languages_settings"
-    android:key="languages_settings">
+    android:key="language_settings">
     <PreferenceCategory
         android:key="languages_category"
         android:title="@string/locale_picker_category_title">
@@ -28,12 +28,13 @@
             android:title="@string/system_language"
             android:fragment="com.android.settings.localepicker.LocaleListEditor"
             settings:controller="com.android.settings.language.PhoneLanguagePreferenceController" />
+
         <Preference
             android:key="apps_language"
             android:title="@string/app_locales_picker_menu_title"
             android:summary="@string/app_locale_picker_summary"
             android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-            settings:controller="com.android.settings.applications.appinfo.ManageAppLocalePreferenceController">
+            settings:controller="com.android.settings.applications.appinfo.AppsLocalePreferenceController">
             <extra
                 android:name="classname"
                 android:value="com.android.settings.applications.appinfo.AppLocaleDetails" />

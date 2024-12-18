@@ -53,6 +53,12 @@ public class MultiUserSwitchBarController implements SwitchWidgetController.OnSw
         mSwitchBar = switchBar;
         mListener = listener;
         mUserCapabilities = UserCapabilities.create(context);
+        updateState();
+        mSwitchBar.setListener(this);
+    }
+
+    void updateState() {
+        mUserCapabilities.updateAddUserCapabilities(mContext);
         mSwitchBar.setChecked(mUserCapabilities.mUserSwitcherEnabled);
 
         if (Flags.fixDisablingOfMuToggleWhenRestrictionApplied()) {
@@ -74,7 +80,6 @@ public class MultiUserSwitchBarController implements SwitchWidgetController.OnSw
                 mSwitchBar.setEnabled(mUserCapabilities.mIsMain);
             }
         }
-        mSwitchBar.setListener(this);
     }
 
     @Override
@@ -92,7 +97,7 @@ public class MultiUserSwitchBarController implements SwitchWidgetController.OnSw
         Log.d(TAG, "Toggling multi-user feature enabled state to: " + isChecked);
         final boolean success = Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.USER_SWITCHER_ENABLED, isChecked ? 1 : 0);
-        if (success && mListener != null) {
+        if (success && mListener != null && !Flags.newMultiuserSettingsUx()) {
             mListener.onMultiUserSwitchChanged(isChecked);
         }
         return success;

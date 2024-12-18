@@ -15,6 +15,8 @@
  */
 package com.android.settings.notification.modes;
 
+import static com.android.settings.Utils.createAccessibleSequence;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.widget.TextView;
@@ -28,6 +30,7 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
 import com.android.settingslib.notification.modes.ZenIconLoader;
 import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModeDescriptions;
 
 import com.google.common.base.Strings;
 
@@ -42,6 +45,7 @@ class ZenModesListItemPreference extends RestrictedPreference {
     private final Context mContext;
     private final ZenIconLoader mIconLoader;
     private final Executor mUiExecutor;
+    private final ZenModeDescriptions mDescriptions;
     private ZenMode mZenMode;
 
     private TextView mTitleView;
@@ -58,6 +62,7 @@ class ZenModesListItemPreference extends RestrictedPreference {
         mContext = context;
         mIconLoader = iconLoader;
         mUiExecutor = uiExecutor;
+        mDescriptions = new ZenModeDescriptions(context);
         setZenMode(zenMode);
         setKey(zenMode.getId());
     }
@@ -89,20 +94,17 @@ class ZenModesListItemPreference extends RestrictedPreference {
         }
 
         setTitle(mZenMode.getName());
-        String dynamicDescription = zenMode.getDynamicDescription(mContext);
-        CharSequence statusText = switch (mZenMode.getStatus()) {
-            case ENABLED_AND_ACTIVE ->
-                    Strings.isNullOrEmpty(dynamicDescription)
-                            ? mContext.getString(R.string.zen_mode_active_text)
-                            : mContext.getString(
-                                    R.string.zen_mode_format_status_and_trigger,
-                                    mContext.getString(R.string.zen_mode_active_text),
-                                    dynamicDescription);
-            case ENABLED -> dynamicDescription;
-            case DISABLED_BY_USER -> mContext.getString(R.string.zen_mode_disabled_by_user);
-            case DISABLED_BY_OTHER -> mContext.getString(R.string.zen_mode_disabled_needs_setup);
-        };
-        setSummary(statusText);
+        ZenMode.Status status = zenMode.getStatus();
+        String statusText = getStatusText(status, mDescriptions.getTriggerDescription(zenMode));
+        String triggerDescriptionForA11y = mDescriptions.getTriggerDescriptionForAccessibility(
+                zenMode);
+
+        if (triggerDescriptionForA11y != null) {
+            setSummary(createAccessibleSequence(statusText,
+                    getStatusText(status, triggerDescriptionForA11y)));
+        } else {
+            setSummary(statusText);
+        }
 
         setIconSize(ICON_SIZE_SMALL);
         FutureUtil.whenDone(
@@ -114,6 +116,21 @@ class ZenModesListItemPreference extends RestrictedPreference {
                 mUiExecutor);
 
         updateTextColor(zenMode);
+    }
+
+    private String getStatusText(ZenMode.Status status, String triggerDescription) {
+        return switch (status) {
+            case ENABLED_AND_ACTIVE ->
+                    Strings.isNullOrEmpty(triggerDescription)
+                            ? mContext.getString(R.string.zen_mode_active_text)
+                            : mContext.getString(
+                                    R.string.zen_mode_format_status_and_trigger,
+                                    mContext.getString(R.string.zen_mode_active_text),
+                                    triggerDescription);
+            case ENABLED -> Strings.nullToEmpty(triggerDescription);
+            case DISABLED_BY_USER -> mContext.getString(R.string.zen_mode_disabled_by_user);
+            case DISABLED_BY_OTHER -> mContext.getString(R.string.zen_mode_disabled_needs_setup);
+        };
     }
 
     private void updateTextColor(@Nullable ZenMode zenMode) {

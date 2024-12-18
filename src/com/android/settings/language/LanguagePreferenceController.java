@@ -22,6 +22,7 @@ import android.content.pm.PackageManager;
 
 import com.android.settings.Settings;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.flags.Flags;
 
 /**
  * This is a display controller for new language activity entry.
@@ -34,6 +35,10 @@ public class LanguagePreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
+        if (Flags.regionalPreferencesApiEnabled()) {
+            setActivityEnabled(mContext, Settings.LanguageSettingsActivity.class, false);
+            return CONDITIONALLY_UNAVAILABLE;
+        }
         setActivityEnabled(mContext, Settings.LanguageSettingsActivity.class, true);
         return AVAILABLE;
     }

@@ -16,11 +16,13 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="bluetooth_switchbar_screen"
     android:title="@string/bluetooth_settings_title">
 
     <SwitchPreferenceCompat
         android:key="bluetooth_auto_on_settings_toggle"
         android:title="@string/bluetooth_screen_auto_on_title"
+        android:summary="@string/bluetooth_screen_auto_on_summary"
         settings:controller="com.android.settings.bluetooth.BluetoothAutoOnPreferenceController"/>
 
     <Preference

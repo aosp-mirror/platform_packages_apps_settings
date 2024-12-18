@@ -20,7 +20,6 @@ import android.app.Application
 import android.bluetooth.BluetoothAdapter
 import android.graphics.Bitmap
 import androidx.test.core.app.ApplicationProvider
-import com.android.settings.bluetooth.domain.interactor.SpatialAudioInteractor
 import com.android.settings.bluetooth.ui.layout.DeviceSettingLayout
 import com.android.settings.bluetooth.ui.model.DeviceSettingPreferenceModel
 import com.android.settings.bluetooth.ui.model.FragmentTypeModel
@@ -46,7 +45,9 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
+import org.mockito.Mockito.any
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
@@ -65,8 +66,6 @@ class BluetoothDeviceDetailsViewModelTest {
 
     @Mock private lateinit var repository: DeviceSettingRepository
 
-    @Mock private lateinit var spatialAudioInteractor: SpatialAudioInteractor
-
     private lateinit var underTest: BluetoothDeviceDetailsViewModel
     private lateinit var featureFactory: FakeFeatureFactory
     private val testScope = TestScope()
@@ -76,11 +75,16 @@ class BluetoothDeviceDetailsViewModelTest {
         val application = ApplicationProvider.getApplicationContext<Application>()
         featureFactory = FakeFeatureFactory.setupForTest()
 
+        `when`(
+            featureFactory.bluetoothFeatureProvider.getDeviceSettingRepository(
+                eq(application), eq(bluetoothAdapter), any()
+            ))
+            .thenReturn(repository)
+
         underTest =
             BluetoothDeviceDetailsViewModel(
                 application,
-                repository,
-                spatialAudioInteractor,
+                bluetoothAdapter,
                 cachedDevice,
                 testScope.testScheduler)
     }
@@ -161,37 +165,6 @@ class BluetoothDeviceDetailsViewModelTest {
     }
 
     @Test
-    fun getDeviceSetting_spatialAudio_returnSpatialAudioInteractorResponse() {
-        testScope.runTest {
-            val pref =
-                buildMultiTogglePreference(
-                    DeviceSettingId.DEVICE_SETTING_ID_SPATIAL_AUDIO_MULTI_TOGGLE)
-            `when`(repository.getDeviceSettingsConfig(cachedDevice))
-                .thenReturn(
-                    DeviceSettingConfigModel(
-                        listOf(
-                            BUILTIN_SETTING_ITEM_1,
-                            buildRemoteSettingItem(
-                                DeviceSettingId.DEVICE_SETTING_ID_SPATIAL_AUDIO_MULTI_TOGGLE),
-                        ),
-                        listOf(),
-                        null))
-            `when`(spatialAudioInteractor.getDeviceSetting(cachedDevice)).thenReturn(flowOf(pref))
-
-            var deviceSettingPreference: DeviceSettingPreferenceModel? = null
-            underTest
-                .getDeviceSetting(
-                    cachedDevice, DeviceSettingId.DEVICE_SETTING_ID_SPATIAL_AUDIO_MULTI_TOGGLE)
-                .onEach { deviceSettingPreference = it }
-                .launchIn(testScope.backgroundScope)
-            runCurrent()
-
-            assertThat(deviceSettingPreference?.id).isEqualTo(pref.id)
-            verify(spatialAudioInteractor, times(1)).getDeviceSetting(cachedDevice)
-        }
-    }
-
-    @Test
     fun getLayout_builtinDeviceSettings() {
         testScope.runTest {
             `when`(repository.getDeviceSettingsConfig(cachedDevice))
@@ -239,18 +212,19 @@ class BluetoothDeviceDetailsViewModelTest {
                 .isEqualTo(
                     listOf(
                         listOf(DeviceSettingId.DEVICE_SETTING_ID_HEADER),
-                        listOf(remoteSettingId1, remoteSettingId2),
+                        listOf(remoteSettingId1),
+                        listOf(remoteSettingId2),
                         listOf(remoteSettingId3),
                     ))
         }
     }
 
     private fun getLatestLayout(layout: DeviceSettingLayout): List<List<Int>> {
-        var latestLayout = MutableList(layout.rows.size) { emptyList<Int>() }
+        val latestLayout = MutableList(layout.rows.size) { emptyList<Int>() }
         for (i in layout.rows.indices) {
             layout.rows[i]
-                .settingIds
-                .onEach { latestLayout[i] = it }
+                .columns
+                .onEach { latestLayout[i] = it.map { c -> c.settingId } }
                 .launchIn(testScope.backgroundScope)
         }
 
@@ -278,15 +252,15 @@ class BluetoothDeviceDetailsViewModelTest {
         DeviceSettingModel.ActionSwitchPreference(cachedDevice, settingId, "title")
 
     private fun buildRemoteSettingItem(settingId: Int) =
-        DeviceSettingConfigItemModel.AppProvidedItem(settingId)
+        DeviceSettingConfigItemModel.AppProvidedItem(settingId, false)
 
     private companion object {
         val BUILTIN_SETTING_ITEM_1 =
-            DeviceSettingConfigItemModel.BuiltinItem(
-                DeviceSettingId.DEVICE_SETTING_ID_HEADER, "bluetooth_device_header")
+            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
+                DeviceSettingId.DEVICE_SETTING_ID_HEADER, false, "bluetooth_device_header")
         val BUILDIN_SETTING_ITEM_2 =
-            DeviceSettingConfigItemModel.BuiltinItem(
-                DeviceSettingId.DEVICE_SETTING_ID_ACTION_BUTTONS, "action_buttons")
-        val SETTING_ITEM_HELP = DeviceSettingConfigItemModel.AppProvidedItem(12345)
+            DeviceSettingConfigItemModel.BuiltinItem.CommonBuiltinItem(
+                DeviceSettingId.DEVICE_SETTING_ID_ACTION_BUTTONS, false, "action_buttons")
+        val SETTING_ITEM_HELP = DeviceSettingConfigItemModel.AppProvidedItem(12345, false)
     }
 }

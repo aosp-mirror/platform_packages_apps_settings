@@ -67,13 +67,8 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
         initLaunchPreference();
 
         final View view = super.onCreateView(inflater, container, savedInstanceState);
-        removePreference(KEY_USE_SERVICE_PREFERENCE);
+        removePreference(getUseServicePreferenceKey());
         return view;
-    }
-
-    @Override
-    protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        // Do nothing.
     }
 
     @Override
@@ -81,7 +76,7 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
         super.onProcessArguments(arguments);
         mComponentName = arguments.getParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME);
         final ActivityInfo info = getAccessibilityShortcutInfo().getActivityInfo();
-        mPackageName = info.loadLabel(getPackageManager()).toString();
+        mFeatureName = info.loadLabel(getPackageManager());
 
         // Settings animated image.
         final int animatedImageRes = arguments.getInt(

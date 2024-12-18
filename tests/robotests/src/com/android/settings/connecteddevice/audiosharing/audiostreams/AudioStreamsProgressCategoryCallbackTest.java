@@ -16,15 +16,26 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static com.android.settingslib.flags.Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX;
+import static com.android.settingslib.flags.Flags.FLAG_ENABLE_LE_AUDIO_SHARING;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
+import android.bluetooth.BluetoothStatusCodes;
+import android.content.Context;
+import android.platform.test.flag.junit.SetFlagsRule;
+
+import androidx.test.core.app.ApplicationProvider;
+
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -34,22 +45,39 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(
+        shadows = {
+            ShadowBluetoothAdapter.class,
+        })
 public class AudioStreamsProgressCategoryCallbackTest {
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+    private final Context mContext = ApplicationProvider.getApplicationContext();
     @Mock private AudioStreamsProgressCategoryController mController;
     @Mock private BluetoothDevice mDevice;
     @Mock private BluetoothLeBroadcastReceiveState mState;
     @Mock private BluetoothLeBroadcastMetadata mMetadata;
+    @Mock private BluetoothDevice mSourceDevice;
     private AudioStreamsProgressCategoryCallback mCallback;
 
     @Before
     public void setUp() {
-        mCallback = new AudioStreamsProgressCategoryCallback(mController);
+        mSetFlagsRule.disableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        ShadowBluetoothAdapter shadowBluetoothAdapter =
+                Shadow.extract(BluetoothAdapter.getDefaultAdapter());
+        shadowBluetoothAdapter.setEnabled(true);
+        shadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
+                BluetoothStatusCodes.FEATURE_SUPPORTED);
+        shadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
+                BluetoothStatusCodes.FEATURE_SUPPORTED);
+        mCallback = new AudioStreamsProgressCategoryCallback(mContext, mController);
     }
 
     @Test
@@ -59,7 +87,22 @@ public class AudioStreamsProgressCategoryCallbackTest {
         when(mState.getBisSyncState()).thenReturn(bisSyncState);
         mCallback.onReceiveStateChanged(mDevice, /* sourceId= */ 0, mState);
 
-        verify(mController).handleSourceConnected(any());
+        verify(mController).handleSourceConnected(any(), any());
+    }
+
+    @Test
+    public void testOnReceiveStateChanged_sourcePresent() {
+        mSetFlagsRule.enableFlags(FLAG_ENABLE_LE_AUDIO_SHARING);
+        mSetFlagsRule.enableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        String address = "11:22:33:44:55:66";
+
+        List<Long> bisSyncState = new ArrayList<>();
+        when(mState.getBisSyncState()).thenReturn(bisSyncState);
+        when(mState.getSourceDevice()).thenReturn(mSourceDevice);
+        when(mSourceDevice.getAddress()).thenReturn(address);
+        mCallback.onReceiveStateChanged(mDevice, /* sourceId= */ 0, mState);
+
+        verify(mController).handleSourcePresent(any(), any());
     }
 
     @Test

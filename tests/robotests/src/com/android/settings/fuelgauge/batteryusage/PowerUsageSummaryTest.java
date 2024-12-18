@@ -37,13 +37,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.fuelgauge.BatteryBroadcastReceiver;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.BatteryUtils;
@@ -82,7 +82,7 @@ public class PowerUsageSummaryTest {
         sAdditionalBatteryInfoIntent = new Intent("com.example.app.ADDITIONAL_BATTERY_INFO");
     }
 
-    @Mock private SettingsActivity mSettingsActivity;
+    @Mock private FragmentActivity mActivity;
     @Mock private LoaderManager mLoaderManager;
     @Mock private Loader<BatteryTip> mBatteryTipLoader;
     @Mock private Loader<BatteryInfo> mBatteryInfoLoader;
@@ -106,7 +106,7 @@ public class PowerUsageSummaryTest {
         mFragment = spy(new TestFragment(mRealContext, mLoaderManager));
         mFragment.initFeatureProvider();
         doNothing().when(mFragment).restartBatteryStatsLoader(anyInt());
-        when(mFragment.getActivity()).thenReturn(mSettingsActivity);
+        when(mFragment.getActivity()).thenReturn(mActivity);
         when(mFeatureFactory.powerUsageFeatureProvider.getAdditionalBatteryInfoIntent())
                 .thenReturn(sAdditionalBatteryInfoIntent);
         mFragment.mBatteryUtils = Mockito.spy(new BatteryUtils(mRealContext));

@@ -1,5 +1,5 @@
 package: "com.android.settings.flags"
-container: "system_ext"
+container: "system"
 
 flag {
   name: "rotation_connected_display_setting"
@@ -13,6 +13,13 @@ flag {
   namespace: "display_manager"
   description: "Allow enabling/disabling and changing resolution of the connected display."
   bug: "253296253"
+}
+
+flag {
+  name: "display_topology_pane_in_display_list"
+  namespace: "display_manager"
+  description: "Shows the connected display setting and shows the topology pane in the display list, even with only one display connected."
+  bug: "352648432"
 }
 
 flag {

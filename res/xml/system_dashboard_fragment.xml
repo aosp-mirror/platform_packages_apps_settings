@@ -30,6 +30,15 @@
         settings:controller="com.android.settings.language.LanguagePreferenceController"/>
 
     <Preference
+        android:key="language_and_region_settings"
+        android:title="@string/language_and_region_settings"
+        android:summary="@string/languages_setting_summary"
+        android:icon="@drawable/ic_settings_languages"
+        android:order="-260"
+        android:fragment="com.android.settings.language.LanguageAndRegionSettings"
+        settings:controller="com.android.settings.language.LanguageAndRegionPreferenceController"/>
+
+    <Preference
         android:key="Keyboard_settings"
         android:title="@string/keyboard_settings"
         android:icon="@drawable/ic_settings_keyboards"
@@ -43,8 +52,26 @@
         android:summary="@string/trackpad_settings_summary"
         android:icon="@drawable/ic_settings_trackpad"
         android:order="-254"
-        android:fragment="com.android.settings.inputmethod.TrackpadSettings"
-        settings:controller="com.android.settings.inputmethod.TrackpadSettingsController"/>
+        android:fragment="com.android.settings.inputmethod.TouchpadAndMouseSettings"
+        settings:controller="com.android.settings.inputmethod.TouchpadAndMouseSettingsController"/>
+
+    <Preference
+        android:key="touchpad_settings"
+        android:title="@string/trackpad_settings"
+        android:summary="@string/trackpad_settings_summary"
+        android:icon="@drawable/ic_settings_trackpad"
+        android:order="-253"
+        android:fragment="com.android.settings.inputmethod.TouchpadSettingFragment"
+        settings:controller="com.android.settings.inputmethod.TouchpadSettingsController"/>
+
+    <Preference
+        android:key="mouse_settings"
+        android:title="@string/mouse_settings"
+        android:summary="@string/mouse_settings_summary"
+        android:icon="@drawable/ic_settings_mouse"
+        android:order="-252"
+        android:fragment="com.android.settings.inputmethod.MouseSettingFragment"
+        settings:controller="com.android.settings.inputmethod.MouseSettingsController"/>
 
     <Preference
         android:key="gesture_settings"

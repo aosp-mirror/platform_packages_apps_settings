@@ -71,6 +71,7 @@ import java.util.Locale;
 public class LocaleListEditor extends RestrictedSettingsFragment implements View.OnTouchListener {
     protected static final String INTENT_LOCALE_KEY = "localeInfo";
     protected static final String EXTRA_SYSTEM_LOCALE_DIALOG_TYPE = "system_locale_dialog_type";
+    protected static final String EXTRA_RESULT_LOCALE = "result_locale";
     protected static final String LOCALE_SUGGESTION = "locale_suggestion";
 
     private static final String TAG = LocaleListEditor.class.getSimpleName();

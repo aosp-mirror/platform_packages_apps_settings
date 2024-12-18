@@ -65,11 +65,13 @@ import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.flags.Flags;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -178,6 +180,12 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
 
         if (resultCode != Activity.RESULT_OK) {
             establishInitialState();
+            if (requestCode == BIOMETRICS_REQUEST) {
+                if (resultCode == ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT) {
+                    IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(getActivity(),
+                            Utils.BiometricStatus.LOCKOUT, true /* twoFactorAuthentication */);
+                }
+            }
             return;
         }
 
@@ -192,6 +200,8 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
                         userId, false /* hideBackground */);
                 return;
             } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
+                IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(getActivity(),
+                        biometricAuthStatus, true /* twoFactorAuthentication */);
                 return;
             }
         }

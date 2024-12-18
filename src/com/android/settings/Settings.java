@@ -92,13 +92,17 @@ public class Settings extends SettingsActivity {
     public static class AvailableVirtualKeyboardActivity extends SettingsActivity { /* empty */ }
     public static class KeyboardLayoutPickerActivity extends SettingsActivity { /* empty */ }
     public static class PhysicalKeyboardActivity extends SettingsActivity { /* empty */ }
+    public static class PhysicalKeyboardLayoutPickerActivity extends SettingsActivity {
+        /* empty */
+    }
     public static class InputMethodAndSubtypeEnablerActivity extends SettingsActivity { /* empty */ }
     public static class SpellCheckersSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocalePickerActivity extends SettingsActivity { /* empty */ }
-    public static class LanguageAndInputSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LanguageSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for the regional preferences settings. */
     public static class RegionalPreferencesActivity extends SettingsActivity { /* empty */ }
+    public static class TemperatureUnitSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class FirstDayOfWeekSettingsActivity extends SettingsActivity { /* empty */ }
     public static class KeyboardSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for the navigation mode settings. */
     public static class NavigationModeSettingsActivity extends SettingsActivity { /* empty */ }
@@ -112,6 +116,7 @@ public class Settings extends SettingsActivity {
     public static class ModuleLicensesActivity extends SettingsActivity { /* empty */ }
     public static class ApplicationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManageApplicationsActivity extends SettingsActivity { /* empty */ }
+    public static class AppStorageSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManageAssistActivity extends SettingsActivity { /* empty */ }
     public static class HighPowerApplicationsActivity extends SettingsActivity { /* empty */ }
     public static class BackgroundCheckSummaryActivity extends SettingsActivity { /* empty */ }
@@ -126,6 +131,9 @@ public class Settings extends SettingsActivity {
     public static class AccessibilityDaltonizerSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for lockscreen settings. */
     public static class LockScreenSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity for notifications on lockscreen settings. */
+    public static class LockScreenNotificationsSettingsActivity
+            extends SettingsActivity { /* empty */ }
     /** Activity for bluetooth pairing settings. */
     public static class BlueToothPairingActivity extends SettingsActivity { /* empty */ }
     /** Activity for Reduce Bright Colors. */
@@ -447,7 +455,7 @@ public class Settings extends SettingsActivity {
             super.onNewIntent(intent);
 
             Log.d(TAG, "Starting onNewIntent");
-
+            setIntent(intent);
             createUiFromIntent(null /* savedState */, convertIntent(intent));
         }
 
@@ -485,6 +493,7 @@ public class Settings extends SettingsActivity {
     public static class NetworkDashboardActivity extends SettingsActivity {}
     public static class ConnectedDeviceDashboardActivity extends SettingsActivity {}
     public static class PowerUsageSummaryActivity extends SettingsActivity { /* empty */ }
+    public static class PowerUsageAdvancedActivity extends SettingsActivity { /* empty */ }
     public static class StorageDashboardActivity extends SettingsActivity {}
     public static class AccountDashboardActivity extends SettingsActivity {}
     public static class SystemDashboardActivity extends SettingsActivity {}
@@ -515,4 +524,5 @@ public class Settings extends SettingsActivity {
 
     public static class HearingDevicesActivity extends SettingsActivity { /* empty */ }
     public static class HearingDevicesPairingActivity extends SettingsActivity { /* empty */ }
+    public static class ContactsStorageSettingsActivity extends SettingsActivity { /* empty */ }
 }

@@ -22,9 +22,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.annotations.Initializer;
 import com.android.settings.applications.defaultapps.DefaultAppPreferenceController;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -43,7 +46,8 @@ public class DefaultVoiceInputPreferenceController extends DefaultAppPreferenceC
     private Preference mPreference;
     private Context mContext;
 
-    public DefaultVoiceInputPreferenceController(Context context, Lifecycle lifecycle) {
+    public DefaultVoiceInputPreferenceController(
+            @NonNull Context context, @Nullable Lifecycle lifecycle) {
         super(context);
         mContext = context;
         mHelper = new VoiceInputHelper(context);
@@ -65,6 +69,7 @@ public class DefaultVoiceInputPreferenceController extends DefaultAppPreferenceC
     }
 
     @Override
+    @Initializer
     public void displayPreference(PreferenceScreen screen) {
         mScreen = screen;
         mPreference = screen.findPreference(getPreferenceKey());

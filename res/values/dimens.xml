@@ -156,8 +156,13 @@
     <dimen name="sfps_progress_bar_translate_y">2dp</dimen>
     <dimen name="sfps_lottie_translate_x">12dp</dimen>
     <dimen name="sfps_lottie_translate_y">12dp</dimen>
+    <dimen name="sfps_enroll_finish_icon_margin_top">-24dp</dimen>
     <dimen name="udfps_lottie_translate_y">0dp</dimen>
     <dimen name="udfps_lottie_padding_top">20dp</dimen>
+    <dimen name="biometrics_glif_header_height">274dp</dimen>
+    <item name="biometrics_glif_header_height_ratio" format="float" type="dimen">0.27</item>
+    <!-- For showing when Display / Font size set to largest -->
+    <item name="biometrics_glif_header_height_ratio_large" format="float" type="dimen">0.37</item>
 
     <!-- Face -->
     <item name="face_preview_translate_y" format="float" type="dimen">0</item>
@@ -175,14 +180,28 @@
     <dimen name="keyboard_picker_text_size">16sp</dimen>
 
     <!-- Pointer -->
-    <dimen name="pointer_fill_style_circle_diameter">52dp</dimen>
-    <dimen name="pointer_fill_style_circle_padding">8dp</dimen>
-    <dimen name="pointer_fill_style_shape_default_stroke">1dp</dimen>
-    <dimen name="pointer_fill_style_shape_hovered_stroke">3dp</dimen>
+    <dimen name="pointer_fill_container_height">88dp</dimen>
+    <dimen name="pointer_fill_container_max_width">448dp</dimen>
+    <dimen name="pointer_fill_style_container_padding">32dp</dimen>
+    <dimen name="pointer_fill_style_circle_diameter">56dp</dimen>
+    <dimen name="pointer_fill_style_circle_hover_selected_diameter">52dp</dimen>
+    <dimen name="pointer_fill_style_circle_hover_diameter">56dp</dimen>
+    <dimen name="pointer_fill_style_circle_selected_diameter">50dp</dimen>
+    <dimen name="pointer_fill_style_circle_inner_diameter">40dp</dimen>
+    <dimen name="pointer_fill_style_circle_offset">8dp</dimen>
+    <dimen name="pointer_fill_style_circle_padding">16dp</dimen>
+    <dimen name="pointer_fill_style_circle_selected_offset">3dp</dimen>
+    <dimen name="pointer_fill_style_checkmark_selected_padding">14dp</dimen>
+    <dimen name="pointer_fill_style_checkmark_hovered_padding">17dp</dimen>
+    <dimen name="pointer_fill_style_shape_selected_stroke">2dp</dimen>
+    <dimen name="pointer_fill_style_shape_hovered_stroke">4dp</dimen>
     <dimen name="pointer_stroke_style_padding">8dp</dimen>
+    <dimen name="pointer_stroke_style_text_padding">21dp</dimen>
     <dimen name="pointer_scale_padding">8dp</dimen>
     <item name="pointer_scale_size_start" format="float" type="dimen">1.0</item>
     <item name="pointer_scale_size_end" format="float" type="dimen">2.5</item>
+    <dimen name="radio_group_style_padding">8dp</dimen>
+    <dimen name="radio_group_style_text_padding">21dp</dimen>
 
     <!-- RemoteAuth-->
     <dimen name="remoteauth_fragment_padding_horizontal">40dp</dimen>
@@ -520,4 +539,7 @@
     <dimen name="zen_mode_circular_icon_margin_between">4dp</dimen>
     <dimen name="zen_mode_circular_icon_margin_vertical">8dp</dimen>
     <dimen name="zen_mode_circular_icon_text_size">18dp</dimen>
+
+    <!-- Connected displays -->
+    <dimen name="display_topology_pane_margin">24dp</dimen>
 </resources>

@@ -41,6 +41,11 @@ class ZenModeBlurbPreferenceController extends AbstractZenModePreferenceControll
     }
 
     @Override
+    public boolean isAvailable(@NonNull ZenMode zenMode) {
+        return !zenMode.isCustomManual();
+    }
+
+    @Override
     void updateState(Preference preference, @NonNull ZenMode zenMode) {
         preference.setTitle(getModeBlurb(zenMode));
     }

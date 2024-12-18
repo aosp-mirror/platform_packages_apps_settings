@@ -17,29 +17,39 @@ package com.android.settings.datausage;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 
 public class DataSaverPreference extends Preference implements DataSaverBackend.Listener {
 
-    private final DataSaverBackend mDataSaverBackend;
+    private final @Nullable DataSaverBackend mDataSaverBackend;
 
     public DataSaverPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mDataSaverBackend = new DataSaverBackend(context);
+        mDataSaverBackend = isCatalystEnabled() ? null : new DataSaverBackend(context);
+    }
+
+    private boolean isCatalystEnabled() {
+        return Flags.catalyst() && Flags.catalystRestrictBackgroundParentEntry();
     }
 
     @Override
     public void onAttached() {
         super.onAttached();
-        mDataSaverBackend.addListener(this);
+        if (mDataSaverBackend != null) {
+            mDataSaverBackend.addListener(this);
+        }
     }
 
     @Override
     public void onDetached() {
         super.onDetached();
-        mDataSaverBackend.remListener(this);
+        if (mDataSaverBackend != null) {
+            mDataSaverBackend.remListener(this);
+        }
     }
 
     @Override

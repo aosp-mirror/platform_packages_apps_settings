@@ -46,7 +46,7 @@ public class AutoTimeZonePreferenceController extends TogglePreferenceController
         // setTimeAndDateCallback() isn't called, e.g. for slices and other cases where the
         // controller is instantiated outside of the context of the real Date & Time settings
         // screen.
-        mCallback  = (c) -> {};
+        mCallback = (c) -> {};
     }
 
     /**
@@ -103,10 +103,23 @@ public class AutoTimeZonePreferenceController extends TogglePreferenceController
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        TimeZoneConfiguration configuration = new TimeZoneConfiguration.Builder()
-                .setAutoDetectionEnabled(isChecked)
-                .build();
-        boolean result = mTimeManager.updateTimeZoneConfiguration(configuration);
+        TimeZoneConfiguration.Builder configuration = new TimeZoneConfiguration.Builder()
+                .setAutoDetectionEnabled(isChecked);
+
+        // "Use location for time zone" is only used if "Automatic time zone" is enabled. If
+        // the user toggles off automatic time zone, set the toggle off and disable the toggle.
+        int geoDetectionCapability = mTimeManager
+                .getTimeZoneCapabilitiesAndConfig()
+                .getCapabilities()
+                .getConfigureGeoDetectionEnabledCapability();
+
+        if (!isChecked
+                && (geoDetectionCapability == CAPABILITY_NOT_APPLICABLE
+                || geoDetectionCapability == CAPABILITY_POSSESSED)) {
+            configuration.setGeoDetectionEnabled(false);
+        }
+
+        boolean result = mTimeManager.updateTimeZoneConfiguration(configuration.build());
 
         mCallback.updateTimeAndDateDisplay(mContext);
         return result;
@@ -129,17 +142,19 @@ public class AutoTimeZonePreferenceController extends TogglePreferenceController
         // time zone must use location.
         if (LocationProviderStatusPreferenceController.hasLocationTimeZoneNoTelephonyFallback(
                 mTimeManager.getTimeZoneCapabilitiesAndConfig().getDetectorStatus())) {
-            return mContext.getResources().getString(R.string.auto_zone_requires_location_summary);
+            return mContext.getString(R.string.auto_zone_requires_location_summary);
         }
-        // If the user has a dedicated toggle to control location use, the summary can
-        // be empty because the use of location is explicit.
-        return "";
+
+        // If the user has a dedicated toggle to control location use, explain what it does.
+        return mContext.getString(R.string.zone_auto_title_summary);
     }
 
     @VisibleForTesting
     boolean isEnabled() {
-        TimeZoneConfiguration config = getTimeZoneCapabilitiesAndConfig().getConfiguration();
-        return config.isAutoDetectionEnabled();
+        return mTimeManager
+                .getTimeZoneCapabilitiesAndConfig()
+                .getConfiguration()
+                .isAutoDetectionEnabled();
     }
 
     private TimeZoneCapabilitiesAndConfig getTimeZoneCapabilitiesAndConfig() {

@@ -147,9 +147,24 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
      * @return any subscription within device is under ECM mode
      */
     public boolean isInEcmMode() {
+        return isInEcmMode(mContext, mTelephonyManager);
+    }
+
+    /**
+     * Check the status of ECM mode
+     *
+     * @param context Caller's {@link Context}
+     * @param telephonyManager The default {@link TelephonyManager}
+     *
+     * @return any subscription within device is under ECM mode
+     */
+    public static boolean isInEcmMode(Context context, TelephonyManager telephonyManager) {
+        if (context == null || telephonyManager == null) {
+            return false;
+        }
         if (Flags.enforceTelephonyFeatureMappingForPublicApis()) {
             try {
-                if (mTelephonyManager.getEmergencyCallbackMode()) {
+                if (telephonyManager.getEmergencyCallbackMode()) {
                     return true;
                 }
             } catch (UnsupportedOperationException e) {
@@ -157,26 +172,26 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
                 // Ignore exception, device is not in ECM mode.
             }
         } else {
-            if (mTelephonyManager.getEmergencyCallbackMode()) {
+            if (telephonyManager.getEmergencyCallbackMode()) {
                 return true;
             }
         }
         final List<SubscriptionInfo> subInfoList =
-                ProxySubscriptionManager.getInstance(mContext).getActiveSubscriptionsInfo();
+                ProxySubscriptionManager.getInstance(context).getActiveSubscriptionsInfo();
         if (subInfoList == null) {
             return false;
         }
         for (SubscriptionInfo subInfo : subInfoList) {
-            final TelephonyManager telephonyManager =
-                    mTelephonyManager.createForSubscriptionId(subInfo.getSubscriptionId());
-            if (telephonyManager != null) {
+            final TelephonyManager telephonyManagerForSubId =
+                    telephonyManager.createForSubscriptionId(subInfo.getSubscriptionId());
+            if (telephonyManagerForSubId != null) {
                 if (!Flags.enforceTelephonyFeatureMappingForPublicApis()) {
-                    if (telephonyManager.getEmergencyCallbackMode()) {
+                    if (telephonyManagerForSubId.getEmergencyCallbackMode()) {
                         return true;
                     }
                 } else {
                     try {
-                        if (telephonyManager.getEmergencyCallbackMode()) {
+                        if (telephonyManagerForSubId.getEmergencyCallbackMode()) {
                             return true;
                         }
                     } catch (UnsupportedOperationException e) {

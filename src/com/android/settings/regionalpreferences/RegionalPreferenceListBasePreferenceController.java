@@ -24,8 +24,8 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.TickButtonPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 /** A base controller for handling all regional preferences controllers. */
 public abstract class RegionalPreferenceListBasePreferenceController extends
@@ -54,42 +54,37 @@ public abstract class RegionalPreferenceListBasePreferenceController extends
         String[] unitValues = getUnitValues();
 
         for (int i = 0; i < unitValues.length; i++) {
-            TickButtonPreference pref = new TickButtonPreference(mContext);
+            SelectorWithWidgetPreference pref = new SelectorWithWidgetPreference(mContext);
             mPreferenceCategory.addPreference(pref);
             final String item = unitValues[i];
             final String value = RegionalPreferencesDataUtils.getDefaultUnicodeExtensionData(
                     mContext, getExtensionTypes());
             pref.setTitle(getPreferenceTitle(item));
             pref.setKey(item);
-            pref.setOnPreferenceClickListener(clickedPref -> {
-                setSelected(pref);
+            pref.setOnClickListener(v -> {
                 RegionalPreferencesDataUtils.savePreference(mContext, getExtensionTypes(),
                         item.equals(RegionalPreferencesDataUtils.DEFAULT_VALUE)
                                 ? null : item);
-                String metrics =
-                        getMetricsActionKey() == SettingsEnums.ACTION_SET_FIRST_DAY_OF_WEEK ? ""
+                String metrics = shouldUseEmptyMetrics()
+                                ? ""
                                 : getPreferenceTitle(value) + " > " + getPreferenceTitle(item);
                 mMetricsFeatureProvider.action(mContext, getMetricsActionKey(), metrics);
-                return true;
             });
-            pref.setSelected(!value.isEmpty() && item.equals(value));
-        }
-    }
-
-    private void setSelected(TickButtonPreference preference) {
-        for (int i = 0; i < mPreferenceCategory.getPreferenceCount(); i++) {
-            TickButtonPreference pref = (TickButtonPreference) mPreferenceCategory.getPreference(i);
-            if (pref.getKey().equals(preference.getKey())) {
-                pref.setSelected(true);
-                continue;
-            }
-            pref.setSelected(false);
+            pref.setChecked(!value.isEmpty() && item.equals(value));
         }
     }
 
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
+    }
+
+    private boolean shouldUseEmptyMetrics() {
+        if (getMetricsActionKey() == SettingsEnums.ACTION_SET_FIRST_DAY_OF_WEEK
+                || getMetricsActionKey() == SettingsEnums.ACTION_SET_MEASUREMENT_SYSTEM) {
+            return true;
+        }
+        return false;
     }
 
     protected abstract String getPreferenceTitle(String item);

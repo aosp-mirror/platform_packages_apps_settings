@@ -16,7 +16,7 @@
 
 package com.android.settings.shortcut;
 
-import static com.android.settings.shortcut.CreateShortcutPreferenceController.SHORTCUT_ID_PREFIX;
+import static com.android.settings.shortcut.Shortcuts.SHORTCUT_ID_PREFIX;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -101,10 +101,10 @@ public class CreateShortcutPreferenceControllerTest {
         when(mShortcutManager.createShortcutResultIntent(any(ShortcutInfo.class)))
                 .thenReturn(new Intent().putExtra("d1", "d2"));
 
-        final Intent intent = new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE)
+        final Intent intent = new Intent(Shortcuts.SHORTCUT_PROBE)
                 .setClass(mContext, Settings.ManageApplicationsActivity.class);
         final ResolveInfo ri = mContext.getPackageManager().resolveActivity(intent, 0);
-        final Intent result = mController.createResultIntent(intent, ri, "mock");
+        final Intent result = mController.createResultIntent(ri);
 
         assertThat(result.getStringExtra("d1")).isEqualTo("d2");
         assertThat((Object) result.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT)).isNotNull();
@@ -116,7 +116,6 @@ public class CreateShortcutPreferenceControllerTest {
                 .isEqualTo(SHORTCUT_ID_PREFIX + intent.getComponent().flattenToShortString());
     }
 
-    @Ignore("b/314924127")
     @Test
     public void queryShortcuts_shouldOnlyIncludeSystemApp() {
         final ResolveInfo ri1 = new ResolveInfo();
@@ -131,16 +130,17 @@ public class CreateShortcutPreferenceControllerTest {
         ri2.activityInfo.applicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 
         mPackageManager.setResolveInfosForIntent(
-                new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE),
+                new Intent(Shortcuts.SHORTCUT_PROBE),
                 Arrays.asList(ri1, ri2));
 
         doReturn(false).when(mController).canShowWifiHotspot();
         final List<ResolveInfo> info = mController.queryShortcuts();
         assertThat(info).hasSize(1);
-        assertThat(info.get(0).activityInfo).isEqualTo(ri2.activityInfo);
+        final ActivityInfo resultActivityInfo = info.get(0).activityInfo;
+        assertThat(resultActivityInfo.name).isEqualTo(ri2.activityInfo.name);
+        assertThat(resultActivityInfo.applicationInfo.isSystemApp()).isTrue();
     }
 
-    @Ignore("b/314924127")
     @Test
     public void queryShortcuts_shouldSortBasedOnPriority() {
         final ResolveInfo ri1 = new ResolveInfo();
@@ -158,14 +158,18 @@ public class CreateShortcutPreferenceControllerTest {
         ri2.activityInfo.applicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 
         mPackageManager.setResolveInfosForIntent(
-                new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE),
+                new Intent(Shortcuts.SHORTCUT_PROBE),
                 Arrays.asList(ri1, ri2));
 
         doReturn(false).when(mController).canShowWifiHotspot();
         final List<ResolveInfo> info = mController.queryShortcuts();
         assertThat(info).hasSize(2);
-        assertThat(info.get(0).activityInfo).isEqualTo(ri2.activityInfo);
-        assertThat(info.get(1).activityInfo).isEqualTo(ri1.activityInfo);
+
+        final ResolveInfo resultRi1 = info.get(0);
+        assertThat(resultRi1.activityInfo.name).isEqualTo(ri2.activityInfo.name);
+        final ResolveInfo resultRi2 = info.get(1);
+        assertThat(resultRi2.activityInfo.name).isEqualTo(ri1.activityInfo.name);
+        assertThat(resultRi1.priority).isLessThan(resultRi2.priority);
     }
 
     @Test
@@ -276,7 +280,7 @@ public class CreateShortcutPreferenceControllerTest {
         ri.activityInfo.applicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 
         mPackageManager.setResolveInfosForIntent(
-                new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE),
+                new Intent(Shortcuts.SHORTCUT_PROBE),
                 Arrays.asList(ri));
     }
 }

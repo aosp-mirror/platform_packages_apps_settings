@@ -70,6 +70,7 @@ object SpecialAppAccessPageProvider : SettingsPageProvider {
                 WifiControlAppListProvider,
                 LongBackgroundTasksAppListProvider,
                 TurnScreenOnAppsAppListProvider,
+                WriteSystemPreferencesAppListProvider,
             )
             .map { it.buildAppListInjectEntry().setLink(fromPage = owner).build() }
     }

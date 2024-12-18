@@ -67,6 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"ຈັບຄູ່ອຸປະກອນໃໝ່"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"ເປີດໂດຍອັດຕະໂນມັດໃນມື້ອື່ນ"</string>
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"ຫາກທ່ານປິດ Bluetooth, ອຸປະກອນຈະເປີດອີກຄັ້ງໃນມື້ຕໍ່ໄປ"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"ຈັບຄູ່ຫູຂວາ"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"ຈັບຄູ່ຫູຊ້າຍ"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"ຈັບຄູ່ຫູອີກຂ້າງຂອງທ່ານ"</string>
@@ -120,6 +121,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"ປິດການນຳໃຊ້ສຽງ Bluetooth LE"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"ປິດການນຳໃຊ້ຄຸນສົມບັດສຽງ Bluetooth LE ຫາກອຸປະກອນຮອງຮັບຄວາມສາມາດຂອງຮາດແວສຽງ LE."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"ໂໝດສຽງ Bluetooth LE"</string>
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"ເປີດການນຳໃຊ້ຕົວຢ່າງ Bluetooth LE Audio Broadcast UI"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"ເປີດການນຳໃຊ້ຕົວຢ່າງ LE Audio Sharing UI ໂດຍຮວມເອົາການແບ່ງປັນສຽງສ່ວນຕົວ ແລະ ການອອກອາກາດສ່ວນຕົວ"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"ສະແດງການສະຫຼັບສຽງ LE ໃນລາຍລະອຽດອຸປະກອນ"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"ຂ້າມລາຍຊື່ອະນຸຍາດສຽງ Bluetooth LE"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"ໃຊ້ສຽງ LE ໂດຍຄ່າເລີ່ມຕົ້ນເຖິງວ່າອຸປະກອນຕໍ່ພ່ວງສຽງ LE ຈະບໍ່ໄດ້ຮັບການຢັ້ງຢືນວ່າເປັນໄປຕາມເກນລາຍຊື່ອະນຸຍາດກໍຕາມ."</string>
@@ -175,6 +178,10 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"ພາສາແອັບ"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"ພາສາທີ່ແນະນຳ"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"ພາສາທັງໝົດ"</string>
+    <string name="suggested_locales_title" msgid="119908696638862861">"ແນະນຳ"</string>
+    <string name="all_supported_locales_title" msgid="2535112632133166546">"ທຸກພາສາ"</string>
+    <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"ທຸກພາກພື້ນ"</string>
+    <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"ລະບົບລຳດັບໝາຍເລກທັງໝົດ"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"ພາສາລະບົບ"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"ຄ່າເລີ່ມຕົ້ນຂອງລະບົບ"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"ບໍ່ສາມາດເລືອກພາສາສຳລັບແອັບນີ້ຈາກການຕັ້ງຄ່າໄດ້."</string>
@@ -190,10 +197,16 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"ປ່ຽນ"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s ບໍ່ມີໃຫ້ໃຊ້"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"ພາສານີ້ບໍ່ສາມາດໃຊ້ເປັນພາສາລະບົບໄດ້, ແຕ່ທ່ານໄດ້ໃຫ້ແອັບ ແລະ ເວັບໄຊຮູ້ວ່າທ່ານຕ້ອງການໃຊ້ພາສານີ້."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"ຄົ້ນຫາ"</string>
+    <string name="language_selection_title" msgid="968179636453982415">"ເພີ່ມພາສາ"</string>
+    <string name="country_selection_title" msgid="5376929821458644732">"ການຕັ້ງຄ່າພາກພື້ນ"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"ພິມຊື່ພາສາ"</string>
+    <string name="more_language_settings_category" msgid="3669703092480725416">"ການຕັ້ງຄ່າພາສາເພີ່ມເຕີມ"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"ການຕັ້ງຄ່າຕາມພາກພື້ນ"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"ກຳນົດການຕັ້ງຄ່າຫົວໜ່ວຍ ແລະ ຕົວເລກ"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"ບອກໃຫ້ແອັບຮູ້ການຕັ້ງຄ່າຕາມພາກພື້ນຂອງທ່ານເພື່ອໃຫ້ແອັບສາມາດປັບແຕ່ງປະສົບການຂອງທ່ານໃຫ້ເປັນແບບສ່ວນຕົວໄດ້."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"ແອັບຈະໃຊ້ການຕັ້ງຄ່າຕາມພາກພື້ນຂອງທ່ານຫາກເປັນໄປໄດ້."</string>
+    <string name="regional_preferences_category_title" msgid="6754667410178749022">"ການຕັ້ງຄ່າຕາມພາກພື້ນ"</string>
     <string name="temperature_preferences_title" msgid="5009881556503629058">"ອຸນຫະພູມ"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"ມື້ທຳອິດຂອງອາທິດ"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"ການຕັ້ງຄ່າຕົວເລກ"</string>
@@ -246,9 +259,11 @@
     <string name="roaming_enable" msgid="7845716016861535340">"ເຊື່ອມຕໍ່ບໍລິການອິນເຕີເນັດເມື່ອໂຣມມິງຢູ່"</string>
     <string name="roaming_disable" msgid="729512894708689604">"ເຊື່ອມຕໍ່ບໍລິການອິນເຕີເນັດເມື່ອໂຣມມິງຢູ່"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"ອາດ​ມີ​ການ​ຄິດ​ໄລ່​ຄ່າ​ບໍ​ລິ​ການ​ໂຣມ​ມິງ."</string>
-    <string name="date_time_auto" msgid="4239202185055225869">"ຕັ້ງເວລາອັດຕະໂນມັດ"</string>
-    <string name="zone_auto_title" msgid="5141692422373097957">"ຕັ້ງຄ່າໂດຍອັດຕະໂນມັດ"</string>
-    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"ລະບົບຈະໃຊ້ສະຖານທີ່ເພື່ອຕັ້ງຄ່າເຂດເວລາເມື່ອເປີດການສະຫຼັບນີ້"</string>
+    <string name="date_time_auto" msgid="1759599045100040686">"ວັນທີ ແລະ ເວລາອັດຕະໂນມັດ"</string>
+    <string name="date_time_auto_summary" msgid="8294938565417729698">"ຕັ້ງຄ່າອັດຕະໂນມັດໂດຍໃຊ້ເຄືອຂ່າຍ ແລະ ສັນຍານໄຮ້ສາຍຂອງທ່ານ"</string>
+    <string name="zone_auto_title" msgid="3520584257065861479">"ເຂດເວລາອັດຕະໂນມັດ"</string>
+    <string name="zone_auto_title_summary" msgid="6540356783943375071">"ຕັ້ງຄ່າອັດຕະໂນມັດໂດຍອີງຕາມເຄືອຂ່າຍມືຖືທີ່ຢູ່ໃກ້ກັບທ່ານ"</string>
+    <string name="auto_zone_requires_location_summary" msgid="2366567167956530124">"ຕັ້ງຄ່າອັດຕະໂນມັດໂດຍໃຊ້ສະຖານທີ່ອຸປະກອນຂອງທ່ານ, ຫາກມີ"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"ໃຊ້ຄ່າເລີ່ມຕົ້ນຂອງສະຖານທີ່"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"ໃຊ້ຮູບແບບ 24 ຊົ່ວໂມງ"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"ເວລາ"</string>
@@ -313,6 +328,7 @@
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"ໃຊ້ການຕັ້ງຄ່າການຊ່ວຍເຂົ້າເຖິງ"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
+    <string name="security_settings_face_enroll_introduction_learn_more_message" msgid="7728962858407497809"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"ຍົກເລີກ"</string>
     <string name="security_settings_face_enroll_introduction_no_thanks" msgid="6603178409726203187">"ບໍ່ຟ້າວເທື່ອ"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"ຂ້ອຍຍອມຮັບ"</string>
@@ -373,6 +389,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"ທ່ານຄວບຄຸມໄດ້"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"ທ່ານ ແລະ ລູກຂອງທ່ານຄວບຄຸມໄດ້"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"ຂໍ້ຄວນຈື່"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_introduction_footer_title_3 (6474415050918819260) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"ໃຊ້ລາຍນິ້ວມືຂອງທ່ານເພື່ອປົດລັອກໂທລະສັບ ຫຼື ອະນຸມັດການສັ່ງຊື້.\n\nໝາຍເຫດ: ທ່ານບໍ່ສາມາດໃຊ້ນິ້ວມືຂອງທ່ານເພື່ອປົດລັອກອຸປະກອນນີ້ໄດ້. ສຳລັບຂໍ້ມູນເພີ່ມເຕີມ, ໃຫ້ຕິດຕໍ່ຜູ້ເບິ່ງແຍງລະບົບອົງກອນຂອງທ່ານ."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"​ຍົກ​ເລີກ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"ບໍ່ຟ້າວເທື່ອ"</string>
@@ -387,6 +405,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"ເພື່ອໃຫ້ໄດ້ຜົນຮັບທີ່ດີທີ່ສຸດ, ໃຫ້ໃຊ້ຕົວປົກປ້ອງໜ້າຈໍທີ່ໄດ້ຮັບການຮັບຮອງ Made for Google. ດ້ວຍຕົວປົກປ້ອງໜ້າຈໍແບບອື່ນ, ລາຍນິ້ວມືຂອງທ່ານອາດໃຊ້ບໍ່ໄດ້."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"ເພື່ອໃຫ້ໄດ້ຜົນຮັບທີ່ດີທີ່ສຸດ, ໃຫ້ໃຊ້ຕົວປົກປ້ອງໜ້າຈໍທີ່ໄດ້ຮັບການຮັບຮອງ Made for Google. ດ້ວຍຕົວປົກປ້ອງໜ້າຈໍແບບອື່ນ, ລາຍນິ້ວມືຂອງລູກທ່ານອາດໃຊ້ບໍ່ໄດ້."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more_2" msgid="8691531121923020632"></string>
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"ປົດລັອກດ້ວຍໂມງ"</string>
     <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"ເມື່ອທ່ານຕັ້ງຄ່າການປົດລັອກດ້ວຍໜ້າ ແລະ ການປົດລັອກດ້ວຍລາຍນິ້ວມື, ໂທລະສັບຂອງທ່ານຈະຂໍໃຫ້ສະແກນລາຍນິ້ວມືຂອງທ່ານເມື່ອທ່ານໃສ່ໜ້າກາກອະນາໄມ ຫຼື ຢູ່ໃນບ່ອນມືດ.\n\nການປົດລັອກດ້ວຍໂມງເປັນອີກວິທີໜຶ່ງທີ່ສະດວກໃນການປົດລັອກໂທລະສັບຂອງທ່ານ ຕົວຢ່າງ: ເມື່ອນິ້ວຂອງທ່ານປຽກຢູ່ ຫຼື ລະບົບຈື່ໃບໜ້າຂອງທ່ານບໍ່ໄດ້."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"ການປົດລັອກດ້ວຍໂມງເປັນອີກວິທີໜຶ່ງທີ່ສະດວກໃນການປົດລັອກໂທລະສັບຂອງທ່ານ ຕົວຢ່າງ: ເມື່ອລະບົບຈື່ລາຍນິ້ວມືຂອງທ່ານບໍ່ໄດ້."</string>
@@ -412,6 +431,17 @@
     <string name="security_settings_fingerprint_single_face_watch_preference_summary" msgid="764951912234638192">"ເພີ່ມໃບໜ້າ, ລາຍນິ້ວມື ແລະ <xliff:g id="WATCH">%s</xliff:g> ແລ້ວ"</string>
     <string name="security_settings_fingerprint_multiple_face_watch_preference_summary" msgid="3935500711366489380">"ເພີ່ມໃບໜ້າ, ລາຍນິ້ວມື ແລະ <xliff:g id="WATCH">%s</xliff:g> ແລ້ວ"</string>
     <string name="mandatory_biometrics_prompt_description" msgid="6790144699440050735">"ການກວດສອບຕົວຕົນເປີດຢູ່ ແລະ ຕ້ອງໃຊ້ຂໍ້ມູນລະບົບຊີວະມິຕິ"</string>
+    <string name="go_to_settings" msgid="4394928396153474179">"ໄປຫາການຕັ້ງຄ່າ"</string>
+    <string name="identity_check_lockout_error_title" msgid="7486409651908283892">"ການກວດສອບຕົວຕົນເປີດຢູ່ ແລະ ບໍ່ສາມາດຢັ້ງຢືນວ່າແມ່ນທ່ານ"</string>
+    <string name="identity_check_lockout_error_description_1" msgid="4882147327291296884">"ກວດສອບລະບົບຊີວະມິຕິຜິດພາດຫຼາຍເທື່ອເກີນໄປ. ໃຫ້ລັອກແລ້ວປົດລັອກອຸປະກອນຂອງທ່ານເພື່ອລອງໃໝ່."</string>
+    <string name="identity_check_lockout_error_two_factor_auth_description_1" msgid="8369894114882274736">"ກວດສອບລະບົບຊີວະມິຕິຜິດພາດຫຼາຍເທື່ອເກີນໄປ. ກະລຸນາລອງໃໝ່."</string>
+    <string name="identity_check_lockout_error_description_2" msgid="5512321457771307067">"ທ່ານສາມາດຈັດການການກວດສອບຕົວຕົນໄດ້ໃນການຕັ້ງຄ່າການປົກປ້ອງຈາກການລັກ. ໄປຫາການຕັ້ງຄ່າ"</string>
+    <string name="identity_check_general_error_title" msgid="5073929400896102674">"ຕ້ອງໃຊ້ລະບົບຊີວະມິຕິເພື່ອສືບຕໍ່"</string>
+    <string name="identity_check_general_error_description_1" msgid="5260846996256699095">"ການກວດສອບຕົວຕົນເປີດຢູ່ ແລະ ຕ້ອງໃຊ້ລະບົບຊີວະມິຕິ,​ ແຕ່ເຊັນເຊີໃບໜ້າ ຫຼື ເຊັນ​ເຊີລາຍນິ້ວ​ມືຂອງທ່ານບໍ່ສາມາດໃຊ້ໄດ້\n"<ul><li>"ໃຫ້ກວດສອບວ່າກ້ອງຂອງທ່ານເປີດຢູ່ແລ້ວລອງໃໝ່"</li>\n<li>"ທ່ານສາມາດປິດການກວດສອບຕົວຕົນໄດ້ໂດຍໃຊ້ບັນຊີ Google ຂອງທ່ານ"</li></ul></string>
+    <string name="identity_check_biometric_error_cancel" msgid="3353689146211669291">"ຍົກເລີກ"</string>
+    <string name="identity_check_biometric_error_ok" msgid="4535306787363107304">"ຕົກລົງ"</string>
+    <string name="go_to_identity_check" msgid="5215846637575231800">"ໄປຫາການກວດສອບຕົວຕົນ"</string>
+    <string name="identity_check_lockout_error_lock_screen" msgid="3021787511681444051">"ໜ້າຈໍລັອກ"</string>
     <string name="security_settings_remoteauth_preference_title" msgid="8319680328086089533">"ການປົດລັອກ Authenticator ຈາກທາງໄກ"</string>
     <string name="security_settings_remoteauth_preference_summary" msgid="1507004469316635196">"ເພີ່ມໂມງແລ້ວ"</string>
     <string name="security_settings_remoteauth_enroll_introduction_title" msgid="2151004795778999671">"ຕັ້ງຄ່າໂມງຂອງທ່ານ"</string>
@@ -538,6 +568,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"ຍົກນິ້ວມືອອກ, ຈາກນັ້ນ ສຳຜັດເຊັນເຊີອີກຄັ້ງ"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"ບໍ່ສາມາດໃຊ້ເຊັນເຊີລາຍນິ້ວມືໄດ້"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"ກະລຸນາໄປຫາຜູ້ໃຫ້ບໍລິການສ້ອມແປງ."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"ປົດລັອກດ້ວຍລາຍນິ້ວມືເມື່ອໜ້າຈໍປິດ"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"ໃຊ້ການປົດລັອກດ້ວຍລາຍນິ້ວມືເຖິງແມ່ນວ່າໜ້າຈໍຈະປິດຢູ່"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"ປິດໜ້າຈໍ, ປົດລັອກ"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"ການຕັ້ງຄ່າຄວາມປອດໄພເພີ່ມເຕີມ"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"ລັອກ​ໂປຣ​ໄຟລ໌​ບ່ອນ​ເຮັດ​ວຽກ, ການເຂົ້າລະຫັດ ແລະ ອື່ນໆ"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"ການເຂົ້າລະຫັດ, ຂໍ້ມູນການເຂົ້າສູ່ລະບົບ ແລະ ອື່ນໆ"</string>
@@ -646,6 +679,9 @@
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"ຕັ້ງຄ່າຮູບແບບສຳລັບພື້ນທີ່ສ່ວນຕົວຂອງທ່ານ"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"ລັອກ"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"ເຊື່ອງ"</string>
+    <string name="private_space_confirm_your_pattern_header" msgid="449382220134788771">"ຢືນຢັນຮູບແບບພື້ນທີ່ສ່ວນບຸກຄົນຂອງທ່ານ"</string>
+    <string name="private_space_confirm_your_pin_header" msgid="4543332157470087796">"ໃສ່ PIN ພື້ນທີ່ສ່ວນບຸກຄົນຂອງທ່ານຄືນໃໝ່"</string>
+    <string name="private_space_confirm_your_password_header" msgid="9202308075814307169">"ໃສ່ລະຫັດຜ່ານພື້ນທີ່ສ່ວນບຸກຄົນຂອງທ່ານຄືນໃໝ່"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"ທ່ານ​ສາ​ມາດ​ເພີ່ມ​ບໍ່ເກີນ <xliff:g id="COUNT">%d</xliff:g> ລາຍ​ນີ້ວ​ມື​"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"You’ve added the maximum number of fingerprints"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Can’t add more fingerprints"</string>
@@ -796,6 +832,7 @@
     <string name="lockpassword_password_requires_nonnumerical" msgid="389687423482993365">"{count,plural, =1{ຕ້ອງມີອັກຂະລະທີ່ບໍ່ແມ່ນຕົວເລກຢ່າງໜ້ອຍ 1 ຕົວ}other{ຕ້ອງມີອັກຂະລະທີ່ບໍ່ແມ່ນຕົວເລກຢ່າງໜ້ອຍ # ຕົວ}}"</string>
     <string name="lockpassword_password_recently_used" msgid="5341218079730167191">"ຜູ້ເບິ່ງແຍງລະບົບບໍ່ອະນຸຍາດໃຫ້ໃຊ້ລະຫັດຜ່ານເມື່ອບໍ່ດົນມານີ້ໄດ້"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="5843639256988031272">"ນ້ອຍຫາໃຫຍ່, ໃຫຍ່ຫານ້ອຍ ຫຼື ຊຸດຕົວເລກຊ້ຳໆແມ່ນບໍ່ສາມາດໃຊ້ໄດ້"</string>
+    <string name="lockpassword_password_no_sequential_characters" msgid="2191567105898075606">"ບໍ່ອະນຸຍາດໃຫ້ໃຊ້ຕົວອັກສອນຈາກໜ້ອຍໄປຫຼາຍ, ຈາກຫຼາຍໄປໜ້ອຍ ຫຼື ຮຽງລຳດັບຊ້ຳກັນ"</string>
     <string name="lockpassword_confirm_label" msgid="560897521093566777">"ຢືນຢັນ"</string>
     <string name="lockpassword_clear_label" msgid="311359833434539894">"ລຶບ"</string>
     <string name="lockpassword_credential_changed" msgid="5934778179732392028">"ມີການປ່ຽນໜ້າຈໍລັອກໄປກ່ອນແລ້ວ. ກະລຸນາລອງໃໝ່ກັບໜ້າຈໍລັອກໃໝ່."</string>
@@ -834,6 +871,10 @@
     <string name="bluetooth_scanning_on_info_message" msgid="786648535600075223">"ເມື່ອເປີດໃຊ້ Bluetooth ແລ້ວ, ອຸປະກອນຂອງທ່ານຈະສາມາດສື່ສານກັບອຸປະກອນ Bluetooth ອື່ນທີ່ຢູ່ໃກ້ຄຽງໄດ້.\n\nເພື່ອປັບປຸງປະສົບການການນຳໃຊ້ອຸປະກອນ, ແອັບ ແລະ ບໍລິການຕ່າງໆຈະຍັງສາມາດສະແກນຫາອຸປະກອນທີ່ຢູ່ໃກ້ຄຽງໄດ້ທຸກເວລາ, ເຖິງແມ່ນວ່າຈະປິດ Bluetooth ໄວ້ກໍຕາມ. ການຕັ້ງຄ່ານີ້ໃຊ້ເພື່ອເຮັດສິ່ງຕ່າງໆ ຕົວຢ່າງ: ໃຊ້ເພື່ອປັບປຸງຄຸນສົມບັດ ແລະ ບໍລິການທີ່ອ້າງອີງສະຖານທີ່ໄດ້. ທ່ານສາມາດປ່ຽນຕົວເລືອກນີ້ໄດ້ໃນການຕັ້ງຄ່າການສະແກນ Bluetooth."</string>
     <string name="bluetooth_scanning_on_info_message_auto_on_available" msgid="7792443293031247638">"ເມື່ອເປີດ Bluetooth, ອຸປະກອນຂອງທ່ານຈະສາມາດສື່ສານກັບອຸປະກອນ Bluetooth ເຄື່ອງອື່ນໆທີ່ຢູ່ໃກ້ຄຽງໄດ້. ຄຸນສົມບັດຕ່າງໆໃຊ້ Bluetooth ເຊັ່ນ: ການແຊຣ໌ດ່ວນ ແລະ ຊອກຫາອຸປະກອນຂອງຂ້ອຍ.\n\nແອັບ ແລະ ບໍລິການຕ່າງໆຈະຍັງສາມາດສະແກນຫາອຸປະກອນທີ່ຢູ່ໃກ້ຄຽງໄດ້ທຸກເວລາເຖິງແມ່ນວ່າ Bluetooth ຈະປິດຢູ່ກໍຕາມ. ການຕັ້ງຄ່ານີ້ສາມາດໃຊ້ເພື່ອເຮັດສິ່ງຕ່າງໆ ເຊັ່ນ: ເພື່ອປັບປຸງຄຸນສົມບັດ ແລະ ບໍລິການທີ່ອີງຕາມສະຖານທີ່. ທ່ານສາມາດປ່ຽນຕົວເລືອກນີ້ໄດ້ໃນການຕັ້ງຄ່າການສະແກນ Bluetooth."</string>
     <string name="bluetooth_scan_change" msgid="1744636222637390367">"ປ່ຽນ"</string>
+    <string name="bluetooth_key_missing_title" msgid="7799054163548353853">"ບໍ່ໄດ້ເຊື່ອມຕໍ່ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="bluetooth_key_missing_message" msgid="2388861106663695319">"ເພື່ອຄວາມປອດໄພຂອງທ່ານ, ໃຫ້ລືມອຸປະກອນນີ້ແລ້ວຈັບຄູ່ອີກຄັ້ງ"</string>
+    <string name="bluetooth_key_missing_forget" msgid="4692006517823001013">"ລືມອຸປະກອນ"</string>
+    <string name="bluetooth_key_missing_cancel" msgid="2482416446357804371">"ຍົກເລີກ"</string>
     <string name="device_details_title" msgid="1155622417516195481">"ລາຍລະອຽດອຸປະກອນ"</string>
     <string name="bluetooth_device_keyboard_settings_preference_title" msgid="3411693160917620519">"ການຕັ້ງຄ່າແປ້ນພິມ"</string>
     <string name="bluetooth_device_more_settings_preference_title" msgid="6034482566541746500">"ການຕັ້ງຄ່າເພີ່ມເຕີມ"</string>
@@ -861,6 +902,7 @@
     <string name="external_display_on" msgid="2560104443500154333">"ເປີດ"</string>
     <string name="external_display_off" msgid="5634413756025351374">"ປິດ"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"ຈໍສະແດງຜົນພາຍນອກ"</string>
+    <string name="builtin_display_settings_category" msgid="3441388849060771885">"ຈໍສະແດງຜົນໃນຕົວ"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"ໃຊ້ຈໍສະແດງຜົນພາຍນອກ"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"ຄວາມລະອຽດຂອງຈໍສະແດງຜົນ"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"ຍົກເລີກການເຊື່ອມຕໍ່ຈໍສະແດງຜົນພາຍນອກແລ້ວ"</string>
@@ -872,6 +914,7 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"ການປ່ຽນການໝຸນ ຫຼື ຄວາມລະອຽດອາດຢຸດແອັບໃດກໍຕາມທີ່ກຳລັງເຮັດວຽກຢູ່ໃນປັດຈຸບັນ"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"ອຸປະກອນຂອງທ່ານຕ້ອງເຊື່ອມຕໍ່ກັບຈໍສະແດງຜົນພາຍນອກເພື່ອສະທ້ອນໜ້າຈໍຂອງທ່ານ"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"ຕົວເລືອກເພີ່ມເຕີມ"</string>
+    <string name="external_display_topology_hint" msgid="854973327795578470">"ກົດຄ້າງແລ້ວລາກເພື່ອຈັດຮຽງຈໍສະແດງຜົນຄືນໃໝ່."</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"ການສົ່ງສັນຍານ"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ແວ່ນສະທ້ອນ"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"ເປີດໃຊ້ງານການສະແດງພາບໄຮ້ສາຍ"</string>
@@ -1008,6 +1051,8 @@
     <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"ກະລຸນາກວດສອບລະຫັດຜ່ານແລ້ວລອງໃໝ່"</string>
     <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"ກະລຸນາຕິດຕໍ່ຜູ້ຜະລິດອຸປະກອນ"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"ກະລຸນາກວດສອບແລ້ວລອງໃໝ່"</string>
+    <string name="wifi_dpp_check_connection_no_matched_ssid" msgid="3608318690698685427">"ເຄືອຂ່າຍ Wi-Fi ນີ້ບໍ່ມີໃຫ້ໃນຕອນນີ້"</string>
+    <string name="wifi_dpp_check_connection_no_matched_security" msgid="1462706753123341376">"ມີບັນຫາກັບລະຫັດ QR ນີ້. ລອງເຊື່ອມຕໍ່ວິທີອື່ນ."</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"ເລືອກເຄືອຂ່າຍ"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"ກະລຸນາເລືອກເຄືອຂ່າຍເພື່ອເຊື່ອມຕໍ່ຫາອຸປະກອນຂອງທ່ານ"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5170095438763569255">"ເພີ່ມອຸປະກອນນີ້ໃສ່ “<xliff:g id="SSID">%1$s</xliff:g>” ບໍ?"</string>
@@ -1203,8 +1248,8 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"ສຶກສາເພີ່ມເຕີມກ່ຽວກັບການໝຸນອັດຕະໂນມັດ"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"ຄວາມລະອຽດໜ້າຈໍ"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"ຄວາມລະອຽດສູງ"</string>
-    <string name="screen_resolution_option_full" msgid="2694003735219114186">"ຄວາມລະອຽດເຕັມ"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"ຄວາມລະອຽດເຕັມຈະໃຊ້ແບັດເຕີຣີຂອງທ່ານຫຼາຍຂຶ້ນ. ການສະຫຼັບໄປໃຊ້ຄວາມລະອຽດຂອງທ່ານອາດເຮັດໃຫ້ບາງແອັບຣີສະຕາດໄດ້."</string>
+    <string name="screen_resolution_option_full" msgid="4456839315039000517">"ຄວາມລະອຽດສູງສຸດ"</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"ຄວາມລະອຽດສູງສຸດຈະໃຊ້ແບັດເຕີຣີຂອງທ່ານຫຼາຍຂຶ້ນ. ການປ່ຽນຄວາມລະອຽດຂອງທ່ານອາດເຮັດໃຫ້ບາງແອັບຣີສະຕາດ."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"ເລືອກແລ້ວ"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"ສີ"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"ທຳ​ມະ​ຊາດ"</string>
@@ -1213,7 +1258,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"ປັບປ່ຽນໄດ້"</string>
     <string name="brightness" msgid="6216871641021779698">"ລະດັບ​ຄວາມແຈ້ງ"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"ປັບ​ຄວາມ​ແຈ້ງ​ອັດຕະໂນມັດ"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"ກ່ຽວກັບຄຸນສົມບັດປັບຄວາມແຈ້ງອັດຕະໂນມັດ"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"ຄວາມແຈ້ງໜ້າຈໍຂອງທ່ານຈະຖືກປັບໂດຍອັດຕະໂນມັດໂດຍອ້າງອີງຈາກສະພາບແວດລ້ອມ ແລະ ກິດຈະກຳທີ່ທ່ານເຮັດ. ທ່ານສາມາດຍ້າຍຕົວເລື່ອນດ້ວຍຕົນເອງເພື່ອຊ່ວຍໃຫ້ລະບົບຮຽນຮູ້ການຕັ້ງຄ່າຂອງທ່ານໄດ້."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"ເປີດ"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"ປິດ"</string>
@@ -1273,14 +1317,18 @@
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"ຈະເປີດອັດຕະໂນມັດເມື່ອຕາເວັນຕົກ"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"ຈະເປີດອັດຕະໂນມັດເວລາ <xliff:g id="ID_1">%1$s</xliff:g>."</string>
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"ຈະເປີດໃຊ້ອັດຕະໂນມັດເມື່ອຮອດເວລານອນ"</string>
+    <string name="dark_ui_summary_off_auto_mode_modes" msgid="2672694802103388896">"ຈະເປີດເມື່ອ <xliff:g id="ID_1">%1$s</xliff:g> ເລີ່ມຕົ້ນ"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"ຈະບໍ່ປິດອັດຕະໂນມັດ"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"ຈະປິດອັດຕະໂນມັດເມື່ອຕາເວັນຂຶ້ນ"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"ຂະປິດອັດຕະໂນມັດເວລາ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"ຈະປິດອັດຕະໂນມັດຫຼັງຈາກເວລານອນ"</string>
+    <string name="dark_ui_summary_on_auto_mode_modes" msgid="7769594183411785087">"ຈະປິດເມື່ອ <xliff:g id="ID_1">%1$s</xliff:g> ສິ້ນສຸດ"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"ຮູບແບບສີສັນມືດຈະໃຊ້ພື້ນຫຼັງສີດຳເພື່ອຊ່ວຍເຮັດໃຫ້ໃຊ້ແບັດເຕີຣີໄດ້ດົນຂຶ້ນໃນໜ້າຈໍບາງຮຸ່ນ. ກຳນົດເວລາຮູບແບບສີສັນມືດຈະລໍຖ້າເປີດຈົນກວ່າໜ້າຈໍຂອງທ່ານຈະປິດ."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"ຕອນນີ້ຮູບແບບສີສັນມືດກຳລັງປະຕິບັດຕາມກຳນົດເວລາໂໝດເວລານອນຂອງທ່ານ"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"ການຕັ້ງຄ່າໂໝດເວລານອນ"</string>
-    <string name="even_dimmer_display_title" msgid="6731255736830410149">"ມົວລົງ"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{ໂໝດຍັງສາມາດເປີດໃຊ້ຮູບແບບສີສັນມືດນຳ}=1{{mode_1} ຍັງສາມາດເປີດໃຊ້ຮູບແບບສີສັນມືດນຳ}=2{{mode_1} ແລະ {mode_2} ຍັງສາມາດເປີດໃຊ້ຮູບແບບສີສັນມືດນຳ}=3{{mode_1}, {mode_2} ແລະ {mode_3} ຍັງສາມາດເປີດໃຊ້ຮູບແບບສີສັນມືດນຳ}other{{mode_1}, {mode_2} ແລະ ອີກ # ໂໝດຍັງສາມາດເປີດໃຊ້ຮູບແບບສີສັນມືດນຳ}}"</string>
+    <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"ການຕັ້ງຄ່າໂໝດ"</string>
+    <string name="even_dimmer_display_title" msgid="4509732439977906028">"ຫຼຸດແສງເປັນພິເສດ"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"ອະນຸຍາດໃຫ້ອຸປະກອນມົວລົງກວ່າປົກກະຕິ"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ໄລຍະໝົດເວລາໜ້າຈໍ"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"ຫຼັງຈາກ <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ທີ່ບໍ່ໄດ້ເຮັດຫຍັງ"</string>
@@ -1603,7 +1651,7 @@
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"ອະນຸຍາດໃຫ້ແອັບ ແລະ ບໍລິການຕ່າງໆສະແກນຫາອຸປະກອນທີ່ຢູ່ໃກ້ຄຽງໄດ້ທຸກເວລາ, ເຖິງແມ່ນວ່າຈະປິດ Bluetooth ໄວ້ກໍຕາມ. ຄຸນສົມບັດນີ້ສາມາດໃຊ້ເພື່ອປັບປຸງຄຸນສົມບັດ ແລະ ບໍລິການທີ່ອ້າງອີງສະຖານທີ່ໄດ້."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"ບໍລິການສະຖານທີ່"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"ບໍລິການສະຖານທີ່"</string>
-    <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"ໃຊ້ສະຖານທີ່"</string>
+    <string name="location_time_zone_detection_toggle_title" msgid="720338048522014712">"ໃຊ້ສະຖານທີ່ສຳລັບເຂດເວລາ"</string>
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"ບໍ່ສາມາດຕັ້ງເຂດເວລາໂດຍອັດຕະໂນມັດໄດ້"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
     <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"ສະຖານທີ່ ຫຼື ບໍລິການສະຖານທີ່ປິດຢູ່"</string>
@@ -1614,11 +1662,11 @@
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"ການຕັ້ງຄ່າສະຖານທີ່"</string>
     <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"ແກ້ໄຂບັນຫານີ້"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"ຍົກເລີກ"</string>
-    <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"ເຂດເວລາອັດຕະໂນມັດປິດຢູ່"</string>
+    <string name="location_time_zone_detection_auto_is_off" msgid="4785540862935730060">"ບໍ່ພ້ອມໃຫ້ນຳໃຊ້ເມື່ອເຂດເວລາອັດຕະໂນມັດປິດຢູ່"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"ປິດການນຳໃຊ້ການກວດຫາເຂດເວລາສະຖານທີ່ແລ້ວ"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"ບໍ່ຮອງຮັບການກວດຫາເຂດເວລາສະຖານທີ່"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"ບໍ່ອະນຸຍາດໃຫ້ປ່ຽນການກວດຫາເຂດເວລາສະຖານທີ່"</string>
-    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"ສະຖານທີ່ອາດຖືກໃຊ້ເພື່ອຕັ້ງຄ່າເຂດເວລາ"</string>
+    <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"ຫາກສະຖານທີ່ອຸປະກອນຂອງທ່ານພ້ອມນຳໃຊ້, ລະບົບກໍອາດຈະໃຊ້ເພື່ອຕັ້ງຄ່າເຂດເວລາຂອງທ່ານ"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"ເບິ່ງຂໍ້ມູນທາງກົດໝາຍ, ສະຖານະ, ເວີຊັນຊອບແວ"</string>
     <string name="legal_information" msgid="7509900979811934843">"ຂໍ້ມູນທາງກົດໝາຍ"</string>
     <string name="manual" msgid="3651593989906084868">"ຄູ່​ມື"</string>
@@ -1918,14 +1966,34 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"ຕົວເລືອກ"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"ການຊ່ວຍເຂົ້າເຖິງ"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"ແປ້ນພິມພາຍນອກ"</string>
+    <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"ຕົວເລືອກໂຄງຮ່າງແປ້ນພິມແທ້"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"ປຸ່ມດີດກັບ"</string>
-    <string name="bounce_keys_summary" msgid="7347050868868080302">"ແປ້ນພິມຈະລະເວັ້ນການກົດປຸ່ມດຽວຊ້ຳໆຢ່າງວ່ອງໄວພາຍໃນ <xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
+    <string name="bounce_keys_summary" msgid="7418024428905737729">"ແປ້ນພິມຈະບໍ່ສົນໃຈການກົດປຸ່ມຊ້ຳໆໄວໆຂອງປຸ່ມດຽວກັນ"</string>
+    <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"ເກນການຍົກເລີກການກົດປຸ່ມຊໍ້າໆ"</string>
+    <string name="bounce_keys_dialog_subtitle" msgid="5640575860258120026">"ເລືອກໄລຍະເວລາທີ່ແປ້ນພິມຂອງທ່ານບໍ່ສົນໃຈການກົດປຸ່ມຊໍ້າໆ"</string>
+    <string name="input_setting_keys_dialog_option_200" msgid="3121006986226247560">"0.2 ວິ"</string>
+    <string name="input_setting_keys_dialog_option_400" msgid="2634500629396699440">"0.4 ວິ"</string>
+    <string name="input_setting_keys_dialog_option_600" msgid="3828362866751805146">"0.6 ວິ"</string>
+    <string name="input_setting_keys_custom_title" msgid="670425691119253202">"ກຳນົດເອງ"</string>
+    <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"ຄ່າທີ່ກຳນົດເອງ"</string>
     <string name="slow_keys" msgid="2891452895499690837">"ເພີ່ມໄລຍະເວລາໃນການກົດປຸ່ມ"</string>
-    <string name="slow_keys_summary" msgid="1784371292745423292">"ປັບເວລາທີ່ມັນໃຊ້ສໍາລັບການກົດປຸ່ມເພື່ອເປີດໃຊ້ເປັນ <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> ms"</string>
+    <string name="slow_keys_summary" msgid="2914214326648535377">"ປັບແກ້ເວລາທີ່ມັນໃຊ້ສໍາລັບການກົດປຸ່ມເພື່ອເປີດໃຊ້"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"ປຸ່ມກົດຄ້າງ"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"ກົດເທື່ອລະປຸ່ມເພື່ອໃຊ້ທາງລັດແທນການກົດປຸ່ມຄ້າງໄວ້ຮ່ວມກັນ"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"ແປ້ນເມົ້າ"</string>
-    <string name="mouse_keys_summary" msgid="2396247040177734245">"ໃຊ້ແປ້ນພິມພາຍນອກເພື່ອຄວບຄຸມເມົ້າ."</string>
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"ໃຊ້ແປ້ນເມົ້າ"</string>
+    <string name="mouse_keys_summary" msgid="7030731235143286467">"ໃຊ້ແປ້ນພິມຂອງທ່ານເພື່ອຄວບຄຸມຕົວຊີ້"</string>
+    <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"ການເລື່ອນເມົ້າຖອຍຫຼັງ"</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"ເລື່ອນຂຶ້ນເພື່ອຍ້າຍໜ້າລົງ"</string>
+    <string name="mouse_swap_primary_button" msgid="3028204969091057207">"ສະຫຼັບປຸ່ມຊ້າຍ ແລະ ຂວາ"</string>
+    <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"ໃຊ້ປຸ່ມເມົ້າເບື້ອງຊ້າຍເປັນປຸ່ມເບື້ອງຂວາຂອງທ່ານ"</string>
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"ແປ້ນເມົ້າສຳລັບ <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"ໃຊ້ປຸ່ມ <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> ເພື່ອຍ້າຍຕົວຊີ້ເມົ້າ"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"ໃຊ້ປຸ່ມ <xliff:g id="CLICK_LABEL">%s</xliff:g> ເພື່ອຄລິກປຸ່ມຫຼັກຂອງເມົ້າ"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"ໃຊ້ປຸ່ມ <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> ເພື່ອກົດປຸ່ມຫຼັກຂອງເມົ້າຄ້າງໄວ້"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"ໃຊ້ປຸ່ມ <xliff:g id="RELEASE_LABEL">%s</xliff:g> ເພື່ອປ່ອຍປຸ່ມຫຼັກຂອງເມົ້າ"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"ໃຊ້ປຸ່ມ <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> ເພື່ອເປີດ/ປິດໂໝດເລື່ອນ. ເຊິ່ງຈະເຮັດໃຫ້ປຸ່ມ <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> ເລື່ອນມຸມມອງຂຶ້ນເທິງ, ລົງລຸ່ມ, ໄປທາງຊ້າຍ ຫຼື ຂວາ"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"ໃຊ້ປຸ່ມ <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> ເພື່ອຄລິກປຸ່ມສຳຮອງຂອງເມົ້າ"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"ປຸ່ມລັດແປ້ນພິມ"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"ສະແດງລາຍຊື່ຂອງທາງລັດ"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"ແປ້ນພິມໂປຣໄຟລ໌ວຽກ ແລະ ເຄື່ອງມື"</string>
@@ -1933,6 +2001,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"ຄ່າເລີ່ມຕົ້ນ"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"ແຜ່ນສຳຜັດ"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"ແຜ່ນສຳຜັດ ແລະ ເມົ້າ"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"ເມົ້າ"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"ຄວາມໄວຂອງຕົວຊີ້, ທ່າທາງ"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"ແຕະເພື່ອຄລິກ"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"ແຕະລາກ"</string>
@@ -1944,19 +2013,26 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"ຄລິກຂວາລຸ່ມສຸດ"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"ຄລິກຢູ່ແຈຂວາລຸ່ມສຸດຂອງແຜ່ນສຳຜັດເພື່ອເບິ່ງຕົວເລືອກເພີ່ມເຕີມ"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"ຄວາມໄວຂອງຕົວຊີ້"</string>
-    <string name="pointer_fill_style" msgid="8413840032931637595">"ຮູບແບບການຕື່ມຕົວຊີ້"</string>
+    <string name="three_finger_tap_preference_title" msgid="7130739855086106052">"ໃຊ້ສາມນິ້ວແຕະ"</string>
+    <string name="pointer_fill_style" msgid="8794616790175016092">"ສີຂອງຕົວຊີ້"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"ປ່ຽນຮູບແບບການຕື່ມຕົວຊີ້ເປັນສີດຳ"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"ຮູບແບບການຕື່ມຕົວຊີ້ເປັນສີຂຽວ"</string>
-    <string name="pointer_fill_style_yellow_button" msgid="5025969961559379024">"ຮູບແບບການຕື່ມຕົວຊີ້ເປັນສີເຫຼືອງ"</string>
+    <string name="pointer_fill_style_red_button" msgid="6424326623906159283">"ປ່ຽນຮູບແບບການຕື່ມສີຂອງຕົວຊີ້ເປັນສີແດງ"</string>
     <string name="pointer_fill_style_pink_button" msgid="4106218142489635673">"ຮູບແບບການຕື່ມຕົວຊີ້ເປັນສີບົວ"</string>
     <string name="pointer_fill_style_blue_button" msgid="5594958078854032785">"ຮູບແບບການຕື່ມຕົວຊີ້ເປັນສີຟ້າ"</string>
-    <string name="pointer_stroke_style" msgid="1886986630216050665">"ຮູບແບບລາຍເສັ້ນຂອງຕົວຊີ້"</string>
+    <string name="pointer_fill_style_purple_button" msgid="3713175300139801778">"ປ່ຽນຮູບແບບການຕື່ມສີຂອງຕົວຊີ້ເປັນສີມ່ວງ"</string>
+    <string name="pointer_stroke_style" msgid="139962661485972329">"ສີເສັ້ນຕົວຊີ້"</string>
     <string name="pointer_stroke_style_name_white" msgid="673686194443825383">"ສີຂາວ"</string>
     <string name="pointer_stroke_style_name_black" msgid="4655806167067437330">"ສີດຳ"</string>
     <string name="pointer_stroke_style_name_none" msgid="8953927511729800247">"ບໍ່ມີ"</string>
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"ສຶກສາທ່າທາງຂອງແຜ່ນສຳຜັດ"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"ແທຣັກແຜດ, ແທຣັກ ແຜດ, ເມົ້າ, ເຄີເຊີ, ເລື່ອນ, ປັດ, ຄລິກຂວາ, ຄລິກ, ຕົວຊີ້"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"ຄລິກຂວາ, ແຕະ"</string>
+    <string name="three_finger_tap_middle_click" msgid="5274906692591143158">"ຄລິກເຄິ່ງກາງ"</string>
+    <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"ເປີດໃຊ້ຜູ້ຊ່ວຍ"</string>
+    <string name="three_finger_tap_go_home" msgid="6526301745535089812">"ໄປຫາໜ້າຫຼັກ"</string>
+    <string name="three_finger_tap_go_back" msgid="2898205524575684271">"ກັບຄືນ"</string>
+    <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"ເບິ່ງແອັບຫຼ້າສຸດ"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"ໄປຫາໜ້າຫຼັກ"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"ໃຊ້ 3 ນິ້ວປັດຂຶ້ນຈາກຕຳແໜ່ງໃດກໍໄດ້ຢູ່ແຜ່ນສຳຜັດຂອງທ່ານ"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"ກັບຄືນ"</string>
@@ -1991,10 +2067,12 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"ຣີເຊັດ"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"ເລືອກປຸ່ມຕົວດັດແປງ"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"ເລືອກປຸ່ມໃໝ່ສຳລັບ <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <!-- no translation found for keyboard_a11y_settings (2564659018555385728) -->
-    <skip />
-    <!-- no translation found for keyboard_a11y_settings_summary (1698531156574098722) -->
-    <skip />
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"ການຊ່ວຍເຂົ້າເຖິງແປ້ນພິມພາຍນອກ"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"ປຸ່ມກົດຄ້າງ, ປຸ່ມຕີກັບ, ແປ້ນເມົ້າ"</string>
+    <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"ປຸ່ມຊ້ຳ"</string>
+    <string name="keyboard_repeat_keys_timeout_title" msgid="3411871149974652293">"ຄວາມຊັກຊ້າກ່ອນການກົດຊ້ຳ"</string>
+    <string name="keyboard_repeat_keys_delay_title" msgid="7323531750483922943">"ອັດຕາການກົດຊ້ຳ"</string>
+    <string name="keyboard_repeat_keys_summary" msgid="8972905345211768313">"ກົດປຸ່ມຄ້າງໄວ້ເພື່ອເຮັດຊ້ຳຕົວອັກສອນຂອງມັນຈົນກວ່າປຸ່ມຈະຖືກປ່ອຍ"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"ໂຄງຮ່າງ <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"ຄ່າເລີ່ມຕົ້ນ"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"ອັດຕະໂນມັດ: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2004,6 +2082,7 @@
     <string name="pointer_scale" msgid="4941564570571663964">"ຂະໜາດຂອງຕົວຊີ້"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"ຫຼຸດຂະໜາດຂອງຕົວຊີ້"</string>
     <string name="pointer_scale_increase_content_description" msgid="1049632123702664450">"ເພີ່ມຂະໜາດຂອງຕົວຊີ້"</string>
+    <string name="pointer_scale_keywords" msgid="8939432511048322072">"ຂະໜາດ, ຂະໜາດ, ຂະໜາດຂອງຕົວຊີ້, ຂະໜາດຂອງຕົວຊີ້, ຕົວຊີ້ເມົ້າຂະໜາດໃຫຍ່, ໃຫຍ່, ສັງເກດໄດ້"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"ມືເກມ"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"ປ່ຽນເສັ້ນທາງການສັ່ນເຕືອນ"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Send vibration to game controller when connected"</string>
@@ -2063,6 +2142,9 @@
     <string name="general_category_title" msgid="6298579528716834157">"ທົ່ວໄປ"</string>
     <string name="display_category_title" msgid="6638191682294461408">"ການສະແດງຜົນ"</string>
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"ສີ ແລະ ໂມຊັນ"</string>
+    <string name="accessibility_pointer_and_touchpad_title" msgid="8719482393177273831">"ການຊ່ວຍເຂົ້າເຖິງຕົວຊີ້ ແລະ ແຜ່ນສຳຜັດ"</string>
+    <string name="accessibility_pointer_and_touchpad_summary" msgid="6089872217234956258">"ສີຂອງຕົວຊີ້, ຂະໜາດຂອງຕົວຊີ້ ແລະ ອື່ນໆ"</string>
+    <string name="accessibility_pointer_color_customization_title" msgid="3376392766113189508">"ການປັບແຕ່ງສີຂອງຕົວຊີ້"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"ຄວາມຄົມຊັດຂອງສີ"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"ຄວາມຄົມຊັດທີ່ສູງຂຶ້ນເຮັດໃຫ້ຂໍ້ຄວາມ, ປຸ່ມ ແລະ ໄອຄອນໂດດເດັ່ນຫຼາຍຂຶ້ນ. ເລືອກຮູບລັກຄວາມຄົມຊັດທີ່ດີທີ່ສຸດສໍາລັບທ່ານ."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"ບາງແອັບອາດຈະບໍ່ຮອງຮັບການຕັ້ງຄ່າສີ ແລະ ຄວາມຄົມຊັດຂໍ້ຄວາມທັງໝົດ"</string>
@@ -2206,11 +2288,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"ຂັ້ນສູງ"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"ປຸ່ມການຊ່ວຍເຂົ້າເຖິງຖືກຕັ້ງເປັນ <xliff:g id="SERVICE">%1$s</xliff:g> ແລ້ວ. ເພື່ອໃຊ້ການຂະຫຍາຍ, ໃຫ້ແຕະປຸ່ມການຊ່ວຍເຂົ້າເຖິງຄ້າງໄວ້, ຈາກນັ້ນເລືອກການຂະຫຍາຍ."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"ຕັ້ງທ່າທາງການຊ່ວຍເຫຼືອເປັນ <xliff:g id="SERVICE">%1$s</xliff:g> ແລ້ວ. ເພື່ອໃຊ້ການຂະຫຍາຍ, ໃຫ້ປັດຂຶ້ນດ້ວຍສອງນິ້ວຈາກລຸ່ມສຸດຂອງໜ້າຈໍຄ້າງໄວ້. ຈາກນັ້ນເລືອກການຂະຫຍາຍ."</string>
-    <!-- no translation found for accessibility_global_gesture_preference_title (8866765674372344850) -->
-    <skip />
+    <string name="accessibility_global_gesture_preference_title" msgid="8866765674372344850">"ທາງລັດຂອງປຸ່ມລະດັບສຽງ"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"ການຕັ້ງຄ່າທາງລັດ"</string>
-    <!-- no translation found for accessibility_shortcut_service_on_lock_screen_title (2301019277262462426) -->
-    <skip />
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="2301019277262462426">"ທາງລັດຂອງປຸ່ມລະດັບສຽງຈາກໜ້າຈໍລັອກ"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"ອະນຸຍາດໃຫ້ເປີດໃຊ້ທາງລັດຄຸນສົມບັດໄດ້ຈາກໜ້າຈໍລັອກ. ກົດປຸ່ມລະດັບສຽງຄ້າງໄວ້ສອງສາມວິນາທີ."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"ປຸ່ມການຊ່ວຍເຂົ້າເຖິງ"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"ປຸ່ມການຊ່ວຍເຂົ້າເຖິງ ແລະ ທ່າທາງ"</string>
@@ -2230,6 +2310,7 @@
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"ໂປ່ງໃສເມື່ອບໍ່ໄດ້ໃຊ້"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"ໂປ່ງໃສ"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"ບໍ່ໂປ່ງໃສ"</string>
+    <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"ບໍ່ມີໃຫ້ໃນລະຫວ່າງນຳໃຊ້ໂໝດປຸ່ມແຖບການນຳທາງ."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"ຕົວອັກສອນຄອນທຣາສສູງ"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"ປ່ຽນສີຂໍ້ຄວາມເປັນດຳ ຫຼື ຂາວ. ເພີ່ມຄອນທຣາສໃຫ້ສູງສຸດກັບພື້ນຫຼັງ."</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"ເພີ່ມປະສິດທິພາບຄວາມຄົມຊັດຂໍ້ຄວາມ"</string>
@@ -2396,7 +2477,7 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"ຕົວຢ່າງ"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"ໂຕເລືອກມາດຕະຖານ"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"ພາສາ"</string>
-    <string name="captioning_text_size" msgid="8039448543171463017">"ຂະໜາດຕົວອັກສອນ"</string>
+    <string name="captioning_text_size" msgid="5764254558945371745">"ຂະໜາດຄຳບັນຍາຍ"</string>
     <string name="captioning_preset" msgid="4174276086501638524">"ຮູບແບບຄຳບັນຍາຍ"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"ໂຕເລືອກກຳນົດເອງ"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"ສີພື້ນຫຼັງ"</string>
@@ -2523,6 +2604,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"ປັບແຕ່ງການໃຊ້ພະລັງງານ"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"ແພັກເກດທີ່ຮວມມານຳ"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"ແອັບຕ່າງໆກຳລັງເຮັດວຽກຕາມປົກກະຕິ"</string>
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"ແນະນຳໃຫ້ປ່ຽນແບັດເຕີຣີ"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"ຄວາມຈຸແບັດເຕີຣີ ແລະ ປະສິດທິພາບການສາກຫຼຸດລົງ ແລະ ຂໍແນະນຳໃຫ້ປ່ຽນແບັດເຕີຣີ."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"ລະດັບແບັດເຕີຣີເຫຼືອໜ້ອຍ"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"ທ່ານສາມາດເປີດໃຊ້ຕົວປະຢັດແບັດເຕີຣີເພື່ອຍືດອາຍຸແບັດເຕີຣີໄດ້"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"ປັບປຸງອາຍຸແບັດເຕີຣີ"</string>
@@ -2940,6 +3023,7 @@
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"ຕັດການເຊື່ອມຕໍ່ VPN ນີ້ບໍ?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"ຕັດການເຊື່ອມຕໍ່"</string>
     <string name="vpn_version" msgid="6344167191984400976">"ເວີຊັນ"</string>
+    <string name="vpn_version_info" msgid="5717671228402924155">"ເວີຊັນ <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"ລືມ VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"ຂຽນທັບ VPN ທີ່ມີຢູ່ກ່ອນແລ້ວຂອງທ່ານບໍ?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Set always-on VPN?"</string>
@@ -3303,7 +3387,8 @@
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"ເປີດການສະແດງພາບພັກໜ້າຈໍໄວ້ຕະຫຼອດ, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, ແທັກ, ຕົວອ່ານ"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"ແປ້ນພິມ, ການສຳຜັດ, ສັ່ນເຕືອນ,"</string>
-    <string name="sound_dashboard_summary" msgid="6574444810552643312">"ລະດັບສຽງ, ການສັ່ນເຕືອນ, ຫ້າມລົບກວນ"</string>
+    <string name="sound_dashboard_summary" msgid="8254699132423665654">"ລະດັບສຽງ ແລະ ການສັ່ນເຕືອນ"</string>
+    <string name="sound_dashboard_summary_with_dnd" msgid="731956092218394657">"ລະດັບສຽງ, ການສັ່ນເຕືອນ, ຫ້າມລົບກວນ"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"​ລະ​ດັບ​ສຽງ​ມີ​ເດຍ"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"ສົ່ງສັນຍານລະດັບສຽງ"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"ລະດັບສຽງການໂທ"</string>
@@ -3347,8 +3432,8 @@
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"ການຕັ້ງຄ່າອຸປະກອນທີ່ເຊື່ອມຕໍ່ແລ້ວ"</string>
     <string name="spatial_audio_multi_toggle_title" msgid="6175786400035541273">"ສຽງຮອບທິດທາງ"</string>
     <string name="spatial_audio_multi_toggle_off" msgid="2086359413991193164">"ປິດ"</string>
-    <string name="spatial_audio_multi_toggle_on" msgid="2988769235357633788">"ປິດ"</string>
-    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="861779551619033627">"ປິດ"</string>
+    <string name="spatial_audio_multi_toggle_on" msgid="4204808183659033003">"ຄົງທີ່"</string>
+    <string name="spatial_audio_multi_toggle_head_tracking_on" msgid="4156440073634867249">"ການຕິດຕາມຫົວ"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{ບໍ່ມີ}=1{ຕັ້ງກຳນົດເວລາ 1 ລາຍການແລ້ວ}other{ຕັ້ງກຳນົດເວລາ # ລາຍການແລ້ວ}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"ຫ້າມລົບກວນ"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"ໂໝດ"</string>
@@ -3361,7 +3446,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"09:00 - 17:00 ໂມງ ຈັນຫາສຸກ\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"ນັດໝາຍປະຕິທິນ"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} ເຮັດວຽກຢູ່}=2{{mode_1} ແລະ {mode_2} ເຮັດວຽກຢູ່}=3{{mode_1}, {mode_2} ແລະ {mode_3} ເຮັດວຽກຢູ່}other{{mode_1}, {mode_2} ແລະ ອີກ # ໂໝດເຮັດວຽກຢູ່}}"</string>
-    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{ສາມາດເປີດໃຊ້ 1 ໂໝດໂດຍອັດຕະໂນມັດ}other{ສາມາດເປີດໃຊ້ # ໂໝດໂດຍອັດຕະໂນມັດ}}"</string>
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{ຫ້າມລົບກວນ}=1{{mode_1}}=2{{mode_1}, {mode_2}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ເປີດ"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"ບໍ່ໄດ້ຕັ້ງຄ່າ"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"ປິດການນຳໃຊ້ຢູ່"</string>
@@ -3416,7 +3501,7 @@
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"ປັບຄວາມສະຫວ່າງຂອງຮູບພື້ນຫຼັງ"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"ເປີດການນຳໃຊ້ຮູບແບບສີສັນມືດ"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"ເປີດການນຳໃຊ້ຮູບແບບສີສັນມືດ"</string>
-    <string name="mode_dark_theme_summary" msgid="8428887193785431898">"ສະຫຼັບລະບົບປະຕິບັດການ ແລະ ແອັບເພື່ອໃຊ້ຂໍ້ຄວາມສີອ່ອນເທິງພື້ນຫຼັງສີເຂັ້ມ, ເຊິ່ງອາດສະບາຍຕາຫຼາຍຂຶ້ນ ແລະ ຊ່ວຍປະຢັດແບັດເຕີຣີໄດ້ຫຼາຍໃນອຸປະກອນບາງປະເພດ"</string>
+    <string name="mode_dark_theme_summary" msgid="2808149708986602464">"ປ່ຽນຮູບແບບສີສັນອຸປະກອນເພື່ອໃຊ້ພື້ນຫຼັງສີເຂັ້ມ, ເຊິ່ງເຮັດໃຫ້ສະບາຍຕາກວ່າ"</string>
     <string name="mode_display_settings_summary" msgid="5929234706883482380">"{count,plural,offset:2 =0{ບໍ່ມີການປ່ຽນແປງການສະແດງຜົນ}=1{{effect_1}}=2{{effect_1} ແລະ {effect_2}}=3{{effect_1}, {effect_2} ແລະ {effect_3}}other{{effect_1}, {effect_2} ແລະ ອີກ # ລາຍການ}}"</string>
     <string name="zen_mode_allow_all_notifications" msgid="7300894425550960390">"ອະນຸຍາດການແຈ້ງເຕືອນທັງໝົດ"</string>
     <string name="zen_mode_all_notifications_allowed" msgid="7612213309293552413">"ໃຫ້ຜູ້ຄົນ, ແອັບ ແລະ ສຽງລົບກວນໄດ້"</string>
@@ -3486,15 +3571,6 @@
     <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"ເຂົ້າໃຈແລ້ວ"</string>
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"ການແຈ້ງເຕືອນ"</string>
     <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"ໄລຍະເວລາ"</string>
-    <string name="zen_msg_event_reminder_title" msgid="5362025129007417554">"ຂໍ້ຄວາມ, ນັດໝາຍ ແລະ ການເຕືອນ"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"ເມື່ອເປີດໂໝດຫ້າມລົບກວນ, ຂໍ້ຄວາມ, ການແຈ້ງເຕືອນ ແລະ ເຫດການຕ່າງໆຈະຖືກປິດສຽງໄວ້, ຍົກເວັ້ນລາຍການທີ່ທ່ານອະນຸຍາດຂ້າງເທິງ. ທ່ານສາມາດປັບແຕ່ງການຕັ້ງຄ່າຂໍ້ຄວາມເພື່ອໃຫ້ໝູ່, ຄອບຄົວ ແລະ ລາຍຊື່ຜູ້ຕິດຕໍ່ຄົນອື່ນໆຂອງທ່ານສາມາດຕິດຕໍ່ຫາທ່ານໄດ້."</string>
-    <string name="zen_onboarding_ok" msgid="8764248406533833392">"ແລ້ວໆ"</string>
-    <string name="zen_onboarding_settings" msgid="2815839576245114342">"ການຕັ້ງຄ່າ"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"ບໍ່ມີພາບ ຫຼື ສຽງຈາກການແຈ້ງເຕືອນ"</string>
-    <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"ບໍ່ມີສຽງຈາກການແຈ້ງເຕືອນ"</string>
-    <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"ທ່ານຈະບໍ່ໄດ້ຍິນສຽງການແຈ້ງເຕືອນ. ແຕ່ອະນຸຍາດການໂທຈາກລາຍຊື່ຜູ້ຕິດຕໍ່ທີ່ຕິດດາວ ແລະ ຜູ້ທີ່ໂທຊ້ຳໆ."</string>
-    <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(ການຕັ້ງຄ່າປັດຈຸບັນ)"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"ປ່ຽນການຕັ້ງຄ່າການແຈ້ງເຕືອນຫ້າມລົບກວນບໍ?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"ສຽງໂປຣໄຟລ໌ບ່ອນເຮັດວຽກ"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"ໃຊ້ສຽງໂປຣໄຟລ໌ສ່ວນຕົວ"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"ໃຊ້ສຽງດຽວກັບໂປຣໄຟລ໌ສ່ວນຕົວຂອງທ່ານ"</string>
@@ -3563,8 +3639,14 @@
     <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"ຫຼັງຈາກປົດລັອກແລ້ວ, ໃຫ້ເຂົ້າໄປໜ້າຈໍທີ່ໃຊ້ຫຼ້າສຸດໂດຍກົງ. ການແຈ້ງເຕືອນຈະບໍ່ສະແດງຢູ່ໜ້າຈໍລັອກ. ປັດລົງຈາກເທິງສຸດເພື່ອເບິ່ງການແຈ້ງເຕືອນ."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"ໜ້າຈໍລັອກ, ຂ້າມ, ອ້ອມ"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"ເມື່ອລັອກໂປຣໄຟລ໌ບ່ອນເຮັດວຽກ"</string>
+    <string name="lock_screen_notif_minimalism" msgid="5556871004042668149">"ການແຈ້ງເຕືອນແບບຮຽບງ່າຍຢູ່ໜ້າຈໍລັອກ"</string>
+    <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"ສະແດງການແຈ້ງເຕືອນໜ້ອຍລົງໃນໜ້າຈໍລັອກ"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"ສະແດງສະເພາະການແຈ້ງເຕືອນໃໝ່ຢູ່ໜ້າຈໍລັອກ"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"ລຶບການແຈ້ງເຕືອນທີ່ເບິ່ງກ່ອນໜ້າອອກຈາກໜ້າຈໍລັອກໂດຍອັດຕະໂນມັດ"</string>
+    <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"ລາຍຊື່ທັງໝົດ"</string>
+    <string name="lock_screen_notifs_full_list_desc" msgid="4868489278443057427">"ຕຳແໜ່ງເລີ່ມຕົ້ນປັດຈຸບັນແມ່ນຖ້ານແບບເຕັມ ແລະ ການວາງຊ້ອນກັນຂອງການແຈ້ງເຕືອນ."</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"ກະທັດຮັດ"</string>
+    <string name="lock_screen_notifs_compact_desc" msgid="2442594880539709057">"ການແຈ້ງເຕືອນໃໝ່ຈະຫຍໍ້ລົງເປັນຖ້ານຢູ່ໜ້າຈໍລັອກຂອງທ່ານ."</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"ການແຈ້ງເຕືອນຢູ່ໜ້າຈໍລັອກ"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"ສະແດງການສົນທະນາ, ຄ່າເລີ່ມຕົ້ນ ແລະ ການປິດສຽງ"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"ສະແດງການສົນທະນາ, ຄ່າເລີ່ມຕົ້ນ ແລະ ການປິດສຽງ"</string>
@@ -3582,6 +3664,10 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"ສະແດງເນື້ອຫາການແຈ້ງເຕືອນວຽກທັງໝົດ"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"ເຊື່ອງເນື້ອຫາວຽກທີ່ລະອຽດອ່ອນ"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"​ທ່ານ​ຕ້ອງ​ການ​ໃຫ້​ສະ​ແດງ​​ການ​ແຈ້ງ​ເຕືອນ​ໂປຣໄຟລ໌ແນວ​ໃດ​ໃນ​ເວ​ລາ​ທີ່​ອຸ​ປະ​ກອນ​ຖືກ​ລັອກ?"</string>
+    <string name="lock_screen_notification_hide_seen_title" msgid="6356324850662946426">"ເຊື່ອງການແຈ້ງເຕືອນທີ່ອ່ານແລ້ວ"</string>
+    <string name="lock_screen_notification_hide_seen_summary" msgid="8345971177658888274">"ລະບົບຈະລຶບການແຈ້ງເຕືອນທີ່ອ່ານແລ້ວອອກຈາກໜ້າຈໍລັອກ."</string>
+    <string name="lock_screen_notification_hide_silent_title" msgid="3284314455767315329">"ເຊື່ອງການແຈ້ງເຕືອນແບບປິດສຽງ"</string>
+    <string name="lock_screen_notification_hide_silent_summary" msgid="1934066619526795468">"ລະບົບຈະລຶບການແຈ້ງເຕືອນ ແລະ ການສົນທະນາແບບປິດສຽງອອກຈາກໜ້າຈໍລັອກ."</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"ການແຈ້ງເຕືອນໂປຣໄຟລ໌"</string>
     <string name="notifications_title" msgid="4221655533193721131">"ການແຈ້ງເຕືອນ"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"​ການ​ແຈ້ງ​ເຕືອນ​ແອັບ"</string>
@@ -3672,6 +3758,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"ເມື່ອທ່ານໄດ້ຮັບການແຈ້ງເຕືອນຈຳນວນຫຼາຍພາຍໃນໄລຍະເວລາສັ້ນໆ, ອຸປະກອນຂອງທ່ານຈະຫຼຸດລະດັບສຽງ ແລະ ຫຼຸດຈຳນວນແຈ້ງເຕືອນລົງເປັນເວລາສູງສຸດ 2 ນາທີ. ໂດຍທີ່ການໂທ, ໂມງປຸກ ແລະ ການສົນທະນາສຳຄັນຈະບໍ່ໄດ້ຮັບຜົນກະທົບ. \n\nການແຈ້ງເຕືອນທີ່ໄດ້ຮັບໃນລະຫວ່າງຄູດາວສາມາດເບິ່ງໄດ້ໂດຍການດຶງລົງຈາກທາງເທິງຂອງໜ້າຈໍ."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"ນຳໃຊ້ກັບໂປຣໄຟລ໌ບ່ອນເຮັດວຽກ"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"ໃຊ້ກັບແອັບໃນໂປຣໄຟລ໌ບ່ອນເຮັດວຽກ"</string>
+    <string name="notification_bundle_title" msgid="460988459835922719">"ຈັດການແຈ້ງເຕືອນເປັນຊຸດແລ້ວ"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"ເປີດ"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"ປິດ"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"ໃຊ້ການຈັດການແຈ້ງເຕືອນເປັນຊຸດ"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"ການແຈ້ງເຕືອນທີ່ມີຮູບແບບສີສັນຄ້າຍກັນຈະຖືກປິດສຽງ ແລະ ຈັດກຸ່ມໄວ້ນໍາກັນສໍາລັບປະສົບການທີ່ງຽບກວ່າເກົ່າ. ການຈັດເປັນຊຸດຈະຍົກເລີກການຕັ້ງຄ່າການແຈ້ງເຕືອນຂອງແອັບເອງ."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"ບໍລິການຕົວຊ່ວຍ VR"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"ບໍ່ມີແອັບທີ່ຕິດຕັ້ງແລ້ວທີ່ຮ້ອງຂໍໃຫ້ໃຊ້ເປັນບໍລິການຕົວຊ່ວຍ VR."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"ອະນຸຍາດໃຫ້ເຂົ້າເຖິງບໍລິການ VR ສຳລັບ <xliff:g id="SERVICE">%1$s</xliff:g> ບໍ?"</string>
@@ -3780,6 +3871,7 @@
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"ການສົນທະນາສຳຄັນ"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"ບໍ່ມີ"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{ບໍ່ມີ}=1{1 ການສົນທະນາ}other{# ການສົນທະນາ}}"</string>
+    <string name="zen_mode_from_conversations_settings" msgid="2411930666794576607">"ການຕັ້ງຄ່າການສົນທະນາ"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"ໃຜທີ່ສາມາດລົບກວນໄດ້"</string>
     <string name="zen_mode_people_footer" msgid="7710707353004137431">"ເຖິງແມ່ນວ່າແອັບການຮັບສົ່ງຂໍ້ຄວາມ ຫຼື ການໂທຈະບໍ່ສາມາດແຈ້ງເຕືອນທ່ານ, ຄົນທີ່ທ່ານເລືອກຢູ່ບ່ອນນີ້ຈະຍັງຄົງສາມາດຕິດຕໍ່ຫາທ່ານໄດ້ຜ່ານແອັບເຫຼົ່ານີ້"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"ການໂທ"</string>
@@ -3803,6 +3895,8 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"ທຸກຄົນ"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"ລາຍຊື່ຜູ້ຕິດຕໍ່"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"ລາຍຊື່ຜູ້ຕິດຕໍ່ທີ່ຕິດດາວ"</string>
+    <string name="zen_mode_from_contacts_settings" msgid="853428575138439415">"ການຕັ້ງຄ່າລາຍຊື່ຜູ້ຕິດຕໍ່"</string>
+    <string name="zen_mode_from_starred_settings" msgid="3389516761063134119">"ການຕັ້ງຄ່າລາຍຊື່ຜູ້ຕິດຕໍ່ທີ່ຕິດດາວ"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"ບໍ່ມີ"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"ບໍ່ມີ"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"ໂມງປຸກ"</string>
@@ -3832,6 +3926,7 @@
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{ບໍ່ໃຫ້ແອັບໃດລົບກວນໄດ້ເລີຍ}=1{{app_1} ສາມາດລົບກວນໄດ້}=2{{app_1} ແລະ {app_2} ສາມາດລົບກວນໄດ້}=3{{app_1}, {app_2} ແລະ {app_3} ສາມາດລົບກວນໄດ້}other{{app_1}, {app_2} ແລະ ອີກ # ແອັບສາມາດລົບກວນໄດ້}}"</string>
     <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (ວຽກ)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"ກຳລັງຄຳນວນ…"</string>
+    <string name="zen_mode_apps_priority_apps_settings" msgid="5544513568250354374">"ການຕັ້ງຄ່າແອັບ"</string>
     <string name="zen_mode_plus_n_items" msgid="6136713354369243421">"+<xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"ອະນຸຍາດໃຫ້ແອັບຍົກເລີກໄດ້"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"ແອັບທີ່ສາມາດລົບກວນໄດ້"</string>
@@ -3874,6 +3969,8 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"ສ້າງໂໝດ"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"ໂໝດທີ່ກຳນົດເອງ"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"ຊື່ໂໝດ"</string>
+    <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"ຊື່ໂໝດບໍ່ສາມາດຫວ່າງເປົ່າໄດ້"</string>
+    <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"ເລືອກໄອຄອນ"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"ນັດໝາຍປະຕິທິນ"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"ສິ່ງທີ່ເຮັດປະຈຳໃນເວລານອນ"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"ໃນຂະນະຂັບລົດ"</string>
@@ -3943,7 +4040,9 @@
     <string name="managing_admin" msgid="2633920317425356619">"ຈັດ​ການ​ໂດຍ <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"ເປີດ​ຕາມ​ມາດ​ຕະ​ຖານ"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"ເປີດ​ລິ້ງ​ທີ່​ຮອງ​ຮັບ​"</string>
-    <string name="app_launch_top_intro_message" msgid="137370923637482459">"ອະນຸຍາດໃຫ້ລິ້ງເວັບຕ່າງໆເປີດແອັບນີ້ໄດ້"</string>
+    <string name="app_launch_open_in_app" msgid="2208182888681699512">"ໃນແອັບ"</string>
+    <string name="app_launch_open_in_browser" msgid="766170191853009756">"ໃນໂປຣແກຣມທ່ອງເວັບຂອງທ່ານ"</string>
+    <string name="app_launch_top_intro_message" msgid="9037324384325518290">"ເລືອກວິທີເປີດລິ້ງເວັບສຳລັບແອັບນີ້"</string>
     <string name="app_launch_links_category" msgid="2380467163878760037">"ລິ້ງທີ່ຈະເປີດໃນແອັບນີ້"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"ລິ້ງ​ທີ່​ຮອງ​ຮັບ​"</string>
     <string name="app_launch_other_defaults_title" msgid="5674385877838735586">"ການຕັ້ງຄ່າເລີ່ມຕົ້ນອື່ນໆ"</string>
@@ -4104,7 +4203,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"ທຸກກົດ​ລະບຽບຫ້າມ​ລົບ​ກວນທີ່​ສ້າງ​ຂຶ້ນ​ໂດຍ​ແອັບນີ້​ຈະ​ຖືກລຶບ​ອອກ."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"ອະນຸຍາດການເຂົ້າເຖິງໂໝດສຳລັບ <xliff:g id="APP">%1$s</xliff:g> ບໍ?"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"ແອັບຈະສາມາດເປີດ/ປິດໂໝດຫ້າມລົບກວນ, ຈັດການ ແລະ ເປີດນຳໃຊ້ໂໝດ, ຮວມທັງປ່ຽນແປງການຕັ້ງຄ່າທີ່ກ່ຽວຂ້ອງໄດ້."</string>
-    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="6288548508466545492">"ຖອດຖອນການເຂົ້າເຖິງໂໝດສຳລັບ <xliff:g id="APP">%1$s</xliff:g> ບໍ?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"ຖອດຖອນການເຂົ້າເຖິງໂໝດສຳລັບ <xliff:g id="APP">%1$s</xliff:g> ບໍ?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"ລະບົບຈະລຶບໂໝດທັງໝົດທີ່ແອັບນີ້ສ້າງອອກ."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"ບໍ່ປັບໃຫ້ເໝາະສົມ"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"ປັບໃຫ້ເໝາະສົມ"</string>
@@ -4126,6 +4225,9 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"ການແຈ້ງເຕືອນແບບເຕັມຈໍ"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"ອະນຸຍາດໃຫ້ແອັບນີ້ສະແດງການແຈ້ງເຕືອນແບບເຕັມຈໍ"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"ອະນຸຍາດໃຫ້ແອັບນີ້ສະແດງການແຈ້ງເຕືອນແບບເຕັມຈໍເມື່ອອຸປະກອນລັອກຢູ່. ແອັບອາດໃຊ້ການແຈ້ງເຕືອນເຫຼົ່ານີ້ເພື່ອໄຮໄລ້ໂມງປຸກ, ສາຍໂທເຂົ້າ ຫຼື ການແຈ້ງເຕືອນສຸກເສີນອື່ນໆ."</string>
+    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"ຂຽນຄ່າກຳນົດຂອງລະບົບ"</string>
+    <string name="write_system_preferences_switch_title" msgid="213522354119233085">"ອະນຸຍາດໃຫ້ແອັບນີ້ແກ້ໄຂຄ່າກຳນົດຂອງລະບົບໃນນາມຂອງທ່ານ"</string>
+    <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"ສິດນີ້ອະນຸຍາດໃຫ້ແອັບແກ້ໄຂຄ່າກຳນົດຫຼັກຂອງລະບົບໄດ້."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"ແອັບການຈັດການມີເດຍ"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"ອະນຸຍາດໃຫ້ແອັບຈັດການມີເດຍ"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"ຫາກອະນຸຍາດ, ແອັບນີ້ຈະສາມາດແກ້ໄຂ ຫຼື ລຶບໄຟລ໌ມີເດຍທີ່ສ້າງຂຶ້ນໂດຍແອັບອື່ນໄດ້ໂດຍບໍ່ຕ້ອງຖາມທ່ານ. ແອັບຈະຕ້ອງມີການອະນຸຍາດເພື່ອເຂົ້າເຖິງໄຟລ໌ ແລະ ມີເດຍໄດ້."</string>
@@ -4371,6 +4473,13 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"ທ່າທາງ"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"ເປີດກ້ອງດ່ວນ"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"ເພື່ອເປີດກ້ອງຂຶ້ນມາແບບດ່ວນ, ໃຫ້ກົດປຸ່ມປິດເປີດສອງເທື່ອຕິດກັນ. ສາມາດເຮັດໄດ້ຈາກທຸກໜ້າຈໍ."</string>
+    <string name="double_tap_power_title" msgid="8705875166298116659">"ແຕະປຸ່ມເປີດປິດສອງເທື່ອ"</string>
+    <string name="double_tap_power_enabled" msgid="305978257631612678">"ໃຊ້ການແຕະສອງເທື່ອ"</string>
+    <string name="double_tap_power_target_action_category" msgid="6186809788568348488">"ແຕະປຸ່ມເປີດປິດສອງເທື່ອ"</string>
+    <string name="double_tap_power_camera_action_title" msgid="8398392033718681209">"ເປີດກ້ອງຖ່າຍຮູບ"</string>
+    <string name="double_tap_power_camera_action_summary" msgid="1231656402570674349">"ເຂົ້າເຖິງກ້ອງຖ່າຍຮູບ"</string>
+    <string name="double_tap_power_wallet_action_title" msgid="2238628756927241786">"ເປີດ Wallet"</string>
+    <string name="double_tap_power_wallet_action_summary" msgid="6567586974229774570">"ເຂົ້າເຖິງ Wallet"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"ສະຫຼັບກ້ອງເພື່ອຖ່າຍເຊວຟີ"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"ໂໝດການນຳທາງ"</string>
@@ -4767,23 +4876,28 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"ໂໝດເຄືອຂ່າຍ <xliff:g id="NETWORKMODEID">%1$d</xliff:g> ບໍ່ຖືກຕ້ອງ. ບໍ່ສົນໃຈ."</string>
     <string name="satellite_setting_title" msgid="2543034229989047673">"ການຮັບສົ່ງຂໍ້ຄວາມຜ່ານດາວທຽມ"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"ສົ່ງ ແລະ ຮັບຂໍ້ຄວາມຜ່ານດາວທຽມ. ຮວມຢູ່ໃນບັນຊີຂອງທ່ານ."</string>
-    <string name="satellite_setting_disabled_summary" msgid="6789122487534159857">"ສົ່ງ ແລະ ຮັບຂໍ້ຄວາມຜ່ານດາວທຽມ. ບໍ່ຮວມຢູ່ໃນບັນຊີຂອງທ່ານ."</string>
-    <string name="keywords_satellite_setting" msgid="3312183289776517695">"ການຮັບສົ່ງຂໍ້ຄວາມຜ່ານດາວທຽມ"</string>
-    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"ກ່ຽວກັບການຮັບສົ່ງຂໍ້ຄວາມຜ່ານດາວທຽມ"</string>
+    <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"ສົ່ງ ແລະ ຮັບຂໍ້ຄວາມຜ່ານດາວທຽມ. ບໍ່ຮວມມາກັບບັນຊີຂອງທ່ານ."</string>
+    <string name="keywords_satellite_setting" msgid="613553612424945946">"ການຮັບສົ່ງຂໍ້ຄວາມຜ່ານດາວທຽມ, ການເຊື່ອມຕໍ່ຜ່ານດາວທຽມ"</string>
+    <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"ກ່ຽວກັບ <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"ທ່ານສາມາດສົ່ງ ແລະ ຮັບຂໍ້ຄວາມຜ່ານດາວທຽມໄດ້ໂດຍເປັນພາກສ່ວນໜຶ່ງຂອງບັນຊີ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ທີ່ມີສິດ"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"ແພັກເກດ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ຂອງທ່ານ"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"ການຮັບສົ່ງຂໍ້ຄວາມຜ່ານດາວທຽມຮວມຢູ່ໃນບັນຊີຂອງທ່ານ"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"ການຮັບສົ່ງຂໍ້ຄວາມຈະຮວມຢູ່ໃນບັນຊີຂອງທ່ານ"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"ການຮັບສົ່ງຂໍ້ຄວາມຜ່ານດາວທຽມບໍ່ໄດ້ຮວມຢູ່ໃນບັນຊີຂອງທ່ານ"</string>
-    <string name="summary_add_satellite_setting" msgid="3815254731634052432">"ເພີ່ມການຮັບສົ່ງຂໍ້ຄວາມຜ່ານດາວທຽມ"</string>
+    <string name="summary_add_satellite_setting" msgid="190359698593056946">"ສຶກສາເພີ່ມເຕີມ"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"ມັນເຮັດວຽກແນວໃດ"</string>
     <string name="title_satellite_connection_guide" msgid="3294802307913609072">"ເມື່ອທ່ານບໍ່ມີເຄືອຂ່າຍມືຖື"</string>
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"ໂທລະສັບຂອງທ່ານຈະເຊື່ອມຕໍ່ກັບດາວທຽມໂດຍອັດຕະໂນມັດ. ສຳລັບການເຊື່ອມຕໍ່ທີ່ດີທີ່ສຸດ, ກະລຸນາຢູ່ໃນພື້ນທີ່ທີ່ເບິ່ງເຫັນທ້ອງຟ້າໄດ້ຢ່າງຊັດເຈນ."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"ຫຼັງຈາກທີ່ໂທລະສັບຂອງທ່ານເຊື່ອມຕໍ່ກັບດາວທຽມ"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"ທ່ານສາມາດສົ່ງຂໍ້ຄວາມຫາໃຜກໍໄດ້, ເຊິ່ງຮວມທັງບໍລິການສຸກເສີນ. ໂທລະສັບຂອງທ່ານຈະເຊື່ອມຕໍ່ກັບເຄືອຂ່າຍມືຖືອີກຄັ້ງເມື່ອມີໃຫ້ໃຊ້."</string>
-    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"ການຮັບສົ່ງຂໍ້ຄວາມຜ່ານດາວທຽມອາດໃຊ້ເວລາດົນກວ່າປົກກະຕິ ແລະ ພ້ອມໃຫ້ບໍລິການໃນບາງພື້ນທີ່ເທົ່ານັ້ນ. ສະພາບອາກາດ ແລະ ໂຄງສ້າງບາງຢ່າງອາດສົ່ງຜົນຕໍ່ການເຊື່ອມຕໍ່ຜ່ານດາວທຽມຂອງທ່ານ. ການໂທຜ່ານດາວທຽມບໍ່ພ້ອມໃຫ້ບໍລິການ. ການໂທສຸກເສີນອາດຍັງເຊື່ອມຕໍ່ຢູ່.\n\nລະບົບອາດໃຊ້ເວລາໄລຍະໜຶ່ງຈົນກວ່າການປ່ຽນແປງໃນບັນຊີຈະສະແດງໃນການຕັ້ງຄ່າ. ກະລຸນາຕິດຕໍ່ຜູ້ໃຫ້ບໍລິການຂອງທ່ານສຳລັບລາຍລະອຽດ."</string>
-    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"ຂໍ້ມູນເພີ່ມເຕີມກ່ຽວກັບການຮັບສົ່ງຂໍ້ຄວາມຜ່ານດາວທຽມ"</string>
+    <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"<xliff:g id="SUBJECT">%1$s</xliff:g> ອາດໃຊ້ເວລາດົນກວ່າປົກກະຕິ ແລະ ພ້ອມໃຫ້ບໍລິການໃນບາງພື້ນທີ່ເທົ່ານັ້ນ. ສະພາບອາກາດ ແລະ ໂຄງສ້າງບາງຢ່າງອາດສົ່ງຜົນຕໍ່ການເຊື່ອມຕໍ່ຜ່ານດາວທຽມຂອງທ່ານ. ການໂທຜ່ານດາວທຽມບໍ່ພ້ອມໃຫ້ບໍລິການ. ການໂທສຸກເສີນອາດຍັງເຊື່ອມຕໍ່ຢູ່.\n\nລະບົບອາດໃຊ້ເວລາໄລຍະໜຶ່ງຈົນກວ່າການປ່ຽນແປງໃນບັນຊີຈະສະແດງໃນການຕັ້ງຄ່າ. ກະລຸນາຕິດຕໍ່ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ສຳລັບລາຍລະອຽດ."</string>
+    <string name="more_about_satellite_messaging" msgid="1039277943532711584">"ຂໍ້ມູນເພີ່ມເຕີມກ່ຽວກັບ <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"ບໍ່ສາມາດເປີດ <xliff:g id="FUNCTION">%1$s</xliff:g> ໄດ້"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"ເພື່ອເປີດ <xliff:g id="FUNCTION">%1$s</xliff:g>, ໃຫ້ສິ້ນສຸດການເຊື່ອມຕໍ່ດາວທຽມກ່ອນ"</string>
+    <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"ການເຊື່ອມຕໍ່ຜ່ານດາວທຽມ"</string>
+    <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"ການເຊື່ອມຕໍ່ຜ່ານດາວທຽມ"</string>
+    <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"ການເຊື່ອມຕໍ່ຜ່ານດາວທຽມ"</string>
+    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"ການຮັບສົ່ງຂໍ້ຄວາມຜ່ານດາວທຽມ"</string>
+    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"ການໃຊ້ຂໍ້ມູນຈະຮວມຢູ່ໃນບັນຊີຂອງທ່ານ"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ຊື່ຈຸດເຂົ້າເຖິງ (APN)"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"ບໍ່ສາມາດໃຊ້ໄດ້ເມື່ອເຊື່ອມຕໍ່ກັບ <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4970,6 +5084,8 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"ທ່ານຢູ່ໃນໂໝດ 16KB ຂອງໂໝດບໍ່ຂຶ້ນກັບໜ້າ. ບໍ່ຮັບປະກັນຄວາມສົມບູນຂອງຊອບແວໃນໂໝດນີ້ ແລະ ຂໍ້ມູນໃດກໍຕາມທີ່ຈັດເກັບໃນໂທລະສັບໃນລະຫວ່າງທີ່ Bootloader ປົດລັອກຢູ່ອາດມີຄວາມສ່ຽງ. ຄຸນສົມບັດບາງຢ່າງອາດຖືກປິດການນຳໃຊ້ໃນໂໝດເຫຼົ່ານີ້, ດັ່ງນັ້ນບາງແອັບພລິເຄຊັນຈຶ່ງອາດບໍ່ເຮັດວຽກ. ເພື່ອກັບຄືນເປັນໂໝດໂປຣດັກຊັນອີກເທື່ອໜຶ່ງ, ທ່ານຕ້ອງປ່ຽນກັບໄປໃຊ້ໂໝດ 4KB ຈາກນັ້ນລັອກ Bootloader ຂອງອຸປະກອນ. ການດຳເນີນການນີ້ຈະຣີເຊັດອຸປະກອນເປັນຄ່າຈາກໂຮງງານອີກເທື່ອໜຶ່ງ ແລະ ກູ້ຄືນເປັນການຕັ້ງຄ່າໂປຣດັກຊັນ. ຫຼັງຈາກທີ່ອຸປະກອນເປີດເຂົ້າເປັນ Android ໄດ້ສຳເລັດ, ໃຫ້ປິດການນຳໃຊ້ການປົດລັອກ OEM ໃນຕົວເລືອກນັກພັດທະນາ. ຫາກອຸປະກອນບໍ່ສາມາດເປີດເຂົ້າເປັນ Android ຫຼື ບໍ່ສະຖຽນ, ໃຫ້ແຟລຊອຸປະກອນອີກເທື່ອໜຶ່ງໂດຍໃຊ້ຮູບພາບໂຮງງານຫຼ້າສຸດຈາກ &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; ຫຼື ໃຊ້ &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ແລະ ເລືອກ \'ລ້າງຂໍ້ມູນອຸປະກອນ\', \'ລັອກ Bootloader\' ແລະ \'ບັງຄັບໃຫ້ແຟລຊທຸກພາທິຊັນ\'."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"ໂໝດບໍ່ເນັ້ນການໃຊ້ໜ້າ ໂດຍໃຊ້ຂະໜາດ 16KB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"ອ່ານເພີ່ມເຕີມ"</string>
+    <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"ເອີ້ນໃຊ້ແອັບດ້ວຍໂໝດຄວາມເຂົ້າກັນໄດ້ກັບຂະໜາດໜ້າ"</string>
+    <string name="enable_16k_app_compat_details" msgid="3389401258168314266">"ແອັບຈະຖືກເອີ້ນໃຊ້ໃນໂໝດຄວາມເຂົ້າກັນໄດ້ກັບຂະໜາດໜ້າເວັບຢູ່ອຸປະກອນ 16 KB ເມື່ອມີການເປີດໃຊ້."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"ເຄື່ອງຈັດການລາຍງານຂໍ້ຜິດພາດ"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"ເລືອກແອັບທີ່ຈະໃຫ້ຈັດການທາງລັດລາຍງານຂໍ້ຜິດພາດຢູ່ອຸປະກອນຂອງທ່ານ."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"ສ່ວນຕົວ"</string>
@@ -5286,8 +5402,8 @@
     <string name="show_captions_enabled" msgid="7089043007924626">"ເປີດ"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"ປິດ"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"ເປີດ"</string>
-    <string name="audio_seek_bar_state_left_first" msgid="8814986910920838972">"ສຽງ %1$d%% ຊ້າຍ, %2$d%% ຂວາ"</string>
-    <string name="audio_seek_bar_state_right_first" msgid="1999368979633398876">"ສຽງ %1$d%% ຂວາ, %2$d%% ຊ້າຍ"</string>
+    <string name="audio_seek_bar_state_left_first" msgid="1641359989891833888">"ສຽງຂ້າງຊ້າຍ <xliff:g id="PERCENT_LEFT">%1$s</xliff:g>, ຂ້າງຂວາ <xliff:g id="PERCENT_RIGHT">%2$s</xliff:g>"</string>
+    <string name="audio_seek_bar_state_right_first" msgid="6027686565598201061">"ສຽງຂ້າງຂວາ <xliff:g id="PERCENT_RIGHT">%1$s</xliff:g>, ຂ້າງຊ້າຍ <xliff:g id="PERCENT_LEFT">%2$s</xliff:g>"</string>
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"ຊື່ອຸປະກອນຂອງທ່ານຈະສະແດງໃຫ້ແອັບທີ່ທ່ານຕິດຕັ້ງໄວ້ເຫັນ. ມັນອາດຖືກສະແດງໃຫ້ຄົນອື່ນເຫັນໃນເວລາທີ່ທ່ານເຊື່ອມຕໍ່ຫາອຸປະກອນ Bluetooth, ເຊື່ອມຕໍ່ຫາເຄືອຂ່າຍ Wi-Fi ຫຼື ຕັ້ງຄ່າຮັອດສະປອດ Wi-Fi ນຳ."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"ເພດທາງໄວຍາກອນ"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"ເລືອກເພດທາງໄວຍາກອນ"</string>
@@ -5356,8 +5472,14 @@
     <string name="audio_sharing_sharing_stopped_label" msgid="8128194452354240996">"ຢຸດການແບ່ງປັນສຽງແລ້ວ"</string>
     <string name="audio_sharing_confirm_dialog_title" msgid="7655147122624691167">"ເຊື່ອມຕໍ່ອຸປະກອນທີ່ເຂົ້າກັນໄດ້"</string>
     <string name="audio_sharing_comfirm_dialog_content" msgid="3479217934447446066">"ເພື່ອເລີ່ມການແບ່ງປັນສຽງ, ທຳອິດໃຫ້ເຊື່ອມຕໍ່ຫູຟັງສຽງ LE ໄປຫາໂທລະສັບຂອງທ່ານກ່ອນ"</string>
-    <!-- no translation found for audio_sharing_switch_active_button_label (3065600513067122124) -->
-    <skip />
+    <string name="audio_sharing_switch_active_button_label" msgid="3065600513067122124">"ສະຫຼັບໄປໃຊ້ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_sharing_progress_dialog_start_stream_content" msgid="1152386358063502897">"ກຳລັງເລີ່ມການສະຕຣີມສຽງ…"</string>
+    <string name="audio_sharing_progress_dialog_add_source_content" msgid="2913609550496440710">"ກຳລັງແບ່ງປັນກັບ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>…"</string>
+    <string name="progress_dialog_connect_device_content" msgid="1387370883978461533">"ກຳລັງເຊື່ອມຕໍ່ກັບ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>…"</string>
+    <string name="audio_sharing_retry_dialog_title" msgid="3954529199333866445">"ບໍ່ສາມາດແບ່ງປັນສຽງໄດ້"</string>
+    <string name="audio_sharing_retry_dialog_content" msgid="6014534433894608834">"ມີບາງຢ່າງຜິດພາດເກີດຂຶ້ນ. ກະລຸນາລອງໃໝ່."</string>
+    <string name="audio_sharing_incompatible_dialog_title" msgid="4586805264392802115">"ບໍ່ສາມາດແບ່ງປັນສຽງກັບ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ໄດ້"</string>
+    <string name="audio_sharing_incompatible_dialog_content" msgid="3943223683620405311">"ການແບ່ງປັນສຽງໃຊ້ໄດ້ກັບຫູຟັງທີ່ຮອງຮັບສຽງ LE ເທົ່ານັ້ນ"</string>
     <string name="audio_streams_category_title" msgid="4878022761829895463">"ເຊື່ອມຕໍ່ກັບການສະຕຣີມສຽງ LE"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"ການສະຕຣີມສຽງທີ່ຢູ່ໃກ້ຄຽງ"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"ການສະຕຣີມສຽງ"</string>
@@ -5384,6 +5506,7 @@
     <string name="audio_streams_dialog_learn_more" msgid="6711241053442211345">"ສຶກສາເພີ່ມເຕີມ"</string>
     <string name="audio_streams_dialog_cannot_play" msgid="1358828316927479091">"ບໍ່ສາມາດຫຼິ້ນການສະຕຣີມສຽງນີ້ຢູ່ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ໄດ້."</string>
     <string name="audio_streams_listening_now" msgid="4205614429222949176">"ຟັງດຽວນີ້"</string>
+    <string name="audio_streams_present_now" msgid="1128360774541089402">"ຢຸດຊົ່ວຄາວແລ້ວໂດຍໂຮສ"</string>
     <string name="audio_streams_media_service_notification_leave_broadcast_text" msgid="4938656134300913647">"ຢຸດການຟັງ"</string>
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"ເຊື່ອມຕໍ່ຫູຟັງທີ່ເຂົ້າກັນໄດ້"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"ເຊື່ອມຕໍ່ອຸປະກອນ"</string>
@@ -5401,8 +5524,21 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"ຟັງສະຕຣີມ"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"ສະແກນລະຫັດ QR ການສະຕຣີມສຽງເພື່ອຟັງກັບ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"ບໍ່ສາມາດແກ້ໄຂລະຫັດຜ່ານໃນລະຫວ່າງທີ່ແບ່ງປັນໄດ້. ເພື່ອປ່ຽນລະຫັດຜ່ານ, ທຳອິດໃຫ້ປິດການແບ່ງປັນສຽງ."</string>
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"ລະຫັດຜ່ານຂອງທ່ານຕ້ອງມີ 4-16 ຕົວອັກສອນ ແລະ ໃຊ້ຕົວອັກສອນ, ຕົວເລກ ແລະ ສັນຍາລັກເທົ່ານັ້ນ"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"ຕົວສະແກນລະຫັດ QR"</string>
-    <!-- no translation found for audio_streams_qr_code_help_with_link (5542328067190486479) -->
-    <skip />
+    <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"ຕ້ອງການຄວາມຊ່ວຍເຫຼືອບໍ?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"ຊອກຫາໃນການຕັ້ງຄ່າ"</string>
+    <string name="keywords_contacts_storage" msgid="9061213057165337893">"ລາຍຊື່ຜູ້ຕິດຕໍ່, ບ່ອນຈັດເກັບຂໍ້ມູນ, ບັນຊີ"</string>
+    <string name="contacts_storage_settings_title" msgid="1574030546525203810">"ບ່ອນຈັດເກັບຂໍ້ມູນລາຍຊື່ຜູ້ຕິດຕໍ່"</string>
+    <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"ອຸປະກອນເທົ່ານັ້ນ"</string>
+    <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"ລາຍຊື່ຜູ້ຕິດຕໍ່ໃໝ່ຈະບໍ່ຖືກຊິ້ງຂໍ້ມູນກັບບັນຊີ"</string>
+    <string name="contacts_storage_selection_message" msgid="8082077300632059003">"ລາຍຊື່ຜູ້ຕິດຕໍ່ຈະຖືກບັນທຶກໄປໃສ່ອຸປະກອນ ແລະ ຊິ້ງຂໍ້ມູນໄປຫາບັນຊີຂອງທ່ານເປັນຄ່າເລີ່ມຕົ້ນ"</string>
+    <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"ການຕັ້ງຄ່າບັນຊີເລີ່ມຕົ້ນຜິດພາດ"</string>
+    <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"ບໍ່ມີການຕັ້ງຄ່າເລີ່ມຕົ້ນ"</string>
+    <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"ອຸປະກອນເທົ່ານັ້ນ"</string>
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"ອຸປະກອນ ແລະ %1$s"</string>
+    <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"ເພີ່ມບັນຊີເພື່ອເລີ່ມຕົ້ນ"</string>
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"ບ່ອນທີ່ບັນທຶກລາຍຊື່ຜູ້ຕິດຕໍ່"</string>
+    <string name="search_gesture_feature_title" msgid="7037117019612710960">"ແຕ້ມວົງມົນເພື່ອຊອກຫາ"</string>
+    <string name="search_gesture_feature_summary" msgid="1793056495030564014">"ແຕະປຸ່ມໜ້າທຳອິດ ຫຼື ດ້າມຈັບນຳທາງຄ້າງໄວ້ເພື່ອຊອກຫາໂດຍໃຊ້ເນື້ອຫາຢູ່ໜ້າຈໍຂອງທ່ານ."</string>
 </resources>

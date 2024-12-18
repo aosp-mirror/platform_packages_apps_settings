@@ -72,9 +72,6 @@ public class TimeFormatPreferenceController extends TogglePreferenceController {
         if (mIsFromSUW) {
             return DISABLED_DEPENDENT_SETTING;
         }
-        if (AutoTimeFormatPreferenceController.isAutoTimeFormatSelection(mContext)) {
-            return DISABLED_DEPENDENT_SETTING;
-        }
         return AVAILABLE;
     }
 
@@ -117,12 +114,12 @@ public class TimeFormatPreferenceController extends TogglePreferenceController {
         return DateFormat.is24HourFormat(mContext);
     }
 
-    static void update24HourFormat(Context context, Boolean is24Hour) {
+    private static void update24HourFormat(Context context, Boolean is24Hour) {
         set24Hour(context, is24Hour);
         timeUpdated(context, is24Hour);
     }
 
-    static void timeUpdated(Context context, Boolean is24Hour) {
+    private static void timeUpdated(Context context, Boolean is24Hour) {
         Intent timeChanged = new Intent(Intent.ACTION_TIME_CHANGED);
         timeChanged.addFlags(Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
         int timeFormatPreference;
@@ -130,15 +127,14 @@ public class TimeFormatPreferenceController extends TogglePreferenceController {
             timeFormatPreference = Intent.EXTRA_TIME_PREF_VALUE_USE_LOCALE_DEFAULT;
         } else {
             timeFormatPreference = is24Hour ? Intent.EXTRA_TIME_PREF_VALUE_USE_24_HOUR
-                : Intent.EXTRA_TIME_PREF_VALUE_USE_12_HOUR;
+                    : Intent.EXTRA_TIME_PREF_VALUE_USE_12_HOUR;
         }
         timeChanged.putExtra(Intent.EXTRA_TIME_PREF_24_HOUR_FORMAT, timeFormatPreference);
         context.sendBroadcast(timeChanged);
     }
 
-    static void set24Hour(Context context, Boolean is24Hour) {
-        String value = is24Hour == null ? null :
-            is24Hour ? HOURS_24 : HOURS_12;
+    private static void set24Hour(Context context, boolean is24Hour) {
+        String value = is24Hour ? HOURS_24 : HOURS_12;
         Settings.System.putString(context.getContentResolver(),
                 Settings.System.TIME_12_24, value);
     }

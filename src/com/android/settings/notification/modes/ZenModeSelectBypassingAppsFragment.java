@@ -48,15 +48,17 @@ public class ZenModeSelectBypassingAppsFragment extends ZenModeFragmentBase impl
         } else {
             app = null;
         }
-        return buildPreferenceControllers(context, app, this, new NotificationBackend());
+        return buildPreferenceControllers(context, app, this, new NotificationBackend(),
+                new ZenHelperBackend(context));
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             @Nullable Application app, @Nullable Fragment host,
-            @Nullable NotificationBackend notificationBackend) {
+            @Nullable NotificationBackend notificationBackend,
+            @Nullable ZenHelperBackend zenHelperBackend) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModeAllBypassingAppsPreferenceController(context, app, host,
-                notificationBackend));
+                zenHelperBackend));
         controllers.add(new ZenModeAddBypassingAppsPreferenceController(context, app, host,
                 notificationBackend));
         return controllers;
@@ -86,7 +88,7 @@ public class ZenModeSelectBypassingAppsFragment extends ZenModeFragmentBase impl
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null, null, null);
+                    return buildPreferenceControllers(context, null, null, null, null);
                 }
             };
 }

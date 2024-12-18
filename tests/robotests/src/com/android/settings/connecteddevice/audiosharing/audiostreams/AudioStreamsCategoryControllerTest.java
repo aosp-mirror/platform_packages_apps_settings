@@ -135,47 +135,47 @@ public class AudioStreamsCategoryControllerTest {
 
     @Test
     public void getAvailabilityStatus_flagOn() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_QR_CODE_PRIVATE_BROADCAST_SHARING);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
     public void getAvailabilityStatus_flagOff() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_QR_CODE_PRIVATE_BROADCAST_SHARING);
+        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
     public void onStart_flagOff_doNothing() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_QR_CODE_PRIVATE_BROADCAST_SHARING);
+        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.onStart(mLifecycleOwner);
         verify(mBluetoothEventManager, never()).registerCallback(any());
     }
 
     @Test
     public void onStart_flagOn_registerCallback() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_QR_CODE_PRIVATE_BROADCAST_SHARING);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.onStart(mLifecycleOwner);
         verify(mBluetoothEventManager).registerCallback(any());
     }
 
     @Test
     public void onStop_flagOff_doNothing() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_QR_CODE_PRIVATE_BROADCAST_SHARING);
+        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.onStop(mLifecycleOwner);
         verify(mBluetoothEventManager, never()).unregisterCallback(any());
     }
 
     @Test
     public void onStop_flagOn_unregisterCallback() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_QR_CODE_PRIVATE_BROADCAST_SHARING);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.onStop(mLifecycleOwner);
         verify(mBluetoothEventManager).unregisterCallback(any());
     }
 
     @Test
     public void updateVisibility_flagOff_invisible() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_QR_CODE_PRIVATE_BROADCAST_SHARING);
+        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.updateVisibility();
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(mPreference.isVisible()).isFalse();
@@ -183,7 +183,7 @@ public class AudioStreamsCategoryControllerTest {
 
     @Test
     public void updateVisibility_noConnectedLe_invisible() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_QR_CODE_PRIVATE_BROADCAST_SHARING);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.updateVisibility();
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(mPreference.isVisible()).isFalse();
@@ -191,7 +191,7 @@ public class AudioStreamsCategoryControllerTest {
 
     @Test
     public void updateVisibility_isNotProfileReady_invisible() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_QR_CODE_PRIVATE_BROADCAST_SHARING);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(
                 mCachedBluetoothDevice);
         when(mVolumeControl.isProfileReady()).thenReturn(false);
@@ -202,7 +202,7 @@ public class AudioStreamsCategoryControllerTest {
 
     @Test
     public void updateVisibility_isBroadcasting_invisible() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_QR_CODE_PRIVATE_BROADCAST_SHARING);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(
                 mCachedBluetoothDevice);
         when(mBroadcast.isEnabled(any())).thenReturn(true);
@@ -213,7 +213,7 @@ public class AudioStreamsCategoryControllerTest {
 
     @Test
     public void updateVisibility_isBluetoothOff_invisible() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_QR_CODE_PRIVATE_BROADCAST_SHARING);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(
                 mCachedBluetoothDevice);
         mShadowBluetoothAdapter.setEnabled(false);
@@ -224,7 +224,7 @@ public class AudioStreamsCategoryControllerTest {
 
     @Test
     public void updateVisibility_visible() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_QR_CODE_PRIVATE_BROADCAST_SHARING);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(
                 mCachedBluetoothDevice);
         mController.displayPreference(mScreen);
@@ -235,7 +235,7 @@ public class AudioStreamsCategoryControllerTest {
 
     @Test
     public void onProfileConnectionStateChanged_updateVisibility() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_QR_CODE_PRIVATE_BROADCAST_SHARING);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         ArgumentCaptor<BluetoothCallback> argumentCaptor =
                 ArgumentCaptor.forClass(BluetoothCallback.class);
         mController.onStart(mLifecycleOwner);

@@ -57,7 +57,7 @@ import java.util.Collections;
 public final class AppWithAdminGrantedPermissionsCounterTest {
 
     @Rule
-    MockitoRule mMockitoRule = MockitoJUnit.rule();
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     private final String APP_1 = "app1";
     private final String APP_2 = "app2";

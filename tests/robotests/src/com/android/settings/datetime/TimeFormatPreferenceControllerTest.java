@@ -97,15 +97,6 @@ public class TimeFormatPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_autoSet_shouldNotEnablePreference() {
-        Settings.System.putString(mContext.getContentResolver(), Settings.System.TIME_12_24, null);
-
-        mController.updateState(mPreference);
-
-        assertThat(mPreference.isEnabled()).isFalse();
-    }
-
-    @Test
     public void updatePreference_12HourSet_shouldSendIntent() {
         mController.setChecked(false);
 

@@ -213,8 +213,15 @@ public class ChooseLockPassword extends SettingsActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
-        ThemeHelper.trySetDynamicColor(this);
+        if (ThemeHelper.shouldApplyGlifExpressiveStyle(getApplicationContext())) {
+            if (!ThemeHelper.trySetSuwTheme(this)) {
+                setTheme(ThemeHelper.getSuwDefaultTheme(getApplicationContext()));
+                ThemeHelper.trySetDynamicColor(this);
+            }
+        } else {
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+            ThemeHelper.trySetDynamicColor(this);
+        }
         super.onCreate(savedInstanceState);
         findViewById(R.id.content_parent).setFitsSystemWindows(false);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
@@ -684,7 +691,8 @@ public class ChooseLockPassword extends SettingsActivity {
                 return;
             }
 
-            final TextView sucTitleView = view.findViewById(R.id.suc_layout_title);
+            final TextView sucTitleView = view.findViewById(
+                    com.google.android.setupdesign.R.id.suc_layout_title);
             final ViewGroup.MarginLayoutParams titleLayoutParams =
                     (ViewGroup.MarginLayoutParams) sucTitleView.getLayoutParams();
             mPasswordRestrictionView = new RecyclerView(getActivity());
@@ -927,7 +935,9 @@ public class ChooseLockPassword extends SettingsActivity {
                                         : R.string.lockpassword_pin_too_long));
                         break;
                     case CONTAINS_SEQUENCE:
-                        messages.add(getString(R.string.lockpassword_pin_no_sequential_digits));
+                        messages.add(getString(mIsAlphaMode
+                                ? R.string.lockpassword_password_no_sequential_characters
+                                : R.string.lockpassword_pin_no_sequential_digits));
                         break;
                     case RECENTLY_USED:
                         DevicePolicyManager devicePolicyManager =

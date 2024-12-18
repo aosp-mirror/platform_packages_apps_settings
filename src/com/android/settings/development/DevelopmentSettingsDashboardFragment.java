@@ -57,6 +57,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.development.autofill.AutofillCategoryController;
@@ -73,9 +74,11 @@ import com.android.settings.development.bluetooth.BluetoothQualityDialogPreferen
 import com.android.settings.development.bluetooth.BluetoothSampleRateDialogPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothStackLogPreferenceController;
 import com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController;
+import com.android.settings.development.linuxterminal.LinuxTerminalPreferenceController;
 import com.android.settings.development.qstile.DevelopmentTiles;
 import com.android.settings.development.storage.SharedDataPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.widget.SettingsMainSwitchBar;
@@ -97,7 +100,9 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         AdbClearKeysDialogHost, LogPersistDialogHost,
         BluetoothRebootDialog.OnRebootDialogListener,
         AbstractBluetoothPreferenceController.Callback,
-        NfcRebootDialog.OnNfcRebootDialogConfirmedListener, BluetoothSnoopLogHost {
+        NfcRebootDialog.OnNfcRebootDialogConfirmedListener,
+        BluetoothSnoopLogHost,
+        BluetoothLeAudioModePreferenceController.OnModeChangeListener {
 
     private static final String TAG = "DevSettingsDashboard";
     @VisibleForTesting static final int REQUEST_BIOMETRIC_PROMPT = 100;
@@ -377,6 +382,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                             userId, false /* hideBackground */);
                 } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
                     mSwitchBar.setChecked(false);
+                    IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(getActivity(),
+                            biometricAuthStatus, false /* twoFactorAuthentication */);
                 } else {
                     //Reset biometrics once enable dialog is shown
                     mIsBiometricsAuthenticated = false;
@@ -494,6 +501,10 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 getDevelopmentOptionsController(
                         BluetoothLeAudioModePreferenceController.class);
         leAudioModeController.onRebootDialogConfirmed();
+
+        final BluetoothLeAudioUiPreferenceController leAudioUiController =
+                getDevelopmentOptionsController(BluetoothLeAudioUiPreferenceController.class);
+        leAudioUiController.onRebootDialogConfirmed();
     }
 
     @Override
@@ -516,6 +527,10 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 getDevelopmentOptionsController(
                         BluetoothLeAudioModePreferenceController.class);
         leAudioModeController.onRebootDialogCanceled();
+
+        final BluetoothLeAudioUiPreferenceController leAudioUiController =
+                getDevelopmentOptionsController(BluetoothLeAudioUiPreferenceController.class);
+        leAudioUiController.onRebootDialogCanceled();
     }
 
     @Override
@@ -559,6 +574,10 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             if (resultCode == RESULT_OK) {
                 mIsBiometricsAuthenticated = true;
                 mSwitchBar.setChecked(true);
+            } else if (resultCode
+                    == ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT) {
+                IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(getActivity(),
+                        Utils.BiometricStatus.LOCKOUT, false /* twoFactorAuthentication */);
             }
         }
         for (AbstractPreferenceController controller : mPreferenceControllers) {
@@ -704,6 +723,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new WirelessDebuggingPreferenceController(context, lifecycle));
         controllers.add(new AdbAuthorizationTimeoutPreferenceController(context));
         controllers.add(new LocalTerminalPreferenceController(context));
+        controllers.add(new LinuxTerminalPreferenceController(context));
         controllers.add(new BugReportInPowerPreferenceController(context));
         controllers.add(new AutomaticSystemServerHeapDumpPreferenceController(context));
         controllers.add(new MockLocationAppPreferenceController(context, fragment));
@@ -732,6 +752,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothMapVersionPreferenceController(context));
         controllers.add(new BluetoothLeAudioPreferenceController(context, fragment));
         controllers.add(new BluetoothLeAudioModePreferenceController(context, fragment));
+        controllers.add(new BluetoothLeAudioUiPreferenceController(context, fragment));
         controllers.add(new BluetoothLeAudioDeviceDetailsPreferenceController(context));
         controllers.add(new BluetoothLeAudioAllowListPreferenceController(context));
         controllers.add(new BluetoothA2dpHwOffloadPreferenceController(context, fragment));
@@ -816,6 +837,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ForceEnableNotesRolePreferenceController(context));
         controllers.add(new GrammaticalGenderPreferenceController(context));
         controllers.add(new SensitiveContentProtectionPreferenceController(context));
+        controllers.add(new ShadeDisplayAwarenessPreferenceController(context));
 
         return controllers;
     }
@@ -845,6 +867,15 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             }
             if (controller instanceof BluetoothCodecListPreferenceController) {
                 ((BluetoothCodecListPreferenceController) controller).onHDAudioEnabled(enabled);
+            }
+        }
+    }
+
+    @Override
+    public void onBroadcastDisabled() {
+        for (AbstractPreferenceController controller : mPreferenceControllers) {
+            if (controller instanceof BluetoothLeAudioUiPreferenceController) {
+                ((BluetoothLeAudioUiPreferenceController) controller).onBroadcastDisabled();
             }
         }
     }

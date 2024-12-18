@@ -18,6 +18,7 @@ import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
 import static com.android.settings.datausage.lib.AppDataUsageRepository.getAppUid;
 import static com.android.settings.datausage.lib.AppDataUsageRepository.getAppUidList;
+import static com.android.settings.spa.app.appinfo.AppInfoSettingsProvider.startAppInfoSettings;
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
@@ -45,13 +46,14 @@ import com.android.settings.datausage.lib.AppDataUsageDetailsRepository;
 import com.android.settings.datausage.lib.NetworkTemplates;
 import com.android.settings.fuelgauge.datasaver.DynamicDenylistManager;
 import com.android.settings.network.SubscriptionUtil;
-import com.android.settings.widget.EntityHeaderController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
+import com.android.settingslib.widget.IntroPreference;
 
 import kotlin.Unit;
 
@@ -65,6 +67,8 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     private static final String TAG = "AppDataUsage";
 
     static final String ARG_APP_ITEM = "app_item";
+    @VisibleForTesting
+    static final String ARG_APP_HEADER = "app_header";
     static final String ARG_NETWORK_TEMPLATE = "network_template";
     static final String ARG_NETWORK_CYCLES = "network_cycles";
     static final String ARG_SELECTED_CYCLE = "selected_cycle";
@@ -176,7 +180,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
             removePreference(KEY_RESTRICT_BACKGROUND);
         }
 
-        addEntityHeader();
+        setupIntroPreference();
     }
 
     @Override
@@ -320,32 +324,32 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     }
 
     @VisibleForTesting
-    void addEntityHeader() {
-        String pkg = mPackages.size() != 0 ? mPackages.valueAt(0) : null;
-        int uid = 0;
-        if (pkg != null) {
+    void setupIntroPreference() {
+        final Preference pref = getPreferenceScreen().findPreference(ARG_APP_HEADER);
+        if (pref != null) {
+            pref.setIcon(mIcon);
+            pref.setTitle(mLabel);
+            pref.setSelectable(true);
+        }
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if (!(preference instanceof IntroPreference)) return false;
+
+        String pkg = !mPackages.isEmpty() ? mPackages.valueAt(0) : null;
+        if (mAppItem.key > 0 && pkg != null) {
             try {
-                uid = mPackageManager.getPackageUidAsUser(pkg,
+                int uid = mPackageManager.getPackageUidAsUser(pkg,
                         UserHandle.getUserId(mAppItem.key));
+                startAppInfoSettings(pkg, uid, this, 0 /* request */,
+                        FeatureFactory.getFeatureFactory().getMetricsFeatureProvider()
+                                .getMetricsCategory(this));
             } catch (PackageManager.NameNotFoundException e) {
                 Log.w(TAG, "Skipping UID because cannot find package " + pkg);
             }
         }
-
-        final boolean showInfoButton = mAppItem.key > 0;
-
-        final Activity activity = getActivity();
-        final Preference pref = EntityHeaderController
-                .newInstance(activity, this, null /* header */)
-                .setUid(uid)
-                .setHasAppInfoLink(showInfoButton)
-                .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
-                        EntityHeaderController.ActionType.ACTION_NONE)
-                .setIcon(mIcon)
-                .setLabel(mLabel)
-                .setPackageName(pkg)
-                .done(getPrefContext());
-        getPreferenceScreen().addPreference(pref);
+        return true;
     }
 
     @Override

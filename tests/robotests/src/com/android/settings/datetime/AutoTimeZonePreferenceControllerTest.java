@@ -225,7 +225,8 @@ public class AutoTimeZonePreferenceControllerTest {
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
         when(mTimeManager.updateTimeZoneConfiguration(Mockito.any())).thenReturn(true);
 
-        assertThat(mController.getSummary()).isEqualTo("");
+        assertThat(mController.getSummary().toString()).isEqualTo(
+                mContext.getString(R.string.zone_auto_title_summary));
 
         capabilitiesAndConfig = createCapabilitiesAndConfig(
                 /* autoSupported= */true, /* autoEnabled= */true, /* telephonySupported= */
@@ -233,12 +234,37 @@ public class AutoTimeZonePreferenceControllerTest {
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
         when(mTimeManager.updateTimeZoneConfiguration(Mockito.any())).thenReturn(true);
 
-        assertThat(mController.getSummary()).isEqualTo(
+        assertThat(mController.getSummary().toString()).isEqualTo(
                 mContext.getString(R.string.auto_zone_requires_location_summary));
+    }
+
+    @Test
+    public void toggleOff_revampFlagOn_shouldToggleOffUseLocation() {
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* autoSupported= */ true,
+                /* autoEnabled= */ true,
+                /* telephonySupported= */ true,
+                /* locationSupported= */ true);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+
+        mController.setChecked(false);
+
+        TimeZoneConfiguration configuration = new TimeZoneConfiguration.Builder()
+                .setAutoDetectionEnabled(false)
+                .setGeoDetectionEnabled(false)
+                .build();
+
+        verify(mTimeManager).updateTimeZoneConfiguration(configuration);
     }
 
     private static TimeZoneCapabilitiesAndConfig createCapabilitiesAndConfig(
             boolean autoSupported, boolean autoEnabled, boolean telephonySupported) {
+        return createCapabilitiesAndConfig(autoSupported, autoEnabled, telephonySupported, false);
+    }
+
+    private static TimeZoneCapabilitiesAndConfig createCapabilitiesAndConfig(
+            boolean autoSupported, boolean autoEnabled, boolean telephonySupported,
+            boolean locationSupported) {
         TimeZoneDetectorStatus status = new TimeZoneDetectorStatus(DETECTOR_STATUS_RUNNING,
                 new TelephonyTimeZoneAlgorithmStatus(
                         telephonySupported ? DETECTION_ALGORITHM_STATUS_RUNNING
@@ -252,12 +278,14 @@ public class AutoTimeZonePreferenceControllerTest {
         TimeZoneCapabilities capabilities = new TimeZoneCapabilities.Builder(UserHandle.SYSTEM)
                 .setConfigureAutoDetectionEnabledCapability(configureAutoDetectionEnabledCapability)
                 .setUseLocationEnabled(true)
-                .setConfigureGeoDetectionEnabledCapability(Capabilities.CAPABILITY_NOT_SUPPORTED)
+                .setConfigureGeoDetectionEnabledCapability(
+                        locationSupported ? Capabilities.CAPABILITY_POSSESSED
+                                : Capabilities.CAPABILITY_NOT_SUPPORTED)
                 .setSetManualTimeZoneCapability(Capabilities.CAPABILITY_POSSESSED)
                 .build();
         TimeZoneConfiguration config = new TimeZoneConfiguration.Builder()
                 .setAutoDetectionEnabled(autoEnabled)
-                .setGeoDetectionEnabled(false)
+                .setGeoDetectionEnabled(locationSupported)
                 .build();
         return new TimeZoneCapabilitiesAndConfig(status, capabilities, config);
     }

@@ -61,7 +61,6 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,6 +120,14 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                         if (activity != null) {
                             activity.finish();
                         }
+                    }
+                }
+
+                @Override
+                public void onDeviceBondStateChanged(
+                        @NonNull CachedBluetoothDevice cachedDevice, int bondState) {
+                    if (cachedDevice.equals(mCachedDevice)) {
+                        finishFragmentIfNecessary();
                     }
                 }
             };
@@ -281,9 +288,12 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         getController(
                 SlicePreferenceController.class,
                 controller -> {
-                    controller.setSliceUri(finalControlUri);
-                    controller.onStart();
-                    controller.displayPreference(getPreferenceScreen());
+                    if (getPreferenceScreen().findPreference(controller.getPreferenceKey())
+                            != null) {
+                        controller.setSliceUri(finalControlUri);
+                        controller.onStart();
+                        controller.displayPreference(getPreferenceScreen());
+                    }
                 });
 
         // Temporarily fix the issue that the page will be automatically scrolled to a wrong
@@ -339,13 +349,28 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         if (view != null) {
             view.getViewTreeObserver().addOnGlobalLayoutListener(mOnGlobalLayoutListener);
         }
+        getListView().setItemViewCacheSize(100);
         return view;
     }
 
     @Override
-    public void onCreatePreferences(@NonNull Bundle savedInstanceState, @NonNull String rootKey) {
-        super.onCreatePreferences(savedInstanceState, rootKey);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         if (Flags.enableBluetoothDeviceDetailsPolish()) {
+            if (mFormatter == null) {
+                List<AbstractPreferenceController> controllers = getPreferenceControllers().stream()
+                        .flatMap(List::stream)
+                        .toList();
+                mFormatter =
+                        FeatureFactory.getFeatureFactory()
+                                .getBluetoothFeatureProvider()
+                                .getDeviceDetailsFragmentFormatter(
+                                        requireContext(),
+                                        this,
+                                        mBluetoothAdapter,
+                                        mCachedDevice,
+                                        controllers);
+            }
             mFormatter.updateLayout(FragmentTypeModel.DeviceDetailsMainFragment.INSTANCE);
         }
     }
@@ -401,31 +426,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
     }
 
     @Override
-    protected void addPreferenceController(AbstractPreferenceController controller) {
-        if (Flags.enableBluetoothDeviceDetailsPolish()) {
-            List<String> keys =
-                    mFormatter.getVisiblePreferenceKeys(
-                            FragmentTypeModel.DeviceDetailsMainFragment.INSTANCE);
-            Lifecycle lifecycle = getSettingsLifecycle();
-            if (keys == null || keys.contains(controller.getPreferenceKey())) {
-                super.addPreferenceController(controller);
-            } else if (controller instanceof LifecycleObserver) {
-                lifecycle.removeObserver((LifecycleObserver) controller);
-            }
-        } else {
-            super.addPreferenceController(controller);
-        }
-    }
-
-    @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        if (Flags.enableBluetoothDeviceDetailsPolish()) {
-            mFormatter =
-                    FeatureFactory.getFeatureFactory()
-                            .getBluetoothFeatureProvider()
-                            .getDeviceDetailsFragmentFormatter(
-                                    requireContext(), this, mBluetoothAdapter, mCachedDevice);
-        }
         ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
 
         if (mCachedDevice != null) {

@@ -199,6 +199,12 @@
             android:title="@string/enable_terminal_title"
             android:summary="@string/enable_terminal_summary" />
 
+        <Preference
+            android:key="linux_terminal"
+            android:title="@string/enable_linux_terminal_title"
+            android:summary="@string/enable_linux_terminal_summary"
+            android:fragment="com.android.settings.development.linuxterminal.LinuxTerminalDashboardFragment" />
+
         <SwitchPreferenceCompat
             android:key="bugreport_in_power"
             android:title="@string/bugreport_in_power"
@@ -389,6 +395,11 @@
             android:entryValues="@array/bluetooth_leaudio_mode_values"/>
 
         <SwitchPreferenceCompat
+            android:key="bluetooth_leaudio_broadcast_ui"
+            android:title="@string/bluetooth_leaudio_broadcast_ui"
+            android:summary="@string/bluetooth_leaudio_broadcast_ui_summary"/>
+
+        <SwitchPreferenceCompat
             android:key="bluetooth_show_leaudio_device_details"
             android:title="@string/bluetooth_show_leaudio_device_details"/>
 
@@ -557,6 +568,13 @@
             android:title="@string/overlay_display_devices_title"
             android:entries="@array/overlay_display_devices_entries"
             android:entryValues="@array/overlay_display_devices_values" />
+
+        <ListPreference
+            android:entries="@array/shade_display_awareness_entries"
+            android:entryValues="@array/shade_display_awareness_values"
+            android:key="shade_display_awareness"
+            android:summary="@string/summary_placeholder"
+            android:title="@string/shade_display_awareness_title" />
 
         <com.android.settings.display.DensityPreference
             android:key="density"

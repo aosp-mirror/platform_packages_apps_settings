@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright (C) 2018 The Android Open Source Project
+  Copyright (C) 2024 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -19,4 +19,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/system_navigation_title"
-    settings:keywords="@string/keywords_system_navigation"/>
+    settings:keywords="@string/keywords_system_navigation">
+
+    <SwitchPreferenceCompat
+        android:key="search_gesture_press_hold"
+        android:title="@string/search_gesture_feature_title"
+        android:summary="@string/search_gesture_feature_summary"
+        android:order="100"
+        settings:allowDividerAbove="true"
+        settings:controller="com.android.settings.gestures.NavigationSettingsContextualSearchController"
+        settings:highlightableMenuKey="@string/menu_key_system" />
+
+</PreferenceScreen>

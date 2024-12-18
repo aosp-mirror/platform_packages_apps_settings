@@ -42,6 +42,7 @@ public class BluetoothDetailsHearingDeviceController extends BluetoothDetailsCon
 
     public static final int ORDER_HEARING_DEVICE_SETTINGS = 1;
     public static final int ORDER_HEARING_AIDS_PRESETS = 2;
+    public static final int ORDER_AMBIENT_VOLUME = 4;
     static final String KEY_HEARING_DEVICE_GROUP = "hearing_device_group";
 
     private final List<BluetoothDetailsController> mControllers = new ArrayList<>();
@@ -106,6 +107,10 @@ public class BluetoothDetailsHearingDeviceController extends BluetoothDetailsCon
         if (Flags.enableHearingAidPresetControl()) {
             mControllers.add(new BluetoothDetailsHearingAidsPresetsController(mContext, mFragment,
                     mManager, mCachedDevice, mLifecycle));
+        }
+        if (com.android.settingslib.flags.Flags.hearingDevicesAmbientVolumeControl()) {
+            mControllers.add(new BluetoothDetailsAmbientVolumePreferenceController(mContext,
+                    mManager, mFragment, mCachedDevice, mLifecycle));
         }
     }
 

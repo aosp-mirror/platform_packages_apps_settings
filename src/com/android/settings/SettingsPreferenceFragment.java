@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
@@ -33,6 +35,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.XmlRes;
 import androidx.fragment.app.DialogFragment;
@@ -45,12 +49,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.widget.HighlightablePreferenceGroupAdapter;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.CustomDialogPreferenceCompat;
 import com.android.settingslib.CustomEditTextPreferenceCompat;
 import com.android.settingslib.core.instrumentation.Instrumentable;
+import com.android.settingslib.preference.PreferenceScreenCreator;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -171,6 +177,24 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
                 checkAvailablePrefs((PreferenceGroup) pref);
             }
         }
+    }
+
+    @Override
+    protected final int getPreferenceScreenResId(@NonNull Context context) {
+        return getPreferenceScreenResId();
+    }
+
+    /** Returns if catalyst is enabled on current screen. */
+    public final boolean isCatalystEnabled() {
+        return getPreferenceScreenCreator() != null;
+    }
+
+    protected @Nullable PreferenceScreenCreator getPreferenceScreenCreator() {
+        if (!Flags.catalyst()) {
+            return null;
+        }
+        Context context = getContext();
+        return context != null ? getPreferenceScreenCreator(context) : null;
     }
 
     public View setPinnedHeaderView(int layoutResId) {
@@ -367,9 +391,13 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     @Override
     protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
         final Bundle arguments = getArguments();
-        mAdapter = new HighlightablePreferenceGroupAdapter(preferenceScreen,
-                arguments == null
-                        ? null : arguments.getString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY),
+        String key = arguments == null ? null : arguments.getString(EXTRA_FRAGMENT_ARG_KEY);
+        if (Flags.catalyst() && key == null) {
+            Activity activity = getActivity();
+            Intent intent = activity != null ? activity.getIntent() : null;
+            key = intent != null ? intent.getStringExtra(EXTRA_FRAGMENT_ARG_KEY) : null;
+        }
+        mAdapter = new HighlightablePreferenceGroupAdapter(preferenceScreen, key,
                 mPreferenceHighlighted);
         return mAdapter;
     }

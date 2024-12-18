@@ -29,6 +29,7 @@ import com.android.settings.biometrics.fingerprint2.domain.interactor.Accessibil
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FoldStateInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.OrientationInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.Default
+import com.android.settings.biometrics.fingerprint2.lib.model.Orientation
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSIconTouchViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.modules.enrolling.rfps.ui.viewmodel.RFPSViewModel
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.BackgroundViewModel
@@ -44,6 +45,7 @@ import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.Fing
 import com.android.settings.biometrics.fingerprint2.ui.enrollment.viewmodel.FingerprintScrollViewModel
 import com.android.settings.testutils2.FakeFingerprintManagerInteractor
 import com.android.systemui.biometrics.shared.model.toFingerprintSensor
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -73,7 +75,11 @@ class Injector(step: FingerprintNavigationStep.UiStep) {
 
   var accessibilityInteractor =
     object : AccessibilityInteractor {
-      override val isAccessibilityEnabled: Flow<Boolean> = flowOf(true)
+      override fun isEnabledFlow(scope: CoroutineScope): Flow<Boolean> = flowOf(true)
+      override val isEnabled: Boolean
+        get() = true
+      override fun announce(clazz: Class<*>, announcement: CharSequence?) {}
+       override fun interrupt() {}
     }
 
   var foldStateInteractor =
@@ -93,6 +99,7 @@ class Injector(step: FingerprintNavigationStep.UiStep) {
       override val rotationFromDefault: Flow<Int> = rotation
 
       override fun getRotationFromDefault(rotation: Int): Int = rotation
+      override val orientationChanged: Flow<Orientation> = flowOf(Orientation.Portrait)
     }
   var gatekeeperViewModel = FingerprintGatekeeperViewModel(fingerprintManagerInteractor)
 

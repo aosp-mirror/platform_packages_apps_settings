@@ -19,10 +19,13 @@ package com.android.settings.biometrics.fingerprint2.domain.interactor
 import android.content.Context
 import android.view.OrientationEventListener
 import com.android.internal.R
+import com.android.settings.biometrics.fingerprint2.lib.model.Orientation
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.transform
 
 /** Interactor which provides information about orientation */
@@ -45,6 +48,9 @@ interface OrientationInteractor {
    * [R.bool.config_reverseDefaultConfigRotation]
    */
   fun getRotationFromDefault(rotation: Int): Int
+
+  /** Indicates an orientation changed event has occurred */
+  val orientationChanged: Flow<Orientation>
 }
 
 class OrientationInteractorImpl(private val context: Context) : OrientationInteractor {
@@ -60,7 +66,10 @@ class OrientationInteractorImpl(private val context: Context) : OrientationInter
     awaitClose { orientationEventListener.disable() }
   }
 
-  override val rotation: Flow<Int> = orientation.transform { emit(context.display.rotation) }
+  override val rotation: Flow<Int> =
+    orientation
+      .transform { emit(context.display.rotation) }
+      .onStart { emit(context.display.rotation) }
 
   override val rotationFromDefault: Flow<Int> = rotation.map { getRotationFromDefault(it) }
 
@@ -73,4 +82,24 @@ class OrientationInteractorImpl(private val context: Context) : OrientationInter
       rotation
     }
   }
+
+  override val orientationChanged: Flow<Orientation> =
+    rotationFromDefault
+      .map {
+        when (it) {
+          1 -> {
+            Orientation.Portrait
+          }
+          2 -> {
+            Orientation.ReverseLandscape
+          }
+          3 -> {
+            Orientation.UpsideDownPortrait
+          }
+          else -> {
+            Orientation.Landscape
+          }
+        }
+      }
+      .distinctUntilChanged()
 }

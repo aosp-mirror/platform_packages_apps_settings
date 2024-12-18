@@ -25,15 +25,12 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.Indexable;
-import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@SearchIndexable
 public class ZenModeBypassingAppsSettings extends ZenModeSettingsBase implements
         Indexable {
     private final String TAG = "ZenBypassingApps";
@@ -74,17 +71,4 @@ public class ZenModeBypassingAppsSettings extends ZenModeSettingsBase implements
     public int getMetricsCategory() {
         return SettingsEnums.NOTIFICATION_ZEN_MODE_OVERRIDING_APPS;
     }
-
-    /**
-     * For Search.
-     */
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.zen_mode_bypassing_apps) {
-
-                @Override
-                public List<AbstractPreferenceController> createPreferenceControllers(
-                        Context context) {
-                    return buildPreferenceControllers(context, null, null, null);
-                }
-            };
 }
