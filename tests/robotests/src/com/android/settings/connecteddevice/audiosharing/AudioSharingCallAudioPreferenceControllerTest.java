@@ -16,7 +16,6 @@
 
 package com.android.settings.connecteddevice.audiosharing;
 
-import static com.android.settings.connecteddevice.audiosharing.AudioSharingUtils.SETTINGS_KEY_FALLBACK_DEVICE_GROUP_ID;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
@@ -64,6 +63,7 @@ import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
@@ -197,7 +197,8 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         verify(mBtEventManager, never()).registerCallback(mController);
         verify(mContentResolver, never())
                 .registerContentObserver(
-                        Settings.Secure.getUriFor(SETTINGS_KEY_FALLBACK_DEVICE_GROUP_ID),
+                        Settings.Secure.getUriFor(
+                                BluetoothUtils.getPrimaryGroupIdUriForBroadcast()),
                         false,
                         mContentObserver);
         verify(mAssistant, never())
@@ -211,7 +212,8 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         verify(mBtEventManager).registerCallback(mController);
         verify(mContentResolver)
                 .registerContentObserver(
-                        Settings.Secure.getUriFor(SETTINGS_KEY_FALLBACK_DEVICE_GROUP_ID),
+                        Settings.Secure.getUriFor(
+                                BluetoothUtils.getPrimaryGroupIdUriForBroadcast()),
                         false,
                         mContentObserver);
         verify(mAssistant)
@@ -319,9 +321,7 @@ public class AudioSharingCallAudioPreferenceControllerTest {
     public void onProfileConnectionStateChanged_noDeviceInSharing_updateSummary() {
         Settings.Secure.putInt(mContentResolver, TEST_SETTINGS_KEY, TEST_DEVICE_GROUP_ID1);
         when(mBroadcast.isEnabled(any())).thenReturn(true);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(ImmutableList.of());
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of());
         mController.displayPreference(mScreen);
         mPreference.setSummary("test");
         mController.onProfileConnectionStateChanged(
@@ -340,9 +340,7 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         when(mCachedDevice1.getName()).thenReturn(TEST_DEVICE_NAME1);
         when(mCacheManager.findDevice(mDevice1)).thenReturn(mCachedDevice1);
         when(mBroadcast.isEnabled(any())).thenReturn(true);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(ImmutableList.of(mDevice1));
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice1));
         when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(mState));
         mController.displayPreference(mScreen);
         mContentObserver.onChange(true);
@@ -369,8 +367,7 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         when(mCacheManager.findDevice(mDevice2)).thenReturn(mCachedDevice2);
         when(mCacheManager.findDevice(mDevice3)).thenReturn(mCachedDevice3);
         when(mBroadcast.isEnabled(any())).thenReturn(true);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
+        when(mAssistant.getAllConnectedDevices())
                 .thenReturn(ImmutableList.of(mDevice1, mDevice2, mDevice3));
         when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(mState));
         mController.displayPreference(mScreen);
@@ -389,9 +386,7 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         when(mCachedDevice1.getName()).thenReturn(TEST_DEVICE_NAME1);
         when(mCacheManager.findDevice(mDevice1)).thenReturn(mCachedDevice1);
         when(mBroadcast.isEnabled(any())).thenReturn(true);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(ImmutableList.of(mDevice1));
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice1));
         when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(mState));
         mController.displayPreference(mScreen);
         shadowOf(Looper.getMainLooper()).idle();
@@ -403,9 +398,7 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         Settings.Secure.putInt(
                 mContentResolver, TEST_SETTINGS_KEY, BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
         when(mBroadcast.isEnabled(any())).thenReturn(true);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(ImmutableList.of());
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of());
         mController.displayPreference(mScreen);
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(mPreference.getSummary().toString()).isEmpty();
@@ -429,9 +422,7 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         when(mCacheManager.findDevice(mDevice2)).thenReturn(mCachedDevice2);
         mShadowBluetoothAdapter.setMostRecentlyConnectedDevices(List.of(mDevice1, mDevice2));
         when(mBroadcast.isEnabled(any())).thenReturn(true);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(ImmutableList.of(mDevice1, mDevice2));
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice1, mDevice2));
         when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(mState));
         mController.init(mParentFragment);
         mController.displayPreference(mScreen);
@@ -521,18 +512,14 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         Settings.Secure.putInt(
                 mContentResolver, TEST_SETTINGS_KEY, BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
         when(mBroadcast.isEnabled(any())).thenReturn(true);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(ImmutableList.of());
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of());
         mController.displayPreference(mScreen);
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(mPreference.getSummary().toString()).isEmpty();
 
         // onReceiveStateChanged will update summary
         Settings.Secure.putInt(mContentResolver, TEST_SETTINGS_KEY, TEST_DEVICE_GROUP_ID1);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(ImmutableList.of(mDevice1));
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice1));
         when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(mState));
         mController.mBroadcastAssistantCallback.onReceiveStateChanged(
                 mDevice1, /* sourceId= */ 1, mState);
@@ -552,17 +539,13 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         Settings.Secure.putInt(
                 mContentResolver, TEST_SETTINGS_KEY, BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
         when(mBroadcast.isEnabled(any())).thenReturn(true);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(ImmutableList.of());
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of());
         mController.displayPreference(mScreen);
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(mPreference.getSummary().toString()).isEmpty();
 
         Settings.Secure.putInt(mContentResolver, TEST_SETTINGS_KEY, TEST_DEVICE_GROUP_ID1);
-        when(mAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED}))
-                .thenReturn(ImmutableList.of(mDevice1));
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice1));
         when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(mState));
         mController.mBroadcastAssistantCallback.onSearchStarted(/* reason= */ 1);
         mController.mBroadcastAssistantCallback.onSearchStartFailed(/* reason= */ 1);

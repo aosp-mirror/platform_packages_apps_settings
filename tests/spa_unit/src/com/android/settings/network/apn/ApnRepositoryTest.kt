@@ -21,8 +21,6 @@ import android.content.Context
 import android.database.MatrixCursor
 import android.net.Uri
 import android.provider.Telephony
-import android.telephony.SubscriptionInfo
-import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -40,19 +38,15 @@ class ApnRepositoryTest {
 
     private val contentResolver = mock<ContentResolver>()
 
-    private val mockSubscriptionInfo = mock<SubscriptionInfo> {
-        on { mccString } doReturn MCC
-        on { mncString } doReturn MNC
-    }
+    private val mockTelephonyManager =
+        mock<TelephonyManager> { on { createForSubscriptionId(SUB_ID) } doReturn mock }
 
-    private val mockSubscriptionManager = mock<SubscriptionManager> {
-        on { getActiveSubscriptionInfo(SUB_ID) } doReturn mockSubscriptionInfo
-    }
+    private val context: Context =
+        spy(ApplicationProvider.getApplicationContext()) {
+            on { contentResolver } doReturn contentResolver
+            on { getSystemService(TelephonyManager::class.java) } doReturn mockTelephonyManager
+        }
 
-    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
-        on { contentResolver } doReturn contentResolver
-        on { getSystemService(SubscriptionManager::class.java) } doReturn mockSubscriptionManager
-    }
     private val uri = mock<Uri> {}
 
     @Test
@@ -91,9 +85,7 @@ class ApnRepositoryTest {
 
     @Test
     fun getApnIdMap_knownCarrierId() {
-        mockSubscriptionInfo.stub {
-            on { carrierId } doReturn CARRIER_ID
-        }
+        mockTelephonyManager.stub { on { simSpecificCarrierId } doReturn CARRIER_ID }
 
         val idMap = context.getApnIdMap(SUB_ID)
 
@@ -102,19 +94,19 @@ class ApnRepositoryTest {
 
     @Test
     fun getApnIdMap_unknownCarrierId() {
-        mockSubscriptionInfo.stub {
-            on { carrierId } doReturn TelephonyManager.UNKNOWN_CARRIER_ID
+        mockTelephonyManager.stub {
+            on { simSpecificCarrierId } doReturn TelephonyManager.UNKNOWN_CARRIER_ID
+            on { simOperator } doReturn SIM_OPERATOR
         }
 
         val idMap = context.getApnIdMap(SUB_ID)
 
-        assertThat(idMap).containsExactly(Telephony.Carriers.NUMERIC, MCC + MNC)
+        assertThat(idMap).containsExactly(Telephony.Carriers.NUMERIC, SIM_OPERATOR)
     }
 
     private companion object {
         const val SUB_ID = 2
         const val CARRIER_ID = 10
-        const val MCC = "310"
-        const val MNC = "101"
+        const val SIM_OPERATOR = "310101"
     }
 }

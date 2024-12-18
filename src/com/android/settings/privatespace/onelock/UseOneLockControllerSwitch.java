@@ -16,6 +16,8 @@
 
 package com.android.settings.privatespace.onelock;
 
+import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment.HIDE_INSECURE_OPTIONS;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE;
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.EXTRA_ACTION_TYPE;
 import static com.android.settings.privatespace.PrivateSpaceSetupActivity.SET_LOCK_ACTION;
 import static com.android.settings.privatespace.onelock.UseOneLockSettingsFragment.UNIFY_PRIVATE_LOCK_WITH_DEVICE_REQUEST;
@@ -197,12 +199,7 @@ public class UseOneLockControllerSwitch extends AbstractPreferenceController
                   .setPositiveButton(
                             R.string.private_space_set_lock_label,
                             (dialog, which) -> {
-                                Intent intent = new Intent(mContext,
-                                          PrivateProfileContextHelperActivity.class);
-                                intent.putExtra(EXTRA_ACTION_TYPE, SET_LOCK_ACTION);
-                                ((Activity) mContext).startActivityForResultAsUser(intent,
-                                          UNUNIFY_PRIVATE_LOCK_FROM_DEVICE_REQUEST,
-                                          /*Options*/ null, mUserHandle);
+                                startSeparateLockSetup();
                             })
                   .setNegativeButton(R.string.private_space_cancel_label,
                             (DialogInterface dialog, int which) -> {
@@ -215,5 +212,27 @@ public class UseOneLockControllerSwitch extends AbstractPreferenceController
                                 dialog.dismiss();
                             })
                   .show();
+    }
+
+    private void startSeparateLockSetup() {
+        if (android.multiuser.Flags.modifyPrivateSpaceSecondaryUnlockSetupFlow()) {
+            final Bundle extras = new Bundle();
+            extras.putInt(Intent.EXTRA_USER_ID, mProfileUserId);
+            extras.putBoolean(HIDE_INSECURE_OPTIONS, true);
+            extras.putInt(EXTRA_KEY_CHOOSE_LOCK_SCREEN_TITLE,
+                    R.string.private_space_lock_setup_title);
+            new SubSettingLauncher(mContext).setDestination(ChooseLockGeneric
+                            .ChooseLockGenericFragment.class.getName())
+                    .setSourceMetricsCategory(mHost.getMetricsCategory())
+                    .setArguments(extras)
+                    .setExtras(extras)
+                    .setTransitionType(SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE)
+                    .launch();
+        } else {
+            Intent intent = new Intent(mContext, PrivateProfileContextHelperActivity.class);
+            intent.putExtra(EXTRA_ACTION_TYPE, SET_LOCK_ACTION);
+            ((Activity) mContext).startActivityForResultAsUser(intent,
+                    UNUNIFY_PRIVATE_LOCK_FROM_DEVICE_REQUEST, /*Options*/ null, mUserHandle);
+        }
     }
 }

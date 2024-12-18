@@ -23,6 +23,9 @@ import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
+
 /**
  * Preference controller controlling whether a time schedule-based mode ends at the next alarm.
  */
@@ -47,7 +50,8 @@ class ZenModeExitAtAlarmPreferenceController extends
         if (mSchedule.exitAtAlarm != exitAtAlarm) {
             mSchedule.exitAtAlarm = exitAtAlarm;
             return saveMode(mode -> {
-                mode.getRule().setConditionId(ZenModeConfig.toScheduleConditionId(mSchedule));
+                mode.setCustomModeConditionId(mContext,
+                        ZenModeConfig.toScheduleConditionId(mSchedule));
                 return mode;
             });
         }

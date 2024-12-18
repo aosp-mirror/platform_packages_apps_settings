@@ -21,11 +21,9 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import java.util.List;
-
 /** DAO for accessing {@link BatteryReattributeEntity} in the database. */
 @Dao
-public interface BatteryReattributeDao {
+interface BatteryReattributeDao {
 
     /** Inserts a {@link BatteryReattributeEntity} data into the database. */
     @Insert(onConflict = OnConflictStrategy.REPLACE)

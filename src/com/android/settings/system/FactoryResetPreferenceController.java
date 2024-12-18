@@ -16,6 +16,7 @@
 package com.android.settings.system;
 
 import android.Manifest;
+import android.annotation.RequiresPermission;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -37,8 +38,8 @@ public class FactoryResetPreferenceController extends BasePreferenceController {
 
     private static final String TAG = "FactoryResetPreference";
 
-    @VisibleForTesting
-    static final String ACTION_PREPARE_FACTORY_RESET =
+    @RequiresPermission(Manifest.permission.PREPARE_FACTORY_RESET)
+    public static final String ACTION_PREPARE_FACTORY_RESET =
             "com.android.settings.ACTION_PREPARE_FACTORY_RESET";
 
     private final UserManager mUm;

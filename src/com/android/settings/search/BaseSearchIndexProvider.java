@@ -21,9 +21,11 @@ import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_SEARCH
 import static com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag.FLAG_INCLUDE_PREF_SCREEN;
 import static com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag.FLAG_NEED_KEY;
 import static com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag.FLAG_NEED_SEARCHABLE;
+import static com.android.settings.search.SettingsSearchIndexablesProvider.SYSPROP_CRASH_ON_ERROR;
 
 import android.annotation.XmlRes;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.util.Log;
@@ -131,24 +133,48 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
             return nonIndexableKeys;
         }
         nonIndexableKeys.addAll(getNonIndexableKeysFromXml(context, false /* suppressAllPage */));
+        updateNonIndexableKeysFromControllers(context, nonIndexableKeys);
+        return nonIndexableKeys;
+    }
+
+    private void updateNonIndexableKeysFromControllers(
+            Context context, List<String> nonIndexableKeys) {
         final List<AbstractPreferenceController> controllers = getPreferenceControllers(context);
-        if (controllers != null && !controllers.isEmpty()) {
+        if (controllers != null) {
             for (AbstractPreferenceController controller : controllers) {
-                if (controller instanceof PreferenceControllerMixin) {
-                    ((PreferenceControllerMixin) controller)
-                            .updateNonIndexableKeys(nonIndexableKeys);
-                } else if (controller instanceof BasePreferenceController) {
-                    ((BasePreferenceController) controller).updateNonIndexableKeys(
-                            nonIndexableKeys);
-                } else {
-                    Log.e(TAG, controller.getClass().getName()
-                            + " must implement " + PreferenceControllerMixin.class.getName()
-                            + " treating the key non-indexable");
-                    nonIndexableKeys.add(controller.getPreferenceKey());
-                }
+                updateNonIndexableKeysFromController(nonIndexableKeys, controller);
             }
         }
-        return nonIndexableKeys;
+    }
+
+    private static void updateNonIndexableKeysFromController(
+            List<String> nonIndexableKeys, AbstractPreferenceController controller) {
+        try {
+            if (controller instanceof PreferenceControllerMixin controllerMixin) {
+                controllerMixin.updateNonIndexableKeys(nonIndexableKeys);
+            } else if (controller instanceof BasePreferenceController basePreferenceController) {
+                basePreferenceController.updateNonIndexableKeys(nonIndexableKeys);
+            } else {
+                Log.e(TAG, controller.getClass().getName()
+                        + " must implement " + PreferenceControllerMixin.class.getName()
+                        + " treating the key non-indexable");
+                nonIndexableKeys.add(controller.getPreferenceKey());
+            }
+        } catch (Exception e) {
+            String msg = "Error trying to get non-indexable keys from: " + controller;
+            // Catch a generic crash. In the absence of the catch, the background thread will
+            // silently fail anyway, so we aren't losing information by catching the exception.
+            // We crash on debuggable build or when the system property exists, so that we can test
+            // if crashes need to be fixed.
+            // The gain is that if there is a crash in a specific controller, we don't lose all
+            // non-indexable keys, but we can still find specific crashes in development.
+            if (Build.IS_DEBUGGABLE || System.getProperty(SYSPROP_CRASH_ON_ERROR) != null) {
+                throw new RuntimeException(msg, e);
+            }
+            Log.e(TAG, msg, e);
+            // When there is an error, treat the key as non-indexable.
+            nonIndexableKeys.add(controller.getPreferenceKey());
+        }
     }
 
     public List<AbstractPreferenceController> getPreferenceControllers(Context context) {

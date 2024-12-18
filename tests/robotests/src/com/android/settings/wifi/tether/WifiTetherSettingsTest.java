@@ -263,91 +263,114 @@ public class WifiTetherSettingsTest {
 
     @Test
     public void getNonIndexableKeys_tetherAvailable_keysNotReturned() {
-        when(mWifiRestriction.isTetherAvailable(mContext)).thenReturn(true);
-        when(mWifiRestriction.isHotspotAvailable(mContext)).thenReturn(true);
-        WifiTetherSettings.SearchIndexProvider searchIndexProvider =
-                new WifiTetherSettings.SearchIndexProvider(XML_RES, mWifiRestriction,
-                        true /* isInstantHotspotEnabled */);
+        WifiTetherSettings.SearchIndexProvider searchIndexProvider = createSearchIndexProvider(
+                true /* isTetherAvailable */, true /* isHotspotAvailable */,
+                true /* isInstantHotspotEnabled */, true /* isSpeedFeatureAvailable */);
 
         final List<String> keys = searchIndexProvider.getNonIndexableKeys(mContext);
 
+        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
+        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_SECURITY);
+        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_HOTSPOT_SECURITY);
+        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
+        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
+        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
+        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_HOTSPOT_SPEED);
+        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_INSTANT_HOTSPOT);
+    }
+
+    @Test
+    public void getNonIndexableKeys_tetherNotAvailable_keysReturned() {
+        WifiTetherSettings.SearchIndexProvider searchIndexProvider = createSearchIndexProvider(
+                false /* isTetherAvailable */, true /* isHotspotAvailable */,
+                true /* isInstantHotspotEnabled */, true /* isSpeedFeatureAvailable */);
+
+        final List<String> keys = searchIndexProvider.getNonIndexableKeys(mContext);
+
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_SECURITY);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_HOTSPOT_SECURITY);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_HOTSPOT_SPEED);
+        assertThat(keys).contains(WifiTetherSettings.KEY_INSTANT_HOTSPOT);
+    }
+
+    @Test
+    public void getNonIndexableKeys_hotspotNotAvailable_keysReturned() {
+        WifiTetherSettings.SearchIndexProvider searchIndexProvider = createSearchIndexProvider(
+                true /* isTetherAvailable */, false /* isHotspotAvailable */,
+                true /* isInstantHotspotEnabled */, true /* isSpeedFeatureAvailable */);
+
+        final List<String> keys = searchIndexProvider.getNonIndexableKeys(mContext);
+
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_SECURITY);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_HOTSPOT_SECURITY);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_HOTSPOT_SPEED);
+        assertThat(keys).contains(WifiTetherSettings.KEY_INSTANT_HOTSPOT);
+    }
+
+    @Test
+    public void getNonIndexableKeys_tetherAndHotspotNotAvailable_keysReturned() {
+        WifiTetherSettings.SearchIndexProvider searchIndexProvider = createSearchIndexProvider(
+                false /* isTetherAvailable */, false /* isHotspotAvailable */,
+                true /* isInstantHotspotEnabled */, true /* isSpeedFeatureAvailable */);
+
+        final List<String> keys = searchIndexProvider.getNonIndexableKeys(mContext);
+
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_SECURITY);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_HOTSPOT_SECURITY);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_HOTSPOT_SPEED);
+        assertThat(keys).contains(WifiTetherSettings.KEY_INSTANT_HOTSPOT);
+    }
+
+    @Test
+    public void getNonIndexableKeys_instantHotspotNotAvailableOnly_keysContainInstantHotspotOnly() {
+        WifiTetherSettings.SearchIndexProvider searchIndexProvider = createSearchIndexProvider(
+                true /* isTetherAvailable */, true /* isHotspotAvailable */,
+                false /* isInstantHotspotEnabled */, true /* isSpeedFeatureAvailable */);
+
+        final List<String> keys = searchIndexProvider.getNonIndexableKeys(mContext);
+
+        // doesNotContain
+        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
+        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_SECURITY);
+        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_HOTSPOT_SECURITY);
+        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
+        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
+        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
+        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_HOTSPOT_SPEED);
+        // contains
+        assertThat(keys).contains(WifiTetherSettings.KEY_INSTANT_HOTSPOT);
+    }
+
+    @Test
+    public void getNonIndexableKeys_speedFeatureNotAvailableOnly_keysContainInstantHotspotOnly() {
+        WifiTetherSettings.SearchIndexProvider searchIndexProvider = createSearchIndexProvider(
+                true /* isTetherAvailable */, true /* isHotspotAvailable */,
+                true /* isInstantHotspotEnabled */, false /* isSpeedFeatureAvailable */);
+
+        final List<String> keys = searchIndexProvider.getNonIndexableKeys(mContext);
+
+        // doesNotContain
         assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
         assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_SECURITY);
         assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
         assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
         assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
         assertThat(keys).doesNotContain(WifiTetherSettings.KEY_INSTANT_HOTSPOT);
-    }
-
-    @Test
-    public void getNonIndexableKeys_tetherNotAvailable_keysReturned() {
-        when(mWifiRestriction.isTetherAvailable(mContext)).thenReturn(false);
-        when(mWifiRestriction.isHotspotAvailable(mContext)).thenReturn(true);
-        WifiTetherSettings.SearchIndexProvider searchIndexProvider =
-                new WifiTetherSettings.SearchIndexProvider(XML_RES, mWifiRestriction,
-                        true /* isInstantHotspotEnabled */);
-
-        final List<String> keys = searchIndexProvider.getNonIndexableKeys(mContext);
-
-        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
-        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_SECURITY);
-        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
-        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
-        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
-        assertThat(keys).contains(WifiTetherSettings.KEY_INSTANT_HOTSPOT);
-    }
-
-    @Test
-    public void getNonIndexableKeys_hotspotNotAvailable_keysReturned() {
-        when(mWifiRestriction.isTetherAvailable(mContext)).thenReturn(true);
-        when(mWifiRestriction.isHotspotAvailable(mContext)).thenReturn(false);
-        WifiTetherSettings.SearchIndexProvider searchIndexProvider =
-                new WifiTetherSettings.SearchIndexProvider(XML_RES, mWifiRestriction,
-                        true /* isInstantHotspotEnabled */);
-
-        final List<String> keys = searchIndexProvider.getNonIndexableKeys(mContext);
-
-        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
-        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_SECURITY);
-        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
-        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
-        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
-        assertThat(keys).contains(WifiTetherSettings.KEY_INSTANT_HOTSPOT);
-    }
-
-    @Test
-    public void getNonIndexableKeys_tetherAndHotspotNotAvailable_keysReturned() {
-        when(mWifiRestriction.isTetherAvailable(mContext)).thenReturn(false);
-        when(mWifiRestriction.isHotspotAvailable(mContext)).thenReturn(false);
-        WifiTetherSettings.SearchIndexProvider searchIndexProvider =
-                new WifiTetherSettings.SearchIndexProvider(XML_RES, mWifiRestriction,
-                        true /* isInstantHotspotEnabled */);
-
-        final List<String> keys = searchIndexProvider.getNonIndexableKeys(mContext);
-
-        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
-        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_SECURITY);
-        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
-        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
-        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
-    }
-
-    @Test
-    public void getNonIndexableKeys_instantHotspotNotAvailableOnly_keysContainInstantHotspotOnly() {
-        when(mWifiRestriction.isTetherAvailable(mContext)).thenReturn(true);
-        when(mWifiRestriction.isHotspotAvailable(mContext)).thenReturn(true);
-        WifiTetherSettings.SearchIndexProvider searchIndexProvider =
-                new WifiTetherSettings.SearchIndexProvider(XML_RES, mWifiRestriction,
-                        false /* isInstantHotspotEnabled */);
-
-        final List<String> keys = searchIndexProvider.getNonIndexableKeys(mContext);
-
-        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
-        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_SECURITY);
-        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
-        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
-        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
-        assertThat(keys).contains(WifiTetherSettings.KEY_INSTANT_HOTSPOT);
+        // contains
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_HOTSPOT_SECURITY);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_HOTSPOT_SPEED);
     }
 
     @Test
@@ -504,6 +527,18 @@ public class WifiTetherSettingsTest {
         doReturn(mPreferenceScreen).when(mSettings).getPreferenceScreen();
 
         mSettings.onCreate(Bundle.EMPTY);
+    }
+
+    private WifiTetherSettings.SearchIndexProvider createSearchIndexProvider(
+            boolean isTetherAvailable, boolean isHotspotAvailable, boolean isInstantHotspotEnabled,
+            boolean isSpeedFeatureAvailable) {
+        when(mWifiRestriction.isTetherAvailable(mContext)).thenReturn(isTetherAvailable);
+        when(mWifiRestriction.isHotspotAvailable(mContext)).thenReturn(isHotspotAvailable);
+        WifiTetherSettings.SearchIndexProvider provider =
+                spy(new WifiTetherSettings.SearchIndexProvider(XML_RES, mWifiRestriction,
+                        isInstantHotspotEnabled));
+        when(provider.isSpeedFeatureAvailable()).thenReturn(isSpeedFeatureAvailable);
+        return provider;
     }
 
     @Implements(RestrictedDashboardFragment.class)

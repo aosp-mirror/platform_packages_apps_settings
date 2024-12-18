@@ -28,7 +28,6 @@ import com.android.settingslib.spa.framework.common.SpaLogger
 import com.android.settingslib.spa.framework.util.SESSION_BROWSE
 import com.android.settingslib.spa.framework.util.SESSION_EXTERNAL
 import com.android.settingslib.spa.framework.util.SESSION_SEARCH
-import com.android.settingslib.spa.framework.util.SESSION_SLICE
 import com.android.settingslib.spa.framework.util.SESSION_UNKNOWN
 
 /**
@@ -74,7 +73,6 @@ class SpaLogData(val id: String, val event: LogEvent,
         return when(sessionSource) {
             SESSION_BROWSE -> SettingsEnums.SESSION_BROWSE
             SESSION_SEARCH -> SettingsEnums.SESSION_SEARCH
-            SESSION_SLICE -> SettingsEnums.SESSION_SLICE_TYPE
             SESSION_EXTERNAL -> SettingsEnums.SESSION_EXTERNAL
             else -> SettingsEnums.SESSION_UNKNOWN
         }

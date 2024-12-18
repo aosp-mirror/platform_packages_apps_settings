@@ -16,8 +16,14 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static android.text.Spanned.SPAN_EXCLUSIVE_INCLUSIVE;
+
+import static com.android.settingslib.flags.Flags.audioSharingHysteresisModeFix;
+
 import android.os.Handler;
 import android.os.Looper;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -26,6 +32,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.Utils;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
@@ -35,10 +42,10 @@ class AudioStreamStateHandler {
     private static final boolean DEBUG = BluetoothUtils.D;
     @VisibleForTesting static final int EMPTY_STRING_RES = 0;
 
-    final AudioStreamsRepository mAudioStreamsRepository = AudioStreamsRepository.getInstance();
     final Handler mHandler = new Handler(Looper.getMainLooper());
     final MetricsFeatureProvider mMetricsFeatureProvider =
             FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
+    AudioStreamsRepository mAudioStreamsRepository = AudioStreamsRepository.getInstance();
 
     AudioStreamStateHandler() {}
 
@@ -68,15 +75,35 @@ class AudioStreamStateHandler {
 
         // Update UI
         ThreadUtils.postOnMainThread(
-                () ->
-                        preference.setIsConnected(
-                                newState
-                                        == AudioStreamsProgressCategoryController.AudioStreamState
-                                                .SOURCE_ADDED,
-                                getSummary() != EMPTY_STRING_RES
-                                        ? preference.getContext().getString(getSummary())
-                                        : "",
-                                getOnClickListener(controller)));
+                () -> {
+                    String summary =
+                            getSummary() != EMPTY_STRING_RES
+                                    ? preference.getContext().getString(getSummary())
+                                    : "";
+                    if (newState
+                            == AudioStreamsProgressCategoryController.AudioStreamState
+                                    .ADD_SOURCE_BAD_CODE) {
+                        SpannableString summarySpan = new SpannableString(summary);
+                        int colorError = Utils.getColorErrorDefaultColor(preference.getContext());
+                        summarySpan.setSpan(
+                                new ForegroundColorSpan(colorError),
+                                0,
+                                summary.length(),
+                                SPAN_EXCLUSIVE_INCLUSIVE);
+                        preference.setSummary(summarySpan);
+                    } else {
+                        preference.setSummary(summary);
+                    }
+                    preference.setIsConnected(
+                            newState
+                                            == AudioStreamsProgressCategoryController
+                                                    .AudioStreamState.SOURCE_ADDED
+                                    || (audioSharingHysteresisModeFix()
+                                            && newState
+                                                    == AudioStreamsProgressCategoryController
+                                                            .AudioStreamState.SOURCE_PRESENT));
+                    preference.setOnPreferenceClickListener(getOnClickListener(controller));
+                });
     }
 
     /**
@@ -111,5 +138,10 @@ class AudioStreamStateHandler {
     /** Subclasses should always override. */
     AudioStreamsProgressCategoryController.AudioStreamState getStateEnum() {
         return AudioStreamsProgressCategoryController.AudioStreamState.UNKNOWN;
+    }
+
+    @VisibleForTesting
+    void setAudioStreamsRepositoryForTesting(AudioStreamsRepository repository) {
+        mAudioStreamsRepository = repository;
     }
 }

@@ -28,7 +28,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.Looper;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import androidx.lifecycle.LifecycleOwner;
@@ -63,12 +62,6 @@ public class NetworkProviderSimListControllerTest {
     private static final String KEY_PREFERENCE_CATEGORY_SIM = "provider_model_sim_category";
     private static final String DISPLAY_NAME_1 = "Sub 1";
     private static final String DISPLAY_NAME_2 = "Sub 2";
-    private static final String SUB_MCC_1 = "123";
-    private static final String SUB_MNC_1 = "456";
-    private static final String SUB_MCC_2 = "223";
-    private static final String SUB_MNC_2 = "456";
-    private static final String SUB_COUNTRY_ISO_1 = "Sub 1";
-    private static final String SUB_COUNTRY_ISO_2 = "Sub 2";
 
     @Mock
     private SubscriptionInfoEntity mSubInfo1;
@@ -140,12 +133,9 @@ public class NetworkProviderSimListControllerTest {
     }
 
     private SubscriptionInfoEntity setupSubscriptionInfoEntity(String subId, int slotId,
-            int carrierId, String displayName, String mcc, String mnc, String countryIso,
-            int cardId, boolean isValid, boolean isActive, boolean isAvailable) {
-        return new SubscriptionInfoEntity(subId, slotId, carrierId, displayName, displayName, 0,
-                mcc, mnc, countryIso, false, cardId, TelephonyManager.DEFAULT_PORT_INDEX, false,
-                null, SubscriptionManager.SUBSCRIPTION_TYPE_LOCAL_SIM, displayName, false,
-                "1234567890", true, false, isValid, true, isActive, isAvailable, false);
+            String displayName, boolean isValid, boolean isActive) {
+        return new SubscriptionInfoEntity(subId, slotId, false, false, displayName, false,
+                false, isValid, isActive, false);
     }
 
     private String setSummaryResId(String resName, String value) {
@@ -159,8 +149,7 @@ public class NetworkProviderSimListControllerTest {
     @Test
     @UiThreadTest
     public void getSummary_tapToActivePSim() {
-        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, false, true);
+        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, DISPLAY_NAME_1, true, false);
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
         displayPreferenceWithLifecycle();
@@ -172,8 +161,7 @@ public class NetworkProviderSimListControllerTest {
     @Test
     @UiThreadTest
     public void getSummary_inactivePSim() {
-        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, false, true);
+        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, DISPLAY_NAME_1, true, false);
         doReturn(true).when(mSubscriptionManager).canDisablePhysicalSubscription();
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
@@ -187,8 +175,7 @@ public class NetworkProviderSimListControllerTest {
     @Test
     @UiThreadTest
     public void getSummary_defaultCalls() {
-        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true);
+        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, DISPLAY_NAME_1, true, true);
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
 
@@ -209,8 +196,7 @@ public class NetworkProviderSimListControllerTest {
         defaultConfig.append(setSummaryResId("default_active_sim_calls"))
                 .append(", ")
                 .append(setSummaryResId("default_active_sim_sms"));
-        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true);
+        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, DISPLAY_NAME_1, true, true);
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);
 
@@ -228,10 +214,8 @@ public class NetworkProviderSimListControllerTest {
     @Test
     @UiThreadTest
     public void getAvailablePhysicalSubscription_withTwoPhysicalSims_returnTwo() {
-        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, 1, DISPLAY_NAME_1, SUB_MCC_1,
-                SUB_MNC_1, SUB_COUNTRY_ISO_1, 1, true, true, true);
-        mSubInfo2 = setupSubscriptionInfoEntity(SUB_ID_2, 1, 1, DISPLAY_NAME_2, SUB_MCC_2,
-                SUB_MNC_2, SUB_COUNTRY_ISO_2, 1, true, true, true);
+        mSubInfo1 = setupSubscriptionInfoEntity(SUB_ID_1, 1, DISPLAY_NAME_1, true, true);
+        mSubInfo2 = setupSubscriptionInfoEntity(SUB_ID_2, 1, DISPLAY_NAME_2, true, true);
         mSubscriptionInfoEntityList.add(mSubInfo1);
         mSubscriptionInfoEntityList.add(mSubInfo2);
         mController.setSubscriptionInfoList(mSubscriptionInfoEntityList);

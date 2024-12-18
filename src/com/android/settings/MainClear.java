@@ -65,11 +65,13 @@ import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.flags.Flags;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -99,6 +101,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
     static final int KEYGUARD_REQUEST = 55;
     @VisibleForTesting
     static final int CREDENTIAL_CONFIRM_REQUEST = 56;
+    static final int BIOMETRICS_REQUEST = 57;
     private static final String KEY_SHOW_ESIM_RESET_CHECKBOX =
             "masterclear.allow_retain_esim_profiles_after_fdr";
 
@@ -156,7 +159,8 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
 
     @VisibleForTesting
     boolean isValidRequestCode(int requestCode) {
-        return !((requestCode != KEYGUARD_REQUEST) && (requestCode != CREDENTIAL_CONFIRM_REQUEST));
+        return !((requestCode != KEYGUARD_REQUEST) && (requestCode != CREDENTIAL_CONFIRM_REQUEST)
+                && (requestCode != BIOMETRICS_REQUEST));
     }
 
     @Override
@@ -176,12 +180,35 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
 
         if (resultCode != Activity.RESULT_OK) {
             establishInitialState();
+            if (requestCode == BIOMETRICS_REQUEST) {
+                if (resultCode == ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT) {
+                    IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(getActivity(),
+                            Utils.BiometricStatus.LOCKOUT, true /* twoFactorAuthentication */);
+                }
+            }
             return;
+        }
+
+        if (requestCode == KEYGUARD_REQUEST) {
+            final int userId = getActivity().getUserId();
+            final Utils.BiometricStatus biometricAuthStatus =
+                    Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
+                            false /* biometricsAuthenticationRequested */,
+                            userId);
+            if (biometricAuthStatus == Utils.BiometricStatus.OK) {
+                Utils.launchBiometricPromptForMandatoryBiometrics(this, BIOMETRICS_REQUEST,
+                        userId, false /* hideBackground */);
+                return;
+            } else if (biometricAuthStatus != Utils.BiometricStatus.NOT_ACTIVE) {
+                IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(getActivity(),
+                        biometricAuthStatus, true /* twoFactorAuthentication */);
+                return;
+            }
         }
 
         Intent intent = null;
         // If returning from a Keyguard request, try to show an account confirmation request if
-        // applciable.
+        // applicable.
         if (CREDENTIAL_CONFIRM_REQUEST != requestCode
                 && (intent = getAccountConfirmationIntent()) != null) {
             showAccountCredentialConfirmation(intent);

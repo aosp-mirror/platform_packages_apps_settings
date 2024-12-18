@@ -24,6 +24,7 @@ import androidx.core.os.persistableBundleOf
 /**
  * Gets the configuration values of the specified config keys applied.
  */
+@Deprecated("Use CarrierConfigRepository instead")
 fun CarrierConfigManager.safeGetConfig(
     keys: List<String>,
     subId: Int = SubscriptionManager.getDefaultSubscriptionId(),

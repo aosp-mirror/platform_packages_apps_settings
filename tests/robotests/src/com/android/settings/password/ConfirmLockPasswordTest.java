@@ -16,6 +16,8 @@
 
 package com.android.settings.password;
 
+import static android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
+
 import static com.android.settings.password.ConfirmLockPassword.ConfirmLockPasswordFragment;
 import static com.android.settings.password.TestUtils.GUESS_INVALID_RESULT;
 import static com.android.settings.password.TestUtils.GUESS_VALID_RESULT;
@@ -42,6 +44,7 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import android.Manifest;
 import android.app.KeyguardManager;
 import android.app.admin.ManagedSubscriptionsPolicy;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
@@ -55,6 +58,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
+import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -303,6 +307,32 @@ public class ConfirmLockPasswordTest {
         verify(mCredentialCheckResultTracker, never())
                 .setResult(anyBoolean(), any(), anyInt(), anyInt());
         assertThat(mLockPatternUtils.isSecure(fragment.mEffectiveUserId)).isFalse();
+    }
+
+    @Test
+    public void onChosenLockSaveFinished_setsRedactionInterstitial() throws Exception {
+        // This test verifies that the RedactionInterstitial is available. This is the screen
+        // responsible for allowing the user to show sensitive lockscreen content. This
+        // also allows the Settings tile for RedactionInterstitial to appear in the "anything else"
+        // page during SUW.
+        final ConfirmDeviceCredentialBaseActivity activity =
+                buildConfirmDeviceCredentialBaseActivity(
+                        ConfirmLockPassword.class,
+                        createRemoteLockscreenValidationIntent(
+                                KeyguardManager.PASSWORD, VALID_REMAINING_ATTEMPTS));
+        final ConfirmLockPasswordFragment fragment =
+                (ConfirmLockPasswordFragment) getConfirmDeviceCredentialBaseFragment(activity);
+        final Intent intent = new Intent();
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE, 1L);
+
+        fragment.onChosenLockSaveFinished(true, intent);
+
+        final ComponentName componentName =
+                new ComponentName(mContext, SetupRedactionInterstitial.class);
+        final int isEnabled = mContext.getPackageManager()
+                .getComponentEnabledSetting(componentName);
+
+        assertThat(isEnabled).isEqualTo(COMPONENT_ENABLED_STATE_ENABLED);
     }
 
     private void triggerHandleNext(

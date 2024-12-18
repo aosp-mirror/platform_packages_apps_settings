@@ -124,8 +124,8 @@ public class SearchFeatureProviderImplTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void verifyLaunchSearchResultPageCaller_nullCaller_shouldCrash() {
-        mProvider.verifyLaunchSearchResultPageCaller(mActivity, null /* caller */);
+    public void verifyLaunchSearchResultPageCaller_emptyCaller_shouldCrash() {
+        mProvider.verifyLaunchSearchResultPageCaller(mActivity, "");
     }
 
     @Test(expected = SecurityException.class)

@@ -17,6 +17,8 @@
 package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
+import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -50,5 +52,16 @@ public class CaptioningMoreOptionsFragment extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.captioning_more_options);
+            new BaseSearchIndexProvider(R.xml.captioning_more_options) {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    if (!Flags.fixA11ySettingsSearch()) {
+                        return super.isPageSearchEnabled(context);
+                    }
+                    // CaptioningMoreOptions is only searchable if captions are enabled, so that we
+                    // don't show search results for settings that will cause no change to the user.
+                    return Settings.Secure.getInt(context.getContentResolver(),
+                            Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, 0) == 1;
+                }
+            };
 }

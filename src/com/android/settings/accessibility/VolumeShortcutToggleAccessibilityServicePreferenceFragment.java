@@ -16,12 +16,14 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.os.Bundle;
 import android.view.View;
 
+import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.settings.R;
 
 /**
@@ -44,7 +46,7 @@ public class VolumeShortcutToggleAccessibilityServicePreferenceFragment extends
         mShortcutPreference.setSummary(hardwareTitle);
         mShortcutPreference.setSettingsEditable(false);
 
-        setAllowedPreferredShortcutType(UserShortcutType.HARDWARE);
+        setAllowedPreferredShortcutType(HARDWARE);
     }
 
     @Override
@@ -56,9 +58,9 @@ public class VolumeShortcutToggleAccessibilityServicePreferenceFragment extends
         final boolean hasRequestAccessibilityButtonFlag =
                 (info.flags & AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON) != 0;
         if (hasRequestAccessibilityButtonFlag && isServiceOn) {
-            shortcutTypes |= UserShortcutType.SOFTWARE;
+            shortcutTypes |= SOFTWARE;
         } else {
-            shortcutTypes &= (~UserShortcutType.SOFTWARE);
+            shortcutTypes &= (~SOFTWARE);
         }
 
         return shortcutTypes;

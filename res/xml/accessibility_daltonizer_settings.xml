@@ -32,24 +32,32 @@
         android:key="daltonizer_mode_deuteranomaly"
         android:persistent="false"
         android:summary="@string/daltonizer_mode_deuteranomaly_summary"
-        android:title="@string/daltonizer_mode_deuteranomaly_title" />
+        android:title="@string/daltonizer_mode_deuteranomaly_title"
+        settings:titleMaxLines="@integer/max_integer"
+        settings:controller="com.android.settings.accessibility.DaltonizerRadioButtonPreferenceController" />
 
     <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="daltonizer_mode_protanomaly"
         android:persistent="false"
         android:summary="@string/daltonizer_mode_protanomaly_summary"
-        android:title="@string/daltonizer_mode_protanomaly_title" />
+        android:title="@string/daltonizer_mode_protanomaly_title"
+        settings:titleMaxLines="@integer/max_integer"
+        settings:controller="com.android.settings.accessibility.DaltonizerRadioButtonPreferenceController" />
 
     <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="daltonizer_mode_tritanomaly"
         android:persistent="false"
         android:summary="@string/daltonizer_mode_tritanomaly_summary"
-        android:title="@string/daltonizer_mode_tritanomaly_title" />
+        android:title="@string/daltonizer_mode_tritanomaly_title"
+        settings:titleMaxLines="@integer/max_integer"
+        settings:controller="com.android.settings.accessibility.DaltonizerRadioButtonPreferenceController" />
 
     <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="daltonizer_mode_grayscale"
         android:persistent="false"
-        android:title="@string/daltonizer_mode_grayscale_title" />
+        android:title="@string/daltonizer_mode_grayscale_title"
+        settings:titleMaxLines="@integer/max_integer"
+        settings:controller="com.android.settings.accessibility.DaltonizerRadioButtonPreferenceController" />
 
     <com.android.settings.widget.SeekBarPreference
         android:key="daltonizer_saturation"

@@ -17,8 +17,7 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
-import android.telephony.SubscriptionInfo
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.testing.TestLifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
@@ -26,17 +25,19 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
-import com.android.settings.network.SubscriptionInfoListViewModel
 import com.android.settings.network.SubscriptionUtil
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.MockitoSession
-import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.stub
 import org.mockito.kotlin.whenever
 import org.mockito.quality.Strictness
 
@@ -44,29 +45,25 @@ import org.mockito.quality.Strictness
 class MobileNetworkPhoneNumberPreferenceControllerTest {
     private lateinit var mockSession: MockitoSession
 
-    private val mockViewModels =  mock<Lazy<SubscriptionInfoListViewModel>>()
-    private val mockFragment = mock<Fragment>{
-        val viewmodel = mockViewModels
-    }
-
-    private var mockPhoneNumber = String()
     private val context: Context = ApplicationProvider.getApplicationContext()
-    private val controller = MobileNetworkPhoneNumberPreferenceController(context, TEST_KEY)
+    private val mockSubscriptionRepository = mock<SubscriptionRepository>()
+
+    private val controller =
+        MobileNetworkPhoneNumberPreferenceController(context, TEST_KEY, mockSubscriptionRepository)
     private val preference = Preference(context).apply { key = TEST_KEY }
     private val preferenceScreen = PreferenceManager(context).createPreferenceScreen(context)
 
     @Before
     fun setUp() {
-        mockSession = ExtendedMockito.mockitoSession()
-            .initMocks(this)
-            .mockStatic(SubscriptionUtil::class.java)
-            .strictness(Strictness.LENIENT)
-            .startMocking()
+        mockSession =
+            ExtendedMockito.mockitoSession()
+                .mockStatic(SubscriptionUtil::class.java)
+                .strictness(Strictness.LENIENT)
+                .startMocking()
 
         preferenceScreen.addPreference(preference)
+        controller.init(SUB_ID)
         controller.displayPreference(preferenceScreen)
-
-        whenever(SubscriptionUtil.getBidiFormattedPhoneNumber(any(),any())).thenReturn(mockPhoneNumber)
     }
 
     @After
@@ -75,41 +72,29 @@ class MobileNetworkPhoneNumberPreferenceControllerTest {
     }
 
     @Test
-    fun refreshData_getEmptyPhoneNumber_preferenceIsNotVisible() = runBlocking {
+    fun onViewCreated_cannotGetPhoneNumber_displayUnknown() = runBlocking {
         whenever(SubscriptionUtil.isSimHardwareVisible(context)).thenReturn(true)
-        whenever(SubscriptionUtil.getActiveSubscriptions(any())).thenReturn(
-            listOf(
-                SUB_INFO_1,
-                SUB_INFO_2
-            )
-        )
-        var mockSubId = 2
-        controller.init(mockFragment, mockSubId)
-        mockPhoneNumber = String()
+        mockSubscriptionRepository.stub {
+            on { phoneNumberFlow(SUB_ID) } doReturn flowOf(null)
+        }
 
-        controller.refreshData(SUB_INFO_2)
+        controller.onViewCreated(TestLifecycleOwner())
+        delay(100)
 
-        assertThat(preference.summary).isEqualTo(
-            context.getString(R.string.device_info_default))
+        assertThat(preference.summary).isEqualTo(context.getString(R.string.device_info_default))
     }
 
     @Test
-    fun refreshData_getPhoneNumber_preferenceSummaryIsExpected() = runBlocking {
+    fun onViewCreated_canGetPhoneNumber_displayPhoneNumber() = runBlocking {
         whenever(SubscriptionUtil.isSimHardwareVisible(context)).thenReturn(true)
-        whenever(SubscriptionUtil.getActiveSubscriptions(any())).thenReturn(
-            listOf(
-                SUB_INFO_1,
-                SUB_INFO_2
-            )
-        )
-        var mockSubId = 2
-        controller.init(mockFragment, mockSubId)
-        mockPhoneNumber = "test phone number"
-        whenever(SubscriptionUtil.getBidiFormattedPhoneNumber(any(),any())).thenReturn(mockPhoneNumber)
+        mockSubscriptionRepository.stub {
+            on { phoneNumberFlow(SUB_ID) } doReturn flowOf(PHONE_NUMBER)
+        }
 
-        controller.refreshData(SUB_INFO_2)
+        controller.onViewCreated(TestLifecycleOwner())
+        delay(100)
 
-        assertThat(preference.summary).isEqualTo(mockPhoneNumber)
+        assertThat(preference.summary).isEqualTo(PHONE_NUMBER)
     }
 
     @Test
@@ -123,18 +108,7 @@ class MobileNetworkPhoneNumberPreferenceControllerTest {
 
     private companion object {
         const val TEST_KEY = "test_key"
-        const val DISPLAY_NAME_1 = "Sub 1"
-        const val DISPLAY_NAME_2 = "Sub 2"
-
-        val SUB_INFO_1: SubscriptionInfo = SubscriptionInfo.Builder().apply {
-            setId(1)
-            setDisplayName(DISPLAY_NAME_1)
-        }.build()
-
-        val SUB_INFO_2: SubscriptionInfo = SubscriptionInfo.Builder().apply {
-            setId(2)
-            setDisplayName(DISPLAY_NAME_2)
-        }.build()
-
+        const val SUB_ID = 10
+        const val PHONE_NUMBER = "1234567890"
     }
 }

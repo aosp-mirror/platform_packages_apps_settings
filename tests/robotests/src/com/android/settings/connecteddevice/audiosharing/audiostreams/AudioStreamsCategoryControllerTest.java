@@ -23,11 +23,13 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
 import android.os.Looper;
@@ -42,6 +44,7 @@ import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows.ShadowAudioStreamsHelper;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
+import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
@@ -57,6 +60,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
@@ -116,7 +120,7 @@ public class AudioStreamsCategoryControllerTest {
         when(mBroadcast.isProfileReady()).thenReturn(true);
         when(mAssistant.isProfileReady()).thenReturn(true);
         when(mVolumeControl.isProfileReady()).thenReturn(true);
-        mController = new AudioStreamsCategoryController(mContext, KEY);
+        mController = spy(new AudioStreamsCategoryController(mContext, KEY));
         mPreference = new Preference(mContext);
         when(mScreen.findPreference(KEY)).thenReturn(mPreference);
         mController.displayPreference(mScreen);
@@ -227,5 +231,22 @@ public class AudioStreamsCategoryControllerTest {
         mController.updateVisibility();
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(mPreference.isVisible()).isTrue();
+    }
+
+    @Test
+    public void onProfileConnectionStateChanged_updateVisibility() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_QR_CODE_PRIVATE_BROADCAST_SHARING);
+        ArgumentCaptor<BluetoothCallback> argumentCaptor =
+                ArgumentCaptor.forClass(BluetoothCallback.class);
+        mController.onStart(mLifecycleOwner);
+        verify(mBluetoothEventManager).registerCallback(argumentCaptor.capture());
+
+        BluetoothCallback callback = argumentCaptor.getValue();
+        callback.onProfileConnectionStateChanged(
+                mCachedBluetoothDevice,
+                BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT,
+                BluetoothAdapter.STATE_DISCONNECTED);
+
+        verify(mController).updateVisibility();
     }
 }

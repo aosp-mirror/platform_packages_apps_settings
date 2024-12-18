@@ -243,6 +243,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
         @Override
         protected void onCreate(Bundle savedState) {
             setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+            setTheme(R.style.SettingsPreferenceTheme_SetupWizard);
             ThemeHelper.trySetDynamicColor(this);
             super.onCreate(savedState);
         }

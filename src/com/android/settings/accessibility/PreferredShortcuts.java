@@ -16,6 +16,10 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -27,8 +31,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
+import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.internal.accessibility.util.ShortcutUtils;
-import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -43,18 +47,18 @@ public final class PreferredShortcuts {
     /**
      * Retrieves the user preferred shortcut types for the given {@code componentName} from
      * SharedPreferences. If the user doesn't have a preferred shortcut,
-     * {@link ShortcutConstants.UserShortcutType.SOFTWARE} is returned.
+     * {@link SOFTWARE} is returned.
      *
      * @param context       {@link Context} to access the {@link SharedPreferences}
      * @param componentName Name of the service or activity, should be the format of {@link
      *                      ComponentName#flattenToString()}.
-     * @return {@link ShortcutConstants.UserShortcutType}
+     * @return {@link UserShortcutType}
      */
-    @ShortcutConstants.UserShortcutType
+    @UserShortcutType
     public static int retrieveUserShortcutType(
             @NonNull Context context, @NonNull String componentName) {
         return retrieveUserShortcutType(
-                context, componentName, ShortcutConstants.UserShortcutType.SOFTWARE);
+                context, componentName, SOFTWARE);
     }
 
     /**
@@ -66,13 +70,13 @@ public final class PreferredShortcuts {
      *                         ComponentName#flattenToString()}.
      * @param defaultTypes The default shortcut types to use if the user doesn't have a
      *                         preferred shortcut.
-     * @return {@link ShortcutConstants.UserShortcutType}
+     * @return {@link UserShortcutType}
      */
-    @ShortcutConstants.UserShortcutType
+    @UserShortcutType
     public static int retrieveUserShortcutType(
             @NonNull Context context,
             @NonNull String componentName,
-            @ShortcutConstants.UserShortcutType int defaultTypes) {
+            @UserShortcutType int defaultTypes) {
 
         // Create a mutable set to modify
         final Set<String> info = new HashSet<>(getFromSharedPreferences(context));
@@ -121,7 +125,7 @@ public final class PreferredShortcuts {
         final Map<Integer, Set<String>> shortcutTypeToTargets = new ArrayMap<>();
         for (int shortcutType : ShortcutConstants.USER_SHORTCUT_TYPES) {
             if (!Flags.a11yQsShortcut()
-                    && shortcutType == ShortcutConstants.UserShortcutType.QUICK_SETTINGS) {
+                    && shortcutType == QUICK_SETTINGS) {
                 // Skip saving quick setting as preferred shortcut option when flag is not enabled
                 continue;
             }
@@ -132,14 +136,14 @@ public final class PreferredShortcuts {
         }
 
         for (String target : components) {
-            int shortcutTypes = ShortcutConstants.UserShortcutType.DEFAULT;
+            int shortcutTypes = DEFAULT;
             for (Map.Entry<Integer, Set<String>> entry : shortcutTypeToTargets.entrySet()) {
                 if (entry.getValue().contains(target)) {
                     shortcutTypes |= entry.getKey();
                 }
             }
 
-            if (shortcutTypes != ShortcutConstants.UserShortcutType.DEFAULT) {
+            if (shortcutTypes != DEFAULT) {
                 final PreferredShortcut shortcut = new PreferredShortcut(
                         target, shortcutTypes);
                 PreferredShortcuts.saveUserShortcutType(context, shortcut);

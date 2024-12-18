@@ -24,22 +24,27 @@
         android:title="@string/mode_display_options_section">
         <Preference
                 android:key="notification_visibility"
-                android:title="@string/zen_mode_restrict_notifications_title" />
+                android:title="@string/zen_mode_restrict_notifications_title"
+                android:icon="@drawable/ic_zen_mode_category_display" />
         <SwitchPreferenceCompat
                 android:key="effect_greyscale"
                 android:title="@string/mode_grayscale_title"
-                android:summary="@string/mode_grayscale_summary"/>
+                android:summary="@string/mode_grayscale_summary"
+                android:icon="@drawable/ic_zen_mode_display_grayscale" />
         <SwitchPreferenceCompat
                 android:key="effect_aod"
                 android:title="@string/mode_aod_title"
-                android:summary="@string/mode_aod_summary"/>
+                android:summary="@string/mode_aod_summary"
+                android:icon="@drawable/ic_zen_mode_display_aod" />
         <SwitchPreferenceCompat
                 android:key="effect_wallpaper"
                 android:title="@string/mode_wallpaper_title"
-                android:summary="@string/mode_wallpaper_summary"/>
+                android:summary="@string/mode_wallpaper_summary"
+                android:icon="@drawable/ic_zen_mode_display_wallpaper" />
         <SwitchPreferenceCompat
                 android:key="effect_dark_theme"
                 android:title="@string/mode_dark_theme_title"
-                android:summary="@string/mode_dark_theme_summary"/>
+                android:summary="@string/mode_dark_theme_summary"
+                android:icon="@drawable/ic_zen_mode_display_dark_theme" />
     </PreferenceCategory>
 </PreferenceScreen>

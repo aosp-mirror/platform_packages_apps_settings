@@ -52,6 +52,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
@@ -63,6 +64,7 @@ import com.android.settings.Utils;
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
+import com.android.settings.flags.Flags;
 import com.android.settings.homepage.TopLevelHighlightMixin;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
@@ -413,13 +415,23 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                         METHOD_GET_PROVIDER_ICON);
                 final Pair<String, Integer> iconInfo = TileUtils.getIconFromUri(
                         mContext, packageName, uri, providerMap);
-                if (iconInfo == null) {
+                final Icon icon;
+                if (iconInfo != null) {
+                    icon = Icon.createWithResource(iconInfo.first, iconInfo.second);
+                } else if (Flags.supportRawDynamicIcons()) {
+                    icon = TileUtils.getRawIconFromUri(mContext, uri, providerMap);
+                } else {
+                    icon = null;
+                }
+                if (icon == null) {
                     Log.w(TAG, "Failed to get icon from uri " + uri);
                     return;
                 }
-                final Icon icon = Icon.createWithResource(iconInfo.first, iconInfo.second);
+
+                final String iconPackage = (iconInfo != null) ? iconInfo.first : null;
+
                 ThreadUtils.postOnMainThread(() -> {
-                    setPreferenceIcon(preference, tile, forceRoundedIcon, iconInfo.first, icon);
+                    setPreferenceIcon(preference, tile, forceRoundedIcon, iconPackage, icon);
                 });
             });
             return;
@@ -435,14 +447,21 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     private void setPreferenceIcon(Preference preference, Tile tile, boolean forceRoundedIcon,
-            String iconPackage, Icon icon) {
+            @Nullable String iconPackage, Icon icon) {
         Drawable iconDrawable = icon.loadDrawable(preference.getContext());
         if (iconDrawable == null) {
             Log.w(TAG, "Set null preference icon for: " + iconPackage);
             preference.setIcon(null);
             return;
         }
+        // Tint homepage icons
         if (TextUtils.equals(tile.getCategory(), CategoryKey.CATEGORY_HOMEPAGE)) {
+            // Skip tinting and Adaptive Icon transformation for homepage account type raw icons
+            if (TextUtils.equals(tile.getGroupKey(), "top_level_account_category")
+                    && iconPackage == null) {
+                preference.setIcon(iconDrawable);
+                return;
+            }
             iconDrawable.setTint(Utils.getHomepageIconColor(preference.getContext()));
         }
 

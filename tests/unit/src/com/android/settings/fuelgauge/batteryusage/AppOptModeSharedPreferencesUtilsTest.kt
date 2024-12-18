@@ -26,6 +26,7 @@ import com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_RESTRICTED
 import com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_UNKNOWN
 import com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_UNRESTRICTED
 import com.android.settings.fuelgauge.batteryusage.AppOptModeSharedPreferencesUtils.UNLIMITED_EXPIRE_TIME
+import com.android.settings.testutils.FakeFeatureFactory
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Before
@@ -51,9 +52,14 @@ class AppOptModeSharedPreferencesUtilsTest {
     @Spy
     private var testBatteryOptimizeUtils = spy(BatteryOptimizeUtils(context, UID, PACKAGE_NAME))
 
+    private lateinit var featureFactory: FakeFeatureFactory
+
     @Before
     fun setup() {
         AppOptModeSharedPreferencesUtils.clearAll(context)
+        featureFactory = FakeFeatureFactory.setupForTest()
+        whenever(featureFactory.powerUsageFeatureProvider.isForceExpireAppOptimizationModeEnabled)
+            .thenReturn(false)
     }
 
     @After
@@ -77,8 +83,17 @@ class AppOptModeSharedPreferencesUtilsTest {
     }
 
     @Test
-    fun updateAppOptModeExpirationInternal_withExpirationTime_verifyData() {
-        insertAppOptModeEventForTest(expirationTime = 1000L)
+    fun updateAppOptModeExpirationInternal_withoutExpirationTime_verifyEmptyList() {
+        insertAppOptModeEventForTest(expirationTime = UNLIMITED_EXPIRE_TIME)
+
+        assertThat(AppOptModeSharedPreferencesUtils.getAllEvents(context)).isEmpty()
+    }
+
+    @Test
+    fun updateAppOptModeExpirationInternal_setOptimizedModeWithFlagEnabled_verifyData() {
+        whenever(featureFactory.powerUsageFeatureProvider.isRestrictedModeOverwriteEnabled)
+            .thenReturn(true)
+        insertAppOptModeEventForTest(expirationTime = 1000L, mode = MODE_OPTIMIZED)
 
         val events = AppOptModeSharedPreferencesUtils.getAllEvents(context)
 
@@ -93,8 +108,46 @@ class AppOptModeSharedPreferencesUtilsTest {
     }
 
     @Test
-    fun updateAppOptModeExpirationInternal_withoutExpirationTime_verifyEmptyList() {
-        insertAppOptModeEventForTest(expirationTime = UNLIMITED_EXPIRE_TIME)
+    fun updateAppOptModeExpirationInternal_setOptimizedModeWithFlagDisabled_verifyData() {
+        whenever(featureFactory.powerUsageFeatureProvider.isRestrictedModeOverwriteEnabled)
+            .thenReturn(false)
+        insertAppOptModeEventForTest(expirationTime = 1000L, mode = MODE_OPTIMIZED)
+
+        val events = AppOptModeSharedPreferencesUtils.getAllEvents(context)
+
+        assertThat(events).hasSize(1)
+        assertAppOptimizationModeEventInfo(
+            events[0],
+            UID,
+            PACKAGE_NAME,
+            MODE_OPTIMIZED,
+            expirationTime = 1000L
+        )
+    }
+
+    @Test
+    fun updateAppOptModeExpirationInternal_setRestrictedModeWithFlagEnabled_verifyData() {
+        whenever(featureFactory.powerUsageFeatureProvider.isRestrictedModeOverwriteEnabled)
+            .thenReturn(true)
+        insertAppOptModeEventForTest(expirationTime = 1000L, mode = MODE_RESTRICTED)
+
+        val events = AppOptModeSharedPreferencesUtils.getAllEvents(context)
+
+        assertThat(events).hasSize(1)
+        assertAppOptimizationModeEventInfo(
+            events[0],
+            UID,
+            PACKAGE_NAME,
+            MODE_RESTRICTED,
+            expirationTime = 1000L
+        )
+    }
+
+    @Test
+    fun updateAppOptModeExpirationInternal_setRestrictedModeWithFlagDisabled_verifyEmptyList() {
+        whenever(featureFactory.powerUsageFeatureProvider.isRestrictedModeOverwriteEnabled)
+            .thenReturn(false)
+        insertAppOptModeEventForTest(expirationTime = 1000L, mode = MODE_RESTRICTED)
 
         assertThat(AppOptModeSharedPreferencesUtils.getAllEvents(context)).isEmpty()
     }
@@ -122,6 +175,20 @@ class AppOptModeSharedPreferencesUtilsTest {
         insertAppOptModeEventForTest(expirationTime = 1000L)
 
         AppOptModeSharedPreferencesUtils.deleteAppOptimizationModeEventByUid(context, UID)
+
+        assertThat(AppOptModeSharedPreferencesUtils.getAllEvents(context)).isEmpty()
+    }
+
+    @Test
+    fun resetExpiredAppOptModeBeforeTimestamp_forceExpiredData_verifyEmptyList() {
+        whenever(featureFactory.powerUsageFeatureProvider.isForceExpireAppOptimizationModeEnabled)
+            .thenReturn(true)
+        insertAppOptModeEventForTest(expirationTime = 1000L)
+
+        AppOptModeSharedPreferencesUtils.resetExpiredAppOptModeBeforeTimestamp(
+            context,
+            queryTimestampMs = 999L
+        )
 
         assertThat(AppOptModeSharedPreferencesUtils.getAllEvents(context)).isEmpty()
     }
@@ -217,14 +284,14 @@ class AppOptModeSharedPreferencesUtilsTest {
         assertThat(currentOptMode).isEqualTo(MODE_RESTRICTED)
     }
 
-    private fun insertAppOptModeEventForTest(expirationTime: Long) {
+    private fun insertAppOptModeEventForTest(expirationTime: Long, mode: Int = MODE_OPTIMIZED) {
         whenever(testBatteryOptimizeUtils?.isOptimizeModeMutable).thenReturn(true)
-        whenever(testBatteryOptimizeUtils?.getAppOptimizationMode(true)).thenReturn(MODE_OPTIMIZED)
+        whenever(testBatteryOptimizeUtils?.getAppOptimizationMode(true)).thenReturn(mode)
         AppOptModeSharedPreferencesUtils.updateAppOptModeExpirationInternal(
             context,
             mutableListOf(UID),
             mutableListOf(PACKAGE_NAME),
-            mutableListOf(MODE_OPTIMIZED),
+            mutableListOf(mode),
             longArrayOf(expirationTime),
         ) { _: Int, _: String ->
             testBatteryOptimizeUtils

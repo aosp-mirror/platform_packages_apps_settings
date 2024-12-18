@@ -1525,32 +1525,104 @@
         <item>2</item>
     </string-array>
 
-    <!-- TODO: b/333901673 - Get full icon list. -->
     <array name="zen_mode_icon_options" translatable="false">
-        <item>@*android:drawable/ic_zen_mode_type_bedtime</item>
-        <item>@*android:drawable/ic_zen_mode_type_driving</item>
-        <item>@*android:drawable/ic_zen_mode_type_immersive</item>
-        <item>@*android:drawable/ic_zen_mode_type_managed</item>
-        <item>@*android:drawable/ic_zen_mode_type_other</item>
+        <!-- Work/Study/Meetings -->
+        <item>@*android:drawable/ic_zen_mode_icon_work</item> <!-- Briefcase -->
+        <item>@*android:drawable/ic_zen_mode_icon_classical_building</item>
+        <item>@*android:drawable/ic_zen_mode_icon_apartment_building</item>
+        <item>@*android:drawable/ic_zen_mode_icon_speech_bubble</item>
+        <item>@*android:drawable/ic_zen_mode_icon_group_of_people</item>
+        <item>@*android:drawable/ic_zen_mode_icon_lightbulb</item>
         <item>@*android:drawable/ic_zen_mode_type_schedule_calendar</item>
+        <item>@*android:drawable/ic_zen_mode_type_special_dnd</item>
+        <!-- Sports -->
+        <item>@*android:drawable/ic_zen_mode_icon_running</item>
+        <item>@*android:drawable/ic_zen_mode_icon_golf</item>
+        <item>@*android:drawable/ic_zen_mode_icon_gym</item>
+        <item>@*android:drawable/ic_zen_mode_icon_swimming</item>
+        <item>@*android:drawable/ic_zen_mode_icon_hiking</item>
+        <item>@*android:drawable/ic_zen_mode_icon_ball_sports</item>
+        <item>@*android:drawable/ic_zen_mode_icon_martial_arts</item>
+        <!-- Leisure -->
+        <item>@*android:drawable/ic_zen_mode_icon_gaming</item>
+        <item>@*android:drawable/ic_zen_mode_icon_palette</item>
+        <item>@*android:drawable/ic_zen_mode_icon_snowflake</item>
+        <item>@*android:drawable/ic_zen_mode_icon_beach</item>
+        <item>@*android:drawable/ic_zen_mode_icon_workshop</item>
+        <item>@*android:drawable/ic_zen_mode_icon_camping</item>
+        <item>@*android:drawable/ic_zen_mode_type_theater</item> <!-- Film reel -->
+        <item>@*android:drawable/ic_zen_mode_icon_book</item>
+        <!-- Wellbeing -->
+        <item>@*android:drawable/ic_zen_mode_icon_lotus_flower</item>
+        <item>@*android:drawable/ic_zen_mode_type_immersive</item>
+        <item>@*android:drawable/ic_zen_mode_icon_headphones</item>
+        <item>@*android:drawable/ic_zen_mode_icon_tv</item>
+        <!-- Other activities -->
+        <item>@*android:drawable/ic_zen_mode_icon_train</item>
+        <item>@*android:drawable/ic_zen_mode_type_driving</item> <!-- Car -->
+        <item>@*android:drawable/ic_zen_mode_icon_fork_and_knife</item>
+        <item>@*android:drawable/ic_zen_mode_icon_shopping_cart</item>
+        <item>@*android:drawable/ic_zen_mode_icon_child</item>
+        <item>@*android:drawable/ic_zen_mode_icon_animal_paw</item>
+        <!-- Generic / abstract -->
+        <item>@*android:drawable/ic_zen_mode_type_unknown</item> <!-- Star badge -->
+        <item>@*android:drawable/ic_zen_mode_type_managed</item> <!-- Two people / Supervisor -->
+        <item>@*android:drawable/ic_zen_mode_type_other</item> <!-- Star -->
+        <item>@*android:drawable/ic_zen_mode_icon_heart</item>
+        <item>@*android:drawable/ic_zen_mode_icon_house</item>
+        <item>@*android:drawable/ic_zen_mode_type_bedtime</item> <!-- Moon -->
         <item>@*android:drawable/ic_zen_mode_type_schedule_time</item>
-        <item>@*android:drawable/ic_zen_mode_type_theater</item>
-        <item>@*android:drawable/ic_zen_mode_type_unknown</item>
     </array>
 
-    <!-- TODO: b/333901673 - Complete list -->
     <!-- Descriptions of the icons in zen_mode_icon_options. Should describe the associated image
          [CHAR LIMIT=NONE] -->
     <string-array name="zen_mode_icon_options_descriptions">
-        <item>Bedtime</item>
-        <item>Driving</item>
-        <item>Immersive</item>
-        <item>Managed</item>
-        <item>Star</item>
+        <!-- Work/Study/Meetings -->
+        <item>Briefcase</item>
+        <item>Classical building</item>
+        <item>Apartment building</item>
+        <item>Speech bubble</item>
+        <item>Group of people</item>
+        <item>Lightbulb</item>
         <item>Calendar</item>
-        <item>Time</item>
-        <item>Theater</item>
-        <item>Flower</item>
+        <item>Do Not Disturb</item>
+        <!-- Sports -->
+        <item>Person running</item>
+        <item>Golf</item>
+        <item>Gym dumbbell</item>
+        <item>Swimming</item>
+        <item>Person hiking</item>
+        <item>Person throwing ball</item>
+        <item>Person kicking</item>
+        <!-- Leisure -->
+        <item>Game controller</item>
+        <item>Artist color palette</item>
+        <item>Snowflake</item>
+        <item>Beach umbrella</item>
+        <item>Workshop tools</item>
+        <item>Tent</item>
+        <item>Film reel</item>
+        <item>Book</item>
+        <!-- Wellbeing -->
+        <item>Lotus flower</item>
+        <item>Person\'s mind</item>
+        <item>Headphones</item>
+        <item>TV</item>
+        <!-- Other activities -->
+        <item>Train</item>
+        <item>Car</item>
+        <item>Fork and knife</item>
+        <item>Shopping cart</item>
+        <item>Child</item>
+        <item>Animal paw</item>
+        <!-- Generic / abstract -->
+        <item>Star badge</item>
+        <item>Two people</item>
+        <item>Star</item>
+        <item>Heart</item>
+        <item>House</item>
+        <item>Half-moon</item>
+        <item>Clock</item>
     </string-array>
 
     <!-- Packages that will not show Display over other apps permission -->

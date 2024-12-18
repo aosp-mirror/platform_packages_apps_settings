@@ -16,6 +16,12 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TRIPLETAP;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
@@ -39,9 +45,9 @@ import android.view.accessibility.Flags;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.testutils.AccessibilityTestUtils;
 
 import org.junit.Before;
@@ -159,52 +165,52 @@ public final class AccessibilityUtilTest {
 
     @Test
     public void hasValueInSettings_putValue_hasValue() {
-        setShortcut(UserShortcutType.SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
+        setShortcut(SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
 
-        assertThat(AccessibilityUtil.hasValueInSettings(mContext, UserShortcutType.SOFTWARE,
+        assertThat(AccessibilityUtil.hasValueInSettings(mContext, SOFTWARE,
                 MOCK_COMPONENT_NAME)).isTrue();
     }
 
     @Test
     public void getUserShortcutTypeFromSettings_putOneValue_hasValue() {
-        setShortcut(UserShortcutType.SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
+        setShortcut(SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
 
         final int shortcutTypes = AccessibilityUtil.getUserShortcutTypesFromSettings(mContext,
                 MOCK_COMPONENT_NAME);
 
         assertThat(shortcutTypes).isEqualTo(
-                UserShortcutType.SOFTWARE
+                SOFTWARE
         );
     }
 
     @Test
     public void getUserShortcutTypeFromSettings_putTwoValues_hasValue() {
-        setShortcut(UserShortcutType.SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
-        setShortcut(UserShortcutType.HARDWARE, MOCK_COMPONENT_NAME.flattenToString());
+        setShortcut(SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
+        setShortcut(HARDWARE, MOCK_COMPONENT_NAME.flattenToString());
 
         final int shortcutTypes = AccessibilityUtil.getUserShortcutTypesFromSettings(mContext,
                 MOCK_COMPONENT_NAME);
 
         assertThat(shortcutTypes).isEqualTo(
-                UserShortcutType.SOFTWARE
-                        | UserShortcutType.HARDWARE
+                SOFTWARE
+                        | HARDWARE
         );
     }
 
     @Test
     @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void getUserShortcutTypeFromSettings_threeShortcutTypesChosen() {
-        setShortcut(UserShortcutType.SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
-        setShortcut(UserShortcutType.HARDWARE, MOCK_COMPONENT_NAME.flattenToString());
-        setShortcut(UserShortcutType.QUICK_SETTINGS, MOCK_COMPONENT_NAME.flattenToString());
+        setShortcut(SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
+        setShortcut(HARDWARE, MOCK_COMPONENT_NAME.flattenToString());
+        setShortcut(QUICK_SETTINGS, MOCK_COMPONENT_NAME.flattenToString());
 
         final int shortcutTypes = AccessibilityUtil.getUserShortcutTypesFromSettings(mContext,
                 MOCK_COMPONENT_NAME);
 
         assertThat(shortcutTypes).isEqualTo(
-                UserShortcutType.SOFTWARE
-                        | UserShortcutType.HARDWARE
-                        | UserShortcutType.QUICK_SETTINGS
+                SOFTWARE
+                        | HARDWARE
+                        | QUICK_SETTINGS
         );
     }
 
@@ -212,7 +218,7 @@ public final class AccessibilityUtilTest {
     @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void optInAllValuesToSettings_optInValue_haveMatchString() {
         clearShortcuts();
-        int shortcutTypes = UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE;
+        int shortcutTypes = SOFTWARE | HARDWARE;
 
         AccessibilityUtil.optInAllValuesToSettings(mContext, shortcutTypes, MOCK_COMPONENT_NAME);
 
@@ -229,8 +235,8 @@ public final class AccessibilityUtilTest {
         AccessibilityManager a11yManager =
                 AccessibilityTestUtils.setupMockAccessibilityManager(mContext);
         Set<String> shortcutTargets = Set.of(MOCK_COMPONENT_NAME.flattenToString());
-        int shortcutTypes = UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE
-                | UserShortcutType.QUICK_SETTINGS;
+        int shortcutTypes = SOFTWARE | HARDWARE
+                | QUICK_SETTINGS;
 
         AccessibilityUtil.optInAllValuesToSettings(mContext, shortcutTypes, MOCK_COMPONENT_NAME);
 
@@ -243,9 +249,9 @@ public final class AccessibilityUtilTest {
     @Test
     @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void optInValueToSettings_optInValue_haveMatchString() {
-        setShortcut(UserShortcutType.SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
+        setShortcut(SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
 
-        AccessibilityUtil.optInValueToSettings(mContext, UserShortcutType.SOFTWARE,
+        AccessibilityUtil.optInValueToSettings(mContext, SOFTWARE,
                 MOCK_COMPONENT_NAME2);
 
         assertThat(getStringFromSettings(SOFTWARE_SHORTCUT_KEY)).isEqualTo(
@@ -261,10 +267,10 @@ public final class AccessibilityUtilTest {
         Set<String> shortcutTargets = Set.of(MOCK_COMPONENT_NAME2.flattenToString());
 
         AccessibilityUtil.optInValueToSettings(
-                mContext, UserShortcutType.HARDWARE, MOCK_COMPONENT_NAME2);
+                mContext, HARDWARE, MOCK_COMPONENT_NAME2);
 
         verify(a11yManager).enableShortcutsForTargets(
-                /* enable= */ true, UserShortcutType.HARDWARE,
+                /* enable= */ true, HARDWARE,
                 shortcutTargets, UserHandle.myUserId());
         verifyNoMoreInteractions(a11yManager);
     }
@@ -272,11 +278,11 @@ public final class AccessibilityUtilTest {
     @Test
     @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void optInValueToSettings_optInTwoValues_haveMatchString() {
-        setShortcut(UserShortcutType.SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
+        setShortcut(SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
 
-        AccessibilityUtil.optInValueToSettings(mContext, UserShortcutType.SOFTWARE,
+        AccessibilityUtil.optInValueToSettings(mContext, SOFTWARE,
                 MOCK_COMPONENT_NAME2);
-        AccessibilityUtil.optInValueToSettings(mContext, UserShortcutType.SOFTWARE,
+        AccessibilityUtil.optInValueToSettings(mContext, SOFTWARE,
                 MOCK_COMPONENT_NAME2);
 
         assertThat(getStringFromSettings(SOFTWARE_SHORTCUT_KEY)).isEqualTo(
@@ -287,10 +293,10 @@ public final class AccessibilityUtilTest {
     @Test
     @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void optOutAllValuesToSettings_optOutValue_emptyString() {
-        setShortcut(UserShortcutType.SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
-        setShortcut(UserShortcutType.HARDWARE, MOCK_COMPONENT_NAME.flattenToString());
+        setShortcut(SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
+        setShortcut(HARDWARE, MOCK_COMPONENT_NAME.flattenToString());
         int shortcutTypes =
-                UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE | UserShortcutType.TRIPLETAP;
+                SOFTWARE | HARDWARE | TRIPLETAP;
 
         AccessibilityUtil.optOutAllValuesFromSettings(mContext, shortcutTypes,
                 MOCK_COMPONENT_NAME);
@@ -305,8 +311,8 @@ public final class AccessibilityUtilTest {
         AccessibilityManager a11yManager =
                 AccessibilityTestUtils.setupMockAccessibilityManager(mContext);
         int shortcutTypes =
-                UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE
-                        | UserShortcutType.QUICK_SETTINGS;
+                SOFTWARE | HARDWARE
+                        | QUICK_SETTINGS;
         Set<String> shortcutTargets = Set.of(MOCK_COMPONENT_NAME.flattenToString());
 
         AccessibilityUtil.optOutAllValuesFromSettings(mContext, shortcutTypes,
@@ -322,9 +328,9 @@ public final class AccessibilityUtilTest {
     @Test
     @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void optOutValueFromSettings_optOutValue_emptyString() {
-        setShortcut(UserShortcutType.SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
+        setShortcut(SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
 
-        AccessibilityUtil.optOutValueFromSettings(mContext, UserShortcutType.SOFTWARE,
+        AccessibilityUtil.optOutValueFromSettings(mContext, SOFTWARE,
                 MOCK_COMPONENT_NAME);
 
         assertThat(getStringFromSettings(SOFTWARE_SHORTCUT_KEY)).isEmpty();
@@ -333,10 +339,10 @@ public final class AccessibilityUtilTest {
     @Test
     @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void optOutValueFromSettings_optOutValue_haveMatchString() {
-        setShortcut(UserShortcutType.SOFTWARE, MOCK_COMPONENT_NAME.flattenToString(),
+        setShortcut(SOFTWARE, MOCK_COMPONENT_NAME.flattenToString(),
                 MOCK_COMPONENT_NAME2.flattenToString());
 
-        AccessibilityUtil.optOutValueFromSettings(mContext, UserShortcutType.SOFTWARE,
+        AccessibilityUtil.optOutValueFromSettings(mContext, SOFTWARE,
                 MOCK_COMPONENT_NAME2);
 
         assertThat(getStringFromSettings(SOFTWARE_SHORTCUT_KEY)).isEqualTo(
@@ -351,36 +357,36 @@ public final class AccessibilityUtilTest {
         Set<String> shortcutTargets = Set.of(MOCK_COMPONENT_NAME.flattenToString());
 
         AccessibilityUtil.optOutValueFromSettings(
-                mContext, UserShortcutType.QUICK_SETTINGS, MOCK_COMPONENT_NAME);
+                mContext, QUICK_SETTINGS, MOCK_COMPONENT_NAME);
 
         verify(a11yManager).enableShortcutsForTargets(
-                /* enable= */ false, UserShortcutType.QUICK_SETTINGS,
+                /* enable= */ false, QUICK_SETTINGS,
                 shortcutTargets, UserHandle.myUserId());
         verifyNoMoreInteractions(a11yManager);
     }
 
     @Test
     public void convertKeyFromSettings_shortcutTypeSoftware() {
-        assertThat(AccessibilityUtil.convertKeyFromSettings(UserShortcutType.SOFTWARE))
+        assertThat(AccessibilityUtil.convertKeyFromSettings(SOFTWARE))
                 .isEqualTo(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
     }
 
     @Test
     public void convertKeyFromSettings_shortcutTypeHardware() {
-        assertThat(AccessibilityUtil.convertKeyFromSettings(UserShortcutType.HARDWARE))
+        assertThat(AccessibilityUtil.convertKeyFromSettings(HARDWARE))
                 .isEqualTo(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
     }
 
     @Test
     public void convertKeyFromSettings_shortcutTypeTripleTap() {
-        assertThat(AccessibilityUtil.convertKeyFromSettings(UserShortcutType.TRIPLETAP))
+        assertThat(AccessibilityUtil.convertKeyFromSettings(TRIPLETAP))
                 .isEqualTo(Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
     }
 
     @Test
     @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void convertKeyFromSettings_shortcutTypeMultiFingersMultiTap() {
-        assertThat(AccessibilityUtil.convertKeyFromSettings(UserShortcutType.TWOFINGER_DOUBLETAP))
+        assertThat(AccessibilityUtil.convertKeyFromSettings(TWOFINGER_DOUBLETAP))
                 .isEqualTo(
                         Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED);
     }
@@ -388,7 +394,7 @@ public final class AccessibilityUtilTest {
     @Test
     @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void convertKeyFromSettings_shortcutTypeQuickSettings() {
-        assertThat(AccessibilityUtil.convertKeyFromSettings(UserShortcutType.QUICK_SETTINGS))
+        assertThat(AccessibilityUtil.convertKeyFromSettings(QUICK_SETTINGS))
                 .isEqualTo(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
     }
 

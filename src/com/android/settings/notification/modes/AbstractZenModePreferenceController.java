@@ -16,6 +16,8 @@
 
 package com.android.settings.notification.modes;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import android.app.Flags;
 import android.content.Context;
 import android.service.notification.ZenPolicy;
@@ -23,11 +25,14 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
-
-import com.google.common.base.Preconditions;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.notification.modes.ZenMode;
+import com.android.settingslib.notification.modes.ZenModesBackend;
 
 import java.util.function.Function;
 
@@ -38,8 +43,7 @@ abstract class AbstractZenModePreferenceController extends AbstractPreferenceCon
 
     private static final String TAG = "AbstractZenModePreferenceController";
 
-    @Nullable
-    protected ZenModesBackend mBackend;
+    @Nullable protected final ZenModesBackend mBackend;
 
     @Nullable  // only until setZenMode() is called
     private ZenMode mZenMode;
@@ -47,20 +51,42 @@ abstract class AbstractZenModePreferenceController extends AbstractPreferenceCon
     @NonNull
     private final String mKey;
 
-    // ZenModesBackend should only be passed in if the preference controller may set the user's
-    // policy for this zen mode. Otherwise, if the preference controller is essentially read-only
-    // and leads to a further Settings screen, backend should be null.
-    AbstractZenModePreferenceController(@NonNull Context context, @NonNull String key,
-            @Nullable ZenModesBackend backend) {
+    @NonNull private final MetricsFeatureProvider mMetricsFeatureProvider;
+
+    /**
+     * Constructor suitable for "read-only" controllers (e.g. link to a different sub-screen.
+     * Controllers that call this constructor to initialize themselves <em>cannot</em> call
+     * {@link #saveMode} or {@link #savePolicy} later.
+     */
+    AbstractZenModePreferenceController(@NonNull Context context, @NonNull String key) {
         super(context);
-        mBackend = backend;
         mKey = key;
+        mBackend = null;
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
+    }
+
+    /**
+     * Constructor suitable for controllers that will update the associated {@link ZenMode}.
+     * Controllers that call this constructor to initialize themselves may call {@link #saveMode} or
+     * {@link #savePolicy} later.
+     */
+    AbstractZenModePreferenceController(@NonNull Context context, @NonNull String key,
+            @NonNull ZenModesBackend backend) {
+        super(context);
+        mKey = key;
+        mBackend = backend;
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
     @NonNull
     public String getPreferenceKey() {
         return mKey;
+    }
+
+    @NonNull
+    public MetricsFeatureProvider getMetricsFeatureProvider() {
+        return mMetricsFeatureProvider;
     }
 
     @Override
@@ -76,17 +102,12 @@ abstract class AbstractZenModePreferenceController extends AbstractPreferenceCon
         return true;
     }
 
-    // Called by parent Fragment onAttach, for any methods (such as isAvailable()) that need
-    // zen mode info before onStart. Most callers should use updateZenMode instead, which will
-    // do any further necessary propagation.
-    protected final void setZenMode(@NonNull ZenMode zenMode) {
+    /**
+     * Assigns the {@link ZenMode} of this controller, so that it can be used later from
+     * {@link #isAvailable()} and {@link #updateState(Preference)}.
+     */
+    final void setZenMode(@NonNull ZenMode zenMode) {
         mZenMode = zenMode;
-    }
-
-    // Called by the parent Fragment onStart, which means it will happen before resume.
-    public void updateZenMode(@NonNull Preference preference, @NonNull ZenMode zenMode) {
-        mZenMode = zenMode;
-        updateState(preference);
     }
 
     @Override
@@ -122,7 +143,7 @@ abstract class AbstractZenModePreferenceController extends AbstractPreferenceCon
      *                instance is ok.
      */
     protected final boolean saveMode(Function<ZenMode, ZenMode> updater) {
-        Preconditions.checkState(mBackend != null);
+        checkState(mBackend != null);
         ZenMode mode = mZenMode;
         if (mode == null) {
             Log.wtf(TAG, "Cannot save mode, it hasn't been loaded (" + getClass() + ")");
@@ -140,5 +161,21 @@ abstract class AbstractZenModePreferenceController extends AbstractPreferenceCon
             mode.setPolicy(policyBuilder.build());
             return mode;
         });
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+    @Nullable
+    ZenMode getZenMode() {
+        return mZenMode;
+    }
+
+    /**
+     * Convenience method for tests. Assigns the {@link ZenMode} of this controller, and calls
+     * {@link #updateState(Preference)} immediately.
+     */
+    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+    final void updateZenMode(@NonNull Preference preference, @NonNull ZenMode zenMode) {
+        mZenMode = zenMode;
+        updateState(preference);
     }
 }

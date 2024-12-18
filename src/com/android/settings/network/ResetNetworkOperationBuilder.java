@@ -65,6 +65,8 @@ public class ResetNetworkOperationBuilder {
 
     private Context mContext;
     private List<Runnable> mResetSequence = new ArrayList<Runnable>();
+    @Nullable
+    private Consumer<Boolean> mResetEsimResultCallback = null;
 
     /**
      * Constructor of builder.
@@ -129,31 +131,32 @@ public class ResetNetworkOperationBuilder {
     }
 
     /**
-     * Append a step of resetting E-SIM.
-     * @param callerPackage package name of caller
+     * Append a result callback of resetting E-SIM.
+     * @param resultCallback a callback dealing with result of resetting eSIM
      * @return this
      */
-    public ResetNetworkOperationBuilder resetEsim(String callerPackage) {
-        resetEsim(callerPackage, null);
+    public ResetNetworkOperationBuilder resetEsimResultCallback(Consumer<Boolean> resultCallback) {
+        mResetEsimResultCallback = resultCallback;
         return this;
     }
 
     /**
      * Append a step of resetting E-SIM.
      * @param callerPackage package name of caller
-     * @param resultCallback a Consumer<Boolean> dealing with result of resetting eSIM
      * @return this
      */
-    public ResetNetworkOperationBuilder resetEsim(String callerPackage,
-            Consumer<Boolean> resultCallback) {
+    public ResetNetworkOperationBuilder resetEsim(String callerPackage) {
         Runnable runnable = () -> {
             long startTime = SystemClock.elapsedRealtime();
 
-            if (!DRY_RUN) {
-                Boolean wipped = RecoverySystem.wipeEuiccData(mContext, callerPackage);
-                if (resultCallback != null) {
-                    resultCallback.accept(wipped);
-                }
+            boolean wipped;
+            if (DRY_RUN) {
+                wipped = true;
+            } else {
+                wipped = RecoverySystem.wipeEuiccData(mContext, callerPackage);
+            }
+            if (mResetEsimResultCallback != null) {
+                mResetEsimResultCallback.accept(wipped);
             }
 
             long endTime = SystemClock.elapsedRealtime();

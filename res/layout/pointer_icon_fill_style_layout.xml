@@ -16,6 +16,7 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
@@ -30,73 +31,149 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/pointer_fill_style_circle_padding"
         android:text="@string/pointer_fill_style"
+        android:textSize="14sp"
+        android:textColor="?androidprv:attr/materialColorPrimary"
         android:textAlignment="viewStart"
-        android:textAppearance="?android:attr/textAppearanceListItem" />
+        android:fontWeight="500" />
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/button_holder"
+        android:layout_width="@dimen/pointer_fill_container_max_width"
+        android:layout_height="@dimen/pointer_fill_container_height"
+        android:layout_marginBottom="@dimen/pointer_fill_style_circle_padding"
+        android:layout_marginTop="@dimen/pointer_fill_style_circle_padding"
+        android:background="@drawable/pointer_icon_fill_container_background"
+        android:gravity="center"
+        android:paddingTop="@dimen/pointer_fill_style_container_padding"
+        android:paddingBottom="@dimen/pointer_fill_style_container_padding">
 
-        <LinearLayout
-            android:id="@+id/button_holder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/pointer_fill_style_circle_padding"
-            android:layout_marginTop="@dimen/pointer_fill_style_circle_padding"
-            android:background="@drawable/pointer_icon_fill_style_background"
-            android:gravity="center_horizontal"
-            android:padding="@dimen/pointer_fill_style_circle_padding">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:clickable="false"
+            android:importantForAccessibility="no"
+            android:layout_weight="4" />
 
-            <ImageView
-                android:id="@+id/button_black"
-                android:layout_width="@dimen/pointer_fill_style_circle_diameter"
-                android:layout_height="@dimen/pointer_fill_style_circle_diameter"
-                android:layout_margin="@dimen/pointer_fill_style_circle_padding"
-                android:adjustViewBounds="true"
-                android:maxWidth="@dimen/pointer_fill_style_circle_diameter"
-                android:contentDescription="@string/pointer_fill_style_black_button"
-                android:scaleType="fitCenter" />
+        <ImageView
+            android:id="@+id/button_black"
+            android:layout_width="@dimen/pointer_fill_style_circle_diameter"
+            android:layout_weight="0"
+            android:layout_height="@dimen/pointer_fill_style_circle_diameter"
+            android:adjustViewBounds="true"
+            android:maxWidth="@dimen/pointer_fill_style_circle_diameter"
+            android:contentDescription="@string/pointer_fill_style_black_button"
+            android:scaleType="center"
+            android:background="@drawable/pointer_icon_fill_color_background"
+            android:src="@drawable/pointer_icon_fill_color_foreground" />
 
-            <ImageView
-                android:id="@+id/button_green"
-                android:layout_width="@dimen/pointer_fill_style_circle_diameter"
-                android:layout_height="@dimen/pointer_fill_style_circle_diameter"
-                android:layout_margin="@dimen/pointer_fill_style_circle_padding"
-                android:adjustViewBounds="true"
-                android:maxWidth="@dimen/pointer_fill_style_circle_diameter"
-                android:contentDescription="@string/pointer_fill_style_green_button"
-                android:scaleType="fitCenter" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:clickable="false"
+            android:importantForAccessibility="no"
+            android:layout_weight="3" />
 
-            <ImageView
-                android:id="@+id/button_yellow"
-                android:layout_width="@dimen/pointer_fill_style_circle_diameter"
-                android:layout_height="@dimen/pointer_fill_style_circle_diameter"
-                android:layout_margin="@dimen/pointer_fill_style_circle_padding"
-                android:adjustViewBounds="true"
-                android:maxWidth="@dimen/pointer_fill_style_circle_diameter"
-                android:contentDescription="@string/pointer_fill_style_yellow_button"
-                android:scaleType="fitCenter" />
+        <ImageView
+            android:id="@+id/button_green"
+            android:layout_width="@dimen/pointer_fill_style_circle_diameter"
+            android:layout_weight="0"
+            android:layout_height="@dimen/pointer_fill_style_circle_diameter"
+            android:adjustViewBounds="true"
+            android:maxWidth="@dimen/pointer_fill_style_circle_diameter"
+            android:contentDescription="@string/pointer_fill_style_green_button"
+            android:scaleType="center"
+            android:background="@drawable/pointer_icon_fill_color_background"
+            android:src="@drawable/pointer_icon_fill_color_foreground" />
 
-            <ImageView
-                android:id="@+id/button_pink"
-                android:layout_width="@dimen/pointer_fill_style_circle_diameter"
-                android:layout_height="@dimen/pointer_fill_style_circle_diameter"
-                android:layout_margin="@dimen/pointer_fill_style_circle_padding"
-                android:adjustViewBounds="true"
-                android:maxWidth="@dimen/pointer_fill_style_circle_diameter"
-                android:contentDescription="@string/pointer_fill_style_pink_button"
-                android:scaleType="fitCenter" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:clickable="false"
+            android:importantForAccessibility="no"
+            android:layout_weight="3" />
 
-            <ImageView
-                android:id="@+id/button_blue"
-                android:layout_width="@dimen/pointer_fill_style_circle_diameter"
-                android:layout_height="@dimen/pointer_fill_style_circle_diameter"
-                android:layout_margin="@dimen/pointer_fill_style_circle_padding"
-                android:adjustViewBounds="true"
-                android:maxWidth="@dimen/pointer_fill_style_circle_diameter"
-                android:contentDescription="@string/pointer_fill_style_blue_button"
-                android:scaleType="fitCenter" />
-        </LinearLayout>
-    </HorizontalScrollView>
+        <ImageView
+            android:id="@+id/button_red"
+            android:layout_width="@dimen/pointer_fill_style_circle_diameter"
+            android:layout_weight="0"
+            android:layout_height="@dimen/pointer_fill_style_circle_diameter"
+            android:adjustViewBounds="true"
+            android:maxWidth="@dimen/pointer_fill_style_circle_diameter"
+            android:contentDescription="@string/pointer_fill_style_red_button"
+            android:scaleType="center"
+            android:background="@drawable/pointer_icon_fill_color_background"
+            android:src="@drawable/pointer_icon_fill_color_foreground" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:clickable="false"
+            android:importantForAccessibility="no"
+            android:layout_weight="3" />
+
+        <ImageView
+            android:id="@+id/button_pink"
+            android:layout_width="@dimen/pointer_fill_style_circle_diameter"
+            android:layout_weight="0"
+            android:layout_height="@dimen/pointer_fill_style_circle_diameter"
+            android:adjustViewBounds="true"
+            android:maxWidth="@dimen/pointer_fill_style_circle_diameter"
+            android:contentDescription="@string/pointer_fill_style_pink_button"
+            android:scaleType="center"
+            android:background="@drawable/pointer_icon_fill_color_background"
+            android:src="@drawable/pointer_icon_fill_color_foreground" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:clickable="false"
+            android:importantForAccessibility="no"
+            android:layout_weight="3" />
+
+        <ImageView
+            android:id="@+id/button_blue"
+            android:layout_width="@dimen/pointer_fill_style_circle_diameter"
+            android:layout_weight="0"
+            android:layout_height="@dimen/pointer_fill_style_circle_diameter"
+            android:adjustViewBounds="true"
+            android:maxWidth="@dimen/pointer_fill_style_circle_diameter"
+            android:contentDescription="@string/pointer_fill_style_blue_button"
+            android:scaleType="center"
+            android:background="@drawable/pointer_icon_fill_color_background"
+            android:src="@drawable/pointer_icon_fill_color_foreground" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:clickable="false"
+            android:importantForAccessibility="no"
+            android:layout_weight="3" />
+
+        <ImageView
+            android:id="@+id/button_purple"
+            android:layout_width="@dimen/pointer_fill_style_circle_diameter"
+            android:layout_weight="0"
+            android:layout_height="@dimen/pointer_fill_style_circle_diameter"
+            android:adjustViewBounds="true"
+            android:maxWidth="@dimen/pointer_fill_style_circle_diameter"
+            android:contentDescription="@string/pointer_fill_style_purple_button"
+            android:scaleType="center"
+            android:background="@drawable/pointer_icon_fill_color_background"
+            android:src="@drawable/pointer_icon_fill_color_foreground" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:clickable="false"
+            android:importantForAccessibility="no"
+            android:layout_weight="4" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -18,15 +18,12 @@ package com.android.settings.fuelgauge.batterytip.detectors;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.when;
-
 import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
-import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,28 +38,23 @@ public class BatteryDefenderDetectorTest {
     @Mock private BatteryInfo mBatteryInfo;
     private BatteryDefenderDetector mBatteryDefenderDetector;
 
-    private FakeFeatureFactory mFakeFeatureFactory;
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         final Context context = ApplicationProvider.getApplicationContext();
         mBatteryDefenderDetector = new BatteryDefenderDetector(mBatteryInfo, context);
-        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
     @Test
     public void detect_notBatteryDefend_tipInvisible() {
-        when(mFakeFeatureFactory.powerUsageFeatureProvider.isBatteryDefend(mBatteryInfo))
-                .thenReturn(false);
+        mBatteryInfo.isBatteryDefender = false;
 
         assertThat(mBatteryDefenderDetector.detect().isVisible()).isFalse();
     }
 
     @Test
     public void detect_isBatteryDefend_tipNew() {
-        when(mFakeFeatureFactory.powerUsageFeatureProvider.isBatteryDefend(mBatteryInfo))
-                .thenReturn(true);
+        mBatteryInfo.isBatteryDefender = true;
 
         assertThat(mBatteryDefenderDetector.detect().getState())
                 .isEqualTo(BatteryTip.StateType.NEW);

@@ -88,9 +88,10 @@ class FingerprintEnrollEnrollingViewModelTest {
     backgroundViewModel.inForeground()
     val fingerprintEnrollViewModel =
       FingerprintEnrollViewModel(
-        fakeFingerprintManagerInteractor,
         gateKeeperViewModel,
         navigationViewModel,
+        fakeFingerprintManagerInteractor,
+        fakeFingerprintManagerInteractor,
       )
     enrollEnrollingViewModel =
       FingerprintEnrollEnrollingViewModel(fingerprintEnrollViewModel, backgroundViewModel)

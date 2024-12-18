@@ -17,6 +17,7 @@
 package com.android.settings.wifi.details2;
 
 import android.content.Context;
+import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 
 import androidx.annotation.NonNull;
@@ -98,30 +99,30 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
     private static final int PREF_RANDOMIZATION_NONE = 1;
 
     /**
-     * Returns preference index value.
+     * Translates a WifiEntry.Privacy value to the matching preference index value.
      *
-     * @param macRandomized is mac randomized value
+     * @param privacy WifiEntry.Privacy value
      * @return index value of preference
      */
-    public static int translateMacRandomizedValueToPrefValue(int macRandomized) {
-        return (macRandomized == WifiEntry.PRIVACY_RANDOMIZED_MAC)
+    public static int translateWifiEntryPrivacyToPrefValue(@WifiEntry.Privacy int privacy) {
+        return (privacy == WifiEntry.PRIVACY_RANDOMIZED_MAC)
             ? PREF_RANDOMIZATION_PERSISTENT : PREF_RANDOMIZATION_NONE;
     }
 
     /**
-     * Returns mac randomized value.
+     * Translates the pref value to WifiConfiguration.MacRandomizationSetting value
      *
      * @param prefMacRandomized is preference index value
-     * @return mac randomized value
+     * @return WifiConfiguration.MacRandomizationSetting value
      */
-    public static int translatePrefValueToMacRandomizedValue(int prefMacRandomized) {
+    public static int translatePrefValueToWifiConfigSetting(int prefMacRandomized) {
         return (prefMacRandomized == PREF_RANDOMIZATION_PERSISTENT)
-            ? WifiEntry.PRIVACY_RANDOMIZED_MAC : WifiEntry.PRIVACY_DEVICE_MAC;
+            ? WifiConfiguration.RANDOMIZATION_AUTO : WifiConfiguration.RANDOMIZATION_NONE;
     }
 
     private void updateSummary(ListPreference preference, int macRandomized) {
         // Translates value here to set RANDOMIZATION_PERSISTENT as first item in UI for better UX.
-        final int prefMacRandomized = translateMacRandomizedValueToPrefValue(macRandomized);
+        final int prefMacRandomized = translateWifiEntryPrivacyToPrefValue(macRandomized);
         preference.setSummary(preference.getEntries()[prefMacRandomized]);
     }
 }

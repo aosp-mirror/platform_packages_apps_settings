@@ -41,11 +41,13 @@ public class MutableGearPreference extends GearPreference {
 
     @Override
     public void setGearEnabled(boolean enabled) {
+        boolean state = false;
         if (mGear != null) {
-            mGear.setEnabled(enabled);
-            mGear.setImageAlpha(enabled ? VALUE_ENABLED_ALPHA : mDisabledAlphaValue);
+            state = enabled && !(isDisabledByAdmin() || isDisabledByEcm());
+            mGear.setEnabled(state);
+            mGear.setImageAlpha(state ? VALUE_ENABLED_ALPHA : mDisabledAlphaValue);
         }
-        mGearState = enabled;
+        mGearState = state;
     }
 
     @Override

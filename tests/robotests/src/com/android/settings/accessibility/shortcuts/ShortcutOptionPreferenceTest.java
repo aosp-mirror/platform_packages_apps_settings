@@ -62,7 +62,7 @@ public class ShortcutOptionPreferenceTest {
     @Test
     public void bindViewHolder_imageResIdSet_shouldShowImageView() {
         mShortcutOptionPreference.setIntroImageResId(
-                R.drawable.accessibility_shortcut_type_hardware);
+                R.drawable.accessibility_shortcut_type_volume_keys);
 
         mShortcutOptionPreference.onBindViewHolder(mViewHolder);
 

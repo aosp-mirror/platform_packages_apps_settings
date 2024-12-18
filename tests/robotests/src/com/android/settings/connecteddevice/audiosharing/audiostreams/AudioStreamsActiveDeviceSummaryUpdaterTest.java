@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 
@@ -76,25 +77,46 @@ public class AudioStreamsActiveDeviceSummaryUpdaterTest {
     }
 
     @Test
-    public void onActiveDeviceChanged_notLeProfile_doNothing() {
-        mUpdater.onActiveDeviceChanged(mCachedBluetoothDevice, 0);
+    public void unregister_doNothing() {
+        mUpdater.register(false);
 
         assertThat(mUpdatedSummary).isNull();
     }
 
     @Test
-    public void onActiveDeviceChanged_leProfile_summaryUpdated() {
+    public void onProfileConnectionStateChanged_notLeAssistProfile_doNothing() {
+        mUpdater.onProfileConnectionStateChanged(mCachedBluetoothDevice, 0, 0);
+
+        assertThat(mUpdatedSummary).isNull();
+    }
+
+    @Test
+    public void onProfileConnectionStateChanged_leAssistantProfile_summaryUpdated() {
         ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(
                 mCachedBluetoothDevice);
         when(mCachedBluetoothDevice.getName()).thenReturn(DEVICE_NAME);
-        mUpdater.onActiveDeviceChanged(mCachedBluetoothDevice, BluetoothProfile.LE_AUDIO);
+        mUpdater.onProfileConnectionStateChanged(
+                mCachedBluetoothDevice,
+                BluetoothAdapter.STATE_CONNECTED,
+                BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT);
 
         assertThat(mUpdatedSummary).isEqualTo(DEVICE_NAME);
     }
 
     @Test
-    public void onActiveDeviceChanged_leProfile_noDevice_summaryUpdated() {
-        mUpdater.onActiveDeviceChanged(mCachedBluetoothDevice, BluetoothProfile.LE_AUDIO);
+    public void onActiveDeviceChanged_leAssistantProfile_noDevice_summaryUpdated() {
+        mUpdater.onProfileConnectionStateChanged(
+                mCachedBluetoothDevice,
+                BluetoothAdapter.STATE_CONNECTED,
+                BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT);
+
+        assertThat(mUpdatedSummary)
+                .isEqualTo(mContext.getString(R.string.audio_streams_dialog_no_le_device_title));
+    }
+
+    @Test
+    public void onBluetoothStateOff_summaryUpdated() {
+        mUpdater.onBluetoothStateChanged(BluetoothAdapter.STATE_OFF);
 
         assertThat(mUpdatedSummary)
                 .isEqualTo(mContext.getString(R.string.audio_streams_dialog_no_le_device_title));
