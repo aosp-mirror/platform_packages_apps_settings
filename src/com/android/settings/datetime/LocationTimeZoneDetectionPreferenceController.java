@@ -25,6 +25,7 @@ import android.app.time.TimeZoneCapabilities;
 import android.app.time.TimeZoneCapabilitiesAndConfig;
 import android.app.time.TimeZoneConfiguration;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -138,7 +139,8 @@ public class LocationTimeZoneDetectionPreferenceController
         } else if (capability == CAPABILITY_NOT_APPLICABLE || capability == CAPABILITY_POSSESSED) {
             return isAutoTimeZoneEnabled() ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
         } else {
-            throw new IllegalStateException("Unknown capability=" + capability);
+            Log.e(TAG, "Unknown capability=" + capability);
+            return UNSUPPORTED_ON_DEVICE;
         }
     }
 

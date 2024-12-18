@@ -26,6 +26,7 @@ import android.app.time.TimeZoneCapabilities;
 import android.app.time.TimeZoneCapabilitiesAndConfig;
 import android.app.time.TimeZoneConfiguration;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.preference.Preference;
 
@@ -34,6 +35,8 @@ import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 public class AutoTimeZonePreferenceController extends TogglePreferenceController {
+
+    private static final String TAG = "AutoTimeZonePreferenceController";
 
     private boolean mIsFromSUW;
     private UpdateTimeAndDateCallback mCallback;
@@ -92,7 +95,8 @@ public class AutoTimeZonePreferenceController extends TogglePreferenceController
                 // arbitrary.
                 return AVAILABLE;
             default:
-                throw new IllegalStateException("Unknown capability=" + capability);
+                Log.e(TAG, "Unknown capability=" + capability);
+                return UNSUPPORTED_ON_DEVICE;
         }
     }
 
