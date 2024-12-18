@@ -40,6 +40,7 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.PopupWindow;
 
 import androidx.annotation.Nullable;
@@ -52,6 +53,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
+import com.android.settings.testutils.shadow.ShadowAccessibilityManager;
 import com.android.settings.testutils.shadow.ShadowFragment;
 
 import org.junit.Before;
@@ -66,36 +68,31 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
 
+import java.util.List;
 import java.util.Locale;
 
 /** Tests for {@link AccessibilityShortcutPreferenceFragment} */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {
-        com.android.settings.testutils.shadow.ShadowFragment.class,
-})
+@Config(shadows = com.android.settings.testutils.shadow.ShadowFragment.class)
 public class AccessibilityShortcutPreferenceFragmentTest {
     private static final String PLACEHOLDER_PACKAGE_NAME = "com.placeholder.example";
     private static final String PLACEHOLDER_CLASS_NAME = PLACEHOLDER_PACKAGE_NAME + ".placeholder";
-    private static final String PLACEHOLDER_TILE_CLASS_NAME =
-            PLACEHOLDER_PACKAGE_NAME + "tile.placeholder";
     private static final ComponentName PLACEHOLDER_COMPONENT_NAME = new ComponentName(
             PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_CLASS_NAME);
-
-    private static final String SOFTWARE_SHORTCUT_KEY =
-            Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
-    private static final String HARDWARE_SHORTCUT_KEY =
-            Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
     private TestAccessibilityShortcutPreferenceFragment mFragment;
     private PreferenceScreen mScreen;
     private Context mContext = ApplicationProvider.getApplicationContext();
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceManager mPreferenceManager;
+    private ShadowAccessibilityManager mShadowAccessibilityManager;
 
     @Before
     public void setUpTestFragment() {
         MockitoAnnotations.initMocks(this);
 
+        mShadowAccessibilityManager = Shadow.extract(
+                mContext.getSystemService(AccessibilityManager.class));
         mFragment = spy(new TestAccessibilityShortcutPreferenceFragment(null));
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
@@ -118,8 +115,10 @@ public class AccessibilityShortcutPreferenceFragmentTest {
 
     @Test
     public void updateShortcutPreferenceData_hasValueInSettings_assignToVariable() {
-        putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, PLACEHOLDER_COMPONENT_NAME.flattenToString());
-        putStringIntoSettings(HARDWARE_SHORTCUT_KEY, PLACEHOLDER_COMPONENT_NAME.flattenToString());
+        mShadowAccessibilityManager.setAccessibilityShortcutTargets(
+                SOFTWARE, List.of(PLACEHOLDER_COMPONENT_NAME.flattenToString()));
+        mShadowAccessibilityManager.setAccessibilityShortcutTargets(
+                HARDWARE, List.of(PLACEHOLDER_COMPONENT_NAME.flattenToString()));
 
         mFragment.updateShortcutPreferenceData();
 

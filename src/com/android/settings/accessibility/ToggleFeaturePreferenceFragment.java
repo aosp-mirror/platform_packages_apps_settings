@@ -56,6 +56,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
+import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
@@ -630,8 +631,8 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
 
         final int shortcutTypes = getUserPreferredShortcutTypes();
         mShortcutPreference.setChecked(
-                AccessibilityUtil.hasValuesInSettings(getPrefContext(), shortcutTypes,
-                        mComponentName));
+                ShortcutUtils.isShortcutContained(
+                        getPrefContext(), shortcutTypes, mComponentName.flattenToString()));
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }
 

@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -564,9 +566,8 @@ public class AccessibilitySettingsTest {
     }
 
     private void setShortcutEnabled(ComponentName componentName, boolean enabled) {
-        Settings.Secure.putString(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS,
-                enabled ? componentName.flattenToString() : "");
+        mShadowAccessibilityManager.setAccessibilityShortcutTargets(
+                SOFTWARE, (enabled) ? List.of(componentName.flattenToString()) : List.of());
     }
 
     private BooleanSubject assertUriObserversContainsClazz(
