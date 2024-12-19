@@ -50,7 +50,6 @@ import java.util.List;
 public class PhysicalKeyboardPreferenceControllerTest {
 
     private static final String DEVICE_NAME = "deviceName";
-    private static final String LAYOUT_LABEL = "deviceLayutLabel";
     private static final String BLUETOOTHADDRESS = "deviceBluetoothAddress";
     private static final int VENDOR_ID = 123;
     private static final int PRODUCT_ID = 456;
@@ -85,7 +84,6 @@ public class PhysicalKeyboardPreferenceControllerTest {
         keyboards.add(new HardKeyboardDeviceInfo(
                 DEVICE_NAME,
                 mIdentifier,
-                LAYOUT_LABEL,
                 BLUETOOTHADDRESS,
                 VENDOR_ID,
                 PRODUCT_ID));

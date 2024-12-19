@@ -203,7 +203,7 @@ public class HighContrastTextMigrationReceiverTest {
 
         ShadowNotification shadowNotification = Shadows.shadowOf(notification);
         assertThat(shadowNotification.getContentTitle()).isEqualTo(mContext.getString(
-                R.string.accessibility_toggle_high_text_contrast_preference_title));
+                R.string.accessibility_notification_high_contrast_text_title));
         assertThat(shadowNotification.getContentText()).isEqualTo(
                 mContext.getString(R.string.accessibility_notification_high_contrast_text_content));
 

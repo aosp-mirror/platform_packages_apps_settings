@@ -21,12 +21,20 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
+
 import android.content.Context;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.accessibility.Flags;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -51,19 +59,58 @@ public class BrightnessLevelPreferenceControllerForSetupWizardTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+
         mController = new BrightnessLevelPreferenceControllerForSetupWizard(mContext,
                 /* lifecycle= */ null);
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
-    public void getAvailabilityStatus_flagOn_shouldReturnAvailable() {
+    public void displayPreference_flagOn_preferenceVisibleTrue() {
+        Preference preference = displayPreference(/* restricted= */ false);
+        assertThat(preference.isVisible()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
+    public void displayPreference_flagOnAndRestricted_preferenceVisibleFalse() {
+        Preference preference = displayPreference(/* restricted= */ true);
+        assertThat(preference.isVisible()).isFalse();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
+    public void getAvailabilityStatus_flagOn_available() {
+        displayPreference(/* restricted= */ false);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
-    public void getAvailabilityStatus_flagOff_shouldReturnConditionallyUnavailable() {
+    @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
+    public void getAvailabilityStatus_flagOnAndRestricted_conditionallyUnavailable() {
+        displayPreference(/* restricted= */ true);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
+    public void getAvailabilityStatus_flagOff_conditionallyUnavailable() {
+        displayPreference(/* restricted= */ false);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+    }
+
+    private RestrictedPreference displayPreference(boolean restricted) {
+        final PreferenceManager manager = new PreferenceManager(mContext);
+        final PreferenceScreen screen = manager.createPreferenceScreen(mContext);
+        final RestrictedPreference preference = new RestrictedPreference(mContext);
+        preference.setKey(mController.getPreferenceKey());
+        preference.setDisabledByAdmin(restricted
+                ? mock(RestrictedLockUtils.EnforcedAdmin.class)
+                : null);
+        assertThat(preference.isDisabledByAdmin()).isEqualTo(restricted);
+        screen.addPreference(preference);
+
+        mController.displayPreference(screen);
+        return preference;
     }
 }

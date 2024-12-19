@@ -142,9 +142,13 @@ public class SeekBarPreference extends RestrictedPreference
             mSeekBar.setContentDescription(mSeekBarContentDescription);
         } else if (!TextUtils.isEmpty(title)) {
             mSeekBar.setContentDescription(title);
+        } else {
+            mSeekBar.setContentDescription(null);
         }
         if (!TextUtils.isEmpty(mSeekBarStateDescription)) {
             mSeekBar.setStateDescription(mSeekBarStateDescription);
+        } else {
+            mSeekBar.setStateDescription(null);
         }
         if (mSeekBar instanceof DefaultIndicatorSeekBar) {
             ((DefaultIndicatorSeekBar) mSeekBar).setDefaultProgress(mDefaultProgress);

@@ -45,8 +45,6 @@ import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
-import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.R;
 
 import org.junit.Before;
@@ -57,7 +55,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
-import java.util.StringJoiner;
 
 @RunWith(RobolectricTestRunner.class)
 public final class AccessibilityUtilTest {
@@ -67,16 +64,6 @@ public final class AccessibilityUtilTest {
     private static final String MOCK_CLASS_NAME2 = MOCK_PACKAGE_NAME + ".mock_a11y_service2";
     private static final ComponentName MOCK_COMPONENT_NAME = new ComponentName(MOCK_PACKAGE_NAME,
             MOCK_CLASS_NAME);
-    private static final ComponentName MOCK_COMPONENT_NAME2 = new ComponentName(MOCK_PACKAGE_NAME,
-            MOCK_CLASS_NAME2);
-    private static final String SOFTWARE_SHORTCUT_KEY =
-            Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
-    private static final String HARDWARE_SHORTCUT_KEY =
-            Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
-    private static final String QUICK_SETTINGS_SHORTCUT_KEY =
-            Settings.Secure.ACCESSIBILITY_QS_TARGETS;
-
-    private static final String PLACEHOLDER_SETTING_FEATURE = "placeholderSettingFeature";
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
@@ -159,56 +146,6 @@ public final class AccessibilityUtilTest {
 
         assertThat(AccessibilityUtil.getAccessibilityServiceFragmentType(info)).isEqualTo(
                 AccessibilityUtil.AccessibilityServiceFragmentType.TOGGLE);
-    }
-
-    @Test
-    public void hasValueInSettings_putValue_hasValue() {
-        setShortcut(SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
-
-        assertThat(AccessibilityUtil.hasValueInSettings(mContext, SOFTWARE,
-                MOCK_COMPONENT_NAME)).isTrue();
-    }
-
-    @Test
-    public void getUserShortcutTypeFromSettings_putOneValue_hasValue() {
-        setShortcut(SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
-
-        final int shortcutTypes = AccessibilityUtil.getUserShortcutTypesFromSettings(mContext,
-                MOCK_COMPONENT_NAME);
-
-        assertThat(shortcutTypes).isEqualTo(
-                SOFTWARE
-        );
-    }
-
-    @Test
-    public void getUserShortcutTypeFromSettings_putTwoValues_hasValue() {
-        setShortcut(SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
-        setShortcut(HARDWARE, MOCK_COMPONENT_NAME.flattenToString());
-
-        final int shortcutTypes = AccessibilityUtil.getUserShortcutTypesFromSettings(mContext,
-                MOCK_COMPONENT_NAME);
-
-        assertThat(shortcutTypes).isEqualTo(
-                SOFTWARE
-                        | HARDWARE
-        );
-    }
-
-    @Test
-    public void getUserShortcutTypeFromSettings_threeShortcutTypesChosen() {
-        setShortcut(SOFTWARE, MOCK_COMPONENT_NAME.flattenToString());
-        setShortcut(HARDWARE, MOCK_COMPONENT_NAME.flattenToString());
-        setShortcut(QUICK_SETTINGS, MOCK_COMPONENT_NAME.flattenToString());
-
-        final int shortcutTypes = AccessibilityUtil.getUserShortcutTypesFromSettings(mContext,
-                MOCK_COMPONENT_NAME);
-
-        assertThat(shortcutTypes).isEqualTo(
-                SOFTWARE
-                        | HARDWARE
-                        | QUICK_SETTINGS
-        );
     }
 
     @Test
@@ -308,28 +245,9 @@ public final class AccessibilityUtilTest {
         return null;
     }
 
-    private String getStringFromSettings(String key) {
-        return Settings.Secure.getString(mContext.getContentResolver(), key);
-    }
-
     private void setSettingsFeatureEnabled(String settingsKey, boolean enabled) {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 settingsKey,
                 enabled ? AccessibilityUtil.State.ON : AccessibilityUtil.State.OFF);
-    }
-
-    private void setShortcut(@UserShortcutType int shortcutType, String... componentNames) {
-        StringJoiner shortcutComponents = new StringJoiner(":");
-        for (String componentName : componentNames) {
-            shortcutComponents.add(componentName);
-        }
-        Settings.Secure.putString(mContext.getContentResolver(),
-                ShortcutUtils.convertToKey(shortcutType), shortcutComponents.toString());
-    }
-
-    private void clearShortcuts() {
-        Settings.Secure.putString(mContext.getContentResolver(), SOFTWARE_SHORTCUT_KEY, "");
-        Settings.Secure.putString(mContext.getContentResolver(), HARDWARE_SHORTCUT_KEY, "");
-        Settings.Secure.putString(mContext.getContentResolver(), QUICK_SETTINGS_SHORTCUT_KEY, "");
     }
 }

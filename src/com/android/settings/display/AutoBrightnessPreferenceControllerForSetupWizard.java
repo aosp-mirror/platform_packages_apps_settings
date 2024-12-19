@@ -19,8 +19,12 @@ package com.android.settings.display;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.accessibility.Flags;
+import com.android.settingslib.RestrictedPreferenceHelper;
+import com.android.settingslib.RestrictedPreferenceHelperProvider;
 
 /**
  * The top-level preference controller that updates the adaptive brightness in the SetupWizard.
@@ -28,15 +32,35 @@ import com.android.settings.accessibility.Flags;
 public class AutoBrightnessPreferenceControllerForSetupWizard
         extends AutoBrightnessPreferenceController {
 
+    private RestrictedPreferenceHelper mRestrictedPreferenceHelper;
+
     public AutoBrightnessPreferenceControllerForSetupWizard(@NonNull Context context,
             @NonNull String key) {
         super(context, key);
     }
 
+    private boolean isRestricted() {
+        if (mRestrictedPreferenceHelper == null) {
+            return false;
+        }
+        return mRestrictedPreferenceHelper.isDisabledByAdmin()
+                || mRestrictedPreferenceHelper.isDisabledByEcm();
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        Preference preference = screen.findPreference(getPreferenceKey());
+        if (preference instanceof RestrictedPreferenceHelperProvider helperProvider) {
+            mRestrictedPreferenceHelper = helperProvider.getRestrictedPreferenceHelper();
+            preference.setVisible(!isRestricted());
+        }
+    }
+
     @Override
     @AvailabilityStatus
     public int getAvailabilityStatus() {
-        if (!Flags.addBrightnessSettingsInSuw()) {
+        if (!Flags.addBrightnessSettingsInSuw() || isRestricted()) {
             return CONDITIONALLY_UNAVAILABLE;
         }
         return super.getAvailabilityStatus();

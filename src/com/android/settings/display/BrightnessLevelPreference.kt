@@ -40,7 +40,7 @@ import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MAX
 import com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MIN
 import com.android.settingslib.display.BrightnessUtils.convertLinearToGammaFloat
-import com.android.settingslib.metadata.PersistentPreference
+import com.android.settingslib.metadata.FloatPersistentPreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
@@ -52,7 +52,7 @@ import java.text.NumberFormat
 // LINT.IfChange
 class BrightnessLevelPreference :
     PreferenceMetadata,
-    PersistentPreference<Float>,
+    FloatPersistentPreference,
     PreferenceBinding,
     PreferenceRestrictionMixin,
     PreferenceSummaryProvider,
@@ -78,7 +78,7 @@ class BrightnessLevelPreference :
     override val useAdminDisabledSummary: Boolean
         get() = true
 
-    override fun intent(context: Context) =
+    override fun intent(context: Context): Intent? =
         Intent(ACTION_SHOW_BRIGHTNESS_DIALOG)
             .setPackage(Utils.SYSTEMUI_PACKAGE_NAME)
             .putExtra(

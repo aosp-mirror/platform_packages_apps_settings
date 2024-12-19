@@ -41,6 +41,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
+import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.R;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
@@ -308,8 +309,8 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
 
         final int shortcutTypes = getUserPreferredShortcutTypes();
         mShortcutPreference.setChecked(
-                AccessibilityUtil.hasValuesInSettings(getPrefContext(), shortcutTypes,
-                        getComponentName()));
+                ShortcutUtils.isShortcutContained(
+                        getPrefContext(), shortcutTypes, getComponentName().flattenToString()));
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }
 

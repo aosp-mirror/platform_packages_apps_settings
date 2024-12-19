@@ -28,6 +28,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <com.android.settings.widget.SettingsMainSwitchBar
+        android:id="@+id/expressive_switch_bar"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dip"/>
+
     <FrameLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
