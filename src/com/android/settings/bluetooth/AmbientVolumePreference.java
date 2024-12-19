@@ -21,25 +21,29 @@ import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO;
 import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_YES;
 import static android.view.View.VISIBLE;
 
+import static com.android.settings.bluetooth.BluetoothDetailsAmbientVolumePreferenceController.KEY_AMBIENT_VOLUME_SLIDER;
 import static com.android.settingslib.bluetooth.HearingAidInfo.DeviceSide.SIDE_LEFT;
 import static com.android.settingslib.bluetooth.HearingAidInfo.DeviceSide.SIDE_RIGHT;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
-import android.util.ArrayMap;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.widget.SeekBarPreference;
+import com.android.settingslib.bluetooth.AmbientVolumeUi;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.google.common.primitives.Ints;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,27 +53,13 @@ import java.util.Map;
  * separated control for devices in the same set. Toggle the expand icon will make the UI switch
  * between unified and separated control.
  */
-public class AmbientVolumePreference extends PreferenceGroup {
+public class AmbientVolumePreference extends PreferenceGroup implements AmbientVolumeUi {
 
-    /** Interface definition for a callback to be invoked when the icon is clicked. */
-    public interface OnIconClickListener {
-        /** Called when the expand icon is clicked. */
-        void onExpandIconClick();
-
-        /** Called when the ambient volume icon is clicked. */
-        void onAmbientVolumeIconClick();
-    };
-
-    static final float ROTATION_COLLAPSED = 0f;
-    static final float ROTATION_EXPANDED = 180f;
-    static final int AMBIENT_VOLUME_LEVEL_MIN = 0;
-    static final int AMBIENT_VOLUME_LEVEL_MAX = 24;
-    static final int AMBIENT_VOLUME_LEVEL_DEFAULT = 24;
-    static final int SIDE_UNIFIED = 999;
-    static final List<Integer> VALID_SIDES = List.of(SIDE_UNIFIED, SIDE_LEFT, SIDE_RIGHT);
+    private static final int ORDER_AMBIENT_VOLUME_CONTROL_UNIFIED = 0;
+    private static final int ORDER_AMBIENT_VOLUME_CONTROL_SEPARATED = 1;
 
     @Nullable
-    private OnIconClickListener mListener;
+    private AmbientVolumeUiListener mListener;
     @Nullable
     private View mExpandIcon;
     @Nullable
@@ -78,26 +68,20 @@ public class AmbientVolumePreference extends PreferenceGroup {
     private boolean mExpanded = false;
     private boolean mMutable = false;
     private boolean mMuted = false;
-    private Map<Integer, SeekBarPreference> mSideToSliderMap = new ArrayMap<>();
-
-    /**
-     * Ambient volume level for hearing device ambient control icon
-     * <p>
-     * This icon visually represents the current ambient gain setting.
-     * It displays separate levels for the left and right sides, each with 5 levels ranging from 0
-     * to 4.
-     * <p>
-     * To represent the combined left/right levels with a single value, the following calculation
-     * is used:
-     *      finalLevel = (leftLevel * 5) + rightLevel
-     * For example:
-     * <ul>
-     *    <li>If left level is 2 and right level is 3, the final level will be 13 (2 * 5 + 3)</li>
-     *    <li>If both left and right levels are 0, the final level will be 0</li>
-     *    <li>If both left and right levels are 4, the final level will be 24</li>
-     * </ul>
-     */
+    private final BiMap<Integer, SeekBarPreference> mSideToSliderMap = HashBiMap.create();
     private int mVolumeLevel = AMBIENT_VOLUME_LEVEL_DEFAULT;
+
+    private final OnPreferenceChangeListener mPreferenceChangeListener =
+            (slider, v) -> {
+                if (slider instanceof SeekBarPreference && v instanceof final Integer value) {
+                    final Integer side = mSideToSliderMap.inverse().get(slider);
+                    if (mListener != null && side != null) {
+                        mListener.onSliderValueChange(side, value);
+                    }
+                    return true;
+                }
+                return false;
+            };
 
     public AmbientVolumePreference(@NonNull Context context) {
         super(context, null);
@@ -138,7 +122,8 @@ public class AmbientVolumePreference extends PreferenceGroup {
         updateExpandIcon();
     }
 
-    void setExpandable(boolean expandable) {
+    @Override
+    public void setExpandable(boolean expandable) {
         mExpandable = expandable;
         if (!mExpandable) {
             setExpanded(false);
@@ -146,11 +131,13 @@ public class AmbientVolumePreference extends PreferenceGroup {
         updateExpandIcon();
     }
 
-    boolean isExpandable() {
+    @Override
+    public boolean isExpandable() {
         return mExpandable;
     }
 
-    void setExpanded(boolean expanded) {
+    @Override
+    public void setExpanded(boolean expanded) {
         if (!mExpandable && expanded) {
             return;
         }
@@ -159,11 +146,13 @@ public class AmbientVolumePreference extends PreferenceGroup {
         updateLayout();
     }
 
-    boolean isExpanded() {
+    @Override
+    public boolean isExpanded() {
         return mExpanded;
     }
 
-    void setMutable(boolean mutable) {
+    @Override
+    public void setMutable(boolean mutable) {
         mMutable = mutable;
         if (!mMutable) {
             mVolumeLevel = AMBIENT_VOLUME_LEVEL_DEFAULT;
@@ -172,11 +161,13 @@ public class AmbientVolumePreference extends PreferenceGroup {
         updateVolumeIcon();
     }
 
-    boolean isMutable() {
+    @Override
+    public boolean isMutable() {
         return mMutable;
     }
 
-    void setMuted(boolean muted) {
+    @Override
+    public void setMuted(boolean muted) {
         if (!mMutable && muted) {
             return;
         }
@@ -189,25 +180,35 @@ public class AmbientVolumePreference extends PreferenceGroup {
         updateVolumeIcon();
     }
 
-    boolean isMuted() {
+    @Override
+    public boolean isMuted() {
         return mMuted;
     }
 
-    void setOnIconClickListener(@Nullable OnIconClickListener listener) {
+    @Override
+    public void setListener(@Nullable AmbientVolumeUiListener listener) {
         mListener = listener;
     }
 
-    void setSliders(Map<Integer, SeekBarPreference> sideToSliderMap) {
-        mSideToSliderMap = sideToSliderMap;
-        for (SeekBarPreference preference : sideToSliderMap.values()) {
-            if (findPreference(preference.getKey()) == null) {
-                addPreference(preference);
+    @Override
+    public void setupSliders(@NonNull Map<Integer, BluetoothDevice> sideToDeviceMap) {
+        sideToDeviceMap.forEach((side, device) ->
+                createSlider(side, ORDER_AMBIENT_VOLUME_CONTROL_SEPARATED + side));
+        createSlider(SIDE_UNIFIED, ORDER_AMBIENT_VOLUME_CONTROL_UNIFIED);
+
+        if (!mSideToSliderMap.isEmpty()) {
+            for (int side : VALID_SIDES) {
+                final SeekBarPreference slider = mSideToSliderMap.get(side);
+                if (slider != null && findPreference(slider.getKey()) == null) {
+                    addPreference(slider);
+                }
             }
         }
         updateLayout();
     }
 
-    void setSliderEnabled(int side, boolean enabled) {
+    @Override
+    public void setSliderEnabled(int side, boolean enabled) {
         SeekBarPreference slider = mSideToSliderMap.get(side);
         if (slider != null && slider.isEnabled() != enabled) {
             slider.setEnabled(enabled);
@@ -215,7 +216,8 @@ public class AmbientVolumePreference extends PreferenceGroup {
         }
     }
 
-    void setSliderValue(int side, int value) {
+    @Override
+    public void setSliderValue(int side, int value) {
         SeekBarPreference slider = mSideToSliderMap.get(side);
         if (slider != null && slider.getProgress() != value) {
             slider.setProgress(value);
@@ -223,7 +225,8 @@ public class AmbientVolumePreference extends PreferenceGroup {
         }
     }
 
-    void setSliderRange(int side, int min, int max) {
+    @Override
+    public void setSliderRange(int side, int min, int max) {
         SeekBarPreference slider = mSideToSliderMap.get(side);
         if (slider != null) {
             slider.setMin(min);
@@ -231,7 +234,8 @@ public class AmbientVolumePreference extends PreferenceGroup {
         }
     }
 
-    void updateLayout() {
+    @Override
+    public void updateLayout() {
         mSideToSliderMap.forEach((side, slider) -> {
             if (side == SIDE_UNIFIED) {
                 slider.setVisible(!mExpanded);
@@ -279,8 +283,7 @@ public class AmbientVolumePreference extends PreferenceGroup {
         mExpandIcon.setVisibility(mExpandable ? VISIBLE : GONE);
         mExpandIcon.setRotation(mExpanded ? ROTATION_EXPANDED : ROTATION_COLLAPSED);
         if (mExpandable) {
-            final int stringRes = mExpanded
-                    ? R.string.bluetooth_ambient_volume_control_collapse
+            final int stringRes = mExpanded ? R.string.bluetooth_ambient_volume_control_collapse
                     : R.string.bluetooth_ambient_volume_control_expand;
             mExpandIcon.setContentDescription(getContext().getString(stringRes));
         } else {
@@ -294,8 +297,7 @@ public class AmbientVolumePreference extends PreferenceGroup {
         }
         mVolumeIcon.setImageLevel(mMuted ? 0 : mVolumeLevel);
         if (mMutable) {
-            final int stringRes = mMuted
-                    ? R.string.bluetooth_ambient_volume_unmute
+            final int stringRes = mMuted ? R.string.bluetooth_ambient_volume_unmute
                     : R.string.bluetooth_ambient_volume_mute;
             mVolumeIcon.setContentDescription(getContext().getString(stringRes));
             mVolumeIcon.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
@@ -303,5 +305,28 @@ public class AmbientVolumePreference extends PreferenceGroup {
             mVolumeIcon.setContentDescription(null);
             mVolumeIcon.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
         }
+    }
+
+    private void createSlider(int side, int order) {
+        if (mSideToSliderMap.containsKey(side)) {
+            return;
+        }
+        SeekBarPreference slider = new SeekBarPreference(getContext());
+        slider.setKey(KEY_AMBIENT_VOLUME_SLIDER + "_" + side);
+        slider.setOrder(order);
+        slider.setOnPreferenceChangeListener(mPreferenceChangeListener);
+        if (side == SIDE_LEFT) {
+            slider.setTitle(
+                    getContext().getString(R.string.bluetooth_ambient_volume_control_left));
+        } else if (side == SIDE_RIGHT) {
+            slider.setTitle(
+                    getContext().getString(R.string.bluetooth_ambient_volume_control_right));
+        }
+        mSideToSliderMap.put(side, slider);
+    }
+
+    @VisibleForTesting
+    Map<Integer, SeekBarPreference> getSliders() {
+        return mSideToSliderMap;
     }
 }
