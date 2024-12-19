@@ -20,6 +20,7 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
+import com.android.settings.connecteddevice.virtual.VirtualDeviceListController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.print.PrintSettingPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -74,6 +75,7 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
                 getSettingsLifecycle().addObserver(uwbPreferenceController);
             }
         }
+        use(VirtualDeviceListController.class).setFragment(this);
     }
 
     @Override
