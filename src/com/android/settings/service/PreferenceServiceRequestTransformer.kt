@@ -17,6 +17,7 @@
 package com.android.settings.service
 
 import android.content.Context
+import android.os.Bundle
 import android.service.settings.preferences.GetValueRequest
 import android.service.settings.preferences.GetValueResult
 import android.service.settings.preferences.MetadataResult
@@ -186,6 +187,11 @@ private data class PreferenceWithScreen(
     val preference: PreferenceProto,
 )
 
+private const val KEY_INT_RANGE = "key_int_range"
+private const val KEY_MIN = "key_min"
+private const val KEY_MAX = "key_max"
+private const val KEY_STEP = "key_step"
+
 private fun PreferenceProto.toMetadata(
     context: Context,
     screenKey: String
@@ -195,6 +201,18 @@ private fun PreferenceProto.toMetadata(
         SensitivityLevel.LOW_SENSITIVITY -> SettingsPreferenceMetadata.EXPECT_POST_CONFIRMATION
         SensitivityLevel.MEDIUM_SENSITIVITY -> SettingsPreferenceMetadata.DEEPLINK_ONLY
         else -> SettingsPreferenceMetadata.NO_DIRECT_ACCESS
+    }
+    val extras = Bundle()
+    if (valueDescriptor.hasRangeValue()
+        && valueDescriptor.rangeValue.hasMin()
+        && valueDescriptor.rangeValue.hasMax()) {
+        val intRange = Bundle()
+        intRange.putInt(KEY_MIN, valueDescriptor.rangeValue.min)
+        intRange.putInt(KEY_MAX, valueDescriptor.rangeValue.max)
+        if (valueDescriptor.rangeValue.hasStep()) {
+            intRange.putInt(KEY_STEP, valueDescriptor.rangeValue.step)
+        }
+        extras.putBundle(KEY_INT_RANGE, intRange)
     }
     return SettingsPreferenceMetadata.Builder(screenKey, key)
         .setTitle(title.getText(context))
@@ -208,5 +226,6 @@ private fun PreferenceProto.toMetadata(
         // Returns all the permissions that are used, some of which are exclusive (e.g. p1 or p2)
         .setReadPermissions(readPermissions.getAllPermissions())
         .setWritePermissions(writePermissions.getAllPermissions())
+        .setExtras(extras)
         .build()
 }

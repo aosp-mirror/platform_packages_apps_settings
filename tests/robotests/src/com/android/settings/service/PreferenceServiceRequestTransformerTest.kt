@@ -42,8 +42,10 @@ import com.android.settingslib.graph.preferenceGroupProto
 import com.android.settingslib.graph.preferenceOrGroupProto
 import com.android.settingslib.graph.preferenceProto
 import com.android.settingslib.graph.preferenceScreenProto
+import com.android.settingslib.graph.preferenceValueDescriptorProto
 import com.android.settingslib.graph.preferenceValueProto
 import com.android.settingslib.graph.proto.PreferenceGraphProto
+import com.android.settingslib.graph.rangeValueProto
 import com.android.settingslib.graph.textProto
 import com.android.settingslib.graph.toProto
 import com.android.settingslib.metadata.SensitivityLevel
@@ -156,6 +158,13 @@ class PreferenceServiceRequestTransformerTest {
                             available = true
                             restricted = true
                             persistent = true
+                            valueDescriptor = preferenceValueDescriptorProto {
+                                rangeValue = rangeValueProto {
+                                    min = 0
+                                    max = 10
+                                    step = 2
+                                }
+                            }
                             sensitivityLevel = SensitivityLevel.LOW_SENSITIVITY
                             readPermissions = Permissions.allOf("read_permission").toProto()
                             writePermissions = Permissions.anyOf("write_permission").toProto()
@@ -181,6 +190,11 @@ class PreferenceServiceRequestTransformerTest {
             assertThat(launchIntent).isNotNull()
             assertThat(launchIntent!!.component!!.className)
                 .isEqualTo(SettingsHomepageActivity::class.java.name)
+            val intRange = extras.getBundle("key_int_range")
+            assertThat(intRange).isNotNull()
+            assertThat(intRange!!.getInt("key_min", -1)).isEqualTo(0)
+            assertThat(intRange.getInt("key_max", -1)).isEqualTo(10)
+            assertThat(intRange.getInt("key_step", -1)).isEqualTo(2)
         }
         with(fResult.value!!) {
             assertThat(type).isEqualTo(SettingsPreferenceValue.TYPE_BOOLEAN)
