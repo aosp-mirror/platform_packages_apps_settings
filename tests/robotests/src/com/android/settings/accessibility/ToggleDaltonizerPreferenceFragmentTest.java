@@ -193,7 +193,6 @@ public class ToggleDaltonizerPreferenceFragmentTest {
     }
 
     private ToggleDaltonizerPreferenceFragment getFragmentInResumedState() {
-
         mActivityController.create().start().resume();
         Fragment fragment = mActivityController.get().getSupportFragmentManager().findFragmentById(
                 R.id.main_content);

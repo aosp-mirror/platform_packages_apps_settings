@@ -17,6 +17,10 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.text.Html;
+
+import androidx.annotation.NonNull;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 
@@ -31,5 +35,25 @@ public class HearingDeviceFooterPreferenceController extends
     @Override
     protected String getIntroductionTitle() {
         return mContext.getString(R.string.accessibility_hearing_device_about_title);
+    }
+
+    @Override
+    public void displayPreference(@NonNull PreferenceScreen screen) {
+        super.displayPreference(screen);
+
+        final AccessibilityFooterPreference footerPreference =
+                screen.findPreference(getPreferenceKey());
+        // We use html tag inside footer string, so it is better to load from html to have better
+        // html tag support.
+        final CharSequence title = Html.fromHtml(
+                mContext.getString(R.string.accessibility_hearing_device_footer_summary),
+                Html.FROM_HTML_MODE_COMPACT, /* imageGetter= */ null, /* tagHandler= */ null);
+        footerPreference.setTitle(title);
+
+        // Need to update contentDescription string to announce "than" rather than ">"
+        final String summaryTts = mContext.getString(
+                R.string.accessibility_hearing_device_footer_summary_tts);
+        final String contentDescription = getIntroductionTitle() + "\n\n" + summaryTts;
+        footerPreference.setContentDescription(contentDescription);
     }
 }

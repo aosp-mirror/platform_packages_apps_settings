@@ -49,7 +49,7 @@ import java.lang.annotation.RetentionPolicy;
 public class HighContrastTextMigrationReceiver extends BroadcastReceiver {
     private static final String TAG = HighContrastTextMigrationReceiver.class.getSimpleName();
     @VisibleForTesting
-    static final String NOTIFICATION_CHANNEL = "high_contrast_text_notification_channel";
+    static final String NOTIFICATION_CHANNEL = "accessibility_notification_channel";
     @VisibleForTesting
     static final String ACTION_RESTORED =
             "com.android.settings.accessibility.ACTION_HIGH_CONTRAST_TEXT_RESTORED";
@@ -120,7 +120,7 @@ public class HighContrastTextMigrationReceiver extends BroadcastReceiver {
                 NOTIFICATION_CHANNEL)
                 .setSmallIcon(R.drawable.ic_settings_24dp)
                 .setContentTitle(context.getString(
-                        R.string.accessibility_toggle_high_text_contrast_preference_title))
+                        R.string.accessibility_notification_high_contrast_text_title))
                 .setContentText(context.getString(
                         R.string.accessibility_notification_high_contrast_text_content))
                 .setAutoCancel(true);
@@ -149,8 +149,7 @@ public class HighContrastTextMigrationReceiver extends BroadcastReceiver {
                 context.getSystemService(NotificationManager.class);
         NotificationChannel notificationChannel = new NotificationChannel(
                 NOTIFICATION_CHANNEL,
-                context.getString(
-                        R.string.accessibility_toggle_high_text_contrast_preference_title),
+                context.getString(R.string.accessibility_settings),
                 NotificationManager.IMPORTANCE_LOW);
         notificationManager.createNotificationChannel(notificationChannel);
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());

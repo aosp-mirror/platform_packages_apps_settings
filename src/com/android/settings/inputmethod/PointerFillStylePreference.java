@@ -25,6 +25,9 @@ import static android.view.PointerIcon.POINTER_ICON_VECTOR_STYLE_FILL_RED;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.PointerIcon;
@@ -41,6 +44,11 @@ import com.android.settings.R;
 
 
 public class PointerFillStylePreference extends Preference {
+    private static final int[] STATE_HOVERED_SELECTED =
+            new int[]{android.R.attr.state_hovered, android.R.attr.state_selected};
+    private static final int[] STATE_SELECTED = new int[]{android.R.attr.state_selected};
+    private static final int[] STATE_HOVERED = new int[]{android.R.attr.state_hovered};
+    private static final int[] STATE_DEFAULT = new int[]{};
 
     @Nullable private LinearLayout mButtonHolder;
 
@@ -82,11 +90,7 @@ public class PointerFillStylePreference extends Preference {
         if (button == null) {
             return;
         }
-        int[] attrs = {com.android.internal.R.attr.pointerIconVectorFill};
-        try (TypedArray ta = getContext().obtainStyledAttributes(
-                PointerIcon.vectorFillStyleToResource(style), attrs)) {
-            button.getBackground().setTint(ta.getColor(0, Color.BLACK));
-        }
+        tintButtonByStyle(button, style);
         button.setOnClickListener(
                 (v) -> {
                     getPreferenceDataStore().putInt(Settings.System.POINTER_FILL_STYLE, style);
@@ -94,6 +98,32 @@ public class PointerFillStylePreference extends Preference {
                 });
         button.setSelected(style == currentStyle);
         button.setPointerIcon(PointerIcon.getSystemIcon(getContext(), PointerIcon.TYPE_ARROW));
+    }
+
+    private void tintButtonByStyle(ImageView button, int style) {
+        int[] attrs = {com.android.internal.R.attr.pointerIconVectorFill};
+        try (TypedArray ta = getContext().obtainStyledAttributes(
+                PointerIcon.vectorFillStyleToResource(style), attrs)) {
+            // Index 0, as there is only one attribute returned here.
+            int color = ta.getColor(/* index= */ 0, Color.BLACK);
+            StateListDrawable stateListDrawable = (StateListDrawable) button.getDrawable();
+            tintDrawableByLayerId(stateListDrawable, STATE_HOVERED_SELECTED,
+                    R.id.tintableCircleHoveredSelected, color);
+            tintDrawableByLayerId(stateListDrawable, STATE_SELECTED, R.id.tintableCircleSelected,
+                    color);
+            tintDrawableByLayerId(stateListDrawable, STATE_HOVERED, R.id.tintableCircleHovered,
+                    color);
+            tintDrawableByLayerId(stateListDrawable, STATE_DEFAULT, R.id.tintableCircleDefault,
+                    color);
+        }
+    }
+
+    private void tintDrawableByLayerId(StateListDrawable stateListDrawable, int[] stateSet,
+            int layerId, int color) {
+        int index = stateListDrawable.findStateDrawableIndex(stateSet);
+        LayerDrawable layerDrawable = (LayerDrawable) stateListDrawable.getStateDrawable(index);
+        Drawable drawable = layerDrawable.findDrawableByLayerId(layerId);
+        drawable.setTint(color);
     }
 
     private void setButtonChecked(int id) {

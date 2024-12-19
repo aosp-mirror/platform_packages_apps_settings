@@ -32,6 +32,8 @@ import android.util.Pair;
 import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -147,6 +149,13 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                     .getContentResolver()
                     .registerContentObserver(uri, /*notifyForDescendants*/ true, mBatteryObserver);
         }
+    }
+
+    @Override
+    protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
+        final RecyclerView.Adapter adapter = super.onCreateAdapter(preferenceScreen);
+        adapter.setHasStableIds(true);
+        return adapter;
     }
 
     @Override

@@ -41,10 +41,8 @@ import com.android.settingslib.graph.preferenceGroupProto
 import com.android.settingslib.graph.preferenceOrGroupProto
 import com.android.settingslib.graph.preferenceProto
 import com.android.settingslib.graph.preferenceScreenProto
+import com.android.settingslib.graph.preferenceValueProto
 import com.android.settingslib.graph.proto.PreferenceGraphProto
-import com.android.settingslib.graph.proto.PreferenceProto
-import com.android.settingslib.graph.proto.PreferenceValueProto
-import com.android.settingslib.graph.proto.TextProto
 import com.android.settingslib.graph.textProto
 import com.android.settingslib.graph.toProto
 import com.android.settingslib.metadata.SensitivityLevel
@@ -57,8 +55,7 @@ import org.junit.runner.RunWith
 @RequiresFlagsEnabled(FLAG_SETTINGS_CATALYST)
 class PreferenceServiceRequestTransformerTest {
 
-    @get:Rule
-    val checkFlagsRule: CheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
+    @get:Rule val checkFlagsRule: CheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
 
     @Test
     fun transformCatalystGetMetadataResponse_emptyGraph_returnsFrameworkResponseWithError() {
@@ -97,7 +94,7 @@ class PreferenceServiceRequestTransformerTest {
                                 title = textProto { string = "title2" }
                                 enabled = false
                             }
-                        }
+                        },
                     )
                 )
             }
@@ -110,21 +107,23 @@ class PreferenceServiceRequestTransformerTest {
             assertThat(metadataList.size).isEqualTo(2)
         }
         assertThat(
-            fResult.metadataList.any {
-                it.key == "key1" &&
-                it.screenKey == "screen" &&
-                it.title == "title1" &&
-                it.isEnabled == true
-            }
-        ).isTrue()
+                fResult.metadataList.any {
+                    it.key == "key1" &&
+                        it.screenKey == "screen" &&
+                        it.title == "title1" &&
+                        it.isEnabled
+                }
+            )
+            .isTrue()
         assertThat(
-            fResult.metadataList.any {
-                it.key == "key2" &&
-                it.screenKey == "screen" &&
-                it.title == "title2" &&
-                it.isEnabled == false
-            }
-        ).isTrue()
+                fResult.metadataList.any {
+                    it.key == "key2" &&
+                        it.screenKey == "screen" &&
+                        it.title == "title2" &&
+                        !it.isEnabled
+                }
+            )
+            .isTrue()
     }
 
     @Test
@@ -143,26 +142,28 @@ class PreferenceServiceRequestTransformerTest {
     fun transformCatalystGetValueResponse_success_returnsValidFrameworkResponse() {
         val context: Context = ApplicationProvider.getApplicationContext()
         val fRequest = GetValueRequest.Builder("screen", "key").build()
-        val cResult = PreferenceGetterResponse(
-            emptyMap(),
-            mapOf(
-                PreferenceCoordinate(fRequest.screenKey, fRequest.preferenceKey) to
-                        PreferenceProto.newBuilder()
-                            .setKey("key")
-                            .setTitle(TextProto.newBuilder().setString("title"))
-                            .setSummary(TextProto.newBuilder().setString("summary"))
-                            .setEnabled(true)
-                            .setAvailable(true)
-                            .setRestricted(true)
-                            .setPersistent(true)
-                            .setSensitivityLevel(SensitivityLevel.LOW_SENSITIVITY)
-                            .setLaunchIntent(
+        val cResult =
+            PreferenceGetterResponse(
+                emptyMap(),
+                mapOf(
+                    PreferenceCoordinate(fRequest.screenKey, fRequest.preferenceKey) to
+                        preferenceProto {
+                            key = "key"
+                            title = textProto { string = "title" }
+                            summary = textProto { string = "summary" }
+                            enabled = true
+                            available = true
+                            restricted = true
+                            persistent = true
+                            sensitivityLevel = SensitivityLevel.LOW_SENSITIVITY
+                            addReadPermissions("read_permission")
+                            addWritePermissions("write_permission")
+                            launchIntent =
                                 Intent(context, SettingsHomepageActivity::class.java).toProto()
-                            )
-                            .setValue(PreferenceValueProto.newBuilder().setBooleanValue(true))
-                            .build()
+                            value = preferenceValueProto { booleanValue = true }
+                        }
+                ),
             )
-        )
         val fResult = transformCatalystGetValueResponse(context, fRequest, cResult)
         assertThat(fResult!!.resultCode).isEqualTo(GetValueResult.RESULT_OK)
         with(fResult.metadata!!) {
@@ -174,6 +175,8 @@ class PreferenceServiceRequestTransformerTest {
             assertThat(isWritable).isTrue()
             assertThat(writeSensitivity)
                 .isEqualTo(SettingsPreferenceMetadata.EXPECT_POST_CONFIRMATION)
+            assertThat(readPermissions).containsExactly("read_permission")
+            assertThat(writePermissions).containsExactly("write_permission")
             assertThat(launchIntent).isNotNull()
             assertThat(launchIntent!!.component!!.className)
                 .isEqualTo(SettingsHomepageActivity::class.java.name)
@@ -188,13 +191,14 @@ class PreferenceServiceRequestTransformerTest {
     fun transformCatalystGetValueResponse_failure_returnsValidFrameworkResponse() {
         val context: Context = ApplicationProvider.getApplicationContext()
         val fRequest = GetValueRequest.Builder("screen", "key").build()
-        val cResult = PreferenceGetterResponse(
-            mapOf(
-                PreferenceCoordinate(fRequest.screenKey, fRequest.preferenceKey) to
+        val cResult =
+            PreferenceGetterResponse(
+                mapOf(
+                    PreferenceCoordinate(fRequest.screenKey, fRequest.preferenceKey) to
                         PreferenceGetterErrorCode.NOT_FOUND
-            ),
-            emptyMap()
-        )
+                ),
+                emptyMap(),
+            )
         val fResult = transformCatalystGetValueResponse(context, fRequest, cResult)
         with(fResult!!) {
             assertThat(resultCode).isEqualTo(GetValueResult.RESULT_UNSUPPORTED)
@@ -214,13 +218,15 @@ class PreferenceServiceRequestTransformerTest {
 
     @Test
     fun transformFrameworkSetValueRequest_typeBoolean_returnsValidCatalystRequest() {
-        val fRequest = SetValueRequest.Builder(
-            "screen",
-            "pref",
-            SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_BOOLEAN)
-                .setBooleanValue(true)
+        val fRequest =
+            SetValueRequest.Builder(
+                    "screen",
+                    "pref",
+                    SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_BOOLEAN)
+                        .setBooleanValue(true)
+                        .build(),
+                )
                 .build()
-        ).build()
         val cRequest = transformFrameworkSetValueRequest(fRequest)
         with(cRequest!!) {
             assertThat(screenKey).isEqualTo(fRequest.screenKey)
@@ -232,13 +238,15 @@ class PreferenceServiceRequestTransformerTest {
 
     @Test
     fun transformFrameworkSetValueRequest_typeInt_returnsValidCatalystRequest() {
-        val fRequest = SetValueRequest.Builder(
-            "screen",
-            "pref",
-            SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_INT)
-                .setIntValue(5)
+        val fRequest =
+            SetValueRequest.Builder(
+                    "screen",
+                    "pref",
+                    SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_INT)
+                        .setIntValue(5)
+                        .build(),
+                )
                 .build()
-        ).build()
         val cRequest = transformFrameworkSetValueRequest(fRequest)
         with(cRequest!!) {
             assertThat(screenKey).isEqualTo(fRequest.screenKey)
@@ -250,59 +258,59 @@ class PreferenceServiceRequestTransformerTest {
 
     @Test
     fun transformFrameworkSetValueRequest_typeString_returnsNull() {
-        val fRequest = SetValueRequest.Builder(
-            "screen",
-            "pref",
-            SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_STRING)
-                .setStringValue("value")
+        val fRequest =
+            SetValueRequest.Builder(
+                    "screen",
+                    "pref",
+                    SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_STRING)
+                        .setStringValue("value")
+                        .build(),
+                )
                 .build()
-        ).build()
         val cRequest = transformFrameworkSetValueRequest(fRequest)
         assertThat(cRequest).isNull()
     }
 
     @Test
     fun transformCatalystSetValueResponse_returnsValidFrameworkResponse() {
-        assertThat(
-            transformCatalystSetValueResponse(PreferenceSetterResult.OK).resultCode
-        ).isEqualTo(SetValueResult.RESULT_OK)
+        assertThat(transformCatalystSetValueResponse(PreferenceSetterResult.OK).resultCode)
+            .isEqualTo(SetValueResult.RESULT_OK)
+
+        assertThat(transformCatalystSetValueResponse(PreferenceSetterResult.UNAVAILABLE).resultCode)
+            .isEqualTo(SetValueResult.RESULT_UNAVAILABLE)
+
+        assertThat(transformCatalystSetValueResponse(PreferenceSetterResult.DISABLED).resultCode)
+            .isEqualTo(SetValueResult.RESULT_DISABLED)
+
+        assertThat(transformCatalystSetValueResponse(PreferenceSetterResult.UNSUPPORTED).resultCode)
+            .isEqualTo(SetValueResult.RESULT_UNSUPPORTED)
+
+        assertThat(transformCatalystSetValueResponse(PreferenceSetterResult.DISALLOW).resultCode)
+            .isEqualTo(SetValueResult.RESULT_DISALLOW)
 
         assertThat(
-            transformCatalystSetValueResponse(PreferenceSetterResult.UNAVAILABLE).resultCode
-        ).isEqualTo(SetValueResult.RESULT_UNAVAILABLE)
+                transformCatalystSetValueResponse(PreferenceSetterResult.REQUIRE_APP_PERMISSION)
+                    .resultCode
+            )
+            .isEqualTo(SetValueResult.RESULT_REQUIRE_APP_PERMISSION)
 
         assertThat(
-            transformCatalystSetValueResponse(PreferenceSetterResult.DISABLED).resultCode
-        ).isEqualTo(SetValueResult.RESULT_DISABLED)
+                transformCatalystSetValueResponse(PreferenceSetterResult.REQUIRE_USER_AGREEMENT)
+                    .resultCode
+            )
+            .isEqualTo(SetValueResult.RESULT_REQUIRE_USER_CONSENT)
+
+        assertThat(transformCatalystSetValueResponse(PreferenceSetterResult.RESTRICTED).resultCode)
+            .isEqualTo(SetValueResult.RESULT_RESTRICTED)
 
         assertThat(
-            transformCatalystSetValueResponse(PreferenceSetterResult.UNSUPPORTED).resultCode
-        ).isEqualTo(SetValueResult.RESULT_UNSUPPORTED)
+                transformCatalystSetValueResponse(PreferenceSetterResult.INVALID_REQUEST).resultCode
+            )
+            .isEqualTo(SetValueResult.RESULT_INVALID_REQUEST)
 
         assertThat(
-            transformCatalystSetValueResponse(PreferenceSetterResult.DISALLOW).resultCode
-        ).isEqualTo(SetValueResult.RESULT_DISALLOW)
-
-        assertThat(
-            transformCatalystSetValueResponse(PreferenceSetterResult.REQUIRE_APP_PERMISSION)
-                .resultCode
-        ).isEqualTo(SetValueResult.RESULT_REQUIRE_APP_PERMISSION)
-
-        assertThat(
-            transformCatalystSetValueResponse(PreferenceSetterResult.REQUIRE_USER_AGREEMENT)
-                .resultCode
-        ).isEqualTo(SetValueResult.RESULT_REQUIRE_USER_CONSENT)
-
-        assertThat(
-            transformCatalystSetValueResponse(PreferenceSetterResult.RESTRICTED).resultCode
-        ).isEqualTo(SetValueResult.RESULT_RESTRICTED)
-
-        assertThat(
-            transformCatalystSetValueResponse(PreferenceSetterResult.INVALID_REQUEST).resultCode
-        ).isEqualTo(SetValueResult.RESULT_INVALID_REQUEST)
-
-        assertThat(
-            transformCatalystSetValueResponse(PreferenceSetterResult.INTERNAL_ERROR).resultCode
-        ).isEqualTo(SetValueResult.RESULT_INTERNAL_ERROR)
+                transformCatalystSetValueResponse(PreferenceSetterResult.INTERNAL_ERROR).resultCode
+            )
+            .isEqualTo(SetValueResult.RESULT_INTERNAL_ERROR)
     }
 }
