@@ -210,6 +210,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Тэмпература"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Першы дзень тыдня"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Налады лічбаў"</string>
+    <string name="measurement_system_preferences_title" msgid="5539250190895110890">"Сістэма вымярэння"</string>
     <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Выкарыстоўваць стандартны параметр"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"Градус Цэльсія (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Градус Фарэнгейта (°F)"</string>
@@ -222,6 +223,9 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Субота"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Калі праграма не падтрымлівае рэгіянальныя налады, яна будзе выкарыстоўваць стандартныя налады для рэгіёнаў."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Даведацца больш пра налады мовы."</string>
+    <string name="metric_measurement_system" msgid="7489725697268321541">"Метрычная"</string>
+    <string name="us_measurement_system" msgid="8738587232938189052">"Імперская (ЗША)"</string>
+    <string name="uk_measurement_system" msgid="4196897001775627597">"Імперская (Вялікабрытанія)"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Дадатковыя параметры"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"Выберыце, як да вас звяртацца"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"Персаналізаваць зварот да вас на прыладзе"</string>
@@ -389,8 +393,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Усё пад кантролем"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Доступ ёсць у вас і вашага дзіцяці"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Важная інфармацыя"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_footer_title_3 (6474415050918819260) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_3" msgid="6474415050918819260">"Бяспечна і карысна"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Для ўхвалення куплі ці разблакіроўкі тэлефона можна карыстацца адбіткам пальца.\n\nЗаўвага. Вы не можаце выкарыстоўваць адбітак пальца для разблакіроўкі гэтай прылады. Для атрымання дадатковай інфармацыі звяжыцеся з адміністратарам арганізацыі."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Скасаваць"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Не зараз"</string>
@@ -1968,16 +1971,23 @@
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Фізічная клавіятура"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Выбар раскладкі фізічнай клавіятуры"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Ігнараванне паўторнага націскання"</string>
-    <string name="bounce_keys_summary" msgid="7418024428905737729">"Хуткія паўторныя націсканні адной і той жа клавішы ігнаруюцца"</string>
-    <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Ігнараванне паўторнага націскання"</string>
-    <string name="bounce_keys_dialog_subtitle" msgid="5640575860258120026">"Выберыце час, на працягу якога паўторныя націсканні адной і той жа клавішы будуць ігнаравацца"</string>
-    <string name="input_setting_keys_dialog_option_200" msgid="3121006986226247560">"0,2 с"</string>
-    <string name="input_setting_keys_dialog_option_400" msgid="2634500629396699440">"0,4 с"</string>
-    <string name="input_setting_keys_dialog_option_600" msgid="3828362866751805146">"0,6 с"</string>
+    <!-- no translation found for bounce_keys_summary (8890925059943636911) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_title (1090578395028456023) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_subtitle (6804676895876861863) -->
+    <skip />
+    <!-- no translation found for input_setting_keys_dialog_option_200 (2785528287150314940) -->
+    <skip />
+    <!-- no translation found for input_setting_keys_dialog_option_400 (91571674179896177) -->
+    <skip />
+    <!-- no translation found for input_setting_keys_dialog_option_600 (6983252972219539375) -->
+    <skip />
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"Карыстальніцкае значэнне"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"карыстальніцкае значэнне"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Запавольванне рэакцыі на націсканне"</string>
-    <string name="slow_keys_summary" msgid="2914214326648535377">"Адрэгулюйце час, неабходны для актывацыі націскання клавішы"</string>
+    <!-- no translation found for slow_keys_summary (3852534180402969185) -->
+    <skip />
     <string name="sticky_keys" msgid="7317317044898161747">"Заліпанне клавіш"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Замест таго каб утрымліваць усе клавішы са спалучэння, націскайце іх па адной"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Клавішы кіравання мышшу"</string>
@@ -2002,6 +2012,8 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Сэнсарная панэль"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Сэнсарная панэль і мыш"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Мыш"</string>
+    <!-- no translation found for mouse_settings_summary (4609720443781972646) -->
+    <skip />
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Хуткасць указальніка, жэсты"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Націсканне дотыкам"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Перацягванне дотыкам"</string>
@@ -2313,6 +2325,10 @@
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"Недаступна, калі кнопка ў рэжыме \"Панэль навігацыі\"."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Высокая кантраснасць тэксту"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Змяняйце колер тэксту на чорны ці белы, каб павысіць яго кантраст з фонам."</string>
+    <!-- no translation found for accessibility_notification_high_contrast_text_content (2143888096871993191) -->
+    <skip />
+    <!-- no translation found for accessibility_notification_high_contrast_text_action (7190559555068414342) -->
+    <skip />
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Максімальная кантраснасць тэксту"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Дадаць да тэксту чорны ці белы фон, каб павялічыць кантрастнасць"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Аўтаматычнае абнаўленне павелiчэння экрана"</string>
@@ -5543,4 +5559,5 @@
     <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Дзе будуць захоўвацца кантакты"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Абвесці для пошуку"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Каб запусціць пошук з выкарыстаннем змесціва экрана, націсніце і ўтрымлівайце кнопку галоўнага экрана або маркер навігацыі."</string>
+    <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Наладзьце звесткі пра прыладу."</string>
 </resources>

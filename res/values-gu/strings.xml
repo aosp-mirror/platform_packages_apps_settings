@@ -210,6 +210,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"તાપમાન"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"અઠવાડિયાનો પહેલો દિવસ"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"નંબરની પસંદગીઓ"</string>
+    <string name="measurement_system_preferences_title" msgid="5539250190895110890">"માપ લેવાની સિસ્ટમ"</string>
     <string name="default_string_of_regional_preference" msgid="3428899072914884203">"ડિફૉલ્ટનો ઉપયોગ કરો"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"સેલ્સિયસ (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"ફૅરન્હાઇટ (°F)"</string>
@@ -222,6 +223,9 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"શનિવાર"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"જો કોઈ ઍપ પ્રાદેશિક પસંદગીઓને સપોર્ટ કરતી ન હોય, તો તે ઍપ તેના ડિફૉલ્ટ લોકેલ સેટિંગનો ઉપયોગ કરશે."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"ભાષાની પસંદગીઓ વિશે વધુ જાણો."</string>
+    <string name="metric_measurement_system" msgid="7489725697268321541">"મેટ્રિક"</string>
+    <string name="us_measurement_system" msgid="8738587232938189052">"ઇમ્પીરિયલ (યુએસ)"</string>
+    <string name="uk_measurement_system" msgid="4196897001775627597">"ઇમ્પીરિયલ (યુકે)"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"વધારાની પસંદગીઓ"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"તમને સંબોધવાની રીત પસંદ કરો"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"તમારું ડિવાઇસ તમને સંબોધવાની રીતને મનગમતી બનાવી શકે છે"</string>
@@ -389,8 +393,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"તમારા નિયંત્રણમાં છે"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"તમારા અને તમારા બાળક પાસે નિયંત્રણ છે"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"ધ્યાનમાં રાખો"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_footer_title_3 (6474415050918819260) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_3" msgid="6474415050918819260">"સુરક્ષિત અને સહાયરૂપ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"તમારા ફોનને અનલૉક કરવા અથવા ખરીદી મંજૂર કરવા માટે તમારી ફિંગરપ્રિન્ટનો ઉપયોગ કરો.\n\nનોંધ: આ ડિવાઇસને અનલૉક કરવા માટે તમે તમારી ફિંગરપ્રિન્ટનો ઉપયોગ નહીં કરી શકો. વધુ માહિતી માટે, તમારી સંસ્થાના વ્યવસ્થાપકનો સંપર્ક કરો."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"રદ કરો"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"હમણાં નહીં"</string>
@@ -1968,16 +1971,23 @@
     <string name="physical_keyboard_title" msgid="3328134097512350958">"ભૌતિક કીબોર્ડ"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"વાસ્તવિક કીબોર્ડ લેઆઉટ પિકર"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"બાઉન્સ કી"</string>
-    <string name="bounce_keys_summary" msgid="7418024428905737729">"એક જ કીને વારંવાર ઝડપથી દબાવવાની પ્રક્રિયાની કીબોર્ડ અવગણના કરે છે"</string>
-    <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"બાઉન્સ કી સંબંધિત મર્યાદા"</string>
-    <string name="bounce_keys_dialog_subtitle" msgid="5640575860258120026">"વારંવાર દબાવવામાં આવતી તમારા કીબોર્ડની કીને અવગણવા માટે જરૂરી અવધિ પસંદ કરો"</string>
-    <string name="input_setting_keys_dialog_option_200" msgid="3121006986226247560">"0.2 સેકન્ડ"</string>
-    <string name="input_setting_keys_dialog_option_400" msgid="2634500629396699440">"0.4 સેકન્ડ"</string>
-    <string name="input_setting_keys_dialog_option_600" msgid="3828362866751805146">"0.6 સેકન્ડ"</string>
+    <!-- no translation found for bounce_keys_summary (8890925059943636911) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_title (1090578395028456023) -->
+    <skip />
+    <!-- no translation found for bounce_keys_dialog_subtitle (6804676895876861863) -->
+    <skip />
+    <!-- no translation found for input_setting_keys_dialog_option_200 (2785528287150314940) -->
+    <skip />
+    <!-- no translation found for input_setting_keys_dialog_option_400 (91571674179896177) -->
+    <skip />
+    <!-- no translation found for input_setting_keys_dialog_option_600 (6983252972219539375) -->
+    <skip />
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"કસ્ટમ"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"કસ્ટમ મૂલ્ય"</string>
     <string name="slow_keys" msgid="2891452895499690837">"ધીમી કી"</string>
-    <string name="slow_keys_summary" msgid="2914214326648535377">"કોઈ કીને દબાવવાથી સક્રિય થવામાં લાગતા સમયમાં વધઘટ કરે છે"</string>
+    <!-- no translation found for slow_keys_summary (3852534180402969185) -->
+    <skip />
     <string name="sticky_keys" msgid="7317317044898161747">"સ્ટીકી કી"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"શૉર્ટકટ માટે કીને એકસાથે દબાવી રાખવાને બદલે એક સમયે એક જ કી દબાવો"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"માઉસની કી"</string>
@@ -2002,6 +2012,8 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"ટચપૅડ"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"ટચપૅડ અને માઉસ"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"માઉસ"</string>
+    <!-- no translation found for mouse_settings_summary (4609720443781972646) -->
+    <skip />
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"પૉઇન્ટરની ઝડપ, સંકેતો"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"ક્લિક કરવા ટૅપ કરો"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"ટૅપ કરીને ખેંચવું"</string>
@@ -2313,6 +2325,10 @@
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"નૅવિગેશન બાર બટન મોડનો ઉપયોગ કરતી વખતે અનુપલબ્ધ."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"ઉચ્ચ કૉન્ટ્રાસ્ટ ટેક્સ્ટ"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"ટેક્સ્ટનો રંગ બદલીને કાળો અથવા સફેદ કરો. આને કારણે બૅકગ્રાઉન્ડ અનુસાર કૉન્ટ્રાસ્ટ વધી જાય છે."</string>
+    <!-- no translation found for accessibility_notification_high_contrast_text_content (2143888096871993191) -->
+    <skip />
+    <!-- no translation found for accessibility_notification_high_contrast_text_action (7190559555068414342) -->
+    <skip />
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"ટેક્સ્ટનો કૉન્ટ્રાસ્ટ મહત્તમ કરો"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"કોન્ટ્રાસ્ટ વધારવા માટે ટેક્સ્ટની આસપાસ કાળું અથવા સફેદ બૅકગ્રાઉન્ડ ઉમેરો"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"સ્ક્રીન મોટી કરવાનું ઑટોમૅટિક અપડેટ કરો"</string>
@@ -5541,4 +5557,5 @@
     <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"સંપર્કો ક્યાં સાચવવા"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"શોધવા માટે વર્તુળ દોરો"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"તમારી સ્ક્રીન પરના કન્ટેન્ટનો ઉપયોગ કરીને શોધવા માટે હોમ બટનને અથવા નૅવિગેશન હૅન્ડલને ટચ કરીને થોડીવાર દબાવી રાખો."</string>
+    <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. ડિવાઇસની વિગત ગોઠવો."</string>
 </resources>

@@ -210,6 +210,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"ტემპერატურა"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"კვირის პირველი დღე"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"ნომრების უპირატესობები"</string>
+    <string name="measurement_system_preferences_title" msgid="5539250190895110890">"გაზომვის სისტემა"</string>
     <string name="default_string_of_regional_preference" msgid="3428899072914884203">"ნაგულისხმევის გამოყენება"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"ცელსიუსი (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"ფარენჰაიტი (°F)"</string>
@@ -222,6 +223,9 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"შაბათი"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"თუ აპი მხარს არ უჭერს რეგიონულ პარამეტრებს, ის ნაგულისხმევი ლოკალის პარამეტრებს გამოიყენებს."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"შეიტყვეთ მეტი ენის პარამეტრების შესახებ."</string>
+    <string name="metric_measurement_system" msgid="7489725697268321541">"მეტრული"</string>
+    <string name="us_measurement_system" msgid="8738587232938189052">"იმპერიული (შეერთებული შტატები)"</string>
+    <string name="uk_measurement_system" msgid="4196897001775627597">"იმპერიული (გაერთიანებული სამეფო)"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"დამატებითი პარამეტრები"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"აირჩიეთ თქვენთვის სასურველი მომართვის ფორმა"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"მოწყობილობას შეუძლია თქვენთვის მომართვის პერსონალიზება"</string>
@@ -389,8 +393,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"ამას თქვენ აკონტროლებთ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"თქვენ და თქვენი ბავშვი აკონტროლებთ ყველაფერს"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"გაითვალისწინეთ"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_footer_title_3 (6474415050918819260) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_3" msgid="6474415050918819260">"უსაფრთხო და სასარგებლო"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"გამოიყენეთ თქვენი თითის ანაბეჭდი ტელეფონის განსაბლოკად ან შენაძენების დასადასტურებლად.\n\nგაითვალისწინეთ: თითის ანაბეჭდს ამ მოწყობილობის განსაბლოკად ვერ გამოიყენებთ. დამატებითი ინფორმაციისთვის დაუკავშირდით თქვენი ორგანიზაციის ადმინისტრატორს."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"გაუქმება"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"ახლა არა"</string>
@@ -1968,16 +1971,16 @@
     <string name="physical_keyboard_title" msgid="3328134097512350958">"ფიზიკური კლავიატურა"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"ფიზ. კლავიატ. განლაგების ამომრჩევი"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"კლავიშების ასხლეტა"</string>
-    <string name="bounce_keys_summary" msgid="7418024428905737729">"კლავიატურა აიგნორებს ერთსა და იმავე კლავიშზე სწრაფ, განმეორებით დაჭერებს"</string>
-    <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"კლავიშების ასხლეტის ზღურბლი"</string>
-    <string name="bounce_keys_dialog_subtitle" msgid="5640575860258120026">"აირჩიეთ დროის ხანგრძლივობა, რომლის განმავლობაშიც თქვენი კლავიატურა აიგნორებს კლავიშის განმეორებით დაჭერას"</string>
-    <string name="input_setting_keys_dialog_option_200" msgid="3121006986226247560">"0,2 წმ"</string>
-    <string name="input_setting_keys_dialog_option_400" msgid="2634500629396699440">"0,4 წმ"</string>
-    <string name="input_setting_keys_dialog_option_600" msgid="3828362866751805146">"0,6 წმ"</string>
+    <string name="bounce_keys_summary" msgid="8890925059943636911">"ერთსა და იმავე კლავიშზე განმეორებითი დაჭერების დაიგნორება"</string>
+    <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"კლავიშების ასხლეტის დაყოვნება"</string>
+    <string name="bounce_keys_dialog_subtitle" msgid="6804676895876861863">"აირჩიეთ, რამდენ ხანს დააიგნორებს კლავიატურა კლავიშებზე განმეორებით დაჭერას"</string>
+    <string name="input_setting_keys_dialog_option_200" msgid="2785528287150314940">"0,2 წამი"</string>
+    <string name="input_setting_keys_dialog_option_400" msgid="91571674179896177">"0,4 წამი"</string>
+    <string name="input_setting_keys_dialog_option_600" msgid="6983252972219539375">"0,6 წამი"</string>
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"მორგებული"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"მორგებული მნიშვნელობა"</string>
     <string name="slow_keys" msgid="2891452895499690837">"ნელი კლავიშები"</string>
-    <string name="slow_keys_summary" msgid="2914214326648535377">"არეგულირებს დროს, რომელიც სჭირდება კლავიშის დაჭერას აქტივაციისთვის"</string>
+    <string name="slow_keys_summary" msgid="3852534180402969185">"აირჩიეთ, რანდენ ხანს დაგჭირდებათ კლავიშზე ხანგრძლივად დაჭერა მაღალ რეგისტრში გადასაყვანად"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"კლავიშების ფიქსაცია"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"მალსახმობებისთვის დააჭირეთ კლავიშებს ცალ-ცალკე და არა ერთდროულად"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"მაუსის კლავიშები"</string>
@@ -2002,6 +2005,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"სენსორული პანელი"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"სენსორული პანელი და მაუსი"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"მაუსი"</string>
+    <string name="mouse_settings_summary" msgid="4609720443781972646">"მანიშნებლის სიჩქარე, გაცვლის ღილაკები, ღილაკის მორგება"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"კურსორის სიჩქარე, ჟესტები"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"შეხებით დაწკაპუნება"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"შეხებით გადატანა"</string>
@@ -2313,6 +2317,8 @@
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"მიუწვდომელია ნავიგაციის ზოლის ღილაკის რეჟიმის გამოყენებისას."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"მაღალკონტრასტიანი ტექსტი"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"ტექსტის ფერის შავით ან თეთრით შეცვლა. აძლიერებს კონტრასტს ფონთან."</string>
+    <string name="accessibility_notification_high_contrast_text_content" msgid="2143888096871993191">"მაღალკონტრასტიან ტექსტს ახალი იერსახე და აღქმადობა აქვს."</string>
+    <string name="accessibility_notification_high_contrast_text_action" msgid="7190559555068414342">"პარამეტრების გახსნა"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"ტექსტის კონტრასტის მაქსიმიზაცია"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"კონტრასტის გაზრდის მიზნით ტექსტის ირგვლივ შავი ან თეთრი ფონის დამატება"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"ეკრანის მასშტაბის ავტომატური განახლება"</string>
@@ -5541,4 +5547,5 @@
     <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"სად მოხდეს კონტაქტების შენახვა"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"ძიება წრის მოხაზვით"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"ეკრანზე არსებული კონტენტის გამოყენებით ძიებისთვის ხანგრძლივად შეეხეთ მთავარი ეკრანის ღილაკს ან ნავიგაციის ზოლს."</string>
+    <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. მოწყობილობის დეტალის კონფიგურაცია."</string>
 </resources>
