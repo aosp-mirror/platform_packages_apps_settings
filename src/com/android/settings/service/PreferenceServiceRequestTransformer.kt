@@ -204,5 +204,7 @@ private fun PreferenceProto.toMetadata(
         .setWritable(persistent)
         .setLaunchIntent(launchIntent.toIntent())
         .setWriteSensitivity(sensitivity)
+        .setReadPermissions(readPermissionsList)
+        .setWritePermissions(writePermissionsList)
         .build()
 }
