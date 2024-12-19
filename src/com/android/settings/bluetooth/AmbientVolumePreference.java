@@ -37,8 +37,8 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
-import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.bluetooth.AmbientVolumeUi;
+import com.android.settingslib.widget.SliderPreference;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -68,12 +68,12 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
     private boolean mExpanded = false;
     private boolean mMutable = false;
     private boolean mMuted = false;
-    private final BiMap<Integer, SeekBarPreference> mSideToSliderMap = HashBiMap.create();
+    private final BiMap<Integer, SliderPreference> mSideToSliderMap = HashBiMap.create();
     private int mVolumeLevel = AMBIENT_VOLUME_LEVEL_DEFAULT;
 
     private final OnPreferenceChangeListener mPreferenceChangeListener =
             (slider, v) -> {
-                if (slider instanceof SeekBarPreference && v instanceof final Integer value) {
+                if (slider instanceof SliderPreference && v instanceof final Integer value) {
                     final Integer side = mSideToSliderMap.inverse().get(slider);
                     if (mListener != null && side != null) {
                         mListener.onSliderValueChange(side, value);
@@ -173,8 +173,8 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
         }
         mMuted = muted;
         if (mMutable && mMuted) {
-            for (SeekBarPreference slider : mSideToSliderMap.values()) {
-                slider.setProgress(slider.getMin());
+            for (SliderPreference slider : mSideToSliderMap.values()) {
+                slider.setValue(slider.getMin());
             }
         }
         updateVolumeIcon();
@@ -198,7 +198,7 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
 
         if (!mSideToSliderMap.isEmpty()) {
             for (int side : VALID_SIDES) {
-                final SeekBarPreference slider = mSideToSliderMap.get(side);
+                final SliderPreference slider = mSideToSliderMap.get(side);
                 if (slider != null && findPreference(slider.getKey()) == null) {
                     addPreference(slider);
                 }
@@ -209,7 +209,7 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
 
     @Override
     public void setSliderEnabled(int side, boolean enabled) {
-        SeekBarPreference slider = mSideToSliderMap.get(side);
+        SliderPreference slider = mSideToSliderMap.get(side);
         if (slider != null && slider.isEnabled() != enabled) {
             slider.setEnabled(enabled);
             updateLayout();
@@ -218,16 +218,16 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
 
     @Override
     public void setSliderValue(int side, int value) {
-        SeekBarPreference slider = mSideToSliderMap.get(side);
-        if (slider != null && slider.getProgress() != value) {
-            slider.setProgress(value);
+        SliderPreference slider = mSideToSliderMap.get(side);
+        if (slider != null && slider.getValue() != value) {
+            slider.setValue(value);
             updateVolumeLevel();
         }
     }
 
     @Override
     public void setSliderRange(int side, int min, int max) {
-        SeekBarPreference slider = mSideToSliderMap.get(side);
+        SliderPreference slider = mSideToSliderMap.get(side);
         if (slider != null) {
             slider.setMin(min);
             slider.setMax(max);
@@ -243,7 +243,7 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
                 slider.setVisible(mExpanded);
             }
             if (!slider.isEnabled()) {
-                slider.setProgress(slider.getMin());
+                slider.setValue(slider.getMin());
             }
         });
         updateVolumeLevel();
@@ -265,14 +265,14 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
     }
 
     private int getVolumeLevel(int side) {
-        SeekBarPreference slider = mSideToSliderMap.get(side);
+        SliderPreference slider = mSideToSliderMap.get(side);
         if (slider == null || !slider.isEnabled()) {
             return 0;
         }
         final double min = slider.getMin();
         final double max = slider.getMax();
         final double levelGap = (max - min) / 4.0;
-        final int value = slider.getProgress();
+        final int value = slider.getValue();
         return (int) Math.ceil((value - min) / levelGap);
     }
 
@@ -311,7 +311,7 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
         if (mSideToSliderMap.containsKey(side)) {
             return;
         }
-        SeekBarPreference slider = new SeekBarPreference(getContext());
+        SliderPreference slider = new SliderPreference(getContext());
         slider.setKey(KEY_AMBIENT_VOLUME_SLIDER + "_" + side);
         slider.setOrder(order);
         slider.setOnPreferenceChangeListener(mPreferenceChangeListener);
@@ -326,7 +326,7 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
     }
 
     @VisibleForTesting
-    Map<Integer, SeekBarPreference> getSliders() {
+    Map<Integer, SliderPreference> getSliders() {
         return mSideToSliderMap;
     }
 }
