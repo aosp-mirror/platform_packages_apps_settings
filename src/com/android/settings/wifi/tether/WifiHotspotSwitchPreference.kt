@@ -33,6 +33,10 @@ import com.android.settings.Utils
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.datausage.DataSaverMainSwitchPreference.Companion.KEY as DATA_SAVER_KEY
 import com.android.settings.wifi.WifiUtils.canShowWifiHotspot
+import com.android.settings.wifi.utils.tetheringManager
+import com.android.settings.wifi.utils.wifiApState
+import com.android.settings.wifi.utils.wifiManager
+import com.android.settings.wifi.utils.wifiSoftApSsid
 import com.android.settingslib.PrimarySwitchPreference
 import com.android.settingslib.TetherUtil
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
@@ -50,7 +54,6 @@ import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.wifi.WifiUtils.Companion.getWifiTetherSummaryForConnectedDevices
 
 // LINT.IfChange
-@Suppress("MissingPermission", "NewApi", "UNCHECKED_CAST")
 class WifiHotspotSwitchPreference(context: Context, dataSaverStore: KeyValueStore) :
     SwitchPreference(KEY, R.string.wifi_hotspot_checkbox_text),
     PreferenceBinding,
@@ -66,14 +69,14 @@ class WifiHotspotSwitchPreference(context: Context, dataSaverStore: KeyValueStor
             !Utils.isMonkeyRunning()
 
     override fun getSummary(context: Context): CharSequence? =
-        when (context.wifiManager?.wifiApState) {
+        when (context.wifiApState) {
             WifiManager.WIFI_AP_STATE_ENABLING -> context.getString(R.string.wifi_tether_starting)
             WifiManager.WIFI_AP_STATE_ENABLED -> {
                 val sapClientsSize = wifiHotspotStore.sapClientsSize
                 if (sapClientsSize == null) {
                     context.getString(
                         R.string.wifi_tether_enabled_subtext,
-                        BidiFormatter.getInstance().unicodeWrap(context.wifiSsid),
+                        BidiFormatter.getInstance().unicodeWrap(context.wifiSoftApSsid),
                     )
                 } else {
                     getWifiTetherSummaryForConnectedDevices(context, sapClientsSize)
@@ -123,6 +126,7 @@ class WifiHotspotSwitchPreference(context: Context, dataSaverStore: KeyValueStor
 
     override fun storage(context: Context): KeyValueStore = wifiHotspotStore
 
+    @Suppress("UNCHECKED_CAST")
     private class WifiHotspotStore(
         private val context: Context,
         val dataSaverStore: KeyValueStore,
@@ -141,7 +145,7 @@ class WifiHotspotSwitchPreference(context: Context, dataSaverStore: KeyValueStor
             key == KEY && context.wifiManager != null && context.tetheringManager != null
 
         override fun <T : Any> getValue(key: String, valueType: Class<T>): T? {
-            val wifiApState = context.wifiManager?.wifiApState
+            val wifiApState = context.wifiApState
             val value =
                 wifiApState == WifiManager.WIFI_AP_STATE_ENABLING ||
                     wifiApState == WifiManager.WIFI_AP_STATE_ENABLED
@@ -204,16 +208,6 @@ class WifiHotspotSwitchPreference(context: Context, dataSaverStore: KeyValueStor
     companion object {
         const val TAG = "WifiHotspotSwitchPreference"
         const val KEY = "wifi_tether"
-
-        private val Context.wifiManager: WifiManager?
-            get() = applicationContext.getSystemService(WifiManager::class.java)
-
-        @Suppress("DEPRECATION")
-        private val Context.wifiSsid
-            get() = wifiManager?.softApConfiguration?.ssid
-
-        private val Context.tetheringManager: TetheringManager?
-            get() = applicationContext.getSystemService(TetheringManager::class.java)
     }
 }
 // LINT.ThenChange(WifiTetherPreferenceController.java)
