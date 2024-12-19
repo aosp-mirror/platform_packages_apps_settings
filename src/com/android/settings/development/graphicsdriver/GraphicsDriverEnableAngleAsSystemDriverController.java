@@ -92,7 +92,17 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
     // This can be enabled by calling:
     //     `adb shell setprop debug.graphics.angle.developeroption.enable true`
     private boolean isAngleDeveloperOptionEnabled() {
-        return mSystemProperties.getBoolean(PROPERTY_DEBUG_ANGLE_DEVELOPER_OPTION, false);
+        boolean intendedUsingAngleDeveloperOption =
+                mSystemProperties.getBoolean(PROPERTY_DEBUG_ANGLE_DEVELOPER_OPTION, false);
+        if (intendedUsingAngleDeveloperOption) {
+            Log.v(TAG,
+                    "ANGLE developer option is enabled in system properties, "
+                    + "but temporarily overridden.");
+        }
+
+        // Temporarily disabling for broader rollout.
+        // The feature requires further maturation before general availability.
+        return false;
     }
 
     @VisibleForTesting
