@@ -30,6 +30,8 @@ import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.network.SatelliteRepository.Companion.isSatelliteOn
 import com.android.settings.network.SatelliteWarningDialogActivity
+import com.android.settings.wifi.utils.isWifiEnabled
+import com.android.settings.wifi.utils.wifiManager
 import com.android.settingslib.RestrictedSwitchPreference
 import com.android.settingslib.WirelessUtils
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
@@ -118,16 +120,14 @@ class WifiSwitchPreference :
 
         private var broadcastReceiver: BroadcastReceiver? = null
 
-        override fun contains(key: String) =
-            key == KEY && context.getSystemService(WifiManager::class.java) != null
+        override fun contains(key: String) = key == KEY && context.wifiManager != null
 
         override fun <T : Any> getValue(key: String, valueType: Class<T>): T? =
-            context.getSystemService(WifiManager::class.java)?.isWifiEnabled as T?
+            context.isWifiEnabled as T?
 
-        @Suppress("DEPRECATION")
         override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
             if (value is Boolean) {
-                context.getSystemService(WifiManager::class.java)?.isWifiEnabled = value
+                context.isWifiEnabled = value
             }
         }
 
