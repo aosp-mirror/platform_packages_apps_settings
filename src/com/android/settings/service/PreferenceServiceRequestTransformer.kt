@@ -31,12 +31,13 @@ import com.android.settingslib.graph.PreferenceGetterRequest
 import com.android.settingslib.graph.PreferenceGetterResponse
 import com.android.settingslib.graph.PreferenceSetterRequest
 import com.android.settingslib.graph.PreferenceSetterResult
-import com.android.settingslib.graph.preferenceValueProto
-import com.android.settingslib.graph.proto.PreferenceProto
-import com.android.settingslib.graph.proto.PreferenceValueProto
+import com.android.settingslib.graph.getAllPermissions
 import com.android.settingslib.graph.getText
+import com.android.settingslib.graph.preferenceValueProto
 import com.android.settingslib.graph.proto.PreferenceGraphProto
 import com.android.settingslib.graph.proto.PreferenceOrGroupProto
+import com.android.settingslib.graph.proto.PreferenceProto
+import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.graph.toIntent
 import com.android.settingslib.metadata.SensitivityLevel
 
@@ -204,7 +205,8 @@ private fun PreferenceProto.toMetadata(
         .setWritable(persistent)
         .setLaunchIntent(launchIntent.toIntent())
         .setWriteSensitivity(sensitivity)
-        .setReadPermissions(readPermissionsList)
-        .setWritePermissions(writePermissionsList)
+        // Returns all the permissions that are used, some of which are exclusive (e.g. p1 or p2)
+        .setReadPermissions(readPermissions.getAllPermissions())
+        .setWritePermissions(writePermissions.getAllPermissions())
         .build()
 }

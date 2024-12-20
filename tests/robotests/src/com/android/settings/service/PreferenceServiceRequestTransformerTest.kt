@@ -31,6 +31,7 @@ import android.service.settings.preferences.SettingsPreferenceValue
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.homepage.SettingsHomepageActivity
+import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.flags.Flags.FLAG_SETTINGS_CATALYST
 import com.android.settingslib.graph.PreferenceCoordinate
 import com.android.settingslib.graph.PreferenceGetterErrorCode
@@ -156,8 +157,8 @@ class PreferenceServiceRequestTransformerTest {
                             restricted = true
                             persistent = true
                             sensitivityLevel = SensitivityLevel.LOW_SENSITIVITY
-                            addReadPermissions("read_permission")
-                            addWritePermissions("write_permission")
+                            readPermissions = Permissions.allOf("read_permission").toProto()
+                            writePermissions = Permissions.anyOf("write_permission").toProto()
                             launchIntent =
                                 Intent(context, SettingsHomepageActivity::class.java).toProto()
                             value = preferenceValueProto { booleanValue = true }
