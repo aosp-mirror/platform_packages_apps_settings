@@ -45,7 +45,7 @@
         android:layout_marginBottom="@dimen/pointer_stroke_style_padding">
         <RadioButton android:id="@+id/stroke_style_white"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/pointer_stroke_style_radio_button_height"
             android:layout_margin="@dimen/pointer_stroke_style_padding"
             android:paddingStart="@dimen/pointer_stroke_style_text_padding"
             android:text="@string/pointer_stroke_style_name_white"
@@ -53,7 +53,7 @@
             android:textAppearance="?android:attr/textAppearanceListItem" />
         <RadioButton android:id="@+id/stroke_style_black"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/pointer_stroke_style_radio_button_height"
             android:layout_margin="@dimen/pointer_stroke_style_padding"
             android:paddingStart="@dimen/pointer_stroke_style_text_padding"
             android:text="@string/pointer_stroke_style_name_black"
@@ -61,7 +61,7 @@
             android:textAppearance="?android:attr/textAppearanceListItem" />
         <RadioButton android:id="@+id/stroke_style_none"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/pointer_stroke_style_radio_button_height"
             android:layout_margin="@dimen/pointer_stroke_style_padding"
             android:paddingStart="@dimen/pointer_stroke_style_text_padding"
             android:text="@string/pointer_stroke_style_name_none"
