@@ -37,6 +37,16 @@ class SpaAppBridgeActivityTest {
 
         assertThat(destination).isEqualTo("$DESTINATION/$PACKAGE_NAME/${UserHandle.myUserId()}")
     }
+    @Test
+    fun getDestinationForApp_hasMalformedPackageName() {
+        val intent = Intent().apply {
+            data = Uri.parse("package:package.name/10#")
+        }
+
+        val destination = getDestinationForApp(DESTINATION, intent)
+
+        assertThat(destination).isNull()
+    }
 
     @Test
     fun getDestinationForApp_noPackageName() {
