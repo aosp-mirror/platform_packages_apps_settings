@@ -52,6 +52,13 @@
       settings:controller="com.android.settings.regionalpreferences.RegionalPreferencesCategoryController">
 
     <Preference
+        android:key="region_preference"
+        android:title="@string/region_picker_preference_title"
+        settings:controller="com.android.settings.regionalpreferences.RegionPreferenceController"
+        settings:fragment="com.android.settings.regionalpreferences.RegionPickerFragment">
+    </Preference>
+
+    <Preference
         android:key="temperature_preference"
         android:title="@string/temperature_preferences_title"
         android:summary="@string/default_string_of_regional_preference"
