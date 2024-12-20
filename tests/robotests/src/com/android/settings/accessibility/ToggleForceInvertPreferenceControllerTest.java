@@ -52,10 +52,7 @@ public class ToggleForceInvertPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        mController = new ToggleForceInvertPreferenceController(
-                mContext,
-                ColorAndMotionFragment.TOGGLE_FORCE_INVERT
-        );
+        mController = new ToggleForceInvertPreferenceController(mContext, "toggle_force_invert");
     }
 
     @Test
