@@ -60,7 +60,9 @@ public abstract class LocalePickerBaseListPreferenceController extends
     private Map<String, Preference> mPreferences;
     private String mPackageName;
     private boolean mIsCountryMode;
-    @Nullable private LocaleStore.LocaleInfo mParentLocale;
+    @Nullable
+    private LocaleStore.LocaleInfo mParentLocale;
+    private boolean mIsSuggestedCategory;
 
     public LocalePickerBaseListPreferenceController(@NonNull Context context,
             @NonNull String preferenceKey) {
@@ -75,6 +77,7 @@ public abstract class LocalePickerBaseListPreferenceController extends
     public void displayPreference(@NonNull PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreferenceCategory = screen.findPreference(getPreferenceCategoryKey());
+        mIsSuggestedCategory = getPreferenceCategoryKey().contains(KEY_SUGGESTED);
         updatePreferences();
     }
 
@@ -88,17 +91,13 @@ public abstract class LocalePickerBaseListPreferenceController extends
         mParentLocale = getParentLocale();
         if (mParentLocale != null) {
             mIsCountryMode = true;
-            mLocaleList = getLocaleCollectorController(mContext).getSupportedLocaleList(
-                    mParentLocale, false, mIsCountryMode);
-            mLocaleOptions = new ArrayList<>(mLocaleList.size());
-            if (!getPreferenceCategoryKey().contains(KEY_SUGGESTED)) {
+            if (!mIsSuggestedCategory) {
                 mPreferenceCategory.setTitle(
                         mContext.getString(R.string.all_supported_locales_regions_title));
             }
         }
 
-        result = getSortedLocaleList(
-                getPreferenceCategoryKey().contains(KEY_SUGGESTED)
+        result = getSortedLocaleList(mIsSuggestedCategory
                         ? getSuggestedLocaleList()
                         : getSupportedLocaleList());
 
@@ -112,13 +111,17 @@ public abstract class LocalePickerBaseListPreferenceController extends
     }
 
     @Override
-    public void onSearchListChanged(@NonNull List<LocaleStore.LocaleInfo> newList) {
+    public void onSearchListChanged(@NonNull List<LocaleStore.LocaleInfo> newList,
+            @Nullable CharSequence prefix) {
         mPreferenceCategory.removeAll();
         mPreferences.clear();
         final Map<String, Preference> existingPreferences = mPreferences;
-        if (getPreferenceCategoryKey().contains(KEY_SUGGESTED)) {
-            newList = getSortedSuggestedLocaleFromSearchList(
-                    newList, getSuggestedLocaleList());
+
+        List<LocaleStore.LocaleInfo> sortedList =
+                mIsSuggestedCategory ? getSuggestedLocaleList() : getSupportedLocaleList();
+        newList = getSortedSuggestedLocaleFromSearchList(newList, sortedList);
+        if (mIsSuggestedCategory && getParentLocale() != null) {
+            newList = getSortedSuggestedRegionFromSearchList(prefix, newList, sortedList);
         }
         setupPreference(newList, existingPreferences);
     }
@@ -136,6 +139,23 @@ public abstract class LocalePickerBaseListPreferenceController extends
         }
         searchItem = getSortedLocaleList(searchItem);
         return searchItem;
+    }
+
+    private List<LocaleStore.LocaleInfo> getSortedSuggestedRegionFromSearchList(
+            @Nullable CharSequence prefix,
+            List<LocaleStore.LocaleInfo> listOptions,
+            List<LocaleStore.LocaleInfo> listSuggested) {
+        List<LocaleStore.LocaleInfo> searchItem = new ArrayList<>();
+        if (prefix == null || prefix.isEmpty()) {
+            return getSortedLocaleList(listSuggested);
+        }
+
+        for (LocaleStore.LocaleInfo option : listOptions) {
+            if (listSuggested.contains(option)) {
+                searchItem.add(option);
+            }
+        }
+        return getSortedLocaleList(searchItem);
     }
 
     private void setupPreference(List<LocaleStore.LocaleInfo> localeInfoList,
@@ -175,18 +195,20 @@ public abstract class LocalePickerBaseListPreferenceController extends
 
     protected abstract LocaleCollectorBase getLocaleCollectorController(Context context);
 
-    @Nullable protected abstract LocaleStore.LocaleInfo getParentLocale();
+    @Nullable
+    protected abstract LocaleStore.LocaleInfo getParentLocale();
 
     protected abstract boolean isNumberingMode();
 
-    @Nullable protected abstract LocaleList getExplicitLocaleList();
+    @Nullable
+    protected abstract LocaleList getExplicitLocaleList();
 
     protected String getPackageName() {
         return mPackageName;
     }
 
     protected List<LocaleStore.LocaleInfo> getSuggestedLocaleList() {
-        mLocaleOptions.clear();
+        setupLocaleList();
         if (mLocaleList != null && !mLocaleList.isEmpty()) {
             mLocaleOptions.addAll(mLocaleList.stream()
                     .filter(localeInfo -> localeInfo.isSuggested())
@@ -199,6 +221,7 @@ public abstract class LocalePickerBaseListPreferenceController extends
     }
 
     protected List<LocaleStore.LocaleInfo> getSupportedLocaleList() {
+        setupLocaleList();
         if (mLocaleList != null && !mLocaleList.isEmpty()) {
             mLocaleOptions.addAll(mLocaleList.stream()
                     .filter(localeInfo -> !localeInfo.isSuggested())
@@ -206,8 +229,13 @@ public abstract class LocalePickerBaseListPreferenceController extends
         } else {
             Log.d(TAG, "Can not get supported locales because the locale list is null or empty.");
         }
-
         return mLocaleOptions;
+    }
+
+    private void setupLocaleList() {
+        mLocaleList = getLocaleCollectorController(mContext).getSupportedLocaleList(
+                mParentLocale, false, mIsCountryMode);
+        mLocaleOptions.clear();
     }
 
     private List<LocaleStore.LocaleInfo> getSortedLocaleList(
