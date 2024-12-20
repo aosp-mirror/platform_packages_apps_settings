@@ -21,6 +21,7 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
+import android.os.UserManager
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -28,7 +29,6 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.DisplaySettings
 import com.android.settings.R
 import com.android.settings.SettingsActivity
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail
@@ -37,7 +37,6 @@ import com.android.settings.spa.app.battery.BatteryOptimizationModeAppListModel
 import com.android.settings.spa.app.battery.BatteryOptimizationModeAppListPageProvider
 import com.android.settingslib.spa.testutils.FakeNavControllerWrapper
 import com.android.settingslib.spa.testutils.firstWithTimeoutOrNull
-import com.android.settingslib.spaprivileged.framework.compose.getPlaceholder
 import com.android.settingslib.spaprivileged.template.app.AppListInput
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.google.common.truth.Truth.assertThat
@@ -130,12 +129,16 @@ class BatteryOptimizationModeAppListPageProviderTest {
     @Test
     fun item_onClick_navigate() {
         setItemContent()
+        doNothing().whenever(context).startActivityAsUser(any(), any())
         doNothing().whenever(context).startActivity(any())
 
         composeTestRule.onNodeWithText(LABEL).performClick()
 
         val intent = argumentCaptor<Intent> {
-            verify(context).startActivity(capture())
+            when (UserManager.isHeadlessSystemUserMode()) {
+                true -> verify(context).startActivityAsUser(capture(), any())
+                false -> verify(context).startActivity(capture())
+            }
         }.firstValue
 
         assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))!!
