@@ -75,6 +75,8 @@ public class RegionPickerFragment extends DashboardFragment{
                 new SystemRegionAllListPreferenceController(
                     context, KEY_PREFERENCE_SYSTEM_REGION_LIST, parentLocaleInfo);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        mSuggestedListPreferenceController.setFragment(this);
+        mSystemRegionAllListPreferenceController.setFragment(this);
         controllers.add(mSuggestedListPreferenceController);
         controllers.add(mSystemRegionAllListPreferenceController);
         return controllers;
