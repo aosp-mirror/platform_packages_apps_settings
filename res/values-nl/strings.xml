@@ -80,6 +80,14 @@
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Voorinstelling"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Geen voorinstellingen geprogrammeerd door je audioloog"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Kan voorinstelling niet updaten"</string>
+    <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Omgeving"</string>
+    <string name="bluetooth_ambient_volume_control_expand" msgid="6726334974948737504">"Uitvouwen naar gescheiden bediening voor links en rechts"</string>
+    <string name="bluetooth_ambient_volume_control_collapse" msgid="7103189728479091531">"Samenvouwen tot geïntegreerde bediening"</string>
+    <string name="bluetooth_ambient_volume_control_left" msgid="1927760358765239141">"Links"</string>
+    <string name="bluetooth_ambient_volume_control_right" msgid="5783836267230662002">"Rechts"</string>
+    <string name="bluetooth_ambient_volume_mute" msgid="2700088105160838096">"Omgevingsgeluid uitzetten"</string>
+    <string name="bluetooth_ambient_volume_unmute" msgid="8055038818824925188">"Omgevingsgeluid aanzetten"</string>
+    <string name="bluetooth_ambient_volume_error" msgid="259328969488233714">"Kan omgeving niet updaten"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Audio-uitvoer"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Over audio-uitvoer"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Leid geluiden naar je hoortoestel of telefoonspeaker"</string>
@@ -166,6 +174,16 @@
     <string name="ping_test_label" msgid="265427033290391845">"Pingtest uitvoeren"</string>
     <string name="skip_label" msgid="6380034601349015895">"Overslaan"</string>
     <string name="next_label" msgid="1248293387735652187">"Volgende"</string>
+    <!-- no translation found for region_picker_preference_title (9195149951917299277) -->
+    <skip />
+    <!-- no translation found for region_picker_title (6743800249134439329) -->
+    <skip />
+    <!-- no translation found for region_picker_sub_title (7092062110753164836) -->
+    <skip />
+    <!-- no translation found for suggested_region_title (2554129334404390153) -->
+    <skip />
+    <!-- no translation found for all_supported_region_title (4817156933097703066) -->
+    <skip />
     <string name="language_picker_title" msgid="4271307478263345133">"Talen"</string>
     <string name="language_picker_category_title" msgid="1792199453060454565">"Volgorde van voorkeurstalen"</string>
     <string name="desc_current_default_language" msgid="1901157141663662859">"Systeemtaal"</string>
@@ -210,8 +228,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatuur"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Eerste dag van de week"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Cijfervoorkeuren"</string>
-    <!-- no translation found for measurement_system_preferences_title (5539250190895110890) -->
-    <skip />
+    <string name="measurement_system_preferences_title" msgid="5539250190895110890">"Meetsysteem"</string>
     <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Standaard gebruiken"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"Celsius (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Fahrenheit (°F)"</string>
@@ -224,12 +241,9 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Zaterdag"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Als een app geen regionale voorkeuren ondersteunt, worden de standaard landinstellingen van de app gebruikt."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Meer informatie over taalvoorkeuren"</string>
-    <!-- no translation found for metric_measurement_system (7489725697268321541) -->
-    <skip />
-    <!-- no translation found for us_measurement_system (8738587232938189052) -->
-    <skip />
-    <!-- no translation found for uk_measurement_system (4196897001775627597) -->
-    <skip />
+    <string name="metric_measurement_system" msgid="7489725697268321541">"Metrisch"</string>
+    <string name="us_measurement_system" msgid="8738587232938189052">"Imperiaal (VS)"</string>
+    <string name="uk_measurement_system" msgid="4196897001775627597">"Imperiaal (VK)"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Aanvullende voorkeuren"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"Kiezen hoe je wordt aangesproken"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"Je apparaat kan personaliseren hoe je wordt aangesproken"</string>
@@ -1256,13 +1270,13 @@
     <string name="screen_resolution_title" msgid="2690518693139811486">"Schermresolutie"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Hoge resolutie"</string>
     <string name="screen_resolution_option_full" msgid="4456839315039000517">"Maximale resolutie"</string>
-    <string name="screen_resolution_footer" msgid="1230761249204935717">"De maximale resolutie gebruikt meer batterijlading. Als je de resolutie wijzigt, worden sommige apps misschien opnieuw opgestart."</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"De maximale resolutie gebruikt meer batterijlading. Als je de resolutie wijzigt, worden sommige apps misschien opnieuw gestart."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Geselecteerd"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Kleuren"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Natuurlijk"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Versterkt"</string>
     <string name="color_mode_option_saturated" msgid="3413853820158447300">"Verzadigd"</string>
-    <string name="color_mode_option_automatic" msgid="2281217686509980870">"Aanpasbaar"</string>
+    <string name="color_mode_option_automatic" msgid="2281217686509980870">"Adaptief"</string>
     <string name="brightness" msgid="6216871641021779698">"Helderheidsniveau"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"Aanpasbare helderheid"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Je schermhelderheid wordt automatisch aangepast aan je omgeving en je activiteiten. Je kunt de schuifregelaar handmatig verplaatsen zodat Aanpasbare helderheid je voorkeuren leert kennen."</string>
@@ -1945,6 +1959,7 @@
     <string name="language_input_gesture_title" msgid="3292455685728572960">"Talen, invoer en gebaren"</string>
     <string name="language_settings" msgid="8700174277543875046">"Talen en invoer"</string>
     <string name="languages_settings" msgid="5784775502251770671">"Talen"</string>
+    <string name="language_and_region_settings" msgid="2950394107276025120">"Taal en regio"</string>
     <string name="keyboard_settings" msgid="184185708597386454">"Toetsenbord"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"Je hebt geen rechten om de apparaattaal te wijzigen."</string>
     <string name="language_keyboard_settings_title" msgid="7934844313233544557">"Talen en invoer"</string>
@@ -1975,23 +1990,16 @@
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fysiek toetsenbord"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Kiezer voor fysieke toetsenbordindeling"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Bouncetoetsen"</string>
-    <!-- no translation found for bounce_keys_summary (8890925059943636911) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_title (1090578395028456023) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_subtitle (6804676895876861863) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_200 (2785528287150314940) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_400 (91571674179896177) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_600 (6983252972219539375) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="8890925059943636911">"Negeer snel herhaald indrukken van dezelfde toets"</string>
+    <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"Vertraging voor stuitertoetsen"</string>
+    <string name="bounce_keys_dialog_subtitle" msgid="6804676895876861863">"Kies hoelang het toetsenbord herhaald indrukken van toetsen negeert"</string>
+    <string name="input_setting_keys_dialog_option_200" msgid="2785528287150314940">"0,2 seconden"</string>
+    <string name="input_setting_keys_dialog_option_400" msgid="91571674179896177">"0,4 seconden"</string>
+    <string name="input_setting_keys_dialog_option_600" msgid="6983252972219539375">"0,6 seconden"</string>
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"Aangepast"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"aangepaste waarde"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Langzame toetsen"</string>
-    <!-- no translation found for slow_keys_summary (3852534180402969185) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="3852534180402969185">"Wijzig hoelang je een toets ingedrukt moet houden voordat deze wordt geregistreerd"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Plaktoetsen"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Druk toetsen één voor één in voor snelkoppelingen in plaats van meerdere toetsen tegelijkertijd"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Muisknoppen"</string>
@@ -2016,8 +2024,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad en muis"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Muis"</string>
-    <!-- no translation found for mouse_settings_summary (4609720443781972646) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="4609720443781972646">"Snelheid van aanwijzer, knoppen wisselen, knopaanpassing"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Snelheid van aanwijzer, gebaren"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Tikken om te klikken"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Tikken en slepen"</string>
@@ -2329,10 +2336,11 @@
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"Niet beschikbaar als je de knopmodus van de navigatiebalk gebruikt."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Tekst met hoog contrast"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Wijzig de tekstkleur in zwart of wit. Zo maximaliseer je het contrast met de achtergrond."</string>
-    <!-- no translation found for accessibility_notification_high_contrast_text_content (2143888096871993191) -->
+    <!-- no translation found for accessibility_notification_high_contrast_text_title (85109818203175520) -->
     <skip />
-    <!-- no translation found for accessibility_notification_high_contrast_text_action (7190559555068414342) -->
+    <!-- no translation found for accessibility_notification_high_contrast_text_content (5073923345319368046) -->
     <skip />
+    <string name="accessibility_notification_high_contrast_text_action" msgid="7190559555068414342">"Instellingen openen"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Tekstcontrast maximaliseren"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Voeg een zwarte of witte achtergrond rond tekst toe voor een hoger contrast"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Schermvergroting automatisch updaten"</string>
@@ -2451,7 +2459,10 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Geschiktheid voor hoortoestellen"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Verbetert de compatibiliteit met luisterspoelen en beperkt ongewenst geluid"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Over hoortoestellen"</string>
-    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"Als je andere hoortoestellen wilt vinden die niet worden ondersteund door ASHA of LE Audio, tik je op "<b>"Nieuw apparaat koppelen"</b>" &gt; "<b>"Meer apparaten bekijken"</b></string>
+    <!-- no translation found for accessibility_hearing_device_footer_summary (5513620078219951077) -->
+    <skip />
+    <!-- no translation found for accessibility_hearing_device_footer_summary_tts (955527026890456959) -->
+    <skip />
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Hoortoestel koppelen"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Op deze pagina kun je ASHA- en LE Audio-hoortoestellen koppelen. Zorg dat je hoortoestel aanstaat en klaar is voor koppelen."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Beschikbare hoortoestellen"</string>
@@ -4301,6 +4312,10 @@
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"Je beheerder kan apps en gegevens bijhouden en beheren die aan deze gebruiker zijn gekoppeld (waaronder instellingen, rechten, zakelijke toegang, netwerkactiviteit en locatiegegevens van het apparaat)."</string>
     <string name="admin_device_owner_message" msgid="5503131744126520590">"Je beheerder kan apps en gegevens bijhouden en beheren die aan dit apparaat zijn gekoppeld (waaronder instellingen, rechten, zakelijke toegang, netwerkactiviteit en locatiegegevens van het apparaat)."</string>
     <string name="admin_financed_message" msgid="1156197630834947884">"Je apparaatbeheerder kan mogelijk toegang krijgen tot gegevens die aan dit apparaat zijn gekoppeld, apps beheren en de instellingen van dit apparaat wijzigen."</string>
+    <!-- no translation found for disabled_by_advanced_protection_title (766656508280098112) -->
+    <skip />
+    <!-- no translation found for disabled_by_advanced_protection_message (5515085544669304056) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Uitzetten"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Aanzetten"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Tonen"</string>
@@ -5225,7 +5240,7 @@
     <string name="category_name_lock_display" msgid="8310402558217129670">"Schermvergrendeling"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"Weergave"</string>
     <string name="category_name_color" msgid="937514550918977151">"Kleur"</string>
-    <string name="category_name_display_controls" msgid="7046581691184725216">"Andere bedieningsopties voor weergave"</string>
+    <string name="category_name_display_controls" msgid="7046581691184725216">"Andere weergaveopties"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Algemeen"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Donker thema gebruiken"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Bluetooth gebruiken"</string>
@@ -5561,6 +5576,5 @@
     <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Waar contacten moeten worden opgeslagen"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Circle to Search"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Houd je vinger op de startknop of de navigatiehandgreep om te zoeken op basis van de content op je scherm."</string>
-    <!-- no translation found for device_detail_icon_content_description (6699151424374841937) -->
-    <skip />
+    <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Apparaatgegevens instellen."</string>
 </resources>

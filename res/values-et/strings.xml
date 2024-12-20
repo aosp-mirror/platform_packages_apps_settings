@@ -80,6 +80,14 @@
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Eelseadistus"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Teie audioloog ei ole ühtegi eelseadistust programmeerinud"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Eelseadistust ei saanud värskendada"</string>
+    <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Ümbritsevad helid"</string>
+    <string name="bluetooth_ambient_volume_control_expand" msgid="6726334974948737504">"Vasaku ja parema poole eraldi juhtimine"</string>
+    <string name="bluetooth_ambient_volume_control_collapse" msgid="7103189728479091531">"Mõlema poole ühtne juhtimine"</string>
+    <string name="bluetooth_ambient_volume_control_left" msgid="1927760358765239141">"Vasakpoolne"</string>
+    <string name="bluetooth_ambient_volume_control_right" msgid="5783836267230662002">"Parempoolne"</string>
+    <string name="bluetooth_ambient_volume_mute" msgid="2700088105160838096">"Ümbritsevate helide vaigistamine"</string>
+    <string name="bluetooth_ambient_volume_unmute" msgid="8055038818824925188">"Ümbritsevate helide vaigistuse tühistamine"</string>
+    <string name="bluetooth_ambient_volume_error" msgid="259328969488233714">"Ümbritsevate helide seadeid ei saanud värskendada"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Heliväljund"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Teave heliväljundi kohta"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Helid suunatakse kuuldeseadmesse või telefoni kõlarisse"</string>
@@ -166,6 +174,16 @@
     <string name="ping_test_label" msgid="265427033290391845">"Pingimistesti käitamine"</string>
     <string name="skip_label" msgid="6380034601349015895">"Jäta vahele"</string>
     <string name="next_label" msgid="1248293387735652187">"Järgmine"</string>
+    <!-- no translation found for region_picker_preference_title (9195149951917299277) -->
+    <skip />
+    <!-- no translation found for region_picker_title (6743800249134439329) -->
+    <skip />
+    <!-- no translation found for region_picker_sub_title (7092062110753164836) -->
+    <skip />
+    <!-- no translation found for suggested_region_title (2554129334404390153) -->
+    <skip />
+    <!-- no translation found for all_supported_region_title (4817156933097703066) -->
+    <skip />
     <string name="language_picker_title" msgid="4271307478263345133">"Keeled"</string>
     <string name="language_picker_category_title" msgid="1792199453060454565">"Eelistatud keelte järjestus"</string>
     <string name="desc_current_default_language" msgid="1901157141663662859">"Süsteemi keel"</string>
@@ -1251,8 +1269,8 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Lisateave automaatse pööramise kohta"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Ekraani eraldusvõime"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Kõrge eraldusvõime"</string>
-    <string name="screen_resolution_option_full" msgid="4456839315039000517">"Täiseraldusvõime"</string>
-    <string name="screen_resolution_footer" msgid="1230761249204935717">"Täiseraldusvõime tarbib rohkem akut. Eraldusvõime muutmine võib mõne rakenduse taaskäivitada."</string>
+    <string name="screen_resolution_option_full" msgid="4456839315039000517">"Maksimaalne eraldusvõime"</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"Maksimaalne eraldusvõime tarbib rohkem akut. Eraldusvõime muutmine võib mõne rakenduse taaskäivitada."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"Valitud"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Värvid"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Loomulikud"</string>
@@ -1941,6 +1959,7 @@
     <string name="language_input_gesture_title" msgid="3292455685728572960">"Keeled, sisestus ja liigutused"</string>
     <string name="language_settings" msgid="8700174277543875046">"Keeled ja sisend"</string>
     <string name="languages_settings" msgid="5784775502251770671">"Keeled"</string>
+    <string name="language_and_region_settings" msgid="2950394107276025120">"Keel ja piirkond"</string>
     <string name="keyboard_settings" msgid="184185708597386454">"Klaviatuur"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"Teil pole luba seadme keele muutmiseks."</string>
     <string name="language_keyboard_settings_title" msgid="7934844313233544557">"Keeled ja sisend"</string>
@@ -1971,23 +1990,16 @@
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Füüsiline klaviatuur"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Füüsilise klaviat. paigutuse valija"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Põrkeklahvid"</string>
-    <!-- no translation found for bounce_keys_summary (8890925059943636911) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_title (1090578395028456023) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_subtitle (6804676895876861863) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_200 (2785528287150314940) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_400 (91571674179896177) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_600 (6983252972219539375) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="8890925059943636911">"Eira sama klahvi kiireid korduvaid vajutusi"</string>
+    <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"Põrkeklahvide viivitus"</string>
+    <string name="bounce_keys_dialog_subtitle" msgid="6804676895876861863">"Valige, kui kaua klaviatuur korduvaid klahvivajutusi eirab"</string>
+    <string name="input_setting_keys_dialog_option_200" msgid="2785528287150314940">"0,2 sekundit"</string>
+    <string name="input_setting_keys_dialog_option_400" msgid="91571674179896177">"0,4 sekundit"</string>
+    <string name="input_setting_keys_dialog_option_600" msgid="6983252972219539375">"0,6 sekundit"</string>
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"Kohandatud"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"kohandatud väärtus"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Aeglased klahvid"</string>
-    <!-- no translation found for slow_keys_summary (3852534180402969185) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="3852534180402969185">"Saate muuta, kui kaua tuleb klahvi all hoida, et selle vajutus registreeritaks"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Nakkeklahvid"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Otseteede puhul klahvide korraga allhoidmise asemel vajutage klahve ükshaaval"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Hiireklahvid"</string>
@@ -2012,8 +2024,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Puuteplaat"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Puuteplaat ja hiir"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Hiir"</string>
-    <!-- no translation found for mouse_settings_summary (4609720443781972646) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="4609720443781972646">"Kursori kiirus, nuppude vahetamine ja kohandamine"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Kursori kiirus, liigutused"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Klõpsamiseks puudutamine"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Puudutusega lohistamine"</string>
@@ -2325,10 +2336,11 @@
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"Pole saadaval navigeerimisriba nupurežiimi kasutamise ajal."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Suure kontrastsusega tekst"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Muutke tekst mustaks või valgeks. Maksimeerib kontrasti taustaga."</string>
-    <!-- no translation found for accessibility_notification_high_contrast_text_content (2143888096871993191) -->
+    <!-- no translation found for accessibility_notification_high_contrast_text_title (85109818203175520) -->
     <skip />
-    <!-- no translation found for accessibility_notification_high_contrast_text_action (7190559555068414342) -->
+    <!-- no translation found for accessibility_notification_high_contrast_text_content (5073923345319368046) -->
     <skip />
+    <string name="accessibility_notification_high_contrast_text_action" msgid="7190559555068414342">"Ava seaded"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Tekstikontrastsuse maksimeerimine"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Lisage tekstile must või valge taust, et kontrastsust suurendada"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Ekraanisuurenduse värskendus"</string>
@@ -2447,7 +2459,10 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Ühilduvus kuuldeaparaatidega"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Parandab ühilduvust induktiivsidestitega (telecoils) ja vähendab soovimatut müra"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Teave kuuldeseade kohta"</string>
-    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"Muude kuuldeseadmete leidmiseks, mida ASHA või LE Audio ei toeta, puudutage valikuid "<b>"Uue seadme sidumine"</b>" &gt; "<b>"Kuva rohkem seadmeid"</b></string>
+    <!-- no translation found for accessibility_hearing_device_footer_summary (5513620078219951077) -->
+    <skip />
+    <!-- no translation found for accessibility_hearing_device_footer_summary_tts (955527026890456959) -->
+    <skip />
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Kuuldeseadme sidumine"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Saate ASHA ja LE Audio kuuldeseadmed siduda sellel lehel. Veenduge, et teie kuuldeseade oleks sisse lülitatud ja sidumiseks valmis."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Saadaval kuuldeseadmed"</string>
@@ -4297,6 +4312,10 @@
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"Teie administraator saab jälgida ja hallata selle kasutajaga seotud rakendusi ning andmeid, sh seadeid, lube, ettevõtte juurdepääsu, võrgutegevusi ja seadme asukohateavet."</string>
     <string name="admin_device_owner_message" msgid="5503131744126520590">"Teie administraator saab jälgida ja hallata selle seadmega seotud rakendusi ning andmeid, sh seadeid, lube, ettevõtte juurdepääsu, võrgutegevusi ja seadme asukohateavet."</string>
     <string name="admin_financed_message" msgid="1156197630834947884">"Teie seadme administraator võib pääseda juurde selle seadmega seostatud andmetele, hallata rakendusi ja muuta selle seadme seadeid."</string>
+    <!-- no translation found for disabled_by_advanced_protection_title (766656508280098112) -->
+    <skip />
+    <!-- no translation found for disabled_by_advanced_protection_message (5515085544669304056) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Lülita välja"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Lülita sisse"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Kuva"</string>

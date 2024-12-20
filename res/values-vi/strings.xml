@@ -80,6 +80,14 @@
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Chế độ đặt sẵn"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Không có chế độ đặt sẵn do chuyên gia thính học lập trình"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Không cập nhật được giá trị đặt trước"</string>
+    <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Âm lượng xung quanh"</string>
+    <string name="bluetooth_ambient_volume_control_expand" msgid="6726334974948737504">"Mở rộng thành các nút điều khiển tách biệt bên trái và bên phải"</string>
+    <string name="bluetooth_ambient_volume_control_collapse" msgid="7103189728479091531">"Thu gọn thành nút điều khiển hợp nhất"</string>
+    <string name="bluetooth_ambient_volume_control_left" msgid="1927760358765239141">"Trái"</string>
+    <string name="bluetooth_ambient_volume_control_right" msgid="5783836267230662002">"Phải"</string>
+    <string name="bluetooth_ambient_volume_mute" msgid="2700088105160838096">"Tắt tiếng xung quanh"</string>
+    <string name="bluetooth_ambient_volume_unmute" msgid="8055038818824925188">"Bật tiếng xung quanh"</string>
+    <string name="bluetooth_ambient_volume_error" msgid="259328969488233714">"Không cập nhật được âm lượng xung quanh"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Đầu ra âm thanh"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Giới thiệu về đầu ra âm thanh"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Định tuyến âm thanh đến thiết bị trợ thính hoặc loa điện thoại của bạn"</string>
@@ -166,6 +174,16 @@
     <string name="ping_test_label" msgid="265427033290391845">"Chạy kiểm tra ping"</string>
     <string name="skip_label" msgid="6380034601349015895">"Bỏ qua"</string>
     <string name="next_label" msgid="1248293387735652187">"Tiếp theo"</string>
+    <!-- no translation found for region_picker_preference_title (9195149951917299277) -->
+    <skip />
+    <!-- no translation found for region_picker_title (6743800249134439329) -->
+    <skip />
+    <!-- no translation found for region_picker_sub_title (7092062110753164836) -->
+    <skip />
+    <!-- no translation found for suggested_region_title (2554129334404390153) -->
+    <skip />
+    <!-- no translation found for all_supported_region_title (4817156933097703066) -->
+    <skip />
     <string name="language_picker_title" msgid="4271307478263345133">"Ngôn ngữ"</string>
     <string name="language_picker_category_title" msgid="1792199453060454565">"Thứ tự ngôn ngữ ưu tiên"</string>
     <string name="desc_current_default_language" msgid="1901157141663662859">"Ngôn ngữ hệ thống"</string>
@@ -210,8 +228,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Nhiệt độ"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Ngày đầu tiên trong tuần"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Lựa chọn ưu tiên về số"</string>
-    <!-- no translation found for measurement_system_preferences_title (5539250190895110890) -->
-    <skip />
+    <string name="measurement_system_preferences_title" msgid="5539250190895110890">"Hệ thống đo lường"</string>
     <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Dùng tùy chọn mặc định"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"Độ C (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Độ F (°F)"</string>
@@ -224,12 +241,9 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Thứ Bảy"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Nếu một ứng dụng không hỗ trợ lựa chọn ưu tiên theo khu vực, thì ứng dụng đó sẽ sử dụng chế độ cài đặt ngôn ngữ mặc định."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Tìm hiểu thêm về các lựa chọn ngôn ngữ ưu tiên."</string>
-    <!-- no translation found for metric_measurement_system (7489725697268321541) -->
-    <skip />
-    <!-- no translation found for us_measurement_system (8738587232938189052) -->
-    <skip />
-    <!-- no translation found for uk_measurement_system (4196897001775627597) -->
-    <skip />
+    <string name="metric_measurement_system" msgid="7489725697268321541">"Chỉ số"</string>
+    <string name="us_measurement_system" msgid="8738587232938189052">"Hệ Anh (Mỹ)"</string>
+    <string name="uk_measurement_system" msgid="4196897001775627597">"Hệ Anh (Anh)"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Lựa chọn ưu tiên khác"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"Chọn cách gọi bạn"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"Thiết bị của bạn có thể cá nhân hoá cách gọi bạn"</string>
@@ -1945,6 +1959,7 @@
     <string name="language_input_gesture_title" msgid="3292455685728572960">"Ngôn ngữ, phương thức nhập và cử chỉ"</string>
     <string name="language_settings" msgid="8700174277543875046">"Ngôn ngữ và nhập liệu"</string>
     <string name="languages_settings" msgid="5784775502251770671">"Ngôn ngữ"</string>
+    <string name="language_and_region_settings" msgid="2950394107276025120">"Ngôn ngữ và khu vực"</string>
     <string name="keyboard_settings" msgid="184185708597386454">"Bàn phím"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"Bạn không có quyền thay đổi ngôn ngữ trên thiết bị."</string>
     <string name="language_keyboard_settings_title" msgid="7934844313233544557">"Ngôn ngữ và nhập liệu"</string>
@@ -1975,23 +1990,16 @@
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Bàn phím vật lý"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Bộ chọn bố cục bàn phím thực"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Phím nảy"</string>
-    <!-- no translation found for bounce_keys_summary (8890925059943636911) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_title (1090578395028456023) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_subtitle (6804676895876861863) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_200 (2785528287150314940) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_400 (91571674179896177) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_600 (6983252972219539375) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="8890925059943636911">"Bỏ qua các lần nhấn nhanh liên tục cùng một phím"</string>
+    <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"Độ trễ của phím nảy"</string>
+    <string name="bounce_keys_dialog_subtitle" msgid="6804676895876861863">"Chọn khoảng thời gian bàn phím bỏ qua các lần nhấn phím liên tục"</string>
+    <string name="input_setting_keys_dialog_option_200" msgid="2785528287150314940">"0,2 giây"</string>
+    <string name="input_setting_keys_dialog_option_400" msgid="91571674179896177">"0,4 giây"</string>
+    <string name="input_setting_keys_dialog_option_600" msgid="6983252972219539375">"0,6 giây"</string>
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"Tuỳ chỉnh"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"giá trị tuỳ chỉnh"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Phím chậm"</string>
-    <!-- no translation found for slow_keys_summary (3852534180402969185) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="3852534180402969185">"Thay đổi khoảng thời gian bạn cần giữ một phím trước khi phím được đăng ký"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Phím cố định"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Nhấn từng phím một để dùng phím tắt thay vì giữ các phím cùng lúc"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Các phím điều khiển chuột"</string>
@@ -2016,8 +2024,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Bàn di chuột"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Chuột và bàn di chuột"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Chuột"</string>
-    <!-- no translation found for mouse_settings_summary (4609720443781972646) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="4609720443781972646">"Tốc độ con trỏ, hoán đổi và tuỳ chỉnh nút"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Tốc độ con trỏ, cử chỉ"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Gõ để nhấp"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Kéo khi nhấn"</string>
@@ -2329,10 +2336,11 @@
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"Không dùng được khi sử dụng chế độ nút trên thanh điều hướng."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Văn bản có độ tương phản cao"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Thay đổi màu chữ thành đen hoặc trắng. Tăng tối đa độ tương phản so với nền."</string>
-    <!-- no translation found for accessibility_notification_high_contrast_text_content (2143888096871993191) -->
+    <!-- no translation found for accessibility_notification_high_contrast_text_title (85109818203175520) -->
     <skip />
-    <!-- no translation found for accessibility_notification_high_contrast_text_action (7190559555068414342) -->
+    <!-- no translation found for accessibility_notification_high_contrast_text_content (5073923345319368046) -->
     <skip />
+    <string name="accessibility_notification_high_contrast_text_action" msgid="7190559555068414342">"Mở phần Cài đặt"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Tăng tối đa độ tương phản văn bản"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Thêm một nền đen hoặc trắng xung quanh văn bản để tăng độ tương phản"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Tự động cập nhật phóng đại màn hình"</string>
@@ -2451,7 +2459,10 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Khả năng tương thích với thiết bị trợ thính"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Cải thiện khả năng tương thích với các cuộn dây cảm ứng và giảm tiếng ồn không mong muốn"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Giới thiệu về thiết bị nghe"</string>
-    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"Để tìm những thiết bị trợ thính khác mà các giao thức ASHA hoặc Âm thanh năng lượng thấp không hỗ trợ, hãy nhấn vào "<b>"Ghép nối thiết bị mới"</b>" &gt; "<b>"Xem thêm thiết bị"</b></string>
+    <!-- no translation found for accessibility_hearing_device_footer_summary (5513620078219951077) -->
+    <skip />
+    <!-- no translation found for accessibility_hearing_device_footer_summary_tts (955527026890456959) -->
+    <skip />
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Ghép nối thiết bị trợ thính"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Bạn có thể ghép nối với thiết bị trợ thính ASHA và Âm thanh năng lượng thấp trên trang này. Hãy đảm bảo rằng thiết bị trợ thính của bạn đang bật và sẵn sàng ghép nối."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Thiết bị trợ thính hiện có"</string>
@@ -4301,6 +4312,10 @@
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"Quản trị viên của bạn có thể giám sát và quản lý các ứng dụng cũng như dữ liệu được liên kết với người dùng này, bao gồm cài đặt, quyền, quyền truy cập vào dữ liệu công ty, hoạt động mạng và thông tin vị trí của thiết bị."</string>
     <string name="admin_device_owner_message" msgid="5503131744126520590">"Quản trị viên của bạn có thể giám sát và quản lý các ứng dụng cũng như dữ liệu được liên kết với thiết bị này, bao gồm cài đặt, quyền, quyền truy cập vào dữ liệu công ty, hoạt động mạng và thông tin vị trí của thiết bị."</string>
     <string name="admin_financed_message" msgid="1156197630834947884">"Quản trị viên thiết bị của bạn có thể truy cập vào dữ liệu liên kết với thiết bị này, quản lý ứng dụng và thay đổi các chế độ cài đặt trên thiết bị này."</string>
+    <!-- no translation found for disabled_by_advanced_protection_title (766656508280098112) -->
+    <skip />
+    <!-- no translation found for disabled_by_advanced_protection_message (5515085544669304056) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Tắt"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Bật"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Hiển thị"</string>
@@ -5561,6 +5576,5 @@
     <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Vị trí lưu thông tin liên hệ"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Khoanh tròn để tìm kiếm"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Bạn có thể chạm và giữ nút Màn hình chính hoặc thanh điều hướng để tìm kiếm bằng nội dung có trên màn hình của mình."</string>
-    <!-- no translation found for device_detail_icon_content_description (6699151424374841937) -->
-    <skip />
+    <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Định cấu hình thông tin chi tiết về thiết bị."</string>
 </resources>
