@@ -17,10 +17,10 @@ package com.android.settings.connecteddevice.display;
 
 import static android.content.Context.DISPLAY_SERVICE;
 import static android.hardware.display.DisplayManager.DISPLAY_CATEGORY_ALL_INCLUDING_DISABLED;
-import static android.hardware.display.DisplayManager.EVENT_FLAG_DISPLAY_ADDED;
-import static android.hardware.display.DisplayManager.EVENT_FLAG_DISPLAY_CHANGED;
-import static android.hardware.display.DisplayManager.EVENT_FLAG_DISPLAY_REMOVED;
-import static android.hardware.display.DisplayManager.PRIVATE_EVENT_FLAG_DISPLAY_CONNECTION_CHANGED;
+import static android.hardware.display.DisplayManager.EVENT_TYPE_DISPLAY_ADDED;
+import static android.hardware.display.DisplayManager.EVENT_TYPE_DISPLAY_CHANGED;
+import static android.hardware.display.DisplayManager.EVENT_TYPE_DISPLAY_REMOVED;
+import static android.hardware.display.DisplayManager.PRIVATE_EVENT_TYPE_DISPLAY_CONNECTION_CHANGED;
 import static android.view.Display.INVALID_DISPLAY;
 
 import static com.android.server.display.feature.flags.Flags.enableModeLimitForExternalDisplay;
@@ -158,9 +158,9 @@ public class ExternalDisplaySettingsConfiguration {
             if (dm == null) {
                 return;
             }
-            dm.registerDisplayListener(listener, mHandler, EVENT_FLAG_DISPLAY_ADDED
-                    | EVENT_FLAG_DISPLAY_CHANGED | EVENT_FLAG_DISPLAY_REMOVED,
-                    PRIVATE_EVENT_FLAG_DISPLAY_CONNECTION_CHANGED);
+            dm.registerDisplayListener(listener, mHandler, EVENT_TYPE_DISPLAY_ADDED
+                    | EVENT_TYPE_DISPLAY_CHANGED | EVENT_TYPE_DISPLAY_REMOVED,
+                    PRIVATE_EVENT_TYPE_DISPLAY_CONNECTION_CHANGED);
         }
 
         /**

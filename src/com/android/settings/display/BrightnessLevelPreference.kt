@@ -128,7 +128,7 @@ class BrightnessLevelPreference :
                 this,
                 HandlerExecutor.main,
                 /* eventFlags= */ 0,
-                DisplayManager.PRIVATE_EVENT_FLAG_DISPLAY_BRIGHTNESS,
+                DisplayManager.PRIVATE_EVENT_TYPE_DISPLAY_BRIGHTNESS,
             )
         }
 
