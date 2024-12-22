@@ -63,8 +63,8 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
         }
         final String action = intent.getAction();
         Log.d(TAG, "onReceive:" + action);
-        if (com.android.settingslib.fuelgauge.BatteryUtils.isWorkProfile(context)) {
-            Log.w(TAG, "do nothing for work profile action=" + action);
+        if (com.android.settingslib.fuelgauge.BatteryUtils.isAdditionalProfile(context)) {
+            Log.w(TAG, "do nothing for an additional profile action=" + action);
             return;
         }
         DatabaseUtils.recordDateTime(context, action);
@@ -106,6 +106,10 @@ public final class BatteryUsageBroadcastReceiver extends BroadcastReceiver {
 
     private void tryToFetchUsageData(Context context) {
         final Intent batteryIntent = BatteryUtils.getBatteryIntent(context);
+        if (batteryIntent == null) {
+            Log.w(TAG, "tryToFetchUsageData: ignore from null battery intent");
+            return;
+        }
         // Returns when battery is not fully charged.
         if (!BatteryStatus.isCharged(batteryIntent)) {
             return;

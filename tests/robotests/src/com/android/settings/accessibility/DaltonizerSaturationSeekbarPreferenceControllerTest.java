@@ -16,38 +16,39 @@
 
 package com.android.settings.accessibility;
 
+import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
+import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
+
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.os.Looper;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.server.accessibility.Flags;
 import com.android.settings.widget.SeekBarPreference;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
 /** Tests for {@link DaltonizerSaturationSeekbarPreferenceController}. */
@@ -57,11 +58,10 @@ public class DaltonizerSaturationSeekbarPreferenceControllerTest {
     private ContentResolver mContentResolver;
     private DaltonizerSaturationSeekbarPreferenceController mController;
 
-    private int mOriginalSaturationLevel = -1;
-
     private PreferenceScreen mScreen;
+    private LifecycleOwner mLifecycleOwner;
+    private Lifecycle mLifecycle;
 
-    @Mock
     private SeekBarPreference mPreference;
 
     @Rule
@@ -69,18 +69,16 @@ public class DaltonizerSaturationSeekbarPreferenceControllerTest {
 
     @Before
     public void setup() {
-        MockitoAnnotations.initMocks(this);
         Context context = ApplicationProvider.getApplicationContext();
         mContentResolver = context.getContentResolver();
-        mOriginalSaturationLevel = Settings.Secure.getInt(
-                mContentResolver,
-                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_SATURATION_LEVEL,
-                7);
 
-        mScreen = spy(new PreferenceScreen(context, /* attrs= */ null));
-        when(mScreen.findPreference(ToggleDaltonizerPreferenceFragment.KEY_SATURATION))
-                .thenReturn(mPreference);
+        mPreference = new SeekBarPreference(context);
+        mPreference.setKey(ToggleDaltonizerPreferenceFragment.KEY_SATURATION);
+        mScreen = new PreferenceManager(context).createPreferenceScreen(context);
+        mScreen.addPreference(mPreference);
 
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = new DaltonizerSaturationSeekbarPreferenceController(
                 context,
                 ToggleDaltonizerPreferenceFragment.KEY_SATURATION);
@@ -88,12 +86,26 @@ public class DaltonizerSaturationSeekbarPreferenceControllerTest {
 
     @After
     public void cleanup() {
-        Settings.Secure.putInt(
+        Settings.Secure.putString(
+                mContentResolver,
+                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER,
+                null);
+        Settings.Secure.putString(
+                mContentResolver,
+                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
+                null);
+        Settings.Secure.putString(
                 mContentResolver,
                 Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_SATURATION_LEVEL,
-                mOriginalSaturationLevel);
+                null);
     }
 
+    @Test
+    public void constructor_defaultValuesMatch() {
+        assertThat(mController.getSliderPosition()).isEqualTo(7);
+        assertThat(mController.getMax()).isEqualTo(10);
+        assertThat(mController.getMin()).isEqualTo(1);
+    }
 
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_COLOR_CORRECTION_SATURATION)
@@ -103,28 +115,88 @@ public class DaltonizerSaturationSeekbarPreferenceControllerTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_COLOR_CORRECTION_SATURATION)
-    public void getAvailabilityStatus_flagEnabled_available() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-    }
-
-    @Test
-    public void constructor_defaultValuesMatch() {
-        assertThat(mController.getSliderPosition()).isEqualTo(7);
-        assertThat(mController.getMax()).isEqualTo(10);
-        assertThat(mController.getMin()).isEqualTo(0);
+    public void getAvailabilityStatus_defaultSettings_unavailable() {
+        // By default enabled == false.
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_COLOR_CORRECTION_SATURATION)
-    public void displayPreference_enabled_visible() {
+    public void getAvailabilityStatus_enabledDefaultDisplayMode_available() {
+        setDaltonizerEnabled(1);
+
+        // By default display mode is deuteranomaly.
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_COLOR_CORRECTION_SATURATION)
+    public void getAvailabilityStatus_flagEnabledProtanEnabled_available() {
+        setDaltonizerMode(/* enabled= */ 1, /* mode= */ 11);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_COLOR_CORRECTION_SATURATION)
+    public void getAvailabilityStatus_flagEnabledDeutranEnabled_available() {
+        setDaltonizerMode(/* enabled= */ 1, /* mode= */ 12);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_COLOR_CORRECTION_SATURATION)
+    public void getAvailabilityStatus_flagEnabledTritanEnabled_available() {
+        setDaltonizerMode(/* enabled= */ 1, /* mode= */ 13);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_COLOR_CORRECTION_SATURATION)
+    public void getAvailabilityStatus_flagEnabledGrayScale_disabled() {
+        setDaltonizerMode(/* enabled= */ 1, /* mode= */ 0);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_COLOR_CORRECTION_SATURATION)
+    public void getAvailabilityStatus_flagEnabledColorCorrectionDisabled_disabled() {
+        setDaltonizerMode(/* enabled= */ 0, /* mode= */ 11);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_COLOR_CORRECTION_SATURATION)
+    public void getAvailabilityStatus_flagEnabledColorCorrectionDisabledGrayScale_disabled() {
+        setDaltonizerMode(/* enabled= */ 0, /* mode= */ 0);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_COLOR_CORRECTION_SATURATION)
+    public void displayPreference_flagEnabledColorCorrectionEnabled_enabledWithDefaultValues() {
+        setDaltonizerMode(/* enabled= */ 1, /* mode= */ 11);
         mController.displayPreference(mScreen);
 
-        verify(mPreference).setMax(eq(10));
-        verify(mPreference).setMin(eq(0));
-        verify(mPreference).setProgress(eq(7));
-        verify(mPreference).setContinuousUpdates(eq(true));
-        verify(mPreference).setOnPreferenceChangeListener(eq(mController));
-        verify(mPreference).setVisible(eq(true));
+        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.getMax()).isEqualTo(10);
+        assertThat(mPreference.getMin()).isEqualTo(1);
+        assertThat(mPreference.getProgress()).isEqualTo(7);
+        assertThat(mPreference.isVisible()).isTrue();
+        assertThat(mPreference.getOnPreferenceChangeListener()).isEqualTo(mController);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_COLOR_CORRECTION_SATURATION)
+    public void displayPreference_flagEnabledColorCorrectionDisabled_disabledWithDefaultValues() {
+        setDaltonizerMode(/* enabled= */ 0, /* mode= */ 11);
+        mController.displayPreference(mScreen);
+
+        assertThat(mPreference.isEnabled()).isFalse();
+        assertThat(mPreference.getMax()).isEqualTo(10);
+        assertThat(mPreference.getMin()).isEqualTo(1);
+        assertThat(mPreference.getProgress()).isEqualTo(7);
+        assertThat(mPreference.isVisible()).isTrue();
+        assertThat(mPreference.getOnPreferenceChangeListener()).isEqualTo(mController);
     }
 
     @Test
@@ -132,12 +204,8 @@ public class DaltonizerSaturationSeekbarPreferenceControllerTest {
     public void displayPreference_disabled_notVisible() {
         mController.displayPreference(mScreen);
 
-        verify(mPreference).setMax(eq(10));
-        verify(mPreference).setMin(eq(0));
-        verify(mPreference).setProgress(eq(7));
-        verify(mPreference).setContinuousUpdates(eq(true));
-        verify(mPreference, never()).setOnPreferenceChangeListener(any());
-        verify(mPreference).setVisible(eq(false));
+        assertThat(mPreference.isVisible()).isFalse();
+        assertThat(mPreference.getOnPreferenceChangeListener()).isNull();
     }
 
     @Test
@@ -153,13 +221,13 @@ public class DaltonizerSaturationSeekbarPreferenceControllerTest {
 
     @Test
     public void setSliderPosition_min_secureSettingsUpdated() {
-        var isSliderSet = mController.setSliderPosition(0);
+        var isSliderSet = mController.setSliderPosition(1);
 
         assertThat(isSliderSet).isTrue();
         assertThat(Settings.Secure.getInt(
                 mContentResolver,
                 Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_SATURATION_LEVEL,
-                7)).isEqualTo(0);
+                7)).isEqualTo(1);
     }
 
     @Test
@@ -193,5 +261,137 @@ public class DaltonizerSaturationSeekbarPreferenceControllerTest {
                 mContentResolver,
                 Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_SATURATION_LEVEL,
                 7)).isEqualTo(7);
+    }
+
+    @Test
+    public void updateState_enabledProtan_preferenceEnabled() {
+        setDaltonizerMode(/* enabled= */ 1, /* mode= */ 11);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void updateState_enabledDeuteran_preferenceEnabled() {
+        setDaltonizerMode(/* enabled= */ 1, /* mode= */ 12);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void updateState_enabledTritan_preferenceEnabled() {
+        setDaltonizerMode(/* enabled= */ 1, /* mode= */ 13);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void updateState_disabledGrayScale_preferenceDisabled() {
+        setDaltonizerMode(/* enabled= */ 0, /* mode= */ 0);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void updateState_nullPreference_noError() {
+        setDaltonizerMode(/* enabled= */ 0, /* mode= */ 0);
+
+        mController.updateState(null);
+    }
+
+    @Test
+    public void updateState_enabledGrayScale_preferenceDisabled() {
+        setDaltonizerMode(/* enabled= */ 1, /* mode= */ 0);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void onResume_daltonizerEnabledAfterResumed_preferenceEnabled() {
+        setDaltonizerMode(/* enabled= */ 0, /* mode= */ 11);
+        mController.displayPreference(mScreen);
+        assertThat(mPreference.isEnabled()).isFalse();
+
+        mLifecycle.addObserver(mController);
+        mLifecycle.handleLifecycleEvent(ON_RESUME);
+
+        setDaltonizerEnabled(1);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        assertThat(mPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void onResume_daltonizerDisabledAfterResumed_preferenceDisabled() {
+        setDaltonizerMode(/* enabled= */ 1, /* mode= */ 11);
+        mController.displayPreference(mScreen);
+        assertThat(mPreference.isEnabled()).isTrue();
+
+        mLifecycle.addObserver(mController);
+        mLifecycle.handleLifecycleEvent(ON_RESUME);
+
+        setDaltonizerEnabled(0);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void onResume_daltonizerGrayScaledAfterResumed_preferenceDisabled() {
+        setDaltonizerMode(/* enabled= */ 1, /* mode= */ 11);
+        mController.displayPreference(mScreen);
+        assertThat(mPreference.isEnabled()).isTrue();
+
+        mLifecycle.addObserver(mController);
+        mLifecycle.handleLifecycleEvent(ON_RESUME);
+
+        setDaltonizerDisplay(0);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void onStop_daltonizerEnabledAfterOnStop_preferenceNotChanged() {
+        setDaltonizerMode(/* enabled= */ 0, /* mode= */ 11);
+        mController.displayPreference(mScreen);
+        assertThat(mPreference.isEnabled()).isFalse();
+
+        mLifecycle.addObserver(mController);
+        mLifecycle.handleLifecycleEvent(ON_STOP);
+
+        // enabled.
+        setDaltonizerEnabled(1);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    private void setDaltonizerMode(int enabled, int mode) {
+        setDaltonizerEnabled(enabled);
+        setDaltonizerDisplay(mode);
+    }
+
+    private void setDaltonizerEnabled(int enabled) {
+        Settings.Secure.putInt(
+                mContentResolver,
+                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED,
+                enabled);
+    }
+
+    private void setDaltonizerDisplay(int mode) {
+        Settings.Secure.putString(
+                mContentResolver,
+                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER,
+                Integer.toString(mode));
     }
 }

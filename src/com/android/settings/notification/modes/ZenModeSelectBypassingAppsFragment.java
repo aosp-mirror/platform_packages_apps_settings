@@ -74,8 +74,7 @@ public class ZenModeSelectBypassingAppsFragment extends ZenModeFragmentBase impl
 
     @Override
     public int getMetricsCategory() {
-        // TODO(b/332937635): Update metrics category
-        return SettingsEnums.NOTIFICATION_ZEN_MODE_OVERRIDING_APPS;
+        return SettingsEnums.NOTIFICATION_ZEN_MODE_OVERRIDING_APP;
     }
 
     /**

@@ -67,10 +67,11 @@ class FingerprintSettingsNavigationViewModelTest {
     underTest =
       FingerprintSettingsNavigationViewModel.FingerprintSettingsNavigationModelFactory(
           defaultUserId,
-          fakeFingerprintManagerInteractor,
           backgroundDispatcher,
           null,
           null,
+          fakeFingerprintManagerInteractor,
+          fakeFingerprintManagerInteractor,
         )
         .create(FingerprintSettingsNavigationViewModel::class.java)
   }
@@ -272,10 +273,11 @@ class FingerprintSettingsNavigationViewModelTest {
       underTest =
         FingerprintSettingsNavigationViewModel.FingerprintSettingsNavigationModelFactory(
             defaultUserId,
-            fakeFingerprintManagerInteractor,
             backgroundDispatcher,
             token,
             challenge,
+            fakeFingerprintManagerInteractor,
+            fakeFingerprintManagerInteractor,
           )
           .create(FingerprintSettingsNavigationViewModel::class.java)
 
@@ -299,10 +301,11 @@ class FingerprintSettingsNavigationViewModelTest {
       underTest =
         FingerprintSettingsNavigationViewModel.FingerprintSettingsNavigationModelFactory(
             defaultUserId,
-            fakeFingerprintManagerInteractor,
             backgroundDispatcher,
             token,
             challenge,
+            fakeFingerprintManagerInteractor,
+            fakeFingerprintManagerInteractor,
           )
           .create(FingerprintSettingsNavigationViewModel::class.java)
 
@@ -331,10 +334,11 @@ class FingerprintSettingsNavigationViewModelTest {
       underTest =
         FingerprintSettingsNavigationViewModel.FingerprintSettingsNavigationModelFactory(
             defaultUserId,
-            fakeFingerprintManagerInteractor,
             backgroundDispatcher,
             token,
             challenge,
+            fakeFingerprintManagerInteractor,
+            fakeFingerprintManagerInteractor,
           )
           .create(FingerprintSettingsNavigationViewModel::class.java)
 

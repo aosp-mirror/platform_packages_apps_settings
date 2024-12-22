@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.internal.app.LocaleHelper;
@@ -62,6 +63,7 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
     private LayoutPreference mPrefOfDescription;
     private Preference mPrefOfDisclaimer;
     private ApplicationInfo mApplicationInfo;
+    @Nullable private String mParentLocale;
 
     /**
      * Create a instance of AppLocaleDetails.
@@ -111,6 +113,12 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
     public void onResume() {
         super.onResume();
         refreshUi();
+        final Activity activity = getActivity();
+        if (mParentLocale != null) {
+            activity.setTitle(mParentLocale);
+        } else {
+            activity.setTitle(R.string.app_locale_picker_title);
+        }
     }
 
     private void refreshUi() {
@@ -214,5 +222,9 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
         } else {
             return LocaleHelper.getDisplayName(appLocale.stripExtensions(), appLocale, true);
         }
+    }
+
+    public void setParentLocale(@Nullable String localeName) {
+        mParentLocale = localeName;
     }
 }

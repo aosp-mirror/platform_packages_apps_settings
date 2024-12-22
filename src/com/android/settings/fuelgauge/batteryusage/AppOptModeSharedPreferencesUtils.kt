@@ -25,6 +25,7 @@ import androidx.annotation.VisibleForTesting
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action
 import com.android.settings.fuelgauge.BatteryOptimizeUtils
 import com.android.settings.fuelgauge.BatteryUtils
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 
 /** A util to store and update app optimization mode expiration event data. */
 object AppOptModeSharedPreferencesUtils {
@@ -74,10 +75,13 @@ object AppOptModeSharedPreferencesUtils {
     @JvmStatic
     fun resetExpiredAppOptModeBeforeTimestamp(context: Context, queryTimestampMs: Long) =
         synchronized(appOptimizationModeLock) {
+            val forceExpireEnabled =
+                featureFactory.powerUsageFeatureProvider.isForceExpireAppOptimizationModeEnabled
             val eventsMap = getAppOptModeEventsMap(context)
             val expirationUids = ArrayList<Int>(eventsMap.size)
             for ((uid, event) in eventsMap) {
-                if (event.expirationTime > queryTimestampMs) {
+                // Not reset the mode if forceExpireEnabled is false and not expired.
+                if (!forceExpireEnabled && event.expirationTime > queryTimestampMs) {
                     continue
                 }
                 updateBatteryOptimizationMode(
@@ -108,12 +112,22 @@ object AppOptModeSharedPreferencesUtils {
         getBatteryOptimizeUtils: (Int, String) -> BatteryOptimizeUtils,
     ) =
         synchronized(appOptimizationModeLock) {
+            val restrictedModeOverwriteEnabled =
+                featureFactory.powerUsageFeatureProvider.isRestrictedModeOverwriteEnabled
             val eventsMap = getAppOptModeEventsMap(context)
             val expirationEvents: MutableMap<Int, AppOptimizationModeEvent> = ArrayMap()
             for (i in uids.indices) {
                 val uid = uids[i]
                 val packageName = packageNames[i]
                 val optimizationMode = optimizationModes[i]
+                if (
+                    !restrictedModeOverwriteEnabled &&
+                        optimizationMode == BatteryOptimizeUtils.MODE_RESTRICTED
+                ) {
+                    // Unable to set restricted mode due to flag protection.
+                    Log.w(TAG, "setOptimizationMode($packageName) into restricted ignored")
+                    continue
+                }
                 val originalOptMode: Int =
                     updateBatteryOptimizationMode(
                         context,

@@ -21,7 +21,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.android.settings.biometrics.BiometricEnrollBase
-import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.FingerprintManagerInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.EnrolledFingerprintsInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.GenerateChallengeInteractor
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -33,10 +34,11 @@ import kotlinx.coroutines.launch
 /** A Viewmodel that represents the navigation of the FingerprintSettings activity. */
 class FingerprintSettingsNavigationViewModel(
   private val userId: Int,
-  private val fingerprintManagerInteractor: FingerprintManagerInteractor,
   private val backgroundDispatcher: CoroutineDispatcher,
   tokenInit: ByteArray?,
   challengeInit: Long?,
+  private val enrolledFingerprintsInteractor: EnrolledFingerprintsInteractor,
+  private val generateChallengeInteractor: GenerateChallengeInteractor,
 ) : ViewModel() {
 
   private var token = tokenInit
@@ -52,7 +54,7 @@ class FingerprintSettingsNavigationViewModel(
       _nextStep.update { LaunchConfirmDeviceCredential(userId) }
     } else {
       viewModelScope.launch {
-        if (fingerprintManagerInteractor.enrolledFingerprints.last()?.isEmpty() == true) {
+        if (enrolledFingerprintsInteractor.enrolledFingerprints.last()?.isEmpty() == true) {
           _nextStep.update { EnrollFirstFingerprint(userId, null, challenge, token) }
         } else {
           showSettingsHelper()
@@ -148,13 +150,13 @@ class FingerprintSettingsNavigationViewModel(
   }
 
   private suspend fun launchEnrollNextStep(gateKeeperPasswordHandle: Long?) {
-    fingerprintManagerInteractor.enrolledFingerprints.collect {
+    enrolledFingerprintsInteractor.enrolledFingerprints.collect {
       if (it?.isEmpty() == true) {
         _nextStep.update { EnrollFirstFingerprint(userId, gateKeeperPasswordHandle, null, null) }
       } else {
         viewModelScope.launch(backgroundDispatcher) {
           val challengePair =
-            fingerprintManagerInteractor.generateChallenge(gateKeeperPasswordHandle!!)
+            generateChallengeInteractor.generateChallenge(gateKeeperPasswordHandle!!)
           challenge = challengePair.first
           token = challengePair.second
 
@@ -174,10 +176,11 @@ class FingerprintSettingsNavigationViewModel(
 
   class FingerprintSettingsNavigationModelFactory(
     private val userId: Int,
-    private val interactor: FingerprintManagerInteractor,
     private val backgroundDispatcher: CoroutineDispatcher,
     private val token: ByteArray?,
     private val challenge: Long?,
+    private val enrolledFingerprintsInteractor: EnrolledFingerprintsInteractor,
+    private val generateChallengeInteractor: GenerateChallengeInteractor,
   ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
@@ -185,10 +188,11 @@ class FingerprintSettingsNavigationViewModel(
 
       return FingerprintSettingsNavigationViewModel(
         userId,
-        interactor,
         backgroundDispatcher,
         token,
         challenge,
+        enrolledFingerprintsInteractor,
+        generateChallengeInteractor,
       )
         as T
     }

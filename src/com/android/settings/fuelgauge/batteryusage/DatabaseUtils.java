@@ -70,6 +70,7 @@ public final class DatabaseUtils {
 
     /** Clear memory threshold for device booting phase. */
     private static final long CLEAR_MEMORY_THRESHOLD_MS = Duration.ofMinutes(5).toMillis();
+
     private static final long CLEAR_MEMORY_DELAYED_MS = Duration.ofSeconds(2).toMillis();
     private static final long INVALID_TIMESTAMP = 0L;
 
@@ -447,8 +448,24 @@ public final class DatabaseUtils {
                         database.batteryEventDao().clearAllAfter(startTimestamp);
                         database.batteryStateDao().clearAllAfter(startTimestamp);
                         database.batteryUsageSlotDao().clearAllAfter(startTimestamp);
+                        database.batteryReattributeDao().clearAllAfter(startTimestamp);
                     } catch (RuntimeException e) {
                         Log.e(TAG, "clearAllAfter() failed", e);
+                    }
+                });
+    }
+
+    /** Clears generated cache data in the battery usage database. */
+    public static void clearEvenHourCacheData(Context context) {
+        AsyncTask.execute(
+                () -> {
+                    try {
+                        final BatteryStateDatabase database =
+                                BatteryStateDatabase.getInstance(context.getApplicationContext());
+                        database.batteryEventDao().clearEvenHourEvent();
+                        database.batteryUsageSlotDao().clearAll();
+                    } catch (RuntimeException e) {
+                        Log.e(TAG, "clearEvenHourCacheData() failed", e);
                     }
                 });
     }
@@ -526,9 +543,11 @@ public final class DatabaseUtils {
         return startCalendar.getTimeInMillis();
     }
 
-    /** Returns the context with profile parent identity when current user is work profile. */
+    /**
+     * Returns the context with profile parent identity when current user is an additional profile.
+     */
     public static Context getParentContext(Context context) {
-        if (com.android.settingslib.fuelgauge.BatteryUtils.isWorkProfile(context)) {
+        if (com.android.settingslib.fuelgauge.BatteryUtils.isAdditionalProfile(context)) {
             try {
                 return context.createPackageContextAsUser(
                         /* packageName= */ context.getPackageName(),
@@ -919,14 +938,12 @@ public final class DatabaseUtils {
         final String logInfo =
                 String.format(
                         Locale.ENGLISH,
-                        "clear database for new time zone = %s",
+                        "clear database cache for new time zone = %s",
                         TimeZone.getDefault().toString());
         BatteryUsageLogUtils.writeLog(context, Action.TIMEZONE_UPDATED, logInfo);
         Log.d(TAG, logInfo);
-        DatabaseUtils.clearAll(context);
+        DatabaseUtils.clearEvenHourCacheData(context);
         PeriodicJobManager.getInstance(context).refreshJob(/* fromBoot= */ false);
-        // Take a snapshot of battery usage data immediately
-        BatteryUsageDataLoader.enqueueWork(context, /* isFullChargeStart= */ true);
     }
 
     private static long loadLongFromContentProvider(

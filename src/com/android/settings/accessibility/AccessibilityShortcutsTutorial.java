@@ -19,7 +19,11 @@ package com.android.settings.accessibility;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TRIPLETAP;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -171,7 +175,7 @@ public final class AccessibilityShortcutsTutorial {
             AlertDialog dialog, List<TutorialPage> pages, int selectedPageIndex) {
         final Button button = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
         final int pageType = pages.get(selectedPageIndex).getType();
-        final int buttonVisibility = pageType == UserShortcutType.SOFTWARE ? VISIBLE : GONE;
+        final int buttonVisibility = (pageType == SOFTWARE) ? VISIBLE : GONE;
         button.setVisibility(buttonVisibility);
         if (buttonVisibility == VISIBLE) {
             final int textResId = AccessibilityUtil.isFloatingMenuEnabled(dialog.getContext())
@@ -393,7 +397,7 @@ public final class AccessibilityShortcutsTutorial {
     }
 
     private static TutorialPage createSoftwareTutorialPage(@NonNull Context context) {
-        final int type = UserShortcutType.SOFTWARE;
+        final int type = SOFTWARE;
         final CharSequence title = getSoftwareTitle(context);
         final View image = createSoftwareImage(context);
         final CharSequence instruction = getSoftwareInstruction(context);
@@ -405,7 +409,7 @@ public final class AccessibilityShortcutsTutorial {
     }
 
     private static TutorialPage createHardwareTutorialPage(@NonNull Context context) {
-        final int type = UserShortcutType.HARDWARE;
+        final int type = HARDWARE;
         final CharSequence title =
                 context.getText(R.string.accessibility_tutorial_dialog_title_volume);
         final View image =
@@ -420,7 +424,7 @@ public final class AccessibilityShortcutsTutorial {
     }
 
     private static TutorialPage createTripleTapTutorialPage(@NonNull Context context) {
-        final int type = UserShortcutType.TRIPLETAP;
+        final int type = TRIPLETAP;
         final CharSequence title =
                 context.getText(R.string.accessibility_tutorial_dialog_title_triple);
         final View image =
@@ -436,7 +440,7 @@ public final class AccessibilityShortcutsTutorial {
     }
 
     private static TutorialPage createTwoFingerTripleTapTutorialPage(@NonNull Context context) {
-        final int type = UserShortcutType.TWOFINGER_DOUBLETAP;
+        final int type = TWOFINGER_DOUBLETAP;
         final int numFingers = 2;
         final CharSequence title = context.getString(
                 R.string.accessibility_tutorial_dialog_title_two_finger_double, numFingers);
@@ -454,7 +458,7 @@ public final class AccessibilityShortcutsTutorial {
 
     private static TutorialPage createQuickSettingsTutorialPage(
             @NonNull Context context, @NonNull CharSequence featureName, boolean inSetupWizard) {
-        final int type = UserShortcutType.QUICK_SETTINGS;
+        final int type = QUICK_SETTINGS;
         final CharSequence title =
                 context.getText(R.string.accessibility_tutorial_dialog_title_quick_setting);
         final View image =
@@ -494,28 +498,28 @@ public final class AccessibilityShortcutsTutorial {
         // LINT.IfChange(shortcut_type_ui_order)
         final List<TutorialPage> tutorialPages = new ArrayList<>();
         if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            if ((shortcutTypes & UserShortcutType.QUICK_SETTINGS)
-                    == UserShortcutType.QUICK_SETTINGS) {
+            if ((shortcutTypes & QUICK_SETTINGS)
+                    == QUICK_SETTINGS) {
                 tutorialPages.add(
                         createQuickSettingsTutorialPage(context, featureName, inSetupWizard));
             }
         }
-        if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
+        if ((shortcutTypes & SOFTWARE) == SOFTWARE) {
             tutorialPages.add(createSoftwareTutorialPage(context));
         }
 
-        if ((shortcutTypes & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE) {
+        if ((shortcutTypes & HARDWARE) == HARDWARE) {
             tutorialPages.add(createHardwareTutorialPage(context));
         }
 
         if (Flags.enableMagnificationMultipleFingerMultipleTapGesture()) {
-            if ((shortcutTypes & UserShortcutType.TWOFINGER_DOUBLETAP)
-                    == UserShortcutType.TWOFINGER_DOUBLETAP) {
+            if ((shortcutTypes & TWOFINGER_DOUBLETAP)
+                    == TWOFINGER_DOUBLETAP) {
                 tutorialPages.add(createTwoFingerTripleTapTutorialPage(context));
             }
         }
 
-        if ((shortcutTypes & UserShortcutType.TRIPLETAP) == UserShortcutType.TRIPLETAP) {
+        if ((shortcutTypes & TRIPLETAP) == TRIPLETAP) {
             tutorialPages.add(createTripleTapTutorialPage(context));
         }
         // LINT.ThenChange(/res/xml/accessibility_edit_shortcuts.xml:shortcut_type_ui_order)

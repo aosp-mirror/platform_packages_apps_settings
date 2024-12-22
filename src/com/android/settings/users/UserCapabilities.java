@@ -76,6 +76,9 @@ public class UserCapabilities {
     public void updateAddUserCapabilities(Context context) {
         final UserManager userManager =
                 (UserManager) context.getSystemService(Context.USER_SERVICE);
+        final UserInfo myUserInfo = userManager.getUserInfo(UserHandle.myUserId());
+        mIsAdmin = myUserInfo.isAdmin();
+
         mEnforcedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(context,
                 UserManager.DISALLOW_ADD_USER, UserHandle.myUserId());
         final boolean hasBaseUserRestriction = RestrictedLockUtilsInternal.hasBaseUserRestriction(

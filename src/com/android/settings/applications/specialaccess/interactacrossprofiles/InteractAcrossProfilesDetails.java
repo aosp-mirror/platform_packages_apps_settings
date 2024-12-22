@@ -72,9 +72,9 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.widget.LayoutPreference;
 
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 public class InteractAcrossProfilesDetails extends AppInfoBase
         implements Preference.OnPreferenceClickListener {
@@ -571,8 +571,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         String disallowedPackagesString = Settings.Global.getString(getContentResolver(),
                 CONNECTED_APPS_DISALLOWED_PACKAGES);
 
-        Set<String> allowedPackagesSet = getSetFromString(allowedPackagesString);
-        Set<String> disallowedPackagesSet = getSetFromString(disallowedPackagesString);
+        HashSet<String> allowedPackagesSet = getSetFromString(allowedPackagesString);
+        HashSet<String> disallowedPackagesSet = getSetFromString(disallowedPackagesString);
 
         if (enabled) {
             allowedPackagesSet.add(crossProfilePackage);
@@ -592,9 +592,9 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
                 String.join(",", disallowedPackagesSet));
     }
 
-    private Set<String> getSetFromString(String packages) {
+    private HashSet<String> getSetFromString(String packages) {
         return Optional.ofNullable(packages)
-                .map(pkg -> Set.of(pkg.split(",")))
-                .orElse(Collections.emptySet());
+                .map(pkg -> new HashSet<>(Arrays.asList(pkg.split(","))))
+                .orElseGet(HashSet::new);
     }
 }

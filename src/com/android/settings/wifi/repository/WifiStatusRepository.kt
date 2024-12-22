@@ -50,14 +50,20 @@ class WifiStatusRepository(
                 var wifiStatusTracker: WifiStatusTracker? = null
                 wifiStatusTracker = wifiStatusTrackerFactory { wifiStatusTracker?.let(::trySend) }
 
+                // Fetches initial state first, before set listening to true, otherwise could cause
+                // race condition.
+                wifiStatusTracker.fetchInitialState()
+                trySend(wifiStatusTracker)
+
                 context
                     .broadcastReceiverFlow(INTENT_FILTER)
-                    .onEach { intent -> wifiStatusTracker.handleBroadcast(intent) }
+                    .onEach { intent ->
+                        wifiStatusTracker.handleBroadcast(intent)
+                        trySend(wifiStatusTracker)
+                    }
                     .launchIn(this)
 
                 wifiStatusTracker.setListening(true)
-                wifiStatusTracker.fetchInitialState()
-                trySend(wifiStatusTracker)
 
                 awaitClose { wifiStatusTracker.setListening(false) }
             }

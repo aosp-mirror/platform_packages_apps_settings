@@ -18,61 +18,65 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import android.content.Context;
 import android.provider.Settings;
 
-import androidx.preference.Preference;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowLooper;
 
+/**
+ * Tests for {@link DaltonizerRadioButtonPreferenceController}
+ */
 @RunWith(RobolectricTestRunner.class)
-public class DaltonizerRadioButtonPreferenceControllerTest implements
-        DaltonizerRadioButtonPreferenceController.OnChangeListener {
-    private static final String PREF_KEY = "daltonizer_mode_protanomaly";
-    private static final String PREF_VALUE = "11";
-    private static final String PREF_FAKE_VALUE = "-1";
+public class DaltonizerRadioButtonPreferenceControllerTest {
+    private static final int DALTONIZER_MODE_INDEX = 0;
+    private static final String PREF_INVALID_VALUE = "-1";
 
+    private final Context mContext = ApplicationProvider.getApplicationContext();
+    private final String mPrefKey =
+            mContext.getResources()
+                    .getStringArray(R.array.daltonizer_mode_keys)[DALTONIZER_MODE_INDEX];
+    private final String mPrefValue =
+            String.valueOf(mContext.getResources()
+                    .getIntArray(R.array.daltonizer_type_values)[DALTONIZER_MODE_INDEX]);
     private DaltonizerRadioButtonPreferenceController mController;
-
-    @Mock
-    private SelectorWithWidgetPreference mMockPref;
-    private Context mContext;
-
-    @Mock
+    private SelectorWithWidgetPreference mPreference;
     private PreferenceScreen mScreen;
+
+    private LifecycleOwner mLifecycleOwner;
+    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mController = new DaltonizerRadioButtonPreferenceController(mContext, mock(Lifecycle.class),
-                PREF_KEY);
-        mController.setOnChangeListener(this);
-
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mMockPref);
-        when(mMockPref.getKey()).thenReturn(PREF_KEY);
+        // initialize the value as unchecked
+        Settings.Secure.putString(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER, PREF_INVALID_VALUE);
+        mController = new DaltonizerRadioButtonPreferenceController(mContext, mPrefKey);
+        mPreference = new SelectorWithWidgetPreference(mContext);
+        mPreference.setKey(mPrefKey);
+        mScreen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
+        mScreen.addPreference(mPreference);
         mController.displayPreference(mScreen);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
     }
 
-    @Override
-    public void onCheckedChanged(Preference preference) {
-        mController.updateState(preference);
+    @After
+    public void cleanUp() {
+        mLifecycle.removeObserver(mController);
     }
 
     @Test
@@ -81,36 +85,62 @@ public class DaltonizerRadioButtonPreferenceControllerTest implements
     }
 
     @Test
-    public void updateState_notChecked() {
+    public void updateState_valueNotMatched_notChecked() {
         Settings.Secure.putString(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER, PREF_FAKE_VALUE);
+                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER, PREF_INVALID_VALUE);
 
-        mController.updateState(mMockPref);
+        mController.updateState(mPreference);
 
-        // the first checked state is set to false by control
-        verify(mMockPref, atLeastOnce()).setChecked(false);
-        verify(mMockPref, never()).setChecked(true);
+        assertThat(mPreference.isChecked()).isFalse();
     }
 
     @Test
-    public void updateState_checked() {
+    public void updateState_valueMatched_checked() {
         Settings.Secure.putString(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER, PREF_VALUE);
+                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER, mPrefValue);
 
-        mController.updateState(mMockPref);
+        mController.updateState(mPreference);
 
-        // the first checked state is set to false by control
-        verify(mMockPref, atLeastOnce()).setChecked(false);
-        verify(mMockPref, atLeastOnce()).setChecked(true);
+        assertThat(mPreference.isChecked()).isTrue();
     }
 
     @Test
     public void onRadioButtonClick_shouldReturnDaltonizerValue() {
-        mController.onRadioButtonClicked(mMockPref);
+        mController.onRadioButtonClicked(mPreference);
+
         final String accessibilityDaltonizerValue = Settings.Secure.getString(
                 mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER);
+        assertThat(accessibilityDaltonizerValue).isEqualTo(mPrefValue);
+    }
 
-        assertThat(accessibilityDaltonizerValue).isEqualTo(PREF_VALUE);
+    @Test
+    public void onResume_settingsValueChangedToUnmatch_preferenceBecomesUnchecked() {
+        Settings.Secure.putString(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER, mPrefValue);
+        mController.updateState(mPreference);
+        assertThat(mPreference.isChecked()).isTrue();
+        mLifecycle.addObserver(mController);
+
+        mLifecycle.handleLifecycleEvent(androidx.lifecycle.Lifecycle.Event.ON_RESUME);
+        Settings.Secure.putString(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER, PREF_INVALID_VALUE);
+        ShadowLooper.idleMainLooper();
+
+        assertThat(mPreference.isChecked()).isFalse();
+    }
+
+    @Test
+    public void onPause_settingsValueChangedAndMatch_preferenceStateNotUpdated() {
+        assertThat(mPreference.isChecked()).isFalse();
+        mLifecycle.addObserver(mController);
+        mLifecycle.handleLifecycleEvent(androidx.lifecycle.Lifecycle.Event.ON_RESUME);
+
+        mLifecycle.handleLifecycleEvent(androidx.lifecycle.Lifecycle.Event.ON_PAUSE);
+        Settings.Secure.putString(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER, mPrefValue);
+        ShadowLooper.idleMainLooper();
+
+        assertThat(mPreference.isChecked()).isFalse();
     }
 }

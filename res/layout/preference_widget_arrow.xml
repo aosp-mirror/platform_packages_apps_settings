@@ -17,10 +17,11 @@
 
 <ImageView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
     android:contentDescription="@null"
     android:scaleType="center"
-    android:tint="?android:attr/textColorPrimary"
+    android:tint="?androidprv:attr/materialColorOnPrimaryContainer"
     android:src="@drawable/ic_arrow_forward" />

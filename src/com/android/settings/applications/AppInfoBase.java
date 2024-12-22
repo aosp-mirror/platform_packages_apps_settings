@@ -18,6 +18,7 @@ package com.android.settings.applications;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
@@ -39,6 +40,7 @@ import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -135,8 +137,13 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
             }
         }
         if (intent != null && intent.hasExtra(Intent.EXTRA_USER_HANDLE)) {
-            mUserId = ((UserHandle) intent.getParcelableExtra(
-                    Intent.EXTRA_USER_HANDLE)).getIdentifier();
+            mUserId = ((UserHandle) intent.getParcelableExtra(Intent.EXTRA_USER_HANDLE))
+                    .getIdentifier();
+            if (mUserId != UserHandle.myUserId() && !hasInteractAcrossUsersFullPermission()) {
+                Log.w(TAG, "Intent not valid.");
+                finish();
+                return "";
+            }
         } else {
             mUserId = UserHandle.myUserId();
         }
@@ -161,6 +168,28 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         }
 
         return mPackageName;
+    }
+
+    @VisibleForTesting
+    protected boolean hasInteractAcrossUsersFullPermission() {
+        Activity activity = getActivity();
+        if (!(activity instanceof SettingsActivity)) {
+            return false;
+        }
+        final String callingPackageName =
+                ((SettingsActivity) activity).getInitialCallingPackage();
+
+        if (TextUtils.isEmpty(callingPackageName)) {
+            Log.w(TAG, "Not able to get calling package name for permission check");
+            return false;
+        }
+        if (mPm.checkPermission(Manifest.permission.INTERACT_ACROSS_USERS_FULL, callingPackageName)
+                != PackageManager.PERMISSION_GRANTED) {
+            Log.w(TAG, "Package " + callingPackageName + " does not have required permission "
+                    + Manifest.permission.INTERACT_ACROSS_USERS_FULL);
+            return false;
+        }
+        return true;
     }
 
     protected void setIntentAndFinish(boolean appChanged) {

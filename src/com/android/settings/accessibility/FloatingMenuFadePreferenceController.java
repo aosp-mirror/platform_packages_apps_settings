@@ -28,6 +28,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -62,6 +63,15 @@ public class FloatingMenuFadePreferenceController extends BasePreferenceControll
     public int getAvailabilityStatus() {
         return AccessibilityUtil.isFloatingMenuEnabled(mContext)
                 ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        int rId = R.string.accessibility_button_fade_summary;
+        if (mPreference != null && !mPreference.isEnabled()) {
+            rId = R.string.accessibility_button_disabled_button_mode_summary;
+        }
+        return mContext.getString(rId);
     }
 
     @Override
@@ -101,6 +111,7 @@ public class FloatingMenuFadePreferenceController extends BasePreferenceControll
 
     private void updateAvailabilityStatus() {
         mPreference.setEnabled(AccessibilityUtil.isFloatingMenuEnabled(mContext));
+        refreshSummary(mPreference);
     }
 
     private int getFloatingMenuFadeValue() {

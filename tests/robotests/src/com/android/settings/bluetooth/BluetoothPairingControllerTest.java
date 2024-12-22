@@ -30,7 +30,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
 
-import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
@@ -178,29 +177,10 @@ public class BluetoothPairingControllerTest {
     }
 
     @Test
-    public void isLeContactSharingEnabled_configIsFalse_returnsFalse() {
-        mockIsLeContactSharingEnabled(false);
-
-        mBluetoothPairingController = createBluetoothPairingController();
-
-        assertThat(mBluetoothPairingController.isLeContactSharingEnabled()).isFalse();
-    }
-
-    @Test
-    public void isLeContactSharingEnabled_configIsTrue_returnsTrue() {
-        mockIsLeContactSharingEnabled(true);
-
-        mBluetoothPairingController = createBluetoothPairingController();
-
-        assertThat(mBluetoothPairingController.isLeContactSharingEnabled()).isTrue();
-    }
-
-    @Test
     public void isContactSharingVisible_profileIsNotReady_returnsTrue() {
-        // isProfileReady=false, isLeAudio=false, isLeContactSharingEnabled=true
+        // isProfileReady=false, isLeAudio=false
         mockIsProfileReady(false);
         mockIsLeAudio(false);
-        mockIsLeContactSharingEnabled(true);
 
         mBluetoothPairingController = createBluetoothPairingController();
         mBluetoothPairingController.mockPbapClientProfile(mPbapLocalBluetoothProfile);
@@ -210,10 +190,9 @@ public class BluetoothPairingControllerTest {
 
     @Test
     public void isContactSharingVisible_profileIsReady_returnsFalse() {
-        // isProfileReady=true, isLeAudio=false, isLeContactSharingEnabled=true
+        // isProfileReady=true, isLeAudio=false
         mockIsProfileReady(true);
         mockIsLeAudio(false);
-        mockIsLeContactSharingEnabled(true);
 
         mBluetoothPairingController = createBluetoothPairingController();
         mBluetoothPairingController.mockPbapClientProfile(mPbapLocalBluetoothProfile);
@@ -223,10 +202,9 @@ public class BluetoothPairingControllerTest {
 
     @Test
     public void isContactSharingVisible_DeviceIsLeAudioAndProfileIsReady_returnsFalse() {
-        // isProfileReady=true, isLeAudio=true, isLeContactSharingEnabled=true
+        // isProfileReady=true, isLeAudio=true
         mockIsProfileReady(true);
         mockIsLeAudio(true);
-        mockIsLeContactSharingEnabled(true);
 
         mBluetoothPairingController = createBluetoothPairingController();
         mBluetoothPairingController.mockPbapClientProfile(mPbapLocalBluetoothProfile);
@@ -236,28 +214,14 @@ public class BluetoothPairingControllerTest {
 
     @Test
     public void isContactSharingVisible_DeviceIsLeAudioAndProfileIsNotReady_returnsTrue() {
-        // isProfileReady=false, isLeAudio=true, isLeContactSharingEnabled=true
+        // isProfileReady=false, isLeAudio=true
         mockIsProfileReady(false);
         mockIsLeAudio(true);
-        mockIsLeContactSharingEnabled(true);
 
         mBluetoothPairingController = createBluetoothPairingController();
         mBluetoothPairingController.mockPbapClientProfile(mPbapLocalBluetoothProfile);
 
         assertThat(mBluetoothPairingController.isContactSharingVisible()).isTrue();
-    }
-
-    @Test
-    public void isContactSharingVisible_DeviceIsLeAndContactSharingIsNotEnabled_returnsFalse() {
-        // isProfileReady=false, isLeAudio=true, isLeContactSharingEnabled=false
-        mockIsProfileReady(false);
-        mockIsLeAudio(true);
-        mockIsLeContactSharingEnabled(false);
-
-        mBluetoothPairingController = createBluetoothPairingController();
-        mBluetoothPairingController.mockPbapClientProfile(mPbapLocalBluetoothProfile);
-
-        assertThat(mBluetoothPairingController.isContactSharingVisible()).isFalse();
     }
 
     private void mockIsProfileReady(boolean mockValue) {
@@ -270,12 +234,5 @@ public class BluetoothPairingControllerTest {
             profileId = BluetoothProfile.LE_AUDIO;
         }
         when(mLocalBluetoothProfile.getProfileId()).thenReturn(profileId);
-    }
-
-    private void mockIsLeContactSharingEnabled(boolean mockValue) {
-        android.provider.DeviceConfig.setProperty(
-                android.provider.DeviceConfig.NAMESPACE_SETTINGS_UI,
-                SettingsUIDeviceConfig.BT_LE_AUDIO_CONTACT_SHARING_ENABLED,
-                /* value= */ mockValue ? "true" : "false", true);
     }
 }

@@ -19,12 +19,16 @@ package com.android.settings.fuelgauge.batteryusage;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertThrows;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.UserManager;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -39,6 +43,8 @@ import com.android.settings.testutils.FakeClock;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
 import java.time.Duration;
@@ -62,9 +68,14 @@ public final class BatteryUsageContentProviderTest {
     private Context mContext;
     private BatteryUsageContentProvider mProvider;
 
+    @Mock
+    private UserManager mUserManager;
+
     @Before
     public void setUp() {
-        mContext = ApplicationProvider.getApplicationContext();
+        MockitoAnnotations.initMocks(this);
+        mContext = spy(ApplicationProvider.getApplicationContext());
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         mProvider = new BatteryUsageContentProvider();
         mProvider.attachInfo(mContext, /* info= */ null);
         BatteryTestUtils.setUpBatteryStateDatabase(mContext);
@@ -77,7 +88,13 @@ public final class BatteryUsageContentProviderTest {
 
     @Test
     public void onCreate_withWorkProfileMode_returnsFalse() {
-        BatteryTestUtils.setWorkProfile(mContext);
+        doReturn(true).when(mUserManager).isManagedProfile();
+        assertThat(mProvider.onCreate()).isFalse();
+    }
+
+    @Test
+    public void onCreate_withPrivateProfileMode_returnsFalse() {
+        doReturn(true).when(mUserManager).isPrivateProfile();
         assertThat(mProvider.onCreate()).isFalse();
     }
 

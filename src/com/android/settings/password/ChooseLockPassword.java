@@ -271,6 +271,8 @@ public class ChooseLockPassword extends SettingsActivity {
 
         private static final int CONFIRM_EXISTING_REQUEST = 58;
         static final int RESULT_FINISHED = RESULT_FIRST_USER;
+        private boolean mIsErrorTooShort = true;
+
         /** Used to store the profile type for which pin/password is being set */
         protected enum ProfileType {
             None,
@@ -672,6 +674,11 @@ public class ChooseLockPassword extends SettingsActivity {
             view.addView(mPasswordRestrictionView);
         }
 
+        @VisibleForTesting
+        View getPasswordRequirementsView() {
+            return mPasswordRestrictionView;
+        }
+
         private void createHintMessageView(ViewGroup view) {
             if (mPasswordRestrictionView != null) {
                 return;
@@ -855,6 +862,7 @@ public class ChooseLockPassword extends SettingsActivity {
          */
         String[] convertErrorCodeToMessages() {
             List<String> messages = new ArrayList<>();
+            mIsErrorTooShort = false;
             for (PasswordValidationError error : mValidationErrors) {
                 switch (error.errorCode) {
                     case CONTAINS_INVALID_CHARACTERS:
@@ -889,6 +897,7 @@ public class ChooseLockPassword extends SettingsActivity {
                                 R.string.lockpassword_password_requires_nonnumerical));
                         break;
                     case TOO_SHORT:
+                        mIsErrorTooShort = true;
                         String message = StringUtil.getIcuPluralsString(getContext(),
                                 error.requirement,
                                 mIsAlphaMode
@@ -918,7 +927,9 @@ public class ChooseLockPassword extends SettingsActivity {
                                         : R.string.lockpassword_pin_too_long));
                         break;
                     case CONTAINS_SEQUENCE:
-                        messages.add(getString(R.string.lockpassword_pin_no_sequential_digits));
+                        messages.add(getString(mIsAlphaMode
+                                ? R.string.lockpassword_password_no_sequential_characters
+                                : R.string.lockpassword_pin_no_sequential_digits));
                         break;
                     case RECENTLY_USED:
                         DevicePolicyManager devicePolicyManager =
@@ -951,12 +962,13 @@ public class ChooseLockPassword extends SettingsActivity {
                     ? LockscreenCredential.createPassword(mPasswordEntry.getText())
                     : LockscreenCredential.createPin(mPasswordEntry.getText());
             final int length = password.size();
+
             if (mUiStage == Stage.Introduction) {
                 mPasswordRestrictionView.setVisibility(View.VISIBLE);
                 final boolean passwordCompliant = validatePassword(password);
                 String[] messages = convertErrorCodeToMessages();
                 // Update the fulfillment of requirements.
-                mPasswordRequirementAdapter.setRequirements(messages);
+                mPasswordRequirementAdapter.setRequirements(messages, mIsErrorTooShort);
                 // set the visibility of pin_auto_confirm option accordingly
                 setAutoPinConfirmOption(passwordCompliant, length);
                 // Enable/Disable the next button accordingly.

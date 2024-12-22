@@ -15,6 +15,7 @@
  */
 package com.android.settings.notification.modes;
 
+import static android.app.NotificationManager.INTERRUPTION_FILTER_ALL;
 import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_ANYONE;
 import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_IMPORTANT;
 import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_NONE;
@@ -30,6 +31,7 @@ import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_MESSAGES;
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_REMINDERS;
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_REPEAT_CALLERS;
 import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_SYSTEM;
+import static android.service.notification.ZenPolicy.STATE_ALLOW;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_AMBIENT;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_BADGE;
 import static android.service.notification.ZenPolicy.VISUAL_EFFECT_FULL_SCREEN_INTENT;
@@ -42,27 +44,34 @@ import android.content.Context;
 import android.icu.text.MessageFormat;
 import android.service.notification.ZenDeviceEffects;
 import android.service.notification.ZenPolicy;
+import android.service.notification.ZenPolicy.ConversationSenders;
+import android.service.notification.ZenPolicy.PeopleType;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.core.text.BidiFormatter;
 
 import com.android.settings.R;
+import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.notification.modes.ZenMode;
+
+import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Predicate;
 
 class ZenModeSummaryHelper {
 
     private final Context mContext;
-    private final ZenModesBackend mBackend;
+    private final ZenHelperBackend mBackend;
 
-    public ZenModeSummaryHelper(Context context, ZenModesBackend backend) {
+    ZenModeSummaryHelper(Context context, ZenHelperBackend backend) {
         mContext = context;
         mBackend = backend;
     }
@@ -79,14 +88,18 @@ class ZenModeSummaryHelper {
             PRIORITY_CATEGORY_REPEAT_CALLERS,
     };
 
+    static final ImmutableList</* @PriorityCategory */ Integer> OTHER_SOUND_CATEGORIES =
+            ImmutableList.of(
+                PRIORITY_CATEGORY_ALARMS,
+                PRIORITY_CATEGORY_MEDIA,
+                PRIORITY_CATEGORY_SYSTEM,
+                PRIORITY_CATEGORY_REMINDERS,
+                PRIORITY_CATEGORY_EVENTS);
+
     String getOtherSoundCategoriesSummary(ZenMode zenMode) {
         List<String> enabledCategories = getEnabledCategories(
                 zenMode.getPolicy(),
-                category -> PRIORITY_CATEGORY_ALARMS == category
-                        || PRIORITY_CATEGORY_MEDIA == category
-                        || PRIORITY_CATEGORY_SYSTEM == category
-                        || PRIORITY_CATEGORY_REMINDERS == category
-                        || PRIORITY_CATEGORY_EVENTS == category,
+                OTHER_SOUND_CATEGORIES::contains,
                 true);
         int numCategories = enabledCategories.size();
         MessageFormat msgFormat = new MessageFormat(
@@ -124,6 +137,14 @@ class ZenModeSummaryHelper {
     }
 
     String getMessagesSettingSummary(ZenPolicy policy) {
+        if (policy.getPriorityCategoryMessages() == STATE_ALLOW
+                && policy.getPriorityMessageSenders() == PEOPLE_TYPE_ANYONE) {
+            // Messages=anyone means anyone. Even if conversation senders is specially configured,
+            // saying "Anyone and priority conversations" 1) makes no sense and 2) is incorrect
+            // because conversations WILL get through by virtue of also being messages.
+            return mContext.getString(R.string.zen_mode_from_anyone);
+        }
+
         List<String> enabledCategories = getEnabledCategories(policy,
                 category -> PRIORITY_CATEGORY_MESSAGES == category
                         || PRIORITY_CATEGORY_CONVERSATIONS == category, true);
@@ -187,48 +208,47 @@ class ZenModeSummaryHelper {
     String getDisplayEffectsSummary(ZenMode zenMode) {
         boolean isFirst = true;
         List<String> enabledEffects = new ArrayList<>();
-        if (!zenMode.getPolicy().shouldShowAllVisualEffects()) {
+        if (!zenMode.getPolicy().shouldShowAllVisualEffects()
+                && zenMode.getInterruptionFilter() != INTERRUPTION_FILTER_ALL) {
             enabledEffects.add(getBlockedEffectsSummary(zenMode));
             isFirst = false;
         }
-        ZenDeviceEffects currEffects =  zenMode.getRule().getDeviceEffects();
-        if (currEffects != null) {
-            if (currEffects.shouldDisplayGrayscale()) {
-                if (isFirst) {
-                    enabledEffects.add(mContext.getString(R.string.mode_grayscale_title));
-                } else {
-                    enabledEffects.add(mContext.getString(
-                            R.string.mode_grayscale_title_secondary_list));
-                }
-                isFirst = false;
+        ZenDeviceEffects currEffects = zenMode.getDeviceEffects();
+        if (currEffects.shouldDisplayGrayscale()) {
+            if (isFirst) {
+                enabledEffects.add(mContext.getString(R.string.mode_grayscale_title));
+            } else {
+                enabledEffects.add(mContext.getString(
+                        R.string.mode_grayscale_title_secondary_list));
             }
-            if (currEffects.shouldSuppressAmbientDisplay()) {
-                if (isFirst) {
-                    enabledEffects.add(mContext.getString(R.string.mode_aod_title));
-                } else {
-                    enabledEffects.add(mContext.getString(
-                            R.string.mode_aod_title_secondary_list));
-                }
-                isFirst = false;
+            isFirst = false;
+        }
+        if (currEffects.shouldSuppressAmbientDisplay()) {
+            if (isFirst) {
+                enabledEffects.add(mContext.getString(R.string.mode_aod_title));
+            } else {
+                enabledEffects.add(mContext.getString(
+                        R.string.mode_aod_title_secondary_list));
             }
-            if (currEffects.shouldDimWallpaper()) {
-                if (isFirst) {
-                    enabledEffects.add(mContext.getString(R.string.mode_wallpaper_title));
-                } else {
-                    enabledEffects.add(mContext.getString(
-                            R.string.mode_wallpaper_title_secondary_list));
-                }
-                isFirst = false;
+            isFirst = false;
+        }
+        if (currEffects.shouldDimWallpaper()) {
+            if (isFirst) {
+                enabledEffects.add(mContext.getString(R.string.mode_wallpaper_title));
+            } else {
+                enabledEffects.add(mContext.getString(
+                        R.string.mode_wallpaper_title_secondary_list));
             }
-            if (currEffects.shouldUseNightMode()) {
-                if (isFirst) {
-                    enabledEffects.add(mContext.getString(R.string.mode_dark_theme_title));
-                } else {
-                    enabledEffects.add(mContext.getString(
-                            R.string.mode_dark_theme_title_secondary_list));
-                }
-                isFirst = false;
+            isFirst = false;
+        }
+        if (currEffects.shouldUseNightMode()) {
+            if (isFirst) {
+                enabledEffects.add(mContext.getString(R.string.mode_dark_theme_title));
+            } else {
+                enabledEffects.add(mContext.getString(
+                        R.string.mode_dark_theme_title_secondary_list));
             }
+            isFirst = false;
         }
 
         int numCategories = enabledEffects.size();
@@ -261,10 +281,11 @@ class ZenModeSummaryHelper {
                     continue;
                 }
 
-                // For conversations, only the "priority conversations" setting is relevant; any
-                // other setting is subsumed by the messages-specific messaging.
+                // For conversations, only the "all/priority conversations" settings are relevant;
+                // any other setting is subsumed by the messages-specific messaging.
                 if (category == PRIORITY_CATEGORY_CONVERSATIONS
                         && policy.isCategoryAllowed(PRIORITY_CATEGORY_CONVERSATIONS, false)
+                        && policy.getPriorityConversationSenders() != CONVERSATION_SENDERS_ANYONE
                         && policy.getPriorityConversationSenders()
                         != CONVERSATION_SENDERS_IMPORTANT) {
                     continue;
@@ -303,13 +324,20 @@ class ZenModeSummaryHelper {
             } else {
                 return mContext.getString(R.string.zen_mode_from_starred);
             }
-        } else if (category == PRIORITY_CATEGORY_CONVERSATIONS
-                && policy.getPriorityConversationSenders() == CONVERSATION_SENDERS_IMPORTANT) {
-            if (isFirst) {
-                return mContext.getString(R.string.zen_mode_from_important_conversations);
-            } else {
-                return mContext.getString(
-                        R.string.zen_mode_from_important_conversations_second);
+        } else if (category == PRIORITY_CATEGORY_CONVERSATIONS) {
+            if (policy.getPriorityConversationSenders() == CONVERSATION_SENDERS_IMPORTANT) {
+                if (isFirst) {
+                    return mContext.getString(R.string.zen_mode_from_important_conversations);
+                } else {
+                    return mContext.getString(
+                            R.string.zen_mode_from_important_conversations_second);
+                }
+            } else if (policy.getPriorityConversationSenders() == CONVERSATION_SENDERS_ANYONE) {
+                if (isFirst) {
+                    return mContext.getString(R.string.zen_mode_from_all_conversations);
+                } else {
+                    return mContext.getString(R.string.zen_mode_from_all_conversations_second);
+                }
             }
         } else if (category == PRIORITY_CATEGORY_EVENTS) {
             if (isFirst) {
@@ -352,7 +380,12 @@ class ZenModeSummaryHelper {
     }
 
     public String getStarredContactsSummary() {
-        List<String> starredContacts = mBackend.getStarredContacts();
+        List<String> starredContacts = mBackend.getStarredContacts().stream()
+                .map(ZenHelperBackend.Contact::displayName)
+                .map(name -> Strings.isNullOrEmpty(name)
+                        ? mContext.getString(R.string.zen_mode_starred_contacts_empty_name)
+                        : name)
+                .toList();
         int numStarredContacts = starredContacts.size();
         MessageFormat msgFormat = new MessageFormat(
                 mContext.getString(R.string.zen_mode_starred_contacts_summary_contacts),
@@ -376,26 +409,32 @@ class ZenModeSummaryHelper {
                 mContext.getString(R.string.zen_mode_contacts_count),
                 Locale.getDefault());
         Map<String, Object> args = new HashMap<>();
-        args.put("count", mBackend.queryAllContactsData().getCount());
+        args.put("count", mBackend.getAllContactsCount());
         return msgFormat.format(args);
     }
 
-    public String getPeopleSummary(ZenMode zenMode) {
-        final int callersAllowed = zenMode.getPolicy().getPriorityCallSenders();
-        final int messagesAllowed = zenMode.getPolicy().getPriorityMessageSenders();
-        final int conversationsAllowed = zenMode.getPolicy().getPriorityConversationSenders();
+    public String getPeopleSummary(ZenPolicy policy) {
+        @PeopleType int callersAllowed = policy.getPriorityCategoryCalls() == STATE_ALLOW
+                ? policy.getPriorityCallSenders() : PEOPLE_TYPE_NONE;
+        @PeopleType int messagesAllowed = policy.getPriorityCategoryMessages() == STATE_ALLOW
+                ? policy.getPriorityMessageSenders() : PEOPLE_TYPE_NONE;
+        @ConversationSenders int conversationsAllowed =
+                policy.getPriorityCategoryConversations() == STATE_ALLOW
+                        ? policy.getPriorityConversationSenders()
+                        : CONVERSATION_SENDERS_NONE;
         final boolean areRepeatCallersAllowed =
-                zenMode.getPolicy().isCategoryAllowed(PRIORITY_CATEGORY_REPEAT_CALLERS, false);
+                policy.isCategoryAllowed(PRIORITY_CATEGORY_REPEAT_CALLERS, false);
 
         if (callersAllowed == PEOPLE_TYPE_ANYONE
                 && messagesAllowed == PEOPLE_TYPE_ANYONE
                 && conversationsAllowed == CONVERSATION_SENDERS_ANYONE) {
-            return mContext.getResources().getString(R.string.zen_mode_people_all);
+            return mContext.getString(R.string.zen_mode_people_all);
         } else if (callersAllowed == PEOPLE_TYPE_NONE
                 && messagesAllowed == PEOPLE_TYPE_NONE
-                && conversationsAllowed == CONVERSATION_SENDERS_NONE
-                && !areRepeatCallersAllowed) {
-            return mContext.getResources().getString(R.string.zen_mode_people_none);
+                && conversationsAllowed == CONVERSATION_SENDERS_NONE) {
+            return mContext.getString(
+                    areRepeatCallersAllowed ? R.string.zen_mode_people_repeat_callers
+                            : R.string.zen_mode_people_none);
         } else {
             return mContext.getResources().getString(R.string.zen_mode_people_some);
         }
@@ -406,13 +445,11 @@ class ZenModeSummaryHelper {
      * on the given mode and provided set of apps.
      */
     public @NonNull String getAppsSummary(@NonNull ZenMode zenMode,
-            @Nullable Set<String> appsBypassing) {
+            @Nullable List<AppEntry> appsBypassing) {
         if (zenMode.getPolicy().getAllowedChannels() == ZenPolicy.CHANNEL_POLICY_PRIORITY) {
             return formatAppsList(appsBypassing);
         } else if (zenMode.getPolicy().getAllowedChannels() == ZenPolicy.CHANNEL_POLICY_NONE) {
             return mContext.getResources().getString(R.string.zen_mode_apps_none_apps);
-        } else if (zenMode.getPolicy().getAllowedChannels() == ZenMode.CHANNEL_POLICY_ALL) {
-            return mContext.getResources().getString(R.string.zen_mode_apps_all_apps);
         }
         return "";
     }
@@ -420,31 +457,70 @@ class ZenModeSummaryHelper {
     /**
      * Generates a formatted string declaring which apps can interrupt in the style of
      * "App, App2, and 4 more can interrupt."
-     * Apps selected for explicit mention are selected in order from the provided set sorted
-     * alphabetically.
+     * Apps selected for explicit mention are picked in order from the provided list.
      */
-    public @NonNull String formatAppsList(@Nullable Set<String> appsBypassingDnd) {
+    @VisibleForTesting
+    public @NonNull String formatAppsList(@Nullable List<AppEntry> appsBypassingDnd) {
         if (appsBypassingDnd == null) {
             return mContext.getResources().getString(R.string.zen_mode_apps_priority_apps);
         }
-        final int numAppsBypassingDnd = appsBypassingDnd.size();
-        String[] appsBypassingDndArr = appsBypassingDnd.toArray(new String[numAppsBypassingDnd]);
-        // Sorts the provided apps alphabetically.
-        Arrays.sort(appsBypassingDndArr);
+        List<String> appNames = appsBypassingDnd.stream().limit(3)
+                .map(app -> {
+                    String appName = BidiFormatter.getInstance().unicodeWrap(app.label);
+                    if (app.isManagedProfile()) {
+                        appName = mContext.getString(R.string.zen_mode_apps_work_app, appName);
+                    }
+                    return appName;
+                })
+                .toList();
+
         MessageFormat msgFormat = new MessageFormat(
                 mContext.getString(R.string.zen_mode_apps_subtext),
                 Locale.getDefault());
         Map<String, Object> args = new HashMap<>();
-        args.put("count", numAppsBypassingDnd);
-        if (numAppsBypassingDnd >= 1) {
-            args.put("app_1", appsBypassingDndArr[0]);
-            if (numAppsBypassingDnd >= 2) {
-                args.put("app_2", appsBypassingDndArr[1]);
-                if (numAppsBypassingDnd == 3) {
-                    args.put("app_3", appsBypassingDndArr[2]);
+        args.put("count", appsBypassingDnd.size());
+        if (appNames.size() >= 1) {
+            args.put("app_1", appNames.get(0));
+            if (appNames.size() >= 2) {
+                args.put("app_2", appNames.get(1));
+                if (appNames.size() == 3) {
+                    args.put("app_3", appNames.get(2));
                 }
             }
         }
         return msgFormat.format(args);
     }
+
+    String getModesSummary(List<ZenMode> modes) {
+        List<ZenMode> activeModes = modes.stream().filter(ZenMode::isActive).toList();
+
+        if (!activeModes.isEmpty()) {
+            MessageFormat msgFormat = new MessageFormat(
+                    mContext.getString(R.string.zen_modes_summary_some_active),
+                    Locale.getDefault());
+
+            Map<String, Object> args = new HashMap<>();
+            args.put("count", activeModes.size());
+            args.put("mode_1", activeModes.get(0).getName());
+            if (activeModes.size() >= 2) {
+                args.put("mode_2", activeModes.get(1).getName());
+                if (activeModes.size() == 3) {
+                    args.put("mode_3", activeModes.get(2).getName());
+                }
+            }
+
+            return msgFormat.format(args);
+        } else {
+            int automaticModeCount = (int) modes.stream()
+                    .filter(m -> m.isEnabled() && !m.isManualDnd() && !m.isCustomManual())
+                    .count();
+
+            MessageFormat msgFormat = new MessageFormat(
+                    mContext.getString(R.string.zen_modes_summary_none_active),
+                    Locale.getDefault());
+            Map<String, Object> msgArgs = Map.of("count", automaticModeCount);
+            return msgFormat.format(msgArgs);
+        }
+    }
+
 }

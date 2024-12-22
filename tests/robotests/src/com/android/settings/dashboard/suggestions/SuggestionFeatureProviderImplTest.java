@@ -25,12 +25,19 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.settings.suggestions.Suggestion;
 
+import androidx.fragment.app.Fragment;
+
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -42,6 +49,9 @@ import org.robolectric.annotation.Config;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowSecureSettings.class)
 public class SuggestionFeatureProviderImplTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private Context mContext;
@@ -93,5 +103,21 @@ public class SuggestionFeatureProviderImplTest {
     public void isSuggestionEnabled_isNotLowMemoryDevice_shouldReturnTrue() {
         when(mActivityManager.isLowRamDevice()).thenReturn(false);
         assertThat(mProvider.isSuggestionEnabled(mContext)).isTrue();
+    }
+
+    @DisableFlags(Flags.FLAG_UPDATED_SUGGESTION_CARD_AOSP)
+    @Test
+    public void getSuggestionFragment_withFlagDisabled_shouldReturnNull() {
+        Class<? extends Fragment> fragment = mProvider.getSuggestionFragment();
+
+        assertThat(fragment).isNull();
+    }
+
+    @EnableFlags(Flags.FLAG_UPDATED_SUGGESTION_CARD_AOSP)
+    @Test
+    public void getSuggestionFragment_withFlagEnabled_shouldReturnFragment() {
+        Class<? extends Fragment> fragment = mProvider.getSuggestionFragment();
+
+        assertThat(fragment).isEqualTo(SuggestionFragment.class);
     }
 }

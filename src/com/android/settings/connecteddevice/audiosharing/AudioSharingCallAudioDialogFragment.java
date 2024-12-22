@@ -19,6 +19,7 @@ package com.android.settings.connecteddevice.audiosharing;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +29,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 
 import java.util.List;
 
@@ -35,6 +37,7 @@ import java.util.List;
 public class AudioSharingCallAudioDialogFragment extends InstrumentedDialogFragment {
     private static final String TAG = "CallsAndAlarmsDialog";
     private static final String BUNDLE_KEY_DEVICE_ITEMS = "bundle_key_device_items";
+    private static final String BUNDLE_KEY_CHECKED_ITEM_INDEX = "bundle_key_checked_index";
 
     // The host creates an instance of this dialog fragment must implement this interface to receive
     // event callbacks.
@@ -64,13 +67,21 @@ public class AudioSharingCallAudioDialogFragment extends InstrumentedDialogFragm
     public static void show(
             @NonNull Fragment host,
             @NonNull List<AudioSharingDeviceItem> deviceItems,
+            int checkedItemIndex,
             @NonNull DialogEventListener listener) {
-        if (!AudioSharingUtils.isFeatureEnabled()) return;
-        final FragmentManager manager = host.getChildFragmentManager();
+        if (!BluetoothUtils.isAudioSharingEnabled()) return;
+        final FragmentManager manager;
+        try {
+            manager = host.getChildFragmentManager();
+        } catch (IllegalStateException e) {
+            Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+            return;
+        }
         sListener = listener;
         if (manager.findFragmentByTag(TAG) == null) {
             final Bundle bundle = new Bundle();
             bundle.putParcelableList(BUNDLE_KEY_DEVICE_ITEMS, deviceItems);
+            bundle.putInt(BUNDLE_KEY_CHECKED_ITEM_INDEX, checkedItemIndex);
             final AudioSharingCallAudioDialogFragment dialog =
                     new AudioSharingCallAudioDialogFragment();
             dialog.setArguments(bundle);
@@ -79,30 +90,29 @@ public class AudioSharingCallAudioDialogFragment extends InstrumentedDialogFragm
     }
 
     @Override
+    @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Bundle arguments = requireArguments();
         List<AudioSharingDeviceItem> deviceItems =
                 arguments.getParcelable(BUNDLE_KEY_DEVICE_ITEMS, List.class);
-        int checkedItem = -1;
-        for (AudioSharingDeviceItem item : deviceItems) {
-            int fallbackActiveGroupId = AudioSharingUtils.getFallbackActiveGroupId(getContext());
-            if (item.getGroupId() == fallbackActiveGroupId) {
-                checkedItem = deviceItems.indexOf(item);
-            }
+        int checkedItemIndex = arguments.getInt(BUNDLE_KEY_CHECKED_ITEM_INDEX, -1);
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.audio_sharing_call_audio_title);
+        if (deviceItems == null) {
+            Log.d(TAG, "Create dialog error: null deviceItems");
+            return builder.create();
         }
         String[] choices =
                 deviceItems.stream().map(AudioSharingDeviceItem::getName).toArray(String[]::new);
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(getActivity())
-                        .setTitle(R.string.audio_sharing_call_audio_title)
-                        .setSingleChoiceItems(
-                                choices,
-                                checkedItem,
-                                (dialog, which) -> {
-                                    if (sListener != null) {
-                                        sListener.onItemClick(deviceItems.get(which));
-                                    }
-                                });
+        builder.setSingleChoiceItems(
+                choices,
+                checkedItemIndex,
+                (dialog, which) -> {
+                    if (sListener != null) {
+                        sListener.onItemClick(deviceItems.get(which));
+                    }
+                });
         return builder.create();
     }
 }

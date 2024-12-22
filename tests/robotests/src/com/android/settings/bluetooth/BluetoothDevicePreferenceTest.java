@@ -18,10 +18,10 @@ package com.android.settings.bluetooth;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -32,22 +32,31 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.UserManager;
 import android.util.Pair;
-import android.view.ContextThemeWrapper;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
+import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -57,18 +66,21 @@ import java.util.Comparator;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowAlertDialogCompat.class})
+@Config(shadows = {ShadowAlertDialogCompat.class,
+        com.android.settings.testutils.shadow.ShadowBluetoothUtils.class})
 public class BluetoothDevicePreferenceTest {
     private static final boolean SHOW_DEVICES_WITHOUT_NAMES = true;
-    private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
-    private static final String MAC_ADDRESS_2 = "05:52:C7:0B:D8:3C";
-    private static final String MAC_ADDRESS_3 = "06:52:C7:0B:D8:3C";
-    private static final String MAC_ADDRESS_4 = "07:52:C7:0B:D8:3C";
+    private static final String TEST_MAC_ADDRESS = "04:52:C7:0B:D8:3C";
+    private static final String TEST_MAC_ADDRESS_1 = "05:52:C7:0B:D8:3C";
+    private static final String TEST_MAC_ADDRESS_2 = "06:52:C7:0B:D8:3C";
+    private static final String TEST_MAC_ADDRESS_3 = "07:52:C7:0B:D8:3C";
     private static final Comparator<BluetoothDevicePreference> COMPARATOR =
             Comparator.naturalOrder();
     private static final String FAKE_DESCRIPTION = "fake_description";
+    private static final int TEST_DEVICE_GROUP_ID = 1;
 
-    private Context mContext;
+    @Rule
+    public final MockitoRule mockito = MockitoJUnit.rule();
     @Mock
     private CachedBluetoothDevice mCachedBluetoothDevice;
     @Mock
@@ -89,35 +101,37 @@ public class BluetoothDevicePreferenceTest {
     private Drawable mDrawable;
     @Mock
     private BluetoothAdapter mBluetoothAdapter;
+    @Mock
+    private LocalBluetoothManager mLocalBluetoothManager;
+    @Mock
+    private CachedBluetoothDeviceManager mDeviceManager;
 
+    private Context mContext = ApplicationProvider.getApplicationContext();
     private FakeFeatureFactory mFakeFeatureFactory;
     private MetricsFeatureProvider mMetricsFeatureProvider;
+
     private BluetoothDevicePreference mPreference;
     private List<BluetoothDevicePreference> mPreferenceList = new ArrayList<>();
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        Context context = spy(RuntimeEnvironment.application.getApplicationContext());
-        mContext = new ContextThemeWrapper(context, R.style.Theme_Settings);
+        mContext.setTheme(R.style.Theme_Settings);
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
-        when(mCachedBluetoothDevice.getAddress()).thenReturn(MAC_ADDRESS);
-        when(mCachedBluetoothDevice.getDrawableWithDescription())
-                .thenReturn(new Pair<>(mDrawable, FAKE_DESCRIPTION));
-        when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
-        when(mCachedDevice1.getAddress()).thenReturn(MAC_ADDRESS_2);
-        when(mCachedDevice1.getDrawableWithDescription())
-                .thenReturn(new Pair<>(mDrawable, FAKE_DESCRIPTION));
-        when(mCachedDevice1.getDevice()).thenReturn(mBluetoothDevice1);
-        when(mCachedDevice2.getAddress()).thenReturn(MAC_ADDRESS_3);
-        when(mCachedDevice2.getDrawableWithDescription())
-                .thenReturn(new Pair<>(mDrawable, FAKE_DESCRIPTION));
-        when(mCachedDevice2.getDevice()).thenReturn(mBluetoothDevice2);
-        when(mCachedDevice3.getAddress()).thenReturn(MAC_ADDRESS_4);
-        when(mCachedDevice3.getDrawableWithDescription())
-                .thenReturn(new Pair<>(mDrawable, FAKE_DESCRIPTION));
-        when(mCachedDevice3.getDevice()).thenReturn(mBluetoothDevice3);
+        ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
+        mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
+        when(mLocalBluetoothManager.getCachedDeviceManager()).thenReturn(mDeviceManager);
+        prepareCachedBluetoothDevice(mCachedBluetoothDevice, TEST_MAC_ADDRESS,
+                new Pair<>(mDrawable, FAKE_DESCRIPTION), TEST_DEVICE_GROUP_ID, mBluetoothDevice);
+        prepareCachedBluetoothDevice(mCachedDevice1, TEST_MAC_ADDRESS_1,
+                new Pair<>(mDrawable, FAKE_DESCRIPTION), TEST_DEVICE_GROUP_ID, mBluetoothDevice1);
+        prepareCachedBluetoothDevice(mCachedDevice2, TEST_MAC_ADDRESS_2,
+                new Pair<>(mDrawable, FAKE_DESCRIPTION), TEST_DEVICE_GROUP_ID, mBluetoothDevice2);
+        prepareCachedBluetoothDevice(mCachedDevice3, TEST_MAC_ADDRESS_3,
+                new Pair<>(mDrawable, FAKE_DESCRIPTION), TEST_DEVICE_GROUP_ID, mBluetoothDevice3);
+        when(mDeviceManager.getCachedDevicesCopy()).thenReturn(
+                ImmutableList.of(mCachedBluetoothDevice));
+
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
                 SHOW_DEVICES_WITHOUT_NAMES, BluetoothDevicePreference.SortType.TYPE_DEFAULT);
         mPreference.mBluetoothAdapter = mBluetoothAdapter;
@@ -301,7 +315,8 @@ public class BluetoothDevicePreferenceTest {
         // callback is not removed.
         mPreference.onAttached();
 
-        verify(mCachedBluetoothDevice, times(1)).registerCallback(any());
+        verify(mCachedBluetoothDevice, times(1)).registerCallback(eq(mContext.getMainExecutor()),
+                any());
         verify(mBluetoothAdapter, times(1)).addOnMetadataChangedListener(any(), any(), any());
     }
 
@@ -313,7 +328,99 @@ public class BluetoothDevicePreferenceTest {
         mPreference.onAttached();
 
         verify(mCachedBluetoothDevice, times(1)).unregisterCallback(any());
-        verify(mCachedBluetoothDevice, times(2)).registerCallback(any());
+        verify(mCachedBluetoothDevice, times(2)).registerCallback(eq(mContext.getMainExecutor()),
+                any());
         verify(mBluetoothAdapter, times(2)).addOnMetadataChangedListener(any(), any(), any());
+    }
+
+    @Test
+    public void onDeviceAttributesChanged_updatePreference() {
+        when(mCachedBluetoothDevice.getName()).thenReturn("Name");
+        mPreference.onAttached();
+        final String updatedName = "updatedName";
+        when(mCachedBluetoothDevice.getName()).thenReturn(updatedName);
+
+        getCachedBluetoothDeviceCallback().onDeviceAttributesChanged();
+
+        assertThat(mPreference.getTitle().toString()).isEqualTo(updatedName);
+    }
+
+    @Test
+    public void onAttached_memberDevicesAdded_registerAllCallback() {
+        when(mCachedBluetoothDevice.getMemberDevice()).thenReturn(
+                ImmutableSet.of(mCachedDevice1, mCachedDevice2, mCachedDevice3));
+        when(mDeviceManager.getCachedDevicesCopy()).thenReturn(
+                ImmutableList.of(mCachedBluetoothDevice, mCachedDevice1, mCachedDevice2,
+                        mCachedDevice3));
+        mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
+                SHOW_DEVICES_WITHOUT_NAMES, BluetoothDevicePreference.SortType.TYPE_DEFAULT);
+
+        mPreference.onAttached();
+
+        verify(mCachedBluetoothDevice).registerCallback(eq(mContext.getMainExecutor()), any());
+        verify(mCachedDevice1).registerCallback(eq(mContext.getMainExecutor()), any());
+        verify(mCachedDevice2).registerCallback(eq(mContext.getMainExecutor()), any());
+        verify(mCachedDevice3).registerCallback(eq(mContext.getMainExecutor()), any());
+    }
+
+    @Test
+    public void onDetached_memberDevicesAdded_unregisterAllCallback() {
+        when(mCachedBluetoothDevice.getMemberDevice()).thenReturn(
+                ImmutableSet.of(mCachedDevice1, mCachedDevice2, mCachedDevice3));
+        when(mDeviceManager.getCachedDevicesCopy()).thenReturn(
+                ImmutableList.of(mCachedBluetoothDevice, mCachedDevice1, mCachedDevice2,
+                        mCachedDevice3));
+        mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
+                SHOW_DEVICES_WITHOUT_NAMES, BluetoothDevicePreference.SortType.TYPE_DEFAULT);
+
+        mPreference.onAttached();
+        mPreference.onDetached();
+
+        verify(mCachedBluetoothDevice).unregisterCallback(any());
+        verify(mCachedDevice1).unregisterCallback(any());
+        verify(mCachedDevice2).unregisterCallback(any());
+        verify(mCachedDevice3).unregisterCallback(any());
+    }
+
+    @Test
+    public void onDeviceAttributesChanged_memberDevicesChanged_registerOnlyExistDeviceCallback() {
+        when(mCachedBluetoothDevice.getMemberDevice()).thenReturn(
+                ImmutableSet.of(mCachedDevice1, mCachedDevice2, mCachedDevice3));
+        when(mDeviceManager.getCachedDevicesCopy()).thenReturn(
+                ImmutableList.of(mCachedBluetoothDevice, mCachedDevice1, mCachedDevice2,
+                        mCachedDevice3));
+        mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
+                SHOW_DEVICES_WITHOUT_NAMES, BluetoothDevicePreference.SortType.TYPE_DEFAULT);
+        mPreference.onAttached();
+        when(mCachedBluetoothDevice.getMemberDevice()).thenReturn(
+                ImmutableSet.of(mCachedDevice1, mCachedDevice2));
+        when(mDeviceManager.getCachedDevicesCopy()).thenReturn(
+                ImmutableList.of(mCachedBluetoothDevice, mCachedDevice1, mCachedDevice2));
+
+        getCachedBluetoothDeviceCallback().onDeviceAttributesChanged();
+
+        verify(mCachedBluetoothDevice, times(2)).registerCallback(eq(mContext.getMainExecutor()),
+                any());
+        verify(mCachedDevice1, times(2)).registerCallback(eq(mContext.getMainExecutor()), any());
+        verify(mCachedDevice2, times(2)).registerCallback(eq(mContext.getMainExecutor()), any());
+        verify(mCachedDevice3, times(1)).registerCallback(eq(mContext.getMainExecutor()), any());
+    }
+
+    private void prepareCachedBluetoothDevice(CachedBluetoothDevice cachedDevice, String address,
+            Pair<Drawable, String> drawableWithDescription, int groupId,
+            BluetoothDevice bluetoothDevice) {
+        when(cachedDevice.getAddress()).thenReturn(address);
+        when(cachedDevice.getDrawableWithDescription()).thenReturn(drawableWithDescription);
+        when(cachedDevice.getGroupId()).thenReturn(groupId);
+        when(cachedDevice.getDevice()).thenReturn(bluetoothDevice);
+    }
+
+    private CachedBluetoothDevice.Callback getCachedBluetoothDeviceCallback() {
+        ArgumentCaptor<CachedBluetoothDevice.Callback> callbackCaptor = ArgumentCaptor.forClass(
+                CachedBluetoothDevice.Callback.class);
+        verify(mCachedBluetoothDevice).registerCallback(eq(mContext.getMainExecutor()),
+                callbackCaptor.capture());
+
+        return callbackCaptor.getValue();
     }
 }

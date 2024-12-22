@@ -60,6 +60,7 @@ public class PrivateSpaceMaintainer {
     private final Context mContext;
     private final UserManager mUserManager;
     private final ActivityManager mActivityManager;
+    private  int mErrorCode;
     @GuardedBy("this")
     private UserHandle mUserHandle;
     private final KeyguardManager mKeyguardManager;
@@ -111,6 +112,9 @@ public class PrivateSpaceMaintainer {
                         userName, USER_TYPE_PROFILE_PRIVATE, new ArraySet<>());
             } catch (Exception e) {
                 Log.e(TAG, "Error creating private space", e);
+                if (android.multiuser.Flags.showDifferentCreationErrorForUnsupportedDevices()) {
+                    mErrorCode = ((UserManager.UserOperationException) e).getUserOperationResult();
+                }
                 return false;
             }
 
@@ -205,7 +209,6 @@ public class PrivateSpaceMaintainer {
             return mKeyguardManager.createConfirmDeviceCredentialIntent(
                     /* title= */ null,  /* description= */null, mUserHandle.getIdentifier());
         }
-        // TODO(b/304796434) Need to try changing this intent to use BiometricPrompt
         return mKeyguardManager.createConfirmDeviceCredentialIntent(
                 /* title= */ null, /* description= */ null);
     }
@@ -311,6 +314,11 @@ public class PrivateSpaceMaintainer {
      */
     public boolean isPrivateSpaceEntryPointEnabled() {
         return mUserManager.canAddPrivateProfile() || doesPrivateSpaceExist();
+    }
+
+    /** Returns the error code for private space creation failure*/
+    public int getPrivateSpaceCreateError() {
+        return mErrorCode;
     }
 
     /** Returns true if private space exists and is running, otherwise returns false */

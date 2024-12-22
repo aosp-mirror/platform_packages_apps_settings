@@ -16,13 +16,9 @@
 
 package com.android.settings.development.bluetooth;
 
-import static com.android.settings.development.bluetooth.BluetoothStackLogPreferenceController.BLUETOOTH_BTSTACK_LOG_MODE_PROPERTY;
-import static com.android.settings.development.bluetooth.BluetoothStackLogPreferenceController.BLUETOOTH_BTSTACK_LOG_MODE_PROPERTY_PERSIST;
-import static com.android.settings.development.bluetooth.BluetoothStackLogPreferenceController.BTSTACK_LOG_MODE_VERBOSE_INDEX;
-import static com.android.settings.development.bluetooth.BluetoothStackLogPreferenceController.BTSTACK_LOG_MODE_DEBUG_INDEX;
-import static com.android.settings.development.bluetooth.BluetoothStackLogPreferenceController.BTSTACK_LOG_MODE_INFO_INDEX;
-import static com.android.settings.development.bluetooth.BluetoothStackLogPreferenceController.BTSTACK_LOG_MODE_WARN_INDEX;
-import static com.android.settings.development.bluetooth.BluetoothStackLogPreferenceController.BTSTACK_LOG_MODE_ERROR_INDEX;
+import static com.android.settings.development.bluetooth.BluetoothStackLogPreferenceController.BT_LOG_LEVEL_DEFAULT_INDEX;
+import static com.android.settings.development.bluetooth.BluetoothStackLogPreferenceController.BT_LOG_LEVEL_PROP;
+import static com.android.settings.development.bluetooth.BluetoothStackLogPreferenceController.BT_LOG_LEVEL_PROP_PERSIST;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -37,18 +33,21 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
-@Ignore("b/339148064")
 public class BluetoothStackLogPreferenceControllerTest {
-    private static final String TAG = "BluetoothStackLogPreferenceControllerTest";
+    private static final String COM_ANDROID_SETTINGS = "com.android.settings";
+    private static final String TYPE_ARRAY = "array";
 
-    @Mock private Context mContext;
+    private static final String XML_DEFINED_PREFERENCE_KEY = "bt_stack_log_level";
+    private static final String XML_DEFINED_ENTRIES_RESOURCE = "bt_stack_log_level_entries";
+    private static final String XML_DEFINED_VALUES_RESOURCE = "bt_stack_log_level_values";
+
+    private static final String PROPERTY_CLEARED = "";
+
+    private Context mContext;
 
     private ListPreference mPreference;
     private PreferenceManager mPreferenceManager;
@@ -61,7 +60,6 @@ public class BluetoothStackLogPreferenceControllerTest {
 
     @Before
     public void setup() {
-        MockitoAnnotations.initMocks(this);
         mContext = ApplicationProvider.getApplicationContext();
 
         if (Looper.myLooper() == null) {
@@ -71,12 +69,11 @@ public class BluetoothStackLogPreferenceControllerTest {
         mPreferenceManager = new PreferenceManager(mContext);
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mPreference = new ListPreference(mContext);
-
         mController = new BluetoothStackLogPreferenceController(mContext);
 
         mPreference.setKey(mController.getPreferenceKey());
-        mPreference.setEntries(com.android.settings.R.array.bt_stack_log_level_entries);
-        mPreference.setEntryValues(com.android.settings.R.array.bt_stack_log_level_values);
+        mPreference.setEntries(getStringArrayResourceId(XML_DEFINED_ENTRIES_RESOURCE));
+        mPreference.setEntryValues(getStringArrayResourceId(XML_DEFINED_VALUES_RESOURCE));
 
         mPreferenceScreen.addPreference(mPreference);
         mController.displayPreference(mPreferenceScreen);
@@ -86,134 +83,109 @@ public class BluetoothStackLogPreferenceControllerTest {
     }
 
     /**
-     * Test that default log level is set to INFO
+     * Get the resource ID associated with a resource name
+     *
+     * This looks up the resource id by name using our device's context. This way, we can avoid
+     * hardcoding a resource ID or value from the R class which may not match the resource IDs on
+     * the device under test.
+     *
+     * Usage: int valuesResId = getStringArrayResource("bt_stack_log_level_values");
+     * Usage: int entriesResId = getStringArrayResource("bt_stack_log_level_entries");
+     *
+     * @param res - The resource name to look up
+     * @return The integer resource ID corresponding to the given resource name
      */
-    @Test
-    public void verifyDefaultState_enablesDefaultLogLevelEntriesAndValuesSameSize() {
-        mController.onPreferenceChange(mPreference, mController.getDefaultModeIndex());
-        assertThat(mPreference.getValue().toString()).isEqualTo(mListValues
-                        [BTSTACK_LOG_MODE_INFO_INDEX].toString());
-        assertThat(mPreference.getSummary().toString()).isEqualTo(mListEntries
-                        [BTSTACK_LOG_MODE_INFO_INDEX].toString());
+    public int getStringArrayResourceId(String res) {
+        return mContext.getResources().getIdentifier(res, TYPE_ARRAY, COM_ANDROID_SETTINGS);
     }
 
     /**
-     * Test that log level is changed to VERBOSE when VERBOSE is selected
+     * Test that, for each possible value a user can select, our controller properly handles the
+     * value to update the underlying system property _and_ set the UI entry to the proper value.
      */
     @Test
-    public void onPreferenceChanged_enableBluetoothStackVerboseLogLevel() {
-        mController.onPreferenceChange(mPreference, mListValues[BTSTACK_LOG_MODE_VERBOSE_INDEX]
-                        .toString());
+    public void onPreferenceChange_withEachValue_uiSetProperlyAndAllValuesWrittenToProperties() {
+        for (int index = 0; index < mListValues.length; index++) {
+            String value = mListValues[index].toString();
+            String entry = mListEntries[index].toString();
 
-        final String persistedLogLevel = SystemProperties.get(
-                        BLUETOOTH_BTSTACK_LOG_MODE_PROPERTY_PERSIST);
-        final String logLevel = SystemProperties.get(BLUETOOTH_BTSTACK_LOG_MODE_PROPERTY);
-        assertThat(persistedLogLevel).isEqualTo(mListValues[BTSTACK_LOG_MODE_VERBOSE_INDEX]
-                        .toString());
-        assertThat(logLevel).isEqualTo(mListValues[BTSTACK_LOG_MODE_VERBOSE_INDEX].toString());
+            mController.onPreferenceChange(mPreference, value);
 
-        assertThat(mPreference.getValue().toString()).isEqualTo(mListValues
-                        [BTSTACK_LOG_MODE_VERBOSE_INDEX].toString());
-        assertThat(mPreference.getSummary().toString()).isEqualTo(mListEntries
-                        [BTSTACK_LOG_MODE_VERBOSE_INDEX].toString());
+            final String persistedLogLevel = SystemProperties.get(BT_LOG_LEVEL_PROP_PERSIST);
+            final String logLevel = SystemProperties.get(BT_LOG_LEVEL_PROP);
+            final String currentValue = mPreference.getValue().toString();
+            final String currentEntry = mPreference.getEntry().toString();
+            final String currentSummary = mPreference.getSummary().toString();
+            final int currentIndex = mPreference.findIndexOfValue(currentValue);
+
+            assertThat(persistedLogLevel).isEqualTo(value);
+            assertThat(logLevel).isEqualTo(value);
+            assertThat(currentIndex).isEqualTo(index);
+            assertThat(currentValue).isEqualTo(value);
+            assertThat(currentEntry).isEqualTo(entry);
+            assertThat(currentSummary).isEqualTo(entry);
+        }
     }
 
     /**
-     * Test that log level is changed to DEBUG when DEBUG is selected
+     * Test that, for each possible log tag log level value, our controller properly handles the
+     * value to set the UI entry to the proper value.
      */
     @Test
-    public void onPreferenceChanged_enableBluetoothStackDebugLogLevel() {
-        mController.onPreferenceChange(mPreference, mListValues[BTSTACK_LOG_MODE_DEBUG_INDEX]
-                        .toString());
+    public void updateState_withEachValue_uiSetProperly() {
+        for (int index = 0; index < mListValues.length; index++) {
+            String value = mListValues[index].toString();
+            String entry = mListEntries[index].toString();
 
-        final String persistedLogLevel = SystemProperties.get(
-                BLUETOOTH_BTSTACK_LOG_MODE_PROPERTY_PERSIST);
-        final String logLevel = SystemProperties.get(BLUETOOTH_BTSTACK_LOG_MODE_PROPERTY);
-        assertThat(persistedLogLevel).isEqualTo(mListValues[BTSTACK_LOG_MODE_DEBUG_INDEX]
-                        .toString());
-        assertThat(logLevel).isEqualTo(mListValues[BTSTACK_LOG_MODE_DEBUG_INDEX].toString());
+            SystemProperties.set(BT_LOG_LEVEL_PROP_PERSIST, value);
+            SystemProperties.set(BT_LOG_LEVEL_PROP, value);
 
-        assertThat(mPreference.getValue().toString()).isEqualTo(mListValues
-                        [BTSTACK_LOG_MODE_DEBUG_INDEX].toString());
-        assertThat(mPreference.getSummary().toString()).isEqualTo(mListEntries
-                        [BTSTACK_LOG_MODE_DEBUG_INDEX].toString());
+            mController.updateState(mPreference);
+
+            final String currentValue = mPreference.getValue().toString();
+            final String currentEntry = mPreference.getEntry().toString();
+            final String currentSummary = mPreference.getSummary().toString();
+            final int currentIndex = mPreference.findIndexOfValue(currentValue);
+
+            assertThat(currentIndex).isEqualTo(index);
+            assertThat(currentValue).isEqualTo(value);
+            assertThat(currentEntry).isEqualTo(entry);
+            assertThat(currentSummary).isEqualTo(entry);
+        }
     }
 
     /**
-     * Test that log level is changed to INFO when INFO is selected
+     * Test that our controller reverts the log level back to a missing/default value when we're
+     * notified that Developer Options has been disabled.
      */
     @Test
-    public void onPreferenceChanged_enableBluetoothStackInfoLogLevel() {
-        mController.onPreferenceChange(mPreference, mListValues[BTSTACK_LOG_MODE_INFO_INDEX]
-                        .toString());
+    public void onDeveloperOptionsSwitchDisabled_preferenceSetToDefault() {
+        mController.onDeveloperOptionsSwitchDisabled();
 
-        final String persistedLogLevel = SystemProperties.get(
-                BLUETOOTH_BTSTACK_LOG_MODE_PROPERTY_PERSIST);
-        final String logLevel = SystemProperties.get(BLUETOOTH_BTSTACK_LOG_MODE_PROPERTY);
-        assertThat(persistedLogLevel).isEqualTo(mListValues[BTSTACK_LOG_MODE_INFO_INDEX]
-                        .toString());
-        assertThat(logLevel).isEqualTo(mListValues[BTSTACK_LOG_MODE_INFO_INDEX].toString());
+        final String defaultEntry = mListEntries[BT_LOG_LEVEL_DEFAULT_INDEX].toString();
+        final String defaultValue = mListValues[BT_LOG_LEVEL_DEFAULT_INDEX].toString();
 
-        assertThat(mPreference.getValue().toString()).isEqualTo(mListValues
-                        [BTSTACK_LOG_MODE_INFO_INDEX].toString());
-        assertThat(mPreference.getSummary().toString()).isEqualTo(mListEntries
-                        [BTSTACK_LOG_MODE_INFO_INDEX].toString());
+        final String persistedLogLevel = SystemProperties.get(BT_LOG_LEVEL_PROP_PERSIST);
+        final String logLevel = SystemProperties.get(BT_LOG_LEVEL_PROP);
+        final String currentValue = mPreference.getValue().toString();
+        final String currentEntry = mPreference.getEntry().toString();
+        final String currentSummary = mPreference.getSummary().toString();
+        final int currentIndex = mPreference.findIndexOfValue(currentValue);
+
+        assertThat(persistedLogLevel).isEqualTo(PROPERTY_CLEARED);
+        assertThat(logLevel).isEqualTo(PROPERTY_CLEARED);
+        assertThat(currentIndex).isEqualTo(BT_LOG_LEVEL_DEFAULT_INDEX);
+        assertThat(currentValue).isEqualTo(defaultValue);
+        assertThat(currentEntry).isEqualTo(defaultEntry);
+        assertThat(currentSummary).isEqualTo(defaultEntry);
     }
 
     /**
-     * Test that log level is changed to WARN when WARN is selected
+     * Test that our preference key returned by our controller matches the one defined in the XML
+     * definition.
      */
     @Test
-    public void onPreferenceChanged_enableBluetoothStackWarnLogLevel() {
-        mController.onPreferenceChange(mPreference, mListValues[BTSTACK_LOG_MODE_WARN_INDEX]
-                        .toString());
-
-        final String persistedLogLevel = SystemProperties.get(
-                BLUETOOTH_BTSTACK_LOG_MODE_PROPERTY_PERSIST);
-        final String logLevel = SystemProperties.get(BLUETOOTH_BTSTACK_LOG_MODE_PROPERTY);
-        assertThat(persistedLogLevel).isEqualTo(mListValues[BTSTACK_LOG_MODE_WARN_INDEX]
-                        .toString());
-        assertThat(logLevel).isEqualTo(mListValues[BTSTACK_LOG_MODE_WARN_INDEX].toString());
-
-        assertThat(mPreference.getValue().toString()).isEqualTo(mListValues
-
-                        [BTSTACK_LOG_MODE_WARN_INDEX].toString());
-        assertThat(mPreference.getSummary().toString()).isEqualTo(mListEntries
-                        [BTSTACK_LOG_MODE_WARN_INDEX].toString());
-    }
-
-    /**
-     * Test that log level is changed to ERROR when ERROR is selected
-     */
-    @Test
-    public void onPreferenceChanged_enableBluetoothStackErrorLogLevel() {
-        mController.onPreferenceChange(mPreference, mListValues[BTSTACK_LOG_MODE_ERROR_INDEX]
-                        .toString());
-
-        final String persistedLogLevel = SystemProperties.get(
-                BLUETOOTH_BTSTACK_LOG_MODE_PROPERTY_PERSIST);
-        final String logLevel = SystemProperties.get(BLUETOOTH_BTSTACK_LOG_MODE_PROPERTY);
-        assertThat(persistedLogLevel).isEqualTo(mListValues[BTSTACK_LOG_MODE_ERROR_INDEX]
-                        .toString());
-        assertThat(logLevel).isEqualTo(mListValues[BTSTACK_LOG_MODE_ERROR_INDEX].toString());
-
-        assertThat(mPreference.getValue().toString()).isEqualTo(mListValues
-                        [BTSTACK_LOG_MODE_ERROR_INDEX].toString());
-        assertThat(mPreference.getSummary().toString()).isEqualTo(mListEntries
-                        [BTSTACK_LOG_MODE_ERROR_INDEX].toString());
-    }
-
-    /**
-     * Test that preference is disabled when developer options is disabled
-     * Log level is also reset to default
-     */
-    @Test
-    public void onDeveloperOptionsDisabled_shouldDisablePreference() {
-        mController.onDeveloperOptionsDisabled();
-        assertThat(mPreference.isEnabled()).isFalse();
-        assertThat(mPreference.getValue().toString()).isEqualTo(mListValues[mController
-                .getDefaultModeIndex()].toString());
-        assertThat(mPreference.getSummary().toString()).isEqualTo(mListEntries[mController
-                .getDefaultModeIndex()].toString());
+    public void getPreferenceKey_matchesXmlDefinedPreferenceKey() {
+        assertThat(mController.getPreferenceKey()).isEqualTo(XML_DEFINED_PREFERENCE_KEY);
     }
 }

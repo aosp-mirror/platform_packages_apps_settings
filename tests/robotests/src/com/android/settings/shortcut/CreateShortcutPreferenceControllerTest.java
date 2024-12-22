@@ -16,7 +16,7 @@
 
 package com.android.settings.shortcut;
 
-import static com.android.settings.shortcut.CreateShortcutPreferenceController.SHORTCUT_ID_PREFIX;
+import static com.android.settings.shortcut.Shortcuts.SHORTCUT_ID_PREFIX;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -101,10 +101,10 @@ public class CreateShortcutPreferenceControllerTest {
         when(mShortcutManager.createShortcutResultIntent(any(ShortcutInfo.class)))
                 .thenReturn(new Intent().putExtra("d1", "d2"));
 
-        final Intent intent = new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE)
+        final Intent intent = new Intent(Shortcuts.SHORTCUT_PROBE)
                 .setClass(mContext, Settings.ManageApplicationsActivity.class);
         final ResolveInfo ri = mContext.getPackageManager().resolveActivity(intent, 0);
-        final Intent result = mController.createResultIntent(intent, ri, "mock");
+        final Intent result = mController.createResultIntent(ri);
 
         assertThat(result.getStringExtra("d1")).isEqualTo("d2");
         assertThat((Object) result.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT)).isNotNull();
@@ -131,7 +131,7 @@ public class CreateShortcutPreferenceControllerTest {
         ri2.activityInfo.applicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 
         mPackageManager.setResolveInfosForIntent(
-                new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE),
+                new Intent(Shortcuts.SHORTCUT_PROBE),
                 Arrays.asList(ri1, ri2));
 
         doReturn(false).when(mController).canShowWifiHotspot();
@@ -158,7 +158,7 @@ public class CreateShortcutPreferenceControllerTest {
         ri2.activityInfo.applicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 
         mPackageManager.setResolveInfosForIntent(
-                new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE),
+                new Intent(Shortcuts.SHORTCUT_PROBE),
                 Arrays.asList(ri1, ri2));
 
         doReturn(false).when(mController).canShowWifiHotspot();
@@ -276,7 +276,7 @@ public class CreateShortcutPreferenceControllerTest {
         ri.activityInfo.applicationInfo.flags = ApplicationInfo.FLAG_SYSTEM;
 
         mPackageManager.setResolveInfosForIntent(
-                new Intent(CreateShortcutPreferenceController.SHORTCUT_PROBE),
+                new Intent(Shortcuts.SHORTCUT_PROBE),
                 Arrays.asList(ri));
     }
 }

@@ -19,7 +19,7 @@ package com.android.settings.accessibility;
 import android.content.ComponentName;
 import android.text.TextUtils;
 
-import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
+import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 
 import com.google.common.base.Objects;
 

@@ -18,13 +18,21 @@ package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
+import android.hardware.biometrics.BiometricManager;
+import android.hardware.biometrics.Flags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
@@ -33,6 +41,9 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.Utils;
+import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.widget.SettingsMainSwitchBar;
@@ -42,6 +53,7 @@ import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -51,6 +63,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowBiometricManager;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -61,22 +74,34 @@ import java.util.List;
         ShadowAlertDialogCompat.class,
         ShadowUserManager.class,
         ShadowUserManager.class,
+        ShadowBiometricManager.class,
 })
 public class DevelopmentSettingsDashboardFragmentTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private Context mContext;
     private ShadowUserManager mShadowUserManager;
+    private ShadowBiometricManager mShadowBiometricManager;
     private DevelopmentSettingsDashboardFragment mDashboard;
+    private SettingsMainSwitchBar mSwitchBar;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        SettingsMainSwitchBar switchBar = new SettingsMainSwitchBar(mContext);
+        mSwitchBar = new SettingsMainSwitchBar(mContext);
         mDashboard = spy(new DevelopmentSettingsDashboardFragment());
-        ReflectionHelpers.setField(mDashboard, "mSwitchBar", switchBar);
+        ReflectionHelpers.setField(mDashboard, "mSwitchBar", mSwitchBar);
         mShadowUserManager = Shadow.extract(mContext.getSystemService(Context.USER_SERVICE));
         mShadowUserManager.setIsAdminUser(true);
+        mShadowBiometricManager = Shadow.extract(mContext.getSystemService(
+                Context.BIOMETRIC_SERVICE));
+        mShadowBiometricManager.setCanAuthenticate(false);
+        //TODO(b/352603684): Should be Authenticators.MANDATORY_BIOMETRICS,
+        // but it is not supported by ShadowBiometricManager
+        mShadowBiometricManager.setAuthenticatorType(
+                BiometricManager.Authenticators.BIOMETRIC_STRONG);
     }
 
     @After
@@ -174,6 +199,57 @@ public class DevelopmentSettingsDashboardFragmentTest {
 
         mDashboard.onCheckedChanged(null, true /* isChecked */);
         assertThat(ShadowEnableDevelopmentSettingWarningDialog.mShown).isTrue();
+    }
+
+    @Test
+    @Config(shadows = ShadowEnableDevelopmentSettingWarningDialog.class)
+    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
+    public void onSwitchChanged_turnOn_shouldLaunchBiometricPromptIfMandatoryBiometricsEffective() {
+        when(mDashboard.getContext()).thenReturn(mContext);
+        doNothing().when(mDashboard).startActivityForResult(any(),
+                eq(DevelopmentSettingsDashboardFragment.REQUEST_BIOMETRIC_PROMPT));
+
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
+        mShadowBiometricManager.setCanAuthenticate(true);
+        mDashboard.onCheckedChanged(null, true /* isChecked */);
+
+        assertThat(mSwitchBar.isChecked()).isFalse();
+        verify(mDashboard).startActivityForResult(any(),
+                eq(DevelopmentSettingsDashboardFragment.REQUEST_BIOMETRIC_PROMPT));
+        assertThat(ShadowEnableDevelopmentSettingWarningDialog.mShown).isFalse();
+    }
+
+    @Test
+    @Config(shadows = ShadowEnableDevelopmentSettingWarningDialog.class)
+    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
+    public void onActivityResult_requestBiometricPrompt_shouldShowWarningDialog() {
+        when(mDashboard.getContext()).thenReturn(mContext);
+
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
+        mDashboard.onActivityResult(DevelopmentSettingsDashboardFragment.REQUEST_BIOMETRIC_PROMPT,
+                Activity.RESULT_OK, null);
+        mDashboard.onCheckedChanged(null, true /* isChecked */);
+
+        assertThat(mSwitchBar.isChecked()).isTrue();
+        assertThat(ShadowEnableDevelopmentSettingWarningDialog.mShown).isTrue();
+    }
+
+    @Test
+    @Config(shadows = ShadowIdentityCheckBiometricErrorDialog.class)
+    @Ignore("b/354820314")
+    @EnableFlags(Flags.FLAG_MANDATORY_BIOMETRICS)
+    public void onActivityResult_requestBiometricPrompt_showErrorDialog() {
+        when(mDashboard.getContext()).thenReturn(mContext);
+
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
+        mDashboard.onActivityResult(DevelopmentSettingsDashboardFragment.REQUEST_BIOMETRIC_PROMPT,
+                ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT, null);
+
+        assertThat(mSwitchBar.isChecked()).isFalse();
+        assertThat(ShadowIdentityCheckBiometricErrorDialog.sShown).isTrue();
     }
 
     @Test
@@ -302,6 +378,16 @@ public class DevelopmentSettingsDashboardFragmentTest {
         @Implementation
         protected static void show(DevelopmentSettingsDashboardFragment host) {
             mShown = true;
+        }
+    }
+
+    @Implements(IdentityCheckBiometricErrorDialog.class)
+    public static class ShadowIdentityCheckBiometricErrorDialog {
+        static boolean sShown;
+        @Implementation
+        public static void showBiometricErrorDialog(FragmentActivity fragmentActivity,
+                Utils.BiometricStatus errorCode) {
+            sShown = true;
         }
     }
 

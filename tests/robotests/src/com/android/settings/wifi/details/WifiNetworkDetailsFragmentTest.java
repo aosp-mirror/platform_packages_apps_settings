@@ -32,6 +32,7 @@ import static com.android.wifitrackerlib.WifiEntry.WIFI_LEVEL_MAX;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -244,6 +245,15 @@ public class WifiNetworkDetailsFragmentTest {
         verify(mHotspotConnectionCategory).setVisible(true);
         verify(mWifiDetailPreferenceController2)
                 .setSignalStrengthTitle(R.string.hotspot_connection_strength);
+    }
+
+    @Test
+    public void onHotspotNetworkChanged_uiRestricted_doNothing() {
+        mFragment.mIsUiRestricted = true;
+
+        mFragment.onHotspotNetworkChanged(null /* HotspotNetworkData */);
+
+        verify(mScreen, never()).findPreference(any());
     }
 
     @Test

@@ -41,91 +41,77 @@ import org.mockito.kotlin.verify
 
 @RunWith(AndroidJUnit4::class)
 class NrAdvancedCallingPreferenceControllerTest {
-    @get:Rule
-    val composeTestRule = createComposeRule()
+    @get:Rule val composeTestRule = createComposeRule()
 
     private val context: Context = spy(ApplicationProvider.getApplicationContext()) {}
 
-    private val callStateRepository = mock<CallStateRepository> {
-        on { isInCallFlow() } doReturn flowOf(false)
-    }
+    private val callStateRepository =
+        mock<CallStateRepository> { on { isInCallFlow() } doReturn flowOf(false) }
 
-    private val voNrRepository = mock<VoNrRepository>()
+    private val voNrRepository =
+        mock<VoNrRepository> { on { isVoNrEnabledFlow(SUB_ID) } doReturn flowOf(true) }
 
-    private val controller = NrAdvancedCallingPreferenceController(
-        context = context,
-        key = TEST_KEY,
-        callStateRepository = callStateRepository,
-    ).apply { init(SUB_ID, voNrRepository) }
+    private val controller =
+        NrAdvancedCallingPreferenceController(
+                context = context,
+                key = TEST_KEY,
+                voNrRepository = voNrRepository,
+                callStateRepository = callStateRepository,
+            )
+            .apply { init(SUB_ID) }
 
     @Test
     fun isChecked_voNrEnabled_on() {
-        voNrRepository.stub {
-            on { isVoNrEnabledFlow() } doReturn flowOf(true)
-        }
+        voNrRepository.stub { on { isVoNrEnabledFlow(SUB_ID) } doReturn flowOf(true) }
 
-        composeTestRule.setContent {
-            controller.Content()
-        }
+        composeTestRule.setContent { controller.Content() }
 
-        composeTestRule.onNodeWithText(context.getString(R.string.nr_advanced_calling_title))
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.nr_advanced_calling_title))
             .assertIsOn()
     }
 
     @Test
     fun isChecked_voNrDisabled_off() {
-        voNrRepository.stub {
-            on { isVoNrEnabledFlow() } doReturn flowOf(false)
-        }
+        voNrRepository.stub { on { isVoNrEnabledFlow(SUB_ID) } doReturn flowOf(false) }
 
-        composeTestRule.setContent {
-            controller.Content()
-        }
+        composeTestRule.setContent { controller.Content() }
 
-        composeTestRule.onNodeWithText(context.getString(R.string.nr_advanced_calling_title))
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.nr_advanced_calling_title))
             .assertIsOff()
     }
 
     @Test
-    fun isEnabled_notInCall_enabled() {
-        callStateRepository.stub {
-            on { isInCallFlow() } doReturn flowOf(false)
-        }
+    fun isChangeable_notInCall_changeable() {
+        callStateRepository.stub { on { isInCallFlow() } doReturn flowOf(false) }
 
-        composeTestRule.setContent {
-            controller.Content()
-        }
+        composeTestRule.setContent { controller.Content() }
 
-        composeTestRule.onNodeWithText(context.getString(R.string.nr_advanced_calling_title))
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.nr_advanced_calling_title))
             .assertIsEnabled()
     }
 
     @Test
-    fun isEnabled_inCall_notEnabled() {
-        callStateRepository.stub {
-            on { isInCallFlow() } doReturn flowOf(true)
-        }
+    fun isChangeable_inCall_notChangeable() {
+        callStateRepository.stub { on { isInCallFlow() } doReturn flowOf(true) }
 
-        composeTestRule.setContent {
-            controller.Content()
-        }
+        composeTestRule.setContent { controller.Content() }
 
-        composeTestRule.onNodeWithText(context.getString(R.string.nr_advanced_calling_title))
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.nr_advanced_calling_title))
             .assertIsNotEnabled()
     }
 
     @Test
     fun onClick_setVoNrEnabled(): Unit = runBlocking {
-        voNrRepository.stub {
-            on { isVoNrEnabledFlow() } doReturn flowOf(false)
-        }
+        voNrRepository.stub { on { isVoNrEnabledFlow(SUB_ID) } doReturn flowOf(false) }
 
-        composeTestRule.setContent {
-            controller.Content()
-        }
+        composeTestRule.setContent { controller.Content() }
         composeTestRule.onRoot().performClick()
 
-        verify(voNrRepository).setVoNrEnabled(true)
+        verify(voNrRepository).setVoNrEnabled(SUB_ID, true)
     }
 
     private companion object {
