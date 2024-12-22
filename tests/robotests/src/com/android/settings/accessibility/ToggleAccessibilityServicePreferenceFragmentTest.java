@@ -299,21 +299,6 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     }
 
     @Test
-    @DisableFlags(
-            com.android.settings.accessibility.Flags.FLAG_EDIT_SHORTCUTS_IN_FULL_SCREEN)
-    public void clickShortcutSettingsPreference_warningNotRequired_dontShowWarning_showDialog()
-            throws Throwable {
-        setupServiceWarningRequired(false);
-        mFragment.mShortcutPreference = new ShortcutPreference(mContext, /* attrs= */null);
-
-        mFragment.onSettingsClicked(mFragment.mShortcutPreference);
-
-        assertThat(mFragment.mLastShownDialogId).isEqualTo(
-                AccessibilityDialogUtils.DialogEnums.EDIT_SHORTCUT);
-    }
-
-    @Test
-    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_EDIT_SHORTCUTS_IN_FULL_SCREEN)
     public void clickShortcutSettingsPreference_warningNotRequired_dontShowWarning_launchActivity()
             throws Throwable {
         setupServiceWarningRequired(false);

@@ -36,10 +36,12 @@ import androidx.preference.Preference;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -55,6 +57,7 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
     static final int REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF = 100;
+    static final int REQUEST_IDENTITY_CHECK_FOR_DEV_PREF = 101;
 
     private Activity mActivity;
     private InstrumentedPreferenceFragment mFragment;
@@ -217,11 +220,35 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
      * @return if activity result is handled.
      */
     public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode != REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF) {
+        if (requestCode != REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF
+                && requestCode != REQUEST_IDENTITY_CHECK_FOR_DEV_PREF) {
             return false;
         }
-        if (resultCode == Activity.RESULT_OK) {
-            enableDevelopmentSettings();
+        if (requestCode == REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF
+                && resultCode == Activity.RESULT_OK) {
+            final int userId = mContext.getUserId();
+            final Utils.BiometricStatus biometricAuthStatus =
+                    Utils.requestBiometricAuthenticationForMandatoryBiometrics(mContext,
+                            false /* biometricsAuthenticationRequested */,
+                            userId);
+            if (biometricAuthStatus == Utils.BiometricStatus.OK) {
+                Utils.launchBiometricPromptForMandatoryBiometrics(mFragment,
+                        REQUEST_IDENTITY_CHECK_FOR_DEV_PREF,
+                        userId, false /* hideBackground */);
+            } else if (biometricAuthStatus == Utils.BiometricStatus.NOT_ACTIVE) {
+                enableDevelopmentSettings();
+            } else {
+                IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(mFragment.getActivity(),
+                        biometricAuthStatus, true /* twoFactorAuthentication */);
+            }
+        } else if (requestCode == REQUEST_IDENTITY_CHECK_FOR_DEV_PREF) {
+            if (resultCode == Activity.RESULT_OK) {
+                enableDevelopmentSettings();
+            } else if (resultCode
+                    == ConfirmDeviceCredentialActivity.BIOMETRIC_LOCKOUT_ERROR_RESULT) {
+                IdentityCheckBiometricErrorDialog.showBiometricErrorDialog(mFragment.getActivity(),
+                        Utils.BiometricStatus.LOCKOUT, true /* twoFactorAuthentication */);
+            }
         }
         mProcessingLastDevHit = false;
         return true;

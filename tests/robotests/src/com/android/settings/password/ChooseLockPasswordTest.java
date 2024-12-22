@@ -36,19 +36,25 @@ import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.robolectric.RuntimeEnvironment.application;
+import static org.robolectric.Shadows.shadowOf;
 
+import android.annotation.ColorInt;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.DevicePolicyManager.PasswordComplexity;
 import android.app.admin.PasswordMetrics;
 import android.app.admin.PasswordPolicy;
 import android.content.Intent;
+import android.os.Looper;
 import android.os.UserHandle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment;
 import com.android.settings.password.ChooseLockPassword.IntentBuilder;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
@@ -65,7 +71,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDrawable;
 
@@ -308,7 +313,7 @@ public class ChooseLockPasswordTest {
                 /* minComplexity= */ PASSWORD_COMPLEXITY_NONE,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
                 /* userEnteredPassword= */ LockscreenCredential.createPassword("12345678"),
-                "Ascending, descending, or repeated sequence of digits isn't allowed");
+                "Ascending, descending, or repeated sequence of characters isn't allowed");
     }
 
     @Test
@@ -350,7 +355,7 @@ public class ChooseLockPasswordTest {
                 /* minComplexity= */ PASSWORD_COMPLEXITY_LOW,
                 /* passwordType= */ PASSWORD_QUALITY_ALPHABETIC,
                 /* userEnteredPassword= */ LockscreenCredential.createPassword("12345678"),
-                "Ascending, descending, or repeated sequence of digits isn't allowed");
+                "Ascending, descending, or repeated sequence of characters isn't allowed");
     }
 
     @Test
@@ -515,6 +520,52 @@ public class ChooseLockPasswordTest {
         assertThat(pinAutoConfirmOption.isChecked()).isFalse();
     }
 
+    @Test
+    public void defaultMessage_shouldBeInTextColorPrimary() {
+        final ChooseLockPassword passwordActivity = setupActivityWithPinTypeAndDefaultPolicy();
+
+        final ChooseLockPasswordFragment fragment = getChooseLockPasswordFragment(passwordActivity);
+        final ScrollToParentEditText passwordEntry = passwordActivity.findViewById(R.id.password_entry);
+        final RecyclerView view = (RecyclerView) fragment.getPasswordRequirementsView();
+        @ColorInt final int textColorPrimary = Utils.getColorAttrDefaultColor(passwordActivity,
+                android.R.attr.textColorPrimary);
+
+        passwordEntry.setText("");
+        fragment.updateUi();
+        shadowOf(Looper.getMainLooper()).idle();
+        TextView textView = (TextView)view.getLayoutManager().findViewByPosition(0);
+
+        assertThat(textView.getCurrentTextColor()).isEqualTo(textColorPrimary);
+    }
+
+    @Test
+    public void errorMessage_shouldBeColorError() {
+        final ChooseLockPassword passwordActivity = setupActivityWithPinTypeAndDefaultPolicy();
+
+        final ChooseLockPasswordFragment fragment = getChooseLockPasswordFragment(passwordActivity);
+        final ScrollToParentEditText passwordEntry = passwordActivity.findViewById(R.id.password_entry);
+        final RecyclerView view = (RecyclerView) fragment.getPasswordRequirementsView();
+        @ColorInt final int textColorPrimary = Utils.getColorAttrDefaultColor(passwordActivity,
+                android.R.attr.textColorPrimary);
+        @ColorInt final int colorError = Utils.getColorAttrDefaultColor(passwordActivity,
+                android.R.attr.colorError);
+
+        passwordEntry.setText("");
+        fragment.updateUi();
+        shadowOf(Looper.getMainLooper()).idle();
+        TextView textView = (TextView)view.getLayoutManager().findViewByPosition(0);
+
+        assertThat(textView.getCurrentTextColor()).isEqualTo(textColorPrimary);
+
+        // Password must be fewer than 17 digits, so this should give an error.
+        passwordEntry.setText("a".repeat(17));
+        fragment.updateUi();
+        shadowOf(Looper.getMainLooper()).idle();
+        textView = (TextView)view.getLayoutManager().findViewByPosition(0);
+
+        assertThat(textView.getCurrentTextColor()).isEqualTo(colorError);
+    }
+
     private ChooseLockPassword setupActivityWithPinTypeAndDefaultPolicy() {
         PasswordPolicy policy = new PasswordPolicy();
         policy.quality = PASSWORD_QUALITY_UNSPECIFIED;
@@ -543,7 +594,7 @@ public class ChooseLockPasswordTest {
                         .setForFingerprint(addFingerprintExtra)
                         .build());
         ChooseLockPasswordFragment fragment = getChooseLockPasswordFragment(passwordActivity);
-        return Shadows.shadowOf(((GlifLayout) fragment.getView()).getIcon());
+        return shadowOf(((GlifLayout) fragment.getView()).getIcon());
     }
 
     private void assertPasswordValidationResult(PasswordMetrics minMetrics,

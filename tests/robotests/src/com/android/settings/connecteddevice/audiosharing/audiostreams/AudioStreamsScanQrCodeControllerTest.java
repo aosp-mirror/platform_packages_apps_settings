@@ -16,29 +16,38 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static android.app.settings.SettingsEnums.AUDIO_STREAM_MAIN;
+
+import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsScanQrCodeController.REQUEST_SCAN_BT_BROADCAST_QR_CODE;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+import android.content.Intent;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows.ShadowAudioStreamsHelper;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.After;
@@ -46,6 +55,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
@@ -139,17 +149,46 @@ public class AudioStreamsScanQrCodeControllerTest {
     public void onPreferenceClick_hasFragment_launchSubSetting() {
         mController.displayPreference(mScreen);
         mController.setFragment(mFragment);
+        when(mFragment.getMetricsCategory()).thenReturn(AUDIO_STREAM_MAIN);
 
         var listener = mPreference.getOnPreferenceClickListener();
         assertThat(listener).isNotNull();
+
+        // mContext is not an Activity context, calling startActivity() from outside of an Activity
+        // context requires the FLAG_ACTIVITY_NEW_TASK flag, create a mock to avoid this
+        // AndroidRuntimeException.
+        Context activityContext = mock(Context.class);
+        when(mPreference.getContext()).thenReturn(activityContext);
+        when(mPreference.getKey()).thenReturn(AudioStreamsScanQrCodeController.KEY);
+
         var clicked = listener.onPreferenceClick(mPreference);
+
+        ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        ArgumentCaptor<Integer> requestCodeCaptor = ArgumentCaptor.forClass(Integer.class);
+        verify(mFragment)
+                .startActivityForResult(intentCaptor.capture(), requestCodeCaptor.capture());
+
+        Intent intent = intentCaptor.getValue();
+        assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(AudioStreamsQrCodeScanFragment.class.getName());
+        assertThat(intent.getIntExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, 0))
+                .isEqualTo(R.string.audio_streams_main_page_scan_qr_code_title);
+        assertThat(intent.getIntExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY, 0))
+                .isEqualTo(AUDIO_STREAM_MAIN);
+
+        int requestCode = requestCodeCaptor.getValue();
+        assertThat(requestCode).isEqualTo(REQUEST_SCAN_BT_BROADCAST_QR_CODE);
+
         assertThat(clicked).isTrue();
     }
 
     @Test
     public void updateVisibility_noConnected_invisible() {
         mController.displayPreference(mScreen);
-        mController.mBluetoothCallback.onActiveDeviceChanged(mDevice, BluetoothProfile.LE_AUDIO);
+        mController.mBluetoothCallback.onProfileConnectionStateChanged(
+                mDevice,
+                BluetoothAdapter.STATE_DISCONNECTED,
+                BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT);
 
         assertThat(mPreference.isVisible()).isFalse();
     }
@@ -158,7 +197,10 @@ public class AudioStreamsScanQrCodeControllerTest {
     public void updateVisibility_hasConnected_visible() {
         mController.displayPreference(mScreen);
         ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(mDevice);
-        mController.mBluetoothCallback.onActiveDeviceChanged(mDevice, BluetoothProfile.LE_AUDIO);
+        mController.mBluetoothCallback.onProfileConnectionStateChanged(
+                mDevice,
+                BluetoothAdapter.STATE_CONNECTED,
+                BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT);
 
         assertThat(mPreference.isVisible()).isTrue();
     }

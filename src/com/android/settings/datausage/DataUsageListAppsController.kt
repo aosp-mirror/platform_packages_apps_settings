@@ -20,6 +20,7 @@ import android.app.ActivityManager
 import android.content.Context
 import android.net.NetworkTemplate
 import android.os.Bundle
+import android.telephony.SubscriptionManager
 import androidx.annotation.OpenForTesting
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LifecycleCoroutineScope
@@ -32,6 +33,7 @@ import com.android.settings.core.BasePreferenceController
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.datausage.lib.AppDataUsageRepository
 import com.android.settings.datausage.lib.NetworkUsageData
+import com.android.settings.network.telephony.requireSubscriptionManager
 import com.android.settingslib.AppItem
 import com.android.settingslib.net.UidDetailProvider
 import kotlinx.coroutines.Dispatchers
@@ -74,8 +76,11 @@ open class DataUsageListAppsController(context: Context, preferenceKey: String) 
         this.cycleData = cycleData
     }
 
-    fun update(carrierId: Int?, startTime: Long, endTime: Long) = lifecycleScope.launch {
+    fun update(subId: Int, startTime: Long, endTime: Long) = lifecycleScope.launch {
         val apps = withContext(Dispatchers.Default) {
+            val carrierId = if (SubscriptionManager.isValidSubscriptionId(subId)) {
+                mContext.requireSubscriptionManager().getActiveSubscriptionInfo(subId)?.carrierId
+            } else null
             repository.getAppPercent(carrierId, startTime, endTime).map { (appItem, percent) ->
                 AppDataUsagePreference(mContext, appItem, percent, uidDetailProvider).apply {
                     setOnPreferenceClickListener {

@@ -22,6 +22,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ProgressBar;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
@@ -48,6 +49,7 @@ public class StorageItemPreference extends Preference {
         setLayoutResource(R.layout.storage_item);
     }
 
+    @VisibleForTesting
     public void setStorageSize(long size, long total) {
         setStorageSize(size, total, false /* animate */);
     }

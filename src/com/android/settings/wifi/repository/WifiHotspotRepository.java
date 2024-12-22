@@ -397,7 +397,7 @@ public class WifiHotspotRepository {
      * @return {@code true} if Wi-Fi Hotspot 5 GHz Band is available
      */
     public boolean is5gAvailable() {
-        if (!mBand5g.isUsableChannelsReady && is5GHzBandSupported()) {
+        if (!mBand5g.isChannelsReady && is5GHzBandSupported()) {
             isChannelAvailable(mBand5g);
         }
         return mBand5g.isAvailable();
@@ -439,7 +439,7 @@ public class WifiHotspotRepository {
      * @return {@code true} if Wi-Fi Hotspot 6 GHz Band is available
      */
     public boolean is6gAvailable() {
-        if (!mBand6g.isUsableChannelsReady && is6GHzBandSupported()) {
+        if (!mBand6g.isChannelsReady && is6GHzBandSupported()) {
             isChannelAvailable(mBand6g);
         }
         return mBand6g.isAvailable();
@@ -473,21 +473,21 @@ public class WifiHotspotRepository {
     boolean isChannelAvailable(SapBand sapBand) {
         try {
             List<WifiAvailableChannel> channels =
-                    mWifiManager.getUsableChannels(sapBand.band, OP_MODE_SAP);
+                    mWifiManager.getAllowedChannels(sapBand.band, OP_MODE_SAP);
             log("isChannelAvailable(), band:" + sapBand.band + ", channels:" + channels);
-            sapBand.hasUsableChannels = (channels != null && channels.size() > 0);
-            sapBand.isUsableChannelsUnsupported = false;
+            sapBand.hasChannels = (channels != null && channels.size() > 0);
+            sapBand.isChannelsUnsupported = false;
         } catch (IllegalArgumentException e) {
-            Log.e(TAG, "Querying usable SAP channels failed, band:" + sapBand.band);
-            sapBand.hasUsableChannels = false;
-            sapBand.isUsableChannelsUnsupported = true;
+            Log.e(TAG, "Querying SAP channels failed, band:" + sapBand.band);
+            sapBand.hasChannels = false;
+            sapBand.isChannelsUnsupported = true;
         } catch (UnsupportedOperationException e) {
             // This is expected on some hardware.
-            Log.e(TAG, "Querying usable SAP channels is unsupported, band:" + sapBand.band);
-            sapBand.hasUsableChannels = false;
-            sapBand.isUsableChannelsUnsupported = true;
+            Log.e(TAG, "Querying SAP channels is unsupported, band:" + sapBand.band);
+            sapBand.hasChannels = false;
+            sapBand.isChannelsUnsupported = true;
         }
-        sapBand.isUsableChannelsReady = true;
+        sapBand.isChannelsReady = true;
         log("isChannelAvailable(), " + sapBand);
         return sapBand.isAvailable();
     }
@@ -531,8 +531,8 @@ public class WifiHotspotRepository {
     }
 
     protected void purgeRefreshData() {
-        mBand5g.isUsableChannelsReady = false;
-        mBand6g.isUsableChannelsReady = false;
+        mBand5g.isChannelsReady = false;
+        mBand6g.isChannelsReady = false;
     }
 
     protected void startAutoRefresh() {
@@ -615,15 +615,15 @@ public class WifiHotspotRepository {
 
     @VisibleForTesting
     void updateCapabilityChanged() {
-        if (mBand5g.isUsableChannelsUnsupported) {
+        if (mBand5g.isChannelsUnsupported) {
             update5gAvailable();
             log("updateCapabilityChanged(), " + mBand5g);
         }
-        if (mBand6g.isUsableChannelsUnsupported) {
+        if (mBand6g.isChannelsUnsupported) {
             update6gAvailable();
             log("updateCapabilityChanged(), " + mBand6g);
         }
-        if (mBand5g.isUsableChannelsUnsupported || mBand6g.isUsableChannelsUnsupported) {
+        if (mBand5g.isChannelsUnsupported || mBand6g.isChannelsUnsupported) {
             updateSpeedType();
         }
     }
@@ -676,9 +676,9 @@ public class WifiHotspotRepository {
     @VisibleForTesting
     static class SapBand {
         public int band;
-        public boolean isUsableChannelsReady;
-        public boolean hasUsableChannels;
-        public boolean isUsableChannelsUnsupported;
+        public boolean isChannelsReady;
+        public boolean hasChannels;
+        public boolean isChannelsUnsupported;
         public boolean hasCapability;
 
         SapBand(int band) {
@@ -689,7 +689,7 @@ public class WifiHotspotRepository {
          * Return whether SoftAp band is available or not.
          */
         public boolean isAvailable() {
-            return isUsableChannelsUnsupported ? hasCapability : hasUsableChannels;
+            return isChannelsUnsupported ? hasCapability : hasChannels;
         }
 
         @Override
@@ -697,10 +697,10 @@ public class WifiHotspotRepository {
         public String toString() {
             return "SapBand{"
                     + "band:" + band
-                    + ",isUsableChannelsReady:" + isUsableChannelsReady
-                    + ",hasUsableChannels:" + hasUsableChannels
-                    + ",isUsableChannelsUnsupported:" + isUsableChannelsUnsupported
-                    + ",hasChannelsCapability:" + hasCapability
+                    + ",isChannelsReady:" + isChannelsReady
+                    + ",hasChannels:" + hasChannels
+                    + ",isChannelsUnsupported:" + isChannelsUnsupported
+                    + ",hasCapability:" + hasCapability
                     + '}';
         }
     }

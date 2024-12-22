@@ -431,7 +431,7 @@ public class WifiSlice implements CustomSliceable {
         boolean isSatelliteOn = false;
         try {
             isSatelliteOn =
-                    satelliteRepository.requestIsEnabled(Executors.newSingleThreadExecutor())
+                    satelliteRepository.requestIsSessionStarted(Executors.newSingleThreadExecutor())
                             .get(2000, TimeUnit.MILLISECONDS);
         } catch (ExecutionException | TimeoutException | InterruptedException e) {
             Log.e(TAG, "Error to get satellite status : " + e);

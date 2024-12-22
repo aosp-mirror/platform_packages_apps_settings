@@ -28,6 +28,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.SettingsActivity
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.development.DevelopmentSettingsDashboardFragment
+import com.android.settingslib.spa.testutils.delay
 import com.android.settingslib.spaprivileged.framework.common.userManager
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
@@ -99,6 +100,7 @@ class DeveloperOptionsControllerTest {
         composeTestRule.onNodeWithText(
             context.getString(com.android.settingslib.R.string.development_settings_title)
         ).performClick()
+        composeTestRule.delay()
 
         val intent = argumentCaptor<Intent> {
             verify(context).startActivity(capture())

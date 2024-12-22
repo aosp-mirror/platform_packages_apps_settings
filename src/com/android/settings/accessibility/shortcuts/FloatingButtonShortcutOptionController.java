@@ -50,7 +50,14 @@ public class FloatingButtonShortcutOptionController
 
     @Override
     protected boolean isShortcutAvailable() {
-        return AccessibilityUtil.isFloatingMenuEnabled(mContext);
+        if (android.provider.Flags.a11yStandaloneGestureEnabled()) {
+            // FAB should be available when in gesture navigation mode,
+            // or if we're in the FAB button mode while in navbar navigation mode.
+            return AccessibilityUtil.isGestureNavigateEnabled(mContext)
+                    || AccessibilityUtil.isFloatingMenuEnabled(mContext);
+        } else {
+            return AccessibilityUtil.isFloatingMenuEnabled(mContext);
+        }
     }
 
     @Nullable

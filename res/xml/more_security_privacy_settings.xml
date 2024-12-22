@@ -92,7 +92,7 @@
                 "com.android.settings.sound.MediaControlsLockScreenPreferenceController" />
 
         <!-- Allow software fallback for camera extensions -->
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="privacy_camera_extensions_fallback"
             android:title="@string/camera_extensions_fallback_title"
             android:summary="@string/camera_extensions_fallback_description"

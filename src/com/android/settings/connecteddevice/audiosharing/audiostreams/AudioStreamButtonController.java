@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static com.android.settingslib.flags.Flags.audioSharingHysteresisModeFix;
+
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
@@ -27,6 +29,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
@@ -40,6 +43,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.ActionButtonsPreference;
 
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -48,7 +52,9 @@ public class AudioStreamButtonController extends BasePreferenceController
     private static final String TAG = "AudioStreamButtonController";
     private static final String KEY = "audio_stream_button";
     private static final int SOURCE_ORIGIN_REPOSITORY = SourceOriginForLogging.REPOSITORY.ordinal();
-    private final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
+
+    @VisibleForTesting
+    final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
             new AudioStreamsBroadcastAssistantCallback() {
                 @Override
                 public void onSourceRemoved(BluetoothDevice sink, int sourceId, int reason) {
@@ -70,12 +76,18 @@ public class AudioStreamButtonController extends BasePreferenceController
                         int sourceId,
                         BluetoothLeBroadcastReceiveState state) {
                     super.onReceiveStateChanged(sink, sourceId, state);
-                    if (AudioStreamsHelper.isConnected(state)) {
+                    boolean shouldUpdateButton =
+                            audioSharingHysteresisModeFix()
+                                    ? AudioStreamsHelper.hasSourcePresent(state)
+                                    : AudioStreamsHelper.isConnected(state);
+                    if (shouldUpdateButton) {
                         updateButton();
-                        mMetricsFeatureProvider.action(
-                                mContext,
-                                SettingsEnums.ACTION_AUDIO_STREAM_JOIN_SUCCEED,
-                                SOURCE_ORIGIN_REPOSITORY);
+                        if (AudioStreamsHelper.isConnected(state)) {
+                            mMetricsFeatureProvider.action(
+                                    mContext,
+                                    SettingsEnums.ACTION_AUDIO_STREAM_JOIN_SUCCEED,
+                                    SOURCE_ORIGIN_REPOSITORY);
+                        }
                     }
                 }
 
@@ -97,8 +109,7 @@ public class AudioStreamButtonController extends BasePreferenceController
                 }
             };
 
-    private final AudioStreamsRepository mAudioStreamsRepository =
-            AudioStreamsRepository.getInstance();
+    private AudioStreamsRepository mAudioStreamsRepository = AudioStreamsRepository.getInstance();
     private final Executor mExecutor;
     private final AudioStreamsHelper mAudioStreamsHelper;
     private final @Nullable LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
@@ -144,8 +155,13 @@ public class AudioStreamButtonController extends BasePreferenceController
             Log.w(TAG, "updateButton(): preference is null!");
             return;
         }
+
+        List<BluetoothLeBroadcastReceiveState> sources =
+                audioSharingHysteresisModeFix()
+                        ? mAudioStreamsHelper.getAllPresentSources()
+                        : mAudioStreamsHelper.getAllConnectedSources();
         boolean isConnected =
-                mAudioStreamsHelper.getAllConnectedSources().stream()
+                sources.stream()
                         .map(BluetoothLeBroadcastReceiveState::getBroadcastId)
                         .anyMatch(connectedBroadcastId -> connectedBroadcastId == mBroadcastId);
 
@@ -227,5 +243,10 @@ public class AudioStreamButtonController extends BasePreferenceController
     /** Initialize with broadcast id */
     void init(int broadcastId) {
         mBroadcastId = broadcastId;
+    }
+
+    @VisibleForTesting
+    void setAudioStreamsRepositoryForTesting(AudioStreamsRepository repository) {
+        mAudioStreamsRepository = repository;
     }
 }

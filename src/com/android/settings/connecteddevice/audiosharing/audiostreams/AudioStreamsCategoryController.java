@@ -16,12 +16,12 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.bluetooth.Utils;
@@ -44,9 +44,13 @@ public class AudioStreamsCategoryController extends AudioSharingBasePreferenceCo
     private final BluetoothCallback mBluetoothCallback =
             new BluetoothCallback() {
                 @Override
-                public void onActiveDeviceChanged(
-                        @Nullable CachedBluetoothDevice activeDevice, int bluetoothProfile) {
-                    if (bluetoothProfile == BluetoothProfile.LE_AUDIO) {
+                public void onProfileConnectionStateChanged(
+                        @NonNull CachedBluetoothDevice cachedDevice,
+                        @ConnectionState int state,
+                        int bluetoothProfile) {
+                    if (bluetoothProfile == BluetoothProfile.LE_AUDIO_BROADCAST_ASSISTANT
+                            && (state == BluetoothAdapter.STATE_CONNECTED
+                                    || state == BluetoothAdapter.STATE_DISCONNECTED)) {
                         updateVisibility();
                     }
                 }

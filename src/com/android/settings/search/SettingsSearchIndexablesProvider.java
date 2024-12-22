@@ -50,6 +50,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.SearchIndexableResource;
 import android.provider.SearchIndexablesContract;
 import android.provider.SearchIndexablesProvider;
@@ -283,17 +284,16 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
             try {
                 providerNonIndexableKeys = provider.getNonIndexableKeys(context);
             } catch (Exception e) {
+                String msg = "Error trying to get non-indexable keys from: "
+                        + bundle.getTargetClass().getName();
                 // Catch a generic crash. In the absence of the catch, the background thread will
                 // silently fail anyway, so we aren't losing information by catching the exception.
-                // We crash when the system property exists so that we can test if crashes need to
-                // be fixed.
-                // The gain is that if there is a crash in a specific controller, we don't lose all
-                // non-indexable keys, but we can still find specific crashes in development.
-                if (System.getProperty(SYSPROP_CRASH_ON_ERROR) != null) {
-                    throw new RuntimeException(e);
+                // We crash on debuggable build or when the system property exists, so that we can
+                // test if crashes need to be fixed.
+                if (Build.IS_DEBUGGABLE || System.getProperty(SYSPROP_CRASH_ON_ERROR) != null) {
+                    throw new RuntimeException(msg, e);
                 }
-                Log.e(TAG, "Error trying to get non-indexable keys from: "
-                        + bundle.getTargetClass().getName(), e);
+                Log.e(TAG, msg, e);
                 continue;
             }
 

@@ -16,34 +16,27 @@
 
 package com.android.settings.spa
 
-import android.app.Activity
-import android.content.pm.PackageManager
-import androidx.annotation.VisibleForTesting
-import com.android.settings.SettingsActivity.META_DATA_KEY_HIGHLIGHT_MENU_KEY
+import android.content.Context
+import android.content.Intent
+import com.android.settings.activityembedding.ActivityEmbeddingUtils
+import com.android.settings.activityembedding.EmbeddedDeepLinkUtils.tryStartMultiPaneDeepLink
+import com.android.settingslib.spa.framework.util.SESSION_EXTERNAL
+import com.android.settingslib.spa.framework.util.appendSpaParams
 
 data class SpaDestination(
     val destination: String,
     val highlightMenuKey: String?,
 ) {
-    companion object {
-        fun Activity.getDestination(
-            destinationFactory: (String) -> String? = { it },
-        ): SpaDestination? {
-            val metaData = packageManager.getActivityInfo(
-                componentName,
-                PackageManager.ComponentInfoFlags.of(PackageManager.GET_META_DATA.toLong())
-            ).metaData
-            val destination = metaData.getString(META_DATA_KEY_DESTINATION)
-            if (destination.isNullOrBlank()) return null
-            val finalDestination = destinationFactory(destination)
-            if (finalDestination.isNullOrBlank()) return null
-            return SpaDestination(
-                destination = finalDestination,
-                highlightMenuKey = metaData.getString(META_DATA_KEY_HIGHLIGHT_MENU_KEY),
+    fun startFromExportedActivity(context: Context) {
+        val intent = Intent(context, SpaActivity::class.java)
+            .appendSpaParams(
+                destination = destination,
+                sessionName = SESSION_EXTERNAL,
             )
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(context) ||
+            !context.tryStartMultiPaneDeepLink(intent, highlightMenuKey)
+        ) {
+            context.startActivity(intent)
         }
-
-        @VisibleForTesting
-        const val META_DATA_KEY_DESTINATION = "com.android.settings.spa.DESTINATION"
     }
 }

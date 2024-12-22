@@ -18,24 +18,17 @@ package com.android.settings.network.ims;
 
 import android.content.Context;
 import android.telecom.TelecomManager;
-import android.telephony.AccessNetworkConstants;
 import android.telephony.SubscriptionManager;
-import android.telephony.ims.ImsException;
-import android.telephony.ims.feature.MmTelFeature;
-import android.telephony.ims.stub.ImsRegistrationImplBase;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
 /**
  * Controller class for querying VT status
  */
-public class VtQueryImsState extends ImsQueryController {
+public class VtQueryImsState {
 
-    private static final String LOG_TAG = "VtQueryImsState";
-
-    private Context mContext;
-    private int mSubId;
+    private final Context mContext;
+    private final int mSubId;
 
     /**
      * Constructor
@@ -44,9 +37,6 @@ public class VtQueryImsState extends ImsQueryController {
      * @param subId subscription's id
      */
     public VtQueryImsState(Context context, int subId) {
-        super(MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VIDEO,
-                ImsRegistrationImplBase.REGISTRATION_TECH_LTE,
-                AccessNetworkConstants.TRANSPORT_TYPE_WWAN);
         mContext = context;
         mSubId = subId;
     }
@@ -63,24 +53,6 @@ public class VtQueryImsState extends ImsQueryController {
     }
 
     /**
-     * Check whether Video Call can be perform or not on this subscription
-     *
-     * @return true when Video Call can be performed, otherwise false
-     */
-    public boolean isReadyToVideoCall() {
-        if (!isProvisionedOnDevice(mSubId)) {
-            return false;
-        }
-
-        try {
-            return isEnabledByPlatform(mSubId) && isServiceStateReady(mSubId);
-        } catch (InterruptedException | IllegalArgumentException | ImsException exception) {
-            Log.w(LOG_TAG, "fail to get Vt ready. subId=" + mSubId, exception);
-        }
-        return false;
-    }
-
-    /**
      * Get allowance status for user to alter configuration
      *
      * @return true when changing configuration by user is allowed.
@@ -89,8 +61,7 @@ public class VtQueryImsState extends ImsQueryController {
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return false;
         }
-        return ((!isTtyEnabled(mContext))
-                || (isTtyOnVolteEnabled(mSubId)));
+        return !isTtyEnabled(mContext) || new ImsQueryTtyOnVolteStat(mSubId).query();
     }
 
     @VisibleForTesting

@@ -15,9 +15,14 @@
  */
 package com.android.settings.security;
 
+import static com.android.settings.biometrics.face.FaceSettings.isFaceHardwareDetected;
+import static com.android.settings.biometrics.fingerprint.FingerprintSettings.isFingerprintHardwareDetected;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.biometrics.combination.CombinedBiometricStatusPreferenceController;
@@ -45,6 +50,10 @@ public class SecuritySettings extends DashboardFragment {
     public static final int CHANGE_TRUST_AGENT_SETTINGS = 126;
     public static final int UNIFY_LOCK_CONFIRM_PROFILE_REQUEST = 129;
     public static final int UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST = 130;
+    @VisibleForTesting
+    static final String KEY_FINGERPRINT_SETTINGS = "fingerprint_settings";
+    @VisibleForTesting
+    static final String KEY_FACE_SETTINGS = "face_settings";
 
     @Override
     public int getMetricsCategory() {
@@ -130,6 +139,18 @@ public class SecuritySettings extends DashboardFragment {
                     return !FeatureFactory.getFeatureFactory().getSecuritySettingsFeatureProvider()
                             .hasAlternativeSecuritySettingsFragment()
                             && !SafetyCenterManagerWrapper.get().isEnabled(context);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+                    if (!isFingerprintHardwareDetected(context)) {
+                        keys.add(KEY_FINGERPRINT_SETTINGS);
+                    }
+                    if (!isFaceHardwareDetected(context)) {
+                       keys.add(KEY_FACE_SETTINGS);
+                    }
+                    return keys;
                 }
             };
 

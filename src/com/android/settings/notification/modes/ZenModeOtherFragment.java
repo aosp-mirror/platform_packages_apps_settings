@@ -16,14 +16,9 @@
 
 package com.android.settings.notification.modes;
 
-import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_ALARMS;
-import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_EVENTS;
-import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_MEDIA;
-import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_REMINDERS;
-import static android.service.notification.ZenPolicy.PRIORITY_CATEGORY_SYSTEM;
-
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -58,7 +53,6 @@ public class ZenModeOtherFragment extends ZenModeFragmentBase {
 
     @Override
     public int getMetricsCategory() {
-        // TODO: b/332937635 - make this the correct metrics category
         return SettingsEnums.NOTIFICATION_ZEN_MODE_PRIORITY;
     }
 }

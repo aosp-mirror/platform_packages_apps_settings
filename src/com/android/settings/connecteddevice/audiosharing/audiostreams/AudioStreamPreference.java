@@ -43,23 +43,12 @@ class AudioStreamPreference extends TwoTargetPreference {
      * Update preference UI based on connection status
      *
      * @param isConnected Is this stream connected
-     * @param summary Summary text
-     * @param onPreferenceClickListener Click listener for the preference
      */
-    void setIsConnected(
-            boolean isConnected,
-            String summary,
-            @Nullable OnPreferenceClickListener onPreferenceClickListener) {
-        if (mIsConnected == isConnected
-                && getSummary() == summary
-                && getOnPreferenceClickListener() == onPreferenceClickListener) {
-            // Nothing to update.
-            return;
+    void setIsConnected(boolean isConnected) {
+        if (mIsConnected != isConnected) {
+            mIsConnected = isConnected;
+            notifyChanged();
         }
-        mIsConnected = isConnected;
-        setSummary(summary);
-        setOnPreferenceClickListener(onPreferenceClickListener);
-        notifyChanged();
     }
 
     @VisibleForTesting

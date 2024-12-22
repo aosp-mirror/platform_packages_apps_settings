@@ -24,14 +24,21 @@
 
     <PreferenceCategory
         android:key="zen_mode_settings_category_calls"
-        android:title="@string/zen_mode_calls_header"
-        settings:allowDividerBelow="true">
+        android:title="@string/zen_mode_calls_header">
     </PreferenceCategory>
+
+    <com.android.settings.applications.SpacePreference
+        android:key="hearing_aid_space_layout"
+        android:layout_height="16dp"/>
 
     <!-- Repeat callers -->
     <SwitchPreferenceCompat
         android:key="zen_mode_repeat_callers"
-        android:title="@string/zen_mode_repeat_callers_title"
-        settings:allowDividerAbove="true"/>
+        android:title="@string/zen_mode_repeat_callers_title" />
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="info_footer"
+        android:title="@string/zen_mode_calls_footer"
+        android:selectable="false"
+        settings:searchable="false"/>
 </PreferenceScreen>

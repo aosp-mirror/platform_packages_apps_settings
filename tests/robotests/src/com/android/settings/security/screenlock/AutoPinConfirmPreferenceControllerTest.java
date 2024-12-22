@@ -22,11 +22,11 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 
+import androidx.fragment.app.Fragment;
 import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,7 +41,7 @@ public class AutoPinConfirmPreferenceControllerTest {
     @Mock
     private LockPatternUtils mLockPatternUtils;
     @Mock
-    private ObservablePreferenceFragment mParentFragment;
+    private Fragment mParentFragment;
     private AutoPinConfirmPreferenceController mController;
     private SwitchPreference mPreference;
 

@@ -31,6 +31,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.flags.Flags;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.LinkedHashMap;
@@ -130,39 +131,54 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
 
     @Override
     public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
-        requireAuthAndExecute(() -> {
-            final long function = UsbBackend.usbFunctionsFromString(preference.getKey());
-            final long previousFunction = mUsbBackend.getCurrentFunctions();
-            if (DEBUG) {
-                Log.d(TAG, "onRadioButtonClicked() function : " + function + ", toString() : "
-                        + UsbManager.usbFunctionsToString(function) + ", previousFunction : "
-                        + previousFunction + ", toString() : "
-                        + UsbManager.usbFunctionsToString(previousFunction));
-            }
-            if (function != previousFunction && !Utils.isMonkeyRunning()
-                    && !isClickEventIgnored(function, previousFunction)) {
-                mPreviousFunction = previousFunction;
+        final long function = UsbBackend.usbFunctionsFromString(preference.getKey());
+        if (isAuthRequired(function)) {
+            requireAuthAndExecute(()->handleRadioButtonClicked(preference, function));
+        } else {
+            handleRadioButtonClicked(preference, function);
+        }
+    }
 
-                //Update the UI in advance to make it looks smooth
-                final SelectorWithWidgetPreference prevPref =
-                        (SelectorWithWidgetPreference) mProfilesContainer.findPreference(
-                                UsbBackend.usbFunctionsToString(mPreviousFunction));
-                if (prevPref != null) {
-                    prevPref.setChecked(false);
-                    preference.setChecked(true);
-                }
+    private void handleRadioButtonClicked(SelectorWithWidgetPreference preference, long function) {
+        final long previousFunction = mUsbBackend.getCurrentFunctions();
+        if (DEBUG) {
+            Log.d(TAG, "onRadioButtonClicked() function : " + function + ", toString() : "
+                    + UsbManager.usbFunctionsToString(function) + ", previousFunction : "
+                    + previousFunction + ", toString() : "
+                    + UsbManager.usbFunctionsToString(previousFunction));
+        }
+        if (function != previousFunction && !Utils.isMonkeyRunning()
+                && !isClickEventIgnored(function, previousFunction)) {
+            mPreviousFunction = previousFunction;
 
-                if (function == UsbManager.FUNCTION_RNDIS || function == UsbManager.FUNCTION_NCM) {
-                    // We need to have entitlement check for usb tethering, so use API in
-                    // TetheringManager.
-                    mTetheringManager.startTethering(
-                            TetheringManager.TETHERING_USB, new HandlerExecutor(mHandler),
-                            mOnStartTetheringCallback);
-                } else {
-                    mUsbBackend.setCurrentFunctions(function);
-                }
+            //Update the UI in advance to make it looks smooth
+            final SelectorWithWidgetPreference prevPref =
+                    (SelectorWithWidgetPreference) mProfilesContainer.findPreference(
+                            UsbBackend.usbFunctionsToString(mPreviousFunction));
+            if (prevPref != null) {
+                prevPref.setChecked(false);
+                preference.setChecked(true);
             }
-        });
+
+            if (function == UsbManager.FUNCTION_RNDIS || function == UsbManager.FUNCTION_NCM) {
+                // We need to have entitlement check for usb tethering, so use API in
+                // TetheringManager.
+                mTetheringManager.startTethering(
+                        TetheringManager.TETHERING_USB, new HandlerExecutor(mHandler),
+                        mOnStartTetheringCallback);
+            } else {
+                mUsbBackend.setCurrentFunctions(function);
+            }
+        }
+    }
+
+    private boolean isAuthRequired(long function) {
+        if (!Flags.excludeWebcamAuthChallenge()) {
+            return true;
+        }
+        // Since webcam and MIDI don't transfer any persistent data over USB
+        // don't require authentication.
+        return !(function == UsbManager.FUNCTION_UVC || function == UsbManager.FUNCTION_MIDI);
     }
 
     private boolean isClickEventIgnored(long function, long previousFunction) {

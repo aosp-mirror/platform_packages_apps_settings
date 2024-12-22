@@ -18,7 +18,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/trackpad_settings">
+    android:title="@string/trackpad_mouse_settings">
     <Preference
         android:key="trackpad_gesture_settings"
         android:title="@string/trackpad_touchpad_gesture_title"
@@ -62,12 +62,14 @@
         android:selectable="false"
         settings:controller="com.android.settings.inputmethod.TrackpadPointerSpeedPreferenceController"/>
 
-    <com.android.settings.inputmethod.PointerFillStylePreference
-        android:key="pointer_fill_style"
-        android:title="@string/pointer_fill_style"
+    <Preference
+        android:fragment="com.android.settings.inputmethod.PointerTouchpadFragment"
+        android:key="pointer_and_touchpad"
         android:order="50"
-        android:dialogTitle="@string/pointer_fill_style"
-        settings:controller="com.android.settings.inputmethod.PointerFillStylePreferenceController"/>
+        android:persistent="false"
+        android:title="@string/accessibility_pointer_and_touchpad_title"
+        android:summary="@string/accessibility_pointer_and_touchpad_summary"
+        settings:searchable="true"/>
 
     <com.android.settingslib.widget.ButtonPreference
         android:key="trackpad_touch_gesture"

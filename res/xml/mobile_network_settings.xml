@@ -85,23 +85,24 @@
             android:summary="@string/auto_data_switch_summary"
             settings:controller="com.android.settings.network.telephony.AutoDataSwitchPreferenceController"/>
 
-        <com.android.settingslib.RestrictedSwitchPreference
+        <!-- Settings search is handled by RoamingSearchItem. -->
+        <com.android.settings.spa.preference.ComposePreference
             android:key="button_roaming_key"
-            android:title="@string/roaming"
-            android:persistent="false"
-            android:summaryOn="@string/roaming_enable"
-            android:summaryOff="@string/roaming_disable"
-            settings:userRestriction="no_data_roaming"
+            settings:searchable="false"
             settings:controller="com.android.settings.network.telephony.RoamingPreferenceController"/>
 
+        <!-- Settings search is handled by DataUsageSearchItem. -->
         <Preference
             android:key="data_usage_summary"
             android:title="@string/app_cellular_data_usage"
+            settings:searchable="false"
             settings:controller="com.android.settings.network.telephony.DataUsagePreferenceController"/>
 
+        <!-- Settings search is handled by BillingCycleSearchItem. -->
         <com.android.settings.datausage.BillingCyclePreference
             android:key="billing_preference"
             android:title="@string/billing_cycle"
+            settings:searchable="false"
             settings:controller="com.android.settings.datausage.BillingCyclePreferenceController"/>
 
         <SwitchPreferenceCompat
@@ -116,10 +117,12 @@
             android:selectable="false"
             settings:searchable="false"/>
 
+        <!-- Settings search is handled by MmsMessageSearchItem. -->
         <SwitchPreferenceCompat
             android:key="mms_message"
             android:title="@string/mms_message_title"
             android:summary="@string/mms_message_summary"
+            settings:searchable="false"
             settings:controller="com.android.settings.network.telephony.MmsMessagePreferenceController"/>
 
         <SwitchPreferenceCompat
@@ -153,6 +156,7 @@
             android:summary="@string/contact_discovery_opt_in_summary"
             settings:controller="com.android.settings.network.telephony.ContactDiscoveryPreferenceController"/>
 
+        <!-- Settings search is handled by PreferredNetworkModeSearchItem. -->
         <ListPreference
             android:key="preferred_network_mode_key"
             android:title="@string/preferred_network_mode_title"
@@ -160,8 +164,10 @@
             android:entries="@array/preferred_network_mode_choices"
             android:entryValues="@array/preferred_network_mode_values"
             android:dialogTitle="@string/preferred_network_mode_dialogtitle"
+            settings:searchable="false"
             settings:controller="com.android.settings.network.telephony.PreferredNetworkModePreferenceController"/>
 
+        <!-- Settings search is handled by EnabledNetworkModeSearchItem. -->
         <ListPreference
             android:key="enabled_networks_key"
             android:title="@string/preferred_network_mode_title"
@@ -169,14 +175,14 @@
             android:entries="@array/enabled_networks_choices"
             android:entryValues="@array/enabled_networks_values"
             android:dialogTitle="@string/preferred_network_mode_dialogtitle"
+            settings:searchable="false"
             settings:controller="com.android.settings.network.telephony.EnabledNetworkModePreferenceController"/>
 
+        <!-- Settings search is handled by CarrierSettingsVersionSearchItem. -->
         <Preference
             android:key="carrier_settings_version_key"
             android:title="@string/carrier_settings_version"
-            android:enabled="false"
-            android:shouldDisableView="false"
-            android:selectable="false"
+            settings:searchable="false"
             settings:controller="com.android.settings.network.telephony.CarrierSettingsVersionPreferenceController"
             settings:enableCopying="true"/>
 
@@ -203,10 +209,12 @@
             android:title="@string/call_category"
             settings:controller="com.android.settings.network.telephony.CallingPreferenceCategoryController">
 
+            <!-- Settings search is handled by WifiCallingSearchItem. -->
             <Preference
                 android:key="wifi_calling"
                 android:title="@string/wifi_calling_settings_title"
                 android:summary="@string/wifi_calling_summary"
+                settings:searchable="false"
                 settings:controller="com.android.settings.network.telephony.WifiCallingPreferenceController">
                 <intent android:action="android.intent.action.MAIN"
                         android:targetPackage="com.android.settings"
@@ -215,10 +223,11 @@
                 </intent>
             </Preference>
 
+            <!-- Settings search is handled by WifiCallingSearchItem. -->
             <SwitchPreferenceCompat
                 android:key="video_calling_key"
                 android:title="@string/video_calling_settings_title"
-                android:persistent="true"
+                settings:searchable="false"
                 settings:controller="com.android.settings.network.telephony.VideoCallingPreferenceController"/>
 
         </PreferenceCategory>
@@ -295,10 +304,10 @@
             settings:controller=
                 "com.android.settings.network.telephony.NullAlgorithmsPreferenceController"/>
 
+        <!-- Settings search is handled by NrAdvancedCallingSearchItem. -->
         <com.android.settings.spa.preference.ComposePreference
             android:key="nr_advanced_calling"
-            android:title="@string/nr_advanced_calling_title"
-            settings:keywords="@string/keywords_nr_advanced_calling"
+            settings:searchable="false"
             settings:controller="com.android.settings.network.telephony.NrAdvancedCallingPreferenceController"/>
     </PreferenceCategory>
 

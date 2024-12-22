@@ -24,6 +24,7 @@ import static android.telephony.UiccSlotInfo.CARD_STATE_INFO_PRESENT;
 import static com.android.internal.util.CollectionUtils.emptyIfNull;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
@@ -51,7 +52,7 @@ import com.android.settings.network.helper.SelectableSubscriptions;
 import com.android.settings.network.helper.SubscriptionAnnotation;
 import com.android.settings.network.telephony.DeleteEuiccSubscriptionDialogActivity;
 import com.android.settings.network.telephony.EuiccRacConnectivityDialogActivity;
-import com.android.settings.network.telephony.SubscriptionRepositoryKt;
+import com.android.settings.network.telephony.SubscriptionRepository;
 import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity;
 
 import java.util.ArrayList;
@@ -507,7 +508,7 @@ public class SubscriptionUtil {
      * @return list of user selectable subscriptions.
      */
     public static List<SubscriptionInfo> getSelectableSubscriptionInfoList(Context context) {
-        return SubscriptionRepositoryKt.getSelectableSubscriptionInfoList(context);
+        return new SubscriptionRepository(context).getSelectableSubscriptionInfoList();
     }
 
     /**
@@ -515,18 +516,23 @@ public class SubscriptionUtil {
      * @param context {@code Context}
      * @param subId The id of subscription need to be enabled or disabled.
      * @param enable Whether the subscription with {@code subId} should be enabled or disabled.
+     * @param isNewTask Whether the start activity add the new task or not
      */
     public static void startToggleSubscriptionDialogActivity(
-            Context context, int subId, boolean enable) {
+            Context context, int subId, boolean enable, boolean isNewTask) {
         if (!SubscriptionManager.isUsableSubscriptionId(subId)) {
             Log.i(TAG, "Unable to toggle subscription due to invalid subscription ID.");
             return;
         }
         if (enable && Flags.isDualSimOnboardingEnabled()) {
-            SimOnboardingActivity.startSimOnboardingActivity(context, subId);
+            SimOnboardingActivity.startSimOnboardingActivity(context, subId, isNewTask);
             return;
         }
-        context.startActivity(ToggleSubscriptionDialogActivity.getIntent(context, subId, enable));
+        Intent intent = ToggleSubscriptionDialogActivity.getIntent(context, subId, enable);
+        if (isNewTask) {
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        context.startActivity(intent);
     }
 
     /**

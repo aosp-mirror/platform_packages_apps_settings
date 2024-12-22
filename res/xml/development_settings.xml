@@ -513,6 +513,11 @@
             android:title="@string/show_key_presses"
             android:summary="@string/show_key_presses_summary" />
 
+        <SwitchPreference
+            android:key="touchpad_visualizer"
+            android:title="@string/touchpad_visualizer"
+            android:summary="@string/touchpad_visualizer_summary" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -728,11 +733,6 @@
             android:title="@string/inactive_apps_title"
             android:fragment="com.android.settings.fuelgauge.InactiveApps" />
 
-        <Preference
-            android:key="tare"
-            android:title="@string/tare_title" >
-        </Preference>
-
         <SwitchPreferenceCompat
             android:key="force_allow_on_external"
             android:title="@string/force_allow_on_external"
@@ -744,14 +744,16 @@
             android:summary="@string/force_resizable_activities_summary" />
 
         <SwitchPreferenceCompat
+            android:key="override_desktop_mode_features"
+            android:title="@string/enable_desktop_mode" />
+
+        <SwitchPreferenceCompat
             android:key="enable_freeform_support"
-            android:title="@string/enable_freeform_support"
-            android:summary="@string/enable_freeform_support_summary" />
+            android:title="@string/enable_freeform_support" />
 
         <SwitchPreferenceCompat
             android:key="force_desktop_mode_on_external_displays"
-            android:title="@string/force_desktop_mode"
-            android:summary="@string/force_desktop_mode_summary" />
+            android:title="@string/enable_desktop_mode_on_secondary_display"/>
 
         <SwitchPreferenceCompat
             android:key="enable_non_resizable_multi_window"

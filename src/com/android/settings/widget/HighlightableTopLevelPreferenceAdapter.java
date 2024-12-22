@@ -17,6 +17,7 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -211,6 +212,14 @@ public class HighlightableTopLevelPreferenceAdapter extends RoundCornerPreferenc
         Log.d(TAG, "Scroll to position " + mScrollPosition);
         // Scroll to the top to reset the position.
         mRecyclerView.nestedScrollBy(0, -mRecyclerView.getHeight());
+
+        // get the visible area of the recycler view
+        Rect rvRect = new Rect();
+        mRecyclerView.getGlobalVisibleRect(rvRect);
+        if (Flags.homepageRevamp() && view.getBottom() <= rvRect.height()) {
+            // the request position already fully visible in the visible area
+            return;
+        }
 
         final int scrollY = view.getTop();
         if (scrollY > 0) {

@@ -21,6 +21,12 @@ import static android.view.WindowInsets.Type.displayCutout;
 import static android.view.WindowInsets.Type.systemBars;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TRIPLETAP;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
 import android.content.Context;
@@ -41,6 +47,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
 
+import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.internal.accessibility.util.ShortcutUtils;
 
 import java.lang.annotation.Retention;
@@ -80,41 +87,6 @@ public final class AccessibilityUtil {
     private static final char COMPONENT_NAME_SEPARATOR = ':';
     private static final TextUtils.SimpleStringSplitter sStringColonSplitter =
             new TextUtils.SimpleStringSplitter(COMPONENT_NAME_SEPARATOR);
-
-    /**
-     * Annotation for different user shortcut type UI type.
-     *
-     * {@code EMPTY} for displaying default value.
-     * {@code SOFTWARE} for displaying specifying the accessibility services or features which
-     * choose accessibility button in the navigation bar as preferred shortcut.
-     * {@code HARDWARE} for displaying specifying the accessibility services or features which
-     * choose accessibility shortcut as preferred shortcut.
-     * {@code TRIPLETAP} for displaying specifying magnification to be toggled via quickly
-     * tapping screen 3 times as preferred shortcut.
-     * {@code TWOFINGER_DOUBLETAP} for displaying specifying magnification to be toggled via
-     * quickly tapping screen 2 times with two fingers as preferred shortcut.
-     * {@code QUICK_SETTINGS} for displaying specifying the accessibility services or features which
-     * choose Quick Settings as preferred shortcut.
-     */
-    @Retention(RetentionPolicy.SOURCE)
-    @IntDef({
-            UserShortcutType.EMPTY,
-            UserShortcutType.SOFTWARE,
-            UserShortcutType.HARDWARE,
-            UserShortcutType.TRIPLETAP,
-            UserShortcutType.TWOFINGER_DOUBLETAP,
-            UserShortcutType.QUICK_SETTINGS,
-    })
-
-    /** Denotes the user shortcut type. */
-    public @interface UserShortcutType {
-        int EMPTY = 0;
-        int SOFTWARE = 1;
-        int HARDWARE = 1 << 1;
-        int TRIPLETAP = 1 << 2;
-        int TWOFINGER_DOUBLETAP = 1 << 3;
-        int QUICK_SETTINGS = 1 << 4;
-    }
 
     /**
      * Denotes the quick setting tooltip type.
@@ -230,11 +202,11 @@ public final class AccessibilityUtil {
             return;
         }
 
-        if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
-            optInValueToSettings(context, UserShortcutType.SOFTWARE, componentName);
+        if ((shortcutTypes & SOFTWARE) == SOFTWARE) {
+            optInValueToSettings(context, SOFTWARE, componentName);
         }
-        if (((shortcutTypes & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE)) {
-            optInValueToSettings(context, UserShortcutType.HARDWARE, componentName);
+        if (((shortcutTypes & HARDWARE) == HARDWARE)) {
+            optInValueToSettings(context, HARDWARE, componentName);
         }
     }
 
@@ -301,11 +273,11 @@ public final class AccessibilityUtil {
             return;
         }
 
-        if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
-            optOutValueFromSettings(context, UserShortcutType.SOFTWARE, componentName);
+        if ((shortcutTypes & SOFTWARE) == SOFTWARE) {
+            optOutValueFromSettings(context, SOFTWARE, componentName);
         }
-        if (((shortcutTypes & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE)) {
-            optOutValueFromSettings(context, UserShortcutType.HARDWARE, componentName);
+        if (((shortcutTypes & HARDWARE) == HARDWARE)) {
+            optOutValueFromSettings(context, HARDWARE, componentName);
         }
     }
 
@@ -364,16 +336,16 @@ public final class AccessibilityUtil {
     static boolean hasValuesInSettings(Context context, int shortcutTypes,
             @NonNull ComponentName componentName) {
         boolean exist = false;
-        if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
-            exist = hasValueInSettings(context, UserShortcutType.SOFTWARE, componentName);
+        if ((shortcutTypes & SOFTWARE) == SOFTWARE) {
+            exist = hasValueInSettings(context, SOFTWARE, componentName);
         }
-        if (((shortcutTypes & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE)) {
-            exist |= hasValueInSettings(context, UserShortcutType.HARDWARE, componentName);
+        if (((shortcutTypes & HARDWARE) == HARDWARE)) {
+            exist |= hasValueInSettings(context, HARDWARE, componentName);
         }
         if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            if ((shortcutTypes & UserShortcutType.QUICK_SETTINGS)
-                    == UserShortcutType.QUICK_SETTINGS) {
-                exist |= hasValueInSettings(context, UserShortcutType.QUICK_SETTINGS,
+            if ((shortcutTypes & QUICK_SETTINGS)
+                    == QUICK_SETTINGS) {
+                exist |= hasValueInSettings(context, QUICK_SETTINGS,
                         componentName);
             }
         }
@@ -427,16 +399,16 @@ public final class AccessibilityUtil {
      */
     static int getUserShortcutTypesFromSettings(Context context,
             @NonNull ComponentName componentName) {
-        int shortcutTypes = UserShortcutType.EMPTY;
-        if (hasValuesInSettings(context, UserShortcutType.SOFTWARE, componentName)) {
-            shortcutTypes |= UserShortcutType.SOFTWARE;
+        int shortcutTypes = DEFAULT;
+        if (hasValuesInSettings(context, SOFTWARE, componentName)) {
+            shortcutTypes |= SOFTWARE;
         }
-        if (hasValuesInSettings(context, UserShortcutType.HARDWARE, componentName)) {
-            shortcutTypes |= UserShortcutType.HARDWARE;
+        if (hasValuesInSettings(context, HARDWARE, componentName)) {
+            shortcutTypes |= HARDWARE;
         }
         if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            if (hasValuesInSettings(context, UserShortcutType.QUICK_SETTINGS, componentName)) {
-                shortcutTypes |= UserShortcutType.QUICK_SETTINGS;
+            if (hasValuesInSettings(context, QUICK_SETTINGS, componentName)) {
+                shortcutTypes |= QUICK_SETTINGS;
             }
         }
 
@@ -455,11 +427,11 @@ public final class AccessibilityUtil {
         }
 
         switch (shortcutType) {
-            case UserShortcutType.SOFTWARE:
+            case SOFTWARE:
                 return Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
-            case UserShortcutType.HARDWARE:
+            case HARDWARE:
                 return Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
-            case UserShortcutType.TRIPLETAP:
+            case TRIPLETAP:
                 return Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED;
             default:
                 throw new IllegalArgumentException(

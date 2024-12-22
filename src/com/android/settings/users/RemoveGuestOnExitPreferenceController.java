@@ -22,6 +22,7 @@ import android.content.DialogInterface;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.util.Log;
@@ -33,6 +34,8 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 /**
@@ -70,9 +73,24 @@ public class RemoveGuestOnExitPreferenceController extends BasePreferenceControl
         if (!isAvailable()) {
             restrictedSwitchPreference.setVisible(false);
         } else {
-            restrictedSwitchPreference.setDisabledByAdmin(
-                    mUserCaps.disallowAddUser() ? mUserCaps.getEnforcedAdmin() : null);
-            restrictedSwitchPreference.setVisible(mUserCaps.mUserSwitcherEnabled);
+            if (android.multiuser.Flags.newMultiuserSettingsUx()) {
+                restrictedSwitchPreference.setVisible(true);
+                final RestrictedLockUtils.EnforcedAdmin disallowRemoveUserAdmin =
+                        RestrictedLockUtilsInternal.checkIfRestrictionEnforced(mContext,
+                                UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId());
+                if (disallowRemoveUserAdmin != null) {
+                    restrictedSwitchPreference.setDisabledByAdmin(disallowRemoveUserAdmin);
+                } else if (mUserCaps.mDisallowAddUserSetByAdmin) {
+                    restrictedSwitchPreference.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
+                } else if (mUserCaps.mDisallowAddUser) {
+                    // Adding user is restricted by system
+                    restrictedSwitchPreference.setVisible(false);
+                }
+            } else {
+                restrictedSwitchPreference.setDisabledByAdmin(
+                        mUserCaps.disallowAddUser() ? mUserCaps.getEnforcedAdmin() : null);
+                restrictedSwitchPreference.setVisible(mUserCaps.mUserSwitcherEnabled);
+            }
         }
     }
 
@@ -82,14 +100,24 @@ public class RemoveGuestOnExitPreferenceController extends BasePreferenceControl
         // then disable this controller
         // also disable this controller for non-admin users
         // also disable when config_guestUserAllowEphemeralStateChange is false
-        if (mUserManager.isGuestUserAlwaysEphemeral()
-                || !UserManager.isGuestUserAllowEphemeralStateChange()
-                || !mUserCaps.isAdmin()
-                || mUserCaps.disallowAddUser()
-                || mUserCaps.disallowAddUserSetByAdmin()) {
-            return DISABLED_FOR_USER;
+        if (android.multiuser.Flags.newMultiuserSettingsUx()) {
+            if (mUserManager.isGuestUserAlwaysEphemeral()
+                    || !UserManager.isGuestUserAllowEphemeralStateChange()
+                    || !mUserCaps.isAdmin()) {
+                return DISABLED_FOR_USER;
+            } else {
+                return AVAILABLE;
+            }
         } else {
-            return mUserCaps.mUserSwitcherEnabled ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+            if (mUserManager.isGuestUserAlwaysEphemeral()
+                    || !UserManager.isGuestUserAllowEphemeralStateChange()
+                    || !mUserCaps.isAdmin()
+                    || mUserCaps.disallowAddUser()
+                    || mUserCaps.disallowAddUserSetByAdmin()) {
+                return DISABLED_FOR_USER;
+            } else {
+                return mUserCaps.mUserSwitcherEnabled ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+            }
         }
     }
 

@@ -29,7 +29,6 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
-import android.telephony.UiccCardInfo;
 import android.telephony.UiccPortInfo;
 import android.telephony.UiccSlotInfo;
 import android.util.ArrayMap;
@@ -41,7 +40,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.android.internal.telephony.flags.Flags;
-import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.mobile.dataservice.MobileNetworkDatabase;
@@ -49,7 +47,6 @@ import com.android.settingslib.mobile.dataservice.MobileNetworkInfoDao;
 import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoDao;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
-import com.android.settingslib.mobile.dataservice.UiccInfoDao;
 import com.android.settingslib.mobile.dataservice.UiccInfoEntity;
 
 import java.util.ArrayList;
@@ -81,23 +78,13 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     private SubscriptionManager mSubscriptionManager;
     private MobileNetworkDatabase mMobileNetworkDatabase;
     private SubscriptionInfoDao mSubscriptionInfoDao;
-    private UiccInfoDao mUiccInfoDao;
     private MobileNetworkInfoDao mMobileNetworkInfoDao;
     private List<SubscriptionInfoEntity> mAvailableSubInfoEntityList = new ArrayList<>();
     private List<SubscriptionInfoEntity> mActiveSubInfoEntityList = new ArrayList<>();
-    private List<UiccInfoEntity> mUiccInfoEntityList = new ArrayList<>();
-    private List<MobileNetworkInfoEntity> mMobileNetworkInfoEntityList = new ArrayList<>();
     private Context mContext;
     private AirplaneModeObserver mAirplaneModeObserver;
-    private DataRoamingObserver mDataRoamingObserver;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private int mPhysicalSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
-    private int mLogicalSlotIndex = SubscriptionManager.INVALID_SIM_SLOT_INDEX;
-    private int mCardState = UiccSlotInfo.CARD_STATE_INFO_ABSENT;
-    private int mPortIndex = TelephonyManager.INVALID_PORT_INDEX;
-    private int mCardId = TelephonyManager.UNINITIALIZED_CARD_ID;
-    private boolean mIsEuicc = false;
-    private boolean mIsRemovable = false;
     private boolean mIsActive = false;
     private Map<Integer, SubscriptionInfo> mSubscriptionInfoMap = new ArrayMap<>();
     private Map<Integer, TelephonyManager> mTelephonyManagerMap = new HashMap<>();
@@ -124,10 +111,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_MOBILE_NETWORK_DB_CREATED);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
         mSubscriptionInfoDao = mMobileNetworkDatabase.mSubscriptionInfoDao();
-        mUiccInfoDao = mMobileNetworkDatabase.mUiccInfoDao();
         mMobileNetworkInfoDao = mMobileNetworkDatabase.mMobileNetworkInfoDao();
         mAirplaneModeObserver = new AirplaneModeObserver(new Handler(Looper.getMainLooper()));
-        mDataRoamingObserver = new DataRoamingObserver(new Handler(Looper.getMainLooper()));
     }
 
     private class AirplaneModeObserver extends ContentObserver {
@@ -158,47 +143,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
     }
 
-    private class DataRoamingObserver extends ContentObserver {
-        private int mRegSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-        private String mBaseField = Settings.Global.DATA_ROAMING;
-
-        DataRoamingObserver(Handler handler) {
-            super(handler);
-        }
-
-        public void register(Context context, int subId) {
-            mRegSubId = subId;
-            String lastField = mBaseField;
-            createTelephonyManagerBySubId(subId);
-            TelephonyManager tm = mTelephonyManagerMap.get(subId);
-            if (tm.getSimCount() != 1) {
-                lastField += subId;
-            }
-            context.getContentResolver().registerContentObserver(
-                    Settings.Global.getUriFor(lastField), false, this);
-        }
-
-        public void unRegister(Context context) {
-            context.getContentResolver().unregisterContentObserver(this);
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            TelephonyManager tm = mTelephonyManagerMap.get(mRegSubId);
-            if (tm == null) {
-                return;
-            }
-            sExecutor.execute(() -> {
-                Log.d(TAG, "DataRoamingObserver changed");
-                insertMobileNetworkInfo(mContext, mRegSubId, tm);
-            });
-            boolean isDataRoamingEnabled = tm.isDataRoamingEnabled();
-            for (MobileNetworkCallback callback : sCallbacks) {
-                callback.onDataRoamingChanged(mRegSubId, isDataRoamingEnabled);
-            }
-        }
-    }
-
     /**
      * Register all callbacks and listener.
      *
@@ -224,7 +168,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         observeAllMobileNetworkInfo(lifecycleOwner);
         if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             createTelephonyManagerBySubId(subId);
-            mDataRoamingObserver.register(mContext, subId);
         }
         // When one client registers callback first time, convey the cached results to the client
         // so that the client is aware of the content therein.
@@ -288,7 +231,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         if (sCallbacks.isEmpty()) {
             mSubscriptionManager.removeOnSubscriptionsChangedListener(this);
             mAirplaneModeObserver.unRegister(mContext);
-            mDataRoamingObserver.unRegister(mContext);
 
             mTelephonyManagerMap.forEach((id, manager) -> {
                 TelephonyCallback callback = mTelephonyCallbackMap.get(id);
@@ -338,22 +280,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 lifecycleOwner, this::onAllMobileNetworkInfoChanged);
     }
 
-    public List<SubscriptionInfoEntity> getAvailableSubInfoEntityList() {
-        return mAvailableSubInfoEntityList;
-    }
-
-    public List<SubscriptionInfoEntity> getActiveSubscriptionInfoList() {
-        return mActiveSubInfoEntityList;
-    }
-
-    public List<UiccInfoEntity> getUiccInfoEntityList() {
-        return mUiccInfoEntityList;
-    }
-
-    public List<MobileNetworkInfoEntity> getMobileNetworkInfoEntityList() {
-        return mMobileNetworkInfoEntityList;
-    }
-
     public SubscriptionInfoEntity getSubInfoById(String subId) {
         return mSubscriptionInfoDao.querySubInfoById(subId);
     }
@@ -368,19 +294,13 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             UiccSlotInfo curSlotInfo = uiccSlotInfos[i];
             if (curSlotInfo != null && curSlotInfo.getCardStateInfo() == CARD_STATE_INFO_PRESENT) {
                 final int index = i;
-                mIsEuicc = curSlotInfo.getIsEuicc();
-                mCardState = curSlotInfo.getCardStateInfo();
-                mIsRemovable = curSlotInfo.isRemovable();
-                mCardId = subInfo.getCardId();
 
                 Collection<UiccPortInfo> uiccPortInfos = curSlotInfo.getPorts();
                 uiccPortInfos.forEach(portInfo -> {
                     if (portInfo.getPortIndex() == subInfo.getPortIndex()
                             && portInfo.getLogicalSlotIndex() == subInfo.getSimSlotIndex()) {
                         mPhysicalSlotIndex = index;
-                        mLogicalSlotIndex = portInfo.getLogicalSlotIndex();
                         mIsActive = portInfo.isActive();
-                        mPortIndex = portInfo.getPortIndex();
                     } else if (DEBUG) {
                         Log.d(TAG, "Can not get port index and physicalSlotIndex for subId "
                                 + subInfo.getSubscriptionId());
@@ -464,7 +384,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     }
 
     private void onAllUiccInfoChanged(List<UiccInfoEntity> uiccInfoEntityList) {
-        mUiccInfoEntityList = new ArrayList<>(uiccInfoEntityList);
         for (MobileNetworkCallback callback : sCallbacks) {
             callback.onAllUiccInfoChanged(uiccInfoEntityList);
         }
@@ -474,7 +393,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
 
     private void onAllMobileNetworkInfoChanged(
             List<MobileNetworkInfoEntity> mobileNetworkInfoEntityList) {
-        mMobileNetworkInfoEntityList = new ArrayList<>(mobileNetworkInfoEntityList);
         for (MobileNetworkCallback callback : sCallbacks) {
             callback.onAllMobileNetworkInfoChanged(mobileNetworkInfoEntityList);
         }
@@ -502,8 +420,8 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                 mMobileNetworkDatabase.insertSubsInfo(subInfoEntity);
                 mMetricsFeatureProvider.action(mContext,
                         SettingsEnums.ACTION_MOBILE_NETWORK_DB_INSERT_SUB_INFO, subId);
-                insertUiccInfo(subId, telephonyManager);
-                insertMobileNetworkInfo(context, subId, telephonyManager);
+                insertUiccInfo(subId);
+                insertMobileNetworkInfo(subId, telephonyManager);
             }
         } else if (DEBUG) {
             Log.d(TAG, "Can not insert subInfo, the entity is null");
@@ -515,8 +433,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         mMobileNetworkDatabase.deleteSubInfoBySubId(subId);
         mMobileNetworkDatabase.deleteUiccInfoBySubId(subId);
         mMobileNetworkDatabase.deleteMobileNetworkInfoBySubId(subId);
-        mUiccInfoEntityList.removeIf(info -> info.subId.equals(subId));
-        mMobileNetworkInfoEntityList.removeIf(info -> info.subId.equals(subId));
         int id = Integer.parseInt(subId);
         removerRegisterBySubId(id);
         mSubscriptionInfoMap.remove(id);
@@ -545,36 +461,22 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
             return null;
         } else {
             getUiccInfoBySubscriptionInfo(uiccSlotInfos, subInfo);
-            SubscriptionInfo firstRemovableSubInfo = SubscriptionUtil.getFirstRemovableSubscription(
-                    context);
             if (DEBUG) {
                 Log.d(TAG, "convert subscriptionInfo to entity for subId = " + subId);
             }
-            return new SubscriptionInfoEntity(String.valueOf(subId),
-                    subInfo.getSimSlotIndex(),
-                    subInfo.getCarrierId(), subInfo.getDisplayName().toString(),
-                    subInfo.getCarrierName() != null ? subInfo.getCarrierName().toString() : "",
-                    subInfo.getDataRoaming(), subInfo.getMccString(), subInfo.getMncString(),
-                    subInfo.getCountryIso(), subInfo.isEmbedded(), mCardId,
-                    subInfo.getPortIndex(), subInfo.isOpportunistic(),
-                    String.valueOf(subInfo.getGroupUuid()),
-                    subInfo.getSubscriptionType(),
+            return new SubscriptionInfoEntity(String.valueOf(subId), subInfo.getSimSlotIndex(),
+                    subInfo.isEmbedded(), subInfo.isOpportunistic(),
                     SubscriptionUtil.getUniqueSubscriptionDisplayName(subInfo, context).toString(),
                     SubscriptionUtil.isSubscriptionVisible(mSubscriptionManager, context, subInfo),
-                    SubscriptionUtil.getFormattedPhoneNumber(context, subInfo),
-                    firstRemovableSubInfo == null ? false
-                            : firstRemovableSubInfo.getSubscriptionId() == subId,
                     SubscriptionUtil.isDefaultSubscription(context, subId),
                     mSubscriptionManager.isValidSubscriptionId(subId),
-                    mSubscriptionManager.isUsableSubscriptionId(subId),
                     mSubscriptionManager.isActiveSubscriptionId(subId),
-                    true /*availableSubInfo*/,
                     mSubscriptionManager.getActiveDataSubscriptionId() == subId);
         }
     }
 
-    private void insertUiccInfo(int subId, TelephonyManager telephonyManager) {
-        UiccInfoEntity uiccInfoEntity = convertToUiccInfoEntity(subId, telephonyManager);
+    private void insertUiccInfo(int subId) {
+        UiccInfoEntity uiccInfoEntity = convertToUiccInfoEntity(subId);
         if (DEBUG) {
             Log.d(TAG, "uiccInfoEntity = " + uiccInfoEntity);
         }
@@ -587,19 +489,12 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
     }
 
-    private void insertMobileNetworkInfo(Context context, int subId,
-            TelephonyManager telephonyManager) {
-        MobileNetworkInfoEntity mobileNetworkInfoEntity = convertToMobileNetworkInfoEntity(context,
-                subId, telephonyManager);
-
+    private void insertMobileNetworkInfo(int subId, TelephonyManager telephonyManager) {
+        MobileNetworkInfoEntity mobileNetworkInfoEntity =
+                convertToMobileNetworkInfoEntity(subId, telephonyManager);
 
         Log.d(TAG, "insertMobileNetworkInfo, mobileNetworkInfoEntity = "
                 + mobileNetworkInfoEntity);
-
-
-        if (mobileNetworkInfoEntity == null) {
-            return;
-        }
 
         if (!sCacheMobileNetworkInfoEntityMap.containsKey(subId)
                 || !sCacheMobileNetworkInfoEntityMap.get(subId).equals(mobileNetworkInfoEntity)) {
@@ -610,53 +505,22 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
     }
 
-    private MobileNetworkInfoEntity convertToMobileNetworkInfoEntity(Context context, int subId,
+    private MobileNetworkInfoEntity convertToMobileNetworkInfoEntity(int subId,
             TelephonyManager telephonyManager) {
         boolean isDataEnabled = false;
-        boolean isDataRoamingEnabled = false;
         if (telephonyManager != null) {
             isDataEnabled = telephonyManager.isDataEnabled();
-            isDataRoamingEnabled = telephonyManager.isDataRoamingEnabled();
         } else {
             Log.d(TAG, "TelephonyManager is null, subId = " + subId);
         }
 
-        return new MobileNetworkInfoEntity(String.valueOf(subId),
-                MobileNetworkUtils.isContactDiscoveryEnabled(context, subId),
-                MobileNetworkUtils.isContactDiscoveryVisible(context, subId),
-                isDataEnabled,
-                MobileNetworkUtils.isCdmaOptions(context, subId),
-                MobileNetworkUtils.isGsmOptions(context, subId),
-                MobileNetworkUtils.isWorldMode(context, subId),
-                MobileNetworkUtils.shouldDisplayNetworkSelectOptions(context, subId),
-                MobileNetworkUtils.isTdscdmaSupported(context, subId),
-                MobileNetworkUtils.activeNetworkIsCellular(context),
-                SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager),
-                isDataRoamingEnabled
+        return new MobileNetworkInfoEntity(String.valueOf(subId), isDataEnabled,
+                SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)
         );
     }
 
-    private UiccInfoEntity convertToUiccInfoEntity(int subId, TelephonyManager telephonyManager) {
-        return new UiccInfoEntity(String.valueOf(subId), String.valueOf(mPhysicalSlotIndex),
-                mLogicalSlotIndex, mCardId, mIsEuicc,
-                isMultipleEnabledProfilesSupported(telephonyManager), mCardState, mIsRemovable,
-                mIsActive, mPortIndex
-        );
-    }
-
-    private boolean isMultipleEnabledProfilesSupported(TelephonyManager telephonyManager) {
-        if (telephonyManager == null) {
-            Log.d(TAG, "TelephonyManager is null");
-            return false;
-        }
-
-        List<UiccCardInfo> cardInfos = telephonyManager.getUiccCardsInfo();
-        if (cardInfos == null) {
-            Log.d(TAG, "UICC card info list is empty.");
-            return false;
-        }
-        return cardInfos.stream().anyMatch(
-                cardInfo -> cardInfo.isMultipleEnabledProfilesSupported());
+    private UiccInfoEntity convertToUiccInfoEntity(int subId) {
+        return new UiccInfoEntity(String.valueOf(subId), mIsActive);
     }
 
     @Override
@@ -741,7 +605,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
     }
 
     private class PhoneCallStateTelephonyCallback extends TelephonyCallback implements
-            TelephonyCallback.CallStateListener,
             TelephonyCallback.UserMobileDataStateListener {
 
         private int mSubId;
@@ -751,18 +614,10 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         }
 
         @Override
-        public void onCallStateChanged(int state) {
-            for (MobileNetworkCallback callback : sCallbacks) {
-                callback.onCallStateChanged(state);
-            }
-        }
-
-        @Override
         public void onUserMobileDataStateChanged(boolean enabled) {
             Log.d(TAG, "onUserMobileDataStateChanged enabled " + enabled + " on SUB " + mSubId);
             sExecutor.execute(() -> {
-                insertMobileNetworkInfo(mContext, mSubId,
-                        getTelephonyManagerBySubId(mContext, mSubId));
+                insertMobileNetworkInfo(mSubId, getTelephonyManagerBySubId(mContext, mSubId));
             });
         }
     }
@@ -787,15 +642,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
 
         default void onAirplaneModeChanged(boolean enabled) {
         }
-
-        /**
-         * Notify clients data roaming changed of subscription.
-         */
-        default void onDataRoamingChanged(int subId, boolean enabled) {
-        }
-
-        default void onCallStateChanged(int state) {
-        }
     }
 
     public void dump(IndentingPrintWriter printwriter) {
@@ -803,8 +649,6 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
         printwriter.increaseIndent();
         printwriter.println(" availableSubInfoEntityList= " + mAvailableSubInfoEntityList);
         printwriter.println(" activeSubInfoEntityList=" + mActiveSubInfoEntityList);
-        printwriter.println(" mobileNetworkInfoEntityList= " + mMobileNetworkInfoEntityList);
-        printwriter.println(" uiccInfoEntityList= " + mUiccInfoEntityList);
         printwriter.println(" CacheSubscriptionInfoEntityMap= " + sCacheSubscriptionInfoEntityMap);
         printwriter.println(" SubscriptionInfoMap= " + mSubscriptionInfoMap);
         printwriter.flush();

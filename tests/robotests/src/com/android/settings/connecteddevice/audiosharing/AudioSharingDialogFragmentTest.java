@@ -34,6 +34,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -82,18 +83,12 @@ public class AudioSharingDialogFragmentTest {
             new AudioSharingDeviceItem(TEST_DEVICE_NAME3, /* groupId= */ 3, /* isActive= */ false);
     private static final AudioSharingDialogFragment.DialogEventListener EMPTY_EVENT_LISTENER =
             new AudioSharingDialogFragment.DialogEventListener() {
-                @Override
-                public void onItemClick(AudioSharingDeviceItem item) {}
-
-                @Override
-                public void onCancelClick() {}
             };
     private static final Pair<Integer, Object> TEST_EVENT_DATA = Pair.create(1, 1);
     private static final Pair<Integer, Object>[] TEST_EVENT_DATA_LIST =
             new Pair[] {TEST_EVENT_DATA};
 
     private Fragment mParent;
-    private AudioSharingDialogFragment mFragment;
     private FakeFeatureFactory mFeatureFactory;
 
     @Before
@@ -107,7 +102,6 @@ public class AudioSharingDialogFragmentTest {
         shadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mFragment = new AudioSharingDialogFragment();
         mParent = new Fragment();
         FragmentController.setupFragment(
                 mParent, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
@@ -120,7 +114,8 @@ public class AudioSharingDialogFragmentTest {
 
     @Test
     public void getMetricsCategory_correctValue() {
-        assertThat(mFragment.getMetricsCategory())
+        AudioSharingDialogFragment fragment = new AudioSharingDialogFragment();
+        assertThat(fragment.getMetricsCategory())
                 .isEqualTo(SettingsEnums.DIALOG_AUDIO_SHARING_ADD_DEVICE);
     }
 
@@ -130,13 +125,22 @@ public class AudioSharingDialogFragmentTest {
         AudioSharingDialogFragment.show(
                 mParent, new ArrayList<>(), EMPTY_EVENT_LISTENER, TEST_EVENT_DATA_LIST);
         shadowMainLooper().idle();
-
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNull();
     }
 
     @Test
-    public void onCreateDialog_flagOn_noConnectedDevice() {
+    public void onCreateDialog_unattachedFragment_dialogNotExist() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        AudioSharingDialogFragment.show(
+                new Fragment(), new ArrayList<>(), EMPTY_EVENT_LISTENER, TEST_EVENT_DATA_LIST);
+        shadowMainLooper().idle();
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNull();
+    }
+
+    @Test
+    public void onCreateDialog_flagOn_noExtraConnectedDevice() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         AudioSharingDialogFragment.show(
                 mParent, new ArrayList<>(), EMPTY_EVENT_LISTENER, TEST_EVENT_DATA_LIST);
@@ -148,42 +152,87 @@ public class AudioSharingDialogFragmentTest {
         assertThat(description).isNotNull();
         ImageView image = dialog.findViewById(R.id.description_image);
         assertThat(image).isNotNull();
-        Button shareBtn = dialog.findViewById(R.id.positive_btn);
-        assertThat(shareBtn).isNotNull();
-        Button cancelBtn = dialog.findViewById(R.id.negative_btn);
-        assertThat(cancelBtn).isNotNull();
+        Button positiveBtn = dialog.findViewById(R.id.positive_btn);
+        assertThat(positiveBtn).isNotNull();
+        Button negativeBtn = dialog.findViewById(R.id.negative_btn);
+        assertThat(negativeBtn).isNotNull();
         assertThat(dialog.isShowing()).isTrue();
         assertThat(description.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(description.getText().toString())
                 .isEqualTo(mParent.getString(R.string.audio_sharing_dialog_connect_device_content));
         assertThat(image.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(shareBtn.getVisibility()).isEqualTo(View.GONE);
-        assertThat(cancelBtn.getVisibility()).isEqualTo(View.GONE);
+        assertThat(positiveBtn.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(positiveBtn.getText().toString())
+                .isEqualTo(mParent.getString(R.string.audio_sharing_pair_button_label));
+        assertThat(negativeBtn.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(negativeBtn.getText().toString())
+                .isEqualTo(mParent.getString(R.string.audio_sharing_qrcode_button_label));
     }
 
     @Test
-    public void onCreateDialog_noConnectedDevice_dialogDismiss() {
+    public void onCreateDialog_noExtraConnectedDevice_pairNewDevice() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        AtomicBoolean isPairBtnClicked = new AtomicBoolean(false);
         AudioSharingDialogFragment.show(
-                mParent, new ArrayList<>(), EMPTY_EVENT_LISTENER, TEST_EVENT_DATA_LIST);
+                mParent,
+                new ArrayList<>(),
+                new AudioSharingDialogFragment.DialogEventListener() {
+                    @Override
+                    public void onPositiveClick() {
+                        isPairBtnClicked.set(true);
+                    }
+                },
+                TEST_EVENT_DATA_LIST);
         shadowMainLooper().idle();
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
-        View btnView = dialog.findViewById(android.R.id.button2);
-        assertThat(btnView).isNotNull();
-        btnView.performClick();
+        Button pairBtn = dialog.findViewById(R.id.positive_btn);
+        assertThat(pairBtn).isNotNull();
+        pairBtn.performClick();
         shadowMainLooper().idle();
 
+        verify(mFeatureFactory.metricsFeatureProvider)
+                .action(
+                        any(Context.class),
+                        eq(SettingsEnums.ACTION_AUDIO_SHARING_DIALOG_POSITIVE_BTN_CLICKED),
+                        eq(TEST_EVENT_DATA));
+        assertThat(isPairBtnClicked.get()).isTrue();
         assertThat(dialog.isShowing()).isFalse();
+    }
+
+    @Test
+    public void onCreateDialog_noExtraConnectedDevice_showQRCode() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        AtomicBoolean isQrCodeBtnClicked = new AtomicBoolean(false);
+        AudioSharingDialogFragment.show(
+                mParent,
+                new ArrayList<>(),
+                new AudioSharingDialogFragment.DialogEventListener() {
+                    @Override
+                    public void onCancelClick() {
+                        isQrCodeBtnClicked.set(true);
+                    }
+                },
+                TEST_EVENT_DATA_LIST);
+        shadowMainLooper().idle();
+        AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog).isNotNull();
+        Button qrCodeBtn = dialog.findViewById(R.id.negative_btn);
+        assertThat(qrCodeBtn).isNotNull();
+        qrCodeBtn.performClick();
+        shadowMainLooper().idle();
+
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(
                         any(Context.class),
                         eq(SettingsEnums.ACTION_AUDIO_SHARING_DIALOG_NEGATIVE_BTN_CLICKED),
                         eq(TEST_EVENT_DATA));
+        assertThat(isQrCodeBtnClicked.get()).isTrue();
+        assertThat(dialog.isShowing()).isFalse();
     }
 
     @Test
-    public void onCreateDialog_flagOn_singleConnectedDevice() {
+    public void onCreateDialog_flagOn_singleExtraConnectedDevice() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         ArrayList<AudioSharingDeviceItem> list = new ArrayList<>();
         list.add(TEST_DEVICE_ITEM1);
@@ -198,10 +247,10 @@ public class AudioSharingDialogFragmentTest {
         assertThat(description).isNotNull();
         ImageView image = dialog.findViewById(R.id.description_image);
         assertThat(image).isNotNull();
-        Button shareBtn = dialog.findViewById(R.id.positive_btn);
-        assertThat(shareBtn).isNotNull();
-        Button cancelBtn = dialog.findViewById(R.id.negative_btn);
-        assertThat(cancelBtn).isNotNull();
+        Button positiveBtn = dialog.findViewById(R.id.positive_btn);
+        assertThat(positiveBtn).isNotNull();
+        Button negativeBtn = dialog.findViewById(R.id.negative_btn);
+        assertThat(negativeBtn).isNotNull();
         assertThat(dialog.isShowing()).isTrue();
         assertThat(title.getText().toString())
                 .isEqualTo(
@@ -211,12 +260,16 @@ public class AudioSharingDialogFragmentTest {
         assertThat(description.getText().toString())
                 .isEqualTo(mParent.getString(R.string.audio_sharing_dialog_share_content));
         assertThat(image.getVisibility()).isEqualTo(View.GONE);
-        assertThat(shareBtn.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(cancelBtn.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(positiveBtn.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(positiveBtn.getText().toString())
+                .isEqualTo(mParent.getString(R.string.audio_sharing_share_button_label));
+        assertThat(negativeBtn.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(negativeBtn.getText().toString())
+                .isEqualTo(mParent.getString(R.string.audio_sharing_no_thanks_button_label));
     }
 
     @Test
-    public void onCreateDialog_singleConnectedDevice_dialogDismiss() {
+    public void onCreateDialog_singleExtraConnectedDevice_dialogDismiss() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         ArrayList<AudioSharingDeviceItem> list = new ArrayList<>();
         list.add(TEST_DEVICE_ITEM1);
@@ -239,7 +292,7 @@ public class AudioSharingDialogFragmentTest {
     }
 
     @Test
-    public void onCreateDialog_singleConnectedDevice_shareClicked() {
+    public void onCreateDialog_singleExtraConnectedDevice_shareClicked() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         ArrayList<AudioSharingDeviceItem> list = new ArrayList<>();
         list.add(TEST_DEVICE_ITEM1);
@@ -249,12 +302,9 @@ public class AudioSharingDialogFragmentTest {
                 list,
                 new AudioSharingDialogFragment.DialogEventListener() {
                     @Override
-                    public void onItemClick(AudioSharingDeviceItem item) {
+                    public void onItemClick(@NonNull AudioSharingDeviceItem item) {
                         isShareBtnClicked.set(true);
                     }
-
-                    @Override
-                    public void onCancelClick() {}
                 },
                 TEST_EVENT_DATA_LIST);
         shadowMainLooper().idle();
@@ -276,7 +326,7 @@ public class AudioSharingDialogFragmentTest {
     }
 
     @Test
-    public void onCreateDialog_flagOn_multipleConnectedDevice() {
+    public void onCreateDialog_flagOn_multipleExtraConnectedDevice() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         ArrayList<AudioSharingDeviceItem> list = new ArrayList<>();
         list.add(TEST_DEVICE_ITEM1);
@@ -304,12 +354,14 @@ public class AudioSharingDialogFragmentTest {
         assertThat(image.getVisibility()).isEqualTo(View.GONE);
         assertThat(shareBtn.getVisibility()).isEqualTo(View.GONE);
         assertThat(cancelBtn.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(cancelBtn.getText().toString())
+                .isEqualTo(mParent.getString(com.android.settings.R.string.cancel));
         assertThat(recyclerView.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(recyclerView.getAdapter().getItemCount()).isEqualTo(3);
     }
 
     @Test
-    public void onCreateDialog_multipleConnectedDevice_dialogDismiss() {
+    public void onCreateDialog_multipleExtraConnectedDevice_dialogDismiss() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         ArrayList<AudioSharingDeviceItem> list = new ArrayList<>();
         list.add(TEST_DEVICE_ITEM1);
@@ -320,9 +372,6 @@ public class AudioSharingDialogFragmentTest {
                 mParent,
                 list,
                 new AudioSharingDialogFragment.DialogEventListener() {
-                    @Override
-                    public void onItemClick(AudioSharingDeviceItem item) {}
-
                     @Override
                     public void onCancelClick() {
                         isCancelBtnClicked.set(true);

@@ -20,6 +20,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -61,7 +62,8 @@ public class SlicePreferenceController extends BasePreferenceController implemen
         return mUri != null ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
-    public void setSliceUri(Uri uri) {
+    /** Sets Slice uri for the preference. */
+    public void setSliceUri(@Nullable Uri uri) {
         mUri = uri;
         mLiveData = SliceLiveData.fromUri(mContext, mUri, (int type, Throwable source) -> {
             Log.w(TAG, "Slice may be null. uri = " + uri + ", error = " + type);

@@ -19,12 +19,13 @@ package com.android.settings.connecteddevice.audiosharing;
 import android.os.Bundle;
 
 import com.android.settings.SettingsActivity;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 
 public class AudioSharingActivity extends SettingsActivity {
     @Override
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
-        if (!AudioSharingUtils.isFeatureEnabled()) {
+        if (!BluetoothUtils.isAudioSharingEnabled()) {
             finish();
         }
     }

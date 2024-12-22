@@ -1,0 +1,17 @@
+package: "com.android.settings.flags"
+container: "system"
+
+flag {
+  name: "catalyst_legal_information"
+  namespace: "android_settings"
+  description: "Flag for Legal information"
+  bug: "323791114"
+}
+
+flag {
+  name: "catalyst_firmware_version"
+  namespace: "android_settings"
+  description: "Flag for Android version"
+  bug: "323791114"
+}
+

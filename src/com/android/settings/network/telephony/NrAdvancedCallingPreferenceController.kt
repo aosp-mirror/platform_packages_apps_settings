@@ -25,52 +25,71 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
+import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchItem
+import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchResult
 import com.android.settings.spa.preference.ComposePreferenceController
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 
-/**
- * Preference controller for "Voice over NR".
- */
-class NrAdvancedCallingPreferenceController @JvmOverloads constructor(
+/** Preference controller for "Voice over NR". */
+class NrAdvancedCallingPreferenceController
+@JvmOverloads
+constructor(
     context: Context,
     key: String,
-    private val callStateRepository : CallStateRepository = CallStateRepository(context),
+    private val voNrRepository: VoNrRepository = VoNrRepository(context),
+    private val callStateRepository: CallStateRepository = CallStateRepository(context),
 ) : ComposePreferenceController(context, key) {
     private var subId: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
-    private var repository: VoNrRepository? = null
+    private val searchItem = NrAdvancedCallingSearchItem(context)
 
     /** Initial this PreferenceController. */
-    @JvmOverloads
-    fun init(subId: Int, repository: VoNrRepository = VoNrRepository(mContext, subId)) {
+    fun init(subId: Int) {
         this.subId = subId
-        this.repository = repository
     }
 
     override fun getAvailabilityStatus() =
-        if (repository?.isVoNrAvailable() == true) AVAILABLE else CONDITIONALLY_UNAVAILABLE
+        if (searchItem.isAvailable(subId)) AVAILABLE else CONDITIONALLY_UNAVAILABLE
 
     @Composable
     override fun Content() {
         val summary = stringResource(R.string.nr_advanced_calling_summary)
-        val isInCall by remember { callStateRepository.isInCallFlow() }
-            .collectAsStateWithLifecycle(initialValue = false)
-        val isEnabled by remember {
-            repository?.isVoNrEnabledFlow() ?: flowOf(false)
-        }.collectAsStateWithLifecycle(initialValue = false)
+        val isInCall by
+            remember { callStateRepository.isInCallFlow() }
+                .collectAsStateWithLifecycle(initialValue = false)
+        val isVoNrEnabled by
+            remember { voNrRepository.isVoNrEnabledFlow(subId) }
+                .collectAsStateWithLifecycle(initialValue = false)
         val coroutineScope = rememberCoroutineScope()
-        SwitchPreference(object : SwitchPreferenceModel {
-            override val title = stringResource(R.string.nr_advanced_calling_title)
-            override val summary = { summary }
-            override val changeable = { !isInCall }
-            override val checked = { isEnabled }
-            override val onCheckedChange: (Boolean) -> Unit = { newChecked ->
-                coroutineScope.launch {
-                    repository?.setVoNrEnabled(newChecked)
+        SwitchPreference(
+            object : SwitchPreferenceModel {
+                override val title = stringResource(R.string.nr_advanced_calling_title)
+                override val summary = { summary }
+                override val changeable = { !isInCall }
+                override val checked = { isVoNrEnabled }
+                override val onCheckedChange: (Boolean) -> Unit = { newChecked ->
+                    coroutineScope.launch { voNrRepository.setVoNrEnabled(subId, newChecked) }
                 }
             }
-        })
+        )
+    }
+
+    companion object {
+        class NrAdvancedCallingSearchItem(private val context: Context) :
+            MobileNetworkSettingsSearchItem {
+            private val voNrRepository = VoNrRepository(context)
+
+            fun isAvailable(subId: Int): Boolean = voNrRepository.isVoNrAvailable(subId)
+
+            override fun getSearchResult(subId: Int): MobileNetworkSettingsSearchResult? {
+                if (!isAvailable(subId)) return null
+                return MobileNetworkSettingsSearchResult(
+                    key = "nr_advanced_calling",
+                    title = context.getString(R.string.nr_advanced_calling_title),
+                    keywords = context.getString(R.string.keywords_nr_advanced_calling),
+                )
+            }
+        }
     }
 }

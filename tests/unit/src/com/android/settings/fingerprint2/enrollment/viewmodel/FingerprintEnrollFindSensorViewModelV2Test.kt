@@ -99,9 +99,10 @@ class FingerprintEnrollFindSensorViewModelV2Test {
     backgroundViewModel.inForeground()
     enrollViewModel =
       FingerprintEnrollViewModel(
-        fakeFingerprintManagerInteractor,
         gatekeeperViewModel,
         navigationViewModel,
+        fakeFingerprintManagerInteractor,
+        fakeFingerprintManagerInteractor,
       )
     accessibilityInteractor =
       object : AccessibilityInteractor {

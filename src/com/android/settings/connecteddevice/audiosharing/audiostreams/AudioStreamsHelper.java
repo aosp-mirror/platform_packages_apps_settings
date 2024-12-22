@@ -19,6 +19,7 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamMediaService.BROADCAST_ID;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamMediaService.BROADCAST_TITLE;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamMediaService.DEVICES;
+import static com.android.settingslib.flags.Flags.audioSharingHysteresisModeFix;
 
 import static java.util.Collections.emptyList;
 
@@ -26,13 +27,15 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeAudioContentMetadata;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
-import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentActivity;
 
+import com.android.settings.R;
 import com.android.settings.connecteddevice.audiosharing.AudioSharingUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -41,6 +44,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.utils.ThreadUtils;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.common.base.Strings;
 
 import java.util.ArrayList;
@@ -60,6 +64,12 @@ public class AudioStreamsHelper {
 
     private final @Nullable LocalBluetoothManager mBluetoothManager;
     private final @Nullable LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
+    // Referring to Broadcast Audio Scan Service 1.0
+    // Table 3.9: Broadcast Receive State characteristic format
+    // 0x00000000: 0b0 = Not synchronized to BIS_index[x]
+    // 0xFFFFFFFF: Failed to sync to BIG
+    private static final long BIS_SYNC_NOT_SYNC_TO_BIS = 0x00000000L;
+    private static final long BIS_SYNC_FAILED_SYNC_TO_BIG = 0xFFFFFFFFL;
 
     AudioStreamsHelper(@Nullable LocalBluetoothManager bluetoothManager) {
         mBluetoothManager = bluetoothManager;
@@ -71,7 +81,8 @@ public class AudioStreamsHelper {
      *
      * @param source The LE broadcast metadata representing the audio source.
      */
-    void addSource(BluetoothLeBroadcastMetadata source) {
+    @VisibleForTesting
+    public void addSource(BluetoothLeBroadcastMetadata source) {
         if (mLeBroadcastAssistant == null) {
             Log.w(TAG, "addSource(): LeBroadcastAssistant is null!");
             return;
@@ -97,7 +108,8 @@ public class AudioStreamsHelper {
     }
 
     /** Removes sources from LE broadcasts associated for all active sinks based on broadcast Id. */
-    void removeSource(int broadcastId) {
+    @VisibleForTesting
+    public void removeSource(int broadcastId) {
         if (mLeBroadcastAssistant == null) {
             Log.w(TAG, "removeSource(): LeBroadcastAssistant is null!");
             return;
@@ -139,6 +151,19 @@ public class AudioStreamsHelper {
                 .toList();
     }
 
+    /** Retrieves a list of all LE broadcast receive states from sinks with source present. */
+    @VisibleForTesting
+    public List<BluetoothLeBroadcastReceiveState> getAllPresentSources() {
+        if (mLeBroadcastAssistant == null) {
+            Log.w(TAG, "getAllPresentSources(): LeBroadcastAssistant is null!");
+            return emptyList();
+        }
+        return getConnectedBluetoothDevices(mBluetoothManager, /* inSharingOnly= */ true).stream()
+                .flatMap(sink -> mLeBroadcastAssistant.getAllSources(sink).stream())
+                .filter(AudioStreamsHelper::hasSourcePresent)
+                .toList();
+    }
+
     /** Retrieves LocalBluetoothLeBroadcastAssistant. */
     @VisibleForTesting
     @Nullable
@@ -148,7 +173,18 @@ public class AudioStreamsHelper {
 
     /** Checks the connectivity status based on the provided broadcast receive state. */
     public static boolean isConnected(BluetoothLeBroadcastReceiveState state) {
-        return state.getBisSyncState().stream().anyMatch(bitmap -> bitmap != 0);
+        return state.getBisSyncState().stream()
+                .anyMatch(
+                        bitmap ->
+                                (bitmap != BIS_SYNC_NOT_SYNC_TO_BIS
+                                        && bitmap != BIS_SYNC_FAILED_SYNC_TO_BIG));
+    }
+
+    /** Checks the connectivity status based on the provided broadcast receive state. */
+    public static boolean hasSourcePresent(BluetoothLeBroadcastReceiveState state) {
+        // Referring to Broadcast Audio Scan Service 1.0
+        // All zero address means no source on the sink device
+        return !state.getSourceDevice().getAddress().equals("00:00:00:00:00:00");
     }
 
     static boolean isBadCode(BluetoothLeBroadcastReceiveState state) {
@@ -237,7 +273,8 @@ public class AudioStreamsHelper {
         List<BluetoothLeBroadcastReceiveState> sourceList =
                 assistant.getAllSources(cachedDevice.getDevice());
         if (!sourceList.isEmpty()
-                && sourceList.stream().anyMatch(AudioStreamsHelper::isConnected)) {
+                && (audioSharingHysteresisModeFix()
+                        || sourceList.stream().anyMatch(AudioStreamsHelper::isConnected))) {
             Log.d(
                     TAG,
                     "Lead device has connected broadcast source, device = "
@@ -248,7 +285,9 @@ public class AudioStreamsHelper {
         for (CachedBluetoothDevice device : cachedDevice.getMemberDevice()) {
             List<BluetoothLeBroadcastReceiveState> list =
                     assistant.getAllSources(device.getDevice());
-            if (!list.isEmpty() && list.stream().anyMatch(AudioStreamsHelper::isConnected)) {
+            if (!list.isEmpty()
+                    && (audioSharingHysteresisModeFix()
+                            || list.stream().anyMatch(AudioStreamsHelper::isConnected))) {
                 Log.d(
                         TAG,
                         "Member device has connected broadcast source, device = "
@@ -275,9 +314,7 @@ public class AudioStreamsHelper {
             Log.w(TAG, "getConnectedBluetoothDevices(): LeBroadcastAssistant is null!");
             return emptyList();
         }
-        List<BluetoothDevice> connectedDevices =
-                leBroadcastAssistant.getDevicesMatchingConnectionStates(
-                        new int[] {BluetoothProfile.STATE_CONNECTED});
+        List<BluetoothDevice> connectedDevices = leBroadcastAssistant.getAllConnectedDevices();
         Optional<CachedBluetoothDevice> cachedBluetoothDevice =
                 inSharingOnly
                         ? getCachedBluetoothDeviceInSharing(manager)
@@ -346,5 +383,17 @@ public class AudioStreamsHelper {
         intent.putExtra(BROADCAST_TITLE, title);
         intent.putParcelableArrayListExtra(DEVICES, new ArrayList<>(devices));
         context.startService(intent);
+    }
+
+    static void configureAppBarByOrientation(@Nullable FragmentActivity activity) {
+        if (activity != null) {
+            AppBarLayout appBarLayout = activity.findViewById(R.id.app_bar);
+            if (appBarLayout != null) {
+                boolean canAppBarExpand =
+                        activity.getResources().getConfiguration().orientation
+                                == Configuration.ORIENTATION_PORTRAIT;
+                appBarLayout.setExpanded(canAppBarExpand);
+            }
+        }
     }
 }
