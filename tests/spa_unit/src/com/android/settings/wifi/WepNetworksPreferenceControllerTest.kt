@@ -200,6 +200,7 @@ class WepNetworksPreferenceControllerTest {
     fun whenClick_aapmEnabled_openDialog() {
         mockAapmManager.stub {
             on { isAdvancedProtectionEnabled } doReturn true
+            on { createSupportIntent(any(), any()) } doReturn Intent()
         }
         doNothing().whenever(context).startActivity(any())
         composeTestRule.setContent { controller.Content() }
