@@ -20,11 +20,9 @@ import android.content.Context
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.R
 import com.android.settings.accessibility.RemoveAnimationsPreference.Companion.ANIMATION_ON_VALUE
 import com.android.settingslib.datastore.SettingsGlobalStore
-import com.android.settingslib.preference.PreferenceScreenBindingHelper
-import com.android.settingslib.preference.PreferenceScreenFactory
+import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,12 +33,7 @@ class RemoveAnimationsPreferenceTest {
     private val appContext: Context = ApplicationProvider.getApplicationContext()
 
     private fun getRemoveAnimationsSwitchPreference(): SwitchPreferenceCompat =
-        PreferenceScreenFactory(appContext).let {
-            val preferenceScreen = it.inflate(R.xml.accessibility_color_and_motion)!!
-            it.preferenceManager.setPreferences(preferenceScreen)
-            PreferenceScreenBindingHelper.bind(preferenceScreen)
-            preferenceScreen.findPreference(RemoveAnimationsPreference.KEY)!!
-        }
+        RemoveAnimationsPreference().createAndBindWidget(appContext)
 
     @Test
     fun animationOff_switchPreferenceIsChecked() {
