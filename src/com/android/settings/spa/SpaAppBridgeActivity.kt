@@ -38,7 +38,7 @@ class SpaAppBridgeActivity : Activity() {
 
     companion object {
         fun getDestinationForApp(destinationPrefix: String, intent: Intent): String? {
-            val packageName = intent.data?.schemeSpecificPart ?: return null
+            val packageName = intent.data?.schemeSpecificPart?.takeIf { Regex("^([a-zA-Z]\\w*\\.)*[a-zA-Z]\\w*$").matches(it) } ?: return null
             return "$destinationPrefix/$packageName/${UserHandle.myUserId()}"
         }
     }
