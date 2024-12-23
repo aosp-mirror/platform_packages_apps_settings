@@ -44,6 +44,12 @@
           android:name="classname"
           android:value="com.android.settings.applications.appinfo.AppLocaleDetails" />
     </Preference>
+    <Preference
+        android:key="terms_of_address_in_more_language_settings"
+        android:title="@string/terms_of_address_title"
+        android:summary="@string/terms_of_address_summary"
+        android:fragment="com.android.settings.localepicker.TermsOfAddressFragment"
+        settings:controller="com.android.settings.localepicker.NewTermsOfAddressController"/>
   </PreferenceCategory>
 
   <PreferenceCategory
