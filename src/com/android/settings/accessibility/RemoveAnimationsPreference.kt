@@ -65,6 +65,10 @@ class RemoveAnimationsPreference :
 
     override fun storage(context: Context): KeyValueStore = RemoveAnimationsStorage(context)
 
+    override fun getReadPermissions(context: Context) = SettingsGlobalStore.getReadPermissions()
+
+    override fun getWritePermissions(context: Context) = SettingsGlobalStore.getWritePermissions()
+
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
