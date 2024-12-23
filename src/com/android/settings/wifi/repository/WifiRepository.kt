@@ -25,6 +25,7 @@ import com.android.settingslib.spaprivileged.framework.common.broadcastReceiverF
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 
 class WifiRepository(
     private val context: Context,
@@ -32,11 +33,13 @@ class WifiRepository(
         context.broadcastReceiverFlow(IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION)),
 ) {
 
-    fun wifiStateFlow() = wifiStateChangedActionFlow
-        .map { intent ->
-            intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_UNKNOWN)
-        }
-        .onEach { Log.d(TAG, "wifiStateFlow: $it") }
+    fun wifiStateFlow(): Flow<Int> =
+        wifiStateChangedActionFlow
+            .map { intent ->
+                intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_UNKNOWN)
+            }
+            .onStart { emit(WifiManager.WIFI_STATE_UNKNOWN) }
+            .onEach { Log.d(TAG, "wifiStateFlow: $it") }
 
     private companion object {
         private const val TAG = "WifiRepository"
