@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batteryusage
 
 import android.os.AsyncTask
 import androidx.annotation.CallSuper
+import androidx.annotation.OpenForTesting
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -50,12 +51,15 @@ abstract class LifecycleAwareAsyncTask<Result>(private val lifecycle: Lifecycle?
     fun start() {
         execute() // expects main thread
         val lifecycle = lifecycle ?: return
-        mainExecutor.execute {
-            // Status is updated to FINISHED if onPoseExecute happened before. And task is cancelled
-            // if lifecycle is stopped.
-            if (status == Status.RUNNING && !isCancelled) {
-                lifecycle.addObserver(this) // requires main thread
-            }
+        mainExecutor.execute { maybeAddObserver(lifecycle) }
+    }
+
+    @OpenForTesting
+    open fun maybeAddObserver(lifecycle: Lifecycle) {
+        // Status is updated to FINISHED if onPoseExecute happened before. And task is cancelled
+        // if lifecycle is stopped.
+        if (status == Status.RUNNING && !isCancelled) {
+            lifecycle.addObserver(this) // requires main thread
         }
     }
 }

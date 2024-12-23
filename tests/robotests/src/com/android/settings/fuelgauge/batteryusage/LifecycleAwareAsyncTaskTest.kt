@@ -22,12 +22,13 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth.assertThat
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit.MILLISECONDS
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.verify
-import java.util.concurrent.CountDownLatch
 
 @RunWith(AndroidJUnit4::class)
 class LifecycleAwareAsyncTaskTest {
@@ -85,6 +86,7 @@ class LifecycleAwareAsyncTaskTest {
 
     @Test
     fun onPostExecute_addObserver() {
+        val countDownLatch = CountDownLatch(2)
         val observers = mutableListOf<LifecycleObserver>()
         val lifecycle =
             object : Lifecycle() {
@@ -97,30 +99,25 @@ class LifecycleAwareAsyncTaskTest {
 
                 override fun removeObserver(observer: LifecycleObserver) {
                     observers.remove(observer)
+                    countDownLatch.countDown()
                 }
             }
         val asyncTask =
             object : LifecycleAwareAsyncTask<Void?>(lifecycle) {
                 override fun doInBackground(vararg params: Void) = null
+
+                override fun maybeAddObserver(lifecycle: Lifecycle) {
+                    super.maybeAddObserver(lifecycle)
+                    countDownLatch.countDown()
+                }
             }
 
         Thread { asyncTask.start() }.start()
-        idleAsyncTaskExecutor()
-        instrumentation.waitForIdleSync()
+        do {
+            instrumentation.waitForIdleSync()
+        } while (!countDownLatch.await(100, MILLISECONDS))
 
         assertThat(observers).isEmpty()
-    }
-
-    private fun idleAsyncTaskExecutor() {
-        val taskCountDownLatch = CountDownLatch(1)
-        object : LifecycleAwareAsyncTask<Void?>(null) {
-                override fun doInBackground(vararg params: Void): Void? {
-                    taskCountDownLatch.countDown()
-                    return null
-                }
-            }
-            .start()
-        taskCountDownLatch.await()
     }
 
     @Test
