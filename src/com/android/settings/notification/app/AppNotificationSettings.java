@@ -104,6 +104,7 @@ public class AppNotificationSettings extends NotificationSettings {
         mControllers.add(new ShowMorePreferenceController(
                 context, mDependentFieldListener, mBackend));
         mControllers.add(new BundleListPreferenceController(context, mBackend));
+        mControllers.add(new PromotedNotificationsPreferenceController(context, mBackend));
         return new ArrayList<>(mControllers);
     }
 }

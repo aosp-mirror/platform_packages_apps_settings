@@ -30,6 +30,23 @@
     <Preference
         android:key="block_desc" />
 
+    <!-- Whether the app can show promoted notifications -->
+    <PreferenceCategory
+        android:title="@string/live_notifications"
+        android:key="promoted_category"
+        android:visibility="gone">
+
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="promoted_switch"
+            android:title="@string/live_notifications_switch" />
+
+        <Preference
+            android:key="promoted_desc"
+            android:summary="@string/live_notifications_desc"
+            android:selectable="false"/>
+
+    </PreferenceCategory>
+
     <!-- Conversations added here -->
     <PreferenceCategory
         android:title="@string/conversations_category_title"
