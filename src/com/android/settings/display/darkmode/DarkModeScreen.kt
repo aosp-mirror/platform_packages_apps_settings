@@ -16,6 +16,7 @@
 
 package com.android.settings.display.darkmode
 
+import android.Manifest
 import android.app.UiModeManager
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -29,6 +30,7 @@ import com.android.settings.flags.Flags
 import com.android.settingslib.PrimarySwitchPreference
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
+import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.BooleanValue
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -70,6 +72,11 @@ class DarkModeScreen :
 
     override val keywords: Int
         get() = R.string.keywords_dark_ui_mode
+
+    override fun getReadPermissions(context: Context) = Permissions.EMPTY
+
+    override fun getWritePermissions(context: Context) =
+        Permissions.allOf(Manifest.permission.MODIFY_DAY_NIGHT_MODE)
 
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
