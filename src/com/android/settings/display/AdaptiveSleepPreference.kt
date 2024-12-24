@@ -77,6 +77,10 @@ class AdaptiveSleepPreference :
 
     override fun storage(context: Context): KeyValueStore = Storage(context)
 
+    override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
+
+    override fun getWritePermissions(context: Context) = SettingsSecureStore.getWritePermissions()
+
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
