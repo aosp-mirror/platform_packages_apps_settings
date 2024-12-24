@@ -50,6 +50,10 @@ class PeakRefreshRateSwitchPreference :
     override fun storage(context: Context): KeyValueStore =
         PeakRefreshRateStore(context, SettingsSystemStore.get(context))
 
+    override fun getReadPermissions(context: Context) = SettingsSystemStore.getReadPermissions()
+
+    override fun getWritePermissions(context: Context) = SettingsSystemStore.getWritePermissions()
+
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
