@@ -468,7 +468,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             final MenuItem item = menu.add(Menu.NONE, R.id.edit_sim_name, Menu.NONE,
-                    R.string.mobile_network_sim_name);
+                    R.string.mobile_network_sim_label_color_title);
             item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         }
