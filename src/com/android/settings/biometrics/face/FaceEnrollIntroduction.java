@@ -53,7 +53,6 @@ import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.MultiBiometricEnrollHelper;
-import com.android.settings.flags.Flags;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupSkipDialog;
 import com.android.settings.utils.SensorPrivacyManagerHelper;
@@ -145,19 +144,6 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         final ImageView iconLooking = findViewById(R.id.icon_looking);
         iconGlasses.getBackground().setColorFilter(getIconColorFilter());
         iconLooking.getBackground().setColorFilter(getIconColorFilter());
-        if (Flags.biometricsOnboardingEducation()) {
-            final ImageView iconSecurityPrivacySafe = findViewById(R.id.icon_security_privacy_safe);
-            final ImageView iconPrivacyTip = findViewById(R.id.icon_privacy_tip);
-            final ImageView iconFamiliarFaceAndZone =
-                    findViewById(R.id.icon_familiar_face_and_zone);
-            final ImageView iconTrashCan = findViewById(R.id.icon_trash_can);
-            final ImageView iconLink = findViewById(R.id.icon_link);
-            iconSecurityPrivacySafe.getBackground().setColorFilter(getIconColorFilter());
-            iconPrivacyTip.getBackground().setColorFilter(getIconColorFilter());
-            iconFamiliarFaceAndZone.getBackground().setColorFilter(getIconColorFilter());
-            iconTrashCan.getBackground().setColorFilter(getIconColorFilter());
-            iconLink.getBackground().setColorFilter(getIconColorFilter());
-        }
 
         // Set text for views with multiple variations.
         final TextView infoMessageGlasses = findViewById(R.id.info_message_glasses);
@@ -170,19 +156,9 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         infoMessageLooking.setText(getInfoMessageLooking());
         inControlTitle.setText(getInControlTitle());
         howMessage.setText(getHowMessage());
-        if (Flags.biometricsOnboardingEducation()) {
-            inControlMessage.setText(
-                    R.string.security_settings_face_enroll_introduction_control_message_2);
-            final TextView learnMore = findViewById(R.id.message_learn_more);
-            learnMore.setText(Html.fromHtml(getString(
-                    R.string.security_settings_face_enroll_introduction_learn_more_message),
-                    Html.FROM_HTML_MODE_LEGACY));
-            learnMore.setMovementMethod(LinkMovementMethod.getInstance());
-        } else {
-            inControlMessage.setText(Html.fromHtml(getString(getInControlMessage()),
-                    Html.FROM_HTML_MODE_LEGACY));
-            inControlMessage.setMovementMethod(LinkMovementMethod.getInstance());
-        }
+        inControlMessage.setText(Html.fromHtml(getString(getInControlMessage()),
+                Html.FROM_HTML_MODE_LEGACY));
+        inControlMessage.setMovementMethod(LinkMovementMethod.getInstance());
         lessSecure.setText(getLessSecureMessage());
 
         final ScrollView scrollView =
@@ -435,11 +411,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected int getLayoutResource() {
-        if (Flags.biometricsOnboardingEducation()) {
-            return R.layout.face_enroll_introduction_2;
-        } else {
-            return R.layout.face_enroll_introduction;
-        }
+        return R.layout.face_enroll_introduction;
     }
 
     @Override
@@ -622,13 +594,8 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
             setDescriptionText(getString(
                     R.string.private_space_face_enroll_introduction_message));
         } else if (mIsFaceStrong) {
-            final int messageRes;
-            if (Flags.biometricsOnboardingEducation()) {
-                messageRes = R.string.security_settings_face_enroll_introduction_message_class3_2;
-            } else {
-                messageRes = R.string.security_settings_face_enroll_introduction_message_class3;
-            }
-            setDescriptionText(getString(messageRes));
+            setDescriptionText(getString(
+                    R.string.security_settings_face_enroll_introduction_message_class3));
         }
         super.updateDescriptionText();
     }
