@@ -63,7 +63,7 @@ import java.util.Arrays;
         ShadowUtils.class,
         ShadowRestrictedLockUtilsInternal.class,
 })
-public class LockScreenNotificationShowSensitiveToggleControllerTest {
+public class LockScreenNotificationShowSensitiveControllerTest {
 
     @Mock
     private DevicePolicyManager mDpm;
@@ -79,8 +79,8 @@ public class LockScreenNotificationShowSensitiveToggleControllerTest {
     private Context mMockContext;
 
     private Context mContext;
-    private LockScreenNotificationShowSensitiveToggleController mController;
-    private LockScreenNotificationShowSensitiveToggleController mWorkController;
+    private LockScreenNotificationShowSensitiveController mController;
+    private LockScreenNotificationShowSensitiveController mWorkController;
     private RestrictedSwitchPreference mPreference;
     private RestrictedSwitchPreference mWorkPreference;
 
@@ -98,9 +98,9 @@ public class LockScreenNotificationShowSensitiveToggleControllerTest {
         when(mMockContext.getSystemService(KeyguardManager.class)).thenReturn(mKm);
         when(mUm.getProfiles(anyInt())).thenReturn(Arrays.asList(new UserInfo(0, "", 0)));
 
-        mController = new LockScreenNotificationShowSensitiveToggleController(
+        mController = new LockScreenNotificationShowSensitiveController(
                 mMockContext,
-                LockScreenNotificationShowSensitiveToggleController.KEY_SHOW_SENSITIVE
+                LockScreenNotificationShowSensitiveController.KEY_SHOW_SENSITIVE
         );
         mPreference = new RestrictedSwitchPreference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
@@ -110,9 +110,9 @@ public class LockScreenNotificationShowSensitiveToggleControllerTest {
         when(mUm.getProfiles(anyInt())).thenReturn(Arrays.asList(
                 new UserInfo(5, "", 0),
                 new UserInfo(10, "", UserInfo.FLAG_MANAGED_PROFILE | UserInfo.FLAG_PROFILE)));
-        mWorkController = new LockScreenNotificationShowSensitiveToggleController(
+        mWorkController = new LockScreenNotificationShowSensitiveController(
                 mMockContext,
-                LockScreenNotificationShowSensitiveToggleController.KEY_SHOW_SENSITIVE_WORK_PROFILE
+                LockScreenNotificationShowSensitiveController.KEY_SHOW_SENSITIVE_WORK_PROFILE
         );
         mWorkPreference = new RestrictedSwitchPreference(mContext);
         mWorkPreference.setKey(mWorkController.getPreferenceKey());
@@ -150,12 +150,12 @@ public class LockScreenNotificationShowSensitiveToggleControllerTest {
         // reset controllers with no work profile
         when(mUm.getProfiles(anyInt())).thenReturn(Arrays.asList(
                 new UserInfo(UserHandle.myUserId(), "", 0)));
-        mWorkController = new LockScreenNotificationShowSensitiveToggleController(
+        mWorkController = new LockScreenNotificationShowSensitiveController(
                 mMockContext,
-                LockScreenNotificationShowSensitiveToggleController.KEY_SHOW_SENSITIVE_WORK_PROFILE
+                LockScreenNotificationShowSensitiveController.KEY_SHOW_SENSITIVE_WORK_PROFILE
         );
-        mController = new LockScreenNotificationShowSensitiveToggleController(mMockContext,
-                LockScreenNotificationShowSensitiveToggleController.KEY_SHOW_SENSITIVE);
+        mController = new LockScreenNotificationShowSensitiveController(mMockContext,
+                LockScreenNotificationShowSensitiveController.KEY_SHOW_SENSITIVE);
 
         // should otherwise show
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
@@ -271,13 +271,13 @@ public class LockScreenNotificationShowSensitiveToggleControllerTest {
                 LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
                 0, 0);
 
-        assertThat(mController.isChecked()).isTrue();
+        assertThat(mController.isChecked()).isFalse();
 
         Settings.Secure.putIntForUser(mContext.getContentResolver(),
                 LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
                 1, 0);
 
-        assertThat(mController.isChecked()).isFalse();
+        assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
@@ -287,13 +287,13 @@ public class LockScreenNotificationShowSensitiveToggleControllerTest {
                 LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
                 0, 10);
 
-        assertThat(mWorkController.isChecked()).isTrue();
+        assertThat(mWorkController.isChecked()).isFalse();
 
         Settings.Secure.putIntForUser(mContext.getContentResolver(),
                 LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
                 1, 10);
 
-        assertThat(mWorkController.isChecked()).isFalse();
+        assertThat(mWorkController.isChecked()).isTrue();
     }
 
     @Test
@@ -305,7 +305,7 @@ public class LockScreenNotificationShowSensitiveToggleControllerTest {
         ShadowRestrictedLockUtilsInternal.setKeyguardDisabledFeatures(
                 KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
 
-        assertThat(mController.isChecked()).isFalse();
+        assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
@@ -317,7 +317,7 @@ public class LockScreenNotificationShowSensitiveToggleControllerTest {
         mController.setChecked(false);
         assertThat(Settings.Secure.getIntForUser(
                 mContext.getContentResolver(), LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 0))
-                .isEqualTo(1);
+                .isEqualTo(0);
     }
 
     @Test
@@ -329,7 +329,7 @@ public class LockScreenNotificationShowSensitiveToggleControllerTest {
         mWorkController.setChecked(true);
         assertThat(Settings.Secure.getIntForUser(
                 mContext.getContentResolver(), LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 10))
-                .isEqualTo(0);
+                .isEqualTo(1);
     }
 
     @Test
@@ -345,10 +345,10 @@ public class LockScreenNotificationShowSensitiveToggleControllerTest {
         mWorkController.setChecked(true);
         assertThat(Settings.Secure.getIntForUser(
                 mContext.getContentResolver(), LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 10))
-                .isEqualTo(0);
+                .isEqualTo(1);
         assertThat(Settings.Secure.getIntForUser(
                 mContext.getContentResolver(), LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 0))
-                .isEqualTo(0);
+                .isEqualTo(1);
     }
 }
 

@@ -39,7 +39,7 @@ import com.android.settings.core.TogglePreferenceController;
  * Controls the toggle that determines whether to hide seen notifications from the lock screen.
  * Toggle for setting: Settings.Secure.LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS
  */
-public class LockScreenNotificationHideSeenToggleController extends TogglePreferenceController
+public class LockScreenNotificationShowSeenController extends TogglePreferenceController
         implements LifecycleEventObserver {
 
     private static final int UNSET = 0;
@@ -57,7 +57,7 @@ public class LockScreenNotificationHideSeenToggleController extends TogglePrefer
         }
     };
 
-    public LockScreenNotificationHideSeenToggleController(@NonNull Context context,
+    public LockScreenNotificationShowSeenController(@NonNull Context context,
             @NonNull String preferenceKey) {
         super(context, preferenceKey);
         mContentResolver = context.getContentResolver();
@@ -90,7 +90,7 @@ public class LockScreenNotificationHideSeenToggleController extends TogglePrefer
     @Override
     public void updateState(@NonNull Preference preference) {
         super.updateState(preference);
-        setChecked(lockScreenShowOnlyUnseenNotifications());
+        setChecked(lockScreenShowSeenNotifications());
         preference.setVisible(isAvailable());
     }
 
@@ -115,18 +115,18 @@ public class LockScreenNotificationHideSeenToggleController extends TogglePrefer
 
     @Override
     public boolean isChecked() {
-        return lockScreenShowOnlyUnseenNotifications();
+        return lockScreenShowSeenNotifications();
     }
 
-    private boolean lockScreenShowOnlyUnseenNotifications() {
+    private boolean lockScreenShowSeenNotifications() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, UNSET) == ON;
+                Settings.Secure.LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, UNSET) == OFF;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, (isChecked ? ON : OFF));
+                Settings.Secure.LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, (isChecked ? OFF : ON));
     }
 
     @Override
