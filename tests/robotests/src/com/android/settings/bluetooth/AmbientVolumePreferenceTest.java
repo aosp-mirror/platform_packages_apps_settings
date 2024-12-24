@@ -41,8 +41,8 @@ import androidx.preference.PreferenceViewHolder;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.bluetooth.AmbientVolumeUi;
+import com.android.settingslib.widget.SliderPreference;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -99,13 +99,13 @@ public class AmbientVolumePreferenceTest {
             slider.setMax(4);
             if (side == SIDE_LEFT) {
                 slider.setKey(KEY_LEFT_SLIDER);
-                slider.setProgress(TEST_LEFT_VOLUME_LEVEL);
+                slider.setValue(TEST_LEFT_VOLUME_LEVEL);
             } else if (side == SIDE_RIGHT) {
                 slider.setKey(KEY_RIGHT_SLIDER);
-                slider.setProgress(TEST_RIGHT_VOLUME_LEVEL);
+                slider.setValue(TEST_RIGHT_VOLUME_LEVEL);
             } else {
                 slider.setKey(KEY_UNIFIED_SLIDER);
-                slider.setProgress(TEST_UNIFIED_VOLUME_LEVEL);
+                slider.setValue(TEST_UNIFIED_VOLUME_LEVEL);
             }
         });
 
@@ -223,7 +223,7 @@ public class AmbientVolumePreferenceTest {
 
     private void assertControlUiCorrect() {
         final boolean expanded = mPreference.isExpanded();
-        Map<Integer, SeekBarPreference> sliders = mPreference.getSliders();
+        Map<Integer, SliderPreference> sliders = mPreference.getSliders();
         assertThat(sliders.get(SIDE_UNIFIED).isVisible()).isEqualTo(!expanded);
         assertThat(sliders.get(SIDE_LEFT).isVisible()).isEqualTo(expanded);
         assertThat(sliders.get(SIDE_RIGHT).isVisible()).isEqualTo(expanded);
