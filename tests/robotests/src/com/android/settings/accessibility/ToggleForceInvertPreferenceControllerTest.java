@@ -23,13 +23,18 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
+import android.content.res.Configuration;
 import android.platform.test.annotations.RequiresFlagsDisabled;
 import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
 
+import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.core.BasePreferenceController;
@@ -52,10 +57,7 @@ public class ToggleForceInvertPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        mController = new ToggleForceInvertPreferenceController(
-                mContext,
-                ColorAndMotionFragment.TOGGLE_FORCE_INVERT
-        );
+        mController = new ToggleForceInvertPreferenceController(mContext, "toggle_force_invert");
     }
 
     @Test
@@ -70,6 +72,30 @@ public class ToggleForceInvertPreferenceControllerTest {
     public void flagOn_getAvailabilityStatus_shouldReturnAvailable() {
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void updateState_darkModeOn_preferenceEnabled() {
+        Configuration config = mContext.getResources().getConfiguration();
+        config.uiMode = Configuration.UI_MODE_NIGHT_YES;
+        mContext.getResources().updateConfiguration(config, null);
+
+        Preference preference = mock(Preference.class);
+        mController.updateState(preference);
+
+        verify(preference).setEnabled(true);
+    }
+
+    @Test
+    public void updateState_darkModeOff_preferenceDisabled() {
+        Configuration config = mContext.getResources().getConfiguration();
+        config.uiMode = Configuration.UI_MODE_NIGHT_NO;
+        mContext.getResources().updateConfiguration(config, null);
+
+        Preference preference = mock(Preference.class);
+        mController.updateState(preference);
+
+        verify(preference).setEnabled(false);
     }
 
     @Test

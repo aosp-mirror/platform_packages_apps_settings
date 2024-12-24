@@ -22,7 +22,6 @@ import android.hardware.display.ColorDisplayManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.view.accessibility.Flags;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,7 +29,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.TwoStatePreference;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -51,8 +49,6 @@ public class ColorAndMotionFragment extends DashboardFragment {
     // Preferences
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN = "daltonizer_preference";
     private static final String TOGGLE_LARGE_POINTER_ICON = "toggle_large_pointer_icon";
-    @VisibleForTesting
-    static final String TOGGLE_FORCE_INVERT = "toggle_force_invert";
 
     private Preference mDisplayDaltonizerPreferenceScreen;
     private TwoStatePreference mToggleDisableAnimationsPreference;
@@ -77,9 +73,6 @@ public class ColorAndMotionFragment extends DashboardFragment {
         mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
         mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         mShortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
-        if (Flags.forceInvertColor()) {
-            mShortcutFeatureKeys.add(ToggleForceInvertPreferenceController.SETTINGS_KEY);
-        }
 
         mSettingsContentObserver = new AccessibilitySettingsContentObserver(new Handler());
         mSettingsContentObserver.registerKeysToObserverCallback(mShortcutFeatureKeys,
