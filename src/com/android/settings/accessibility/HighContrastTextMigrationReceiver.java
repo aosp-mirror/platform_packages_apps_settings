@@ -123,7 +123,7 @@ public class HighContrastTextMigrationReceiver extends BroadcastReceiver {
                         R.string.accessibility_notification_high_contrast_text_title))
                 .setContentText(context.getString(
                         R.string.accessibility_notification_high_contrast_text_content))
-                .setAutoCancel(true);
+                .setFlag(Notification.FLAG_NO_CLEAR, true);
 
         Intent settingsIntent = new Intent(Settings.ACTION_TEXT_READING_SETTINGS);
         settingsIntent.setPackage(context.getPackageName());
@@ -142,9 +142,11 @@ public class HighContrastTextMigrationReceiver extends BroadcastReceiver {
                     settingsPendingIntent
             ).build();
 
-            notificationBuilder.addAction(settingsAction);
+            notificationBuilder
+                    .setContentIntent(settingsPendingIntent)
+                    .addAction(settingsAction)
+                    .setAutoCancel(true);
         }
-
         NotificationManager notificationManager =
                 context.getSystemService(NotificationManager.class);
         NotificationChannel notificationChannel = new NotificationChannel(
