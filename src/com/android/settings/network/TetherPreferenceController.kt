@@ -42,7 +42,9 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class TetherPreferenceController(
+class TetherPreferenceController
+@JvmOverloads
+constructor(
     context: Context,
     key: String,
     private val tetheredRepository: TetheredRepository = TetheredRepository(context),
