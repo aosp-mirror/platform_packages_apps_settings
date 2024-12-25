@@ -15,6 +15,7 @@
  */
 package com.android.settings.display
 
+import android.Manifest
 import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
@@ -36,6 +37,7 @@ import com.android.settingslib.datastore.DataChangeReason
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MAX
 import com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MIN
@@ -94,6 +96,11 @@ class BrightnessLevelPreference :
         preference.onPreferenceClickListener = this
         preference.isPersistent = false
     }
+
+    override fun getReadPermissions(context: Context) =
+        Permissions.allOf(Manifest.permission.CONTROL_DISPLAY_BRIGHTNESS)
+
+    override fun getWritePermissions(context: Context) = Permissions.EMPTY
 
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
