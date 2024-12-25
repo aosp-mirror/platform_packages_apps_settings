@@ -49,8 +49,12 @@ class BatteryPercentageSwitchPreference :
                 com.android.internal.R.bool.config_battery_percentage_setting_available
             )
 
+    override fun getReadPermissions(context: Context) = SettingsSystemStore.getReadPermissions()
+
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
+
+    override fun getWritePermissions(context: Context) = SettingsSystemStore.getWritePermissions()
 
     override fun getWritePermit(
         context: Context,
