@@ -24,6 +24,7 @@ import com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType
 import com.android.settingslib.Utils
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
+import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.fuelgauge.BatteryUtils
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -102,8 +103,12 @@ class BatteryHeaderPreference :
 
     override fun getMaxValue(context: Context): Int = 100
 
+    override fun getReadPermissions(context: Context) = Permissions.EMPTY
+
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
+
+    override fun getWritePermissions(context: Context) = Permissions.EMPTY
 
     override fun getWritePermit(context: Context, value: Int?, callingPid: Int, callingUid: Int) =
         ReadWritePermit.DISALLOW
