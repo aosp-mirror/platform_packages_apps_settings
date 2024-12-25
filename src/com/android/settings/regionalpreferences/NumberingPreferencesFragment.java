@@ -32,8 +32,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-/** Provides options of numbering system to each language. */
-public class NumberingPreferencesFragment  extends DashboardFragment {
+/**
+ * Provides options of numbering system to each language.
+ *
+ * @deprecated Use {@link NumberingSystemLocaleListFragment} instead.
+ */
+@Deprecated
+public class NumberingPreferencesFragment extends DashboardFragment {
+
     /** Initializes variables. */
     @VisibleForTesting
     String initTitle() {

@@ -102,7 +102,7 @@
         android:title="@string/numbers_preferences_title"
         android:summary="@string/default_string_of_regional_preference"
         settings:controller="com.android.settings.regionalpreferences.NewNumberingSystemController"
-        settings:fragment="com.android.settings.regionalpreferences.NumberingPreferencesFragment">
+        settings:fragment="com.android.settings.regionalpreferences.NumberingSystemLocaleListFragment">
       <extra
           android:name="arg_key_regional_preference"
           android:value="arg_value_language_select"/>
