@@ -15,6 +15,7 @@
  */
 package com.android.settings.fuelgauge.batterysaver
 
+import android.Manifest
 import android.content.Context
 import android.os.PowerManager
 import com.android.settings.R
@@ -22,6 +23,7 @@ import com.android.settings.fuelgauge.BatterySaverReceiver
 import com.android.settings.fuelgauge.BatterySaverReceiver.BatterySaverListener
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
+import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.fuelgauge.BatterySaverLogging.SAVER_ENABLED_SETTINGS
 import com.android.settingslib.fuelgauge.BatterySaverUtils
 import com.android.settingslib.fuelgauge.BatteryStatus
@@ -42,6 +44,11 @@ class BatterySaverPreference :
     private var batterySaverReceiver: BatterySaverReceiver? = null
 
     override fun storage(context: Context) = BatterySaverStore(context)
+
+    override fun getReadPermissions(context: Context) = Permissions.EMPTY
+
+    override fun getWritePermissions(context: Context) =
+        Permissions.anyOf(Manifest.permission.DEVICE_POWER, Manifest.permission.POWER_SAVER)
 
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
