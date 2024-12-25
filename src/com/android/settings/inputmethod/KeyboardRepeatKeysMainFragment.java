@@ -68,7 +68,7 @@ public class KeyboardRepeatKeysMainFragment extends DashboardFragment
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.PHYSICAL_KEYBOARD_A11Y;
+        return SettingsEnums.PHYSICAL_KEYBOARD_REPEAT_KEYS;
     }
 
     @Override

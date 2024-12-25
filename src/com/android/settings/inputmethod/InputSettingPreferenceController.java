@@ -40,6 +40,8 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.keyboard.Flags;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.concurrent.TimeUnit;
 
@@ -51,6 +53,7 @@ public abstract class InputSettingPreferenceController extends TogglePreferenceC
     private static final int CUSTOM_PROGRESS_INTERVAL = 100;
     private static final long MILLISECOND_IN_SECONDS = TimeUnit.SECONDS.toMillis(1);
     private final ContentResolver mContentResolver;
+    protected final MetricsFeatureProvider mMetricsFeatureProvider;
     private final ContentObserver mContentObserver = new ContentObserver(new Handler(true)) {
         @Override
         public void onChange(boolean selfChange, Uri uri) {
@@ -72,10 +75,14 @@ public abstract class InputSettingPreferenceController extends TogglePreferenceC
         return 0;
     }
 
+    protected void onCustomValueUpdated(int thresholdTimeMillis) {
+    }
+
     public InputSettingPreferenceController(@NonNull Context context,
             @NonNull String preferenceKey) {
         super(context, preferenceKey);
         mContentResolver = context.getContentResolver();
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -150,6 +157,7 @@ public abstract class InputSettingPreferenceController extends TogglePreferenceC
                                 }
                             }
                             updateInputSettingKeysValue(threshold);
+                            onCustomValueUpdated(threshold);
                         })
                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss())
                 .create();
