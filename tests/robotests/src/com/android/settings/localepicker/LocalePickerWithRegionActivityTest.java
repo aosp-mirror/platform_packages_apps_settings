@@ -6,10 +6,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 
 import android.app.Activity;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import com.android.internal.app.LocaleStore;
+import com.android.settings.flags.Flags;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -24,6 +28,8 @@ public class LocalePickerWithRegionActivityTest {
 
     private LocalePickerWithRegionActivity mActivity;
 
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -33,6 +39,7 @@ public class LocalePickerWithRegionActivityTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_REGIONAL_PREFERENCES_API_ENABLED)
     public void onLocaleSelected_resultShouldBeOK() {
         final ShadowActivity shadowActivity = Shadows.shadowOf(mActivity);
         mActivity.onLocaleSelected(mock(LocaleStore.LocaleInfo.class));
@@ -41,6 +48,7 @@ public class LocalePickerWithRegionActivityTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_REGIONAL_PREFERENCES_API_ENABLED)
     public void onLocaleSelected_localeInfoShouldBeSentBack() {
         final ShadowActivity shadowActivity = Shadows.shadowOf(mActivity);
         mActivity.onLocaleSelected(mock(LocaleStore.LocaleInfo.class));

@@ -33,6 +33,10 @@ import com.android.internal.app.LocalePickerWithRegion;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 import com.android.settings.core.SettingsBaseActivity;
+import com.android.settings.flags.Flags;
+import com.android.settings.regionalpreferences.RegionDialogFragment;
+
+import java.util.Locale;
 
 /**
  * An activity to show the locale picker page.
@@ -45,6 +49,10 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
     private static final String TAG = LocalePickerWithRegionActivity.class.getSimpleName();
     private static final String PARENT_FRAGMENT_NAME = "localeListEditor";
     private static final String CHILD_FRAGMENT_NAME = "LocalePickerWithRegion";
+    private static final int DIALOG_CHANGE_LOCALE_REGION = 1;
+    private static final String ARG_DIALOG_TYPE = "arg_dialog_type";
+    private static final String ARG_TARGET_LOCALE = "arg_target_locale";
+    private static final String TAG_DIALOG_CHANGE_REGION = "dialog_change_region";
 
     private LocalePickerWithRegion mSelector;
 
@@ -102,6 +110,37 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
 
     @Override
     public void onLocaleSelected(LocaleStore.LocaleInfo locale) {
+        if (Flags.regionalPreferencesApiEnabled()) {
+            if (sameLanguageAndScript(locale.getLocale(), Locale.getDefault())) {
+                Bundle args = new Bundle();
+                args.putInt(ARG_DIALOG_TYPE, DIALOG_CHANGE_LOCALE_REGION);
+                args.putSerializable(ARG_TARGET_LOCALE, locale);
+                RegionDialogFragment regionDialogFragment = RegionDialogFragment.newInstance();
+                regionDialogFragment.setArguments(args);
+                regionDialogFragment.show(getSupportFragmentManager(), TAG_DIALOG_CHANGE_REGION);
+            } else {
+                dispose(locale);
+            }
+        } else {
+            dispose(locale);
+        }
+    }
+
+    private static boolean sameLanguageAndScript(Locale source, Locale target) {
+        String sourceLanguage = source.getLanguage();
+        String targetLanguage = target.getLanguage();
+        String sourceLocaleScript = source.getScript();
+        String targetLocaleScript = target.getScript();
+        if (sourceLanguage.equals(targetLanguage)) {
+            if (!sourceLocaleScript.isEmpty() && !targetLocaleScript.isEmpty()) {
+                return sourceLocaleScript.equals(targetLocaleScript);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private void dispose(LocaleStore.LocaleInfo locale) {
         final Intent intent = new Intent();
         intent.putExtra(LocaleListEditor.INTENT_LOCALE_KEY, locale);
         setResult(RESULT_OK, intent);

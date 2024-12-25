@@ -17,18 +17,19 @@
 package com.android.settings.regionalpreferences;
 
 import android.content.Context;
-import android.os.LocaleList;
+import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.Initializer;
 import com.android.internal.app.LocaleCollectorBase;
 import com.android.internal.app.LocaleHelper;
-import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 import com.android.internal.app.LocaleStore.LocaleInfo;
 import com.android.settings.core.BasePreferenceController;
@@ -45,9 +46,12 @@ public abstract class RegionPickerBaseListPreferenceController extends BasePrefe
 
     private static final String TAG = "RegionPickerBaseListPreferenceController";
     private static final String KEY_SUGGESTED = "suggested";
+    private static final String TAG_DIALOG_CHANGE_REGION = "dialog_change_region";
     private PreferenceCategory mPreferenceCategory;
     private Set<LocaleInfo> mLocaleList;
     private ArrayList<LocaleInfo> mLocaleOptions;
+    private Fragment mParent;
+    private FragmentManager mFragmentManager;
 
     public RegionPickerBaseListPreferenceController(@NonNull Context context,
             @NonNull String preferenceKey) {
@@ -56,6 +60,10 @@ public abstract class RegionPickerBaseListPreferenceController extends BasePrefe
             false, false);
         mLocaleOptions = new ArrayList<>();
         mLocaleOptions.ensureCapacity(mLocaleList.size());
+    }
+
+    public void setFragment(@NonNull Fragment parent) {
+        mParent = parent;
     }
 
     @Override
@@ -156,28 +164,14 @@ public abstract class RegionPickerBaseListPreferenceController extends BasePrefe
         if (localeInfo.getLocale().equals(Locale.getDefault())) {
             return;
         }
-        updateRegion(localeInfo.getLocale().toLanguageTag());
-        updatePreferences();
-    }
 
-    private void updateRegion(String selectedLanguageTag) {
-        LocaleList localeList = LocaleList.getDefault();
-        Locale systemLocale = Locale.getDefault();
-        Set<Character> extensionKeys = systemLocale.getExtensionKeys();
-        Locale selectedLocale = Locale.forLanguageTag(selectedLanguageTag);
-        Locale.Builder builder = new Locale.Builder();
-        builder.setLocale(selectedLocale);
-        if (!extensionKeys.isEmpty()) {
-            for (Character extKey : extensionKeys) {
-                builder.setExtension(extKey, systemLocale.getExtension(extKey));
-            }
-        }
-        Locale newLocale = builder.build();
-        Locale[] resultLocales = new Locale[localeList.size()];
-        resultLocales[0] = newLocale;
-        for (int i = 1; i < localeList.size(); i++) {
-            resultLocales[i] = localeList.get(i);
-        }
-        LocalePicker.updateLocales(new LocaleList(resultLocales));
+        mFragmentManager = mParent.getChildFragmentManager();
+        Bundle args = new Bundle();
+        args.putInt(RegionDialogFragment.ARG_DIALOG_TYPE,
+                RegionDialogFragment.DIALOG_CHANGE_LOCALE_REGION);
+        args.putSerializable(RegionDialogFragment.ARG_TARGET_LOCALE, localeInfo);
+        RegionDialogFragment regionDialogFragment = RegionDialogFragment.newInstance();
+        regionDialogFragment.setArguments(args);
+        regionDialogFragment.show(mFragmentManager, TAG_DIALOG_CHANGE_REGION);
     }
 }
