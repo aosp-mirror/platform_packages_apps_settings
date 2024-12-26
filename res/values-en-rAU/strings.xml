@@ -80,6 +80,14 @@
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Preset"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"There are no presets programmed by your audiologist"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Couldn\'t update preset"</string>
+    <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Surroundings"</string>
+    <string name="bluetooth_ambient_volume_control_expand" msgid="6726334974948737504">"Expand to left and right separated controls"</string>
+    <string name="bluetooth_ambient_volume_control_collapse" msgid="7103189728479091531">"Collapse to unified control"</string>
+    <string name="bluetooth_ambient_volume_control_left" msgid="1927760358765239141">"Left"</string>
+    <string name="bluetooth_ambient_volume_control_right" msgid="5783836267230662002">"Right"</string>
+    <string name="bluetooth_ambient_volume_mute" msgid="2700088105160838096">"Mute surroundings"</string>
+    <string name="bluetooth_ambient_volume_unmute" msgid="8055038818824925188">"Unmute surroundings"</string>
+    <string name="bluetooth_ambient_volume_error" msgid="259328969488233714">"Couldn\'t update surroundings"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Audio output"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"About audio output"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Route sounds to your hearing device or phone speaker"</string>
@@ -166,6 +174,16 @@
     <string name="ping_test_label" msgid="265427033290391845">"Run ping test"</string>
     <string name="skip_label" msgid="6380034601349015895">"Skip"</string>
     <string name="next_label" msgid="1248293387735652187">"Next"</string>
+    <!-- no translation found for region_picker_preference_title (9195149951917299277) -->
+    <skip />
+    <!-- no translation found for region_picker_title (6743800249134439329) -->
+    <skip />
+    <!-- no translation found for region_picker_sub_title (7092062110753164836) -->
+    <skip />
+    <!-- no translation found for suggested_region_title (2554129334404390153) -->
+    <skip />
+    <!-- no translation found for all_supported_region_title (4817156933097703066) -->
+    <skip />
     <string name="language_picker_title" msgid="4271307478263345133">"Languages"</string>
     <string name="language_picker_category_title" msgid="1792199453060454565">"Preferred language order"</string>
     <string name="desc_current_default_language" msgid="1901157141663662859">"System language"</string>
@@ -210,8 +228,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperature"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"First day of week"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Numbers preferences"</string>
-    <!-- no translation found for measurement_system_preferences_title (5539250190895110890) -->
-    <skip />
+    <string name="measurement_system_preferences_title" msgid="5539250190895110890">"Measurement system"</string>
     <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Use default"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"Celsius (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Fahrenheit (°F)"</string>
@@ -224,12 +241,9 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Saturday"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"If an app doesn’t support regional preferences, the app will use its default locale settings."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Learn more about language preferences."</string>
-    <!-- no translation found for metric_measurement_system (7489725697268321541) -->
-    <skip />
-    <!-- no translation found for us_measurement_system (8738587232938189052) -->
-    <skip />
-    <!-- no translation found for uk_measurement_system (4196897001775627597) -->
-    <skip />
+    <string name="metric_measurement_system" msgid="7489725697268321541">"Metric"</string>
+    <string name="us_measurement_system" msgid="8738587232938189052">"Imperial (US)"</string>
+    <string name="uk_measurement_system" msgid="4196897001775627597">"Imperial (UK)"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Additional preferences"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"Choose how you\'re addressed"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"Your device can personalise how you\'re addressed"</string>
@@ -1945,6 +1959,7 @@
     <string name="language_input_gesture_title" msgid="3292455685728572960">"Languages, input &amp; gestures"</string>
     <string name="language_settings" msgid="8700174277543875046">"Languages and input"</string>
     <string name="languages_settings" msgid="5784775502251770671">"Languages"</string>
+    <string name="language_and_region_settings" msgid="2950394107276025120">"Language and region"</string>
     <string name="keyboard_settings" msgid="184185708597386454">"Keyboard"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"You don’t have permission to change the device language."</string>
     <string name="language_keyboard_settings_title" msgid="7934844313233544557">"Languages and input"</string>
@@ -1975,23 +1990,16 @@
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Physical keyboard"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Physical keyboard layout picker"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Bounce keys"</string>
-    <!-- no translation found for bounce_keys_summary (8890925059943636911) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_title (1090578395028456023) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_subtitle (6804676895876861863) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_200 (2785528287150314940) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_400 (91571674179896177) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_600 (6983252972219539375) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="8890925059943636911">"Ignore quickly repeated presses of the same key"</string>
+    <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"Bounce key delay"</string>
+    <string name="bounce_keys_dialog_subtitle" msgid="6804676895876861863">"Choose how long the keyboard ignores repeated keystrokes"</string>
+    <string name="input_setting_keys_dialog_option_200" msgid="2785528287150314940">"0.2 seconds"</string>
+    <string name="input_setting_keys_dialog_option_400" msgid="91571674179896177">"0.4 seconds"</string>
+    <string name="input_setting_keys_dialog_option_600" msgid="6983252972219539375">"0.6 seconds"</string>
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"Custom"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"custom value"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Slow keys"</string>
-    <!-- no translation found for slow_keys_summary (3852534180402969185) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="3852534180402969185">"Change how long you need to hold down a key before it\'s registered"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Sticky keys"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Press one key at a time for shortcuts instead of holding keys down together"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Mouse keys"</string>
@@ -2016,8 +2024,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad and mouse"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Mouse"</string>
-    <!-- no translation found for mouse_settings_summary (4609720443781972646) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="4609720443781972646">"Pointer speed, swap buttons, button customisation"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Pointer speed, gestures"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Tap to click"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Tap dragging"</string>
@@ -2329,10 +2336,11 @@
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"Unavailable while using navigation bar button mode."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"High-contrast text"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Change text colour to black or white. Maximises contrast with the background."</string>
-    <!-- no translation found for accessibility_notification_high_contrast_text_content (2143888096871993191) -->
+    <!-- no translation found for accessibility_notification_high_contrast_text_title (85109818203175520) -->
     <skip />
-    <!-- no translation found for accessibility_notification_high_contrast_text_action (7190559555068414342) -->
+    <!-- no translation found for accessibility_notification_high_contrast_text_content (5073923345319368046) -->
     <skip />
+    <string name="accessibility_notification_high_contrast_text_action" msgid="7190559555068414342">"Open Settings"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maximise text contrast"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Add a black or white background around the text to increase the contrast"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Auto update screen magnification"</string>
@@ -2451,7 +2459,10 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Hearing aid compatibility"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Improves compatibility with telecoils and reduces unwanted noise"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"About hearing devices"</string>
-    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"To find other hearing devices that aren\'t supported by ASHA or LE Audio, tap "<b>"Pair new device"</b>" &gt; "<b>"See more devices"</b></string>
+    <!-- no translation found for accessibility_hearing_device_footer_summary (5513620078219951077) -->
+    <skip />
+    <!-- no translation found for accessibility_hearing_device_footer_summary_tts (955527026890456959) -->
+    <skip />
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Pair hearing device"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"You can pair ASHA and LE Audio hearing devices on this page. Make sure that your hearing device is turned on and ready to pair."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Available hearing devices"</string>
@@ -4301,6 +4312,10 @@
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"Your admin can monitor and manage apps and data associated with this user, including settings, permissions, corporate access, network activity and the device\'s location information."</string>
     <string name="admin_device_owner_message" msgid="5503131744126520590">"Your admin can monitor and manage apps and data associated with this device, including settings, permissions, corporate access, network activity and the device\'s location information."</string>
     <string name="admin_financed_message" msgid="1156197630834947884">"Your device administrator may be able to access data associated with this device, manage apps and change this device\'s settings."</string>
+    <!-- no translation found for disabled_by_advanced_protection_title (766656508280098112) -->
+    <skip />
+    <!-- no translation found for disabled_by_advanced_protection_message (5515085544669304056) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Turn off"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Turn on"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Show"</string>
@@ -5561,6 +5576,5 @@
     <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Where to save contacts"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Circle to Search"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Touch and hold the home button or the navigation handle to search using the content on your screen."</string>
-    <!-- no translation found for device_detail_icon_content_description (6699151424374841937) -->
-    <skip />
+    <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Configure device detail."</string>
 </resources>

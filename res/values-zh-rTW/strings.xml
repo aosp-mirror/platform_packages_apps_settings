@@ -80,6 +80,14 @@
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"預設設定"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"沒有由聽力師預設的設定"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"無法更新預設設定"</string>
+    <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"環境"</string>
+    <string name="bluetooth_ambient_volume_control_expand" msgid="6726334974948737504">"展開為左右獨立控制選項"</string>
+    <string name="bluetooth_ambient_volume_control_collapse" msgid="7103189728479091531">"收合為統合控制選項"</string>
+    <string name="bluetooth_ambient_volume_control_left" msgid="1927760358765239141">"左"</string>
+    <string name="bluetooth_ambient_volume_control_right" msgid="5783836267230662002">"右"</string>
+    <string name="bluetooth_ambient_volume_mute" msgid="2700088105160838096">"將環境靜音"</string>
+    <string name="bluetooth_ambient_volume_unmute" msgid="8055038818824925188">"取消環境靜音"</string>
+    <string name="bluetooth_ambient_volume_error" msgid="259328969488233714">"無法更新環境狀態"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"音訊輸出裝置"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"關於音訊輸出"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"將聲音轉送至助聽器或手機喇叭"</string>
@@ -166,6 +174,16 @@
     <string name="ping_test_label" msgid="265427033290391845">"執行連線偵測 (ping) 測試"</string>
     <string name="skip_label" msgid="6380034601349015895">"略過"</string>
     <string name="next_label" msgid="1248293387735652187">"下一步"</string>
+    <!-- no translation found for region_picker_preference_title (9195149951917299277) -->
+    <skip />
+    <!-- no translation found for region_picker_title (6743800249134439329) -->
+    <skip />
+    <!-- no translation found for region_picker_sub_title (7092062110753164836) -->
+    <skip />
+    <!-- no translation found for suggested_region_title (2554129334404390153) -->
+    <skip />
+    <!-- no translation found for all_supported_region_title (4817156933097703066) -->
+    <skip />
     <string name="language_picker_title" msgid="4271307478263345133">"語言"</string>
     <string name="language_picker_category_title" msgid="1792199453060454565">"偏好語言順序"</string>
     <string name="desc_current_default_language" msgid="1901157141663662859">"系統語言"</string>
@@ -210,8 +228,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"溫度"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"一週的第一天"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"數字顯示方式偏好"</string>
-    <!-- no translation found for measurement_system_preferences_title (5539250190895110890) -->
-    <skip />
+    <string name="measurement_system_preferences_title" msgid="5539250190895110890">"計量系統"</string>
     <string name="default_string_of_regional_preference" msgid="3428899072914884203">"使用預設值"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"攝氏 (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"華氏 (°F)"</string>
@@ -224,12 +241,9 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"星期六"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"如果應用程式不支援地區偏好設定，就會使用預設的語言代碼設定。"</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"進一步瞭解語言偏好設定"</string>
-    <!-- no translation found for metric_measurement_system (7489725697268321541) -->
-    <skip />
-    <!-- no translation found for us_measurement_system (8738587232938189052) -->
-    <skip />
-    <!-- no translation found for uk_measurement_system (4196897001775627597) -->
-    <skip />
+    <string name="metric_measurement_system" msgid="7489725697268321541">"公制"</string>
+    <string name="us_measurement_system" msgid="8738587232938189052">"英制 (美國)"</string>
+    <string name="uk_measurement_system" msgid="4196897001775627597">"英制 (英國)"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"其他偏好設定"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"選擇稱呼你的方式"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"你可以自訂裝置稱呼你的方式"</string>
@@ -1945,6 +1959,7 @@
     <string name="language_input_gesture_title" msgid="3292455685728572960">"語言、輸入和手勢"</string>
     <string name="language_settings" msgid="8700174277543875046">"語言與輸入設定"</string>
     <string name="languages_settings" msgid="5784775502251770671">"語言"</string>
+    <string name="language_and_region_settings" msgid="2950394107276025120">"語言和區域"</string>
     <string name="keyboard_settings" msgid="184185708597386454">"鍵盤"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"你沒有變更裝置語言的權限。"</string>
     <string name="language_keyboard_settings_title" msgid="7934844313233544557">"語言與輸入設定"</string>
@@ -1975,23 +1990,16 @@
     <string name="physical_keyboard_title" msgid="3328134097512350958">"實體鍵盤"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"實體鍵盤配置挑選器"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"彈回鍵"</string>
-    <!-- no translation found for bounce_keys_summary (8890925059943636911) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_title (1090578395028456023) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_subtitle (6804676895876861863) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_200 (2785528287150314940) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_400 (91571674179896177) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_600 (6983252972219539375) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="8890925059943636911">"忽略快速重複按下同一按鍵的動作"</string>
+    <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"彈回鍵延遲"</string>
+    <string name="bounce_keys_dialog_subtitle" msgid="6804676895876861863">"選擇鍵盤忽略重複按下按鍵的時間長度"</string>
+    <string name="input_setting_keys_dialog_option_200" msgid="2785528287150314940">"0.2 秒"</string>
+    <string name="input_setting_keys_dialog_option_400" msgid="91571674179896177">"0.4 秒"</string>
+    <string name="input_setting_keys_dialog_option_600" msgid="6983252972219539375">"0.6 秒"</string>
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"自訂"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"自訂值"</string>
     <string name="slow_keys" msgid="2891452895499690837">"延遲感應鍵"</string>
-    <!-- no translation found for slow_keys_summary (3852534180402969185) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="3852534180402969185">"變更按住按鍵多久後才會觸發動作"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"相黏鍵"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"一次按下快速鍵中的一個按鍵，而非同時按住多個按鍵"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"滑鼠按鍵"</string>
@@ -2016,8 +2024,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"觸控板"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"觸控板與滑鼠"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"滑鼠"</string>
-    <!-- no translation found for mouse_settings_summary (4609720443781972646) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="4609720443781972646">"游標速度、按鈕互換、自訂按鈕"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"游標速度、手勢"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"點按"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"輕觸拖曳"</string>
@@ -2329,10 +2336,11 @@
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"使用導覽列按鈕模式時無法使用。"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"高對比文字"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"將文字色變成黑色或白色，與背景色彩呈現最大對比。"</string>
-    <!-- no translation found for accessibility_notification_high_contrast_text_content (2143888096871993191) -->
+    <!-- no translation found for accessibility_notification_high_contrast_text_title (85109818203175520) -->
     <skip />
-    <!-- no translation found for accessibility_notification_high_contrast_text_action (7190559555068414342) -->
+    <!-- no translation found for accessibility_notification_high_contrast_text_content (5073923345319368046) -->
     <skip />
+    <string name="accessibility_notification_high_contrast_text_action" msgid="7190559555068414342">"開啟「設定」"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"盡可能提高文字對比度"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"在文字周圍加上黑色或白色背景，可增加對比度"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"自動更新螢幕放大設定"</string>
@@ -2451,7 +2459,10 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"助聽器相容性"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"提升與電話線圈的相容程度，減少惱人噪音"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"關於助聽器"</string>
-    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"如要找到 ASHA 或 LE Audio 不支援的其他助聽器，請依序輕觸「配對新裝置」"<b></b>"&gt;「查看更多裝置」"<b></b></string>
+    <!-- no translation found for accessibility_hearing_device_footer_summary (5513620078219951077) -->
+    <skip />
+    <!-- no translation found for accessibility_hearing_device_footer_summary_tts (955527026890456959) -->
+    <skip />
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"配對助聽器"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"你可以在這裡配對 ASHA 和 LE Audio 助聽器。請確認助聽器已開啟並可進行配對。"</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"可用的助聽器"</string>
@@ -4301,6 +4312,10 @@
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"你的管理員可以監控及管理與這位使用者相關聯的應用程式和資料，包括設定、權限、公司系統權限、網路活動，以及裝置的位置資訊。"</string>
     <string name="admin_device_owner_message" msgid="5503131744126520590">"你的管理員可以監控及管理與這個裝置相關聯的應用程式和資料，包括設定、權限、公司系統權限、網路活動，以及裝置的位置資訊。"</string>
     <string name="admin_financed_message" msgid="1156197630834947884">"你的裝置管理員或許可以存取這部裝置的相關資料、管理應用程式及變更裝置設定。"</string>
+    <!-- no translation found for disabled_by_advanced_protection_title (766656508280098112) -->
+    <skip />
+    <!-- no translation found for disabled_by_advanced_protection_message (5515085544669304056) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"關閉"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"開啟"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"顯示"</string>
@@ -5561,6 +5576,5 @@
     <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"聯絡人的儲存位置"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"畫圈搜尋"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"按住主畫面按鈕或導覽列，就能搜尋畫面內容。"</string>
-    <!-- no translation found for device_detail_icon_content_description (6699151424374841937) -->
-    <skip />
+    <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>。設定裝置詳細資料。"</string>
 </resources>

@@ -80,6 +80,14 @@
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Задата подешавања"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Не постоје задата подешавања која је програмирао аудиолог"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Ажурирање задатих подешавања није успело"</string>
+    <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Окружење"</string>
+    <string name="bluetooth_ambient_volume_control_expand" msgid="6726334974948737504">"Прошири на контроле раздвојене на леву и десну страну"</string>
+    <string name="bluetooth_ambient_volume_control_collapse" msgid="7103189728479091531">"Скупи у јединствену контролу"</string>
+    <string name="bluetooth_ambient_volume_control_left" msgid="1927760358765239141">"Лево"</string>
+    <string name="bluetooth_ambient_volume_control_right" msgid="5783836267230662002">"Десно"</string>
+    <string name="bluetooth_ambient_volume_mute" msgid="2700088105160838096">"Искључи звук окружења"</string>
+    <string name="bluetooth_ambient_volume_unmute" msgid="8055038818824925188">"Укључи звук окружења"</string>
+    <string name="bluetooth_ambient_volume_error" msgid="259328969488233714">"Ажурирање окружења није успело"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Аудио излаз"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"О аудио излазу"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Усмерава звукове на слушни апарат или звучник телефона"</string>
@@ -166,6 +174,16 @@
     <string name="ping_test_label" msgid="265427033290391845">"Покрени тест пинговања"</string>
     <string name="skip_label" msgid="6380034601349015895">"Прескочи"</string>
     <string name="next_label" msgid="1248293387735652187">"Даље"</string>
+    <!-- no translation found for region_picker_preference_title (9195149951917299277) -->
+    <skip />
+    <!-- no translation found for region_picker_title (6743800249134439329) -->
+    <skip />
+    <!-- no translation found for region_picker_sub_title (7092062110753164836) -->
+    <skip />
+    <!-- no translation found for suggested_region_title (2554129334404390153) -->
+    <skip />
+    <!-- no translation found for all_supported_region_title (4817156933097703066) -->
+    <skip />
     <string name="language_picker_title" msgid="4271307478263345133">"Језици"</string>
     <string name="language_picker_category_title" msgid="1792199453060454565">"Редослед жељених језика"</string>
     <string name="desc_current_default_language" msgid="1901157141663662859">"Језик система"</string>
@@ -1941,6 +1959,7 @@
     <string name="language_input_gesture_title" msgid="3292455685728572960">"Језици, унос и покрети"</string>
     <string name="language_settings" msgid="8700174277543875046">"Језици и унос"</string>
     <string name="languages_settings" msgid="5784775502251770671">"Језици"</string>
+    <string name="language_and_region_settings" msgid="2950394107276025120">"Језик и регион"</string>
     <string name="keyboard_settings" msgid="184185708597386454">"Тастатура"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"Немате дозволу да мењате језик уређаја."</string>
     <string name="language_keyboard_settings_title" msgid="7934844313233544557">"Језици и унос"</string>
@@ -1971,23 +1990,16 @@
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Физичка тастатура"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Бирач распореда физичке тастатуре"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Дужи одзив тастера"</string>
-    <!-- no translation found for bounce_keys_summary (8890925059943636911) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_title (1090578395028456023) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_subtitle (6804676895876861863) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_200 (2785528287150314940) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_400 (91571674179896177) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_600 (6983252972219539375) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="8890925059943636911">"Игноришите брзе притиске истог тастера који се понављају"</string>
+    <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"Кашњење дужег одзива тастера"</string>
+    <string name="bounce_keys_dialog_subtitle" msgid="6804676895876861863">"Одаберите колико дуго тастатура треба да игнорише поновљене притиске тастера"</string>
+    <string name="input_setting_keys_dialog_option_200" msgid="2785528287150314940">"0,2 секунде"</string>
+    <string name="input_setting_keys_dialog_option_400" msgid="91571674179896177">"0,4 секунде"</string>
+    <string name="input_setting_keys_dialog_option_600" msgid="6983252972219539375">"0,6 секунди"</string>
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"Прилагођено"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"прилагођена вредност"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Спори тастери"</string>
-    <!-- no translation found for slow_keys_summary (3852534180402969185) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="3852534180402969185">"Промените колико дуго треба да задржите тастер да би се активирао"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Лепљиви тастери"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Притискајте један по један тастер да бисте користили пречице уместо да истовремено држите тастере"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Тастери миша"</string>
@@ -2012,8 +2024,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Тачпед"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Тачпед и миш"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Миш"</string>
-    <!-- no translation found for mouse_settings_summary (4609720443781972646) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="4609720443781972646">"Брзина показивача, замена и прилагођавање дугмади"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Брзина показивача, покрети"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Додирните да бисте кликнули"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Превлачење додиром"</string>
@@ -2325,10 +2336,11 @@
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"Недоступно док користите режим дугмета траке за нав."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Текст високог контраста"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Промените боју текста у црну или белу. Максимално увећава контраст са позадином."</string>
-    <!-- no translation found for accessibility_notification_high_contrast_text_content (2143888096871993191) -->
+    <!-- no translation found for accessibility_notification_high_contrast_text_title (85109818203175520) -->
     <skip />
-    <!-- no translation found for accessibility_notification_high_contrast_text_action (7190559555068414342) -->
+    <!-- no translation found for accessibility_notification_high_contrast_text_content (5073923345319368046) -->
     <skip />
+    <string name="accessibility_notification_high_contrast_text_action" msgid="7190559555068414342">"Отвори Подешавања"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Максимално повећај контраст текста"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Додајте црну или белу позадину око текста да бисте повећали контраст"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Аутоматски ажурирај увелич. екрана"</string>
@@ -2447,7 +2459,10 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Компатибилност са слушним апаратима"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Побољшава компатибилност са телекоиловима и смањује нежељену буку"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"О слушним апаратима"</string>
-    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"Да бисте пронашли друге слушне апарате који немају ASHA ни LE Audio, додирните "<b>"Упари нови уређај"</b>" &gt; "<b>"Прикажи још уређаја"</b></string>
+    <!-- no translation found for accessibility_hearing_device_footer_summary (5513620078219951077) -->
+    <skip />
+    <!-- no translation found for accessibility_hearing_device_footer_summary_tts (955527026890456959) -->
+    <skip />
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Упарите слушни апарат"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"На овој страници можете да упарите слушне апарате који имају ASHA и LE Audio. Проверите да ли је слушни апарат укључен и спреман за упаривање."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Доступни слушни апарати"</string>
@@ -4297,6 +4312,10 @@
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"Администратор може да надгледа апликације и податке повезане са овим корисником, укључујући подешавања, дозволе, корпоративни приступ, активности на мрежи и информације о локацији уређаја, као и да управља њима."</string>
     <string name="admin_device_owner_message" msgid="5503131744126520590">"Администратор може да прати апликације и податке повезане са овим уређајем, укључујући подешавања, дозволе, корпоративни приступ, активности на мрежи и информације о локацији уређаја, као и да управља њима."</string>
     <string name="admin_financed_message" msgid="1156197630834947884">"Администратор уређаја можда може да приступа подацима повезаним са овим уређајем, да управља апликацијама и да мења подешавања овог уређаја."</string>
+    <!-- no translation found for disabled_by_advanced_protection_title (766656508280098112) -->
+    <skip />
+    <!-- no translation found for disabled_by_advanced_protection_message (5515085544669304056) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Искључи"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Укључи"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Прикажи"</string>

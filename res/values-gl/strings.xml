@@ -80,6 +80,14 @@
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Configuración predeterminada"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"O audiólogo non fixo ningunha configuración predeterminada"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Non se puido actualizar a configuración predeterminada"</string>
+    <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Ambiente"</string>
+    <string name="bluetooth_ambient_volume_control_expand" msgid="6726334974948737504">"Despregar para controis separados do lado esquerdo e do dereito"</string>
+    <string name="bluetooth_ambient_volume_control_collapse" msgid="7103189728479091531">"Contraer para control unificado"</string>
+    <string name="bluetooth_ambient_volume_control_left" msgid="1927760358765239141">"Esquerdo"</string>
+    <string name="bluetooth_ambient_volume_control_right" msgid="5783836267230662002">"Dereito"</string>
+    <string name="bluetooth_ambient_volume_mute" msgid="2700088105160838096">"Silenciar o ambiente"</string>
+    <string name="bluetooth_ambient_volume_unmute" msgid="8055038818824925188">"Activar o son ambiental"</string>
+    <string name="bluetooth_ambient_volume_error" msgid="259328969488233714">"Non se puido actualizar o ambiente"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Saída de audio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Acerca da saída de audio"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Transmite sons ao teu dispositivo auditivo ou ao altofalante do teléfono"</string>
@@ -166,6 +174,16 @@
     <string name="ping_test_label" msgid="265427033290391845">"Executar proba de ping"</string>
     <string name="skip_label" msgid="6380034601349015895">"Omitir"</string>
     <string name="next_label" msgid="1248293387735652187">"Seguinte"</string>
+    <!-- no translation found for region_picker_preference_title (9195149951917299277) -->
+    <skip />
+    <!-- no translation found for region_picker_title (6743800249134439329) -->
+    <skip />
+    <!-- no translation found for region_picker_sub_title (7092062110753164836) -->
+    <skip />
+    <!-- no translation found for suggested_region_title (2554129334404390153) -->
+    <skip />
+    <!-- no translation found for all_supported_region_title (4817156933097703066) -->
+    <skip />
     <string name="language_picker_title" msgid="4271307478263345133">"Idiomas"</string>
     <string name="language_picker_category_title" msgid="1792199453060454565">"Orde dos idiomas preferidos"</string>
     <string name="desc_current_default_language" msgid="1901157141663662859">"Idioma do sistema"</string>
@@ -210,8 +228,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Temperatura"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Primeiro día da semana"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Preferencias de números"</string>
-    <!-- no translation found for measurement_system_preferences_title (5539250190895110890) -->
-    <skip />
+    <string name="measurement_system_preferences_title" msgid="5539250190895110890">"Sistema de medida"</string>
     <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Usa a opción predeterminada"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"Celsius (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Fahrenheit (°F)"</string>
@@ -224,12 +241,9 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Sábado"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Se unha aplicación non admite preferencias rexionais, usará as opcións predeterminadas da súa configuración rexional."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Consulta máis información sobre as preferencias de idioma."</string>
-    <!-- no translation found for metric_measurement_system (7489725697268321541) -->
-    <skip />
-    <!-- no translation found for us_measurement_system (8738587232938189052) -->
-    <skip />
-    <!-- no translation found for uk_measurement_system (4196897001775627597) -->
-    <skip />
+    <string name="metric_measurement_system" msgid="7489725697268321541">"Sistema métrico"</string>
+    <string name="us_measurement_system" msgid="8738587232938189052">"Sistema imperial (EUA)"</string>
+    <string name="uk_measurement_system" msgid="4196897001775627597">"Sistema imperial (Reino Unido)"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Preferencias adicionais"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"Elixir como queres que se dirixan a ti"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"O dispositivo pode personalizar o modo de dirixirse a ti"</string>
@@ -1945,6 +1959,7 @@
     <string name="language_input_gesture_title" msgid="3292455685728572960">"Idiomas, entrada e xestos"</string>
     <string name="language_settings" msgid="8700174277543875046">"Idiomas e introdución de texto"</string>
     <string name="languages_settings" msgid="5784775502251770671">"Idiomas"</string>
+    <string name="language_and_region_settings" msgid="2950394107276025120">"Idioma e rexión"</string>
     <string name="keyboard_settings" msgid="184185708597386454">"Teclado"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"Non tes permiso para cambiar o idioma do dispositivo."</string>
     <string name="language_keyboard_settings_title" msgid="7934844313233544557">"Idiomas e introdución de texto"</string>
@@ -1975,23 +1990,16 @@
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclado físico"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Selector do deseño do teclado fís."</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Teclas de rebote"</string>
-    <!-- no translation found for bounce_keys_summary (8890925059943636911) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_title (1090578395028456023) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_subtitle (6804676895876861863) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_200 (2785528287150314940) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_400 (91571674179896177) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_600 (6983252972219539375) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="8890925059943636911">"Ignora as pulsacións repetidas rapidamente da mesma tecla"</string>
+    <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"Atraso das teclas de rebote"</string>
+    <string name="bounce_keys_dialog_subtitle" msgid="6804676895876861863">"Escolle canto tempo debe ignorar o teclado as pulsacións repetidas de teclas"</string>
+    <string name="input_setting_keys_dialog_option_200" msgid="2785528287150314940">"0,2 segundos"</string>
+    <string name="input_setting_keys_dialog_option_400" msgid="91571674179896177">"0,4 segundos"</string>
+    <string name="input_setting_keys_dialog_option_600" msgid="6983252972219539375">"0,6 segundos"</string>
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"Personalizado"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"valor personalizado"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Teclas lentas"</string>
-    <!-- no translation found for slow_keys_summary (3852534180402969185) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="3852534180402969185">"Cambia o tempo que debes manter premida unha tecla antes de que se rexistre"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Teclas presas"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Preme unha tecla de cada vez para os atallos, en lugar de manter premidas varias"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Teclas do rato"</string>
@@ -2016,8 +2024,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Panel táctil"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Panel táctil e rato"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Rato"</string>
-    <!-- no translation found for mouse_settings_summary (4609720443781972646) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="4609720443781972646">"Veloc. do punteiro, cambia/personaliza os botóns"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Velocidade do punteiro, xestos"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Toque para facer clic"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Tocar e arrastrar"</string>
@@ -2329,10 +2336,11 @@
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"Non dispoñible co modo de botón da barra de naveg."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Texto de alto contraste"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Cambia a cor do texto a negro ou branco. Maximiza o contraste co fondo."</string>
-    <!-- no translation found for accessibility_notification_high_contrast_text_content (2143888096871993191) -->
+    <!-- no translation found for accessibility_notification_high_contrast_text_title (85109818203175520) -->
     <skip />
-    <!-- no translation found for accessibility_notification_high_contrast_text_action (7190559555068414342) -->
+    <!-- no translation found for accessibility_notification_high_contrast_text_content (5073923345319368046) -->
     <skip />
+    <string name="accessibility_notification_high_contrast_text_action" msgid="7190559555068414342">"Abrir Configuración"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maximizar o contraste do texto"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Engade un fondo branco ou negro ao redor do texto para aumentar o contraste"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Actualizar aumento automaticamente"</string>
@@ -2451,7 +2459,10 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Compatibilidade disp. auditivos"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Mellora a compatibilidade con telebobinas e reduce o ruído non desexado"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Acerca dos dispositivos auditivos"</string>
-    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"Para atopar outros dispositivos auditivos que non sexan compatibles con ASHA ou co audio de baixo consumo, toca "<b>"Vincular dispositivo"</b>" &gt; "<b>"Ver máis dispositivos"</b></string>
+    <!-- no translation found for accessibility_hearing_device_footer_summary (5513620078219951077) -->
+    <skip />
+    <!-- no translation found for accessibility_hearing_device_footer_summary_tts (955527026890456959) -->
+    <skip />
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Vincular disp. auditivo"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Nesta páxina podes vincular os dispositivos auditivos ASHA e de audio de baixo consumo. Asegúrate de que o teu dispositivo auditivo está activado e listo para vincularse."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Dispositivos auditivos dispoñibles"</string>
@@ -4301,6 +4312,10 @@
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"O teu administrador pode supervisar e xestionar as aplicacións e os datos asociados a este usuario, mesmo os permisos, a configuración, o acceso corporativo, a actividade da rede e a información de localización do dispositivo."</string>
     <string name="admin_device_owner_message" msgid="5503131744126520590">"O teu administrador pode supervisar e xestionar as aplicacións e os datos asociados a este dispositivo, mesmo os permisos, a configuración, o acceso corporativo, a actividade da rede e a información de localización do dispositivo."</string>
     <string name="admin_financed_message" msgid="1156197630834947884">"É posible que o administrador do teu dispositivo poida acceder aos datos asociados ao dispositivo, cambiar a súa configuración e xestionar as aplicacións."</string>
+    <!-- no translation found for disabled_by_advanced_protection_title (766656508280098112) -->
+    <skip />
+    <!-- no translation found for disabled_by_advanced_protection_message (5515085544669304056) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Desactivar"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Activar"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Mostrar"</string>
@@ -5561,6 +5576,5 @@
     <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Onde gardar os contactos"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Rodear para buscar"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Mantén premido o botón de inicio ou o controlador de navegación para facer buscas usando o contido da pantalla."</string>
-    <!-- no translation found for device_detail_icon_content_description (6699151424374841937) -->
-    <skip />
+    <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Configura o detalle do dispositivo."</string>
 </resources>

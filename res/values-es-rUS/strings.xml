@@ -80,6 +80,14 @@
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Ajuste predeterminado"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Tu audiólogo no programó ningún ajuste predeterminado"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"No se pudo actualizar el ajuste predeterminado"</string>
+    <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Sonido envolvente"</string>
+    <string name="bluetooth_ambient_volume_control_expand" msgid="6726334974948737504">"Expandir los controles separados a la izquierda y a la derecha"</string>
+    <string name="bluetooth_ambient_volume_control_collapse" msgid="7103189728479091531">"Contraer al control unificado"</string>
+    <string name="bluetooth_ambient_volume_control_left" msgid="1927760358765239141">"Izquierda"</string>
+    <string name="bluetooth_ambient_volume_control_right" msgid="5783836267230662002">"Derecha"</string>
+    <string name="bluetooth_ambient_volume_mute" msgid="2700088105160838096">"Activar el sonido envolvente"</string>
+    <string name="bluetooth_ambient_volume_unmute" msgid="8055038818824925188">"Desactivar el sonido envolvente"</string>
+    <string name="bluetooth_ambient_volume_error" msgid="259328969488233714">"No se pudo actualizar el sonido envolvente"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Salida de audio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Info. sobre salida de audio"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Enruta sonidos a tu dispositivo auditivo o bocina del teléfono"</string>
@@ -166,6 +174,16 @@
     <string name="ping_test_label" msgid="265427033290391845">"Ejecutar prueba de ping"</string>
     <string name="skip_label" msgid="6380034601349015895">"Omitir"</string>
     <string name="next_label" msgid="1248293387735652187">"Siguiente"</string>
+    <!-- no translation found for region_picker_preference_title (9195149951917299277) -->
+    <skip />
+    <!-- no translation found for region_picker_title (6743800249134439329) -->
+    <skip />
+    <!-- no translation found for region_picker_sub_title (7092062110753164836) -->
+    <skip />
+    <!-- no translation found for suggested_region_title (2554129334404390153) -->
+    <skip />
+    <!-- no translation found for all_supported_region_title (4817156933097703066) -->
+    <skip />
     <string name="language_picker_title" msgid="4271307478263345133">"Idiomas"</string>
     <string name="language_picker_category_title" msgid="1792199453060454565">"Orden de idiomas preferidos"</string>
     <string name="desc_current_default_language" msgid="1901157141663662859">"Idioma del sistema"</string>
@@ -1941,6 +1959,7 @@
     <string name="language_input_gesture_title" msgid="3292455685728572960">"Idiomas, entrada y gestos"</string>
     <string name="language_settings" msgid="8700174277543875046">"Idiomas y entradas"</string>
     <string name="languages_settings" msgid="5784775502251770671">"Idiomas"</string>
+    <string name="language_and_region_settings" msgid="2950394107276025120">"Idioma y región"</string>
     <string name="keyboard_settings" msgid="184185708597386454">"Teclado"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"No tienes permiso para cambiar el idioma del dispositivo."</string>
     <string name="language_keyboard_settings_title" msgid="7934844313233544557">"Idiomas y entradas"</string>
@@ -1971,23 +1990,16 @@
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclado físico"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Selector de diseño de teclado físico"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Rechazo de teclas"</string>
-    <!-- no translation found for bounce_keys_summary (8890925059943636911) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_title (1090578395028456023) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_subtitle (6804676895876861863) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_200 (2785528287150314940) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_400 (91571674179896177) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_600 (6983252972219539375) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="8890925059943636911">"Ignora las presiones repetidas con rapidez de la misma tecla"</string>
+    <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"Demora de rechazo de teclas"</string>
+    <string name="bounce_keys_dialog_subtitle" msgid="6804676895876861863">"Elige cuánto tiempo el teclado ignora las presiones repetidas"</string>
+    <string name="input_setting_keys_dialog_option_200" msgid="2785528287150314940">"0.2 segundos"</string>
+    <string name="input_setting_keys_dialog_option_400" msgid="91571674179896177">"0.4 segundos"</string>
+    <string name="input_setting_keys_dialog_option_600" msgid="6983252972219539375">"0.6 segundos"</string>
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"Personalizado"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"valor personalizado"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Teclas lentas"</string>
-    <!-- no translation found for slow_keys_summary (3852534180402969185) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="3852534180402969185">"Cambia el tiempo que debes mantener presionada una tecla antes de que se registre"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Teclas especiales"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Presiona una tecla a la vez para hacer la combinación de teclas en lugar de presionarlas juntas"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Teclas del mouse"</string>
@@ -2012,8 +2024,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Panel táctil"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Panel táctil y mouse"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Mouse"</string>
-    <!-- no translation found for mouse_settings_summary (4609720443781972646) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="4609720443781972646">"Velocidad del puntero, intercambiar botones, personalización de botones"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Velocidad del puntero, gestos"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Presionar para hacer clic"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Tocar y arrastrar"</string>
@@ -2325,10 +2336,11 @@
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"No disponible mientras se usa el modo de botones de la barra de navegación."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Texto de alto contraste"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Cambia el color del texto a blanco o negro. Maximiza el contraste con el fondo."</string>
-    <!-- no translation found for accessibility_notification_high_contrast_text_content (2143888096871993191) -->
+    <!-- no translation found for accessibility_notification_high_contrast_text_title (85109818203175520) -->
     <skip />
-    <!-- no translation found for accessibility_notification_high_contrast_text_action (7190559555068414342) -->
+    <!-- no translation found for accessibility_notification_high_contrast_text_content (5073923345319368046) -->
     <skip />
+    <string name="accessibility_notification_high_contrast_text_action" msgid="7190559555068414342">"Abrir Configuración"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maximizar el contraste del texto"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Agrega un fondo blanco o negro alrededor del texto para aumentar el contraste"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Actualizar automáticamente la ampliación de pantalla"</string>
@@ -2447,7 +2459,10 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Compatibilidad con audífonos"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Mejora la compatibilidad con el acoplamiento inductivo y reduce el ruido no deseado"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Información sobre disp. auditivos"</string>
-    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"Para encontrar otros dispositivos auditivos que no son compatibles con ASHA o LE Audio, presiona "<b>"Vincular dispositivo nuevo"</b>" &gt; "<b>"Ver más dispositivos"</b></string>
+    <!-- no translation found for accessibility_hearing_device_footer_summary (5513620078219951077) -->
+    <skip />
+    <!-- no translation found for accessibility_hearing_device_footer_summary_tts (955527026890456959) -->
+    <skip />
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Vincular dispos. auditivo"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Puedes vincular los dispositivos auditivos ASHA y LE Audio en esta página. Asegúrate de que los dispositivos auditivos estén encendidos y listos para la vinculación."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Dispositivos disponibles"</string>
@@ -4297,6 +4312,10 @@
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"El administrador puede controlar y administrar las apps y los datos asociados con este usuario, incluida la configuración, los permisos, el acceso corporativo, la actividad de la red y la información de la ubicación del dispositivo."</string>
     <string name="admin_device_owner_message" msgid="5503131744126520590">"El administrador puede controlar y administrar las apps y los datos asociados con este dispositivo, incluida la configuración, los permisos, el acceso corporativo, la actividad de red y la información de la ubicación del dispositivo."</string>
     <string name="admin_financed_message" msgid="1156197630834947884">"Es posible que el administrador del dispositivo pueda acceder a los datos asociados, cambie la configuración y administre las apps."</string>
+    <!-- no translation found for disabled_by_advanced_protection_title (766656508280098112) -->
+    <skip />
+    <!-- no translation found for disabled_by_advanced_protection_message (5515085544669304056) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Desactivar"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Activar"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Mostrar"</string>

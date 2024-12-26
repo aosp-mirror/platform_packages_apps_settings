@@ -80,6 +80,14 @@
     <string name="bluetooth_hearing_aids_presets" msgid="4615094985857156388">"Preset"</string>
     <string name="bluetooth_hearing_aids_presets_empty_list_message" msgid="4240241268432643259">"Tidak ada preset yang diprogram oleh ahli audiologi Anda"</string>
     <string name="bluetooth_hearing_aids_presets_error" msgid="2095249829735188484">"Tidak dapat memperbarui preset"</string>
+    <string name="bluetooth_ambient_volume_control" msgid="5106474499808101548">"Suara sekitar"</string>
+    <string name="bluetooth_ambient_volume_control_expand" msgid="6726334974948737504">"Luaskan ke kontrol terpisah kiri dan kanan"</string>
+    <string name="bluetooth_ambient_volume_control_collapse" msgid="7103189728479091531">"Ciutkan ke kontrol terpadu"</string>
+    <string name="bluetooth_ambient_volume_control_left" msgid="1927760358765239141">"Kiri"</string>
+    <string name="bluetooth_ambient_volume_control_right" msgid="5783836267230662002">"Kanan"</string>
+    <string name="bluetooth_ambient_volume_mute" msgid="2700088105160838096">"Bisukan suara sekitar"</string>
+    <string name="bluetooth_ambient_volume_unmute" msgid="8055038818824925188">"Bunyikan suara sekitar"</string>
+    <string name="bluetooth_ambient_volume_error" msgid="259328969488233714">"Tidak dapat memperbarui suara sekitar"</string>
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Output audio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"Tentang output audio"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Arahkan suara ke alat bantu dengar atau speaker ponsel"</string>
@@ -166,6 +174,16 @@
     <string name="ping_test_label" msgid="265427033290391845">"Jalankan Uji Ping"</string>
     <string name="skip_label" msgid="6380034601349015895">"Lewati"</string>
     <string name="next_label" msgid="1248293387735652187">"Berikutnya"</string>
+    <!-- no translation found for region_picker_preference_title (9195149951917299277) -->
+    <skip />
+    <!-- no translation found for region_picker_title (6743800249134439329) -->
+    <skip />
+    <!-- no translation found for region_picker_sub_title (7092062110753164836) -->
+    <skip />
+    <!-- no translation found for suggested_region_title (2554129334404390153) -->
+    <skip />
+    <!-- no translation found for all_supported_region_title (4817156933097703066) -->
+    <skip />
     <string name="language_picker_title" msgid="4271307478263345133">"Bahasa"</string>
     <string name="language_picker_category_title" msgid="1792199453060454565">"Urutan bahasa pilihan"</string>
     <string name="desc_current_default_language" msgid="1901157141663662859">"Bahasa sistem"</string>
@@ -210,8 +228,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Suhu"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Hari pertama dalam seminggu"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Preferensi angka"</string>
-    <!-- no translation found for measurement_system_preferences_title (5539250190895110890) -->
-    <skip />
+    <string name="measurement_system_preferences_title" msgid="5539250190895110890">"Sistem pengukuran"</string>
     <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Gunakan default"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"Celsius (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Fahrenheit (°F)"</string>
@@ -224,12 +241,9 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"Sabtu"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Jika tidak mendukung preferensi regional, aplikasi akan menggunakan setelan lokalitas defaultnya."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Pelajari lebih lanjut preferensi bahasa."</string>
-    <!-- no translation found for metric_measurement_system (7489725697268321541) -->
-    <skip />
-    <!-- no translation found for us_measurement_system (8738587232938189052) -->
-    <skip />
-    <!-- no translation found for uk_measurement_system (4196897001775627597) -->
-    <skip />
+    <string name="metric_measurement_system" msgid="7489725697268321541">"Metrik"</string>
+    <string name="us_measurement_system" msgid="8738587232938189052">"Imperial (AS)"</string>
+    <string name="uk_measurement_system" msgid="4196897001775627597">"Imperial (Inggris Raya)"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Preferensi tambahan"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"Pilih cara Anda disapa"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"Perangkat Anda dapat mempersonalisasi cara Anda disapa"</string>
@@ -1945,6 +1959,7 @@
     <string name="language_input_gesture_title" msgid="3292455685728572960">"Bahasa, masukan &amp; gestur"</string>
     <string name="language_settings" msgid="8700174277543875046">"Bahasa &amp; input"</string>
     <string name="languages_settings" msgid="5784775502251770671">"Bahasa"</string>
+    <string name="language_and_region_settings" msgid="2950394107276025120">"Bahasa &amp; wilayah"</string>
     <string name="keyboard_settings" msgid="184185708597386454">"Keyboard"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"Anda tidak memiliki izin untuk mengubah bahasa perangkat."</string>
     <string name="language_keyboard_settings_title" msgid="7934844313233544557">"Bahasa &amp; masukan"</string>
@@ -1975,23 +1990,16 @@
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Keyboard fisik"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Pemilih tata letak keyboard fisik"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Tombol pantul"</string>
-    <!-- no translation found for bounce_keys_summary (8890925059943636911) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_title (1090578395028456023) -->
-    <skip />
-    <!-- no translation found for bounce_keys_dialog_subtitle (6804676895876861863) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_200 (2785528287150314940) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_400 (91571674179896177) -->
-    <skip />
-    <!-- no translation found for input_setting_keys_dialog_option_600 (6983252972219539375) -->
-    <skip />
+    <string name="bounce_keys_summary" msgid="8890925059943636911">"Mengabaikan penekanan tombol yang sama secara berulang dan cepat"</string>
+    <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"Penundaan tombol pantul"</string>
+    <string name="bounce_keys_dialog_subtitle" msgid="6804676895876861863">"Pilih berapa lama keyboard mengabaikan penekanan tombol berulang"</string>
+    <string name="input_setting_keys_dialog_option_200" msgid="2785528287150314940">"0,2 detik"</string>
+    <string name="input_setting_keys_dialog_option_400" msgid="91571674179896177">"0,4 detik"</string>
+    <string name="input_setting_keys_dialog_option_600" msgid="6983252972219539375">"0,6 detik"</string>
     <string name="input_setting_keys_custom_title" msgid="670425691119253202">"Kustom"</string>
     <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"Nilai kustom"</string>
     <string name="slow_keys" msgid="2891452895499690837">"Tombol lambat"</string>
-    <!-- no translation found for slow_keys_summary (3852534180402969185) -->
-    <skip />
+    <string name="slow_keys_summary" msgid="3852534180402969185">"Ubah durasi yang diperlukan untuk menahan tombol sebelum tombol tersebut didaftarkan"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"Tombol lekat"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Tekan tombol satu per satu untuk menggunakan pintasan, bukan menekan beberapa tombol secara bersamaan"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Tombol mouse"</string>
@@ -2016,8 +2024,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad &amp; mouse"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Mouse"</string>
-    <!-- no translation found for mouse_settings_summary (4609720443781972646) -->
-    <skip />
+    <string name="mouse_settings_summary" msgid="4609720443781972646">"Kecepatan kursor, tombol swap, penyesuaian tombol"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Kecepatan kursor, gestur"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Ketuk untuk mengklik"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"Ketuk tarik"</string>
@@ -2329,10 +2336,11 @@
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"Tidak tersedia saat menggunakan mode tombol menu navigasi."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Teks kontras tinggi"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Ubah warna teks ke hitam atau putih. Memaksimalkan kontras dengan latar belakang."</string>
-    <!-- no translation found for accessibility_notification_high_contrast_text_content (2143888096871993191) -->
+    <!-- no translation found for accessibility_notification_high_contrast_text_title (85109818203175520) -->
     <skip />
-    <!-- no translation found for accessibility_notification_high_contrast_text_action (7190559555068414342) -->
+    <!-- no translation found for accessibility_notification_high_contrast_text_content (5073923345319368046) -->
     <skip />
+    <string name="accessibility_notification_high_contrast_text_action" msgid="7190559555068414342">"Buka Setelan"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Maksimalkan kontras teks"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Tambahkan latar belakang hitam atau putih di sekeliling teks untuk menaikkan kontras"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Perbarui otomatis pembesaran layar"</string>
@@ -2451,7 +2459,10 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Kompatibilitas alat bantu dengar"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Meningkatkan kompatibilitas dengan telecoil dan mengurangi kebisingan yang tidak diinginkan"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"Tentang alat bantu dengar"</string>
-    <string name="accessibility_hearing_device_footer_summary" msgid="256061045064940818">"Untuk menemukan alat bantu dengar lain yang tidak didukung oleh ASHA atau LE Audio, ketuk "<b>"Sambungkan perangkat baru"</b>" &gt; "<b>"Lihat perangkat lainnya"</b></string>
+    <!-- no translation found for accessibility_hearing_device_footer_summary (5513620078219951077) -->
+    <skip />
+    <!-- no translation found for accessibility_hearing_device_footer_summary_tts (955527026890456959) -->
+    <skip />
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Sambungkan alat"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Anda dapat menyambungkan alat bantu dengar LE Audio dan ASHA di halaman ini. Pastikan alat bantu dengar Anda telah diaktifkan dan siap disambungkan."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Alat bantu dengar yang tersedia"</string>
@@ -4301,6 +4312,10 @@
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"Admin dapat memantau serta mengelola aplikasi dan data yang terkait dengan pengguna ini, termasuk setelan, izin, akses perusahaan, aktivitas jaringan, dan informasi lokasi perangkat."</string>
     <string name="admin_device_owner_message" msgid="5503131744126520590">"Admin dapat memantau serta mengelola aplikasi dan data yang terkait dengan perangkat ini, termasuk setelan, izin, akses perusahaan, aktivitas jaringan, dan informasi lokasi perangkat."</string>
     <string name="admin_financed_message" msgid="1156197630834947884">"Administrator perangkat Anda mungkin dapat mengakses data yang dikaitkan dengan perangkat ini, mengelola aplikasi, dan mengubah setelan perangkat ini."</string>
+    <!-- no translation found for disabled_by_advanced_protection_title (766656508280098112) -->
+    <skip />
+    <!-- no translation found for disabled_by_advanced_protection_message (5515085544669304056) -->
+    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Nonaktifkan"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Aktifkan"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Lihat"</string>
@@ -5561,6 +5576,5 @@
     <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Tempat untuk menyimpan kontak"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Lingkari untuk Menelusuri"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Sentuh lama tombol Layar utama atau tuas navigasi untuk menelusuri menggunakan konten di layar."</string>
-    <!-- no translation found for device_detail_icon_content_description (6699151424374841937) -->
-    <skip />
+    <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Konfigurasi detail perangkat."</string>
 </resources>
