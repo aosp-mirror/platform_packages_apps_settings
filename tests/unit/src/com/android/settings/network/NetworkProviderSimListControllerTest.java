@@ -135,7 +135,7 @@ public class NetworkProviderSimListControllerTest {
     private SubscriptionInfoEntity setupSubscriptionInfoEntity(String subId, int slotId,
             String displayName, boolean isValid, boolean isActive) {
         return new SubscriptionInfoEntity(subId, slotId, false, false, displayName, false,
-                false, isValid, isActive, false);
+                false, isValid, isActive);
     }
 
     private String setSummaryResId(String resName, String value) {
