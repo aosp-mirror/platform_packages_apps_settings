@@ -121,10 +121,10 @@ public class SatelliteSettingsPreferenceCategoryController
 
     @VisibleForTesting
     class CarrierRoamingNtnModeCallback extends TelephonyCallback implements
-            TelephonyCallback.CarrierRoamingNtnModeListener {
+            TelephonyCallback.CarrierRoamingNtnListener {
         @Override
         public void onCarrierRoamingNtnAvailableServicesChanged(int[] availableServices) {
-            CarrierRoamingNtnModeListener.super.onCarrierRoamingNtnAvailableServicesChanged(
+            CarrierRoamingNtnListener.super.onCarrierRoamingNtnAvailableServicesChanged(
                     availableServices);
             List<Integer> availableServicesList = Arrays.stream(availableServices).boxed().toList();
             boolean isSmsAvailable = availableServicesList.contains(SERVICE_TYPE_SMS);
