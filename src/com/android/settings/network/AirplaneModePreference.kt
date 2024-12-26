@@ -65,6 +65,10 @@ class AirplaneModePreference :
     override val restrictionKeys
         get() = arrayOf(UserManager.DISALLOW_AIRPLANE_MODE)
 
+    override fun getReadPermissions(context: Context) = SettingsGlobalStore.getReadPermissions()
+
+    override fun getWritePermissions(context: Context) = SettingsGlobalStore.getWritePermissions()
+
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
