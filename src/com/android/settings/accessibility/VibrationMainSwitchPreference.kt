@@ -48,8 +48,12 @@ class VibrationMainSwitchPreference :
     override fun storage(context: Context): KeyValueStore =
         VibrationMainSwitchToggleStorage(SettingsSystemStore.get(context))
 
+    override fun getReadPermissions(context: Context) = SettingsSystemStore.getReadPermissions()
+
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
+
+    override fun getWritePermissions(context: Context) = SettingsSystemStore.getWritePermissions()
 
     override fun getWritePermit(
         context: Context,
