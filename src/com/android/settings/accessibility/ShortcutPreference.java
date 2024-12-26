@@ -18,22 +18,23 @@ package com.android.settings.accessibility;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
+import com.android.settingslib.widget.SettingsThemeHelper;
+import com.android.settingslib.widget.TwoTargetPreference;
 
 /**
  * Preference that can enable accessibility shortcut and let users choose which shortcut type they
  * prefer to use.
  */
-public class ShortcutPreference extends Preference {
+public class ShortcutPreference extends TwoTargetPreference {
 
     /**
      * Interface definition for a callback to be invoked when the toggle or settings has been
@@ -61,8 +62,6 @@ public class ShortcutPreference extends Preference {
 
     ShortcutPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setLayoutResource(R.layout.accessibility_shortcut_secondary_action);
-        setWidgetLayoutResource(androidx.preference.R.layout.preference_widget_switch_compat);
         setIconSpaceReserved(false);
         // Treat onSettingsClicked as this preference's click.
         setOnPreferenceClickListener(preference -> {
@@ -72,24 +71,29 @@ public class ShortcutPreference extends Preference {
     }
 
     @Override
+    protected int getSecondTargetResId() {
+        return SettingsThemeHelper.isExpressiveTheme(getContext())
+                ? com.android.settingslib.widget.theme.R.layout
+                        .settingslib_expressive_preference_switch
+                : androidx.preference.R.layout.preference_widget_switch_compat;
+    }
+
+    int getSwitchResId() {
+        return SettingsThemeHelper.isExpressiveTheme(getContext())
+                ? com.android.settingslib.widget.theme.R.id.switchWidget
+                : androidx.preference.R.id.switchWidget;
+    }
+
+    @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
-        final TypedValue outValue = new TypedValue();
-        getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground,
-                outValue, true);
-
-        final LinearLayout mainFrame = holder.itemView.findViewById(R.id.main_frame);
-        if (mainFrame != null) {
-            mainFrame.setOnClickListener(view -> callOnSettingsClicked());
-            mainFrame.setClickable(mSettingsEditable);
-            mainFrame.setFocusable(mSettingsEditable);
-            mainFrame.setBackgroundResource(
-                    mSettingsEditable ? outValue.resourceId : /* Remove background */ 0);
+        final View widgetFrame = holder.findViewById(android.R.id.widget_frame);
+        if (widgetFrame instanceof LinearLayout linearLayout) {
+            linearLayout.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
         }
 
-        CompoundButton switchWidget =
-                holder.itemView.findViewById(androidx.preference.R.id.switchWidget);
+        CompoundButton switchWidget = holder.itemView.findViewById(getSwitchResId());
         if (switchWidget != null) {
             // Consumes move events to ignore drag actions.
             switchWidget.setOnTouchListener((v, event) -> {
@@ -101,18 +105,21 @@ public class ShortcutPreference extends Preference {
             switchWidget.setOnClickListener(view -> callOnToggleClicked());
             switchWidget.setClickable(mSettingsEditable);
             switchWidget.setFocusable(mSettingsEditable);
-            switchWidget.setBackgroundResource(
-                    mSettingsEditable ? outValue.resourceId : /* Remove background */ 0);
         }
 
-        final View divider = holder.itemView.findViewById(R.id.divider);
+        final View divider = holder.itemView.findViewById(
+                com.android.settingslib.widget.preference.twotarget.R.id.two_target_divider);
         if (divider != null) {
             divider.setVisibility(mSettingsEditable ? View.VISIBLE : View.GONE);
         }
 
-        holder.itemView.setOnClickListener(view -> callOnToggleClicked());
-        holder.itemView.setClickable(!mSettingsEditable);
-        holder.itemView.setFocusable(!mSettingsEditable);
+        holder.itemView.setOnClickListener(view -> {
+            if (mSettingsEditable) {
+                callOnSettingsClicked();
+            } else {
+                callOnToggleClicked();
+            }
+        });
     }
 
     /**
