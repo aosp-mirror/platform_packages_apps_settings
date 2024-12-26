@@ -16,13 +16,20 @@
 
 package com.android.settings.notification.app;
 
+import android.app.Flags;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
@@ -40,6 +47,26 @@ public class AppNotificationSettings extends NotificationSettings {
         return SettingsEnums.NOTIFICATION_APP_NOTIFICATION;
     }
 
+    @Override
+    protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
+        if (Flags.uiRichOngoing()) {
+            // If we got here via APP_NOTIFICATION_PROMOTION_SETTINGS intent, add the relevant
+            // preference key to navigate to & highlight. This argument is passed into
+            // HighlightablePreferenceGroupAdapter in the SettingsPreferenceFragment onCreateAdapter
+            // call.
+            if (mIntent != null && TextUtils.equals(mIntent.getAction(),
+                    Settings.ACTION_APP_NOTIFICATION_PROMOTION_SETTINGS)) {
+                Bundle args = getArguments();
+                if (args == null) {
+                    args = new Bundle();
+                }
+                args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
+                        PromotedNotificationsPreferenceController.KEY_PROMOTED_SWITCH);
+                setArguments(args);
+            }
+        }
+        return super.onCreateAdapter(preferenceScreen);
+    }
 
     @Override
     public void onResume() {

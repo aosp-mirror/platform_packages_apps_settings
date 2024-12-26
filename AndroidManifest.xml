@@ -4066,6 +4066,11 @@
                 <action android:name="android.settings.APP_NOTIFICATION_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <intent-filter android:priority="2"
+                           android:featureFlag="android.app.ui_rich_ongoing">
+                <action android:name="android.settings.APP_NOTIFICATION_PROMOTION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.notification.app.AppNotificationSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
