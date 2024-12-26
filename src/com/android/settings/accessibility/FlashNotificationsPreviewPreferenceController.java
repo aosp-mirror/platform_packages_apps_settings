@@ -41,6 +41,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.widget.ButtonPreference;
 
 /**
  * Controller for flash notifications preview.
@@ -48,7 +49,7 @@ import com.android.settings.core.BasePreferenceController;
 public class FlashNotificationsPreviewPreferenceController extends
         BasePreferenceController implements LifecycleEventObserver {
 
-    private Preference mPreference;
+    private ButtonPreference mPreference;
     private final ContentResolver mContentResolver;
 
     @VisibleForTesting
@@ -74,19 +75,14 @@ public class FlashNotificationsPreviewPreferenceController extends
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        updateState(mPreference);
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (getPreferenceKey().equals(preference.getKey())) {
-            Intent intent = new Intent(ACTION_FLASH_NOTIFICATION_START_PREVIEW);
-            intent.putExtra(EXTRA_FLASH_NOTIFICATION_PREVIEW_TYPE, TYPE_SHORT_PREVIEW);
-            mContext.sendBroadcastAsUser(intent, UserHandle.SYSTEM);
-            return true;
+        if (mPreference != null) {
+            mPreference.setOnClickListener(view -> {
+                Intent intent = new Intent(ACTION_FLASH_NOTIFICATION_START_PREVIEW);
+                intent.putExtra(EXTRA_FLASH_NOTIFICATION_PREVIEW_TYPE, TYPE_SHORT_PREVIEW);
+                mContext.sendBroadcastAsUser(intent, UserHandle.SYSTEM);
+            });
         }
-
-        return super.handlePreferenceTreeClick(preference);
+        updateState(mPreference);
     }
 
     @Override
