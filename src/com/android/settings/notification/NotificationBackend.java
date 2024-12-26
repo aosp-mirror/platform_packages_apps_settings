@@ -23,6 +23,7 @@ import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED_BY
 
 import static com.android.server.notification.Flags.notificationHideUnusedChannels;
 
+import android.app.Flags;
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
@@ -66,11 +67,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 public class NotificationBackend {
     private static final String TAG = "NotificationBackend";
@@ -102,6 +101,9 @@ public class NotificationBackend {
         row.blockedChannelCount = getBlockedChannelCount(row.pkg, row.uid);
         row.channelCount = getChannelCount(row.pkg, row.uid);
         recordAggregatedUsageEvents(context, row);
+        if (Flags.uiRichOngoing()) {
+            row.canBePromoted = canBePromoted(row.pkg, row.uid);
+        }
         return row;
     }
 
@@ -707,6 +709,35 @@ public class NotificationBackend {
         }
     }
 
+    /**
+     * Retrieves whether the app with given package and uid is permitted to post promoted
+     * notifications.
+     */
+    public boolean canBePromoted(String pkg, int uid) {
+        try {
+            return sINM.appCanBePromoted(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
+    /**
+     * Sets whether the app with given package and uid is permitted to post promoted notifications.
+     */
+    public void setCanBePromoted(String pkg, int uid, boolean allowed) {
+        // We shouldn't get here with the flag off, but just in case, do nothing.
+        if (!Flags.uiRichOngoing()) {
+            Log.wtf(TAG, "tried to setCanBePromoted without flag on");
+            return;
+        }
+        try {
+            sINM.setCanBePromoted(pkg, uid, allowed, /* fromUser= */ true);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
     @VisibleForTesting
     void setNm(INotificationManager inm) {
         sINM = inm;
@@ -748,5 +779,6 @@ public class NotificationBackend {
         public Map<String, NotificationsSentState> sentByChannel;
         public NotificationsSentState sentByApp;
         public boolean showAllChannels = true;
+        public boolean canBePromoted;
     }
 }
