@@ -16,6 +16,7 @@
 
 package com.android.settings.wifi
 
+import android.Manifest
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -37,6 +38,7 @@ import com.android.settingslib.WirelessUtils
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.DataChangeReason
 import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
@@ -93,6 +95,15 @@ class WifiSwitchPreference :
 
         return true
     }
+
+    override fun getReadPermissions(context: Context) =
+        Permissions.allOf(Manifest.permission.ACCESS_WIFI_STATE)
+
+    override fun getWritePermissions(context: Context) =
+        Permissions.anyOf(
+            Manifest.permission.NETWORK_SETTINGS,
+            Manifest.permission.CHANGE_WIFI_STATE,
+        )
 
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
