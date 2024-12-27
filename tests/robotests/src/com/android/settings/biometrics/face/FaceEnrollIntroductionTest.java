@@ -64,7 +64,6 @@ import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
-import com.android.settings.flags.Flags;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
@@ -403,9 +402,7 @@ public class FaceEnrollIntroductionTest {
 
         assertThat(getGlifLayout(mActivity).getDescriptionText().toString()).isEqualTo(
                 mContext.getString(
-                        Flags.biometricsOnboardingEducation()
-                            ? R.string.security_settings_face_enroll_introduction_message_class3_2
-                            : R.string.security_settings_face_enroll_introduction_message_class3));
+                        R.string.security_settings_face_enroll_introduction_message_class3));
         assertThat(mActivity.findViewById(R.id.info_row_less_secure).getVisibility()).isEqualTo(
                 View.GONE);
     }
