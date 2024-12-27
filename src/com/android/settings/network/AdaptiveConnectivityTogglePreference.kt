@@ -16,6 +16,7 @@
 
 package com.android.settings.network
 
+import android.Manifest
 import android.content.Context
 import android.net.wifi.WifiManager
 import android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED
@@ -24,6 +25,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObservableDelegate
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.datastore.SettingsStore
+import com.android.settingslib.datastore.and
 import com.android.settingslib.metadata.MainSwitchPreference
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
@@ -34,6 +36,11 @@ class AdaptiveConnectivityTogglePreference :
 
     override fun storage(context: Context): KeyValueStore =
         AdaptiveConnectivityToggleStorage(context, SettingsSecureStore.get(context))
+
+    override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
+
+    override fun getWritePermissions(context: Context) =
+        SettingsSecureStore.getWritePermissions() and Manifest.permission.NETWORK_SETTINGS
 
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
