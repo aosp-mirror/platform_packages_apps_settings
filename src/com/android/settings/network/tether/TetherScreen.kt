@@ -35,7 +35,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(TetherScreen.KEY)
 class TetherScreen :
     PreferenceScreenCreator,
     PreferenceTitleProvider,
@@ -76,7 +76,7 @@ class TetherScreen :
         makeLaunchIntent(context, TetherSettingsActivity::class.java, metadata?.key)
 
     override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(this) {
+        preferenceHierarchy(context, this) {
             val dataSaverStore = DataSaverMainSwitchPreference.createDataStore(context)
             +WifiHotspotSwitchPreference(context, dataSaverStore)
         }

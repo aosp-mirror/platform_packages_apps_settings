@@ -29,7 +29,7 @@ import com.android.settingslib.preference.PreferenceScreenCreator
  * Accessibility settings for vibration.
  */
 // LINT.IfChange
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(VibrationScreen.KEY)
 class VibrationScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider {
     override val key: String
         get() = KEY
@@ -49,7 +49,7 @@ class VibrationScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider 
 
     override fun fragmentClass(): Class<out Fragment>? = VibrationSettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
         +VibrationMainSwitchPreference()
     }
 

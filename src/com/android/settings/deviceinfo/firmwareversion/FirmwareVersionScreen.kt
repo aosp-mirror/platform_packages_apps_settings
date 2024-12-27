@@ -25,7 +25,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(FirmwareVersionScreen.KEY)
 class FirmwareVersionScreen : PreferenceScreenCreator, PreferenceSummaryProvider {
 
     override fun isFlagEnabled(context: Context) = Flags.catalystFirmwareVersion()
@@ -45,7 +45,7 @@ class FirmwareVersionScreen : PreferenceScreenCreator, PreferenceSummaryProvider
     override fun fragmentClass() = FirmwareVersionSettings::class.java
 
     override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(this) {
+        preferenceHierarchy(context, this) {
             +FirmwareVersionDetailPreference()
             +SecurityPatchLevelPreference()
             +MainlineModuleVersionPreference()

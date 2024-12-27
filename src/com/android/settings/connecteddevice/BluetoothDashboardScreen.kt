@@ -25,7 +25,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(BluetoothDashboardScreen.KEY)
 class BluetoothDashboardScreen : PreferenceScreenCreator {
     override val key: String
         get() = KEY
@@ -46,7 +46,7 @@ class BluetoothDashboardScreen : PreferenceScreenCreator {
         makeLaunchIntent(context, BluetoothDashboardActivity::class.java, metadata?.key)
 
     override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(this) {
+        preferenceHierarchy(context, this) {
             val bluetoothDataStore = BluetoothPreference.createDataStore(context)
             +BluetoothPreference(bluetoothDataStore)
             +BluetoothFooterPreference(bluetoothDataStore)

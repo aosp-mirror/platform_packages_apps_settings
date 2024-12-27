@@ -23,7 +23,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(WifiCallingScreen.KEY)
 class WifiCallingScreen : PreferenceScreenCreator {
     override val key: String
         get() = KEY
@@ -41,7 +41,7 @@ class WifiCallingScreen : PreferenceScreenCreator {
     override fun hasCompleteHierarchy() = false
 
     override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(this) {
+        preferenceHierarchy(context, this) {
             val subId = SubscriptionManager.getDefaultSubscriptionId()
             if (SubscriptionManager.isValidSubscriptionId(subId)) {
                 +WifiCallingMainSwitchPreference(subId)

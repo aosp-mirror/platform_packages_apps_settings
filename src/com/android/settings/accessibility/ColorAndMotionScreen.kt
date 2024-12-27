@@ -26,7 +26,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(ColorAndMotionScreen.KEY)
 class ColorAndMotionScreen : PreferenceScreenCreator {
     override val key: String
         get() = KEY
@@ -44,7 +44,7 @@ class ColorAndMotionScreen : PreferenceScreenCreator {
     override fun fragmentClass() = ColorAndMotionFragment::class.java
 
     override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(this) {
+        preferenceHierarchy(context, this) {
             +RemoveAnimationsPreference()
         }
 

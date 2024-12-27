@@ -31,7 +31,7 @@ import com.android.settingslib.preference.PreferenceScreenCreator
 //  We might be able to consolidate this into VibrationScreen with PreferenceHierarchy choosing
 //  between toggle or slider preferences based on device config, depending on how overlays are done.
 // LINT.IfChange
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(VibrationIntensityScreen.KEY)
 class VibrationIntensityScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider {
     override val key: String
         get() = KEY
@@ -52,7 +52,7 @@ class VibrationIntensityScreen : PreferenceScreenCreator, PreferenceAvailability
     override fun fragmentClass(): Class<out Fragment>? =
         VibrationIntensitySettingsFragment::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
         +VibrationMainSwitchPreference()
     }
 

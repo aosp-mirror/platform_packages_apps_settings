@@ -26,7 +26,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(PowerUsageSummaryScreen.KEY)
 class PowerUsageSummaryScreen :
     PreferenceScreenCreator, PreferenceAvailabilityProvider, PreferenceIconProvider {
     override val key: String
@@ -54,10 +54,11 @@ class PowerUsageSummaryScreen :
             R.drawable.ic_settings_battery_white
         }
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {
-        +BatteryHeaderPreference()
-        +BatteryPercentageSwitchPreference()
-    }
+    override fun getPreferenceHierarchy(context: Context) =
+        preferenceHierarchy(context, this) {
+            +BatteryHeaderPreference()
+            +BatteryPercentageSwitchPreference()
+        }
 
     companion object {
         const val KEY = "power_usage_summary_screen"

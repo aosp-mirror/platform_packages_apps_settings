@@ -20,6 +20,7 @@ import android.content.Context
 import android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID
 import com.android.settings.R
 import com.android.settings.Settings.DataSaverSummaryActivity
+import com.android.settings.datausage.DataSaverMainSwitchPreference.Companion.KEY as DATA_SAVER_KEY
 import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.datastore.HandlerExecutor
@@ -32,9 +33,8 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
-import com.android.settings.datausage.DataSaverMainSwitchPreference.Companion.KEY as DATA_SAVER_KEY
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(DataSaverScreen.KEY)
 class DataSaverScreen(context: Context) :
     PreferenceScreenCreator,
     PreferenceAvailabilityProvider,
@@ -75,7 +75,7 @@ class DataSaverScreen(context: Context) :
         makeLaunchIntent(context, DataSaverSummaryActivity::class.java, metadata?.key)
 
     override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(this) { +DataSaverMainSwitchPreference() }
+        preferenceHierarchy(context, this) { +DataSaverMainSwitchPreference() }
 
     override fun hasCompleteHierarchy() = false
 

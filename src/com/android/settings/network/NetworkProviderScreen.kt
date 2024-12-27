@@ -26,7 +26,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(NetworkProviderScreen.KEY)
 class NetworkProviderScreen :
     PreferenceScreenCreator, PreferenceAvailabilityProvider, PreferenceRestrictionMixin {
     override val key: String
@@ -55,7 +55,7 @@ class NetworkProviderScreen :
 
     override fun fragmentClass() = NetworkProviderSettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
         +WifiSwitchPreference()
     }
 
