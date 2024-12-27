@@ -311,10 +311,7 @@ public class SettingsActivity extends SettingsBaseActivity
         }
 
         setContentView(R.layout.settings_main_prefs);
-
-        mMainSwitch = SettingsThemeHelper.isExpressiveTheme(this)
-                ? findViewById(R.id.expressive_switch_bar)
-                : findViewById(R.id.switch_bar);
+        mMainSwitch = findViewById(R.id.switch_bar);
         if (mMainSwitch != null) {
             mMainSwitch.setMetricsCategory(lookupMetricsCategory());
             mMainSwitch.setTranslationZ(findViewById(R.id.main_content).getTranslationZ() + 1);
