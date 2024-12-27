@@ -16,6 +16,9 @@
 
 package com.android.settings.wifi.calling
 
+import android.Manifest.permission.MODIFY_PHONE_STATE
+import android.Manifest.permission.READ_PRECISE_PHONE_STATE
+import android.Manifest.permission.READ_PRIVILEGED_PHONE_STATE
 import android.content.Context
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
@@ -28,6 +31,8 @@ import com.android.settings.widget.SettingsMainSwitchPreference
 import com.android.settings.wifi.calling.WifiCallingSettingsForSub.getCarrierActivityIntent
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
+import com.android.settingslib.datastore.Permissions
+import com.android.settingslib.datastore.and
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
@@ -60,8 +65,15 @@ class WifiCallingMainSwitchPreference(private val subId: Int) :
 
     override fun createWidget(context: Context) = SettingsMainSwitchPreference(context)
 
+    override fun getReadPermissions(context: Context) =
+        Permissions.anyOf(READ_PRIVILEGED_PHONE_STATE, READ_PRECISE_PHONE_STATE)
+
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
+
+    override fun getWritePermissions(context: Context) =
+        Permissions.anyOf(READ_PRIVILEGED_PHONE_STATE, READ_PRECISE_PHONE_STATE) and
+            MODIFY_PHONE_STATE
 
     override fun getWritePermit(
         context: Context,
