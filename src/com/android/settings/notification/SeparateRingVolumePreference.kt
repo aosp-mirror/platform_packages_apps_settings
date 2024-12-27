@@ -16,6 +16,8 @@
 
 package com.android.settings.notification
 
+import android.Manifest.permission.MODIFY_AUDIO_SETTINGS
+import android.Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED
 import android.app.INotificationManager
 import android.app.NotificationManager
 import android.app.NotificationManager.ACTION_EFFECTS_SUPPRESSOR_CHANGED
@@ -24,6 +26,7 @@ import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager.FEATURE_AUTOMOTIVE
 import android.media.AudioManager
 import android.media.AudioManager.INTERNAL_RINGER_MODE_CHANGED_ACTION
 import android.media.AudioManager.RINGER_MODE_NORMAL
@@ -40,6 +43,8 @@ import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
+import com.android.settingslib.datastore.Permissions
+import com.android.settingslib.datastore.and
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceIconProvider
@@ -94,8 +99,18 @@ open class SeparateRingVolumePreference :
         }
     }
 
+    override fun getReadPermissions(context: Context) = Permissions.EMPTY
+
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
+
+    override fun getWritePermissions(context: Context): Permissions? {
+        var permissions = Permissions.allOf(MODIFY_AUDIO_SETTINGS)
+        if (context.packageManager.hasSystemFeature(FEATURE_AUTOMOTIVE)) {
+            permissions = permissions and MODIFY_AUDIO_SETTINGS_PRIVILEGED
+        }
+        return permissions
+    }
 
     override fun getWritePermit(context: Context, value: Int?, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
