@@ -27,7 +27,7 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 // TODO(b/368359967): The entry point logic is not yet migrated
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(ScreenTimeoutScreen.KEY)
 class ScreenTimeoutScreen : PreferenceScreenCreator {
 
     override val key: String
@@ -43,7 +43,7 @@ class ScreenTimeoutScreen : PreferenceScreenCreator {
     override fun hasCompleteHierarchy() = false
 
     override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(this) { +AdaptiveSleepPreference() }
+        preferenceHierarchy(context, this) { +AdaptiveSleepPreference() }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, ScreenTimeoutActivity::class.java, metadata?.key)

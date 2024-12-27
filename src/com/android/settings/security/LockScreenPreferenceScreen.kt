@@ -28,7 +28,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(LockScreenPreferenceScreen.KEY)
 open class LockScreenPreferenceScreen : PreferenceScreenCreator, PreferenceSummaryProvider {
     override val key: String
         get() = KEY
@@ -52,7 +52,7 @@ open class LockScreenPreferenceScreen : PreferenceScreenCreator, PreferenceSumma
         makeLaunchIntent(context, LockScreenSettingsActivity::class.java, metadata?.key)
 
     override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(this) {
+        preferenceHierarchy(context, this) {
             +AmbientDisplayAlwaysOnPreference()
         }
 

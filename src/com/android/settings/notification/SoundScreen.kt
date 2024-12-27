@@ -27,7 +27,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(SoundScreen.KEY)
 class SoundScreen : PreferenceScreenCreator, PreferenceIconProvider {
     override val key: String
         get() = KEY
@@ -51,7 +51,7 @@ class SoundScreen : PreferenceScreenCreator, PreferenceIconProvider {
     override fun fragmentClass(): Class<out Fragment>? = SoundSettings::class.java
 
     override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(this) {
+        preferenceHierarchy(context, this) {
             +MediaVolumePreference() order -180
             +CallVolumePreference() order -170
             +SeparateRingVolumePreference() order -155

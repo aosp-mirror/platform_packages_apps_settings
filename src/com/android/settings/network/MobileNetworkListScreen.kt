@@ -46,7 +46,7 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenBinding
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(MobileNetworkListScreen.KEY)
 class MobileNetworkListScreen :
     PreferenceScreenCreator,
     PreferenceScreenBinding,
@@ -160,7 +160,7 @@ class MobileNetworkListScreen :
     override fun fragmentClass() = MobileNetworkListFragment::class.java
 
     override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(this) { +MobileDataPreference() }
+        preferenceHierarchy(context, this) { +MobileDataPreference() }
 
     companion object {
         const val KEY = "mobile_network_list"

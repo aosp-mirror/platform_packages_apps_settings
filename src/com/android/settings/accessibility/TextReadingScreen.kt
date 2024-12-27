@@ -22,7 +22,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(TextReadingScreen.KEY)
 class TextReadingScreen : PreferenceScreenCreator {
     override val key: String
         get() = KEY
@@ -36,7 +36,7 @@ class TextReadingScreen : PreferenceScreenCreator {
 
     override fun hasCompleteHierarchy() = false
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
 
     companion object {
         const val KEY = "text_reading_screen"

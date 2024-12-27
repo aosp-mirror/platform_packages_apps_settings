@@ -27,7 +27,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(NetworkDashboardScreen.KEY)
 class NetworkDashboardScreen : PreferenceScreenCreator, PreferenceIconProvider {
     override val key: String
         get() = KEY
@@ -51,7 +51,7 @@ class NetworkDashboardScreen : PreferenceScreenCreator, PreferenceIconProvider {
         makeLaunchIntent(context, NetworkDashboardActivity::class.java, metadata?.key)
 
     override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(this) {
+        preferenceHierarchy(context, this) {
             +MobileNetworkListScreen.KEY order -15
             +AirplaneModePreference() order -5
             +DataSaverScreen.KEY order 10

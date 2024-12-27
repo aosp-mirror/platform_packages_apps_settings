@@ -23,7 +23,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(AdaptiveConnectivityScreen.KEY)
 class AdaptiveConnectivityScreen : PreferenceScreenCreator {
     override val key
         get() = KEY
@@ -35,7 +35,7 @@ class AdaptiveConnectivityScreen : PreferenceScreenCreator {
 
     override fun fragmentClass() = AdaptiveConnectivitySettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {
         +AdaptiveConnectivityTogglePreference()
     }
 

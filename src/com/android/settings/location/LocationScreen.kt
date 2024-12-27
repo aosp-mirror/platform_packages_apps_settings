@@ -25,7 +25,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(LocationScreen.KEY)
 class LocationScreen : PreferenceScreenCreator, PreferenceSummaryProvider, PreferenceIconProvider {
     override val key: String
         get() = KEY
@@ -57,7 +57,7 @@ class LocationScreen : PreferenceScreenCreator, PreferenceSummaryProvider, Prefe
 
     override fun fragmentClass() = LocationSettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
 
     companion object {
         const val KEY = "location_settings"

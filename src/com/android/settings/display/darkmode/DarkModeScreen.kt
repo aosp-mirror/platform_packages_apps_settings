@@ -37,7 +37,7 @@ import com.android.settingslib.preference.PreferenceScreenBinding
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 // LINT.IfChange
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(DarkModeScreen.KEY)
 class DarkModeScreen(context: Context) :
     PreferenceScreenCreator,
     PreferenceScreenBinding,
@@ -80,7 +80,7 @@ class DarkModeScreen(context: Context) :
 
     override fun hasCompleteHierarchy() = false
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
 
     override fun storage(context: Context): KeyValueStore = darkModeStorage
 
@@ -89,8 +89,8 @@ class DarkModeScreen(context: Context) :
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
         if (preference is DarkModePreference) preference.setCatalystEnabled(true)
-        (preference as PrimarySwitchPreference).apply {
-            isSwitchEnabled = isEnabled()
+        (preference as? PrimarySwitchPreference)?.apply {
+            isSwitchEnabled = isEnabled
             isChecked = darkModeStorage.getBoolean(KEY) == true
         }
     }

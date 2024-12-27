@@ -23,7 +23,7 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
 // LINT.IfChange
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(ModuleLicensesScreen.KEY)
 class ModuleLicensesScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider {
     override val key: String
         get() = KEY
@@ -39,7 +39,7 @@ class ModuleLicensesScreen : PreferenceScreenCreator, PreferenceAvailabilityProv
 
     override fun fragmentClass() = ModuleLicensesDashboard::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
 
     override fun isAvailable(context: Context): Boolean {
         val modules = context.packageManager.getInstalledModules(/* flags= */ 0)
