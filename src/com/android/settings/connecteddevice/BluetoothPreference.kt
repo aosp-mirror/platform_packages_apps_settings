@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.content.BroadcastReceiver
@@ -35,6 +36,7 @@ import com.android.settingslib.WirelessUtils
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.DataChangeReason
 import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
@@ -51,6 +53,11 @@ class BluetoothPreference(private val bluetoothDataStore: BluetoothDataStore) :
 
     override val restrictionKeys: Array<String>
         get() = arrayOf(UserManager.DISALLOW_BLUETOOTH, UserManager.DISALLOW_CONFIG_BLUETOOTH)
+
+    override fun getReadPermissions(context: Context) = Permissions.EMPTY
+
+    override fun getWritePermissions(context: Context) =
+        Permissions.allOf(Manifest.permission.BLUETOOTH_CONNECT)
 
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
