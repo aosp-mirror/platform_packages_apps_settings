@@ -109,9 +109,12 @@ public class ActionDisabledByAdminDialog extends Activity
         }
         if (enforcingAdmin.getAuthority() instanceof UnknownAuthority authority
                 && ADVANCED_PROTECTION_SYSTEM_ENTITY.equals(authority.getName())) {
-            Intent apmSupportIntent = AdvancedProtectionManager
-                    .createSupportIntentForPolicyIdentifierOrRestriction(restriction,
-                            AdvancedProtectionManager.SUPPORT_DIALOG_TYPE_UNKNOWN);
+            AdvancedProtectionManager apm = getSystemService(AdvancedProtectionManager.class);
+            if (apm == null) {
+                return;
+            }
+            Intent apmSupportIntent = apm.createSupportIntentForPolicyIdentifierOrRestriction(
+                    restriction, /* type */ null);
             startActivityAsUser(apmSupportIntent, UserHandle.of(userId));
             finish();
         } else {
