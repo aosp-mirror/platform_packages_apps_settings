@@ -27,7 +27,6 @@ import static com.android.settings.Utils.isPrivateProfile;
 import static com.android.settings.biometrics.BiometricEnrollBase.BIOMETRIC_AUTH_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_CHALLENGE;
-import static com.android.settings.flags.Flags.screenOffUnlockPowerOptimization;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -603,11 +602,6 @@ public class FingerprintSettings extends SubSettings {
         }
 
         private boolean isUltrasnoicUdfps() {
-            // b/368465560 Gate either ultrasonic or optical UDFPS if the power do not optimized
-            if (!screenOffUnlockPowerOptimization()) {
-                return false;
-            }
-
             mFingerprintManager = Utils.getFingerprintManagerOrNull(getActivity());
             if (mFingerprintManager != null) {
                 mSensorProperties = mFingerprintManager.getSensorPropertiesInternal();
