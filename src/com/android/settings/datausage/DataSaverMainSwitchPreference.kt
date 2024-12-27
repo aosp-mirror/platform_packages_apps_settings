@@ -16,12 +16,14 @@
 
 package com.android.settings.datausage
 
+import android.Manifest
 import android.content.Context
 import com.android.settings.R
 import com.android.settings.widget.MainSwitchBarMetadata
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.DataChangeReason
 import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
@@ -35,6 +37,12 @@ class DataSaverMainSwitchPreference : MainSwitchBarMetadata, PreferenceLifecycle
         get() = R.string.data_saver_switch_title
 
     override fun storage(context: Context) = createDataStore(context)
+
+    override fun getReadPermissions(context: Context) =
+        Permissions.allOf(Manifest.permission.MANAGE_NETWORK_POLICY)
+
+    override fun getWritePermissions(context: Context) =
+        Permissions.allOf(Manifest.permission.MANAGE_NETWORK_POLICY)
 
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
