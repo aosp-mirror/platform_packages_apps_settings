@@ -54,12 +54,11 @@
             </FrameLayout>
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/contrast_button_total_size"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/contrast_button_text_spacing"
                 android:gravity="center_horizontal|top"
-                android:ellipsize="end"
-                android:singleLine="true"
+                android:singleLine="false"
                 android:textSize="@dimen/contrast_button_text_size"
                 android:text="@string/lock_screen_notifs_show_compact"
                 android:textColor="@androidprv:color/materialColorOnSurface"/>
@@ -89,12 +88,11 @@
             </FrameLayout>
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/contrast_button_total_size"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/contrast_button_text_spacing"
                 android:gravity="center_horizontal|top"
-                android:ellipsize="end"
-                android:singleLine="true"
+                android:singleLine="false"
                 android:textSize="@dimen/contrast_button_text_size"
                 android:text="@string/lock_screen_notifs_show_full_list"
                 android:textColor="@androidprv:color/materialColorOnSurface"/>
