@@ -16,6 +16,7 @@
 
 package com.android.settings.wifi.tether
 
+import android.Manifest
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
@@ -44,6 +45,7 @@ import com.android.settingslib.datastore.DataChangeReason
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -108,6 +110,12 @@ class WifiHotspotSwitchPreference(context: Context, dataSaverStore: KeyValueStor
 
     override val restrictionKeys
         get() = arrayOf(UserManager.DISALLOW_WIFI_TETHERING)
+
+    override fun getReadPermissions(context: Context) =
+        Permissions.allOf(Manifest.permission.ACCESS_WIFI_STATE)
+
+    override fun getWritePermissions(context: Context) =
+        Permissions.allOf(Manifest.permission.TETHER_PRIVILEGED)
 
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
