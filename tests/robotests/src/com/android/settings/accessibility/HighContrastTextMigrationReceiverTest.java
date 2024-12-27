@@ -20,6 +20,7 @@ import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENT
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import static com.android.settings.accessibility.HighContrastTextMigrationReceiver.ACTION_RESTORED;
+import static com.android.settings.accessibility.HighContrastTextMigrationReceiver.ACTION_OPEN_SETTINGS;
 import static com.android.settings.accessibility.HighContrastTextMigrationReceiver.NOTIFICATION_CHANNEL;
 import static com.android.settings.accessibility.HighContrastTextMigrationReceiver.NOTIFICATION_ID;
 import static com.android.settings.accessibility.HighContrastTextMigrationReceiver.PromptState.PROMPT_SHOWN;
@@ -28,9 +29,9 @@ import static com.android.settings.accessibility.HighContrastTextMigrationReceiv
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -54,9 +55,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
+import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowNotification;
 import org.robolectric.shadows.ShadowNotificationManager;
 import org.robolectric.shadows.ShadowPackageManager;
+
+import java.util.List;
 
 /** Tests for {@link HighContrastTextMigrationReceiver}. */
 @RunWith(RobolectricTestRunner.class)
@@ -66,6 +70,7 @@ public class HighContrastTextMigrationReceiverTest {
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private HighContrastTextMigrationReceiver mReceiver;
+    private ShadowApplication mShadowApplication;
     private ShadowNotificationManager mShadowNotificationManager;
 
     @Before
@@ -73,6 +78,7 @@ public class HighContrastTextMigrationReceiverTest {
         NotificationManager notificationManager =
                 mContext.getSystemService(NotificationManager.class);
         mShadowNotificationManager = Shadows.shadowOf(notificationManager);
+        mShadowApplication = Shadows.shadowOf((Application) mContext);
 
         // Setup Settings app as a system app
         ShadowPackageManager shadowPm = Shadows.shadowOf(mContext.getPackageManager());
@@ -187,6 +193,28 @@ public class HighContrastTextMigrationReceiverTest {
         verifyNotificationNotSent();
     }
 
+    @Test
+    @EnableFlags(Flags.FLAG_HIGH_CONTRAST_TEXT_SMALL_TEXT_RECT)
+    public void onReceive_openSettingsIntent_openHighContrastTextPreference() {
+        Intent intent = new Intent(ACTION_OPEN_SETTINGS);
+        mReceiver.onReceive(mContext, intent);
+
+        List<Intent> broadcastIntents = mShadowApplication.getBroadcastIntents();
+        assertThat(broadcastIntents.size()).isEqualTo(1);
+        assertThat(broadcastIntents.get(0).getAction())
+                .isEqualTo(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+
+        Intent startedActivitie = mShadowApplication.getNextStartedActivity();
+        assertThat(startedActivitie).isNotNull();
+        Bundle fragmentArgs = startedActivitie.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+        assertThat(fragmentArgs).isNotNull();
+        assertThat(fragmentArgs.getString(EXTRA_FRAGMENT_ARG_KEY))
+                .isEqualTo(TextReadingPreferenceFragment.HIGH_TEXT_CONTRAST_KEY);
+
+        Notification notification = mShadowNotificationManager.getNotification(NOTIFICATION_ID);
+        assertThat(notification).isNull();
+    }
+
     private void verifyNotificationNotSent() {
         Notification notification = mShadowNotificationManager.getNotification(NOTIFICATION_ID);
         assertThat(notification).isNull();
@@ -210,13 +238,6 @@ public class HighContrastTextMigrationReceiverTest {
         assertThat(notification.actions.length).isEqualTo(1);
         assertThat(notification.actions[0].title.toString()).isEqualTo(
                 mContext.getString(R.string.accessibility_notification_high_contrast_text_action));
-
-        PendingIntent pendingIntent = notification.actions[0].actionIntent;
-        Intent settingsIntent = Shadows.shadowOf(pendingIntent).getSavedIntent();
-        Bundle fragmentArgs = settingsIntent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
-        assertThat(fragmentArgs).isNotNull();
-        assertThat(fragmentArgs.getString(EXTRA_FRAGMENT_ARG_KEY))
-                .isEqualTo(TextReadingPreferenceFragment.HIGH_TEXT_CONTRAST_KEY);
     }
 
     private void assertPromptStateAndHctState(
