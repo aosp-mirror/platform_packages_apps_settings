@@ -100,8 +100,7 @@ public class ImeiInfoDialogController {
 
         mDialog.setText(ID_PRL_VERSION_VALUE, getCdmaPrlVersion());
 
-        if ((mSubscriptionInfo != null && isCdmaLteEnabled()) ||
-                    (mSubscriptionInfo == null && isSimPresent(mSlotId))) {
+        if (isCdmaLteEnabled()) {
             // Show IMEI for LTE device
             mDialog.setText(ID_IMEI_VALUE, mTelephonyManager.getImei(mSlotId));
             mDialog.setText(ID_IMEI_SV_VALUE,
