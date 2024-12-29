@@ -21,11 +21,13 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 
 import androidx.preference.PreferenceViewHolder;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.R;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,10 +42,10 @@ public class ShortcutPreferenceTest {
     private static final String SETTINGS_CLICKED = "settings_clicked";
 
     private ShortcutPreference mShortcutPreference;
-    private PreferenceViewHolder mPreferenceViewHolder;
+    private PreferenceViewHolder mViewHolder;
     private String mResult;
 
-    private ShortcutPreference.OnClickCallback mListener =
+    private final ShortcutPreference.OnClickCallback mListener =
             new ShortcutPreference.OnClickCallback() {
                 @Override
                 public void onToggleClicked(ShortcutPreference preference) {
@@ -61,30 +63,49 @@ public class ShortcutPreferenceTest {
         final Context context = ApplicationProvider.getApplicationContext();
         mShortcutPreference = new ShortcutPreference(context, null);
 
+        int resID = SettingsThemeHelper.isExpressiveTheme(context)
+                ? com.android.settingslib.widget.preference.twotarget.R.layout
+                        .settingslib_expressive_preference_two_target
+                : com.android.settingslib.widget.preference.twotarget.R.layout
+                        .preference_two_target;
         final LayoutInflater inflater = LayoutInflater.from(context);
-        final View view =
-                inflater.inflate(R.layout.accessibility_shortcut_secondary_action, null);
-        mPreferenceViewHolder = PreferenceViewHolder.createInstanceForTests(view);
+        final View view = inflater.inflate(resID, null);
+        mViewHolder = PreferenceViewHolder.createInstanceForTests(view);
+
+        final LinearLayout widget = mViewHolder.itemView.findViewById(android.R.id.widget_frame);
+        inflater.inflate(mShortcutPreference.getSecondTargetResId(), widget, true);
     }
 
     @Test
     public void clickToggle_toggleClicked() {
-        mShortcutPreference.onBindViewHolder(mPreferenceViewHolder);
+        mShortcutPreference.onBindViewHolder(mViewHolder);
         mShortcutPreference.setOnClickCallback(mListener);
 
-        mPreferenceViewHolder.itemView.performClick();
+        CompoundButton switchWidget = mViewHolder.itemView.findViewById(
+                mShortcutPreference.getSwitchResId());
+        assert switchWidget != null;
+        switchWidget.performClick();
 
         assertThat(mResult).isEqualTo(TOGGLE_CLICKED);
         assertThat(mShortcutPreference.isChecked()).isTrue();
     }
 
     @Test
-    public void clickSettings_settingsClicked() {
-        mShortcutPreference.onBindViewHolder(mPreferenceViewHolder);
+    public void clickItem_settingsClicked() {
+        mShortcutPreference.onBindViewHolder(mViewHolder);
         mShortcutPreference.setOnClickCallback(mListener);
 
-        final View settings = mPreferenceViewHolder.itemView.findViewById(R.id.main_frame);
-        settings.performClick();
+        mViewHolder.itemView.performClick();
+
+        assertThat(mResult).isEqualTo(SETTINGS_CLICKED);
+    }
+
+    @Test
+    public void clickPreference_settingsClicked() {
+        mShortcutPreference.onBindViewHolder(mViewHolder);
+        mShortcutPreference.setOnClickCallback(mListener);
+
+        mShortcutPreference.performClick();
 
         assertThat(mResult).isEqualTo(SETTINGS_CLICKED);
     }
@@ -94,14 +115,5 @@ public class ShortcutPreferenceTest {
         mShortcutPreference.setChecked(true);
 
         assertThat(mShortcutPreference.isChecked()).isEqualTo(true);
-    }
-
-    @Test
-    public void performClickOnPreference_settingsClicked() {
-        mShortcutPreference.onBindViewHolder(mPreferenceViewHolder);
-        mShortcutPreference.setOnClickCallback(mListener);
-        mShortcutPreference.performClick();
-
-        assertThat(mResult).isEqualTo(SETTINGS_CLICKED);
     }
 }
