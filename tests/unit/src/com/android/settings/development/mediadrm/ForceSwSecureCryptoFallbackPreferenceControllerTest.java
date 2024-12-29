@@ -69,7 +69,11 @@ public class ForceSwSecureCryptoFallbackPreferenceControllerTest {
     @Test
     @EnableFlags(Flags.FLAG_FORCE_L3_ENABLED)
     public void updateState_flagEnabled_checkPreference() {
-        mController.updateState(mPreference);
+        try (MediaDrm drm = new MediaDrm(WIDEVINE_UUID)) {
+            mController.updateState(mPreference);
+        } catch (UnsupportedSchemeException ex) {
+            assumeNoException(ex);
+        }
         assertThat(mPreference.isEnabled()).isTrue();
         assertThat(mPreference.isChecked()).isFalse();
         assertThat(WidevineProperties.forcel3_enabled().orElse(false)).isFalse();
