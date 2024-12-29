@@ -28,23 +28,28 @@
         android:key="flash_notifications_illustration"
         settings:searchable="false"
         settings:lottie_rawRes="@drawable/flash_notifications_illustration"
-        settings:controller="com.android.settings.accessibility.FlashNotificationIllustrationPreferenceController"/>
+        settings:controller="com.android.settings.accessibility.FlashNotificationIllustrationPreferenceController" />
 
-    <SwitchPreferenceCompat
-        android:key="camera_flash_notification_preference"
-        android:persistent="false"
-        android:title="@string/camera_flash_notification_title"
-        settings:controller="com.android.settings.accessibility.CameraFlashNotificationPreferenceController" />
+    <PreferenceCategory
+        android:key="flash_notifications_category"
+        android:layout="@layout/settingslib_preference_category_no_title">
+        <SwitchPreferenceCompat
+            android:key="camera_flash_notification_preference"
+            android:persistent="false"
+            android:title="@string/camera_flash_notification_title"
+            settings:controller="com.android.settings.accessibility.CameraFlashNotificationPreferenceController" />
+        <com.android.settingslib.PrimarySwitchPreference
+            android:key="screen_flash_notification_preference"
+            android:persistent="false"
+            android:title="@string/screen_flash_notification_title"
+            settings:controller="com.android.settings.accessibility.ScreenFlashNotificationPreferenceController" />
+    </PreferenceCategory>
 
-    <com.android.settingslib.PrimarySwitchPreference
-        android:key="screen_flash_notification_preference"
-        android:persistent="false"
-        android:title="@string/screen_flash_notification_title"
-        settings:controller="com.android.settings.accessibility.ScreenFlashNotificationPreferenceController" />
-
-    <com.android.settings.accessibility.FlashNotificationsPreviewPreference
+    <com.android.settingslib.widget.ButtonPreference
         android:key="flash_notifications_preview"
         android:title="@string/flash_notifications_preview"
+        settings:buttonPreferenceSize="extra"
+        settings:buttonPreferenceType="filled"
         settings:searchable="false"
         settings:controller="com.android.settings.accessibility.FlashNotificationsPreviewPreferenceController" />
 

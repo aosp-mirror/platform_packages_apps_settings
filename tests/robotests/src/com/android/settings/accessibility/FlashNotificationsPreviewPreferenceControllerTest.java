@@ -29,7 +29,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -37,12 +36,15 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
+import android.view.View;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceViewHolder;
 import androidx.test.core.app.ApplicationProvider;
+
+import com.android.settingslib.widget.ButtonPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -51,7 +53,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
@@ -71,20 +72,21 @@ public class FlashNotificationsPreviewPreferenceControllerTest {
     private ContentResolver mContentResolver = mContext.getContentResolver();
     @Mock
     private PreferenceScreen mPreferenceScreen;
-    private Preference mPreference;
+    private ButtonPreference mPreference;
     private FlashNotificationsPreviewPreferenceController mController;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
 
-        mPreference = new Preference(mContext);
+        mPreference = new ButtonPreference(mContext);
         mPreference.setKey(PREFERENCE_KEY);
+        final View rootView = View.inflate(mContext, mPreference.getLayoutResource(), null);
+        mPreference.onBindViewHolder(PreferenceViewHolder.createInstanceForTests(rootView));
         when(mPreferenceScreen.findPreference(PREFERENCE_KEY)).thenReturn(mPreference);
 
         mController = new FlashNotificationsPreviewPreferenceController(mContext, PREFERENCE_KEY);
+        mController.displayPreference(mPreferenceScreen);
     }
 
     @After
@@ -98,67 +100,58 @@ public class FlashNotificationsPreviewPreferenceControllerTest {
     }
 
     @Test
-    public void testDisplayPreference_torchPresent_cameraOff_screenOff_notVisible() {
+    public void updateState_cameraOff_screenOff_notVisible() {
         setFlashNotificationsState(FlashNotificationsUtil.State.OFF);
 
-        mController.displayPreference(mPreferenceScreen);
+        mController.updateState(mPreference);
 
         assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
-    public void testDisplayPreference_torchPresent_cameraOn_screenOff_isVisible() {
+    public void updateState_cameraOn_screenOff_isVisible() {
         setFlashNotificationsState(FlashNotificationsUtil.State.CAMERA);
 
-        mController.displayPreference(mPreferenceScreen);
+        mController.updateState(mPreference);
 
         assertThat(mPreference.isVisible()).isTrue();
     }
 
     @Test
-    public void testDisplayPreference_torchPresent_cameraOff_screenOn_isVisible() {
+    public void updateState_cameraOff_screenOn_isVisible() {
         setFlashNotificationsState(FlashNotificationsUtil.State.SCREEN);
 
-        mController.displayPreference(mPreferenceScreen);
+        mController.updateState(mPreference);
 
         assertThat(mPreference.isVisible()).isTrue();
     }
 
     @Test
-    public void testDisplayPreference_torchPresent_cameraOn_screenOn_isVisible() {
+    public void updateState_cameraOn_screenOn_isVisible() {
         setFlashNotificationsState(FlashNotificationsUtil.State.CAMERA_SCREEN);
 
-        mController.displayPreference(mPreferenceScreen);
+        mController.updateState(mPreference);
 
         assertThat(mPreference.isVisible()).isTrue();
     }
 
     @Test
-    public void testHandlePreferenceTreeClick_invalidPreference() {
-        mController.handlePreferenceTreeClick(mock(Preference.class));
-
-        verify(mContext, never()).sendBroadcastAsUser(any(), any());
-    }
-
-    @Test
-    public void handlePreferenceTreeClick_assertAction() {
-        mController.handlePreferenceTreeClick(mPreference);
+    public void clickOnButton_assertAction() {
+        mPreference.getButton().callOnClick();
 
         ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
         verify(mContext).sendBroadcastAsUser(captor.capture(), any());
         Intent captured = captor.getValue();
-
         assertThat(captured.getAction()).isEqualTo(ACTION_FLASH_NOTIFICATION_START_PREVIEW);
     }
 
     @Test
-    public void handlePreferenceTreeClick_assertExtra() {
-        mController.handlePreferenceTreeClick(mPreference);
+    public void clickOnButton_assertExtra() {
+        mPreference.getButton().callOnClick();
 
         ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
         verify(mContext).sendBroadcastAsUser(captor.capture(), any());
         Intent captured = captor.getValue();
-
         assertThat(captured.getIntExtra(EXTRA_FLASH_NOTIFICATION_PREVIEW_TYPE, TYPE_LONG_PREVIEW))
                 .isEqualTo(TYPE_SHORT_PREVIEW);
     }
