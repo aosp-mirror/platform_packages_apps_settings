@@ -329,11 +329,16 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
 
         mController.refresh();
 
-        assertBatteryIcon(mLayoutPreference.findViewById(R.id.layout_left),
-                R.drawable.ic_battery_alert_24dp);
-        assertBatteryIcon(mLayoutPreference.findViewById(R.id.layout_right), /* resId= */-1);
-        assertBatteryIcon(mLayoutPreference.findViewById(R.id.layout_middle),
-                R.drawable.ic_battery_alert_24dp);
+        assertBatteryIcon(
+                mLayoutPreference.findViewById(R.id.layout_left),
+                R.drawable.ic_battery_alert_24dp,
+                false);
+        assertBatteryIcon(
+                mLayoutPreference.findViewById(R.id.layout_right), /* resId= */ -1, true);
+        assertBatteryIcon(
+                mLayoutPreference.findViewById(R.id.layout_middle),
+                R.drawable.ic_battery_alert_24dp,
+                false);
     }
 
     @Test
@@ -546,10 +551,15 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
         }
     }
 
-    private void assertBatteryIcon(LinearLayout linearLayout, int resId) {
+    private void assertBatteryIcon(LinearLayout linearLayout, int resId, boolean charging) {
         final ImageView imageView = linearLayout.findViewById(R.id.bt_battery_icon);
-        assertThat(shadowOf(imageView.getDrawable()).getCreatedFromResId())
-                .isEqualTo(resId);
+        if (charging) {
+            assertThat(imageView.getContentDescription().toString())
+                    .isEqualTo(mContext.getString(R.string.device_details_battery_charging));
+        } else {
+            assertThat(imageView.getContentDescription().toString())
+                    .isEqualTo(mContext.getString(R.string.device_details_battery));
+        }
+        assertThat(shadowOf(imageView.getDrawable()).getCreatedFromResId()).isEqualTo(resId);
     }
-
 }
