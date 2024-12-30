@@ -183,6 +183,9 @@ import com.android.settings.privatespace.delete.PrivateSpaceDeleteFragment;
 import com.android.settings.privatespace.delete.PrivateSpaceDeletionProgressFragment;
 import com.android.settings.privatespace.onelock.PrivateSpaceBiometricSettings;
 import com.android.settings.regionalpreferences.FirstDayOfWeekItemFragment;
+import com.android.settings.regionalpreferences.MeasurementSystemItemFragment;
+import com.android.settings.regionalpreferences.NumberingSystemLocaleListFragment;
+import com.android.settings.regionalpreferences.RegionPickerFragment;
 import com.android.settings.regionalpreferences.RegionalPreferencesEntriesFragment;
 import com.android.settings.regionalpreferences.TemperatureUnitFragment;
 import com.android.settings.safetycenter.MoreSecurityPrivacyFragment;
@@ -396,9 +399,12 @@ public class SettingsGateway {
             ColorAndMotionFragment.class.getName(),
             ColorContrastFragment.class.getName(),
             LongBackgroundTasksDetails.class.getName(),
+            RegionPickerFragment.class.getName(),
             RegionalPreferencesEntriesFragment.class.getName(),
             TemperatureUnitFragment.class.getName(),
             FirstDayOfWeekItemFragment.class.getName(),
+            MeasurementSystemItemFragment.class.getName(),
+            NumberingSystemLocaleListFragment.class.getName(),
             BatteryInfoFragment.class.getName(),
             UserAspectRatioDetails.class.getName(),
             ScreenTimeoutSettings.class.getName(),
