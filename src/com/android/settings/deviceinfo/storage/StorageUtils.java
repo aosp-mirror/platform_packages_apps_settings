@@ -28,12 +28,15 @@ import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.os.storage.VolumeRecord;
+import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.format.Formatter;
+import android.text.style.TtsSpan;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
@@ -122,11 +125,22 @@ public class StorageUtils {
     }
 
     /** Returns size label of changing units. (e.g., 1kB, 2MB, 3GB) */
-    public static String getStorageSizeLabel(Context context, long bytes) {
+    public static @Nullable CharSequence getStorageSizeLabel(@NonNull Context context, long bytes) {
         final Formatter.BytesResult result = Formatter.formatBytes(context.getResources(),
                 bytes, Formatter.FLAG_SHORTER);
-        return TextUtils.expandTemplate(context.getText(R.string.storage_size_large),
+        String storageSize = TextUtils.expandTemplate(context.getText(R.string.storage_size_large),
                 result.value, result.units).toString();
+
+        // If storage size is less than 1KB, use TtsSpan to add additional metadata for
+        // text-to-speech engines.
+        if (bytes < 1024) {
+            TtsSpan ttsSpan = new TtsSpan.MeasureBuilder().setNumber(bytes).setUnit("byte").build();
+            SpannableString phraseSpannable = new SpannableString(storageSize);
+            phraseSpannable.setSpan(ttsSpan, 0, phraseSpannable.length(), 0);
+            return phraseSpannable;
+        }
+
+        return storageSize;
     }
 
     /** An AsyncTask to unmount a specified volume. */
