@@ -19,14 +19,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/trackpad_mouse_settings">
-    <Preference
-        android:key="trackpad_gesture_settings"
-        android:title="@string/trackpad_touchpad_gesture_title"
-        android:summary="@string/trackpad_touchpad_gesture_summary"
-        android:order="-10"
-        android:fragment="com.android.settings.inputmethod.TrackpadTouchGestureSettings"
-        settings:controller="com.android.settings.inputmethod.TrackpadTouchGestureSettingsController"/>
-
     <SwitchPreferenceCompat
         android:key="trackpad_tap_to_click"
         android:title="@string/trackpad_tap_to_click"
