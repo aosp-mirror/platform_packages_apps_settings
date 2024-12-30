@@ -315,6 +315,12 @@ public class SettingsActivity extends SettingsBaseActivity
         if (mMainSwitch != null) {
             mMainSwitch.setMetricsCategory(lookupMetricsCategory());
             mMainSwitch.setTranslationZ(findViewById(R.id.main_content).getTranslationZ() + 1);
+            if (SettingsThemeHelper.isExpressiveTheme(this)) {
+                final int paddingHorizontal = getResources().getDimensionPixelSize(
+                        com.android.settingslib.widget.theme
+                                .R.dimen.settingslib_expressive_space_small1);
+                mMainSwitch.setPadding(paddingHorizontal, 0, paddingHorizontal, 0);
+            }
         }
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
