@@ -31,4 +31,10 @@
         android:title="@string/mouse_swap_primary_button"
         android:summary="@string/mouse_swap_primary_button_summary"
         settings:controller="com.android.settings.inputmethod.MouseSwapPrimaryButtonPreferenceController" />
+
+    <SwitchPreferenceCompat
+        android:key="mouse_pointer_acceleration"
+        android:title="@string/mouse_pointer_acceleration"
+        android:summary="@string/mouse_pointer_acceleration_summary"
+        settings:controller="com.android.settings.inputmethod.MousePointerAccelerationPreferenceController" />
 </PreferenceScreen>
