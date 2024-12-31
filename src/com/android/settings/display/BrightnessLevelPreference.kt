@@ -42,19 +42,22 @@ import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MAX
 import com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MIN
 import com.android.settingslib.display.BrightnessUtils.convertLinearToGammaFloat
-import com.android.settingslib.metadata.FloatPersistentPreference
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.RangeValue
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.transition.SettingsTransitionHelper
+import java.math.BigDecimal
 import java.text.NumberFormat
 
 // LINT.IfChange
 class BrightnessLevelPreference :
     PreferenceMetadata,
-    FloatPersistentPreference,
+    PersistentPreference<Int>,
+    RangeValue,
     PreferenceBinding,
     PreferenceRestrictionMixin,
     PreferenceSummaryProvider,
@@ -70,7 +73,7 @@ class BrightnessLevelPreference :
         get() = R.string.keywords_display_brightness_level
 
     override fun getSummary(context: Context): CharSequence? =
-        NumberFormat.getPercentInstance().format(context.brightness)
+        NumberFormat.getPercentInstance().format(context.brightnessPercent)
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
@@ -105,13 +108,17 @@ class BrightnessLevelPreference :
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
-    override fun getWritePermit(context: Context, value: Float?, callingPid: Int, callingUid: Int) =
+    override fun getWritePermit(context: Context, value: Int?, callingPid: Int, callingUid: Int) =
         ReadWritePermit.DISALLOW
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
     override fun storage(context: Context): KeyValueStore = BrightnessStorage(context)
+
+    override fun getMinValue(context: Context) = 0
+
+    override fun getMaxValue(context: Context) = 100
 
     private class BrightnessStorage(private val context: Context) :
         AbstractKeyedDataObservable<String>(),
@@ -123,7 +130,9 @@ class BrightnessLevelPreference :
 
         @Suppress("UNCHECKED_CAST")
         override fun <T : Any> getValue(key: String, valueType: Class<T>) =
-            context.brightness.toFloat() as T
+            BigDecimal(context.brightnessPercent * 100)
+                .setScale(0, NumberFormat.getPercentInstance().roundingMode)
+                .toInt() as T
 
         override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {}
 
@@ -134,7 +143,7 @@ class BrightnessLevelPreference :
             context.displayManager.registerDisplayListener(
                 this,
                 HandlerExecutor.main,
-                /* eventFlags= */ 0,
+                /* eventFilter= */ 0,
                 DisplayManager.PRIVATE_EVENT_TYPE_DISPLAY_BRIGHTNESS,
             )
         }
@@ -176,21 +185,20 @@ class BrightnessLevelPreference :
         private val Context.displayManager: DisplayManager
             get() = getSystemService(DisplayManager::class.java)!!
 
-        private val Context.brightness: Double
+        private val Context.brightnessPercent: Double
             get() {
-                val info: BrightnessInfo? = display.brightnessInfo
-                val value =
-                    info?.run {
-                        convertLinearToGammaFloat(brightness, brightnessMinimum, brightnessMaximum)
-                    }
-                return getPercentage(value?.toDouble() ?: 0.0)
+                val info: BrightnessInfo = display.brightnessInfo ?: return 0.0
+                return info.brightnessInGammaSpace.toPercentage()
             }
 
-        private fun getPercentage(value: Double): Double =
+        private val BrightnessInfo.brightnessInGammaSpace: Int
+            get() = convertLinearToGammaFloat(brightness, brightnessMinimum, brightnessMaximum)
+
+        private fun Int.toPercentage(): Double =
             when {
-                value > GAMMA_SPACE_MAX -> 1.0
-                value < GAMMA_SPACE_MIN -> 0.0
-                else -> (value - GAMMA_SPACE_MIN) / (GAMMA_SPACE_MAX - GAMMA_SPACE_MIN)
+                this > GAMMA_SPACE_MAX -> 1.0
+                this < GAMMA_SPACE_MIN -> 0.0
+                else -> (this - GAMMA_SPACE_MIN).toDouble() / (GAMMA_SPACE_MAX - GAMMA_SPACE_MIN)
             }
     }
 }
