@@ -26,6 +26,7 @@ import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.flags.Flags;
 import com.android.settingslib.utils.ThreadUtils;
 
 /** Controller to maintain available media Bluetooth devices */
@@ -60,6 +61,14 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
 
     @Override
     public boolean isFilterMatched(CachedBluetoothDevice cachedDevice) {
+        // If the device is temporary bond, it shouldn't be shown here.
+        if (Flags.enableTemporaryBondDevicesUi()
+                && BluetoothUtils.isTemporaryBondDevice(cachedDevice.getDevice())) {
+            Log.d(TAG,
+                    "isFilterMatched() Filter out temporary bond device " + cachedDevice.getName());
+            return false;
+        }
+
         final int currentAudioProfile;
 
         if (mAudioMode == AudioManager.MODE_RINGTONE

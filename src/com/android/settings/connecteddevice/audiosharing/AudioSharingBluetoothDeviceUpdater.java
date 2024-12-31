@@ -29,6 +29,7 @@ import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.flags.Flags;
 import com.android.settingslib.utils.ThreadUtils;
 
 public class AudioSharingBluetoothDeviceUpdater extends BluetoothDeviceUpdater
@@ -51,6 +52,14 @@ public class AudioSharingBluetoothDeviceUpdater extends BluetoothDeviceUpdater
 
     @Override
     public boolean isFilterMatched(CachedBluetoothDevice cachedDevice) {
+        // If the device is temporary bond, it shouldn't be shown here.
+        if (Flags.enableTemporaryBondDevicesUi()
+                && BluetoothUtils.isTemporaryBondDevice(cachedDevice.getDevice())) {
+            Log.d(TAG,
+                    "isFilterMatched() Filter out temporary bond device " + cachedDevice.getName());
+            return false;
+        }
+
         boolean isFilterMatched = false;
         if (isDeviceConnected(cachedDevice) && isDeviceInCachedDevicesList(cachedDevice)) {
             // If device is LE audio device and has a broadcast source,
