@@ -16,6 +16,7 @@
 package com.android.settings.localepicker;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.internal.app.LocaleStore;
 
@@ -25,5 +26,6 @@ import java.util.List;
 public interface LocaleListSearchCallback {
 
     /** Callback method for searching changes. */
-    void onSearchListChanged(@NonNull List<LocaleStore.LocaleInfo> localeInfoList);
+    void onSearchListChanged(@NonNull List<LocaleStore.LocaleInfo> localeInfoList,
+            @Nullable CharSequence prefix);
 }

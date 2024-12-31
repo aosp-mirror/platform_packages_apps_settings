@@ -222,8 +222,9 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
             if (mRecyclerView != null) {
                 mRecyclerView.post(() -> mRecyclerView.scrollToPosition(0));
             }
-            mSystemLocaleAllListPreferenceController.onSearchListChanged(mLocaleOptions);
-            mSuggestedListPreferenceController.onSearchListChanged(mLocaleOptions);
+
+            mSystemLocaleAllListPreferenceController.onSearchListChanged(mLocaleOptions, null);
+            mSuggestedListPreferenceController.onSearchListChanged(mLocaleOptions, null);
         }
 
         // TODO: decide if this is enough, or we want to use a BreakIterator...
