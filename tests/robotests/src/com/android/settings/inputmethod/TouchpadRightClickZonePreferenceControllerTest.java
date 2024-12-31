@@ -44,28 +44,28 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-/** Tests for {@link TrackpadReverseScrollingPreferenceController} */
+/** Tests for {@link TouchpadRightClickZonePreferenceController} */
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         com.android.settings.testutils.shadow.ShadowSystemSettings.class,
         com.android.settings.testutils.shadow.ShadowInputDevice.class,
 })
-public class TrackpadReverseScrollingPreferenceControllerTest {
+public class TouchpadRightClickZonePreferenceControllerTest {
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
 
-    private static final String PREFERENCE_KEY = "trackpad_reverse_scrolling";
-    private static final String SETTING_KEY = Settings.System.TOUCHPAD_NATURAL_SCROLLING;
+    private static final String PREFERENCE_KEY = "touchpad_bottom_right_tap";
+    private static final String SETTING_KEY = Settings.System.TOUCHPAD_RIGHT_CLICK_ZONE;
 
     private Context mContext;
-    private TrackpadReverseScrollingPreferenceController mController;
+    private TouchpadRightClickZonePreferenceController mController;
     private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mController = new TrackpadReverseScrollingPreferenceController(mContext, PREFERENCE_KEY);
+        mController = new TouchpadRightClickZonePreferenceController(mContext, PREFERENCE_KEY);
     }
 
     @Test
@@ -86,25 +86,8 @@ public class TrackpadReverseScrollingPreferenceControllerTest {
     }
 
     @Test
-    public void setChecked_true_shouldReturn0() {
+    public void setChecked_true_shouldReturn1() {
         mController.setChecked(true);
-
-        int result = Settings.System.getIntForUser(
-                mContext.getContentResolver(),
-                SETTING_KEY,
-                0,
-                UserHandle.USER_CURRENT);
-
-        assertThat(result).isEqualTo(0);
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                any(),
-                eq(SettingsEnums.ACTION_GESTURE_REVERSE_SCROLLING_CHANGED),
-                eq(true));
-    }
-
-    @Test
-    public void setChecked_false_shouldReturn1() {
-        mController.setChecked(false);
 
         int result = Settings.System.getIntForUser(
                 mContext.getContentResolver(),
@@ -115,12 +98,29 @@ public class TrackpadReverseScrollingPreferenceControllerTest {
         assertThat(result).isEqualTo(1);
         verify(mFeatureFactory.metricsFeatureProvider).action(
                 any(),
-                eq(SettingsEnums.ACTION_GESTURE_REVERSE_SCROLLING_CHANGED),
+                eq(SettingsEnums.ACTION_GESTURE_BOTTOM_RIGHT_TAP_CHANGED),
+                eq(true));
+    }
+
+    @Test
+    public void setChecked_false_shouldReturn0() {
+        mController.setChecked(false);
+
+        int result = Settings.System.getIntForUser(
+                mContext.getContentResolver(),
+                SETTING_KEY,
+                0,
+                UserHandle.USER_CURRENT);
+
+        assertThat(result).isEqualTo(0);
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                any(),
+                eq(SettingsEnums.ACTION_GESTURE_BOTTOM_RIGHT_TAP_CHANGED),
                 eq(false));
     }
 
     @Test
-    public void isChecked_providerPutInt1_returnFalse() {
+    public void isChecked_providerPutInt1_returnTrue() {
         Settings.System.putIntForUser(
                 mContext.getContentResolver(),
                 SETTING_KEY,
@@ -129,11 +129,11 @@ public class TrackpadReverseScrollingPreferenceControllerTest {
 
         boolean result = mController.isChecked();
 
-        assertThat(result).isFalse();
+        assertThat(result).isTrue();
     }
 
     @Test
-    public void isChecked_providerPutInt0_returnTrue() {
+    public void isChecked_providerPutInt0_returnFalse() {
         Settings.System.putIntForUser(
                 mContext.getContentResolver(),
                 SETTING_KEY,
@@ -142,6 +142,6 @@ public class TrackpadReverseScrollingPreferenceControllerTest {
 
         boolean result = mController.isChecked();
 
-        assertThat(result).isTrue();
+        assertThat(result).isFalse();
     }
 }

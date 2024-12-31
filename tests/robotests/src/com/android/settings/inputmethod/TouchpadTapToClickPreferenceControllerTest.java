@@ -44,28 +44,28 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-/** Tests for {@link TrackpadBottomPreferenceController} */
+/** Tests for {@link TouchpadTapToClickPreferenceController} */
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         com.android.settings.testutils.shadow.ShadowSystemSettings.class,
         com.android.settings.testutils.shadow.ShadowInputDevice.class,
 })
-public class TrackpadBottomPreferenceControllerTest {
+public class TouchpadTapToClickPreferenceControllerTest {
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
 
-    private static final String PREFERENCE_KEY = "trackpad_bottom_right_tap";
-    private static final String SETTING_KEY = Settings.System.TOUCHPAD_RIGHT_CLICK_ZONE;
+    private static final String PREFERENCE_KEY = "touchpad_tap_to_click";
+    private static final String SETTING_KEY = Settings.System.TOUCHPAD_TAP_TO_CLICK;
 
     private Context mContext;
-    private TrackpadBottomPreferenceController mController;
+    private TouchpadTapToClickPreferenceController mController;
     private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mController = new TrackpadBottomPreferenceController(mContext, PREFERENCE_KEY);
+        mController = new TouchpadTapToClickPreferenceController(mContext, PREFERENCE_KEY);
     }
 
     @Test
@@ -98,7 +98,7 @@ public class TrackpadBottomPreferenceControllerTest {
         assertThat(result).isEqualTo(1);
         verify(mFeatureFactory.metricsFeatureProvider).action(
                 any(),
-                eq(SettingsEnums.ACTION_GESTURE_BOTTOM_RIGHT_TAP_CHANGED),
+                eq(SettingsEnums.ACTION_GESTURE_TAP_TO_CLICK_CHANGED),
                 eq(true));
     }
 
@@ -115,7 +115,7 @@ public class TrackpadBottomPreferenceControllerTest {
         assertThat(result).isEqualTo(0);
         verify(mFeatureFactory.metricsFeatureProvider).action(
                 any(),
-                eq(SettingsEnums.ACTION_GESTURE_BOTTOM_RIGHT_TAP_CHANGED),
+                eq(SettingsEnums.ACTION_GESTURE_TAP_TO_CLICK_CHANGED),
                 eq(false));
     }
 

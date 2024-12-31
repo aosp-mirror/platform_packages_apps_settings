@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,32 +25,31 @@ import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-public class TrackpadBottomPreferenceController extends TogglePreferenceController {
+public class TouchpadTapDraggingPreferenceController extends TogglePreferenceController {
 
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
-    public TrackpadBottomPreferenceController(Context context, String key) {
+    public TouchpadTapDraggingPreferenceController(Context context, String key) {
         super(context, key);
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
     public boolean isChecked() {
-        return InputSettings.useTouchpadRightClickZone(mContext);
+        return InputSettings.useTouchpadTapDragging(mContext);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        InputSettings.setTouchpadRightClickZone(mContext, isChecked);
+        InputSettings.setTouchpadTapDragging(mContext, isChecked);
         mMetricsFeatureProvider.action(
-                mContext, SettingsEnums.ACTION_GESTURE_BOTTOM_RIGHT_TAP_CHANGED, isChecked);
+                mContext, SettingsEnums.ACTION_GESTURE_TAP_DRAGGING_CHANGED, isChecked);
         return true;
     }
 
     @Override
     public int getAvailabilityStatus() {
-        boolean isTouchpad = InputPeripheralsSettingsUtils.isTouchpad();
-        return isTouchpad ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return InputPeripheralsSettingsUtils.isTouchpad() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

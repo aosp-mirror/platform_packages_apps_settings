@@ -25,11 +25,11 @@ import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-public class TrackpadTapToClickPreferenceController extends TogglePreferenceController {
+public class TouchpadTapToClickPreferenceController extends TogglePreferenceController {
 
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
-    public TrackpadTapToClickPreferenceController(Context context, String key) {
+    public TouchpadTapToClickPreferenceController(Context context, String key) {
         super(context, key);
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }

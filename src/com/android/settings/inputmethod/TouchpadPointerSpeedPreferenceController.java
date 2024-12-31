@@ -27,12 +27,12 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-public class TrackpadPointerSpeedPreferenceController extends SliderPreferenceController {
+public class TouchpadPointerSpeedPreferenceController extends SliderPreferenceController {
 
     private SeekBarPreference mPreference;
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
-    public TrackpadPointerSpeedPreferenceController(Context context, String key) {
+    public TouchpadPointerSpeedPreferenceController(Context context, String key) {
         super(context, key);
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
