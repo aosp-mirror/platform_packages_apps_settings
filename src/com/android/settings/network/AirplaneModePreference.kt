@@ -17,6 +17,7 @@
 package com.android.settings.network
 
 import android.app.Activity
+import android.app.settings.SettingsEnums.ACTION_AIRPLANE_TOGGLE
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -33,6 +34,7 @@ import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.network.SatelliteRepository.Companion.isSatelliteOn
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.RestrictedSwitchPreference
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.DataChangeReason
@@ -113,6 +115,9 @@ class AirplaneModePreference :
                 val intent = Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED)
                 intent.putExtra("state", value)
                 context.sendBroadcastAsUser(intent, UserHandle.ALL)
+
+                val metricsFeature = featureFactory.metricsFeatureProvider
+                metricsFeature.action(context, ACTION_AIRPLANE_TOGGLE, value)
             }
         }
 
