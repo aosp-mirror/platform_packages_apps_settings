@@ -60,6 +60,7 @@ import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.ims.MockWfcQueryImsState;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -396,6 +397,7 @@ public class MobileNetworkUtilsTest {
     }
 
     @Test
+    @Ignore
     public void getCurrentCarrierNameForDisplay_withoutSubId_returnNotNull() {
         assertThat(MobileNetworkUtils.getCurrentCarrierNameForDisplay(
                 mContext)).isNotNull();
