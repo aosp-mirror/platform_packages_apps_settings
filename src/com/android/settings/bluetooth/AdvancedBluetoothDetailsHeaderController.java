@@ -626,6 +626,11 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             imageView.setLayoutParams(layoutParams);
         } else {
             imageView.setImageDrawable(createBtBatteryIcon(mContext, level, charging));
+            imageView.setContentDescription(
+                    mContext.getString(
+                            charging
+                                    ? R.string.device_details_battery_charging
+                                    : R.string.device_details_battery));
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             imageView.setLayoutParams(layoutParams);
