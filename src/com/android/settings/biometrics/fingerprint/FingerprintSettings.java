@@ -21,6 +21,7 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.FINGERPRI
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_FINGERPRINT_LAST_DELETE_MESSAGE;
 import static android.app.admin.DevicePolicyResources.UNDEFINED;
 import static android.hardware.biometrics.Flags.screenOffUnlockUdfps;
+import static android.view.WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import static com.android.settings.Utils.isPrivateProfile;
@@ -40,6 +41,7 @@ import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
+import android.os.CancellationSignal;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -49,8 +51,15 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowInsets;
+import android.view.WindowInsetsController;
+import android.view.WindowManager;
 import android.widget.ImeAwareEditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -76,6 +85,7 @@ import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -235,6 +245,9 @@ public class FingerprintSettings extends SubSettings {
 
         private static final String TAG = "FingerprintSettings";
         private static final String KEY_FINGERPRINT_ITEM_PREFIX = "key_fingerprint_item";
+
+        private static final String KEY_FINGERPRINT_CHECK_ENROLLED =
+                "key_fingerprint_check_enrolled";
         @VisibleForTesting
         static final String KEY_FINGERPRINT_ADD = "key_fingerprint_add";
         private static final String KEY_FINGERPRINT_ENABLE_KEYGUARD_TOGGLE =
@@ -691,6 +704,17 @@ public class FingerprintSettings extends SubSettings {
                 mFingerprintsEnrolledCategory.addPreference(pref);
                 pref.setOnPreferenceChangeListener(this);
             }
+            if (Flags.biometricsOnboardingEducation() && isUdfps() && fingerprintCount > 0) {
+                // Setup check enrolled fingerprints preference
+                Preference pref = new Preference(root.getContext());
+                pref.setKey(KEY_FINGERPRINT_CHECK_ENROLLED);
+                pref.setTitle(root.getContext().getString(
+                        R.string.fingerprint_check_enrolled_title));
+                pref.setIcon(R.drawable.ic_check_list_24dp);
+                pref.setVisible(true);
+                mFingerprintsEnrolledCategory.addPreference(pref);
+                pref.setOnPreferenceChangeListener(this);
+            }
             mAddFingerprintPreference = findPreference(KEY_FINGERPRINT_ADD);
             setupAddFingerprintPreference();
             return keyToReturn;
@@ -916,6 +940,8 @@ public class FingerprintSettings extends SubSettings {
                 FingerprintPreference fpref = (FingerprintPreference) pref;
                 final Fingerprint fp = fpref.getFingerprint();
                 showRenameDialog(fp);
+            } else if (KEY_FINGERPRINT_CHECK_ENROLLED.equals(key)) {
+                showCheckEnrolledDialog();
             }
             return super.onPreferenceTreeClick(pref);
         }
@@ -966,6 +992,16 @@ public class FingerprintSettings extends SubSettings {
             renameDialog.setTargetFragment(this, 0);
             renameDialog.show(getFragmentManager(), RenameDialog.class.getName());
             mAuthenticateSidecar.stopAuthentication();
+        }
+
+        private void showCheckEnrolledDialog() {
+            final CheckEnrolledDialog checkEnrolledDialog = new CheckEnrolledDialog();
+            final Bundle args = new Bundle();
+            args.putInt(CheckEnrolledDialog.KEY_USER_ID, mUserId);
+            args.putParcelable(CheckEnrolledDialog.KEY_SENSOR_PROPERTIES, mSensorProperties.get(0));
+            checkEnrolledDialog.setArguments(args);
+            checkEnrolledDialog.setTargetFragment(this, 0);
+            checkEnrolledDialog.show(getFragmentManager(), CheckEnrolledDialog.class.getName());
         }
 
         @Override
@@ -1342,6 +1378,121 @@ public class FingerprintSettings extends SubSettings {
                 }
             };
             return new InputFilter[]{filter};
+        }
+
+        public static class CheckEnrolledDialog extends InstrumentedDialogFragment {
+
+            private static final String KEY_USER_ID = "user_id";
+            private static final String KEY_SENSOR_PROPERTIES = "sensor_properties";
+            private int mUserId;
+            private @Nullable CancellationSignal mCancellationSignal;
+            private @Nullable FingerprintSensorPropertiesInternal mSensorPropertiesInternal;
+
+            @Override
+            public @NonNull View onCreateView(
+                    @NonNull LayoutInflater inflater,
+                    @Nullable ViewGroup container,
+                    @Nullable Bundle savedInstanceState) {
+                return inflater.inflate(
+                        R.layout.fingerprint_check_enrolled_dialog, container, false);
+            }
+
+            @Override
+            public @NonNull Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+                final Dialog dialog = super.onCreateDialog(savedInstanceState);
+                if (dialog != null) {
+                    mUserId = getArguments().getInt(KEY_USER_ID);
+                    mSensorPropertiesInternal =
+                            getArguments().getParcelable(KEY_SENSOR_PROPERTIES);
+
+                    // Remove the default dialog title bar
+                    dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
+                    dialog.setOnShowListener(dialogInterface -> {
+                        final UdfpsCheckEnrolledView v =
+                                dialog.findViewById(R.id.udfps_check_enrolled_view);
+                        v.setSensorProperties(mSensorPropertiesInternal);
+                    });
+                }
+
+                return dialog;
+            }
+
+            @Override
+            public void onStart() {
+                super.onStart();
+                if (getDialog() == null) {
+                    return;
+                }
+
+                final Dialog dialog = getDialog();
+                Window window = dialog.getWindow();
+                WindowManager.LayoutParams params = window.getAttributes();
+
+                // Make the dialog fullscreen
+                params.width = WindowManager.LayoutParams.MATCH_PARENT;
+                params.height = WindowManager.LayoutParams.MATCH_PARENT;
+                params.layoutInDisplayCutoutMode = LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS;
+                params.setFitInsetsTypes(0);
+                window.setAttributes(params);
+                window.getDecorView().getWindowInsetsController().hide(
+                        WindowInsets.Type.statusBars());
+                window.getDecorView().getWindowInsetsController().setSystemBarsBehavior(
+                        WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+                window.setBackgroundDrawableResource(android.R.color.black);
+
+                final TextView message =
+                        dialog.findViewById(R.id.udfps_fingerprint_sensor_message);
+                final Vibrator vibrator = getContext().getSystemService(Vibrator.class);
+                final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(getContext());
+                mCancellationSignal = new CancellationSignal();
+                fpm.authenticate(
+                        null /* crypto */,
+                        mCancellationSignal,
+                        new FingerprintManager.AuthenticationCallback() {
+                            @Override
+                            public void onAuthenticationError(
+                                    int errorCode, @NonNull CharSequence errString) {
+                                dialog.dismiss();
+                            }
+
+                            @Override
+                            public void onAuthenticationSucceeded(
+                                    @NonNull FingerprintManager.AuthenticationResult result) {
+                                int fingerId = result.getFingerprint().getBiometricId();
+                                FingerprintSettingsFragment parent =
+                                        (FingerprintSettingsFragment) getTargetFragment();
+                                parent.highlightFingerprintItem(fingerId);
+                                dialog.dismiss();
+                            }
+
+                            @Override
+                            public void onAuthenticationFailed() {
+                                vibrator.vibrate(
+                                        VibrationEffect.get(VibrationEffect.EFFECT_DOUBLE_CLICK));
+                                message.setText(R.string.fingerprint_check_enroll_not_recognized);
+                                message.postDelayed(() -> {
+                                    message.setText(R.string.fingerprint_check_enroll_touch_sensor);
+                                }, 2000);
+                            }
+                        },
+                        null /* handler */,
+                        mUserId);
+            }
+
+            @Override
+            public void onDismiss(@NonNull DialogInterface dialog) {
+                super.onDismiss(dialog);
+                if (mCancellationSignal != null) {
+                    mCancellationSignal.cancel();
+                    mCancellationSignal = null;
+                }
+            }
+
+            @Override
+            public int getMetricsCategory() {
+                return 0;
+            }
         }
 
         public static class RenameDialog extends InstrumentedDialogFragment {
