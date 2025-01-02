@@ -2830,6 +2830,12 @@
                   android:screenOrientation="portrait"/>
 
         <activity android:name=".biometrics.face.FaceEnrollIntroduction"
+                  android:exported="false"
+                  android:theme="@style/GlifV4Theme.DayNight"
+                  android:screenOrientation="nosensor">
+        </activity>
+
+        <activity android:name=".biometrics.face.FaceEnroll"
                   android:exported="true"
                   android:theme="@style/GlifV4Theme.DayNight"
                   android:screenOrientation="nosensor">

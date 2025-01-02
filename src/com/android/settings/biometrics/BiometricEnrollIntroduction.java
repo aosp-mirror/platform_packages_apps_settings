@@ -71,7 +71,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     private boolean mParentalConsentRequired;
     private boolean mHasScrolledToBottom = false;
 
-    @Nullable private PorterDuffColorFilter mIconColorFilter;
+    @Nullable protected PorterDuffColorFilter mIconColorFilter;
 
     /**
      * @return true if the biometric is disabled by a device administrator
