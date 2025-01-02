@@ -20,7 +20,9 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.wifi.SoftApConfiguration;
 import android.text.TextUtils;
+import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
@@ -36,7 +38,8 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
  * Controller for logic pertaining to the password of Wi-Fi tethering.
  */
 public class WifiTetherPasswordPreferenceController extends WifiTetherBasePreferenceController
-        implements ValidatedEditTextPreference.Validator {
+        implements ValidatedEditTextPreference.Validator,
+        EditTextPreference.OnBindEditTextListener {
 
     private static final String PREF_KEY = "wifi_tether_network_password";
 
@@ -80,6 +83,7 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
         ((ValidatedEditTextPreference) mPreference).setValidator(this);
         ((ValidatedEditTextPreference) mPreference).setIsPassword(true);
         ((ValidatedEditTextPreference) mPreference).setIsSummaryPassword(true);
+        ((EditTextPreference) mPreference).setOnBindEditTextListener(this);
         updatePasswordDisplay((EditTextPreference) mPreference);
     }
 
@@ -142,5 +146,10 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
             pref.setSummary(R.string.wifi_hotspot_no_password_subtext);
             pref.setVisible(false);
         }
+    }
+
+    @Override
+    public void onBindEditText(@NonNull EditText editText) {
+        editText.setHint(R.string.wifi_hotspot_password_title);
     }
 }

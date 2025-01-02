@@ -22,18 +22,22 @@ import android.content.Intent;
 import android.net.wifi.SoftApConfiguration;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ValidatedEditTextPreference;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreferenceController
-        implements ValidatedEditTextPreference.Validator {
+        implements ValidatedEditTextPreference.Validator,
+        EditTextPreference.OnBindEditTextListener {
 
     private static final String TAG = "WifiTetherSsidPref";
     private static final String PREF_KEY = "wifi_tether_network_name";
@@ -93,6 +97,7 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
             ((WifiTetherSsidPreference) mPreference).setButtonVisible(false);
         }
 
+        ((EditTextPreference) mPreference).setOnBindEditTextListener(this);
         updateSsidDisplay((EditTextPreference) mPreference);
     }
 
@@ -137,5 +142,10 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
     @VisibleForTesting
     boolean isQrCodeButtonAvailable() {
         return ((WifiTetherSsidPreference) mPreference).isQrCodeButtonAvailable();
+    }
+
+    @Override
+    public void onBindEditText(@NonNull EditText editText) {
+        editText.setHint(R.string.wifi_hotspot_name_title);
     }
 }
