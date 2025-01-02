@@ -22,12 +22,7 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.text.BidiFormatter;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.format.Formatter;
-import android.text.style.RelativeSizeSpan;
 import android.util.EventLog;
 import android.util.Log;
 
@@ -209,34 +204,6 @@ public class DataUsageSummary extends DashboardFragment {
     public void onResume() {
         super.onResume();
         updateState();
-    }
-
-    @VisibleForTesting
-    static CharSequence formatUsage(Context context, String template, long usageLevel) {
-        final float LARGER_SIZE = 1.25f * 1.25f;  // (1/0.8)^2
-        final float SMALLER_SIZE = 1.0f / LARGER_SIZE;  // 0.8^2
-        return formatUsage(context, template, usageLevel, LARGER_SIZE, SMALLER_SIZE);
-    }
-
-    static CharSequence formatUsage(Context context, String template, long usageLevel,
-                                    float larger, float smaller) {
-        final int FLAGS = Spannable.SPAN_INCLUSIVE_INCLUSIVE;
-
-        final Formatter.BytesResult usedResult = Formatter.formatBytes(context.getResources(),
-                usageLevel, Formatter.FLAG_CALCULATE_ROUNDED | Formatter.FLAG_IEC_UNITS);
-        final SpannableString enlargedValue = new SpannableString(usedResult.value);
-        enlargedValue.setSpan(new RelativeSizeSpan(larger), 0, enlargedValue.length(), FLAGS);
-
-        final SpannableString amountTemplate = new SpannableString(
-                context.getString(com.android.internal.R.string.fileSizeSuffix)
-                .replace("%1$s", "^1").replace("%2$s", "^2"));
-        final CharSequence formattedUsage = TextUtils.expandTemplate(amountTemplate,
-                enlargedValue, usedResult.units);
-
-        final SpannableString fullTemplate = new SpannableString(template);
-        fullTemplate.setSpan(new RelativeSizeSpan(smaller), 0, fullTemplate.length(), FLAGS);
-        return TextUtils.expandTemplate(fullTemplate,
-                BidiFormatter.getInstance().unicodeWrap(formattedUsage.toString()));
     }
 
     private void updateState() {
