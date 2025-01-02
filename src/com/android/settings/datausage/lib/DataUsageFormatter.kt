@@ -18,14 +18,18 @@ package com.android.settings.datausage.lib
 
 import android.content.Context
 import android.content.res.Resources
-import android.text.format.Formatter
 import com.android.settingslib.spaprivileged.framework.common.BytesFormatter
 
-class DataUsageFormatter(private val context: Context) {
+class DataUsageFormatter(context: Context) {
+
+    private val bytesFormatter = BytesFormatter(context)
 
     /** Formats the data usage. */
     fun formatDataUsage(sizeBytes: Long): String =
-        BytesFormatter(context).format(sizeBytes, BytesFormatter.UseCase.DataUsage)
+        bytesFormatter.format(sizeBytes, BytesFormatter.UseCase.DataUsage)
+
+    fun formatDataUsageWithUnits(sizeBytes: Long): BytesFormatter.Result =
+        bytesFormatter.formatWithUnits(sizeBytes, BytesFormatter.UseCase.DataUsage)
 
     companion object {
         /**
@@ -35,6 +39,6 @@ class DataUsageFormatter(private val context: Context) {
          * in Settings, and align with other places in Settings.
          */
         fun Resources.getBytesDisplayUnit(bytes: Long): String =
-            Formatter.formatBytes(this, bytes, Formatter.FLAG_IEC_UNITS).units
+            BytesFormatter(this).formatWithUnits(bytes, BytesFormatter.UseCase.DataUsage).units
     }
 }

@@ -24,6 +24,7 @@ import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
+import com.android.settings.datausage.lib.DataUsageFormatter
 import com.android.settings.datausage.lib.DataUsageLib.getMobileTemplate
 import com.android.settings.datausage.lib.INetworkCycleDataRepository
 import com.android.settings.datausage.lib.NetworkCycleDataRepository
@@ -71,6 +72,8 @@ open class DataUsageSummaryPreferenceController @JvmOverloads constructor(
     }
 
     private lateinit var preference: DataUsageSummaryPreference
+
+    private val dataUsageFormatter = DataUsageFormatter(mContext)
 
     override fun getAvailabilityStatus(subId: Int) =
         if (subInfo != null) AVAILABLE else CONDITIONALLY_UNAVAILABLE
@@ -120,8 +123,8 @@ open class DataUsageSummaryPreferenceController @JvmOverloads constructor(
 
     private fun setDataBarSize(dataBarSize: Long) {
         preference.setLabels(
-            DataUsageUtils.formatDataUsage(mContext, /* byteValue = */ 0),
-            DataUsageUtils.formatDataUsage(mContext, dataBarSize)
+            dataUsageFormatter.formatDataUsage(/* byteValue = */ 0),
+            dataUsageFormatter.formatDataUsage(dataBarSize)
         )
     }
 
@@ -129,22 +132,22 @@ open class DataUsageSummaryPreferenceController @JvmOverloads constructor(
         warningBytes > 0 && limitBytes > 0 -> {
             TextUtils.expandTemplate(
                 mContext.getText(R.string.cell_data_warning_and_limit),
-                DataUsageUtils.formatDataUsage(mContext, warningBytes),
-                DataUsageUtils.formatDataUsage(mContext, limitBytes),
+                dataUsageFormatter.formatDataUsage(warningBytes),
+                dataUsageFormatter.formatDataUsage(limitBytes),
             )
         }
 
         warningBytes > 0 -> {
             TextUtils.expandTemplate(
                 mContext.getText(R.string.cell_data_warning),
-                DataUsageUtils.formatDataUsage(mContext, warningBytes),
+                dataUsageFormatter.formatDataUsage(warningBytes),
             )
         }
 
         limitBytes > 0 -> {
             TextUtils.expandTemplate(
                 mContext.getText(R.string.cell_data_limit),
-                DataUsageUtils.formatDataUsage(mContext, limitBytes),
+                dataUsageFormatter.formatDataUsage(limitBytes),
             )
         }
 

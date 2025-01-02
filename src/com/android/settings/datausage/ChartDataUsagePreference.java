@@ -20,7 +20,6 @@ import android.net.NetworkPolicy;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
-import android.text.format.Formatter;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.util.DataUnit;
@@ -34,9 +33,11 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.datausage.lib.DataUsageFormatter;
 import com.android.settings.datausage.lib.NetworkCycleChartData;
 import com.android.settings.datausage.lib.NetworkUsageData;
 import com.android.settings.widget.UsageView;
+import com.android.settingslib.spaprivileged.framework.common.BytesFormatter;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -279,10 +280,10 @@ public class ChartDataUsagePreference extends Preference {
     }
 
     private CharSequence getLabel(long bytes, int str, int mLimitColor) {
-        Formatter.BytesResult result = Formatter.formatBytes(mResources, bytes,
-                Formatter.FLAG_SHORTER | Formatter.FLAG_IEC_UNITS);
+        DataUsageFormatter dataUsageFormatter = new DataUsageFormatter(getContext());
+        BytesFormatter.Result result = dataUsageFormatter.formatDataUsageWithUnits(bytes);
         CharSequence label = TextUtils.expandTemplate(getContext().getText(str),
-                result.value, result.units);
+                result.getNumber(), result.getUnits());
         return new SpannableStringBuilder().append(label, new ForegroundColorSpan(mLimitColor), 0);
     }
 
