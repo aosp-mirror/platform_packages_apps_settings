@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.hardware.input.InputSettings;
 import android.os.UserHandle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
 
@@ -40,8 +41,8 @@ public class TouchpadGesturesTutorialButtonPreferenceController extends BasePref
     private static final String GESTURE_DIALOG_TAG = "GESTURE_DIALOG_TAG";
     private static final String TUTORIAL_ACTION = "com.android.systemui.action.TOUCHPAD_TUTORIAL";
 
-    private Fragment mParent;
-    private MetricsFeatureProvider mMetricsFeatureProvider;
+    private @Nullable Fragment mParent;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     public TouchpadGesturesTutorialButtonPreferenceController(Context context, String key) {
         super(context, key);
