@@ -143,7 +143,7 @@ class DataUsagePreferenceControllerTest {
         controller.onViewCreated(TestLifecycleOwner())
 
         waitUntil { preference.isEnabled }
-        waitUntil { preference.summary?.contains("0 B used") == true }
+        waitUntil { preference.summary?.contains("0 byte used") == true }
     }
 
     @Test
@@ -159,7 +159,7 @@ class DataUsagePreferenceControllerTest {
         controller.onViewCreated(TestLifecycleOwner())
 
         waitUntil { !preference.isEnabled }
-        waitUntil { preference.summary?.contains("0 B used") == true }
+        waitUntil { preference.summary?.contains("0 byte used") == true }
     }
 
     @Test

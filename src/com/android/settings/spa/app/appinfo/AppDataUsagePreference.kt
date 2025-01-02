@@ -113,7 +113,7 @@ private class AppDataUsagePresenter(
         } else {
             context.getString(
                 R.string.data_summary_format,
-                appUsageData.formatUsage(context).displayText,
+                appUsageData.formatUsage(context),
                 appUsageData.formatStartDate(context),
             )
         }

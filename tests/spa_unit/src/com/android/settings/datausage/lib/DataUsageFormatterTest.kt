@@ -21,7 +21,6 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.datausage.lib.DataUsageFormatter.Companion.getBytesDisplayUnit
 import com.google.common.truth.Truth.assertThat
-
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -33,26 +32,23 @@ class DataUsageFormatterTest {
 
     @Test
     fun formatDataUsage_0() {
-        val (displayText, contentDescription) = dataUsageFormatter.formatDataUsage(0)
+        val displayText = dataUsageFormatter.formatDataUsage(0)
 
-        assertThat(displayText).isEqualTo("0 B")
-        assertThat(contentDescription).isEqualTo("0 byte")
+        assertThat(displayText).isEqualTo("0 byte")
     }
 
     @Test
     fun formatDataUsage_1000() {
-        val (displayText, contentDescription) = dataUsageFormatter.formatDataUsage(1000)
+        val displayText = dataUsageFormatter.formatDataUsage(1000)
 
         assertThat(displayText).isEqualTo("0.98 kB")
-        assertThat(contentDescription).isEqualTo("0.98 kB")
     }
 
     @Test
     fun formatDataUsage_2000000() {
-        val (displayText, contentDescription) = dataUsageFormatter.formatDataUsage(2000000)
+        val displayText = dataUsageFormatter.formatDataUsage(2000000)
 
         assertThat(displayText).isEqualTo("1.91 MB")
-        assertThat(contentDescription).isEqualTo("1.91 MB")
     }
 
     @Test

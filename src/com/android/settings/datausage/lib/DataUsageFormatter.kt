@@ -16,40 +16,16 @@
 
 package com.android.settings.datausage.lib
 
-import android.annotation.StringRes
 import android.content.Context
 import android.content.res.Resources
-import android.icu.text.UnicodeSet
-import android.icu.text.UnicodeSetSpanner
-import android.text.BidiFormatter
 import android.text.format.Formatter
-import com.android.internal.R
+import com.android.settingslib.spaprivileged.framework.common.BytesFormatter
 
 class DataUsageFormatter(private val context: Context) {
 
-    data class FormattedDataUsage(
-        val displayText: String,
-        val contentDescription: String,
-    ) {
-        fun format(context: Context, @StringRes resId: Int, vararg formatArgs: Any?) =
-            FormattedDataUsage(
-                displayText = context.getString(resId, displayText, *formatArgs),
-                contentDescription = context.getString(resId, contentDescription, *formatArgs),
-            )
-    }
-
     /** Formats the data usage. */
-    fun formatDataUsage(sizeBytes: Long): FormattedDataUsage {
-        val result = Formatter.formatBytes(context.resources, sizeBytes, Formatter.FLAG_IEC_UNITS)
-        return FormattedDataUsage(
-            displayText = BidiFormatter.getInstance().unicodeWrap(
-                context.getString(R.string.fileSizeSuffix, result.value, result.units)
-            ),
-            contentDescription = context.getString(
-                R.string.fileSizeSuffix, result.value, result.unitsContentDescription
-            ),
-        )
-    }
+    fun formatDataUsage(sizeBytes: Long): String =
+        BytesFormatter(context).format(sizeBytes, BytesFormatter.UseCase.DataUsage)
 
     companion object {
         /**
