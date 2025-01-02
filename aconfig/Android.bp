@@ -79,3 +79,15 @@ java_aconfig_library {
     name: "keyboard_flags_lib",
     aconfig_declarations: "keyboard_flags",
 }
+
+aconfig_declarations {
+    name: "settings_connectivity_flags",
+    package: "com.android.settings.connectivity",
+    container: "system",
+    srcs: ["connectivity/*.aconfig"],
+}
+
+java_aconfig_library {
+    name: "settings_connectivity_flags_lib",
+    aconfig_declarations: "settings_connectivity_flags",
+}
