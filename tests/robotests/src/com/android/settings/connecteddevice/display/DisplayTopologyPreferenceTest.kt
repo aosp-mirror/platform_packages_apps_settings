@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.display
 
+import android.hardware.display.DisplayTopology.TreeNode.POSITION_BOTTOM
 import android.hardware.display.DisplayTopology.TreeNode.POSITION_LEFT
 
 import android.content.Context
@@ -23,10 +24,12 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.ColorDrawable
 import android.hardware.display.DisplayTopology
+import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 import androidx.preference.PreferenceViewHolder
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.core.view.MotionEventBuilder
 
 import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
@@ -39,7 +42,7 @@ import org.robolectric.RobolectricTestRunner
 class DisplayTopologyPreferenceTest {
     val context = ApplicationProvider.getApplicationContext<Context>()
     val preference = DisplayTopologyPreference(context)
-    val injector = TestInjector()
+    val injector = TestInjector(context)
     val rootView = View.inflate(context, preference.layoutResource, /*parent=*/ null)
     val holder = PreferenceViewHolder.createInstanceForTests(rootView)
     val wallpaper = ColorDrawable(Color.MAGENTA)
@@ -50,13 +53,16 @@ class DisplayTopologyPreferenceTest {
         preference.onBindViewHolder(holder)
     }
 
-    class TestInjector : DisplayTopologyPreference.Injector() {
+    class TestInjector(context : Context) : DisplayTopologyPreference.Injector(context) {
         var topology : DisplayTopology? = null
         var systemWallpaper : Drawable? = null
 
-        override fun displayTopology(context : Context) : DisplayTopology? { return topology }
+        override var displayTopology : DisplayTopology?
+            get() = topology
+            set(value) { topology = value }
 
-        override fun wallpaper(context : Context) : Drawable { return systemWallpaper!! }
+        override val wallpaper : Drawable
+            get() = systemWallpaper!!
     }
 
     @Test
@@ -70,8 +76,16 @@ class DisplayTopologyPreferenceTest {
         assertThat(preference.mTopologyHint.text).isEqualTo("")
     }
 
-    @Test
-    fun twoDisplaysGenerateBlocks() {
+    private fun getPaneChildren(): List<DisplayBlock> =
+        (0..preference.mPaneContent.childCount-1)
+                .map { preference.mPaneContent.getChildAt(it) as DisplayBlock }
+                .toList()
+
+    /**
+     * Sets up a simple topology in the pane with two displays. Returns the left-hand display and
+     * right-hand display in order in a list. The right-hand display is the root.
+     */
+    fun setupTwoDisplays(): List<DisplayBlock> {
         val child = DisplayTopology.TreeNode(
                 /* displayId= */ 42, /* width= */ 100f, /* height= */ 80f,
                 POSITION_LEFT, /* offset= */ 42f)
@@ -93,15 +107,19 @@ class DisplayTopologyPreferenceTest {
         preference.onAttached()
         preference.onGlobalLayout()
 
-        assertThat(preference.mPaneContent.childCount).isEqualTo(2)
-        val block0 = preference.mPaneContent.getChildAt(0)
-        val block1 = preference.mPaneContent.getChildAt(1)
+        val paneChildren = getPaneChildren()
+        assertThat(paneChildren).hasSize(2)
 
         // Block of child display is on the left.
-        val (childBlock, rootBlock) = if (block0.x < block1.x)
-                listOf(block0, block1)
+        return if (paneChildren[0].x < paneChildren[1].x)
+                paneChildren
         else
-                listOf(block1, block0)
+                paneChildren.reversed()
+    }
+
+    @Test
+    fun twoDisplaysGenerateBlocks() {
+        val (childBlock, rootBlock) = setupTwoDisplays()
 
         // After accounting for padding, child should be half the length of root in each dimension.
         assertThat(childBlock.layoutParams.width + BLOCK_PADDING)
@@ -109,12 +127,96 @@ class DisplayTopologyPreferenceTest {
         assertThat(childBlock.layoutParams.height + BLOCK_PADDING)
                 .isEqualTo(rootBlock.layoutParams.height / 2)
         assertThat(childBlock.y).isGreaterThan(rootBlock.y)
-        assertThat(block0.background).isEqualTo(wallpaper)
-        assertThat(block1.background).isEqualTo(wallpaper)
+        assertThat(childBlock.background).isEqualTo(wallpaper)
+        assertThat(rootBlock.background).isEqualTo(wallpaper)
         assertThat(rootBlock.x - BLOCK_PADDING * 2)
                 .isEqualTo(childBlock.x + childBlock.layoutParams.width)
 
         assertThat(preference.mTopologyHint.text)
                 .isEqualTo(context.getString(R.string.external_display_topology_hint))
+    }
+
+    @Test
+    fun dragDisplayDownward() {
+        val (leftBlock, rightBlock) = setupTwoDisplays()
+
+        val downEvent = MotionEventBuilder.newBuilder()
+                .setPointer(0f, 0f)
+                .setAction(MotionEvent.ACTION_DOWN)
+                .build()
+
+        // Move the left block half of its height downward. This is 40 pixels in display
+        // coordinates. The original offset is 42, so the new offset will be 42 + 40.
+        val moveEvent = MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_MOVE)
+                .setPointer(0f, leftBlock.layoutParams.height / 2f + BLOCK_PADDING)
+                .build()
+        val upEvent = MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_UP).build()
+
+        leftBlock.dispatchTouchEvent(downEvent)
+        leftBlock.dispatchTouchEvent(moveEvent)
+        leftBlock.dispatchTouchEvent(upEvent)
+
+        val rootChildren = injector.topology!!.root!!.children
+        assertThat(rootChildren).hasSize(1)
+        val child = rootChildren[0]
+        assertThat(child.position).isEqualTo(POSITION_LEFT)
+        assertThat(child.offset).isWithin(1f).of(82f)
+    }
+
+    @Test
+    fun dragRootDisplayToNewSide() {
+        val (leftBlock, rightBlock) = setupTwoDisplays()
+
+        val downEvent = MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_DOWN)
+                .setPointer(0f, 0f)
+                .build()
+
+        // Move the right block left and upward. We won't move it into exactly the correct position,
+        // relying on the clamp algorithm to choose the correct side and offset.
+        val moveEvent = MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_MOVE)
+                .setPointer(
+                        -leftBlock.layoutParams.width - 2f * BLOCK_PADDING,
+                        -leftBlock.layoutParams.height / 2f)
+                .build()
+
+        val upEvent = MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_UP).build()
+
+        assertThat(leftBlock.y).isGreaterThan(rightBlock.y)
+
+        rightBlock.dispatchTouchEvent(downEvent)
+        rightBlock.dispatchTouchEvent(moveEvent)
+        rightBlock.dispatchTouchEvent(upEvent)
+
+        val rootChildren = injector.topology!!.root!!.children
+        assertThat(rootChildren).hasSize(1)
+        val child = rootChildren[0]
+        assertThat(child.position).isEqualTo(POSITION_BOTTOM)
+        assertThat(child.offset).isWithin(1f).of(0f)
+
+        // After rearranging blocks, the original block views should still be present.
+        val paneChildren = getPaneChildren()
+        assertThat(paneChildren.indexOf(leftBlock)).isNotEqualTo(-1)
+        assertThat(paneChildren.indexOf(rightBlock)).isNotEqualTo(-1)
+
+        // Left edge of both blocks should be aligned after dragging.
+        assertThat(paneChildren[0].x)
+                .isWithin(1f)
+                .of(paneChildren[1].x)
+    }
+
+    @Test
+    fun keepOriginalViewsWhenAddingMore() {
+        setupTwoDisplays()
+        val childrenBefore = getPaneChildren()
+        injector.topology!!.addDisplay(/* displayId= */ 101, 320f, 240f)
+        preference.refreshPane()
+        val childrenAfter = getPaneChildren()
+
+        assertThat(childrenBefore).hasSize(2)
+        assertThat(childrenAfter).hasSize(3)
+        assertThat(childrenAfter.subList(0, 2)).isEqualTo(childrenBefore)
     }
 }
