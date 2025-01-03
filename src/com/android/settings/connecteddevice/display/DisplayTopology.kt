@@ -75,16 +75,16 @@ class TopologyScale(
         paneWidth : Int, minEdgeLength : Int, maxBlockRatio : Float,
         displaysPos : Collection<RectF>) {
     /** Scale of block sizes to real-world display sizes. Should be less than 1. */
-    val blockRatio : Float
+    val blockRatio: Float
 
     /** Height of topology pane needed to allow all display blocks to appear with some padding. */
-    val paneHeight : Int
+    val paneHeight: Float
 
     /** Pane's X view coordinate that corresponds with topology's X=0 coordinate. */
-    val originPaneX : Int
+    val originPaneX: Float
 
     /** Pane's Y view coordinate that corresponds with topology's Y=0 coordinate. */
-    val originPaneY : Int
+    val originPaneY: Float
 
     init {
         val displayBounds = RectF(
@@ -114,15 +114,14 @@ class TopologyScale(
         // 20% padding above and below the display bounds - this is where the 0.6 comes from.
         val rawPaneHeight = max(
                 paneWidth.toDouble() / displayBounds.width() * displayBounds.height(),
-                displayBounds.height() * blockRatio / 0.6)
+                displayBounds.height() * blockRatio / 0.6).toFloat()
 
         // It is easy for the aspect ratio to result in an excessively tall pane, since the width is
         // pre-determined and may be considerably wider than necessary. So we prevent the height
         // from growing too large here, by limiting vertical padding to the size of the tallest
         // display. This improves results for very tall display bounds.
         paneHeight = min(
-                rawPaneHeight.toInt(),
-                (blockRatio * (displayBounds.height() + biggestDisplayHeight * 2f)).toInt())
+                rawPaneHeight, blockRatio * (displayBounds.height() + biggestDisplayHeight * 2f))
 
         // Set originPaneXY (the location of 0,0 in display space in the pane's coordinate system)
         // such that the display bounds rect is centered in the pane.
@@ -134,28 +133,24 @@ class TopologyScale(
         val blockMostLeft = (paneWidth - displayBounds.width() * blockRatio) / 2
         val blockMostTop = (paneHeight - displayBounds.height() * blockRatio) / 2
 
-        originPaneX = (blockMostLeft - displayBounds.left * blockRatio).toInt()
-        originPaneY = (blockMostTop - displayBounds.top * blockRatio).toInt()
+        originPaneX = blockMostLeft - displayBounds.left * blockRatio
+        originPaneY = blockMostTop - displayBounds.top * blockRatio
     }
 
     /** Transforms coordinates in view pane space to display space. */
-    fun paneToDisplayCoor(panePos : Point) : PointF {
-        return PointF(
-                (panePos.x - originPaneX).toFloat() / blockRatio,
-                (panePos.y - originPaneY).toFloat() / blockRatio)
+    fun paneToDisplayCoor(paneX: Float, paneY: Float): PointF {
+        return PointF((paneX - originPaneX) / blockRatio, (paneY - originPaneY) / blockRatio)
     }
 
     /** Transforms coordinates in display space to view pane space. */
-    fun displayToPaneCoor(displayPos : PointF) : Point {
-        return Point(
-                (displayPos.x * blockRatio).toInt() + originPaneX,
-                (displayPos.y * blockRatio).toInt() + originPaneY)
+    fun displayToPaneCoor(displayX: Float, displayY: Float): PointF {
+        return PointF(displayX * blockRatio + originPaneX, displayY * blockRatio + originPaneY)
     }
 
     override fun toString() : String {
         return String.format(
                 Locale.ROOT,
-                "{TopoScale blockRatio=%f originPaneXY=%d,%d paneHeight=%d}",
+                "{TopologyScale blockRatio=%f originPaneXY=%.1f,%.1f paneHeight=%.1f}",
                 blockRatio, originPaneX, originPaneY, paneHeight)
     }
 }
@@ -163,7 +158,7 @@ class TopologyScale(
 const val PREFERENCE_KEY = "display_topology_preference"
 
 /** Padding in pane coordinate pixels on each side of a display block. */
-const val BLOCK_PADDING = 2
+const val BLOCK_PADDING = 2f
 
 /** Represents a draggable block in the topology pane. */
 class DisplayBlock(context : Context) : Button(context) {
@@ -174,24 +169,24 @@ class DisplayBlock(context : Context) : Button(context) {
     }
 
     /** Sets position of the block given unpadded coordinates. */
-    fun place(topLeft : Point) {
-        x = (topLeft.x + BLOCK_PADDING).toFloat()
-        y = (topLeft.y + BLOCK_PADDING).toFloat()
+    fun place(topLeft: PointF) {
+        x = topLeft.x + BLOCK_PADDING
+        y = topLeft.y + BLOCK_PADDING
     }
 
-    val unpaddedX : Int
-        get() = (x - BLOCK_PADDING).toInt()
+    val unpaddedX: Float
+        get() = x - BLOCK_PADDING
 
-    val unpaddedY : Int
-        get() = (y - BLOCK_PADDING).toInt()
+    val unpaddedY: Float
+        get() = y - BLOCK_PADDING
 
     /** Sets position and size of the block given unpadded bounds. */
     fun placeAndSize(bounds : RectF, scale : TopologyScale) {
-        val topLeft = scale.displayToPaneCoor(PointF(bounds.left, bounds.top))
-        val bottomRight = scale.displayToPaneCoor(PointF(bounds.right, bounds.bottom))
+        val topLeft = scale.displayToPaneCoor(bounds.left, bounds.top)
+        val bottomRight = scale.displayToPaneCoor(bounds.right, bounds.bottom)
         val layout = layoutParams
-        layout.width = bottomRight.x - topLeft.x - BLOCK_PADDING * 2
-        layout.height = bottomRight.y - topLeft.y - BLOCK_PADDING * 2
+        layout.width = (bottomRight.x - topLeft.x - BLOCK_PADDING * 2f).toInt()
+        layout.height = (bottomRight.y - topLeft.y - BLOCK_PADDING * 2f).toInt()
         layoutParams = layout
         place(topLeft)
     }
@@ -327,8 +322,9 @@ class DisplayTopologyPreference(context : Context)
                 mPaneContent.width, minEdgeLength = 60, maxBlockRatio = 0.12f,
                 blocksPos.map { it.second }.toList())
         mPaneHolder.layoutParams.let {
-            if (it.height != scaling.paneHeight) {
-                it.height = scaling.paneHeight
+            val newHeight = scaling.paneHeight.toInt()
+            if (it.height != newHeight) {
+                it.height = newHeight
                 mPaneHolder.layoutParams = it
             }
         }
@@ -378,15 +374,14 @@ class DisplayTopologyPreference(context : Context)
     private fun onBlockTouchMove(ev: MotionEvent): Boolean {
         val drag = mDrag ?: return false
         val topology = mTopologyInfo ?: return false
-        val dispDragCoor = topology.scaling.paneToDisplayCoor(Point(
-                (ev.rawX - drag.dragOffsetX).toInt(),
-                (ev.rawY - drag.dragOffsetY).toInt()))
+        val dispDragCoor = topology.scaling.paneToDisplayCoor(
+                ev.rawX - drag.dragOffsetX, ev.rawY - drag.dragOffsetY)
         val dispDragRect = RectF(
                 dispDragCoor.x, dispDragCoor.y,
                 dispDragCoor.x + drag.displayWidth, dispDragCoor.y + drag.displayHeight)
         val snapRect = clampPosition(drag.stationaryDisps.map { it.second }, dispDragRect)
 
-        drag.display.place(topology.scaling.displayToPaneCoor(PointF(snapRect.left, snapRect.top)))
+        drag.display.place(topology.scaling.displayToPaneCoor(snapRect.left, snapRect.top))
 
         return true
     }
@@ -397,7 +392,7 @@ class DisplayTopologyPreference(context : Context)
         mPaneContent.requestDisallowInterceptTouchEvent(false)
 
         val newCoor = topology.scaling.paneToDisplayCoor(
-                Point(drag.display.unpaddedX, drag.display.unpaddedY))
+                drag.display.unpaddedX, drag.display.unpaddedY)
         val newTopology = topology.topology.copy()
         val newPositions = drag.stationaryDisps.map { (id, pos) -> id to PointF(pos.left, pos.top) }
                 .plus(drag.displayId to newCoor)
