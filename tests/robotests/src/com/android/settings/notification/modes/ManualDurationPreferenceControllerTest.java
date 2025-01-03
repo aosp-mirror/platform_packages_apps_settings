@@ -70,8 +70,7 @@ public class ManualDurationPreferenceControllerTest {
     @Test
     public void testIsAvailable_onlyForManualDnd() {
         assertThat(mPrefController.isAvailable(TestModeBuilder.EXAMPLE)).isFalse();
-        assertThat(mPrefController.isAvailable(TestModeBuilder.MANUAL_DND_ACTIVE)).isTrue();
-        assertThat(mPrefController.isAvailable(TestModeBuilder.MANUAL_DND_INACTIVE)).isTrue();
+        assertThat(mPrefController.isAvailable(TestModeBuilder.MANUAL_DND)).isTrue();
     }
 
     @Test

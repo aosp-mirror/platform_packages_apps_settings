@@ -123,7 +123,7 @@ public class ZenModeTriggerAddPreferenceControllerTest {
 
     @Test
     public void isAvailable_manualDND_false() {
-        mController.setZenMode(TestModeBuilder.MANUAL_DND_INACTIVE);
+        mController.setZenMode(TestModeBuilder.MANUAL_DND);
         assertThat(mController.isAvailable()).isFalse();
     }
 

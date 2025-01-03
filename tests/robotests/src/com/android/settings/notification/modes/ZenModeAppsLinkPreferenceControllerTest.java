@@ -63,7 +63,6 @@ import com.android.settingslib.notification.modes.TestModeBuilder;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.MoreExecutors;
 
 import org.junit.Before;
@@ -153,14 +152,18 @@ public final class ZenModeAppsLinkPreferenceControllerTest {
 
     @Test
     public void updateState_dnd_enabled() {
-        ZenMode dnd = TestModeBuilder.MANUAL_DND_ACTIVE;
+        ZenMode dnd = TestModeBuilder.MANUAL_DND;
         mController.updateState(mPreference, dnd);
         assertThat(mPreference.isEnabled()).isTrue();
     }
 
     @Test
     public void updateState_specialDnd_disabled() {
-        ZenMode specialDnd = TestModeBuilder.manualDnd(INTERRUPTION_FILTER_NONE, true);
+        ZenMode specialDnd = new TestModeBuilder()
+                .makeManualDnd()
+                .setInterruptionFilter(INTERRUPTION_FILTER_NONE)
+                .setActive(true)
+                .build();
         mController.updateState(mPreference, specialDnd);
         assertThat(mPreference.isEnabled()).isFalse();
     }
