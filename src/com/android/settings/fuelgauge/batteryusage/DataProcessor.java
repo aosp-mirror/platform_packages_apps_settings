@@ -170,7 +170,7 @@ public final class DataProcessor {
     }
 
     /** Gets the {@link BatteryUsageStats} from system service. */
-    @Nullable
+    @NonNull
     public static BatteryUsageStats getBatteryUsageStats(final Context context) {
         final long startTime = System.currentTimeMillis();
         final BatteryUsageStatsQuery batteryUsageStatsQuery =
@@ -238,17 +238,6 @@ public final class DataProcessor {
                 String.format(
                         "getAppUsageEventsForUser() for user %d in %d/ms", userID, elapsedTime));
         return events;
-    }
-
-    /** Closes the {@link BatteryUsageStats} after using it. */
-    public static void closeBatteryUsageStats(BatteryUsageStats batteryUsageStats) {
-        if (batteryUsageStats != null) {
-            try {
-                batteryUsageStats.close();
-            } catch (Exception e) {
-                Log.e(TAG, "BatteryUsageStats.close() failed", e);
-            }
-        }
     }
 
     /**
@@ -1073,20 +1062,15 @@ public final class DataProcessor {
     }
 
     @Nullable
-    private static List<BatteryHistEntry> getBatteryHistListFromFromStatsService(
-            final Context context) {
-        List<BatteryHistEntry> batteryHistEntryList = null;
-        try {
-            final BatteryUsageStats batteryUsageStats = getBatteryUsageStats(context);
+    private static List<BatteryHistEntry> getBatteryHistListFromFromStatsService(Context context) {
+        try (BatteryUsageStats batteryUsageStats = getBatteryUsageStats(context)) {
             final List<BatteryEntry> batteryEntryList =
                     generateBatteryEntryListFromBatteryUsageStats(context, batteryUsageStats);
-            batteryHistEntryList = convertToBatteryHistEntry(batteryEntryList, batteryUsageStats);
-            closeBatteryUsageStats(batteryUsageStats);
-        } catch (RuntimeException e) {
-            Log.e(TAG, "load batteryUsageStats:", e);
+            return convertToBatteryHistEntry(batteryEntryList, batteryUsageStats);
+        } catch (Exception e) {
+            Log.e(TAG, "getBatteryHistListFromFromStatsService:", e);
+            return null;
         }
-
-        return batteryHistEntryList;
     }
 
     @VisibleForTesting
