@@ -27,7 +27,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -62,13 +61,8 @@ public class MinimalismPreferenceController
             Settings.Secure.getUriFor(LOCK_SCREEN_SHOW_NOTIFICATIONS);
 
     @Nullable private LayoutPreference mPreference;
-    @Nullable private TextView mDescView;
     private Map<Integer, LinearLayout> mButtons = new HashMap<>();
     private Map<Integer, IllustrationPreference> mIllustrations = new HashMap<>();
-    private final Map<Integer, Integer> mDescriptionTexts = Map.ofEntries(
-            Map.entry(LS_MINIMALISM_OFF, R.string.lock_screen_notifs_full_list_desc),
-            Map.entry(LS_MINIMALISM_ON, R.string.lock_screen_notifs_compact_desc)
-    );
 
     private final ContentResolver mContentResolver;
 
@@ -130,7 +124,6 @@ public class MinimalismPreferenceController
     public void displayPreference(@NonNull PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(KEY_MINIMALISM_PREFERENCE);
-        mDescView = mPreference.findViewById(R.id.notif_ls_style_desc);
 
         mButtons = Map.ofEntries(
                 Map.entry(LS_MINIMALISM_OFF,
@@ -165,14 +158,6 @@ public class MinimalismPreferenceController
                 -> preference.setVisible(currentValue == value));
     }
 
-    private void highlightDescription(int value) {
-        if (mDescView == null) return;
-        Integer descStringId = mDescriptionTexts.get(value);
-        if (descStringId != null) {
-            mDescView.setText(descStringId);
-        }
-    }
-
     private int getCurrentMinimalismValue() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
                 LOCK_SCREEN_NOTIFICATION_MINIMALISM, LS_MINIMALISM_ON);
@@ -190,7 +175,6 @@ public class MinimalismPreferenceController
             int currentValue = getCurrentMinimalismValue();
             highlightButton(currentValue);
             highlightIllustration(currentValue);
-            highlightDescription(currentValue);
         }
     }
 }

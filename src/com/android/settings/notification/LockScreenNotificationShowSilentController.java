@@ -38,7 +38,7 @@ import com.android.settings.core.TogglePreferenceController;
  * Controls the toggle that determines whether to show silent notifications when screen locked.
  * Toggle for: Settings.Secure.LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS
  */
-public class LockScreenNotificationHideSilentToggleController extends TogglePreferenceController
+public class LockScreenNotificationShowSilentController extends TogglePreferenceController
         implements LifecycleEventObserver {
 
     private static final int ON = 1;
@@ -56,7 +56,7 @@ public class LockScreenNotificationHideSilentToggleController extends TogglePref
         }
     };
 
-    public LockScreenNotificationHideSilentToggleController(@NonNull Context context,
+    public LockScreenNotificationShowSilentController(@NonNull Context context,
             @NonNull String preferenceKey) {
         super(context, preferenceKey);
         mContentResolver = context.getContentResolver();
@@ -89,13 +89,13 @@ public class LockScreenNotificationHideSilentToggleController extends TogglePref
     @Override
     public void updateState(@NonNull Preference preference) {
         super.updateState(preference);
-        setChecked(hideSilentNotificationsWhenLocked());
+        setChecked(showSilentNotificationsWhenLocked());
         preference.setVisible(isAvailable());
     }
 
-    private boolean hideSilentNotificationsWhenLocked() {
+    private boolean showSilentNotificationsWhenLocked() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS, OFF) == OFF;
+                Settings.Secure.LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS, OFF) == ON;
     }
 
     @Override
@@ -116,13 +116,13 @@ public class LockScreenNotificationHideSilentToggleController extends TogglePref
 
     @Override
     public boolean isChecked() {
-        return hideSilentNotificationsWhenLocked();
+        return showSilentNotificationsWhenLocked();
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS, (isChecked ? OFF : ON));
+                Settings.Secure.LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS, (isChecked ? ON : OFF));
     }
 
     @Override

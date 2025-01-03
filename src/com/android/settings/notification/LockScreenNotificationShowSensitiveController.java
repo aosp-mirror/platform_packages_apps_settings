@@ -53,7 +53,7 @@ import java.util.List;
  * when locked.
  * Toggle for: Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS
  */
-public class LockScreenNotificationShowSensitiveToggleController
+public class LockScreenNotificationShowSensitiveController
         extends TogglePreferenceController implements LifecycleEventObserver {
 
     private static final int ON = 1;
@@ -78,7 +78,7 @@ public class LockScreenNotificationShowSensitiveToggleController
         }
     };
 
-    public LockScreenNotificationShowSensitiveToggleController(@NonNull Context context,
+    public LockScreenNotificationShowSensitiveController(@NonNull Context context,
             @NonNull String preferenceKey) {
         super(context, preferenceKey);
         mContentResolver = context.getContentResolver();
@@ -145,7 +145,7 @@ public class LockScreenNotificationShowSensitiveToggleController
     @Override
     public void updateState(@Nullable Preference preference) {
         if (preference == null) return;
-        setChecked(showSensitiveContentOnlyWhenUnlocked());
+        setChecked(showSensitiveContentWhenLocked());
         preference.setVisible(isAvailable());
     }
 
@@ -187,15 +187,15 @@ public class LockScreenNotificationShowSensitiveToggleController
 
     @Override
     public boolean isChecked() {
-        return showSensitiveContentOnlyWhenUnlocked();
+        return showSensitiveContentWhenLocked();
     }
 
-    private boolean showSensitiveContentOnlyWhenUnlocked() {
+    private boolean showSensitiveContentWhenLocked() {
         int userId = getUserId();
-        if (!isLockScreenSecure()) return false;
-        if (getEnforcedAdmin(userId) != null) return true;
+        if (!isLockScreenSecure()) return true;
+        if (getEnforcedAdmin(userId) != null) return false;
         return Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, ON, userId) == OFF;
+                Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, ON, userId) == ON;
     }
 
     @Override
@@ -203,7 +203,7 @@ public class LockScreenNotificationShowSensitiveToggleController
         return Settings.Secure.putIntForUser(
                 mContext.getContentResolver(),
                 Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
-                (isChecked ? OFF : ON), getUserId()
+                (isChecked ? ON : OFF), getUserId()
         );
     }
 
