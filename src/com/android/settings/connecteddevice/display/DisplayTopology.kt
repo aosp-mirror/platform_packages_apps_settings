@@ -45,7 +45,9 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
 
 import java.util.Locale
+import java.util.function.Consumer
 
+import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
@@ -210,6 +212,8 @@ class DisplayTopologyPreference(context : Context)
      */
     private var mPaneNeedsRefresh = false
 
+    private val mTopologyListener = Consumer<DisplayTopology> { applyTopology(it) }
+
     init {
         layoutResource = R.layout.display_topology_preference
 
@@ -238,10 +242,17 @@ class DisplayTopologyPreference(context : Context)
     }
 
     override fun onAttached() {
+        super.onAttached()
         // We don't know if topology changes happened when we were detached, as it is impossible to
         // listen at that time (we must remove listeners when detaching). Setting this flag makes
         // the following onGlobalLayout call refresh the pane.
         mPaneNeedsRefresh = true
+        injector.registerTopologyListener(mTopologyListener)
+    }
+
+    override fun onDetached() {
+        super.onDetached()
+        injector.unregisterTopologyListener(mTopologyListener)
     }
 
     override fun onGlobalLayout() {
@@ -265,6 +276,14 @@ class DisplayTopologyPreference(context : Context)
 
         open val wallpaper : Drawable
             get() = WallpaperManager.getInstance(context).drawable ?: ColorDrawable(Color.BLACK)
+
+        open fun registerTopologyListener(listener: Consumer<DisplayTopology>) {
+            displayManager.registerTopologyListener(context.mainExecutor, listener)
+        }
+
+        open fun unregisterTopologyListener(listener: Consumer<DisplayTopology>) {
+            displayManager.unregisterTopologyListener(listener)
+        }
     }
 
     /**
@@ -294,12 +313,18 @@ class DisplayTopologyPreference(context : Context)
     private var mTopologyInfo : TopologyInfo? = null
     private var mDrag : BlockDrag? = null
 
-    @VisibleForTesting fun refreshPane() {
-        val recycleableBlocks = ArrayDeque<DisplayBlock>()
-        for (i in 0..mPaneContent.childCount-1) {
-            recycleableBlocks.add(mPaneContent.getChildAt(i) as DisplayBlock)
-        }
+    private fun sameDisplayPosition(a: RectF, b: RectF): Boolean {
+        // Comparing in display coordinates, so a 1 pixel difference will be less than one dp in
+        // pane coordinates. Canceling the drag and refreshing the pane will not change the apparent
+        // position of displays in the pane.
+        val EPSILON = 1f
+        return EPSILON > abs(a.left - b.left) &&
+                EPSILON > abs(a.right - b.right) &&
+                EPSILON > abs(a.top - b.top) &&
+                EPSILON > abs(a.bottom - b.bottom)
+    }
 
+    @VisibleForTesting fun refreshPane() {
         val topology = injector.displayTopology
         if (topology == null) {
             // This occurs when no topology is active.
@@ -309,18 +334,39 @@ class DisplayTopologyPreference(context : Context)
             mTopologyInfo = null
             return
         }
+
+        applyTopology(topology)
+    }
+
+    @VisibleForTesting var mTimesReceivedSameTopology = 0
+
+    private fun applyTopology(topology: DisplayTopology) {
         mTopologyHint.text = context.getString(R.string.external_display_topology_hint)
 
-        val blocksPos = buildList {
+        val oldBounds = mTopologyInfo?.positions
+        val newBounds = buildList {
             val bounds = topology.absoluteBounds
             (0..bounds.size()-1).forEach {
                 add(Pair(bounds.keyAt(it), bounds.valueAt(it)))
             }
         }
 
+        if (oldBounds != null && oldBounds.size == newBounds.size &&
+                oldBounds.zip(newBounds).all { (old, new) ->
+                    old.first == new.first && sameDisplayPosition(old.second, new.second)
+                }) {
+            mTimesReceivedSameTopology++
+            return
+        }
+
+        val recycleableBlocks = ArrayDeque<DisplayBlock>()
+        for (i in 0..mPaneContent.childCount-1) {
+            recycleableBlocks.add(mPaneContent.getChildAt(i) as DisplayBlock)
+        }
+
         val scaling = TopologyScale(
                 mPaneContent.width, minEdgeLength = 60, maxBlockRatio = 0.12f,
-                blocksPos.map { it.second }.toList())
+                newBounds.map { it.second }.toList())
         mPaneHolder.layoutParams.let {
             val newHeight = scaling.paneHeight.toInt()
             if (it.height != newHeight) {
@@ -329,7 +375,7 @@ class DisplayTopologyPreference(context : Context)
             }
         }
 
-        blocksPos.forEach { (id, pos) ->
+        newBounds.forEach { (id, pos) ->
             val block = recycleableBlocks.removeFirstOrNull() ?: DisplayBlock(context).apply {
                 // We need a separate wallpaper Drawable for each display block, since each needs to
                 // be drawn at a separate size.
@@ -348,9 +394,12 @@ class DisplayTopologyPreference(context : Context)
                 }
             }
         }
-        mPaneContent.removeViews(blocksPos.size, recycleableBlocks.size)
+        mPaneContent.removeViews(newBounds.size, recycleableBlocks.size)
 
-        mTopologyInfo = TopologyInfo(topology, scaling, blocksPos)
+        mTopologyInfo = TopologyInfo(topology, scaling, newBounds)
+
+        // Cancel the drag if one is in progress.
+        mDrag = null
     }
 
     private fun onBlockTouchDown(
