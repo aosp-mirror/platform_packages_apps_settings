@@ -98,6 +98,11 @@ class NetworkSelectRepository(context: Context, private val subId: Int) {
             return emptyList()
         }
 
+        if (carrierConfigManager == null) {
+            Log.d(TAG, "carrierConfigManager is null")
+            return emptyList()
+        }
+
         val config = carrierConfigManager.getConfigForSubId(
             subId,
             CarrierConfigManager.KEY_REMOVE_SATELLITE_PLMN_IN_MANUAL_NETWORK_SCAN_BOOL
