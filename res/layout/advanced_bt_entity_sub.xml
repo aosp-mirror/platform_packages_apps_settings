@@ -30,14 +30,20 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal">
         <ImageView
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bt_header_circle_outline" />
+
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/header_icon"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_gravity="center"
             android:antialias="true"
-            android:background="@drawable/bt_header_circle_outline"
             android:padding="8dp"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            app:shapeAppearanceOverlay="@style/DeviceIconRoundedCornerStyle" />
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/battery_ring"
