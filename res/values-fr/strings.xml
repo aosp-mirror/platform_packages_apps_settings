@@ -41,7 +41,7 @@
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Interrompu"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Inconnu"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Aperçu"</string>
-    <string name="qr_code_content_description" msgid="1852208464419291347">"Code QR"</string>
+    <string name="qr_code_content_description" msgid="1852208464419291347">"QR code"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Réduire"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Agrandir"</string>
     <string name="stay_awake_on_fold_title" msgid="6590454679898134221">"Toujours"</string>
@@ -88,6 +88,16 @@
     <string name="bluetooth_ambient_volume_mute" msgid="2700088105160838096">"Couper le mode Sons environnants"</string>
     <string name="bluetooth_ambient_volume_unmute" msgid="8055038818824925188">"Réactiver le mode Sons environnants"</string>
     <string name="bluetooth_ambient_volume_error" msgid="259328969488233714">"Impossible de mettre à jour le mode Sons environnants"</string>
+    <!-- no translation found for bluetooth_hearing_device_input_routing_title (4250163440326783748) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_device_input_routing_dialog_title (3669686215092975961) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_device_input_routing_dialog_summary (8444876415995010203) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_device_input_routing_hearing_device_option (1999169569658289216) -->
+    <skip />
+    <!-- no translation found for bluetooth_hearing_device_input_routing_builtin_option (4510810043725216734) -->
+    <skip />
     <string name="bluetooth_audio_routing_title" msgid="5541729245424856226">"Sortie audio"</string>
     <string name="bluetooth_audio_routing_about_title" msgid="5773336779246891954">"À propos de la sortie audio"</string>
     <string name="bluetooth_audio_routing_summary" msgid="7180947533985969066">"Envoyer le son vers votre appareil auditif ou le haut-parleur de votre téléphone"</string>
@@ -174,16 +184,11 @@
     <string name="ping_test_label" msgid="265427033290391845">"Effectuer un test de ping"</string>
     <string name="skip_label" msgid="6380034601349015895">"Ignorer"</string>
     <string name="next_label" msgid="1248293387735652187">"Suivant"</string>
-    <!-- no translation found for region_picker_preference_title (9195149951917299277) -->
-    <skip />
-    <!-- no translation found for region_picker_title (6743800249134439329) -->
-    <skip />
-    <!-- no translation found for region_picker_sub_title (7092062110753164836) -->
-    <skip />
-    <!-- no translation found for suggested_region_title (2554129334404390153) -->
-    <skip />
-    <!-- no translation found for all_supported_region_title (4817156933097703066) -->
-    <skip />
+    <string name="region_picker_preference_title" msgid="9195149951917299277">"Région"</string>
+    <string name="region_picker_title" msgid="6743800249134439329">"Sélectionner une région"</string>
+    <string name="region_picker_sub_title" msgid="7092062110753164836">"La région que vous choisissez affecte la façon dont votre appareil affiche l\'heure, les dates, la température, etc."</string>
+    <string name="suggested_region_title" msgid="2554129334404390153">"Suggestions"</string>
+    <string name="all_supported_region_title" msgid="4817156933097703066">"Toutes les régions"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"Langues"</string>
     <string name="language_picker_category_title" msgid="1792199453060454565">"Ordre de préférence des langues"</string>
     <string name="desc_current_default_language" msgid="1901157141663662859">"Langue du système"</string>
@@ -198,6 +203,8 @@
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Toutes les langues"</string>
     <string name="suggested_locales_title" msgid="119908696638862861">"Suggestions"</string>
     <string name="all_supported_locales_title" msgid="2535112632133166546">"Toutes les langues"</string>
+    <!-- no translation found for more_supported_locales_title (599492013949604604) -->
+    <skip />
     <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"Toutes les régions"</string>
     <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"Tous les systèmes de numérotation"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Langue du système"</string>
@@ -208,6 +215,10 @@
     <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Votre appareil, les applis et les sites Web utilisent la première langue prise en charge de votre liste de langues préférées.\n\nDe nombreuses applis se baseront également sur la région de votre langue préférée pour mettre en forme les dates, les nombres et les unités. Pour modifier votre région, ajoutez une langue, puis sélectionnez votre région préférée."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Pour sélectionner une langue pour chaque application, accédez aux paramètres de langue de cette application."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"En savoir plus sur les langues des applications"</string>
+    <!-- no translation found for title_change_system_region (5476591184463491936) -->
+    <skip />
+    <!-- no translation found for desc_notice_device_region_change (6702773189066944100) -->
+    <skip />
     <string name="title_change_system_locale" msgid="8589844586256566951">"Sélectionner %s comme langue du système ?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"Ajouter %s aux langues préférées ?"</string>
     <string name="desc_system_locale_addition" msgid="3409917362651596070">"Cela permet aux applis et sites Web de savoir que vous préférez aussi cette langue."</string>
@@ -216,9 +227,18 @@
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s indisponible"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"Cette langue ne peut pas être utilisée comme langue du système, mais vous avez indiqué aux applis et sites Web qu\'il s\'agissait de votre préférence."</string>
     <string name="locale_search_menu" msgid="297782694044826686">"Rechercher"</string>
+    <!-- no translation found for language_and_region_title (8374151891112162767) -->
+    <skip />
     <string name="language_selection_title" msgid="968179636453982415">"Ajouter une langue"</string>
+    <!-- no translation found for region_selection_title (3630336682851020349) -->
+    <skip />
     <string name="country_selection_title" msgid="5376929821458644732">"Préférences régionales"</string>
-    <string name="search_language_hint" msgid="1739082427104506694">"Saisissez la langue"</string>
+    <!-- no translation found for search_language_hint (6738370354628565338) -->
+    <skip />
+    <!-- no translation found for search_region_hint (1748708432568237552) -->
+    <skip />
+    <!-- no translation found for top_intro_region_title (2336323415395642117) -->
+    <skip />
     <string name="more_language_settings_category" msgid="3669703092480725416">"Autres paramètres de langue"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Préférences régionales"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Définir les préférences d\'unités et de nombres"</string>
@@ -350,7 +370,6 @@
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Utiliser config. d\'accessibilité"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
-    <string name="security_settings_face_enroll_introduction_learn_more_message" msgid="7728962858407497809"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Annuler"</string>
     <string name="security_settings_face_enroll_introduction_no_thanks" msgid="6603178409726203187">"Plus tard"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"J\'accepte"</string>
@@ -401,6 +420,8 @@
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Empreinte digitale"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Quand le déverrouillage par empreinte est utilisé"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Empreinte pour travail"</string>
+    <!-- no translation found for fingerprint_check_enrolled_title (1007921571704991108) -->
+    <skip />
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Ajouter une empreinte"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Empreinte digitale ajoutée}one{# empreinte digitale ajoutée}other{# empreintes digitales ajoutées}}"</string>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1146977379031250790">"Configuration requise"</string>
@@ -411,7 +432,6 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Vous avez le contrôle"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Gardez le contrôle, vous et votre enfant"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"À noter"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_footer_title_3" msgid="6474415050918819260">"Sécurisé et utile"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Utilisez votre empreinte digitale pour déverrouiller votre téléphone ou approuver des achats.\n\nRemarque : Vous ne pouvez pas utiliser votre empreinte digitale pour déverrouiller cet appareil. Pour en savoir plus, contactez l\'administrateur de votre entreprise."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Annuler"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Plus tard"</string>
@@ -426,7 +446,10 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Pour de meilleurs résultats, utilisez une protection d\'écran certifiée Made for Google. Avec d\'autres protections d\'écran, il se peut que votre empreinte digitale ne soit pas reconnue."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Pour de meilleurs résultats, utilisez une protection d\'écran certifiée Made for Google. L\'empreinte digitale de votre enfant peut ne pas être reconnue avec d\'autres protections d\'écran."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more_2" msgid="8691531121923020632"></string>
+    <!-- no translation found for fingerprint_check_enroll_touch_sensor (5010063281557456236) -->
+    <skip />
+    <!-- no translation found for fingerprint_check_enroll_not_recognized (2779520550437394431) -->
+    <skip />
     <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Déverrouillage par une montre"</string>
     <string name="biometric_settings_intro_with_activeunlock" msgid="5032953826653108646">"Si vous configurez le déverrouillage par reconnaissance faciale et par empreinte digitale, votre téléphone vous demandera votre empreinte quand vous porterez un masque ou que vous serez dans un endroit sombre.\n\nLe Déverrouillage par une montre est un autre moyen pratique de déverrouiller votre téléphone, par exemple lorsque vos doigts sont mouillés ou que votre visage n\'est pas reconnu."</string>
     <string name="biometric_settings_intro_with_fingerprint" msgid="5881355884547769337">"Le Déverrouillage par une montre est un autre moyen pratique de déverrouiller votre téléphone, par exemple, lorsque votre empreinte digitale n\'est pas reconnue."</string>
@@ -908,6 +931,10 @@
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Dissocier l\'appli ?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"L\'appli <xliff:g id="APP_NAME">%1$s</xliff:g> ne s\'associera plus à votre <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Expérimental. Améliore la qualité audio."</string>
+    <!-- no translation found for device_details_battery (5466987755790847884) -->
+    <skip />
+    <!-- no translation found for device_details_battery_charging (3464969346075775143) -->
+    <skip />
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Dissocier l\'appareil"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Dissocier l\'appli"</string>
     <string name="device_details_more_settings" msgid="950302792331611271">"Plus de paramètres"</string>
@@ -1056,13 +1083,13 @@
     <string name="wifi_subscription_summary" msgid="18802471063384598">"Afficher ou modifier l\'abonnement"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Adresse MAC aléatoire"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Ajouter un appareil"</string>
-    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Centrez le code QR ci-dessous pour ajouter l\'appareil à \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
-    <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Scannez le code QR"</string>
-    <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Centrez le code QR ci-dessous pour établir la connexion à \"<xliff:g id="SSID">%1$s</xliff:g>\"."</string>
-    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Connectez-vous au Wi-Fi en scannant un code QR"</string>
+    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Centrez le QR code ci-dessous pour ajouter l\'appareil à \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
+    <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Scannez le QR code"</string>
+    <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Centrez le QR code ci-dessous pour établir la connexion à \"<xliff:g id="SSID">%1$s</xliff:g>\"."</string>
+    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Connectez-vous au Wi-Fi en scannant un QR code"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Partager le Wi‑Fi"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Scannez ce code QR avec un autre appareil pour le connecter à \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
-    <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Scannez ce code QR pour vous connecter à \"<xliff:g id="SSID">%1$s</xliff:g>\"."</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Scannez ce QR code avec un autre appareil pour le connecter à \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
+    <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Scannez ce QR code pour vous connecter à \"<xliff:g id="SSID">%1$s</xliff:g>\"."</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"Réessayez. Si le problème persiste, contactez le fabricant de l\'appareil"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"Un problème est survenu"</string>
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Assurez-vous que l\'appareil est branché, chargé et allumé"</string>
@@ -1073,7 +1100,7 @@
     <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"Contactez le fabricant de l\'appareil"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Vérifiez la connexion et réessayez"</string>
     <string name="wifi_dpp_check_connection_no_matched_ssid" msgid="3608318690698685427">"Ce réseau Wi‑Fi n\'est pas disponible pour le moment"</string>
-    <string name="wifi_dpp_check_connection_no_matched_security" msgid="1462706753123341376">"Ce code QR présente un problème. Essayez de vous connecter d\'une autre manière."</string>
+    <string name="wifi_dpp_check_connection_no_matched_security" msgid="1462706753123341376">"Ce QR code présente un problème. Essayez de vous connecter d\'une autre manière."</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Sélectionner un réseau"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Sélectionnez un réseau pour connecter l\'appareil"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5170095438763569255">"Ajouter cet appareil à \"<xliff:g id="SSID">%1$s</xliff:g>\" ?"</string>
@@ -1091,8 +1118,8 @@
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Connexion automatique"</string>
     <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Autorisez la connexion à ce réseau lorsqu\'il est à portée"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Ajouter un appareil"</string>
-    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Utilisez un code QR pour ajouter un appareil à ce réseau"</string>
-    <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Le format de code QR n\'est pas valide"</string>
+    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Utilisez un QR code pour ajouter un appareil à ce réseau"</string>
+    <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Le format de QR code n\'est pas valide"</string>
     <string name="retry" msgid="7542103800274026915">"Réessayer"</string>
     <string name="wifi_shared" msgid="8850748923537589782">"Partager avec d\'autres utilisateurs de l\'appareil"</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(aucune modification)"</string>
@@ -2009,6 +2036,10 @@
     <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"Faire défiler vers le haut pour déplacer la page vers le bas"</string>
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Inverser les boutons gauche et droit"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Utiliser le bouton gauche de la souris comme bouton droit"</string>
+    <!-- no translation found for mouse_pointer_acceleration (388336576055293329) -->
+    <skip />
+    <!-- no translation found for mouse_pointer_acceleration_summary (6954407061360045792) -->
+    <skip />
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Touches pour la souris pour <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
     <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Utilisez les touches <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> pour déplacer le pointeur de la souris"</string>
     <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Utilisez la touche <xliff:g id="CLICK_LABEL">%s</xliff:g> pour cliquer sur le bouton principal de la souris"</string>
@@ -2101,6 +2132,10 @@
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automatique : <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Utilisateur sélectionné : <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Voix"</string>
+    <!-- no translation found for speech_preference_title (5080497338234779098) -->
+    <skip />
+    <!-- no translation found for speech_preference_summary (5190362663352347487) -->
+    <skip />
     <string name="pointer_speed" msgid="7398649279282675718">"Vitesse du pointeur"</string>
     <string name="pointer_scale" msgid="4941564570571663964">"Échelle du pointeur"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Diminuer l\'échelle du pointeur"</string>
@@ -2336,10 +2371,8 @@
     <string name="accessibility_button_disabled_button_mode_summary" msgid="1978174613270619492">"Indisponible lorsque vous utilisez le mode Bouton de la barre de navigation."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Texte avec contraste élevé"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Mettre le texte en noir ou blanc pour maximiser le contraste avec l\'arrière-plan"</string>
-    <!-- no translation found for accessibility_notification_high_contrast_text_title (85109818203175520) -->
-    <skip />
-    <!-- no translation found for accessibility_notification_high_contrast_text_content (5073923345319368046) -->
-    <skip />
+    <string name="accessibility_notification_high_contrast_text_title" msgid="85109818203175520">"Le texte avec contraste élevé a été remplacé"</string>
+    <string name="accessibility_notification_high_contrast_text_content" msgid="5073923345319368046">"Essayez plutôt \"Optimiser le contraste du texte\". Vous pouvez y accéder dans les paramètres."</string>
     <string name="accessibility_notification_high_contrast_text_action" msgid="7190559555068414342">"Ouvrir les paramètres"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Optimiser le contraste du texte"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Ajoutez un fond noir ou blanc autour du texte pour augmenter le contraste"</string>
@@ -2348,8 +2381,10 @@
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Bouton Marche/Arrêt pour raccrocher"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Agrandir le curseur"</string>
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Rendre le curseur plus visible"</string>
-    <string name="accessibility_force_invert_title" msgid="5015366813138748407">"Passer toutes les applis en mode sombre"</string>
-    <string name="accessibility_force_invert_summary" msgid="1882329675950887268">"Concerne les applis n\'ayant pas leur propre thème sombre. Certaines applis peuvent présenter des problèmes d\'affichage tels qu\'un inversement des couleurs."</string>
+    <!-- no translation found for accessibility_force_invert_title (5248504501753732051) -->
+    <skip />
+    <!-- no translation found for accessibility_force_invert_summary (179237803986895815) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Supprimer les animations"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Réduire les mouvements à l\'écran"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Audio mono"</string>
@@ -2459,10 +2494,8 @@
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Compatibilité avec appareils auditifs"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Améliore la compatibilité avec les phonocapteurs et réduit les bruits indésirables"</string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"À propos des appareils auditifs"</string>
-    <!-- no translation found for accessibility_hearing_device_footer_summary (5513620078219951077) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_footer_summary_tts (955527026890456959) -->
-    <skip />
+    <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"Pour détecter d\'autres appareils auditifs qui ne sont pas pris en charge par les protocoles ASHA ou LE Audio, appuyez sur &lt;b&gt;Associer un nouvel appareil&lt;/b&gt; &gt; &lt;b&gt;Voir d\'autres appareils&lt;/b&gt;"</string>
+    <string name="accessibility_hearing_device_footer_summary_tts" msgid="955527026890456959">"Pour détecter d\'autres appareils auditifs qui ne sont pas pris en charge par les protocoles ASHA ou LE Audio, appuyez sur "<b>"Associer un nouvel appareil"</b>", puis sur "<b>"Voir d\'autres appareils"</b></string>
     <string name="accessibility_hearing_device_pairing_page_title" msgid="6608901091770850295">"Associer appareil auditif"</string>
     <string name="accessibility_hearing_device_pairing_intro" msgid="7022201665808166517">"Vous pouvez associer des appareils auditifs ASHA et LE Audio sur cette page. Vérifiez que votre appareil auditif est allumé et prêt à être associé."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Appareils auditifs disponibles"</string>
@@ -3504,7 +3537,7 @@
     <string name="zen_mode_set_calendar_title" msgid="609741570346510347">"Programmation d\'événement"</string>
     <string name="zen_mode_set_calendar_which_calendar" msgid="7520289688350942687">"Activer durant événements pour"</string>
     <string name="zen_mode_set_calendar_which_reply" msgid="3136872740890390233">"Si réponse à l\'invitation est"</string>
-    <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Programmation temporelle"</string>
+    <string name="zen_mode_set_schedule_title" msgid="8767170965922472951">"Programmation"</string>
     <string name="zen_mode_set_schedule_link" msgid="2534032127923435737">"Programmation"</string>
     <string name="zen_mode_schedule_duration" msgid="299332195675875111">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Programme"</string>
@@ -3643,6 +3676,12 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Autoriser la mise en attente des notifications"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Pastille de notification sur l\'icône de l\'application"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Groupes de notifications"</string>
+    <!-- no translation found for live_notifications (4650406646292963831) -->
+    <skip />
+    <!-- no translation found for live_notifications_switch (50547709843410137) -->
+    <skip />
+    <!-- no translation found for live_notifications_desc (7383414458419053003) -->
+    <skip />
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bulles"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bulles"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Afficher cette conversation sous forme de bulle"</string>
@@ -4312,10 +4351,6 @@
     <string name="admin_profile_owner_user_message" msgid="4929926887231544950">"Votre administrateur peut contrôler et gérer les applications et les données associées à ce profil utilisateur, y compris les paramètres, les autorisations, l\'accès aux contenus de l\'entreprise, l\'activité réseau et les informations de localisation de l\'appareil."</string>
     <string name="admin_device_owner_message" msgid="5503131744126520590">"Votre administrateur peut contrôler et gérer les applications et les données associées à cet appareil, y compris les paramètres, les autorisations, l\'accès aux contenus de l\'entreprise, l\'activité réseau et les informations de localisation de l\'appareil."</string>
     <string name="admin_financed_message" msgid="1156197630834947884">"Il est possible que l\'administrateur de votre appareil puisse accéder aux données associées à l\'appareil, modifier ses paramètres et gérer les applis."</string>
-    <!-- no translation found for disabled_by_advanced_protection_title (766656508280098112) -->
-    <skip />
-    <!-- no translation found for disabled_by_advanced_protection_message (5515085544669304056) -->
-    <skip />
     <string name="condition_turn_off" msgid="402707350778441939">"Désactiver"</string>
     <string name="condition_turn_on" msgid="3911077299444314791">"Activer"</string>
     <string name="condition_expand_show" msgid="1501084007540953213">"Afficher"</string>
@@ -4883,7 +4918,6 @@
     <string name="mobile_network_inactive_sim" msgid="5829757490580409899">"Inactif/Carte SIM"</string>
     <string name="mobile_network_active_esim" msgid="3984452275968408382">"Actif/eSIM"</string>
     <string name="mobile_network_inactive_esim" msgid="8777415108263057939">"Inactif/eSIM"</string>
-    <string name="mobile_network_sim_name" msgid="3187192894150386537">"Nom et couleur de la SIM"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Nom"</string>
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Couleur (pour les applis compatibles)"</string>
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"Enregistrer"</string>
@@ -5143,8 +5177,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Long"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Afficher Wallet"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"Autoriser l\'accès à Wallet depuis l\'écran de verrouillage"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"Afficher le lecteur de code QR"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Autoriser l\'accès au lecteur de code QR depuis l\'écran de verrouillage"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1856477548806618829">"Afficher le lecteur de QR code"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Autoriser l\'accès au lecteur de QR code depuis l\'écran de verrouillage"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Afficher les commandes de contrôle des appareils"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="7522918441738915364">"À partir de l\'écran de verrouillage"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="2174300719855112358">"Utiliser les commandes de contrôle des appareils"</string>
@@ -5281,6 +5315,20 @@
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Afficher un message lorsque les applis accèdent à du texte, à des images ou à d\'autres contenus que vous avez copiés"</string>
     <string name="all_apps" msgid="3054120149509114789">"Toutes les applis"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Ne pas autoriser"</string>
+    <!-- no translation found for virtual_device_connected (6082030549955977794) -->
+    <skip />
+    <!-- no translation found for virtual_device_disconnected (4148915248176291618) -->
+    <skip />
+    <!-- no translation found for virtual_device_unknown (3592486476918448088) -->
+    <skip />
+    <!-- no translation found for virtual_device_details_title (2298529342462505596) -->
+    <skip />
+    <!-- no translation found for virtual_device_forget_dialog_title (4589091802540229362) -->
+    <skip />
+    <!-- no translation found for virtual_device_forget_dialog_confirm_button (2700888112027110344) -->
+    <skip />
+    <!-- no translation found for virtual_device_companion_app_category (2795042145688252495) -->
+    <skip />
     <string name="uwb_settings_title" msgid="8578498712312002231">"Bande ultralarge (UWB)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Aide à identifier la position relative des appareils à proximité disposant de l\'UWB"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Désactiver le mode Avion pour utiliser l\'UWB"</string>
@@ -5351,13 +5399,13 @@
     <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"En écoute"</string>
     <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Rechercher des diffusions"</string>
     <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Quitter la diffusion"</string>
-    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Scanner un code QR"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Scanner un QR code"</string>
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Saisir le mot de passe"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Connexion impossible. Réessayez."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Mot de passe incorrect"</string>
     <string name="find_broadcast_join_broadcast_error" msgid="5486980388774711346">"Impossible de rejoindre la diffusion"</string>
-    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Pour commencer à écouter, centrez le code QR ci-dessous"</string>
-    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Le format de code QR n\'est pas valide"</string>
+    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Pour commencer à écouter, centrez le QR code ci-dessous"</string>
+    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Le format de QR code n\'est pas valide"</string>
     <string name="convert_to_esim_title" msgid="71037864129009206">"Convertir en eSIM"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"Transférer l\'eSIM à un autre appareil"</string>
     <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# appli}one{# appli}other{# applis}}"</string>
@@ -5488,10 +5536,10 @@
     <string name="audio_sharing_share_with_button_label" msgid="4146194430380237357">"Partager avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_sharing_close_button_label" msgid="2666534149100498574">"Fermer"</string>
     <string name="audio_sharing_dialog_connect_device_content" msgid="2873230647152283734">"Connectez un autre casque compatible ou partagez le nom et le mot de passe de votre flux avec l\'autre personne"</string>
-    <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Associer un autre casque compatible ou partager le code QR de votre flux audio avec l\'autre personne"</string>
+    <string name="audio_sharing_dialog_pair_device_content" msgid="3136997898244863470">"Associer un autre casque compatible ou partager le QR code de votre flux audio avec l\'autre personne"</string>
     <string name="audio_sharing_sharing_label" msgid="1038021053061111508">"Audio partagé"</string>
     <string name="audio_sharing_pair_button_label" msgid="7987236990273083588">"Associer un nouvel appareil"</string>
-    <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"Afficher le code QR"</string>
+    <string name="audio_sharing_qrcode_button_label" msgid="3207039106555097659">"Afficher le QR code"</string>
     <string name="audio_sharing_notification_title" msgid="1204798942946033005">"Vous partagez le contenu audio"</string>
     <string name="audio_sharing_notification_content" msgid="1577180829878785642">"Les personnes qui écoutent peuvent entendre vos contenus multimédias mais pas les appels."</string>
     <string name="audio_sharing_stop_button_label" msgid="8770519671470608849">"Arrêter le partage"</string>
@@ -5518,12 +5566,12 @@
     <string name="audio_streams_category_title" msgid="4878022761829895463">"Connecter à un flux LE Audio"</string>
     <string name="audio_streams_pref_title" msgid="6320485086288646209">"Flux audio à proximité"</string>
     <string name="audio_streams_title" msgid="6617990880383079165">"Flux audio"</string>
-    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"Connecter à un flux audio à l\'aide d\'un code QR"</string>
+    <string name="audio_streams_qr_code_summary" msgid="2838923349871884871">"Connecter à un flux audio à l\'aide d\'un QR code"</string>
     <string name="audio_streams_empty" msgid="8803517701437394982">"Aucun flux audio n\'a été détecté"</string>
     <string name="audio_streams_disconnect" msgid="1755594831469579161">"Déconnecter"</string>
     <string name="audio_streams_connect" msgid="1955964373102927954">"Connecter"</string>
-    <string name="audio_streams_qr_code_is_not_valid_format" msgid="4856288389653121830">"Le format de code QR n\'est pas valide"</string>
-    <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"Pour commencer à écouter, centrez le code QR ci-dessous"</string>
+    <string name="audio_streams_qr_code_is_not_valid_format" msgid="4856288389653121830">"Le format de QR code n\'est pas valide"</string>
+    <string name="audio_streams_qr_code_scanner" msgid="525396804963685478">"Pour commencer à écouter, centrez le QR code ci-dessous"</string>
     <string name="audio_streams_add_source_bad_code_state_summary" msgid="6527086906921868757">"Vérifiez le mot de passe et réessayez"</string>
     <string name="audio_streams_add_source_failed_state_summary" msgid="3937546443978562322">"Connexion impossible. Réessayez."</string>
     <string name="audio_streams_connecting_summary" msgid="7237827765572331702">"Connexion…"</string>
@@ -5546,21 +5594,21 @@
     <string name="audio_streams_dialog_no_le_device_title" msgid="3931163990976742282">"Connecter un casque compatible"</string>
     <string name="audio_streams_dialog_no_le_device_button" msgid="4484355549428642588">"Connecter un appareil"</string>
     <string name="audio_streams_detail_page_title" msgid="7884132061275273766">"Détails du flux audio"</string>
-    <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"Code QR du flux audio"</string>
+    <string name="audio_streams_qr_code_page_title" msgid="9169570362469544641">"QR code du flux audio"</string>
     <string name="audio_streams_qr_code_page_password" msgid="7268475614131297060">"Mot de passe : <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
-    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Pour écouter <xliff:g id="STREAM_NAME">%1$s</xliff:g>, d\'autres personnes peuvent connecter un casque compatible à leur appareil Android. Elles peuvent ensuite scanner ce code QR."</string>
+    <string name="audio_streams_qr_code_page_description" msgid="1317961663706630428">"Pour écouter <xliff:g id="STREAM_NAME">%1$s</xliff:g>, d\'autres personnes peuvent connecter un casque compatible à leur appareil Android. Elles peuvent ensuite scanner ce QR code."</string>
     <string name="audio_streams_main_page_title" msgid="1838380471076527639">"Trouver un flux audio"</string>
     <string name="audio_streams_main_page_subtitle" msgid="3251995732921981539">"Écouter un appareil qui partage de l\'audio ou un broadcast Auracast à proximité"</string>
     <string name="audio_streams_main_page_device_title" msgid="2635744035523908253">"Votre appareil audio"</string>
     <string name="audio_streams_main_page_no_device_summary" msgid="2936000845397406389">"Connecter un casque compatible"</string>
     <string name="audio_streams_main_page_scan_section_title" msgid="2778235929304061163">"Flux audio à proximité"</string>
-    <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"Scanner le code QR"</string>
-    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Commencer à écouter en scannant le code QR d\'un flux"</string>
+    <string name="audio_streams_main_page_scan_qr_code_title" msgid="8337270277392468895">"Scanner le QR code"</string>
+    <string name="audio_streams_main_page_scan_qr_code_summary" msgid="1991792283368249499">"Commencer à écouter en scannant le QR code d\'un flux"</string>
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"Écouter le flux"</string>
-    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Scanner le code QR d\'un flux audio pour l\'écouter avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"Scanner le QR code d\'un flux audio pour l\'écouter avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"Impossible de modifier le mot de passe lors du partage. Pour modifier le mot de passe, il faut d\'abord désactiver le partage audio."</string>
     <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Votre mot de passe doit contenir entre 4 et 16 caractères et n\'être composé que de lettres, de chiffres et de symboles"</string>
-    <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Lecteur de code QR"</string>
+    <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Lecteur de QR code"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Besoin d\'aide ?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"Rechercher un paramètre"</string>
     <string name="keywords_contacts_storage" msgid="9061213057165337893">"contacts, stockage, compte"</string>
