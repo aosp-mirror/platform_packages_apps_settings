@@ -16,6 +16,8 @@
 
 package com.android.settings.development.linuxterminal;
 
+import static android.system.virtualmachine.VirtualMachineManager.CAPABILITY_NON_PROTECTED_VM;
+
 import static com.android.settings.development.linuxterminal.LinuxTerminalPreferenceController.MEMORY_MIN_BYTES;
 import static com.android.settings.development.linuxterminal.LinuxTerminalPreferenceController.STORAGE_MIN_BYTES;
 import static com.android.settings.development.linuxterminal.LinuxTerminalPreferenceController.TERMINAL_PACKAGE_NAME_RESID;
@@ -32,6 +34,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.storage.StorageManager;
+import android.system.virtualmachine.VirtualMachineManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,27 +46,33 @@ import org.robolectric.RobolectricTestRunner;
 /** Tests {@link LinuxTerminalPreferenceController} */
 @RunWith(RobolectricTestRunner.class)
 public class LinuxTerminalPreferenceControllerTest {
+    private static final String TERMINAL_PACKAGE_NAME = "com.android.virtualization.terminal";
 
     @Mock private Context mContext;
     @Mock private PackageManager mPackageManager;
     @Mock private StorageManager mStorageManager;
+    @Mock private VirtualMachineManager mVirtualMachineManager;
     @Mock private PackageInfo mPackageInfo;
 
-    private String mTerminalPackageName = "com.android.virtualization.terminal";
     private LinuxTerminalPreferenceController mController;
 
     @Before
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
-        doReturn(mTerminalPackageName).when(mContext).getString(TERMINAL_PACKAGE_NAME_RESID);
+        doReturn(TERMINAL_PACKAGE_NAME).when(mContext).getString(TERMINAL_PACKAGE_NAME_RESID);
 
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(mPackageInfo)
                 .when(mPackageManager)
-                .getPackageInfo(eq(mTerminalPackageName), anyInt());
+                .getPackageInfo(eq(TERMINAL_PACKAGE_NAME), anyInt());
 
         doReturn(mStorageManager).when(mContext).getSystemService(StorageManager.class);
         doReturn(STORAGE_MIN_BYTES).when(mStorageManager).getPrimaryStorageSize();
+
+        doReturn(mVirtualMachineManager)
+                .when(mContext)
+                .getSystemService(VirtualMachineManager.class);
+        doReturn(CAPABILITY_NON_PROTECTED_VM).when(mVirtualMachineManager).getCapabilities();
     }
 
     @Test
@@ -76,6 +85,15 @@ public class LinuxTerminalPreferenceControllerTest {
     @Test
     public void isAvailable_whenDeviceStorageInsufficient_returnFalse() {
         doReturn(STORAGE_MIN_BYTES / 2).when(mStorageManager).getPrimaryStorageSize();
+
+        mController = createController(mContext);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isAvailable_whenVmNotSupported_returnFalse() {
+        doReturn(0).when(mVirtualMachineManager).getCapabilities();
 
         mController = createController(mContext);
 
@@ -102,7 +120,7 @@ public class LinuxTerminalPreferenceControllerTest {
     public void isAvailable_whenAppDoesNotExist_returnsFalse() throws Exception {
         doThrow(new NameNotFoundException())
                 .when(mPackageManager)
-                .getPackageInfo(eq(mTerminalPackageName), anyInt());
+                .getPackageInfo(eq(TERMINAL_PACKAGE_NAME), anyInt());
 
         mController = createController(mContext);
 
