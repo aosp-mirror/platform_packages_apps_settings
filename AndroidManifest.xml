@@ -5456,6 +5456,12 @@
                 <action android:name="android.settings.AUDIO_STREAM_DIALOG" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="bluetooth" />
+                <data android:scheme="BLUETOOTH" />
+            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamConfirmDialog" />
         </activity>
