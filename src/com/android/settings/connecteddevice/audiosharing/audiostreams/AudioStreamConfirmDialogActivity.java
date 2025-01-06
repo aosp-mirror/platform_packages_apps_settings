@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,6 +52,7 @@ public class AudioStreamConfirmDialogActivity extends SettingsActivity
     @Override
     protected void createUiFromIntent(@Nullable Bundle savedState, Intent intent) {
         if (BluetoothUtils.isAudioSharingUIAvailable(this)
+                && !isBluetoothUnsupportedOrOff()
                 && !AudioSharingUtils.isAudioSharingProfileReady(mProfileManager)) {
             Log.d(TAG, "createUiFromIntent() : supported but not ready, skip createUiFromIntent");
             mSavedState = savedState;
@@ -68,6 +70,7 @@ public class AudioStreamConfirmDialogActivity extends SettingsActivity
     @Override
     public void onStart() {
         if (BluetoothUtils.isAudioSharingUIAvailable(this)
+                && !isBluetoothUnsupportedOrOff()
                 && !AudioSharingUtils.isAudioSharingProfileReady(mProfileManager)) {
             Log.d(TAG, "onStart() : supported but not ready, listen to service ready");
             if (mProfileManager != null) {
@@ -88,6 +91,7 @@ public class AudioStreamConfirmDialogActivity extends SettingsActivity
     @Override
     public void onServiceConnected() {
         if (BluetoothUtils.isAudioSharingUIAvailable(this)
+                && !isBluetoothUnsupportedOrOff()
                 && AudioSharingUtils.isAudioSharingProfileReady(mProfileManager)) {
             if (mProfileManager != null) {
                 mProfileManager.removeServiceListener(this);
@@ -105,5 +109,10 @@ public class AudioStreamConfirmDialogActivity extends SettingsActivity
     @Override
     protected boolean isValidFragment(String fragmentName) {
         return AudioStreamConfirmDialog.class.getName().equals(fragmentName);
+    }
+
+    private static boolean isBluetoothUnsupportedOrOff() {
+        var adapter = BluetoothAdapter.getDefaultAdapter();
+        return adapter == null || !adapter.isEnabled();
     }
 }

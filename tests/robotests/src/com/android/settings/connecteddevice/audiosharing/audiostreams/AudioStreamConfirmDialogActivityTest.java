@@ -140,6 +140,15 @@ public class AudioStreamConfirmDialogActivityTest {
     }
 
     @Test
+    public void setupActivity_serviceNotReady_bluetoothOff_doNothing() {
+        when(mAssistant.isProfileReady()).thenReturn(false);
+        mShadowBluetoothAdapter.setEnabled(false);
+        mActivity = Robolectric.setupActivity(AudioStreamConfirmDialogActivity.class);
+
+        verify(mLocalBluetoothProfileManager, never()).addServiceListener(any());
+    }
+
+    @Test
     public void onStop_unregisterCallback() {
         mActivity = Robolectric.setupActivity(AudioStreamConfirmDialogActivity.class);
         mActivity.onStop();
