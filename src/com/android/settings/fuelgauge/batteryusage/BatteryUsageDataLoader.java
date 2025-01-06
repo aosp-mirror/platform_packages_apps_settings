@@ -29,6 +29,7 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.fuelgauge.batteryusage.bugreport.BatteryUsageLogUtils;
 import com.android.settings.overlay.FeatureFactory;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -56,30 +57,32 @@ public final class BatteryUsageDataLoader {
     static void loadBatteryStatsData(final Context context, final boolean isFullChargeStart) {
         BatteryUsageLogUtils.writeLog(context, Action.FETCH_USAGE_DATA, "");
         final long currentTime = System.currentTimeMillis();
-        final BatteryUsageStats batteryUsageStats = DataProcessor.getBatteryUsageStats(context);
-        final List<BatteryEntry> batteryEntryList =
-                sFakeBatteryEntryListSupplier != null
-                        ? sFakeBatteryEntryListSupplier.get()
-                        : DataProcessor.generateBatteryEntryListFromBatteryUsageStats(
-                                context, batteryUsageStats);
-        if (batteryEntryList == null || batteryEntryList.isEmpty()) {
-            Log.w(TAG, "getBatteryEntryList() returns null or empty content");
-        }
-        final long elapsedTime = System.currentTimeMillis() - currentTime;
-        Log.d(TAG, String.format("getBatteryUsageStats() in %d/ms", elapsedTime));
-        if (isFullChargeStart) {
-            DatabaseUtils.recordDateTime(context, DatabaseUtils.KEY_LAST_LOAD_FULL_CHARGE_TIME);
-            DatabaseUtils.sendBatteryEventData(
-                    context,
-                    ConvertUtils.convertToBatteryEvent(
-                            currentTime, BatteryEventType.FULL_CHARGED, 100));
-            DatabaseUtils.removeDismissedPowerAnomalyKeys(context);
-        }
+        try (BatteryUsageStats batteryUsageStats = DataProcessor.getBatteryUsageStats(context)) {
+            final List<BatteryEntry> batteryEntryList =
+                    sFakeBatteryEntryListSupplier != null
+                            ? sFakeBatteryEntryListSupplier.get()
+                            : DataProcessor.generateBatteryEntryListFromBatteryUsageStats(
+                                    context, batteryUsageStats);
+            if (batteryEntryList == null || batteryEntryList.isEmpty()) {
+                Log.w(TAG, "getBatteryEntryList() returns null or empty content");
+            }
+            final long elapsedTime = System.currentTimeMillis() - currentTime;
+            Log.d(TAG, String.format("getBatteryUsageStats() in %d/ms", elapsedTime));
+            if (isFullChargeStart) {
+                DatabaseUtils.recordDateTime(context, DatabaseUtils.KEY_LAST_LOAD_FULL_CHARGE_TIME);
+                DatabaseUtils.sendBatteryEventData(
+                        context,
+                        ConvertUtils.convertToBatteryEvent(
+                                currentTime, BatteryEventType.FULL_CHARGED, 100));
+                DatabaseUtils.removeDismissedPowerAnomalyKeys(context);
+            }
 
-        // Uploads the BatteryEntry data into database.
-        DatabaseUtils.sendBatteryEntryData(
-                context, currentTime, batteryEntryList, batteryUsageStats, isFullChargeStart);
-        DataProcessor.closeBatteryUsageStats(batteryUsageStats);
+            // Uploads the BatteryEntry data into database.
+            DatabaseUtils.sendBatteryEntryData(
+                    context, currentTime, batteryEntryList, batteryUsageStats, isFullChargeStart);
+        } catch (IOException e) {
+            Log.e(TAG, "loadBatteryStatsData:", e);
+        }
     }
 
     @VisibleForTesting
