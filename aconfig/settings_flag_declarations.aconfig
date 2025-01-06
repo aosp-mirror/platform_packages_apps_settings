@@ -70,3 +70,13 @@ flag {
   description: "Flag for catalyst service"
   bug: "323791114"
 }
+
+flag {
+  name: "utils_return_user_handle_for_current_user_id"
+  namespace: "profile_experiences"
+  description: "Don't ignore the current user id when checking for existing profiles."
+  bug: "378471943"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
+}
