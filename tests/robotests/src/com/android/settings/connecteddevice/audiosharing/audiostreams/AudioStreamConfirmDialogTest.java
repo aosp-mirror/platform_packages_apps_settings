@@ -36,6 +36,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.view.View;
 import android.widget.Button;
@@ -81,6 +82,9 @@ public class AudioStreamConfirmDialogTest {
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private static final String VALID_METADATA =
             "BLUETOOTH:UUID:184F;BN:VGVzdA==;AT:1;AD:00A1A1A1A1A1;BI:1E240;BC:VGVzdENvZGU=;"
+                    + "MD:BgNwVGVzdA==;AS:1;PI:A0;NS:1;BS:3;NB:2;SM:BQNUZXN0BARlbmc=;;";
+    private static final String VALID_METADATA_LOWERCASE =
+            "bluetooth:UUID:184F;BN:VGVzdA==;AT:1;AD:00A1A1A1A1A1;BI:1E240;BC:VGVzdENvZGU=;"
                     + "MD:BgNwVGVzdA==;AS:1;PI:A0;NS:1;BS:3;NB:2;SM:BQNUZXN0BARlbmc=;;";
     private static final String DEVICE_NAME = "device_name";
     private final Context mContext = ApplicationProvider.getApplicationContext();
@@ -322,6 +326,65 @@ public class AudioStreamConfirmDialogTest {
 
         Intent intent = new Intent();
         intent.putExtra(KEY_BROADCAST_METADATA, VALID_METADATA);
+        FragmentController.of(mDialogFragment, intent)
+                .create(/* containerViewId= */ 0, /* bundle= */ null)
+                .start()
+                .resume()
+                .visible()
+                .get();
+        shadowMainLooper().idle();
+
+        assertThat(mDialogFragment.getMetricsCategory())
+                .isEqualTo(DIALOG_AUDIO_STREAM_CONFIRM_LISTEN);
+        assertThat(mDialogFragment.mActivity).isNotNull();
+        mDialogFragment.mActivity = spy(mDialogFragment.mActivity);
+
+        Dialog dialog = mDialogFragment.getDialog();
+        assertThat(dialog).isNotNull();
+        assertThat(dialog.isShowing()).isTrue();
+        TextView title = dialog.findViewById(R.id.dialog_title);
+        assertThat(title).isNotNull();
+        assertThat(title.getText())
+                .isEqualTo(
+                        mContext.getString(R.string.audio_streams_dialog_listen_to_audio_stream));
+        TextView subtitle1 = dialog.findViewById(R.id.dialog_subtitle);
+        assertThat(subtitle1).isNotNull();
+        assertThat(subtitle1.getVisibility()).isEqualTo(View.VISIBLE);
+        TextView subtitle2 = dialog.findViewById(R.id.dialog_subtitle_2);
+        assertThat(subtitle2).isNotNull();
+        var defaultName = mContext.getString(DEFAULT_DEVICE_NAME);
+        assertThat(subtitle2.getText())
+                .isEqualTo(
+                        mContext.getString(
+                                R.string.audio_streams_dialog_control_volume, defaultName));
+        View leftButton = dialog.findViewById(R.id.left_button);
+        assertThat(leftButton).isNotNull();
+        assertThat(leftButton.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(leftButton.hasOnClickListeners()).isTrue();
+
+        leftButton.callOnClick();
+        assertThat(dialog.isShowing()).isFalse();
+
+        Button rightButton = dialog.findViewById(R.id.right_button);
+        assertThat(rightButton).isNotNull();
+        assertThat(rightButton.getText())
+                .isEqualTo(mContext.getString(R.string.audio_streams_dialog_listen));
+        assertThat(rightButton.hasOnClickListeners()).isTrue();
+
+        rightButton.callOnClick();
+        assertThat(dialog.isShowing()).isFalse();
+        verify(mDialogFragment.mActivity, times(2)).finish();
+    }
+
+    @Test
+    public void showDialog_getDataStringFromIntent_confirmListen() {
+        List<BluetoothDevice> devices = new ArrayList<>();
+        devices.add(mBluetoothDevice);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(devices);
+        when(mBluetoothDevice.getAlias()).thenReturn("");
+
+        Intent intent = new Intent();
+        intent.setData(Uri.parse(VALID_METADATA_LOWERCASE));
         FragmentController.of(mDialogFragment, intent)
                 .create(/* containerViewId= */ 0, /* bundle= */ null)
                 .start()

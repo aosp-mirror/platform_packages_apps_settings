@@ -17,6 +17,7 @@
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsDashboardFragment.KEY_BROADCAST_METADATA;
+import static com.android.settingslib.bluetooth.BluetoothBroadcastUtils.SCHEME_BT_BROADCAST_METADATA;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -48,9 +49,13 @@ public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
     static final int DEFAULT_DEVICE_NAME = R.string.audio_streams_dialog_default_device;
 
     private Context mContext;
-    @VisibleForTesting @Nullable Activity mActivity;
-    @Nullable private BluetoothLeBroadcastMetadata mBroadcastMetadata;
-    @Nullable private BluetoothDevice mConnectedDevice;
+    @VisibleForTesting
+    @Nullable
+    Activity mActivity;
+    @Nullable
+    private BluetoothLeBroadcastMetadata mBroadcastMetadata;
+    @Nullable
+    private BluetoothDevice mConnectedDevice;
     private int mAudioStreamConfirmDialogId = SettingsEnums.PAGE_UNKNOWN;
 
     @Override
@@ -206,11 +211,22 @@ public class AudioStreamConfirmDialog extends InstrumentedDialogFragment {
     }
 
     private @Nullable BluetoothLeBroadcastMetadata getMetadata(Intent intent) {
+        // Get the metadata from the intent extras
         String metadata = intent.getStringExtra(KEY_BROADCAST_METADATA);
-        if (metadata == null || metadata.isEmpty()) {
-            return null;
+        if (metadata != null && !metadata.isEmpty()) {
+            return BluetoothLeBroadcastMetadataExt.INSTANCE.convertToBroadcastMetadata(metadata);
         }
-        return BluetoothLeBroadcastMetadataExt.INSTANCE.convertToBroadcastMetadata(metadata);
+        // Retrieve the generic data string from the intent
+        String genericData = intent.getDataString();
+        if (genericData != null && !genericData.isEmpty()) {
+            // Normalize the prefix by replacing lowercase "bluetooth" with uppercase "BLUETOOTH"
+            genericData = genericData.replaceFirst("bluetooth", "BLUETOOTH");
+            if (genericData.startsWith(SCHEME_BT_BROADCAST_METADATA)) {
+                return BluetoothLeBroadcastMetadataExt.INSTANCE.convertToBroadcastMetadata(
+                        genericData);
+            }
+        }
+        return null;
     }
 
     private int getDialogId(boolean hasMetadata, boolean hasConnectedDevice) {
