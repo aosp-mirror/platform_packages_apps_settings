@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.hardware.input.InputSettings;
 import android.os.UserHandle;
-import android.util.FeatureFlagUtils;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceScreen;
@@ -36,7 +35,6 @@ import com.android.settingslib.widget.ButtonPreference;
 
 public class TouchGesturesButtonPreferenceController extends BasePreferenceController {
 
-    private static final int ORDER_TOP = 0;
     private static final int ORDER_BOTTOM = 100;
     private static final String PREFERENCE_KEY = "trackpad_touch_gesture";
     private static final String GESTURE_DIALOG_TAG = "GESTURE_DIALOG_TAG";
@@ -59,14 +57,8 @@ public class TouchGesturesButtonPreferenceController extends BasePreferenceContr
         super.displayPreference(screen);
         ButtonPreference buttonPreference =
                 (ButtonPreference) screen.findPreference(getPreferenceKey());
-        boolean touchGestureDeveloperMode = FeatureFlagUtils
-                .isEnabled(mContext, FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_TRACKPAD_GESTURE);
         if (getPreferenceKey().equals(PREFERENCE_KEY)) {
-            if (touchGestureDeveloperMode) {
-                buttonPreference.setOrder(ORDER_TOP);
-            } else {
-                buttonPreference.setOrder(ORDER_BOTTOM);
-            }
+            buttonPreference.setOrder(ORDER_BOTTOM);
         }
         buttonPreference.setOnClickListener(v -> {
             showTouchpadGestureEducation();
