@@ -5477,7 +5477,8 @@
             android:name="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamMediaService"
             android:foregroundServiceType="mediaPlayback"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="true"
+            android:permission="android.permission.BLUETOOTH_PRIVILEGED" />
 
         <!-- Once b/364771256 is fixed, add android:featureFlag="com.android.settings.flags.catalyst_service". -->
         <!-- Permission is not yet finalized, use READ_BASIC_PHONE_STATE temporarily. -->
