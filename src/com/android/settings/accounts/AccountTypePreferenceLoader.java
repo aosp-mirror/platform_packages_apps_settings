@@ -20,6 +20,7 @@ package com.android.settings.accounts;
 import android.accounts.Account;
 import android.accounts.AuthenticatorDescription;
 import android.content.ClipData;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -185,9 +186,9 @@ public class AccountTypePreferenceLoader {
                                     prefIntent, mUserHandle);
                             } else {
                                 Log.e(TAG,
-                                    "Refusing to launch authenticator intent because"
-                                        + "it exploits Settings permissions: "
-                                        + prefIntent);
+                                        "Refusing to launch authenticator intent because "
+                                                + "it exploits Settings permissions: "
+                                                + prefIntent);
                             }
                             return true;
                         }
@@ -241,13 +242,19 @@ public class AccountTypePreferenceLoader {
     }
 
     /**
-     * Determines if the supplied Intent is safe. A safe intent is one that is
-     * will launch a exported=true activity or owned by the same uid as the
+     * Determines if the supplied Intent is safe. A safe intent is one that
+     * will launch an exported=true activity or owned by the same uid as the
      * authenticator supplying the intent.
      */
-    private boolean isSafeIntent(PackageManager pm, Intent intent, String acccountType) {
+    @VisibleForTesting
+    boolean isSafeIntent(PackageManager pm, Intent intent, String accountType) {
+        if (TextUtils.equals(intent.getScheme(), ContentResolver.SCHEME_CONTENT)) {
+            Log.e(TAG, "Intent with a content scheme is unsafe.");
+            return false;
+        }
+
         AuthenticatorDescription authDesc =
-            mAuthenticatorHelper.getAccountTypeDescription(acccountType);
+                mAuthenticatorHelper.getAccountTypeDescription(accountType);
         ResolveInfo resolveInfo = pm.resolveActivityAsUser(intent, 0, mUserHandle.getIdentifier());
         if (resolveInfo == null) {
             return false;
