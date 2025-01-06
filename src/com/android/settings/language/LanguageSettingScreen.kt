@@ -15,19 +15,15 @@
  */
 package com.android.settings.language
 
-import android.content.ComponentName
 import android.content.Context
-import android.content.pm.PackageManager
 import com.android.settings.R
-import com.android.settings.Settings.LanguageSettingsActivity
 import com.android.settings.flags.Flags
-import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
-class LanguageSettingScreen: PreferenceScreenCreator {
+@ProvidePreferenceScreen(LanguageSettingScreen.KEY)
+class LanguageSettingScreen : PreferenceScreenCreator {
     override val key: String
         get() = KEY
 
@@ -46,7 +42,7 @@ class LanguageSettingScreen: PreferenceScreenCreator {
 
     override fun fragmentClass() = LanguageSettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
 
     companion object {
         const val KEY = "language_setting"

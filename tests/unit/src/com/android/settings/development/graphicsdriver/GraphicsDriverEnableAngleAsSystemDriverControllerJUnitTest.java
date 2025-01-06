@@ -182,7 +182,7 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
     @Test
     public void updateState_PreferenceShouldEnabled() {
         mController.updateState(mPreference);
-        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.isEnabled()).isFalse();
     }
 
     @Test

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2024 The Android Open Source Project
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/lock_screen_notifs_title"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="lock_screen_notification_global_pref"
+        android:title="@string/switch_on_text"
+        settings:controller="com.android.settings.notification.LockScreenNotificationsGlobalPreferenceController"/>
+
+<!--    TODO: replace res with actual illustrations when we have -->
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="compact_illustration"
+        settings:searchable="false"
+        android:selectable="false"
+        settings:dynamicColor="true"/>
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="full_list_illustration"
+        settings:searchable="false"
+        android:selectable="false"
+        settings:dynamicColor="true"/>
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="ls_minimalism"
+        android:selectable="false"
+        android:layout="@layout/notification_ls_minimalism_selector"
+        settings:controller="com.android.settings.notification.lockscreen.MinimalismPreferenceController" />
+
+    <PreferenceCategory
+        android:key="lockscreen_notification_what_to_show"
+        android:title="@string/lockscreen_notification_what_to_show_title">
+
+        <SwitchPreferenceCompat
+            android:key="lock_screen_notification_show_seen_toggle"
+            android:title="@string/lock_screen_notification_show_seen_title"
+            settings:controller="com.android.settings.notification.LockScreenNotificationShowSeenController" />
+
+        <SwitchPreferenceCompat
+            android:key="lock_screen_notification_show_silent_toggle"
+            android:title="@string/lock_screen_notification_show_silent_title"
+            settings:controller="com.android.settings.notification.LockScreenNotificationShowSilentController" />
+
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="lock_screen_notification_show_sensitive_toggle"
+            android:title="@string/lock_screen_notification_show_sensitive_content_title"
+            settings:controller="com.android.settings.notification.LockScreenNotificationShowSensitiveController" />
+
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="work_profile_show_sensitive_notif_toggle"
+            android:title="@string/lock_screen_notification_show_sensitive_work_content_title"
+            settings:controller="com.android.settings.notification.LockScreenNotificationShowSensitiveController" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

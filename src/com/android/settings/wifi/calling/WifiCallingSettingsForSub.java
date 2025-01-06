@@ -58,9 +58,11 @@ import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
+import com.android.settings.network.telephony.AbstractSubscriptionPreferenceController;
 import com.android.settings.network.telephony.wificalling.IWifiCallingRepository;
 import com.android.settings.network.telephony.wificalling.WifiCallingRepository;
 import com.android.settings.widget.SettingsMainSwitchPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import kotlin.Unit;
 
@@ -293,6 +295,11 @@ public class WifiCallingSettingsForSub extends DashboardFragment
 
         updateDescriptionForOptions(
                 List.of(mButtonWfcMode, mButtonWfcRoamingMode, mUpdateAddress));
+
+        List<AbstractPreferenceController> subscriptionPreferenceControllers =
+                useGroup(AbstractSubscriptionPreferenceController.class);
+        subscriptionPreferenceControllers.forEach(
+                controller -> ((AbstractSubscriptionPreferenceController) controller).init(mSubId));
     }
 
     @Override
@@ -486,17 +493,21 @@ public class WifiCallingSettingsForSub extends DashboardFragment
                 .launch();
     }
 
+    private @Nullable Intent getCarrierActivityIntent() {
+        return getCarrierActivityIntent(getActivity(), mSubId);
+    }
+
     /*
      * Get the Intent to launch carrier emergency address management activity.
      * Return null when no activity found.
      */
-    private Intent getCarrierActivityIntent() {
+    static @Nullable Intent getCarrierActivityIntent(Context context, int subId) {
         // Retrieve component name from carrier config
         final CarrierConfigManager configManager =
-                getActivity().getSystemService(CarrierConfigManager.class);
+                context.getSystemService(CarrierConfigManager.class);
         if (configManager == null) return null;
 
-        final PersistableBundle bundle = configManager.getConfigForSubId(mSubId);
+        final PersistableBundle bundle = configManager.getConfigForSubId(subId);
         if (bundle == null) return null;
 
         final String carrierApp = bundle.getString(
@@ -509,7 +520,7 @@ public class WifiCallingSettingsForSub extends DashboardFragment
         // Build and return intent
         final Intent intent = new Intent();
         intent.setComponent(componentName);
-        intent.putExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX, mSubId);
+        intent.putExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX, subId);
         return intent;
     }
 

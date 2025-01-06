@@ -159,6 +159,7 @@ class AppInfoSettingsMoreOptionsTest {
             packageName = PACKAGE_NAME
             uid = UID
         }
+        whenever(userManager.isUserAdmin(app.userId)).thenReturn(true)
         whenever(userManager.aliveUsers).thenReturn(listOf(OTHER_USER))
         whenever(packageManagers.isPackageInstalledAsUser(PACKAGE_NAME, OTHER_USER_ID))
             .thenReturn(true)
@@ -172,11 +173,29 @@ class AppInfoSettingsMoreOptionsTest {
     }
 
     @Test
+    fun uninstallForAllUsers_NotAdminUser_notDisplayed() {
+        val app = ApplicationInfo().apply {
+            packageName = PACKAGE_NAME
+            uid = UID
+        }
+        whenever(userManager.isUserAdmin(app.userId)).thenReturn(false)
+        whenever(userManager.aliveUsers).thenReturn(listOf(OTHER_USER))
+        whenever(packageManagers.isPackageInstalledAsUser(PACKAGE_NAME, OTHER_USER_ID))
+            .thenReturn(true)
+
+        setContent(app)
+        composeTestRule.onRoot().performClick()
+
+        composeTestRule.onRoot().assertIsNotDisplayed()
+    }
+
+    @Test
     fun uninstallForAllUsers_appHiddenNotInQuietModeAndPrimaryUser_displayed() {
         val app = ApplicationInfo().apply {
             packageName = PACKAGE_NAME
             uid = UID
         }
+        whenever(userManager.isUserAdmin(app.userId)).thenReturn(true)
         whenever(userManager.aliveUsers).thenReturn(listOf(OTHER_USER))
         whenever(packageManagers
                 .isPackageInstalledAsUser(PACKAGE_NAME, OTHER_USER_ID))
@@ -198,6 +217,7 @@ class AppInfoSettingsMoreOptionsTest {
             packageName = PACKAGE_NAME
             uid = UID
         }
+        whenever(userManager.isUserAdmin(app.userId)).thenReturn(true)
         whenever(userManager.aliveUsers).thenReturn(listOf(OTHER_USER))
         whenever(packageManagers
                 .isPackageInstalledAsUser(PACKAGE_NAME, OTHER_USER_ID))

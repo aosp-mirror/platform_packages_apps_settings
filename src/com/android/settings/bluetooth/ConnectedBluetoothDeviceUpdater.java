@@ -39,26 +39,37 @@ public class ConnectedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
     private static final String PREF_KEY_PREFIX = "connected_bt_";
 
     private final AudioManager mAudioManager;
+    private int mAudioMode;
 
     public ConnectedBluetoothDeviceUpdater(Context context,
             DevicePreferenceCallback devicePreferenceCallback, int metricsCategory) {
         super(context, devicePreferenceCallback, metricsCategory);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        mAudioMode = mAudioManager.getMode();
     }
 
     @Override
     public void onAudioModeChanged() {
+        // TODO: move to background thread
+        mAudioMode = mAudioManager.getMode();
         forceUpdate();
     }
 
     @Override
     public boolean isFilterMatched(CachedBluetoothDevice cachedDevice) {
-        final int audioMode = mAudioManager.getMode();
+        // If the device is temporary bond, it shouldn't be shown here.
+        if (Flags.enableTemporaryBondDevicesUi()
+                && BluetoothUtils.isTemporaryBondDevice(cachedDevice.getDevice())) {
+            Log.d(TAG,
+                    "isFilterMatched() Filter out temporary bond device " + cachedDevice.getName());
+            return false;
+        }
+
         final int currentAudioProfile;
 
-        if (audioMode == AudioManager.MODE_RINGTONE
-                || audioMode == AudioManager.MODE_IN_CALL
-                || audioMode == AudioManager.MODE_IN_COMMUNICATION) {
+        if (mAudioMode == AudioManager.MODE_RINGTONE
+                || mAudioMode == AudioManager.MODE_IN_CALL
+                || mAudioMode == AudioManager.MODE_IN_COMMUNICATION) {
             // in phone call
             currentAudioProfile = BluetoothProfile.HEADSET;
         } else {

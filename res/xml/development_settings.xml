@@ -199,10 +199,11 @@
             android:title="@string/enable_terminal_title"
             android:summary="@string/enable_terminal_summary" />
 
-        <SwitchPreferenceCompat
-            android:key="enable_linux_terminal"
+        <Preference
+            android:key="linux_terminal"
             android:title="@string/enable_linux_terminal_title"
-            android:summary="@string/enable_linux_terminal_summary" />
+            android:summary="@string/enable_linux_terminal_summary"
+            android:fragment="com.android.settings.development.linuxterminal.LinuxTerminalDashboardFragment" />
 
         <SwitchPreferenceCompat
             android:key="bugreport_in_power"
@@ -567,6 +568,13 @@
             android:title="@string/overlay_display_devices_title"
             android:entries="@array/overlay_display_devices_entries"
             android:entryValues="@array/overlay_display_devices_values" />
+
+        <ListPreference
+            android:entries="@array/shade_display_awareness_entries"
+            android:entryValues="@array/shade_display_awareness_values"
+            android:key="shade_display_awareness"
+            android:summary="@string/summary_placeholder"
+            android:title="@string/shade_display_awareness_title" />
 
         <com.android.settings.display.DensityPreference
             android:key="density"

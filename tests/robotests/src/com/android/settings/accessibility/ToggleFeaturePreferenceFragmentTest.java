@@ -26,7 +26,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -38,13 +37,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.icu.text.CaseMap;
 import android.os.Bundle;
-import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.PopupWindow;
 
 import androidx.fragment.app.FragmentActivity;
@@ -56,6 +55,7 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.flags.Flags;
+import com.android.settings.testutils.shadow.ShadowAccessibilityManager;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.widget.TopIntroPreference;
 
@@ -74,12 +74,14 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
 
+import java.util.List;
 import java.util.Locale;
 
 /** Tests for {@link ToggleFeaturePreferenceFragment} */
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowFragment.class,
+        ShadowAccessibilityManager.class
 })
 public class ToggleFeaturePreferenceFragmentTest {
     @Rule
@@ -111,6 +113,7 @@ public class ToggleFeaturePreferenceFragmentTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceManager mPreferenceManager;
+    private ShadowAccessibilityManager mShadowAccessibilityManager;
 
     @Mock
     private FragmentActivity mActivity;
@@ -122,6 +125,8 @@ public class ToggleFeaturePreferenceFragmentTest {
     @Before
     public void setUpTestFragment() {
         MockitoAnnotations.initMocks(this);
+        mShadowAccessibilityManager = Shadow.extract(
+                mContext.getSystemService(AccessibilityManager.class));
 
         mFragment = spy(new TestToggleFeaturePreferenceFragment());
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
@@ -142,7 +147,6 @@ public class ToggleFeaturePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     @Config(shadows = {ShadowFragment.class})
     public void onResume_flagEnabled_haveRegisterToSpecificUris() {
         mFragment.onAttach(mContext);
@@ -167,31 +171,6 @@ public class ToggleFeaturePreferenceFragmentTest {
     }
 
     @Test
-    @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
-    @Config(shadows = {ShadowFragment.class})
-    public void onResume_flagDisabled_haveRegisterToSpecificUris() {
-        mFragment.onAttach(mContext);
-        mFragment.onCreate(Bundle.EMPTY);
-
-        mFragment.onResume();
-
-        verify(mContentResolver).registerContentObserver(
-                eq(Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS)),
-                eq(false),
-                any(AccessibilitySettingsContentObserver.class));
-        verify(mContentResolver).registerContentObserver(
-                eq(Settings.Secure.getUriFor(
-                        Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE)),
-                eq(false),
-                any(AccessibilitySettingsContentObserver.class));
-        verify(mContentResolver, never()).registerContentObserver(
-                eq(Settings.Secure.getUriFor(
-                        Settings.Secure.ACCESSIBILITY_QS_TARGETS)),
-                eq(false),
-                any(AccessibilitySettingsContentObserver.class));
-    }
-
-    @Test
     public void updateShortcutPreferenceData_assignDefaultValueToVariable() {
         mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
 
@@ -206,10 +185,10 @@ public class ToggleFeaturePreferenceFragmentTest {
     @Test
     public void updateShortcutPreferenceData_hasValueInSettings_assignToVariable() {
         mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
-        putSecureStringIntoSettings(SOFTWARE_SHORTCUT_KEY,
-                PLACEHOLDER_COMPONENT_NAME.flattenToString());
-        putSecureStringIntoSettings(HARDWARE_SHORTCUT_KEY,
-                PLACEHOLDER_COMPONENT_NAME.flattenToString());
+        mShadowAccessibilityManager.setAccessibilityShortcutTargets(
+                SOFTWARE, List.of(PLACEHOLDER_COMPONENT_NAME.flattenToString()));
+        mShadowAccessibilityManager.setAccessibilityShortcutTargets(
+                HARDWARE, List.of(PLACEHOLDER_COMPONENT_NAME.flattenToString()));
 
         mFragment.updateShortcutPreferenceData();
 
@@ -241,15 +220,6 @@ public class ToggleFeaturePreferenceFragmentTest {
     }
 
     @Test
-    @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
-    @Config(shadows = ShadowFragment.class)
-    public void onPreferenceToggledOnEnabledService_showTooltipView() {
-        mFragment.onPreferenceToggled(mFragment.getUseServicePreferenceKey(), /* enabled= */ true);
-
-        assertThat(getLatestPopupWindow().isShowing()).isTrue();
-    }
-
-    @Test
     @Config(shadows = ShadowFragment.class)
     public void onPreferenceToggledOnEnabledService_inSuw_toolTipViewShouldNotShow() {
         Intent suwIntent = new Intent();
@@ -259,18 +229,6 @@ public class ToggleFeaturePreferenceFragmentTest {
         mFragment.onPreferenceToggled(mFragment.getUseServicePreferenceKey(), /* enabled= */ true);
 
         assertThat(getLatestPopupWindow()).isNull();
-    }
-
-    @Test
-    @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
-    @Config(shadows = ShadowFragment.class)
-    public void onPreferenceToggledOnEnabledService_tooltipViewShown_notShowTooltipView() {
-        mFragment.onPreferenceToggled(mFragment.getUseServicePreferenceKey(), /* enabled= */ true);
-        getLatestPopupWindow().dismiss();
-
-        mFragment.onPreferenceToggled(mFragment.getUseServicePreferenceKey(), /* enabled= */ true);
-
-        assertThat(getLatestPopupWindow().isShowing()).isFalse();
     }
 
     @Test
@@ -365,16 +323,6 @@ public class ToggleFeaturePreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
-    @Config(shadows = ShadowFragment.class)
-    public void showQuickSettingsTooltipIfNeeded_qsFlagOn_dontShowTooltipView() {
-        mFragment.showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_EDIT);
-
-        assertThat(getLatestPopupWindow()).isNull();
-    }
-
-    @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void getShortcutTypeSummary_shortcutSummaryIsCorrectlySet() {
         final PreferredShortcut userPreferredShortcut = new PreferredShortcut(
                 PLACEHOLDER_COMPONENT_NAME.flattenToString(),
@@ -396,10 +344,6 @@ public class ToggleFeaturePreferenceFragmentTest {
         String summary = mFragment.getShortcutTypeSummary(mContext).toString();
 
         assertThat(summary).isEqualTo(expected);
-    }
-
-    private void putSecureStringIntoSettings(String key, String componentName) {
-        Settings.Secure.putString(mContext.getContentResolver(), key, componentName);
     }
 
     private String getSecureStringFromSettings(String key) {

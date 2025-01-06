@@ -26,15 +26,17 @@ import android.app.time.TimeZoneCapabilities;
 import android.app.time.TimeZoneCapabilitiesAndConfig;
 import android.app.time.TimeZoneConfiguration;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.flags.Flags;
 
 public class AutoTimeZonePreferenceController extends TogglePreferenceController {
+
+    private static final String TAG = "AutoTimeZonePreferenceController";
 
     private boolean mIsFromSUW;
     private UpdateTimeAndDateCallback mCallback;
@@ -93,7 +95,8 @@ public class AutoTimeZonePreferenceController extends TogglePreferenceController
                 // arbitrary.
                 return AVAILABLE;
             default:
-                throw new IllegalStateException("Unknown capability=" + capability);
+                Log.e(TAG, "Unknown capability=" + capability);
+                return UNSUPPORTED_ON_DEVICE;
         }
     }
 
@@ -107,19 +110,17 @@ public class AutoTimeZonePreferenceController extends TogglePreferenceController
         TimeZoneConfiguration.Builder configuration = new TimeZoneConfiguration.Builder()
                 .setAutoDetectionEnabled(isChecked);
 
-        if (Flags.revampToggles()) {
-            // "Use location for time zone" is only used if "Automatic time zone" is enabled. If
-            // the user toggles off automatic time zone, set the toggle off and disable the toggle.
-            int geoDetectionCapability = mTimeManager
-                    .getTimeZoneCapabilitiesAndConfig()
-                    .getCapabilities()
-                    .getConfigureGeoDetectionEnabledCapability();
+        // "Use location for time zone" is only used if "Automatic time zone" is enabled. If
+        // the user toggles off automatic time zone, set the toggle off and disable the toggle.
+        int geoDetectionCapability = mTimeManager
+                .getTimeZoneCapabilitiesAndConfig()
+                .getCapabilities()
+                .getConfigureGeoDetectionEnabledCapability();
 
-            if (!isChecked
-                    && (geoDetectionCapability == CAPABILITY_NOT_APPLICABLE
-                    || geoDetectionCapability == CAPABILITY_POSSESSED)) {
-                configuration.setGeoDetectionEnabled(false);
-            }
+        if (!isChecked
+                && (geoDetectionCapability == CAPABILITY_NOT_APPLICABLE
+                || geoDetectionCapability == CAPABILITY_POSSESSED)) {
+            configuration.setGeoDetectionEnabled(false);
         }
 
         boolean result = mTimeManager.updateTimeZoneConfiguration(configuration.build());

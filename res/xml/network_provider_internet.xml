@@ -30,6 +30,7 @@
         settings:allowDividerAbove="true"
         settings:keywords="@string/keywords_internet"
         settings:useAdminDisabledSummary="true"
+        settings:userRestriction="no_config_wifi"
         settings:controller="com.android.settings.network.InternetPreferenceControllerV2" />
 
     <com.android.settingslib.RestrictedPreference
@@ -80,6 +81,7 @@
         android:title="@string/data_saver_title"
         android:icon="@drawable/ic_settings_data_usage"
         android:order="10"
+        android:persistent="false"
         settings:isPreferenceVisible="@bool/config_show_data_saver"
         android:fragment="com.android.settings.datausage.DataSaverSummary"/>
 

@@ -27,7 +27,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(MyDeviceInfoScreen.KEY)
 class MyDeviceInfoScreen :
     PreferenceScreenCreator, PreferenceSummaryProvider, PreferenceIconProvider {
     override val key: String
@@ -52,7 +52,7 @@ class MyDeviceInfoScreen :
 
     override fun fragmentClass() = MyDeviceInfoFragment::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
 
     override fun hasCompleteHierarchy() = false
 

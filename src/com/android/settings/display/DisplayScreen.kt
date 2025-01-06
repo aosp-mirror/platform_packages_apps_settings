@@ -21,6 +21,7 @@ import com.android.settings.R
 import com.android.settings.Settings.DisplaySettingsActivity
 import com.android.settings.display.darkmode.DarkModeScreen
 import com.android.settings.flags.Flags
+import com.android.settings.security.LockScreenPreferenceScreen
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceIconProvider
@@ -29,7 +30,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(DisplayScreen.KEY)
 open class DisplayScreen :
     PreferenceScreenCreator, PreferenceAvailabilityProvider, PreferenceIconProvider {
     override val key: String
@@ -50,12 +51,14 @@ open class DisplayScreen :
 
     override fun fragmentClass() = DisplaySettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {
-        +BrightnessLevelRestrictedPreference()
-        +AutoBrightnessScreen.KEY
-        +DarkModeScreen.KEY
-        +PeakRefreshRateSwitchPreference()
-    }
+    override fun getPreferenceHierarchy(context: Context) =
+        preferenceHierarchy(context, this) {
+            +BrightnessLevelPreference()
+            +AutoBrightnessScreen.KEY
+            +LockScreenPreferenceScreen.KEY
+            +DarkModeScreen.KEY
+            +PeakRefreshRateSwitchPreference()
+        }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, DisplaySettingsActivity::class.java, metadata?.key)

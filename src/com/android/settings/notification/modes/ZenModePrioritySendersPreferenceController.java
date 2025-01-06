@@ -148,7 +148,8 @@ class ZenModePrioritySendersPreferenceController
             makeSelectorPreference(KEY_ANY,
                     R.string.zen_mode_from_anyone, null, mIsMessages, true);
             makeSelectorPreference(KEY_NONE,
-                    R.string.zen_mode_none_messages, null, mIsMessages, true);
+                    mIsMessages ? R.string.zen_mode_none_messages : R.string.zen_mode_none_calls,
+                    null, mIsMessages, true);
         }
         super.displayPreference(screen);
     }
@@ -299,6 +300,7 @@ class ZenModePrioritySendersPreferenceController
         List<UserHandle> userProfiles = mUserManager.getEnabledProfiles();
         if (userProfiles.size() <= 1) {
             mContext.startActivity(intent);
+            return;
         }
 
         mProfileSelectDialog = ProfileSelectDialog.createDialog(mContext, userProfiles,

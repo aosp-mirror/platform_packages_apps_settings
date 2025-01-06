@@ -16,17 +16,20 @@
 
 package com.android.settings.accessibility;
 
-import static org.junit.Assert.assertEquals;
+import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.preference.PreferenceViewHolder;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settingslib.Utils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,12 +56,20 @@ public final class PaletteListPreferenceTest {
 
     @Test
     public void initPaletteView_success() {
+        final int expectedCount =
+                mContext.getResources().getStringArray(R.array.setting_palette_data).length;
+        final ColorStateList expectedTextColor =
+                Utils.getColorAttr(mContext, android.R.attr.textColorPrimary);
+
         mPaletteListPreference.onBindViewHolder(mPreferenceViewHolder);
 
         final ViewGroup viewGroup =
                 mPreferenceViewHolder.itemView.findViewById(R.id.palette_view);
-        final int expectedCount =
-                mContext.getResources().getStringArray(R.array.setting_palette_data).length;
-        assertEquals(expectedCount, viewGroup.getChildCount());
+        final int childCount = viewGroup.getChildCount();
+        assertThat(childCount).isEqualTo(expectedCount);
+        for (int i = 0; i < childCount; i++) {
+            final TextView textView = (TextView) viewGroup.getChildAt(i);
+            assertThat(textView.getTextColors()).isEqualTo(expectedTextColor);
+        }
     }
 }

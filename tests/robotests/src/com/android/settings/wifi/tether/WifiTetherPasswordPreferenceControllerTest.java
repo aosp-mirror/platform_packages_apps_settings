@@ -18,10 +18,13 @@ package com.android.settings.wifi.tether;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -32,6 +35,7 @@ import android.content.Context;
 import android.net.TetheringManager;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
+import android.widget.EditText;
 
 import androidx.preference.PreferenceScreen;
 
@@ -81,7 +85,7 @@ public class WifiTetherPasswordPreferenceControllerTest {
         when(featureFactory.getWifiFeatureProvider().getWifiHotspotRepository())
                 .thenReturn(mWifiHotspotRepository);
 
-        mPreference = new ValidatedEditTextPreference(RuntimeEnvironment.application);
+        mPreference = spy(new ValidatedEditTextPreference(RuntimeEnvironment.application));
         mConfig = new SoftApConfiguration.Builder().setSsid("test_1234")
                 .setPassphrase(INITIAL_PASSWORD, SoftApConfiguration.SECURITY_TYPE_WPA2_PSK)
                 .build();
@@ -178,5 +182,21 @@ public class WifiTetherPasswordPreferenceControllerTest {
         // Call updateDisplay and verify it's changed.
         mController.updateDisplay();
         assertThat(mPreference.isPassword()).isTrue();
+    }
+
+    @Test
+    public void updateDisplay_shouldSetOnBindEditTextListener() {
+        mController.displayPreference(mScreen);
+
+        verify(mPreference).setOnBindEditTextListener(any());
+    }
+
+    @Test
+    public void onBindEditText_shouldSetHint() {
+        EditText editText = mock(EditText.class);
+
+        mController.onBindEditText(editText);
+
+        verify(editText).setHint(anyInt());
     }
 }

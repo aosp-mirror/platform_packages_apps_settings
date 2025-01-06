@@ -16,17 +16,15 @@
 package com.android.settings.display
 
 import android.content.Context
-import android.os.Process
-import android.os.UserHandle
 import android.os.UserManager
 import android.provider.Settings
 import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
 import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL
 import androidx.preference.Preference
+import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.PrimarySwitchPreference
-import com.android.settingslib.RestrictedLockUtilsInternal
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObservableDelegate
 import com.android.settingslib.datastore.SettingsStore
@@ -35,19 +33,19 @@ import com.android.settingslib.metadata.BooleanValue
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.metadata.PreferenceRestrictionProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenBinding
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(AutoBrightnessScreen.KEY)
 class AutoBrightnessScreen :
     PreferenceScreenCreator,
     PreferenceScreenBinding,
     PreferenceAvailabilityProvider,
-    PreferenceRestrictionProvider,
+    PreferenceRestrictionMixin,
     PersistentPreference<Boolean>,
     BooleanValue {
     override val key: String
@@ -62,36 +60,46 @@ class AutoBrightnessScreen :
 
     override fun hasCompleteHierarchy() = false
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
 
     override fun storage(context: Context): KeyValueStore =
         AutoBrightnessDataStore(SettingsSystemStore.get(context))
 
-    override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
+    override fun getReadPermissions(context: Context) = SettingsSystemStore.getReadPermissions()
+
+    override fun getWritePermissions(context: Context) = SettingsSystemStore.getWritePermissions()
+
+    override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
+
+    override fun getWritePermit(
+        context: Context,
+        value: Boolean?,
+        callingPid: Int,
+        callingUid: Int,
+    ) = ReadWritePermit.ALLOW
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(
             com.android.internal.R.bool.config_automatic_brightness_available
         )
 
-    override fun isEnabled(context: Context) =
-        !UserManager.get(context)
-            .hasBaseUserRestriction(UserManager.DISALLOW_CONFIG_BRIGHTNESS, Process.myUserHandle())
+    override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
-    override fun isRestricted(context: Context) =
-        RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
-            context,
-            UserManager.DISALLOW_CONFIG_BRIGHTNESS,
-            UserHandle.myUserId(),
-        ) != null
+    override val restrictionKeys
+        get() = arrayOf(UserManager.DISALLOW_CONFIG_BRIGHTNESS)
+
+    override val useAdminDisabledSummary: Boolean
+        get() = true
 
     override fun createWidget(context: Context) = PrimarySwitchPreference(context)
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
         (preference as PrimarySwitchPreference).apply {
-            useAdminDisabledSummary(true)
             isSwitchEnabled = isEnabled
             // "true" is not the real default value (it is provided by AutoBrightnessDataStore)
             isChecked = preferenceDataStore!!.getBoolean(key, true)

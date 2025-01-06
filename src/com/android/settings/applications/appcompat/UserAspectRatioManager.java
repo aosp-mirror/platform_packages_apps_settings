@@ -72,7 +72,6 @@ public class UserAspectRatioManager {
             "enable_app_compat_user_aspect_ratio_fullscreen";
     private static final boolean DEFAULT_VALUE_ENABLE_USER_ASPECT_RATIO_FULLSCREEN = true;
 
-    final boolean mIsUserMinAspectRatioAppDefaultFlagEnabled = Flags.userMinAspectRatioAppDefault();
     private final boolean mIgnoreActivityOrientationRequest;
 
     private final Context mContext;
@@ -252,8 +251,7 @@ public class UserAspectRatioManager {
     boolean isOverrideToFullscreenEnabled(String pkgName, int userId) {
         Boolean appAllowsOrientationOverride = readComponentProperty(mContext.getPackageManager(),
                 pkgName, PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE);
-        return mIsUserMinAspectRatioAppDefaultFlagEnabled
-                && hasAspectRatioOption(USER_MIN_ASPECT_RATIO_FULLSCREEN, pkgName)
+        return hasAspectRatioOption(USER_MIN_ASPECT_RATIO_FULLSCREEN, pkgName)
                 && !FALSE.equals(appAllowsOrientationOverride)
                 && (isFullscreenCompatChangeEnabled(pkgName, userId)
                     || isUniversalResizeable(pkgName, userId));
@@ -326,15 +324,13 @@ public class UserAspectRatioManager {
             throw new RuntimeException("config_userAspectRatioOverrideValues options must have"
                     + " USER_MIN_ASPECT_RATIO_UNSET value");
         }
-        if (mIsUserMinAspectRatioAppDefaultFlagEnabled) {
-            userMinAspectRatioMap.put(USER_MIN_ASPECT_RATIO_APP_DEFAULT,
-                    userMinAspectRatioMap.get(USER_MIN_ASPECT_RATIO_UNSET));
-            mUserAspectRatioOrder.put(USER_MIN_ASPECT_RATIO_APP_DEFAULT,
-                    mUserAspectRatioOrder.get(USER_MIN_ASPECT_RATIO_UNSET));
-            if (mUserAspectRatioA11yMap.containsKey(USER_MIN_ASPECT_RATIO_UNSET)) {
-                mUserAspectRatioA11yMap.put(USER_MIN_ASPECT_RATIO_APP_DEFAULT,
-                        mUserAspectRatioA11yMap.get(USER_MIN_ASPECT_RATIO_UNSET));
-            }
+        userMinAspectRatioMap.put(USER_MIN_ASPECT_RATIO_APP_DEFAULT,
+                userMinAspectRatioMap.get(USER_MIN_ASPECT_RATIO_UNSET));
+        mUserAspectRatioOrder.put(USER_MIN_ASPECT_RATIO_APP_DEFAULT,
+                mUserAspectRatioOrder.get(USER_MIN_ASPECT_RATIO_UNSET));
+        if (mUserAspectRatioA11yMap.containsKey(USER_MIN_ASPECT_RATIO_UNSET)) {
+            mUserAspectRatioA11yMap.put(USER_MIN_ASPECT_RATIO_APP_DEFAULT,
+                    mUserAspectRatioA11yMap.get(USER_MIN_ASPECT_RATIO_UNSET));
         }
         return userMinAspectRatioMap;
     }

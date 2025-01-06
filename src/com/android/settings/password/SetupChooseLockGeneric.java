@@ -269,9 +269,7 @@ public class SetupChooseLockGeneric extends ChooseLockGeneric {
             public void onViewCreated(@NotNull View view, Bundle savedInstanceState) {
                 super.onViewCreated(view, savedInstanceState);
                 GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
-                int titleResource = R.string.lock_settings_picker_new_lock_title;
 
-                layout.setHeaderText(titleResource);
                 setDivider(new ColorDrawable(Color.TRANSPARENT));
                 setDividerHeight(0);
                 getHeaderView().setVisible(false);

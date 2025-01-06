@@ -16,16 +16,25 @@
 
 package com.android.settings.network
 
+import android.app.settings.SettingsEnums.ACTION_AIRPLANE_TOGGLE
+import android.content.Context
 import android.content.ContextWrapper
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.FEATURE_LEANBACK
 import android.content.res.Resources
+import android.provider.Settings
+import android.telephony.TelephonyManager
+import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.testutils.FakeFeatureFactory
+import com.android.settingslib.datastore.SettingsGlobalStore
+import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
+import org.mockito.Mockito.verify
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
@@ -33,14 +42,22 @@ import org.mockito.kotlin.stub
 @RunWith(AndroidJUnit4::class)
 class AirplaneModePreferenceTest {
 
-    private val mockPackageManager = mock<PackageManager>()
     private val mockResources = mock<Resources>()
+    private val mockPackageManager = mock<PackageManager>()
+    private var mockTelephonyManager = mock<TelephonyManager>()
 
-    private val context =
-        object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
+    private val context = ApplicationProvider.getApplicationContext<Context>()
+    private val contextWrapper =
+        object : ContextWrapper(context) {
+            override fun getResources(): Resources = mockResources
+
             override fun getPackageManager(): PackageManager = mockPackageManager
 
-            override fun getResources(): Resources = mockResources
+            override fun getSystemService(name: String): Any? =
+                when (name) {
+                    getSystemServiceName(TelephonyManager::class.java) -> mockTelephonyManager
+                    else -> super.getSystemService(name)
+                }
         }
 
     private val airplaneModePreference = AirplaneModePreference()
@@ -50,7 +67,7 @@ class AirplaneModePreferenceTest {
         mockResources.stub { on { getBoolean(anyInt()) } doReturn true }
         mockPackageManager.stub { on { hasSystemFeature(FEATURE_LEANBACK) } doReturn false }
 
-        assertThat(airplaneModePreference.isAvailable(context)).isTrue()
+        assertThat(airplaneModePreference.isAvailable(contextWrapper)).isTrue()
     }
 
     @Test
@@ -58,7 +75,7 @@ class AirplaneModePreferenceTest {
         mockResources.stub { on { getBoolean(anyInt()) } doReturn false }
         mockPackageManager.stub { on { hasSystemFeature(FEATURE_LEANBACK) } doReturn false }
 
-        assertThat(airplaneModePreference.isAvailable(context)).isFalse()
+        assertThat(airplaneModePreference.isAvailable(contextWrapper)).isFalse()
     }
 
     @Test
@@ -66,6 +83,65 @@ class AirplaneModePreferenceTest {
         mockResources.stub { on { getBoolean(anyInt()) } doReturn true }
         mockPackageManager.stub { on { hasSystemFeature(FEATURE_LEANBACK) } doReturn true }
 
-        assertThat(airplaneModePreference.isAvailable(context)).isFalse()
+        assertThat(airplaneModePreference.isAvailable(contextWrapper)).isFalse()
     }
+
+    @Test
+    fun getValue_defaultOn_returnOn() {
+        SettingsGlobalStore.get(context).setInt(Settings.Global.AIRPLANE_MODE_ON, 1)
+
+        val getValue =
+            airplaneModePreference.storage(context).getBoolean(AirplaneModePreference.KEY)
+
+        assertThat(getValue).isTrue()
+    }
+
+    @Test
+    fun getValue_defaultOff_returnOff() {
+        SettingsGlobalStore.get(context).setInt(Settings.Global.AIRPLANE_MODE_ON, 0)
+
+        val getValue =
+            airplaneModePreference.storage(context).getBoolean(AirplaneModePreference.KEY)
+
+        assertThat(getValue).isFalse()
+    }
+
+    @Test
+    fun setValue_valueTrue_metricsActionAirplaneToggleTrue() {
+        val metricsFeatureProvider = FakeFeatureFactory.setupForTest().metricsFeatureProvider
+
+        airplaneModePreference.storage(context).setBoolean(AirplaneModePreference.KEY, true)
+
+        verify(metricsFeatureProvider).action(context, ACTION_AIRPLANE_TOGGLE, true)
+    }
+
+    @Test
+    fun setValue_valueFalse_metricsActionAirplaneToggleFalse() {
+        val metricsFeatureProvider = FakeFeatureFactory.setupForTest().metricsFeatureProvider
+
+        airplaneModePreference.storage(context).setBoolean(AirplaneModePreference.KEY, false)
+
+        verify(metricsFeatureProvider).action(context, ACTION_AIRPLANE_TOGGLE, false)
+    }
+
+    @Test
+    fun performClick_defaultOn_checkedIsFalse() {
+        SettingsGlobalStore.get(context).setInt(Settings.Global.AIRPLANE_MODE_ON, 1)
+
+        val preference = getSwitchPreference().apply { performClick() }
+
+        assertThat(preference.isChecked).isFalse()
+    }
+
+    @Test
+    fun performClick_defaultOff_checkedIsTrue() {
+        SettingsGlobalStore.get(context).setInt(Settings.Global.AIRPLANE_MODE_ON, 0)
+
+        val preference = getSwitchPreference().apply { performClick() }
+
+        assertThat(preference.isChecked).isTrue()
+    }
+
+    private fun getSwitchPreference(): SwitchPreferenceCompat =
+        airplaneModePreference.createAndBindWidget(context)
 }

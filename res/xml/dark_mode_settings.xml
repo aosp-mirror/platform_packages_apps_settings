@@ -35,25 +35,35 @@
         android:title="@string/twilight_mode_location_off_dialog_message"
         settings:controller="com.android.settings.display.TwilightLocationPreferenceController"/>
 
-    <DropDownPreference
-        android:key="dark_ui_auto_mode"
-        android:title="@string/dark_ui_auto_mode_title"
-        android:summary="%s"
-        android:entries="@array/dark_ui_scheduler_preference_titles"
-        android:entryValues="@array/dark_ui_scheduler_preference_titles"
-        settings:allowDividerAbove="true"
-        settings:controller="com.android.settings.display.darkmode.DarkModeScheduleSelectorController"
-        settings:keywords="@string/keywords_dark_ui_mode"/>
+    <PreferenceCategory
+        android:key="display_category"
+        android:title="@string/accessibility_screen_option">
 
-    <Preference
-        android:key="dark_theme_start_time"
-        android:title="@string/night_display_start_time_title"
-        settings:searchable="false"/>
+        <SwitchPreferenceCompat
+            android:key="toggle_force_invert"
+            android:summary="@string/accessibility_force_invert_summary"
+            android:title="@string/accessibility_force_invert_title"
+            settings:controller="com.android.settings.accessibility.ToggleForceInvertPreferenceController"/>
 
-    <Preference
-        android:key="dark_theme_end_time"
-        android:title="@string/night_display_end_time_title"
-        settings:searchable="false"/>
+        <DropDownPreference
+            android:key="dark_ui_auto_mode"
+            android:title="@string/dark_ui_auto_mode_title"
+            android:summary="%s"
+            android:entries="@array/dark_ui_scheduler_preference_titles"
+            android:entryValues="@array/dark_ui_scheduler_preference_titles"
+            settings:controller="com.android.settings.display.darkmode.DarkModeScheduleSelectorController"
+            settings:keywords="@string/keywords_dark_ui_mode"/>
+
+        <Preference
+            android:key="dark_theme_start_time"
+            android:title="@string/night_display_start_time_title"
+            settings:searchable="false"/>
+
+        <Preference
+            android:key="dark_theme_end_time"
+            android:title="@string/night_display_end_time_title"
+            settings:searchable="false"/>
+    </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
         android:key="dark_theme_custom_bedtime_footer"

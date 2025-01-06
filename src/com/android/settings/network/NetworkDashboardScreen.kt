@@ -17,13 +17,17 @@ package com.android.settings.network
 
 import android.content.Context
 import com.android.settings.R
+import com.android.settings.Settings.NetworkDashboardActivity
+import com.android.settings.datausage.DataSaverScreen
 import com.android.settings.flags.Flags
+import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceIconProvider
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(NetworkDashboardScreen.KEY)
 class NetworkDashboardScreen : PreferenceScreenCreator, PreferenceIconProvider {
     override val key: String
         get() = KEY
@@ -43,7 +47,15 @@ class NetworkDashboardScreen : PreferenceScreenCreator, PreferenceIconProvider {
 
     override fun fragmentClass() = NetworkDashboardFragment::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        makeLaunchIntent(context, NetworkDashboardActivity::class.java, metadata?.key)
+
+    override fun getPreferenceHierarchy(context: Context) =
+        preferenceHierarchy(context, this) {
+            +MobileNetworkListScreen.KEY order -15
+            +AirplaneModePreference() order -5
+            +DataSaverScreen.KEY order 10
+        }
 
     companion object {
         const val KEY = "network_provider_and_internet_screen"

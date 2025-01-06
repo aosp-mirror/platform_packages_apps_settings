@@ -21,6 +21,7 @@ import android.app.settings.SettingsEnums
 import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Looper
+import android.telecom.TelecomManager
 import android.telephony.SubscriptionManager
 import android.util.Log
 import android.view.LayoutInflater
@@ -89,7 +90,12 @@ class ResetNetworkConfirm : InstrumentedFragment() {
     /** Configure the UI for the final confirmation interaction */
     private fun View.establishFinalConfirmationState() {
         requireViewById<View>(R.id.execute_reset_network).setOnClickListener {
-            showResetInternetDialog();
+            val tm = context.getSystemService(TelecomManager::class.java)
+            if (tm != null && tm.isInCall) {
+                showResetInternetDialog();
+            } else {
+                onResetClicked()
+            }
         }
     }
 
@@ -138,9 +144,13 @@ class ResetNetworkConfirm : InstrumentedFragment() {
      * settings to its factory-default state.
      */
     @VisibleForTesting
-    suspend fun onResetClicked() {
-        showProgressDialog()
-        resetNetwork()
+    fun onResetClicked() {
+        if (!Utils.isMonkeyRunning() && !resetStarted) {
+            resetStarted = true
+            viewLifecycleOwner.lifecycleScope.launch {
+                showProgressDialog()
+                resetNetwork() }
+        }
     }
 
     private fun showProgressDialog() {
@@ -165,10 +175,7 @@ class ResetNetworkConfirm : InstrumentedFragment() {
         val builder = AlertDialog.Builder(requireContext())
         val resetInternetClickListener =
             DialogInterface.OnClickListener { dialog, which ->
-                if (!Utils.isMonkeyRunning() && !resetStarted) {
-                    resetStarted = true
-                    viewLifecycleOwner.lifecycleScope.launch { onResetClicked() }
-                }
+                onResetClicked()
             }
 
         builder.setTitle(R.string.reset_your_internet_title)

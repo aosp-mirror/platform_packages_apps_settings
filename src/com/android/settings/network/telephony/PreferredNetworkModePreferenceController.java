@@ -24,10 +24,18 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.RadioAccessFamily;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.satellite.SatelliteManager;
+import android.telephony.satellite.SatelliteModemStateCallback;
+import android.telephony.satellite.SelectedNbIotSatelliteSubscriptionCallback;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -38,17 +46,56 @@ import com.android.settings.network.telephony.mode.NetworkModes;
  * Preference controller for "Preferred network mode"
  */
 public class PreferredNetworkModePreferenceController extends BasePreferenceController
-        implements ListPreference.OnPreferenceChangeListener {
+        implements ListPreference.OnPreferenceChangeListener, DefaultLifecycleObserver {
     private static final String TAG = "PrefNetworkModeCtrl";
 
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private CarrierConfigCache mCarrierConfigCache;
     private TelephonyManager mTelephonyManager;
     private boolean mIsGlobalCdma;
+    private SatelliteManager mSatelliteManager;
+    private Preference mPreference;
+    private boolean mIsSatelliteSessionStarted = false;
+    private boolean mIsCurrentSubscriptionForSatellite = false;
+
+    @VisibleForTesting
+    final SelectedNbIotSatelliteSubscriptionCallback mSelectedNbIotSatelliteSubscriptionCallback =
+            new SelectedNbIotSatelliteSubscriptionCallback() {
+                @Override
+                public void onSelectedNbIotSatelliteSubscriptionChanged(int selectedSubId) {
+                    mIsCurrentSubscriptionForSatellite = selectedSubId == mSubId;
+                    updateState(mPreference);
+                }
+            };
+
+    @VisibleForTesting
+    final SatelliteModemStateCallback mSatelliteModemStateCallback =
+            new SatelliteModemStateCallback() {
+                @Override
+                public void onSatelliteModemStateChanged(int state) {
+                    switch (state) {
+                        case SatelliteManager.SATELLITE_MODEM_STATE_OFF:
+                        case SatelliteManager.SATELLITE_MODEM_STATE_UNAVAILABLE:
+                        case SatelliteManager.SATELLITE_MODEM_STATE_UNKNOWN:
+                            if (mIsSatelliteSessionStarted) {
+                                mIsSatelliteSessionStarted = false;
+                                updateState(mPreference);
+                            }
+                            break;
+                        default:
+                            if (!mIsSatelliteSessionStarted) {
+                                mIsSatelliteSessionStarted = true;
+                                updateState(mPreference);
+                            }
+                            break;
+                    }
+                }
+            };
 
     public PreferredNetworkModePreferenceController(Context context, String key) {
         super(context, key);
         mCarrierConfigCache = CarrierConfigCache.getInstance(context);
+        mSatelliteManager = context.getSystemService(SatelliteManager.class);
     }
 
     @Override
@@ -59,8 +106,18 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
     }
 
     @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+    }
+
+    @Override
     public void updateState(Preference preference) {
+        if (preference == null) {
+            return;
+        }
         super.updateState(preference);
+        preference.setEnabled(!(mIsCurrentSubscriptionForSatellite && mIsSatelliteSessionStarted));
         final ListPreference listPreference = (ListPreference) preference;
         final int networkMode = getPreferredNetworkMode();
         listPreference.setValue(Integer.toString(networkMode));
@@ -75,9 +132,9 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
                 TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER,
                 RadioAccessFamily.getRafFromNetworkType(newPreferredNetworkMode));
 
-            final ListPreference listPreference = (ListPreference) preference;
-            listPreference.setSummary(getPreferredNetworkModeSummaryResId(newPreferredNetworkMode));
-            return true;
+        final ListPreference listPreference = (ListPreference) preference;
+        listPreference.setSummary(getPreferredNetworkModeSummaryResId(newPreferredNetworkMode));
+        return true;
     }
 
     public void init(int subId) {
@@ -88,6 +145,38 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
 
         mIsGlobalCdma = mTelephonyManager.isLteCdmaEvdoGsmWcdmaEnabled()
                 && carrierConfig.getBoolean(CarrierConfigManager.KEY_SHOW_CDMA_CHOICES_BOOL);
+    }
+
+    @Override
+    public void onStart(@NonNull LifecycleOwner owner) {
+        if (com.android.settings.flags.Flags.satelliteOemSettingsUxMigration()) {
+            if (mSatelliteManager != null) {
+                try {
+                    mSatelliteManager.registerForModemStateChanged(
+                            mContext.getMainExecutor(), mSatelliteModemStateCallback);
+                    mSatelliteManager.registerForSelectedNbIotSatelliteSubscriptionChanged(
+                            mContext.getMainExecutor(),
+                            mSelectedNbIotSatelliteSubscriptionCallback);
+                } catch (IllegalStateException e) {
+                    Log.w(TAG, "IllegalStateException : " + e);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onStop(@NonNull LifecycleOwner owner) {
+        if (com.android.settings.flags.Flags.satelliteOemSettingsUxMigration()) {
+            if (mSatelliteManager != null) {
+                try {
+                    mSatelliteManager.unregisterForModemStateChanged(mSatelliteModemStateCallback);
+                    mSatelliteManager.unregisterForSelectedNbIotSatelliteSubscriptionChanged(
+                            mSelectedNbIotSatelliteSubscriptionCallback);
+                } catch (IllegalStateException e) {
+                    Log.w(TAG, "IllegalStateException : " + e);
+                }
+            }
+        }
     }
 
     private int getPreferredNetworkMode() {

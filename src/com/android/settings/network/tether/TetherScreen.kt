@@ -17,18 +17,30 @@ package com.android.settings.network.tether
 
 import android.content.Context
 import android.net.TetheringManager
+import android.os.UserManager
+import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
+import com.android.settings.Settings.TetherSettingsActivity
+import com.android.settings.datausage.DataSaverMainSwitchPreference
 import com.android.settings.flags.Flags
 import com.android.settings.network.TetherPreferenceController
+import com.android.settings.utils.makeLaunchIntent
+import com.android.settings.wifi.tether.WifiHotspotSwitchPreference
 import com.android.settingslib.TetherUtil
 import com.android.settingslib.Utils
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
-class TetherScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider {
+@ProvidePreferenceScreen(TetherScreen.KEY)
+class TetherScreen :
+    PreferenceScreenCreator,
+    PreferenceTitleProvider,
+    PreferenceAvailabilityProvider,
+    PreferenceRestrictionMixin {
 
     override val key: String
         get() = KEY
@@ -39,7 +51,7 @@ class TetherScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider {
     override val keywords: Int
         get() = R.string.keywords_hotspot_tethering
 
-    override fun getPreferenceTitle(context: Context): CharSequence? =
+    override fun getTitle(context: Context): CharSequence? =
         if (TetherPreferenceController.isTetherConfigDisallowed(context)) {
             context.getText(R.string.tether_settings_title_all)
         } else {
@@ -49,13 +61,25 @@ class TetherScreen : PreferenceScreenCreator, PreferenceAvailabilityProvider {
 
     override fun isAvailable(context: Context) = TetherUtil.isTetherAvailable(context)
 
+    override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
+
+    override val restrictionKeys
+        get() = arrayOf(UserManager.DISALLOW_CONFIG_TETHERING)
+
     override fun isFlagEnabled(context: Context) = Flags.catalystTetherSettings()
 
     override fun hasCompleteHierarchy() = false
 
     override fun fragmentClass() = TetherSettings::class.java
 
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(this) {}
+    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+        makeLaunchIntent(context, TetherSettingsActivity::class.java, metadata?.key)
+
+    override fun getPreferenceHierarchy(context: Context) =
+        preferenceHierarchy(context, this) {
+            val dataSaverStore = DataSaverMainSwitchPreference.createDataStore(context)
+            +WifiHotspotSwitchPreference(context, dataSaverStore)
+        }
 
     companion object {
         const val KEY = "tether_settings"

@@ -40,17 +40,12 @@ import android.app.time.TimeZoneConfiguration;
 import android.app.time.TimeZoneDetectorStatus;
 import android.content.Context;
 import android.os.UserHandle;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.flags.Flags;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -61,9 +56,6 @@ import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class AutoTimeZonePreferenceControllerTest {
-
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private UpdateTimeAndDateCallback mCallback;
@@ -247,7 +239,6 @@ public class AutoTimeZonePreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags({Flags.FLAG_REVAMP_TOGGLES})
     public void toggleOff_revampFlagOn_shouldToggleOffUseLocation() {
         TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
                 /* autoSupported= */ true,
@@ -261,25 +252,6 @@ public class AutoTimeZonePreferenceControllerTest {
         TimeZoneConfiguration configuration = new TimeZoneConfiguration.Builder()
                 .setAutoDetectionEnabled(false)
                 .setGeoDetectionEnabled(false)
-                .build();
-
-        verify(mTimeManager).updateTimeZoneConfiguration(configuration);
-    }
-
-    @Test
-    @DisableFlags({Flags.FLAG_REVAMP_TOGGLES})
-    public void toggleOff_revampFlagOff_shouldToggleOffUseLocation() {
-        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
-                /* autoSupported= */ true,
-                /* autoEnabled= */ true,
-                /* telephonySupported= */ true,
-                /* locationSupported= */ true);
-        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
-
-        mController.setChecked(false);
-
-        TimeZoneConfiguration configuration = new TimeZoneConfiguration.Builder()
-                .setAutoDetectionEnabled(false)
                 .build();
 
         verify(mTimeManager).updateTimeZoneConfiguration(configuration);

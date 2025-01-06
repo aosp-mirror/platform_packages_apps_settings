@@ -16,24 +16,29 @@
 
 package com.android.settings.notification
 
+import android.Manifest.permission.MODIFY_AUDIO_SETTINGS
+import android.Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED
+import android.Manifest.permission.MODIFY_PHONE_STATE
 import android.content.Context
+import android.content.pm.PackageManager.FEATURE_AUTOMOTIVE
 import android.media.AudioManager
 import android.media.AudioManager.STREAM_BLUETOOTH_SCO
 import android.media.AudioManager.STREAM_VOICE_CALL
-import android.os.UserHandle
-import android.os.UserManager.DISALLOW_ADJUST_VOLUME
+import android.os.UserManager
 import androidx.preference.Preference
+import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
-import com.android.settingslib.RestrictedLockUtilsInternal
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
+import com.android.settingslib.datastore.Permissions
+import com.android.settingslib.datastore.and
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.metadata.PreferenceRestrictionProvider
 import com.android.settingslib.metadata.RangeValue
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
@@ -44,7 +49,7 @@ open class CallVolumePreference :
     RangeValue,
     PreferenceAvailabilityProvider,
     PreferenceIconProvider,
-    PreferenceRestrictionProvider {
+    PreferenceRestrictionMixin {
     override val key: String
         get() = KEY
 
@@ -55,18 +60,12 @@ open class CallVolumePreference :
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_call_volume) &&
-                !createAudioHelper(context).isSingleVolume()
+            !createAudioHelper(context).isSingleVolume
 
-    override fun isRestricted(context: Context) =
-        RestrictedLockUtilsInternal.hasBaseUserRestriction(
-            context,
-            DISALLOW_ADJUST_VOLUME,
-            UserHandle.myUserId()
-        ) || RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
-            context,
-            DISALLOW_ADJUST_VOLUME,
-            UserHandle.myUserId()
-        ) != null
+    override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
+
+    override val restrictionKeys
+        get() = arrayOf(UserManager.DISALLOW_ADJUST_VOLUME)
 
     override fun storage(context: Context): KeyValueStore {
         val helper = createAudioHelper(context)
@@ -83,8 +82,24 @@ open class CallVolumePreference :
         }
     }
 
-    override fun getWritePermit(context: Context, value: Int?, myUid: Int, callingUid: Int) =
+    override fun getReadPermissions(context: Context) = Permissions.EMPTY
+
+    override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
+
+    override fun getWritePermissions(context: Context): Permissions? {
+        var permissions = Permissions.allOf(MODIFY_AUDIO_SETTINGS, MODIFY_PHONE_STATE)
+        if (context.packageManager.hasSystemFeature(FEATURE_AUTOMOTIVE)) {
+            permissions = permissions and MODIFY_AUDIO_SETTINGS_PRIVILEGED
+        }
+        return permissions
+    }
+
+    override fun getWritePermit(context: Context, value: Int?, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     override fun getMinValue(context: Context) =
         createAudioHelper(context).getMinVolume(getAudioStream(context))

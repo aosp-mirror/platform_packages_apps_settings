@@ -87,6 +87,12 @@ public class BluetoothDetailsCompanionAppsController extends BluetoothDetailsCon
         mProfilesContainer.setLayoutResource(R.layout.preference_companion_app);
     }
 
+    @Override
+    public boolean isAvailable() {
+        // Do not show this preference for now. More details in b/191992001#comment7
+        return false;
+    }
+
     private List<AssociationInfo> getAssociations(String address) {
         return filter(
                 mCompanionDeviceManager.getAllAssociations(),

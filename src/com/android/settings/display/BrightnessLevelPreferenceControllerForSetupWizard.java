@@ -20,8 +20,12 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.accessibility.Flags;
+import com.android.settingslib.RestrictedPreferenceHelper;
+import com.android.settingslib.RestrictedPreferenceHelperProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 /**
@@ -31,15 +35,35 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 public class BrightnessLevelPreferenceControllerForSetupWizard extends
         BrightnessLevelPreferenceController {
 
+    private RestrictedPreferenceHelper mRestrictedPreferenceHelper;
+
     public BrightnessLevelPreferenceControllerForSetupWizard(@NonNull Context context,
             @Nullable Lifecycle lifecycle) {
         super(context, lifecycle);
     }
 
+    private boolean isRestricted() {
+        if (mRestrictedPreferenceHelper == null) {
+            return false;
+        }
+        return mRestrictedPreferenceHelper.isDisabledByAdmin()
+                || mRestrictedPreferenceHelper.isDisabledByEcm();
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        Preference preference = screen.findPreference(getPreferenceKey());
+        if (preference instanceof RestrictedPreferenceHelperProvider helperProvider) {
+            mRestrictedPreferenceHelper = helperProvider.getRestrictedPreferenceHelper();
+            preference.setVisible(!isRestricted());
+        }
+    }
+
     @Override
     @AvailabilityStatus
     public int getAvailabilityStatus() {
-        if (!Flags.addBrightnessSettingsInSuw()) {
+        if (!Flags.addBrightnessSettingsInSuw() || isRestricted()) {
             return CONDITIONALLY_UNAVAILABLE;
         }
         return super.getAvailabilityStatus();

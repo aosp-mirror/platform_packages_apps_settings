@@ -23,6 +23,7 @@ import android.os.UserManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
@@ -32,6 +33,7 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settings.R;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.widget.SettingsThemeHelper;
 import com.android.settingslib.wifi.WifiEnterpriseRestrictionUtils;
 
 /**
@@ -61,6 +63,20 @@ public class AddWifiNetworkPreference extends RestrictedPreference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
+
+        // Set padding to expressive style
+        if (SettingsThemeHelper.isExpressiveTheme(getContext())) {
+            final int paddingStart = getContext().getResources().getDimensionPixelSize(
+                    com.android.settingslib.widget.theme
+                            .R.dimen.settingslib_expressive_space_extrasmall4);
+            final int paddingEnd = getContext().getResources().getDimensionPixelSize(
+                    com.android.settingslib.widget.theme
+                            .R.dimen.settingslib_expressive_space_small3);
+            LinearLayout iconFrame = (LinearLayout) holder.findViewById(
+                    com.android.settingslib.R.id.icon_frame);
+            iconFrame.setPaddingRelative(paddingStart, iconFrame.getPaddingTop(),
+                    paddingEnd, iconFrame.getPaddingBottom());
+        }
 
         final ImageButton scanButton = (ImageButton) holder.findViewById(R.id.button_icon);
         scanButton.setImageDrawable(mScanIconDrawable);

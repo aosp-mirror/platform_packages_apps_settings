@@ -38,6 +38,7 @@ public class PointerStrokeStylePreference extends Preference {
     public PointerStrokeStylePreference(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         setLayoutResource(R.layout.pointer_icon_stroke_style_layout);
+        setSelectable(false);
     }
 
     @Override

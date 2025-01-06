@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -376,21 +378,7 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void onCreate_flagDisabled_haveRegisterToSpecificUrisAndActions() {
-        setupFragment();
-
-        assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS,
-                AccessibilitySettingsContentObserver.class).isTrue();
-        assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE,
-                AccessibilitySettingsContentObserver.class).isTrue();
-        assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_QS_TARGETS,
-                AccessibilitySettingsContentObserver.class).isFalse();
-    }
-
-    @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void onCreate_flagEnabled_haveRegisterToSpecificUrisAndActions() {
+    public void onCreate_haveRegisterToSpecificUrisAndActions() {
         setupFragment();
 
         assertUriObserversContainsClazz(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS,
@@ -463,7 +451,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_CHECK_PREBUNDLED_IS_PREINSTALLED)
     public void testNonPreinstalledApp_IncludedInDownloadedCategory() {
         mShadowAccessibilityManager.setInstalledAccessibilityServiceList(
                 List.of(getMockAccessibilityServiceInfo(
@@ -579,9 +566,8 @@ public class AccessibilitySettingsTest {
     }
 
     private void setShortcutEnabled(ComponentName componentName, boolean enabled) {
-        Settings.Secure.putString(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS,
-                enabled ? componentName.flattenToString() : "");
+        mShadowAccessibilityManager.setAccessibilityShortcutTargets(
+                SOFTWARE, (enabled) ? List.of(componentName.flattenToString()) : List.of());
     }
 
     private BooleanSubject assertUriObserversContainsClazz(

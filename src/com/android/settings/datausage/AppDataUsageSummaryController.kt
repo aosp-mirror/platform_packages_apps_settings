@@ -17,7 +17,6 @@
 package com.android.settings.datausage
 
 import android.content.Context
-import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
@@ -28,6 +27,7 @@ import com.android.settings.datausage.lib.NetworkUsageDetailsData
 import com.android.settings.spa.preference.ComposePreferenceController
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
+import com.android.settingslib.spa.widget.ui.Category
 import com.android.settingslib.spaprivileged.framework.compose.getPlaceholder
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
@@ -60,7 +60,7 @@ class AppDataUsageSummaryController(context: Context, preferenceKey: String) :
 
     @Composable
     override fun Content() {
-        Column {
+        Category {
             val totalUsage by totalUsageFlow.collectAsStateWithLifecycle(emptyDataUsage)
             val foregroundUsage by foregroundUsageFlow.collectAsStateWithLifecycle(emptyDataUsage)
             val backgroundUsage by backgroundUsageFlow.collectAsStateWithLifecycle(emptyDataUsage)

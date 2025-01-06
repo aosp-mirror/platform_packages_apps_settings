@@ -167,6 +167,7 @@ public class NetworkProviderSettingsTest {
         });
         doReturn(mContext).when(mNetworkProviderSettings).getContext();
         doReturn(mPreferenceManager).when(mNetworkProviderSettings).getPreferenceManager();
+        doReturn(null).when(mNetworkProviderSettings).getPreferenceScreenBindingKey(mContext);
         doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
         doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);

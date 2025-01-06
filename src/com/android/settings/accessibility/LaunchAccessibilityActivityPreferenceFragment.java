@@ -72,16 +72,11 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
     }
 
     @Override
-    protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        // Do nothing.
-    }
-
-    @Override
     protected void onProcessArguments(Bundle arguments) {
         super.onProcessArguments(arguments);
         mComponentName = arguments.getParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME);
         final ActivityInfo info = getAccessibilityShortcutInfo().getActivityInfo();
-        mPackageName = info.loadLabel(getPackageManager()).toString();
+        mFeatureName = info.loadLabel(getPackageManager());
 
         // Settings animated image.
         final int animatedImageRes = arguments.getInt(

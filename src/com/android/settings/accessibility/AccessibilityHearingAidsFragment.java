@@ -97,17 +97,6 @@ public class AccessibilityHearingAidsFragment extends AccessibilityShortcutPrefe
     }
 
     @Override
-    protected ComponentName getTileComponentName() {
-        return AccessibilityShortcutController.ACCESSIBILITY_HEARING_AIDS_TILE_COMPONENT_NAME;
-    }
-
-    @Override
-    protected CharSequence getTileTooltipContent(int type) {
-        // No tooltip to be shown
-        return null;
-    }
-
-    @Override
     protected boolean showGeneralCategory() {
         // Have static preference under dynamically created PreferenceCategory KEY_GENERAL_CATEGORY.
         // In order to modify that, we need to use our own PreferenceCategory for this page.

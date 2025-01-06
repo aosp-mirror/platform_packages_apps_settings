@@ -274,7 +274,6 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         }
         if (mDailyChartView != dailyChartView || mHourlyChartView != hourlyChartView) {
             mHandler.post(() -> setBatteryChartViewInner(dailyChartView, hourlyChartView));
-            animateBatteryChartViewGroup();
         }
         if (mBatteryChartViewGroup != null) {
             final View grandparentView = (View) mBatteryChartViewGroup.getParent();

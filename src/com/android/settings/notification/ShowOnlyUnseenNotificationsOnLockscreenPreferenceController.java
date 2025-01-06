@@ -57,6 +57,10 @@ public class ShowOnlyUnseenNotificationsOnLockscreenPreferenceController
 
     @Override
     public int getAvailabilityStatus() {
+        // Hide when the notifications on lock screen page flag is enabled.
+        if (Flags.notificationLockScreenSettings()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
         if (Flags.notificationMinimalism()) {
             if (!isNotifOnLockScreenEnabled()) {
                 return DISABLED_DEPENDENT_SETTING;

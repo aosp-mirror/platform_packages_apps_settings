@@ -92,12 +92,20 @@ public class Settings extends SettingsActivity {
     public static class AvailableVirtualKeyboardActivity extends SettingsActivity { /* empty */ }
     public static class KeyboardLayoutPickerActivity extends SettingsActivity { /* empty */ }
     public static class PhysicalKeyboardActivity extends SettingsActivity { /* empty */ }
+    public static class PhysicalKeyboardLayoutPickerActivity extends SettingsActivity {
+        /* empty */
+    }
     public static class InputMethodAndSubtypeEnablerActivity extends SettingsActivity { /* empty */ }
     public static class SpellCheckersSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocalePickerActivity extends SettingsActivity { /* empty */ }
     public static class LanguageSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for the regional preferences settings. */
+    public static class RegionSettingsActivity extends SettingsActivity { /* empty */ }
     public static class RegionalPreferencesActivity extends SettingsActivity { /* empty */ }
+    public static class TemperatureUnitSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class FirstDayOfWeekSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class MeasurementSystemSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class NumberingSystemSettingsActivity extends SettingsActivity { /* empty */ }
     public static class KeyboardSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for the navigation mode settings. */
     public static class NavigationModeSettingsActivity extends SettingsActivity { /* empty */ }
@@ -126,6 +134,9 @@ public class Settings extends SettingsActivity {
     public static class AccessibilityDaltonizerSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for lockscreen settings. */
     public static class LockScreenSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Activity for notifications on lockscreen settings. */
+    public static class LockScreenNotificationsSettingsActivity
+            extends SettingsActivity { /* empty */ }
     /** Activity for bluetooth pairing settings. */
     public static class BlueToothPairingActivity extends SettingsActivity { /* empty */ }
     /** Activity for Reduce Bright Colors. */

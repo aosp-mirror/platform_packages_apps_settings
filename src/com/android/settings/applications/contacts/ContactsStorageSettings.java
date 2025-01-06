@@ -36,7 +36,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceGroup;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -57,12 +57,14 @@ import java.util.Map;
  */
 @SearchIndexable
 public class ContactsStorageSettings extends DashboardFragment
-        implements SelectorWithWidgetPreference.OnClickListener, OnPreferenceClickListener {
+        implements SelectorWithWidgetPreference.OnClickListener, OnPreferenceClickListener,
+        AuthenticatorHelper.OnAccountsUpdateListener {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.contacts_storage_settings);
     private static final String TAG = "ContactsStorageSettings";
     private static final String PREF_KEY_ADD_ACCOUNT = "add_account";
     private static final String PREF_KEY_DEVICE_ONLY = "device_only_account_preference";
+    private static final String PREF_KEY_ACCOUNT_CATEGORY = "account_category";
     private final Map<String, DefaultAccountAndState> mAccountMap = new HashMap<>();
     private AuthenticatorHelper mAuthenticatorHelper;
 
@@ -70,7 +72,15 @@ public class ContactsStorageSettings extends DashboardFragment
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mAuthenticatorHelper = new AuthenticatorHelper(context,
-                new UserHandle(UserHandle.myUserId()), null);
+                new UserHandle(UserHandle.myUserId()), this);
+        mAuthenticatorHelper.listenToAccountUpdates();
+        preloadEligibleAccountIcon();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mAuthenticatorHelper.stopListeningToAccountUpdates();
     }
 
     @UiThread
@@ -119,6 +129,12 @@ public class ContactsStorageSettings extends DashboardFragment
     }
 
     @Override
+    public void onAccountsUpdate(UserHandle userHandle) {
+        preloadEligibleAccountIcon();
+        refreshUI();
+    }
+
+    @Override
     public void onCreatePreferences(@NonNull Bundle savedInstanceState,
             @NonNull String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
@@ -130,23 +146,34 @@ public class ContactsStorageSettings extends DashboardFragment
         // Clear all the accounts stored in the map and later on re-fetch the eligible accounts
         // when creating eligible account preferences.
         mAccountMap.clear();
-        final PreferenceScreen screen = getPreferenceScreen();
+        final PreferenceGroup preferenceGroup = findPreference(PREF_KEY_ACCOUNT_CATEGORY);
+        preferenceGroup.removeAll();
         // If the default account is SIM, we should show in the page, otherwise don't show.
         SelectorWithWidgetPreference simAccountPreference = buildSimAccountPreference();
         if (simAccountPreference != null) {
-            getPreferenceScreen().addPreference(simAccountPreference);
+            preferenceGroup.addPreference(simAccountPreference);
         }
         List<Account> accounts = DefaultAccount.getEligibleCloudAccounts(getContentResolver());
         for (int i = 0; i < accounts.size(); i++) {
-            screen.addPreference(buildCloudAccountPreference(accounts.get(i), /*order=*/i));
+            preferenceGroup.addPreference(
+                    buildCloudAccountPreference(accounts.get(i), /*order=*/i));
         }
         // If there's no eligible account types, the "Add Account" preference should
         // not be shown to the users.
         if (getEligibleAccountTypes().length > 0) {
-            screen.addPreference(buildAddAccountPreference(accounts.isEmpty()));
+            preferenceGroup.addPreference(buildAddAccountPreference(accounts.isEmpty()));
         }
         setupDeviceOnlyPreference();
-        setDefaultAccountPreference();
+        setDefaultAccountPreference(preferenceGroup);
+    }
+
+    private void preloadEligibleAccountIcon() {
+        String[] accountTypes = getEligibleAccountTypes();
+        for (String accountType : accountTypes) {
+            // Preload the drawable for the account type to avoid the latency when rendering the
+            // account preference.
+            mAuthenticatorHelper.preloadDrawableForType(getContext(), accountType);
+        }
     }
 
     private void setupDeviceOnlyPreference() {
@@ -157,7 +184,7 @@ public class ContactsStorageSettings extends DashboardFragment
         }
     }
 
-    private void setDefaultAccountPreference() {
+    private void setDefaultAccountPreference(PreferenceGroup preferenceGroup) {
         DefaultAccountAndState currentDefaultAccountAndState =
                 DefaultAccount.getDefaultAccountForNewContacts(getContentResolver());
         String preferenceKey = getAccountHashCode(currentDefaultAccountAndState);
@@ -170,20 +197,21 @@ public class ContactsStorageSettings extends DashboardFragment
             preference = getPreferenceScreen().findPreference(preferenceKey);
         } else if (preferenceKey != null && currentDefaultAccount != null) {
             preference = buildCloudAccountPreference(currentDefaultAccount, mAccountMap.size());
-            getPreferenceScreen().addPreference(preference);
+            preferenceGroup.addPreference(preference);
         }
         if (preference != null) {
             preference.setChecked(true);
         }
     }
 
-    //TODO: Add preference category on account preferences.
     private SelectorWithWidgetPreference buildCloudAccountPreference(Account account, int order) {
         SelectorWithWidgetPreference preference = new SelectorWithWidgetPreference(
                 getPrefContext());
         DefaultAccountAndState accountAndState = DefaultAccountAndState.ofCloud(account);
         String preferenceKey = getAccountHashCode(accountAndState);
-        preference.setTitle(mAuthenticatorHelper.getLabelForType(getPrefContext(), account.type));
+        String accountPreferenceTitle = getString(R.string.contacts_storage_account_title,
+                mAuthenticatorHelper.getLabelForType(getPrefContext(), account.type));
+        preference.setTitle(accountPreferenceTitle);
         preference.setIcon(mAuthenticatorHelper.getDrawableForType(getPrefContext(), account.type));
         preference.setSummary(account.name);
         preference.setKey(preferenceKey);

@@ -68,6 +68,9 @@ public class ConnectedBluetoothDeviceUpdaterTest {
 
     private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
     private static final String TEST_EXCLUSIVE_MANAGER = "com.test.manager";
+    private static final String TEMP_BOND_METADATA =
+            "<TEMP_BOND_TYPE>le_audio_sharing</TEMP_BOND_TYPE>";
+    private static final int METADATA_FAST_PAIR_CUSTOMIZED_FIELDS = 25;
 
     @Rule
     public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
@@ -112,16 +115,11 @@ public class ConnectedBluetoothDeviceUpdaterTest {
         when(mCachedBluetoothDevice.getAddress()).thenReturn(MAC_ADDRESS);
         when(mCachedBluetoothDevice.getDrawableWithDescription()).thenReturn(pairs);
         mShadowCachedBluetoothDeviceManager.setCachedDevicesCopy(mCachedDevices);
-        mBluetoothDeviceUpdater = spy(new ConnectedBluetoothDeviceUpdater(mContext,
-                mDevicePreferenceCallback, /* metricsCategory= */ 0));
-        mBluetoothDeviceUpdater.setPrefContext(mContext);
-        doNothing().when(mBluetoothDeviceUpdater).addPreference(any());
-        doNothing().when(mBluetoothDeviceUpdater).removePreference(any());
     }
 
     @Test
     public void onAudioModeChanged_hfpDeviceConnected_notInCall_addPreference() {
-        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
@@ -133,7 +131,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
 
     @Test
     public void onAudioModeChanged_hfpDeviceConnected_inCall_removePreference() {
-        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_IN_CALL);
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
@@ -145,7 +143,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
 
     @Test
     public void onAudioModeChanged_a2dpDeviceConnected_notInCall_removePreference() {
-        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedA2dpDevice()).thenReturn(true);
@@ -157,7 +155,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
 
     @Test
     public void onAudioModeChanged_a2dpDeviceConnected_inCall_addPreference() {
-        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_IN_CALL);
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedA2dpDevice()).thenReturn(true);
@@ -169,7 +167,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
 
     @Test
     public void onProfileConnectionStateChanged_a2dpDeviceConnected_inCall_addPreference() {
-        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_IN_CALL);
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedA2dpDevice()).thenReturn(true);
@@ -182,7 +180,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
 
     @Test
     public void onProfileConnectionStateChanged_deviceIsNotInList_inCall_invokesRemovePreference() {
-        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_IN_CALL);
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedA2dpDevice()).thenReturn(true);
@@ -196,7 +194,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
 
     @Test
     public void onProfileConnectionStateChanged_a2dpDeviceConnected_notInCall_removePreference() {
-        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedA2dpDevice()).thenReturn(true);
@@ -209,7 +207,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
 
     @Test
     public void onProfileConnectionStateChanged_hfpDeviceConnected_inCall_removePreference() {
-        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_IN_CALL);
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
@@ -222,7 +220,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
 
     @Test
     public void onProfileConnectionStateChanged_hfpDeviceConnected_notInCall_addPreference() {
-        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
@@ -236,7 +234,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
     @Test
     public void onProfileConnectionStateChanged_ashaHearingAidConnected_inCall_removePreference()
     {
-        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_IN_CALL);
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
@@ -250,7 +248,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
     @Test
     public void onProfileConnectionStateChanged_ashaHearingAidConnected_notInCall_removePreference()
     {
-        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater.
                 isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedAshaHearingAidDevice()).thenReturn(true);
@@ -263,7 +261,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
 
     @Test
     public void onProfileConnectionStateChanged_leAudioDeviceConnected_inCall_removesPreference() {
-        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_IN_CALL);
         when(mBluetoothDeviceUpdater
                 .isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedLeAudioDevice()).thenReturn(true);
@@ -277,7 +275,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
     @Test
     public void onProfileConnectionStateChanged_leAudioDeviceConnected_notInCall_removesPreference()
     {
-        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater
                 .isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedLeAudioDevice()).thenReturn(true);
@@ -290,7 +288,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
     @Test
     public void onProfileConnectionStateChanged_deviceIsNotInList_inCall_invokesRemovesPreference()
     {
-        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_IN_CALL);
         when(mBluetoothDeviceUpdater
                 .isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedLeAudioDevice()).thenReturn(true);
@@ -305,7 +303,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
     @Test
     public void onProfileConnectionStateChanged_deviceIsNotInList_notInCall_invokesRemovesPreference
             () {
-        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater
                 .isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedLeAudioDevice()).thenReturn(true);
@@ -319,6 +317,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
 
     @Test
     public void onProfileConnectionStateChanged_deviceDisconnected_removePreference() {
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_NORMAL);
         mBluetoothDeviceUpdater.onProfileConnectionStateChanged(mCachedBluetoothDevice,
                 BluetoothProfile.STATE_DISCONNECTED, BluetoothProfile.A2DP);
 
@@ -327,6 +326,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
 
     @Test
     public void addPreference_addPreference_shouldHideSecondTarget() {
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_NORMAL);
         BluetoothDevicePreference btPreference =
                 new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
                         true, BluetoothDevicePreference.SortType.TYPE_DEFAULT);
@@ -340,7 +340,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_ENABLE_HIDE_EXCLUSIVELY_MANAGED_BLUETOOTH_DEVICE)
     public void update_notExclusiveManagedDevice_addDevice() {
-        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater
                 .isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
@@ -356,7 +356,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
     @RequiresFlagsEnabled(Flags.FLAG_ENABLE_HIDE_EXCLUSIVELY_MANAGED_BLUETOOTH_DEVICE)
     public void update_exclusivelyManagedDevice_packageNotInstalled_addDevice()
             throws Exception {
-        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater
                 .isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
@@ -376,7 +376,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
             throws Exception {
         ApplicationInfo appInfo = new ApplicationInfo();
         appInfo.enabled = false;
-        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater
             .isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
@@ -393,7 +393,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
     @RequiresFlagsEnabled(Flags.FLAG_ENABLE_HIDE_EXCLUSIVELY_MANAGED_BLUETOOTH_DEVICE)
     public void update_exclusivelyManagedDevice_packageInstalledAndEnabled_removePreference()
             throws Exception {
-        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_NORMAL);
         when(mBluetoothDeviceUpdater
             .isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
         when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
@@ -406,5 +406,30 @@ public class ConnectedBluetoothDeviceUpdaterTest {
 
         verify(mBluetoothDeviceUpdater).removePreference(mCachedBluetoothDevice);
         verify(mBluetoothDeviceUpdater, never()).addPreference(mCachedBluetoothDevice);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_TEMPORARY_BOND_DEVICES_UI)
+    public void update_temporaryBondDevice_removePreference() {
+        setUpDeviceUpdaterWithAudioMode(AudioManager.MODE_NORMAL);
+        when(mBluetoothDeviceUpdater
+                .isDeviceConnected(any(CachedBluetoothDevice.class))).thenReturn(true);
+        when(mCachedBluetoothDevice.isConnectedHfpDevice()).thenReturn(true);
+        when(mBluetoothDevice.getMetadata(METADATA_FAST_PAIR_CUSTOMIZED_FIELDS))
+                .thenReturn(TEMP_BOND_METADATA.getBytes());
+
+        mBluetoothDeviceUpdater.update(mCachedBluetoothDevice);
+
+        verify(mBluetoothDeviceUpdater).removePreference(mCachedBluetoothDevice);
+        verify(mBluetoothDeviceUpdater, never()).addPreference(mCachedBluetoothDevice);
+    }
+
+    private void setUpDeviceUpdaterWithAudioMode(int audioMode) {
+        mAudioManager.setMode(audioMode);
+        mBluetoothDeviceUpdater = spy(new ConnectedBluetoothDeviceUpdater(mContext,
+                mDevicePreferenceCallback, /* metricsCategory= */ 0));
+        mBluetoothDeviceUpdater.setPrefContext(mContext);
+        doNothing().when(mBluetoothDeviceUpdater).addPreference(any());
+        doNothing().when(mBluetoothDeviceUpdater).removePreference(any());
     }
 }

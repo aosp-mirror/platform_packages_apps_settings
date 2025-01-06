@@ -16,6 +16,9 @@
 
 package com.android.settings.network.telephony;
 
+import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC;
+import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL;
+import static android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING;
 
@@ -56,20 +59,27 @@ import java.util.Set;
 /** Handle Satellite Setting Preference Layout. */
 public class SatelliteSetting extends RestrictedDashboardFragment {
     private static final String TAG = "SatelliteSetting";
-    public static final String PREF_KEY_ABOUT_SATELLITE_MESSAGING = "key_about_satellite_messaging";
-    public static final String PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN =
+    private static final String PREF_KEY_ABOUT_SATELLITE_MESSAGING =
+            "key_about_satellite_messaging";
+    private static final String PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN =
             "key_category_your_satellite_plan";
-    public static final String PREF_KEY_YOUR_SATELLITE_PLAN = "key_your_satellite_plan";
-    public static final String PREF_KEY_CATEGORY_HOW_IT_WORKS = "key_category_how_it_works";
+    private static final String PREF_KEY_YOUR_SATELLITE_PLAN = "key_your_satellite_plan";
+    private static final String PREF_KEY_CATEGORY_HOW_IT_WORKS = "key_category_how_it_works";
+    private static final String PREF_KEY_YOUR_SATELLITE_DATA_PLAN = "key_your_satellite_data_plan";
+    private static final String PREF_KEY_CATEGORY_ABOUT_SATELLITE = "key_category_about_satellite";
     private static final String KEY_FOOTER_PREFERENCE = "satellite_setting_extra_info_footer_pref";
-    public static final String SUB_ID = "sub_id";
+
+    static final String SUB_ID = "sub_id";
+    static final String EXTRA_IS_SERVICE_DATA_TYPE = "is_service_data_type";
+    static final String EXTRA_IS_SMS_AVAILABLE_FOR_MANUAL_TYPE = "is_sms_available";
 
     private Activity mActivity;
-    private TelephonyManager mTelephonymanager;
-    private CarrierConfigManager mCarrierConfigManager;
     private SatelliteManager mSatelliteManager;
     private PersistableBundle mConfigBundle;
-    private int mSubId;
+    private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+    private String mSimOperatorName = "";
+    private boolean mIsServiceDataType = false;
+    private boolean mIsSmsAvailableForManualType = false;
 
     public SatelliteSetting() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
@@ -102,8 +112,8 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
 
         mSubId = mActivity.getIntent().getIntExtra(SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mConfigBundle = fetchCarrierConfigData(mSubId);
 
-        mCarrierConfigManager = mActivity.getSystemService(CarrierConfigManager.class);
         if (!isSatelliteAttachSupported(mSubId)) {
             Log.d(TAG, "SatelliteSettings: KEY_SATELLITE_ATTACH_SUPPORTED_BOOL is false, "
                     + "do nothing.");
@@ -111,13 +121,21 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
             return;
         }
 
-        mTelephonymanager = mActivity.getSystemService(TelephonyManager.class);
+        mIsServiceDataType = getIntent().getBooleanExtra(EXTRA_IS_SERVICE_DATA_TYPE, false);
+        mIsSmsAvailableForManualType = getIntent().getBooleanExtra(
+                EXTRA_IS_SMS_AVAILABLE_FOR_MANUAL_TYPE, false);
+        mSimOperatorName = getSystemService(TelephonyManager.class).getSimOperatorName(mSubId);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        updateDynamicPreferenceViews();
+        boolean isSatelliteEligible = isSatelliteEligible();
+        updateTitle();
+        updateAboutSatelliteContent();
+        updateMobilePlan(isSatelliteEligible);
+        updateHowItWorksContent(isSatelliteEligible);
+        updateFooterContent();
     }
 
     @Override
@@ -130,31 +148,47 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
         return R.xml.satellite_setting;
     }
 
-    private void updateDynamicPreferenceViews() {
-        String operatorName = mTelephonymanager.getSimOperatorName(mSubId);
-        boolean isSatelliteEligible = isSatelliteEligible();
+    private void updateTitle() {
+        getActivity().setTitle(getSubjectString());
+    }
 
-        // About satellite messaging
+    // About satellite content
+    private void updateAboutSatelliteContent() {
+        Preference categoryTitle = findPreference(PREF_KEY_CATEGORY_ABOUT_SATELLITE);
+        categoryTitle.setTitle(
+                getString(R.string.category_name_about_satellite_messaging,
+                        getDescriptionString()));
+
         Preference preference = findPreference(PREF_KEY_ABOUT_SATELLITE_MESSAGING);
         preference.setTitle(
-                getResources().getString(R.string.title_about_satellite_setting, operatorName));
+                getResources().getString(R.string.title_about_satellite_setting, mSimOperatorName));
+    }
 
+    private void updateMobilePlan(boolean isSatelliteEligible) {
         // Your mobile plan
         PreferenceCategory prefCategory = findPreference(PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN);
         prefCategory.setTitle(getResources().getString(R.string.category_title_your_satellite_plan,
-                operatorName));
+                mSimOperatorName));
+        Preference messagingPreference = findPreference(PREF_KEY_YOUR_SATELLITE_PLAN);
 
-        preference = findPreference(PREF_KEY_YOUR_SATELLITE_PLAN);
-        Drawable icon;
+        Drawable icon = getContext().getDrawable(R.drawable.ic_check_circle_24px);
         if (isSatelliteEligible) {
             /* In case satellite is allowed by carrier's entitlement server, the page will show
                the check icon with guidance that satellite is included in user's mobile plan */
-            preference.setTitle(R.string.title_have_satellite_plan);
-            icon = getContext().getDrawable(R.drawable.ic_check_circle_24px);
+            messagingPreference.setTitle(R.string.title_have_satellite_plan);
+            if (com.android.settings.flags.Flags.satelliteOemSettingsUxMigration()) {
+                if (mIsServiceDataType) {
+                    Preference connectivityPreference = findPreference(
+                            PREF_KEY_YOUR_SATELLITE_DATA_PLAN);
+                    connectivityPreference.setTitle(R.string.title_have_satellite_data_plan);
+                    connectivityPreference.setIcon(icon);
+                    connectivityPreference.setVisible(true);
+                }
+            }
         } else {
             /* Or, it will show the blocked icon with the guidance that satellite is not included
                in user's mobile plan */
-            preference.setTitle(R.string.title_no_satellite_plan);
+            messagingPreference.setTitle(R.string.title_no_satellite_plan);
             /* And, the link url provides more information via web page will be shown */
             SpannableString spannable = new SpannableString(
                     getResources().getString(R.string.summary_add_satellite_setting));
@@ -162,10 +196,10 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
                     Spanned.SPAN_INCLUSIVE_INCLUSIVE);
             spannable.setSpan(new StyleSpan(Typeface.BOLD), 0, spannable.length(),
                     Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-            preference.setSummary(spannable);
+            messagingPreference.setSummary(spannable);
             /* The link will lead users to a guide page */
-            preference.setOnPreferenceClickListener(pref -> {
-                String url = readSatelliteMoreInfoString(mSubId);
+            messagingPreference.setOnPreferenceClickListener(pref -> {
+                String url = readSatelliteMoreInfoString();
                 if (!url.isEmpty()) {
                     Uri uri = Uri.parse(url);
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
@@ -173,11 +207,13 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
                 }
                 return true;
             });
-            icon = getResources().getDrawable(R.drawable.ic_block_24px);
+            icon = getResources().getDrawable(R.drawable.ic_block_24px, null);
         }
         icon.setTintList(Utils.getColorAttr(getContext(), android.R.attr.textColorPrimary));
-        preference.setIcon(icon);
+        messagingPreference.setIcon(icon);
+    }
 
+    private void updateHowItWorksContent(boolean isSatelliteEligible) {
         /* Composes "How it works" section, which guides how users can use satellite messaging, when
            satellite messaging is included in user's mobile plan, or it'll will be grey out. */
         if (!isSatelliteEligible) {
@@ -185,16 +221,18 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
             category.setEnabled(false);
             category.setShouldDisableView(true);
         }
+    }
 
+    private void updateFooterContent() {
         // More about satellite messaging
         FooterPreference footerPreference = findPreference(KEY_FOOTER_PREFERENCE);
         if (footerPreference != null) {
             footerPreference.setSummary(
                     getResources().getString(R.string.satellite_setting_summary_more_information,
-                            operatorName));
+                            getSubjectString(), mSimOperatorName));
 
             final String[] link = new String[1];
-            link[0] = readSatelliteMoreInfoString(mSubId);
+            link[0] = readSatelliteMoreInfoString();
             if (link[0] != null && !link[0].isEmpty()) {
                 footerPreference.setLearnMoreAction(view -> {
                     if (!link[0].isEmpty()) {
@@ -205,13 +243,17 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
                         }
                     }
                 });
+
                 footerPreference.setLearnMoreText(
-                        getResources().getString(R.string.more_about_satellite_messaging));
+                        getString(R.string.more_about_satellite_messaging, getDescriptionString()));
             }
         }
     }
 
     private boolean isSatelliteEligible() {
+        if (isCarrierRoamingNtnConnectedTypeManual()) {
+            return mIsSmsAvailableForManualType;
+        }
         try {
             Set<Integer> restrictionReason =
                     mSatelliteManager.getAttachRestrictionReasonsForCarrier(mSubId);
@@ -223,26 +265,63 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
         }
     }
 
-    private String readSatelliteMoreInfoString(int subId) {
-        if (mConfigBundle == null) {
-            mConfigBundle = mCarrierConfigManager.getConfigForSubId(subId,
-                    KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING);
-            if (mConfigBundle.isEmpty()) {
+    private PersistableBundle fetchCarrierConfigData(int subId) {
+        CarrierConfigManager carrierConfigManager = mActivity.getSystemService(
+                CarrierConfigManager.class);
+        PersistableBundle bundle = CarrierConfigManager.getDefaultConfig();
+        try {
+            bundle = carrierConfigManager.getConfigForSubId(subId,
+                    KEY_SATELLITE_ATTACH_SUPPORTED_BOOL,
+                    KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING,
+                    KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT);
+            if (bundle.isEmpty()) {
                 Log.d(TAG, "SatelliteSettings: getDefaultConfig");
-                mConfigBundle = CarrierConfigManager.getDefaultConfig();
+                bundle = CarrierConfigManager.getDefaultConfig();
             }
+        } catch (IllegalStateException exception) {
+            Log.d(TAG, "SatelliteSettings exception : " + exception);
         }
+        return bundle;
+    }
+
+    private String readSatelliteMoreInfoString() {
         return mConfigBundle.getString(KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING, "");
     }
 
+    private boolean isCarrierRoamingNtnConnectedTypeManual() {
+        return CARRIER_ROAMING_NTN_CONNECT_MANUAL == mConfigBundle.getInt(
+                KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT, CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC);
+    }
+
     private boolean isSatelliteAttachSupported(int subId) {
-        PersistableBundle bundle = mCarrierConfigManager.getConfigForSubId(subId,
-                KEY_SATELLITE_ATTACH_SUPPORTED_BOOL);
-        if (bundle.isEmpty()) {
-            Log.d(TAG, "SatelliteSettings: getDefaultConfig");
-            bundle = CarrierConfigManager.getDefaultConfig();
+
+        return mConfigBundle.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false);
+    }
+
+    // This is for a word which first letter is uppercase. e.g. Satellite messaging.
+    private String getSubjectString() {
+        int result;
+        if (com.android.settings.flags.Flags.satelliteOemSettingsUxMigration()) {
+            result = mIsServiceDataType
+                    ? R.string.title_satellite_setting_connectivity
+                    : R.string.satellite_setting_title;
+        } else {
+            result = R.string.satellite_setting_title;
         }
-        return bundle.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false);
+        return getString(result);
+    }
+
+    // This is for a word without uppercase letter. e.g. satellite messaging.
+    private String getDescriptionString() {
+        int result;
+        if (com.android.settings.flags.Flags.satelliteOemSettingsUxMigration()) {
+            result = mIsServiceDataType
+                    ? R.string.description_satellite_setting_connectivity
+                    : R.string.description_satellite_setting_messaging;
+        } else {
+            result = R.string.satellite_setting_title;
+        }
+        return getString(result);
     }
 
     private static void loge(String message) {

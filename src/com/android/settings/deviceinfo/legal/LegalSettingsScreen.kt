@@ -23,7 +23,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen
+@ProvidePreferenceScreen(LegalSettingsScreen.KEY)
 open class LegalSettingsScreen : PreferenceScreenCreator {
     override val key: String
         get() = KEY
@@ -36,7 +36,7 @@ open class LegalSettingsScreen : PreferenceScreenCreator {
     override fun fragmentClass() = LegalSettings::class.java
 
     override fun getPreferenceHierarchy(context: Context) =
-        preferenceHierarchy(this) {
+        preferenceHierarchy(context, this) {
             +LegalPreference("copyright", R.string.copyright_title, "android.settings.COPYRIGHT")
             +LegalPreference("license", R.string.license_title, "android.settings.LICENSE")
             +LegalPreference("terms", R.string.terms_title, "android.settings.TERMS")

@@ -38,6 +38,7 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
@@ -676,7 +677,7 @@ public final class DatabaseUtils {
     static List<ContentValues> sendBatteryEntryData(
             final Context context,
             final long snapshotTimestamp,
-            final List<BatteryEntry> batteryEntryList,
+            @Nullable final List<BatteryEntry> batteryEntryList,
             final BatteryUsageStats batteryUsageStats,
             final boolean isFullChargeStart) {
         final long startTime = System.currentTimeMillis();

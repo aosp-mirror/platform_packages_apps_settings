@@ -125,7 +125,7 @@ public class DefaultSubscriptionControllerTest {
 
     private SubscriptionInfoEntity setupSubscriptionInfoEntity(String subId, String displayName) {
         return new SubscriptionInfoEntity(subId, 1, false, false, displayName, false, false, true,
-                true, false);
+                true);
     }
 
     @Test

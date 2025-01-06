@@ -41,6 +41,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
  * will disable the entire settings screen once the settings is turned OFF. All device haptics will
  * be disabled by this setting, except the flagged alerts and accessibility touch feedback.
  */
+// LINT.IfChange
 public class VibrationMainSwitchPreferenceController extends SettingsMainSwitchPreferenceController
         implements LifecycleObserver, OnStart, OnStop {
 
@@ -106,3 +107,4 @@ public class VibrationMainSwitchPreferenceController extends SettingsMainSwitchP
         return R.string.menu_key_accessibility;
     }
 }
+// LINT.ThenChange(VibrationMainSwitchPreference.kt)

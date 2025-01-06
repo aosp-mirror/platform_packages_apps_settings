@@ -25,6 +25,7 @@ import android.app.time.TimeZoneCapabilities;
 import android.app.time.TimeZoneCapabilitiesAndConfig;
 import android.app.time.TimeZoneConfiguration;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -32,7 +33,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.flags.Flags;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -68,7 +68,7 @@ public class LocationTimeZoneDetectionPreferenceController
         // forceRefresh set to true as the location toggle may have been turned off by switching off
         // automatic time zone
         TimeZoneCapabilitiesAndConfig capabilitiesAndConfig =
-                getTimeZoneCapabilitiesAndConfig(/*forceRefresh=*/ Flags.revampToggles());
+                getTimeZoneCapabilitiesAndConfig(/*forceRefresh=*/ true);
         TimeZoneConfiguration configuration = capabilitiesAndConfig.getConfiguration();
         return configuration.isGeoDetectionEnabled();
     }
@@ -137,13 +137,10 @@ public class LocationTimeZoneDetectionPreferenceController
         if (capability == CAPABILITY_NOT_SUPPORTED || capability == CAPABILITY_NOT_ALLOWED) {
             return UNSUPPORTED_ON_DEVICE;
         } else if (capability == CAPABILITY_NOT_APPLICABLE || capability == CAPABILITY_POSSESSED) {
-            if (Flags.revampToggles()) {
-                return isAutoTimeZoneEnabled() ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
-            } else {
-                return AVAILABLE;
-            }
+            return isAutoTimeZoneEnabled() ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
         } else {
-            throw new IllegalStateException("Unknown capability=" + capability);
+            Log.e(TAG, "Unknown capability=" + capability);
+            return UNSUPPORTED_ON_DEVICE;
         }
     }
 
@@ -151,10 +148,8 @@ public class LocationTimeZoneDetectionPreferenceController
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        if (Flags.revampToggles()) {
-            // enable / disable the toggle based on automatic time zone being enabled or not
-            preference.setEnabled(isAutoTimeZoneEnabled());
-        }
+        // enable / disable the toggle based on automatic time zone being enabled or not
+        preference.setEnabled(isAutoTimeZoneEnabled());
     }
 
     @Override

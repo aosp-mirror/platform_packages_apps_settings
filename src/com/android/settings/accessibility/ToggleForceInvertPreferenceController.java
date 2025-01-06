@@ -16,11 +16,16 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
 import android.content.Context;
+import android.content.res.Configuration;
 import android.provider.Settings;
 import android.view.accessibility.Flags;
 
-import androidx.annotation.VisibleForTesting;
+import androidx.annotation.NonNull;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -28,27 +33,28 @@ import com.android.settings.core.TogglePreferenceController;
 /** A toggle preference controller for force invert (force dark). */
 public class ToggleForceInvertPreferenceController extends TogglePreferenceController {
 
-    public static final String SETTINGS_KEY =
-            Settings.Secure.ACCESSIBILITY_FORCE_INVERT_COLOR_ENABLED;
-
-    @VisibleForTesting
-    static final int ON = 1;
-    @VisibleForTesting
-    static final int OFF = 0;
-
     public ToggleForceInvertPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
     @Override
     public boolean isChecked() {
-        return Settings.Secure.getInt(mContext.getContentResolver(), SETTINGS_KEY, OFF) != OFF;
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_FORCE_INVERT_COLOR_ENABLED, OFF) != OFF;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putInt(mContext.getContentResolver(),
-                SETTINGS_KEY, isChecked ? ON : OFF);
+                Settings.Secure.ACCESSIBILITY_FORCE_INVERT_COLOR_ENABLED, isChecked ? ON : OFF);
+    }
+
+    @Override
+    public void updateState(@NonNull Preference preference) {
+        super.updateState(preference);
+        final boolean isDarkModeActivated = (mContext.getResources().getConfiguration().uiMode
+                & Configuration.UI_MODE_NIGHT_YES) != 0;
+        preference.setEnabled(isDarkModeActivated);
     }
 
     @Override

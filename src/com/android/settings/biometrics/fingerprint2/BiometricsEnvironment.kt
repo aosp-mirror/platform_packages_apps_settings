@@ -122,24 +122,24 @@ class BiometricsEnvironment(
     FingerprintEnrollStageThresholdInteractor(fingerprintEnrollmentRepository)
 
   fun createGenerateChallengeInteractor(): GenerateChallengeInteractor =
-    GenerateChallengeInteractorImpl(fingerprintManager, context.userId, gateKeeperPasswordProvider)
+    GenerateChallengeInteractorImpl(fingerprintManager, userRepo, gateKeeperPasswordProvider)
 
   fun createFingerprintEnrollInteractor(): EnrollFingerprintInteractor =
-    EnrollFingerprintInteractorImpl(context.userId, fingerprintManager, Settings)
+    EnrollFingerprintInteractorImpl(userRepo, fingerprintManager, Settings)
 
   fun createFingerprintsEnrolledInteractor(): EnrolledFingerprintsInteractorImpl =
     EnrolledFingerprintsInteractorImpl(fingerprintEnrollmentRepository)
 
   fun createAuthenticateInteractor(): AuthenitcateInteractor =
-    AuthenticateInteractorImpl(fingerprintManager, context.userId)
+    AuthenticateInteractorImpl(fingerprintManager, userRepo)
 
   fun createUserInteractor(): UserInteractor = UserInteractorImpl(userRepo)
 
   fun createRemoveFingerprintInteractor(): RemoveFingerprintInteractor =
-    RemoveFingerprintsInteractorImpl(fingerprintManager, context.userId)
+    RemoveFingerprintsInteractorImpl(fingerprintManager, userRepo)
 
   fun createRenameFingerprintInteractor(): RenameFingerprintInteractor =
-    RenameFingerprintsInteractorImpl(fingerprintManager, context.userId, backgroundDispatcher)
+    RenameFingerprintsInteractorImpl(fingerprintManager, userRepo, backgroundDispatcher)
 
   fun createAccessibilityInteractor(): AccessibilityInteractor {
     return AccessibilityInteractorImpl(context.getSystemService(AccessibilityManager::class.java)!!)

@@ -21,17 +21,22 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.media.RingtoneManager;
+import android.media.audio.Flags;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.telephony.TelephonyManager;
 
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
 public class PhoneRingtonePreferenceControllerTest {
@@ -39,30 +44,57 @@ public class PhoneRingtonePreferenceControllerTest {
     @Mock
     private TelephonyManager mTelephonyManager;
 
-    private Context mContext;
+    @Mock
+    private Context mMockContext;
+
+    @Mock
+    private Resources mMockResources;
+
     private PhoneRingtonePreferenceController mController;
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication shadowContext = ShadowApplication.getInstance();
-        shadowContext.setSystemService(Context.TELEPHONY_SERVICE, mTelephonyManager);
-        mContext = RuntimeEnvironment.application;
-        mController = new PhoneRingtonePreferenceController(mContext);
+        when(mMockContext.getResources()).thenReturn(mMockResources);
+        when(mMockContext.getSystemService(
+                Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
+        mController = new PhoneRingtonePreferenceController(mMockContext);
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_RINGTONE_HAPTICS_CUSTOMIZATION)
     public void isAvailable_notVoiceCapable_shouldReturnFalse() {
+        when(mMockResources
+                .getBoolean(com.android.internal.R.bool.config_ringtoneVibrationSettingsSupported))
+                .thenReturn(false);
         when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_RINGTONE_HAPTICS_CUSTOMIZATION)
     public void isAvailable_VoiceCapable_shouldReturnTrue() {
+        when(mMockResources
+                .getBoolean(com.android.internal.R.bool.config_ringtoneVibrationSettingsSupported))
+                .thenReturn(false);
         when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
 
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_RINGTONE_HAPTICS_CUSTOMIZATION)
+    public void isAvailable_vibrationSupported_shouldReturnFalse() {
+        when(mMockResources
+                .getBoolean(com.android.internal.R.bool.config_ringtoneVibrationSettingsSupported))
+                .thenReturn(true);
+        when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
+
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test

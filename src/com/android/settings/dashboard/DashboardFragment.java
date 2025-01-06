@@ -48,11 +48,13 @@ import com.android.settings.core.CategoryMixin.CategoryListener;
 import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.restriction.UserRestrictionBindingHelper;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.preference.PreferenceScreenBindingHelper;
 import com.android.settingslib.preference.PreferenceScreenCreator;
 import com.android.settingslib.search.Indexable;
 
@@ -91,6 +93,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     private DashboardTilePlaceholderPreferenceController mPlaceholderPreferenceController;
     private boolean mListeningToCategoryChange;
     private List<String> mSuppressInjectedTileKeys;
+
+    private @Nullable UserRestrictionBindingHelper mUserRestrictionBindingHelper;
 
     @Override
     public void onAttach(Context context) {
@@ -177,6 +181,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             // Upon rotation configuration change we need to update preference states before any
             // editing dialog is recreated (that would happen before onResume is called).
             updatePreferenceStates();
+        }
+        if (isCatalystEnabled()) {
+            PreferenceScreenBindingHelper helper = getPreferenceScreenBindingHelper();
+            if (helper != null) {
+                mUserRestrictionBindingHelper = new UserRestrictionBindingHelper(requireContext(),
+                        helper);
+            }
         }
     }
 
@@ -289,8 +300,12 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    protected final int getPreferenceScreenResId(@NonNull Context context) {
-        return getPreferenceScreenResId();
+    public void onDestroy() {
+        if (mUserRestrictionBindingHelper != null) {
+            mUserRestrictionBindingHelper.close();
+            mUserRestrictionBindingHelper = null;
+        }
+        super.onDestroy();
     }
 
     @Override
@@ -331,6 +346,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
 
         return null;
+    }
+
+    /** Returns grouped controllers of input type T. */
+    protected <T extends AbstractPreferenceController> List<AbstractPreferenceController> useGroup(
+            Class<T> clazz) {
+        return mPreferenceControllers.values().stream().flatMap(Collection::stream).filter(
+                controller -> clazz.isInstance(controller)).toList();
     }
 
     /** Returns all controllers of type T. */
@@ -393,7 +415,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 removeControllersForHybridMode();
             }
             setPreferenceScreen(screen);
-            requireActivity().setTitle(screen.getTitle());
+            updateActivityTitleWithScreenTitle(screen);
         } else {
             addPreferencesFromResource(resId);
             screen = getPreferenceScreen();
@@ -412,6 +434,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     private void removeControllersForHybridMode() {
         Set<String> keys = getPreferenceKeysInHierarchy();
         Iterator<AbstractPreferenceController> iterator = mControllers.iterator();
+        Lifecycle lifecycle = getSettingsLifecycle();
         while (iterator.hasNext()) {
             AbstractPreferenceController controller = iterator.next();
             String key = controller.getPreferenceKey();
@@ -423,21 +446,11 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 if (controllers != null) {
                     controllers.remove(controller);
                 }
+                if (controller instanceof LifecycleObserver) {
+                    lifecycle.removeObserver((LifecycleObserver) controller);
+                }
             }
         }
-    }
-
-    /** Returns if catalyst is enabled on current screen. */
-    protected final boolean isCatalystEnabled() {
-        return getPreferenceScreenCreator() != null;
-    }
-
-    private @Nullable PreferenceScreenCreator getPreferenceScreenCreator() {
-        if (!Flags.catalyst()) {
-            return null;
-        }
-        Context context = getContext();
-        return context != null ? getPreferenceScreenCreator(context) : null;
     }
 
     /**

@@ -17,18 +17,21 @@
 package com.android.settings.biometrics.fingerprint2.domain.interactor
 
 import android.hardware.fingerprint.FingerprintManager
+import com.android.settings.biometrics.fingerprint2.data.repository.UserRepo
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.RenameFingerprintInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 
 class RenameFingerprintsInteractorImpl(
   private val fingerprintManager: FingerprintManager,
-  private val userId: Int,
+  private val userRepo: UserRepo,
   private val backgroundDispatcher: CoroutineDispatcher,
 ) : RenameFingerprintInteractor {
 
   override suspend fun renameFingerprint(fp: FingerprintData, newName: String) {
+    val userId = userRepo.currentUser.first()
     withContext(backgroundDispatcher) { fingerprintManager.rename(fp.fingerId, userId, newName) }
   }
 }

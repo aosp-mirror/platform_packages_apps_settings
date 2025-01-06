@@ -338,6 +338,9 @@ public final class BluetoothDevicePreference extends GearPreference {
 
         if (mCachedDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
             ImageView deviceDetails = (ImageView) view.findViewById(R.id.settings_button);
+            deviceDetails.setContentDescription(
+                    getContext().getResources().getString(
+                            R.string.device_detail_icon_content_description, getTitle()));
 
             if (deviceDetails != null) {
                 deviceDetails.setOnClickListener(this);

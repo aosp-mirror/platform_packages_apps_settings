@@ -26,6 +26,7 @@ import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.flags.Flags;
 import com.android.settingslib.utils.ThreadUtils;
 
 /** Controller to maintain available media Bluetooth devices */
@@ -39,6 +40,7 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
 
     private final AudioManager mAudioManager;
     private final LocalBluetoothManager mLocalBtManager;
+    private int mAudioMode;
 
     public AvailableMediaBluetoothDeviceUpdater(
             Context context,
@@ -47,21 +49,31 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         super(context, devicePreferenceCallback, metricsCategory);
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         mLocalBtManager = Utils.getLocalBtManager(context);
+        mAudioMode = mAudioManager.getMode();
     }
 
     @Override
     public void onAudioModeChanged() {
+        // TODO: move to background thread
+        mAudioMode = mAudioManager.getMode();
         forceUpdate();
     }
 
     @Override
     public boolean isFilterMatched(CachedBluetoothDevice cachedDevice) {
-        final int audioMode = mAudioManager.getMode();
+        // If the device is temporary bond, it shouldn't be shown here.
+        if (Flags.enableTemporaryBondDevicesUi()
+                && BluetoothUtils.isTemporaryBondDevice(cachedDevice.getDevice())) {
+            Log.d(TAG,
+                    "isFilterMatched() Filter out temporary bond device " + cachedDevice.getName());
+            return false;
+        }
+
         final int currentAudioProfile;
 
-        if (audioMode == AudioManager.MODE_RINGTONE
-                || audioMode == AudioManager.MODE_IN_CALL
-                || audioMode == AudioManager.MODE_IN_COMMUNICATION) {
+        if (mAudioMode == AudioManager.MODE_RINGTONE
+                || mAudioMode == AudioManager.MODE_IN_CALL
+                || mAudioMode == AudioManager.MODE_IN_COMMUNICATION) {
             // in phone call
             currentAudioProfile = BluetoothProfile.HEADSET;
         } else {
@@ -77,9 +89,9 @@ public class AvailableMediaBluetoothDeviceUpdater extends BluetoothDeviceUpdater
             // It would show in Available Devices group if the audio sharing flag is disabled or
             // the device is not in the audio sharing session.
             if (cachedDevice.isConnectedLeAudioDevice()) {
-                if (BluetoothUtils.isAudioSharingEnabled()
+                if (BluetoothUtils.isAudioSharingUIAvailable(mContext)
                         && BluetoothUtils.hasConnectedBroadcastSource(
-                                cachedDevice, mLocalBtManager)) {
+                        cachedDevice, mLocalBtManager)) {
                     Log.d(
                             TAG,
                             "Filter out device : "

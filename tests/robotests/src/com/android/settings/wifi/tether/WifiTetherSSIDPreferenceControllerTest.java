@@ -18,10 +18,13 @@ package com.android.settings.wifi.tether;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -32,6 +35,7 @@ import android.content.Context;
 import android.net.TetheringManager;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
+import android.widget.EditText;
 
 import androidx.preference.PreferenceScreen;
 
@@ -68,7 +72,7 @@ public class WifiTetherSSIDPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mPreference = new WifiTetherSsidPreference(RuntimeEnvironment.application);
+        mPreference = spy(new WifiTetherSsidPreference(RuntimeEnvironment.application));
 
         doReturn(mock(DevicePolicyManager.class)).when(mContext)
                 .getSystemService(Context.DEVICE_POLICY_SERVICE);
@@ -148,11 +152,18 @@ public class WifiTetherSSIDPreferenceControllerTest {
     }
 
     @Test
+    public void updateDisplay_shouldSetOnBindEditTextListener() {
+        mController.displayPreference(mScreen);
+
+        verify(mPreference).setOnBindEditTextListener(any());
+    }
+
+    @Test
     public void displayPreference_wifiApDisabled_shouldHideQrCodeIcon() {
         when(mWifiManager.isWifiApEnabled()).thenReturn(false);
         final SoftApConfiguration config = new SoftApConfiguration.Builder()
                 .setSsid("test_1234").setPassphrase("test_password",
-                SoftApConfiguration.SECURITY_TYPE_WPA2_PSK).build();
+                        SoftApConfiguration.SECURITY_TYPE_WPA2_PSK).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
 
         mController.displayPreference(mScreen);
@@ -164,10 +175,19 @@ public class WifiTetherSSIDPreferenceControllerTest {
         when(mWifiManager.isWifiApEnabled()).thenReturn(true);
         final SoftApConfiguration config = new SoftApConfiguration.Builder()
                 .setSsid("test_1234").setPassphrase("test_password",
-                SoftApConfiguration.SECURITY_TYPE_WPA2_PSK).build();
+                        SoftApConfiguration.SECURITY_TYPE_WPA2_PSK).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
 
         mController.displayPreference(mScreen);
         assertThat(mController.isQrCodeButtonAvailable()).isEqualTo(true);
+    }
+
+    @Test
+    public void onBindEditText_shouldSetHint() {
+        EditText editText = mock(EditText.class);
+
+        mController.onBindEditText(editText);
+
+        verify(editText).setHint(anyInt());
     }
 }

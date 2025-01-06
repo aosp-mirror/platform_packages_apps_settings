@@ -26,6 +26,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
@@ -37,6 +38,7 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settingslib.R;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.Utils;
+import com.android.settingslib.widget.SettingsThemeHelper;
 import com.android.settingslib.wifi.WifiUtils;
 import com.android.wifitrackerlib.HotspotNetworkEntry;
 import com.android.wifitrackerlib.WifiEntry;
@@ -123,6 +125,20 @@ public class WifiEntryPreference extends RestrictedPreference implements
         // Turn off divider
         view.findViewById(com.android.settingslib.widget.preference.twotarget.R.id.two_target_divider)
                 .setVisibility(View.INVISIBLE);
+
+        // Set padding to expressive style
+        if (SettingsThemeHelper.isExpressiveTheme(getContext())) {
+            final int paddingStart = getContext().getResources().getDimensionPixelSize(
+                    com.android.settingslib.widget.theme
+                            .R.dimen.settingslib_expressive_space_extrasmall4);
+            final int paddingEnd = getContext().getResources().getDimensionPixelSize(
+                    com.android.settingslib.widget.theme
+                            .R.dimen.settingslib_expressive_space_small3);
+            LinearLayout iconFrame = (LinearLayout) view.findViewById(
+                    com.android.settingslib.R.id.icon_frame);
+            iconFrame.setPaddingRelative(paddingStart, iconFrame.getPaddingTop(),
+                    paddingEnd, iconFrame.getPaddingBottom());
+        }
 
         // Enable the icon button when the help string in this WifiEntry is not null.
         final ImageButton imageButton = (ImageButton) view.findViewById(R.id.icon_button);

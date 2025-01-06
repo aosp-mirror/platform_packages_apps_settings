@@ -24,12 +24,17 @@ import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.os.Looper;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.flags.Flags;
+
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -44,6 +49,8 @@ public class TermsOfAddressCategoryControllerTest {
     private Context mContext;
     private TermsOfAddressCategoryController mTermsOfAddressCategoryController;
     private Locale mCacheLocale;
+
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setUp() {
@@ -65,6 +72,7 @@ public class TermsOfAddressCategoryControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_REGIONAL_PREFERENCES_API_ENABLED)
     public void getAvailabilityStatus_returnAvailable() {
         Locale.setDefault(Locale.forLanguageTag("fr-FR"));
 

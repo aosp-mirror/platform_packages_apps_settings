@@ -28,7 +28,6 @@ import com.android.settings.accessibility.AccessibilityDetailsSettingsFragment;
 import com.android.settings.accessibility.AccessibilityHearingAidsFragment;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
-import com.android.settings.accessibility.AutoBrightnessPreferenceFragmentForSetupWizard;
 import com.android.settings.accessibility.CaptioningPropertiesFragment;
 import com.android.settings.accessibility.ColorAndMotionFragment;
 import com.android.settings.accessibility.HearingDevicePairingFragment;
@@ -131,13 +130,12 @@ import com.android.settings.gestures.PowerMenuSettings;
 import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.gestures.SystemNavigationGestureSettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
-import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
 import com.android.settings.inputmethod.KeyboardSettings;
 import com.android.settings.inputmethod.ModifierKeysSettings;
 import com.android.settings.inputmethod.NewKeyboardLayoutEnabledLocalesFragment;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.SpellCheckersSettings;
-import com.android.settings.inputmethod.TrackpadSettings;
+import com.android.settings.inputmethod.TouchpadAndMouseSettings;
 import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.inputmethod.UserDictionarySettings;
 import com.android.settings.language.LanguageSettings;
@@ -157,6 +155,7 @@ import com.android.settings.network.telephony.SatelliteSetting;
 import com.android.settings.network.tether.TetherSettings;
 import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
+import com.android.settings.notification.LockScreenNotificationsPreferencePageFragment;
 import com.android.settings.notification.NotificationAccessSettings;
 import com.android.settings.notification.NotificationAssistantPicker;
 import com.android.settings.notification.PoliteNotificationsPreferenceFragment;
@@ -183,7 +182,12 @@ import com.android.settings.privacy.PrivacyDashboardFragment;
 import com.android.settings.privatespace.delete.PrivateSpaceDeleteFragment;
 import com.android.settings.privatespace.delete.PrivateSpaceDeletionProgressFragment;
 import com.android.settings.privatespace.onelock.PrivateSpaceBiometricSettings;
+import com.android.settings.regionalpreferences.FirstDayOfWeekItemFragment;
+import com.android.settings.regionalpreferences.MeasurementSystemItemFragment;
+import com.android.settings.regionalpreferences.NumberingSystemLocaleListFragment;
+import com.android.settings.regionalpreferences.RegionPickerFragment;
 import com.android.settings.regionalpreferences.RegionalPreferencesEntriesFragment;
+import com.android.settings.regionalpreferences.TemperatureUnitFragment;
 import com.android.settings.safetycenter.MoreSecurityPrivacyFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.MemtagPage;
@@ -238,7 +242,7 @@ public class SettingsGateway {
             KeyboardSettings.class.getName(),
             ModifierKeysSettings.class.getName(),
             NewKeyboardLayoutEnabledLocalesFragment.class.getName(),
-            TrackpadSettings.class.getName(),
+            TouchpadAndMouseSettings.class.getName(),
             SpellCheckersSettings.class.getName(),
             UserDictionaryList.class.getName(),
             UserDictionarySettings.class.getName(),
@@ -268,7 +272,6 @@ public class SettingsGateway {
             EditShortcutsPreferenceFragment.class.getName(),
             TextReadingPreferenceFragment.class.getName(),
             TextReadingPreferenceFragmentForSetupWizard.class.getName(),
-            AutoBrightnessPreferenceFragmentForSetupWizard.class.getName(),
             CaptioningPropertiesFragment.class.getName(),
             ToggleDaltonizerPreferenceFragment.class.getName(),
             ToggleColorInversionPreferenceFragment.class.getName(),
@@ -309,7 +312,6 @@ public class SettingsGateway {
             PrintJobSettingsFragment.class.getName(),
             TrustedCredentialsSettings.class.getName(),
             PaymentSettings.class.getName(),
-            KeyboardLayoutPickerFragment.class.getName(),
             PhysicalKeyboardFragment.class.getName(),
             ZenModeSettings.class.getName(),
             SoundSettings.class.getName(),
@@ -365,6 +367,7 @@ public class SettingsGateway {
             EnterprisePrivacySettings.class.getName(),
             WebViewAppPicker.class.getName(),
             LockscreenDashboardFragment.class.getName(),
+            LockScreenNotificationsPreferencePageFragment.class.getName(),
             MemtagPage.class.getName(),
             BluetoothDeviceDetailsFragment.class.getName(),
             BluetoothBroadcastDialog.class.getName(),
@@ -396,7 +399,12 @@ public class SettingsGateway {
             ColorAndMotionFragment.class.getName(),
             ColorContrastFragment.class.getName(),
             LongBackgroundTasksDetails.class.getName(),
+            RegionPickerFragment.class.getName(),
             RegionalPreferencesEntriesFragment.class.getName(),
+            TemperatureUnitFragment.class.getName(),
+            FirstDayOfWeekItemFragment.class.getName(),
+            MeasurementSystemItemFragment.class.getName(),
+            NumberingSystemLocaleListFragment.class.getName(),
             BatteryInfoFragment.class.getName(),
             UserAspectRatioDetails.class.getName(),
             ScreenTimeoutSettings.class.getName(),

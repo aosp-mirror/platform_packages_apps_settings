@@ -16,14 +16,10 @@
 
 package com.android.settings.accessibility;
 
-import static android.view.accessibility.Flags.FLAG_FORCE_INVERT_COLOR;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 
@@ -73,20 +69,6 @@ public class ColorAndMotionFragmentTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(FLAG_FORCE_INVERT_COLOR)
-    public void forceInvertEnabled_getNonIndexableKeys_existInXmlLayout() {
-        final List<String> niks = ColorAndMotionFragment.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mContext);
-        final List<String> keys =
-                XmlTestUtils.getKeysFromPreferenceXml(mContext,
-                        R.xml.accessibility_color_and_motion);
-
-        assertThat(niks).doesNotContain(ColorAndMotionFragment.TOGGLE_FORCE_INVERT);
-        assertThat(keys).containsAtLeastElementsIn(niks);
-    }
-
-    @Test
-    @RequiresFlagsDisabled(FLAG_FORCE_INVERT_COLOR)
     public void getNonIndexableKeys_existInXmlLayout() {
         final List<String> niks = ColorAndMotionFragment.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(mContext);
@@ -94,7 +76,6 @@ public class ColorAndMotionFragmentTest {
                 XmlTestUtils.getKeysFromPreferenceXml(mContext,
                         R.xml.accessibility_color_and_motion);
 
-        assertThat(niks).contains(ColorAndMotionFragment.TOGGLE_FORCE_INVERT);
         assertThat(keys).containsAtLeastElementsIn(niks);
     }
 }

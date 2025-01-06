@@ -20,6 +20,7 @@ import android.util.ArrayMap;
 
 import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.development.linuxterminal.LinuxTerminalDashboardFragment;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.NewKeyboardLayoutEnabledLocalesFragment;
@@ -52,5 +53,8 @@ public class ProfileFragmentBridge {
                 ProfileSelectKeyboardFragment.class.getName());
         FRAGMENT_MAP.put(NewKeyboardLayoutEnabledLocalesFragment.class.getName(),
                 ProfileSelectPhysicalKeyboardFragment.class.getName());
+        FRAGMENT_MAP.put(
+                LinuxTerminalDashboardFragment.class.getName(),
+                ProfileSelectLinuxTerminalFragment.class.getName());
     }
 }

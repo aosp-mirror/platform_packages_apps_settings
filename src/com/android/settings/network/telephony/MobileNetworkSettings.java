@@ -277,11 +277,18 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         if (roamingPreferenceController != null) {
             roamingPreferenceController.init(getParentFragmentManager(), mSubId);
         }
+        final SatelliteSettingsPreferenceCategoryController
+                satelliteSettingsPreferenceCategoryController =
+                use(SatelliteSettingsPreferenceCategoryController.class);
+        if (satelliteSettingsPreferenceCategoryController != null) {
+            satelliteSettingsPreferenceCategoryController.init(mSubId);
+        }
         final SatelliteSettingPreferenceController satelliteSettingPreferenceController = use(
                 SatelliteSettingPreferenceController.class);
         if (satelliteSettingPreferenceController != null) {
             satelliteSettingPreferenceController.init(mSubId);
         }
+
         use(ApnPreferenceController.class).init(mSubId);
         use(CarrierPreferenceController.class).init(mSubId);
         use(DataUsagePreferenceController.class).init(mSubId);
@@ -327,12 +334,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
             convertToEsimPreferenceController.init(mSubId, mSubscriptionInfoEntity);
         }
 
-        List<AbstractSubscriptionPreferenceController> subscriptionPreferenceControllers =
-                useAll(AbstractSubscriptionPreferenceController.class);
-        for (AbstractSubscriptionPreferenceController controller :
-                subscriptionPreferenceControllers) {
-            controller.init(mSubId);
-        }
+        List<AbstractPreferenceController> subscriptionPreferenceControllers =
+                useGroup(AbstractSubscriptionPreferenceController.class);
+        subscriptionPreferenceControllers.forEach(
+                controller -> ((AbstractSubscriptionPreferenceController) controller).init(mSubId));
     }
 
     @Override
@@ -463,7 +468,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             final MenuItem item = menu.add(Menu.NONE, R.id.edit_sim_name, Menu.NONE,
-                    R.string.mobile_network_sim_name);
+                    R.string.mobile_network_sim_label_color_title);
             item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         }

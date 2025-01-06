@@ -21,8 +21,9 @@ import android.content.Intent
 import android.net.wifi.WifiManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settingslib.spa.testutils.firstWithTimeoutOrNull
+import com.android.settingslib.spa.testutils.lastWithTimeoutOrNull
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -33,16 +34,25 @@ class WifiRepositoryTest {
 
     private val context: Context = ApplicationProvider.getApplicationContext()
 
-    private val mockWifiStateChangedActionFlow = flowOf(Intent().apply {
-        putExtra(WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_ENABLED)
-    })
-
-    private val repository = WifiRepository(context, mockWifiStateChangedActionFlow)
-
     @Test
-    fun wifiStateFlow() = runBlocking {
-        val wifiState = repository.wifiStateFlow().firstWithTimeoutOrNull()
+    fun wifiStateFlow_enabled() = runBlocking {
+        val wifiStateChangedIntent =
+            Intent().apply {
+                putExtra(WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_ENABLED)
+            }
+        val repository = WifiRepository(context, flowOf(wifiStateChangedIntent))
+
+        val wifiState = repository.wifiStateFlow().lastWithTimeoutOrNull()
 
         assertThat(wifiState).isEqualTo(WifiManager.WIFI_STATE_ENABLED)
+    }
+
+    @Test
+    fun wifiStateFlow_unknown() = runBlocking {
+        val repository = WifiRepository(context, emptyFlow())
+
+        val wifiState = repository.wifiStateFlow().lastWithTimeoutOrNull()
+
+        assertThat(wifiState).isEqualTo(WifiManager.WIFI_STATE_UNKNOWN)
     }
 }
