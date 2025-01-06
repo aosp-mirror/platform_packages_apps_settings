@@ -28,7 +28,7 @@ import com.android.settingslib.RestrictedSwitchPreference;
 public class PromotedNotificationsPreferenceController extends
         NotificationPreferenceController implements Preference.OnPreferenceChangeListener {
     private static final String KEY_PROMOTED_CATEGORY = "promoted_category";
-    private static final String KEY_PROMOTED_SWITCH = "promoted_switch";
+    protected static final String KEY_PROMOTED_SWITCH = "promoted_switch";
 
     public PromotedNotificationsPreferenceController(@NonNull Context context,
             @NonNull NotificationBackend backend) {
