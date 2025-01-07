@@ -29,10 +29,14 @@ import android.content.SharedPreferences;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.provider.Settings;
+import android.view.accessibility.AccessibilityManager;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.core.BasePreferenceController;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -99,5 +103,24 @@ public class ToggleAutoclickCursorAreaSizeControllerTest {
         controller.onStop();
 
         verify(prefs).unregisterOnSharedPreferenceChangeListener(controller);
+    }
+
+    @Test
+    public void getProgress_matchesSetting() {
+        assertThat(mController.getSliderPosition()).isEqualTo(readSetting());
+    }
+
+    @Test
+    public void setProgress_updatesSetting() {
+        for (int size : ImmutableList.of(20, 40, 60, 80, 100)) {
+            mController.setSliderPosition(size);
+            assertThat(readSetting()).isEqualTo(size);
+        }
+    }
+
+    private int readSetting() {
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_AUTOCLICK_CURSOR_AREA_SIZE,
+                AccessibilityManager.AUTOCLICK_CURSOR_AREA_SIZE_DEFAULT);
     }
 }

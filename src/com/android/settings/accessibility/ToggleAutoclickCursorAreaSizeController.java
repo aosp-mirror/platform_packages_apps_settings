@@ -17,9 +17,14 @@
 package com.android.settings.accessibility;
 
 import static android.content.Context.MODE_PRIVATE;
+import static android.view.accessibility.AccessibilityManager.AUTOCLICK_CURSOR_AREA_SIZE_MAX;
+import static android.view.accessibility.AccessibilityManager.AUTOCLICK_CURSOR_AREA_SIZE_MIN;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.provider.Settings;
+import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,15 +42,14 @@ public class ToggleAutoclickCursorAreaSizeController extends SliderPreferenceCon
 
     public static final String TAG = ToggleAutoclickCursorAreaSizeController.class.getSimpleName();
 
-    private static final int MIN_SIZE = 20;
-    private static final int MAX_SIZE = 100;
-    private static final int DEFAULT_SIZE = 60;
-
+    private final ContentResolver mContentResolver;
     private final SharedPreferences mSharedPreferences;
 
     public ToggleAutoclickCursorAreaSizeController(@NonNull Context context,
             @NonNull String preferenceKey) {
         super(context, preferenceKey);
+
+        mContentResolver = context.getContentResolver();
         mSharedPreferences = context.getSharedPreferences(context.getPackageName(), MODE_PRIVATE);
     }
 
@@ -76,28 +80,34 @@ public class ToggleAutoclickCursorAreaSizeController extends SliderPreferenceCon
     @Override
     public void onSharedPreferenceChanged(
             @NonNull SharedPreferences sharedPreferences, @Nullable String key) {
-        // TODO(b/383901288): Update slider.
+        // TODO(b/383901288): Update slider if interested preference has changed.
     }
 
     @Override
     public boolean setSliderPosition(int position) {
-        // TODO(b/383901288): Update settings.
+        Settings.Secure.putInt(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_AUTOCLICK_CURSOR_AREA_SIZE, position);
         return true;
     }
 
     @Override
     public int getSliderPosition() {
-        // TODO(b/383901288): retrieve from settings and fallback to default.
-        return DEFAULT_SIZE;
+        int size = Settings.Secure.getInt(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_AUTOCLICK_CURSOR_AREA_SIZE,
+                AccessibilityManager.AUTOCLICK_CURSOR_AREA_SIZE_DEFAULT);
+        // Make sure the size is between min and max allowed value.
+        size = Math.min(size, AUTOCLICK_CURSOR_AREA_SIZE_MAX);
+        size = Math.max(size, AUTOCLICK_CURSOR_AREA_SIZE_MIN);
+        return size;
     }
 
     @Override
     public int getMax() {
-        return MAX_SIZE;
+        return AUTOCLICK_CURSOR_AREA_SIZE_MAX;
     }
 
     @Override
     public int getMin() {
-        return MIN_SIZE;
+        return AUTOCLICK_CURSOR_AREA_SIZE_MIN;
     }
 }
