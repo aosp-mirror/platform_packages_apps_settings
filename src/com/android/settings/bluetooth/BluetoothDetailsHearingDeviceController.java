@@ -22,7 +22,6 @@ import androidx.annotation.NonNull;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.accessibility.Flags;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -107,10 +106,8 @@ public class BluetoothDetailsHearingDeviceController extends BluetoothDetailsCon
             mControllers.add(new BluetoothDetailsHearingDeviceSettingsController(mContext,
                     mFragment, mCachedDevice, mLifecycle));
         }
-        if (Flags.enableHearingAidPresetControl()) {
-            mControllers.add(new BluetoothDetailsHearingAidsPresetsController(mContext, mFragment,
-                    mManager, mCachedDevice, mLifecycle));
-        }
+        mControllers.add(new BluetoothDetailsHearingAidsPresetsController(mContext, mFragment,
+                mManager, mCachedDevice, mLifecycle));
         if (com.android.settingslib.flags.Flags.hearingDevicesAmbientVolumeControl()) {
             mControllers.add(new BluetoothDetailsAmbientVolumePreferenceController(mContext,
                     mManager, mFragment, mCachedDevice, mLifecycle));
