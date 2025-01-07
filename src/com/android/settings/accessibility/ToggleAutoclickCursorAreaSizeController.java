@@ -21,6 +21,7 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -42,7 +43,8 @@ public class ToggleAutoclickCursorAreaSizeController extends SliderPreferenceCon
 
     private final SharedPreferences mSharedPreferences;
 
-    public ToggleAutoclickCursorAreaSizeController(Context context, String preferenceKey) {
+    public ToggleAutoclickCursorAreaSizeController(@NonNull Context context,
+            @NonNull String preferenceKey) {
         super(context, preferenceKey);
         mSharedPreferences = context.getSharedPreferences(context.getPackageName(), MODE_PRIVATE);
     }
@@ -62,7 +64,7 @@ public class ToggleAutoclickCursorAreaSizeController extends SliderPreferenceCon
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
+    public void displayPreference(@NonNull PreferenceScreen screen) {
         super.displayPreference(screen);
     }
 
@@ -73,7 +75,7 @@ public class ToggleAutoclickCursorAreaSizeController extends SliderPreferenceCon
 
     @Override
     public void onSharedPreferenceChanged(
-            SharedPreferences sharedPreferences, @Nullable String key) {
+            @NonNull SharedPreferences sharedPreferences, @Nullable String key) {
         // TODO(b/383901288): Update slider.
     }
 
