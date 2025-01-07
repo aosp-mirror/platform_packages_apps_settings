@@ -79,9 +79,12 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     private static final int LOW_BATTERY_LEVEL_THRESHOLD = 15;
     private static final int BATTERY_LEVEL_5 = 5;
     private static final int BATTERY_LEVEL_50 = 50;
+    private static final int METADATA_FAST_PAIR_CUSTOMIZED_FIELDS = 25;
     private static final String ICON_URI = "content://test.provider/icon.png";
     private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
     private static final String DEVICE_SUMMARY = "test summary";
+    private static final String TEMP_BOND_METADATA =
+            "<TEMP_BOND_TYPE>le_audio_sharing</TEMP_BOND_TYPE>";
 
     private Context mContext;
 
@@ -529,6 +532,23 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
 
         ImageButton button = mLayoutPreference.findViewById(R.id.rename_button);
         assertThat(button.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    @EnableFlags({Flags.FLAG_ENABLE_BLUETOOTH_DEVICE_DETAILS_POLISH,
+            com.android.settingslib.flags.Flags.FLAG_ENABLE_TEMPORARY_BOND_DEVICES_UI})
+    public void temporaryBondDevice_renameButtonNotShown() {
+        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
+                .thenReturn("true".getBytes());
+        when(mBluetoothDevice.getMetadata(METADATA_FAST_PAIR_CUSTOMIZED_FIELDS))
+                .thenReturn(TEMP_BOND_METADATA.getBytes());
+        Set<CachedBluetoothDevice> cacheBluetoothDevices = new HashSet<>();
+        when(mCachedDevice.getMemberDevice()).thenReturn(cacheBluetoothDevices);
+
+        mController.onStart();
+
+        ImageButton button = mLayoutPreference.findViewById(R.id.rename_button);
+        assertThat(button.getVisibility()).isEqualTo(View.GONE);
     }
 
     private void assertBatteryPredictionVisible(LinearLayout linearLayout, int visible) {
