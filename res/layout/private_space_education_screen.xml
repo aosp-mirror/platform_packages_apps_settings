@@ -24,10 +24,6 @@
     app:sucHeaderText="@string/private_space_setup_title"
     app:sudDescriptionText="@string/private_space_hide_apps_summary"
     android:icon="@drawable/ic_private_space_icon">
-    <ScrollView
-        android:id="@+id/main_clear_scrollview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
     <LinearLayout
         android:id="@+id/sud_layout_icon_container"
         style="@style/SudContentFrame"
@@ -124,5 +120,4 @@
                 android:text="@string/private_space_learn_more_text"/>
         </RelativeLayout>
     </LinearLayout>
-    </ScrollView>
 </com.google.android.setupdesign.GlifLayout>
