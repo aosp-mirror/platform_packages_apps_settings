@@ -29,6 +29,14 @@
         android:title="@string/fingerprint_add_title"
         android:icon="@drawable/ic_add_24dp"/>
 
+    <com.android.settingslib.widget.ButtonPreference
+        android:key="key_fingerprint_add_expressive"
+        android:title="@string/add"
+        settings:buttonPreferenceSize="large"
+        settings:buttonPreferenceType="tonal"
+        android:visibility="gone"
+        android:icon="@drawable/ic_add_24dp"/>
+
     <PreferenceCategory
         android:key="security_settings_fingerprint_unlock_category"
         android:title="@string/security_settings_fingerprint_settings_preferences_category"

@@ -99,7 +99,9 @@ import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.transition.SettingsTransitionHelper;
+import com.android.settingslib.widget.ButtonPreference;
 import com.android.settingslib.widget.FooterPreference;
+import com.android.settingslib.widget.SettingsThemeHelper;
 import com.android.settingslib.widget.TwoTargetPreference;
 
 import com.google.android.setupdesign.util.DeviceHelper;
@@ -250,6 +252,8 @@ public class FingerprintSettings extends SubSettings {
                 "key_fingerprint_check_enrolled";
         @VisibleForTesting
         static final String KEY_FINGERPRINT_ADD = "key_fingerprint_add";
+        @VisibleForTesting
+        static final String KEY_FINGERPRINT_ADD_EXPRESSIVE = "key_fingerprint_add_expressive";
         private static final String KEY_FINGERPRINT_ENABLE_KEYGUARD_TOGGLE =
                 "fingerprint_enable_keyguard_toggle";
         private static final String KEY_LAUNCHED_CONFIRM = "launched_confirm";
@@ -324,6 +328,8 @@ public class FingerprintSettings extends SubSettings {
 
         @Nullable
         private UdfpsEnrollCalibrator mCalibrator;
+
+        private boolean mIsExpressiveThemeStyle;
 
         FingerprintAuthenticateSidecar.Listener mAuthenticateListener =
                 new FingerprintAuthenticateSidecar.Listener() {
@@ -471,6 +477,7 @@ public class FingerprintSettings extends SubSettings {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            mIsExpressiveThemeStyle = SettingsThemeHelper.isExpressiveTheme(getPrefContext());
 
             Activity activity = getActivity();
             mFingerprintManager = Utils.getFingerprintManagerOrNull(activity);
@@ -679,7 +686,8 @@ public class FingerprintSettings extends SubSettings {
                 mFingerprintsEnrolledCategory.removeAll();
             }
 
-            String keyToReturn = KEY_FINGERPRINT_ADD;
+            String keyToReturn = mIsExpressiveThemeStyle
+                    ? KEY_FINGERPRINT_ADD_EXPRESSIVE : KEY_FINGERPRINT_ADD;
             final List<Fingerprint> items = mFingerprintManager.getEnrolledFingerprints(mUserId);
             final int fingerprintCount = items.size();
             for (int i = 0; i < fingerprintCount; i++) {
@@ -715,13 +723,30 @@ public class FingerprintSettings extends SubSettings {
                 mFingerprintsEnrolledCategory.addPreference(pref);
                 pref.setOnPreferenceChangeListener(this);
             }
-            mAddFingerprintPreference = findPreference(KEY_FINGERPRINT_ADD);
+            mAddFingerprintPreference = findPreference(mIsExpressiveThemeStyle
+                    ? KEY_FINGERPRINT_ADD_EXPRESSIVE : KEY_FINGERPRINT_ADD);
             setupAddFingerprintPreference();
             return keyToReturn;
         }
 
         private void setupAddFingerprintPreference() {
             mAddFingerprintPreference.setOnPreferenceChangeListener(this);
+            if (mIsExpressiveThemeStyle
+                    && (mAddFingerprintPreference instanceof ButtonPreference)) {
+                ((ButtonPreference) mAddFingerprintPreference).setOnClickListener(view -> {
+                    mIsEnrolling = true;
+                    Intent intent = new Intent();
+                    intent.setClassName(SETTINGS_PACKAGE_NAME,
+                            FingerprintEnroll.AddAdditionalFingerprint.class.getName());
+                    intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
+                    intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
+                    if (mCalibrator != null) {
+                        intent.putExtras(mCalibrator.getExtrasForNextIntent());
+                    }
+                    startActivityForResult(intent, ADD_FINGERPRINT_REQUEST);
+                });
+            }
+
             updateAddPreference();
         }
 
@@ -803,11 +828,14 @@ public class FingerprintSettings extends SubSettings {
                 return; // Activity went away
             }
 
-            mAddFingerprintPreference = findPreference(KEY_FINGERPRINT_ADD);
+            mAddFingerprintPreference = findPreference(
+                    mIsExpressiveThemeStyle ? KEY_FINGERPRINT_ADD_EXPRESSIVE : KEY_FINGERPRINT_ADD);
 
             if (mAddFingerprintPreference == null) {
                 return; // b/275519315 Skip if updateAddPreference() invoke before addPreference()
             }
+
+            updateAddingButtonStyle();
 
             /* Disable preference if too many fingerprints added */
             final int max = getContext().getResources().getInteger(
@@ -826,6 +854,20 @@ public class FingerprintSettings extends SubSettings {
             mAddFingerprintPreference.setSummary(maxSummary);
             mAddFingerprintPreference.setEnabled(!isDeviceOwnerBlockingAuth
                     && !tooMany && !removalInProgress && mToken != null);
+        }
+
+        private void updateAddingButtonStyle() {
+            final Preference nonExpressiveBtnPreference = findPreference(KEY_FINGERPRINT_ADD);
+            final ButtonPreference expressiveBtnPreference =
+                    findPreference(KEY_FINGERPRINT_ADD_EXPRESSIVE);
+
+            if (nonExpressiveBtnPreference != null) {
+                nonExpressiveBtnPreference.setVisible(!mIsExpressiveThemeStyle);
+            }
+
+            if (expressiveBtnPreference != null) {
+                expressiveBtnPreference.setVisible(mIsExpressiveThemeStyle);
+            }
         }
 
         private void createFooterPreference(PreferenceGroup root) {
@@ -925,11 +967,11 @@ public class FingerprintSettings extends SubSettings {
         @Override
         public boolean onPreferenceTreeClick(Preference pref) {
             final String key = pref.getKey();
-            if (KEY_FINGERPRINT_ADD.equals(key)) {
+            if (!mIsExpressiveThemeStyle && KEY_FINGERPRINT_ADD.equals(key)) {
                 mIsEnrolling = true;
                 Intent intent = new Intent();
                 intent.setClassName(SETTINGS_PACKAGE_NAME,
-                    FingerprintEnroll.AddAdditionalFingerprint.class.getName());
+                        FingerprintEnroll.AddAdditionalFingerprint.class.getName());
                 intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
                 if (mCalibrator != null) {
