@@ -5556,6 +5556,21 @@
                        android:value="true" />
         </activity>
 
+
+        <activity android:name=".Settings$ContentProtectionSettingsActivity"
+            android:label="@string/content_protection_preference_title"
+            android:exported="true"
+            android:featureFlag="android.view.contentprotection.flags.exported_settings_activity_enabled">
+            <intent-filter>
+                <action android:name="android.settings.CONTENT_PROTECTION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.security.ContentProtectionPreferenceFragment"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_system"/>
+        </activity>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
