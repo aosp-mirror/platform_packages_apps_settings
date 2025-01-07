@@ -89,15 +89,19 @@ public class GeneralBluetoothDetailsHeaderController extends BluetoothDetailsCon
         if (summary != null) {
             summary.setText(mCachedDevice.getConnectionSummary());
         }
-        ImageButton renameButton = mLayoutPreference.findViewById(R.id.rename_button);
-        renameButton.setVisibility(View.VISIBLE);
-        renameButton.setOnClickListener(
-                view -> {
-                    RemoteDeviceNameDialogFragment.newInstance(mCachedDevice)
-                            .show(
-                                    mFragment.getFragmentManager(),
-                                    RemoteDeviceNameDialogFragment.TAG);
-                });
+        boolean isTempBond = com.android.settingslib.flags.Flags.enableTemporaryBondDevicesUi()
+                && BluetoothUtils.isTemporaryBondDevice(mCachedDevice.getDevice());
+        if (!isTempBond) {
+            ImageButton renameButton = mLayoutPreference.findViewById(R.id.rename_button);
+            renameButton.setVisibility(View.VISIBLE);
+            renameButton.setOnClickListener(
+                    view -> {
+                        RemoteDeviceNameDialogFragment.newInstance(mCachedDevice)
+                                .show(
+                                        mFragment.getFragmentManager(),
+                                        RemoteDeviceNameDialogFragment.TAG);
+                    });
+        }
     }
 
     @Override

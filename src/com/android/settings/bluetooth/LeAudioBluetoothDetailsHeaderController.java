@@ -168,7 +168,9 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
         if (mLayoutPreference == null || mCachedDevice == null) {
             return;
         }
-        if (Flags.enableBluetoothDeviceDetailsPolish()) {
+        boolean isTempBond = com.android.settingslib.flags.Flags.enableTemporaryBondDevicesUi()
+                && BluetoothUtils.isTemporaryBondDevice(mCachedDevice.getDevice());
+        if (Flags.enableBluetoothDeviceDetailsPolish() && !isTempBond) {
             ImageButton renameButton = mLayoutPreference.findViewById(R.id.rename_button);
             renameButton.setVisibility(View.VISIBLE);
             renameButton.setOnClickListener(view -> {
