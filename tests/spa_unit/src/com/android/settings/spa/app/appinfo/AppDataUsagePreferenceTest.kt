@@ -134,7 +134,7 @@ class AppDataUsagePreferenceTest {
 
         setContent()
 
-        composeTestRule.waitUntilExists(hasText("123 B used since Oct 25, 2022"))
+        composeTestRule.waitUntilExists(hasText("123 byte used since Oct 25, 2022"))
     }
 
     @Test

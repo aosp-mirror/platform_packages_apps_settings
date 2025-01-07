@@ -152,8 +152,9 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
     void updatePrefs() {
         mBillingCycle.setSummary(null);
         final long warningBytes = services.mPolicyEditor.getPolicyWarningBytes(mNetworkTemplate);
+        DataUsageFormatter dataUsageFormatter = new DataUsageFormatter(requireContext());
         if (warningBytes != WARNING_DISABLED) {
-            mDataWarning.setSummary(DataUsageUtils.formatDataUsage(getContext(), warningBytes));
+            mDataWarning.setSummary(dataUsageFormatter.formatDataUsage(warningBytes));
             mDataWarning.setEnabled(true);
             mEnableDataWarning.setChecked(true);
         } else {
@@ -163,7 +164,7 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
         }
         final long limitBytes = services.mPolicyEditor.getPolicyLimitBytes(mNetworkTemplate);
         if (limitBytes != LIMIT_DISABLED) {
-            mDataLimit.setSummary(DataUsageUtils.formatDataUsage(getContext(), limitBytes));
+            mDataLimit.setSummary(dataUsageFormatter.formatDataUsage(limitBytes));
             mDataLimit.setEnabled(true);
             mEnableDataLimit.setChecked(true);
         } else {

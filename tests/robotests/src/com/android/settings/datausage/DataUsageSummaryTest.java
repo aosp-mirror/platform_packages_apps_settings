@@ -16,8 +16,6 @@
 
 package com.android.settings.datausage;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -90,15 +88,6 @@ public class DataUsageSummaryTest {
         doNothing().when(mDataUsageSummary).enableProxySubscriptionManager(any());
         doReturn(true).when(mDataUsageSummary).removePreference(anyString());
         doNothing().when(mDataUsageSummary).addWifiSection();
-    }
-
-    @Test
-    public void formatUsage_shouldLookLikeFormatFileSize() {
-        final long usage = 2147483648L; // 2GB
-        final String formattedUsage =
-                DataUsageSummary.formatUsage(mContext, "^1", usage).toString();
-        final CharSequence formattedInIECUnit = DataUsageUtils.formatDataUsage(mContext, usage);
-        assertThat(formattedUsage).isEqualTo(formattedInIECUnit);
     }
 
     @Test

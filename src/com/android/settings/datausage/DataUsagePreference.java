@@ -28,6 +28,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.datausage.lib.DataUsageFormatter;
 import com.android.settingslib.net.DataUsageController;
 
 public class DataUsagePreference extends Preference implements TemplatePreference {
@@ -58,8 +59,9 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
             final DataUsageController.DataUsageInfo usageInfo =
                     controller.getDataUsageInfo(mTemplate);
             setTitle(mTitleRes);
+            DataUsageFormatter dataUsageFormatter = new DataUsageFormatter(getContext());
             setSummary(getContext().getString(R.string.data_usage_template,
-                    DataUsageUtils.formatDataUsage(getContext(), usageInfo.usageLevel),
+                    dataUsageFormatter.formatDataUsage(usageInfo.usageLevel),
                     usageInfo.period));
         }
         final long usageLevel = controller.getHistoricalUsageLevel(template);

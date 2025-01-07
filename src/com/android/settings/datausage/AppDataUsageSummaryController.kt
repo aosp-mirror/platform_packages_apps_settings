@@ -37,8 +37,7 @@ class AppDataUsageSummaryController(context: Context, preferenceKey: String) :
 
     private val dataFlow = MutableStateFlow(NetworkUsageDetailsData.AllZero)
     private val dataUsageFormatter = DataUsageFormatter(context)
-    private val emptyDataUsage =
-        DataUsageFormatter.FormattedDataUsage(context.getPlaceholder(), context.getPlaceholder())
+    private val emptyDataUsage = context.getPlaceholder()
 
     private val totalUsageFlow = dataFlow.map {
         dataUsageFormatter.formatDataUsage(it.totalUsage)
@@ -66,18 +65,15 @@ class AppDataUsageSummaryController(context: Context, preferenceKey: String) :
             val backgroundUsage by backgroundUsageFlow.collectAsStateWithLifecycle(emptyDataUsage)
             Preference(object : PreferenceModel {
                 override val title = stringResource(R.string.total_size_label)
-                override val summary = { totalUsage.displayText }
-                override val summaryContentDescription = { totalUsage.contentDescription }
+                override val summary = { totalUsage }
             })
             Preference(object : PreferenceModel {
                 override val title = stringResource(R.string.data_usage_label_foreground)
-                override val summary = { foregroundUsage.displayText }
-                override val summaryContentDescription = { foregroundUsage.contentDescription }
+                override val summary = { foregroundUsage }
             })
             Preference(object : PreferenceModel {
                 override val title = stringResource(R.string.data_usage_label_background)
-                override val summary = { backgroundUsage.displayText }
-                override val summaryContentDescription = { backgroundUsage.contentDescription }
+                override val summary = { backgroundUsage }
             })
         }
     }
