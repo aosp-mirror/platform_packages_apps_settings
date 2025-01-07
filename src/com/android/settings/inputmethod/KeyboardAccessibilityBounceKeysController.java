@@ -16,6 +16,10 @@
 
 package com.android.settings.inputmethod;
 
+import static android.app.settings.SettingsEnums.ACTION_BOUNCE_KEYS_CUSTOM_VALUE_CHANGE;
+import static android.app.settings.SettingsEnums.ACTION_BOUNCE_KEYS_DISABLED;
+import static android.app.settings.SettingsEnums.ACTION_BOUNCE_KEYS_ENABLED;
+
 import android.content.Context;
 import android.hardware.input.InputSettings;
 import android.net.Uri;
@@ -78,7 +82,15 @@ public class KeyboardAccessibilityBounceKeysController extends
     @Override
     public boolean setChecked(boolean isChecked) {
         updateInputSettingKeysValue(isChecked ? BOUNCE_KEYS_THRESHOLD : 0);
+        mMetricsFeatureProvider.action(mContext,
+                isChecked ? ACTION_BOUNCE_KEYS_ENABLED : ACTION_BOUNCE_KEYS_DISABLED);
         return true;
+    }
+
+    @Override
+    protected void onCustomValueUpdated(int thresholdTimeMillis) {
+        mMetricsFeatureProvider.action(mContext, ACTION_BOUNCE_KEYS_CUSTOM_VALUE_CHANGE,
+                thresholdTimeMillis);
     }
 
     @Override

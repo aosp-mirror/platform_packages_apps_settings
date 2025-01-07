@@ -83,7 +83,7 @@ public class MouseKeysMainPageFragment extends DashboardFragment
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.PHYSICAL_KEYBOARD_A11Y;
+        return SettingsEnums.SETTINGS_PHYSICAL_KEYBOARD_MOUSE_KEYS;
     }
 
     @Override

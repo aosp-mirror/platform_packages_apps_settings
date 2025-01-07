@@ -16,6 +16,9 @@
 
 package com.android.settings.inputmethod;
 
+import static android.app.settings.SettingsEnums.ACTION_STICKY_KEYS_DISABLED;
+import static android.app.settings.SettingsEnums.ACTION_STICKY_KEYS_ENABLED;
+
 import android.content.Context;
 import android.hardware.input.InputSettings;
 import android.net.Uri;
@@ -52,6 +55,8 @@ public class KeyboardAccessibilityStickyKeysController extends
     public boolean setChecked(boolean isChecked) {
         InputSettings.setAccessibilityStickyKeysEnabled(mContext,
                 isChecked);
+        mMetricsFeatureProvider.action(mContext,
+                isChecked ? ACTION_STICKY_KEYS_ENABLED : ACTION_STICKY_KEYS_DISABLED);
         return true;
     }
 

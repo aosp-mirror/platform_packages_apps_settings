@@ -16,6 +16,10 @@
 
 package com.android.settings.inputmethod;
 
+import static android.app.settings.SettingsEnums.ACTION_SLOW_KEYS_CUSTOM_VALUE_CHANGE;
+import static android.app.settings.SettingsEnums.ACTION_SLOW_KEYS_DISABLED;
+import static android.app.settings.SettingsEnums.ACTION_SLOW_KEYS_ENABLED;
+
 import android.content.Context;
 import android.hardware.input.InputSettings;
 import android.net.Uri;
@@ -58,6 +62,8 @@ public class KeyboardAccessibilitySlowKeysController extends
     @Override
     public boolean setChecked(boolean isChecked) {
         updateInputSettingKeysValue(isChecked ? SLOW_KEYS_THRESHOLD : 0);
+        mMetricsFeatureProvider.action(mContext,
+                isChecked ? ACTION_SLOW_KEYS_ENABLED : ACTION_SLOW_KEYS_DISABLED);
         return true;
     }
 
@@ -96,6 +102,12 @@ public class KeyboardAccessibilitySlowKeysController extends
     @Override
     protected void updateInputSettingKeysValue(int thresholdTimeMillis) {
         InputSettings.setAccessibilitySlowKeysThreshold(mContext, thresholdTimeMillis);
+    }
+
+    @Override
+    protected void onCustomValueUpdated(int thresholdTimeMillis) {
+        mMetricsFeatureProvider.action(mContext,
+                ACTION_SLOW_KEYS_CUSTOM_VALUE_CHANGE, thresholdTimeMillis);
     }
 
     @Override
