@@ -77,7 +77,7 @@ public class AudioStreamMediaService extends Service {
     private static final int ZERO_PLAYBACK_SPEED = 0;
     private final PlaybackState.Builder mPlayStatePlayingBuilder =
             new PlaybackState.Builder()
-                    .setActions(PlaybackState.ACTION_PAUSE | PlaybackState.ACTION_SEEK_TO)
+                    .setActions(PlaybackState.ACTION_PLAY_PAUSE | PlaybackState.ACTION_SEEK_TO)
                     .setState(
                             PlaybackState.STATE_PLAYING,
                             STATIC_PLAYBACK_POSITION,
@@ -88,7 +88,7 @@ public class AudioStreamMediaService extends Service {
                             com.android.settings.R.drawable.ic_clear);
     private final PlaybackState.Builder mPlayStatePausingBuilder =
             new PlaybackState.Builder()
-                    .setActions(PlaybackState.ACTION_PLAY | PlaybackState.ACTION_SEEK_TO)
+                    .setActions(PlaybackState.ACTION_PLAY_PAUSE | PlaybackState.ACTION_SEEK_TO)
                     .setState(
                             PlaybackState.STATE_PAUSED,
                             STATIC_PLAYBACK_POSITION,
