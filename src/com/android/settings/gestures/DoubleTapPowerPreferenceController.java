@@ -18,6 +18,8 @@ package com.android.settings.gestures;
 
 import static android.provider.Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
 
+import static com.android.settings.gestures.DoubleTapPowerSettingsUtils.DOUBLE_TAP_POWER_DISABLED_MODE;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings;
@@ -37,7 +39,8 @@ public class DoubleTapPowerPreferenceController extends BasePreferenceController
 
     public static boolean isSuggestionComplete(Context context, SharedPreferences prefs) {
         return !isGestureAvailable(context)
-                || prefs.getBoolean(DoubleTapPowerSettings.PREF_KEY_SUGGESTION_COMPLETE, false);
+                || prefs.getBoolean(DoubleTapPowerSettings.PREF_KEY_SUGGESTION_COMPLETE,
+                false);
     }
 
     private static boolean isGestureAvailable(@NonNull Context context) {
@@ -46,7 +49,10 @@ public class DoubleTapPowerPreferenceController extends BasePreferenceController
                     .getBoolean(
                             com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled);
         }
-        return DoubleTapPowerSettingsUtils.isDoubleTapPowerButtonGestureAvailable(context);
+        return context.getResources()
+                .getInteger(
+                        com.android.internal.R.integer.config_doubleTapPowerGestureMode)
+                != DOUBLE_TAP_POWER_DISABLED_MODE;
     }
 
     @Override
@@ -56,7 +62,9 @@ public class DoubleTapPowerPreferenceController extends BasePreferenceController
 
     @Override
     public void displayPreference(@NonNull PreferenceScreen screen) {
-        if (!android.service.quickaccesswallet.Flags.launchWalletOptionOnPowerDoubleTap()) {
+        if (!android.service.quickaccesswallet.Flags.launchWalletOptionOnPowerDoubleTap()
+                || !DoubleTapPowerSettingsUtils
+                .isMultiTargetDoubleTapPowerButtonGestureAvailable(mContext)) {
             final Preference preference = screen.findPreference(getPreferenceKey());
             if (preference != null) {
                 preference.setTitle(R.string.double_tap_power_for_camera_title);
@@ -68,12 +76,14 @@ public class DoubleTapPowerPreferenceController extends BasePreferenceController
     @Override
     @NonNull
     public CharSequence getSummary() {
-        if (!android.service.quickaccesswallet.Flags.launchWalletOptionOnPowerDoubleTap()) {
+        if (!android.service.quickaccesswallet.Flags.launchWalletOptionOnPowerDoubleTap()
+                || !DoubleTapPowerSettingsUtils
+                .isMultiTargetDoubleTapPowerButtonGestureAvailable(mContext)) {
             final boolean isCameraDoubleTapPowerGestureEnabled =
                     Settings.Secure.getInt(
-                                    mContext.getContentResolver(),
-                                    CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED,
-                                    DoubleTapPowerToOpenCameraPreferenceController.ON)
+                            mContext.getContentResolver(),
+                            CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED,
+                            DoubleTapPowerToOpenCameraPreferenceController.ON)
                             == DoubleTapPowerToOpenCameraPreferenceController.ON;
             return mContext.getText(
                     isCameraDoubleTapPowerGestureEnabled
@@ -85,7 +95,7 @@ public class DoubleTapPowerPreferenceController extends BasePreferenceController
                     mContext.getText(com.android.settings.R.string.gesture_setting_on);
             final CharSequence actionString =
                     DoubleTapPowerSettingsUtils.isDoubleTapPowerButtonGestureForCameraLaunchEnabled(
-                                    mContext)
+                            mContext)
                             ? mContext.getText(R.string.double_tap_power_camera_action_summary)
                             : mContext.getText(R.string.double_tap_power_wallet_action_summary);
             return mContext.getString(R.string.double_tap_power_summary, onString, actionString);

@@ -16,6 +16,9 @@
 
 package com.android.settings.gestures;
 
+import static com.android.settings.gestures.DoubleTapPowerSettingsUtils.DOUBLE_TAP_POWER_DISABLED_MODE;
+import static com.android.settings.gestures.DoubleTapPowerSettingsUtils.DOUBLE_TAP_POWER_MULTI_TARGET_MODE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.mock;
@@ -72,7 +75,8 @@ public class DoubleTapPowerForCameraPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_setDoubleTapPowerGestureNotAvailable_preferenceUnsupported() {
-        when(mResources.getBoolean(R.bool.config_doubleTapPowerGestureEnabled)).thenReturn(false);
+        when(mResources.getInteger(R.integer.config_doubleTapPowerGestureMode)).thenReturn(
+                DOUBLE_TAP_POWER_DISABLED_MODE);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
@@ -80,7 +84,8 @@ public class DoubleTapPowerForCameraPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_setDoubleTapPowerButtonDisabled_preferenceDisabled() {
-        when(mResources.getBoolean(R.bool.config_doubleTapPowerGestureEnabled)).thenReturn(true);
+        when(mResources.getInteger(R.integer.config_doubleTapPowerGestureMode)).thenReturn(
+                DOUBLE_TAP_POWER_MULTI_TARGET_MODE);
         DoubleTapPowerSettingsUtils.setDoubleTapPowerButtonGestureEnabled(mContext, false);
 
         assertThat(mController.getAvailabilityStatus())
@@ -89,7 +94,8 @@ public class DoubleTapPowerForCameraPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_setDoubleTapPowerCameraLaunchEnabled_preferenceEnabled() {
-        when(mResources.getBoolean(R.bool.config_doubleTapPowerGestureEnabled)).thenReturn(true);
+        when(mResources.getInteger(R.integer.config_doubleTapPowerGestureMode)).thenReturn(
+                DOUBLE_TAP_POWER_MULTI_TARGET_MODE);
         DoubleTapPowerSettingsUtils.setDoubleTapPowerButtonGestureEnabled(mContext, true);
 
         assertThat(mController.getAvailabilityStatus())

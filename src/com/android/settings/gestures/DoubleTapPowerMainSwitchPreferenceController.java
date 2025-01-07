@@ -57,7 +57,8 @@ public class DoubleTapPowerMainSwitchPreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return DoubleTapPowerSettingsUtils.isDoubleTapPowerButtonGestureAvailable(mContext)
+        return DoubleTapPowerSettingsUtils
+                .isMultiTargetDoubleTapPowerButtonGestureAvailable(mContext)
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }

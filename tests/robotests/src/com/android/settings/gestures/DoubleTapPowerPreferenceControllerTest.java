@@ -20,6 +20,9 @@ import static android.provider.Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_D
 import static android.provider.Settings.Secure.DOUBLE_TAP_POWER_BUTTON_GESTURE_ENABLED;
 
 import static com.android.settings.gestures.DoubleTapPowerPreferenceController.isSuggestionComplete;
+import static com.android.settings.gestures.DoubleTapPowerSettingsUtils.DOUBLE_TAP_POWER_DISABLED_MODE;
+import static com.android.settings.gestures.DoubleTapPowerSettingsUtils.DOUBLE_TAP_POWER_LAUNCH_CAMERA_MODE;
+import static com.android.settings.gestures.DoubleTapPowerSettingsUtils.DOUBLE_TAP_POWER_MULTI_TARGET_MODE;
 import static com.android.settings.gestures.DoubleTapPowerToOpenCameraPreferenceController.OFF;
 import static com.android.settings.gestures.DoubleTapPowerToOpenCameraPreferenceController.ON;
 
@@ -58,7 +61,8 @@ import org.robolectric.annotation.Config;
 @Config(shadows = SettingsShadowResources.class)
 public class DoubleTapPowerPreferenceControllerTest {
 
-    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private Context mContext;
     private ContentResolver mContentResolver;
     private DoubleTapPowerPreferenceController mController;
@@ -83,18 +87,30 @@ public class DoubleTapPowerPreferenceControllerTest {
 
     @Test
     @EnableFlags(Flags.FLAG_LAUNCH_WALLET_OPTION_ON_POWER_DOUBLE_TAP)
-    public void isAvailable_flagEnabled_configIsTrue_returnsTrue() {
+    public void isAvailable_flagEnabled_configIsMultiTargetMode_returnsTrue() {
         SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_doubleTapPowerGestureEnabled, Boolean.TRUE);
+                com.android.internal.R.integer.config_doubleTapPowerGestureMode,
+                DOUBLE_TAP_POWER_MULTI_TARGET_MODE);
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     @EnableFlags(Flags.FLAG_LAUNCH_WALLET_OPTION_ON_POWER_DOUBLE_TAP)
-    public void isAvailable_flagEnabled_configIsFalse_returnsFalse() {
+    public void isAvailable_flagEnabled_configIsCameraLaunchMode_returnsTrue() {
         SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_doubleTapPowerGestureEnabled, Boolean.FALSE);
+                com.android.internal.R.integer.config_doubleTapPowerGestureMode,
+                DOUBLE_TAP_POWER_LAUNCH_CAMERA_MODE);
+
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_LAUNCH_WALLET_OPTION_ON_POWER_DOUBLE_TAP)
+    public void isAvailable_flagEnabled_configIsDisabledMode_returnsFalse() {
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.integer.config_doubleTapPowerGestureMode,
+                DOUBLE_TAP_POWER_DISABLED_MODE);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -121,18 +137,20 @@ public class DoubleTapPowerPreferenceControllerTest {
 
     @Test
     @EnableFlags(Flags.FLAG_LAUNCH_WALLET_OPTION_ON_POWER_DOUBLE_TAP)
-    public void isSuggestionCompleted_enableFlag_doubleTapPower_trueWhenNotAvailable() {
+    public void isSuggestionCompleted_flagEnabled_configIsMultiTargetMode_trueWhenNotAvailable() {
         SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_doubleTapPowerGestureEnabled, false);
+                com.android.internal.R.integer.config_doubleTapPowerGestureMode,
+                DOUBLE_TAP_POWER_DISABLED_MODE);
 
         assertThat(isSuggestionComplete(mContext, null /* prefs */)).isTrue();
     }
 
     @Test
     @EnableFlags(Flags.FLAG_LAUNCH_WALLET_OPTION_ON_POWER_DOUBLE_TAP)
-    public void isSuggestionCompleted_enableFlag_doubleTapPower_falseWhenNotVisited() {
+    public void isSuggestionCompleted_enableFlag_configIsMultiTargetMode_falseWhenNotVisited() {
         SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_doubleTapPowerGestureEnabled, true);
+                com.android.internal.R.integer.config_doubleTapPowerGestureMode,
+                DOUBLE_TAP_POWER_MULTI_TARGET_MODE);
         // No stored value in shared preferences if not visited yet.
         final SharedPreferences prefs =
                 new SuggestionFeatureProviderImpl().getSharedPrefs(mContext);
@@ -142,9 +160,10 @@ public class DoubleTapPowerPreferenceControllerTest {
 
     @Test
     @EnableFlags(Flags.FLAG_LAUNCH_WALLET_OPTION_ON_POWER_DOUBLE_TAP)
-    public void isSuggestionCompleted_enableFlag_doubleTapPower_trueWhenVisited() {
+    public void isSuggestionCompleted_enableFlag_configIsMultiTargetMode_trueWhenVisited() {
         SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_doubleTapPowerGestureEnabled, true);
+                com.android.internal.R.integer.config_doubleTapPowerGestureMode,
+                DOUBLE_TAP_POWER_MULTI_TARGET_MODE);
         // No stored value in shared preferences if not visited yet.
         final SharedPreferences prefs =
                 new SuggestionFeatureProviderImpl().getSharedPrefs(mContext);
@@ -189,13 +208,30 @@ public class DoubleTapPowerPreferenceControllerTest {
 
     @Test
     @DisableFlags(Flags.FLAG_LAUNCH_WALLET_OPTION_ON_POWER_DOUBLE_TAP)
-    public void displayPreference_flagDisabled_doubleTapPowerLegacyTitleIsDisplayed() {
+    public void displayPreference_flagDisabled_cameraLaunchTitleIsDisplayed() {
         mController.displayPreference(mScreen);
 
         assertThat(
-                        TextUtils.equals(
-                                mPreference.getTitle(),
-                                mContext.getText(R.string.double_tap_power_for_camera_title)))
+                TextUtils.equals(
+                        mPreference.getTitle(),
+                        mContext.getText(R.string.double_tap_power_for_camera_title)))
+                .isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_LAUNCH_WALLET_OPTION_ON_POWER_DOUBLE_TAP)
+    public void
+            displayPreference_flagEnabled_configIsCameraLaunchMode_cameraLaunchTitleIsDisplayed() {
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.integer.config_doubleTapPowerGestureMode,
+                DOUBLE_TAP_POWER_LAUNCH_CAMERA_MODE);
+
+        mController.displayPreference(mScreen);
+
+        assertThat(
+                TextUtils.equals(
+                        mPreference.getTitle(),
+                        mContext.getText(R.string.double_tap_power_for_camera_title)))
                 .isTrue();
     }
 
@@ -206,9 +242,9 @@ public class DoubleTapPowerPreferenceControllerTest {
         Settings.Secure.putInt(mContentResolver, CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, ON);
 
         assertThat(
-                        TextUtils.equals(
-                                mController.getSummary(),
-                                mContext.getText(R.string.gesture_setting_on)))
+                TextUtils.equals(
+                        mController.getSummary(),
+                        mContext.getText(R.string.gesture_setting_on)))
                 .isTrue();
     }
 
@@ -219,9 +255,42 @@ public class DoubleTapPowerPreferenceControllerTest {
         Settings.Secure.putInt(mContentResolver, CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, OFF);
 
         assertThat(
-                        TextUtils.equals(
-                                mController.getSummary(),
-                                mContext.getText(R.string.gesture_setting_off)))
+                TextUtils.equals(
+                        mController.getSummary(),
+                        mContext.getText(R.string.gesture_setting_off)))
+                .isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_LAUNCH_WALLET_OPTION_ON_POWER_DOUBLE_TAP)
+    public void getSummary_flagEnabled_doubleTapPowerEnabled_configIsCameraLaunchMode_returnsOn() {
+        // Set the setting to be enabled.
+        Settings.Secure.putInt(mContentResolver, CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, ON);
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.integer.config_doubleTapPowerGestureMode,
+                DOUBLE_TAP_POWER_LAUNCH_CAMERA_MODE);
+
+        assertThat(
+                TextUtils.equals(
+                        mController.getSummary(),
+                        mContext.getText(R.string.gesture_setting_on)))
+                .isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_LAUNCH_WALLET_OPTION_ON_POWER_DOUBLE_TAP)
+    public void
+            getSummary_flagEnabled_doubleTapPowerDisabled_configIsCameraLaunchMode_returnsOff() {
+        // Set the setting to be disabled.
+        Settings.Secure.putInt(mContentResolver, CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, OFF);
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.integer.config_doubleTapPowerGestureMode,
+                DOUBLE_TAP_POWER_LAUNCH_CAMERA_MODE);
+
+        assertThat(
+                TextUtils.equals(
+                        mController.getSummary(),
+                        mContext.getText(R.string.gesture_setting_off)))
                 .isTrue();
     }
 
@@ -233,9 +302,9 @@ public class DoubleTapPowerPreferenceControllerTest {
                 mContentResolver, DOUBLE_TAP_POWER_BUTTON_GESTURE_ENABLED, 0 /* OFF */);
 
         assertThat(
-                        TextUtils.equals(
-                                mController.getSummary(),
-                                mContext.getText(R.string.gesture_setting_off)))
+                TextUtils.equals(
+                        mController.getSummary(),
+                        mContext.getText(R.string.gesture_setting_off)))
                 .isTrue();
     }
 
@@ -248,13 +317,13 @@ public class DoubleTapPowerPreferenceControllerTest {
         DoubleTapPowerSettingsUtils.setDoubleTapPowerButtonForCameraLaunch(mContext);
 
         assertThat(
-                        TextUtils.equals(
-                                mController.getSummary(),
-                                mContext.getString(
-                                        R.string.double_tap_power_summary,
-                                        mContext.getText(R.string.gesture_setting_on),
-                                        mContext.getText(
-                                                R.string.double_tap_power_camera_action_summary))))
+                TextUtils.equals(
+                        mController.getSummary(),
+                        mContext.getString(
+                                R.string.double_tap_power_summary,
+                                mContext.getText(R.string.gesture_setting_on),
+                                mContext.getText(
+                                        R.string.double_tap_power_camera_action_summary))))
                 .isTrue();
     }
 
@@ -267,13 +336,13 @@ public class DoubleTapPowerPreferenceControllerTest {
         DoubleTapPowerSettingsUtils.setDoubleTapPowerButtonForWalletLaunch(mContext);
 
         assertThat(
-                        TextUtils.equals(
-                                mController.getSummary(),
-                                mContext.getString(
-                                        R.string.double_tap_power_summary,
-                                        mContext.getText(R.string.gesture_setting_on),
-                                        mContext.getText(
-                                                R.string.double_tap_power_wallet_action_summary))))
+                TextUtils.equals(
+                        mController.getSummary(),
+                        mContext.getString(
+                                R.string.double_tap_power_summary,
+                                mContext.getText(R.string.gesture_setting_on),
+                                mContext.getText(
+                                        R.string.double_tap_power_wallet_action_summary))))
                 .isTrue();
     }
 }
