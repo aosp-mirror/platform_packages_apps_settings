@@ -40,6 +40,7 @@ import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
@@ -86,6 +87,7 @@ import org.robolectric.shadow.api.Shadow;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
@@ -99,11 +101,13 @@ import java.util.Set;
 public class AudioStreamMediaServiceTest {
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+    private static final String DEVICE_ADDRESS = "00:A1:A1:A1:A1:A1";
     private static final String CHANNEL_ID = "bluetooth_notification_channel";
     private static final String DEVICE_NAME = "name";
     @Mock private Resources mResources;
     @Mock private LocalBluetoothManager mLocalBtManager;
     @Mock private LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
+    @Mock private BluetoothLeBroadcastReceiveState mBroadcastReceiveState;
     @Mock private AudioStreamsHelper mAudioStreamsHelper;
     @Mock private NotificationManager mNotificationManager;
     @Mock private MediaSessionManager mMediaSessionManager;
@@ -302,6 +306,63 @@ public class AudioStreamMediaServiceTest {
                 mDevice, /* sourceId= */ 0, /* reason= */ 0);
 
         verify(mAudioStreamMediaService).stopSelf();
+    }
+
+    @Test
+    public void assistantCallback_onReceiveStateChanged_connected_doNothing() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+
+        mAudioStreamMediaService.onCreate();
+        mAudioStreamMediaService.onStartCommand(setupIntent(), /* flags= */ 0, /* startId= */ 0);
+
+        assertThat(mAudioStreamMediaService.mBroadcastAssistantCallback).isNotNull();
+        List<Long> bisSyncState = new ArrayList<>();
+        bisSyncState.add(1L);
+        when(mBroadcastReceiveState.getBisSyncState()).thenReturn(bisSyncState);
+        when(mDevice.getAddress()).thenReturn(DEVICE_ADDRESS);
+        when(mBroadcastReceiveState.getSourceDevice()).thenReturn(mDevice);
+
+        mAudioStreamMediaService.mBroadcastAssistantCallback.onReceiveStateChanged(
+                mDevice, /* sourceId= */ 0, /* state= */ mBroadcastReceiveState);
+
+        verify(mNotificationManager, never()).notify(anyInt(), any());
+    }
+
+    @Test
+    public void assistantCallback_onReceiveStateChanged_hysteresis_updateNotification() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+
+        mAudioStreamMediaService.onCreate();
+        mAudioStreamMediaService.onStartCommand(setupIntent(), /* flags= */ 0, /* startId= */ 0);
+
+        assertThat(mAudioStreamMediaService.mBroadcastAssistantCallback).isNotNull();
+        when(mBroadcastReceiveState.getBisSyncState()).thenReturn(new ArrayList<>());
+        when(mDevice.getAddress()).thenReturn(DEVICE_ADDRESS);
+        when(mBroadcastReceiveState.getSourceDevice()).thenReturn(mDevice);
+
+        mAudioStreamMediaService.mBroadcastAssistantCallback.onReceiveStateChanged(
+                mDevice, /* sourceId= */ 0, /* state= */ mBroadcastReceiveState);
+
+        verify(mNotificationManager).notify(anyInt(), any());
+    }
+
+    @Test
+    public void assistantCallback_onReceiveStateChanged_hysteresis_flagOff_doNothing() {
+        mSetFlagsRule.disableFlags(Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+
+        mAudioStreamMediaService.onCreate();
+        mAudioStreamMediaService.onStartCommand(setupIntent(), /* flags= */ 0, /* startId= */ 0);
+
+        assertThat(mAudioStreamMediaService.mBroadcastAssistantCallback).isNotNull();
+        mAudioStreamMediaService.mBroadcastAssistantCallback.onReceiveStateChanged(
+                mDevice, /* sourceId= */ 0, /* state= */ mBroadcastReceiveState);
+
+        verify(mBroadcastReceiveState, never()).getBisSyncState();
+        verify(mBroadcastReceiveState, never()).getSourceDevice();
+        verify(mNotificationManager, never()).notify(anyInt(), any());
     }
 
     @Test
