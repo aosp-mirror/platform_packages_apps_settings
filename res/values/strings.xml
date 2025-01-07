@@ -4672,14 +4672,14 @@
     <!-- Summary text for the accessibility setting 'Mouse keys' preference sub-screen. [CHAR LIMIT=100] -->
     <string name="mouse_keys_summary">Use your keyboard to control the pointer</string>
     <!-- Title for the 'Mouse reverse scrolling' preference switch, which reverses the direction of mouse scroll wheels so that moving the wheel up scrolls the content down. [CHAR LIMIT=60] -->
-    <string name="mouse_reverse_vertical_scrolling">Mouse reverse scrolling</string>
+    <string name="mouse_reverse_vertical_scrolling">Reverse scrolling</string>
     <!-- Summary text for the 'Mouse reverse scrolling' preference switch indicating to users that when the setting is enabled that scrolling up with their mouse wheel will move the page content down. [CHAR LIMIT=NONE] -->
-    <string name="mouse_reverse_vertical_scrolling_summary">Scroll up to move the page down</string>
+    <string name="mouse_reverse_vertical_scrolling_summary">Content moves up when you scroll down</string>
     <!-- TODO(b/383555305): finalize these strings and mark them translatable. -->
     <!-- Title for the 'Mouse controlled scrolling' preference switch, which disables the mouse scrolling acceleration so that the scrolling speed becomes directly proportional to the speed at which the wheel is turned. [CHAR LIMIT=60]-->
     <string name="mouse_scrolling_acceleration" translatable="false">Controlled scrolling</string>
     <!-- Title for the 'Swap buttons' preference switch, which swaps the left and right buttons of connected mice so that right click will be the primary action button and left clicking will be the secondary action, for example showing the context menu. [CHAR LIMIT=60] -->
-    <string name="mouse_swap_primary_button">Swap left and right buttons</string>
+    <string name="mouse_swap_primary_button">Swap primary mouse button</string>
     <!-- Summary text for the 'Swap buttons' preference switch indicating to users that when this switch is enabled, their left click will behave as though it is the right click (secondary action) and that the right click will be the primary action. [CHAR LIMIT=NONE] -->
     <string name="mouse_swap_primary_button_summary">Use the left mouse button as your right</string>
     <!-- Title for the 'Cursor acceleration' preference switch, which dynamically adjusts cursor movement based on speed. [CHAR LIMIT=60] -->
@@ -4726,9 +4726,13 @@
     <!-- Title text for 'Tap to click'. [CHAR LIMIT=35] -->
     <string name="trackpad_tap_to_click">Tap to click</string>
     <!-- Title text for 'Tap dragging', a touchpad setting which allows dragging of UI elements by tapping the touchpad with a single finger and then moving it. [CHAR LIMIT=35] -->
-    <string name="trackpad_tap_dragging_title">Tap dragging</string>
+    <string name="trackpad_tap_dragging_title">Tap and drag to move items</string>
     <!-- Summary text for 'Tap dragging', a touchpad setting which allows dragging of UI elements by tapping the touchpad with a single finger and then moving it. [CHAR LIMIT=60] -->
-    <string name="trackpad_tap_dragging_summary">Tap and drag your finger on the touchpad to move objects</string>
+    <string name="trackpad_tap_dragging_summary">Double-tap an item, hold down on the second tap, and then drag the item to move it</string>
+    <!-- Title text for 'Touchpad gestures' [CHAR LIMIT=35] -->
+    <string name="trackpad_touchpad_gesture_title">Touchpad gestures</string>
+    <!-- Summary text for 'Touchpad gestures' [CHAR LIMIT=60] -->
+    <string name="trackpad_touchpad_gesture_summary">Customize individual touchpad navigation gestures</string>
     <!-- Title text for 'Reverse scrolling' [CHAR LIMIT=35] -->
     <string name="trackpad_reverse_scrolling_title">Reverse scrolling</string>
     <!-- Summary text for 'Reverse scrolling' [CHAR LIMIT=60] -->
@@ -4738,9 +4742,9 @@
     <!-- Summary text for 'Bottom-right click', a setting that allows the user to right-click by pressing in the bottom-right corner of a touchpad [CHAR LIMIT=60] -->
     <string name="trackpad_bottom_right_tap_summary">Click in the bottom right corner of the touchpad for more options</string>
     <!-- Title text for 'Pointer speed'. [CHAR LIMIT=35] -->
-    <string name="trackpad_pointer_speed">Pointer speed</string>
+    <string name="trackpad_pointer_speed">Cursor speed</string>
     <!-- Title text for 'Three finger tap' touchpad preference. This preference allows the user to select an action that will trigger when they tap three fingers on a touchpad. [CHAR LIMIT=60] -->
-    <string name="three_finger_tap_preference_title">Use three finger tap</string>
+    <string name="three_finger_tap_preference_title">Customise 3-finger tap</string>
     <!-- Title text for mouse pointer color. [CHAR LIMIT=35] -->
     <string name="pointer_fill_style">Pointer color</string>
     <!-- Content description for black pointer fill style. [CHAR LIMIT=60] -->
@@ -4876,7 +4880,7 @@
     <!-- On Languages & input settings screen, setting summary.  Setting for mouse pointer speed. [CHAR LIMIT=35] -->
     <string name="pointer_speed">Pointer speed</string>
     <!-- Setting for mouse pointer scale. [CHAR LIMIT=35] -->
-    <string name="pointer_scale">Pointer scale</string>
+    <string name="pointer_scale">Cursor size</string>
     <!-- Content description for decreasing pointer scale. [CHAR LIMIT=35] -->
     <string name="pointer_scale_decrease_content_description">Decrease pointer scale</string>
     <!-- Setting for mouse pointer scale. [CHAR LIMIT=35] -->
@@ -5027,21 +5031,23 @@
     <string name="display_category_title">Display</string>
     <!-- Title for the accessibility color and motion page. [CHAR LIMIT=50] -->
     <string name="accessibility_color_and_motion_title">Color and motion</string>
-    <!-- Title for the accessibility pointer and touchpad page. [CHAR LIMIT=50] -->
-    <string name="accessibility_pointer_and_touchpad_title">Pointer &amp; touchpad accessibility</string>
+    <!-- Title for the accessibility cursor and touchpad page. [CHAR LIMIT=50] -->
+    <string name="accessibility_pointer_and_touchpad_title">Cursor &amp; touchpad accessibility</string>
     <!-- Summary for the accessibility pointer and touchpad page. [CHAR LIMIT=50] -->
-    <string name="accessibility_pointer_and_touchpad_summary">Pointer color, pointer size &amp; more</string>
+    <string name="accessibility_pointer_and_touchpad_summary">Size, color, type</string>
     <!-- Title for the accessibility pointer color customization page. [CHAR LIMIT=50] -->
-    <string name="accessibility_pointer_color_customization_title">Pointer color customization</string>
+    <string name="accessibility_pointer_color_customization_title">Cursor color</string>
     <!-- TODO(b/353947750): finalize the four strings below and mark them translatable. -->
+    <!-- Title for the cursor section of the accessibility pointer and touchpad page. -->
+    <string name="accessibility_pointer_title">Cursor</string>
     <!-- Title for the touchpad section of the accessibility pointer and touchpad page. -->
-    <string name="accessibility_touchpad_title" translatable="false">Touchpad</string>
+    <string name="accessibility_touchpad_title">Touchpad</string>
     <!-- Title for a settings toggle that allows the user to enable or disable system gestures (3- or 4-finger swipes for going home, back, to the overview screen, or between apps) being made on a touchpad. -->
-    <string name="accessibility_touchpad_system_gestures_enable_title" translatable="false">Use system gestures</string>
+    <string name="accessibility_touchpad_system_gestures_enable_title">Use 3- or 4-finger gestures </string>
     <!-- Description text for a settings toggle that allows the user to enable or disable system gestures (3- or 4-finger swipes for going home, back, to the overview screen, or between apps) being made on a touchpad. -->
-    <string name="accessibility_touchpad_system_gestures_enable_summary" translatable="false">When turned off, 3- or 4-finger gestures are ignored</string>
+    <string name="accessibility_touchpad_system_gestures_enable_summary">When turned off, your touchpad will ignore 3- or 4-finger gestures</string>
     <!-- List of synonyms used in the settings search bar to find the "Use system gestures" touchpad setting, which allows the user to enable or disable system gestures (3- or 4-finger swipes for going home, back, to the overview screen, or between apps) being made on a touchpad. -->
-    <string name="keywords_accessibility_touchpad_system_gestures_enable" translatable="false">touchpad, trackpad, swipe</string>
+    <string name="keywords_accessibility_touchpad_system_gestures_enable">touchpad, trackpad, swipe</string>
     <!-- Title for the accessibility color contrast page. [CHAR LIMIT=50] -->
     <string name="accessibility_color_contrast_title">Color contrast</string>
     <!-- Intro for the accessibility color contrast page. [CHAR LIMIT=NONE] -->
@@ -5531,7 +5537,7 @@
     <!-- suffixed to click action texts "Double-tap to " -->
     <string name="accessibility_action_label_panel_slice">enter settings</string>
     <!-- Title for accessibility preference for configuring feature that performs click action soon after mouse/trackpad pointer stops moving. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_autoclick_preference_title">Autoclick (dwell timing)</string>
+    <string name="accessibility_autoclick_preference_title">Autoclick (Dwell timing)</string>
     <!-- Title for accessibility dwell timing footer. [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_about_title">About autoclick (dwell timing)</string>
     <!-- Accessibility dwell timing footer link content description [CHAR LIMIT=NONE] -->
