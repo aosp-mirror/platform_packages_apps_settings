@@ -59,6 +59,13 @@ flag {
 }
 
 flag {
+  name: "enable_magnification_focus_following_dialog"
+  namespace: "accessibility"
+  description: "Decides whether to show the magnification focus following dialog in Settings app."
+  bug: "388336111"
+}
+
+flag {
   name: "fix_a11y_settings_search"
   namespace: "accessibility"
   description: "Fix the a11y related search items in Settings app"
