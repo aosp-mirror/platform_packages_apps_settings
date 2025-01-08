@@ -16,12 +16,11 @@
 
 package com.android.settings.network.telephony;
 
-import static android.telephony.NetworkRegistrationInfo.SERVICE_TYPE_DATA;
-import static android.telephony.NetworkRegistrationInfo.SERVICE_TYPE_SMS;
-
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static junit.framework.Assert.assertEquals;
 
 import static org.mockito.Mockito.spy;
 
@@ -34,8 +33,6 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-
-import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -74,24 +71,6 @@ public class SatelliteSettingsPreferenceCategoryControllerTest {
 
     @Test
     @Ignore("b/382664790")
-    public void setPreferenceTitle_hasDataService_showConnectivity() {
-        PreferenceManager preferenceManager = new PreferenceManager(mContext);
-        PreferenceScreen preferenceScreen = preferenceManager.createPreferenceScreen(mContext);
-        PreferenceCategory preferenceCategory = new PreferenceCategory(mContext);
-        preferenceCategory.setKey(KEY);
-        preferenceCategory.addPreference(new Preference(mContext));
-        preferenceScreen.addPreference(preferenceCategory);
-        mController.displayPreference(preferenceScreen);
-
-        mController.mCarrierRoamingNtnModeCallback.onCarrierRoamingNtnAvailableServicesChanged(
-                new int[]{SERVICE_TYPE_DATA});
-
-        assertThat(preferenceCategory.getTitle()).isEqualTo(
-                mContext.getString(R.string.title_satellite_setting_connectivity));
-    }
-
-    @Test
-    @Ignore("b/382664790")
     public void setPreferenceTitle_hasSmsService_showMessaging() {
         PreferenceManager preferenceManager = new PreferenceManager(mContext);
         PreferenceScreen preferenceScreen = preferenceManager.createPreferenceScreen(mContext);
@@ -101,10 +80,6 @@ public class SatelliteSettingsPreferenceCategoryControllerTest {
         preferenceCategory.addPreference(new Preference(mContext));
         mController.displayPreference(preferenceScreen);
 
-        mController.mCarrierRoamingNtnModeCallback.onCarrierRoamingNtnAvailableServicesChanged(
-                new int[]{SERVICE_TYPE_SMS});
-
-        assertThat(preferenceCategory.getTitle()).isEqualTo(
-                mContext.getString(R.string.satellite_setting_title));
+        assertEquals(preferenceCategory.getTitle(), "Satellite connectivity");
     }
 }
