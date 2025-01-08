@@ -16,6 +16,8 @@
 
 package com.android.settings.dream;
 
+import static android.service.dreams.Flags.allowDreamWhenPostured;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -65,7 +67,11 @@ public class WhenToDreamPicker extends RadioButtonPickerFragment {
         }
 
         for (int i = 0; i < entries.length; i++) {
-            candidates.add(new WhenToDreamCandidateInfo(entries[i], values[i]));
+            final String key = values[i];
+            if (DreamSettings.WHILE_POSTURED_ONLY.equals(key) && !allowDreamWhenPostured()) {
+                continue;
+            }
+            candidates.add(new WhenToDreamCandidateInfo(entries[i], key));
         }
 
         return candidates;

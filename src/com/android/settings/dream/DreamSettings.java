@@ -17,10 +17,6 @@
 package com.android.settings.dream;
 
 import static com.android.settings.dream.DreamMainSwitchPreferenceController.MAIN_SWITCH_PREF_KEY;
-import static com.android.settingslib.dream.DreamBackend.EITHER;
-import static com.android.settingslib.dream.DreamBackend.NEVER;
-import static com.android.settingslib.dream.DreamBackend.WHILE_CHARGING;
-import static com.android.settingslib.dream.DreamBackend.WHILE_DOCKED;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -57,6 +53,7 @@ public class DreamSettings extends DashboardFragment implements OnCheckedChangeL
     static final String WHILE_CHARGING_ONLY = "while_charging_only";
     static final String WHILE_DOCKED_ONLY = "while_docked_only";
     static final String EITHER_CHARGING_OR_DOCKED = "either_charging_or_docked";
+    static final String WHILE_POSTURED_ONLY = "while_postured_only";
     static final String NEVER_DREAM = "never";
 
     private MainSwitchPreference mMainSwitchPreference;
@@ -75,26 +72,30 @@ public class DreamSettings extends DashboardFragment implements OnCheckedChangeL
     static int getSettingFromPrefKey(String key) {
         switch (key) {
             case WHILE_CHARGING_ONLY:
-                return WHILE_CHARGING;
+                return DreamBackend.WHILE_CHARGING;
             case WHILE_DOCKED_ONLY:
-                return WHILE_DOCKED;
+                return DreamBackend.WHILE_DOCKED;
             case EITHER_CHARGING_OR_DOCKED:
-                return EITHER;
+                return DreamBackend.WHILE_CHARGING_OR_DOCKED;
+            case WHILE_POSTURED_ONLY:
+                return DreamBackend.WHILE_POSTURED;
             case NEVER_DREAM:
             default:
-                return NEVER;
+                return DreamBackend.NEVER;
         }
     }
 
     static String getKeyFromSetting(@WhenToDream int dreamSetting) {
         switch (dreamSetting) {
-            case WHILE_CHARGING:
+            case DreamBackend.WHILE_CHARGING:
                 return WHILE_CHARGING_ONLY;
-            case WHILE_DOCKED:
+            case DreamBackend.WHILE_DOCKED:
                 return WHILE_DOCKED_ONLY;
-            case EITHER:
+            case DreamBackend.WHILE_CHARGING_OR_DOCKED:
                 return EITHER_CHARGING_OR_DOCKED;
-            case NEVER:
+            case DreamBackend.WHILE_POSTURED:
+                return WHILE_POSTURED_ONLY;
+            case DreamBackend.NEVER:
             default:
                 return NEVER_DREAM;
         }
@@ -103,14 +104,17 @@ public class DreamSettings extends DashboardFragment implements OnCheckedChangeL
     static int getDreamSettingDescriptionResId(@WhenToDream int dreamSetting,
             boolean enabledOnBattery) {
         switch (dreamSetting) {
-            case WHILE_CHARGING:
+            case DreamBackend.WHILE_CHARGING:
                 return R.string.screensaver_settings_summary_sleep;
-            case WHILE_DOCKED:
+            case DreamBackend.WHILE_DOCKED:
                 return enabledOnBattery ? R.string.screensaver_settings_summary_dock
                         : R.string.screensaver_settings_summary_dock_and_charging;
-            case EITHER:
+            case DreamBackend.WHILE_CHARGING_OR_DOCKED:
                 return R.string.screensaver_settings_summary_either_long;
-            case NEVER:
+            case DreamBackend.WHILE_POSTURED:
+                return enabledOnBattery ? R.string.screensaver_settings_summary_postured
+                        : R.string.screensaver_settings_summary_postured_and_charging;
+            case DreamBackend.NEVER:
             default:
                 return R.string.screensaver_settings_summary_never;
         }
