@@ -28,6 +28,7 @@ import androidx.window.embedding.ActivityEmbeddingController;
 import androidx.window.embedding.SplitController;
 
 import com.android.settings.R;
+import com.android.window.flags.Flags;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -48,7 +49,10 @@ public class ActivityEmbeddingUtils {
      * @see androidx.window.embedding.SplitController.SplitSupportStatus#SPLIT_UNAVAILABLE
      */
     private static final boolean SHOULD_ENABLE_LARGE_SCREEN_OPTIMIZATION =
-            SystemProperties.getBoolean("persist.settings.large_screen_opt.enabled", false);
+            SystemProperties.getBoolean("persist.settings.large_screen_opt.enabled", false)
+                    || (Flags.activityEmbeddingSupportForConnectedDisplays()
+                    && SystemProperties.getBoolean(
+                            "persist.settings.large_screen_opt_for_dp.enabled", false));
 
     private static final String TAG = "ActivityEmbeddingUtils";
 
