@@ -269,7 +269,7 @@ public class AudioStreamsHelper {
      * @param localBtManager The BT manager to provide BT functions.
      * @return Whether the device has connected to a broadcast source.
      */
-    private static boolean hasConnectedBroadcastSource(
+    public static boolean hasConnectedBroadcastSource(
             CachedBluetoothDevice cachedDevice, LocalBluetoothManager localBtManager) {
         if (localBtManager == null) {
             Log.d(TAG, "Skip check hasConnectedBroadcastSource due to bt manager is null");
