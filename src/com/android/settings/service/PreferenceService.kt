@@ -59,7 +59,6 @@ class PreferenceService : SettingsPreferenceService() {
                     callingPid,
                     callingUid,
                     GetPreferenceGraphRequest(
-                        includeValue = false,
                         flags = PreferenceGetterFlags.METADATA,
                     ),
                 )
