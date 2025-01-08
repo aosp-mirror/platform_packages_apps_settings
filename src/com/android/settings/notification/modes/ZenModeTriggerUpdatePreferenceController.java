@@ -109,9 +109,11 @@ class ZenModeTriggerUpdatePreferenceController extends AbstractZenModePreference
                     tryParseScheduleConditionId(mode.getRule().getConditionId());
             if (schedule != null) {
                 preference.setTitle(SystemZenRules.getTimeSummary(mContext, schedule));
-                preference.setSummary(Utils.createAccessibleSequence(
-                        SystemZenRules.getDaysOfWeekShort(mContext, schedule),
-                        SystemZenRules.getDaysOfWeekFull(mContext, schedule)));
+                String shortDaysSummary = SystemZenRules.getDaysOfWeekShort(mContext, schedule);
+                String fullDaysSummary = SystemZenRules.getDaysOfWeekFull(mContext, schedule);
+                preference.setSummary(shortDaysSummary != null && fullDaysSummary != null
+                        ? Utils.createAccessibleSequence(shortDaysSummary, fullDaysSummary)
+                        : shortDaysSummary);
             } else {
                 // Fallback, but shouldn't happen.
                 Log.wtf(TAG, "SCHEDULE_TIME mode without schedule: " + mode);
