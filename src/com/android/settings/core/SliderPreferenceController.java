@@ -16,6 +16,7 @@ package com.android.settings.core;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.slice.builders.SliceAction;
 
@@ -24,7 +25,7 @@ import com.android.settings.slices.SliceData;
 public abstract class SliderPreferenceController extends BasePreferenceController implements
         Preference.OnPreferenceChangeListener {
 
-    public SliderPreferenceController(Context context, String preferenceKey) {
+    public SliderPreferenceController(@NonNull Context context, @NonNull String preferenceKey) {
         super(context, preferenceKey);
     }
 

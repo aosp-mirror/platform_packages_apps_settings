@@ -20,6 +20,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.input.InputSettings;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.SliderPreferenceController;
@@ -31,7 +32,7 @@ public class TouchpadPointerSpeedPreferenceController extends SliderPreferenceCo
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
-    public TouchpadPointerSpeedPreferenceController(Context context, String key) {
+    public TouchpadPointerSpeedPreferenceController(@NonNull Context context, @NonNull String key) {
         super(context, key);
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }

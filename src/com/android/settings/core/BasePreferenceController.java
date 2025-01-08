@@ -29,6 +29,7 @@ import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -194,7 +195,7 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
         }
     }
 
-    public BasePreferenceController(Context context, String preferenceKey) {
+    public BasePreferenceController(@NonNull Context context, @NonNull String preferenceKey) {
         super(context);
         mPreferenceKey = preferenceKey;
         mPrefVisibility = true;
