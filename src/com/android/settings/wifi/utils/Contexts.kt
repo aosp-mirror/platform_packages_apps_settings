@@ -19,6 +19,8 @@
 package com.android.settings.wifi.utils
 
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.TetheringManager
 import android.net.wifi.WifiManager
 
@@ -52,3 +54,18 @@ var Context.isWifiEnabled: Boolean
  */
 val Context.tetheringManager: TetheringManager?
     get() = applicationContext.getSystemService(TetheringManager::class.java)
+
+/**
+ * Gets the {@link android.net.ConnectivityManager} system service.
+ *
+ * Use application context to get system services to avoid memory leaks.
+ */
+val Context.connectivityManager: ConnectivityManager?
+    get() = applicationContext.getSystemService(ConnectivityManager::class.java)
+
+/** Return true if the default network is a Wi-Fi network */
+val Context.isDefaultNetworkWifi: Boolean
+    get() =
+        connectivityManager
+            ?.getNetworkCapabilities(connectivityManager?.activeNetwork)
+            ?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true

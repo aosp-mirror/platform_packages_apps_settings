@@ -17,6 +17,8 @@
 package com.android.settings.wifi
 
 import android.Manifest
+import android.app.settings.SettingsEnums.ACTION_WIFI_OFF
+import android.app.settings.SettingsEnums.ACTION_WIFI_ON
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -31,6 +33,8 @@ import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.network.SatelliteRepository.Companion.isSatelliteOn
 import com.android.settings.network.SatelliteWarningDialogActivity
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
+import com.android.settings.wifi.utils.isDefaultNetworkWifi
 import com.android.settings.wifi.utils.isWifiEnabled
 import com.android.settings.wifi.utils.wifiManager
 import com.android.settingslib.RestrictedSwitchPreference
@@ -137,8 +141,15 @@ class WifiSwitchPreference :
             context.isWifiEnabled as T?
 
         override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
-            if (value is Boolean) {
-                context.isWifiEnabled = value
+            if (value !is Boolean) return
+
+            context.isWifiEnabled = value
+
+            val metricsFeature = featureFactory.metricsFeatureProvider
+            if (value) {
+                metricsFeature.action(context, ACTION_WIFI_ON)
+            } else {
+                metricsFeature.action(context, ACTION_WIFI_OFF, context.isDefaultNetworkWifi)
             }
         }
 
