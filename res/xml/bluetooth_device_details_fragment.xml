@@ -69,6 +69,10 @@
         settings:allowDividerAbove="true"/>
 
     <PreferenceCategory
+        android:key="audio_sharing_control"
+        android:layout="@layout/settingslib_preference_category_no_title"/>
+
+    <PreferenceCategory
         android:key="bt_device_slice_category"
         settings:controller="com.android.settings.bluetooth.BlockingPrefWithSliceController"/>
 
