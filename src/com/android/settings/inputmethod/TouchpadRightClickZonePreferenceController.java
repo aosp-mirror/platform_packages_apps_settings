@@ -27,7 +27,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class TouchpadRightClickZonePreferenceController extends TogglePreferenceController {
 
-    private MetricsFeatureProvider mMetricsFeatureProvider;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     public TouchpadRightClickZonePreferenceController(Context context, String key) {
         super(context, key);
