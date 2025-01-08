@@ -24,10 +24,15 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
+import com.android.server.flags.Flags;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -36,33 +41,37 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class TimeFeedbackPreferenceCategoryControllerTest {
+public class NotificationsPreferenceCategoryControllerTest {
 
-    private TestTimeFeedbackPreferenceCategoryController mController;
-    @Mock private AbstractPreferenceController mChildController;
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
+
+    private NotificationsPreferenceCategoryController mController;
+    @Mock
+    private AbstractPreferenceController mChildController;
 
     @Before
+    @EnableFlags({Flags.FLAG_DATETIME_NOTIFICATIONS})
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         Context context = RuntimeEnvironment.getApplication();
 
-        mController = new TestTimeFeedbackPreferenceCategoryController(context, "test_key");
+        mController = new NotificationsPreferenceCategoryController(context, "test_key");
         mController.addChildController(mChildController);
     }
 
     @Test
-    public void getAvailabilityStatus_featureEnabledPrimary() {
-        mController.setTimeFeedbackFeatureEnabled(false);
-
+    @DisableFlags({Flags.FLAG_DATETIME_NOTIFICATIONS})
+    public void getAvailabilityStatus_featureDisabled() {
         when(mChildController.isAvailable()).thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
-    public void getAvailabilityStatus_childControllerSecondary() {
-        mController.setTimeFeedbackFeatureEnabled(true);
-
+    @EnableFlags({Flags.FLAG_DATETIME_NOTIFICATIONS})
+    public void getAvailabilityStatus_featureEnabled() {
         when(mChildController.isAvailable()).thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
@@ -70,28 +79,5 @@ public class TimeFeedbackPreferenceCategoryControllerTest {
         when(mChildController.isAvailable()).thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-    }
-
-    /**
-     * Extend class under test to change {@link #isTimeFeedbackFeatureEnabled} to not call
-     * {@link DateTimeLaunchUtils} because that's non-trivial to fake.
-     */
-    private static class TestTimeFeedbackPreferenceCategoryController
-            extends TimeFeedbackPreferenceCategoryController {
-
-        private boolean mTimeFeedbackFeatureEnabled;
-
-        TestTimeFeedbackPreferenceCategoryController(Context context, String preferenceKey) {
-            super(context, preferenceKey);
-        }
-
-        void setTimeFeedbackFeatureEnabled(boolean value) {
-            this.mTimeFeedbackFeatureEnabled = value;
-        }
-
-        @Override
-        protected boolean isTimeFeedbackFeatureEnabled() {
-            return mTimeFeedbackFeatureEnabled;
-        }
     }
 }

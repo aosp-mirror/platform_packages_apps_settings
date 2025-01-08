@@ -22,7 +22,7 @@ import android.provider.DeviceConfig;
 import com.android.settings.flags.Flags;
 
 /** A class to avoid duplication of launch-control logic for "time feedback" support. */
-final class TimeFeedbackLaunchUtils {
+final class DateTimeLaunchUtils {
     /**
      * A {@link DeviceConfig} flag that influences whether the settings entries related to help and
      * feedback are supported on this device / for this user.
@@ -30,21 +30,21 @@ final class TimeFeedbackLaunchUtils {
     public static final String KEY_HELP_AND_FEEDBACK_FEATURE_SUPPORTED =
             "time_help_and_feedback_feature_supported";
 
-    private TimeFeedbackLaunchUtils() {}
+    private DateTimeLaunchUtils() {}
 
     static boolean isFeedbackFeatureSupported() {
         // Support is determined according to:
         // 1) A build-time flag to determine release feature availability.
         // 2) A runtime / server-side flag to determine which devices / who gets to see the feature.
         //    This is launch control for limiting the feedback to droidfooding.
-        return isFeatureSupportedThisRelease() && isFeatureSupportedOnThisDevice();
+        return isFeedbackFeatureSupportedThisRelease() && isFeedbackFeatureSupportedOnThisDevice();
     }
 
-    private static boolean isFeatureSupportedThisRelease() {
+    private static boolean isFeedbackFeatureSupportedThisRelease() {
         return Flags.datetimeFeedback();
     }
 
-    private static boolean isFeatureSupportedOnThisDevice() {
+    private static boolean isFeedbackFeatureSupportedOnThisDevice() {
         boolean defaultIsSupported = false;
         return DeviceConfig.getBoolean(
                 NAMESPACE_SETTINGS_UI, KEY_HELP_AND_FEEDBACK_FEATURE_SUPPORTED, defaultIsSupported);
