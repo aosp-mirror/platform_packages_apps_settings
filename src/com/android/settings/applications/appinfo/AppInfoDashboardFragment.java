@@ -243,7 +243,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         if (!ensurePackageInfoAvailable(activity)) {
             return;
         }
-        if (!ensureDisplayableModule(activity)) {
+        if (!android.content.pm.Flags.removeHiddenModuleUsage() && !ensureDisplayableModule(activity)) {
             return;
         }
         startListeningToPackageRemove();
@@ -386,6 +386,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
      * If it's not, the fragment will finish.
      *
      * @return true if package is displayable.
+     * TODO(b/382016780): to be removed after flag cleanup.
      */
     @VisibleForTesting
     boolean ensureDisplayableModule(Activity activity) {

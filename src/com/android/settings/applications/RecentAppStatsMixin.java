@@ -186,7 +186,8 @@ public class RecentAppStatsMixin implements LifecycleObserver, OnStart {
             return false;
         }
 
-        if (AppUtils.isHiddenSystemModule(mContext, pkgName)) {
+        if (!android.content.pm.Flags.removeHiddenModuleUsage()
+                && AppUtils.isHiddenSystemModule(mContext, pkgName)) {
             return false;
         }
 

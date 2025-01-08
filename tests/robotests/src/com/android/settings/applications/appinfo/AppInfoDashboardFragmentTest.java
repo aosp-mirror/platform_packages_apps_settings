@@ -205,6 +205,7 @@ public final class AppInfoDashboardFragmentTest {
         verify(mActivity, never()).finishAndRemoveTask();
     }
 
+    // TODO(b/382016780): to be removed after flag cleanup.
     @Test
     @Config(shadows = ShadowAppUtils.class)
     public void ensureDisplayableModule_hiddenModule_shouldReturnFalse() {
@@ -215,6 +216,7 @@ public final class AppInfoDashboardFragmentTest {
         assertThat(mFragment.ensureDisplayableModule(mActivity)).isFalse();
     }
 
+    // TODO(b/382016780): to be removed after flag cleanup.
     @Test
     @Config(shadows = ShadowAppUtils.class)
     public void ensureDisplayableModule_regularApp_shouldReturnTrue() {

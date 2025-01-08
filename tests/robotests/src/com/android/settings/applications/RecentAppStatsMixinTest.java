@@ -38,12 +38,16 @@ import android.content.pm.ResolveInfo;
 import android.os.PowerManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -87,6 +91,9 @@ public class RecentAppStatsMixinTest {
     private Context mContext;
 
     private RecentAppStatsMixin mRecentAppStatsMixin;
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setUp() throws PackageManager.NameNotFoundException {
@@ -255,6 +262,59 @@ public class RecentAppStatsMixinTest {
     }
 
     @Test
+    @EnableFlags({android.content.pm.Flags.FLAG_REMOVE_HIDDEN_MODULE_USAGE})
+    public void loadDisplayableRecentApps_twoSystemModulesSet_shouldHaveTwoSystemModules() {
+        final List<UsageStats> stats = new ArrayList<>();
+
+        // System modules.
+        final UsageStats stat1 = new UsageStats();
+        stat1.mLastTimeUsed = System.currentTimeMillis();
+        stat1.mPackageName = "com.foo.module1";
+        stats.add(stat1);
+
+        final UsageStats stat2 = new UsageStats();
+        stat2.mLastTimeUsed = System.currentTimeMillis() + 200;
+        stat2.mPackageName = "com.foo.module2";
+        stats.add(stat2);
+
+        ApplicationsState.AppEntry stat1Entry = mock(ApplicationsState.AppEntry.class);
+        ApplicationsState.AppEntry stat2Entry = mock(ApplicationsState.AppEntry.class);
+        stat1Entry.info = mApplicationInfo;
+        stat2Entry.info = mApplicationInfo;
+
+        when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId())).thenReturn(stat1Entry);
+        when(mAppState.getEntry(stat2.mPackageName, UserHandle.myUserId())).thenReturn(stat2Entry);
+
+        // Hidden status set to false and true, but they should not cause the difference in
+        // the behavior.
+        final ModuleInfo moduleInfo1 = new ModuleInfo();
+        moduleInfo1.setPackageName(stat1.mPackageName);
+        moduleInfo1.setHidden(false);
+
+        final ModuleInfo moduleInfo2 = new ModuleInfo();
+        moduleInfo2.setPackageName(stat2.mPackageName);
+        moduleInfo2.setHidden(true);
+
+        ReflectionHelpers.setStaticField(ApplicationsState.class, "sInstance", null);
+        final List<ModuleInfo> modules = new ArrayList<>();
+        modules.add(moduleInfo1);
+        modules.add(moduleInfo2);
+        when(mPackageManager.getInstalledModules(anyInt() /* flags */))
+                .thenReturn(modules);
+
+        when(mPackageManager.resolveActivityAsUser(any(Intent.class), anyInt(), anyInt()))
+                .thenReturn(new ResolveInfo());
+        when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
+                .thenReturn(stats);
+
+        mRecentAppStatsMixin.loadDisplayableRecentApps(3);
+
+        assertThat(mRecentAppStatsMixin.mRecentApps.size()).isEqualTo(2);
+    }
+
+    // TODO(b/382016780): to be removed after flag cleanup.
+    @Test
+    @DisableFlags({android.content.pm.Flags.FLAG_REMOVE_HIDDEN_MODULE_USAGE})
     public void loadDisplayableRecentApps_hiddenSystemModuleSet_shouldNotHaveHiddenSystemModule() {
         final List<UsageStats> stats = new ArrayList<>();
         // Regular app.
