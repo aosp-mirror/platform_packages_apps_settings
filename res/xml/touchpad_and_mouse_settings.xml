@@ -20,31 +20,31 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/trackpad_mouse_settings">
     <SwitchPreferenceCompat
-        android:key="trackpad_tap_to_click"
+        android:key="touchpad_tap_to_click"
         android:title="@string/trackpad_tap_to_click"
-        settings:controller="com.android.settings.inputmethod.TrackpadTapToClickPreferenceController"
+        settings:controller="com.android.settings.inputmethod.TouchpadTapToClickPreferenceController"
         android:order="10"/>
 
     <SwitchPreferenceCompat
-        android:key="trackpad_reverse_scrolling"
+        android:key="touchpad_reverse_scrolling"
         android:title="@string/trackpad_reverse_scrolling_title"
         android:summary="@string/trackpad_reverse_scrolling_summary"
-        settings:controller="com.android.settings.inputmethod.TrackpadReverseScrollingPreferenceController"
+        settings:controller="com.android.settings.inputmethod.TouchpadReverseScrollingPreferenceController"
         android:order="20"/>
 
     <SwitchPreferenceCompat
-        android:key="trackpad_bottom_right_tap"
+        android:key="touchpad_bottom_right_tap"
         android:title="@string/trackpad_bottom_right_tap_title"
         android:summary="@string/trackpad_bottom_right_tap_summary"
-        settings:controller="com.android.settings.inputmethod.TrackpadBottomPreferenceController"
+        settings:controller="com.android.settings.inputmethod.TouchpadRightClickZonePreferenceController"
         android:order="30"
         settings:keywords="@string/keywords_trackpad_bottom_right_tap"/>
 
     <SwitchPreferenceCompat
-        android:key="trackpad_tap_dragging"
+        android:key="touchpad_tap_dragging"
         android:title="@string/trackpad_tap_dragging_title"
         android:summary="@string/trackpad_tap_dragging_summary"
-        settings:controller="com.android.settings.inputmethod.TrackpadTapDraggingPreferenceController"
+        settings:controller="com.android.settings.inputmethod.TouchpadTapDraggingPreferenceController"
         android:order="35"/>
 
     <Preference
@@ -55,11 +55,11 @@
         android:order="37"/>
 
     <com.android.settings.widget.SeekBarPreference
-        android:key="trackpad_pointer_speed"
+        android:key="touchpad_pointer_speed"
         android:title="@string/trackpad_pointer_speed"
         android:order="40"
         android:selectable="false"
-        settings:controller="com.android.settings.inputmethod.TrackpadPointerSpeedPreferenceController"/>
+        settings:controller="com.android.settings.inputmethod.TouchpadPointerSpeedPreferenceController"/>
 
     <SwitchPreferenceCompat
         android:key="mouse_reverse_vertical_scrolling"
@@ -91,13 +91,13 @@
         settings:searchable="true"/>
 
     <com.android.settingslib.widget.ButtonPreference
-        android:key="trackpad_touch_gesture"
+        android:key="touchpad_touch_gesture"
         android:title="@string/trackpad_touch_gesture"
-        settings:controller="com.android.settings.inputmethod.TouchGesturesButtonPreferenceController"/>
+        settings:controller="com.android.settings.inputmethod.TouchpadGesturesTutorialButtonPreferenceController"/>
 
     <com.android.settingslib.widget.FooterPreference
-        android:key="trackpad_gestures_disabled_footer"
+        android:key="touchpad_gestures_disabled_footer"
         android:title="@string/trackpad_gestures_disabled_footer_text"
         settings:searchable="false"
-        settings:controller="com.android.settings.inputmethod.TrackpadGesturesDisabledFooterPreferenceController"/>
+        settings:controller="com.android.settings.inputmethod.TouchpadGesturesDisabledFooterPreferenceController"/>
 </PreferenceScreen>

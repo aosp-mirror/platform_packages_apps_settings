@@ -44,28 +44,28 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-/** Tests for {@link TrackpadTapToClickPreferenceController} */
+/** Tests for {@link TouchpadReverseScrollingPreferenceController} */
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         com.android.settings.testutils.shadow.ShadowSystemSettings.class,
         com.android.settings.testutils.shadow.ShadowInputDevice.class,
 })
-public class TrackpadTapToClickPreferenceControllerTest {
+public class TouchpadReverseScrollingPreferenceControllerTest {
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
 
-    private static final String PREFERENCE_KEY = "trackpad_tap_to_click";
-    private static final String SETTING_KEY = Settings.System.TOUCHPAD_TAP_TO_CLICK;
+    private static final String PREFERENCE_KEY = "touchpad_reverse_scrolling";
+    private static final String SETTING_KEY = Settings.System.TOUCHPAD_NATURAL_SCROLLING;
 
     private Context mContext;
-    private TrackpadTapToClickPreferenceController mController;
+    private TouchpadReverseScrollingPreferenceController mController;
     private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mController = new TrackpadTapToClickPreferenceController(mContext, PREFERENCE_KEY);
+        mController = new TouchpadReverseScrollingPreferenceController(mContext, PREFERENCE_KEY);
     }
 
     @Test
@@ -86,25 +86,8 @@ public class TrackpadTapToClickPreferenceControllerTest {
     }
 
     @Test
-    public void setChecked_true_shouldReturn1() {
+    public void setChecked_true_shouldReturn0() {
         mController.setChecked(true);
-
-        int result = Settings.System.getIntForUser(
-                mContext.getContentResolver(),
-                SETTING_KEY,
-                0,
-                UserHandle.USER_CURRENT);
-
-        assertThat(result).isEqualTo(1);
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                any(),
-                eq(SettingsEnums.ACTION_GESTURE_TAP_TO_CLICK_CHANGED),
-                eq(true));
-    }
-
-    @Test
-    public void setChecked_false_shouldReturn0() {
-        mController.setChecked(false);
 
         int result = Settings.System.getIntForUser(
                 mContext.getContentResolver(),
@@ -115,12 +98,29 @@ public class TrackpadTapToClickPreferenceControllerTest {
         assertThat(result).isEqualTo(0);
         verify(mFeatureFactory.metricsFeatureProvider).action(
                 any(),
-                eq(SettingsEnums.ACTION_GESTURE_TAP_TO_CLICK_CHANGED),
+                eq(SettingsEnums.ACTION_GESTURE_REVERSE_SCROLLING_CHANGED),
+                eq(true));
+    }
+
+    @Test
+    public void setChecked_false_shouldReturn1() {
+        mController.setChecked(false);
+
+        int result = Settings.System.getIntForUser(
+                mContext.getContentResolver(),
+                SETTING_KEY,
+                0,
+                UserHandle.USER_CURRENT);
+
+        assertThat(result).isEqualTo(1);
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                any(),
+                eq(SettingsEnums.ACTION_GESTURE_REVERSE_SCROLLING_CHANGED),
                 eq(false));
     }
 
     @Test
-    public void isChecked_providerPutInt1_returnTrue() {
+    public void isChecked_providerPutInt1_returnFalse() {
         Settings.System.putIntForUser(
                 mContext.getContentResolver(),
                 SETTING_KEY,
@@ -129,11 +129,11 @@ public class TrackpadTapToClickPreferenceControllerTest {
 
         boolean result = mController.isChecked();
 
-        assertThat(result).isTrue();
+        assertThat(result).isFalse();
     }
 
     @Test
-    public void isChecked_providerPutInt0_returnFalse() {
+    public void isChecked_providerPutInt0_returnTrue() {
         Settings.System.putIntForUser(
                 mContext.getContentResolver(),
                 SETTING_KEY,
@@ -142,6 +142,6 @@ public class TrackpadTapToClickPreferenceControllerTest {
 
         boolean result = mController.isChecked();
 
-        assertThat(result).isFalse();
+        assertThat(result).isTrue();
     }
 }

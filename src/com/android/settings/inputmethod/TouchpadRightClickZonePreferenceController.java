@@ -25,25 +25,25 @@ import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-public class TrackpadReverseScrollingPreferenceController extends TogglePreferenceController {
+public class TouchpadRightClickZonePreferenceController extends TogglePreferenceController {
 
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
-    public TrackpadReverseScrollingPreferenceController(Context context, String key) {
+    public TouchpadRightClickZonePreferenceController(Context context, String key) {
         super(context, key);
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
     public boolean isChecked() {
-        return !InputSettings.useTouchpadNaturalScrolling(mContext);
+        return InputSettings.useTouchpadRightClickZone(mContext);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        InputSettings.setTouchpadNaturalScrolling(mContext, !isChecked);
+        InputSettings.setTouchpadRightClickZone(mContext, isChecked);
         mMetricsFeatureProvider.action(
-                mContext, SettingsEnums.ACTION_GESTURE_REVERSE_SCROLLING_CHANGED, isChecked);
+                mContext, SettingsEnums.ACTION_GESTURE_BOTTOM_RIGHT_TAP_CHANGED, isChecked);
         return true;
     }
 

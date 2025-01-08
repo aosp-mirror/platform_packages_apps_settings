@@ -48,7 +48,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class TrackpadGestureDialogFragment extends BottomSheetDialogFragment {
+public class TouchpadGestureDialogFragment extends BottomSheetDialogFragment {
 
     private Context mContext;
     private LayoutInflater mInflater;
@@ -66,8 +66,6 @@ public class TrackpadGestureDialogFragment extends BottomSheetDialogFragment {
     private static final int DOT_INDICATOR_SIZE = 12;
     private static final int DOT_INDICATOR_LEFT_PADDING = 6;
     private static final int DOT_INDICATOR_RIGHT_PADDING = 6;
-
-    public TrackpadGestureDialogFragment() {}
 
     @Override
     public void onAttach(Context context) {
@@ -118,7 +116,7 @@ public class TrackpadGestureDialogFragment extends BottomSheetDialogFragment {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
 
         mInflater = mContext.getSystemService(LayoutInflater.class);
-        View contentView = mInflater.inflate(R.layout.trackpad_gesture_preview, null);
+        View contentView = mInflater.inflate(R.layout.touchpad_gesture_preview, null);
         addViewPager(contentView);
         dialog.setContentView(contentView);
         Window gestureDialogWindow = dialog.getWindow();

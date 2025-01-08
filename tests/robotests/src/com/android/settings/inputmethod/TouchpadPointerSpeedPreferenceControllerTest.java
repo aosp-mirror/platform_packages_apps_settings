@@ -42,20 +42,20 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-/** Tests for {@link TrackpadPointerSpeedPreferenceController} */
+/** Tests for {@link TouchpadPointerSpeedPreferenceController} */
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         com.android.settings.testutils.shadow.ShadowSystemSettings.class,
 })
-public class TrackpadPointerSpeedPreferenceControllerTest {
+public class TouchpadPointerSpeedPreferenceControllerTest {
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
 
-    private static final String PREFERENCE_KEY = "trackpad_pointer_speed";
+    private static final String PREFERENCE_KEY = "touchpad_pointer_speed";
     private static final String SETTING_KEY = Settings.System.TOUCHPAD_POINTER_SPEED;
 
     private Context mContext;
-    private TrackpadPointerSpeedPreferenceController mController;
+    private TouchpadPointerSpeedPreferenceController mController;
     private int mDefaultSpeed;
     private FakeFeatureFactory mFeatureFactory;
 
@@ -63,7 +63,7 @@ public class TrackpadPointerSpeedPreferenceControllerTest {
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mController = new TrackpadPointerSpeedPreferenceController(mContext, PREFERENCE_KEY);
+        mController = new TouchpadPointerSpeedPreferenceController(mContext, PREFERENCE_KEY);
         mDefaultSpeed = Settings.System.getIntForUser(
                 mContext.getContentResolver(),
                 SETTING_KEY,

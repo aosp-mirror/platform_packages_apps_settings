@@ -33,17 +33,17 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.ButtonPreference;
 
-public class TouchGesturesButtonPreferenceController extends BasePreferenceController {
+public class TouchpadGesturesTutorialButtonPreferenceController extends BasePreferenceController {
 
     private static final int ORDER_BOTTOM = 100;
-    private static final String PREFERENCE_KEY = "trackpad_touch_gesture";
+    private static final String PREFERENCE_KEY = "touchpad_touch_gesture";
     private static final String GESTURE_DIALOG_TAG = "GESTURE_DIALOG_TAG";
     private static final String TUTORIAL_ACTION = "com.android.systemui.action.TOUCHPAD_TUTORIAL";
 
     private Fragment mParent;
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
-    public TouchGesturesButtonPreferenceController(Context context, String key) {
+    public TouchpadGesturesTutorialButtonPreferenceController(Context context, String key) {
         super(context, key);
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
@@ -88,7 +88,7 @@ public class TouchGesturesButtonPreferenceController extends BasePreferenceContr
             // of user 0 sysui instance
             mContext.startActivityAsUser(intent, UserHandle.SYSTEM);
         } else {
-            TrackpadGestureDialogFragment fragment = new TrackpadGestureDialogFragment();
+            TouchpadGestureDialogFragment fragment = new TouchpadGestureDialogFragment();
             fragment.setTargetFragment(mParent, 0);
             fragment.show(mParent.getActivity().getSupportFragmentManager(), GESTURE_DIALOG_TAG);
         }
