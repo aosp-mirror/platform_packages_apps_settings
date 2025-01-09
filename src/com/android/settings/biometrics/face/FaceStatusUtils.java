@@ -26,12 +26,11 @@ import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.ParentalControlsUtils;
+import com.android.settings.flags.Flags;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
-/**
- * Utilities for face details shared between Security Settings and Safety Center.
- */
+/** Utilities for face details shared between Security Settings and Safety Center. */
 public class FaceStatusUtils {
 
     private final int mUserId;
@@ -44,9 +43,7 @@ public class FaceStatusUtils {
         mUserId = userId;
     }
 
-    /**
-     * Returns whether the face settings entity should be shown.
-     */
+    /** Returns whether the face settings entity should be shown. */
     public boolean isAvailable() {
         return !Utils.isMultipleBiometricsSupported(mContext) && Utils.hasFaceHardware(mContext);
     }
@@ -61,55 +58,70 @@ public class FaceStatusUtils {
                 mContext, BiometricAuthenticator.TYPE_FACE);
     }
 
-    /**
-     * Returns the title of face settings entity.
-     */
+    /** Returns the title of face settings entity. */
     public String getTitle() {
         UserManager userManager = mContext.getSystemService(UserManager.class);
         if (userManager != null && userManager.isProfile()) {
             return mContext.getString(
                     Utils.isPrivateProfile(mUserId, mContext)
-                            ? R.string.private_space_face_unlock_title
-                            : R.string.security_settings_face_profile_preference_title);
+                            ? getPrivateSpaceTitle()
+                            : getWorkProfileTitle());
         } else {
-            return mContext.getString(R.string.security_settings_face_preference_title);
+            return mContext.getString(getRegularTitle());
         }
     }
 
-    /**
-     * Returns the summary of face settings entity.
-     */
+    private int getPrivateSpaceTitle() {
+        if (Flags.biometricsOnboardingEducation()) {
+            return R.string.private_space_face_unlock_title_new;
+        }
+        return R.string.private_space_face_unlock_title;
+    }
+
+    private int getWorkProfileTitle() {
+        if (Flags.biometricsOnboardingEducation()) {
+            return R.string.security_settings_face_profile_preference_title_new;
+        }
+        return R.string.security_settings_face_profile_preference_title;
+    }
+
+    private int getRegularTitle() {
+        if (Flags.biometricsOnboardingEducation()) {
+            return R.string.security_settings_face_preference_title_new;
+        }
+        return R.string.security_settings_face_preference_title;
+    }
+
+    /** Returns the summary of face settings entity. */
     public String getSummary() {
         if (shouldShowDisabledByAdminStr()) {
             return mContext.getString(
                     com.android.settingslib.widget.restricted.R.string.disabled_by_admin);
         } else {
-            return mContext.getResources().getString(hasEnrolled()
-                ? R.string.security_settings_face_preference_summary
-                : R.string.security_settings_face_preference_summary_none);
+            return mContext.getResources()
+                    .getString(
+                            hasEnrolled()
+                                    ? R.string.security_settings_face_preference_summary
+                                    : R.string.security_settings_face_preference_summary_none);
         }
     }
 
-    /**
-     * Returns the class name of the Settings page corresponding to face settings.
-     */
+    /** Returns the class name of the Settings page corresponding to face settings. */
     public String getSettingsClassName() {
-        return hasEnrolled() ? Settings.FaceSettingsInternalActivity.class.getName()
+        return hasEnrolled()
+                ? Settings.FaceSettingsInternalActivity.class.getName()
                 : FaceEnrollIntroductionInternal.class.getName();
     }
 
-    /**
-     * Returns whether at least one face template has been enrolled.
-     */
+    /** Returns whether at least one face template has been enrolled. */
     public boolean hasEnrolled() {
         return mFaceManager.hasEnrolledTemplates(mUserId);
     }
 
-    /**
-     * Indicates if the face feature is enabled or disabled by the Device Admin.
-     */
+    /** Indicates if the face feature is enabled or disabled by the Device Admin. */
     private boolean shouldShowDisabledByAdminStr() {
         return RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
-                mContext, DevicePolicyManager.KEYGUARD_DISABLE_FACE, mUserId) != null;
+                        mContext, DevicePolicyManager.KEYGUARD_DISABLE_FACE, mUserId)
+                != null;
     }
 }

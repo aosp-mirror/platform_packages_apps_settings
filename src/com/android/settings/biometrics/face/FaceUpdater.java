@@ -29,7 +29,9 @@ import androidx.annotation.Nullable;
 
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.flags.Flags;
 import com.android.settings.safetycenter.BiometricsSafetySource;
+import com.android.settings.safetycenter.FaceSafetySource;
 
 /**
  * Responsible for making {@link FaceManager#enroll} and {@link FaceManager#remove} calls and thus
@@ -51,20 +53,43 @@ public class FaceUpdater {
     }
 
     /** Wrapper around the {@link FaceManager#enroll} method. */
-    public void enroll(int userId, byte[] hardwareAuthToken, CancellationSignal cancel,
-            FaceManager.EnrollmentCallback callback, int[] disabledFeatures, Intent intent) {
-        this.enroll(userId, hardwareAuthToken, cancel,
-                new NotifyingEnrollmentCallback(mContext, callback), disabledFeatures,
-                null, false, intent);
+    public void enroll(
+            int userId,
+            byte[] hardwareAuthToken,
+            CancellationSignal cancel,
+            FaceManager.EnrollmentCallback callback,
+            int[] disabledFeatures,
+            Intent intent) {
+        this.enroll(
+                userId,
+                hardwareAuthToken,
+                cancel,
+                new NotifyingEnrollmentCallback(mContext, callback),
+                disabledFeatures,
+                null,
+                false,
+                intent);
     }
 
     /** Wrapper around the {@link FaceManager#enroll} method. */
-    public void enroll(int userId, byte[] hardwareAuthToken, CancellationSignal cancel,
-            FaceManager.EnrollmentCallback callback, int[] disabledFeatures,
-            @Nullable Surface previewSurface, boolean debugConsent, Intent intent) {
-        mFaceManager.enroll(userId, hardwareAuthToken, cancel,
-                new NotifyingEnrollmentCallback(mContext, callback), disabledFeatures,
-                previewSurface, debugConsent, toFaceEnrollOptions(intent));
+    public void enroll(
+            int userId,
+            byte[] hardwareAuthToken,
+            CancellationSignal cancel,
+            FaceManager.EnrollmentCallback callback,
+            int[] disabledFeatures,
+            @Nullable Surface previewSurface,
+            boolean debugConsent,
+            Intent intent) {
+        mFaceManager.enroll(
+                userId,
+                hardwareAuthToken,
+                cancel,
+                new NotifyingEnrollmentCallback(mContext, callback),
+                disabledFeatures,
+                previewSurface,
+                debugConsent,
+                toFaceEnrollOptions(intent));
     }
 
     /** Wrapper around the {@link FaceManager#remove} method. */
@@ -73,17 +98,15 @@ public class FaceUpdater {
     }
 
     /**
-     * Decorator of the {@link FaceManager.EnrollmentCallback} class that notifies other
-     * interested parties that a face setting has changed.
+     * Decorator of the {@link FaceManager.EnrollmentCallback} class that notifies other interested
+     * parties that a face setting has changed.
      */
-    private static class NotifyingEnrollmentCallback
-            extends FaceManager.EnrollmentCallback {
+    private static class NotifyingEnrollmentCallback extends FaceManager.EnrollmentCallback {
 
         private final Context mContext;
         private final FaceManager.EnrollmentCallback mCallback;
 
-        NotifyingEnrollmentCallback(Context context,
-                FaceManager.EnrollmentCallback callback) {
+        NotifyingEnrollmentCallback(Context context, FaceManager.EnrollmentCallback callback) {
             mContext = context;
             mCallback = callback;
         }
@@ -99,8 +122,14 @@ public class FaceUpdater {
         }
 
         @Override
-        public void onEnrollmentFrame(int helpCode, @Nullable CharSequence helpMessage,
-                @Nullable FaceEnrollCell cell, int stage, float pan, float tilt, float distance) {
+        public void onEnrollmentFrame(
+                int helpCode,
+                @Nullable CharSequence helpMessage,
+                @Nullable FaceEnrollCell cell,
+                int stage,
+                float pan,
+                float tilt,
+                float distance) {
             mCallback.onEnrollmentFrame(helpCode, helpMessage, cell, stage, pan, tilt, distance);
         }
 
@@ -108,14 +137,18 @@ public class FaceUpdater {
         public void onEnrollmentProgress(int remaining) {
             mCallback.onEnrollmentProgress(remaining);
             if (remaining == 0) {
-                BiometricsSafetySource.onBiometricsChanged(mContext); // biometrics data changed
+                if (Flags.biometricsOnboardingEducation()) {
+                    FaceSafetySource.onBiometricsChanged(mContext);
+                } else {
+                    BiometricsSafetySource.onBiometricsChanged(mContext); // biometrics data changed
+                }
             }
         }
     }
 
     /**
-     * Decorator of the {@link FaceManager.RemovalCallback} class that notifies other
-     * interested parties that a face setting has changed.
+     * Decorator of the {@link FaceManager.RemovalCallback} class that notifies other interested
+     * parties that a face setting has changed.
      */
     private static class NotifyingRemovalCallback extends FaceManager.RemovalCallback {
 
@@ -135,7 +168,11 @@ public class FaceUpdater {
         @Override
         public void onRemovalSucceeded(@Nullable Face fp, int remaining) {
             mCallback.onRemovalSucceeded(fp, remaining);
-            BiometricsSafetySource.onBiometricsChanged(mContext); // biometrics data changed
+            if (Flags.biometricsOnboardingEducation()) {
+                FaceSafetySource.onBiometricsChanged(mContext);
+            } else {
+                BiometricsSafetySource.onBiometricsChanged(mContext); // biometrics data changed
+            }
         }
     }
 

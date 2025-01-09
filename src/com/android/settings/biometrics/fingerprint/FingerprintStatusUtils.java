@@ -25,29 +25,26 @@ import android.os.UserManager;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.ParentalControlsUtils;
+import com.android.settings.flags.Flags;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.utils.StringUtil;
 
-/**
- * Utilities for fingerprint details shared between Security Settings and Safety Center.
- */
+/** Utilities for fingerprint details shared between Security Settings and Safety Center. */
 public class FingerprintStatusUtils {
 
     private final int mUserId;
     private final Context mContext;
     private final FingerprintManager mFingerprintManager;
 
-    public FingerprintStatusUtils(Context context, FingerprintManager fingerprintManager,
-            int userId) {
+    public FingerprintStatusUtils(
+            Context context, FingerprintManager fingerprintManager, int userId) {
         mContext = context;
         mFingerprintManager = fingerprintManager;
         mUserId = userId;
     }
 
-    /**
-     * Returns whether the fingerprint settings entity should be shown.
-     */
+    /** Returns whether the fingerprint settings entity should be shown. */
     public boolean isAvailable() {
         return !Utils.isMultipleBiometricsSupported(mContext)
                 && Utils.hasFingerprintHardware(mContext);
@@ -62,24 +59,42 @@ public class FingerprintStatusUtils {
         return ParentalControlsUtils.parentConsentRequired(
                 mContext, BiometricAuthenticator.TYPE_FINGERPRINT);
     }
-    /**
-     * Returns the title of fingerprint settings entity.
-     */
+
+    /** Returns the title of fingerprint settings entity. */
     public String getTitle() {
         UserManager userManager = mContext.getSystemService(UserManager.class);
         if (userManager != null && userManager.isProfile()) {
             return mContext.getString(
                     Utils.isPrivateProfile(mUserId, mContext)
-                            ? R.string.private_space_fingerprint_unlock_title
-                            : R.string.security_settings_work_fingerprint_preference_title);
+                            ? getPrivateSpaceTitle()
+                            : getWorkProfileTitle());
         } else {
-            return mContext.getString(R.string.security_settings_fingerprint_preference_title);
+            return mContext.getString(getRegularTitle());
         }
     }
 
-    /**
-     * Returns the summary of fingerprint settings entity.
-     */
+    private int getPrivateSpaceTitle() {
+        if (Flags.biometricsOnboardingEducation()) {
+            return R.string.private_space_fingerprint_unlock_title_new;
+        }
+        return R.string.private_space_fingerprint_unlock_title;
+    }
+
+    private int getWorkProfileTitle() {
+        if (Flags.biometricsOnboardingEducation()) {
+            return R.string.security_settings_work_fingerprint_preference_title_new;
+        }
+        return R.string.security_settings_work_fingerprint_preference_title;
+    }
+
+    private int getRegularTitle() {
+        if (Flags.biometricsOnboardingEducation()) {
+            return R.string.security_settings_fingerprint; // doesn't have an overlay
+        }
+        return R.string.security_settings_fingerprint_preference_title;
+    }
+
+    /** Returns the summary of fingerprint settings entity. */
     public String getSummary() {
         if (shouldShowDisabledByAdminStr()) {
             return mContext.getString(
@@ -87,7 +102,9 @@ public class FingerprintStatusUtils {
         }
         if (hasEnrolled()) {
             final int numEnrolled = mFingerprintManager.getEnrolledFingerprints(mUserId).size();
-            return StringUtil.getIcuPluralsString(mContext, numEnrolled,
+            return StringUtil.getIcuPluralsString(
+                    mContext,
+                    numEnrolled,
                     R.string.security_settings_fingerprint_preference_summary);
         } else {
             return mContext.getString(
@@ -95,25 +112,20 @@ public class FingerprintStatusUtils {
         }
     }
 
-    /**
-     * Returns the class name of the Settings page corresponding to fingerprint settings.
-     */
+    /** Returns the class name of the Settings page corresponding to fingerprint settings. */
     public String getSettingsClassName() {
         return FingerprintSettings.class.getName();
     }
 
-    /**
-     * Returns whether at least one fingerprint has been enrolled.
-     */
+    /** Returns whether at least one fingerprint has been enrolled. */
     public boolean hasEnrolled() {
         return mFingerprintManager.hasEnrolledFingerprints(mUserId);
     }
 
-    /**
-     * Indicates if the fingerprint feature should show the "Disabled by Admin" string.
-     */
+    /** Indicates if the fingerprint feature should show the "Disabled by Admin" string. */
     private boolean shouldShowDisabledByAdminStr() {
         return RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
-                mContext, DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, mUserId) != null;
+                        mContext, DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, mUserId)
+                != null;
     }
 }
