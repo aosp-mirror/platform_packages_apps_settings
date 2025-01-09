@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import static android.content.Context.MODE_PRIVATE;
+import static android.view.accessibility.AccessibilityManager.AUTOCLICK_CURSOR_AREA_INCREMENT_SIZE;
 import static android.view.accessibility.AccessibilityManager.AUTOCLICK_CURSOR_AREA_SIZE_MAX;
 import static android.view.accessibility.AccessibilityManager.AUTOCLICK_CURSOR_AREA_SIZE_MIN;
 
@@ -35,6 +36,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.server.accessibility.Flags;
 import com.android.settings.core.SliderPreferenceController;
+import com.android.settingslib.widget.SliderPreference;
 
 /** Controller class that controls accessibility autoclick cursor area size settings. */
 public class ToggleAutoclickCursorAreaSizeController extends SliderPreferenceController
@@ -44,6 +46,7 @@ public class ToggleAutoclickCursorAreaSizeController extends SliderPreferenceCon
 
     private final ContentResolver mContentResolver;
     private final SharedPreferences mSharedPreferences;
+    private SliderPreference mPreference;
 
     public ToggleAutoclickCursorAreaSizeController(@NonNull Context context,
             @NonNull String preferenceKey) {
@@ -70,6 +73,13 @@ public class ToggleAutoclickCursorAreaSizeController extends SliderPreferenceCon
     @Override
     public void displayPreference(@NonNull PreferenceScreen screen) {
         super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+        if (mPreference != null) {
+            mPreference.setMin(getMin());
+            mPreference.setMax(getMax());
+            mPreference.setSliderIncrement(AUTOCLICK_CURSOR_AREA_INCREMENT_SIZE);
+            mPreference.setValue(getSliderPosition());
+        }
     }
 
     @Override
@@ -85,8 +95,9 @@ public class ToggleAutoclickCursorAreaSizeController extends SliderPreferenceCon
 
     @Override
     public boolean setSliderPosition(int position) {
-        Settings.Secure.putInt(mContentResolver,
-                Settings.Secure.ACCESSIBILITY_AUTOCLICK_CURSOR_AREA_SIZE, position);
+        int size = validateSize(position);
+        Settings.Secure.putInt(
+                mContentResolver, Settings.Secure.ACCESSIBILITY_AUTOCLICK_CURSOR_AREA_SIZE, size);
         return true;
     }
 
@@ -95,10 +106,7 @@ public class ToggleAutoclickCursorAreaSizeController extends SliderPreferenceCon
         int size = Settings.Secure.getInt(mContentResolver,
                 Settings.Secure.ACCESSIBILITY_AUTOCLICK_CURSOR_AREA_SIZE,
                 AccessibilityManager.AUTOCLICK_CURSOR_AREA_SIZE_DEFAULT);
-        // Make sure the size is between min and max allowed value.
-        size = Math.min(size, AUTOCLICK_CURSOR_AREA_SIZE_MAX);
-        size = Math.max(size, AUTOCLICK_CURSOR_AREA_SIZE_MIN);
-        return size;
+        return validateSize(size);
     }
 
     @Override
@@ -109,5 +117,11 @@ public class ToggleAutoclickCursorAreaSizeController extends SliderPreferenceCon
     @Override
     public int getMin() {
         return AUTOCLICK_CURSOR_AREA_SIZE_MIN;
+    }
+
+    private int validateSize(int size) {
+        size = Math.min(size, AUTOCLICK_CURSOR_AREA_SIZE_MAX);
+        size = Math.max(size, AUTOCLICK_CURSOR_AREA_SIZE_MIN);
+        return size;
     }
 }
