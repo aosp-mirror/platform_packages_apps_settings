@@ -120,7 +120,9 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      */
     public static final int DISABLED_DEPENDENT_SETTING = 5;
 
+    @NonNull
     protected final String mPreferenceKey;
+    @Nullable
     protected UiBlockListener mUiBlockListener;
     protected boolean mUiBlockerFinished;
     private boolean mIsForWork;
