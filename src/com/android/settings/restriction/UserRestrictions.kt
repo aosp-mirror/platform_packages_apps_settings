@@ -24,6 +24,7 @@ import android.os.UserManager
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.DataChangeReason
 import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.metadata.PreferenceChangeReason
 import java.util.concurrent.Executor
 
 /** Helper class to monitor user restriction changes. */
@@ -46,7 +47,7 @@ class UserRestrictions private constructor(private val applicationContext: Conte
         object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 // there is no way to get the changed keys, just notify all observers
-                observable.notifyChange(DataChangeReason.UPDATE)
+                observable.notifyChange(PreferenceChangeReason.STATE)
             }
         }
 

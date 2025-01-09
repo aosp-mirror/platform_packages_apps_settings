@@ -37,11 +37,11 @@ import com.android.settings.network.SatelliteRepository.Companion.isSatelliteOn
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.RestrictedSwitchPreference
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
-import com.android.settingslib.datastore.DataChangeReason
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
@@ -126,7 +126,7 @@ class AirplaneModePreference :
                 phoneStateListener =
                     object : PhoneStateListener(Looper.getMainLooper()) {
                         override fun onRadioPowerStateChanged(state: Int) {
-                            notifyChange(KEY, DataChangeReason.UPDATE)
+                            notifyChange(KEY, PreferenceChangeReason.VALUE)
                         }
                     }
                 it.listen(phoneStateListener, PhoneStateListener.LISTEN_RADIO_POWER_STATE_CHANGED)
