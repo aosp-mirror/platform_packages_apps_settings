@@ -17,7 +17,6 @@
 package com.android.settings.applications;
 
 import android.content.Context;
-import android.text.format.Formatter;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -25,6 +24,7 @@ import androidx.preference.Preference;
 
 import com.android.internal.util.Preconditions;
 import com.android.settingslib.applications.StorageStatsSource;
+import com.android.settingslib.spaprivileged.model.app.AppStorageRepositoryImpl;
 
 /**
  * Handles setting the sizes for the app info screen.
@@ -70,27 +70,28 @@ public class AppStorageSizesController {
             mCacheSize.setSummary(errorRes);
             mTotalSize.setSummary(errorRes);
         } else {
+            var appStorageRepository = new AppStorageRepositoryImpl(context);
             long codeSize = mLastResult.getCodeBytes();
             long dataSize =
                     mDataCleared ? 0 : mLastResult.getDataBytes() - mLastResult.getCacheBytes();
             if (mLastCodeSize != codeSize) {
                 mLastCodeSize = codeSize;
-                mAppSize.setSummary(getSizeStr(context, codeSize));
+                mAppSize.setSummary(appStorageRepository.formatSizeBytes(codeSize));
             }
             if (mLastDataSize != dataSize) {
                 mLastDataSize = dataSize;
-                mDataSize.setSummary(getSizeStr(context, dataSize));
+                mDataSize.setSummary(appStorageRepository.formatSizeBytes(dataSize));
             }
             long cacheSize = (mDataCleared || mCachedCleared) ? 0 : mLastResult.getCacheBytes();
             if (mLastCacheSize != cacheSize) {
                 mLastCacheSize = cacheSize;
-                mCacheSize.setSummary(getSizeStr(context, cacheSize));
+                mCacheSize.setSummary(appStorageRepository.formatSizeBytes(cacheSize));
             }
 
             long totalSize = codeSize + dataSize + cacheSize;
             if (mLastTotalSize != totalSize) {
                 mLastTotalSize = totalSize;
-                mTotalSize.setSummary(getSizeStr(context, totalSize));
+                mTotalSize.setSummary(appStorageRepository.formatSizeBytes(totalSize));
             }
         }
     }
@@ -127,10 +128,6 @@ public class AppStorageSizesController {
      */
     public StorageStatsSource.AppStorageStats getLastResult() {
         return mLastResult;
-    }
-
-    private String getSizeStr(Context context, long size) {
-        return Formatter.formatFileSize(context, size);
     }
 
     public static class Builder {
