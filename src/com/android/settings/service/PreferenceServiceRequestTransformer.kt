@@ -25,7 +25,6 @@ import android.service.settings.preferences.SetValueRequest
 import android.service.settings.preferences.SetValueResult
 import android.service.settings.preferences.SettingsPreferenceMetadata
 import android.service.settings.preferences.SettingsPreferenceValue
-import com.android.settingslib.graph.PreferenceCoordinate
 import com.android.settingslib.graph.PreferenceGetterErrorCode
 import com.android.settingslib.graph.PreferenceGetterFlags
 import com.android.settingslib.graph.PreferenceGetterRequest
@@ -40,6 +39,7 @@ import com.android.settingslib.graph.proto.PreferenceOrGroupProto
 import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.graph.toIntent
+import com.android.settingslib.metadata.PreferenceCoordinate
 import com.android.settingslib.metadata.SensitivityLevel
 
 /** Transform Catalyst Graph result to Framework GET METADATA result */
