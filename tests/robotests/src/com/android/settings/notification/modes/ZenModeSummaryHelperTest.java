@@ -529,7 +529,7 @@ public class ZenModeSummaryHelperTest {
     @Test
     public void getModesSummary_excludesImplicitModes() {
         ImmutableList<ZenMode> modes = ImmutableList.of(
-                TestModeBuilder.MANUAL_DND_INACTIVE,
+                TestModeBuilder.MANUAL_DND,
                 new TestModeBuilder().implicitForPackage("com.annoying.one").build(),
                 new TestModeBuilder().setName("Chirping").build()
         );
@@ -541,7 +541,7 @@ public class ZenModeSummaryHelperTest {
     @Test
     public void getModesSummary_oneModeActive_listsActiveMode() {
         ImmutableList<ZenMode> modes = ImmutableList.of(
-                TestModeBuilder.MANUAL_DND_ACTIVE,
+                new TestModeBuilder().makeManualDnd().setActive(true).build(),
                 new TestModeBuilder().setName("Inactive").setActive(false).build());
 
         String summary = mSummaryHelper.getModesSummary(modes);
@@ -551,7 +551,7 @@ public class ZenModeSummaryHelperTest {
     @Test
     public void getModesSummary_twoModesActive_listsActiveModes() {
         ImmutableList<ZenMode> modes = ImmutableList.of(
-                TestModeBuilder.MANUAL_DND_ACTIVE,
+                new TestModeBuilder().makeManualDnd().setActive(true).build(),
                 new TestModeBuilder().setName("Inactive").setActive(false).build(),
                 new TestModeBuilder().setName("Active #1").setActive(true).build());
 
@@ -562,7 +562,7 @@ public class ZenModeSummaryHelperTest {
     @Test
     public void getModesSummary_threeModesActive_listsActiveModes() {
         ImmutableList<ZenMode> modes = ImmutableList.of(
-                TestModeBuilder.MANUAL_DND_INACTIVE,
+                TestModeBuilder.MANUAL_DND,
                 new TestModeBuilder().setName("Inactive #1").setActive(false).build(),
                 new TestModeBuilder().setName("Active #1").setActive(true).build(),
                 new TestModeBuilder().setName("Active #2").setActive(true).build(),
@@ -576,7 +576,7 @@ public class ZenModeSummaryHelperTest {
     @Test
     public void getModesSummary_manyModesActive_listsSomeActiveModes() {
         ImmutableList<ZenMode> modes = ImmutableList.of(
-                TestModeBuilder.MANUAL_DND_ACTIVE,
+                new TestModeBuilder().makeManualDnd().setActive(true).build(),
                 new TestModeBuilder().setName("Inactive #1").setActive(false).build(),
                 new TestModeBuilder().setName("Active #1").setActive(true).build(),
                 new TestModeBuilder().setName("Active #2").setActive(true).build(),

@@ -71,7 +71,7 @@ public final class InterruptionFilterPreferenceControllerTest {
     @Test
     public void updateState_dnd_enabled() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode dnd = TestModeBuilder.MANUAL_DND_ACTIVE;
+        ZenMode dnd = TestModeBuilder.MANUAL_DND;
 
         mController.updateState(preference, dnd);
 
@@ -81,7 +81,11 @@ public final class InterruptionFilterPreferenceControllerTest {
     @Test
     public void updateState_specialDnd_disabled() {
         TwoStatePreference preference = mock(TwoStatePreference.class);
-        ZenMode specialDnd = TestModeBuilder.manualDnd(INTERRUPTION_FILTER_NONE, true);
+        ZenMode specialDnd = new TestModeBuilder()
+                .makeManualDnd()
+                .setInterruptionFilter(INTERRUPTION_FILTER_NONE)
+                .setActive(true)
+                .build();
 
         mController.updateState(preference, specialDnd);
 

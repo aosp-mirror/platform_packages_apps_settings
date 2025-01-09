@@ -190,7 +190,7 @@ public final class ZenModeButtonPreferenceControllerTest {
         Button button = new Button(mContext);
         LayoutPreference pref = mock(LayoutPreference.class);
         when(pref.findViewById(anyInt())).thenReturn(button);
-        ZenMode zenMode = TestModeBuilder.MANUAL_DND_INACTIVE;
+        ZenMode zenMode = TestModeBuilder.MANUAL_DND;
 
         mController.updateZenMode(pref, zenMode);
         button.callOnClick();
@@ -204,7 +204,7 @@ public final class ZenModeButtonPreferenceControllerTest {
         Button button = new Button(mContext);
         LayoutPreference pref = mock(LayoutPreference.class);
         when(pref.findViewById(anyInt())).thenReturn(button);
-        ZenMode zenMode = TestModeBuilder.MANUAL_DND_INACTIVE;
+        ZenMode zenMode = TestModeBuilder.MANUAL_DND;
 
         mController.updateZenMode(pref, zenMode);
         button.callOnClick();

@@ -18,7 +18,7 @@ package com.android.settings.notification.modes;
 
 import static android.app.NotificationManager.INTERRUPTION_FILTER_PRIORITY;
 
-import static com.android.settingslib.notification.modes.TestModeBuilder.MANUAL_DND_INACTIVE;
+import static com.android.settingslib.notification.modes.TestModeBuilder.MANUAL_DND;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -150,7 +150,7 @@ public class ZenModesListPreferenceControllerTest {
     @DisableFlags(Flags.FLAG_MODES_UI)
     public void testModesUiOff_notAvailableAndNoSearchData() {
         // There exist modes
-        when(mBackend.getModes()).thenReturn(List.of(MANUAL_DND_INACTIVE, TEST_MODE));
+        when(mBackend.getModes()).thenReturn(List.of(MANUAL_DND, TEST_MODE));
 
         assertThat(mPrefController.isAvailable()).isFalse();
         List<SearchIndexableRaw> data = new ArrayList<>();
@@ -185,20 +185,20 @@ public class ZenModesListPreferenceControllerTest {
 
         // Changing mode data so there's a different one mode doesn't keep any previous data
         // (and setting that state up in the caller)
-        when(mBackend.getModes()).thenReturn(List.of(MANUAL_DND_INACTIVE));
+        when(mBackend.getModes()).thenReturn(List.of(MANUAL_DND));
         List<SearchIndexableRaw> newData = new ArrayList<>();
         mPrefController.updateDynamicRawDataToIndex(newData);
         assertThat(newData).hasSize(1);
 
         SearchIndexableRaw newItem = newData.get(0);
-        assertThat(newItem.key).isEqualTo(MANUAL_DND_INACTIVE.getId());
+        assertThat(newItem.key).isEqualTo(MANUAL_DND.getId());
         assertThat(newItem.title).isEqualTo("Do Not Disturb");  // set above
     }
 
     @Test
     @EnableFlags(Flags.FLAG_MODES_UI)
     public void testUpdateDynamicRawDataToIndex_multipleModes() {
-        when(mBackend.getModes()).thenReturn(List.of(MANUAL_DND_INACTIVE, TEST_MODE));
+        when(mBackend.getModes()).thenReturn(List.of(MANUAL_DND, TEST_MODE));
 
         List<SearchIndexableRaw> data = new ArrayList<>();
         mPrefController.updateDynamicRawDataToIndex(data);
@@ -206,7 +206,7 @@ public class ZenModesListPreferenceControllerTest {
 
         // Should keep the order presented by getModes()
         SearchIndexableRaw item0 = data.get(0);
-        assertThat(item0.key).isEqualTo(MANUAL_DND_INACTIVE.getId());
+        assertThat(item0.key).isEqualTo(MANUAL_DND.getId());
         assertThat(item0.title).isEqualTo("Do Not Disturb");  // set above
 
         SearchIndexableRaw item1 = data.get(1);
