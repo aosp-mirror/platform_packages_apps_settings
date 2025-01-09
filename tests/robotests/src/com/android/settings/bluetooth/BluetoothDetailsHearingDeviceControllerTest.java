@@ -25,7 +25,6 @@ import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 
-import com.android.settings.accessibility.Flags;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
@@ -119,21 +118,11 @@ public class BluetoothDetailsHearingDeviceControllerTest extends
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_HEARING_AID_PRESET_CONTROL)
-    public void initSubControllers_flagEnabled_presetControllerExist() {
+    public void initSubControllers_presetControllerExist() {
         mHearingDeviceController.initSubControllers(false);
 
         assertThat(mHearingDeviceController.getSubControllers().stream().anyMatch(
                 c -> c instanceof BluetoothDetailsHearingAidsPresetsController)).isTrue();
-    }
-
-    @Test
-    @RequiresFlagsDisabled(Flags.FLAG_ENABLE_HEARING_AID_PRESET_CONTROL)
-    public void initSubControllers_flagDisabled_presetControllerNotExist() {
-        mHearingDeviceController.initSubControllers(false);
-
-        assertThat(mHearingDeviceController.getSubControllers().stream().anyMatch(
-                c -> c instanceof BluetoothDetailsHearingAidsPresetsController)).isFalse();
     }
 
     @Test
