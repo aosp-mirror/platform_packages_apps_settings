@@ -24,20 +24,30 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.internal.R;
+import com.android.server.display.feature.flags.Flags;
 
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/** Tests for {@link ReduceBrightColorsPreferenceController} */
 @RunWith(AndroidJUnit4.class)
 public class ReduceBrightColorsPreferenceControllerTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private static final String PREF_KEY = "rbc_preference";
 
     private Context mContext;
@@ -76,17 +86,122 @@ public class ReduceBrightColorsPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_configuredRbcAvailable_shouldReturnTrue() {
+    @DisableFlags(Flags.FLAG_EVEN_DIMMER)
+    public void isAvailable_whenEvenDimmerOffAndDisabled_RbcOnAndAvailable_returnTrue() {
+        doReturn(false).when(mResources).getBoolean(
+                com.android.internal.R.bool.config_evenDimmerEnabled);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 1);
         doReturn(true).when(mResources).getBoolean(
                 R.bool.config_reduceBrightColorsAvailable);
+
         assertThat(mController.isAvailable()).isTrue();
     }
+
     @Test
-    public void isAvailable_configuredRbcUnAvailable_shouldReturnFalse() {
+    @DisableFlags(Flags.FLAG_EVEN_DIMMER)
+    public void isAvailable_whenEvenDimmerOffAndDisabled_RbcOffAndAvailable_returnTrue() {
+        doReturn(false).when(mResources).getBoolean(
+                com.android.internal.R.bool.config_evenDimmerEnabled);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 0);
+        doReturn(true).when(mResources).getBoolean(
+                R.bool.config_reduceBrightColorsAvailable);
+
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_EVEN_DIMMER)
+    public void isAvailable_whenEvenDimmerOffAndDisabled_RbcOnAndUnavailable_returnFalse() {
+        doReturn(false).when(mResources).getBoolean(
+                com.android.internal.R.bool.config_evenDimmerEnabled);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 1);
         doReturn(false).when(mResources).getBoolean(
                 R.bool.config_reduceBrightColorsAvailable);
+
         assertThat(mController.isAvailable()).isFalse();
     }
+
+    @Test
+    @EnableFlags(Flags.FLAG_EVEN_DIMMER)
+    public void isAvailable_whenEvenDimmerOnAndDisabled_RbcOnAndAvailable_returnTrue() {
+        doReturn(false).when(mResources).getBoolean(
+                com.android.internal.R.bool.config_evenDimmerEnabled);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 1);
+        doReturn(true).when(mResources).getBoolean(
+                R.bool.config_reduceBrightColorsAvailable);
+
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_EVEN_DIMMER)
+    public void isAvailable_whenEvenDimmerOnAndDisabled_RbcOffAndAvailable_returnTrue() {
+        doReturn(false).when(mResources).getBoolean(
+                com.android.internal.R.bool.config_evenDimmerEnabled);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 0);
+        doReturn(true).when(mResources).getBoolean(
+                R.bool.config_reduceBrightColorsAvailable);
+
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_EVEN_DIMMER)
+    public void isAvailable_whenEvenDimmerOnAndDisabled_RbcOnAndUnavailable_returnFalse() {
+        doReturn(false).when(mResources).getBoolean(
+                com.android.internal.R.bool.config_evenDimmerEnabled);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 1);
+        doReturn(false).when(mResources).getBoolean(
+                R.bool.config_reduceBrightColorsAvailable);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_EVEN_DIMMER)
+    public void isAvailable_whenEvenDimmerOnAndEnabled_RbcOnAndAvailable_returnFalse() {
+        doReturn(true).when(mResources).getBoolean(
+                com.android.internal.R.bool.config_evenDimmerEnabled);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 1);
+        doReturn(true).when(mResources).getBoolean(
+                R.bool.config_reduceBrightColorsAvailable);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_EVEN_DIMMER)
+    public void isAvailable_whenEvenDimmerOnAndEnabled_RbcOffAndAvailable_returnFalse() {
+        doReturn(true).when(mResources).getBoolean(
+                com.android.internal.R.bool.config_evenDimmerEnabled);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 0);
+        doReturn(true).when(mResources).getBoolean(
+                R.bool.config_reduceBrightColorsAvailable);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_EVEN_DIMMER)
+    public void isAvailable_whenEvenDimmerOnAndEnabled_RbcOnAndUnavailable_returnFalse() {
+        doReturn(true).when(mResources).getBoolean(
+                com.android.internal.R.bool.config_evenDimmerEnabled);
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 1);
+        doReturn(false).when(mResources).getBoolean(
+                R.bool.config_reduceBrightColorsAvailable);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
 
     private int resourceId(String type, String name) {
         return mContext.getResources().getIdentifier(name, type, mContext.getPackageName());
