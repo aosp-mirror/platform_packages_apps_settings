@@ -19,7 +19,10 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Consumer;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 /**
@@ -109,4 +112,14 @@ public interface SurveyFeatureProvider {
      * @param simpleKey The simple name of the key to get the surveyId for.
      */
     void sendActivityIfAvailable(String simpleKey);
+
+    /**
+     * Checks if a survey is available for the given key by binding to the survey service.
+     *
+     * @param lifecycleOwner The lifecycle owner to manage the service connection.
+     * @param simpleKey The simple name of the key to get the surveyId for.
+     * @param listener The callback to be invoked when the survey availability is checked.
+     */
+    void checkSurveyAvailable(@NonNull LifecycleOwner lifecycleOwner, @NonNull String simpleKey,
+            @NonNull Consumer<Boolean> listener);
 }

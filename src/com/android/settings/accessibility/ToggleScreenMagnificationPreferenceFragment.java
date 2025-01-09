@@ -196,20 +196,17 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     protected void initSettingsPreference() {
-        // If the device doesn't support window magnification feature, it should hide the
-        // settings preference.
-        if (!isWindowMagnificationSupported(getContext())) {
-            return;
-        }
-
         final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
-        // LINT.IfChange(preference_list)
-        addMagnificationModeSetting(generalCategory);
-        addFollowTypingSetting(generalCategory);
-        addOneFingerPanningSetting(generalCategory);
-        addAlwaysOnSetting(generalCategory);
-        addJoystickSetting(generalCategory);
-        // LINT.ThenChange(search_data)
+        if (isWindowMagnificationSupported(getContext())) {
+            // LINT.IfChange(preference_list)
+            addMagnificationModeSetting(generalCategory);
+            addFollowTypingSetting(generalCategory);
+            addOneFingerPanningSetting(generalCategory);
+            addAlwaysOnSetting(generalCategory);
+            addJoystickSetting(generalCategory);
+            // LINT.ThenChange(:search_data)
+        }
+        addFeedbackSetting(generalCategory);
     }
 
     @Override
@@ -346,6 +343,14 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         return pref;
     }
 
+    private static Preference createFeedbackPreference(Context context) {
+        final Preference pref = new Preference(context);
+        pref.setTitle(R.string.accessibility_feedback_title);
+        pref.setSummary(R.string.accessibility_feedback_summary);
+        pref.setKey(MagnificationFeedbackPreferenceController.PREF_KEY);
+        return pref;
+    }
+
     private static boolean isJoystickSupported() {
         return DeviceConfig.getBoolean(
                 DeviceConfig.NAMESPACE_WINDOW_MANAGER,
@@ -369,6 +374,21 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         joystickPreferenceController.setInSetupWizard(mInSetupWizard);
         joystickPreferenceController.displayPreference(getPreferenceScreen());
         addPreferenceController(joystickPreferenceController);
+    }
+
+    private void addFeedbackSetting(PreferenceCategory generalCategory) {
+        if (!Flags.enableLowVisionHats()) {
+            return;
+        }
+
+        final Preference feedbackPreference = createFeedbackPreference(getPrefContext());
+        generalCategory.addPreference(feedbackPreference);
+
+        final MagnificationFeedbackPreferenceController magnificationFeedbackPreferenceController =
+                new MagnificationFeedbackPreferenceController(getContext(), this,
+                        MagnificationFeedbackPreferenceController.PREF_KEY);
+        magnificationFeedbackPreferenceController.displayPreference(getPreferenceScreen());
+        addPreferenceController(magnificationFeedbackPreferenceController);
     }
 
     @Override
@@ -773,7 +793,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                                     createFollowTypingPreference(context),
                                     createOneFingerPanningPreference(context),
                                     createAlwaysOnPreference(context),
-                                    createJoystickPreference(context)
+                                    createJoystickPreference(context),
+                                    createFeedbackPreference(context)
                             )
                             .forEach(pref ->
                                     rawData.add(createPreferenceSearchData(context, pref)));
@@ -810,9 +831,14 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                             niks.add(MagnificationJoystickPreferenceController.PREF_KEY);
                         }
                     }
+
+                    if (!Flags.enableLowVisionHats()) {
+                        niks.add(MagnificationFeedbackPreferenceController.PREF_KEY);
+                    }
+
                     return niks;
                 }
-                // LINT.ThenChange(preference_list)
+                // LINT.ThenChange(:preference_list)
 
                 private SearchIndexableRaw createPreferenceSearchData(
                         Context context, Preference pref) {
