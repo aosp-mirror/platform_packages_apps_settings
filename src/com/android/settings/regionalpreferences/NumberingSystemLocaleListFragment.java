@@ -16,8 +16,6 @@
 
 package com.android.settings.regionalpreferences;
 
-import static android.provider.Settings.ACTION_NUMBERING_SYSTEM_SETTINGS;
-
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -47,10 +45,6 @@ public class NumberingSystemLocaleListFragment extends DashboardFragment {
         if (isEmptyNumberingSystemLocale()) {
             getActivity().setResult(Activity.RESULT_CANCELED);
             finish();
-        }
-
-        if (getIntent().getAction().equals(ACTION_NUMBERING_SYSTEM_SETTINGS)) {
-          // TODO: Generically log action.
         }
 
         getActivity().setTitle(R.string.numbers_preferences_title);
