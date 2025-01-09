@@ -16,6 +16,12 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static com.android.settingslib.bluetooth.BluetoothUtils.isAudioSharingHysteresisModeFixAvailable;
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.DECRYPTION_FAILED;
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.PAUSED;
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.STREAMING;
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.getLocalSourceState;
+
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toMap;
 
@@ -137,6 +143,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
     private final @Nullable LocalBluetoothManager mBluetoothManager;
     private final ConcurrentHashMap<Integer, AudioStreamPreference> mBroadcastIdToPreferenceMap =
             new ConcurrentHashMap<>();
+    private final boolean mHysteresisModeFixAvailable;
     private @Nullable BluetoothLeBroadcastMetadata mSourceFromQrCode;
     private SourceOriginForLogging mSourceFromQrCodeOriginForLogging;
     @Nullable private AudioStreamsProgressCategoryPreference mCategoryPreference;
@@ -149,7 +156,9 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         mAudioStreamsHelper = new AudioStreamsHelper(mBluetoothManager);
         mMediaControlHelper = new MediaControlHelper(mContext, mBluetoothManager);
         mLeBroadcastAssistant = mAudioStreamsHelper.getLeBroadcastAssistant();
-        mBroadcastAssistantCallback = new AudioStreamsProgressCategoryCallback(context, this);
+        mBroadcastAssistantCallback = new AudioStreamsProgressCategoryCallback(this);
+        mHysteresisModeFixAvailable = BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(
+                mContext);
     }
 
     @Override
@@ -260,8 +269,8 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                         // change it's state.
                         existingPreference.setAudioStreamMetadata(source);
                         if (fromState != AudioStreamState.SOURCE_ADDED
-                                && (!isAudioSharingHysteresisModeFixAvailable(mContext)
-                                        || fromState != AudioStreamState.SOURCE_PRESENT)) {
+                                && (!mHysteresisModeFixAvailable
+                                || fromState != AudioStreamState.SOURCE_PRESENT)) {
                             Log.w(
                                     TAG,
                                     "handleSourceFound(): unexpected state : "
@@ -336,8 +345,8 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         if (DEBUG) {
             Log.d(TAG, "handleSourceLost()");
         }
-        if (mAudioStreamsHelper.getAllConnectedSources().stream()
-                .anyMatch(connected -> connected.getBroadcastId() == broadcastId)) {
+        if (mAudioStreamsHelper.getConnectedBroadcastIdAndState(
+                mHysteresisModeFixAvailable).containsKey(broadcastId)) {
             Log.d(
                     TAG,
                     "handleSourceLost() : keep this preference as the source is still connected.");
@@ -366,14 +375,12 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
             // not, means the source is removed from the sink, we move back the preference to SYNCED
             // state.
             if ((preference.getAudioStreamState() == AudioStreamState.SOURCE_ADDED
-                            || (isAudioSharingHysteresisModeFixAvailable(mContext)
+                    || (mHysteresisModeFixAvailable
                                     && preference.getAudioStreamState()
                                             == AudioStreamState.SOURCE_PRESENT))
-                    && mAudioStreamsHelper.getAllConnectedSources().stream()
-                            .noneMatch(
-                                    connected ->
-                                            connected.getBroadcastId()
-                                                    == preference.getAudioStreamBroadcastId())) {
+                    && !mAudioStreamsHelper.getConnectedBroadcastIdAndState(
+                    mHysteresisModeFixAvailable).containsKey(
+                    preference.getAudioStreamBroadcastId())) {
 
                 ThreadUtils.postOnMainThread(
                         () -> {
@@ -395,27 +402,27 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
     // Expect one of the following:
     // 1) No preference existed, create new preference with state SOURCE_ADDED
     // 2) Any other state, move to SOURCE_ADDED
-    void handleSourceConnected(
+    void handleSourceStreaming(
             BluetoothDevice device, BluetoothLeBroadcastReceiveState receiveState) {
         if (DEBUG) {
-            Log.d(TAG, "handleSourceConnected()");
+            Log.d(TAG, "handleSourceStreaming()");
         }
-        if (!AudioStreamsHelper.isConnected(receiveState)) {
+        if (getLocalSourceState(receiveState) != STREAMING) {
             return;
         }
-        var broadcastIdConnected = receiveState.getBroadcastId();
+        var broadcastIdStreaming = receiveState.getBroadcastId();
         Optional<BluetoothLeBroadcastMetadata> metadata =
                 getMetadataMatchingByBroadcastId(
-                        device, receiveState.getSourceId(), broadcastIdConnected);
+                        device, receiveState.getSourceId(), broadcastIdStreaming);
         handleQrCodeWithUnsetBroadcastIdIfNeeded(metadata, receiveState);
         mBroadcastIdToPreferenceMap.compute(
-                broadcastIdConnected,
+                broadcastIdStreaming,
                 (k, existingPreference) -> {
                     if (existingPreference == null) {
-                        // No existing preference for this source even if it's already connected,
+                        // No existing preference for this source even if it's already streaming,
                         // add one and set initial state to SOURCE_ADDED. This could happen because
-                        // we retrieves the connected source during onStart() from
-                        // AudioStreamsHelper#getAllConnectedSources() even before the source is
+                        // we retrieves the streaming source during onStart() from
+                        // AudioStreamsHelper#getAllStreamingSources() even before the source is
                         // founded by scanning.
                         return metadata.isPresent()
                                 ? addNewPreference(
@@ -440,7 +447,7 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         if (DEBUG) {
             Log.d(TAG, "handleSourceConnectBadCode()");
         }
-        if (!AudioStreamsHelper.isBadCode(receiveState)) {
+        if (getLocalSourceState(receiveState) != DECRYPTION_FAILED) {
             return;
         }
         mBroadcastIdToPreferenceMap.computeIfPresent(
@@ -467,29 +474,28 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
 
     // Find preference by receiveState and decide next state.
     // Expect one preference existed, move to SOURCE_PRESENT
-    void handleSourcePresent(
+    void handleSourcePaused(
             BluetoothDevice device, BluetoothLeBroadcastReceiveState receiveState) {
         if (DEBUG) {
-            Log.d(TAG, "handleSourcePresent()");
+            Log.d(TAG, "handleSourcePaused()");
         }
-        if (!AudioStreamsHelper.hasSourcePresent(receiveState)) {
+        if (!mHysteresisModeFixAvailable || getLocalSourceState(receiveState) != PAUSED) {
             return;
         }
 
-        var broadcastIdConnected = receiveState.getBroadcastId();
+        var broadcastIdPaused = receiveState.getBroadcastId();
         Optional<BluetoothLeBroadcastMetadata> metadata =
                 getMetadataMatchingByBroadcastId(
-                        device, receiveState.getSourceId(), broadcastIdConnected);
+                        device, receiveState.getSourceId(), broadcastIdPaused);
         handleQrCodeWithUnsetBroadcastIdIfNeeded(metadata, receiveState);
         mBroadcastIdToPreferenceMap.compute(
-                broadcastIdConnected,
+                broadcastIdPaused,
                 (k, existingPreference) -> {
                     if (existingPreference == null) {
-                        // No existing preference for this source even if it's already connected,
-                        // add one and set initial state to SOURCE_PRESENT. This could happen
-                        // because
-                        // we retrieves the connected source during onStart() from
-                        // AudioStreamsHelper#getAllPresentSources() even before the source is
+                        // No existing preference for this source even if it's already existed but
+                        // currently paused, add one and set initial state to SOURCE_PRESENT. This
+                        // could happen because we retrieves the paused source during onStart() from
+                        // AudioStreamsHelper#getAllPausedSources() even before the source is
                         // founded by scanning.
                         return metadata.isPresent()
                                 ? addNewPreference(
@@ -580,56 +586,43 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
         mLeBroadcastAssistant.registerServiceCallBack(mExecutor, mBroadcastAssistantCallback);
         mExecutor.execute(
                 () -> {
-                    // Handle QR code scan, display currently connected streams then start scanning
-                    // sequentially
+                    // Handle QR code scan, display currently streaming or paused streams then start
+                    // scanning sequentially
                     handleSourceFromQrCodeIfExists();
                     Map<BluetoothDevice, List<BluetoothLeBroadcastReceiveState>> sources =
                             mAudioStreamsHelper.getAllSourcesByDevice();
-                    Map<BluetoothDevice, List<BluetoothLeBroadcastReceiveState>> connectedSources =
-                            getConnectedSources(sources);
-                    if (isAudioSharingHysteresisModeFixAvailable(mContext)) {
-                        // With hysteresis mode, we prioritize showing connected sources first.
-                        // If no connected sources are found, we then show present sources.
-                        if (!connectedSources.isEmpty()) {
-                            connectedSources.forEach(
-                                    (device, stateList) ->
-                                            stateList.forEach(
-                                                    state -> handleSourceConnected(device, state)));
-                        } else {
-                            Map<BluetoothDevice, List<BluetoothLeBroadcastReceiveState>>
-                                    presentSources = getPresentSources(sources);
-                            presentSources.forEach(
-                                    (device, stateList) ->
-                                            stateList.forEach(
-                                                    state -> handleSourcePresent(device, state)));
-                        }
-                    } else {
-                        connectedSources.forEach(
+                    getStreamSourcesByDevice(sources).forEach(
+                            (device, stateList) ->
+                                    stateList.forEach(
+                                            state -> handleSourceStreaming(device, state)));
+                    if (mHysteresisModeFixAvailable) {
+                        getPausedSourcesByDevice(sources).forEach(
                                 (device, stateList) ->
                                         stateList.forEach(
-                                                state -> handleSourceConnected(device, state)));
+                                                state -> handleSourcePaused(device, state)));
                     }
                     mLeBroadcastAssistant.startSearchingForSources(emptyList());
                     mMediaControlHelper.start();
                 });
     }
 
-    private Map<BluetoothDevice, List<BluetoothLeBroadcastReceiveState>> getConnectedSources(
+    private Map<BluetoothDevice, List<BluetoothLeBroadcastReceiveState>> getStreamSourcesByDevice(
             Map<BluetoothDevice, List<BluetoothLeBroadcastReceiveState>> sources) {
         return sources.entrySet().stream()
                 .filter(
                         entry ->
-                                entry.getValue().stream().anyMatch(AudioStreamsHelper::isConnected))
+                                entry.getValue().stream().anyMatch(
+                                        state -> getLocalSourceState(state) == STREAMING))
                 .collect(toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    private Map<BluetoothDevice, List<BluetoothLeBroadcastReceiveState>> getPresentSources(
+    private Map<BluetoothDevice, List<BluetoothLeBroadcastReceiveState>> getPausedSourcesByDevice(
             Map<BluetoothDevice, List<BluetoothLeBroadcastReceiveState>> sources) {
         return sources.entrySet().stream()
                 .filter(
                         entry ->
                                 entry.getValue().stream()
-                                        .anyMatch(AudioStreamsHelper::hasSourcePresent))
+                                        .anyMatch(state -> getLocalSourceState(state) == PAUSED))
                 .collect(toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
@@ -741,9 +734,5 @@ public class AudioStreamsProgressCategoryController extends BasePreferenceContro
                                     .launch();
                             dialog.dismiss();
                         });
-    }
-
-    private static boolean isAudioSharingHysteresisModeFixAvailable(Context context) {
-        return BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(context);
     }
 }

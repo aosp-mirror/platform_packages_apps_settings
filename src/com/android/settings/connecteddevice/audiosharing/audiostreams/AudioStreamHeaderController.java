@@ -16,9 +16,10 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
-import static com.android.settingslib.flags.Flags.audioSharingHysteresisModeFix;
-
-import static java.util.stream.Collectors.toList;
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState;
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.PAUSED;
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.STREAMING;
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.getLocalSourceState;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
@@ -61,6 +62,7 @@ public class AudioStreamHeaderController extends BasePreferenceController
     private final Executor mExecutor;
     private final AudioStreamsHelper mAudioStreamsHelper;
     @Nullable private final LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
+    private final boolean mHysteresisModeFixAvailable;
 
     @VisibleForTesting
     final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
@@ -83,13 +85,13 @@ public class AudioStreamHeaderController extends BasePreferenceController
                         int sourceId,
                         BluetoothLeBroadcastReceiveState state) {
                     super.onReceiveStateChanged(sink, sourceId, state);
-                    if (AudioStreamsHelper.isConnected(state)) {
+                    var localSourceState = getLocalSourceState(state);
+                    if (localSourceState == STREAMING) {
                         updateSummary();
                         mAudioStreamsHelper.startMediaService(
                                 mContext, mBroadcastId, mBroadcastName);
-                    } else if (BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(mContext)
-                            && AudioStreamsHelper.hasSourcePresent(state)) {
-                        // if source present but not connected, only update the summary
+                    } else if (mHysteresisModeFixAvailable && localSourceState == PAUSED) {
+                        // if source paused, only update the summary
                         updateSummary();
                     }
                 }
@@ -105,6 +107,8 @@ public class AudioStreamHeaderController extends BasePreferenceController
         mExecutor = Executors.newSingleThreadExecutor();
         mAudioStreamsHelper = new AudioStreamsHelper(Utils.getLocalBtManager(context));
         mLeBroadcastAssistant = mAudioStreamsHelper.getLeBroadcastAssistant();
+        mHysteresisModeFixAvailable = BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(
+                context);
     }
 
     @Override
@@ -151,38 +155,9 @@ public class AudioStreamHeaderController extends BasePreferenceController
         var unused =
                 ThreadUtils.postOnBackgroundThread(
                         () -> {
-                            var connectedSourceList =
-                                    mAudioStreamsHelper.getAllPresentSources().stream()
-                                            .filter(
-                                                    state ->
-                                                            (state.getBroadcastId()
-                                                                    == mBroadcastId))
-                                            .collect(toList());
-
-                            var latestSummary =
-                                    audioSharingHysteresisModeFix()
-                                            ? connectedSourceList.isEmpty()
-                                                    ? AUDIO_STREAM_HEADER_NOT_LISTENING_SUMMARY
-                                                    : (connectedSourceList.stream()
-                                                                    .anyMatch(
-                                                                            AudioStreamsHelper
-                                                                                    ::isConnected)
-                                                            ? mContext.getString(
-                                                                    AUDIO_STREAM_HEADER_LISTENING_NOW_SUMMARY)
-                                                            : mContext.getString(
-                                                                    AUDIO_STREAM_HEADER_PRESENT_NOW_SUMMARY))
-                                            : mAudioStreamsHelper.getAllConnectedSources().stream()
-                                                            .map(
-                                                                    BluetoothLeBroadcastReceiveState
-                                                                            ::getBroadcastId)
-                                                            .anyMatch(
-                                                                    connectedBroadcastId ->
-                                                                            connectedBroadcastId
-                                                                                    == mBroadcastId)
-                                                    ? mContext.getString(
-                                                            AUDIO_STREAM_HEADER_LISTENING_NOW_SUMMARY)
-                                                    : AUDIO_STREAM_HEADER_NOT_LISTENING_SUMMARY;
-
+                            var sourceState = mAudioStreamsHelper.getConnectedBroadcastIdAndState(
+                                    mHysteresisModeFixAvailable).get(mBroadcastId);
+                            var latestSummary = getLatestSummary(sourceState);
                             ThreadUtils.postOnMainThread(
                                     () -> {
                                         if (mHeaderController != null) {
@@ -211,5 +186,17 @@ public class AudioStreamHeaderController extends BasePreferenceController
         mFragment = audioStreamDetailsFragment;
         mBroadcastName = broadcastName;
         mBroadcastId = broadcastId;
+    }
+
+    private String getLatestSummary(@Nullable LocalBluetoothLeBroadcastSourceState state) {
+        if (state == null) {
+            return AUDIO_STREAM_HEADER_NOT_LISTENING_SUMMARY;
+        }
+        if (mHysteresisModeFixAvailable) {
+            return state == STREAMING
+                    ? mContext.getString(AUDIO_STREAM_HEADER_LISTENING_NOW_SUMMARY)
+                    : mContext.getString(AUDIO_STREAM_HEADER_PRESENT_NOW_SUMMARY);
+        }
+        return mContext.getString(AUDIO_STREAM_HEADER_LISTENING_NOW_SUMMARY);
     }
 }

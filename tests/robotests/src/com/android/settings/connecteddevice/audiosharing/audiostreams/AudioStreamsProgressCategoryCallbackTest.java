@@ -77,7 +77,7 @@ public class AudioStreamsProgressCategoryCallbackTest {
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
         shadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
-        mCallback = new AudioStreamsProgressCategoryCallback(mContext, mController);
+        mCallback = new AudioStreamsProgressCategoryCallback(mController);
     }
 
     @Test
@@ -87,7 +87,7 @@ public class AudioStreamsProgressCategoryCallbackTest {
         when(mState.getBisSyncState()).thenReturn(bisSyncState);
         mCallback.onReceiveStateChanged(mDevice, /* sourceId= */ 0, mState);
 
-        verify(mController).handleSourceConnected(any(), any());
+        verify(mController).handleSourceStreaming(any(), any());
     }
 
     @Test
@@ -102,7 +102,7 @@ public class AudioStreamsProgressCategoryCallbackTest {
         when(mSourceDevice.getAddress()).thenReturn(address);
         mCallback.onReceiveStateChanged(mDevice, /* sourceId= */ 0, mState);
 
-        verify(mController).handleSourcePresent(any(), any());
+        verify(mController).handleSourcePaused(any(), any());
     }
 
     @Test
