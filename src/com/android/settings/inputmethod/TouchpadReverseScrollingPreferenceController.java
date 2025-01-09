@@ -20,6 +20,8 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.input.InputSettings;
 
+import androidx.annotation.NonNull;
+
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -27,9 +29,10 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class TouchpadReverseScrollingPreferenceController extends TogglePreferenceController {
 
-    private MetricsFeatureProvider mMetricsFeatureProvider;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
-    public TouchpadReverseScrollingPreferenceController(Context context, String key) {
+    public TouchpadReverseScrollingPreferenceController(@NonNull Context context,
+                                                        @NonNull String key) {
         super(context, key);
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }

@@ -37,6 +37,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -51,10 +52,6 @@ import java.util.Arrays;
 public class TouchpadGestureDialogFragment extends BottomSheetDialogFragment {
 
     private Context mContext;
-    private LayoutInflater mInflater;
-    private View mViewArrowPrevious;
-    private View mViewArrowNext;
-    private ViewPager mViewPager;
     private ArrayList<View> mPageList;
     private ImageView[] mDotIndicators;
     private View[] mViewPagerItems;
@@ -68,7 +65,7 @@ public class TouchpadGestureDialogFragment extends BottomSheetDialogFragment {
     private static final int DOT_INDICATOR_RIGHT_PADDING = 6;
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mContext = context;
     }
@@ -111,13 +108,14 @@ public class TouchpadGestureDialogFragment extends BottomSheetDialogFragment {
         window.setNavigationBarColor(Color.TRANSPARENT);
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
 
-        mInflater = mContext.getSystemService(LayoutInflater.class);
-        View contentView = mInflater.inflate(R.layout.touchpad_gesture_preview, null);
-        addViewPager(contentView);
+        LayoutInflater inflater = mContext.getSystemService(LayoutInflater.class);
+        View contentView = inflater.inflate(R.layout.touchpad_gesture_preview, null);
+        addViewPager(contentView, inflater);
         dialog.setContentView(contentView);
         Window gestureDialogWindow = dialog.getWindow();
         gestureDialogWindow.setType(TYPE_SYSTEM_DIALOG);
@@ -145,7 +143,7 @@ public class TouchpadGestureDialogFragment extends BottomSheetDialogFragment {
         // The gesture education view shouldn't be draggable."
         behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
-            public void onStateChanged(View bottomSheet, int newState) {
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 if (newState == BottomSheetBehavior.STATE_DRAGGING) {
                     if (isGestureNavigationEnabled()) {
                         behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -156,7 +154,7 @@ public class TouchpadGestureDialogFragment extends BottomSheetDialogFragment {
             }
 
             @Override
-            public void onSlide(View bottomSheet, float slideOffset) {
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
                 // Do nothing.
             }
         });
@@ -174,13 +172,12 @@ public class TouchpadGestureDialogFragment extends BottomSheetDialogFragment {
                         R.layout.gesture_tip5_switch_apps));
     }
 
-    private void addViewPager(View preview) {
-        mViewPager = preview.findViewById(R.id.viewpager);
+    private void addViewPager(View preview, LayoutInflater inflater) {
+        ViewPager viewPager = preview.findViewById(R.id.viewpager);
         int viewPagerResourceSize = getViewPagerResource().size();
         mViewPagerItems = new View[viewPagerResourceSize];
         for (int i = 0; i < viewPagerResourceSize; i++) {
-            mViewPagerItems[i] =
-                    mInflater.inflate(getViewPagerResource().get(i), null /* root */);
+            mViewPagerItems[i] = inflater.inflate(getViewPagerResource().get(i), null /* root */);
         }
 
         mPageList = new ArrayList<View>();
@@ -188,12 +185,12 @@ public class TouchpadGestureDialogFragment extends BottomSheetDialogFragment {
             mPageList.add(mViewPagerItems[i]);
         }
 
-        mViewPager.setAdapter(new GesturePagerAdapter(mPageList));
+        viewPager.setAdapter(new GesturePagerAdapter(mPageList));
 
         mButtonStartRestart = (Button) preview.findViewById(R.id.button_restart);
         mButtonStartRestart.setOnClickListener(v -> {
-            final int firstPos = mViewPager.getCurrentItem() - mViewPagerItems.length;
-            mViewPager.setCurrentItem(firstPos, true);
+            final int firstPos = viewPager.getCurrentItem() - mViewPagerItems.length;
+            viewPager.setCurrentItem(firstPos, true);
         });
 
         mButtonEndDone = (Button) preview.findViewById(R.id.button_done);
@@ -208,11 +205,11 @@ public class TouchpadGestureDialogFragment extends BottomSheetDialogFragment {
 
         mButtonEndNext = (Button) preview.findViewById(R.id.button_next);
         mButtonEndNext.setOnClickListener(v -> {
-            final int nextPos = mViewPager.getCurrentItem() + 1;
-            mViewPager.setCurrentItem(nextPos, true);
+            final int nextPos = viewPager.getCurrentItem() + 1;
+            viewPager.setCurrentItem(nextPos, true);
         });
 
-        mViewPager.addOnPageChangeListener(createPageListener());
+        viewPager.addOnPageChangeListener(createPageListener());
         final ViewGroup viewGroup = (ViewGroup) preview.findViewById(R.id.viewGroup);
         mDotIndicators = new ImageView[mPageList.size()];
         for (int i = 0; i < mPageList.size(); i++) {
@@ -234,12 +231,14 @@ public class TouchpadGestureDialogFragment extends BottomSheetDialogFragment {
         }
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
+        public void destroyItem(@NonNull ViewGroup container, int position,
+                                @NonNull Object object) {
             if (mPageViewList.get(position) != null) {
                 container.removeView(mPageViewList.get(position));
             }
         }
 
+        @NonNull
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             container.addView(mPageViewList.get(position));
@@ -252,7 +251,7 @@ public class TouchpadGestureDialogFragment extends BottomSheetDialogFragment {
         }
 
         @Override
-        public boolean isViewFromObject(View view, Object object) {
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
             return object == view;
         }
     }
