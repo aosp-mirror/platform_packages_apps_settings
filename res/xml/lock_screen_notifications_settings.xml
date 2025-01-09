@@ -46,7 +46,8 @@
 
     <PreferenceCategory
         android:key="lockscreen_notification_what_to_show"
-        android:title="@string/lockscreen_notification_what_to_show_title">
+        android:title="@string/lockscreen_notification_what_to_show_title"
+        settings:controller="com.android.settings.notification.LockScreenWhatToShowController">
 
         <SwitchPreferenceCompat
             android:key="lock_screen_notification_show_seen_toggle"
