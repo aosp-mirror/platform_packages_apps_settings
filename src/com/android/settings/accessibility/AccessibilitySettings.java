@@ -148,9 +148,7 @@ public class AccessibilitySettings extends DashboardFragment implements
 
     private final Map<String, PreferenceCategory> mCategoryToPrefCategoryMap =
             new ArrayMap<>();
-    @VisibleForTesting
-    final Map<Preference, PreferenceCategory> mServicePreferenceToPreferenceCategoryMap =
-            new ArrayMap<>();
+    private final List<Preference> mServicePreferences = new ArrayList<>();
     private final Map<ComponentName, PreferenceCategory> mPreBundledServiceComponentToCategoryMap =
             new ArrayMap<>();
 
@@ -372,13 +370,10 @@ public class AccessibilitySettings extends DashboardFragment implements
         // Since services category is auto generated we have to do a pass
         // to generate it since services can come and go and then based on
         // the global accessibility state to decided whether it is enabled.
-        final ArrayList<Preference> servicePreferences =
-                new ArrayList<>(mServicePreferenceToPreferenceCategoryMap.keySet());
-        for (int i = 0; i < servicePreferences.size(); i++) {
-            Preference service = servicePreferences.get(i);
-            PreferenceCategory category = mServicePreferenceToPreferenceCategoryMap.get(service);
-            category.removePreference(service);
+        for (Preference service : mServicePreferences) {
+            service.getParent().removePreference(service);
         }
+        mServicePreferences.clear();
 
         initializePreBundledServicesMapFromArray(CATEGORY_SCREEN_READER,
                 R.array.config_preinstalled_screen_reader_services);
@@ -423,7 +418,7 @@ public class AccessibilitySettings extends DashboardFragment implements
                 prefCategory = mPreBundledServiceComponentToCategoryMap.get(componentName);
             }
             prefCategory.addPreference(preference);
-            mServicePreferenceToPreferenceCategoryMap.put(preference, prefCategory);
+            mServicePreferences.add(preference);
         }
 
         // Update the order of all the category according to the order defined in xml file.
