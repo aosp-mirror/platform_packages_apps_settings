@@ -38,6 +38,7 @@ import java.util.Locale;
 
 public class MouseKeysImageListAdapter extends
         RecyclerView.Adapter<MouseKeysImageListAdapter.MouseKeyImageViewHolder> {
+    private static final String LABEL_DELIMITER = ", ";
     private static final ImmutableList<Integer> DRAWABLE_LIST = ImmutableList.of(
             R.drawable.mouse_keys_directional, R.drawable.mouse_keys_click,
             R.drawable.mouse_keys_press_hold, R.drawable.mouse_keys_release,
@@ -93,7 +94,7 @@ public class MouseKeysImageListAdapter extends
         List<String> directionalLabelList = DIRECTIONAL_CHAR_KEYCODE_LIST.stream().map(
                 (key) -> getDisplayLabel(currentInputDevice, key)).toList();
         mComposedSummaryList.add(context.getString(R.string.mouse_keys_directional_summary,
-                String.join(",", directionalLabelList)));
+                String.join(LABEL_DELIMITER, directionalLabelList)));
         String leftClickLabel = getDisplayLabel(currentInputDevice, LEFT_CLICK_CHAR_KEYCODE);
         mComposedSummaryList.add(
                 context.getString(R.string.mouse_keys_click_summary, leftClickLabel));
@@ -107,7 +108,8 @@ public class MouseKeysImageListAdapter extends
                 (key) -> getDisplayLabel(currentInputDevice, key)).toList();
         mComposedSummaryList.add(context.getString(R.string.mouse_keys_toggle_scroll_summary,
                 toggleScrollLabelList.getFirst(),
-                String.join(",", toggleScrollLabelList.subList(1, toggleScrollLabelList.size()))
+                String.join(LABEL_DELIMITER,
+                        toggleScrollLabelList.subList(1, toggleScrollLabelList.size()))
         ));
         String rightClickLabel = getDisplayLabel(currentInputDevice, RIGHT_CLICK_CHAR_KEYCODE);
         mComposedSummaryList.add(
