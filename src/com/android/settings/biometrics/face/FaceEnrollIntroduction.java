@@ -625,7 +625,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         updateDescriptionText();
     }
 
-    private boolean isPrivateProfile() {
+    protected boolean isPrivateProfile() {
         return Utils.isPrivateProfile(mUserId, getApplicationContext());
     }
 }

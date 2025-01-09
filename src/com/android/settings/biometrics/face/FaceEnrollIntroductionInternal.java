@@ -16,12 +16,12 @@
 
 package com.android.settings.biometrics.face;
 
-import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
-
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.FragmentActivity;
+
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * Wrapper of {@link FaceEnrollIntroduction} to use with a pre-defined task affinity.
@@ -42,7 +42,9 @@ public class FaceEnrollIntroductionInternal extends FragmentActivity {
         trampoline.setFlags(0);
 
         // Trampoline to the intended activity, and finish
-        trampoline.setClassName(SETTINGS_PACKAGE_NAME, FaceEnrollIntroduction.class.getName());
+        trampoline.setClass(getApplicationContext(),
+                FeatureFactory.getFeatureFactory().getFaceFeatureProvider()
+                        .getEnrollActivityClassProvider().getNext());
         startActivity(trampoline);
         finish();
     }

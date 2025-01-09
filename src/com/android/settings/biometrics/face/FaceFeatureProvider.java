@@ -19,6 +19,7 @@ package com.android.settings.biometrics.face;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 /** Feature provider for face unlock */
@@ -32,4 +33,13 @@ public interface FaceFeatureProvider {
 
     /** Returns true if setup wizard supported face enrollment. */
     boolean isSetupWizardSupported(Context context);
+
+    /**
+     * Gets the provider for current face enrollment activity classes
+     * @return the provider
+     */
+    @NonNull
+    default FaceEnrollActivityClassProvider getEnrollActivityClassProvider() {
+        return FaceEnrollActivityClassProvider.getInstance();
+    }
 }
