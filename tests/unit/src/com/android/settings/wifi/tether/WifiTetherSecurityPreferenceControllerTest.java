@@ -18,6 +18,7 @@ package com.android.settings.wifi.tether;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -31,6 +32,10 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.wifi.factory.WifiFeatureProvider;
+import com.android.settings.wifi.repository.WifiHotspotRepository;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -70,6 +75,10 @@ public class WifiTetherSecurityPreferenceControllerTest {
                 .setPassphrase(null, SoftApConfiguration.SECURITY_TYPE_OPEN).build();
         when(context.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         when(mWifiManager.getSoftApConfiguration()).thenReturn(mConfig);
+        WifiHotspotRepository repository = mock(WifiHotspotRepository.class);
+        when(repository.isSpeedFeatureAvailable()).thenReturn(false);
+        WifiFeatureProvider provider = FakeFeatureFactory.setupForTest().getWifiFeatureProvider();
+        when(provider.getWifiHotspotRepository()).thenReturn(repository);
 
         mController = new WifiTetherSecurityPreferenceController(context, mListener);
         if (Looper.myLooper() == null) {
