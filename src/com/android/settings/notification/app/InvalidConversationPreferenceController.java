@@ -24,6 +24,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 public class InvalidConversationPreferenceController extends NotificationPreferenceController
         implements Preference.OnPreferenceChangeListener {
@@ -67,7 +68,15 @@ public class InvalidConversationPreferenceController extends NotificationPrefere
         pref.setDisabledByAdmin(mAdmin);
         pref.setEnabled(!pref.isDisabledByAdmin());
         pref.setChecked(!mBackend.hasUserDemotedInvalidMsgApp(mAppRow.pkg, mAppRow.uid));
-        preference.setSummary(mContext.getString(R.string.conversation_section_switch_summary));
+        if (SettingsThemeHelper.isExpressiveTheme(mContext)) {
+            if (preference.getParent() != null) {
+                preference.getParent().setVisible(true);
+            }
+            preference.setSummary(mContext.getString(
+                    R.string.conversation_section_switch_complete_summary));
+        } else {
+            preference.setSummary(mContext.getString(R.string.conversation_section_switch_summary));
+        }
     }
 
     @Override

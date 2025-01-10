@@ -56,6 +56,9 @@ public class ShowMorePreferenceController extends NotificationPreferenceControll
         if (mAppRow.banned || mAppRow.showAllChannels) {
             return false;
         }
+        if (mBackend.getChannelCount(mAppRow.pkg, mAppRow.uid) == 0) {
+            return false;
+        }
         return true;
     }
 

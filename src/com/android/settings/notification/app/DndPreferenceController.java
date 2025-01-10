@@ -54,6 +54,9 @@ public class DndPreferenceController extends NotificationPreferenceController
 
     public void updateState(Preference preference) {
         if (mChannel != null) {
+            if (preference.getParent() != null) {
+                preference.getParent().setVisible(true);
+            }
             RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
             pref.setDisabledByAdmin(mAdmin);
             pref.setEnabled(!pref.isDisabledByAdmin());

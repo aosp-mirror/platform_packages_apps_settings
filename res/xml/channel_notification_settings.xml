@@ -111,16 +111,18 @@
         android:title="@string/app_notification_override_dnd_title"
         android:summary="@string/app_notification_override_dnd_summary" />
 
-    <Preference
-        android:key="app_link"
-        android:order="18"
-        android:title="@string/app_settings_link"
-        android:icon="@drawable/ic_settings_24dp"
-        settings:allowDividerAbove="true"/>
-
     <com.android.settingslib.widget.FooterPreference
         android:key="block_desc"
-        android:order="110"
-        settings:allowDividerAbove="false"/>
+        android:order="110"/>
+
+    <PreferenceCategory
+        android:key="external"
+        android:order="18"
+        android:layout="@layout/settingslib_preference_category_no_title">
+        <Preference
+            android:key="app_link"
+            android:title="@string/app_settings_link"
+            android:icon="@drawable/ic_settings_24dp"/>
+    </PreferenceCategory>
 
 </PreferenceScreen>

@@ -71,6 +71,9 @@ public class AllowSoundPreferenceController extends NotificationPreferenceContro
             pref.setEnabled(!pref.isDisabledByAdmin());
             pref.setChecked(mChannel.getImportance() >= IMPORTANCE_DEFAULT
                     || mChannel.getImportance() == IMPORTANCE_UNSPECIFIED);
+            if (preference.getParent() != null) {
+                preference.getParent().setVisible(true);
+            }
         } else { Log.i(TAG, "tried to updatestate on a null channel?!"); }
     }
 

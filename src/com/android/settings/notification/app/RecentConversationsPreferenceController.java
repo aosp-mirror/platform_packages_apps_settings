@@ -40,6 +40,7 @@ import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.widget.ButtonPreference;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.text.Collator;
@@ -75,14 +76,12 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
         return true;
     }
 
-    //TODO(b/233325816): Use ButtonPreference instead.
-    LayoutPreference getClearAll(PreferenceGroup parent) {
-        LayoutPreference pref = new LayoutPreference(
-                mContext, R.layout.conversations_clear_recents);
+    ButtonPreference getClearAll(PreferenceGroup parent) {
+        ButtonPreference pref = new ButtonPreference(mContext);
+        pref.setTitle(R.string.conversation_settings_clear_recents);
         pref.setKey(getPreferenceKey() + CLEAR_ALL_KEY_SUFFIX);
         pref.setOrder(1);
-        Button button = pref.findViewById(R.id.conversation_settings_clear_recents);
-        button.setOnClickListener(v -> {
+        pref.setOnClickListener(v -> {
             try {
                 mPs.removeAllRecentConversations();
                 // Removing recents is asynchronous, so we can't immediately reload the list from
@@ -97,7 +96,8 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
                         }
                     }
                 }
-                button.announceForAccessibility(mContext.getString(R.string.recent_convos_removed));
+                pref.getButton().announceForAccessibility(
+                        mContext.getString(R.string.recent_convos_removed));
             } catch (RemoteException e) {
                 Slog.w(TAG, "Could not clear recents", e);
             }
@@ -160,25 +160,27 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
                 .forEachOrdered(pref -> {
                     pref.setOrder(order.getAndIncrement());
                     mPreferenceGroup.addPreference(pref);
-                    if (pref.hasClearListener()) {
+                    if (pref instanceof RecentConversationPreference
+                            && ((RecentConversationPreference) pref).hasClearListener()) {
                         hasClearable.set(true);
                     }
                 });
         return hasClearable.get();
     }
 
-    protected RecentConversationPreference createConversationPref(
+    protected Preference createConversationPref(
             final ConversationChannel conversation) {
         final String pkg = conversation.getShortcutInfo().getPackage();
         final int uid = conversation.getUid();
         final String conversationId = conversation.getShortcutInfo().getId();
-        RecentConversationPreference pref = new RecentConversationPreference(mContext);
+        Preference pref = conversation.hasActiveNotifications() ? new Preference(mContext)
+                : new RecentConversationPreference(mContext);
 
         if (!conversation.hasActiveNotifications()) {
-            pref.setOnClearClickListener(() -> {
+            ((RecentConversationPreference) pref).setOnClearClickListener(() -> {
                 try {
                     mPs.removeRecentConversation(pkg, UserHandle.getUserId(uid), conversationId);
-                    pref.getClearView().announceForAccessibility(
+                    ((RecentConversationPreference) pref).getClearView().announceForAccessibility(
                             mContext.getString(R.string.recent_convo_removed));
                     mPreferenceGroup.removePreference(pref);
                 } catch (RemoteException e) {

@@ -91,6 +91,14 @@ public class ChannelListPreferenceControllerTest {
             assertEquals("zeroCategories", mGroupList.getPreference(0).getKey());
         }
 
+        // Test the case with no groups but hidden channels
+        inGroups = new ArrayList<>();
+        mController.mChannelCount = 1;
+        mController.updateFullList(mGroupList, inGroups);
+        {
+            assertEquals(0, mGroupList.getPreferenceCount());
+        }
+
         // Test that adding a group clears the zero category and adds everything
         NotificationChannelGroup inGroup1 = new NotificationChannelGroup("group1", "Group 1");
         inGroup1.addChannel(new NotificationChannel("ch1a", "Channel 1A", IMPORTANCE_DEFAULT));
@@ -250,6 +258,7 @@ public class ChannelListPreferenceControllerTest {
         }
 
         // Test that we go back to the empty state when clearing all groups and channels.
+        mController.mChannelCount = 0;
         inGroups.clear();
         mController.updateFullList(mGroupList, inGroups);
         {
