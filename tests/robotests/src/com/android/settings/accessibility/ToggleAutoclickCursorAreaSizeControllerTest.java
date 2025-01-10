@@ -16,6 +16,9 @@
 
 package com.android.settings.accessibility;
 
+import static android.view.accessibility.AccessibilityManager.AUTOCLICK_CURSOR_AREA_SIZE_MAX;
+import static android.view.accessibility.AccessibilityManager.AUTOCLICK_CURSOR_AREA_SIZE_MIN;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -32,9 +35,11 @@ import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 
+import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.widget.SliderPreference;
 
 import com.google.common.collect.ImmutableList;
 
@@ -106,21 +111,74 @@ public class ToggleAutoclickCursorAreaSizeControllerTest {
     }
 
     @Test
-    public void getProgress_matchesSetting() {
-        assertThat(mController.getSliderPosition()).isEqualTo(readSetting());
+    public void getProgress_matchesSetting_inRangeValue() {
+        // TODO(388844952): Use parameter testing.
+        for (int size : ImmutableList.of(20, 40, 60, 80, 100)) {
+            updateSetting(size);
+
+            assertThat(mController.getSliderPosition()).isEqualTo(size);
+        }
     }
 
     @Test
-    public void setProgress_updatesSetting() {
-        for (int size : ImmutableList.of(20, 40, 60, 80, 100)) {
-            mController.setSliderPosition(size);
-            assertThat(readSetting()).isEqualTo(size);
+    public void getProgress_matchesSetting_aboveMaxValue() {
+        updateSetting(120);
+
+        assertThat(mController.getSliderPosition()).isEqualTo(AUTOCLICK_CURSOR_AREA_SIZE_MAX);
+    }
+
+    @Test
+    public void getProgress_matchesSetting_belowMinValue() {
+        updateSetting(0);
+
+        assertThat(mController.getSliderPosition()).isEqualTo(AUTOCLICK_CURSOR_AREA_SIZE_MIN);
+    }
+
+    @Test
+    public void setProgress_updatesSetting_inRangeValue() {
+        // TODO(388844952): Use parameter testing.
+        for (int position : ImmutableList.of(20, 40, 60, 80, 100)) {
+            mController.setSliderPosition(position);
+
+            assertThat(readSetting()).isEqualTo(position);
         }
+    }
+
+    @Test
+    public void setProgress_updatesSetting_aboveMaxValue() {
+        mController.setSliderPosition(120);
+
+        assertThat(readSetting()).isEqualTo(AUTOCLICK_CURSOR_AREA_SIZE_MAX);
+    }
+
+    @Test
+    public void setProgress_updatesSetting_belowMinValue() {
+        mController.setSliderPosition(0);
+
+        assertThat(readSetting()).isEqualTo(AUTOCLICK_CURSOR_AREA_SIZE_MIN);
+    }
+
+    @Test
+    public void sliderPreference_setCorrectInitialValue() {
+        SliderPreference preference = mock(SliderPreference.class);
+        PreferenceScreen screen = mock(PreferenceScreen.class);
+        doReturn(preference).when(screen).findPreference(anyString());
+
+        mController.displayPreference(screen);
+
+        verify(preference).setValue(mController.getSliderPosition());
     }
 
     private int readSetting() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_AUTOCLICK_CURSOR_AREA_SIZE,
                 AccessibilityManager.AUTOCLICK_CURSOR_AREA_SIZE_DEFAULT);
+    }
+
+    private void updateSetting(int value) {
+        Settings.Secure.putInt(
+                mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_AUTOCLICK_CURSOR_AREA_SIZE,
+                value);
     }
 }
