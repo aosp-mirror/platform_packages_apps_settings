@@ -16,10 +16,13 @@
 
 package com.android.settings.development.linuxterminal;
 
+import static android.system.virtualmachine.VirtualMachineManager.CAPABILITY_NON_PROTECTED_VM;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Process;
 import android.os.storage.StorageManager;
+import android.system.virtualmachine.VirtualMachineManager;
 import android.text.TextUtils;
 import android.util.DataUnit;
 
@@ -43,7 +46,7 @@ public class LinuxTerminalPreferenceController extends DeveloperOptionsPreferenc
     static final long MEMORY_MIN_BYTES = DataUnit.GIGABYTES.toBytes(4); // 4_000_000_000
 
     @VisibleForTesting
-    static final long STORAGE_MIN_BYTES = DataUnit.GIGABYTES.toBytes(128); // 128_000_000_000
+    static final long STORAGE_MIN_BYTES = DataUnit.GIGABYTES.toBytes(64); // 64_000_000_000
 
     private static final String LINUX_TERMINAL_KEY = "linux_terminal";
 
@@ -58,9 +61,13 @@ public class LinuxTerminalPreferenceController extends DeveloperOptionsPreferenc
 
         StorageManager storageManager =
                 Objects.requireNonNull(context.getSystemService(StorageManager.class));
+        VirtualMachineManager virtualMachineManager =
+                Objects.requireNonNull(context.getSystemService(VirtualMachineManager.class));
         mIsDeviceCapable =
                 getTotalMemory() >= MEMORY_MIN_BYTES
-                        && storageManager.getPrimaryStorageSize() >= STORAGE_MIN_BYTES;
+                        && storageManager.getPrimaryStorageSize() >= STORAGE_MIN_BYTES
+                        && ((virtualMachineManager.getCapabilities() & CAPABILITY_NON_PROTECTED_VM)
+                                != 0);
     }
 
     // Avoid lazy initialization because this may be called before displayPreference().
