@@ -43,6 +43,7 @@ import com.android.settings.keyboard.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
+import java.text.NumberFormat;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -214,7 +215,7 @@ public abstract class InputSettingPreferenceController extends TogglePreferenceC
     }
 
     private static String progressToThresholdInSecond(int progress) {
-        return String.valueOf((double) progress * CUSTOM_PROGRESS_INTERVAL
+        return NumberFormat.getInstance().format((float) progress * CUSTOM_PROGRESS_INTERVAL
                 / MILLISECOND_IN_SECONDS);
     }
 
