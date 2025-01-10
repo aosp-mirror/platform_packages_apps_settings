@@ -27,6 +27,16 @@ import com.android.settingslib.preference.TwoStatePreferenceBinding
 interface MainSwitchBarMetadata :
     TwoStatePreference, TwoStatePreferenceBinding, PreferenceBindingPlaceholder {
 
+    /**
+     * Disable main switch bar when user toggles the switch. By this way, user cannot toggle again
+     * before last operation is done.
+     *
+     * Side-effect: If the underlying operation is completed quickly, this will causes UI flicker.
+     * Override and return `false` to get rid of the flicker.
+     */
+    val disableWidgetOnCheckedChanged: Boolean
+        get() = true
+
     override fun createWidget(context: Context) = MainSwitchBarPreference(context, this)
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {

@@ -36,6 +36,9 @@ class DataSaverMainSwitchPreference : MainSwitchBarMetadata, PreferenceLifecycle
     override val title
         get() = R.string.data_saver_switch_title
 
+    override val disableWidgetOnCheckedChanged: Boolean
+        get() = false
+
     override fun storage(context: Context) = createDataStore(context)
 
     override fun getReadPermissions(context: Context) =
