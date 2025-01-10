@@ -52,6 +52,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.flags.Flags;
 import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -63,6 +64,7 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 /** PreferenceController to control the dialog to choose the active device for calls and alarms */
 public class AudioSharingCallAudioPreferenceController extends AudioSharingBasePreferenceController
@@ -379,9 +381,19 @@ public class AudioSharingCallAudioPreferenceController extends AudioSharingBaseP
 
     private void updateDeviceItemsInSharingSession() {
         mGroupedConnectedDevices = AudioSharingUtils.fetchConnectedDevicesByGroupId(mBtManager);
+        if (Flags.enableTemporaryBondDevicesUi()) {
+            mGroupedConnectedDevices =
+                    mGroupedConnectedDevices.entrySet().stream()
+                            .filter(entry -> !anyTemporaryBondDevice(entry.getValue()))
+                            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        }
         mDeviceItemsInSharingSession =
                 AudioSharingUtils.buildOrderedConnectedLeadAudioSharingDeviceItem(
                         mBtManager, mGroupedConnectedDevices, /* filterByInSharing= */ true);
+    }
+
+    private boolean anyTemporaryBondDevice(List<BluetoothDevice> connectedDevices) {
+        return connectedDevices.stream().anyMatch(BluetoothUtils::isTemporaryBondDevice);
     }
 
     @Nullable

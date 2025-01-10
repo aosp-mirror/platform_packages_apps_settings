@@ -42,6 +42,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.os.Looper;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.View;
@@ -107,8 +108,11 @@ public class AudioSharingCallAudioPreferenceControllerTest {
     private static final String PREF_KEY = "calls_and_alarms";
     private static final String TEST_DEVICE_NAME1 = "test1";
     private static final String TEST_DEVICE_NAME2 = "test2";
+    private static final String TEMP_BOND_METADATA =
+            "<TEMP_BOND_TYPE>le_audio_sharing</TEMP_BOND_TYPE>";
     private static final int TEST_DEVICE_GROUP_ID1 = 1;
     private static final int TEST_DEVICE_GROUP_ID2 = 2;
+    private static final int METADATA_FAST_PAIR_CUSTOMIZED_FIELDS = 25;
 
     private static final String TEST_SETTINGS_KEY =
             "bluetooth_le_broadcast_fallback_active_group_id";
@@ -438,6 +442,23 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         mController.displayPreference(mScreen);
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(mPreference.getSummary().toString()).isEmpty();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_TEMPORARY_BOND_DEVICES_UI)
+    public void displayPreference_hasTemporaryBondDevice_doNotShow() {
+        Settings.Secure.putInt(mContentResolver, TEST_SETTINGS_KEY, TEST_DEVICE_GROUP_ID1);
+        when(mCachedDevice1.isActiveDevice(BluetoothProfile.LE_AUDIO)).thenReturn(true);
+        when(mBroadcast.isEnabled(any())).thenReturn(true);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice1, mDevice2));
+        when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(mState));
+        when(mDevice2.getMetadata(METADATA_FAST_PAIR_CUSTOMIZED_FIELDS)).thenReturn(
+                TEMP_BOND_METADATA.getBytes());
+
+        mController.displayPreference(mScreen);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        assertThat(mController.mGroupedConnectedDevices).hasSize(0);
     }
 
     @Test
