@@ -34,9 +34,9 @@ import com.android.settings.network.SatelliteWarningDialogActivity
 import com.android.settings.widget.MainSwitchBarMetadata
 import com.android.settingslib.WirelessUtils
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
-import com.android.settingslib.datastore.DataChangeReason
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.Permissions
+import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
@@ -152,7 +152,14 @@ class BluetoothPreference(private val bluetoothDataStore: BluetoothDataStore) :
             broadcastReceiver =
                 object : BroadcastReceiver() {
                     override fun onReceive(context: Context, intent: Intent) {
-                        notifyChange(KEY, DataChangeReason.UPDATE)
+                        val state =
+                            intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR)
+                        if (
+                            state == BluetoothAdapter.STATE_ON ||
+                                state == BluetoothAdapter.STATE_OFF
+                        ) {
+                            notifyChange(KEY, PreferenceChangeReason.STATE)
+                        }
                     }
                 }
             context.registerReceiver(

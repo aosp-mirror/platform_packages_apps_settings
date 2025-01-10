@@ -33,7 +33,6 @@ import com.android.settings.Utils
 import com.android.settings.core.SettingsBaseActivity
 import com.android.settingslib.RestrictedPreference
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
-import com.android.settingslib.datastore.DataChangeReason
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
@@ -43,6 +42,7 @@ import com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MAX
 import com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MIN
 import com.android.settingslib.display.BrightnessUtils.convertLinearToGammaFloat
 import com.android.settingslib.metadata.PersistentPreference
+import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.RangeValue
@@ -155,7 +155,7 @@ class BrightnessLevelPreference :
         }
 
         override fun onKeyChanged(key: String, reason: Int) {
-            notifyChange(KEY, DataChangeReason.UPDATE)
+            notifyChange(KEY, reason)
         }
 
         override fun onDisplayAdded(displayId: Int) {}
@@ -163,7 +163,7 @@ class BrightnessLevelPreference :
         override fun onDisplayRemoved(displayId: Int) {}
 
         override fun onDisplayChanged(displayId: Int) {
-            notifyChange(KEY, DataChangeReason.UPDATE)
+            notifyChange(KEY, PreferenceChangeReason.STATE)
         }
     }
 

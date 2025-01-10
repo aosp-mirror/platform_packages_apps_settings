@@ -20,8 +20,8 @@ import android.content.Context
 import com.android.settings.PreferenceRestrictionMixin
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.preference.PreferenceScreenBindingHelper
-import com.android.settingslib.preference.PreferenceScreenBindingHelper.Companion.CHANGE_REASON_STATE
 
 /** Helper to rebind preference immediately when user restriction is changed. */
 class UserRestrictionBindingHelper(
@@ -55,7 +55,7 @@ class UserRestrictionBindingHelper(
 
     override fun onKeyChanged(restrictionKey: String, reason: Int) {
         val keys = restrictionKeysToPreferenceKeys[restrictionKey] ?: return
-        for (key in keys) screenBindingHelper.notifyChange(key, CHANGE_REASON_STATE)
+        for (key in keys) screenBindingHelper.notifyChange(key, PreferenceChangeReason.STATE)
     }
 
     override fun close() {

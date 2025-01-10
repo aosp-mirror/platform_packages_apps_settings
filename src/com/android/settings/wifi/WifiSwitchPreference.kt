@@ -40,9 +40,9 @@ import com.android.settings.wifi.utils.wifiManager
 import com.android.settingslib.RestrictedSwitchPreference
 import com.android.settingslib.WirelessUtils
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
-import com.android.settingslib.datastore.DataChangeReason
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.Permissions
+import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
@@ -163,7 +163,7 @@ class WifiSwitchPreference :
                             wifiState == WifiManager.WIFI_STATE_ENABLED ||
                                 wifiState == WifiManager.WIFI_STATE_DISABLED
                         ) {
-                            notifyChange(KEY, DataChangeReason.UPDATE)
+                            notifyChange(KEY, PreferenceChangeReason.VALUE)
                         }
                     }
                 }

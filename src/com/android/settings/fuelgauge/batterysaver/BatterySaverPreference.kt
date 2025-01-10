@@ -22,7 +22,6 @@ import com.android.settings.R
 import com.android.settings.fuelgauge.BatterySaverReceiver
 import com.android.settings.fuelgauge.BatterySaverReceiver.BatterySaverListener
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
-import com.android.settingslib.datastore.DataChangeReason
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.fuelgauge.BatterySaverLogging.SAVER_ENABLED_SETTINGS
@@ -30,6 +29,7 @@ import com.android.settingslib.fuelgauge.BatterySaverUtils
 import com.android.settingslib.fuelgauge.BatteryStatus
 import com.android.settingslib.fuelgauge.BatteryUtils
 import com.android.settingslib.metadata.MainSwitchPreference
+import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import kotlinx.coroutines.CoroutineScope
@@ -105,12 +105,12 @@ class BatterySaverPreference :
         override fun onPowerSaveModeChanged() {
             scope.launch {
                 delay(SWITCH_ANIMATION_DURATION)
-                notifyChange(KEY, DataChangeReason.UPDATE)
+                notifyChange(KEY, PreferenceChangeReason.VALUE)
             }
         }
 
         override fun onBatteryChanged(pluggedIn: Boolean) =
-            notifyChange(KEY, DataChangeReason.UPDATE)
+            notifyChange(KEY, PreferenceChangeReason.STATE)
     }
 
     companion object {
