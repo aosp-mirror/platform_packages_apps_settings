@@ -30,6 +30,7 @@ import com.android.settingslib.metadata.MainSwitchPreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 
 /** Accessibility settings for vibration. */
 // LINT.IfChange
@@ -61,6 +62,9 @@ class VibrationMainSwitchPreference :
         callingPid: Int,
         callingUid: Int,
     ) = ReadWritePermit.ALLOW
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     override fun onResume(context: PreferenceLifecycleContext) {
         vibrator = context.getSystemService(Vibrator::class.java)
