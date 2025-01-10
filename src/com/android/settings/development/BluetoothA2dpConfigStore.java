@@ -16,11 +16,9 @@
 
 package com.android.settings.development;
 
-import android.annotation.FlaggedApi;
 import android.bluetooth.BluetoothCodecConfig;
 import android.bluetooth.BluetoothCodecType;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 /** Utility class for storing current Bluetooth A2DP profile values */
@@ -37,10 +35,6 @@ public class BluetoothA2dpConfigStore {
     private long mCodecSpecific2Value;
     private long mCodecSpecific3Value;
     private long mCodecSpecific4Value;
-
-    public void setCodecType(int codecType) {
-        mCodecTypeNative = codecType;
-    }
 
     public void setCodecType(@Nullable BluetoothCodecType codecType) {
         mCodecType = codecType;
@@ -82,6 +76,7 @@ public class BluetoothA2dpConfigStore {
     public BluetoothCodecConfig createCodecConfig() {
         BluetoothCodecConfig.Builder builder = new BluetoothCodecConfig.Builder()
                 .setCodecPriority(mCodecPriority)
+                .setExtendedCodecType(mCodecType)
                 .setSampleRate(mSampleRate)
                 .setBitsPerSample(mBitsPerSample)
                 .setChannelMode(mChannelMode)
@@ -89,27 +84,6 @@ public class BluetoothA2dpConfigStore {
                 .setCodecSpecific2(mCodecSpecific2Value)
                 .setCodecSpecific3(mCodecSpecific3Value)
                 .setCodecSpecific4(mCodecSpecific4Value);
-        if (Flags.a2dpOffloadCodecExtensibilitySettings()) {
-            builder.setExtendedCodecType(mCodecType);
-        } else {
-            builder.setCodecType(mCodecTypeNative);
-        }
         return builder.build();
-    }
-
-    /** Create codec config utilizing {@link BluetoothCodecType} */
-    @FlaggedApi(Flags.FLAG_A2DP_OFFLOAD_CODEC_EXTENSIBILITY_SETTINGS)
-    public @NonNull BluetoothCodecConfig createCodecConfigFromCodecType() {
-        return new BluetoothCodecConfig.Builder()
-                .setExtendedCodecType(mCodecType)
-                .setCodecPriority(mCodecPriority)
-                .setSampleRate(mSampleRate)
-                .setBitsPerSample(mBitsPerSample)
-                .setChannelMode(mChannelMode)
-                .setCodecSpecific1(mCodecSpecific1Value)
-                .setCodecSpecific2(mCodecSpecific2Value)
-                .setCodecSpecific3(mCodecSpecific3Value)
-                .setCodecSpecific4(mCodecSpecific4Value)
-                .build();
     }
 }

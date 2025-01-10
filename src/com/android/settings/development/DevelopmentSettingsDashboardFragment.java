@@ -67,7 +67,6 @@ import com.android.settings.development.bluetooth.AbstractBluetoothDialogPrefere
 import com.android.settings.development.bluetooth.AbstractBluetoothPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothBitPerSampleDialogPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothChannelModeDialogPreferenceController;
-import com.android.settings.development.bluetooth.BluetoothCodecDialogPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothCodecListPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothHDAudioPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothQualityDialogPreferenceController;
@@ -813,8 +812,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new AutofillCategoryController(context, lifecycle));
         controllers.add(new AutofillLoggingLevelPreferenceController(context, lifecycle));
         controllers.add(new AutofillResetOptionsPreferenceController(context));
-        controllers.add(new BluetoothCodecDialogPreferenceController(context, lifecycle,
-                bluetoothA2dpConfigStore, fragment));
         controllers.add(
                 new BluetoothCodecListPreferenceController(
                         context, lifecycle, bluetoothA2dpConfigStore, fragment));
@@ -849,8 +846,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     @Override
     public void onBluetoothCodecChanged() {
         for (AbstractPreferenceController controller : mPreferenceControllers) {
-            if (controller instanceof AbstractBluetoothDialogPreferenceController
-                    && !(controller instanceof BluetoothCodecDialogPreferenceController)) {
+            if (controller instanceof AbstractBluetoothDialogPreferenceController) {
                 ((AbstractBluetoothDialogPreferenceController) controller)
                         .onBluetoothCodecUpdated();
             }
