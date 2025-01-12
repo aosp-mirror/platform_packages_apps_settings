@@ -47,6 +47,7 @@ import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmDeviceCredentialActivity;
@@ -76,6 +77,8 @@ public class FaceSettings extends DashboardFragment {
             "security_settings_face_delete_faces_container";
     private static final String PREF_KEY_ENROLL_FACE_UNLOCK =
             "security_settings_face_enroll_faces_container";
+    private static final String PREF_KEY_USE_FACE_TO_CATEGORY =
+            "biometric_settings_use_face_to";
     public static final String SECURITY_SETTINGS_FACE_MANAGE_CATEGORY =
             "security_settings_face_manage_category";
 
@@ -237,6 +240,12 @@ public class FaceSettings extends DashboardFragment {
 
         if (savedInstanceState != null) {
             mToken = savedInstanceState.getByteArray(KEY_TOKEN);
+        }
+
+        if (Flags.biometricsOnboardingEducation()) {
+            final PreferenceCategory category =
+                    findPreference(PREF_KEY_USE_FACE_TO_CATEGORY);
+            category.setVisible(true);
         }
     }
 
