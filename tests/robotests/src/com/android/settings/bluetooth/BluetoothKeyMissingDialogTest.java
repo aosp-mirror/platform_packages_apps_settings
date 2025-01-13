@@ -19,6 +19,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.robolectric.shadows.ShadowLooper.shadowMainLooper;
 
 import android.bluetooth.BluetoothDevice;
@@ -27,10 +28,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
+import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
@@ -38,18 +42,26 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowAlertDialogCompat.class)
+@Config(shadows = {ShadowAlertDialogCompat.class, ShadowBluetoothUtils.class})
 public class BluetoothKeyMissingDialogTest {
     @Mock private BluetoothDevice mBluetoothDevice;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private LocalBluetoothManager mLocalBtManager;
 
     private BluetoothKeyMissingDialogFragment mFragment = null;
     private FragmentActivity mActivity = null;
 
+    private static final String MAC_ADDRESS = "12:34:56:78:90:12";
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        when(mBluetoothDevice.getAddress()).thenReturn(MAC_ADDRESS);
+        when(mLocalBtManager.getBluetoothAdapter().getRemoteDevice(MAC_ADDRESS))
+                .thenReturn(mBluetoothDevice);
+        ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBtManager;
         mActivity = Robolectric.setupActivity(FragmentActivity.class);
-        mFragment = new BluetoothKeyMissingDialogFragment(mBluetoothDevice);
+        mFragment = BluetoothKeyMissingDialogFragment.newInstance(mBluetoothDevice);
         mActivity
                 .getSupportFragmentManager()
                 .beginTransaction()

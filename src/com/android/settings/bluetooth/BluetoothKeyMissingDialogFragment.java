@@ -31,6 +31,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
  * A dialogFragment used by {@link BluetoothKeyMissingDialog} to create a dialog for the
@@ -40,16 +41,26 @@ public class BluetoothKeyMissingDialogFragment extends InstrumentedDialogFragmen
         implements OnClickListener {
 
     private static final String TAG = "BTKeyMissingDialogFragment";
+    private static final String KEY_CACHED_DEVICE_ADDRESS = "cached_device";
 
     private BluetoothDevice mBluetoothDevice;
 
-    public BluetoothKeyMissingDialogFragment(@NonNull BluetoothDevice bluetoothDevice) {
-        mBluetoothDevice = bluetoothDevice;
+    /** Creates a new instant of the fragment. */
+    public static BluetoothKeyMissingDialogFragment newInstance(BluetoothDevice device) {
+        Bundle args = new Bundle(1);
+        args.putString(KEY_CACHED_DEVICE_ADDRESS, device.getAddress());
+        BluetoothKeyMissingDialogFragment fragment = new BluetoothKeyMissingDialogFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        String deviceAddress = getArguments().getString(KEY_CACHED_DEVICE_ADDRESS);
+        LocalBluetoothManager manager = Utils.getLocalBtManager(getContext());
+        mBluetoothDevice = manager.getBluetoothAdapter().getRemoteDevice(deviceAddress);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View view = getActivity().getLayoutInflater().inflate(R.layout.bluetooth_key_missing, null);
         TextView keyMissingTitle = view.findViewById(R.id.bluetooth_key_missing_title);
@@ -66,7 +77,7 @@ public class BluetoothKeyMissingDialogFragment extends InstrumentedDialogFragmen
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (!getActivity().isFinishing()) {
+        if (!getActivity().isChangingConfigurations() && !getActivity().isFinishing()) {
             getActivity().finish();
         }
     }
