@@ -214,7 +214,7 @@ class DeviceDetailsFragmentFormatterImpl(
             }
         }
 
-        fragment.listView.post {
+        fragment.lifecycleScope.launch {
             if (isLoading) {
                 fragment.setLoading(false, false)
                 isLoading = false
