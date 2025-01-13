@@ -40,7 +40,8 @@ public class BluetoothKeyMissingDialog extends FragmentActivity {
             finish();
             return;
         }
-        BluetoothKeyMissingDialogFragment fragment = new BluetoothKeyMissingDialogFragment(device);
+        BluetoothKeyMissingDialogFragment fragment =
+                BluetoothKeyMissingDialogFragment.newInstance(device);
         fragment.show(getSupportFragmentManager(), FRAGMENT_TAG);
         closeSystemDialogs();
     }
