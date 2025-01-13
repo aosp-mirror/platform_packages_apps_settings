@@ -31,6 +31,7 @@ import android.safetycenter.SafetySourceStatus;
 import android.safetycenter.SafetySourceStatus.IconAction;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.security.ScreenLockPreferenceDetailsUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -122,7 +123,12 @@ public final class LockScreenSafetySource {
 
         // Also send refreshed safety center data for biometrics, since changing lockscreen settings
         // can unset biometrics.
-        BiometricsSafetySource.onBiometricsChanged(context);
+        if (Flags.biometricsOnboardingEducation()) {
+            FaceSafetySource.onBiometricsChanged(context);
+            FingerprintSafetySource.onBiometricsChanged(context);
+        } else {
+            BiometricsSafetySource.onBiometricsChanged(context);
+        }
     }
 
     private static IconAction createGearMenuIconAction(

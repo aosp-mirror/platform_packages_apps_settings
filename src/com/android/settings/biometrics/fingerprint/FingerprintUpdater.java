@@ -27,7 +27,9 @@ import androidx.annotation.Nullable;
 
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.flags.Flags;
 import com.android.settings.safetycenter.BiometricsSafetySource;
+import com.android.settings.safetycenter.FingerprintSafetySource;
 
 /**
  * Responsible for making {@link FingerprintManager#enroll} and {@link FingerprintManager#remove}
@@ -49,11 +51,19 @@ public class FingerprintUpdater {
     }
 
     /** Wrapper around the {@link FingerprintManager#enroll} method. */
-    public void enroll(byte [] hardwareAuthToken, CancellationSignal cancel, int userId,
+    public void enroll(
+            byte[] hardwareAuthToken,
+            CancellationSignal cancel,
+            int userId,
             FingerprintManager.EnrollmentCallback callback,
-            @FingerprintManager.EnrollReason int enrollReason, Intent intent) {
-        mFingerprintManager.enroll(hardwareAuthToken, cancel, userId,
-                new NotifyingEnrollmentCallback(mContext, callback), enrollReason,
+            @FingerprintManager.EnrollReason int enrollReason,
+            Intent intent) {
+        mFingerprintManager.enroll(
+                hardwareAuthToken,
+                cancel,
+                userId,
+                new NotifyingEnrollmentCallback(mContext, callback),
+                enrollReason,
                 toFingerprintEnrollOptions(intent));
     }
 
@@ -66,14 +76,13 @@ public class FingerprintUpdater {
      * Decorator of the {@link FingerprintManager.EnrollmentCallback} class that notifies other
      * interested parties that a fingerprint setting has changed.
      */
-    private static class NotifyingEnrollmentCallback
-            extends FingerprintManager.EnrollmentCallback {
+    private static class NotifyingEnrollmentCallback extends FingerprintManager.EnrollmentCallback {
 
         private final Context mContext;
         private final FingerprintManager.EnrollmentCallback mCallback;
 
-        NotifyingEnrollmentCallback(Context context,
-                FingerprintManager.EnrollmentCallback callback) {
+        NotifyingEnrollmentCallback(
+                Context context, FingerprintManager.EnrollmentCallback callback) {
             mContext = context;
             mCallback = callback;
         }
@@ -92,7 +101,11 @@ public class FingerprintUpdater {
         public void onEnrollmentProgress(int remaining) {
             mCallback.onEnrollmentProgress(remaining);
             if (remaining == 0) {
-                BiometricsSafetySource.onBiometricsChanged(mContext); // biometrics data changed
+                if (Flags.biometricsOnboardingEducation()) {
+                    FingerprintSafetySource.onBiometricsChanged(mContext);
+                } else {
+                    BiometricsSafetySource.onBiometricsChanged(mContext); // biometrics data changed
+                }
             }
         }
 
@@ -139,7 +152,11 @@ public class FingerprintUpdater {
         @Override
         public void onRemovalSucceeded(@Nullable Fingerprint fp, int remaining) {
             mCallback.onRemovalSucceeded(fp, remaining);
-            BiometricsSafetySource.onBiometricsChanged(mContext); // biometrics data changed
+            if (Flags.biometricsOnboardingEducation()) {
+                FingerprintSafetySource.onBiometricsChanged(mContext);
+            } else {
+                BiometricsSafetySource.onBiometricsChanged(mContext); // biometrics data changed
+            }
         }
     }
 

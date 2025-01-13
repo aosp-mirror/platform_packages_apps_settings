@@ -29,6 +29,10 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
 import android.safetycenter.SafetySourceIssue;
@@ -39,12 +43,14 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.flags.Flags;
 import com.android.settings.security.ScreenLockPreferenceDetailsUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -61,6 +67,9 @@ public class LockScreenSafetySourceTest {
     private static final String FAKE_SCREEN_LOCK_SETTINGS = "screen_lock_settings";
     private static final SafetyEvent EVENT_SOURCE_STATE_CHANGED =
             new SafetyEvent.Builder(SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED).build();
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     private Context mApplicationContext;
 
@@ -486,7 +495,9 @@ public class LockScreenSafetySourceTest {
     }
 
     @Test
-    public void onLockScreenChange_whenSafetyCenterEnabled_setsLockscreenAndBiometricData() {
+    @RequiresFlagsDisabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    public void
+            onLockScreenChange_whenSafetyCenterEnabled_flagOff_setsLockscreenAndBiometricData() {
         whenScreenLockIsEnabled();
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
 
@@ -498,6 +509,24 @@ public class LockScreenSafetySourceTest {
         verify(mSafetyCenterManagerWrapper)
                 .setSafetySourceData(
                         any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), any(), any());
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    public void onLockScreenChange_whenSafetyCenterEnabled_flagOn_setsLockscreenAndBiometricData() {
+        whenScreenLockIsEnabled();
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+
+        LockScreenSafetySource.onLockScreenChange(mApplicationContext);
+
+        verify(mSafetyCenterManagerWrapper)
+                .setSafetySourceData(
+                        any(), eq(LockScreenSafetySource.SAFETY_SOURCE_ID), any(), any());
+        verify(mSafetyCenterManagerWrapper)
+                .setSafetySourceData(any(), eq(FaceSafetySource.SAFETY_SOURCE_ID), any(), any());
+        verify(mSafetyCenterManagerWrapper)
+                .setSafetySourceData(
+                        any(), eq(FingerprintSafetySource.SAFETY_SOURCE_ID), any(), any());
     }
 
     @Test
