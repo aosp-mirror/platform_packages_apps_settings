@@ -34,12 +34,12 @@ import com.android.settingslib.spa.framework.util.mapItem
 import com.android.settingslib.spaprivileged.model.app.AppEntry
 import com.android.settingslib.spaprivileged.model.app.AppListModel
 import com.android.settingslib.spaprivileged.model.app.AppRecord
+import com.android.settingslib.spaprivileged.model.app.AppStorageRepositoryImpl
 import com.android.settingslib.spaprivileged.template.app.AppList
 import com.android.settingslib.spaprivileged.template.app.AppListInput
 import com.android.settingslib.spaprivileged.template.app.AppListItem
 import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.android.settingslib.spaprivileged.template.app.AppListPage
-import com.android.settingslib.spaprivileged.template.app.calculateSizeBytes
 import com.android.settingslib.spaprivileged.template.app.getStorageSize
 import kotlinx.coroutines.flow.Flow
 
@@ -109,9 +109,11 @@ class StorageAppListModel(
         getStorageSize()
     }
 ) : AppListModel<AppRecordWithSize> {
+    private val appStorageRepository = AppStorageRepositoryImpl(context)
+
     override fun transform(userIdFlow: Flow<Int>, appListFlow: Flow<List<ApplicationInfo>>) =
-        appListFlow.mapItem {
-            AppRecordWithSize(it, it.calculateSizeBytes(context) ?: 0L)
+        appListFlow.mapItem { app ->
+            AppRecordWithSize(app, appStorageRepository.calculateSizeBytes(app) ?: 0L)
         }
 
     override fun filter(
