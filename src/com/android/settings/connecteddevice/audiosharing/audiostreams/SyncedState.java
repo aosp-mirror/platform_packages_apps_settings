@@ -18,9 +18,12 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -109,6 +112,20 @@ class SyncedState extends AudioStreamStateHandler {
                                     controller.handleSourceAddRequest(preference, metadata);
                                 })
                         .create();
+        EditText editText = layout.requireViewById(R.id.broadcast_edit_text);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                        .setEnabled(s.length() >= 4 && s.length() <= 16);
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
         alertDialog.show();
+        Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setEnabled(false);
     }
 }
