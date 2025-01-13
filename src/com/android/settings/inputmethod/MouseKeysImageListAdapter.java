@@ -118,7 +118,8 @@ public class MouseKeysImageListAdapter extends
 
     private String getDisplayLabel(InputDevice currentInputDevice, int keycode) {
         return String.valueOf(currentInputDevice.getKeyCharacterMap().getDisplayLabel(
-                currentInputDevice.getKeyCodeForKeyLocation(keycode))).toLowerCase(Locale.ROOT);
+                currentInputDevice.getKeyCodeForKeyLocation(keycode))).toLowerCase(
+                Locale.getDefault());
     }
 
     public static class MouseKeyImageViewHolder extends RecyclerView.ViewHolder {
