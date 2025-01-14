@@ -75,12 +75,6 @@
         settings:controller="com.android.settings.inputmethod.MouseSwapPrimaryButtonPreferenceController"
         android:order="47"/>
 
-    <SwitchPreferenceCompat
-        android:key="mouse_scrolling_acceleration"
-        android:title="@string/mouse_scrolling_acceleration"
-        settings:controller="com.android.settings.inputmethod.MouseScrollingAccelerationPreferenceController"
-        android:order="48"/>
-
     <Preference
         android:fragment="com.android.settings.inputmethod.PointerTouchpadFragment"
         android:key="pointer_and_touchpad"
@@ -89,6 +83,19 @@
         android:title="@string/accessibility_pointer_and_touchpad_title"
         android:summary="@string/accessibility_pointer_and_touchpad_summary"
         settings:searchable="true"/>
+
+    <SwitchPreferenceCompat
+        android:key="mouse_scrolling_acceleration"
+        android:title="@string/mouse_scrolling_acceleration"
+        settings:controller="com.android.settings.inputmethod.MouseScrollingAccelerationPreferenceController"
+        android:order="51"/>
+
+    <com.android.settings.widget.SeekBarPreference
+        android:key="mouse_scrolling_speed"
+        android:title="@string/mouse_scrolling_speed"
+        android:order="52"
+        android:selectable="false"
+        settings:controller="com.android.settings.inputmethod.MouseScrollingSpeedPreferenceController"/>
 
     <com.android.settingslib.widget.ButtonPreference
         android:key="touchpad_touch_gesture"
