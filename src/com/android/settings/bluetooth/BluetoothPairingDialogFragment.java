@@ -41,7 +41,6 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.flags.Flags;
 
 /**
  * A dialogFragment used by {@link BluetoothPairingDialog} to create an appropriately styled dialog
@@ -91,9 +90,7 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
         /* Cancel pairing unless 1) explicitly accepted by user 2) the event is triggered by
          * orientation change. */
         boolean shouldCancelPairing =
-                Flags.disableBondingCancellationForOrientationChange()
-                        ? !mPositiveClicked && !getActivity().isChangingConfigurations()
-                        : !mPositiveClicked;
+                !mPositiveClicked && !getActivity().isChangingConfigurations();
         if (mPairingController.getDialogType() != BluetoothPairingController.DISPLAY_PASSKEY_DIALOG
                 && shouldCancelPairing) {
             mPairingController.onCancel();
