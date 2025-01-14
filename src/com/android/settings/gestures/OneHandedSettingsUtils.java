@@ -257,16 +257,10 @@ public class OneHandedSettingsUtils {
             return true;
         }
 
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            // Checks QS_SHORTCUT_KEY
-            final String targetsQs = Settings.Secure.getStringForUser(context.getContentResolver(),
-                    Settings.Secure.ACCESSIBILITY_QS_TARGETS, sCurrentUserId);
-            if (!TextUtils.isEmpty(targetsQs) && targetsQs.contains(ONE_HANDED_MODE_TARGET_NAME)) {
-                return true;
-            }
-        }
-
-        return false;
+        // Checks QS_SHORTCUT_KEY
+        final String targetsQs = Settings.Secure.getStringForUser(context.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_QS_TARGETS, sCurrentUserId);
+        return !TextUtils.isEmpty(targetsQs) && targetsQs.contains(ONE_HANDED_MODE_TARGET_NAME);
     }
 
     /**
