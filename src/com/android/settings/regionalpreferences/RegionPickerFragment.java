@@ -16,8 +16,10 @@
 
 package com.android.settings.regionalpreferences;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 
@@ -25,8 +27,10 @@ import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +49,19 @@ public class RegionPickerFragment extends DashboardFragment{
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        MetricsFeatureProvider metricsFeatureProvider =
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
+        String action = getIntent() != null ? getIntent().getAction() : "";
+        if (Settings.ACTION_REGION_SETTINGS.equals(action)) {
+            metricsFeatureProvider.action(
+                    context, SettingsEnums.ACTION_OPEN_REGION_OUTSIDE_SETTINGS);
+        }
+    }
+
+    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.system_region_picker;
     }
@@ -56,7 +73,7 @@ public class RegionPickerFragment extends DashboardFragment{
 
     @Override
     public int getMetricsCategory() {
-        return 0;
+        return SettingsEnums.REGION_SETTINGS;
     }
 
     @Override
