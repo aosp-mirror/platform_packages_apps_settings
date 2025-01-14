@@ -59,6 +59,13 @@ flag {
 }
 
 flag {
+  name: "enable_magnification_cursor_following_dialog"
+  namespace: "accessibility"
+  description: "Decides whether to show the magnification cursor following dialog in Settings app."
+  bug: "388335935"
+}
+
+flag {
   name: "enable_magnification_focus_following_dialog"
   namespace: "accessibility"
   description: "Decides whether to show the magnification focus following dialog in Settings app."
