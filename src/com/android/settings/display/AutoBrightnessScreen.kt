@@ -29,8 +29,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObservableDelegate
 import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.datastore.SettingsSystemStore
-import com.android.settingslib.metadata.BooleanValue
-import com.android.settingslib.metadata.PersistentPreference
+import com.android.settingslib.metadata.BooleanPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -46,8 +45,7 @@ class AutoBrightnessScreen :
     PreferenceScreenBinding,
     PreferenceAvailabilityProvider,
     PreferenceRestrictionMixin,
-    PersistentPreference<Boolean>,
-    BooleanValue {
+    BooleanPreference {
     override val key: String
         get() = KEY
 
