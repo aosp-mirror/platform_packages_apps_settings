@@ -117,6 +117,7 @@ abstract class BluetoothNameDialogFragment extends InstrumentedDialogFragment
             .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.dialog_edittext, null);
         mDeviceNameView = (EditText) view.findViewById(R.id.edittext);
+        mDeviceNameView.setHint(R.string.bluetooth_device_name);
         mDeviceNameView.setFilters(new InputFilter[] {
                 new BluetoothLengthDeviceNameFilter()
         });
