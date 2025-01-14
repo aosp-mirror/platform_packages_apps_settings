@@ -24,6 +24,10 @@ import static android.provider.Settings.EXTRA_APP_PACKAGE;
 import static android.provider.Settings.EXTRA_CHANNEL_ID;
 import static android.provider.Settings.EXTRA_CONVERSATION_ID;
 
+import static com.android.settings.notification.history.NotificationHistoryActivity.ROUND_CORNER_BOTTOM;
+import static com.android.settings.notification.history.NotificationHistoryActivity.ROUND_CORNER_CENTER;
+import static com.android.settings.notification.history.NotificationHistoryActivity.ROUND_CORNER_TOP;
+
 import android.annotation.ColorInt;
 import android.annotation.UserIdInt;
 import android.app.ActivityManager;
@@ -111,13 +115,22 @@ public class NotificationSbnAdapter extends
             int position) {
         final StatusBarNotification sbn = mValues.get(position);
         if (sbn != null) {
+            int cornerType = ROUND_CORNER_CENTER;
+            if (position == (getItemCount() - 1)) {
+                cornerType |= ROUND_CORNER_BOTTOM;
+            }
+            if (position == 0) {
+                cornerType |= ROUND_CORNER_TOP;
+            }
+            int backgroundRes = NotificationHistoryActivity.getRoundCornerDrawableRes(cornerType);
+            holder.itemView.setBackgroundResource(backgroundRes);
+
             holder.setIconBackground(loadBackground(sbn));
             holder.setIcon(loadIcon(sbn));
             holder.setPackageLabel(loadPackageLabel(sbn.getPackageName()).toString());
             holder.setTitle(getTitleString(sbn.getNotification()));
             holder.setSummary(getTextString(mContext, sbn.getNotification()));
             holder.setPostedTime(sbn.getPostTime());
-            holder.setDividerVisible(position < (mValues.size() -1));
             int userId = normalizeUserId(sbn);
             if (!mUserBadgeCache.containsKey(userId)) {
                 Drawable profile = mContext.getPackageManager().getUserBadgeForDensityNoBackground(

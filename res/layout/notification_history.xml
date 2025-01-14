@@ -17,7 +17,6 @@
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scroll"
-    android:background="?android:attr/colorBackgroundFloating"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -132,7 +131,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp">
 
             <LinearLayout
                 android:id="@+id/snoozed_list"
@@ -145,12 +145,12 @@
                     android:layout_width="wrap_content"
                     android:text="@string/notification_history_snooze"
                     android:textColor="?android:attr/textColorPrimary"
+                    android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
                     android:textAppearance="@style/TextAppearance.HomepageCardTitle"
                     android:paddingBottom="16dp" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/notification_list"
-                        android:background="@drawable/rounded_bg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clipChildren="true"
@@ -170,10 +170,10 @@
                     android:text="@string/notification_history_dismiss"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textAppearance="@style/TextAppearance.HomepageCardTitle"
+                    android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
                     android:paddingBottom="16dp" />
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/notification_list"
-                        android:background="@drawable/rounded_bg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clipChildren="true"
@@ -191,13 +191,13 @@
                     android:layout_width="wrap_content"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textAppearance="@style/TextAppearance.HomepageCardTitle"
+                    android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
                     android:paddingBottom="16dp" />
                 <LinearLayout
                     android:id="@+id/apps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/rounded_bg">
+                    android:orientation="vertical">
                     <!-- app based recycler views added here -->
                 </LinearLayout>
             </LinearLayout>
