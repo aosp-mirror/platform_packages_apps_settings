@@ -117,7 +117,6 @@ public class VirtualDeviceDetailsHeaderController extends BasePreferenceControll
                 iconView.setImageIcon(deviceIcon);
             }
         }
-        iconView.setContentDescription("Icon for device");
     }
 
     private void updateSummary() {
