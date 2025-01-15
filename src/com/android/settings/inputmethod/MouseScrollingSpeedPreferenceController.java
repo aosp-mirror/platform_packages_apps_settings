@@ -16,6 +16,7 @@
 
 package com.android.settings.inputmethod;
 
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -30,7 +31,9 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.SliderPreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.SeekBarPreference;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -38,6 +41,8 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 
 public class MouseScrollingSpeedPreferenceController extends SliderPreferenceController implements
         Preference.OnPreferenceChangeListener, LifecycleObserver, OnStop, OnStart  {
+
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     private final ContentResolver mContentResolver;
     private final ContentObserver mContentObserver;
@@ -48,6 +53,7 @@ public class MouseScrollingSpeedPreferenceController extends SliderPreferenceCon
     public MouseScrollingSpeedPreferenceController(@NonNull Context context, @NonNull String key) {
         super(context, key);
 
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mContentResolver = context.getContentResolver();
         mContentObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
             @Override
@@ -81,6 +87,8 @@ public class MouseScrollingSpeedPreferenceController extends SliderPreferenceCon
             return false;
         }
         InputSettings.setMouseScrollingSpeed(mContext, position);
+        mMetricsFeatureProvider.action(
+                mContext, SettingsEnums.ACTION_MOUSE_SCROLLING_SPEED_CHANGED, position);
 
         return true;
     }
