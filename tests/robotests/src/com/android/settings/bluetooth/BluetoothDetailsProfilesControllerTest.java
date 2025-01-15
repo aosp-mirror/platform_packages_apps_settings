@@ -29,6 +29,7 @@ import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+import android.os.SystemProperties;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -646,6 +647,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         List<SwitchPreferenceCompat> switches = getProfileSwitches(false);
         assertThat(switches.isEmpty()).isTrue();
     }
+
     @Test
     public void ashaHearingAidWithLeAudio_showLeAudioToggle() {
         setupDevice(makeDefaultDeviceConfig());
@@ -657,5 +659,17 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         List<SwitchPreferenceCompat> switches = getProfileSwitches(false);
         assertThat(switches.getFirst().getTitle()).isEqualTo(
                 mContext.getString(mLeAudioProfile.getNameResource(mDevice)));
+    }
+
+    @Test
+    public void ashaHearingAidWithLeAudio_hideLeAudioToggleFromSystemProperties() {
+        setupDevice(makeDefaultDeviceConfig());
+        addHearingAidProfileToDevice(false);
+        addLeAudioProfileToDevice(true);
+        SystemProperties.set("bluetooth.leaudio.toggle_visible_for_asha", "false");
+        showScreen(mController);
+
+        List<SwitchPreferenceCompat> switches = getProfileSwitches(false);
+        assertThat(switches.isEmpty()).isTrue();
     }
 }
