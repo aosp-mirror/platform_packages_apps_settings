@@ -57,7 +57,7 @@ public class HighContrastTextMigrationReceiver extends BroadcastReceiver {
     static final String ACTION_OPEN_SETTINGS =
             "com.android.settings.accessibility.ACTION_OPEN_HIGH_CONTRAST_TEXT_SETTINGS";
     @VisibleForTesting
-    static final int NOTIFICATION_ID = 1;
+    static final int NOTIFICATION_ID = R.string.accessibility_notification_high_contrast_text_title;
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
