@@ -18,12 +18,17 @@ package com.android.settings.regionalpreferences;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.provider.Settings;
+
+import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -36,6 +41,20 @@ public class MeasurementSystemItemFragment extends DashboardFragment {
     private static final String LOG_TAG = "MeasurementSystemItemFragment";
     private static final String KEY_PREFERENCE_CATEGORY_MEASUREMENT_SYSTEM_ITEM =
             "measurement_system_item_category";
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        MetricsFeatureProvider metricsFeatureProvider =
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
+        String action = getIntent() != null ? getIntent().getAction() : "";
+        if (Settings.ACTION_MEASUREMENT_SYSTEM_SETTINGS.equals(action)) {
+            metricsFeatureProvider.action(
+                    context, SettingsEnums.ACTION_OPEN_MEASUREMENT_SYSTEM_OUTSIDE_SETTINGS);
+        }
+    }
+
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.regional_preferences_measurement_system;

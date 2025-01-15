@@ -17,6 +17,7 @@
 package com.android.settings.regionalpreferences;
 
 import android.app.Dialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -35,6 +36,8 @@ import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.Locale;
 import java.util.Set;
@@ -61,7 +64,7 @@ public class RegionDialogFragment extends InstrumentedDialogFragment {
 
     @Override
     public int getMetricsCategory() {
-        return 0;
+        return SettingsEnums.CHANGE_REGION_DIALOG;
     }
 
     @NonNull
@@ -110,6 +113,7 @@ public class RegionDialogFragment extends InstrumentedDialogFragment {
         private final Context mContext;
         private final int mDialogType;
         private final LocaleStore.LocaleInfo mLocaleInfo;
+        private final MetricsFeatureProvider mMetricsFeatureProvider;
 
         RegionDialogController(
                 @NonNull Context context, @NonNull RegionDialogFragment dialogFragment) {
@@ -117,6 +121,8 @@ public class RegionDialogFragment extends InstrumentedDialogFragment {
             Bundle arguments = dialogFragment.getArguments();
             mDialogType = arguments.getInt(ARG_DIALOG_TYPE);
             mLocaleInfo = (LocaleStore.LocaleInfo) arguments.getSerializable(ARG_TARGET_LOCALE);
+            mMetricsFeatureProvider =
+                FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         }
 
         @Override
@@ -124,6 +130,14 @@ public class RegionDialogFragment extends InstrumentedDialogFragment {
             if (mDialogType == DIALOG_CHANGE_LOCALE_REGION) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
                     updateRegion(mLocaleInfo.getLocale().toLanguageTag());
+                    mMetricsFeatureProvider.action(
+                            mContext,
+                            SettingsEnums.ACTION_CHANGE_REGION_DIALOG_POSITIVE_BTN_CLICKED);
+                }
+                if (which == DialogInterface.BUTTON_NEGATIVE) {
+                    mMetricsFeatureProvider.action(
+                            mContext,
+                            SettingsEnums.ACTION_CHANGE_REGION_DIALOG_NEGATIVE_BTN_CLICKED);
                 }
                 dismiss();
                 if (getActivity() != null) {
