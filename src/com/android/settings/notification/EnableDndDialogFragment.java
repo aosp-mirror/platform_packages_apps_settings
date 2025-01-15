@@ -21,17 +21,17 @@ import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settingslib.notification.modes.EnableZenModeDialog;
+import com.android.settingslib.notification.modes.EnableDndDialogFactory;
 
-public class SettingsEnableZenModeDialog extends InstrumentedDialogFragment {
+public class EnableDndDialogFragment extends InstrumentedDialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-         return new EnableZenModeDialog(getContext()).createDialog();
+        return new EnableDndDialogFactory(getContext()).createDialog();
     }
 
     @Override
     public int getMetricsCategory() {
-       return SettingsEnums.NOTIFICATION_ZEN_MODE_ENABLE_DIALOG;
+        return SettingsEnums.NOTIFICATION_ZEN_MODE_ENABLE_DIALOG;
     }
 }

@@ -21,13 +21,13 @@ import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settingslib.notification.modes.ZenDurationDialog;
+import com.android.settingslib.notification.modes.DndDurationDialogFactory;
 
 public class SettingsZenDurationDialog extends InstrumentedDialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        return new ZenDurationDialog(getContext()).createDialog();
+        return new DndDurationDialogFactory(getContext()).createDialog();
     }
 
     @Override

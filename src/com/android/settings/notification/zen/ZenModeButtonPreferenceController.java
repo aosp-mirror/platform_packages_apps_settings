@@ -30,7 +30,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.notification.SettingsEnableZenModeDialog;
+import com.android.settings.notification.EnableDndDialogFragment;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -118,7 +118,7 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
             int zenDuration = getZenDuration();
             switch (zenDuration) {
                 case Settings.Secure.ZEN_DURATION_PROMPT:
-                    new SettingsEnableZenModeDialog().show(mFragment, TAG);
+                    new EnableDndDialogFragment().show(mFragment, TAG);
                     break;
                 case Settings.Secure.ZEN_DURATION_FOREVER:
                     mBackend.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
