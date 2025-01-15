@@ -27,10 +27,11 @@ import android.telephony.TelephonyManager
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.testutils.FakeFeatureFactory
+import com.android.settings.testutils.MetricsRule
 import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
@@ -41,6 +42,7 @@ import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
 class AirplaneModePreferenceTest {
+    @Rule(order = 0) @JvmField val metricsRule = MetricsRule()
 
     private val mockResources = mock<Resources>()
     private val mockPackageManager = mock<PackageManager>()
@@ -107,30 +109,13 @@ class AirplaneModePreferenceTest {
     }
 
     @Test
-    fun setValue_valueTrue_metricsActionAirplaneToggleTrue() {
-        val metricsFeatureProvider = FakeFeatureFactory.setupForTest().metricsFeatureProvider
-
-        airplaneModePreference.storage(context).setBoolean(AirplaneModePreference.KEY, true)
-
-        verify(metricsFeatureProvider).action(context, ACTION_AIRPLANE_TOGGLE, true)
-    }
-
-    @Test
-    fun setValue_valueFalse_metricsActionAirplaneToggleFalse() {
-        val metricsFeatureProvider = FakeFeatureFactory.setupForTest().metricsFeatureProvider
-
-        airplaneModePreference.storage(context).setBoolean(AirplaneModePreference.KEY, false)
-
-        verify(metricsFeatureProvider).action(context, ACTION_AIRPLANE_TOGGLE, false)
-    }
-
-    @Test
     fun performClick_defaultOn_checkedIsFalse() {
         SettingsGlobalStore.get(context).setInt(Settings.Global.AIRPLANE_MODE_ON, 1)
 
         val preference = getSwitchPreference().apply { performClick() }
 
         assertThat(preference.isChecked).isFalse()
+        verify(metricsRule.metricsFeatureProvider).action(context, ACTION_AIRPLANE_TOGGLE, false)
     }
 
     @Test
@@ -140,6 +125,7 @@ class AirplaneModePreferenceTest {
         val preference = getSwitchPreference().apply { performClick() }
 
         assertThat(preference.isChecked).isTrue()
+        verify(metricsRule.metricsFeatureProvider).action(context, ACTION_AIRPLANE_TOGGLE, true)
     }
 
     private fun getSwitchPreference(): SwitchPreferenceCompat =
