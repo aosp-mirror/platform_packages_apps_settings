@@ -815,8 +815,6 @@ public class ChooseLockPattern extends SettingsActivity {
                 if (stage == Stage.NeedToConfirm) {
                     // If the Stage is NeedToConfirm, move the a11y focus to the header.
                     mHeaderText.requestAccessibilityFocus();
-                } else {
-                    mHeaderText.announceForAccessibility(mHeaderText.getText());
                 }
             }
         }
