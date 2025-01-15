@@ -220,7 +220,7 @@ public class AbstractBluetoothDialogPreferenceControllerTest {
             mActiveDevice)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
-        verify(mBluetoothA2dpConfigStore).setCodecType(mCodecConfigAAC.getCodecType());
+        verify(mBluetoothA2dpConfigStore).setCodecType(mCodecConfigAAC.getExtendedCodecType());
         verify(mBluetoothA2dpConfigStore).setSampleRate(mCodecConfigAAC.getSampleRate());
         verify(mBluetoothA2dpConfigStore).setBitsPerSample(mCodecConfigAAC.getBitsPerSample());
         verify(mBluetoothA2dpConfigStore).setChannelMode(mCodecConfigAAC.getChannelMode());
