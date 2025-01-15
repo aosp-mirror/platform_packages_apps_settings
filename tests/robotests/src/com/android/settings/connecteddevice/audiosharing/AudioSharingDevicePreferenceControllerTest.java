@@ -584,6 +584,7 @@ public class AudioSharingDevicePreferenceControllerTest {
     public void testInCallState_showCallStateTitleAndSetActiveOnDeviceClick() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mSetFlagsRule.disableFlags(Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API);
         Settings.Secure.putInt(mContext.getContentResolver(),
                 BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
                 BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
@@ -609,6 +610,7 @@ public class AudioSharingDevicePreferenceControllerTest {
     public void testInCallState_enableHysteresisFix_setAndSaveActiveOnDeviceClick() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mSetFlagsRule.enableFlags(Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API);
         Settings.Secure.putInt(mContext.getContentResolver(),
                 BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
                 BluetoothCsipSetCoordinator.GROUP_ID_INVALID);

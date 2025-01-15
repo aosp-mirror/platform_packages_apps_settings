@@ -198,6 +198,7 @@ public class AudioSharingDialogHandlerTest {
     @Test
     public void handleUserTriggeredDeviceConnected_inCall_setActive() {
         mSetFlagsRule.disableFlags(Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API);
         Settings.Secure.putInt(mContext.getContentResolver(),
                 BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
                 BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
@@ -218,6 +219,7 @@ public class AudioSharingDialogHandlerTest {
     @Test
     public void handleUserTriggeredDeviceConnected_inCall_enableHysteresisFix_setAndSaveActive() {
         mSetFlagsRule.enableFlags(Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API);
         Settings.Secure.putInt(mContext.getContentResolver(),
                 BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
                 BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
@@ -452,6 +454,7 @@ public class AudioSharingDialogHandlerTest {
 
     @Test
     public void handleDeviceConnected_inCall_doNothing() {
+        mSetFlagsRule.enableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API);
         when(mAudioManager.getMode()).thenReturn(AudioManager.MODE_IN_CALL);
         setUpBroadcast(true);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of());
