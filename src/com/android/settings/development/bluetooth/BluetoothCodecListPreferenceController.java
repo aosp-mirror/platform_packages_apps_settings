@@ -32,7 +32,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.development.BluetoothA2dpConfigStore;
-import com.android.settings.development.Flags;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
@@ -62,9 +61,7 @@ public class BluetoothCodecListPreferenceController extends AbstractBluetoothPre
 
     @Override
     public boolean isAvailable() {
-        boolean available = Flags.a2dpOffloadCodecExtensibilitySettings();
-        Log.d(TAG, "isAvailable: " + available);
-        return available;
+        return true;
     }
 
     @Override
@@ -80,10 +77,6 @@ public class BluetoothCodecListPreferenceController extends AbstractBluetoothPre
 
     @Override
     public boolean onPreferenceChange(@Nullable Preference preference, @NonNull Object newValue) {
-        if (!Flags.a2dpOffloadCodecExtensibilitySettings()) {
-            return false;
-        }
-
         if (mListPreference == null) {
             Log.e(TAG, "onPreferenceChange: List preference is null");
             return false;
@@ -115,7 +108,7 @@ public class BluetoothCodecListPreferenceController extends AbstractBluetoothPre
         }
 
         BluetoothCodecConfig codecConfig =
-                mBluetoothA2dpConfigStore.createCodecConfigFromCodecType();
+                mBluetoothA2dpConfigStore.createCodecConfig();
         Log.d(TAG, "onPreferenceChange: setCodecConfigPreference: " + codecConfig.toString());
         bluetoothA2dp.setCodecConfigPreference(activeDevice, codecConfig);
         if (mCallback != null) {
@@ -128,9 +121,6 @@ public class BluetoothCodecListPreferenceController extends AbstractBluetoothPre
     @Override
     public void updateState(@Nullable Preference preference) {
         super.updateState(preference);
-        if (!Flags.a2dpOffloadCodecExtensibilitySettings()) {
-            return;
-        }
 
         if (!isHDAudioEnabled()) {
             Log.d(TAG, "updateState: HD Audio is disabled");
