@@ -77,6 +77,8 @@ public class SettingsApplication extends Application {
         if (Flags.catalyst()) {
             PreferenceScreenRegistry.INSTANCE.setPreferenceScreenMetadataFactories(
                     preferenceScreenFactories());
+            PreferenceScreenRegistry.INSTANCE.setPreferenceUiActionMetricsLogger(
+                    new SettingsMetricsLogger(this));
             PreferenceBindingFactory.setDefaultFactory(new SettingsPreferenceBindingFactory());
         }
 
