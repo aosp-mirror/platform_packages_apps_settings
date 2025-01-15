@@ -48,11 +48,9 @@ public class ColorAndMotionFragment extends DashboardFragment {
 
     // Preferences
     private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN = "daltonizer_preference";
-    private static final String TOGGLE_LARGE_POINTER_ICON = "toggle_large_pointer_icon";
 
     private Preference mDisplayDaltonizerPreferenceScreen;
     private TwoStatePreference mToggleDisableAnimationsPreference;
-    private TwoStatePreference mToggleLargePointerIconPreference;
     private AccessibilitySettingsContentObserver mSettingsContentObserver;
 
     private final List<String> mShortcutFeatureKeys = new ArrayList<>();
@@ -116,9 +114,6 @@ public class ColorAndMotionFragment extends DashboardFragment {
 
         // Disable animation.
         mToggleDisableAnimationsPreference = findPreference(RemoveAnimationsPreference.KEY);
-
-        // Large pointer icon.
-        mToggleLargePointerIconPreference = findPreference(TOGGLE_LARGE_POINTER_ICON);
     }
 
     /**
@@ -134,10 +129,8 @@ public class ColorAndMotionFragment extends DashboardFragment {
             // hardware-accelerated color transform.
             getPreferenceScreen().removePreference(mDisplayDaltonizerPreferenceScreen);
             getPreferenceScreen().removePreference(mToggleDisableAnimationsPreference);
-            getPreferenceScreen().removePreference(mToggleLargePointerIconPreference);
             experimentalCategory.addPreference(mDisplayDaltonizerPreferenceScreen);
             experimentalCategory.addPreference(mToggleDisableAnimationsPreference);
-            experimentalCategory.addPreference(mToggleLargePointerIconPreference);
         }
     }
 

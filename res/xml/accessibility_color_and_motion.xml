@@ -58,13 +58,6 @@
         android:title="@string/accessibility_disable_animations"
         settings:controller="com.android.settings.accessibility.DisableAnimationsPreferenceController"/>
 
-    <SwitchPreferenceCompat
-        android:key="toggle_large_pointer_icon"
-        android:persistent="false"
-        android:summary="@string/accessibility_toggle_large_pointer_icon_summary"
-        android:title="@string/accessibility_toggle_large_pointer_icon_title"
-        settings:controller="com.android.settings.accessibility.LargePointerIconPreferenceController"/>
-
     <PreferenceCategory
         android:key="experimental_category"
         android:persistent="false"
