@@ -19,10 +19,13 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamHeaderController.AUDIO_STREAM_HEADER_LISTENING_NOW_SUMMARY;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamHeaderController.AUDIO_STREAM_HEADER_NOT_LISTENING_SUMMARY;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamHeaderController.AUDIO_STREAM_HEADER_PRESENT_NOW_SUMMARY;
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.PAUSED;
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.STREAMING;
 import static com.android.settingslib.flags.Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX;
 import static com.android.settingslib.flags.Flags.FLAG_ENABLE_LE_AUDIO_SHARING;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -66,6 +69,7 @@ import org.robolectric.shadow.api.Shadow;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executor;
 
 @RunWith(RobolectricTestRunner.class)
@@ -160,10 +164,9 @@ public class AudioStreamHeaderControllerTest {
     }
 
     @Test
-    public void testDisplayPreference_sourceConnected_setSummary() {
-        when(mAudioStreamsHelper.getAllConnectedSources())
-                .thenReturn(List.of(mBroadcastReceiveState));
-        when(mBroadcastReceiveState.getBroadcastId()).thenReturn(BROADCAST_ID);
+    public void testDisplayPreference_sourceStreaming_setSummary() {
+        when(mAudioStreamsHelper.getConnectedBroadcastIdAndState(anyBoolean()))
+                .thenReturn(Map.of(BROADCAST_ID, STREAMING));
 
         mController.displayPreference(mScreen);
 
@@ -176,8 +179,9 @@ public class AudioStreamHeaderControllerTest {
     }
 
     @Test
-    public void testDisplayPreference_sourceNotConnected_setSummary() {
-        when(mAudioStreamsHelper.getAllConnectedSources()).thenReturn(Collections.emptyList());
+    public void testDisplayPreference_sourceNotStreaming_setSummary() {
+        when(mAudioStreamsHelper.getConnectedBroadcastIdAndState(anyBoolean()))
+                .thenReturn(Collections.emptyMap());
 
         mController.displayPreference(mScreen);
 
@@ -189,18 +193,14 @@ public class AudioStreamHeaderControllerTest {
     }
 
     @Test
-    public void testDisplayPreference_sourcePresent_setSummary() {
+    public void testDisplayPreference_sourcePaused_setSummary() {
         mSetFlagsRule.enableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
-        String address = "11:22:33:44:55:66";
+        when(mAudioStreamsHelper.getConnectedBroadcastIdAndState(anyBoolean()))
+                .thenReturn(Map.of(BROADCAST_ID, PAUSED));
 
-        when(mBroadcastReceiveState.getBroadcastId()).thenReturn(BROADCAST_ID);
-        when(mBroadcastReceiveState.getSourceDevice()).thenReturn(mBluetoothDevice);
-        when(mBluetoothDevice.getAddress()).thenReturn(address);
-        List<Long> bisSyncState = new ArrayList<>();
-        when(mBroadcastReceiveState.getBisSyncState()).thenReturn(bisSyncState);
-        when(mAudioStreamsHelper.getAllPresentSources())
-                .thenReturn(List.of(mBroadcastReceiveState));
-
+        // Create new controller to enable hysteresis mode
+        mController = new AudioStreamHeaderController(mContext, KEY);
+        mController.init(mFragment, BROADCAST_NAME, BROADCAST_ID);
         mController.displayPreference(mScreen);
 
         verify(mHeaderController).setLabel(BROADCAST_NAME);
@@ -212,10 +212,10 @@ public class AudioStreamHeaderControllerTest {
     }
 
     @Test
-    public void testDisplayPreference_sourceNotPresent_setSummary() {
+    public void testDisplayPreference_sourceNotPaused_setSummary() {
         mSetFlagsRule.enableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
-
-        when(mAudioStreamsHelper.getAllPresentSources()).thenReturn(Collections.emptyList());
+        when(mAudioStreamsHelper.getConnectedBroadcastIdAndState(anyBoolean()))
+                .thenReturn(Collections.emptyMap());
 
         mController.displayPreference(mScreen);
 
@@ -228,7 +228,8 @@ public class AudioStreamHeaderControllerTest {
 
     @Test
     public void testCallback_onSourceRemoved_updateButton() {
-        when(mAudioStreamsHelper.getAllConnectedSources()).thenReturn(Collections.emptyList());
+        when(mAudioStreamsHelper.getConnectedBroadcastIdAndState(anyBoolean()))
+                .thenReturn(Collections.emptyMap());
 
         mController.displayPreference(mScreen);
         mController.mBroadcastAssistantCallback.onSourceRemoved(
@@ -241,7 +242,8 @@ public class AudioStreamHeaderControllerTest {
 
     @Test
     public void testCallback_onSourceLost_updateButton() {
-        when(mAudioStreamsHelper.getAllConnectedSources()).thenReturn(Collections.emptyList());
+        when(mAudioStreamsHelper.getConnectedBroadcastIdAndState(anyBoolean()))
+                .thenReturn(Collections.emptyMap());
 
         mController.displayPreference(mScreen);
         mController.mBroadcastAssistantCallback.onSourceLost(/* broadcastId= */ 1);
@@ -253,8 +255,8 @@ public class AudioStreamHeaderControllerTest {
 
     @Test
     public void testCallback_onReceiveStateChanged_updateButton() {
-        when(mAudioStreamsHelper.getAllConnectedSources())
-                .thenReturn(List.of(mBroadcastReceiveState));
+        when(mAudioStreamsHelper.getConnectedBroadcastIdAndState(anyBoolean()))
+                .thenReturn(Map.of(BROADCAST_ID, STREAMING));
         when(mBroadcastReceiveState.getBroadcastId()).thenReturn(BROADCAST_ID);
         BluetoothLeBroadcastReceiveState state = mock(BluetoothLeBroadcastReceiveState.class);
         List<Long> bisSyncState = new ArrayList<>();
@@ -272,17 +274,20 @@ public class AudioStreamHeaderControllerTest {
     }
 
     @Test
-    public void testCallback_onReceiveStateChangedWithSourcePresent_updateButton() {
+    public void testCallback_onReceiveStateChangedWithSourcePaused_updateButton() {
         mSetFlagsRule.enableFlags(FLAG_ENABLE_LE_AUDIO_SHARING);
         mSetFlagsRule.enableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
         String address = "11:22:33:44:55:66";
 
-        when(mAudioStreamsHelper.getAllPresentSources())
-                .thenReturn(List.of(mBroadcastReceiveState));
+        when(mAudioStreamsHelper.getConnectedBroadcastIdAndState(anyBoolean()))
+                .thenReturn(Map.of(BROADCAST_ID, PAUSED));
         when(mBroadcastReceiveState.getBroadcastId()).thenReturn(BROADCAST_ID);
         when(mBroadcastReceiveState.getSourceDevice()).thenReturn(mBluetoothDevice);
         when(mBluetoothDevice.getAddress()).thenReturn(address);
 
+        // Create new controller to enable hysteresis mode
+        mController = new AudioStreamHeaderController(mContext, KEY);
+        mController.init(mFragment, BROADCAST_NAME, BROADCAST_ID);
         mController.displayPreference(mScreen);
         mController.mBroadcastAssistantCallback.onReceiveStateChanged(
                 mock(BluetoothDevice.class), /* sourceId= */ 0, mBroadcastReceiveState);

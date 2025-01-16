@@ -16,6 +16,10 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.PAUSED;
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.STREAMING;
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.getLocalSourceState;
+
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
@@ -42,7 +46,6 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.ActionButtonsPreference;
 
-import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -75,18 +78,17 @@ public class AudioStreamButtonController extends BasePreferenceController
                         int sourceId,
                         BluetoothLeBroadcastReceiveState state) {
                     super.onReceiveStateChanged(sink, sourceId, state);
-                    boolean shouldUpdateButton =
-                            BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(mContext)
-                                    ? AudioStreamsHelper.hasSourcePresent(state)
-                                    : AudioStreamsHelper.isConnected(state);
+                    var localSourceState = getLocalSourceState(state);
+                    boolean shouldUpdateButton = mHysteresisModeFixAvailable
+                            ? (localSourceState == PAUSED || localSourceState == STREAMING)
+                            : localSourceState == STREAMING;
                     if (shouldUpdateButton) {
                         updateButton();
-                        if (AudioStreamsHelper.isConnected(state)) {
-                            mMetricsFeatureProvider.action(
-                                    mContext,
-                                    SettingsEnums.ACTION_AUDIO_STREAM_JOIN_SUCCEED,
-                                    SOURCE_ORIGIN_REPOSITORY);
-                        }
+                        // TODO(b/308368124): Verify if this log is too noisy.
+                        mMetricsFeatureProvider.action(
+                                mContext,
+                                SettingsEnums.ACTION_AUDIO_STREAM_JOIN_SUCCEED,
+                                SOURCE_ORIGIN_REPOSITORY);
                     }
                 }
 
@@ -113,6 +115,7 @@ public class AudioStreamButtonController extends BasePreferenceController
     private final AudioStreamsHelper mAudioStreamsHelper;
     private final @Nullable LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
+    private final boolean mHysteresisModeFixAvailable;
     private @Nullable ActionButtonsPreference mPreference;
     private int mBroadcastId = -1;
 
@@ -121,6 +124,8 @@ public class AudioStreamButtonController extends BasePreferenceController
         mExecutor = Executors.newSingleThreadExecutor();
         mAudioStreamsHelper = new AudioStreamsHelper(Utils.getLocalBtManager(context));
         mLeBroadcastAssistant = mAudioStreamsHelper.getLeBroadcastAssistant();
+        mHysteresisModeFixAvailable = BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(
+                context);
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
@@ -155,14 +160,8 @@ public class AudioStreamButtonController extends BasePreferenceController
             return;
         }
 
-        List<BluetoothLeBroadcastReceiveState> sources =
-                BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(mContext)
-                        ? mAudioStreamsHelper.getAllPresentSources()
-                        : mAudioStreamsHelper.getAllConnectedSources();
-        boolean isConnected =
-                sources.stream()
-                        .map(BluetoothLeBroadcastReceiveState::getBroadcastId)
-                        .anyMatch(connectedBroadcastId -> connectedBroadcastId == mBroadcastId);
+        boolean isConnected = mAudioStreamsHelper.getConnectedBroadcastIdAndState(
+                mHysteresisModeFixAvailable).containsKey(mBroadcastId);
 
         View.OnClickListener onClickListener;
 

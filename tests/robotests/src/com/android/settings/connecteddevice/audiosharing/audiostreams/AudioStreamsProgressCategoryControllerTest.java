@@ -25,6 +25,7 @@ import static com.android.settings.connecteddevice.audiosharing.audiostreams.Aud
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.AudioStreamState.WAIT_FOR_SYNC;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsProgressCategoryController.UNSET_BROADCAST_ID;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.STREAMING;
 import static com.android.settingslib.flags.Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX;
 import static com.android.settingslib.flags.Flags.FLAG_ENABLE_LE_AUDIO_SHARING;
 
@@ -355,7 +356,7 @@ public class AudioStreamsProgressCategoryControllerTest {
     }
 
     @Test
-    public void testOnStart_handleSourceAlreadyConnected_useNameFromMetadata() {
+    public void testOnStart_handleSourceAlreadyStreaming_useNameFromMetadata() {
         // Setup a device
         ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(mDevice);
 
@@ -665,8 +666,8 @@ public class AudioStreamsProgressCategoryControllerTest {
         shadowOf(Looper.getMainLooper()).idle();
 
         // A new source found is lost, but the source is still connected
-        BluetoothLeBroadcastReceiveState connected = createConnectedMock(NEWLY_FOUND_BROADCAST_ID);
-        when(mAudioStreamsHelper.getAllConnectedSources()).thenReturn(ImmutableList.of(connected));
+        when(mAudioStreamsHelper.getConnectedBroadcastIdAndState(anyBoolean())).thenReturn(
+                Map.of(NEWLY_FOUND_BROADCAST_ID, STREAMING));
         mController.handleSourceLost(NEWLY_FOUND_BROADCAST_ID);
         shadowOf(Looper.getMainLooper()).idle();
 
@@ -819,13 +820,15 @@ public class AudioStreamsProgressCategoryControllerTest {
     }
 
     @Test
-    public void testHandleSourcePresent_updateState() {
+    public void testHandleSourcePaused_updateState() {
         mSetFlagsRule.enableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
         String address = "11:22:33:44:55:66";
 
         // Setup a device
         ShadowAudioStreamsHelper.setCachedBluetoothDeviceInSharingOrLeConnected(mDevice);
 
+        // Create new controller to enable hysteresis mode
+        mController = spy(new TestController(mContext, KEY));
         // Setup mPreference so it's not null
         mController.displayPreference(mScreen);
 
@@ -844,7 +847,7 @@ public class AudioStreamsProgressCategoryControllerTest {
         when(receiveState.getBisSyncState()).thenReturn(bisSyncState);
 
         // The new found source is identified as failed to connect
-        mController.handleSourcePresent(mSourceDevice, receiveState);
+        mController.handleSourcePaused(mSourceDevice, receiveState);
         shadowOf(Looper.getMainLooper()).idle();
 
         ArgumentCaptor<AudioStreamPreference> preference =

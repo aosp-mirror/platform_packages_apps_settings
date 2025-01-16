@@ -46,6 +46,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -143,9 +144,12 @@ public class BluetoothDetailsAudioSharingControllerTest extends BluetoothDetails
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
-    public void connected_hasConnectedBroadcastSource_showTwoPreference() {
+    public void connected_hasBroadcastSource_showTwoPreference() {
         when(mCachedDevice.isConnectedLeAudioDevice()).thenReturn(true);
         when(mCachedDevice.isActiveDevice(BluetoothProfile.LE_AUDIO)).thenReturn(false);
+        List<Long> bisSyncState = new ArrayList<>();
+        bisSyncState.add(1L);
+        when(mBroadcastReceiveState.getBisSyncState()).thenReturn(bisSyncState);
         when(mLocalManager
                 .getProfileManager()
                 .getLeAudioBroadcastAssistantProfile()

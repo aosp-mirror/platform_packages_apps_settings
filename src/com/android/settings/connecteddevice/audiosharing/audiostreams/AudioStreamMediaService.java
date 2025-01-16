@@ -16,8 +16,6 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
-import static java.util.Collections.emptyList;
-
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -25,7 +23,6 @@ import android.app.Service;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothVolumeControl;
 import android.content.Intent;
@@ -107,6 +104,7 @@ public class AudioStreamMediaService extends Service {
     // override this value. Otherwise, we raise the volume to 25 when the play button is clicked.
     private final AtomicInteger mLatestPositiveVolume = new AtomicInteger(25);
     private final Object mLocalSessionLock = new Object();
+    private boolean mHysteresisModeFixAvailable;
     private int mBroadcastId;
     @Nullable private List<BluetoothDevice> mDevices;
     @Nullable private LocalBluetoothManager mLocalBtManager;
@@ -139,6 +137,7 @@ public class AudioStreamMediaService extends Service {
             Log.w(TAG, "onCreate() : mLeBroadcastAssistant is null!");
             return;
         }
+        mHysteresisModeFixAvailable = BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(this);
 
         mNotificationManager = getSystemService(NotificationManager.class);
         if (mNotificationManager == null) {
@@ -309,13 +308,9 @@ public class AudioStreamMediaService extends Service {
         }
 
         private void handleRemoveSource() {
-            List<BluetoothLeBroadcastReceiveState> connected =
-                    mAudioStreamsHelper == null
-                            ? emptyList()
-                            : mAudioStreamsHelper.getAllConnectedSources();
-            if (connected.stream()
-                    .map(BluetoothLeBroadcastReceiveState::getBroadcastId)
-                    .noneMatch(id -> id == mBroadcastId)) {
+            if (mAudioStreamsHelper != null
+                    && !mAudioStreamsHelper.getConnectedBroadcastIdAndState(
+                            mHysteresisModeFixAvailable).containsKey(mBroadcastId)) {
                 stopSelf();
             }
         }

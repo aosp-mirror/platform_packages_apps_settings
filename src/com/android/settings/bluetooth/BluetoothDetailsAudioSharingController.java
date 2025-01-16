@@ -82,7 +82,7 @@ public class BluetoothDetailsAudioSharingController extends BluetoothDetailsCont
         mProfilesContainer.removeAll();
         mProfilesContainer.addPreference(createAudioSharingPreference());
         if ((BluetoothUtils.isActiveLeAudioDevice(mCachedDevice)
-                        || AudioStreamsHelper.hasConnectedBroadcastSource(
+                        || AudioStreamsHelper.hasBroadcastSource(
                                 mCachedDevice, mLocalBluetoothManager))
                 && !BluetoothUtils.isBroadcasting(mLocalBluetoothManager)) {
             mProfilesContainer.addPreference(createFindAudioStreamPreference());

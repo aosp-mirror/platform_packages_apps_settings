@@ -16,23 +16,17 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.getLocalSourceState;
+
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
-import android.content.Context;
-
-import com.android.settingslib.bluetooth.BluetoothUtils;
 
 public class AudioStreamsProgressCategoryCallback extends AudioStreamsBroadcastAssistantCallback {
-    private static final String TAG = "AudioStreamsProgressCategoryCallback";
-
-    private final Context mContext;
     private final AudioStreamsProgressCategoryController mCategoryController;
 
     public AudioStreamsProgressCategoryCallback(
-            Context context,
             AudioStreamsProgressCategoryController audioStreamsProgressCategoryController) {
-        mContext = context;
         mCategoryController = audioStreamsProgressCategoryController;
     }
 
@@ -40,15 +34,11 @@ public class AudioStreamsProgressCategoryCallback extends AudioStreamsBroadcastA
     public void onReceiveStateChanged(
             BluetoothDevice sink, int sourceId, BluetoothLeBroadcastReceiveState state) {
         super.onReceiveStateChanged(sink, sourceId, state);
-
-        if (AudioStreamsHelper.isConnected(state)) {
-            mCategoryController.handleSourceConnected(sink, state);
-        } else if (AudioStreamsHelper.isBadCode(state)) {
-            mCategoryController.handleSourceConnectBadCode(state);
-        } else if (BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(mContext)
-                && AudioStreamsHelper.hasSourcePresent(state)) {
-            // Keep this check as the last, source might also present in above states
-            mCategoryController.handleSourcePresent(sink, state);
+        var sourceState = getLocalSourceState(state);
+        switch (sourceState) {
+            case STREAMING -> mCategoryController.handleSourceStreaming(sink, state);
+            case DECRYPTION_FAILED -> mCategoryController.handleSourceConnectBadCode(state);
+            case PAUSED -> mCategoryController.handleSourcePaused(sink, state);
         }
     }
 
