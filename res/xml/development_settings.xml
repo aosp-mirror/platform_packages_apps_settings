@@ -756,6 +756,10 @@
             android:title="@string/enable_freeform_support" />
 
         <SwitchPreferenceCompat
+            android:key="override_desktop_experience_features"
+            android:title="@string/enable_desktop_experience_features"/>
+
+        <SwitchPreferenceCompat
             android:key="force_desktop_mode_on_external_displays"
             android:title="@string/enable_desktop_mode_on_secondary_display"/>
 

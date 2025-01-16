@@ -802,6 +802,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new FreeformWindowsPreferenceController(context, fragment));
         controllers.add(new DesktopModePreferenceController(context, fragment));
         controllers.add(new DesktopModeSecondaryDisplayPreferenceController(context, fragment));
+        controllers.add(new DesktopExperiencePreferenceController(context, fragment));
         controllers.add(new NonResizableMultiWindowPreferenceController(context));
         controllers.add(new ShortcutManagerThrottlingPreferenceController(context));
         controllers.add(new EnableGnssRawMeasFullTrackingPreferenceController(context));
