@@ -21,12 +21,8 @@ import static com.android.internal.jank.InteractionJankMonitor.Configuration;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 
-import androidx.annotation.XmlRes;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -109,12 +105,6 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     }
 
     @Override
-    public void addPreferencesFromResource(@XmlRes int preferencesResId) {
-        super.addPreferencesFromResource(preferencesResId);
-        updateActivityTitleWithScreenTitle(getPreferenceScreen());
-    }
-
-    @Override
     public <T extends Preference> T findPreference(CharSequence key) {
         if (key == null) {
             return null;
@@ -145,17 +135,6 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
 
     protected void writePreferenceClickMetric(Preference preference) {
         mMetricsFeatureProvider.logClickedPreference(preference, getMetricsCategory());
-    }
-
-    protected void updateActivityTitleWithScreenTitle(PreferenceScreen screen) {
-        if (screen != null) {
-            final CharSequence title = screen.getTitle();
-            if (!TextUtils.isEmpty(title)) {
-                getActivity().setTitle(title);
-            } else {
-                Log.w(TAG, "Screen title missing for fragment " + this.getClass().getName());
-            }
-        }
     }
 
     private static final class OnScrollListener extends RecyclerView.OnScrollListener {
