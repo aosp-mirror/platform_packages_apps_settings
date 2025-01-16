@@ -19,6 +19,7 @@ package com.android.settings.localepicker;
 import static com.android.settings.localepicker.LocaleListEditor.EXTRA_RESULT_LOCALE;
 import static com.android.settings.localepicker.RegionAndNumberingSystemPickerFragment.EXTRA_IS_NUMBERING_SYSTEM;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.LocaleList;
@@ -178,7 +179,9 @@ public abstract class LocalePickerBaseListPreferenceController extends
             pref.setTitle(localeName);
             pref.setKey(locale.toString());
             pref.setOnPreferenceClickListener(clickedPref -> {
+                // TODO: b/390347399 - Should pop up a dialog when changes the region.
                 switchFragment(locale);
+                ((Activity) mContext).finish();
                 return true;
             });
             mPreferences.put(locale.getId(), pref);
