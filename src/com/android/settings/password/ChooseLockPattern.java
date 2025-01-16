@@ -563,6 +563,7 @@ public class ChooseLockPattern extends SettingsActivity {
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
             mLockPatternView.setOnPatternListener(mChooseNewLockPatternListener);
             mLockPatternView.setFadePattern(false);
+            mLockPatternView.setClickable(false);
 
             mFooterText = (TextView) view.findViewById(R.id.footerText);
 
