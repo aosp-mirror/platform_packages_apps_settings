@@ -27,17 +27,17 @@ import android.net.wifi.WifiManager
 import android.os.UserManager
 import android.text.BidiFormatter
 import android.util.Log
-import androidx.preference.Preference
 import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.core.SubSettingLauncher
+import com.android.settings.datausage.DataSaverMainSwitchPreference.Companion.KEY as DATA_SAVER_KEY
 import com.android.settings.wifi.WifiUtils.canShowWifiHotspot
 import com.android.settings.wifi.utils.tetheringManager
 import com.android.settings.wifi.utils.wifiApState
 import com.android.settings.wifi.utils.wifiManager
 import com.android.settings.wifi.utils.wifiSoftApSsid
-import com.android.settingslib.PrimarySwitchPreference
+import com.android.settingslib.PrimarySwitchPreferenceBinding
 import com.android.settingslib.TetherUtil
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.HandlerExecutor
@@ -46,19 +46,16 @@ import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceChangeReason
-import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
-import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.wifi.WifiUtils.Companion.getWifiTetherSummaryForConnectedDevices
-import com.android.settings.datausage.DataSaverMainSwitchPreference.Companion.KEY as DATA_SAVER_KEY
 
 // LINT.IfChange
 class WifiHotspotSwitchPreference(context: Context, dataSaverStore: KeyValueStore) :
     SwitchPreference(KEY, R.string.wifi_hotspot_checkbox_text),
-    PreferenceBinding,
+    PrimarySwitchPreferenceBinding,
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider,
     PreferenceRestrictionMixin {
@@ -130,8 +127,6 @@ class WifiHotspotSwitchPreference(context: Context, dataSaverStore: KeyValueStor
     override val sensitivityLevel
         get() = SensitivityLevel.HIGH_SENSITIVITY
 
-    override fun createWidget(context: Context) = PrimarySwitchPreference(context)
-
     override fun storage(context: Context): KeyValueStore = wifiHotspotStore
 
     @Suppress("UNCHECKED_CAST")
@@ -201,16 +196,7 @@ class WifiHotspotSwitchPreference(context: Context, dataSaverStore: KeyValueStor
             Log.e(TAG, "onTetheringFailed(),error=$error")
         }
 
-        override fun onKeyChanged(key: String, reason: Int) =
-            notifyChange(KEY, reason)
-    }
-
-    override fun bind(preference: Preference, metadata: PreferenceMetadata) {
-        super.bind(preference, metadata)
-        (preference as PrimarySwitchPreference).apply {
-            isChecked = preferenceDataStore!!.getBoolean(key, false)
-            isSwitchEnabled = isEnabled
-        }
+        override fun onKeyChanged(key: String, reason: Int) = notifyChange(KEY, reason)
     }
 
     companion object {

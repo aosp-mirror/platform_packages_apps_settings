@@ -21,10 +21,11 @@ import android.provider.Settings
 import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
 import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL
 import androidx.preference.Preference
+import androidx.preference.PreferenceScreen
 import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.flags.Flags
-import com.android.settingslib.PrimarySwitchPreference
+import com.android.settingslib.PrimarySwitchPreferenceBinding
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObservableDelegate
 import com.android.settingslib.datastore.SettingsStore
@@ -42,7 +43,8 @@ import com.android.settingslib.preference.PreferenceScreenCreator
 @ProvidePreferenceScreen(AutoBrightnessScreen.KEY)
 class AutoBrightnessScreen :
     PreferenceScreenCreator,
-    PreferenceScreenBinding,
+    PreferenceScreenBinding, // binding for screen page
+    PrimarySwitchPreferenceBinding, // binding for screen entry point widget
     PreferenceAvailabilityProvider,
     PreferenceRestrictionMixin,
     BooleanValuePreference {
@@ -93,16 +95,11 @@ class AutoBrightnessScreen :
     override val useAdminDisabledSummary: Boolean
         get() = true
 
-    override fun createWidget(context: Context) = PrimarySwitchPreference(context)
-
-    override fun bind(preference: Preference, metadata: PreferenceMetadata) {
-        super.bind(preference, metadata)
-        (preference as PrimarySwitchPreference).apply {
-            isSwitchEnabled = isEnabled
-            // "true" is not the real default value (it is provided by AutoBrightnessDataStore)
-            isChecked = preferenceDataStore!!.getBoolean(key, true)
+    override fun bind(preference: Preference, metadata: PreferenceMetadata) =
+        when (preference) {
+            is PreferenceScreen -> super<PreferenceScreenBinding>.bind(preference, metadata)
+            else -> super<PrimarySwitchPreferenceBinding>.bind(preference, metadata)
         }
-    }
 
     /**
      * The datastore for brightness, which is persisted as integer but the external type is boolean.
