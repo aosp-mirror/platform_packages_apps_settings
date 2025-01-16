@@ -50,6 +50,7 @@ import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
+@Deprecated
 public class AppLocalePickerActivity extends SettingsBaseActivity
         implements LocalePickerWithRegion.LocaleSelectedListener, MenuItem.OnActionExpandListener {
     private static final String TAG = AppLocalePickerActivity.class.getSimpleName();
