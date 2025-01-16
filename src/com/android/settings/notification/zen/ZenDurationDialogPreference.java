@@ -23,7 +23,7 @@ import android.util.AttributeSet;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settingslib.CustomDialogPreferenceCompat;
-import com.android.settingslib.notification.modes.ZenDurationDialog;
+import com.android.settingslib.notification.modes.DndDurationDialogFactory;
 
 public class ZenDurationDialogPreference extends CustomDialogPreferenceCompat {
 
@@ -48,7 +48,7 @@ public class ZenDurationDialogPreference extends CustomDialogPreferenceCompat {
             DialogInterface.OnClickListener listener) {
         super.onPrepareDialogBuilder(builder, listener);
 
-        ZenDurationDialog zenDialog = new ZenDurationDialog(getContext());
+        DndDurationDialogFactory zenDialog = new DndDurationDialogFactory(getContext());
         zenDialog.setupDialog(builder);
     }
 }
