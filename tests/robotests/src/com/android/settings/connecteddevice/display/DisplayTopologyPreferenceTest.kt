@@ -102,6 +102,15 @@ class DisplayTopologyPreferenceTest {
                 .map { preference.mPaneContent.getChildAt(it) as DisplayBlock }
                 .toList()
 
+    fun singleDisplayTopology(): DisplayTopology {
+        val primaryId = 22;
+
+        val root = DisplayTopology.TreeNode(
+                primaryId, /* width= */ 200f, /* height= */ 160f, POSITION_LEFT, /* offset= */ 0f)
+
+        return DisplayTopology(root, primaryId)
+    }
+
     fun twoDisplayTopology(childPosition: Int, childOffset: Float): DisplayTopology {
         val primaryId = 1
 
@@ -285,6 +294,36 @@ class DisplayTopologyPreferenceTest {
         injector.topologyListener!!.accept(injector.topology!!)
 
         assertThat(preference.mTimesReceivedSameTopology).isEqualTo(1)
+    }
+
+    @Test
+    fun cannotMoveSingleDisplay() {
+        injector.topology = singleDisplayTopology()
+        preparePane()
+
+        val paneChildren = getPaneChildren()
+        assertThat(paneChildren).hasSize(1)
+        val block = paneChildren[0]
+
+        val origY = block.unpaddedY
+
+        block.dispatchTouchEvent(MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_DOWN)
+                .setPointer(0f, 0f)
+                .build())
+        block.dispatchTouchEvent(MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_MOVE)
+                .setPointer(0f, 30f)
+                .build())
+
+        assertThat(block.unpaddedY).isWithin(0.01f).of(origY)
+
+        block.dispatchTouchEvent(MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_UP)
+                .build())
+
+        // Block should be back to original position.
+        assertThat(block.unpaddedY).isWithin(0.01f).of(origY)
     }
 
     @Test

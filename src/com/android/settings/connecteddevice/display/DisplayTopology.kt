@@ -404,8 +404,12 @@ class DisplayTopologyPreference(context : Context)
 
     private fun onBlockTouchDown(
             displayId: Int, displayPos: RectF, block: DisplayBlock, ev: MotionEvent): Boolean {
-        val stationaryDisps = (mTopologyInfo ?: return false)
-                .positions.filter { it.first != displayId }
+        val positions = (mTopologyInfo ?: return false).positions
+
+        // Do not allow dragging for single-display topology, since there is nothing to clamp it to.
+        if (positions.size <= 1) { return false }
+
+        val stationaryDisps = positions.filter { it.first != displayId }
 
         // We have to use rawX and rawY for the coordinates since the view receiving the event is
         // also the view that is moving. We need coordinates relative to something that isn't
