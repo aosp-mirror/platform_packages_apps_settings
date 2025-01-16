@@ -25,7 +25,7 @@ import com.android.settings.flags.Flags
 import com.android.settingslib.PrimarySwitchPreference
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.Permissions
-import com.android.settingslib.metadata.BooleanPreference
+import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -40,7 +40,7 @@ import com.android.settingslib.preference.PreferenceScreenCreator
 class DarkModeScreen(context: Context) :
     PreferenceScreenCreator,
     PreferenceScreenBinding,
-    BooleanPreference,
+    BooleanValuePreference,
     PreferenceSummaryProvider {
 
     private val darkModeStorage = DarkModeStorage(context)
