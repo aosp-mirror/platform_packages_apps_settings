@@ -16,7 +16,14 @@
 
 package com.android.settings.accessibility;
 
+import static android.view.accessibility.AccessibilityManager.AUTOCLICK_IGNORE_MINOR_CURSOR_MOVEMENT_DEFAULT;
+
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
+import android.content.ContentResolver;
 import android.content.Context;
+import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 
@@ -29,9 +36,13 @@ public class ToggleAutoclickIgnoreMinorCursorMovementController extends TogglePr
     private static final String TAG =
             ToggleAutoclickIgnoreMinorCursorMovementController.class.getSimpleName();
 
+    private final ContentResolver mContentResolver;
+
     public ToggleAutoclickIgnoreMinorCursorMovementController(
             @NonNull Context context, @NonNull String key) {
         super(context, key);
+
+        mContentResolver = context.getContentResolver();
     }
 
     @Override
@@ -41,13 +52,19 @@ public class ToggleAutoclickIgnoreMinorCursorMovementController extends TogglePr
 
     @Override
     public boolean isChecked() {
-        // TODO(b/388845718): retrieve check status from settings.
-        return false;
+        return Settings.Secure.getInt(
+                        mContentResolver,
+                        Settings.Secure.ACCESSIBILITY_AUTOCLICK_IGNORE_MINOR_CURSOR_MOVEMENT,
+                        AUTOCLICK_IGNORE_MINOR_CURSOR_MOVEMENT_DEFAULT ? ON : OFF)
+                == ON;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        // TODO(b/388845718): Update settings.
+        Settings.Secure.putInt(
+                mContentResolver,
+                Settings.Secure.ACCESSIBILITY_AUTOCLICK_IGNORE_MINOR_CURSOR_MOVEMENT,
+                isChecked ? ON : OFF);
         return true;
     }
 

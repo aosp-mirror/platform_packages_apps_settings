@@ -16,12 +16,17 @@
 
 package com.android.settings.accessibility;
 
+import static android.view.accessibility.AccessibilityManager.AUTOCLICK_IGNORE_MINOR_CURSOR_MOVEMENT_DEFAULT;
+
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
+import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -65,5 +70,28 @@ public class ToggleAutoclickIgnoreMinorCursorMovementControllerTest {
     public void getAvailabilityStatus_conditionallyUnavailableWhenFlagOn() {
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void isChecked_matchesSetting() {
+        assertThat(mController.isChecked()).isEqualTo(readSetting() == ON);
+    }
+
+    @Test
+    public void setChecked_true_updatesSetting() {
+        mController.setChecked(true);
+        assertThat(readSetting()).isEqualTo(ON);
+    }
+
+    @Test
+    public void setChecked_false_updatesSetting() {
+        mController.setChecked(false);
+        assertThat(readSetting()).isEqualTo(OFF);
+    }
+
+    private int readSetting() {
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_AUTOCLICK_IGNORE_MINOR_CURSOR_MOVEMENT,
+                AUTOCLICK_IGNORE_MINOR_CURSOR_MOVEMENT_DEFAULT ? ON : OFF);
     }
 }
