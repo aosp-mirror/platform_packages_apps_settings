@@ -20,9 +20,10 @@ import android.Manifest
 import android.content.Context
 import android.os.PowerManager
 import androidx.preference.Preference
+import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.flags.Flags
-import com.android.settingslib.PrimarySwitchPreference
+import com.android.settingslib.PrimarySwitchPreferenceBinding
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.BooleanValuePreference
@@ -39,7 +40,8 @@ import com.android.settingslib.preference.PreferenceScreenCreator
 @ProvidePreferenceScreen(DarkModeScreen.KEY)
 class DarkModeScreen(context: Context) :
     PreferenceScreenCreator,
-    PreferenceScreenBinding,
+    PreferenceScreenBinding, // binding for screen page
+    PrimarySwitchPreferenceBinding, // binding for screen entry point widget
     BooleanValuePreference,
     PreferenceSummaryProvider {
 
@@ -82,14 +84,11 @@ class DarkModeScreen(context: Context) :
 
     override fun storage(context: Context): KeyValueStore = darkModeStorage
 
-    override fun createWidget(context: Context) = PrimarySwitchPreference(context)
-
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
-        super.bind(preference, metadata)
         if (preference is DarkModePreference) preference.setCatalystEnabled(true)
-        (preference as? PrimarySwitchPreference)?.apply {
-            isSwitchEnabled = isEnabled
-            isChecked = darkModeStorage.getBoolean(KEY) == true
+        when (preference) {
+            is PreferenceScreen -> super<PreferenceScreenBinding>.bind(preference, metadata)
+            else -> super<PrimarySwitchPreferenceBinding>.bind(preference, metadata)
         }
     }
 
