@@ -39,7 +39,6 @@ import com.android.settingslib.widget.UsageProgressBarPreference
 // LINT.IfChange
 class BatteryHeaderPreference :
     PersistentPreference<Int>,
-    PreferenceMetadata,
     PreferenceBinding,
     PreferenceLifecycleProvider,
     RangeValue {

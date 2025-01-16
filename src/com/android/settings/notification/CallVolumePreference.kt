@@ -43,7 +43,6 @@ import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
 open class CallVolumePreference :
-    PreferenceMetadata,
     PreferenceBinding,
     PersistentPreference<Int>,
     RangeValue,

@@ -33,18 +33,18 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObservableDelegate
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.datastore.SettingsStore
+import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
-import com.android.settingslib.metadata.TwoStatePreference
 import com.android.settingslib.preference.PreferenceBindingPlaceholder
 import com.android.settingslib.preference.SwitchPreferenceBinding
 
 // LINT.IfChange
 class AdaptiveSleepPreference :
-    TwoStatePreference,
+    BooleanValuePreference,
     SwitchPreferenceBinding,
     PreferenceLifecycleProvider,
     PreferenceBindingPlaceholder, // not needed once controller class is cleaned up
