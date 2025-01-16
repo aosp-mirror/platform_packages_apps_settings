@@ -58,7 +58,6 @@ android_robolectric_test {
         "Settings-robo-testutils",
         "Settings-testutils2",
         "SettingsLib-robo-testutils",
-        "SettingsLibPreference-testutils",
         "Settings_robolectric_meta_service_file",
         "aconfig_settings_flags_lib",
         "android.webkit.flags-aconfig-java",
@@ -73,6 +72,7 @@ android_robolectric_test {
         "kotlin-test",
         "mockito-robolectric-prebuilt", // mockito deps order matters!
         "mockito-kotlin2",
+        "SettingsLibPreference-testutils", // order matters because it depends on mockito-kotlin2
         "notification_flags_lib",
         "platform-test-annotations",
         "testables",
@@ -115,6 +115,7 @@ java_library {
     libs: [
         "Robolectric_all-target",
         "Settings-core",
+        "androidx.test.core",
         "mockito-robolectric-prebuilt",
         "truth",
     ],

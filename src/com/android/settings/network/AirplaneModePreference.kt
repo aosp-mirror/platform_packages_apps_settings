@@ -30,11 +30,11 @@ import android.telephony.TelephonyManager
 import androidx.annotation.DrawableRes
 import androidx.preference.Preference
 import com.android.settings.AirplaneModeEnabler
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.network.SatelliteRepository.Companion.isSatelliteOn
-import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.RestrictedSwitchPreference
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.KeyValueStore
@@ -51,6 +51,7 @@ import com.android.settingslib.metadata.SwitchPreference
 // LINT.IfChange
 class AirplaneModePreference :
     SwitchPreference(KEY, R.string.airplane_mode),
+    PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider,
     PreferenceLifecycleProvider,
     PreferenceRestrictionMixin {
@@ -88,6 +89,9 @@ class AirplaneModePreference :
     override val sensitivityLevel
         get() = SensitivityLevel.HIGH_SENSITIVITY
 
+    override val preferenceActionMetrics: Int
+        get() = ACTION_AIRPLANE_TOGGLE
+
     override fun storage(context: Context): KeyValueStore =
         AirplaneModeStorage(context, SettingsGlobalStore.get(context))
 
@@ -109,16 +113,12 @@ class AirplaneModePreference :
             (settingsStore.getBoolean(key) ?: DEFAULT_VALUE) as T
 
         override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
-            if (value is Boolean) {
-                settingsStore.setBoolean(key, value)
+            if (value !is Boolean) return
+            settingsStore.setBoolean(key, value)
 
-                val intent = Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED)
-                intent.putExtra("state", value)
-                context.sendBroadcastAsUser(intent, UserHandle.ALL)
-
-                val metricsFeature = featureFactory.metricsFeatureProvider
-                metricsFeature.action(context, ACTION_AIRPLANE_TOGGLE, value)
-            }
+            val intent = Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED)
+            intent.putExtra("state", value)
+            context.sendBroadcastAsUser(intent, UserHandle.ALL)
         }
 
         override fun onFirstObserverAdded() {
