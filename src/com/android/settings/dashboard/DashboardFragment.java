@@ -415,7 +415,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 removeControllersForHybridMode();
             }
             setPreferenceScreen(screen);
-            updateActivityTitleWithScreenTitle(screen);
         } else {
             addPreferencesFromResource(resId);
             screen = getPreferenceScreen();

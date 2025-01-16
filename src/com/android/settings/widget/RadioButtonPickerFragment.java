@@ -89,7 +89,6 @@ public abstract class RadioButtonPickerFragment extends SettingsPreferenceFragme
         if (isCatalystEnabled()) {
             PreferenceScreen preferenceScreen = createPreferenceScreen();
             setPreferenceScreen(preferenceScreen);
-            updateActivityTitleWithScreenTitle(preferenceScreen);
         } else {
             super.onCreatePreferences(savedInstanceState, rootKey);
         }
