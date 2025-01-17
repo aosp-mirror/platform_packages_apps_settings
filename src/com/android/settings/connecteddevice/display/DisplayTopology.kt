@@ -51,6 +51,10 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
+// These extension methods make calls to min and max chainable.
+fun Float.atMost(n: Number): Float = min(this, n.toFloat())
+fun Float.atLeast(n: Number): Float = max(this, n.toFloat())
+
 /**
  * Contains the parameters needed for transforming global display coordinates to and from topology
  * pane coordinates. This is necessary for implementing an interactive display topology pane. The
@@ -64,6 +68,9 @@ import kotlin.math.min
  * practice the origin will be the upper-left coordinate of the primary display.
  *
  * @param paneWidth width of the pane in view coordinates
+ * @param minPaneHeight smallest allowed height of the pane in view coordinates. This will not
+ *                      affect the block ratio, but only the final height of the pane and the
+ *                      position of the display bounds' center.
  * @param minEdgeLength the smallest length permitted of a display block. This should be set based
  *                      on accessibility requirements, but also accounting for padding that appears
  *                      around each button.
@@ -74,8 +81,8 @@ import kotlin.math.min
  * @param displaysPos the absolute topology coordinates for each display in the topology.
  */
 class TopologyScale(
-        paneWidth : Int, minEdgeLength : Int, maxBlockRatio : Float,
-        displaysPos : Collection<RectF>) {
+        paneWidth: Int, minPaneHeight: Float, minEdgeLength: Int, maxBlockRatio: Float,
+        displaysPos: Collection<RectF>) {
     /** Scale of block sizes to real-world display sizes. Should be less than 1. */
     val blockRatio: Float
 
@@ -102,28 +109,30 @@ class TopologyScale(
             biggestDisplayHeight = max(biggestDisplayHeight, pos.height())
         }
 
-        // Set height according to the width and the aspect ratio of the display bounds limitted by
+        // Set height according to the width and the aspect ratio of the display bounds limited by
         // maxBlockRatio. It prevents blocks from being too large, which would make dragging and
         // dropping awkward.
-        val rawBlockRatio = min(maxBlockRatio, paneWidth.toFloat() * 0.6f / displayBounds.width())
-
-        // If the `ratio` is set too low because one of the displays will have an edge less than
-        // minEdgeLength(dp) long, increase it such that the smallest edge is that long.
-        blockRatio = max(minEdgeLength.toFloat() / smallestDisplayDim, rawBlockRatio).toFloat()
+        blockRatio = maxBlockRatio
+                .atMost(paneWidth * 0.6 / displayBounds.width())
+                // If the `ratio` is set too low because one of the displays will have an edge less
+                // than minEdgeLength(dp) long, increase it such that the smallest edge is that
+                // long.
+                .atLeast(minEdgeLength.toFloat() / smallestDisplayDim)
 
         // Essentially, we just set the pane height based on the pre-determined pane width and the
-        // aspect ratio of the display bounds. But we may need to increase it slightly to achieve
-        // 20% padding above and below the display bounds - this is where the 0.6 comes from.
-        val rawPaneHeight = max(
-                paneWidth.toDouble() / displayBounds.width() * displayBounds.height(),
-                displayBounds.height() * blockRatio / 0.6).toFloat()
+        // aspect ratio of the display bounds.
+        paneHeight = (paneWidth.toFloat() / displayBounds.width() * displayBounds.height())
+                // We may need to increase it slightly to achieve 20% padding above and below the
+                // display bounds - this is where the 0.6 comes from.
+                .atLeast(displayBounds.height() * blockRatio / 0.6)
 
-        // It is easy for the aspect ratio to result in an excessively tall pane, since the width is
-        // pre-determined and may be considerably wider than necessary. So we prevent the height
-        // from growing too large here, by limiting vertical padding to the size of the tallest
-        // display. This improves results for very tall display bounds.
-        paneHeight = min(
-                rawPaneHeight, blockRatio * (displayBounds.height() + biggestDisplayHeight * 2f))
+                // It is easy for the aspect ratio to result in an excessively tall pane, since the
+                // width is pre-determined and may be considerably wider than necessary. So we
+                // prevent the height from growing too large here, by limiting vertical padding to
+                // the size of the tallest display. This improves results for very tall display
+                // bounds.
+                .atMost(blockRatio * (displayBounds.height() + biggestDisplayHeight * 2f))
+                .atLeast(minPaneHeight)
 
         // Set originPaneXY (the location of 0,0 in display space in the pane's coordinate system)
         // such that the display bounds rect is centered in the pane.
@@ -365,7 +374,8 @@ class DisplayTopologyPreference(context : Context)
         }
 
         val scaling = TopologyScale(
-                mPaneContent.width, minEdgeLength = 60, maxBlockRatio = 0.12f,
+                mPaneContent.width, minPaneHeight = mTopologyInfo?.scaling?.paneHeight ?: 0f,
+                minEdgeLength = 60, maxBlockRatio = 0.12f,
                 newBounds.map { it.second }.toList())
         mPaneHolder.layoutParams.let {
             val newHeight = scaling.paneHeight.toInt()
