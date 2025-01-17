@@ -18,14 +18,14 @@ package com.android.settings.widget
 
 import android.content.Context
 import androidx.preference.Preference
+import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.metadata.TwoStatePreference
 import com.android.settingslib.preference.PreferenceBindingPlaceholder
-import com.android.settingslib.preference.TwoStatePreferenceBinding
+import com.android.settingslib.preference.BooleanValuePreferenceBinding
 
 /** Base metadata of `MainSwitchBar`. */
 interface MainSwitchBarMetadata :
-    TwoStatePreference, TwoStatePreferenceBinding, PreferenceBindingPlaceholder {
+    BooleanValuePreference, BooleanValuePreferenceBinding, PreferenceBindingPlaceholder {
 
     /**
      * Disable main switch bar when user toggles the switch. By this way, user cannot toggle again

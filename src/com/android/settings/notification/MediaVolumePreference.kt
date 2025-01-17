@@ -40,7 +40,6 @@ import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
 open class MediaVolumePreference :
-    PreferenceMetadata,
     PreferenceBinding,
     PersistentPreference<Int>,
     RangeValue,

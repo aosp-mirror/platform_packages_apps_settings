@@ -55,7 +55,6 @@ import java.text.NumberFormat
 
 // LINT.IfChange
 class BrightnessLevelPreference :
-    PreferenceMetadata,
     PersistentPreference<Int>,
     RangeValue,
     PreferenceBinding,

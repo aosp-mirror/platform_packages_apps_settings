@@ -33,11 +33,11 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.datastore.and
+import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
-import com.android.settingslib.metadata.TwoStatePreference
-import com.android.settingslib.preference.TwoStatePreferenceBinding
+import com.android.settingslib.preference.BooleanValuePreferenceBinding
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 
@@ -47,7 +47,7 @@ import kotlinx.coroutines.runBlocking
  * TODO(b/372732219): apply metadata to UI
  */
 class WifiCallingMainSwitchPreference(private val subId: Int) :
-    TwoStatePreference, TwoStatePreferenceBinding, PreferenceAvailabilityProvider {
+    BooleanValuePreference, BooleanValuePreferenceBinding, PreferenceAvailabilityProvider {
 
     override val key: String
         get() = KEY

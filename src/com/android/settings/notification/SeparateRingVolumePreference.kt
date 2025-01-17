@@ -58,7 +58,6 @@ import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
 open class SeparateRingVolumePreference :
-    PreferenceMetadata,
     PreferenceBinding,
     PersistentPreference<Int>,
     RangeValue,
