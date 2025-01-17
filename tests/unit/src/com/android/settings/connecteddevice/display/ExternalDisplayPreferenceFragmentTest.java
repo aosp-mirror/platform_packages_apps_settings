@@ -105,7 +105,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         fragment.onSaveInstanceStateCallback(outState);
         assertThat(outState.getBoolean(PREVIOUSLY_SHOWN_LIST_KEY)).isTrue();
 
-        pref = mPreferenceScreen.findPreference(DisplayTopologyKt.PREFERENCE_KEY);
+        pref = mPreferenceScreen.findPreference(DisplayTopologyKt.TOPOLOGY_PREFERENCE_KEY);
         assertThat(pref).isNull();
 
         pref = mPreferenceScreen.findPreference(
@@ -122,7 +122,9 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         doReturn(new Display[] {mDisplays[1]}).when(mMockedInjector).getAllDisplays();
         mHandler.flush();
 
-        var pref = mPreferenceScreen.findPreference(DisplayTopologyKt.PREFERENCE_KEY);
+        var pref = mPreferenceScreen.findPreference(DisplayTopologyKt.TOPOLOGY_PREFERENCE_KEY);
+        assertThat(pref).isNotNull();
+        pref = mPreferenceScreen.findPreference(MirroringKt.MIRROR_PREFERENCE_KEY);
         assertThat(pref).isNotNull();
 
         PreferenceCategory listPref =
@@ -145,8 +147,10 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         doReturn(new Display[0]).when(mMockedInjector).getAllDisplays();
         mHandler.flush();
 
-        var pref = mPreferenceScreen.findPreference(DisplayTopologyKt.PREFERENCE_KEY);
+        var pref = mPreferenceScreen.findPreference(DisplayTopologyKt.TOPOLOGY_PREFERENCE_KEY);
         assertThat(pref).isNotNull();
+        pref = mPreferenceScreen.findPreference(MirroringKt.MIRROR_PREFERENCE_KEY);
+        assertThat(pref).isNull();
 
         PreferenceCategory listPref =
                 mPreferenceScreen.findPreference(DISPLAYS_LIST_PREFERENCE_KEY);

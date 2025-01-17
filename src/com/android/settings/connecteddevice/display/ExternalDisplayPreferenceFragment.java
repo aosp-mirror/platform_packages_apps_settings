@@ -102,6 +102,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     @Nullable
     private Preference mDisplayTopologyPreference;
     @Nullable
+    private Preference mMirrorPreference;
+    @Nullable
     private PreferenceCategory mDisplaysPreference;
     @Nullable
     private PreferenceCategory mBuiltinDisplayPreference;
@@ -292,6 +294,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         if (mDisplaysPreference == null) {
             mDisplaysPreference = new PreferenceCategory(context);
             mDisplaysPreference.setPersistent(false);
+            mDisplaysPreference.setOrder(40);
         }
         return mDisplaysPreference;
     }
@@ -301,6 +304,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         if (mBuiltinDisplayPreference == null) {
             mBuiltinDisplayPreference = new PreferenceCategory(context);
             mBuiltinDisplayPreference.setPersistent(false);
+            mBuiltinDisplayPreference.setOrder(30);
         }
         return mBuiltinDisplayPreference;
     }
@@ -308,9 +312,17 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     @NonNull Preference getDisplayTopologyPreference(@NonNull Context context) {
         if (mDisplayTopologyPreference == null) {
             mDisplayTopologyPreference = new DisplayTopologyPreference(context);
-            mDisplayTopologyPreference.setPersistent(false);
+            mDisplayTopologyPreference.setOrder(10);
         }
         return mDisplayTopologyPreference;
+    }
+
+    @NonNull Preference getMirrorPreference(@NonNull Context context) {
+        if (mMirrorPreference == null) {
+            mMirrorPreference = new MirrorPreference(context);
+            mMirrorPreference.setOrder(20);
+        }
+        return mMirrorPreference;
     }
 
     private void restoreState(@Nullable Bundle savedInstanceState) {
@@ -399,6 +411,9 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             @NonNull PreferenceScreen screen, @NonNull Context context) {
         if (mInjector != null && mInjector.getFlags().displayTopologyPaneInDisplayList()) {
             screen.addPreference(getDisplayTopologyPreference(context));
+            if (!displaysToShow.isEmpty()) {
+                screen.addPreference(getMirrorPreference(context));
+            }
 
             // If topology is shown, we also show a preference for the built-in display for
             // consistency with the topology.
