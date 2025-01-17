@@ -48,7 +48,6 @@ import androidx.annotation.Nullable;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
@@ -243,24 +242,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     @Override
     ComponentName getTileComponentName() {
         return mTileComponentName;
-    }
-
-    @Override
-    CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
-        final ComponentName componentName = getTileComponentName();
-        if (componentName == null) {
-            return null;
-        }
-
-        final CharSequence tileName = loadTileLabel(getPrefContext(), componentName);
-        if (tileName == null) {
-            return null;
-        }
-
-        final int titleResId = type == QuickSettingsTooltipType.GUIDE_TO_EDIT
-                ? R.string.accessibility_service_qs_tooltip_content
-                : R.string.accessibility_service_auto_added_qs_tooltip_content;
-        return getString(titleResId, tileName);
     }
 
     @Override

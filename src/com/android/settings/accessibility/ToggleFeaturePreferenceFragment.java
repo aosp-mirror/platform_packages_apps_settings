@@ -59,7 +59,6 @@ import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.Flags;
@@ -273,14 +272,6 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
 
     /** Returns the accessibility tile component name. */
     abstract ComponentName getTileComponentName();
-
-    /** Returns the accessibility tile component name.
-     *
-     * @deprecated unused, as this class no longer displays tile tooltips.
-     *
-     * (TODO 367414968: finish removal.)*/
-    @Deprecated
-    abstract CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type);
 
     protected void updateToggleServiceTitle(SettingsMainSwitchPreference switchPreference) {
         final CharSequence title =

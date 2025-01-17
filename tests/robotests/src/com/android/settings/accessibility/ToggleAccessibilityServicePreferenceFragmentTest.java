@@ -43,9 +43,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
-import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 
@@ -109,72 +107,6 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
         when(mScreen.getPreferenceManager()).thenReturn(mPreferenceManager);
         doReturn(mScreen).when(mFragment).getPreferenceScreen();
         mShadowAccessibilityManager = Shadow.extract(AccessibilityManager.getInstance(mContext));
-    }
-
-    @Test
-    public void getTileTooltipContent_noTileServiceAssigned_returnNull() {
-        final CharSequence tileTooltipContent =
-                mFragment.getTileTooltipContent(QuickSettingsTooltipType.GUIDE_TO_EDIT);
-
-        assertThat(tileTooltipContent).isNull();
-    }
-
-    @Test
-    public void getTileTooltipContent_hasOneTileService_guideToEdit_haveMatchString() {
-        setupTileService(PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME,
-                PLACEHOLDER_TILE_NAME);
-
-        final CharSequence tileTooltipContent =
-                mFragment.getTileTooltipContent(QuickSettingsTooltipType.GUIDE_TO_EDIT);
-        final CharSequence tileName =
-                mFragment.loadTileLabel(mContext, mFragment.getTileComponentName());
-        assertThat(tileTooltipContent.toString()).isEqualTo(
-                mContext.getString(R.string.accessibility_service_qs_tooltip_content, tileName));
-    }
-
-    @Test
-    public void getTileTooltipContent_hasOneTileService_guideToDirectUse_haveMatchString() {
-        setupTileService(PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME,
-                PLACEHOLDER_TILE_NAME);
-
-        final CharSequence tileTooltipContent =
-                mFragment.getTileTooltipContent(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
-        final CharSequence tileName =
-                mFragment.loadTileLabel(mContext, mFragment.getTileComponentName());
-        assertThat(tileTooltipContent.toString()).isEqualTo(
-                mContext.getString(
-                        R.string.accessibility_service_auto_added_qs_tooltip_content, tileName));
-    }
-
-    @Test
-    public void getTileTooltipContent_hasTwoTileServices_guideToEdit_haveMatchString() {
-        setupTileService(PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME,
-                PLACEHOLDER_TILE_NAME);
-        setupTileService(PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME2,
-                PLACEHOLDER_TILE_NAME2);
-
-        final CharSequence tileTooltipContent =
-                mFragment.getTileTooltipContent(QuickSettingsTooltipType.GUIDE_TO_EDIT);
-        final CharSequence tileName =
-                mFragment.loadTileLabel(mContext, mFragment.getTileComponentName());
-        assertThat(tileTooltipContent.toString()).isEqualTo(
-                mContext.getString(R.string.accessibility_service_qs_tooltip_content, tileName));
-    }
-
-    @Test
-    public void getTileTooltipContent_hasTwoTileServices_guideToDirectUse_haveMatchString() {
-        setupTileService(PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME,
-                PLACEHOLDER_TILE_NAME);
-        setupTileService(PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME2,
-                PLACEHOLDER_TILE_NAME2);
-
-        final CharSequence tileTooltipContent =
-                mFragment.getTileTooltipContent(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
-        final CharSequence tileName =
-                mFragment.loadTileLabel(mContext, mFragment.getTileComponentName());
-        assertThat(tileTooltipContent.toString()).isEqualTo(
-                mContext.getString(
-                        R.string.accessibility_service_auto_added_qs_tooltip_content, tileName));
     }
 
     @Test
