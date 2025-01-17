@@ -25,15 +25,13 @@ import android.provider.Settings.Secure.DOZE_ALWAYS_ON
 import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController.isAodSuppressedByBedtime
+import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
-import com.android.settingslib.datastore.KeyedObservableDelegate
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.PreferenceLifecycleContext
-import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
@@ -44,10 +42,7 @@ class AmbientDisplayAlwaysOnPreference :
     SwitchPreference(KEY, R.string.doze_always_on_title, R.string.doze_always_on_summary),
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider,
-    PreferenceLifecycleProvider,
     PreferenceRestrictionMixin {
-
-    private var keyMappingObserver: KeyedObserver<String>? = null
 
     override val keywords: Int
         get() = R.string.keywords_always_show_time_info
@@ -88,24 +83,17 @@ class AmbientDisplayAlwaysOnPreference :
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
-    override fun onCreate(context: PreferenceLifecycleContext) {
-        val storage = SettingsSecureStore.get(context)
-        keyMappingObserver =
-            KeyedObserver<String> { _, reason -> storage.notifyChange(KEY, reason) }
-                .also { storage.addObserver(DOZE_ALWAYS_ON, it, HandlerExecutor.main) }
-    }
-
-    override fun onDestroy(context: PreferenceLifecycleContext) {
-        keyMappingObserver?.let {
-            SettingsSecureStore.get(context).removeObserver(DOZE_ALWAYS_ON, it)
-        }
-    }
-
+    /**
+     * Datastore of the preference.
+     *
+     * The preference key and underlying storage key are the different, leverage
+     * [AbstractKeyedDataObservable] to redirect data change event.
+     */
     @Suppress("UNCHECKED_CAST")
     class Storage(
         private val context: Context,
         private val settingsStore: SettingsStore = SettingsSecureStore.get(context),
-    ) : KeyedObservableDelegate<String>(settingsStore), KeyValueStore {
+    ) : AbstractKeyedDataObservable<String>(), KeyedObserver<String>, KeyValueStore {
 
         override fun contains(key: String) = settingsStore.contains(DOZE_ALWAYS_ON)
 
@@ -118,6 +106,20 @@ class AmbientDisplayAlwaysOnPreference :
 
         override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) =
             settingsStore.setValue(DOZE_ALWAYS_ON, valueType, value)
+
+        override fun onFirstObserverAdded() {
+            // observe the underlying storage key
+            settingsStore.addObserver(DOZE_ALWAYS_ON, this, HandlerExecutor.main)
+        }
+
+        override fun onKeyChanged(key: String, reason: Int) {
+            // forward data change to preference hierarchy key
+            notifyChange(KEY, reason)
+        }
+
+        override fun onLastObserverRemoved() {
+            settingsStore.removeObserver(DOZE_ALWAYS_ON, this)
+        }
     }
 
     companion object {
