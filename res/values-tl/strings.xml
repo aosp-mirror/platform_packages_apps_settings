@@ -227,6 +227,10 @@
     <string name="search_region_hint" msgid="1748708432568237552">"Maghanap ng mga rehiyon"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"Naaapektuhan ng rehiyong pipiliin mo kung paano ipinapakita ng iyong telepono ang oras, mga petsa, temperatura, at higit pa."</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"Higit pang setting ng wika"</string>
+    <!-- no translation found for title_change_system_locale_region (2239197787972916177) -->
+    <skip />
+    <!-- no translation found for body_change_system_locale_region (2706171830649357930) -->
+    <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"Mga panrehiyong preference"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Magtakda ng mga kagustuhan sa mga yunit at numero"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Ipaalam sa mga app kung ano ang mga panrehiyong preference mo para ma-personalize ng mga ito ang iyong experience."</string>
@@ -344,6 +348,9 @@
     <string name="safety_center_summary" msgid="3554867379951053869">"Seguridad ng app, lock ng device, mga pahintulot"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Naidagdag ang mukha"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Kinakailangan ang pag-set up"</string>
+    <string name="security_settings_face_preference_title_new" msgid="7680231874730796331">"Mukha"</string>
+    <string name="security_settings_face_profile_preference_title_new" msgid="685550153608106166">"Mukha sa trabaho"</string>
+    <string name="private_space_face_unlock_title_new" msgid="2079622608951402509">"Mukha para sa pribadong space"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Pag-unlock Gamit ang Mukha"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Pag-unlock Gamit ang Mukha para sa trabaho"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Paano i-set up ang Pag-unlock Gamit ang Mukha"</string>
@@ -407,6 +414,7 @@
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Fingerprint"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Kapag ginagamit ang Fingerprint Unlock"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingerprint sa trabaho"</string>
+    <string name="security_settings_work_fingerprint_preference_title_new" msgid="8967333987631878868">"Fingerprint sa trabaho"</string>
     <string name="fingerprint_check_enrolled_title" msgid="1007921571704991108">"Tingnan ang mga naka-enroll na fingerprint"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Magdagdag ng fingerprint"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Naidagdag ang fingerprint}one{Naidagdag ang # fingerprint}other{Naidagdag ang # na fingerprint}}"</string>
@@ -619,6 +627,7 @@
     <string name="private_space_face_title" msgid="3290402865367663079">"Pag-unlock Gamit ang Mukha"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"I-tap para i-set up"</string>
     <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"Pag-unlock Gamit ang Fingerprint para sa pribadong space"</string>
+    <string name="private_space_fingerprint_unlock_title_new" msgid="5524309056115678364">"Fingerprint para sa pribadong space"</string>
     <string name="private_space_face_unlock_title" msgid="462248384776453613">"Pag-unlock Gamit ang Mukha para sa pribadong space"</string>
     <string name="private_space_biometric_unlock_title" msgid="1978145237698659673">"Pag-unlock gamit ang Mukha at Fingerprint sa private space"</string>
     <string name="private_space_fingerprint_enroll_introduction_title" msgid="5187730641333680942">"I-set up ang Pag-unlock Gamit ang Fingerprint para sa pribadong space"</string>
@@ -1380,10 +1389,8 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Habang nagcha-charge"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Habang naka-dock"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Hindi kailanman"</string>
-    <!-- no translation found for screensaver_settings_summary_postured (1184119124847691954) -->
-    <skip />
-    <!-- no translation found for screensaver_settings_summary_postured_and_charging (1952047156927637506) -->
-    <skip />
+    <string name="screensaver_settings_summary_postured" msgid="1184119124847691954">"Habang nakatayo"</string>
+    <string name="screensaver_settings_summary_postured_and_charging" msgid="1952047156927637506">"Habang nakatayo at nagcha-charge"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Naka-on / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Naka-off"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Kailan magsisimula"</string>
@@ -3724,8 +3731,7 @@
     <string name="conversations_category_title" msgid="5586541340846847798">"Mga Pag-uusap"</string>
     <string name="conversation_section_switch_title" msgid="3332885377659473775">"Seksyon ng pag-uusap"</string>
     <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Payagan ang app na gamitin ang seksyon ng pag-uusap"</string>
-    <!-- no translation found for conversation_section_switch_complete_summary (6326149637059423284) -->
-    <skip />
+    <string name="conversation_section_switch_complete_summary" msgid="6326149637059423284">"Payagan ang app na gamitin ang seksyon ng pag-uusap, kahit na hindi sinusuportahan ang mga feature gaya ng pagpa-prioritize at bubbles."</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Hindi isang pag-uusap"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Alisin sa seksyon ng pag-uusap"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Isa itong pag-uusap"</string>
@@ -3857,10 +3863,8 @@
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Bilang tugon sa iyong kahilingan, pinipigilan ng Android na lumabas sa device na ito ang ganitong kategorya ng mga notification"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Bilang tugon sa iyong kahilingan, pinipigilan ng Android na lumabas sa device na ito ang ganitong grupo ng mga notification"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Hindi nagpapadala ang app na ito ng mga notification"</string>
-    <!-- no translation found for app_notification_settings (2848603567344392693) -->
-    <skip />
-    <!-- no translation found for notification_channels (8080872820677975820) -->
-    <skip />
+    <string name="app_notification_settings" msgid="2848603567344392693">"Mga setting ng app"</string>
+    <string name="notification_channels" msgid="8080872820677975820">"Mga kategorya ng notification"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Iba Pa"</string>
     <string name="no_channels" msgid="4716199078612071915">"Walang anumang notification para sa app na ito"</string>
     <string name="no_recent_channels" msgid="5068574296267584043">"Ipakita ang mga hindi ginagamit na kategorya"</string>
@@ -4528,18 +4532,15 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"Mga Galaw"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Mabilis na buksan ang camera"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Para mabuksan kaagad ang camera, pindutin ang power button nang dalawang beses. Gumagana ito sa anumang screen."</string>
-    <!-- no translation found for double_tap_power_title (8129216801770589261) -->
+    <string name="double_tap_power_title" msgid="8129216801770589261">"I-double press ang power button"</string>
+    <string name="double_tap_power_enabled" msgid="7609935047996304482">"Gumamit ng pag-double press"</string>
+    <string name="double_tap_power_target_action_category" msgid="2568741597095863728">"I-double press ang power button para buksan"</string>
+    <string name="double_tap_power_camera_action_title" msgid="6641206739933181509">"Camera"</string>
+    <!-- no translation found for double_tap_power_camera_action_summary (4942585540579590444) -->
     <skip />
-    <!-- no translation found for double_tap_power_enabled (7609935047996304482) -->
+    <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
+    <!-- no translation found for double_tap_power_wallet_action_summary (3463748484407928770) -->
     <skip />
-    <!-- no translation found for double_tap_power_target_action_category (2568741597095863728) -->
-    <skip />
-    <!-- no translation found for double_tap_power_camera_action_title (6641206739933181509) -->
-    <skip />
-    <string name="double_tap_power_camera_action_summary" msgid="1231656402570674349">"I-access ang Camera"</string>
-    <!-- no translation found for double_tap_power_wallet_action_title (2460162990983117189) -->
-    <skip />
-    <string name="double_tap_power_wallet_action_summary" msgid="6567586974229774570">"I-access ang Wallet"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"I-flip ang camera para sa selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigation mode"</string>
@@ -4938,10 +4939,8 @@
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Magpadala at makatanggap ng mga text message sa pamamagitan ng satellite. Hindi kasama sa iyong account."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Satellite messaging, koneksyon sa satellite"</string>
     <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"Tungkol sa <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
-    <!-- no translation found for title_about_satellite_setting (3563087940535642558) -->
-    <skip />
-    <!-- no translation found for category_title_your_satellite_plan (8169426217950247126) -->
-    <skip />
+    <string name="title_about_satellite_setting" msgid="3563087940535642558">"Puwede kang magpadala at makatanggap ng mga text message sa pamamagitan ng satellite gamit ang kwalipikadong <xliff:g id="CARRIER_NAME">%1$s</xliff:g> account"</string>
+    <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"Ang iyong <xliff:g id="CARRIER_NAME">%1$s</xliff:g> account"</string>
     <string name="title_have_satellite_plan" msgid="857337944804101443">"Kasama sa iyong account ang pagmemensahe"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Hindi kasama ang satellite na pagmemensahe sa iyong account"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Matuto Pa"</string>
