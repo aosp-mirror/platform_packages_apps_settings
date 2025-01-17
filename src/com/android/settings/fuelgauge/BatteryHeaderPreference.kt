@@ -26,11 +26,10 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.fuelgauge.BatteryUtils
-import com.android.settingslib.metadata.PersistentPreference
+import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.metadata.RangeValue
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
@@ -38,10 +37,9 @@ import com.android.settingslib.widget.UsageProgressBarPreference
 
 // LINT.IfChange
 class BatteryHeaderPreference :
-    PersistentPreference<Int>,
+    IntRangeValuePreference,
     PreferenceBinding,
-    PreferenceLifecycleProvider,
-    RangeValue {
+    PreferenceLifecycleProvider {
 
     @VisibleForTesting var batteryBroadcastReceiver: BatteryBroadcastReceiver? = null
 

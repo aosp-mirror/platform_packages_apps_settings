@@ -41,11 +41,10 @@ import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MAX
 import com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MIN
 import com.android.settingslib.display.BrightnessUtils.convertLinearToGammaFloat
-import com.android.settingslib.metadata.PersistentPreference
+import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
-import com.android.settingslib.metadata.RangeValue
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
@@ -55,8 +54,7 @@ import java.text.NumberFormat
 
 // LINT.IfChange
 class BrightnessLevelPreference :
-    PersistentPreference<Int>,
-    RangeValue,
+    IntRangeValuePreference,
     PreferenceBinding,
     PreferenceRestrictionMixin,
     PreferenceSummaryProvider,
