@@ -54,6 +54,13 @@
         settings:controller="com.android.settings.inputmethod.TouchpadThreeFingerTapPreferenceController"
         android:order="37"/>
 
+    <SwitchPreferenceCompat
+        android:key="touchpad_acceleration"
+        android:title="@string/touchpad_acceleration_title"
+        android:summary="@string/touchpad_acceleration_summary"
+        settings:controller="com.android.settings.inputmethod.TouchpadAccelerationPreferenceController"
+        android:order="38"/>
+
     <com.android.settings.widget.SeekBarPreference
         android:key="touchpad_pointer_speed"
         android:title="@string/trackpad_pointer_speed"
