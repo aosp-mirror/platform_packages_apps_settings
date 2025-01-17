@@ -387,6 +387,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final MagnificationFeedbackPreferenceController magnificationFeedbackPreferenceController =
                 new MagnificationFeedbackPreferenceController(getContext(), this,
                         MagnificationFeedbackPreferenceController.PREF_KEY);
+        magnificationFeedbackPreferenceController.setInSetupWizard(mInSetupWizard);
         magnificationFeedbackPreferenceController.displayPreference(getPreferenceScreen());
         addPreferenceController(magnificationFeedbackPreferenceController);
     }

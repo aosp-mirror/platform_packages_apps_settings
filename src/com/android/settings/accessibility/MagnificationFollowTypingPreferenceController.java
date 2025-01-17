@@ -26,7 +26,7 @@ import com.android.settings.R;
 
 /** Controller that accesses and switches the preference status of following typing feature */
 public class MagnificationFollowTypingPreferenceController extends
-        MagnificationFeaturePreferenceController {
+        MagnificationTogglePreferenceController {
 
     private static final String TAG =
             MagnificationFollowTypingPreferenceController.class.getSimpleName();

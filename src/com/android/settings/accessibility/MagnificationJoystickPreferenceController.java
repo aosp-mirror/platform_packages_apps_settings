@@ -28,7 +28,7 @@ import com.android.settings.R;
  * Controller that accesses and switches the preference status of the magnification joystick feature
  */
 public class MagnificationJoystickPreferenceController extends
-        MagnificationFeaturePreferenceController {
+        MagnificationTogglePreferenceController {
 
     private static final String TAG =
             MagnificationJoystickPreferenceController.class.getSimpleName();

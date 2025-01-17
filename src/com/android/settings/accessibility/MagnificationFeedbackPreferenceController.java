@@ -25,7 +25,6 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SurveyFeatureProvider;
@@ -35,7 +34,7 @@ import com.android.settings.overlay.SurveyFeatureProvider;
  * visibility and click behavior of the preference based on the availability of a user survey
  * related to magnification.
  */
-public class MagnificationFeedbackPreferenceController extends BasePreferenceController
+public class MagnificationFeedbackPreferenceController extends MagnificationBasePreferenceController
         implements DefaultLifecycleObserver {
     private static final String TAG = "MagnificationFeedbackPreferenceController";
     public static final String PREF_KEY = "magnification_feedback";
@@ -53,7 +52,7 @@ public class MagnificationFeedbackPreferenceController extends BasePreferenceCon
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return isInSetupWizard() ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
     }
 
     @Override
