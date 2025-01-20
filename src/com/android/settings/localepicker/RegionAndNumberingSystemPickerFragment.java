@@ -116,8 +116,8 @@ public class RegionAndNumberingSystemPickerFragment extends DashboardFragment im
         }
 
         TopIntroPreference topIntroPreference = findPreference(KEY_TOP_INTRO_PREFERENCE);
-        if (topIntroPreference != null) {
-            topIntroPreference.setVisible(!mIsNumberingMode);
+        if (topIntroPreference != null && mIsNumberingMode) {
+            topIntroPreference.setTitle(R.string.top_intro_numbering_system_title);
         }
 
         if (mSystemLocaleAllListPreferenceController != null) {
