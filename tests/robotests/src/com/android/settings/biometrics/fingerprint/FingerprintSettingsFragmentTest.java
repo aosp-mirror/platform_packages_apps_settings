@@ -385,6 +385,19 @@ public class FingerprintSettingsFragmentTest {
 
     @Test
     @EnableFlags(com.android.settings.flags.Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    public void testUseFingerprintToPreference_isShown() {
+        doReturn(List.of()).when(mFingerprintManager).getEnrolledFingerprints(anyInt());
+        setUpFragment(false, PRIMARY_USER_ID, TYPE_UDFPS_OPTICAL, 5);
+
+        shadowOf(Looper.getMainLooper()).idle();
+
+        final Preference preference =
+                mFragment.findPreference("biometric_settings_use_fingerprint_to");
+        assertThat(preference.isVisible()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
     public void testCheckEnrolledHide_nonUdfps() {
         final Fingerprint fingerprint = new Fingerprint("Test", 0, 0);
         doReturn(List.of(fingerprint)).when(mFingerprintManager).getEnrolledFingerprints(anyInt());

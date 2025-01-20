@@ -20,6 +20,24 @@
     android:title="@string/security_settings_face_preference_title">
 
     <PreferenceCategory
+        android:key="biometric_settings_use_face_to"
+        android:title="@string/security_settings_face_settings_use_face_to_category"
+        settings:isPreferenceVisible="false">
+
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="biometric_settings_face_keyguard"
+            android:title="@string/biometric_settings_use_biometric_unlock_phone"
+            settings:keywords="@string/keywords_biometric_unlock"
+            settings:controller="com.android.settings.biometrics.face.FaceSettingsKeyguardUnlockPreferenceController"/>
+
+        <SwitchPreferenceCompat
+            android:key="biometric_settings_face_app"
+            android:title="@string/biometric_settings_use_biometric_for_apps"
+            settings:keywords="@string/keywords_biometric_unlock"
+            settings:controller="com.android.settings.biometrics.face.FaceSettingsAppsPreferenceController"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="security_settings_face_unlock_category"
         android:title="@string/security_settings_face_settings_use_face_category"
         settings:controller="com.android.settings.biometrics.face.FaceUnlockCategoryPreferenceController">

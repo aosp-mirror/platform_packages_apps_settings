@@ -273,6 +273,8 @@ public class FingerprintSettings extends SubSettings {
                 "security_settings_fingerprint_footer";
         private static final String KEY_BIOMETRICS_AUTHENTICATION_REQUESTED =
                 "biometrics_authentication_requested";
+        private static final String KEY_BIOMETRICS_USE_FINGERPRINT_TO_CATEGORY =
+                "biometric_settings_use_fingerprint_to";
 
         private static final int MSG_REFRESH_FINGERPRINT_TEMPLATES = 1000;
         private static final int MSG_FINGER_AUTH_SUCCESS = 1001;
@@ -656,6 +658,9 @@ public class FingerprintSettings extends SubSettings {
         private PreferenceScreen createPreferenceHierarchy() {
             PreferenceScreen root = getPreferenceScreen();
             addFingerprintPreferences(root);
+            if (Flags.biometricsOnboardingEducation()) {
+                setupUseFingerprintToPreferences();
+            }
             setPreferenceScreen(root);
             return root;
         }
@@ -684,6 +689,10 @@ public class FingerprintSettings extends SubSettings {
             mFingerprintsEnrolledCategory = findPreference(KEY_FINGERPRINTS_ENROLLED_CATEGORY);
             if (mFingerprintsEnrolledCategory != null) {
                 mFingerprintsEnrolledCategory.removeAll();
+            }
+            if (Flags.biometricsOnboardingEducation()) {
+                mFingerprintsEnrolledCategory.setTitle(root.getContext().getString(
+                        R.string.security_settings_fingerprint_title));
             }
 
             String keyToReturn = mIsExpressiveThemeStyle
@@ -813,6 +822,26 @@ public class FingerprintSettings extends SubSettings {
                         mScreenOffUnlockUdfpsPreferenceController.setChecked(!isChecked);
                         return true;
                     });
+        }
+
+        private void setupUseFingerprintToPreferences() {
+            final PreferenceCategory category =
+                    findPreference(KEY_BIOMETRICS_USE_FINGERPRINT_TO_CATEGORY);
+            category.setVisible(true);
+
+            // Setup use fingerprint to unlock preference
+            final FingerprintSettingsKeyguardUnlockPreferenceController fpUnlockController =
+                    use(FingerprintSettingsKeyguardUnlockPreferenceController.class);
+            fpUnlockController.setUserId(mUserId);
+            findPreference(fpUnlockController.getPreferenceKey())
+                    .setOnPreferenceChangeListener(fpUnlockController);
+
+            // Setup use fingerprint to verify it's you in apps preference
+            final FingerprintSettingsAppsPreferenceController fingerprintAppController =
+                    use(FingerprintSettingsAppsPreferenceController.class);
+            fingerprintAppController.setUserId(mUserId);
+            findPreference(fingerprintAppController.getPreferenceKey())
+                    .setOnPreferenceChangeListener(fingerprintAppController);
         }
 
         private void updatePreferencesAfterFingerprintRemoved() {
