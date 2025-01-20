@@ -51,6 +51,8 @@ public class PhysicalKeyboardA11yFragment extends DashboardFragment
         super.onAttach(context);
         mInputManager = Preconditions.checkNotNull(getActivity()
                 .getSystemService(InputManager.class));
+        use(KeyboardAccessibilitySlowKeysController.class).setFragment(this /*parent*/);
+        use(KeyboardAccessibilityBounceKeysController.class).setFragment(this /*parent*/);
     }
 
     @Override
