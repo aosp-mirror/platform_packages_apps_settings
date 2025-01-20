@@ -104,7 +104,7 @@ public class BubbleNotificationPreferenceControllerTest {
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, ON)).isEqualTo(OFF);
 
-        mPreference.updateStatus(false);
+        mPreference.setChecked(false);
 
         assertThat(mPreference.isChecked()).isFalse();
     }

@@ -49,7 +49,7 @@ public class WifiScanningMainSwitchPreferenceController extends TogglePreference
 
         MainSwitchPreference pref = screen.findPreference(getPreferenceKey());
         pref.addOnSwitchChangeListener(this);
-        pref.updateStatus(isChecked());
+        pref.setChecked(isChecked());
     }
 
     @Override

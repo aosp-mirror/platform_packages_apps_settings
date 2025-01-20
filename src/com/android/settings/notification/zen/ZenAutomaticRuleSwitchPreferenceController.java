@@ -81,7 +81,7 @@ public class ZenAutomaticRuleSwitchPreferenceController extends
 
     public void updateState(Preference preference) {
         if (mRule != null) {
-            mSwitchBar.updateStatus(mRule.isEnabled());
+            mSwitchBar.setChecked(mRule.isEnabled());
         }
     }
 

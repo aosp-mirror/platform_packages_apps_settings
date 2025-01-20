@@ -92,7 +92,7 @@ public class BatterySaverButtonPreferenceController extends TogglePreferenceCont
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        mPreference.updateStatus(isChecked());
+        mPreference.setChecked(isChecked());
     }
 
     @Override
