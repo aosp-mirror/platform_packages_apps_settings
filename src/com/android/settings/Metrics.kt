@@ -19,9 +19,9 @@ package com.android.settings
 import android.content.Context
 import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider
-import com.android.settingslib.metadata.PreferenceUiActionMetricsLogger
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata
+import com.android.settingslib.metadata.PreferenceUiActionMetricsLogger
 
 /** Provides metrics for preference action. */
 interface PreferenceActionMetricsProvider {
