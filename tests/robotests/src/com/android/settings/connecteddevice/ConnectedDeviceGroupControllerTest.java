@@ -344,7 +344,6 @@ public class ConnectedDeviceGroupControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_BONDED_BLUETOOTH_DEVICE_SEARCHABLE)
     public void updateDynamicRawDataToIndex_deviceNotBonded_deviceIsNotSearchable() {
         when(mDevice.getBondState()).thenReturn(BluetoothDevice.BOND_NONE);
         List<SearchIndexableRaw> searchData = new ArrayList<>();
@@ -355,7 +354,6 @@ public class ConnectedDeviceGroupControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_BONDED_BLUETOOTH_DEVICE_SEARCHABLE)
     public void updateDynamicRawDataToIndex_deviceBonded_deviceIsSearchable() {
         when(mDevice.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
         List<SearchIndexableRaw> searchData = new ArrayList<>();
