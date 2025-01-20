@@ -41,7 +41,7 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 public class MagnificationOneFingerPanningPreferenceController extends
-        MagnificationFeaturePreferenceController implements LifecycleObserver, OnResume, OnPause {
+        MagnificationTogglePreferenceController implements LifecycleObserver, OnResume, OnPause {
     static final String PREF_KEY = Settings.Secure.ACCESSIBILITY_SINGLE_FINGER_PANNING_ENABLED;
 
     private TwoStatePreference mSwitchPreference;

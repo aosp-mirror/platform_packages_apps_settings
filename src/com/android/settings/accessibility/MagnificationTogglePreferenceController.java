@@ -21,13 +21,13 @@ import android.content.Context;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
- * A base preference controller of magnification feature with common methods.
+ * A base toggle preference controller of magnification feature with common methods.
  */
-public abstract class MagnificationFeaturePreferenceController extends TogglePreferenceController {
+public abstract class MagnificationTogglePreferenceController extends TogglePreferenceController {
 
     private boolean mInSetupWizard;
 
-    protected MagnificationFeaturePreferenceController(Context context,
+    protected MagnificationTogglePreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
     }
