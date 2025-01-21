@@ -20,12 +20,15 @@ import android.app.WallpaperManager
 import com.android.settings.R
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.PointF
 import android.graphics.RectF
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.LayerDrawable
 import android.hardware.display.DisplayManager
 import android.hardware.display.DisplayTopology
 import android.hardware.display.DisplayTopology.TreeNode.POSITION_BOTTOM
@@ -168,36 +171,54 @@ class TopologyScale(
 
 const val TOPOLOGY_PREFERENCE_KEY = "display_topology_preference"
 
-/** Padding in pane coordinate pixels on each side of a display block. */
-const val BLOCK_PADDING = 2f
-
 /** Represents a draggable block in the topology pane. */
 class DisplayBlock(context : Context) : Button(context) {
+    @VisibleForTesting var mSelectedImage: Drawable = ColorDrawable(Color.BLACK)
+    @VisibleForTesting var mUnselectedImage: Drawable = ColorDrawable(Color.BLACK)
+
+    private val mSelectedBg = context.getDrawable(
+            R.drawable.display_block_selection_marker_background)!!
+    private val mUnselectedBg = context.getDrawable(
+            R.drawable.display_block_unselected_background)!!
+    private val mInsetPx = context.resources.getDimensionPixelSize(R.dimen.display_block_padding)
+
     init {
         isScrollContainer = false
         isVerticalScrollBarEnabled = false
         isHorizontalScrollBarEnabled = false
+
+        // Prevents shadow from appearing around edge of button.
+        stateListAnimator = null
     }
 
     /** Sets position of the block given unpadded coordinates. */
     fun place(topLeft: PointF) {
-        x = topLeft.x + BLOCK_PADDING
-        y = topLeft.y + BLOCK_PADDING
+        x = topLeft.x
+        y = topLeft.y
     }
 
-    val unpaddedX: Float
-        get() = x - BLOCK_PADDING
+    fun setWallpaper(wallpaper: Bitmap?) {
+        val wallpaperDrawable = BitmapDrawable(context.resources, wallpaper ?: return)
 
-    val unpaddedY: Float
-        get() = y - BLOCK_PADDING
+        fun framedBy(bg: Drawable): Drawable =
+            LayerDrawable(arrayOf(wallpaperDrawable, bg)).apply {
+                setLayerInsetRelative(0, mInsetPx, mInsetPx, mInsetPx, mInsetPx)
+            }
+        mSelectedImage = framedBy(mSelectedBg)
+        mUnselectedImage = framedBy(mUnselectedBg)
+    }
+
+    fun setHighlighted(value: Boolean) {
+        background = if (value) mSelectedImage else mUnselectedImage
+    }
 
     /** Sets position and size of the block given unpadded bounds. */
     fun placeAndSize(bounds : RectF, scale : TopologyScale) {
         val topLeft = scale.displayToPaneCoor(bounds.left, bounds.top)
         val bottomRight = scale.displayToPaneCoor(bounds.right, bounds.bottom)
         val layout = layoutParams
-        layout.width = (bottomRight.x - topLeft.x - BLOCK_PADDING * 2f).toInt()
-        layout.height = (bottomRight.y - topLeft.y - BLOCK_PADDING * 2f).toInt()
+        layout.width = (bottomRight.x - topLeft.x).toInt()
+        layout.height = (bottomRight.y - topLeft.y).toInt()
         layoutParams = layout
         place(topLeft)
     }
@@ -284,8 +305,8 @@ class DisplayTopologyPreference(context : Context)
             get() = displayManager.displayTopology
             set(value) { displayManager.displayTopology = value }
 
-        open val wallpaper : Drawable
-            get() = WallpaperManager.getInstance(context).drawable ?: ColorDrawable(Color.BLACK)
+        open val wallpaper: Bitmap?
+            get() = WallpaperManager.getInstance(context).bitmap
 
         open fun registerTopologyListener(listener: Consumer<DisplayTopology>) {
             displayManager.registerTopologyListener(context.mainExecutor, listener)
@@ -386,14 +407,20 @@ class DisplayTopologyPreference(context : Context)
             }
         }
 
+        var wallpaperBitmap : Bitmap? = null
+
         newBounds.forEach { (id, pos) ->
             val block = recycleableBlocks.removeFirstOrNull() ?: DisplayBlock(context).apply {
+                if (wallpaperBitmap == null) {
+                    wallpaperBitmap = injector.wallpaper
+                }
                 // We need a separate wallpaper Drawable for each display block, since each needs to
                 // be drawn at a separate size.
-                background = injector.wallpaper
+                setWallpaper(wallpaperBitmap)
 
                 mPaneContent.addView(this)
             }
+            block.setHighlighted(false)
 
             block.placeAndSize(pos, scaling)
             block.setOnTouchListener { view, ev ->
@@ -422,12 +449,15 @@ class DisplayTopologyPreference(context : Context)
 
         val stationaryDisps = positions.filter { it.first != displayId }
 
+        mDrag?.display?.setHighlighted(false)
+        block.setHighlighted(true)
+
         // We have to use rawX and rawY for the coordinates since the view receiving the event is
         // also the view that is moving. We need coordinates relative to something that isn't
         // moving, and the raw coordinates are relative to the screen.
         mDrag = BlockDrag(
                 stationaryDisps.toList(), block, displayId, displayPos.width(), displayPos.height(),
-                ev.rawX - block.unpaddedX, ev.rawY - block.unpaddedY)
+                ev.rawX - block.x, ev.rawY - block.y)
 
         // Prevents a container of this view from intercepting the touch events in the case the
         // pointer moves outside of the display block or the pane.
@@ -454,9 +484,10 @@ class DisplayTopologyPreference(context : Context)
         val drag = mDrag ?: return false
         val topology = mTopologyInfo ?: return false
         mPaneContent.requestDisallowInterceptTouchEvent(false)
+        drag.display.setHighlighted(false)
 
         val newCoor = topology.scaling.paneToDisplayCoor(
-                drag.display.unpaddedX, drag.display.unpaddedY)
+                drag.display.x, drag.display.y)
         val newTopology = topology.topology.copy()
         val newPositions = drag.stationaryDisps.map { (id, pos) -> id to PointF(pos.left, pos.top) }
                 .plus(drag.displayId to newCoor)
