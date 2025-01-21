@@ -65,6 +65,7 @@ public class RegionAndNumberingSystemPickerFragment extends DashboardFragment im
 
     public static final String EXTRA_TARGET_LOCALE = "extra_target_locale";
     public static final String EXTRA_IS_NUMBERING_SYSTEM = "extra_is_numbering_system";
+    public static final String EXTRA_APP_PACKAGE_NAME = "extra_package_name";
 
     private static final String TAG = "RegionAndNumberingSystemPickerFragment";
     private static final String KEY_PREFERENCE_SYSTEM_LOCALE_LIST = "system_locale_list";
