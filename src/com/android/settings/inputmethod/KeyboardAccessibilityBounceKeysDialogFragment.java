@@ -32,6 +32,8 @@ public class KeyboardAccessibilityBounceKeysDialogFragment extends
         Bundle bundle = new Bundle();
         bundle.putInt(EXTRA_TITLE_RES, R.string.bounce_keys_dialog_title);
         bundle.putInt(EXTRA_SUBTITLE_RES, R.string.bounce_keys_dialog_subtitle);
+        bundle.putInt(EXTRA_SEEKBAR_CONTENT_DESCRIPTION,
+                R.string.input_setting_bounce_keys_seekbar_desc);
         result.setArguments(bundle);
         return result;
     }

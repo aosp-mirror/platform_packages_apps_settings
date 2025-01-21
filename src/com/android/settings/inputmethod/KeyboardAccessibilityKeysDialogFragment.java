@@ -38,6 +38,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.jspecify.annotations.Nullable;
 
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public abstract class KeyboardAccessibilityKeysDialogFragment extends DialogFragment {
@@ -45,6 +46,8 @@ public abstract class KeyboardAccessibilityKeysDialogFragment extends DialogFrag
     private static final long MILLISECOND_IN_SECONDS = TimeUnit.SECONDS.toMillis(1);
     protected static final String EXTRA_TITLE_RES = "extra_title_res";
     protected static final String EXTRA_SUBTITLE_RES = "extra_subtitle_res";
+    protected static final String EXTRA_SEEKBAR_CONTENT_DESCRIPTION =
+            "extra_seekbar_content_description_res";
 
     protected final MetricsFeatureProvider mMetricsFeatureProvider;
 
@@ -67,6 +70,7 @@ public abstract class KeyboardAccessibilityKeysDialogFragment extends DialogFrag
         super.onCreateDialog(savedInstanceState);
         int titleRes = getArguments().getInt(EXTRA_TITLE_RES);
         int subtitleRes = getArguments().getInt(EXTRA_SUBTITLE_RES);
+        int seekbarContentDescriptionRes = getArguments().getInt(EXTRA_SEEKBAR_CONTENT_DESCRIPTION);
 
         Activity activity = getActivity();
         View dialoglayout =
@@ -121,6 +125,10 @@ public abstract class KeyboardAccessibilityKeysDialogFragment extends DialogFrag
             titleTextView.setText(titleRes);
             subTitleTextView.setText(subtitleRes);
 
+            if (seekbarContentDescriptionRes != 0) {
+                customProgressBar.setContentDescription(
+                        getContext().getString(seekbarContentDescriptionRes));
+            }
             customProgressBar.incrementProgressBy(CUSTOM_PROGRESS_INTERVAL);
             customProgressBar.setProgress(1);
             View customValueView = accessibilityKeyDialog.findViewById(
@@ -141,7 +149,9 @@ public abstract class KeyboardAccessibilityKeysDialogFragment extends DialogFrag
             customProgressBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    customValueTextView.setText(progressToThresholdInSecond(progress));
+                    String threshold = progressToThresholdInSecond(progress);
+                    customValueTextView.setText(threshold);
+                    customProgressBar.setContentDescription(threshold);
                 }
 
                 @Override
@@ -162,9 +172,10 @@ public abstract class KeyboardAccessibilityKeysDialogFragment extends DialogFrag
         return accessibilityKeyDialog;
     }
 
-    private static String progressToThresholdInSecond(int progress) {
-        return String.valueOf((double) progress * CUSTOM_PROGRESS_INTERVAL
-                / MILLISECOND_IN_SECONDS);
+    private String progressToThresholdInSecond(int progress) {
+        return (double) progress * CUSTOM_PROGRESS_INTERVAL
+                / MILLISECOND_IN_SECONDS + " " + TimeUnit.SECONDS.name().toLowerCase(
+                Locale.getDefault());
     }
 
     private void initStateBasedOnThreshold(RadioGroup cannedValueRadioGroup,

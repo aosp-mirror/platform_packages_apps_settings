@@ -32,6 +32,8 @@ public class KeyboardAccessibilitySlowKeysDialogFragment extends
         Bundle bundle = new Bundle();
         bundle.putInt(EXTRA_TITLE_RES, R.string.slow_keys);
         bundle.putInt(EXTRA_SUBTITLE_RES, R.string.slow_keys_summary);
+        bundle.putInt(EXTRA_SEEKBAR_CONTENT_DESCRIPTION,
+                R.string.input_setting_slow_keys_seekbar_desc);
         result.setArguments(bundle);
         return result;
     }
