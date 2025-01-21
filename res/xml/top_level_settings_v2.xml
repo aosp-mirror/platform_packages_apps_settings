@@ -221,6 +221,16 @@
             settings:controller="com.android.settings.accounts.TopLevelAccountEntryPreferenceController"/>
 
         <com.android.settings.widget.HomepagePreference
+            android:key="top_level_supervision"
+            android:title="@string/supervision_settings_title"
+            android:summary="@string/supervision_settings_summary"
+            android:icon="@drawable/ic_account_child_invert"
+            android:order="5"
+            android:fragment="com.android.settings.supervision.SupervisionDashboardFragment"
+            settings:highlightableMenuKey="@string/menu_key_supervision"
+            settings:controller="com.android.settings.supervision.TopLevelSupervisionPreferenceController"/>
+
+        <com.android.settings.widget.HomepagePreference
             android:key="top_level_emergency"
             android:title="@string/emergency_settings_preference_title"
             android:summary="@string/emergency_dashboard_summary"
