@@ -166,7 +166,7 @@ class TopologyScale(
     }
 }
 
-const val PREFERENCE_KEY = "display_topology_preference"
+const val TOPOLOGY_PREFERENCE_KEY = "display_topology_preference"
 
 /** Padding in pane coordinate pixels on each side of a display block. */
 const val BLOCK_PADDING = 2f
@@ -229,7 +229,8 @@ class DisplayTopologyPreference(context : Context)
         // Prevent highlight when hovering with mouse.
         isSelectable = false
 
-        key = PREFERENCE_KEY
+        key = TOPOLOGY_PREFERENCE_KEY
+        isPersistent = false
 
         injector = Injector(context)
     }
