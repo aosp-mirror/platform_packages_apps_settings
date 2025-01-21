@@ -22,7 +22,7 @@ import com.android.settings.Utils
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment
 import com.android.settingslib.applications.DefaultAppInfo
 
-class DefaultPrivateCombinedPreferenceController(context: Context?) : DefaultCombinedPreferenceController(context) {
+class DefaultPrivateCombinedPreferenceController(context: Context?) : DefaultCombinedPreferenceController(context, /*isWorkProfile=*/ false, /*isPrivateSpace=*/ true) {
     private val userHandle: UserHandle? =
             Utils.getProfileOfType(mUserManager, ProfileSelectFragment.ProfileType.PRIVATE)
 

@@ -21,6 +21,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.credentials.CredentialManager;
 import android.os.UserHandle;
@@ -89,7 +90,8 @@ public class AccountDashboardFragment extends DashboardFragment {
                     forceUpdatePreferences();
                 }
             };
-            cmpp.init(this, getFragmentManager(), getIntent(), delegate, /*isWorkProfile=*/false);
+            cmpp.init(this, getFragmentManager(), getIntent(), delegate,
+                    /*isWorkProfile=*/false, /*isPrivateSpace=*/ false);
         } else {
             getSettingsLifecycle().addObserver(use(PasswordsPreferenceController.class));
         }
@@ -98,7 +100,8 @@ public class AccountDashboardFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        buildAutofillPreferenceControllers(context, controllers);
+        buildAutofillPreferenceControllers(context, controllers,
+                /*isWorkProfile=*/false, /*isPrivateSpace=*/ false);
         final String[] authorities = getIntent().getStringArrayExtra(EXTRA_AUTHORITIES);
         buildAccountPreferenceControllers(context, this /* parent */, authorities, controllers);
         return controllers;
@@ -110,9 +113,13 @@ public class AccountDashboardFragment extends DashboardFragment {
     }
 
     static void buildAutofillPreferenceControllers(
-            Context context, List<AbstractPreferenceController> controllers) {
+            Context context,
+            List<AbstractPreferenceController> controllers,
+            boolean isWorkProfile,
+            boolean isPrivateSpace) {
         if (CredentialManager.isServiceEnabled(context)) {
-            controllers.add(new DefaultCombinedPreferenceController(context));
+            controllers.add(new DefaultCombinedPreferenceController(
+                    context, isWorkProfile, isPrivateSpace));
             controllers.add(new DefaultWorkCombinedPreferenceController(context));
             controllers.add(new DefaultPrivateCombinedPreferenceController(context));
         } else {
@@ -162,7 +169,7 @@ public class AccountDashboardFragment extends DashboardFragment {
                     final List<AbstractPreferenceController> controllers = new ArrayList<>();
                     buildAccountPreferenceControllers(
                             context, null /* parent */, null /* authorities*/, controllers);
-                    buildAutofillPreferenceControllers(context, controllers);
+                    buildAutofillPreferenceControllers(context, controllers, false, false);
                     return controllers;
                 }
 

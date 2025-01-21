@@ -57,7 +57,7 @@ public class CredentialsPickerActivityTest {
     @Test
     public void testInjectFragmentIntoIntent_normalProfile() {
         Intent intent = new Intent();
-        CredentialsPickerActivity.injectFragmentIntoIntent(mMockContext, intent);
+        CredentialsPickerActivity.injectFragmentIntoIntent(mMockContext, intent, 10);
         assertThat(intent.getStringExtra(CredentialsPickerActivity.EXTRA_SHOW_FRAGMENT))
                 .isEqualTo(DefaultCombinedPicker.class.getName());
     }
@@ -70,7 +70,7 @@ public class CredentialsPickerActivityTest {
         when(mUserManager.isManagedProfile(anyInt())).thenReturn(true);
         assertThat(DefaultCombinedPickerWork.isUserHandledByFragment(mUserManager, 10)).isTrue();
 
-        CredentialsPickerActivity.injectFragmentIntoIntent(mMockContext, intent);
+        CredentialsPickerActivity.injectFragmentIntoIntent(mMockContext, intent, 10);
         assertThat(intent.getStringExtra(CredentialsPickerActivity.EXTRA_SHOW_FRAGMENT))
                 .isEqualTo(DefaultCombinedPickerWork.class.getName());
     }
@@ -84,7 +84,7 @@ public class CredentialsPickerActivityTest {
         doReturn(true).when(mUserManager).isPrivateProfile();
         assertThat(DefaultCombinedPickerPrivate.isUserHandledByFragment(mUserManager)).isTrue();
 
-        CredentialsPickerActivity.injectFragmentIntoIntent(mMockContext, intent);
+        CredentialsPickerActivity.injectFragmentIntoIntent(mMockContext, intent, 10);
         assertThat(intent.getStringExtra(CredentialsPickerActivity.EXTRA_SHOW_FRAGMENT))
                 .isEqualTo(DefaultCombinedPickerPrivate.class.getName());
     }

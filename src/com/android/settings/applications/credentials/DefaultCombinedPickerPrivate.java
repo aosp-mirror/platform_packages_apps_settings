@@ -21,11 +21,6 @@ import android.os.UserManager;
 
 public class DefaultCombinedPickerPrivate extends DefaultCombinedPicker {
 
-    @Override
-    protected int getUser() {
-        return UserHandle.myUserId();
-    }
-
     /** Returns whether the user is handled by this fragment. */
     public static boolean isUserHandledByFragment(UserManager userManager) {
         return android.os.Flags.allowPrivateProfile()

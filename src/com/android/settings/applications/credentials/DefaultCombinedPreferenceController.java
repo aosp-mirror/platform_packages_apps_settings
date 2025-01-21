@@ -48,7 +48,8 @@ import java.util.List;
 import java.util.concurrent.Executor;
 
 public class DefaultCombinedPreferenceController extends DefaultAppPreferenceController {
-
+    private final boolean mIsWorkProfile;
+    private final boolean mIsPrivateSpace;
     private static final Intent AUTOFILL_PROBE = new Intent(AutofillService.SERVICE_INTERFACE);
     private static final String TAG = "DefaultCombinedPreferenceController";
 
@@ -56,11 +57,14 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
     private final CredentialManager mCredentialManager;
     private final Executor mExecutor;
 
-    public DefaultCombinedPreferenceController(Context context) {
+    public DefaultCombinedPreferenceController(Context context,
+            boolean isWorkProfile, boolean isPrivateSpace) {
         super(context);
 
         mExecutor = ContextCompat.getMainExecutor(context);
         mAutofillManager = mContext.getSystemService(AutofillManager.class);
+        mIsWorkProfile = isWorkProfile;
+        mIsPrivateSpace = isPrivateSpace;
 
         if (CredentialManager.isServiceEnabled(context)) {
             mCredentialManager = mContext.getSystemService(CredentialManager.class);
@@ -209,14 +213,17 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
     }
 
     protected int getUser() {
-        return UserHandle.myUserId();
+        return UserUtils.getUser(mIsWorkProfile, mIsPrivateSpace, mContext);
     }
 
     /** Creates an intent to open the credential picker. */
     private Intent createIntentToOpenPicker() {
         final Context context =
                 mContext.createContextAsUser(UserHandle.of(getUser()), /* flags= */ 0);
-        return new Intent(context, CredentialsPickerActivity.class);
+        Intent intent = new Intent(context, CredentialsPickerActivity.class);
+        intent.putExtra(UserUtils.EXTRA_IS_WORK_PROFILE, mIsWorkProfile);
+        intent.putExtra(UserUtils.EXTRA_IS_PRIVATE_SPACE, mIsPrivateSpace);
+        return intent;
     }
 
     private void removePrimaryProvider() {

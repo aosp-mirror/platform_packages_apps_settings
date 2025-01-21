@@ -16,18 +16,19 @@
 
 package com.android.settings.applications.credentials;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
 
-import com.android.settings.Utils;
-
 public class DefaultWorkCombinedPreferenceController extends DefaultCombinedPreferenceController {
+
+    @Nullable
     private final UserHandle mUserHandle;
 
     public DefaultWorkCombinedPreferenceController(Context context) {
-        super(context);
-        mUserHandle = Utils.getManagedProfile(mUserManager);
+        super(context, /*isWorkProfile=*/ true, /*isPrivateSpace=*/ false);
+        mUserHandle = UserUtils.getManagedProfile(mUserManager);
     }
 
     @Override
@@ -46,10 +47,5 @@ public class DefaultWorkCombinedPreferenceController extends DefaultCombinedPref
     @Override
     protected void startActivity(Intent intent) {
         mContext.startActivityAsUser(intent, mUserHandle);
-    }
-
-    @Override
-    protected int getUser() {
-        return mUserHandle.getIdentifier();
     }
 }

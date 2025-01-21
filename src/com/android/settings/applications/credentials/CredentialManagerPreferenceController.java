@@ -119,6 +119,7 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
 
     private Optional<Boolean> mSimulateHiddenForTests = Optional.empty();
     private boolean mIsWorkProfile = false;
+    private boolean mIsPrivateSpace = false;
     private boolean mSimulateConnectedForTests = false;
 
     public CredentialManagerPreferenceController(Context context, String preferenceKey) {
@@ -203,10 +204,12 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
             FragmentManager fragmentManager,
             @Nullable Intent launchIntent,
             @NonNull Delegate delegate,
-            boolean isWorkProfile) {
+            boolean isWorkProfile,
+            boolean isPrivateSpace) {
         fragment.getSettingsLifecycle().addObserver(this);
         mFragmentManager = fragmentManager;
         mIsWorkProfile = isWorkProfile;
+        mIsPrivateSpace = isPrivateSpace;
 
         setDelegate(delegate);
         verifyReceivedIntent(launchIntent);
@@ -496,7 +499,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
         final Preference preference = new Preference(context);
         preference.setOnPreferenceClickListener(
                 p -> {
-                    context.startActivityAsUser(addNewServiceIntent, UserHandle.of(getUser()));
+                    context.startActivityAsUser(addNewServiceIntent,
+                            UserHandle.of(getUser()));
                     return true;
                 });
         preference.setTitle(R.string.print_menu_item_add_service);
@@ -886,18 +890,12 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
     }
 
     protected int getUser() {
-        if (mIsWorkProfile) {
-            UserHandle workProfile = getWorkProfileUserHandle();
-            if (workProfile != null) {
-                return workProfile.getIdentifier();
-            }
-        }
-        return UserHandle.myUserId();
+        return UserUtils.getUser(mIsWorkProfile, mIsPrivateSpace, mContext);
     }
 
     private @Nullable UserHandle getWorkProfileUserHandle() {
         if (mIsWorkProfile) {
-            return Utils.getManagedProfile(UserManager.get(mContext));
+            return UserUtils.getManagedProfile(UserManager.get(mContext));
         }
 
         return null;
