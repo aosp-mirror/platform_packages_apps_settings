@@ -36,6 +36,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.android.graphics.hwui.flags.Flags;
+import com.android.modules.expresslog.Counter;
 import com.android.settings.R;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -166,6 +167,7 @@ public class HighContrastTextMigrationReceiver extends BroadcastReceiver {
                 NotificationManager.IMPORTANCE_LOW);
         notificationManager.createNotificationChannel(notificationChannel);
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
+        Counter.logIncrement("accessibility.value_hct_notification_posted");
     }
 
     private Intent createHighContrastTextSettingsIntent(Context context) {
@@ -174,6 +176,8 @@ public class HighContrastTextMigrationReceiver extends BroadcastReceiver {
         Bundle fragmentArgs = new Bundle();
         fragmentArgs.putString(EXTRA_FRAGMENT_ARG_KEY,
                 TextReadingPreferenceFragment.HIGH_TEXT_CONTRAST_KEY);
+        fragmentArgs.putInt(TextReadingPreferenceFragment.EXTRA_LAUNCHED_FROM,
+                TextReadingPreferenceFragment.EntryPoint.HIGH_CONTRAST_TEXT_NOTIFICATION);
         settingsIntent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, fragmentArgs);
         return settingsIntent;
     }
