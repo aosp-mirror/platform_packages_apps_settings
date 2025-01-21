@@ -68,6 +68,7 @@ public class BrightnessLevelPreferenceControllerForSetupWizardTest {
     @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
     public void displayPreference_flagOn_preferenceVisibleTrue() {
         Preference preference = displayPreference(/* restricted= */ false);
+
         assertThat(preference.isVisible()).isTrue();
     }
 
@@ -75,6 +76,15 @@ public class BrightnessLevelPreferenceControllerForSetupWizardTest {
     @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
     public void displayPreference_flagOnAndRestricted_preferenceVisibleFalse() {
         Preference preference = displayPreference(/* restricted= */ true);
+
+        assertThat(preference.isVisible()).isFalse();
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
+    public void displayPreference_flagOff_preferenceVisibleFalse() {
+        Preference preference = displayPreference(/* restricted= */ false);
+
         assertThat(preference.isVisible()).isFalse();
     }
 
@@ -82,6 +92,7 @@ public class BrightnessLevelPreferenceControllerForSetupWizardTest {
     @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
     public void getAvailabilityStatus_flagOn_available() {
         displayPreference(/* restricted= */ false);
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
@@ -89,6 +100,7 @@ public class BrightnessLevelPreferenceControllerForSetupWizardTest {
     @EnableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
     public void getAvailabilityStatus_flagOnAndRestricted_conditionallyUnavailable() {
         displayPreference(/* restricted= */ true);
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
@@ -96,6 +108,7 @@ public class BrightnessLevelPreferenceControllerForSetupWizardTest {
     @DisableFlags(Flags.FLAG_ADD_BRIGHTNESS_SETTINGS_IN_SUW)
     public void getAvailabilityStatus_flagOff_conditionallyUnavailable() {
         displayPreference(/* restricted= */ false);
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 

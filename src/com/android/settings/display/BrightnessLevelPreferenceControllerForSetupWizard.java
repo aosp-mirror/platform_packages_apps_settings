@@ -52,12 +52,11 @@ public class BrightnessLevelPreferenceControllerForSetupWizard extends
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        Preference preference = screen.findPreference(getPreferenceKey());
+        final Preference preference = screen.findPreference(getPreferenceKey());
         if (preference instanceof RestrictedPreferenceHelperProvider helperProvider) {
             mRestrictedPreferenceHelper = helperProvider.getRestrictedPreferenceHelper();
-            preference.setVisible(!isRestricted());
         }
+        super.displayPreference(screen);
     }
 
     @Override
