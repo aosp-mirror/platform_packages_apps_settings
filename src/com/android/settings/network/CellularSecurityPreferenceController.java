@@ -23,6 +23,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.safetycenter.SafetyCenterManager;
+import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -37,6 +38,8 @@ import com.android.internal.telephony.flags.Flags;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.telephony.CellularSecuritySettingsFragment;
+
+import java.util.List;
 
 /**
  * {@link BasePreferenceController} for accessing Cellular Security settings from Network &
@@ -76,6 +79,13 @@ public class CellularSecurityPreferenceController extends BasePreferenceControll
         if (mTelephonyManager == null) {
             Log.w(LOG_TAG, "Telephony manager not yet initialized");
             mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        }
+
+        // Check there are valid SIM cards which can be displayed to the user, otherwise this
+        // settings should not be shown.
+        List<SubscriptionInfo> availableSubs = SubscriptionUtil.getAvailableSubscriptions(mContext);
+        if (availableSubs.isEmpty()) {
+            return CONDITIONALLY_UNAVAILABLE;
         }
 
         boolean isNullCipherDisablementAvailable = false;
