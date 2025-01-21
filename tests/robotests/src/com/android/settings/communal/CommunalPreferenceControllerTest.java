@@ -16,6 +16,10 @@
 
 package com.android.settings.communal;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -25,12 +29,17 @@ import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.os.UserHandle;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -40,6 +49,9 @@ import org.robolectric.annotation.Config;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {SettingsShadowResources.class, ShadowUserManager.class})
 public class CommunalPreferenceControllerTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private ShadowUserManager mShadowUserManager;
     private CommunalPreferenceController mController;
 
@@ -54,27 +66,68 @@ public class CommunalPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_communalEnabled_shouldBeTrueForDockUser() {
+    public void isAvailable_communalEnabled_shouldBeTrueForPrimaryUser() {
         setCommunalEnabled(true);
         mShadowUserManager.setUserForeground(true);
         assertTrue(mController.isAvailable());
     }
 
     @Test
-    public void isAvailable_communalEnabled_shouldBeFalseForNonDockUser() {
+    public void isAvailable_communalEnabled_shouldBeFalseForSecondaryUser() {
         setCommunalEnabled(true);
         mShadowUserManager.setUserForeground(false);
         assertFalse(mController.isAvailable());
     }
 
     @Test
-    public void isAvailable_communalDisabled_shouldBeFalseForDockUser() {
+    public void isAvailable_communalDisabled_shouldBeFalseForPrimaryUser() {
         setCommunalEnabled(false);
+        mShadowUserManager.setUserForeground(true);
+        assertFalse(mController.isAvailable());
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_HUB_MODE_SETTINGS_ON_MOBILE)
+    public void isAvailable_communalOnMobileEnabled_shouldBeTrueForPrimaryUser() {
+        setCommunalEnabled(false);
+        setCommunalOnMobileEnabled(true);
+        mShadowUserManager.setUserForeground(true);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_HUB_MODE_SETTINGS_ON_MOBILE)
+    public void isAvailable_communalOnMobileEnabled_shouldBeFalseForSecondaryUser() {
+        setCommunalEnabled(false);
+        setCommunalOnMobileEnabled(true);
+        mShadowUserManager.setUserForeground(false);
+        assertFalse(mController.isAvailable());
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_HUB_MODE_SETTINGS_ON_MOBILE)
+    public void isAvailable_communalOnMobileDisabled_shouldBeFalseForPrimaryUser() {
+        setCommunalEnabled(false);
+        setCommunalOnMobileEnabled(false);
+        mShadowUserManager.setUserForeground(true);
+        assertFalse(mController.isAvailable());
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_HUB_MODE_SETTINGS_ON_MOBILE)
+    public void isAvailable_hubModeSettingsOnMobileFlagDisabled_shouldBeFalseForPrimaryUser() {
+        setCommunalEnabled(false);
+        setCommunalOnMobileEnabled(true);
         mShadowUserManager.setUserForeground(true);
         assertFalse(mController.isAvailable());
     }
 
     private void setCommunalEnabled(boolean enabled) {
         SettingsShadowResources.overrideResource(R.bool.config_show_communal_settings, enabled);
+    }
+
+    private void setCommunalOnMobileEnabled(boolean enabled) {
+        SettingsShadowResources.overrideResource(
+                R.bool.config_show_communal_settings_mobile, enabled);
     }
 }

@@ -48,6 +48,7 @@ import org.robolectric.util.ReflectionHelpers;
 @RunWith(RobolectricTestRunner.class)
 public class WhenToDreamPreferenceControllerTest {
     private static final String TEST_PACKAGE = "com.android.test";
+    private static final String PREF_KEY = "when_to_start";
 
     private WhenToDreamPreferenceController mController;
     private Context mContext;
@@ -64,7 +65,7 @@ public class WhenToDreamPreferenceControllerTest {
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
-        mController = new WhenToDreamPreferenceController(mContext, true, true);
+        mController = new WhenToDreamPreferenceController(mContext, PREF_KEY, true, true);
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
         when(mContext.getSystemService(PowerManager.class)).thenReturn(mPowerManager);
         when(mPowerManager.isAmbientDisplaySuppressedForTokenByApp(anyString(), anyInt()))

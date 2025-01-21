@@ -1,0 +1,9 @@
+package: "com.android.settings.flags"
+container: "system"
+
+flag {
+  name: "enable_hub_mode_settings_on_mobile"
+  namespace: "systemui"
+  description: "This flag controls whether hub mode settings should be enabled on mobile"
+  bug: "389782624"
+}
