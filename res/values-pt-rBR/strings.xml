@@ -227,6 +227,10 @@
     <string name="search_region_hint" msgid="1748708432568237552">"Pesquisar regiões"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"A região escolhida afeta a forma como o smartphone mostra o horário, as datas, a temperatura e muito mais"</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"Mais configurações de idioma"</string>
+    <!-- no translation found for title_change_system_locale_region (2239197787972916177) -->
+    <skip />
+    <!-- no translation found for body_change_system_locale_region (2706171830649357930) -->
+    <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferências regionais"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Definir preferências de número e unidades"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Permita que os apps saibam suas preferências regionais para personalizar sua experiência."</string>
@@ -344,6 +348,9 @@
     <string name="safety_center_summary" msgid="3554867379951053869">"Segurança dos apps, bloqueio do dispositivo, permissões"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Rosto adicionado"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Configuração necessária"</string>
+    <string name="security_settings_face_preference_title_new" msgid="7680231874730796331">"Rosto"</string>
+    <string name="security_settings_face_profile_preference_title_new" msgid="685550153608106166">"Reconhecimento facial para o trabalho"</string>
+    <string name="private_space_face_unlock_title_new" msgid="2079622608951402509">"Rosto do espaço privado"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Desbloqueio facial"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Desbloqueio facial para trabalho"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Como configurar o Desbloqueio facial"</string>
@@ -407,6 +414,7 @@
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Impressão digital"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Quando o Desbloqueio por impressão digital estiver sendo usado"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Impressão digital do trabalho"</string>
+    <string name="security_settings_work_fingerprint_preference_title_new" msgid="8967333987631878868">"Impressão digital para o trabalho"</string>
     <string name="fingerprint_check_enrolled_title" msgid="1007921571704991108">"Verifique as impressões digitais registradas"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Adicionar impressão digital"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Impressão digital registrada}one{# impressão digital registrada}other{# impressões digitais registradas}}"</string>
@@ -619,6 +627,7 @@
     <string name="private_space_face_title" msgid="3290402865367663079">"Desbloqueio facial"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Toque para configurar"</string>
     <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"Desbloqueio por impressão digital para o espaço privado"</string>
+    <string name="private_space_fingerprint_unlock_title_new" msgid="5524309056115678364">"Impressão digital do espaço privado"</string>
     <string name="private_space_face_unlock_title" msgid="462248384776453613">"Desbloqueio facial para o espaço privado"</string>
     <string name="private_space_biometric_unlock_title" msgid="1978145237698659673">"Desbloqueio facial e por digital para espaço privado"</string>
     <string name="private_space_fingerprint_enroll_introduction_title" msgid="5187730641333680942">"Configurar Desbloqueio por digital para o espaço privado"</string>
@@ -1380,10 +1389,8 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Ao carregar"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Encaixado na base"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Nunca"</string>
-    <!-- no translation found for screensaver_settings_summary_postured (1184119124847691954) -->
-    <skip />
-    <!-- no translation found for screensaver_settings_summary_postured_and_charging (1952047156927637506) -->
-    <skip />
+    <string name="screensaver_settings_summary_postured" msgid="1184119124847691954">"Na posição"</string>
+    <string name="screensaver_settings_summary_postured_and_charging" msgid="1952047156927637506">"Na posição e carregando"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Ativado / <xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Desativada"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Quando começar"</string>
@@ -3724,8 +3731,7 @@
     <string name="conversations_category_title" msgid="5586541340846847798">"Conversas"</string>
     <string name="conversation_section_switch_title" msgid="3332885377659473775">"Seção de conversa"</string>
     <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Permitir que o app use uma seção de conversa"</string>
-    <!-- no translation found for conversation_section_switch_complete_summary (6326149637059423284) -->
-    <skip />
+    <string name="conversation_section_switch_complete_summary" msgid="6326149637059423284">"Permitir que o app use uma seção de conversa, embora recursos de conversa como priorização e balões não estejam disponíveis nele."</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Não é uma conversa"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Remover da seção de conversa"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Esta é uma conversa"</string>
@@ -3857,10 +3863,8 @@
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"O Android está bloqueando essa categoria de notificações neste dispositivo, conforme você pediu."</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"O Android está bloqueando esse grupo de notificações neste dispositivo, conforme seu pedido"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Esse app não envia notificações"</string>
-    <!-- no translation found for app_notification_settings (2848603567344392693) -->
-    <skip />
-    <!-- no translation found for notification_channels (8080872820677975820) -->
-    <skip />
+    <string name="app_notification_settings" msgid="2848603567344392693">"Configurações do app"</string>
+    <string name="notification_channels" msgid="8080872820677975820">"Categorias de notificação"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Outros"</string>
     <string name="no_channels" msgid="4716199078612071915">"Este app não postou nenhuma notificação"</string>
     <string name="no_recent_channels" msgid="5068574296267584043">"Mostrar categorias não usadas"</string>
@@ -4528,18 +4532,15 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"Gestos"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Abrir a câmera rapidamente"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Para abrir a câmera rapidamente, pressione o botão liga/desliga duas vezes. O recurso funciona em qualquer tela."</string>
-    <!-- no translation found for double_tap_power_title (8129216801770589261) -->
+    <string name="double_tap_power_title" msgid="8129216801770589261">"Pressione o botão liga/desliga duas vezes"</string>
+    <string name="double_tap_power_enabled" msgid="7609935047996304482">"Pressione duas vezes"</string>
+    <string name="double_tap_power_target_action_category" msgid="2568741597095863728">"Pressione o botão liga/desliga duas vezes para abrir"</string>
+    <string name="double_tap_power_camera_action_title" msgid="6641206739933181509">"Câmera"</string>
+    <!-- no translation found for double_tap_power_camera_action_summary (4942585540579590444) -->
     <skip />
-    <!-- no translation found for double_tap_power_enabled (7609935047996304482) -->
+    <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Carteira"</string>
+    <!-- no translation found for double_tap_power_wallet_action_summary (3463748484407928770) -->
     <skip />
-    <!-- no translation found for double_tap_power_target_action_category (2568741597095863728) -->
-    <skip />
-    <!-- no translation found for double_tap_power_camera_action_title (6641206739933181509) -->
-    <skip />
-    <string name="double_tap_power_camera_action_summary" msgid="1231656402570674349">"Acessar a câmera"</string>
-    <!-- no translation found for double_tap_power_wallet_action_title (2460162990983117189) -->
-    <skip />
-    <string name="double_tap_power_wallet_action_summary" msgid="6567586974229774570">"Acessar a Carteira"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Virar câmera para tirar selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Modo de navegação"</string>
@@ -4938,10 +4939,8 @@
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Enviar e receber mensagens de texto via satélite. Recurso não incluído na sua conta."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Mensagem via satélite, conectividade via satélite"</string>
     <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"Sobre <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
-    <!-- no translation found for title_about_satellite_setting (3563087940535642558) -->
-    <skip />
-    <!-- no translation found for category_title_your_satellite_plan (8169426217950247126) -->
-    <skip />
+    <string name="title_about_satellite_setting" msgid="3563087940535642558">"É possível enviar e receber mensagens de texto via satélite com uma conta qualificada da operadora <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"Sua conta da <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="title_have_satellite_plan" msgid="857337944804101443">"O serviço de mensagens está incluído na sua conta"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Mensagens via satélite não estão incluídas na sua conta"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Saiba mais"</string>

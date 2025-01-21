@@ -227,6 +227,10 @@
     <string name="search_region_hint" msgid="1748708432568237552">"Cerca regioni"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"La regione che scegli influisce sul modo in cui lo smartphone mostra l\'ora, le date, la temperatura e altro ancora."</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"Altre impostazioni della lingua"</string>
+    <!-- no translation found for title_change_system_locale_region (2239197787972916177) -->
+    <skip />
+    <!-- no translation found for body_change_system_locale_region (2706171830649357930) -->
+    <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferenze locali"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Imposta le preferenze per unità e numeri"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Consenti alle app di conoscere le tue preferenze locali affinché possano personalizzare la tua esperienza."</string>
@@ -344,6 +348,12 @@
     <string name="safety_center_summary" msgid="3554867379951053869">"Sicurezza delle app, blocco dispositivo, autorizzazioni"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Volto aggiunto"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Configurazione richiesta"</string>
+    <!-- no translation found for security_settings_face_preference_title_new (7680231874730796331) -->
+    <skip />
+    <!-- no translation found for security_settings_face_profile_preference_title_new (685550153608106166) -->
+    <skip />
+    <!-- no translation found for private_space_face_unlock_title_new (2079622608951402509) -->
+    <skip />
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Sblocco con il Volto"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Sblocco con il Volto per il lavoro"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Come configurare lo Sblocco con il Volto"</string>
@@ -407,6 +417,8 @@
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Impronta"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Quando usi lo Sblocco con l\'Impronta"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Impronta per lavoro"</string>
+    <!-- no translation found for security_settings_work_fingerprint_preference_title_new (8967333987631878868) -->
+    <skip />
     <string name="fingerprint_check_enrolled_title" msgid="1007921571704991108">"Controlla le impronte registrate"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Aggiungi impronta"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Impronta aggiunta}other{# impronte aggiunte}}"</string>
@@ -619,6 +631,8 @@
     <string name="private_space_face_title" msgid="3290402865367663079">"Sblocco con il Volto"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Tocca per configurare"</string>
     <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"Sblocco con l\'Impronta per lo spazio privato"</string>
+    <!-- no translation found for private_space_fingerprint_unlock_title_new (5524309056115678364) -->
+    <skip />
     <string name="private_space_face_unlock_title" msgid="462248384776453613">"Sblocco con il Volto per lo spazio privato"</string>
     <string name="private_space_biometric_unlock_title" msgid="1978145237698659673">"Sblocco con il Volto e con l\'Impronta per lo spazio privato"</string>
     <string name="private_space_fingerprint_enroll_introduction_title" msgid="5187730641333680942">"Configura lo Sblocco con l\'Impronta per lo spazio privato"</string>
@@ -1380,10 +1394,8 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Durante la ricarica"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Quando inserito nel dock"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Mai"</string>
-    <!-- no translation found for screensaver_settings_summary_postured (1184119124847691954) -->
-    <skip />
-    <!-- no translation found for screensaver_settings_summary_postured_and_charging (1952047156927637506) -->
-    <skip />
+    <string name="screensaver_settings_summary_postured" msgid="1184119124847691954">"In verticale"</string>
+    <string name="screensaver_settings_summary_postured_and_charging" msgid="1952047156927637506">"Quando è in verticale e in carica"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"On/<xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Off"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Quando avviare"</string>
@@ -1503,7 +1515,7 @@
     <string name="storage_internal_format_details" msgid="2399034372813686846">"Puoi formattare questa scheda SD per archiviare foto, video, musica e altro e accedervi su altri dispositivi. \n\n"<b>"Tutti i dati su questa scheda SD saranno resettati."</b>" \n\n"<b>"Prima di formattare"</b>" \n\n"<b>"Esegui il backup delle foto e degli altri contenuti multimediali"</b>" \nSposta i file multimediali su una memoria alternativa del dispositivo o trasferiscili su un computer tramite un cavo USB. \n\n"<b>"Esegui il backup delle app"</b>" \nTutte le app archiviate su questa <xliff:g id="NAME">^1</xliff:g> saranno disinstallate e i relativi dati saranno resettati. Per mantenere queste app, spostale in uno spazio di archiviazione alternativo su questo dispositivo."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"Se espelli questa <xliff:g id="NAME_0">^1</xliff:g>, le app memorizzate non funzioneranno più e i file multimediali memorizzati non saranno disponibili fino all\'inserimento della scheda."</b>" \n\nQuesta <xliff:g id="NAME_1">^1</xliff:g> è supportata soltanto su questo dispositivo, pertanto non funzionerà su altri dispositivi."</string>
     <string name="storage_internal_forget_details" msgid="5606507270046186691">"Per poter utilizzare app, foto o dati memorizzati in questa <xliff:g id="NAME">^1</xliff:g>, devi reinserirla. \n\nIn alternativa, puoi decidere di eliminare il dispositivo di archiviazione, se non è disponibile. \n\nSe lo elimini, tutti i dati memorizzati sul dispositivo saranno persi per sempre. \n\nPotrai reinstallare le app in un secondo momento, ma i relativi dati memorizzati sul dispositivo andranno persi."</string>
-    <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Dimenticare <xliff:g id="NAME">^1</xliff:g>?"</string>
+    <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"Eliminare <xliff:g id="NAME">^1</xliff:g>?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"Tutti i dati, le app e le foto memorizzati su <xliff:g id="NAME">^1</xliff:g> verranno perduti per sempre."</string>
     <string name="storage_detail_dialog_system" msgid="7461009051858709479">"Il sistema include i file utilizzati per eseguire Android versione <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="storage_os_detail_dialog_system" msgid="1423073052313067844">"Sono inclusi il tuo sistema operativo e i file necessari per far funzionare correttamente il tuo smartphone. Per proteggere la loro integrità, non è possibile accedere a questi file."</string>
@@ -2035,8 +2047,7 @@
     <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Usa il tasto <xliff:g id="RELEASE_LABEL">%s</xliff:g> per rilasciare il tasto principale del mouse"</string>
     <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Usa il tasto <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> per attivare/disattivare la modalità di scorrimento. In questo modo, i tasti <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> consentono di scorrere la visualizzazione verso l\'alto, il basso, sinistra o destra"</string>
     <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Usa il tasto <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> per fare clic sul pulsante secondario del mouse"</string>
-    <!-- no translation found for keyboard_shortcuts_helper (6934420811737731188) -->
-    <skip />
+    <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"Visualizza scorciatoie da tastiera"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Mostra l\'elenco di scorciatoie"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastiere e strumenti del profilo di lavoro"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Tastiera sullo schermo per il lavoro"</string>
@@ -2044,7 +2055,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad e mouse"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Mouse"</string>
-    <string name="mouse_settings_summary" msgid="4609720443781972646">"Velocità/scambio puls./personaliz."</string>
+    <string name="mouse_settings_summary" msgid="4609720443781972646">"Velocità puntatore, scambio pulsanti, personalizz. pulsanti"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Velocità del puntatore, gesti"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Tocco per fare clic"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Tocca e trascina per spostare"</string>
@@ -2101,7 +2112,7 @@
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Scegli un tasto di modifica"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Scegli un nuovo tasto per <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Accessibilità della tastiera fisica"</string>
-    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Tasti permanenti, tasti rimbalzati, tasti del mouse"</string>
+    <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Tasti permanenti, antirimbalzo dei tasti, tasti del mouse"</string>
     <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"Ripeti tasti"</string>
     <string name="keyboard_repeat_keys_timeout_title" msgid="3411871149974652293">"Ritardo prima della ripetizione"</string>
     <string name="keyboard_repeat_keys_delay_title" msgid="7323531750483922943">"Frequenza ripetizione"</string>
@@ -2200,12 +2211,9 @@
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Controlli di interazione"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Controlli basati sul tempo"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Controlli di sistema"</string>
-    <!-- no translation found for accessibility_feedback_title (6690472705407526006) -->
-    <skip />
-    <!-- no translation found for accessibility_feedback_summary (4576591591334314827) -->
-    <skip />
-    <!-- no translation found for accessibility_feedback_disabled_summary (3652321859452620942) -->
-    <skip />
+    <string name="accessibility_feedback_title" msgid="6690472705407526006">"Feedback"</string>
+    <string name="accessibility_feedback_summary" msgid="4576591591334314827">"Aiutaci a migliorare partecipando a un sondaggio"</string>
+    <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"Nessun sondaggio disponibile"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"App scaricate"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Sperimentali"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Flag funzionalità"</string>
@@ -3068,13 +3076,13 @@
     <string name="vpn_connect" msgid="7102335248484045354">"Connetti"</string>
     <string name="vpn_replace" msgid="1533147558671640341">"Sostituisci"</string>
     <string name="vpn_edit" msgid="5862301148429324911">"Modifica profilo VPN"</string>
-    <string name="vpn_forget" msgid="2913950864877236737">"Rimuovi"</string>
+    <string name="vpn_forget" msgid="2913950864877236737">"Elimina"</string>
     <string name="vpn_connect_to" msgid="216709261691085594">"Connessione a <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Disconnettere questa VPN?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Disconnetti"</string>
     <string name="vpn_version" msgid="6344167191984400976">"Versione"</string>
     <string name="vpn_version_info" msgid="5717671228402924155">"Versione <xliff:g id="VERSION">%s</xliff:g>"</string>
-    <string name="vpn_forget_long" msgid="729132269203870205">"Rimuovi VPN"</string>
+    <string name="vpn_forget_long" msgid="729132269203870205">"Elimina VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Sostituire la rete VPN esistente?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Impostare la rete VPN sempre attiva?"</string>
     <string name="vpn_first_always_on_vpn_message" msgid="2769478310633047870">"Quando questa impostazione è attiva, la connessione Internet non sarà disponibile fino a quando la rete VPN sarà connessa correttamente"</string>
@@ -3728,8 +3736,7 @@
     <string name="conversations_category_title" msgid="5586541340846847798">"Conversazioni"</string>
     <string name="conversation_section_switch_title" msgid="3332885377659473775">"Sezione delle conversazioni"</string>
     <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Consenti all\'app di usare la sezione delle conversazioni"</string>
-    <!-- no translation found for conversation_section_switch_complete_summary (6326149637059423284) -->
-    <skip />
+    <string name="conversation_section_switch_complete_summary" msgid="6326149637059423284">"Consenti all\'app di usare la sezione delle conversazioni, anche se non supporta le relative funzionalità."</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Non è una conversazione"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Rimuovi dalla sezione delle conversazioni"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Questa è una conversazione"</string>
@@ -3861,10 +3868,8 @@
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Come richiesto, Android sta bloccando la visualizzazione di questa categoria di notifiche su questo dispositivo"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Come richiesto, Android sta bloccando la visualizzazione di questo gruppo di notifiche su questo dispositivo"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Questa app non invia notifiche"</string>
-    <!-- no translation found for app_notification_settings (2848603567344392693) -->
-    <skip />
-    <!-- no translation found for notification_channels (8080872820677975820) -->
-    <skip />
+    <string name="app_notification_settings" msgid="2848603567344392693">"Impostazioni app"</string>
+    <string name="notification_channels" msgid="8080872820677975820">"Categorie di notifica"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Altro"</string>
     <string name="no_channels" msgid="4716199078612071915">"L\'app non ha pubblicato alcuna notifica"</string>
     <string name="no_recent_channels" msgid="5068574296267584043">"Mostra le categorie inutilizzate"</string>
@@ -4540,10 +4545,12 @@
     <skip />
     <!-- no translation found for double_tap_power_camera_action_title (6641206739933181509) -->
     <skip />
-    <string name="double_tap_power_camera_action_summary" msgid="1231656402570674349">"Accedi alla fotocamera"</string>
+    <!-- no translation found for double_tap_power_camera_action_summary (4942585540579590444) -->
+    <skip />
     <!-- no translation found for double_tap_power_wallet_action_title (2460162990983117189) -->
     <skip />
-    <string name="double_tap_power_wallet_action_summary" msgid="6567586974229774570">"Accedi a Wallet"</string>
+    <!-- no translation found for double_tap_power_wallet_action_summary (3463748484407928770) -->
+    <skip />
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Cambia fotocamera per selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Modalità di navigazione"</string>
@@ -4942,10 +4949,8 @@
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Invia e ricevi messaggi via satellite. Funzione non disponibile con il tuo account."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Messaggi via satellite, connettività satellitare"</string>
     <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"Informazioni su <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
-    <!-- no translation found for title_about_satellite_setting (3563087940535642558) -->
-    <skip />
-    <!-- no translation found for category_title_your_satellite_plan (8169426217950247126) -->
-    <skip />
+    <string name="title_about_satellite_setting" msgid="3563087940535642558">"Puoi scambiare messaggi via satellite con un account <xliff:g id="CARRIER_NAME">%1$s</xliff:g> idoneo"</string>
+    <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"Il tuo account <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="title_have_satellite_plan" msgid="857337944804101443">"I messaggi sono inclusi nel tuo account"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"La messaggistica satellitare non è inclusa nel tuo account"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Scopri di più"</string>
@@ -5315,8 +5320,8 @@
     <string name="virtual_device_disconnected" msgid="4148915248176291618">"Disconnesso"</string>
     <string name="virtual_device_unknown" msgid="3592486476918448088">"Dispositivo sconosciuto"</string>
     <string name="virtual_device_details_title" msgid="2298529342462505596">"Dettagli dispositivo"</string>
-    <string name="virtual_device_forget_dialog_title" msgid="4589091802540229362">"Rimuovere <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <string name="virtual_device_forget_dialog_confirm_button" msgid="2700888112027110344">"Rimuovi"</string>
+    <string name="virtual_device_forget_dialog_title" msgid="4589091802540229362">"Eliminare <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="virtual_device_forget_dialog_confirm_button" msgid="2700888112027110344">"Elimina"</string>
     <string name="virtual_device_companion_app_category" msgid="2795042145688252495">"Connessione gestita da"</string>
     <string name="uwb_settings_title" msgid="8578498712312002231">"UWB (Ultra-WideBand)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Consente di identificare la posizione relativa dei dispositivi nelle vicinanze dotati di tecnologia UWB"</string>

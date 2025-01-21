@@ -227,6 +227,10 @@
     <string name="search_region_hint" msgid="1748708432568237552">"Cari rantau"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"Rantau yang anda pilih mempengaruhi cara telefon anda memaparkan masa, tarikh, suhu dan banyak lagi"</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"Lebih banyak tetapan bahasa"</string>
+    <!-- no translation found for title_change_system_locale_region (2239197787972916177) -->
+    <skip />
+    <!-- no translation found for body_change_system_locale_region (2706171830649357930) -->
+    <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"Tetapan wilayah"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Tetapkan pilihan unit dan nombor"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Beritahu apl tetapan wilayah anda supaya apl boleh memeribadikan pengalaman anda."</string>
@@ -344,6 +348,9 @@
     <string name="safety_center_summary" msgid="3554867379951053869">"Keselamatan apl, kunci peranti, kebenaran"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Wajah ditambahkan"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Persediaan diperlukan"</string>
+    <string name="security_settings_face_preference_title_new" msgid="7680231874730796331">"Wajah"</string>
+    <string name="security_settings_face_profile_preference_title_new" msgid="685550153608106166">"Wajah untuk profil kerja"</string>
+    <string name="private_space_face_unlock_title_new" msgid="2079622608951402509">"Wajah untuk ruang privasi"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Buka Kunci Wajah"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Buka Kunci Wajah untuk kerja"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Cara menyediakan Buka Kunci Wajah"</string>
@@ -407,6 +414,7 @@
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Cap jari"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Apabila menggunakan Buka Kunci Cap Jari"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Cap jari untuk kerja"</string>
+    <string name="security_settings_work_fingerprint_preference_title_new" msgid="8967333987631878868">"Cap jari untuk kerja"</string>
     <string name="fingerprint_check_enrolled_title" msgid="1007921571704991108">"Semak cap jari yang didaftarkan"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Tambahkan cap jari"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Cap jari ditambahkan}other{# cap jari ditambahkan}}"</string>
@@ -619,6 +627,7 @@
     <string name="private_space_face_title" msgid="3290402865367663079">"Buka Kunci Wajah"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Ketik untuk membuat persediaan"</string>
     <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"Buka Kunci Cap Jari untuk ruang privasi"</string>
+    <string name="private_space_fingerprint_unlock_title_new" msgid="5524309056115678364">"Cap jari untuk ruang privasi"</string>
     <string name="private_space_face_unlock_title" msgid="462248384776453613">"Buka Kunci Wajah untuk ruang privasi"</string>
     <string name="private_space_biometric_unlock_title" msgid="1978145237698659673">"Buka Kunci Wajah &amp; Cap Jari untuk ruang privasi"</string>
     <string name="private_space_fingerprint_enroll_introduction_title" msgid="5187730641333680942">"Sediakan Buka Kunci Cap Jari untuk ruang privasi"</string>
@@ -4523,18 +4532,15 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"Gerak isyarat"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Buka kamera dengan cepat"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Untuk membuka kamera dengan cepat, tekan butang kuasa dua kali. Berfungsi daripada sebarang skrin."</string>
-    <!-- no translation found for double_tap_power_title (8129216801770589261) -->
+    <string name="double_tap_power_title" msgid="8129216801770589261">"Tekan dua kali butang kuasa"</string>
+    <string name="double_tap_power_enabled" msgid="7609935047996304482">"Gunakan tekan dua kali"</string>
+    <string name="double_tap_power_target_action_category" msgid="2568741597095863728">"Tekan dua kali butang kuasa untuk membuka"</string>
+    <string name="double_tap_power_camera_action_title" msgid="6641206739933181509">"Kamera"</string>
+    <!-- no translation found for double_tap_power_camera_action_summary (4942585540579590444) -->
     <skip />
-    <!-- no translation found for double_tap_power_enabled (7609935047996304482) -->
+    <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
+    <!-- no translation found for double_tap_power_wallet_action_summary (3463748484407928770) -->
     <skip />
-    <!-- no translation found for double_tap_power_target_action_category (2568741597095863728) -->
-    <skip />
-    <!-- no translation found for double_tap_power_camera_action_title (6641206739933181509) -->
-    <skip />
-    <string name="double_tap_power_camera_action_summary" msgid="1231656402570674349">"Akses Kamera"</string>
-    <!-- no translation found for double_tap_power_wallet_action_title (2460162990983117189) -->
-    <skip />
-    <string name="double_tap_power_wallet_action_summary" msgid="6567586974229774570">"Akses Wallet"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Balikkan kamera untuk mengambil swafoto"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Mod navigasi"</string>

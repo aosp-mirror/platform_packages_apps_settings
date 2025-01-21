@@ -209,7 +209,7 @@
     <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Vaš uređaj, aplikacije i web-lokacije upotrebljavaju prvi podržani jezik s popisa preferiranih jezika.\n\nMnoge aplikacije upotrebljavat će i regiju preferiranog jezika za odabir formata datuma, brojeva i mjernih jedinica. Da biste promijenili regiju, dodajte jezik, a zatim odaberite preferiranu regiju."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Da biste odabrali jezik za svaku aplikaciju, otvorite postavke jezika aplikacija."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Saznajte više o jezicima aplikacija"</string>
-    <string name="title_change_system_region" msgid="5476591184463491936">"Želite li promijeniti regiju u regiju %s?"</string>
+    <string name="title_change_system_region" msgid="5476591184463491936">"Želite li regiju promijeniti u: %s?"</string>
     <string name="desc_notice_device_region_change" msgid="6702773189066944100">"Vaš će uređaj kao jezik sustava zadržati %s"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Želite li jezik sustava promijeniti na %s?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"Želite li dodati %s u preferirane jezike?"</string>
@@ -221,12 +221,16 @@
     <string name="locale_search_menu" msgid="297782694044826686">"Pretraži"</string>
     <string name="language_and_region_title" msgid="8374151891112162767">"Jezik i regija"</string>
     <string name="language_selection_title" msgid="968179636453982415">"Dodajte jezik"</string>
-    <string name="region_selection_title" msgid="3630336682851020349">"Odabir regije"</string>
+    <string name="region_selection_title" msgid="3630336682851020349">"Odaberite regiju"</string>
     <string name="country_selection_title" msgid="5376929821458644732">"Postavke regije"</string>
-    <string name="search_language_hint" msgid="6738370354628565338">"Pretraživanje jezika"</string>
-    <string name="search_region_hint" msgid="1748708432568237552">"Pretraživanje regija"</string>
-    <string name="top_intro_region_title" msgid="2336323415395642117">"Regija koju odaberete utječe na to kako telefon prikazuje vrijeme, datume, temperaturu i drugo"</string>
+    <string name="search_language_hint" msgid="6738370354628565338">"Pretražite jezik"</string>
+    <string name="search_region_hint" msgid="1748708432568237552">"Pretražite regije"</string>
+    <string name="top_intro_region_title" msgid="2336323415395642117">"Regija koju odaberete utječe na to kako telefon prikazuje vrijeme, datum, temperaturu i drugo"</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"Više postavki jezika"</string>
+    <!-- no translation found for title_change_system_locale_region (2239197787972916177) -->
+    <skip />
+    <!-- no translation found for body_change_system_locale_region (2706171830649357930) -->
+    <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionalne preferencije"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Odredite kako će se prikazivati mjerne jedinice i brojke"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"Unesite svoje regionalne preferencije u aplikacije kako bi mogle personalizirati vaš doživljaj."</string>
@@ -344,6 +348,9 @@
     <string name="safety_center_summary" msgid="3554867379951053869">"Sigurnost aplikacija, zaključavanje uređaja, dopuštenja"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Lice je dodano"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Potrebno je postavljanje"</string>
+    <string name="security_settings_face_preference_title_new" msgid="7680231874730796331">"Lice"</string>
+    <string name="security_settings_face_profile_preference_title_new" msgid="685550153608106166">"Lice za poslovni profil"</string>
+    <string name="private_space_face_unlock_title_new" msgid="2079622608951402509">"Lice za privatni prostor"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Otključavanje licem"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Otključavanje licem za posao"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Kako postaviti otključavanje licem"</string>
@@ -407,6 +414,7 @@
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Otisak prsta"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Kad se koristi otključavanje otiskom prsta"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Otisak za posl. profil"</string>
+    <string name="security_settings_work_fingerprint_preference_title_new" msgid="8967333987631878868">"Otisak za posl. profil"</string>
     <string name="fingerprint_check_enrolled_title" msgid="1007921571704991108">"Provjerite prijavljene otiske prstiju"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Dodajte otisak prsta"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Dodan je otisak prsta}one{Dodan je # otisak prsta}few{Dodana su # otiska prsta}other{Dodano je # otisaka prsta}}"</string>
@@ -619,6 +627,7 @@
     <string name="private_space_face_title" msgid="3290402865367663079">"Otključavanje licem"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Dodirnite za postavljanje"</string>
     <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"Otključavanje otiskom prsta za privatni prostor"</string>
+    <string name="private_space_fingerprint_unlock_title_new" msgid="5524309056115678364">"Otisak prsta za privatni prostor"</string>
     <string name="private_space_face_unlock_title" msgid="462248384776453613">"Otključavanje licem za privatni prostor"</string>
     <string name="private_space_biometric_unlock_title" msgid="1978145237698659673">"Otključavanje licem i otiskom prsta za privatni prostor"</string>
     <string name="private_space_fingerprint_enroll_introduction_title" msgid="5187730641333680942">"Postavljanje otključavanja otiskom prsta za privatni prostor"</string>
@@ -1380,10 +1389,8 @@
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Tijekom punjenja"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Kada je na priključnoj stanici"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Nikada"</string>
-    <!-- no translation found for screensaver_settings_summary_postured (1184119124847691954) -->
-    <skip />
-    <!-- no translation found for screensaver_settings_summary_postured_and_charging (1952047156927637506) -->
-    <skip />
+    <string name="screensaver_settings_summary_postured" msgid="1184119124847691954">"Tijekom držanja uspravno"</string>
+    <string name="screensaver_settings_summary_postured_and_charging" msgid="1952047156927637506">"Tijekom držanja uspravno i punjenja"</string>
     <string name="screensaver_settings_summary_on" msgid="4210827304351483645">"Uključeno/<xliff:g id="SCREEN_SAVER">%1$s</xliff:g>"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Isključeno"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Kada pokrenuti"</string>
@@ -2023,11 +2030,11 @@
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Koristi tipke miša"</string>
     <string name="mouse_keys_summary" msgid="7030731235143286467">"Upravljajte pokazivačem pomoću tipkovnice"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Obrnuto pomicanje"</string>
-    <string name="mouse_reverse_vertical_scrolling_summary" msgid="4403637093982742165">"Sadržaj se pomiče prema gore kad se vi pomičete prema dolje"</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="4403637093982742165">"Sadržaj se pomiče prema gore kad se pomičete prema dolje"</string>
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"Zamijeni primarnu tipku miša"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Upotrebljavajte lijevu tipku miša kao desnu"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"Ubrzanje pokazivača"</string>
-    <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"Brzi pokreti mišem dalje će pomaknuti pokazivač"</string>
+    <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"Brži pokreti mišem dalje će pomaknuti pokazivač"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"Tipke miša za tipkovnicu <xliff:g id="KEYBOARD_NAME">%s</xliff:g>"</string>
     <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Pomoću tipki <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> pomičite pokazivač miša"</string>
     <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Pomoću tipke <xliff:g id="CLICK_LABEL">%s</xliff:g> kliknite primarnu tipku miša"</string>
@@ -2035,8 +2042,7 @@
     <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Pomoću tipke <xliff:g id="RELEASE_LABEL">%s</xliff:g> otpustite primarnu tipku miša"</string>
     <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"Pomoću tipke <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> uključite način pomicanja. To će omogućiti da tipkama <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> pomičete prikaz prema gore, dolje, ulijevo ili udesno"</string>
     <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"Pomoću tipke <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> kliknite sekundarnu tipku miša"</string>
-    <!-- no translation found for keyboard_shortcuts_helper (6934420811737731188) -->
-    <skip />
+    <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"Prikaži tipkovne prečace"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Prikaži popis prečaca"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tipkovnice i alati radnog profila"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Zaslonska tipkovnica za posao"</string>
@@ -2048,7 +2054,7 @@
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Brzina pokazivača, pokreti"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Dodirni za klik"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Dodirnite i povucite za premještanje stavki"</string>
-    <string name="trackpad_tap_dragging_summary" msgid="2935498183201422245">"Dvaput dodirnite stavku, zadržite pritisak pri drugom dodiru i povucite je da je premjestite"</string>
+    <string name="trackpad_tap_dragging_summary" msgid="2935498183201422245">"Dvaput dodirnite stavku, zadržite pritisak pri drugom dodiru i povucite je za premještanje"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Pokreti za dodirnu podlogu"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Prilagodba pojedinih pokreta za kretanje dodirnom podlogom"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Obrnuto pomicanje"</string>
@@ -2182,7 +2188,7 @@
     <string name="accessibility_pointer_color_customization_title" msgid="2841888132681075999">"Boja pokazivača"</string>
     <string name="accessibility_pointer_title" msgid="7427650233669997010">"Pokazivač"</string>
     <string name="accessibility_touchpad_title" msgid="5798458334122685642">"Dodirna podloga"</string>
-    <string name="accessibility_touchpad_system_gestures_enable_title" msgid="1867179109603472062">"Koristite pokrete s tri ili četiri prsta"</string>
+    <string name="accessibility_touchpad_system_gestures_enable_title" msgid="1867179109603472062">"Koristi pokrete s tri ili četiri prsta"</string>
     <string name="accessibility_touchpad_system_gestures_enable_summary" msgid="7076378989016181266">"Kad je ta opcija isključena, dodirna podloga zanemaruje pokrete s tri ili četiri prsta"</string>
     <string name="keywords_accessibility_touchpad_system_gestures_enable" msgid="4406441971607855466">"dodirna podloga, dodirna površina, prelazak prstom"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Kontrast boja"</string>
@@ -2200,12 +2206,9 @@
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Kontrole interakcije"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Kontrole tajminga"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"Kontrole sustava"</string>
-    <!-- no translation found for accessibility_feedback_title (6690472705407526006) -->
-    <skip />
-    <!-- no translation found for accessibility_feedback_summary (4576591591334314827) -->
-    <skip />
-    <!-- no translation found for accessibility_feedback_disabled_summary (3652321859452620942) -->
-    <skip />
+    <string name="accessibility_feedback_title" msgid="6690472705407526006">"Povratne informacije"</string>
+    <string name="accessibility_feedback_summary" msgid="4576591591334314827">"Pomozite nam da se poboljšamo ispunjavanjem ankete"</string>
+    <string name="accessibility_feedback_disabled_summary" msgid="3652321859452620942">"Nema dostupnih anketa"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Preuzete aplikacije"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperimentalno"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Oznake značajki"</string>
@@ -2370,7 +2373,7 @@
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Veliki pokazivač miša"</string>
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Povećaj vidljivost pokazivača miša"</string>
     <string name="accessibility_force_invert_title" msgid="5248504501753732051">"Promijeni temu aplikacija u tamnu"</string>
-    <string name="accessibility_force_invert_summary" msgid="179237803986895815">"Automatski pretvori aplikacije sa svijetlom temom u tamnu temu"</string>
+    <string name="accessibility_force_invert_summary" msgid="179237803986895815">"Automatski pretvara aplikacije sa svijetlom temom u tamnu temu"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Ukloni animacije"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Smanjuje pokrete na zaslonu"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Monozvuk"</string>
@@ -3728,8 +3731,7 @@
     <string name="conversations_category_title" msgid="5586541340846847798">"Razgovori"</string>
     <string name="conversation_section_switch_title" msgid="3332885377659473775">"Odjeljak razgovora"</string>
     <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Dopusti aplikaciji upotrebu odjeljka razgovora"</string>
-    <!-- no translation found for conversation_section_switch_complete_summary (6326149637059423284) -->
-    <skip />
+    <string name="conversation_section_switch_complete_summary" msgid="6326149637059423284">"Dopusti upotrebu odjeljka razgovora za aplikaciju, iako ova aplikacija ne podržava značajke razgovora kao što su prioritizacija i oblačići."</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Nije razgovor"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Uklanja se iz odjeljka razgovora"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Ovo je razgovor"</string>
@@ -3861,10 +3863,8 @@
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Android na vaš zahtjev blokira prikazivanje te kategorije obavijesti na ovom uređaju"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Android na vaš zahtjev blokira prikazivanje te grupe obavijesti na ovom uređaju"</string>
     <string name="app_notifications_not_send_desc" msgid="5683060986735070528">"Ova aplikacija ne šalje obavijesti"</string>
-    <!-- no translation found for app_notification_settings (2848603567344392693) -->
-    <skip />
-    <!-- no translation found for notification_channels (8080872820677975820) -->
-    <skip />
+    <string name="app_notification_settings" msgid="2848603567344392693">"Postavke aplikacija"</string>
+    <string name="notification_channels" msgid="8080872820677975820">"Kategorije obavijesti"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Drugo"</string>
     <string name="no_channels" msgid="4716199078612071915">"Ova aplikacija nije objavila nijednu obavijest"</string>
     <string name="no_recent_channels" msgid="5068574296267584043">"Prikaži nekorištene kategorije"</string>
@@ -4532,18 +4532,15 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"Pokreti"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Brzo otvaranje kamere"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Da biste brzo otvorili kameru, dvaput pritisnite tipku za uključivanje/isključivanje. Funkcionira na svim zaslonima."</string>
-    <!-- no translation found for double_tap_power_title (8129216801770589261) -->
+    <string name="double_tap_power_title" msgid="8129216801770589261">"Dvaput pritisnite tipku za uključivanje/isključivanje"</string>
+    <string name="double_tap_power_enabled" msgid="7609935047996304482">"Upotrijebite dvostruki pritisak"</string>
+    <string name="double_tap_power_target_action_category" msgid="2568741597095863728">"Dvaput pritisnite tipku za uključivanje/isključivanje da biste otvorili"</string>
+    <string name="double_tap_power_camera_action_title" msgid="6641206739933181509">"Kamera"</string>
+    <!-- no translation found for double_tap_power_camera_action_summary (4942585540579590444) -->
     <skip />
-    <!-- no translation found for double_tap_power_enabled (7609935047996304482) -->
+    <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
+    <!-- no translation found for double_tap_power_wallet_action_summary (3463748484407928770) -->
     <skip />
-    <!-- no translation found for double_tap_power_target_action_category (2568741597095863728) -->
-    <skip />
-    <!-- no translation found for double_tap_power_camera_action_title (6641206739933181509) -->
-    <skip />
-    <string name="double_tap_power_camera_action_summary" msgid="1231656402570674349">"Pristupite kameri"</string>
-    <!-- no translation found for double_tap_power_wallet_action_title (2460162990983117189) -->
-    <skip />
-    <string name="double_tap_power_wallet_action_summary" msgid="6567586974229774570">"Pristupite Walletu"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Promjena u selfie kameru trzajem"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Način navigacije"</string>
@@ -4942,10 +4939,8 @@
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"Šaljite i primajte tekstne poruke putem satelita. Nije uključeno s vašim računom."</string>
     <string name="keywords_satellite_setting" msgid="613553612424945946">"Slanje poruka putem satelita, satelitska povezivost"</string>
     <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"O značajci <xliff:g id="SUBJECT">%1$s</xliff:g>"</string>
-    <!-- no translation found for title_about_satellite_setting (3563087940535642558) -->
-    <skip />
-    <!-- no translation found for category_title_your_satellite_plan (8169426217950247126) -->
-    <skip />
+    <string name="title_about_satellite_setting" msgid="3563087940535642558">"Možete razmjenjivati tekstne poruke putem satelita u sklopu <xliff:g id="CARRIER_NAME">%1$s</xliff:g> računa koji ispunjava kriterije"</string>
+    <string name="category_title_your_satellite_plan" msgid="8169426217950247126">"Vaš <xliff:g id="CARRIER_NAME">%1$s</xliff:g> račun"</string>
     <string name="title_have_satellite_plan" msgid="857337944804101443">"Slanje poruka uključeno je za vaš račun"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"Slanje poruka putem satelita nije uključeno s vašim računom"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"Saznajte više"</string>
