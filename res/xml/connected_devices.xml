@@ -40,6 +40,11 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="temp_bond_device_list"
+        android:title="@string/connected_device_temp_bond_device_title"
+        settings:controller="com.android.settings.connecteddevice.audiosharing.TemporaryBondDeviceGroupController" />
+
+    <PreferenceCategory
         android:key="available_device_list"
         android:title="@string/connected_device_media_device_title"
         settings:controller="com.android.settings.connecteddevice.AvailableMediaDeviceGroupController" />
