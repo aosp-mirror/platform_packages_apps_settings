@@ -111,7 +111,7 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
     @Override
     public void onLocaleSelected(LocaleStore.LocaleInfo locale) {
         if (Flags.regionalPreferencesApiEnabled()) {
-            if (sameLanguageAndScript(locale.getLocale(), Locale.getDefault())) {
+            if (sameLanguageAndScript(locale.getLocale(), LocaleList.getDefault().get(0))) {
                 Bundle args = new Bundle();
                 args.putInt(ARG_DIALOG_TYPE, DIALOG_CHANGE_LOCALE_REGION);
                 args.putSerializable(ARG_TARGET_LOCALE, locale);
