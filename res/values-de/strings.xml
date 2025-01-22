@@ -140,6 +140,8 @@
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bluetooth LE Audio-Zulassungsliste umgehen"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE Audio wird standardmäßig verwendet, selbst wenn ein LE Audio-Peripheriegerät nicht die Kriterien der Zulassungsliste erfüllt."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Mediengeräte"</string>
+    <!-- no translation found for connected_device_temp_bond_device_title (1141199848329262106) -->
+    <skip />
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Anrufgeräte"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Andere Geräte"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Gespeicherte Geräte"</string>
@@ -227,9 +229,9 @@
     <string name="search_region_hint" msgid="1748708432568237552">"Regionen suchen"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"Welche Region du auswählst, wirkt sich darauf aus, wie auf deinem Smartphone Informationen wie die Uhrzeit, das Datum oder die Temperatur angezeigt werden"</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"Weitere Spracheinstellungen"</string>
-    <!-- no translation found for title_change_system_locale_region (2239197787972916177) -->
-    <skip />
-    <!-- no translation found for body_change_system_locale_region (2706171830649357930) -->
+    <string name="title_change_system_locale_region" msgid="2239197787972916177">"Region in „%s“ ändern?"</string>
+    <string name="body_change_system_locale_region" msgid="2706171830649357930">"Dein Gerät verwendet weiterhin %s als Systemsprache"</string>
+    <!-- no translation found for top_intro_numbering_system_title (3560237920807539566) -->
     <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"Regionale Einstellungen"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Einstellungen für Einheiten und Zahlen festlegen"</string>
@@ -348,12 +350,9 @@
     <string name="safety_center_summary" msgid="3554867379951053869">"App-Sicherheit, Gerätesperre, Berechtigungen"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Gesicht hinzugefügt"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Einrichtung erforderlich"</string>
-    <!-- no translation found for security_settings_face_preference_title_new (7680231874730796331) -->
-    <skip />
-    <!-- no translation found for security_settings_face_profile_preference_title_new (685550153608106166) -->
-    <skip />
-    <!-- no translation found for private_space_face_unlock_title_new (2079622608951402509) -->
-    <skip />
+    <string name="security_settings_face_preference_title_new" msgid="7680231874730796331">"Gesicht"</string>
+    <string name="security_settings_face_profile_preference_title_new" msgid="685550153608106166">"Gesicht (Arbeit)"</string>
+    <string name="private_space_face_unlock_title_new" msgid="2079622608951402509">"Gesicht (vertrauliches Profil)"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Entsperrung per Gesicht"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Entsperrung per Gesichtserkennung für die Arbeit"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Gesichtsentsperrung einrichten"</string>
@@ -400,6 +399,10 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Lösche dein aktuelles Gesichtsmodell, um die Entsperrung per Gesichtserkennung neu einzurichten.\n\nDein Gesichtsmodell wird dauerhaft und sicher gelöscht.\n\nDanach benötigst du zum Entsperren deines Smartphones oder zur Authentifizierung in Apps deine PIN, dein Muster oder dein Passwort."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Lösche dein aktuelles Gesichtsmodell, um die Entsperrung per Gesichtserkennung neu einzurichten.\n\nDein Gesichtsmodell wird dauerhaft und sicher gelöscht.\n\nDanach benötigst du zum Entsperren deines Smartphones oder zur Authentifizierung in Apps deinen Fingerabdruck, deine PIN, dein Muster oder Passwort."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Gesichtsentsperrung für"</string>
+    <!-- no translation found for security_settings_face_settings_face_category (60058016983772899) -->
+    <skip />
+    <!-- no translation found for security_settings_face_settings_use_face_to_category (3349153603335284583) -->
+    <skip />
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Bei Nutzung der Entsperrung per Gesichtserkennung"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Augen müssen geöffnet sein"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Zum Entsperren des Smartphones müssen deine Augen geöffnet sein"</string>
@@ -414,11 +417,14 @@
     <string name="security_settings_face_remove_dialog_details_fingerprint_conv" msgid="2627374706274503259">"Dein Gesichtsmodell wird dauerhaft und sicher gelöscht.\n\nNach dem Löschen benötigst du deinen Fingerabdruck, deine PIN, dein Muster oder dein Passwort, um dein Smartphone zu entsperren."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Verwende die Entsperrung per Gesichtserkennung, um dein Smartphone zu entsperren"</string>
     <string name="security_settings_fingerprint" msgid="6387775386189204201">"Fingerabdruck"</string>
+    <!-- no translation found for security_settings_fingerprint_title (7564944192711394896) -->
+    <skip />
+    <!-- no translation found for security_settings_category_use_fingerprint (4273932435979772330) -->
+    <skip />
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Fingerabdruck"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Wenn die Entsperrung per Fingerabdruck genutzt wird"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingerabdruck-Einstellungen für die Arbeit"</string>
-    <!-- no translation found for security_settings_work_fingerprint_preference_title_new (8967333987631878868) -->
-    <skip />
+    <string name="security_settings_work_fingerprint_preference_title_new" msgid="8967333987631878868">"Fingerabdruck (Arbeit)"</string>
     <string name="fingerprint_check_enrolled_title" msgid="1007921571704991108">"Registrierte Fingerabdrücke prüfen"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Fingerabdruck hinzufügen"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Fingerabdruck hinzugefügt}other{# Fingerabdrücke hinzugefügt}}"</string>
@@ -631,8 +637,7 @@
     <string name="private_space_face_title" msgid="3290402865367663079">"Entsperrung per Gesichtserkennung"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Zum Einrichten tippen"</string>
     <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"Entsperrung per Fingerabdruck für das vertrauliche Profil"</string>
-    <!-- no translation found for private_space_fingerprint_unlock_title_new (5524309056115678364) -->
-    <skip />
+    <string name="private_space_fingerprint_unlock_title_new" msgid="5524309056115678364">"Fingerabdruck (vertrauliches Profil)"</string>
     <string name="private_space_face_unlock_title" msgid="462248384776453613">"Entsperrung per Gesichtserkennung für das vertrauliche Profil"</string>
     <string name="private_space_biometric_unlock_title" msgid="1978145237698659673">"Vertrauliches Profil: Entsperrung per Gesicht/Fingerabdruck"</string>
     <string name="private_space_fingerprint_enroll_introduction_title" msgid="5187730641333680942">"Entsperrung per Fingerabdruck für das vertrauliche Profil einrichten"</string>
@@ -959,6 +964,8 @@
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"Dein Gerät muss mit einem externen Display verbunden sein, um deinen Bildschirm spiegeln zu können"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Weitere Optionen"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Zum Neuanordnen der Displays halten und ziehen."</string>
+    <!-- no translation found for external_display_mirroring_title (2688288527687724603) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Streamen"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"spiegeln"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Kabellose Übertragung aktivieren"</string>
@@ -2055,11 +2062,11 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad und Maus"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Maus"</string>
-    <string name="mouse_settings_summary" msgid="4609720443781972646">"Zeigergeschwindigkeit, Tastentausch"</string>
+    <string name="mouse_settings_summary" msgid="4609720443781972646">"Zeigergeschwindigkeit, Tastentausch, Tastenanpassung"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Zeigergeschwindigkeit, Touch-Gesten"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Touchpad-Klick"</string>
-    <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Zum Verschieben von Elementen tippen und ziehen"</string>
-    <string name="trackpad_tap_dragging_summary" msgid="2935498183201422245">"Doppeltippe auf ein Element, halte es beim zweiten Tippen gedrückt und ziehe es dann an die gewünschte Position"</string>
+    <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Zum Verschieben tippen und ziehen"</string>
+    <string name="trackpad_tap_dragging_summary" msgid="2935498183201422245">"Doppeltippen, halten und an gewünschte Position ziehen"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Touchpad-Gesten"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Individuelle Touchpad-Gesten für die Navigation festlegen"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Scrollrichtung umkehren"</string>
@@ -2068,6 +2075,10 @@
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"Unten rechts auf das Touchpad tippen, um weitere Optionen anzuzeigen"</string>
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Cursorgeschwindigkeit"</string>
     <string name="three_finger_tap_preference_title" msgid="2114347152933865780">"„Mit drei Fingern tippen“ anpassen"</string>
+    <!-- no translation found for touchpad_acceleration_title (176627555191021888) -->
+    <skip />
+    <!-- no translation found for touchpad_acceleration_summary (8057075483967535793) -->
+    <skip />
     <string name="pointer_fill_style" msgid="8794616790175016092">"Zeigerfarbe"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Zeigerfüllfarbe in Schwarz ändern"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Zeigerfüllfarbe in Grün ändern"</string>
@@ -2368,9 +2379,11 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Text mit hohem Kontrast"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Textfarbe in Schwarz oder Weiß ändern. Maximiert den Kontrast zum Hintergrund."</string>
     <string name="accessibility_notification_high_contrast_text_title" msgid="85109818203175520">"Text mit hohem Kontrast wurde ersetzt"</string>
-    <string name="accessibility_notification_high_contrast_text_content" msgid="5073923345319368046">"Du kannst es stattdessen mit „Textkontrast maximieren“ versuchen. Du findest diese Option in den Einstellungen."</string>
+    <!-- no translation found for accessibility_notification_high_contrast_text_content (7159316497764514501) -->
+    <skip />
     <string name="accessibility_notification_high_contrast_text_action" msgid="7190559555068414342">"Einstellungen öffnen"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Textkontrast maximieren"</string>
+    <!-- no translation found for accessibility_toggle_maximize_text_contrast_preference_title (6940551350643305572) -->
+    <skip />
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Schwarzen oder weißen Hintergrund für Text hinzufügen, um den Kontrast zu erhöhen"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Vergrößerung automatisch aktualisieren"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Vergrößerung bei App-Übergängen aktualisieren"</string>
@@ -2583,6 +2596,8 @@
     <string name="keywords_sound_amplifier" msgid="939404835256246663"></string>
     <string name="keywords_display_size" msgid="5286419615221231518">"Displaygröße, großer Bildschirm"</string>
     <string name="keywords_bold_text" msgid="6257418169207099589">"Hoher Kontrast, eingeschränktes Sehvermögen, Fettschrift, Fettdruck"</string>
+    <!-- no translation found for keywords_maximize_text_contrast (4304270989682862814) -->
+    <skip />
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"Farbe anpassen"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"Display dunkel machen, Display hell machen"</string>
@@ -4537,20 +4552,13 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"Touch-Gesten &amp; Bewegungen"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Kamera schnell öffnen"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Ein-/Aus-Taste zweimal drücken, um die Kamera direkt zu starten. Funktioniert auch, wenn eine andere App geöffnet ist."</string>
-    <!-- no translation found for double_tap_power_title (8129216801770589261) -->
-    <skip />
-    <!-- no translation found for double_tap_power_enabled (7609935047996304482) -->
-    <skip />
-    <!-- no translation found for double_tap_power_target_action_category (2568741597095863728) -->
-    <skip />
-    <!-- no translation found for double_tap_power_camera_action_title (6641206739933181509) -->
-    <skip />
-    <!-- no translation found for double_tap_power_camera_action_summary (4942585540579590444) -->
-    <skip />
-    <!-- no translation found for double_tap_power_wallet_action_title (2460162990983117189) -->
-    <skip />
-    <!-- no translation found for double_tap_power_wallet_action_summary (3463748484407928770) -->
-    <skip />
+    <string name="double_tap_power_title" msgid="8129216801770589261">"Zweimal die Ein/Aus-Schaltfläche drücken"</string>
+    <string name="double_tap_power_enabled" msgid="7609935047996304482">"Zweimaliges Drücken verwenden"</string>
+    <string name="double_tap_power_target_action_category" msgid="2568741597095863728">"Zum Öffnen zweimal die Ein/Aus-Schaltfläche drücken"</string>
+    <string name="double_tap_power_camera_action_title" msgid="6641206739933181509">"Kamera"</string>
+    <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"Kamera öffnen"</string>
+    <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
+    <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Wallet öffnen"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Für Selfie-Modus Handgelenk drehen"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Navigationsmodus"</string>
@@ -4562,7 +4570,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Öffne den Startbildschirm, indem du vom unteren Displayrand nach oben wischst. Um zwischen Apps zu wechseln, wische vom unteren Displayrand nach oben, halte und lass dann los. Wenn du zurückgehen möchtest, wische vom linken oder vom rechten Rand nach innen."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Bedienung über 3 Schaltflächen"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Nutze die Schaltflächen unten auf deinem Bildschirm, um zurückzugehen, den Startbildschirm aufzurufen und zwischen Apps zu wechseln."</string>
-    <string name="nav_tutorial_button_description" msgid="6880450051535137024">"Schaltfläche zum Starten des Tutorials für „Bedienung über Gesten“ Zum Aktivieren doppeltippen."</string>
+    <!-- no translation found for nav_tutorial_button_description (7195363082216233970) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"Systemsteuerung, Bedienung über 2 Schaltflächen, Bedienung über 3 Schaltflächen, Gestensteuerung, Bedienung über Gesten, wischen"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digitaler Assistent"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Zum Öffnen des Assistenten wischen"</string>
@@ -5211,8 +5220,6 @@
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Damit die Wiedergabe schnell fortgesetzt werden kann, bleibt der Mediaplayer in den Schnelleinstellungen geöffnet"</string>
     <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Medien auf dem Sperrbildschirm anzeigen"</string>
     <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"Damit die Wiedergabe schnell fortgesetzt werden kann, bleibt der Mediaplayer auf dem Sperrbildschirm geöffnet"</string>
-    <string name="media_controls_recommendations_title" msgid="3012692549413927608">"Medienempfehlungen von Assistant anzeigen"</string>
-    <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Basierend auf deinen Aktivitäten"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Player ausblenden"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Player anzeigen"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"Medien"</string>
@@ -5619,4 +5626,14 @@
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Circle to Search"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Halte die Startbildschirmtaste oder den Navigationsziehpunkt gedrückt, um anhand des Inhalts auf dem Bildschirm zu suchen."</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Gerätedetail konfigurieren."</string>
+    <!-- no translation found for supervision_settings_title (8383827215386872736) -->
+    <skip />
+    <!-- no translation found for supervision_settings_summary (5020634300370322741) -->
+    <skip />
+    <!-- no translation found for device_supervision_switch_title (3203958797412413373) -->
+    <skip />
+    <!-- no translation found for device_supervision_switch_no_pin_summary (8294396978464347129) -->
+    <skip />
+    <!-- no translation found for keywords_supervision_settings (2580555201483955376) -->
+    <skip />
 </resources>

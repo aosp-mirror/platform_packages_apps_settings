@@ -140,6 +140,8 @@
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Заобикаляне на списъка на разрешените устройства с Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Използване на LE Audio по подразбиране дори ако не е потвърдено, че периферното устройство с LE Audio отговаря на критериите на списъка на разрешените устройства."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Мултимедийни устройства"</string>
+    <!-- no translation found for connected_device_temp_bond_device_title (1141199848329262106) -->
+    <skip />
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Устройства за обаждания"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Други устройства"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Запазени устройства"</string>
@@ -227,9 +229,9 @@
     <string name="search_region_hint" msgid="1748708432568237552">"Търсете региони"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"Избраният от вас регион влияе върху това как телефонът ви показва часа, датите, температурата и др."</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"Още езикови настройки"</string>
-    <!-- no translation found for title_change_system_locale_region (2239197787972916177) -->
-    <skip />
-    <!-- no translation found for body_change_system_locale_region (2706171830649357930) -->
+    <string name="title_change_system_locale_region" msgid="2239197787972916177">"Искате ли да промените региона на „%s“?"</string>
+    <string name="body_change_system_locale_region" msgid="2706171830649357930">"Устройството ви ще запази %s като системен език"</string>
+    <!-- no translation found for top_intro_numbering_system_title (3560237920807539566) -->
     <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"Регионални предпочитания"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Задаване на предпочитания за мерните единици и цифрите"</string>
@@ -348,12 +350,9 @@
     <string name="safety_center_summary" msgid="3554867379951053869">"Сигурност на приложенията, заключване на у-вото, разрешения"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Лицето е добавено"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Необходимо е настройване"</string>
-    <!-- no translation found for security_settings_face_preference_title_new (7680231874730796331) -->
-    <skip />
-    <!-- no translation found for security_settings_face_profile_preference_title_new (685550153608106166) -->
-    <skip />
-    <!-- no translation found for private_space_face_unlock_title_new (2079622608951402509) -->
-    <skip />
+    <string name="security_settings_face_preference_title_new" msgid="7680231874730796331">"Лице"</string>
+    <string name="security_settings_face_profile_preference_title_new" msgid="685550153608106166">"Лице за служебни цели"</string>
+    <string name="private_space_face_unlock_title_new" msgid="2079622608951402509">"Лице за частното пространство"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Отключване с лице"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Отключване с лице за служебни цели"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"Как да настроите отключването с лице"</string>
@@ -400,6 +399,10 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Изтрийте текущия модел на лицето си, за да настроите отново отключването с лице.\n\nМоделът на лицето ви ще бъде изтрит надеждно и за постоянно.\n\nСлед изтриването ще имате нужда от ПИН кода, фигурата или паролата си, за да отключвате телефона и да удостоверявате самоличността си в приложения."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Изтрийте текущия модел на лицето си, за да настроите отново отключването с лице.\n\nМоделът на лицето ви ще бъде изтрит надеждно и за постоянно.\n\nСлед изтриването ще имате нужда от отпечатъка, ПИН кода, фигурата или паролата си, за да отключвате телефона и да удостоверявате самоличността си в приложения."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Откл. с лице с цел"</string>
+    <!-- no translation found for security_settings_face_settings_face_category (60058016983772899) -->
+    <skip />
+    <!-- no translation found for security_settings_face_settings_use_face_to_category (3349153603335284583) -->
+    <skip />
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"При използване на отключването с лице"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Очите трябва да са отворени"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"За да отключите телефона, очите ви трябва да са отворени"</string>
@@ -414,11 +417,14 @@
     <string name="security_settings_face_remove_dialog_details_fingerprint_conv" msgid="2627374706274503259">"Моделът на лицето ви ще бъде изтрит надеждно и за постоянно.\n\nСлед това ще имате нужда от отпечатъка, ПИН кода, фигурата или паролата си, за да отключвате телефона си."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Използвайте функцията „Отключване с лице“, за да отключвате телефона си"</string>
     <string name="security_settings_fingerprint" msgid="6387775386189204201">"Отпечатък"</string>
+    <!-- no translation found for security_settings_fingerprint_title (7564944192711394896) -->
+    <skip />
+    <!-- no translation found for security_settings_category_use_fingerprint (4273932435979772330) -->
+    <skip />
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Отпечатък"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"При използване на „Отключване с отпечатък“"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Отпечатък за служ. цели"</string>
-    <!-- no translation found for security_settings_work_fingerprint_preference_title_new (8967333987631878868) -->
-    <skip />
+    <string name="security_settings_work_fingerprint_preference_title_new" msgid="8967333987631878868">"Отпеч. за служ. цели"</string>
     <string name="fingerprint_check_enrolled_title" msgid="1007921571704991108">"Проверка на регистрираните отпечатъци"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Добавяне на отпечатък"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Отпечатъкът е добавен}other{Добавени са # отпечатъка}}"</string>
@@ -631,8 +637,7 @@
     <string name="private_space_face_title" msgid="3290402865367663079">"Отключване с лице"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"Докоснете, за да настроите"</string>
     <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"„Отключване с отпечатък“ за частното пространство"</string>
-    <!-- no translation found for private_space_fingerprint_unlock_title_new (5524309056115678364) -->
-    <skip />
+    <string name="private_space_fingerprint_unlock_title_new" msgid="5524309056115678364">"Отпечатък за частното пространство"</string>
     <string name="private_space_face_unlock_title" msgid="462248384776453613">"„Отключване с лице“ за частното пространство"</string>
     <string name="private_space_biometric_unlock_title" msgid="1978145237698659673">"Отключване с лице и отпечатък за частно пространство"</string>
     <string name="private_space_fingerprint_enroll_introduction_title" msgid="5187730641333680942">"Настройване на функцията за отключване с отпечатък за частно пространство"</string>
@@ -959,6 +964,8 @@
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"Устройството ви трябва да е свързано с външен екран, за да дублирате съдържанието на екрана си"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"Още опции"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"Задръжте и плъзнете, за да пренаредите екраните."</string>
+    <!-- no translation found for external_display_mirroring_title (2688288527687724603) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Предаване"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"дублиране"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Активир. на безжичния дисплей"</string>
@@ -2068,6 +2075,10 @@
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"За още опции кликнете в долния десен ъгъл на сензорния панел"</string>
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Скорост на курсора"</string>
     <string name="three_finger_tap_preference_title" msgid="2114347152933865780">"Персонализиране на докосването с три пръста"</string>
+    <!-- no translation found for touchpad_acceleration_title (176627555191021888) -->
+    <skip />
+    <!-- no translation found for touchpad_acceleration_summary (8057075483967535793) -->
+    <skip />
     <string name="pointer_fill_style" msgid="8794616790175016092">"Цвят на курсора"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Запълване на курсора в черно"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Запълване на курсора в зелено"</string>
@@ -2368,9 +2379,9 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Текст с висок контраст"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Променете цвета на текста на черен или бял. Така контрастът с фона се увеличава максимално."</string>
     <string name="accessibility_notification_high_contrast_text_title" msgid="85109818203175520">"Текстът с висок контраст бе заменен"</string>
-    <string name="accessibility_notification_high_contrast_text_content" msgid="5073923345319368046">"Вместо това опитайте с „Увеличаване на контраста на текста“. Можете да намерите опцията в настройките."</string>
+    <string name="accessibility_notification_high_contrast_text_content" msgid="7159316497764514501">"Вместо това опитайте с опцията за контури на текста. Можете да я намерите в настройките."</string>
     <string name="accessibility_notification_high_contrast_text_action" msgid="7190559555068414342">"Към настройките"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"Увеличаване на контраста на текста"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="6940551350643305572">"Контури на текста"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Добавете черен или бял фон около текста, за да увеличите контраста"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Авт. актуал. на увеличението на екрана"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Актуал. на увеличението на екрана при преходи на прилож."</string>
@@ -2583,6 +2594,7 @@
     <string name="keywords_sound_amplifier" msgid="939404835256246663"></string>
     <string name="keywords_display_size" msgid="5286419615221231518">"размер на екрана, голям екран"</string>
     <string name="keywords_bold_text" msgid="6257418169207099589">"Висок контраст, увредено зрение, удебелен шрифт, удебелени елементи"</string>
+    <string name="keywords_maximize_text_contrast" msgid="4304270989682862814">"текст с висок контраст"</string>
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"коригиране на цветовете"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"тъмен екран, светъл екран"</string>
@@ -4537,20 +4549,13 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"Жестове"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Бързо отваряне на камерата"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"За да отворите бързо камерата, натиснете два пъти бутона за включване/изключване – това работи от всеки екран."</string>
-    <!-- no translation found for double_tap_power_title (8129216801770589261) -->
-    <skip />
-    <!-- no translation found for double_tap_power_enabled (7609935047996304482) -->
-    <skip />
-    <!-- no translation found for double_tap_power_target_action_category (2568741597095863728) -->
-    <skip />
-    <!-- no translation found for double_tap_power_camera_action_title (6641206739933181509) -->
-    <skip />
-    <!-- no translation found for double_tap_power_camera_action_summary (4942585540579590444) -->
-    <skip />
-    <!-- no translation found for double_tap_power_wallet_action_title (2460162990983117189) -->
-    <skip />
-    <!-- no translation found for double_tap_power_wallet_action_summary (3463748484407928770) -->
-    <skip />
+    <string name="double_tap_power_title" msgid="8129216801770589261">"Двукратно натискане на бутона за захранване"</string>
+    <string name="double_tap_power_enabled" msgid="7609935047996304482">"Използване на двукратно натискане"</string>
+    <string name="double_tap_power_target_action_category" msgid="2568741597095863728">"Отваряне с двукратно натискане на бутона за захранване"</string>
+    <string name="double_tap_power_camera_action_title" msgid="6641206739933181509">"Камера"</string>
+    <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"Отваряне на Камера"</string>
+    <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Wallet"</string>
+    <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"Отваряне на Wallet"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Обръщане на камерата за селфи"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Режим на навигация"</string>
@@ -4562,7 +4567,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"За достъп до началния екран прекарайте пръст нагоре от долната част на дисплея. За превключване между приложенията прекарайте пръст нагоре от долната част, задръжте и след това освободете. За връщане назад прекарайте пръст настрани от левия или десния край."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Навигиране с 3 бутона"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Връщане назад, достъп до началния екран и превключване между приложенията посредством бутоните в долната част на екрана."</string>
-    <string name="nav_tutorial_button_description" msgid="6880450051535137024">"Бутон за стартиране на урока за навигирането с жестове. Докоснете двукратно за активиране."</string>
+    <!-- no translation found for nav_tutorial_button_description (7195363082216233970) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"навигиране в системата, навигиране с 2 бутона, навигиране с 3 бутона, навигиране с жестове, прекарване на пръст"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Дигитален асистент"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Плъзгане на пръст за извикване на асистент"</string>
@@ -5211,8 +5217,6 @@
     <string name="media_controls_resume_description" msgid="3163482266454802097">"С цел бързо възобновяване на възпроизвеждането медийният плейър остава отворен в бързите настройки"</string>
     <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"Показване на медийния плейър на заключения екран"</string>
     <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"С цел бързо възобновяване на възпроизвеждането медийният плейър остава отворен на заключения екран"</string>
-    <string name="media_controls_recommendations_title" msgid="3012692549413927608">"Показване на препоръките на Асистент за мултимедия"</string>
-    <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Въз основа на активността ви"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Скриване на плейъра"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Показване на плейъра"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"мултимедия"</string>
@@ -5619,4 +5623,14 @@
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Търсене с ограждане"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Докоснете и задръжте бутона „Начало“ или манипулатора за навигация, за да потърсите съдържанието на екрана."</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Конфигуриране на подробностите за устройството."</string>
+    <!-- no translation found for supervision_settings_title (8383827215386872736) -->
+    <skip />
+    <!-- no translation found for supervision_settings_summary (5020634300370322741) -->
+    <skip />
+    <!-- no translation found for device_supervision_switch_title (3203958797412413373) -->
+    <skip />
+    <!-- no translation found for device_supervision_switch_no_pin_summary (8294396978464347129) -->
+    <skip />
+    <!-- no translation found for keywords_supervision_settings (2580555201483955376) -->
+    <skip />
 </resources>
