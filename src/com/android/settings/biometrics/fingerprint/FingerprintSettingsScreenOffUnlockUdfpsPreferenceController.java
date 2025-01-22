@@ -59,7 +59,7 @@ public class FingerprintSettingsScreenOffUnlockUdfpsPreferenceController
             return false;
         }
         final boolean defEnabled = mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_screen_off_udfps_enabled);
+                com.android.internal.R.bool.config_screen_off_udfps_default_on);
         final int value = Settings.Secure.getIntForUser(
                 mContext.getContentResolver(),
                 Settings.Secure.SCREEN_OFF_UNLOCK_UDFPS_ENABLED,
