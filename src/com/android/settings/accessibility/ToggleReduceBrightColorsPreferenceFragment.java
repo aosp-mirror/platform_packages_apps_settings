@@ -37,7 +37,6 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.widget.SettingsMainSwitchPreference;
@@ -179,13 +178,6 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
     @Override
     ComponentName getTileComponentName() {
         return REDUCE_BRIGHT_COLORS_TILE_SERVICE_COMPONENT_NAME;
-    }
-
-    @Override
-    CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
-        return getText(type == QuickSettingsTooltipType.GUIDE_TO_EDIT
-                ? R.string.accessibility_reduce_bright_colors_qs_tooltip_content
-                : R.string.accessibility_reduce_bright_colors_auto_added_qs_tooltip_content);
     }
 
     @Override

@@ -47,7 +47,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.widget.SettingsMainSwitchPreference;
@@ -263,11 +262,6 @@ public class ToggleColorInversionPreferenceFragmentTest {
         @Override
         ComponentName getTileComponentName() {
             return PLACEHOLDER_COMPONENT_NAME;
-        }
-
-        @Override
-        protected CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
-            return PLACEHOLDER_TILE_TOOLTIP_CONTENT;
         }
 
         @Override

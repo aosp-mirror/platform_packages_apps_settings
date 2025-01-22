@@ -36,7 +36,6 @@ import android.view.ViewGroup;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.search.SearchIndexable;
@@ -177,13 +176,6 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     @Override
     ComponentName getTileComponentName() {
         return COLOR_INVERSION_TILE_COMPONENT_NAME;
-    }
-
-    @Override
-    CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
-        return getText(type == QuickSettingsTooltipType.GUIDE_TO_EDIT
-                ? R.string.accessibility_color_inversion_qs_tooltip_content
-                : R.string.accessibility_color_inversion_auto_added_qs_tooltip_content);
     }
 
     @Override

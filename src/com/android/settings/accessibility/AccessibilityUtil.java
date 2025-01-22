@@ -219,22 +219,6 @@ public final class AccessibilityUtil {
     }
 
     /**
-     * Converts {@link UserShortcutType} to key in Settings.
-     *
-     * @param shortcutType The shortcut type.
-     * @return Mapping key in Settings.
-     *
-     * @deprecated use
-     * {@link ShortcutUtils#convertToKey(int)} instead.
-     *
-     * (TODO 367414968: finish removal.)
-     */
-    @Deprecated
-    static String convertKeyFromSettings(@UserShortcutType int shortcutType) {
-        return ShortcutUtils.convertToKey(shortcutType);
-    }
-
-    /**
      * Gets the width of the screen.
      *
      * @param context the current context.
