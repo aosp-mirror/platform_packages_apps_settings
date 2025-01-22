@@ -22,6 +22,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -124,18 +125,19 @@ public class MouseKeysImageListAdapter extends
 
     public static class MouseKeyImageViewHolder extends RecyclerView.ViewHolder {
         private final TextView mTextView;
+        private final ImageView mImageView;
         private final Context mContext;
 
         public MouseKeyImageViewHolder(View itemView, Context context) {
             super(itemView);
-            mTextView = (TextView) itemView;
+            mTextView = itemView.findViewById(R.id.layout_description);
+            mImageView = itemView.findViewById(R.id.image);
             mContext = context;
         }
 
         void bindView(int drawableRes, String summary) {
             mTextView.setText(summary);
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(null,
-                    mContext.getDrawable(drawableRes), null, null);
+            mImageView.setImageDrawable(mContext.getDrawable(drawableRes));
         }
     }
 }
