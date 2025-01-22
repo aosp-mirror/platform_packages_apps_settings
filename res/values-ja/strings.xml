@@ -140,6 +140,8 @@
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bluetooth LE Audio の許可リストを回避する"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE Audio の周辺機器が許可リストの基準を満たしていない場合でも、デフォルトで LE Audio を使用します。"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"メディア デバイス"</string>
+    <!-- no translation found for connected_device_temp_bond_device_title (1141199848329262106) -->
+    <skip />
     <string name="connected_device_call_device_title" msgid="88732390601723608">"通話デバイス"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"その他のデバイス"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"保存済みのデバイス"</string>
@@ -227,9 +229,9 @@
     <string name="search_region_hint" msgid="1748708432568237552">"地域を検索できます"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"選択した地域によって、スマートフォンに表示される時間、日付、温度などが決まります"</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"その他の言語設定"</string>
-    <!-- no translation found for title_change_system_locale_region (2239197787972916177) -->
-    <skip />
-    <!-- no translation found for body_change_system_locale_region (2706171830649357930) -->
+    <string name="title_change_system_locale_region" msgid="2239197787972916177">"地域を%sに変更しますか？"</string>
+    <string name="body_change_system_locale_region" msgid="2706171830649357930">"デバイスのシステム言語は%sのままとなります"</string>
+    <!-- no translation found for top_intro_numbering_system_title (3560237920807539566) -->
     <skip />
     <string name="regional_preferences_title" msgid="4304567374498629528">"地域別の設定"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"使用する単位と数字を指定します"</string>
@@ -348,12 +350,9 @@
     <string name="safety_center_summary" msgid="3554867379951053869">"アプリのセキュリティ、デバイスのロック、アクセス許可"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"顔が登録されています"</string>
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"セットアップが必要です"</string>
-    <!-- no translation found for security_settings_face_preference_title_new (7680231874730796331) -->
-    <skip />
-    <!-- no translation found for security_settings_face_profile_preference_title_new (685550153608106166) -->
-    <skip />
-    <!-- no translation found for private_space_face_unlock_title_new (2079622608951402509) -->
-    <skip />
+    <string name="security_settings_face_preference_title_new" msgid="7680231874730796331">"顔認証"</string>
+    <string name="security_settings_face_profile_preference_title_new" msgid="685550153608106166">"顔認証（仕事用）"</string>
+    <string name="private_space_face_unlock_title_new" msgid="2079622608951402509">"顔認証（プライベート スペース）"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"顔認証"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"仕事用の顔認証"</string>
     <string name="security_settings_face_enroll_education_title" msgid="6448806884597691208">"顔認証の設定方法"</string>
@@ -400,6 +399,10 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"現在の顔モデルを削除して顔認証をもう一度設定してください。\n\n顔モデルは安全かつ完全に削除されます。\n\n削除後に、スマートフォンのロック解除やアプリでの認証を行うには、PIN、パターン、パスワードのいずれかが必要になります。"</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"現在の顔モデルを削除して顔認証をもう一度設定してください。\n\n顔モデルは安全かつ完全に削除されます。\n\n削除後に、スマートフォンのロック解除やアプリでの認証を行うには、指紋、PIN、パターン、パスワードのいずれかが必要になります。"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"顔認証の用途"</string>
+    <!-- no translation found for security_settings_face_settings_face_category (60058016983772899) -->
+    <skip />
+    <!-- no translation found for security_settings_face_settings_use_face_to_category (3349153603335284583) -->
+    <skip />
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"顔認証を使用する場合"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"目を開いているか確認"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"デバイスのロックを解除する際に、目を開いていることを確認します"</string>
@@ -414,11 +417,14 @@
     <string name="security_settings_face_remove_dialog_details_fingerprint_conv" msgid="2627374706274503259">"顔モデルは安全かつ完全に削除されます。\n\n削除後に、スマートフォンのロックを解除するには、指紋、PIN、パターン、パスワードのいずれかが必要になります。"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"顔認証を使用して、スマートフォンのロックを解除します"</string>
     <string name="security_settings_fingerprint" msgid="6387775386189204201">"指紋"</string>
+    <!-- no translation found for security_settings_fingerprint_title (7564944192711394896) -->
+    <skip />
+    <!-- no translation found for security_settings_category_use_fingerprint (4273932435979772330) -->
+    <skip />
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"指紋"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"指紋認証の使用時"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"仕事用の指紋"</string>
-    <!-- no translation found for security_settings_work_fingerprint_preference_title_new (8967333987631878868) -->
-    <skip />
+    <string name="security_settings_work_fingerprint_preference_title_new" msgid="8967333987631878868">"指紋認証（仕事用）"</string>
     <string name="fingerprint_check_enrolled_title" msgid="1007921571704991108">"登録済みの指紋を確認"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"指紋を追加"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{指紋が登録されています}other{# 件の指紋が登録されています}}"</string>
@@ -631,8 +637,7 @@
     <string name="private_space_face_title" msgid="3290402865367663079">"顔認証"</string>
     <string name="private_space_biometric_summary" msgid="4403837276018724581">"タップして設定してください"</string>
     <string name="private_space_fingerprint_unlock_title" msgid="3614016453395789051">"プライベート スペースの指紋認証"</string>
-    <!-- no translation found for private_space_fingerprint_unlock_title_new (5524309056115678364) -->
-    <skip />
+    <string name="private_space_fingerprint_unlock_title_new" msgid="5524309056115678364">"指紋認証（プライベート スペース）"</string>
     <string name="private_space_face_unlock_title" msgid="462248384776453613">"プライベート スペースの顔認証"</string>
     <string name="private_space_biometric_unlock_title" msgid="1978145237698659673">"プライベート スペースの顔認証と指紋認証"</string>
     <string name="private_space_fingerprint_enroll_introduction_title" msgid="5187730641333680942">"プライベート スペースの指紋認証の設定"</string>
@@ -959,6 +964,8 @@
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"画面をミラーリングするには、デバイスを外部ディスプレイに接続する必要があります"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"その他のオプション"</string>
     <string name="external_display_topology_hint" msgid="854973327795578470">"ディスプレイを並べ替えるには長押ししてドラッグします。"</string>
+    <!-- no translation found for external_display_mirroring_title (2688288527687724603) -->
+    <skip />
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"キャスト"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ミラー"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"ワイヤレス ディスプレイの有効化"</string>
@@ -2068,6 +2075,10 @@
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"タッチパッドの右下をクリックするとオプションが表示されます"</string>
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"カーソル速度"</string>
     <string name="three_finger_tap_preference_title" msgid="2114347152933865780">"「3 本の指でタップ」のカスタマイズ"</string>
+    <!-- no translation found for touchpad_acceleration_title (176627555191021888) -->
+    <skip />
+    <!-- no translation found for touchpad_acceleration_summary (8057075483967535793) -->
+    <skip />
     <string name="pointer_fill_style" msgid="8794616790175016092">"ポインタの色"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"ポインターの塗りつぶしを黒色に変更"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"ポインターの塗りつぶしを緑色に変更"</string>
@@ -2368,9 +2379,9 @@
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"高コントラスト テキスト"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"テキストの色を黒または白に変更します。背景とのコントラストが最も際立ちます。"</string>
     <string name="accessibility_notification_high_contrast_text_title" msgid="85109818203175520">"[高コントラスト テキスト] は置き換えられました"</string>
-    <string name="accessibility_notification_high_contrast_text_content" msgid="5073923345319368046">"代わりに [テキストのコントラストを最大にする] をお試しください。このオプションは [設定] から有効にできます。"</string>
+    <string name="accessibility_notification_high_contrast_text_content" msgid="7159316497764514501">"代わりに [文字の縁取り] をお試しください。このオプションは [設定] から有効にできます。"</string>
     <string name="accessibility_notification_high_contrast_text_action" msgid="7190559555068414342">"設定を開く"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="8737272017343509753">"テキストのコントラストを最大にする"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="6940551350643305572">"文字の縁取り"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"テキストの背景色を黒または白にして、コントラストが際立つようにします"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"画面の拡大を自動更新"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"アプリの遷移時に画面の拡大を更新"</string>
@@ -2411,11 +2422,11 @@
     <string name="accessibility_autoclick_description" msgid="6695732131412361101">"自動クリックは、マウスをクリックしにくい場合に役立ちます"</string>
     <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"自動クリック OFF"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"短め"</string>
-    <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0.2秒"</string>
+    <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0.2 秒"</string>
     <string name="accessibility_autoclick_medium_title" msgid="3134175117576834320">"中"</string>
-    <string name="accessibility_autoclick_medium_summary" msgid="1343390686514222871">"0.6秒"</string>
+    <string name="accessibility_autoclick_medium_summary" msgid="1343390686514222871">"0.6 秒"</string>
     <string name="accessibility_autoclick_long_title" msgid="6799311820641687735">"長め"</string>
-    <string name="accessibility_autoclick_long_summary" msgid="3747153151313563637">"1秒"</string>
+    <string name="accessibility_autoclick_long_summary" msgid="3747153151313563637">"1 秒"</string>
     <string name="accessibility_autoclick_custom_title" msgid="4597792235546232038">"カスタム"</string>
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"短い"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"長い"</string>
@@ -2583,6 +2594,7 @@
     <string name="keywords_sound_amplifier" msgid="939404835256246663"></string>
     <string name="keywords_display_size" msgid="5286419615221231518">"画面 サイズ, 大きい 画面"</string>
     <string name="keywords_bold_text" msgid="6257418169207099589">"ハイ コントラスト, ロー ビジョン, 太字 フォント, ボールド 体"</string>
+    <string name="keywords_maximize_text_contrast" msgid="4304270989682862814">"高コントラスト テキスト"</string>
     <string name="keywords_select_to_speak" msgid="2872704811610888719"></string>
     <string name="keywords_color_correction" msgid="8540442886990423681">"調整 色"</string>
     <string name="keywords_color_inversion" msgid="4291058365873221962">"切り替え 画面 ダーク, 切り替え 画面 ライト"</string>
@@ -4537,20 +4549,13 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"ジェスチャー"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"カメラをすばやく起動"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"電源ボタンを 2 回押して、カメラをすばやく起動できます。どの画面からでも操作できます。"</string>
-    <!-- no translation found for double_tap_power_title (8129216801770589261) -->
-    <skip />
-    <!-- no translation found for double_tap_power_enabled (7609935047996304482) -->
-    <skip />
-    <!-- no translation found for double_tap_power_target_action_category (2568741597095863728) -->
-    <skip />
-    <!-- no translation found for double_tap_power_camera_action_title (6641206739933181509) -->
-    <skip />
-    <!-- no translation found for double_tap_power_camera_action_summary (4942585540579590444) -->
-    <skip />
-    <!-- no translation found for double_tap_power_wallet_action_title (2460162990983117189) -->
-    <skip />
-    <!-- no translation found for double_tap_power_wallet_action_summary (3463748484407928770) -->
-    <skip />
+    <string name="double_tap_power_title" msgid="8129216801770589261">"電源ボタンを 2 回押す"</string>
+    <string name="double_tap_power_enabled" msgid="7609935047996304482">"2 回押しを使用する"</string>
+    <string name="double_tap_power_target_action_category" msgid="2568741597095863728">"電源ボタンを 2 回押して開く"</string>
+    <string name="double_tap_power_camera_action_title" msgid="6641206739933181509">"カメラ"</string>
+    <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"カメラを起動"</string>
+    <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"ウォレット"</string>
+    <string name="double_tap_power_wallet_action_summary" msgid="3463748484407928770">"ウォレットを開く"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"ひねる動作で前後のカメラを切り替え"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"ナビゲーション モード"</string>
@@ -4562,7 +4567,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"ホームに移動するには、画面の下部から上にスワイプします。アプリを切り替えるには、下から上にスワイプして長押ししてから離します。戻るには、左端または右端からスワイプします。"</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3 ボタン ナビゲーション"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"戻る、ホームへの移動、アプリの切り替えを画面下部のボタンで行います。"</string>
-    <string name="nav_tutorial_button_description" msgid="6880450051535137024">"ジェスチャー ナビゲーションのチュートリアルを開始するボタンです。有効にするにはダブルタップします。"</string>
+    <!-- no translation found for nav_tutorial_button_description (7195363082216233970) -->
+    <skip />
     <string name="keywords_system_navigation" msgid="3131782378486554934">"システム ナビゲーション, 2 ボタン ナビゲーション, 3 ボタン ナビゲーション, ジェスチャー ナビゲーション, スワイプ"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"デジタル アシスタント"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"スワイプしてアシスタントを起動"</string>
@@ -5211,8 +5217,6 @@
     <string name="media_controls_resume_description" msgid="3163482266454802097">"再生をすばやく再開できるよう、[クイック設定] にメディア プレーヤーを開いたままにします"</string>
     <string name="media_controls_lockscreen_title" msgid="2188311721857512510">"ロック画面にメディアを表示する"</string>
     <string name="media_controls_lockscreen_description" msgid="3320333660404439510">"再生をすばやく再開できるよう、ロック画面にメディア プレーヤーを開いたままにする"</string>
-    <string name="media_controls_recommendations_title" msgid="3012692549413927608">"アシスタントのおすすめのメディアを表示する"</string>
-    <string name="media_controls_recommendations_description" msgid="7596498733126824030">"アクティビティに基づいて表示します"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"プレーヤーを非表示"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"クイック設定に表示させるプレーヤーを選択"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"メディア"</string>
@@ -5320,7 +5324,7 @@
     <string name="virtual_device_disconnected" msgid="4148915248176291618">"未接続"</string>
     <string name="virtual_device_unknown" msgid="3592486476918448088">"不明なデバイス"</string>
     <string name="virtual_device_details_title" msgid="2298529342462505596">"デバイスの詳細"</string>
-    <string name="virtual_device_forget_dialog_title" msgid="4589091802540229362">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>を削除しますか？"</string>
+    <string name="virtual_device_forget_dialog_title" msgid="4589091802540229362">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> を削除しますか？"</string>
     <string name="virtual_device_forget_dialog_confirm_button" msgid="2700888112027110344">"削除"</string>
     <string name="virtual_device_companion_app_category" msgid="2795042145688252495">"接続を管理するアプリ"</string>
     <string name="uwb_settings_title" msgid="8578498712312002231">"超広帯域無線（UWB）"</string>
@@ -5619,4 +5623,14 @@
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"かこって検索"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"ホームボタンまたはナビゲーション ハンドルを長押しすると、画面上のコンテンツを使って検索できます。"</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>。デバイスの詳細を設定してください。"</string>
+    <!-- no translation found for supervision_settings_title (8383827215386872736) -->
+    <skip />
+    <!-- no translation found for supervision_settings_summary (5020634300370322741) -->
+    <skip />
+    <!-- no translation found for device_supervision_switch_title (3203958797412413373) -->
+    <skip />
+    <!-- no translation found for device_supervision_switch_no_pin_summary (8294396978464347129) -->
+    <skip />
+    <!-- no translation found for keywords_supervision_settings (2580555201483955376) -->
+    <skip />
 </resources>
