@@ -295,11 +295,11 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getSettingsLifecycle());
+        return buildPreferenceControllers(context);
     }
 
     private List<AbstractPreferenceController> buildPreferenceControllers(
-            @NonNull Context context, @Nullable Lifecycle lifecycle) {
+            @NonNull Context context) {
         LocaleList explicitLocales = null;
         if (isDeviceDemoMode()) {
             Bundle bundle = getIntent().getExtras();
@@ -314,6 +314,8 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
         mSystemLocaleAllListPreferenceController = new SystemLocaleAllListPreferenceController(
                 context, KEY_PREFERENCE_SYSTEM_LOCALE_LIST, explicitLocales);
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        mSuggestedListPreferenceController.setFragmentManager(getFragmentManager());
+        mSystemLocaleAllListPreferenceController.setFragmentManager(getFragmentManager());
         controllers.add(mSuggestedListPreferenceController);
         controllers.add(mSystemLocaleAllListPreferenceController);
 
