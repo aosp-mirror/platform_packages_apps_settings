@@ -6,7 +6,7 @@ package {
 aconfig_declarations {
     name: "aconfig_settings_flags",
     package: "com.android.settings.flags",
-    container: "system",
+    container: "system_ext",
     srcs: [
         "*.aconfig",
         "catalyst/*.aconfig",
@@ -21,7 +21,7 @@ java_aconfig_library {
 aconfig_declarations {
     name: "factory_reset_flags",
     package: "com.android.settings.factory_reset",
-    container: "system",
+    container: "system_ext",
     srcs: ["factory_reset/*.aconfig"],
 }
 
@@ -33,7 +33,7 @@ java_aconfig_library {
 aconfig_declarations {
     name: "media_drm_flags",
     package: "com.android.settings.media_drm",
-    container: "system",
+    container: "system_ext",
     srcs: ["media_drm/*.aconfig"],
 }
 
@@ -45,7 +45,7 @@ java_aconfig_library {
 aconfig_declarations {
     name: "accessibility_flags",
     package: "com.android.settings.accessibility",
-    container: "system",
+    container: "system_ext",
     srcs: ["accessibility/*.aconfig"],
 }
 
@@ -57,7 +57,7 @@ java_aconfig_library {
 aconfig_declarations {
     name: "development_settings_flags",
     package: "com.android.settings.development",
-    container: "system",
+    container: "system_ext",
     srcs: [
         "development/**/*.aconfig",
     ],
@@ -71,7 +71,7 @@ java_aconfig_library {
 aconfig_declarations {
     name: "keyboard_flags",
     package: "com.android.settings.keyboard",
-    container: "system",
+    container: "system_ext",
     srcs: ["keyboard/*.aconfig"],
 }
 
