@@ -29,7 +29,7 @@ import com.android.settings.dashboard.DashboardFragment
  */
 class SupervisionDashboardFragment : DashboardFragment() {
 
-    override fun getPreferenceScreenResId() = R.xml.placeholder_preference_screen
+    override fun getPreferenceScreenResId() = 0
 
     override fun getMetricsCategory() = SettingsEnums.SUPERVISION_DASHBOARD
 

@@ -403,10 +403,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
      * Displays resource based tiles.
      */
     private void displayResourceTiles() {
-        final int resId = getPreferenceScreenResId();
-        if (resId <= 0) {
-            return;
-        }
         PreferenceScreen screen;
         PreferenceScreenCreator preferenceScreenCreator = getPreferenceScreenCreator();
         if (preferenceScreenCreator != null) {
@@ -416,6 +412,10 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             }
             setPreferenceScreen(screen);
         } else {
+            final int resId = getPreferenceScreenResId();
+            if (resId <= 0) {
+                return;
+            }
             addPreferencesFromResource(resId);
             screen = getPreferenceScreen();
         }
