@@ -19,6 +19,7 @@ package com.android.settings.regionalpreferences;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.LocaleList;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
@@ -83,7 +84,7 @@ public class RegionPickerFragment extends DashboardFragment{
 
     private List<AbstractPreferenceController> buildPreferenceControllers(
             @NonNull Context context) {
-        Locale parentLocale = LocaleStore.getLocaleInfo(Locale.getDefault()).getParent();
+        Locale parentLocale = LocaleStore.getLocaleInfo(LocaleList.getDefault().get(0)).getParent();
         LocaleStore.LocaleInfo parentLocaleInfo = LocaleStore.getLocaleInfo(parentLocale);
         SystemRegionSuggestedListPreferenceController mSuggestedListPreferenceController =
                 new SystemRegionSuggestedListPreferenceController(
