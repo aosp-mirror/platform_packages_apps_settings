@@ -18,11 +18,10 @@ package com.android.settings.accessibility
 import android.content.Context
 import com.android.settings.R
 import com.android.settings.flags.Flags
-import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceScreenCreator
 
-@ProvidePreferenceScreen(TextReadingScreen.KEY)
+// @ProvidePreferenceScreen(TextReadingScreen.KEY)
 class TextReadingScreen : PreferenceScreenCreator {
     override val key: String
         get() = KEY
@@ -34,9 +33,12 @@ class TextReadingScreen : PreferenceScreenCreator {
 
     override fun fragmentClass() = TextReadingPreferenceFragment::class.java
 
-    override fun hasCompleteHierarchy() = false
-
-    override fun getPreferenceHierarchy(context: Context) = preferenceHierarchy(context, this) {}
+    override fun getPreferenceHierarchy(context: Context) =
+        preferenceHierarchy(context, this) {
+            +TextReadingPreview()
+            +TextReadingFontSizePreference()
+            +TextReadingDisplaySizePreference()
+        }
 
     companion object {
         const val KEY = "text_reading_screen"
