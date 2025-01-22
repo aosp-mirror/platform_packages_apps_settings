@@ -91,6 +91,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     private static final String ESTIMATE_READY = "estimate_ready";
     private static final String DATABASE_ID = "id";
     private static final String DATABASE_BLUETOOTH = "Bluetooth";
+    private static final String TAG_BATT = "BATT";
     private static final long TIME_OF_HOUR = TimeUnit.SECONDS.toMillis(3600);
     private static final long TIME_OF_MINUTE = TimeUnit.SECONDS.toMillis(60);
     private static final int LEFT_DEVICE_ID = 1;
@@ -268,6 +269,30 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                                                         BluetoothDevice.METADATA_MAIN_BATTERY)
                                                 != BluetoothUtils.META_INT_ERROR);
                             });
+            Supplier<Boolean> isBattEnabled =
+                    Suppliers.memoize(
+                            () ->
+                                    Boolean.valueOf(
+                                            BluetoothUtils.getFastPairCustomizedField(
+                                                    mCachedDevice.getDevice(), TAG_BATT)));
+            Supplier<Integer> leftBatteryLevel =
+                    Suppliers.memoize(
+                            () ->
+                                    BluetoothUtils.getIntMetaData(
+                                            mCachedDevice.getDevice(),
+                                            BluetoothDevice.METADATA_UNTETHERED_LEFT_BATTERY));
+            Supplier<Integer> rightBatteryLevel =
+                    Suppliers.memoize(
+                            () ->
+                                    BluetoothUtils.getIntMetaData(
+                                            mCachedDevice.getDevice(),
+                                            BluetoothDevice.METADATA_UNTETHERED_RIGHT_BATTERY));
+            Supplier<Integer> caseBatteryLevel =
+                    Suppliers.memoize(
+                            () ->
+                                    BluetoothUtils.getIntMetaData(
+                                            mCachedDevice.getDevice(),
+                                            BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY));
             preloadAndRun(
                     List.of(deviceName, disconnected, isUntetheredHeadset, summaryText),
                     () -> {
@@ -277,7 +302,16 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                         final TextView summary =
                                 mLayoutPreference.findViewById(R.id.entity_header_summary);
 
-                        if (disconnected.get()) {
+                        final boolean isBatteryLevelAvailable =
+                                Flags.enableBatteryLevelDisplay()
+                                        && isBattEnabled.get()
+                                        && (leftBatteryLevel.get() > BluetoothUtils.META_INT_ERROR
+                                                || rightBatteryLevel.get()
+                                                        > BluetoothUtils.META_INT_ERROR
+                                                || caseBatteryLevel.get()
+                                                        > BluetoothUtils.META_INT_ERROR);
+
+                        if (disconnected.get() && !isBatteryLevelAvailable) {
                             summary.setText(summaryText.get());
                             updateDisconnectLayout();
                             return;
