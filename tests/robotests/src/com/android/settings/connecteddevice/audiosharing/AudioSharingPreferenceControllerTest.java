@@ -25,8 +25,10 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
@@ -77,7 +79,8 @@ import org.robolectric.shadow.api.Shadow;
             ShadowThreadUtils.class
         })
 public class AudioSharingPreferenceControllerTest {
-    private static final String PREF_KEY = "audio_sharing_settings";
+    private static final String PREF_KEY1 = "audio_sharing_settings";
+    private static final String PREF_KEY2 = "connected_device_audio_sharing_settings";
 
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
@@ -110,9 +113,6 @@ public class AudioSharingPreferenceControllerTest {
         when(localBluetoothManager.getEventManager()).thenReturn(mBtEventManager);
         when(localBluetoothManager.getProfileManager()).thenReturn(mLocalBtProfileManager);
         when(mLocalBtProfileManager.getLeAudioBroadcastProfile()).thenReturn(mBroadcast);
-        mController = new AudioSharingPreferenceController(mContext, PREF_KEY);
-        mPreference = spy(new Preference(mContext));
-        when(mScreen.findPreference(PREF_KEY)).thenReturn(mPreference);
     }
 
     @After
@@ -124,6 +124,7 @@ public class AudioSharingPreferenceControllerTest {
     @Test
     public void onStart_flagOn_registerCallback() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        setupControllerWithKey(PREF_KEY1);
         mController.onStart(mLifecycleOwner);
         verify(mBtEventManager).registerCallback(mController);
         verify(mBroadcast).registerServiceCallBack(any(), any(BluetoothLeBroadcast.Callback.class));
@@ -132,6 +133,7 @@ public class AudioSharingPreferenceControllerTest {
     @Test
     public void onStart_flagOff_skipRegisterCallback() {
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        setupControllerWithKey(PREF_KEY1);
         mController.onStart(mLifecycleOwner);
         verify(mBtEventManager, never()).registerCallback(mController);
         verify(mBroadcast, never())
@@ -141,6 +143,7 @@ public class AudioSharingPreferenceControllerTest {
     @Test
     public void onStop_flagOn_unregisterCallback() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        setupControllerWithKey(PREF_KEY1);
         mController.onStop(mLifecycleOwner);
         verify(mBtEventManager).unregisterCallback(mController);
         verify(mBroadcast).unregisterServiceCallBack(any(BluetoothLeBroadcast.Callback.class));
@@ -149,6 +152,7 @@ public class AudioSharingPreferenceControllerTest {
     @Test
     public void onStop_flagOff_skipUnregisterCallback() {
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        setupControllerWithKey(PREF_KEY1);
         mController.onStop(mLifecycleOwner);
         verify(mBtEventManager, never()).unregisterCallback(mController);
         verify(mBroadcast, never())
@@ -158,65 +162,147 @@ public class AudioSharingPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_flagOn() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        setupControllerWithKey(PREF_KEY1);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
     public void getAvailabilityStatus_flagOff() {
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
+        setupControllerWithKey(PREF_KEY1);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
-    public void getSummary_broadcastOn() {
+    public void getSummary_connectionPreference_broadcastOn() {
         when(mBroadcast.isEnabled(any())).thenReturn(true);
+        setupControllerWithKey(PREF_KEY1);
         assertThat(mController.getSummary().toString())
                 .isEqualTo(mContext.getString(R.string.audio_sharing_summary_on));
     }
 
     @Test
-    public void getSummary_broadcastOff() {
+    public void getSummary_connectionPreference_broadcastOff() {
         when(mBroadcast.isEnabled(any())).thenReturn(false);
+        setupControllerWithKey(PREF_KEY1);
         assertThat(mController.getSummary().toString())
                 .isEqualTo(mContext.getString(R.string.audio_sharing_summary_off));
     }
 
     @Test
+    public void getSummary_connectedDevices_broadcastOn() {
+        when(mBroadcast.isEnabled(any())).thenReturn(true);
+        setupControllerWithKey(PREF_KEY2);
+        assertThat(mController.getSummary().toString()).isEmpty();
+    }
+
+    @Test
+    public void getSummary_connectedDevices_broadcastOff() {
+        when(mBroadcast.isEnabled(any())).thenReturn(false);
+        setupControllerWithKey(PREF_KEY2);
+        assertThat(mController.getSummary().toString()).isEmpty();
+    }
+
+    @Test
     public void onBluetoothStateChanged_refreshSummary() {
+        setupControllerWithKey(PREF_KEY1);
+        mController.updateState(mPreference);
         mController.displayPreference(mScreen);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertThat(mPreference.getSummary().toString())
+                .isEqualTo(mContext.getString(R.string.audio_sharing_summary_off));
+        assertThat(mPreference.isVisible()).isTrue();
+
         when(mBroadcast.isEnabled(any())).thenReturn(true);
         mController.onBluetoothStateChanged(STATE_ON);
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(mPreference.getSummary().toString())
                 .isEqualTo(mContext.getString(R.string.audio_sharing_summary_on));
+        assertThat(mPreference.isVisible()).isTrue();
 
         when(mBroadcast.isEnabled(any())).thenReturn(false);
         mController.onBluetoothStateChanged(STATE_OFF);
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(mPreference.getSummary().toString())
                 .isEqualTo(mContext.getString(R.string.audio_sharing_summary_off));
+        assertThat(mPreference.isVisible()).isTrue();
+    }
+
+    @Test
+    public void onBluetoothStateChanged_refreshVisibility() {
+        setupControllerWithKey(PREF_KEY2);
+        mController.updateState(mPreference);
+        mController.displayPreference(mScreen);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertThat(mPreference.getSummary().toString()).isEmpty();
+        assertThat(mPreference.isVisible()).isFalse();
+
+        when(mBroadcast.isEnabled(any())).thenReturn(true);
+        mController.onBluetoothStateChanged(STATE_ON);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertThat(mPreference.getSummary().toString()).isEmpty();
+        assertThat(mPreference.isVisible()).isTrue();
+
+        when(mBroadcast.isEnabled(any())).thenReturn(false);
+        mController.onBluetoothStateChanged(STATE_OFF);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertThat(mPreference.getSummary().toString()).isEmpty();
+        assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
     public void testBluetoothLeBroadcastCallbacks_refreshSummary() {
+        setupControllerWithKey(PREF_KEY1);
+        mController.updateState(mPreference);
         mController.displayPreference(mScreen);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertThat(mPreference.getSummary().toString())
+                .isEqualTo(mContext.getString(R.string.audio_sharing_summary_off));
+        assertThat(mPreference.isVisible()).isTrue();
 
         when(mBroadcast.isEnabled(any())).thenReturn(true);
         mController.mBroadcastCallback.onBroadcastStarted(/* reason= */ 1, /* broadcastId= */ 1);
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(mPreference.getSummary().toString())
                 .isEqualTo(mContext.getString(R.string.audio_sharing_summary_on));
+        assertThat(mPreference.isVisible()).isTrue();
 
         when(mBroadcast.isEnabled(any())).thenReturn(false);
         mController.mBroadcastCallback.onBroadcastStopped(/* reason= */ 1, /* broadcastId= */ 1);
         shadowOf(Looper.getMainLooper()).idle();
         assertThat(mPreference.getSummary().toString())
                 .isEqualTo(mContext.getString(R.string.audio_sharing_summary_off));
+        assertThat(mPreference.isVisible()).isTrue();
+    }
+
+    @Test
+    public void testBluetoothLeBroadcastCallbacks_refreshVisibility() {
+        setupControllerWithKey(PREF_KEY2);
+        mController.updateState(mPreference);
+        mController.displayPreference(mScreen);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertThat(mPreference.getSummary().toString()).isEmpty();
+        assertThat(mPreference.isVisible()).isFalse();
+
+        when(mBroadcast.isEnabled(any())).thenReturn(true);
+        mController.mBroadcastCallback.onBroadcastStarted(/* reason= */ 1, /* broadcastId= */ 1);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertThat(mPreference.getSummary().toString()).isEmpty();
+        assertThat(mPreference.isVisible()).isTrue();
+
+        when(mBroadcast.isEnabled(any())).thenReturn(false);
+        mController.mBroadcastCallback.onBroadcastStopped(/* reason= */ 1, /* broadcastId= */ 1);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertThat(mPreference.getSummary().toString()).isEmpty();
+        assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
     public void testBluetoothLeBroadcastCallbacks_doNothing() {
+        setupControllerWithKey(PREF_KEY1);
         mController.displayPreference(mScreen);
+        shadowOf(Looper.getMainLooper()).idle();
+        verify(mPreference).setVisible(anyBoolean());
 
         mController.mBroadcastCallback.onBroadcastMetadataChanged(/* reason= */ 1, mMetadata);
         verify(mPreference, never()).setSummary(any());
@@ -233,5 +319,34 @@ public class AudioSharingPreferenceControllerTest {
         mController.mBroadcastCallback.onBroadcastUpdateFailed(
                 /* reason= */ 1, /* broadcastId= */ 1);
         verify(mPreference, never()).setSummary(any());
+        verify(mPreference).setVisible(anyBoolean());
+
+        setupControllerWithKey(PREF_KEY2);
+        mController.displayPreference(mScreen);
+        shadowOf(Looper.getMainLooper()).idle();
+        verify(mPreference, times(3)).setVisible(anyBoolean());
+
+        mController.mBroadcastCallback.onBroadcastMetadataChanged(/* reason= */ 1, mMetadata);
+        verify(mPreference, never()).setSummary(any());
+        mController.mBroadcastCallback.onBroadcastUpdated(/* reason= */ 1, /* broadcastId= */ 1);
+        verify(mPreference, never()).setSummary(any());
+        mController.mBroadcastCallback.onPlaybackStarted(/* reason= */ 1, /* broadcastId= */ 1);
+        verify(mPreference, never()).setSummary(any());
+        mController.mBroadcastCallback.onPlaybackStopped(/* reason= */ 1, /* broadcastId= */ 1);
+        verify(mPreference, never()).setSummary(any());
+        mController.mBroadcastCallback.onBroadcastStartFailed(/* reason= */ 1);
+        verify(mPreference, never()).setSummary(any());
+        mController.mBroadcastCallback.onBroadcastStopFailed(/* reason= */ 1);
+        verify(mPreference, never()).setSummary(any());
+        mController.mBroadcastCallback.onBroadcastUpdateFailed(
+                /* reason= */ 1, /* broadcastId= */ 1);
+        verify(mPreference, never()).setSummary(any());
+        verify(mPreference, times(3)).setVisible(anyBoolean());
+    }
+
+    private void setupControllerWithKey(String preferenceKey) {
+        mController = new AudioSharingPreferenceController(mContext, preferenceKey);
+        mPreference = spy(new Preference(mContext));
+        when(mScreen.findPreference(preferenceKey)).thenReturn(mPreference);
     }
 }
