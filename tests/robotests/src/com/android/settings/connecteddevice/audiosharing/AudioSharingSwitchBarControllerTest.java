@@ -515,23 +515,14 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
-    public void onBroadcastMetadataChanged_hasLocalSource_noDialog() {
+    public void onBroadcastMetadataChanged_notTriggeredHere_noDialog() {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2, mDevice1));
-        when(mState.getBroadcastId()).thenReturn(1);
-        when(mBroadcast.getLatestBroadcastId()).thenReturn(1);
-        when(mAssistant.getAllSources(mDevice2)).thenReturn(ImmutableList.of(mState));
+        when(mAssistant.getAllSources(any(BluetoothDevice.class))).thenReturn(ImmutableList.of());
         when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
         doNothing().when(mBroadcast).startPrivateBroadcast();
-        mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
-        shadowOf(Looper.getMainLooper()).idle();
-
-        verify(mBroadcast).startPrivateBroadcast();
-        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
-        assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
-                AudioSharingProgressDialogFragment.class.getName());
 
         mController.mBroadcastCallback.onBroadcastMetadataChanged(/* reason= */ 1, mMetadata);
         shadowOf(Looper.getMainLooper()).idle();
@@ -540,7 +531,7 @@ public class AudioSharingSwitchBarControllerTest {
         verify(mFeatureFactory.metricsFeatureProvider, never())
                 .action(any(Context.class), eq(SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING));
 
-        childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
         // No audio sharing dialog.
         assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).doesNotContain(
                 AudioSharingDialogFragment.class.getName());
@@ -613,7 +604,7 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
-    public void onBroadcastMetadataChanged_oneActiveOnConnected_showJoinAudioSharingDialog() {
+    public void onBroadcastMetadataChanged_oneActiveOneConnected_showJoinAudioSharingDialog() {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
@@ -681,7 +672,7 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
-    public void onBroadcastMetadataChanged_oneActiveOnConnected_clickShareBtnOnDialog_addSource() {
+    public void onBroadcastMetadataChanged_oneActiveOneConnected_clickShareBtnOnDialog_addSource() {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
@@ -722,7 +713,7 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
-    public void onBroadcastMetadataChanged_oneActiveOnConnected_clickCancelBtnOnDialog_doNothing() {
+    public void onBroadcastMetadataChanged_oneActiveOneConnected_clickCancelBtnOnDlg_doNothing() {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
