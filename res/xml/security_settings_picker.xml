@@ -67,9 +67,45 @@
         android:title="@string/biometrics_unlock_skip_biometrics"
         android:persistent="false"/>
 
+    <PreferenceCategory
+        android:key="unlock_settings"
+        android:title="@string/security_settings_fingerprint_settings_preferences_category"
+        settings:isPreferenceVisible="false">
+
+        <!-- available in pattern -->
+        <SwitchPreferenceCompat
+            android:key="visiblepattern"
+            android:title="@string/lockpattern_settings_enable_visible_pattern_title" />
+
+        <!-- available in pin -->
+        <SwitchPreferenceCompat
+            android:key="auto_pin_confirm"
+            android:title="@string/lock_screen_auto_pin_confirm_title"
+            android:summary="@string/lock_screen_auto_pin_confirm_summary" />
+
+        <SwitchPreferenceCompat
+            android:key="enhancedPinPrivacy"
+            android:title="@string/lockpattern_settings_enhanced_pin_privacy_title"
+            android:summary="@string/lockpattern_settings_enhanced_pin_privacy_summary" />
+
+
+        <!-- available in pin/pattern/password -->
+        <com.android.settings.security.screenlock.ProtectedTimeoutListPreference
+            android:key="lock_after_timeout"
+            android:title="@string/lock_after_timeout"
+            android:summary="@string/summary_placeholder"
+            android:entries="@array/lock_after_timeout_entries"
+            android:entryValues="@array/lock_after_timeout_values" />
+
+        <!-- available in pin/pattern/password -->
+        <SwitchPreferenceCompat
+            android:key="power_button_instantly_locks"
+            android:title="@string/lockpattern_settings_enable_power_button_instantly_locks" />
+    </PreferenceCategory>
+
     <com.android.settingslib.widget.FooterPreference
-            android:key="lock_settings_footer"
-            android:selectable="false"
-            settings:searchable="false"/>
+        android:key="lock_settings_footer"
+        android:selectable="false"
+        settings:searchable="false"/>
 
 </PreferenceScreen>

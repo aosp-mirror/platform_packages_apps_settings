@@ -92,7 +92,8 @@ public class ScreenLockPreferenceDetailsUtils {
      * Returns whether the Gear Menu should be shown.
      */
     public boolean shouldShowGearMenu() {
-        return isLockPatternSecure();
+        return !com.android.settings.flags.Flags.biometricsOnboardingEducation()
+                && isLockPatternSecure();
     }
 
     /**
