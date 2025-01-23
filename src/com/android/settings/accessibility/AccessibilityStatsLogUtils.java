@@ -20,6 +20,7 @@ import static com.android.settings.accessibility.TextReadingPreferenceFragment.B
 import static com.android.settings.accessibility.TextReadingPreferenceFragment.DISPLAY_SIZE_KEY;
 import static com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint.ACCESSIBILITY_SETTINGS;
 import static com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint.DISPLAY_SETTINGS;
+import static com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint.HIGH_CONTRAST_TEXT_NOTIFICATION;
 import static com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint.SUW_ANYTHING_ELSE;
 import static com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint.SUW_VISION_SETTINGS;
 import static com.android.settings.accessibility.TextReadingPreferenceFragment.FONT_SIZE_KEY;
@@ -109,6 +110,8 @@ public final class AccessibilityStatsLogUtils {
                 return SettingsStatsLog.ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED__ENTRY_POINT__TEXT_READING_DISPLAY_SETTINGS;
             case ACCESSIBILITY_SETTINGS:
                 return SettingsStatsLog.ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED__ENTRY_POINT__TEXT_READING_ACCESSIBILITY_SETTINGS;
+            case HIGH_CONTRAST_TEXT_NOTIFICATION:
+                return SettingsStatsLog.ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED__ENTRY_POINT__TEXT_READING_HIGH_CONTRAST_TEXT_NOTIFICATION;
             default:
                 return SettingsStatsLog.ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED__ENTRY_POINT__TEXT_READING_UNKNOWN_ENTRY;
         }
