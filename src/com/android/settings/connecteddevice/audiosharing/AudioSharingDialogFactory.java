@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice.audiosharing;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -147,13 +148,27 @@ public class AudioSharingDialogFactory {
         /**
          * Sets the custom image of the dialog custom body.
          *
-         * @param iconRes The text to be used for the title.
+         * @param iconRes The iconRes to be used for the image.
          * @return This builder.
          */
         @NonNull
         public AudioSharingDialogFactory.DialogBuilder setCustomImage(@DrawableRes int iconRes) {
             ImageView image = mCustomBody.findViewById(R.id.description_image);
             image.setImageResource(iconRes);
+            image.setVisibility(View.VISIBLE);
+            return this;
+        }
+
+        /**
+         * Sets the custom image of the dialog custom body.
+         *
+         * @param bitmap The bitmap to be used for the image.
+         * @return This builder.
+         */
+        @NonNull
+        public AudioSharingDialogFactory.DialogBuilder setCustomImage(Bitmap bitmap) {
+            ImageView image = mCustomBody.findViewById(R.id.description_image);
+            image.setImageBitmap(bitmap);
             image.setVisibility(View.VISIBLE);
             return this;
         }

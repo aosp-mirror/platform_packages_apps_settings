@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -69,7 +70,7 @@ public class AudioStreamsQrCodeFragment extends InstrumentedFragment {
                     if (broadcastMetadata == null) {
                         return;
                     }
-                    Bitmap bm = getQrCodeBitmap(broadcastMetadata).orElse(null);
+                    Bitmap bm = getQrCodeBitmap(broadcastMetadata, getActivity()).orElse(null);
                     if (bm == null) {
                         return;
                     }
@@ -100,7 +101,9 @@ public class AudioStreamsQrCodeFragment extends InstrumentedFragment {
                 });
     }
 
-    private Optional<Bitmap> getQrCodeBitmap(@Nullable BluetoothLeBroadcastMetadata metadata) {
+    /** Gets an optional bitmap from metadata. */
+    public static Optional<Bitmap> getQrCodeBitmap(@Nullable BluetoothLeBroadcastMetadata metadata,
+            Context context) {
         if (metadata == null) {
             Log.d(TAG, "getQrCodeBitmap: broadcastMetadata is empty!");
             return Optional.empty();
@@ -113,7 +116,7 @@ public class AudioStreamsQrCodeFragment extends InstrumentedFragment {
         Log.d(TAG, "getQrCodeBitmap: metadata : " + metadata);
         try {
             int qrcodeSize =
-                    getResources().getDimensionPixelSize(R.dimen.audio_streams_qrcode_size);
+                    context.getResources().getDimensionPixelSize(R.dimen.audio_streams_qrcode_size);
             Bitmap bitmap = QrCodeGenerator.encodeQrCode(metadataStr, qrcodeSize);
             return Optional.of(bitmap);
         } catch (WriterException e) {
