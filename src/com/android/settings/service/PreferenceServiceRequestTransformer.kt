@@ -157,11 +157,10 @@ fun transformFrameworkSetValueRequest(request: SetValueRequest): PreferenceSette
         SettingsPreferenceValue.TYPE_INT -> preferenceValueProto {
             intValue = request.preferenceValue.intValue
         }
-        else -> null
+        else -> return null
     }
-    return valueProto?.let {
-        PreferenceSetterRequest(request.screenKey, request.preferenceKey, it)
-    }
+    // TODO: support parameterized screen
+    return PreferenceSetterRequest(request.screenKey, null, request.preferenceKey, valueProto)
 }
 
 /** Translate Catalyst SET VALUE result to Framework SET VALUE result */
