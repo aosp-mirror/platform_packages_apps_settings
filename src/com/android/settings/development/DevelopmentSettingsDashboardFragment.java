@@ -198,8 +198,12 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             super.onChange(selfChange, uri);
+            Activity activity = getActivity();
+            if (activity == null) {
+                return;
+            }
             final boolean developmentEnabledState =
-                    DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext());
+                    DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(activity);
             final boolean switchState = mSwitchBar.isChecked();
 
             // when developer options is enabled, but it is disabled by other privilege apps like:
@@ -209,7 +213,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                     return;
                 }
                 disableDeveloperOptions();
-                getActivity().runOnUiThread(() -> finishFragment());
+                activity.runOnUiThread(() -> finishFragment());
             }
         }
     };
