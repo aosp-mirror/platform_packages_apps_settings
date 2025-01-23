@@ -38,13 +38,13 @@ class MirrorPreference(context: Context): SwitchPreferenceCompat(context) {
 
     override fun onAttached() {
         super.onAttached()
-        setChecked(0 != Settings.Global.getInt(
+        setChecked(0 != Settings.Secure.getInt(
                 context.contentResolver, Settings.Secure.MIRROR_BUILT_IN_DISPLAY, 0))
     }
 
     override fun onClick() {
         super.onClick()
-        Settings.Global.putInt(
+        Settings.Secure.putInt(
                 context.contentResolver, Settings.Secure.MIRROR_BUILT_IN_DISPLAY,
                 if (isChecked()) 1 else 0)
     }
