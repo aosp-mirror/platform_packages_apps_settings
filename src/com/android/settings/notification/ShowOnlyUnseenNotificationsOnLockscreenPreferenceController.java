@@ -31,7 +31,9 @@ import com.android.settings.core.TogglePreferenceController;
 public class ShowOnlyUnseenNotificationsOnLockscreenPreferenceController
         extends TogglePreferenceController {
 
-    private static final int UNSET = 0;
+    // This is the default value for phones, before notification minimalism, this setting is
+    // unavailable to phones, we use this value to hide the toggle on phones.
+    private static final int UNSET_UNAVAILABLE = 0;
     @VisibleForTesting
     static final int ON = 1;
     @VisibleForTesting
@@ -46,7 +48,7 @@ public class ShowOnlyUnseenNotificationsOnLockscreenPreferenceController
     @Override
     public boolean isChecked() {
         return Settings.Secure.getInt(mContext.getContentResolver(),
-                LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, UNSET) == ON;
+                LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, UNSET_UNAVAILABLE) == ON;
     }
 
     @Override
@@ -69,8 +71,8 @@ public class ShowOnlyUnseenNotificationsOnLockscreenPreferenceController
             return AVAILABLE;
         }
         int setting = Settings.Secure.getInt(mContext.getContentResolver(),
-                LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, UNSET);
-        if (setting == UNSET) {
+                LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, UNSET_UNAVAILABLE);
+        if (setting == UNSET_UNAVAILABLE) {
             return CONDITIONALLY_UNAVAILABLE;
         } else {
             return AVAILABLE;
