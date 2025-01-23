@@ -687,6 +687,37 @@ public class NotificationBackend {
         }
     }
 
+    public boolean isNotificationSummarizationSupported() {
+        try {
+            return !sINM.getUnsupportedAdjustmentTypes().contains(Adjustment.KEY_SUMMARIZATION);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+        return false;
+    }
+
+    public boolean isNotificationSummarizationEnabled(Context context) {
+        try {
+            return sINM.getAllowedAssistantAdjustments(context.getPackageName())
+                    .contains(Adjustment.KEY_SUMMARIZATION);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+        return false;
+    }
+
+    public void setNotificationSummarizationEnabled(boolean enabled) {
+        try {
+            if (enabled) {
+                sINM.allowAssistantAdjustment(Adjustment.KEY_SUMMARIZATION);
+            } else {
+                sINM.disallowAssistantAdjustment(Adjustment.KEY_SUMMARIZATION);
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
     public boolean isBundleTypeApproved(@Adjustment.Types int type) {
         try {
             int[] approved = sINM.getAllowedAdjustmentKeyTypes();

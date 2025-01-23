@@ -25,7 +25,7 @@
         <!-- See all apps button -->
         <Preference
             android:key="all_notifications"
-            android:order="10"
+            android:order="1"
             android:title="@string/app_notification_field"
             android:summary="@string/app_notification_field_summary"
             android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
@@ -35,7 +35,7 @@
         </Preference>
         <Preference
             android:key="notification_history"
-            android:order="11"
+            android:order="2"
             android:title="@string/notification_history"
             android:summary="@string/notification_history_summary">
             <intent
@@ -45,10 +45,18 @@
         </Preference>
 
         <Preference
+            android:fragment="com.android.settings.notification.SummarizationPreferenceFragment"
+            android:key="summarization_notifications_preference"
+            android:order="3"
+            android:persistent="false"
+            android:title="@string/notification_summarization_title"
+            settings:controller="com.android.settings.notification.SummarizationPreferenceController" />
+
+        <Preference
             android:fragment="com.android.settings.notification.BundlePreferenceFragment"
             android:key="bundle_notifications_preference"
             android:persistent="false"
-            android:order="12"
+            android:order="4"
             android:title="@string/notification_bundle_title"
             settings:controller="com.android.settings.notification.BundlePreferenceController" />
     </PreferenceCategory>
