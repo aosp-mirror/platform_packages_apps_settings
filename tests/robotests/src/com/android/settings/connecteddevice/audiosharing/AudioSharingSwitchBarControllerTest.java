@@ -79,6 +79,7 @@ import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
+import com.android.settingslib.bluetooth.BluetoothLeBroadcastMetadataExt;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
@@ -543,6 +544,12 @@ public class AudioSharingSwitchBarControllerTest {
     public void onBroadcastMetadataChanged_singleActiveDevice_showJoinAudioSharingDialog() {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
+        String metadataStr =
+                "BLUETOOTH:UUID:184F;BN:VGVzdA==;AT:1;AD:00A1A1A1A1A1;BI:1E240;BC:VGVzdENvZGU=;"
+                        + "MD:BgNwVGVzdA==;AS:1;PI:A0;NS:1;BS:3;NB:2;SM:BQNUZXN0BARlbmc=;;";
+        // Use real metadata as the dialog will display a qr code image
+        BluetoothLeBroadcastMetadata realMetadata =
+                BluetoothLeBroadcastMetadataExt.INSTANCE.convertToBroadcastMetadata(metadataStr);
         when(mBtnView.isEnabled()).thenReturn(true);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2));
         when(mAssistant.getAllSources(any(BluetoothDevice.class))).thenReturn(ImmutableList.of());
@@ -556,8 +563,8 @@ public class AudioSharingSwitchBarControllerTest {
                 AudioSharingProgressDialogFragment.class.getName());
 
         when(mBroadcast.isEnabled(null)).thenReturn(true);
-        when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
-        mController.mBroadcastCallback.onBroadcastMetadataChanged(/* reason= */ 1, mMetadata);
+        when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(realMetadata);
+        mController.mBroadcastCallback.onBroadcastMetadataChanged(/* reason= */ 1, realMetadata);
         shadowOf(Looper.getMainLooper()).idle();
 
         verify(mFeatureFactory.metricsFeatureProvider)

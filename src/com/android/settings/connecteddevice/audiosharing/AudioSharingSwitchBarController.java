@@ -723,10 +723,16 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
                         cleanUpStatesForStartSharing();
                     }
                 };
+        BluetoothLeBroadcastMetadata metadata = mBroadcast == null ? null
+                : mBroadcast.getLatestBluetoothLeBroadcastMetadata();
         AudioSharingUtils.postOnMainThread(
                 mContext,
                 () -> AudioSharingDialogFragment.show(
-                        mFragment, mDeviceItemsForSharing, listener, eventData));
+                        mFragment,
+                        mDeviceItemsForSharing,
+                        metadata,
+                        listener,
+                        eventData));
     }
 
     private void showErrorDialog() {
