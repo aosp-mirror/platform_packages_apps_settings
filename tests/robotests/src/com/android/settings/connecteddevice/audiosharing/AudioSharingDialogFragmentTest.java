@@ -60,6 +60,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -263,6 +264,18 @@ public class AudioSharingDialogFragmentTest {
         assertThat(dialog).isNotNull();
         ImageView image = dialog.findViewById(R.id.description_image);
         assertThat(image).isNotNull();
+        TextView text = dialog.findViewById(R.id.description_text);
+        assertThat(text).isNotNull();
+        assertThat(METADATA).isNotNull();
+        assertThat(text.getText().toString()).isEqualTo(
+                mParent.getString(R.string.audio_sharing_dialog_qr_code_content,
+                        METADATA.getBroadcastName(), new String(
+                                METADATA.getBroadcastCode(),
+                                StandardCharsets.UTF_8)));
+        TextView textBottom = dialog.findViewById(R.id.description_text_2);
+        assertThat(textBottom).isNotNull();
+        assertThat(textBottom.getText().toString()).isEqualTo(
+                mParent.getString(R.string.audio_sharing_dialog_pair_new_device_content));
         Button cancelBtn = dialog.findViewById(R.id.negative_btn);
         assertThat(cancelBtn).isNotNull();
         cancelBtn.performClick();
