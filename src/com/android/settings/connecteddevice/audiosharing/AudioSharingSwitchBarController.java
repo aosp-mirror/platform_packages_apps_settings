@@ -136,8 +136,17 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
             new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
-                    updateSwitch();
-                    mListener.onAudioSharingStateChanged();
+                    if (intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR)
+                            == BluetoothAdapter.STATE_ON
+                            && !AudioSharingUtils.isAudioSharingProfileReady(mProfileManager)) {
+                        if (mProfileManager != null) {
+                            mProfileManager.addServiceListener(
+                                    AudioSharingSwitchBarController.this);
+                        }
+                    } else {
+                        updateSwitch();
+                        mListener.onAudioSharingStateChanged();
+                    }
                 }
             };
 
@@ -360,14 +369,14 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
         }
         mContext.registerReceiver(mReceiver, mIntentFilter, Context.RECEIVER_EXPORTED_UNAUDITED);
         updateSwitch();
+        registerCallbacks();
         if (!AudioSharingUtils.isAudioSharingProfileReady(mProfileManager)) {
             if (mProfileManager != null) {
                 mProfileManager.addServiceListener(this);
             }
-            Log.d(TAG, "Skip register callbacks. Profile is not ready.");
+            Log.d(TAG, "Skip handleStartAudioSharingFromIntent. Profile is not ready.");
             return;
         }
-        registerCallbacks();
         if (mIntentHandleStage.compareAndSet(
                 StartIntentHandleStage.TO_HANDLE.ordinal(),
                 StartIntentHandleStage.HANDLE_AUTO_ADD.ordinal())) {
@@ -445,7 +454,6 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
     public void onServiceConnected() {
         Log.d(TAG, "onServiceConnected()");
         if (AudioSharingUtils.isAudioSharingProfileReady(mProfileManager)) {
-            registerCallbacks();
             updateSwitch();
             mListener.onAudioSharingProfilesConnected();
             mListener.onAudioSharingStateChanged();
@@ -525,7 +533,7 @@ public class AudioSharingSwitchBarController extends BasePreferenceController
     }
 
     private void unregisterCallbacks() {
-        if (!isAvailable() || !AudioSharingUtils.isAudioSharingProfileReady(mProfileManager)) {
+        if (!isAvailable()) {
             Log.d(TAG, "Skip unregisterCallbacks(). Feature is not available.");
             return;
         }
