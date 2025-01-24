@@ -24,7 +24,6 @@ import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.notification.VolumeSeekBarPreference.Callback;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 /**
@@ -34,7 +33,6 @@ public abstract class VolumeSeekBarPreferenceController extends
         AdjustVolumeRestrictedPreferenceController implements LifecycleObserver {
 
     protected VolumeSeekBarPreference mPreference;
-    protected VolumeSeekBarPreference.Callback mVolumePreferenceCallback;
     protected AudioHelper mHelper;
     protected VolumeSeekBarPreference.Listener mVolumePreferenceListener;
 
@@ -48,10 +46,6 @@ public abstract class VolumeSeekBarPreferenceController extends
         mHelper = helper;
     }
 
-    public void setCallback(Callback callback) {
-        mVolumePreferenceCallback = callback;
-    }
-
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
@@ -62,7 +56,6 @@ public abstract class VolumeSeekBarPreferenceController extends
 
     protected void setupVolPreference(PreferenceScreen screen) {
         mPreference = screen.findPreference(getPreferenceKey());
-        mPreference.setCallback(mVolumePreferenceCallback);
         mPreference.setListener(mVolumePreferenceListener);
         mPreference.setStream(getAudioStream());
         mPreference.setMuteIcon(getMuteIcon());
