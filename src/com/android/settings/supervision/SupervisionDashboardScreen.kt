@@ -60,6 +60,7 @@ class SupervisionDashboardScreen : PreferenceScreenCreator {
             +TitlelessPreferenceGroup("supervision_features_group_1") += {
                 // Empty category for dynamic injection targeting.
             }
+            +SupervisionPinManagementScreen.KEY
         }
 
     companion object {
