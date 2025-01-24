@@ -28,17 +28,18 @@ import android.os.Message;
 import android.service.notification.NotificationListenerService;
 import android.view.View;
 
-import androidx.lifecycle.OnLifecycleEvent;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 /**
  * Update notification volume icon in Settings in response to user adjusting volume.
  */
 public class NotificationVolumePreferenceController extends
-        RingerModeAffectedVolumePreferenceController {
+        RingerModeAffectedVolumePreferenceController implements DefaultLifecycleObserver {
 
     private static final String KEY_NOTIFICATION_VOLUME = "notification_volume";
     private static final String TAG = "NotificationVolumePreferenceController";
@@ -80,17 +81,13 @@ public class NotificationVolumePreferenceController extends
         updateEnabledState();
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onResume(@NonNull LifecycleOwner owner) {
         mReceiver.register(true);
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onPause(@NonNull LifecycleOwner owner) {
         mReceiver.register(false);
     }
 

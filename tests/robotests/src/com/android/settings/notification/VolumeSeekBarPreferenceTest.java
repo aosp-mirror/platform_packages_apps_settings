@@ -32,12 +32,14 @@ import android.preference.SeekBarVolumizer;
 import android.widget.SeekBar;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
 import java.util.Locale;
@@ -47,6 +49,10 @@ public class VolumeSeekBarPreferenceTest {
 
     private static final CharSequence CONTENT_DESCRIPTION = "TEST";
     private static final int STREAM = 5;
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+
     @Mock
     private AudioManager mAudioManager;
     @Mock
@@ -70,10 +76,10 @@ public class VolumeSeekBarPreferenceTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.AUDIO_SERVICE)).thenReturn(mAudioManager);
         when(mSeekBarVolumizerFactory.create(eq(STREAM), eq(null), mSbvc.capture()))
                 .thenReturn(mVolumizer);
+        doCallRealMethod().when(mPreference).createSeekBarVolumizer();
         doCallRealMethod().when(mPreference).setStream(anyInt());
         doCallRealMethod().when(mPreference).updateContentDescription(CONTENT_DESCRIPTION);
         mPreference.mSeekBar = mSeekBar;
@@ -99,50 +105,50 @@ public class VolumeSeekBarPreferenceTest {
     }
 
     @Test
-    public void init_listenerIsCalled() {
+    public void onBindViewHolder_listenerIsCalled() {
         when(mPreference.isEnabled()).thenReturn(true);
         doCallRealMethod().when(mPreference).setListener(mListener);
-        doCallRealMethod().when(mPreference).init();
+        doCallRealMethod().when(mPreference).onBindViewHolder();
 
         mPreference.setStream(STREAM);
         mPreference.setListener(mListener);
-        mPreference.init();
+        mPreference.onBindViewHolder();
 
         verify(mPreference).updateContentDescription(CONTENT_DESCRIPTION);
     }
 
     @Test
-    public void init_listenerNotSet_noException() {
+    public void onBindViewHolder_listenerNotSet_noException() {
         when(mPreference.isEnabled()).thenReturn(true);
-        doCallRealMethod().when(mPreference).init();
+        doCallRealMethod().when(mPreference).onBindViewHolder();
 
         mPreference.setStream(STREAM);
-        mPreference.init();
+        mPreference.onBindViewHolder();
 
         verify(mPreference, never()).updateContentDescription(CONTENT_DESCRIPTION);
     }
 
     @Test
-    public void init_preferenceIsDisabled_shouldNotInvokeListener() {
+    public void onBindViewHolder_preferenceIsDisabled_shouldNotInvokeListener() {
         when(mPreference.isEnabled()).thenReturn(false);
         doCallRealMethod().when(mPreference).setListener(mListener);
-        doCallRealMethod().when(mPreference).init();
+        doCallRealMethod().when(mPreference).onBindViewHolder();
 
         mPreference.setStream(STREAM);
-        mPreference.init();
+        mPreference.onBindViewHolder();
 
         verify(mPreference, never()).updateContentDescription(CONTENT_DESCRIPTION);
     }
 
     @Test
-    public void init_changeProgress_overrideStateDescriptionCalled() {
+    public void onBindViewHolder_changeProgress_overrideStateDescriptionCalled() {
         final int progress = 4;
         when(mPreference.isEnabled()).thenReturn(true);
         when(mPreference.formatStateDescription(progress)).thenReturn(CONTENT_DESCRIPTION);
-        doCallRealMethod().when(mPreference).init();
+        doCallRealMethod().when(mPreference).onBindViewHolder();
 
         mPreference.setStream(STREAM);
-        mPreference.init();
+        mPreference.onBindViewHolder();
 
         verify(mSeekBarVolumizerFactory).create(eq(STREAM), eq(null), mSbvc.capture());
 
@@ -166,10 +172,10 @@ public class VolumeSeekBarPreferenceTest {
         when(mContext.getResources()).thenReturn(mRes);
         when(mRes.getConfiguration()).thenReturn(mConfig);
         when(mConfig.getLocales()).thenReturn(new LocaleList(Locale.US));
-        doCallRealMethod().when(mPreference).init();
+        doCallRealMethod().when(mPreference).onBindViewHolder();
 
         mPreference.setStream(STREAM);
-        mPreference.init();
+        mPreference.onBindViewHolder();
 
         verify(mSeekBarVolumizerFactory).create(eq(STREAM), eq(null), mSbvc.capture());
 

@@ -89,24 +89,6 @@ public class VolumeSeekBarPreferenceControllerTest {
     }
 
     @Test
-    public void onResume_shouldResumePreference() {
-        mController.displayPreference(mScreen);
-
-        mController.onResume();
-
-        verify(mPreference).onActivityResume();
-    }
-
-    @Test
-    public void onPause_shouldPausePreference() {
-        mController.displayPreference(mScreen);
-
-        mController.onPause();
-
-        verify(mPreference).onActivityPause();
-    }
-
-    @Test
     public void sliderMethods_handleNullPreference() {
         when(mHelper.getStreamVolume(mController.getAudioStream())).thenReturn(4);
         when(mHelper.getMaxVolume(mController.getAudioStream())).thenReturn(10);
