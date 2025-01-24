@@ -40,7 +40,7 @@ import androidx.annotation.Nullable;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceGroup;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -54,8 +54,8 @@ import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.MainSwitchPreference;
 import com.android.settingslib.widget.TwoTargetPreference;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -108,6 +108,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     @Nullable
     private PreferenceCategory mBuiltinDisplayPreference;
     @Nullable
+    private Preference mBuiltinDisplaySizeAndTextPreference;
+    @Nullable
     private Injector mInjector;
     @Nullable
     private String[] mRotationEntries;
@@ -143,7 +145,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     @Override
     public void onSaveInstanceStateCallback(@NonNull Bundle outState) {
         outState.putSerializable(PREVIOUSLY_SHOWN_LIST_KEY,
-                (Serializable) mPreviouslyShownListOfDisplays);
+                mPreviouslyShownListOfDisplays);
     }
 
     @Override
@@ -160,7 +162,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         View view = getView();
         TextView emptyView = null;
         if (view != null) {
-            emptyView = (TextView) view.findViewById(android.R.id.empty);
+            emptyView = view.findViewById(android.R.id.empty);
         }
         if (emptyView != null) {
             emptyView.setText(EXTERNAL_DISPLAY_NOT_FOUND_RESOURCE);
@@ -246,6 +248,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         if (mRotationPref == null) {
             mRotationPref = new ListPreference(context);
             mRotationPref.setPersistent(false);
+            mRotationPref.setKey(EXTERNAL_DISPLAY_ROTATION_KEY);
+            mRotationPref.setTitle(EXTERNAL_DISPLAY_ROTATION_TITLE_RESOURCE);
         }
         return mRotationPref;
     }
@@ -256,6 +260,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         if (mResolutionPreference == null) {
             mResolutionPreference = new Preference(context);
             mResolutionPreference.setPersistent(false);
+            mResolutionPreference.setKey(EXTERNAL_DISPLAY_RESOLUTION_PREFERENCE_KEY);
+            mResolutionPreference.setTitle(EXTERNAL_DISPLAY_RESOLUTION_TITLE_RESOURCE);
         }
         return mResolutionPreference;
     }
@@ -266,6 +272,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         if (mUseDisplayPref == null) {
             mUseDisplayPref = new MainSwitchPreference(context);
             mUseDisplayPref.setPersistent(false);
+            mUseDisplayPref.setKey(EXTERNAL_DISPLAY_USE_PREFERENCE_KEY);
+            mUseDisplayPref.setTitle(EXTERNAL_DISPLAY_USE_TITLE_RESOURCE);
         }
         return mUseDisplayPref;
     }
@@ -276,6 +284,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         if (mImagePreference == null) {
             mImagePreference = new IllustrationPreference(context);
             mImagePreference.setPersistent(false);
+            mImagePreference.setKey("external_display_illustration");
         }
         return mImagePreference;
     }
@@ -295,6 +304,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             mDisplaysPreference = new PreferenceCategory(context);
             mDisplaysPreference.setPersistent(false);
             mDisplaysPreference.setOrder(40);
+            mDisplaysPreference.setKey(DISPLAYS_LIST_PREFERENCE_KEY);
         }
         return mDisplaysPreference;
     }
@@ -305,8 +315,18 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             mBuiltinDisplayPreference = new PreferenceCategory(context);
             mBuiltinDisplayPreference.setPersistent(false);
             mBuiltinDisplayPreference.setOrder(30);
+            mBuiltinDisplayPreference.setKey(BUILTIN_DISPLAY_LIST_PREFERENCE_KEY);
+            mBuiltinDisplayPreference.setTitle(BUILTIN_DISPLAY_SETTINGS_CATEGORY_RESOURCE);
         }
         return mBuiltinDisplayPreference;
+    }
+
+    @NonNull
+    private Preference getBuiltinDisplaySizeAndTextPreference(@NonNull Context context) {
+        if (mBuiltinDisplaySizeAndTextPreference == null) {
+            mBuiltinDisplaySizeAndTextPreference = new BuiltinDisplaySizeAndTextPreference(context);
+        }
+        return mBuiltinDisplaySizeAndTextPreference;
     }
 
     @NonNull Preference getDisplayTopologyPreference(@NonNull Context context) {
@@ -338,12 +358,13 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         if (screen == null || mInjector == null || mInjector.getContext() == null) {
             return;
         }
-        screen.removeAll();
-        updateScreenForDisplayId(getDisplayIdArg(), screen, mInjector.getContext());
+        try (var cleanableScreen = new PrefRefresh(screen)) {
+            updateScreenForDisplayId(getDisplayIdArg(), cleanableScreen, mInjector.getContext());
+        }
     }
 
     private void updateScreenForDisplayId(final int displayId,
-            @NonNull final PreferenceScreen screen, @NonNull Context context) {
+            @NonNull final PrefRefresh screen, @NonNull Context context) {
         final boolean forceShowList = displayId == INVALID_DISPLAY
                 && mInjector != null && forceShowDisplayList(mInjector.getFlags());
         final var displaysToShow = externalDisplaysToShow(displayId);
@@ -378,7 +399,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         activity.setTitle(EXTERNAL_DISPLAY_TITLE_RESOURCE);
     }
 
-    private void showTextWhenNoDisplaysToShow(@NonNull final PreferenceScreen screen,
+    private void showTextWhenNoDisplaysToShow(@NonNull final PrefRefresh screen,
             @NonNull Context context) {
         if (isUseDisplaySettingEnabled(mInjector)) {
             screen.addPreference(updateUseDisplayPreferenceNoDisplaysFound(context));
@@ -387,7 +408,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                 EXTERNAL_DISPLAY_NOT_FOUND_FOOTER_RESOURCE));
     }
 
-    private void showDisplaySettings(@NonNull Display display, @NonNull PreferenceScreen screen,
+    private void showDisplaySettings(@NonNull Display display, @NonNull PrefRefresh screen,
             @NonNull Context context) {
         final var isEnabled = mInjector != null && mInjector.isDisplayEnabled(display);
         if (isUseDisplaySettingEnabled(mInjector)) {
@@ -408,7 +429,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     }
 
     private void showDisplaysList(@NonNull List<Display> displaysToShow,
-            @NonNull PreferenceScreen screen, @NonNull Context context) {
+                                  @NonNull PrefRefresh screen, @NonNull Context context) {
         if (mInjector != null && mInjector.getFlags().displayTopologyPaneInDisplayList()) {
             screen.addPreference(getDisplayTopologyPreference(context));
             if (!displaysToShow.isEmpty()) {
@@ -418,23 +439,30 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             // If topology is shown, we also show a preference for the built-in display for
             // consistency with the topology.
             var builtinCategory = getBuiltinDisplayListPreference(context);
-            builtinCategory.setKey(BUILTIN_DISPLAY_LIST_PREFERENCE_KEY);
-            builtinCategory.setTitle(BUILTIN_DISPLAY_SETTINGS_CATEGORY_RESOURCE);
-            builtinCategory.removeAll();
             screen.addPreference(builtinCategory);
-
-            builtinCategory.addPreference(new BuiltinDisplaySizeAndTextPreference(context));
+            builtinCategory.addPreference(getBuiltinDisplaySizeAndTextPreference(context));
         }
 
-        var pref = getDisplaysListPreference(context);
-        pref.setKey(DISPLAYS_LIST_PREFERENCE_KEY);
-        pref.removeAll();
+        var displayGroupPref = getDisplaysListPreference(context);
         if (!displaysToShow.isEmpty()) {
-            screen.addPreference(pref);
+            screen.addPreference(displayGroupPref);
         }
-        for (var display : displaysToShow) {
-            pref.addPreference(new DisplayPreference(context, display));
+        try (var groupCleanable = new PrefRefresh(displayGroupPref)) {
+            for (var display : displaysToShow) {
+                var pref = getDisplayPreference(context, display, groupCleanable);
+                pref.setSummary(display.getMode().getPhysicalWidth() + " x "
+                                   + display.getMode().getPhysicalHeight());
+                pref.setTitle(display.getName());
+            }
         }
+    }
+
+    private Preference getDisplayPreference(@NonNull Context context,
+            @NonNull Display display, @NonNull PrefRefresh groupCleanable) {
+        var pref = groupCleanable.findUnusedPreference(DisplayPreference.generateKey(display));
+        pref = pref != null ? pref : new DisplayPreference(context, display);
+        groupCleanable.addPreference(pref);
+        return pref;
     }
 
     private List<Display> externalDisplaysToShow(int displayIdToShow) {
@@ -458,8 +486,6 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
 
     private Preference updateUseDisplayPreferenceNoDisplaysFound(@NonNull Context context) {
         final var pref = getUseDisplayPreference(context);
-        pref.setKey(EXTERNAL_DISPLAY_USE_PREFERENCE_KEY);
-        pref.setTitle(EXTERNAL_DISPLAY_USE_TITLE_RESOURCE);
         pref.setChecked(false);
         pref.setEnabled(false);
         pref.setOnPreferenceChangeListener(null);
@@ -469,8 +495,6 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     private Preference updateUseDisplayPreference(@NonNull final Context context,
             @NonNull final Display display, boolean isEnabled) {
         final var pref = getUseDisplayPreference(context);
-        pref.setKey(EXTERNAL_DISPLAY_USE_PREFERENCE_KEY);
-        pref.setTitle(EXTERNAL_DISPLAY_USE_TITLE_RESOURCE);
         pref.setChecked(isEnabled);
         pref.setEnabled(true);
         pref.setOnPreferenceChangeListener((p, newValue) -> {
@@ -512,8 +536,6 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     private Preference updateRotationPreference(@NonNull final Context context,
             @NonNull final Display display, final int displayRotation) {
         var pref = getRotationPreference(context);
-        pref.setKey(EXTERNAL_DISPLAY_ROTATION_KEY);
-        pref.setTitle(EXTERNAL_DISPLAY_ROTATION_TITLE_RESOURCE);
         if (mRotationEntries == null || mRotationEntriesValues == null) {
             mRotationEntries = new String[] {
                     context.getString(R.string.external_display_standard_rotation),
@@ -543,8 +565,6 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     private Preference updateResolutionPreference(@NonNull final Context context,
             @NonNull final Display display) {
         var pref = getResolutionPreference(context);
-        pref.setKey(EXTERNAL_DISPLAY_RESOLUTION_PREFERENCE_KEY);
-        pref.setTitle(EXTERNAL_DISPLAY_RESOLUTION_TITLE_RESOURCE);
         pref.setSummary(display.getMode().getPhysicalWidth() + " x "
                 + display.getMode().getPhysicalHeight());
         pref.setOnPreferenceClickListener((Preference p) -> {
@@ -601,15 +621,16 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             implements Preference.OnPreferenceClickListener {
         private final int mDisplayId;
 
+        static String generateKey(final Display display) {
+            return "display_id_" + display.getDisplayId();
+        }
+
         DisplayPreference(@NonNull final Context context, @NonNull final Display display) {
             super(context);
             mDisplayId = display.getDisplayId();
 
             setPersistent(false);
-            setKey("display_id_" + mDisplayId);
-            setTitle(display.getName());
-            setSummary(display.getMode().getPhysicalWidth() + " x "
-                               + display.getMode().getPhysicalHeight());
+            setKey(generateKey(display));
             setOnPreferenceClickListener(this);
         }
 
@@ -618,6 +639,48 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             launchExternalDisplaySettings(mDisplayId);
             writePreferenceClickMetric(preference);
             return true;
+        }
+    }
+
+    private static class PrefRefresh implements AutoCloseable {
+        private final PreferenceGroup mScreen;
+        private final HashMap<String, Preference> mUnusedPreferences = new HashMap<>();
+
+        PrefRefresh(@NonNull final PreferenceGroup screen) {
+            mScreen = screen;
+            int preferencesCount = mScreen.getPreferenceCount();
+            for (int i = 0; i < preferencesCount; i++) {
+                var pref = mScreen.getPreference(i);
+                if (pref.hasKey()) {
+                    mUnusedPreferences.put(pref.getKey(), pref);
+                }
+            }
+        }
+
+        @Nullable
+        Preference findUnusedPreference(@NonNull String key) {
+            return mUnusedPreferences.get(key);
+        }
+
+        boolean addPreference(@NonNull final Preference pref) {
+            if (pref.hasKey()) {
+                final var previousPref = mUnusedPreferences.get(pref.getKey());
+                if (pref == previousPref) {
+                    // Exact preference already added, no need to add it again.
+                    // And no need to remove this preference either.
+                    mUnusedPreferences.remove(pref.getKey());
+                    return true;
+                }
+                // Exact preference is not yet added
+            }
+            return mScreen.addPreference(pref);
+        }
+
+        @Override
+        public void close() {
+            for (var v : mUnusedPreferences.values()) {
+                mScreen.removePreference(v);
+            }
         }
     }
 }
