@@ -19,6 +19,11 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/security_settings_fingerprint_preference_title">
 
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="security_settings_fingerprint_description"
+        settings:searchable="false"
+        settings:isPreferenceVisible="false" />
+
     <PreferenceCategory
         android:key="biometric_settings_use_fingerprint_to"
         android:title="@string/security_settings_category_use_fingerprint"

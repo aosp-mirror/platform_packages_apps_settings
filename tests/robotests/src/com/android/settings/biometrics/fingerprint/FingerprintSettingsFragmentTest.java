@@ -135,16 +135,20 @@ public class FingerprintSettingsFragmentTest {
     @Mock
     private Vibrator mVibrator;
 
+    private FingerprintSettingsFeatureProvider mFingerprintSettingsFeatureProvider;
+
+    private FakeFeatureFactory mFakeFeatureFactory;
     private FingerprintAuthenticateSidecar mFingerprintAuthenticateSidecar;
     private FingerprintRemoveSidecar mFingerprintRemoveSidecar;
 
     @Before
     public void setUp() {
         ShadowUtils.setFingerprintManager(mFingerprintManager);
-        FakeFeatureFactory.setupForTest();
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
 
         mContext = spy(ApplicationProvider.getApplicationContext());
         mFragment = spy(new FingerprintSettingsFragment());
+        mFingerprintSettingsFeatureProvider = new FingerprintSettingsFeatureProvider();
         doReturn(mContext).when(mFragment).getContext();
         doReturn(mBiometricManager).when(mContext).getSystemService(BiometricManager.class);
         doReturn(true).when(mFingerprintManager).isHardwareDetected();
@@ -152,6 +156,9 @@ public class FingerprintSettingsFragmentTest {
         when(mBiometricManager.canAuthenticate(PRIMARY_USER_ID,
                 BiometricManager.Authenticators.IDENTITY_CHECK))
                 .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
+        when(mFakeFeatureFactory.getFingerprintFeatureProvider()
+                .getFingerprintSettingsFeatureProvider())
+                .thenReturn(mFingerprintSettingsFeatureProvider);
     }
 
     @After

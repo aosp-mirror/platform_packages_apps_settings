@@ -71,4 +71,13 @@ public interface FingerprintFeatureProvider {
     ) {
         return new FingerprintExtPreferencesProvider();
     }
+
+    /**
+     * Gets the feature provider for FingerprintSettings page
+     * @return the provider
+     */
+    @NonNull
+    default FingerprintSettingsFeatureProvider getFingerprintSettingsFeatureProvider() {
+        return FingerprintSettingsFeatureProvider.getInstance();
+    }
 }

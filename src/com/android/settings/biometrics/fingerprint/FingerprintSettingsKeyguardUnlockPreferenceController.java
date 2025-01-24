@@ -19,9 +19,11 @@ package com.android.settings.biometrics.fingerprint;
 import static android.provider.Settings.Secure.FINGERPRINT_KEYGUARD_ENABLED;
 
 import android.content.Context;
+import android.hardware.fingerprint.FingerprintManager;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
+import androidx.preference.Preference;
 
 import com.android.settings.Utils;
 import com.android.settings.biometrics.activeunlock.ActiveUnlockStatusUtils;
@@ -33,9 +35,12 @@ public class FingerprintSettingsKeyguardUnlockPreferenceController
     private static final int OFF = 0;
     private static final int DEFAULT = ON;
 
+    private FingerprintManager mFingerprintManager;
+
     public FingerprintSettingsKeyguardUnlockPreferenceController(
             @NonNull Context context, @NonNull String key) {
         super(context, key);
+        mFingerprintManager = Utils.getFingerprintManagerOrNull(context);
     }
 
     @Override
@@ -48,6 +53,20 @@ public class FingerprintSettingsKeyguardUnlockPreferenceController
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putIntForUser(mContext.getContentResolver(),
                 FINGERPRINT_KEYGUARD_ENABLED, isChecked ? ON : OFF, getUserId());
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (!FingerprintSettings.isFingerprintHardwareDetected(mContext)) {
+            preference.setEnabled(false);
+        } else if (!mFingerprintManager.hasEnrolledTemplates(getUserId())) {
+            preference.setEnabled(false);
+        } else if (getRestrictingAdmin() != null) {
+            preference.setEnabled(false);
+        } else {
+            preference.setEnabled(true);
+        }
     }
 
     @Override
