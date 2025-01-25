@@ -147,7 +147,7 @@ public class RestrictedPreferenceHelper {
                 && android.security.Flags.extendEcmToAllSettings()) {
             preference.checkEcmRestrictionAndSetDisabled(
                     AppOpsManager.OPSTR_BIND_ACCESSIBILITY_SERVICE,
-                    preference.getPackageName());
+                    preference.getPackageName(), serviceEnabled);
             if (preference.isDisabledByEcm()) {
                 serviceAllowed = false;
             }
