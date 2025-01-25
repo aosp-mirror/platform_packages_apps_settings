@@ -25,12 +25,15 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.fragment.app.FragmentActivity;
@@ -39,7 +42,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.internal.R;
+import com.android.window.flags.Flags;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -53,10 +60,15 @@ import org.robolectric.annotation.Config;
 })
 public class FreeformWindowsPreferenceControllerTest {
 
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     @Mock
     Context mContext;
     @Mock
     private PackageManager mPackageManager;
+    @Mock
+    private Resources mResources;
     @Mock
     private SwitchPreference mPreference;
     @Mock
@@ -78,23 +90,46 @@ public class FreeformWindowsPreferenceControllerTest {
         doReturn(mTransaction).when(mFragmentManager).beginTransaction();
         doReturn(mFragmentManager).when(mActivity).getSupportFragmentManager();
         doReturn(mActivity).when(mFragment).getActivity();
+        doReturn(true).when(mResources).getBoolean(R.bool.config_isDesktopModeSupported);
         mController = new FreeformWindowsPreferenceController(mContext, mFragment);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mContext.getResources()).thenReturn(mResources);
         mController.displayPreference(mScreen);
     }
 
+    @DisableFlags({Flags.FLAG_SHOW_DESKTOP_EXPERIENCE_DEV_OPTION,
+            Flags.FLAG_SHOW_DESKTOP_WINDOWING_DEV_OPTION})
+    @Test
+    public void isAvailable_whenDesktopDevOptionsAreDisabled_returnsTrue() {
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @EnableFlags(Flags.FLAG_SHOW_DESKTOP_WINDOWING_DEV_OPTION)
+    @Test
+    public void isAvailable_whenDesktopWindowingDevOptionIsEnabled_returnsFalse() {
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @EnableFlags(Flags.FLAG_SHOW_DESKTOP_EXPERIENCE_DEV_OPTION)
+    @Test
+    public void isAvailable_whenDesktopExperienceDevOptionIsEnabled_returnsFalse() {
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @DisableFlags({Flags.FLAG_SHOW_DESKTOP_EXPERIENCE_DEV_OPTION,
+            Flags.FLAG_SHOW_DESKTOP_WINDOWING_DEV_OPTION})
     @Test
     public void isAvailable_deviceHasFreeformWindowSystemFeature_returnsFalse() {
-        mController = spy(mController);
         when(mPackageManager.hasSystemFeature(FEATURE_FREEFORM_WINDOW_MANAGEMENT)).thenReturn(true);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
+    @DisableFlags({Flags.FLAG_SHOW_DESKTOP_EXPERIENCE_DEV_OPTION,
+            Flags.FLAG_SHOW_DESKTOP_WINDOWING_DEV_OPTION})
     @Test
     public void isAvailable_deviceDoesNotHaveFreeformWindowSystemFeature_returnsTrue() {
-        mController = spy(mController);
         when(mPackageManager.hasSystemFeature(FEATURE_FREEFORM_WINDOW_MANAGEMENT)).thenReturn(
                 false);
 

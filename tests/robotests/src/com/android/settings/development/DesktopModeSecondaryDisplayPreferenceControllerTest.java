@@ -26,11 +26,13 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.fragment.app.FragmentActivity;
@@ -39,7 +41,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.window.flags.Flags;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -54,8 +59,9 @@ import org.robolectric.annotation.Config;
 })
 public class DesktopModeSecondaryDisplayPreferenceControllerTest {
 
-    private static final String ENG_BUILD_TYPE = "eng";
-    private static final String USER_BUILD_TYPE = "user";
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private static final int SETTING_VALUE_INVALID = -1;
 
     @Mock
@@ -86,20 +92,16 @@ public class DesktopModeSecondaryDisplayPreferenceControllerTest {
         mController.displayPreference(mScreen);
     }
 
+    @DisableFlags(Flags.FLAG_SHOW_DESKTOP_EXPERIENCE_DEV_OPTION)
     @Test
-    public void isAvailable_engBuild_shouldBeTrue() {
-        mController = spy(mController);
-        doReturn(ENG_BUILD_TYPE).when(mController).getBuildType();
-
+    public void isAvailable_whenDesktopExperienceDevOptionIsDisabled_shouldBeTrue() {
         assertThat(mController.isAvailable()).isTrue();
     }
 
+    @EnableFlags(Flags.FLAG_SHOW_DESKTOP_EXPERIENCE_DEV_OPTION)
     @Test
-    public void isAvailable_userBuild_shouldBeTrue() {
-        mController = spy(mController);
-        doReturn(USER_BUILD_TYPE).when(mController).getBuildType();
-
-        assertThat(mController.isAvailable()).isTrue();
+    public void isAvailable_whenDesktopExperienceDevOptionIsEnabled_shouldBeFalse() {
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
