@@ -16,6 +16,7 @@
 
 package com.android.settings.inputmethod;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.input.InputSettings;
 
@@ -23,12 +24,17 @@ import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class MouseScrollingAccelerationPreferenceController extends TogglePreferenceController {
+
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     public MouseScrollingAccelerationPreferenceController(
             @NonNull Context context, @NonNull String key) {
         super(context, key);
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -39,6 +45,9 @@ public class MouseScrollingAccelerationPreferenceController extends TogglePrefer
     @Override
     public boolean setChecked(boolean isChecked) {
         InputSettings.setMouseScrollingAcceleration(mContext, !isChecked);
+        mMetricsFeatureProvider.action(mContext,
+                isChecked ? SettingsEnums.ACTION_MOUSE_SCROLLING_ACCELERATION_DISABLED :
+                            SettingsEnums.ACTION_MOUSE_SCROLLING_ACCELERATION_ENABLED);
         return true;
     }
 
