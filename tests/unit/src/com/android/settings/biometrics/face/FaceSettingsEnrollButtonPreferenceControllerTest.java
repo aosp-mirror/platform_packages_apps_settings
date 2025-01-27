@@ -24,6 +24,7 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 import android.widget.Button;
 
+import androidx.preference.Preference;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.Before;
@@ -43,6 +44,8 @@ public class FaceSettingsEnrollButtonPreferenceControllerTest {
     @Mock
     private Button mButton;
     @Mock
+    private Preference mPreference;
+    @Mock
     private FaceSettingsEnrollButtonPreferenceController.Listener mListener;
 
     private FaceSettingsEnrollButtonPreferenceController mController;
@@ -61,6 +64,14 @@ public class FaceSettingsEnrollButtonPreferenceControllerTest {
     @Test
     public void testOnClick() {
         mController.onClick(mButton);
+
+        assertThat(mController.isClicked()).isTrue();
+        verify(mListener).onStartEnrolling(any());
+    }
+
+    @Test
+    public void testOnPreferenceClick() {
+        mController.onPreferenceClick(mPreference);
 
         assertThat(mController.isClicked()).isTrue();
         verify(mListener).onStartEnrolling(any());

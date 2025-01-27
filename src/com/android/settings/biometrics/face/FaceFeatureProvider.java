@@ -42,4 +42,13 @@ public interface FaceFeatureProvider {
     default FaceEnrollActivityClassProvider getEnrollActivityClassProvider() {
         return FaceEnrollActivityClassProvider.getInstance();
     }
+
+    /**
+     * Gets the feature provider for FaceSettings page
+     * @return the provider
+     */
+    @NonNull
+    default FaceSettingsFeatureProvider getFaceSettingsFeatureProvider() {
+        return FaceSettingsFeatureProvider.getInstance();
+    }
 }

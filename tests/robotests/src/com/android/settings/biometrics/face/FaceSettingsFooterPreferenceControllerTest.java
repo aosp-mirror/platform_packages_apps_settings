@@ -32,6 +32,8 @@ import android.hardware.face.FaceSensorPropertiesInternal;
 import android.hardware.face.IFaceAuthenticatorsRegisteredCallback;
 import android.os.Looper;
 import android.os.RemoteException;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
@@ -60,6 +62,8 @@ import java.util.List;
 public class FaceSettingsFooterPreferenceControllerTest {
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private static final String PREF_KEY = "security_face_footer";
     @Mock
     private FaceManager mFaceManager;
@@ -140,6 +144,7 @@ public class FaceSettingsFooterPreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(com.android.settings.flags.Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
     public void testString_faceClass3() throws RemoteException {
         setupHasFaceFeature();
         displayFaceSettingsFooterPreferenceController();

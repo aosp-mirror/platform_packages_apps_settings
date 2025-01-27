@@ -24,10 +24,12 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.flags.Flags;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.widget.LayoutPreference;
@@ -39,10 +41,11 @@ import com.google.android.setupdesign.util.PartnerStyleHelper;
  * Preference controller that allows a user to enroll their face.
  */
 public class FaceSettingsEnrollButtonPreferenceController extends BasePreferenceController
-        implements View.OnClickListener {
+        implements View.OnClickListener, Preference.OnPreferenceClickListener {
 
     private static final String TAG = "FaceSettings/Remove";
     static final String KEY = "security_settings_face_enroll_faces_container";
+    static final String KEY_1 = "security_settings_face_enroll";
 
     private final Context mContext;
 
@@ -53,7 +56,7 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
     private Listener mListener;
 
     public FaceSettingsEnrollButtonPreferenceController(Context context) {
-        this(context, KEY);
+        this(context, Flags.biometricsOnboardingEducation() ? KEY_1 : KEY);
     }
 
     public FaceSettingsEnrollButtonPreferenceController(Context context, String preferenceKey) {
@@ -62,25 +65,39 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
     }
 
     @Override
-    public void updateState(Preference preference) {
+    public void updateState(@NonNull Preference preference) {
         super.updateState(preference);
-
-        mButton = ((LayoutPreference) preference).findViewById(
-                R.id.security_settings_face_settings_enroll_button);
-
-        if (PartnerStyleHelper.shouldApplyPartnerResource(mButton)) {
-            ButtonStyler.applyPartnerCustomizationPrimaryButtonStyle(mContext, mButton);
-        }
-
-        mButton.setOnClickListener(this);
         final boolean isDeviceOwnerBlockingAuth =
                 RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
                         mContext, DevicePolicyManager.KEYGUARD_DISABLE_FACE, mUserId) != null;
-        mButton.setEnabled(!isDeviceOwnerBlockingAuth);
+
+        if (Flags.biometricsOnboardingEducation()) {
+            preference.setEnabled(!isDeviceOwnerBlockingAuth);
+        } else {
+            mButton = ((LayoutPreference) preference).findViewById(
+                    R.id.security_settings_face_settings_enroll_button);
+
+            if (PartnerStyleHelper.shouldApplyPartnerResource(mButton)) {
+                ButtonStyler.applyPartnerCustomizationPrimaryButtonStyle(mContext, mButton);
+            }
+
+            mButton.setOnClickListener(this);
+            mButton.setEnabled(!isDeviceOwnerBlockingAuth);
+        }
     }
 
     @Override
     public void onClick(View v) {
+        startEnrolling();
+    }
+
+    @Override
+    public boolean onPreferenceClick(@NonNull Preference preference) {
+        startEnrolling();
+        return true;
+    }
+
+    private void startEnrolling() {
         mIsClicked = true;
         final Intent intent = new Intent();
         intent.setClassName(SETTINGS_PACKAGE_NAME, FaceEnroll.class.getName());

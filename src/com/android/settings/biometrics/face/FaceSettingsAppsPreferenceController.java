@@ -23,6 +23,7 @@ import android.hardware.face.FaceManager;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
+import androidx.preference.Preference;
 
 import com.android.settings.Utils;
 import com.android.settings.biometrics.activeunlock.ActiveUnlockStatusUtils;
@@ -50,6 +51,20 @@ public class FaceSettingsAppsPreferenceController extends
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putIntForUser(mContext.getContentResolver(), FACE_APP_ENABLED,
                 isChecked ? ON : OFF, getUserId());
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (!FaceSettings.isFaceHardwareDetected(mContext)) {
+            preference.setEnabled(false);
+        } else if (!mFaceManager.hasEnrolledTemplates(getUserId())) {
+            preference.setEnabled(false);
+        } else if (getRestrictingAdmin() != null) {
+            preference.setEnabled(false);
+        } else {
+            preference.setEnabled(true);
+        }
     }
 
     @Override
