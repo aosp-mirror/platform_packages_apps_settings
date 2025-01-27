@@ -72,7 +72,6 @@ public class CellularSecurityPreferenceController extends BasePreferenceControll
         if (!mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)
                 || !Flags.enableIdentifierDisclosureTransparencyUnsolEvents()
                 || !Flags.enableModemCipherTransparencyUnsolEvents()
-                || !Flags.enableIdentifierDisclosureTransparency()
                 || !Flags.enableModemCipherTransparency()) {
             return UNSUPPORTED_ON_DEVICE;
         }

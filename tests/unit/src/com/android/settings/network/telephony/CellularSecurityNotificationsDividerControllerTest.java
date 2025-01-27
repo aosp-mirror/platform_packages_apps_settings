@@ -129,15 +129,11 @@ public class CellularSecurityNotificationsDividerControllerTest {
             mSetFlagsRule.enableFlags(
                     Flags.FLAG_ENABLE_IDENTIFIER_DISCLOSURE_TRANSPARENCY_UNSOL_EVENTS);
             mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_MODEM_CIPHER_TRANSPARENCY);
-            mSetFlagsRule.enableFlags(
-                    Flags.FLAG_ENABLE_IDENTIFIER_DISCLOSURE_TRANSPARENCY);
         } else {
             mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_MODEM_CIPHER_TRANSPARENCY_UNSOL_EVENTS);
             mSetFlagsRule.disableFlags(
                     Flags.FLAG_ENABLE_IDENTIFIER_DISCLOSURE_TRANSPARENCY_UNSOL_EVENTS);
             mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_MODEM_CIPHER_TRANSPARENCY);
-            mSetFlagsRule.disableFlags(
-                    Flags.FLAG_ENABLE_IDENTIFIER_DISCLOSURE_TRANSPARENCY);
         }
     }
 }
