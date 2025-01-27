@@ -42,6 +42,7 @@ class SupervisionPinManagementScreen : PreferenceScreenCreator {
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {
+            +SupervisionPinRecoveryPreference()
             // TODO(b/391992481) implement the screen.
             +SupervisionChangePinPreference()
         }
