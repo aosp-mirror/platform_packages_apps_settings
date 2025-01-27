@@ -113,19 +113,6 @@ public class CellularSecurityNotificationsPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_flagsDisabled_shouldReturnFalse() {
-        // All flags disabled
-        enableFlags(false);
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
-
-        // One flag is disabled
-        enableFlags(true);
-        mSetFlagsRule.disableFlags(
-                Flags.FLAG_ENABLE_IDENTIFIER_DISCLOSURE_TRANSPARENCY_UNSOL_EVENTS);
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
-    }
-
-    @Test
     public void setChecked_flagsDisabled_shouldReturnFalse() {
         // Flags disabled
         enableFlags(false);
@@ -230,13 +217,9 @@ public class CellularSecurityNotificationsPreferenceControllerTest {
     private void enableFlags(boolean enabled) {
         if (enabled) {
             mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_MODEM_CIPHER_TRANSPARENCY_UNSOL_EVENTS);
-            mSetFlagsRule.enableFlags(
-                    Flags.FLAG_ENABLE_IDENTIFIER_DISCLOSURE_TRANSPARENCY_UNSOL_EVENTS);
             mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_MODEM_CIPHER_TRANSPARENCY);
         } else {
             mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_MODEM_CIPHER_TRANSPARENCY_UNSOL_EVENTS);
-            mSetFlagsRule.disableFlags(
-                    Flags.FLAG_ENABLE_IDENTIFIER_DISCLOSURE_TRANSPARENCY_UNSOL_EVENTS);
             mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_MODEM_CIPHER_TRANSPARENCY);
         }
     }
