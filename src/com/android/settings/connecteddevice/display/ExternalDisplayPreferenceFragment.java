@@ -18,12 +18,13 @@ package com.android.settings.connecteddevice.display;
 
 import static android.view.Display.INVALID_DISPLAY;
 
-import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG;
+import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_NOT_FOUND_RESOURCE;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isDisplayAllowed;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isTopologyPaneEnabled;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isUseDisplaySettingEnabled;
+import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isDisplaySizeSettingEnabled;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isResolutionSettingEnabled;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isRotationSettingEnabled;
 
@@ -45,6 +46,7 @@ import androidx.preference.PreferenceGroup;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragmentBase;
+import com.android.settings.accessibility.AccessibilitySeekBarPreference;
 import com.android.settings.accessibility.TextReadingPreferenceFragment;
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DisplayListener;
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.Injector;
@@ -68,6 +70,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     static final String EXTERNAL_DISPLAY_USE_PREFERENCE_KEY = "external_display_use_preference";
     static final String EXTERNAL_DISPLAY_ROTATION_KEY = "external_display_rotation";
     static final String EXTERNAL_DISPLAY_RESOLUTION_PREFERENCE_KEY = "external_display_resolution";
+    static final String EXTERNAL_DISPLAY_SIZE_PREFERENCE_KEY = "external_display_size";
     static final int EXTERNAL_DISPLAY_CHANGE_RESOLUTION_FOOTER_RESOURCE =
             R.string.external_display_change_resolution_footer_title;
     static final int EXTERNAL_DISPLAY_LANDSCAPE_DRAWABLE =
@@ -84,6 +87,8 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             R.string.external_display_rotation;
     static final int EXTERNAL_DISPLAY_RESOLUTION_TITLE_RESOURCE =
             R.string.external_display_resolution_settings_title;
+    static final int EXTERNAL_DISPLAY_SIZE_TITLE_RESOURCE = R.string.screen_zoom_title;
+    static final int EXTERNAL_DISPLAY_SIZE_SUMMARY_RESOURCE = R.string.screen_zoom_short_summary;
     static final int BUILTIN_DISPLAY_SETTINGS_CATEGORY_RESOURCE =
             R.string.builtin_display_settings_category;
     @VisibleForTesting
@@ -111,6 +116,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     private Preference mBuiltinDisplaySizeAndTextPreference;
     @Nullable
     private Injector mInjector;
+    @Nullable private AccessibilitySeekBarPreference mDisplaySizePreference;
     @Nullable
     private String[] mRotationEntries;
     @Nullable
@@ -345,6 +351,21 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         return mMirrorPreference;
     }
 
+    @NonNull
+    @VisibleForTesting
+    AccessibilitySeekBarPreference getSizePreference(@NonNull Context context) {
+        if (mDisplaySizePreference == null) {
+            mDisplaySizePreference = new AccessibilitySeekBarPreference(context, /* attrs= */ null);
+            mDisplaySizePreference.setIconStart(R.drawable.ic_remove_24dp);
+            mDisplaySizePreference.setIconStartContentDescription(
+                    R.string.screen_zoom_make_smaller_desc);
+            mDisplaySizePreference.setIconEnd(R.drawable.ic_add_24dp);
+            mDisplaySizePreference.setIconEndContentDescription(
+                    R.string.screen_zoom_make_larger_desc);
+        }
+        return mDisplaySizePreference;
+    }
+
     private void restoreState(@Nullable Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             return;
@@ -425,6 +446,9 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
         if (isResolutionSettingEnabled(mInjector)) {
             screen.addPreference(updateFooterPreference(context,
                     EXTERNAL_DISPLAY_CHANGE_RESOLUTION_FOOTER_RESOURCE));
+        }
+        if (isDisplaySizeSettingEnabled(mInjector)) {
+            screen.addPreference(updateSizePreference(context));
         }
     }
 
@@ -573,6 +597,20 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             return true;
         });
         pref.setEnabled(isResolutionSettingEnabled(mInjector));
+        return pref;
+    }
+
+    private Preference updateSizePreference(@NonNull final Context context) {
+        var pref = (Preference) getSizePreference(context);
+        pref.setKey(EXTERNAL_DISPLAY_SIZE_PREFERENCE_KEY);
+        pref.setSummary(EXTERNAL_DISPLAY_SIZE_SUMMARY_RESOURCE);
+        pref.setPersistent(false);
+        pref.setTitle(EXTERNAL_DISPLAY_SIZE_TITLE_RESOURCE);
+        pref.setOnPreferenceClickListener(
+                (Preference p) -> {
+                    writePreferenceClickMetric(p);
+                    return true;
+                });
         return pref;
     }
 

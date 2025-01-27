@@ -352,4 +352,8 @@ public class ExternalDisplaySettingsConfiguration {
     static boolean isRotationSettingEnabled(@Nullable Injector injector) {
         return injector != null && injector.getFlags().rotationConnectedDisplaySetting();
     }
+
+    static boolean isDisplaySizeSettingEnabled(@Nullable Injector injector) {
+        return injector != null && injector.getFlags().displaySizeConnectedDisplaySetting();
+    }
 }
