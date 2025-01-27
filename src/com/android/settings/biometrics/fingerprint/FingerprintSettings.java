@@ -1313,6 +1313,15 @@ public class FingerprintSettings extends SubSettings {
                     }
                 }
             } else if (requestCode == LAUNCH_EXT_PREF_REQUEST) {
+                if (resultCode == RESULT_TIMEOUT) {
+                    Activity activity = getActivity();
+                    if (activity != null) {
+                        activity.setResult(resultCode);
+                        activity.finish();
+                        return;
+                    }
+                }
+
                 if (!mLaunchedExtPrefKey.isEmpty()) {
                     final Preference preference = findPreference(mLaunchedExtPrefKey);
                     if (preference instanceof PrimarySwitchIntentPreference) {
