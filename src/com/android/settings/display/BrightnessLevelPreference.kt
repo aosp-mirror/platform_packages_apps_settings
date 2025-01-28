@@ -97,8 +97,14 @@ class BrightnessLevelPreference :
         preference.isPersistent = false
     }
 
-    override fun getReadPermissions(context: Context) =
-        Permissions.allOf(Manifest.permission.CONTROL_DISPLAY_BRIGHTNESS)
+    // Note that we *currently* use restricted APIs to obtain the brightness value, but the
+    // brightness value itself is not data that requires permission restriction (as evidence this
+    // value is already available via the summary field). As long as we only
+    // expose the brightness value and not the other data obtained from BrightnessInfo, we do not
+    // require a permission control to obtain this value. A new API is in the works for Brightness
+    // that we can later migrate to that doesn't use any of these permission controls.
+    // Reference ticket: b/388557367
+    override fun getReadPermissions(context: Context) = Permissions.EMPTY
 
     override fun getWritePermissions(context: Context) = Permissions.EMPTY
 
