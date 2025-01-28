@@ -19,7 +19,8 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="accessibility_shortcuts_settings"
     android:persistent="false"
-    android:title="@string/accessibility_shortcuts_settings_title">
+    android:title="@string/accessibility_shortcuts_settings_title"
+    settings:searchable="false">
 
     <Preference
         android:fragment="com.android.settings.accessibility.AccessibilityButtonFragment"
@@ -33,5 +34,5 @@
         android:persistent="false"
         android:title="@string/accessibility_shortcut_service_on_lock_screen_title"
         android:summary="@string/accessibility_shortcut_description"
-        settings:controller="com.android.settings.accessibility.AccessibilityShortcutPreferenceController"/>
+        settings:controller="com.android.settings.accessibility.HardwareShortcutFromLockscreenPreferenceController"/>
 </PreferenceScreen>

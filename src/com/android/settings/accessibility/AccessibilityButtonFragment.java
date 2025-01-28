@@ -16,9 +16,14 @@
 
 package com.android.settings.accessibility;
 
-import android.app.settings.SettingsEnums;
-import android.os.Bundle;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
 
+import android.app.settings.SettingsEnums;
+import android.content.Context;
+import android.os.Bundle;
+import android.provider.Settings;
+
+import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -61,5 +66,13 @@ public class AccessibilityButtonFragment extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_button_settings);
+            new BaseSearchIndexProvider(R.xml.accessibility_button_settings) {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    // Page should be unsearchable if there are no active button targets
+                    String targets = Settings.Secure.getStringForUser(context.getContentResolver(),
+                            ShortcutUtils.convertToKey(SOFTWARE), context.getUserId());
+                    return targets != null && !targets.isEmpty();
+                }
+            };
 }

@@ -15,6 +15,7 @@
  */
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
@@ -22,16 +23,21 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.view.accessibility.AccessibilityManager;
+
+import androidx.annotation.NonNull;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
- * Settings page for accessibility shortcut
+ * Setting to allow the hardware shortcut to turn on from the lock screen
  */
-public class AccessibilityShortcutPreferenceController extends TogglePreferenceController {
-
-    public AccessibilityShortcutPreferenceController(Context context, String preferenceKey) {
+public class HardwareShortcutFromLockscreenPreferenceController
+        extends TogglePreferenceController {
+    public HardwareShortcutFromLockscreenPreferenceController(
+            Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
@@ -56,7 +62,33 @@ public class AccessibilityShortcutPreferenceController extends TogglePreferenceC
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        if (!com.android.settings.accessibility.Flags.fixA11ySettingsSearch()) {
+            return AVAILABLE;
+        } else {
+            if (mContext.getSystemService(AccessibilityManager.class)
+                    .getAccessibilityShortcutTargets(HARDWARE).isEmpty()) {
+                return DISABLED_DEPENDENT_SETTING;
+            } else {
+                return AVAILABLE;
+            }
+        }
+    }
+
+    @Override
+    public void updateState(@NonNull Preference preference) {
+        super.updateState(preference);
+        refreshSummary(preference);
+    }
+
+    @Override
+    public @NonNull CharSequence getSummary() {
+        if (getAvailabilityStatus() == AVAILABLE) {
+            return mContext.getString(R.string.accessibility_shortcut_description);
+        } else {
+            return mContext.getString(
+                    R.string.accessibility_shortcut_unassigned_setting_unavailable_summary,
+                    AccessibilityUtil.getShortcutSummaryList(mContext, HARDWARE));
+        }
     }
 
     @Override
