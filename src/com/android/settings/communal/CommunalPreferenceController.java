@@ -21,6 +21,7 @@ import android.content.Context;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.flags.Flags;
 
 /**
  * Controls the top-level Communal settings preference.
@@ -39,7 +40,14 @@ public class CommunalPreferenceController extends BasePreferenceController {
      * Returns whether communal preferences are available.
      */
     public static boolean isAvailable(Context context) {
-        return context.getResources().getBoolean(R.bool.config_show_communal_settings)
-                && Utils.canCurrentUserDream(context);
+        if (context.getResources().getBoolean(R.bool.config_show_communal_settings)) {
+            return Utils.canCurrentUserDream(context);
+        }
+
+        if (context.getResources().getBoolean(R.bool.config_show_communal_settings_mobile)) {
+            return Flags.enableHubModeSettingsOnMobile() && Utils.canCurrentUserDream(context);
+        }
+
+        return false;
     }
 }
