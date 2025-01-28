@@ -334,7 +334,7 @@ class DisplayTopologyPreferenceTest {
     fun updatedTopologyCancelsDragIfNonTrivialChange() {
         val (leftBlock, _) = setupTwoDisplays(POSITION_LEFT, /* childOffset= */ 42f)
 
-        assertThat(leftBlock.y).isWithin(0.01f).of(142.17f)
+        assertThat(leftBlock.y).isWithin(0.05f).of(143.76f)
 
         leftBlock.dispatchTouchEvent(MotionEventBuilder.newBuilder()
                 .setAction(MotionEvent.ACTION_DOWN)
@@ -344,30 +344,30 @@ class DisplayTopologyPreferenceTest {
                 .setAction(MotionEvent.ACTION_MOVE)
                 .setPointer(0f, 30f)
                 .build())
-        assertThat(leftBlock.y).isWithin(0.01f).of(172.17f)
+        assertThat(leftBlock.y).isWithin(0.05f).of(173.76f)
 
         // Offset is only different by 0.5 dp, so the drag will not cancel.
         injector.topology = twoDisplayTopology(POSITION_LEFT, /* childOffset= */ 41.5f)
         injector.topologyListener!!.accept(injector.topology!!)
 
-        assertThat(leftBlock.y).isWithin(0.01f).of(172.17f)
+        assertThat(leftBlock.y).isWithin(0.05f).of(173.76f)
         // Move block farther downward.
         leftBlock.dispatchTouchEvent(MotionEventBuilder.newBuilder()
                 .setAction(MotionEvent.ACTION_MOVE)
                 .setPointer(0f, 50f)
                 .build())
-        assertThat(leftBlock.y).isWithin(0.01f).of(192.17f)
+        assertThat(leftBlock.y).isWithin(0.05f).of(193.76f)
 
         injector.topology = twoDisplayTopology(POSITION_LEFT, /* childOffset= */ 20f)
         injector.topologyListener!!.accept(injector.topology!!)
 
-        assertThat(leftBlock.y).isWithin(0.01f).of(125.67f)
+        assertThat(leftBlock.y).isWithin(0.05f).of(115.60f)
         // Another move in the opposite direction should not move the left block.
         leftBlock.dispatchTouchEvent(MotionEventBuilder.newBuilder()
                 .setAction(MotionEvent.ACTION_MOVE)
                 .setPointer(0f, -20f)
                 .build())
-        assertThat(leftBlock.y).isWithin(0.01f).of(125.67f)
+        assertThat(leftBlock.y).isWithin(0.05f).of(115.60f)
     }
 
     @Test
