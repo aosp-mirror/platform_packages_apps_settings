@@ -28,6 +28,7 @@ import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionMainSwitchPreferenceTest {
@@ -57,6 +58,32 @@ class SupervisionMainSwitchPreferenceTest {
         setSupervisionEnabled(false)
 
         assertThat(getMainSwitchPreference().isChecked).isFalse()
+    }
+
+    @Test
+    fun toggleOn() {
+        setSupervisionEnabled(false)
+        val widget = getMainSwitchPreference()
+
+        assertThat(widget.isChecked).isFalse()
+
+        widget.performClick()
+
+        assertThat(widget.isChecked).isTrue()
+        verify(mockSupervisionManager).setSupervisionEnabled(true)
+    }
+
+    @Test
+    fun toggleOff() {
+        setSupervisionEnabled(true)
+        val widget = getMainSwitchPreference()
+
+        assertThat(widget.isChecked).isTrue()
+
+        widget.performClick()
+
+        assertThat(widget.isChecked).isFalse()
+        verify(mockSupervisionManager).setSupervisionEnabled(false)
     }
 
     private fun getMainSwitchPreference(): MainSwitchPreference =
