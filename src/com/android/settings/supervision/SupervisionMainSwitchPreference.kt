@@ -49,7 +49,6 @@ class SupervisionMainSwitchPreference :
     override val sensitivityLevel: Int
         get() = SensitivityLevel.HIGH_SENSITIVITY
 
-    // TODO(b/390505725): Listen for changes in supervision state.
     @Suppress("UNCHECKED_CAST")
     private class SupervisionMainSwitchStorage(private val context: Context) :
         NoOpKeyedObservable<String>(), KeyValueStore {
@@ -61,7 +60,11 @@ class SupervisionMainSwitchPreference :
                 as T
 
         override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
-            // TODO(b/383402852): implement handling of main toggle.
+            // TODO(b/392694561): add PIN protection to main toggle.
+            if (key == KEY && value is Boolean) {
+                val supervisionManager = context.getSystemService(SupervisionManager::class.java)
+                supervisionManager.setSupervisionEnabled(value)
+            }
         }
     }
 
