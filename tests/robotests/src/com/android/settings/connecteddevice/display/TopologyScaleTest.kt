@@ -35,7 +35,7 @@ class TopologyScaleTest {
     fun oneDisplay4to3Aspect() {
         val scale = TopologyScale(
                 /* paneWidth= */ 640, minPaneHeight = 0f,
-                minEdgeLength = 48, maxBlockRatio = 0.05f,
+                minEdgeLength = 48f, maxBlockRatio = 0.05f,
                 listOf(RectF(0f, 0f, 640f, 480f)))
 
         // blockRatio is higher than 0.05 in order to make the smallest display edge (480 dp) 48dp
@@ -52,7 +52,7 @@ class TopologyScaleTest {
         // The paneHeight and origin coordinates are changed but the block ratio is the same.
         val taller = TopologyScale(
                 /* paneWidth= */ 640, minPaneHeight = 155.0f,
-                minEdgeLength = 48, maxBlockRatio = 0.05f,
+                minEdgeLength = 48f, maxBlockRatio = 0.05f,
                 listOf(RectF(0f, 0f, 640f, 480f)))
 
         assertEquals(
@@ -64,7 +64,7 @@ class TopologyScaleTest {
     fun twoUnalignedDisplays() {
         val scale = TopologyScale(
                 /* paneWidth= */ 300, minPaneHeight = 0f,
-                minEdgeLength = 48, maxBlockRatio = 0.05f,
+                minEdgeLength = 48f, maxBlockRatio = 0.05f,
                 listOf(RectF(0f, 0f, 1920f, 1200f), RectF(1920f, -300f, 3840f, 900f)))
 
         assertEquals(
@@ -80,7 +80,7 @@ class TopologyScaleTest {
     fun twoDisplaysBlockRatioBumpedForGarSizeMinimumHorizontal() {
         val scale = TopologyScale(
                 /* paneWidth= */ 192, minPaneHeight = 0f,
-                minEdgeLength = 48, maxBlockRatio = 0.05f,
+                minEdgeLength = 48f, maxBlockRatio = 0.05f,
                 listOf(RectF(0f, 0f, 240f, 320f), RectF(-240f, -320f, 0f, 0f)))
 
         // blockRatio is higher than 0.05 in order to make the smallest display edge (240 dp) 48dp
@@ -98,7 +98,7 @@ class TopologyScaleTest {
     fun paneVerticalPaddingLimitedByTallestDisplay() {
         val scale = TopologyScale(
                 /* paneWidth= */ 300, minPaneHeight = 0f,
-                minEdgeLength = 48, maxBlockRatio = 0.05f,
+                minEdgeLength = 48f, maxBlockRatio = 0.05f,
                 listOf(
                         RectF(0f, 0f, 640f, 480f),
                         RectF(0f, 480f, 640f, 960f),
@@ -118,7 +118,7 @@ class TopologyScaleTest {
     fun limitedByCustomMaxBlockRatio() {
         val scale = TopologyScale(
                 /* paneWidth= */ 300, minPaneHeight = 0f,
-                minEdgeLength = 24, maxBlockRatio = 0.12f,
+                minEdgeLength = 24f, maxBlockRatio = 0.12f,
                 listOf(
                         RectF(0f, 0f, 640f, 480f),
                         RectF(0f, 480f, 640f, 960f)))
@@ -135,7 +135,7 @@ class TopologyScaleTest {
         // minBlockEdgeLength/minDisplayEdgeLength = 80/480 = 1/6, so the block ratio will be 1/6
         val scale = TopologyScale(
                 /* paneWidth= */ 300, minPaneHeight = 0f,
-                minEdgeLength = 80, maxBlockRatio = 0.05f,
+                minEdgeLength = 80f, maxBlockRatio = 0.05f,
                 listOf(
                         RectF(0f, 0f, 640f, 480f),
                         RectF(0f, 480f, 640f, 960f)))
