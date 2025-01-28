@@ -25,6 +25,7 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.hardware.display.DisplayTopology
+import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
@@ -70,6 +71,8 @@ class DisplayTopologyPreferenceTest {
 
         override val wallpaper: Bitmap?
             get() = systemWallpaper!!
+
+        override val densityDpi = DisplayMetrics.DENSITY_DEFAULT
 
         override fun registerTopologyListener(listener: Consumer<DisplayTopology>) {
             if (topologyListener != null) {

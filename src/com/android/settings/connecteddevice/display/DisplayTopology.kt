@@ -35,7 +35,9 @@ import android.hardware.display.DisplayTopology.TreeNode.POSITION_BOTTOM
 import android.hardware.display.DisplayTopology.TreeNode.POSITION_LEFT
 import android.hardware.display.DisplayTopology.TreeNode.POSITION_RIGHT
 import android.hardware.display.DisplayTopology.TreeNode.POSITION_TOP
+import android.util.DisplayMetrics
 import android.util.Log
+import android.view.DisplayInfo
 import android.view.MotionEvent
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
@@ -84,7 +86,7 @@ fun Float.atLeast(n: Number): Float = max(this, n.toFloat())
  * @param displaysPos the absolute topology coordinates for each display in the topology.
  */
 class TopologyScale(
-        paneWidth: Int, minPaneHeight: Float, minEdgeLength: Int, maxBlockRatio: Float,
+        paneWidth: Int, minPaneHeight: Float, minEdgeLength: Float, maxBlockRatio: Float,
         displaysPos: Collection<RectF>) {
     /** Scale of block sizes to real-world display sizes. Should be less than 1. */
     val blockRatio: Float
@@ -120,7 +122,7 @@ class TopologyScale(
                 // If the `ratio` is set too low because one of the displays will have an edge less
                 // than minEdgeLength(dp) long, increase it such that the smallest edge is that
                 // long.
-                .atLeast(minEdgeLength.toFloat() / smallestDisplayDim)
+                .atLeast(minEdgeLength / smallestDisplayDim)
 
         // Essentially, we just set the pane height based on the pre-determined pane width and the
         // aspect ratio of the display bounds.
@@ -308,6 +310,16 @@ class DisplayTopologyPreference(context : Context)
         open val wallpaper: Bitmap?
             get() = WallpaperManager.getInstance(context).bitmap
 
+        open val densityDpi: Int
+            get() {
+                val info = DisplayInfo()
+                return if (context.display.getDisplayInfo(info)) {
+                    info.logicalDensityDpi
+                } else {
+                    DisplayMetrics.DENSITY_DEFAULT
+                }
+            }
+
         open fun registerTopologyListener(listener: Consumer<DisplayTopology>) {
             displayManager.registerTopologyListener(context.mainExecutor, listener)
         }
@@ -395,9 +407,14 @@ class DisplayTopologyPreference(context : Context)
             recycleableBlocks.add(mPaneContent.getChildAt(i) as DisplayBlock)
         }
 
+        // This density is the density of the current display (showing the topology pane). It is
+        // necessary to use this density here because the topology pane coordinates are in physical
+        // pixels, and the display coordinates are in density-independent pixels.
+        val dpi = injector.densityDpi
         val scaling = TopologyScale(
                 mPaneContent.width, minPaneHeight = mTopologyInfo?.scaling?.paneHeight ?: 0f,
-                minEdgeLength = 60, maxBlockRatio = 0.12f,
+                minEdgeLength = DisplayTopology.dpToPx(60f, dpi),
+                maxBlockRatio = DisplayTopology.dpToPx(0.12f, dpi),
                 newBounds.map { it.second }.toList())
         mPaneHolder.layoutParams.let {
             val newHeight = scaling.paneHeight.toInt()
