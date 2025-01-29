@@ -89,7 +89,7 @@ public class DesktopModePreferenceController extends DeveloperOptionsPreferenceC
         final boolean shouldDevOptionBeEnabled = switch (toggleOverride) {
             case OVERRIDE_OFF -> false;
             case OVERRIDE_ON -> true;
-            case OVERRIDE_UNSET -> DesktopModeStatus.shouldDevOptionBeEnabledByDefault();
+            case OVERRIDE_UNSET -> DesktopModeStatus.shouldDevOptionBeEnabledByDefault(mContext);
         };
         ((TwoStatePreference) mPreference).setChecked(shouldDevOptionBeEnabled);
     }
