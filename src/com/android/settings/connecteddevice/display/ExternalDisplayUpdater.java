@@ -16,7 +16,6 @@
 
 package com.android.settings.connecteddevice.display;
 
-import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.forceShowDisplayList;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isDisplayAllowed;
 
 import android.content.Context;
@@ -141,10 +140,6 @@ public class ExternalDisplayUpdater {
             if (display != null && isDisplayAllowed(display, mInjector)) {
                 return context.getString(R.string.external_display_on);
             }
-        }
-
-        if (forceShowDisplayList(mInjector.getFlags())) {
-            return context.getString(R.string.external_display_off);
         }
 
         for (var display : mInjector.getAllDisplays()) {

@@ -21,8 +21,8 @@ import static android.view.Display.INVALID_DISPLAY;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_NOT_FOUND_RESOURCE;
-import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.forceShowDisplayList;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isDisplayAllowed;
+import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isTopologyPaneEnabled;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isUseDisplaySettingEnabled;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isResolutionSettingEnabled;
 import static com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.isRotationSettingEnabled;
@@ -366,7 +366,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
     private void updateScreenForDisplayId(final int displayId,
             @NonNull final PrefRefresh screen, @NonNull Context context) {
         final boolean forceShowList = displayId == INVALID_DISPLAY
-                && mInjector != null && forceShowDisplayList(mInjector.getFlags());
+                && isTopologyPaneEnabled(mInjector);
         final var displaysToShow = externalDisplaysToShow(displayId);
 
         if (!forceShowList && displaysToShow.isEmpty() && displayId == INVALID_DISPLAY) {
@@ -430,7 +430,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
 
     private void showDisplaysList(@NonNull List<Display> displaysToShow,
                                   @NonNull PrefRefresh screen, @NonNull Context context) {
-        if (mInjector != null && mInjector.getFlags().displayTopologyPaneInDisplayList()) {
+        if (isTopologyPaneEnabled(mInjector)) {
             screen.addPreference(getDisplayTopologyPreference(context));
             if (!displaysToShow.isEmpty()) {
                 screen.addPreference(getMirrorPreference(context));
