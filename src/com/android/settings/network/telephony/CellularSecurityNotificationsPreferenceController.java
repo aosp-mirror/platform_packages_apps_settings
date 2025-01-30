@@ -178,8 +178,7 @@ public class CellularSecurityNotificationsPreferenceController extends
     }
 
     private boolean areFlagsEnabled() {
-        if (!Flags.enableIdentifierDisclosureTransparencyUnsolEvents()
-                || !Flags.enableModemCipherTransparencyUnsolEvents()
+        if (!Flags.enableModemCipherTransparencyUnsolEvents()
                 || !Flags.enableModemCipherTransparency()) {
             return false;
         }
