@@ -31,15 +31,17 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.supervision.SupervisionManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.face.FaceManager;
 import android.os.UserHandle;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.annotations.RequiresFlagsEnabled;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
 import android.safetycenter.SafetySourceStatus;
@@ -68,12 +70,13 @@ import org.mockito.MockitoAnnotations;
 public class FaceSafetySourceTest {
 
     private static final ComponentName COMPONENT_NAME = new ComponentName("package", "class");
-    private static final UserHandle USER_HANDLE = new UserHandle(UserHandle.myUserId());
+    private static final int USER_ID = UserHandle.myUserId();
+    private static final UserHandle USER_HANDLE = new UserHandle(USER_ID);
     private static final SafetyEvent EVENT_SOURCE_STATE_CHANGED =
             new SafetyEvent.Builder(SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED).build();
 
     @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private Context mApplicationContext;
 
@@ -82,6 +85,7 @@ public class FaceSafetySourceTest {
     @Mock private FaceManager mFaceManager;
     @Mock private LockPatternUtils mLockPatternUtils;
     @Mock private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
+    @Mock private SupervisionManager mSupervisionManager;
 
     @Before
     public void setUp() {
@@ -90,11 +94,11 @@ public class FaceSafetySourceTest {
         when(mApplicationContext.getPackageManager()).thenReturn(mPackageManager);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)).thenReturn(true);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(true);
-        when(mDevicePolicyManager.getProfileOwnerOrDeviceOwnerSupervisionComponent(USER_HANDLE))
-                .thenReturn(COMPONENT_NAME);
         when(mApplicationContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
         when(mApplicationContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mFaceManager);
+        when(mApplicationContext.getSystemService(Context.SUPERVISION_SERVICE))
+                .thenReturn(mSupervisionManager);
         FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
         when(featureFactory.securityFeatureProvider.getLockPatternUtils(mApplicationContext))
                 .thenReturn(mLockPatternUtils);
@@ -153,11 +157,31 @@ public class FaceSafetySourceTest {
     }
 
     @Test
+    @DisableFlags(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
     public void setSafetySourceData_withFaceNotEnrolled_whenDisabledByAdmin_setsData() {
+        when(mDevicePolicyManager.getProfileOwnerOrDeviceOwnerSupervisionComponent(USER_HANDLE))
+                .thenReturn(COMPONENT_NAME);
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME))
+                .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FACE);
+
+        FaceSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
+
+        assertSafetySourceDisabledDataSetWithSingularSummary(
+                "security_settings_face_preference_title_new",
+                "security_settings_face_preference_summary_none");
+    }
+
+    @Test
+    @EnableFlags(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
+    public void setSafetySourceData_withFaceNotEnrolled_whenSupervisionIsOn_setsData() {
+        when(mSupervisionManager.isSupervisionEnabledForUser(USER_ID)).thenReturn(true);
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
+        when(mDevicePolicyManager.getKeyguardDisabledFeatures(null))
                 .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FACE);
 
         FaceSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
@@ -183,11 +207,31 @@ public class FaceSafetySourceTest {
     }
 
     @Test
+    @DisableFlags(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
     public void setSafetySourceData_withFaceEnrolled_whenDisabledByAdmin_setsData() {
+        when(mDevicePolicyManager.getProfileOwnerOrDeviceOwnerSupervisionComponent(USER_HANDLE))
+                .thenReturn(COMPONENT_NAME);
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(true);
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME))
+                .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FACE);
+
+        FaceSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
+
+        assertSafetySourceDisabledDataSetWithSingularSummary(
+                "security_settings_face_preference_title_new",
+                "security_settings_face_preference_summary");
+    }
+
+    @Test
+    @EnableFlags(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
+    public void setSafetySourceData_withFaceEnrolled_whenSupervisionIsOn_setsData() {
+        when(mSupervisionManager.isSupervisionEnabledForUser(USER_ID)).thenReturn(true);
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(true);
+        when(mDevicePolicyManager.getKeyguardDisabledFeatures(null))
                 .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FACE);
 
         FaceSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
