@@ -209,7 +209,7 @@
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Setel bahasa untuk setiap aplikasi."</string>
     <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Perangkat, aplikasi, dan situs menggunakan bahasa pertama yang didukung dalam daftar bahasa pilihan Anda.\n\nBanyak aplikasi juga akan menggunakan wilayah dari bahasa pilihan Anda untuk memformat tanggal, nomor, dan unit. Untuk mengubah wilayah Anda, tambahkan bahasa, lalu pilih wilayah pilihan Anda."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Untuk memilih bahasa bagi setiap aplikasi, buka setelan bahasa aplikasi."</string>
-    <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Pelajari bahasa aplikasi lebih lanjut"</string>
+    <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Pelajari lebih lanjut bahasa aplikasi"</string>
     <string name="title_change_system_region" msgid="5476591184463491936">"Ubah wilayah ke %s?"</string>
     <string name="desc_notice_device_region_change" msgid="6702773189066944100">"Perangkat Anda akan tetap menjadikan %s sebagai bahasa sistem"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Ubah bahasa sistem menjadi %s?"</string>
@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Saat menggunakan Buka dengan Wajah"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Wajibkan mata terbuka"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Untuk membuka kunci ponsel, mata Anda harus terbuka"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Selalu wajibkan konfirmasi"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Saat memakai Buka dengan Wajah di aplikasi, selalu minta langkah konfirmasi"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Hapus model wajah"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Ketuk layar tiga kali"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Edit pintasan aksesibilitas"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Pilih pintasan Anda untuk %1$s"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Lanjutkan"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Alat bantu dengar"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Siapkan dan kelola alat bantu dengar, implan koklea, dan perangkat amplifikasi lainnya yang mendukung ASHA dan LE Audio"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Izinkan penundaan notifikasi"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Titik notifikasi di ikon aplikasi"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Paket notifikasi"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Ringkasan notifikasi"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"Aktif"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Nonaktif"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Gunakan ringkasan notifikasi"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Otomatis ringkas notifikasi percakapan dari aplikasi mana pun"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Notifikasi terbaru"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Tampilkan info terbaru"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Notifikasi yang disematkan menampilkan info terbaru dari aplikasi, serta selalu muncul di status bar dan layar kunci"</string>
@@ -4058,7 +4057,7 @@
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Aktifkan"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Setel mode yang mengikuti jadwal rutin"</string>
     <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Setel mode untuk menjalankan sinkronisasi acara kalender dan respons undangan"</string>
-    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Merancang rutinitas tidur yang menenangkan. Menyetel alarm, meredupkan layar, dan memblokir notifikasi."</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Rancang rutinitas tidur yang menenangkan. Setel alarm, redupkan layar, dan blokir notifikasi."</string>
     <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Memprioritaskan keamanan di jalan untuk mengemudi dengan fokus dan bebas distraksi"</string>
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Memblokir distraksi dan gangguan dari perangkat agar dapat fokus"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Menghilangkan semua distraksi untuk mendapatkan lingkungan yang tenang"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Baterai"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panel Setelan"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Aktifkan jendela berbentuk bebas"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Aktifkan fitur pengalaman desktop"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Aktifkan Tampilan Desktop di perangkat dan di layar sekunder."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Aktifkan Tampilan Desktop di layar sekunder."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Aktifkan jendela berbentuk bebas di layar sekunder"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Aktifkan ukuran tidak dapat diubah di multi-jendela"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Izinkan aplikasi yang ukurannya tidak dapat diubah di multi-jendela"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Gunakan pengawasan perangkat"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Siapkan PIN untuk memulai"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"pengawasan, pengawasan orang tua, kontrol orang tua"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

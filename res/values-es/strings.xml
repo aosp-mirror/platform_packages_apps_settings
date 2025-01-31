@@ -26,7 +26,7 @@
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"Toca para que se muestre la información"</string>
     <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{Te queda # paso para habilitar las opciones para desarrolladores.}other{Te quedan # pasos para habilitar las opciones para desarrolladores.}}"</string>
     <string name="show_dev_on" msgid="2840850085134853754">"¡Ya eres desarrollador!"</string>
-    <string name="show_dev_already" msgid="7041756429707644630">"Las opciones para desarrolladores ya están activadas."</string>
+    <string name="show_dev_already" msgid="7041756429707644630">"No hace falta, ya eres desarrollador."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"Habilita primero las opciones para desarrolladores."</string>
     <string name="dev_settings_available_to_admin_only_warning" msgid="3408243404879083111">"Solo los usuarios administradores pueden acceder a los ajustes para desarrolladores."</string>
     <string name="header_category_system" msgid="1665516346845259058">"Sistema"</string>
@@ -257,7 +257,7 @@
     <string name="uk_measurement_system" msgid="4196897001775627597">"Imperial (Reino Unido)"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Preferencias adicionales"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"Elegir formas de dirigirse a ti"</string>
-    <string name="terms_of_address_summary" msgid="7802443422612600620">"Tu dispositivo puede personalizar la forma de dirigirse a ti."</string>
+    <string name="terms_of_address_summary" msgid="7802443422612600620">"Tu dispositivo puede personalizar la forma de dirigirse a ti"</string>
     <string name="terms_of_address_intro_title" msgid="1533951542181569335">"Este ajuste permite personalizar la forma en la que la mayoría de las aplicaciones del sistema se dirigen a ti, pero no sirve para las aplicaciones que instales."</string>
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Sin especificar"</string>
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"Femenino"</string>
@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Al usar Desbloqueo facial"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Los ojos deben estar abiertos"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Para desbloquear el teléfono, debes abrir los ojos"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Pedir confirmación siempre"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Al usar Desbloqueo facial en aplicaciones, solicita siempre una confirmación"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Eliminar modelo facial"</string>
@@ -1790,7 +1792,7 @@
     <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Para transferir las cuentas de Google, los ajustes y más, introduce el PIN de tu otro dispositivo. Tu PIN estará cifrado."</string>
     <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Para transferir las cuentas de Google, los ajustes y más, introduce la contraseña de tu otro dispositivo. Tu contraseña estará cifrada."</string>
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Usar el patrón también para desbloquear"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Usar el PIN también para desbloquear"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Usar el PIN también para desbloquear este dispositivo"</string>
     <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Usar la contraseña también para desbloquear"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Verifica el patrón"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"Verifica el PIN"</string>
@@ -1868,7 +1870,7 @@
     <string name="archive" msgid="9074663845068632127">"Archivar"</string>
     <string name="restore" msgid="7622486640713967157">"Restaurar"</string>
     <string name="restoring_step_one" msgid="3465050101254272874">"Restaurando"</string>
-    <string name="restoring_step_two" msgid="140484846432595108">"Restaurando."</string>
+    <string name="restoring_step_two" msgid="140484846432595108">"Restaurar"</string>
     <string name="restoring_step_three" msgid="3712883580876329811">"Restaurando.."</string>
     <string name="restoring_step_four" msgid="8966846882470446209">"Restaurando..."</string>
     <string name="total_size_label" msgid="2052185048749658866">"Total"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tocar tres veces la pantalla"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Editar accesos directos de accesibilidad"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Elige el acceso directo para %1$s"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continuar"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Audífonos"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Configura y gestiona audífonos ASHA y LE Audio, implantes cocleares y otros dispositivos de amplificación de sonido"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Permitir que se pospongan las notificaciones"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Burbuja de notificación en el icono de la aplicación"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Paquetes de notificaciones"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Resúmenes de notificaciones"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"Activado"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Desactivado"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Usar resúmenes de notificaciones"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Resume automáticamente las notificaciones de conversaciones de cualquier aplicación"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Notificaciones en tiempo real"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Mostrar información en tiempo real"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Las notificaciones fijadas muestran información en tiempo real de las aplicaciones y aparecen siempre en la barra de estado y en la pantalla de bloqueo"</string>
@@ -4276,7 +4275,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Se quitarán todas las reglas del modo No molestar que esta aplicación haya creado."</string>
     <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"¿Permitir que <xliff:g id="APP">%1$s</xliff:g> acceda a los modos?"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"La aplicación podrá activar o desactivar No molestar, gestionar y activar los modos y hacer cambios en los ajustes relacionados."</string>
-    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"¿Revocar el acceso a Modos de <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"¿Revocar el acceso de <xliff:g id="APP">%1$s</xliff:g> a los modos?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Se eliminarán todos los modos creados por esta aplicación."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"No optimizar"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimizar"</string>
@@ -4532,7 +4531,7 @@
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Ayuda a alargar la batería"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Recuadros para desarrolladores en ajustes rápidos"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Inhabilitar tiempo de espera de autorización adb"</string>
-    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Inhabilita la revocación automática de autorizaciones adb para sistemas que no se han vuelto a conectar durante el periodo predeterminado (7 días) o configurado por el usuario (mínimo 1 día)"</string>
+    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Inhabilita la revocación automática de autorizaciones adb para sistemas que no se han vuelto a conectar durante el periodo predeterminado (7 días) o el tiempo configurado por el usuario (mínimo 1 día)"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Sensores desactivados"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Ajustes del perfil de trabajo"</string>
     <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Buscar contactos del directorio de trabajo en aplicaciones personales"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batería"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panel de ajustes"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Habilitar ventanas de forma libre"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Habilitar las funciones de experiencia del escritorio"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Habilitar la vista para ordenador en el dispositivo y en las pantallas secundarias."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Habilitar la vista para ordenador en pantallas secundarias."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Habilitar ventanas libres en pantallas secundarias"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Habilitar aplicaciones de tamaño no modificable en multiventana"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Permite que las aplicaciones de tamaño no modificable se muestren en multiventana"</string>
@@ -5290,7 +5286,7 @@
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Usar Evitar sonar"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Usar Compartir Internet"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Usar Fijar aplicaciones"</string>
-    <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Usar Opciones para desarrolladores"</string>
+    <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Usar opciones para desarrolladores"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Usa servicio de impresión"</string>
     <string name="multiple_users_main_switch_title" msgid="9158796544835843201">"Permitir cambiar de usuario"</string>
     <string name="multiple_users_main_switch_keywords" msgid="4845954458094134356">"permitir, varios, usuarios, habilitar, muchos"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Usar la supervisión del dispositivo"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Configura un PIN para empezar"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervisión, supervisión parental, controles parentales"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

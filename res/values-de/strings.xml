@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Bei Nutzung der Entsperrung per Gesichtserkennung"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Augen müssen geöffnet sein"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Zum Entsperren des Smartphones müssen deine Augen geöffnet sein"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Bestätigung immer erforderlich"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Bei Gesichtsentsperrung in Apps immer Bestätigung anfordern"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Gesichtsmodell löschen"</string>
@@ -2069,7 +2071,7 @@
     <string name="trackpad_pointer_speed" msgid="5672221910698079303">"Cursorgeschwindigkeit"</string>
     <string name="three_finger_tap_preference_title" msgid="2114347152933865780">"„Mit drei Fingern tippen“ anpassen"</string>
     <string name="touchpad_acceleration_title" msgid="176627555191021888">"Touchpad-Beschleunigung"</string>
-    <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Schnellere Bewegungen auf dem Touchpad bewegen den Cursor weiter"</string>
+    <string name="touchpad_acceleration_summary" msgid="8057075483967535793">"Je schneller du deine Finger auf dem Touchpad bewegst, desto größere Strecken legt der Cursor zurück"</string>
     <string name="pointer_fill_style" msgid="8794616790175016092">"Zeigerfarbe"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"Zeigerfüllfarbe in Schwarz ändern"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"Zeigerfüllfarbe in Grün ändern"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Dreimal auf den Bildschirm tippen"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Kurzbefehl für Bedienungshilfen bearbeiten"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Tastenkombination für %1$s auswählen"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Weiter"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Hörgeräte"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Du kannst Hörgeräte, Cochlea-Implantate und andere Verstärker, die mit ASHA und LE Audio kompatibel sind, einrichten und verwalten"</string>
@@ -3496,7 +3500,7 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Keine}=1{1 Zeitplan festgelegt}other{# Zeitpläne festgelegt}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Bitte nicht stören"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Modi"</string>
-    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Mit Modi für Schlaf, Arbeit, Autofahren und alles dazwischen kannst du Ablenkungen minimieren und deine Aufmerksamkeit besser lenken."</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Mit dem passenden Modus für Schlaf, Arbeit, Autofahren und viele andere Situationen kannst du Ablenkungen minimieren und deine Aufmerksamkeit besser lenken."</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Eigenen Modus erstellen"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Benachrichtigungen nur von wichtigen Personen und Apps"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Zeitplan festlegen"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Schlummerfunktion für Benachrichtigungen zulassen"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Benachrich­ti­gungs­punkt auf App-Symbol"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Benachrichtigungs-Sets"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Zusammenfassung von Benachrichtigungen"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"An"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Aus"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Zusammenfassung von Benachrichtigungen verwenden"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Benachrichtigungen zu Unterhaltungen aus beliebigen Apps automatisch zusammenfassen"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Live-Benachrichtigungen"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Live-Informationen einblenden"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Aktuelle Informationen aus Apps werden als angeheftete Benachrichtigungen angezeigt, die immer in der Statusleiste und auf dem Sperrbildschirm erscheinen"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Akku"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Einstellungen"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Freiform-Fenster zulassen"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Funktionen für die Desktop-Oberfläche aktivieren"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Desktop-Ansicht auf dem Gerät und auf sekundären Displays aktivieren."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Desktop-Ansicht auf sekundären Displays aktivieren."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Freiform-Fenster auf sekundären Displays zulassen"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Mehrfenstermodus für nicht änderbare Größen aktivieren"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Erlaubt Mehrfenstermodus für Apps mit nicht änderbarer Größe"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Elternaufsicht für das Gerät verwenden"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"PIN einrichten, um zu beginnen"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"Aufsicht, Elternaufsicht, Jugendschutzeinstellungen"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

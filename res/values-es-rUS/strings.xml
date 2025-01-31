@@ -256,8 +256,8 @@
     <string name="us_measurement_system" msgid="8738587232938189052">"Imperial (EE.UU.)"</string>
     <string name="uk_measurement_system" msgid="4196897001775627597">"Imperial (Reino Unido)"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Preferencias adicionales"</string>
-    <string name="terms_of_address_title" msgid="7338630812197476808">"Elige cómo el dispositivo se dirige a ti"</string>
-    <string name="terms_of_address_summary" msgid="7802443422612600620">"Personaliza la forma en la que el dispositivo se dirige a ti"</string>
+    <string name="terms_of_address_title" msgid="7338630812197476808">"Elige cómo se dirige a ti el dispositivo"</string>
+    <string name="terms_of_address_summary" msgid="7802443422612600620">"Tu dispositivo puede personalizar la forma de dirigirse a ti"</string>
     <string name="terms_of_address_intro_title" msgid="1533951542181569335">"Este parámetro permite personalizar la forma en que se dirigen a ti la mayoría de las apps del sistema. Las apps que instales manualmente no lo usarán."</string>
     <string name="terms_of_address_not_specified" msgid="4439257779351251973">"Sin especificar"</string>
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"Femenino"</string>
@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Cuando usas Desbloqueo facial"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Los ojos deben estar abiertos"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Para desbloquear el teléfono, debes abrir los ojos"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Requerir siempre confirmación"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Solicitar confirmación cuando se use Desbloqueo facial en apps."</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Borrar modelo de rostro"</string>
@@ -2356,8 +2358,8 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Más información sobre el botón de accesibilidad y los gestos"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Se está usando el botón de accesibilidad. El gesto no está disponible con navegación con 3 botones."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accede rápidamente a funciones de accesibilidad"</string>
-    <string name="accessibility_button_gesture_description" msgid="1141723096904904336">"&lt;b&gt;Para comenzar&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Ve a la configuración de accesibilidad.&lt;br/&gt; {1,number,integer}. Selecciona una función y presiona la combinación.&lt;br/&gt; {2,number,integer}. Elige si quieres usar un botón o un gesto para acceder a la función.&lt;br/&gt;"</string>
-    <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Para comenzar&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Ve a la configuración de accesibilidad.&lt;br/&gt; {1,number,integer}. Selecciona una función y presiona la combinación.&lt;br/&gt; {2,number,integer}. Elige el botón para acceder a la función.&lt;br/&gt;"</string>
+    <string name="accessibility_button_gesture_description" msgid="1141723096904904336">"&lt;b&gt;Para comenzar&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Ve a la configuración de accesibilidad.&lt;br/&gt; {1,number,integer}. Selecciona una función y presiona el atajo.&lt;br/&gt; {2,number,integer}. Elige si quieres usar un botón o un gesto para acceder a la función.&lt;br/&gt;"</string>
+    <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Para comenzar&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Ve a la configuración de accesibilidad.&lt;br/&gt; {1,number,integer}. Selecciona una función y presiona el atajo.&lt;br/&gt; {2,number,integer}. Elige el botón para acceder a la función.&lt;br/&gt;"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Usar botón o gesto"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Ubicación"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Tamaño"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Presionar tres veces la pantalla"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Editar combinaciones de accesibilidad"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Elige tu combinación de teclas para %1$s"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continuar"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Dispositivos auditivos"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Configura y gestiona audífonos ASHA y LE Audio, implantes cocleares y otros dispositivos de amplificación de sonido"</string>
@@ -3035,7 +3039,7 @@
     <string name="data_usage_background_label" msgid="5363718469293175279">"En segundo plano:"</string>
     <string name="data_usage_app_settings" msgid="5693524672522122485">"Configuración de la aplicación"</string>
     <string name="data_usage_app_restrict_background" msgid="5728840276368097276">"Datos en segundo plano"</string>
-    <string name="data_usage_app_restrict_background_summary" msgid="2997942775999602794">"Habilitar el uso de datos móviles en segundo plano"</string>
+    <string name="data_usage_app_restrict_background_summary" msgid="2997942775999602794">"Habilita el uso de datos móviles en segundo plano"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="8213268097024597864">"Para restringir datos en 2.° plano aquí, limita datos móviles."</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="5383874438677899255">"¿Restringir el uso de datos en segundo plano?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"Esta función puede hacer que deje de funcionar una aplicación que tenga que utilizar datos en segundo plano cuando solo estén disponibles redes móviles.\n\nPuedes encontrar controles de uso de datos más adecuados en las opciones de configuración disponibles en la aplicación."</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Permitir posponer notificaciones"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Punto de notificación en ícono de app"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Paquetes de notificaciones"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Resúmenes de notificaciones"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"Sí"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"No"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Usar resúmenes de notificaciones"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Resumir automáticamente las notificaciones de conversaciones de cualquier app"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Notificaciones en vivo"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Mostrar información en tiempo real"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Las notificaciones fijadas muestran información en tiempo real de las apps y siempre aparecen en la barra de estado y la pantalla de bloqueo"</string>
@@ -4269,14 +4268,14 @@
     <string name="running_frequency" msgid="7260225121706316639">"Frecuencia"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Uso máximo"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"No se usaron datos"</string>
-    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"¿Quieres que la app <xliff:g id="APP">%1$s</xliff:g> tenga acceso a No interrumpir?"</string>
+    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"¿Quieres que la app de <xliff:g id="APP">%1$s</xliff:g> tenga acceso a No interrumpir?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"La aplicación podrá activar y desactivar la función No interrumpir y realizar cambios de configuración relacionados."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Debe seguir activado porque el acceso a las notificaciones está activado"</string>
-    <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"¿Quieres revocar el acceso de la app <xliff:g id="APP">%1$s</xliff:g> a No interrumpir?"</string>
+    <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"¿Quieres revocar el acceso de la app de <xliff:g id="APP">%1$s</xliff:g> a No interrumpir?"</string>
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Se quitarán todas las reglas del modo No interrumpir que creó esta app."</string>
-    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"¿Quieres permitir el acceso de <xliff:g id="APP">%1$s</xliff:g> a los modos?"</string>
+    <string name="zen_modes_access_warning_dialog_title" msgid="8372164559156809659">"¿Quieres permitir el acceso de la app de <xliff:g id="APP">%1$s</xliff:g> a los modos?"</string>
     <string name="zen_modes_access_warning_dialog_summary" msgid="2432178679607798200">"La app podrá activar y desactivar No interrumpir, administrar y activar los modos, y cambiar la configuración relacionada."</string>
-    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"¿Quieres revocar el acceso de <xliff:g id="APP">%1$s</xliff:g> a los modos?"</string>
+    <string name="zen_modes_access_revoke_warning_dialog_title" msgid="189454396436517964">"¿Quieres revocar el acceso de la app de <xliff:g id="APP">%1$s</xliff:g> a los modos?"</string>
     <string name="zen_modes_access_revoke_warning_dialog_summary" msgid="4669243849023204217">"Se quitarán todos los modos que creó esta app."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"No optimizar"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimizar"</string>
@@ -4298,7 +4297,7 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notificaciones de pantalla completa"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Permitir notificaciones de pantalla completa de esta app"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permite que esta app muestre notificaciones que ocupan toda la pantalla cuando el dispositivo está bloqueado. Las apps pueden usarlas para destacar alarmas, llamadas entrantes y otras notificaciones urgentes."</string>
-    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"Escribe preferencias del sistema"</string>
+    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"Escribir preferencias del sistema"</string>
     <string name="write_system_preferences_switch_title" msgid="213522354119233085">"Permite que esta app modifique las preferencias del sistema en tu nombre"</string>
     <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"Permite que una app modifique las preferencias principales del sistema."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Apps de administración de multimedia"</string>
@@ -4531,8 +4530,8 @@
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"Prueba el Tema oscuro"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Extiende la duración de la batería"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Tarjetas de configuración rápida para desarrolladores"</string>
-    <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Inhabilitar tiempo de espera de autorización ADB"</string>
-    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Inhabilita la revocación automática de autorizaciones ADB para sistemas que no se volvieron a conectar dentro de un período predeterminado (7 días) o uno configurado por el usuario (mínimo de 1 día)."</string>
+    <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Inhabilitar tiempo de espera de autorizaciones adb"</string>
+    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Inhabilita la revocación automática de autorizaciones adb para sistemas que no se volvieron a conectar dentro de un período predeterminado (7 días) o uno configurado por el usuario (mínimo de 1 día)."</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Sensores desactivados"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Configuración del perfil de trabajo"</string>
     <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Buscar contactos del directorio de trabajo en apps personales"</string>
@@ -4763,7 +4762,7 @@
     <string name="credman_confirmation_message_positive_button" msgid="2812613187691345361">"Desactivar"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Autocompletar"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"Nivel de registro"</string>
-    <string name="autofill_max_partitions" msgid="7342195529574406366">"Número máximo de solicitudes por sesión"</string>
+    <string name="autofill_max_partitions" msgid="7342195529574406366">"Máximo de solicitudes por sesión"</string>
     <string name="autofill_max_visible_datasets" msgid="4970201981694392229">"Máximo de conjuntos de datos visibles"</string>
     <string name="autofill_reset_developer_options" msgid="6425613608979498608">"Restablecer valores predeterminados"</string>
     <string name="autofill_reset_developer_options_complete" msgid="1276741935956594965">"Se restablecieron las opciones de autocompletar para desarrolladores"</string>
@@ -4819,7 +4818,7 @@
     <string name="my_device_info_account_preference_summary" msgid="3510582677937510545">"%d cuentas"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Nombre del dispositivo"</string>
     <string name="my_device_info_basic_info_category_title" msgid="381963187269356548">"Información básica"</string>
-    <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"Información reglamentaria y legal"</string>
+    <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"Información legal y sobre reglamentaciones"</string>
     <string name="my_device_info_device_details_category_title" msgid="4848438695638348680">"Detalles del dispositivo"</string>
     <string name="my_device_info_device_identifiers_category_title" msgid="2197063484127704153">"Identificadores del dispositivo"</string>
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Control de Wi-Fi"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batería"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panel de Configuración"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Habilitar ventanas de formato libre"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Habilitar funciones de experiencia de computadora"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Habilita la vista para computadoras de escritorio en el dispositivo y en las pantallas secundarias."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Habilitar la vista para computadoras de escritorio en las pantallas secundarias."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Habilitar las ventanas de formato libre en pantallas secundarias"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Habilitar apps que no cambian de tamaño en multiventana"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Permite que las apps que no cambian de tamaño aparezcan en multiventana"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Usar la supervisión de dispositivos"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Configurar un PIN para comenzar"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervisión, supervisión parental, controles parentales"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

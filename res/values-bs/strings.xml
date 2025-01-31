@@ -252,9 +252,9 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"subota"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Ako aplikacija ne podržava regionalne postavke, koristit će svoje zadane postavke jezika/zemlje."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Saznajte više o postavkama jezika."</string>
-    <string name="metric_measurement_system" msgid="7489725697268321541">"Pokazatelj"</string>
-    <string name="us_measurement_system" msgid="8738587232938189052">"Imperijalne jedinice (SAD)"</string>
-    <string name="uk_measurement_system" msgid="4196897001775627597">"Imperijalne jedinice (UK)"</string>
+    <string name="metric_measurement_system" msgid="7489725697268321541">"Metrički sistem"</string>
+    <string name="us_measurement_system" msgid="8738587232938189052">"Imperijalni sistem (SAD)"</string>
+    <string name="uk_measurement_system" msgid="4196897001775627597">"Imperijalni sistem (UK)"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Dodatne postavke"</string>
     <string name="terms_of_address_title" msgid="7338630812197476808">"Odaberite način na koji će vas oslovljavati"</string>
     <string name="terms_of_address_summary" msgid="7802443422612600620">"Uređaj može personalizirati način na koji vas oslovljavaju"</string>
@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Kada koristite otključavanje licem"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Oči moraju biti otvorene"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Da otključate telefon, oči vam moraju biti otvorene"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Uvijek traži potvrdu"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Za korištenje otključavanja licem u aplikacijama uvijek se traži potvrda."</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Izbriši model lica"</string>
@@ -2357,7 +2359,7 @@
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Korištenje dugmeta za pristupačnost. Pokret nije dostupan s navigiranjem pomoću 3 dugmeta."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Brzo pristupite funkcijama pristupačnosti"</string>
     <string name="accessibility_button_gesture_description" msgid="1141723096904904336">"&lt;b&gt;Da započnete:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Idite u postavke pristupačnosti&lt;br/&gt; {1,number,integer}. Odaberite funkciju i dodirnite prečicu&lt;br/&gt; {2,number,integer}. Odaberite želite li koristiti dugme ili pokret da pristupite funkciji&lt;br/&gt;"</string>
-    <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Da započnete:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Idite u postavke pristupačnosti&lt;br/&gt; {1,number,integer}. Odaberite funkciju i dodirnite prečicu&lt;br/&gt; {2,number,integer}. Odaberite dugme da pristupite funkciji&lt;br/&gt;"</string>
+    <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Da započnete:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Idite u postavke pristupačnosti.&lt;br/&gt; {1,number,integer}. Odaberite funkciju i dodirnite prečicu.&lt;br/&gt; {2,number,integer}. Odaberite dugme da pristupite funkciji.&lt;br/&gt;"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Korištenje dugmeta ili pokreta"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Lokacija"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Veličina"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Trostruki dodir ekrana"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Uredite prečice za pristupačnost"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Odaberite prečicu za %1$s"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Nastavi"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Slušni aparati"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Postavite ASHA i LE Audio slušne aparate, kohlearne implantate i druge uređaje za pojačavanje zvuka te upravljajte njima"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Dozvoli odgađanje obavještenja"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Tačka za obavještenja na ikoni aplikacije"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Paketi obavještenja"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Sažeci o obavještenjima"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"Uključeno"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Isključeno"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Koristi sažetke obavještenja"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Automatsko sažimanje obavještenja o razgovorima iz bilo koje aplikacije"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Obavještenja uživo"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Prikazuj informacije uživo"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Zakačena obavještenja prikazuju informacije uživo iz aplikacija i uvijek se prikazuju na statusnoj traci i zaključanom ekranu"</string>
@@ -4298,7 +4297,7 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Obavještenja preko cijelog ekrana"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Dozvoli obavještenja ove aplikacije preko cijelog ekrana"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Dozvolite aplikaciji da prikazuje obavještenja koja zauzimaju cijeli ekran kada je uređaj zaključan. Aplikacije ih mogu koristiti da istaknu alarme, dolazne pozive ili druga hitna obavještenja."</string>
-    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"Pisanje postavki sistema"</string>
+    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"Zapisivanje postavki sistema"</string>
     <string name="write_system_preferences_switch_title" msgid="213522354119233085">"Dozvoli ovoj aplikaciji da mijenja postavke sistema u moje ime"</string>
     <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"Odobrenje dozvoljava aplikaciji da mijenja osnovne postavke sistema."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Aplikacije za upravljanje medijima"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Baterija"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Ploča s postavkama"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Omogući prilagodljive prozore"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Omogući funkcije iskustva na računaru"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Na uređaju i sekundarnim ekranima omogućite prikaz na računaru."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Na sekundarnim ekranima omogućite prikaz na računaru."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Omogući prilagodljive prozore na sekundarnom ekranu"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Omogući aplikacije nepromjenjive veličine u više prozora"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Omogućava prikaz aplikacija nepromjenjive veličine u više prozora"</string>
@@ -5633,4 +5629,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Koristi nadzor uređaja"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Postavite PIN da započnete"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"nadzor, roditeljski nadzor, roditeljske kontrole"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"ເມື່ອໃຊ້ການປົດລັອກດ້ວຍໜ້າ"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"ຕ້ອງມືນຕາຈຶ່ງຈະໃຊ້ໄດ້"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"ເພື່ອປົດລັອກໂທລະສັບ, ທ່ານຈະຕ້ອງມືນຕາຂອງທ່ານກ່ອນ"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"ຈຳເປັນຕ້ອງມີການຢືນຢັນທຸກເທື່ອ"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"ເມື່ອໃຊ້ການປົດລັອກດ້ວຍໜ້າໃນແອັບຕ່າງໆ, ໃຫ້ຢືນຢັນນຳທຸກເທື່ອ"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"ລຶບຮູບແບບໃບໜ້າ"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"ແຕະໃສ່ໜ້າຈໍສາມເທື່ອ"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"ແກ້ໄຂທາງລັດການຊ່ວຍເຂົ້າເຖິງ"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"ເລືອກທາງລັດຂອງທ່ານສຳລັບ %1$s"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"ສືບຕໍ່"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"ອຸປະກອນຊ່ວຍຟັງ"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ຕັ້ງຄ່າ ແລະ ຈັດການເຄື່ອງຊ່ວຍຟັງສຽງ ASHA ແລະ ສຽງ LE, ປະສາດຫູທຽມ ແລະ ອຸປະກອນຂະຫຍາຍສຽງອື່ນໆ"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"ອະນຸຍາດໃຫ້ເລື່ອນການແຈ້ງເຕືອນ"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"ໄອຄອນຈຸດການແຈ້ງເຕືອນຢູ່ແອັບ"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"ກຸ່ມການແຈ້ງເຕືອນ"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"ສະຫຼຸບການແຈ້ງເຕືອນ"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"ເປີດ"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"ປິດ"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"ໃຊ້ສະຫຼຸບການແຈ້ງເຕືອນ"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"ສະຫຼຸບການແຈ້ງເຕືອນການສົນທະນາໂດຍອັດຕະໂນມັດຈາກແອັບໃດກໍໄດ້"</string>
     <string name="live_notifications" msgid="4650406646292963831">"ການແຈ້ງເຕືອນສົດ"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"ສະແດງຂໍ້ມູນສົດ"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"ການແຈ້ງເຕືອນທີ່ປັກໝຸດໄວ້ຈະສະແດງຂໍ້ມູນສົດຈາກແອັບຕ່າງໆ ແລະ ຈະປາກົດຢູ່ແຖບສະຖານະ ແລະ ໜ້າຈໍລັອກສະເໝີ"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"ແບັດເຕີຣີ"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"ແຜງການຕັ້ງຄ່າ"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"ເປີດການນຳໃຊ້ໜ້າຈໍຮູບແບບອິດສະຫຼະ"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"ເປີດການນຳໃຊ້ຄຸນສົມບັດປະສົບການເດັສທັອບ"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"ເປີດການນຳໃຊ້ມຸມມອງເດັສທັອບຢູ່ອຸປະກອນ ແລະ ຢູ່ຈໍສະແດງຜົນສຳຮອງ."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"ເປີດການນຳໃຊ້ມຸມມອງເດັສທັອບຢູ່ຈໍສະແດງຜົນສຳຮອງ."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"ເປີດການນຳໃຊ້ໜ້າຈໍຮູບແບບອິດສະຫຼະຢູ່ຈໍສະແດງຜົນສຳຮອງ"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"ເປີດການນຳໃຊ້ແບບບໍ່ສາມາດປັບຂະໜາດໃນການໃຊ້ຫຼາຍໜ້າຈໍ"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"ອະນຸຍາດໃຫ້ມີແອັບແບບບໍ່ສາມາດປັບຂະໜາດໄດ້ໃນການໃຊ້ຫຼາຍໜ້າຈໍ"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"ໃຊ້ການເບິ່ງແຍງກວດກາອຸປະກອນ"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"ຕັ້ງຄ່າ PIN ເພື່ອເລີ່ມຕົ້ນ"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"ການເບິ່ງແຍງກວດກາ, ການເບິ່ງແຍງຂອງພໍ່ແມ່, ການຄວບຄຸມຂອງພໍ່ແມ່"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

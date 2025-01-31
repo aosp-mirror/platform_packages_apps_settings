@@ -210,7 +210,7 @@
     <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"设备、应用和网站会使用首选语言列表中的第一个受支持的语言。\n\n许多应用还会根据您首选的语言地区来调整日期、数字和单位的格式。如要更改您的地区，请先添加一种语言，然后选择您的首选地区。"</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"如需为每个应用选择语言，请进入应用语言设置页面。"</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"详细了解应用语言"</string>
-    <string name="title_change_system_region" msgid="5476591184463491936">"要将区域更改为%s吗？"</string>
+    <string name="title_change_system_region" msgid="5476591184463491936">"要将地区更改为%s吗？"</string>
     <string name="desc_notice_device_region_change" msgid="6702773189066944100">"您的设备将使用%s作为系统语言"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"将系统语言更改为%s？"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"将“%s”添加为首选语言？"</string>
@@ -220,7 +220,7 @@
     <string name="title_unavailable_locale" msgid="2628898110416542386">"无法使用%s"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"此语言无法用作系统语言，但应用和网站已知晓您选择此语言为您的首选语言。"</string>
     <string name="locale_search_menu" msgid="297782694044826686">"搜索"</string>
-    <string name="language_and_region_title" msgid="8374151891112162767">"语言和区域"</string>
+    <string name="language_and_region_title" msgid="8374151891112162767">"语言和地区"</string>
     <string name="language_selection_title" msgid="968179636453982415">"添加语言"</string>
     <string name="region_selection_title" msgid="3630336682851020349">"选择区域"</string>
     <string name="country_selection_title" msgid="5376929821458644732">"地区偏好设置"</string>
@@ -305,7 +305,7 @@
     <string name="date_time_set_timezone" msgid="2915125337941495746">"选择时区"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"日期"</string>
     <string name="date_time_search_region" msgid="1364133854952610919">"搜索区域"</string>
-    <string name="date_time_select_region" msgid="5449345333305056072">"区域"</string>
+    <string name="date_time_select_region" msgid="5449345333305056072">"地区"</string>
     <string name="date_time_select_fixed_offset_time_zones" msgid="594848300882055361">"选择世界协调时间 (UTC) 偏移量"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"使用人脸解锁时"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"需要睁开双眼"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"必须睁开双眼才能解锁手机"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"一律需要确认"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"在应用中使用人脸解锁时，一律需要确认"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"删除脸部模型"</string>
@@ -2206,7 +2208,7 @@
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2 天前"</string>
     <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"要后续跟进吗？"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"出差报告"</string>
-    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"如要获取进一步协助，请与我或 Helen 联系。此报告将"</string>
+    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"如要获取进一步协助，请与我或 Helen 联系。报告如下："</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"客户支出"</string>
     <string name="color_contrast_about_title" msgid="5939566801408667867">"关于颜色对比度"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"调暗屏幕"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"点按屏幕三次"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"修改无障碍快捷方式"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"为%1$s选择快捷键"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"继续"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"助听装置"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"设置和管理 ASHA 和 LE 音频助听器、人工耳蜗及其他放大设备"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"允许显示通知延后选项"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"应用图标上的通知圆点"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"通知包"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"通知摘要"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"已开启"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"已关闭"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"使用通知摘要"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"自动摘要来自任意应用的对话通知"</string>
     <string name="live_notifications" msgid="4650406646292963831">"实时通知"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"显示实时信息"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"固定的通知会显示应用的实时信息，并始终显示在状态栏和锁定屏幕上"</string>
@@ -4051,10 +4050,10 @@
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"“<xliff:g id="APP_NAME">%1$s</xliff:g>”中的信息和设置"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"由“<xliff:g id="APP_NAME">%1$s</xliff:g>”管理"</string>
     <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"停用<xliff:g id="MODE_NAME">%1$s</xliff:g>？"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"停用后，此模式绝不会自动开启"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"停用后，此模式不会自动开启"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"停用"</string>
     <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"启用<xliff:g id="MODE_NAME">%1$s</xliff:g>？"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"此模式可能会自动开启，具体取决于它的相关设置"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"此模式可能会自动开启，具体取决于其相关设置"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"启用"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"设置一个遵守固定时间表的模式"</string>
     <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"设置一个可同步日历活动和邀请回复的模式"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"电池"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"设置面板"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"启用可自由调整的窗口"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"启用桌面版体验功能"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"在设备和辅助显示屏上启用桌面版视图。"</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"在辅助显示屏上启用桌面版视图。"</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"在辅助显示屏上启用可自由调整的窗口"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"允许以多窗口模式显示不可调整大小的应用"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"允许通过多窗口模式显示不可调整大小的应用"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"使用设备监督功能"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"设置 PIN 码即可开始使用"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"监督、家长监督、家长控制"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

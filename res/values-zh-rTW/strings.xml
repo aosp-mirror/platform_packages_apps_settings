@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"使用人臉解鎖功能時"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"必須睜開雙眼"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"必須睜開雙眼才能將手機解鎖"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"一律需要確認"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"在應用程式中使用人臉解鎖功能時，一律進行確認"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"刪除臉部模型"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"輕觸螢幕三下"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"編輯無障礙捷徑"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"選擇「%1$s」的快速鍵"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"繼續"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"助聽器"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"設定及管理 ASHA 和 LE Audio 助聽器、人工電子耳和其他擴音裝置"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"顯示延後通知"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"顯示應用程式圖示的通知圓點"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"通知組合"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"通知摘要"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"開啟"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"關閉"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"使用通知摘要"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"自動歸納任何應用程式的對話通知摘要"</string>
     <string name="live_notifications" msgid="4650406646292963831">"即時通知"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"顯示即時資訊"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"固定的通知會提供應用程式即時資訊，並一律顯示在狀態列和螢幕鎖定畫面上"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"電池"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"設定面板"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"啟用自由形式視窗"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"啟用電腦版服務功能"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"在裝置和第二個螢幕上啟用電腦檢視畫面。"</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"在第二個螢幕上啟用電腦檢視畫面。"</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"在第二個螢幕上啟用自由形式視窗功能"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"允許多視窗模式顯示無法調整大小的應用程式"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"允許透過多視窗模式顯示無法調整大小的應用程式"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"使用裝置監護功能"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"設定 PIN 碼即可開始使用"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"監護, 家長監護"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

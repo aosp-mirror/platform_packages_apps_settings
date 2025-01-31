@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"სახით განბლოკვის გამოყენებისას"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"გახელილი თვალები აუცილებელია"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"ტელეფონის განსაბლოკად თვალები გახელილი უნდა გქონდეთ"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"დადასტურების ყოველთვის მოთხოვნა"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"აპებში სახით განბლოკვის გამოყენებისას, ყოველთვის მოითხოვეთ დადასტურება"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"სახის მოდელის წაშლა"</string>
@@ -1927,7 +1929,7 @@
     <string name="archiving_failed" msgid="2037798988961634978">"დაარქივება ვერ მოხერხდა"</string>
     <string name="archiving_succeeded" msgid="7891249456483297845">"<xliff:g id="PACKAGE_LABEL">%1$s</xliff:g> დაარქივებულია"</string>
     <string name="restoring_failed" msgid="3390531747355943533">"აღდგენა ვერ მოხერხდა"</string>
-    <string name="restoring_in_progress" msgid="7787443682651146115">"მიმდინარეობს <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>ს აღდგენა"</string>
+    <string name="restoring_in_progress" msgid="7787443682651146115">"მიმდინარეობს აღდგენა: <xliff:g id="PACKAGE_LABEL">%1$s</xliff:g>"</string>
     <string name="another_migration_already_in_progress" msgid="6550546307856052261">"მიგრაციის სხვა პროცესი უკვე მიმდინარეობს."</string>
     <string name="insufficient_storage" msgid="8115088042669030558">"არ არის საკმარისი სივრცე შესანახად."</string>
     <string name="does_not_exist" msgid="6499163879348776120">"აპი არ არსებობს."</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"სამმაგად შეეხეთ ეკრანს"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"მარტივი წვდომის მალსახმობების რედაქტირება"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"აირჩიეთ თქვენი მალსახმობი %1$s-ისთვის"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"გაგრძელება"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"სმენის აპარატები"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ASHA-ს და LE-აუდიოს სმენის მოწყობილობების, კოხლეარული იმპლანტების და სხვა გამაძლიერებელი მოწყობილობების დაყენება და მართვა"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"შეტყობინებების ჩაჩუმების დაშვება"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"შეტყობ. ნიშნული აპის ხატულაზე"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"შეტყობინების ნაკრებები"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"შეტყობინების შეჯამებები"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"ჩართული"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"გამორთული"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"შეტყობინების შეჯამებების გამოყენება"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"ნებისმიერი აპიდან საუბრების ავტომატური შეჯამება"</string>
     <string name="live_notifications" msgid="4650406646292963831">"პირდაპირი შეტყობინებები"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"პირდაპირი ინფორმაციის ჩვენება"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"ჩამაგრებული შეტყობინებები აჩვენებს ინფორმაციას აპებიდან რეალურ დროში და ყოველთვის ჩანს სტატუსის ზოლსა და ჩაკეტილ ეკრანზე"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"ბატარეა"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"პარამეტრების პანელი"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"თავისუფალი ფორმის ფანჯრების ჩართვა"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"დესკტოპ გამოცდილების ფუნქციების ჩართვა"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"დესკტოპის ხედის ჩართვა მოწყობილობაზე და მეორეულ ეკრანებზე."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"დესკტოპის ხედის ჩართვა მეორეულ ეკრანებზე."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"თავისუფალი ფორმის ფანჯრის ჩართვა დამატებით ეკრანზე"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"ფიქსირებული ზომის აპის ჩართვა მრავალი ფანჯრის რეჟიმში"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"ეს პარამეტრი საშუალებას იძლევა, აპი ზომის შეუცვლელად გამოჩნდეს მრავალი ფანჯრის რეჟიმში"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"მოწყობილობის ზედამხედველობის გამოყენება"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"დასაწყებად დააყენეთ PIN-კოდი"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"ზედამხედველობა, მშობლის ზედამხედველობა, მშობელთა კონტროლი"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

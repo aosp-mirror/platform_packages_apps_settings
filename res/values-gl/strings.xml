@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Cando se utilice o desbloqueo facial"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Os ollos deben estar abertos"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Para desbloquear o teléfono, debes ter os ollos abertos"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Pedir sempre confirmación"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Ao utilizar o desbloqueo facial en aplicacións, pide confirmación."</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Eliminar modelo facial"</string>
@@ -2118,7 +2120,7 @@
     <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"Repetición de teclas"</string>
     <string name="keyboard_repeat_keys_timeout_title" msgid="3411871149974652293">"Retardo previo á repetición"</string>
     <string name="keyboard_repeat_keys_delay_title" msgid="7323531750483922943">"Índice de repetición"</string>
-    <string name="keyboard_repeat_keys_summary" msgid="8972905345211768313">"Mantén premida unha tecla para repetir o seu carácter ata que a soltes"</string>
+    <string name="keyboard_repeat_keys_summary" msgid="8972905345211768313">"Mantén premida unha tecla para repetir ese carácter ata que a soltes"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"Deseño: <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Predeterminado"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Selección automática: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tres toques na pantalla"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Editar os atallos de accesibilidade"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Escolle o atallo para %1$s"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continuar"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Dispositivos auditivos"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Configura e xestiona audiófonos ASHA e de audio de baixo consumo, implantes cocleares e outros dispositivos de amplificación"</string>
@@ -3672,16 +3676,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Permitir adiar notificacións"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Punto de notificacións nas iconas"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Paquetes de notificacións"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Resumos de notificacións"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"Opción activada"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Opción desactivada"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Usar resumos de notificacións"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Resume automaticamente as notificacións das conversas de calquera aplicación"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Notificacións en directo"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Mostrar información en directo"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"As notificacións fixadas mostran a información en directo das aplicacións, que aparecerá sempre na barra de estado e na pantalla de bloqueo"</string>
@@ -4018,7 +4017,7 @@
     <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Nada pode interromper o modo Non molestar}=1{{sound_category_1} pode interromper o modo Non molestar}=2{{sound_category_1} e {sound_category_2} poden interromper o modo Non molestar}=3{{sound_category_1}, {sound_category_2} e {sound_category_3} poden interromper o modo Non molestar}other{{sound_category_1}, {sound_category_2} e # sons máis poden interromper o modo Non molestar}}"</string>
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Nada pode interromper o modo Non molestar"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Ninguén pode interromper o modo Non molestar"</string>
-    <string name="zen_mode_people_some" msgid="9101872681298810281">"Algunhas persoas poden interromper o modo Non molestar"</string>
+    <string name="zen_mode_people_some" msgid="9101872681298810281">"Algunhas persoas poden interromperte"</string>
     <string name="zen_mode_people_repeat_callers" msgid="4499084111069828761">"A chamadas repetidas poden interromper"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"Todas as persoas poden interromper o modo Non molestar"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Chamadas repetidas"</string>
@@ -5081,12 +5080,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batería"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panel de configuración"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Activar ventás de forma libre"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Activar funcións de experiencia para ordenador"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Activa a vista para ordenadores no dispositivo e nas pantallas secundarias."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Activa a vista para ordenadores nas pantallas secundarias."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Activar ventás de forma libre na pantalla secundaria"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Activar aplicacións sen axuste de tamaño no modo multiventá"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Permite utilizar as aplicacións sen axuste de tamaño no modo multiventá"</string>
@@ -5613,7 +5609,7 @@
     <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"O contrasinal debe ter entre 4 e 16 caracteres, e só pode incluír letras, números e símbolos"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Escáner de códigos QR"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Precisas axuda?"</annotation></string>
-    <string name="homepage_search" msgid="6759334912284663559">"Buscar en Configuración"</string>
+    <string name="homepage_search" msgid="6759334912284663559">"Fai buscas en Configuración"</string>
     <string name="keywords_contacts_storage" msgid="9061213057165337893">"contactos, almacenamento, conta"</string>
     <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Almacenamento de contactos"</string>
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Só dispositivo"</string>
@@ -5633,4 +5629,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Usar supervisión do dispositivo"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Define un PIN para comezar"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervisión, supervisión parental, controis parentais"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

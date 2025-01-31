@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Lorsque vous utilisez la reconnaissance faciale"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Exiger des yeux ouverts"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Pour déverrouiller le téléphone, vos yeux doivent être ouverts"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Toujours demander une confirmation"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Toujours confirmer le Déverrouillage par reconnaissance faciale dans les applis"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Supprimer le modèle facial"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Toucher l\'écran trois fois"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Modifier les raccourcis d\'accessibilité"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Choisissez votre raccourci pour %1$s"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continuer"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Appareils auditifs"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Configurer et gérer les prothèses auditives, les implants cochléaires et les autres appareils d\'amplification ASHA et LE Audio"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Autoriser le report des notifications"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Pastille de notification sur l\'icône de l\'appli"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Groupes de notifications"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Résumés des notifications"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"Activé"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Désactivé"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Utiliser les résumés des notifications"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Résumez automatiquement les notifications de conversation à partir de n\'importe quelle appli"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Notifications en direct"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Afficher les informations en direct"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Les notifications épinglées affichent des informations en direct des applis et apparaissent toujours sur la barre d\'état et l\'écran de verrouillage"</string>
@@ -4140,7 +4139,7 @@
     <string name="notifications_label" msgid="8471624476040164538">"Notifications"</string>
     <string name="notifications_enabled" msgid="7743168481579361019">"Activé"</string>
     <string name="notifications_enabled_with_info" msgid="1808946629277684308">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g>/<xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
-    <string name="notifications_disabled" msgid="5603160425378437143">"Désactivé"</string>
+    <string name="notifications_disabled" msgid="5603160425378437143">"Désactivées"</string>
     <string name="notifications_categories_off" msgid="7712037485557237328">"{count,plural, =1{# catégorie désactivée}one{# catégorie désactivée}other{# catégories désactivées}}"</string>
     <string name="runtime_permissions_additional_count" msgid="6071909675951786523">"{count,plural, =1{# autorisation supplémentaire}one{# autorisation supplémentaire}other{# autorisations supplémentaires}}"</string>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Aucune autorisation accordée"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Pile"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panneau Paramètres"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Activer les fenêtres de forme libre"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Activer les fonctionnalités pour les ordinateurs"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Activez l\'affichage sur ordinateur de bureau sur l\'appareil et les écrans secondaires."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Activez l\'affichage sur ordinateur de bureau sur les écrans secondaires."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Activer les fenêtres de forme libre sur l\'écran secondaire"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Activer éléments non redimensionnables en mode multi-fenêtre"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Activer les applis non redimensionnables en mode multi-fenêtre"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Utiliser la supervision de l\'appareil"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Configurez le NIP pour commencer"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervision, supervision parentale, contrôles parentaux"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

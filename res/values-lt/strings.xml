@@ -210,7 +210,7 @@
     <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Jūsų įrenginys, programos ir svetainės naudoja pirmąją palaikomą kalbą iš pageidaujamų kalbų sąrašo.\n\nDaug programų taip pat naudos regioną pagal pageidaujamą kalbą, kad nustatytų datų, skaičių ir matavimo vienetų formatą. Jei norite pakeisti regioną, pridėkite kalbą, tada pasirinkite pageidaujamą regioną."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Norėdami pasirinkti kalbą kiekvienai programai, eikite į programų kalbų nustatymus."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Sužinokite daugiau apie programos kalbas"</string>
-    <string name="title_change_system_region" msgid="5476591184463491936">"Pakeisti regioną į %s?"</string>
+    <string name="title_change_system_region" msgid="5476591184463491936">"Pakeisti regioną į: %s?"</string>
     <string name="desc_notice_device_region_change" msgid="6702773189066944100">"Jūsų įrenginyje %s bus išsaugota kaip sistemos kalba"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Pakeisti sistemos kalbą į %s ?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"Pridėti %s prie pageidaujamų kalbų?"</string>
@@ -228,7 +228,7 @@
     <string name="search_region_hint" msgid="1748708432568237552">"Ieškokite regionų"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"Pasirinktas regionas turi įtakos tam, kaip telefone rodomas laikas, datos, temperatūra ir kt."</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"Daugiau kalbos nustatymų"</string>
-    <string name="title_change_system_locale_region" msgid="2239197787972916177">"Pakeisti regioną į %s?"</string>
+    <string name="title_change_system_locale_region" msgid="2239197787972916177">"Pakeisti regioną į: %s?"</string>
     <string name="body_change_system_locale_region" msgid="2706171830649357930">"Jūsų įrenginyje %s bus išsaugota kaip sistemos kalba"</string>
     <string name="top_intro_numbering_system_title" msgid="3560237920807539566">"Naudojami skaitmenys priklausys nuo numeravimo sistemos"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Tinkamumo nustatymai pagal regioną"</string>
@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Kai naudojamas atrakinimas pagal veidą"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Reikia būti atsimerkus"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Norint atrakinti telefoną, reikia būti atsimerkus"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Visada reikalauti patvirtinimo"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Naudojant atrakinimą pagal veidą programose, visada reikalauti patvirtinimo"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Ištrinti veido modelį"</string>
@@ -434,8 +436,8 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Atšaukti"</string>
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="1663906389456119842">"Ne dabar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Sutinku"</string>
-    <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Praleisti piršto antspaudą?"</string>
-    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Piršto antspaudo sąranka užtrunka tik minutę ar dvi. Jei praleisite šį veiksmą, vėliau piršto antspaudą galėsite pridėti nustatymuose."</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Praleisti piršto atspaudą?"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Piršto atspaudo sąranka užtrunka tik minutę ar dvi. Jei praleisite šį veiksmą, vėliau piršto atspaudą galėsite pridėti nustatymuose."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Kai rodoma ši piktograma, tapatybei nustatyti naudokite kontrolinį kodą, kaip prisijungdami prie programų ar patvirtindami pirkinį"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Atminkite"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Kaip tai veikia"</string>
@@ -2357,7 +2359,7 @@
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Pritaikomumo mygtuko naudojimas. Gestas nepasiekiamas naudojant naršymą 3 mygtukais."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Greitai pasiekti pritaik. neįgaliesiems funkcijas"</string>
     <string name="accessibility_button_gesture_description" msgid="1141723096904904336">"&lt;b&gt;Kad pradėtumėte, atlikite toliau nurodytus veiksmus&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Eikite į pritaikomumo nustatymus&lt;br/&gt; {1,number,integer}. Pasirinkite funkciją ir palieskite spartųjį klavišą&lt;br/&gt; {2,number,integer}. Pasirinkite, norite naudoti mygtuką ar gestą, kad pasiektumėte funkciją&lt;br/&gt;"</string>
-    <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Kad pradėtumėte, atlikite toliau nurodytus veiksmus&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Eikite į pritaikomumo nustatymus&lt;br/&gt; {1,number,integer}. Pasirinkite funkciją ir palieskite spartųjį klavišą&lt;br/&gt; {2,number,integer}. Pasirinkite mygtuką, kuriuo norite pasiekti funkciją.&lt;br/&gt;"</string>
+    <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Kad pradėtumėte, atlikite toliau nurodytus veiksmus&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Eikite į pritaikomumo nustatymus&lt;br/&gt; {1,number,integer}. Pasirinkite funkciją ir palieskite spartųjį klavišą&lt;br/&gt; {2,number,integer}. Pasirinkite mygtuką, kuriuo norite pasiekti funkciją&lt;br/&gt;"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Naudoti mygtuką arba gestą"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Vieta"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Dydis"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Triskart paliesti ekraną"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Pritaikomumo šaukinių redagavimas"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Pasirinkite „%1$s“ spartųjį klavišą"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Tęsti"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Klausos įrenginiai"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Nustatykite ir tvarkykite ASHA ir „LE Audio“ klausos aparatus, vidinės ausies implantus ir kitus garso stiprinimo įrenginius"</string>
@@ -3496,7 +3500,7 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nė vieno}=1{Nustatytas 1 tvarkaraštis}one{Nustatytas # tvarkaraštis}few{Nustatyti # tvarkaraščiai}many{Nustatyta # tvarkaraščio}other{Nustatyta # tvarkaraščių}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Netrukdymo režimas"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"Režimai"</string>
-    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Sumažinkite blaškančių veiksnių ir valdykite savo dėmesį naudodami miego, darbo, vairavimo ir įvairius kitus režimus."</string>
+    <string name="zen_modes_list_intro" msgid="1795379595115088972">"Sumažinkite blaškančius veiksnius ir valdykite savo dėmesį naudodami miego, darbo, vairavimo ir įvairius kitus režimus."</string>
     <string name="zen_modes_add_mode" msgid="5926457160307593664">"Sukurkite savo režimą"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Gauti pranešimus tik iš svarbių žmonių ar programų"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"Nustatyti tvarkaraštį"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Leisti nustatyti pranešimus snausti"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Pranešimo taškas programos piktogramoje"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Pranešimų rinkiniai"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Pranešimų suvestinės"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"Įjungta"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Išjungta"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Naudoti pranešimų suvestines"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Automatiškai apibendrinti pokalbių pranešimus iš bet kurios programos"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Tiesioginiai pranešimai"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Rodyti tiesioginę informaciją"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Prisegti pranešimai rodo tiesioginę informaciją iš programų ir visada rodomi būsenos juostoje bei užrakinimo ekrane"</string>
@@ -4050,10 +4049,10 @@
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Programos nustatymai"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Informacija ir nustatymai programoje „<xliff:g id="APP_NAME">%1$s</xliff:g>“"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Tvarko „<xliff:g id="APP_NAME">%1$s</xliff:g>“"</string>
-    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Išjungti režimą: <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Išjungti režimą „<xliff:g id="MODE_NAME">%1$s</xliff:g>“?"</string>
     <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Šis režimas niekada neįsijungs, kai yra išjungtas"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Išjungti"</string>
-    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Įgalinti režimą: <xliff:g id="MODE_NAME">%1$s</xliff:g>“?"</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Įgalinti režimą „<xliff:g id="MODE_NAME">%1$s</xliff:g>“?"</string>
     <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Šis režimas gali būti įjungtas automatiškai, atsižvelgiant į jo nustatymus"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Įgalinti"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Nustatykite režimą, atitinkantį įprastą tvarkaraštį"</string>
@@ -4298,7 +4297,7 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Pranešimai viso ekrano režimu"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Leisti pranešimus viso ekrano režimu iš šios programos"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Leiskite šiai programai rodyti pranešimus viso ekrano režimu, kai įrenginys užrakintas. Programos gali juos naudoti, kad paryškintų įspėjimus, gaunamuosius skambučius ar kitus skubius pranešimus."</string>
-    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"Rašyti sistemos nuostatas"</string>
+    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"Įrašyti sistemos nuostatas"</string>
     <string name="write_system_preferences_switch_title" msgid="213522354119233085">"Leisti šiai programai keisti sistemos nuostatas jūsų vardu"</string>
     <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"Šis leidimas leidžia programai keisti pagrindines sistemos nuostatas."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Medijos valdymo programos"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Akumuliatorius"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Nustatymų skydelis"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Įgalinti laisvos formos langus"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Įgalinti darbalaukio funkcijas"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Įgalinti rodinio versiją staliniams kompiuteriams įrenginyje ir antriniuose ekranuose."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Įgalinti rodinio versiją staliniams kompiuteriams antriniuose ekranuose."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Įgalinti laisvos formos langus papildomame ekrane"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Įgalinti nekeičiamo dydžio progr. naud. kelių langų funkciją"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Leidžiama naudoti nekeičiamo dydžio programas su kelių langų funkcija"</string>
@@ -5634,4 +5630,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Naudoti įrenginio priežiūrą"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Nustatyti PIN kodą, kad būtų galima pradėti"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"priežiūra, tėvų priežiūra, tėvų kontrolė"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

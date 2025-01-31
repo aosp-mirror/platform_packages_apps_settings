@@ -228,7 +228,7 @@
     <string name="search_region_hint" msgid="1748708432568237552">"Hududlarni qidirish"</string>
     <string name="top_intro_region_title" msgid="2336323415395642117">"Tanlangan mintaqa telefondagi vaqt, sana, harorat va boshqa sozlamalarga taʼsir qiladi."</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"Boshqa til sozlamalari"</string>
-    <string name="title_change_system_locale_region" msgid="2239197787972916177">"Hudud bunga oʻzgartirilsinmi: %s ?"</string>
+    <string name="title_change_system_locale_region" msgid="2239197787972916177">"Hudud %sga oʻzgartirilsinmi?"</string>
     <string name="body_change_system_locale_region" msgid="2706171830649357930">"Qurilmada tizim tili sifatida %s tili saqlanadi"</string>
     <string name="top_intro_numbering_system_title" msgid="3560237920807539566">"Raqamlar sanoq tizimi asosida ishlatiladi"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Hududiy sozlamalar"</string>
@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Yuz bilan ochishdan foydalanilganda"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Koʻzlar ochiq boʻlishi kerak"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Telefon qulfini yechish uchun ekranga koʻzlaringizni ochib qarang"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Doim tasdiqlash talab etilsin"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Ilovalar yuz bilan ochilishida har doim tasdiqlanishi kerak"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Yuz modelini oʻchirib tashlash"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Ekran ustiga uch marta bosing"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Qulaylik buyruqlarini tahrirlash"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"%1$s uchun buyruq tanlang"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Davom etish"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Eshitish qurilmalari"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ASHA va LE Audio eshitish moslamalari, koxlear implantlar va boshqa kuchaytiruvchi qurilmalarni sozlash va boshqarish"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Bildirishnomalarni keyinga qoldirish"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Ilova belgisi ustida bildirishnoma belgisi"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Bildirishnoma jamlanmalari"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Bildirishnoma xulosalari"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"Yoniq"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Yoqilmagan"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Bildirishnomalarni xulosalash"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Istalgan ilovadagi xabar bildirishnomalarini avtomatik xulosalash"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Jonli bildirishnomalar"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Jonli efir maʼlumotlarini koʻrsatish"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Mahkamlangan bildirishnomalar ilovalardagi jonli efir maʼlumotlarini koʻrsatadi va har doim holat qatori va ekran qulfida chiqadi"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batareya"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Sozlamalar paneli"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Erkin shakldagi oynalarni yoqish"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Qurilmada kompyuter funksiyalarini yoqish"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Qurilma va qoʻshimcha ekranlarda kompyuter rejimini yoqish"</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Qoʻshimcha ekranlarda kompyuter rejimini yoqish"</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Ikkinchi ekranda erkin shakldagi oynalarni yoqish"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Koʻp oynali hajmi oʻzgarmas ilovalarni yoqish"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Hajmi oʻzgarmas ilovalar koʻp oynali rejimda ochilishiga ruxsat beradi."</string>
@@ -5612,7 +5608,7 @@
     <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Parol 4-16 belgidan iborat boʻlishi lozim. Faqat harf, raqam va belgilar ishlatish mumkin."</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR-kod skaneri"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Yordam kerakmi?"</annotation></string>
-    <string name="homepage_search" msgid="6759334912284663559">"Qidiruv sozlamalari"</string>
+    <string name="homepage_search" msgid="6759334912284663559">"Sozlamalar ichidan qidirish"</string>
     <string name="keywords_contacts_storage" msgid="9061213057165337893">"kontaktlar, xotira, hisob"</string>
     <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Kontaktlar ombori"</string>
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Faqat qurilmada"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Qurilma nazoratidan foydalanish"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Boshlash uchun PIN kod sozlang"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"nazorat, ota-ona nazorati, ota-ona boshqaruvi"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

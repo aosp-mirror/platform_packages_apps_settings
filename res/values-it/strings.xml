@@ -37,7 +37,7 @@
     <string name="radioInfo_roaming_not" msgid="3137594549464975054">"Non in roaming"</string>
     <string name="radioInfo_data_disconnected" msgid="362604130117666924">"Disconnesso"</string>
     <string name="radioInfo_data_connecting" msgid="7280819598028917888">"Connessione"</string>
-    <string name="radioInfo_data_connected" msgid="8816467971633020141">"Connesso"</string>
+    <string name="radioInfo_data_connected" msgid="8816467971633020141">"Connessa"</string>
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Sospeso"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Sconosciuto"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Anteprima"</string>
@@ -210,7 +210,7 @@
     <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Per il dispositivo, le app e i siti web viene usata la prima lingua supportata dell\'elenco delle tue lingue preferite.\n\nPer molte app verrà usata anche la regione della tua lingua preferita per inserire il formato corretto di date, numeri e unità. Per modificare la regione, aggiungi una lingua e scegli la regione che preferisci."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Per selezionare una lingua per ogni app, vai alle impostazioni della lingua delle app."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Scopri di più sulle lingue delle app"</string>
-    <string name="title_change_system_region" msgid="5476591184463491936">"Vuoi cambiare la regione con la regione %s?"</string>
+    <string name="title_change_system_region" msgid="5476591184463491936">"Cambiare la regione con %s?"</string>
     <string name="desc_notice_device_region_change" msgid="6702773189066944100">"Il dispositivo manterrà %s come lingua di sistema"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Impostare la lingua di sistema in %s?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"Aggiungere %s alle lingue preferite?"</string>
@@ -229,7 +229,7 @@
     <string name="top_intro_region_title" msgid="2336323415395642117">"La regione che scegli influisce sul modo in cui lo smartphone mostra l\'ora, le date, la temperatura e altro ancora."</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"Altre impostazioni della lingua"</string>
     <string name="title_change_system_locale_region" msgid="2239197787972916177">"Cambiare la regione con %s?"</string>
-    <string name="body_change_system_locale_region" msgid="2706171830649357930">"Il dispositivo manterrà %s come lingua di sistema"</string>
+    <string name="body_change_system_locale_region" msgid="2706171830649357930">"Il dispositivo manterrà la seguente lingua di sistema: %s"</string>
     <string name="top_intro_numbering_system_title" msgid="3560237920807539566">"Le cifre utilizzate dipendono dal sistema di numerazione"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Preferenze locali"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Imposta le preferenze per unità e numeri"</string>
@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Quando usi lo Sblocco con il Volto"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Gli occhi devono essere aperti"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Per sbloccare il telefono gli occhi devono essere aperti"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Chiedi sempre conferma"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Chiedi sempre conferma se viene usato lo Sblocco con il Volto nelle app"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Elimina il modello del volto"</string>
@@ -1869,8 +1871,8 @@
     <string name="restore" msgid="7622486640713967157">"Ripristina"</string>
     <string name="restoring_step_one" msgid="3465050101254272874">"Ripristino in corso"</string>
     <string name="restoring_step_two" msgid="140484846432595108">"Ripristino in corso."</string>
-    <string name="restoring_step_three" msgid="3712883580876329811">"Ripristino in corso…"</string>
-    <string name="restoring_step_four" msgid="8966846882470446209">"Ripristino in corso…"</string>
+    <string name="restoring_step_three" msgid="3712883580876329811">"Ripristino in corso.."</string>
+    <string name="restoring_step_four" msgid="8966846882470446209">"Ripristino in corso..."</string>
     <string name="total_size_label" msgid="2052185048749658866">"Totale"</string>
     <string name="application_size_label" msgid="6407051020651716729">"Dimensioni app"</string>
     <string name="external_code_size_label" msgid="7375146402660973743">"App in archivio USB"</string>
@@ -2202,11 +2204,11 @@
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Un contrasto più elevato rende testi, pulsanti e icone più distinguibili. Scegli il contrasto più adatto a te."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Alcune app potrebbero non supportare tutte le impostazioni di contrasto di colore e del testo"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Anteprima"</string>
-    <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Helen, Adam"</string>
+    <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Elena, Aldo"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"2 giorni fa"</string>
     <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"Ricontattare?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"Report della trasferta"</string>
-    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"Per maggiore assistenza, contatta me o Helen. Questo report sarà"</string>
+    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"Per maggiore assistenza, contatta me o Elena. Questo report sarà"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"Spese del cliente"</string>
     <string name="color_contrast_about_title" msgid="5939566801408667867">"Info sul contrasto di colore"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Scurisci lo schermo"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tocca tre volte lo schermo"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Modificare le scorciatoie di accessibilità"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Scegli la scorciatoia per %1$s"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continua"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Protesi uditive"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Configura e gestisci apparecchi acustici, impianti cocleari e altri dispositivi di amplificazione ASHA ed LE Audio"</string>
@@ -3012,7 +3016,7 @@
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Cambia ciclo…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Giorno del mese in cui reimpostare ciclo di utilizzo dei dati:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Nessuna app ha utilizzato dati in questo periodo."</string>
-    <string name="data_usage_label_foreground" msgid="8782117644558473624">"Primo piano"</string>
+    <string name="data_usage_label_foreground" msgid="8782117644558473624">"In primo piano"</string>
     <string name="data_usage_label_background" msgid="8862781660427421859">"In background"</string>
     <string name="data_usage_app_restricted" msgid="312065316274378518">"limitato"</string>
     <string name="data_usage_disable_mobile" msgid="6183809500102606801">"Disattivare i dati mobili?"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Consenti posticipazione delle notifiche"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Indicatore di notifica su icona app"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Bundle di notifiche"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Riepiloghi delle notifiche"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"On"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Off"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Usa i riepiloghi delle notifiche"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Riepiloga automaticamente le notifiche di conversazione da qualsiasi app"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Notifiche in tempo reale"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Mostra informazioni in tempo reale"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Le notifiche fissate mostrano informazioni in tempo reale provenienti dalle app e vengono sempre visualizzate nella barra di stato e nella schermata di blocco"</string>
@@ -4066,7 +4065,7 @@
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Riduci al minimo le interruzioni consentendo solo alle app e alle persone importanti di raggiungerti"</string>
     <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Imposta una modalità che segua una programmazione regolare"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Mantieni il dispositivo sincronizzato con gli eventi della giornata"</string>
-    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Svegliarsi al 100%"</string>
+    <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Svegliati in piena forma"</string>
     <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Metti la sicurezza al primo posto quando sei in strada"</string>
     <string name="zen_mode_inspiration_immersive" msgid="4062437428955782933">"Concentrati per entrare nella zona"</string>
     <string name="zen_mode_inspiration_theater" msgid="9194190183262761230">"Per i momenti in cui la cortesia è importante"</string>
@@ -4604,7 +4603,7 @@
     <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"Attiva allarme con conto alla rovescia"</string>
     <string name="emergency_gesture_sound_setting_summary" msgid="6573377104470235173">"All\'avvio di SOS emergenze viene emesso un suono ad alto volume"</string>
     <string name="emergency_gesture_category_call_for_help_title" msgid="1680040129478289510">"Avvisa per chiedere aiuto"</string>
-    <string name="emergency_gesture_call_for_help_title" msgid="4969340870836239982">"Chiama per chiedere aiuto"</string>
+    <string name="emergency_gesture_call_for_help_title" msgid="4969340870836239982">"Chiedi aiuto"</string>
     <string name="emergency_gesture_call_for_help_dialog_title" msgid="8901271205171421201">"Numero da chiamare per chiedere aiuto"</string>
     <string name="emergency_gesture_call_for_help_summary" msgid="6552830427932669221">"<xliff:g id="PHONE_NUMBER">%1$s</xliff:g>. Tocca per cambiarlo"</string>
     <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Se inserisci un numero non di emergenza:\n • Il tuo dispositivo deve essere sbloccato per poter usare la funzionalità SOS emergenze\n • La tua chiamata potrebbe non ricevere risposta"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batteria"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Riquadro delle impostazioni"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Attiva finestre a forma libera"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Attiva le funzionalità dell\'esperienza desktop"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Attiva la visualizzazione desktop sul dispositivo e su display secondari."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Attiva la visualizzazione desktop su display secondari."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Attiva finestre forma libera su display secondario"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Attiva app non ridimensionabili in multi-finestra"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Consente la presenza di app non ridimensionabili in modalità multi-finestra"</string>
@@ -5280,7 +5276,7 @@
     <string name="bluetooth_phonebook_access_dialog_title" msgid="7624607995928968721">"Vuoi consentire l\'accesso a contatti e registro chiamate?"</string>
     <string name="bluetooth_phonebook_access_dialog_content" msgid="959658135522249170">"Un dispositivo Bluetooth, <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>, richiede l\'accesso ai tuoi contatti e al tuo registro chiamate, inclusi i dati relativi a chiamate in arrivo e in uscita.\n\nNon hai mai effettuato la connessione a <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> in passato."</string>
     <string name="category_name_brightness" msgid="8520372392029305084">"Luminosità"</string>
-    <string name="category_name_lock_display" msgid="8310402558217129670">"Schermata di blocco"</string>
+    <string name="category_name_lock_display" msgid="8310402558217129670">"Blocco dello schermo"</string>
     <string name="category_name_appearance" msgid="8287486771764166805">"Aspetto"</string>
     <string name="category_name_color" msgid="937514550918977151">"Colore"</string>
     <string name="category_name_display_controls" msgid="7046581691184725216">"Altri controlli del display"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Usa la supervisione del dispositivo"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Configura il PIN per iniziare"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervisione, Supervisione dei genitori, Controllo genitori"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

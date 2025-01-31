@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Quan utilitzes Desbloqueig facial"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Els ulls han d\'estar oberts"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Per desbloquejar el telèfon, has de tenir els ulls oberts"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Requereix sempre confirmació"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Requereix sempre confirmació en utilitzar el desbloqueig facial en apps"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Suprimeix el model facial"</string>
@@ -2200,11 +2202,11 @@
     <string name="keywords_accessibility_touchpad_system_gestures_enable" msgid="4406441971607855466">"ratolí tàctil, lliscar"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Contrast de color"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Un contrast més alt fa que el text, els botons i les icones destaquin més. Tria el contrast que més t\'agradi."</string>
-    <string name="color_contrast_note" msgid="7592686603372566198">"Pot ser que algunes aplicacions encara no admetin totes les opcions de configuració de contrast de color i text"</string>
+    <string name="color_contrast_note" msgid="7592686603372566198">"Pot ser que algunes aplicacions no admetin totes les opcions de configuració de contrast de color i text"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Previsualitza"</string>
     <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Helen, Adam"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"Fa 2 dies"</string>
-    <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"Vols seguir?"</string>
+    <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"Fer-ne seguiment?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"Informe de viatge de negocis"</string>
     <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"Per obtenir més assistència, contacta amb mi o la Helen. L\'informe serà"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"Despeses del client"</string>
@@ -2373,7 +2375,7 @@
     <string name="accessibility_notification_high_contrast_text_content" msgid="7159316497764514501">"Prova l\'opció Contorns de text. La trobaràs a Configuració."</string>
     <string name="accessibility_notification_high_contrast_text_action" msgid="7190559555068414342">"Obre Configuració"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="6940551350643305572">"Contorns de text"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Afegeix un fons blanc o negre al text per augmentar el contrast"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Afegeix un fons blanc o negre al voltant del text per augmentar-ne el contrast"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Actualitza ampliació automàticament"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Actualitza augment pantalla a transicions aplic."</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"El botó d\'engegada penja"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tres tocs a la pantalla"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Edita les dreceres d\'accessibilitat"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Tria la drecera per a %1$s"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continua"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Audiòfons"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Configura i gestiona els audiòfons compatibles amb ASHA o LE Audio, els implants coclears i altres dispositius d\'amplificació"</string>
@@ -3672,16 +3676,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Permet posposar les notificacions"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Punt de notificació a la icona de l\'aplicació"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Paquets de notificacions"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Resums de les notificacions"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"Activats"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Desactivats"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Utilitza els resums de les notificacions"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Resumeix automàticament les notificacions de les converses de qualsevol aplicació"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Notificacions en temps real"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Mostra la informació en temps real"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Les notificacions fixades mostren informació en temps real de les aplicacions i sempre es mostren a la barra d\'estat i a la pantalla de bloqueig"</string>
@@ -5081,12 +5080,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Bateria"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Tauler de configuració"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Activa les finestres amb format lliure"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Activa les funcions d\'experiència a l\'ordinador"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Activa la visualització per a ordinadors al dispositiu i a les pantalles secundàries."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Activa la visualització per a ordinadors a les pantalles secundàries."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Activa les finestres amb format lliure a la pantalla secundària"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Activa la mida no ajustable al mode multifinestra"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Permet les aplicacions de mida no ajustable al mode multifinestra"</string>
@@ -5633,4 +5629,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Utilitza la supervisió del dispositiu"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Configura un PIN per començar"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervisió, supervisió parental, controls parentals"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>
