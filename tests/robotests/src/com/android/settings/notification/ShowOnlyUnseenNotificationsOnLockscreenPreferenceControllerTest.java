@@ -37,6 +37,8 @@ import android.provider.Settings;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.server.notification.Flags;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -47,9 +49,15 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+/**
+ * Disable FLAG_NOTIFICATION_LOCK_SCREEN_SETTINGS because this toggle will be replaced by the new
+ * settings page.
+ */
 @RunWith(RobolectricTestRunner.class)
+@DisableFlags(Flags.FLAG_NOTIFICATION_LOCK_SCREEN_SETTINGS)
 public class ShowOnlyUnseenNotificationsOnLockscreenPreferenceControllerTest {
-
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -57,8 +65,6 @@ public class ShowOnlyUnseenNotificationsOnLockscreenPreferenceControllerTest {
 
     private ShowOnlyUnseenNotificationsOnLockscreenPreferenceController mController;
     private Preference mPreference;
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setUp() {
