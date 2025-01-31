@@ -34,8 +34,6 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-import java.util.Objects;
-
 /** Preference controller for Linux terminal option in developers option */
 public class LinuxTerminalPreferenceController extends DeveloperOptionsPreferenceController
         implements PreferenceControllerMixin {
@@ -59,13 +57,15 @@ public class LinuxTerminalPreferenceController extends DeveloperOptionsPreferenc
         mTerminalPackageName =
                 isPackageInstalled(context.getPackageManager(), packageName) ? packageName : null;
 
-        StorageManager storageManager =
-                Objects.requireNonNull(context.getSystemService(StorageManager.class));
+        StorageManager storageManager = context.getSystemService(StorageManager.class);
         VirtualMachineManager virtualMachineManager =
-                Objects.requireNonNull(context.getSystemService(VirtualMachineManager.class));
+                context.getSystemService(VirtualMachineManager.class);
+
         mIsDeviceCapable =
                 getTotalMemory() >= MEMORY_MIN_BYTES
+                        && storageManager != null
                         && storageManager.getPrimaryStorageSize() >= STORAGE_MIN_BYTES
+                        && virtualMachineManager != null
                         && ((virtualMachineManager.getCapabilities() & CAPABILITY_NON_PROTECTED_VM)
                                 != 0);
     }
