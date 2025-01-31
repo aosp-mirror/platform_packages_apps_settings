@@ -61,6 +61,7 @@ import org.robolectric.shadows.ShadowSystemProperties;
         com.android.settings.testutils.shadow.ShadowFragment.class,
 })
 @EnableFlags(Flags.FLAG_SHOW_DESKTOP_WINDOWING_DEV_OPTION)
+@DisableFlags(Flags.FLAG_ENABLE_DESKTOP_MODE_THROUGH_DEV_OPTION)
 public class DesktopModePreferenceControllerTest {
 
     @Rule
