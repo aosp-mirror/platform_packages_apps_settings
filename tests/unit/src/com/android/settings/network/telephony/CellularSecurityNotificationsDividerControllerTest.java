@@ -114,10 +114,8 @@ public class CellularSecurityNotificationsDividerControllerTest {
     private void enableFlags(boolean enabled) {
         if (enabled) {
             mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_MODEM_CIPHER_TRANSPARENCY_UNSOL_EVENTS);
-            mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_MODEM_CIPHER_TRANSPARENCY);
         } else {
             mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_MODEM_CIPHER_TRANSPARENCY_UNSOL_EVENTS);
-            mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_MODEM_CIPHER_TRANSPARENCY);
         }
     }
 }
