@@ -26,10 +26,12 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -41,6 +43,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.internal.R;
 import com.android.window.flags.Flags;
 
 import org.junit.Before;
@@ -78,18 +81,22 @@ public class DesktopModeSecondaryDisplayPreferenceControllerTest {
     private FragmentTransaction mTransaction;
 
     private Context mContext;
+    private Resources mResources;
     private DesktopModeSecondaryDisplayPreferenceController mController;
 
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
+        mResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(mResources);
         doReturn(mTransaction).when(mFragmentManager).beginTransaction();
         doReturn(mFragmentManager).when(mActivity).getSupportFragmentManager();
         doReturn(mActivity).when(mFragment).getActivity();
         mController = new DesktopModeSecondaryDisplayPreferenceController(mContext, mFragment);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
+        when(mResources.getBoolean(R.bool.config_isDesktopModeSupported)).thenReturn(false);
     }
 
     @DisableFlags(Flags.FLAG_SHOW_DESKTOP_EXPERIENCE_DEV_OPTION)
@@ -101,6 +108,8 @@ public class DesktopModeSecondaryDisplayPreferenceControllerTest {
     @EnableFlags(Flags.FLAG_SHOW_DESKTOP_EXPERIENCE_DEV_OPTION)
     @Test
     public void isAvailable_whenDesktopExperienceDevOptionIsEnabled_shouldBeFalse() {
+        when(mResources.getBoolean(R.bool.config_isDesktopModeSupported)).thenReturn(true);
+
         assertThat(mController.isAvailable()).isFalse();
     }
 
@@ -174,4 +183,5 @@ public class DesktopModeSecondaryDisplayPreferenceControllerTest {
         assertThat(mode).isEqualTo(SETTING_VALUE_OFF);
         verify(mPreference).setEnabled(false);
     }
+
 }
