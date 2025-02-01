@@ -45,8 +45,7 @@ class TopologyScaleTest {
     @Test
     fun oneDisplay4to3Aspect() {
         val scale = TopologyScale(
-                /* paneWidth= */ 640, minPaneHeight = 0f,
-                minEdgeLength = 48f, maxEdgeLength = 64f,
+                paneWidth = 640, minEdgeLength = 48f, maxEdgeLength = 64f,
                 listOf(RectF(0f, 0f, 640f, 480f)))
 
         // blockRatio is is set in order to make the smallest display edge (480 dp) 48dp
@@ -62,24 +61,12 @@ class TopologyScaleTest {
                 PointF(640f, 240f) to scale.paneToDisplayCoor(352f, 96f),
             ),
             0.001f)
-
-        // Same as original scale but made taller with minPaneHeight.
-        // The paneHeight and origin coordinates are changed but the block ratio is the same.
-        val taller = TopologyScale(
-                /* paneWidth= */ 640, minPaneHeight = 155.0f,
-                minEdgeLength = 48f, maxEdgeLength = 64f,
-                listOf(RectF(0f, 0f, 640f, 480f)))
-
-        assertEquals(
-                "{TopologyScale blockRatio=0.100000 originPaneXY=288.0,72.0 paneHeight=192.0}",
-                "" + taller)
     }
 
     @Test
     fun twoUnalignedDisplays() {
         val scale = TopologyScale(
-                /* paneWidth= */ 300, minPaneHeight = 0f,
-                minEdgeLength = 48f, maxEdgeLength = 96f,
+                paneWidth = 300, minEdgeLength = 48f, maxEdgeLength = 96f,
                 listOf(RectF(0f, 0f, 1920f, 1200f), RectF(1920f, -300f, 3840f, 900f)))
 
         assertEquals(
@@ -97,8 +84,7 @@ class TopologyScaleTest {
     @Test
     fun twoDisplaysBlockRatioBumpedForGarSizeMinimumHorizontal() {
         val scale = TopologyScale(
-                /* paneWidth= */ 192, minPaneHeight = 0f,
-                minEdgeLength = 48f, maxEdgeLength = 64f,
+                paneWidth = 192, minEdgeLength = 48f, maxEdgeLength = 64f,
                 listOf(RectF(0f, 0f, 240f, 320f), RectF(-240f, -320f, 0f, 0f)))
 
         // blockRatio is higher than 0.05 in order to make the smallest display edge (240 dp) 48dp
@@ -118,8 +104,7 @@ class TopologyScaleTest {
     @Test
     fun paneVerticalPaddingSetByMinEdgeLength() {
         val scale = TopologyScale(
-                /* paneWidth= */ 300, minPaneHeight = 0f,
-                minEdgeLength = 48f, maxEdgeLength = 80f,
+                paneWidth = 300, minEdgeLength = 48f, maxEdgeLength = 80f,
                 listOf(
                         RectF(0f, 0f, 640f, 480f),
                         RectF(0f, 480f, 640f, 960f),
@@ -141,8 +126,7 @@ class TopologyScaleTest {
     @Test
     fun limitedByCustomMaxBlockRatio() {
         val scale = TopologyScale(
-                /* paneWidth= */ 300, minPaneHeight = 0f,
-                minEdgeLength = 24f, maxEdgeLength = 77f,
+                paneWidth = 300, minEdgeLength = 24f, maxEdgeLength = 77f,
                 listOf(
                         RectF(0f, 0f, 640f, 480f),
                         RectF(0f, 480f, 640f, 960f)))
@@ -161,8 +145,7 @@ class TopologyScaleTest {
     fun largeCustomMinEdgeLength() {
         // minBlockEdgeLength/minDisplayEdgeLength = 80/480 = 1/6, so the block ratio will be 1/6
         val scale = TopologyScale(
-                /* paneWidth= */ 300, minPaneHeight = 0f,
-                minEdgeLength = 80f, maxEdgeLength = 100f,
+                paneWidth = 300, minEdgeLength = 80f, maxEdgeLength = 100f,
                 listOf(
                         RectF(0f, 0f, 640f, 480f),
                         RectF(0f, 480f, 640f, 960f)))

@@ -73,9 +73,6 @@ fun Float.atLeast(n: Number): Float = max(this, n.toFloat())
  * position. In practice the origin will be the upper-left coordinate of the primary display.
  *
  * @param paneWidth width of the pane in view coordinates
- * @param minPaneHeight smallest allowed height of the pane in view coordinates. This will not
- *                      affect the block ratio, but only the final height of the pane and the
- *                      position of the display bounds' center.
  * @param minEdgeLength the smallest length permitted of a display block. This should be set based
  *                      on accessibility requirements, but also accounting for padding that appears
  *                      around each button.
@@ -85,7 +82,7 @@ fun Float.atLeast(n: Number): Float = max(this, n.toFloat())
  * @param displaysPos the absolute topology coordinates for each display in the topology.
  */
 class TopologyScale(
-        paneWidth: Int, minPaneHeight: Float, minEdgeLength: Float, maxEdgeLength: Float,
+        paneWidth: Int, minEdgeLength: Float, maxEdgeLength: Float,
         displaysPos: Collection<RectF>) {
     /** Scale of block sizes to real-world display sizes. Should be less than 1. */
     val blockRatio: Float
@@ -124,12 +121,11 @@ class TopologyScale(
                 // requirements.
                 .atLeast(minEdgeLength / smallestDisplayDim)
 
-        paneHeight = minPaneHeight
-                // A tall pane is likely to result in more scrolling. So we
-                // prevent the height from growing too large here, by limiting vertical padding to
-                // 1.5x of the minEdgeLength on each side. This keeps a comfortable amount of
-                // padding without it resulting in too much deadspace.
-                .atLeast(blockRatio * displayBounds.height() + minEdgeLength * 3f)
+        // A tall pane is likely to result in more scrolling. So we
+        // prevent the height from growing too large here, by limiting vertical padding to
+        // 1.5x of the minEdgeLength on each side. This keeps a comfortable amount of
+        // padding without it resulting in too much deadspace.
+        paneHeight = blockRatio * displayBounds.height() + minEdgeLength * 3f
 
         // Set originPaneXY (the location of 0,0 in display space in the pane's coordinate system)
         // such that the display bounds rect is centered in the pane.
@@ -404,7 +400,7 @@ class DisplayTopologyPreference(context : Context)
         // pixels, and the display coordinates are in density-independent pixels.
         val dpi = injector.densityDpi
         val scaling = TopologyScale(
-                mPaneContent.width, minPaneHeight = mTopologyInfo?.scaling?.paneHeight ?: 0f,
+                mPaneContent.width,
                 minEdgeLength = DisplayTopology.dpToPx(60f, dpi),
                 maxEdgeLength = DisplayTopology.dpToPx(256f, dpi),
                 newBounds.map { it.second }.toList())
