@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
+import android.safetycenter.SafetySourceIssue;
 import android.safetycenter.SafetySourceStatus;
 
 /** Static helpers for setting SafetyCenter data for biometric safety sources. */
@@ -42,6 +43,30 @@ public final class BiometricSourcesUtils {
             boolean enabled,
             boolean hasEnrolled,
             SafetyEvent safetyEvent) {
+        setBiometricSafetySourceData(
+                safetySourceId,
+                context,
+                title,
+                summary,
+                pendingIntent,
+                enabled,
+                hasEnrolled,
+                safetyEvent,
+                null
+        );
+    }
+
+    /** Sets data for one of the biometrics sources */
+    public static void setBiometricSafetySourceData(
+            String safetySourceId,
+            Context context,
+            String title,
+            String summary,
+            PendingIntent pendingIntent,
+            boolean enabled,
+            boolean hasEnrolled,
+            SafetyEvent safetyEvent,
+            SafetySourceIssue safetySourceIssue) {
         int severityLevel =
                 enabled && hasEnrolled
                         ? SafetySourceData.SEVERITY_LEVEL_INFORMATION
@@ -52,8 +77,13 @@ public final class BiometricSourcesUtils {
                         .setPendingIntent(pendingIntent)
                         .setEnabled(enabled)
                         .build();
-        SafetySourceData safetySourceData =
-                new SafetySourceData.Builder().setStatus(status).build();
+
+        SafetySourceData.Builder builder = new SafetySourceData.Builder().setStatus(status);
+        if (safetySourceIssue != null) {
+            builder.addIssue(safetySourceIssue);
+        }
+        SafetySourceData safetySourceData = builder.build();
+
 
         SafetyCenterManagerWrapper.get()
                 .setSafetySourceData(context, safetySourceId, safetySourceData, safetyEvent);
