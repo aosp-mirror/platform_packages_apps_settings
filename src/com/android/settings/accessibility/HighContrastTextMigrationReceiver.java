@@ -57,6 +57,8 @@ public class HighContrastTextMigrationReceiver extends BroadcastReceiver {
     @VisibleForTesting
     static final String ACTION_OPEN_SETTINGS =
             "com.android.settings.accessibility.ACTION_OPEN_HIGH_CONTRAST_TEXT_SETTINGS";
+    private static final String ACTION_NOTIFICATION_DISMISSED =
+            "com.android.settings.accessibility.ACTION_HIGH_CONTRAST_TEXT_NOTIFICATION_DISMISSED";
     @VisibleForTesting
     static final int NOTIFICATION_ID = R.string.accessibility_notification_high_contrast_text_title;
 
@@ -87,6 +89,8 @@ public class HighContrastTextMigrationReceiver extends BroadcastReceiver {
             context.startActivity(settingsIntent);
 
             context.getSystemService(NotificationManager.class).cancel(NOTIFICATION_ID);
+        } else if (ACTION_NOTIFICATION_DISMISSED.equals(intent.getAction())) {
+            Counter.logIncrement("accessibility.value_hct_notification_dismissed");
         } else if (ACTION_RESTORED.equals(intent.getAction())) {
             Log.i(TAG, "HCT attempted to be restored from backup; showing notification for userId: "
                     + context.getUserId());
@@ -159,6 +163,13 @@ public class HighContrastTextMigrationReceiver extends BroadcastReceiver {
                     .addAction(settingsAction)
                     .setAutoCancel(true);
         }
+
+        Intent deleteIntent = new Intent(context, HighContrastTextMigrationReceiver.class);
+        deleteIntent.setAction(ACTION_NOTIFICATION_DISMISSED);
+        PendingIntent deletePendingIntent = PendingIntent.getBroadcast(context, 0,
+                deleteIntent, PendingIntent.FLAG_IMMUTABLE);
+        notificationBuilder.setDeleteIntent(deletePendingIntent);
+
         NotificationManager notificationManager =
                 context.getSystemService(NotificationManager.class);
         NotificationChannel notificationChannel = new NotificationChannel(
