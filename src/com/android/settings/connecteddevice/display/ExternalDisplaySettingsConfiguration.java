@@ -342,7 +342,8 @@ public class ExternalDisplaySettingsConfiguration {
     }
 
     static boolean isUseDisplaySettingEnabled(@Nullable Injector injector) {
-        return injector != null && injector.getFlags().resolutionAndEnableConnectedDisplaySetting();
+        return injector != null && injector.getFlags().resolutionAndEnableConnectedDisplaySetting()
+                && !injector.getFlags().displayTopologyPaneInDisplayList();
     }
 
     static boolean isResolutionSettingEnabled(@Nullable Injector injector) {
