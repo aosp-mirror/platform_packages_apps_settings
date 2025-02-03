@@ -207,10 +207,10 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Избирането на език за това приложение не е налице от настройките."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Езикът може да се различава от езиците, налични в приложението. Възможно е някои приложения да не поддържат тази настройка."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Задайте език за всяко приложение."</string>
-    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Устройството ви, приложенията и уебсайтовете използват първия поддържан език от тези, които предпочитате.\n\nМного приложения ще използват и региона от предпочитания ви език, за да форматират датата, цифрите и единиците. За да промените региона си, добавете език, след което изберете предпочитания от вас регион."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Устройството ви, приложенията и уебсайтовете използват първия поддържан език от списъка ви с предпочитани езици.\n\nМного приложения ще използват и региона от предпочитания ви език, за да форматират датата, цифрите и единиците. За да промените региона си, добавете език, след което изберете предпочитания от вас регион."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"За да изберете език за всяко отделно приложение, отворете настройките за език на приложенията."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Научете повече за езиците на приложенията"</string>
-    <string name="title_change_system_region" msgid="5476591184463491936">"Искате ли да промените региона на „%s“?"</string>
+    <string name="title_change_system_region" msgid="5476591184463491936">"Искате ли да промените региона на %s?"</string>
     <string name="desc_notice_device_region_change" msgid="6702773189066944100">"Устройството ви ще запази %s като системен език"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Искате ли да промените системния език на %s?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"Искате ли да добавите %s към предпочитаните езици?"</string>
@@ -239,7 +239,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Температура"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Първи ден от седмицата"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Предпочитания за числата"</string>
-    <string name="measurement_system_preferences_title" msgid="5539250190895110890">"Система за измерване"</string>
+    <string name="measurement_system_preferences_title" msgid="5539250190895110890">"Система единици"</string>
     <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Използване на настройките по подразбиране"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"Целзий (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Фаренхайт (°F)"</string>
@@ -252,7 +252,7 @@
     <string name="saturday_first_day_of_week" msgid="3702282590450322727">"събота"</string>
     <string name="title_regional_pref_footer" msgid="7450438024324794380">"Ако дадено приложение не поддържа регионалните предпочитания, то ще използва стандартните си настройки за локала."</string>
     <string name="desc_regional_pref_footer_learn_more" msgid="4401708653329230081">"Научете повече за езиковите предпочитания."</string>
-    <string name="metric_measurement_system" msgid="7489725697268321541">"Показател"</string>
+    <string name="metric_measurement_system" msgid="7489725697268321541">"Метрична"</string>
     <string name="us_measurement_system" msgid="8738587232938189052">"Имперска (САЩ)"</string>
     <string name="uk_measurement_system" msgid="4196897001775627597">"Имперска (Обединено кралство)"</string>
     <string name="category_title_terms_of_address" msgid="4309422700380895278">"Допълнителни предпочитания"</string>
@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"При използване на отключването с лице"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Очите трябва да са отворени"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"За да отключите телефона, очите ви трябва да са отворени"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Винаги да се изисква потвърждение"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"При отключване с лице в приложенията винаги да се изисква потвърждение"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Изтриване на модела на лицето"</string>
@@ -576,7 +578,7 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Поставете едната страна на пръста си върху сензора и задръжте, след това поставете другата"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Пропуск. на настройването на отпечатък?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Избрахте да използвате отпечатъка си като един от начините за отключване на телефона си. Ако пропуснете сега, ще трябва да настроите по-късно. Настройването отнема около минута."</string>
-    <string name="lock_screen_skip_setup_title" msgid="6979006375138175111">"Искате ли да пропуснете настройването на <xliff:g id="OPTIONS">%s</xliff:g>?"</string>
+    <string name="lock_screen_skip_setup_title" msgid="6979006375138175111">"Искате ли да пропуснете настройването на: <xliff:g id="OPTIONS">%s</xliff:g>?"</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Да се пропусне ли настройването на ПИН?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Да се пропусне ли настройването за ПИН код и лице?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Да се пропусне ли настройването за ПИН код и отпечатък?"</string>
@@ -1470,7 +1472,7 @@
     <string name="scanning_status_text_on" msgid="3846571210578042940">"Вкл."</string>
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Изкл."</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
-    <string name="status_icc_id" msgid="7995690631650006970">"Идентификатор на карта с ИС"</string>
+    <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"Тип на мобилната мрежа за пренос на данни"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Тип на мобилната мрежа за гласова комуникация"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Информация за оператора"</string>
@@ -1602,7 +1604,7 @@
     <string name="error_adding_apn_type" msgid="1324263534991467943">"Операторът не позволява добавянето на имена на точки за достъп (APN) от типа „%s“."</string>
     <string name="error_mmsc_valid" msgid="8380951905485647380">"Полето MMSC трябва да съдържа валидна стойност."</string>
     <string name="restore_default_apn" msgid="6596048535642130689">"Стандартните настройки за името на точката за достъп (APN) се възстановяват."</string>
-    <string name="menu_restore" msgid="4310539620115151551">"Възстановяване на стандартни"</string>
+    <string name="menu_restore" msgid="4310539620115151551">"Възстановяване на стандартните"</string>
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Възстановяването на стандартните настройки за името на точката за достъп (APN) завърши."</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Опции за нулиране"</string>
     <string name="reset_mobile_network_settings_title" msgid="5616713931258506842">"Нулиране на настройките за мобилната мрежа"</string>
@@ -2202,11 +2204,11 @@
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"При по-висок контраст текстът, бутоните и иконите се открояват повече. Изберете най-подходящия според вас контраст."</string>
     <string name="color_contrast_note" msgid="7592686603372566198">"Възможно е някои приложения да не поддържат всички настройки за контраст на текста и цветовете"</string>
     <string name="color_contrast_preview" msgid="6791430227535363883">"Визуализация"</string>
-    <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Хелън, Адам"</string>
+    <string name="color_contrast_preview_sender_name" msgid="8641943417589238147">"Елена, Ангел"</string>
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"Преди 2 дни"</string>
     <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"Посл. действ.?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"Отчет за командировка"</string>
-    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"За допълнителна помощ се свържете с мен или Хелън. Този отчет ще бъде"</string>
+    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"За допълнителна помощ се свържете с мен или Елена. Този отчет ще бъде"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"Разходи на клиента"</string>
     <string name="color_contrast_about_title" msgid="5939566801408667867">"За контраста на цветовете"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Затъмняване на екрана"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Трикратно докосване на екрана"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Редактиране на преките пътища за достъпност"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Изберете клавишна комбинация за „%1$s“"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Напред"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Слухови апарати"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Настройване и управление на слухови апарати, кохлеарни импланти и други устройства за усилване на звука с протоколите ASHA и LE Audio"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Разрешаване на отлагането на известията"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Точка за известия в иконата на прил."</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Групи известия"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Обобщения на известията"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"Вкл."</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Изкл."</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Използване на обобщения на известията"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Автоматично обобщаване на известията за разговори от всяко приложение"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Известия в реално време"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Показване на информация в реално време"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Фиксираните известия показват информация в реално време от приложенията и винаги се показват в лентата на състоянието и на заключения екран"</string>
@@ -4054,7 +4053,7 @@
     <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Този режим няма да се включва, след като бъде деактивиран"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Деактивиране"</string>
     <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Активиране на „<xliff:g id="MODE_NAME">%1$s</xliff:g>“?"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Този режим може да се включва автоматично въз основа на настройките му"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Този режим може да се включва автоматично въз основа на настройките за него"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Активиране"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Изберете режим, който следва редовен график"</string>
     <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Изберете режим за синхронизиране със събитията от календара и отговорите на поканите"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Батерия"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Панел за настройки"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Активиране на прозорците в свободна форма"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Активиране на функциите за работа на настол. комп."</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Активиране на изгледа за настолни компютри на устройството и на вторичните дисплеи."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Активиране на изгледа за настолни компютри на вторични дисплеи."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Актив. на проз. в своб. форма на вторични дисплеи"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Активиране на непреоразмерими елементи в „Няколко прозореца“"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Разрешава на приложенията, които не могат да се преоразмеряват, да бъдат в режим за няколко прозореца"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Използване на функцията за контролиране на устройството"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"За да започнете, настройте ПИН код"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"контрол, родителски контрол, родителски контроли"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

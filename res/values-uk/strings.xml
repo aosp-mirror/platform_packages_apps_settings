@@ -135,7 +135,7 @@
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Вимикає функцію Bluetooth LE Audio, якщо пристрій підтримує апаратні можливості LE Audio."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Режим Bluetooth LE Audio"</string>
     <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Увімкнути попередній перегляд інтерфейсу для трансляції Bluetooth LE Audio"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Увімкнути попередню версію інтерфейсу для спільного доступу до LE Audio, включно з особистим надсиланням аудіо й приватною трансляцією"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Увімкнути попередній перегляд інтерфейсу для спільного доступу до LE Audio, включно з особистим надсиланням аудіо й приватною трансляцією"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Перемикач LE Audio в інф. про пристрій"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Обходити білий список Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE Audio використовуватиметься за умовчанням, навіть якщо периферійний пристрій LE Audio не перевірено на відповідність критеріям білого списку."</string>
@@ -193,7 +193,7 @@
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Мова"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Бажана мова"</string>
     <string name="app_locales_picker_menu_title" msgid="7617427959223831373">"Мови додатків"</string>
-    <string name="app_locale_picker_summary" msgid="6742557329924446252">"Виберіть мову для кожного додатка"</string>
+    <string name="app_locale_picker_summary" msgid="6742557329924446252">"Вибрати мову для кожного додатка"</string>
     <string name="app_locale_picker_title" msgid="2431448962911301366">"Мова додатка"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Пропоновані мови"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Усі мови"</string>
@@ -229,7 +229,7 @@
     <string name="top_intro_region_title" msgid="2336323415395642117">"Вибір регіону впливає на те, як на телефоні відображаються час, дати, температура тощо"</string>
     <string name="more_language_settings_category" msgid="3669703092480725416">"Інші налаштування мови"</string>
     <string name="title_change_system_locale_region" msgid="2239197787972916177">"Змінити регіон на \"%s\"?"</string>
-    <string name="body_change_system_locale_region" msgid="2706171830649357930">"%s збережеться на пристрої як мова системи"</string>
+    <string name="body_change_system_locale_region" msgid="2706171830649357930">"Мовою системи на пристрої залишиться %s"</string>
     <string name="top_intro_numbering_system_title" msgid="3560237920807539566">"Використовувані цифри залежать від системи нумерації"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"Регіональні налаштування"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"Установіть параметри одиниць і чисел"</string>
@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Коли ввімкнено фейс-контроль"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Очі мають бути розплющеними"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Розблоковувати телефон, коли очі відкриті"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Завжди просити підтвердження"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Просити підтвердження під час використання фейс-контролю в додатках"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Видалити модель обличчя"</string>
@@ -1914,7 +1916,7 @@
     <string name="internal_storage" msgid="999496851424448809">"Внутр. пам\'ять"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Повт. обчисл. розм…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Видалити дані додатка?"</string>
-    <string name="clear_data_dlg_text" msgid="3440011276559762619">"Дані додатка, зокрема файли та налаштування, буде назавжди видалено з цього пристрою"</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"Дані додатка, зокрема файли й налаштування, буде назавжди видалено з цього пристрою"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"OK"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Скасувати"</string>
     <string name="dlg_delete" msgid="1790919205039397659">"Видалити"</string>
@@ -2125,7 +2127,7 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Вибрано користувачем: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Мовлення"</string>
     <string name="speech_preference_title" msgid="5080497338234779098">"Мовлення"</string>
-    <string name="speech_preference_summary" msgid="5190362663352347487">"Керуйте розпізнаванням і виводом мовлення"</string>
+    <string name="speech_preference_summary" msgid="5190362663352347487">"Керувати розпізнаванням і виводом мовлення"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Швидкість курсора"</string>
     <string name="pointer_scale" msgid="3170694549809691557">"Розмір курсора"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Зменшити розмір курсора"</string>
@@ -2350,7 +2352,7 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Дає змогу вмикати функцію із заблокованого екрана за допомогою комбінації клавіш. Натисніть і утримуйте обидві клавіші гучності впродовж кількох секунд."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Кнопка функцій доступності"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Кнопка й жест функцій доступності"</string>
-    <string name="accessibility_button_intro_text" msgid="80993874471745687">"Вмикайте спеціальні можливості з будь-якого екрана"</string>
+    <string name="accessibility_button_intro_text" msgid="80993874471745687">"Вмикайте функції доступності з будь-якого екрана"</string>
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"Про кнопку спеціальних можливостей"</string>
     <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Про кнопку й жест спеціальних можливостей"</string>
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Докладніше про кнопку й жест спеціальних можливостей"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Тричі торкнутися екрана"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Редагування швидкого ввімкнення функцій доступності"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Виберіть спосіб швидкого ввімкнення таких функцій: %1$s"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Продовжити"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Слухові апарати"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Налаштовуйте й контролюйте слухові апарати з підтримкою ASHA і LE Audio, кохлеарні імплантати й інші пристрої для підсилення звуку"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Дозволити відкладання сповіщень"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Сповіщення на значках додатків"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Пакети сповіщень"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Короткі перекази сповіщень"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"Увімкнено"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Вимкнено"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Використовувати короткі перекази сповіщень"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Автоматично підсумовувати сповіщення про розмови з будь-якого додатка"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Сповіщення в реальному часі"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Показувати інформацію в реальному часі"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Закріплені сповіщення з актуальною інформацією від додатків. Завжди показуються в рядку стану й на заблокованому екрані."</string>
@@ -4045,7 +4044,7 @@
     <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"Укажіть назву режиму"</string>
     <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"Виберіть значок"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Події в календарі"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Програма \"Час спати\""</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Коли вмикається Час сну"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"За кермом"</string>
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Налаштування додатка"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Інформація і налаштування в додатку <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -4442,7 +4441,7 @@
     <string name="data_saver_off" msgid="5891210864117269045">"Вимкнено"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Увімкнути Заощадження трафіку"</string>
     <string name="unrestricted_app_title" msgid="8531936851059106374">"Необмежене використання мобільного трафіку"</string>
-    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Дозволити доступ до мобільного Інтернету з необмеженим трафіком у режимі заощадження трафіку"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Не обмежувати доступ до мобільного Інтернету в режимі заощадження трафіку"</string>
     <string name="home_app" msgid="6056850504746902747">"Головний додаток"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Додати ще один відбиток пальця"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Розблоковуйте екран іншим пальцем"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Акумулятор"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Панель налаштувань"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Увімкнути вікна змінного розміру"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Увімкнути функції режиму комп’ютера"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Увімкнути режим робочого стола на пристрої і додаткових екранах."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Увімкнути режим робочого стола на додаткових екранах."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Увімкнути вікна змінного розміру на додатк. екрані"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Дозволити немасштабовані додатки в багатоекранному режимі"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Дає змогу користуватися в багатоекранному режимі додатками, розмір яких не можна змінити"</string>
@@ -5629,14 +5625,13 @@
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Обвести й знайти"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Натисніть і втримуйте кнопку головного екрана або маркер навігації, щоб здійснити пошук за вмістом на екрані."</string>
     <string name="device_detail_icon_content_description" msgid="6699151424374841937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Змінити налаштування пристрою."</string>
-    <!-- no translation found for supervision_settings_title (8383827215386872736) -->
+    <string name="supervision_settings_title" msgid="8383827215386872736">"Батьківський контроль"</string>
+    <string name="supervision_settings_summary" msgid="5020634300370322741">"Обмеження на контент і інші обмеження"</string>
+    <string name="device_supervision_switch_title" msgid="3203958797412413373">"Використовувати батьківський контроль пристрою"</string>
+    <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Щоб почати, налаштуйте PIN-код"</string>
+    <string name="keywords_supervision_settings" msgid="2580555201483955376">"контроль, батьківський контроль"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
     <skip />
-    <!-- no translation found for supervision_settings_summary (5020634300370322741) -->
-    <skip />
-    <!-- no translation found for device_supervision_switch_title (3203958797412413373) -->
-    <skip />
-    <!-- no translation found for device_supervision_switch_no_pin_summary (8294396978464347129) -->
-    <skip />
-    <!-- no translation found for keywords_supervision_settings (2580555201483955376) -->
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
     <skip />
 </resources>

@@ -207,7 +207,7 @@
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Энэ аппын хэлийг Тохиргоо хэсгээс сонгох боломжгүй байна."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Хэл нь аппад боломжтой хэлээс шалтгаалан харилцан адилгүй байж болно. Зарим апп энэ тохиргоог дэмждэггүй байж магадгүй."</string>
     <string name="desc_app_locale_selection_supported" msgid="6744909281573556379">"Апп тус бүрд хэл тохируулна уу."</string>
-    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Таны төхөөрөмж, апп, вебсайтууд илүүд үзсэн хэлний жагсаалтаас тань эхний дэмжигдсэн хэлийг ашигладаг.\n\nОлон апп мөн огноо, тоо, нэгжийг форматлахдаа таны сонгосон хэлний бүс нутгийг ашиглана. Бүс нутгаа өөрчлөхийн тулд хэл нэмээд, дараа нь илүүд үзсэн бүс нутгаа сонгоно уу."</string>
+    <string name="desc_introduction_of_language_picker" msgid="4012265379885200083">"Таны төхөөрөмж, апп, вебсайтууд сонгохыг хүссэн хэлний жагсаалтаас тань эхний дэмжигдсэн хэлийг ашигладаг.\n\nОлон апп мөн огноо, тоо, нэгжийг форматлахдаа таны сонгосон хэлний бүс нутгийг ашиглана. Бүс нутгаа өөрчлөхийн тулд хэл нэмээд, дараа нь хүссэн бүс нутгаа сонгоно уу."</string>
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Апп тус бүрд хэл сонгохын тулд аппын хэлний тохиргоо руу очно уу."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"Аппын хэлний талаар нэмэлт мэдээлэл авах"</string>
     <string name="title_change_system_region" msgid="5476591184463491936">"Бүс нутгийг %s болгож өөрчлөх үү?"</string>
@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Царайгаар түгжээ тайлахыг ашиглаж буй тохиолдолд"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Нүдийг нээлттэй байхыг шаардах"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Утасны түгжээг тайлахын тулд таны нүд нээлттэй байх шаардлагатай"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Үргэлж баталгаажуулалт шаардах"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Царайгаар түгжээ тайлахыг аппад ашиглахад баталгаажуулах алхмыг тогтмол шаардах"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Нүүрний загвар устгах"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Дэлгэцийг гурав товших"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Хандалтын товчлолуудыг засах"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"%1$s-н товчлолоо сонгоно уу"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Үргэлжлүүлэх"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Сонсголын төхөөрөмжүүд"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ASHA, LE Аудионы сонсголын төхөөрөмж, дунгийн суулгац болон бусад өсгөх төхөөрөмжийг тохируулж, удирдана уу"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Мэдэгдлийг түр хойшлуулахыг зөвшөөрөх"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Аппын дүрс тэмдэг дэх мэдэгдлийн цэг"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Мэдэгдлийн багц"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Мэдэгдлийн хураангуй"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"Асаах"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Унтраах"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Мэдэгдлийн хураангуйг ашиглах"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Дурын аппаас харилцан ярианы мэдэгдлийг автоматаар хураангуйлах"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Шууд мэдэгдэл"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Шууд мэдээллийг харуулах"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Бэхэлсэн мэдэгдэл нь аппуудын шууд мэдээллийг харуулдаг бөгөөд статус самбар, түгжээтэй дэлгэц дээр үргэлж харагдана"</string>
@@ -4564,8 +4563,8 @@
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Яаралтай тусламж, эрүүл мэндийн мэдээлэл, сэрэмжлүүлэг"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Зангааны навигац"</string>
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Нүүр хуудас руу очихын тулд дэлгэцийн доороос дээш шударна уу. Аппуудыг сэлгэхийн тулд доод талаас дээш шударч, удаан дараад суллана уу. Буцахын тулд зүүн эсвэл баруун ирмэгээс шударна уу."</string>
-    <string name="legacy_navigation_title" msgid="7877402855994423727">"3-товчлуурт-навигац"</string>
-    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Буцах, Нүүр хуудас болон аппуудыг сэлгэх товчлуурууд таны дэлгэцийн доод хэсэгт байдаг."</string>
+    <string name="legacy_navigation_title" msgid="7877402855994423727">"3 товчтой навигац"</string>
+    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Буцах, Нүүр хуудас болон аппуудыг сэлгэх товчнууд таны дэлгэцийн доод хэсэгт байдаг."</string>
     <string name="nav_tutorial_button_description" msgid="7195363082216233970">"Зангааны навигацын зааврыг эхлүүлнэ үү."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"системийн навигац, 2 товчлуурт навигац, 3 товчлуурт навигац, зангааны навигац, шудрах"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Дижитал туслах"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Батарей"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Тохиргооны самбар"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Чөлөөт хэлбэрийн цонхыг идэвхжүүлэх"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Компьютерын хэрэглээний онцлогийг идэвхжүүлэх"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Дэлгэц дээр харагдах байдлыг төхөөрөмж, хоёрдогч дэлгэцэд идэвхжүүлнэ үү."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Дэлгэц дээр харагдах байдлыг хоёрдогч дэлгэцэд идэвхжүүлнэ үү."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Хоёрдогч дэлгэцэд чөлөөт хэлбэрийн цонх идэвхжүүл"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Хэмжээг өөрчлөх боломжгүй аппуудыг олон цонхонд идэвхжүүлэх"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Хэмжээг нь өөрчлөх боломжгүй аппуудыг олон цонхонд байхыг нь зөвшөөрнө"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Төхөөрөмжийн хяналт ашиглах"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Эхлүүлэхийн тулд ПИН тохируулна уу"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"хяналт, эцэг эхийн хяналт, эцэг эхийн тохиргоо"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

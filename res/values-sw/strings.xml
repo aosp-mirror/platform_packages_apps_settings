@@ -239,7 +239,7 @@
     <string name="temperature_preferences_title" msgid="5009881556503629058">"Halijoto"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Siku ya kwanza ya wiki"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Mapendeleo ya namba"</string>
-    <string name="measurement_system_preferences_title" msgid="5539250190895110890">"Mfumo wa kupima"</string>
+    <string name="measurement_system_preferences_title" msgid="5539250190895110890">"Mfumo wa kupimia"</string>
     <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Tumia mipangilio chaguomsingi"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"Selsiasi (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Farenhaiti (°F)"</string>
@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Unapotumia kipengele cha Kufungua kwa uso"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Unafaa kuwa umefungua macho"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Ili ufungue simu, lazima uwe umefungua macho yako"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Omba uthibitishaji kila wakati"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Iombe uthibitishaji kila wakati unapofungua kwa uso katika programu"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Futa muundo wa uso"</string>
@@ -2206,7 +2208,7 @@
     <string name="color_contrast_preview_email_send_date" msgid="2108702726171600080">"Siku 2 zilizopita"</string>
     <string name="color_contrast_preview_email_badge" msgid="4845484039428505392">"Utafuatilia?"</string>
     <string name="color_contrast_preview_email_title" msgid="198712116139754823">"Ripoti ya safari ya kikazi"</string>
-    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"Kwa usaidizi zaidi, tafadhali wasiliana nami au Helen. Ripoti hii"</string>
+    <string name="color_contrast_preview_email_body" msgid="2714343154965937945">"Kwa usaidizi zaidi, tafadhali wasiliana nami au Helen. Ripoti hii itakuwa"</string>
     <string name="color_contrast_preview_email_attachment_name" msgid="852407311884814746">"Gharama za Mteja"</string>
     <string name="color_contrast_about_title" msgid="5939566801408667867">"Kuhusu utofautishaji wa rangi"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Geuza skrini iwe nyeusi"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Gusa skrini mara tatu"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Badilisha njia za mkato za ufikivu"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Chagua njia ya mkato ya %1$s"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Endelea"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Vifaa vya kusaidia kusikia"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Weka mipangilio na udhibiti visaidizi vya kusikia vya ASHA na LE Audio, vifaa vinavyosaidia kusikia vinavyopachikwa ndani ya sikio na vifaa vya kukuza sauti"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Ruhusu uahirishaji wa arifa"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Kitone cha arifa kwenye aikoni ya programu"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Vifurushi vya arifa"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Mihtasari ya arifa"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"Imewashwa"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Imezimwa"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Tumia mihtasari ya arifa"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Andaa muhtasari wa arifa za mazungumzo kiotomatiki kwenye programu yoyote"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Arifa za moja kwa moja"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Onyesha maelezo ya moja kwa moja"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Arifa zilizobandikwa zinaonyesha maelezo ya moja kwa moja kutoka kwenye programu na huonekana kwenye sehemu ya arifa na skrini iliyofungwa"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Betri"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Kidirisha cha Mipangilio"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Kuwasha madirisha yenye muundo huru"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Washa vipengele vya utumiaji wa kompyuta ya mezani"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Washa Mwonekano wa Kompyuta kwenye kifaa na kwenye skrini za pili."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Washa Mwonekano wa Kompyuta kwenye skrini za pili."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Ruhusu madirisha ya muundo huru kwenye skrini mbadala"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Ruhusu ukubwa usioweza kubadilishwa katika madirisha mengi"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Huruhusu programu zenye ukubwa usioweza kubadilishwa ziwe katika madirisha mengi"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Tumia usimamizi wa kifaa"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Buni PIN ili uanze"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"usimamizi, usimamizi wa wazazi, vidhibiti vya wazazi"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

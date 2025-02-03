@@ -240,7 +240,7 @@
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"हप्ताको पहिलो दिन"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"नम्बरसम्बन्धी प्राथमिकताहरू"</string>
     <string name="measurement_system_preferences_title" msgid="5539250190895110890">"मापन प्रणाली"</string>
-    <string name="default_string_of_regional_preference" msgid="3428899072914884203">"डिफल्ट विधि प्रयोग गर्नुहोस्"</string>
+    <string name="default_string_of_regional_preference" msgid="3428899072914884203">"डिफल्ट सेटिङ प्रयोग गर्नुहोस्"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"सेल्सियस (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"फरेनहाइट (°F)"</string>
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"आइतवार"</string>
@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"फेस अनलक प्रयोग गर्दा"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"आँखा खुला राख्न लगाउनुहोस्"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"फोन अनलक गर्न तपाईंका आँखा खुला हुनै पर्छ"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"सधैँ पुष्टि गर्न लगाउनुहोस्"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"एपहरूमा फेस अनलक प्रयोग गर्दा सधैँ पुष्टि गर्नु पर्ने बनाउनुहोस्"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"फेस मोडेल मेटाउनुहोस्"</string>
@@ -1373,7 +1375,7 @@
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{मोडहरूले अँध्यारो थिम अन गर्न पनि सक्छन्}=1{{mode_1} ले अँध्यारो थिम पनि अन गर्छ}=2{{mode_1} र {mode_2} ले अँध्यारो थिम पनि अन गर्छन्}=3{{mode_1}, {mode_2} र {mode_3} ले अँध्यारो थिम पनि अन गर्छन्}other{{mode_1}, {mode_2} र थप # वटा मोडले अँध्यारो थिम पनि अन गर्छन्}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"मोडहरूसम्बन्धी सेटिङ"</string>
     <string name="even_dimmer_display_title" msgid="4509732439977906028">"अझै मधुरो"</string>
-    <string name="even_dimmer_display_summary" msgid="120301078873242172">"डिभाइस चमक सदाको भन्दा बढी मधुरो बनाउन दिनुहोस्"</string>
+    <string name="even_dimmer_display_summary" msgid="120301078873242172">"डिभाइसको चमक सदाको भन्दा बढी मधुरो हुन दिनुहोस्"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"स्क्रिन टाइम आउट हुने समय"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>को निष्क्रियतापछि"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"सेट गरिएको छैन"</string>
@@ -1471,12 +1473,12 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"अफ छ"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
-    <string name="status_data_network_type" msgid="3689772955330665876">"मोबाइल डेटासम्बन्धी नेटवर्कको प्रकार"</string>
-    <string name="status_voice_network_type" msgid="8700356693062562884">"मोबाइल आवाजसम्बन्धी नेटवर्कको प्रकार"</string>
+    <string name="status_data_network_type" msgid="3689772955330665876">"मोबाइल डेटा नेटवर्कको प्रकार"</string>
+    <string name="status_voice_network_type" msgid="8700356693062562884">"मोबाइल भ्वाइस नेटवर्कको प्रकार"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"संचालक जानकारी"</string>
-    <string name="status_data_state" msgid="525196229491743487">"मोबाइल सञ्जाल वस्तुस्थिति"</string>
+    <string name="status_data_state" msgid="525196229491743487">"मोबाइल नेटवर्कको अवस्था"</string>
     <string name="status_esim_id" msgid="5158916796362809133">"EID"</string>
-    <string name="status_service_state" msgid="1693424422121058791">"सेवा स्थिति"</string>
+    <string name="status_service_state" msgid="1693424422121058791">"सेवाको अवस्था"</string>
     <string name="status_signal_strength" msgid="7644525712554444359">"सिग्नलको क्षमता"</string>
     <string name="status_roaming" msgid="1253597174715663778">"रोमिङ"</string>
     <string name="status_operator" msgid="4335640583552058491">"नेटवर्क"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"स्क्रिनमा तीनचोटि ट्याप गर्नुहोस्"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"एक्सेसिबिलिटीसम्बन्धी सर्टकटहरू सम्पादन गर्नुहोस्"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"%1$s का लागि आफ्नो सर्टकट रोज्नुहोस्"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"जारी राख्नुहोस्"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"हियरिङ डिभाइसहरू"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ASHA र LE अडियो हियरिङ डिभाइस, कक्लियर इम्प्लान्ट तथा अन्य एम्प्लिफिकेसन डिभाइसहरू सेटअप र व्यवस्थापन गर्नुहोस्"</string>
@@ -3247,7 +3251,7 @@
     <string name="access_point_names" msgid="5768430498022188057">"बिन्दु नामहरूमा पहुँच"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"उन्नत कल गर्दै"</string>
-    <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G कल गर्दै"</string>
+    <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G कलिङ"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"भ्वाइस कलको गुणस्तर सुधार्न LTE सेवा प्रयोग गर्नुहोस् (सिफारिस गरिएको)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"भ्वाइस कलको गुणस्तर सुधार्न 4G सेवा प्रयोग गर्नुहोस् (सिफारिस गरिएको)"</string>
     <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"सूचना स्नुज गर्न दिनुहोस्"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"एपको आइकनमा देखिने नोटिफिकेसन डट"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"नोटिफिकेसन बन्डलहरू"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"नोटिफिकेसनका सारांश"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"अन"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"अफ"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"नोटिफिकेसनका सारांश प्रयोग गर्नुहोस्"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"कुनै पनि एपबाट प्राप्त भएका वार्तालापसम्बन्धी नोटिफिकेसनहरूको सारांश स्वतः निकाल्नुहोस्"</string>
     <string name="live_notifications" msgid="4650406646292963831">"लाइभ नोटिफिकेसन"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"हालको जानकारी देखाउनुहोस्"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"पिन गरिएका नोटिफिकेसनमा एपहरूको हालको जानकारी देखाइन्छ र ती नोटिफिकेसन सधैँ स्ट्याटस बार र लक स्क्रिनमा देखिन्छन्"</string>
@@ -4935,7 +4934,7 @@
     <string name="preferred_network_mode_summary" msgid="537577807865497546">"नेटवर्क अपरेटिङ मोड परिवर्तन गर्नुहोस्"</string>
     <string name="preferred_network_mode_dialogtitle" msgid="4179420486180351631">"रुचाइएको नेटवर्कको प्रकार"</string>
     <string name="carrier_settings_version" msgid="3364919669057317776">"सेवा प्रदायकसम्बन्धी सेटिङको संस्करण"</string>
-    <string name="call_category" msgid="641461844504128789">"कल गर्दै"</string>
+    <string name="call_category" msgid="641461844504128789">"कल गर्ने सुविधा"</string>
     <string name="video_calling_settings_title" msgid="5490466306783552190">"सेवा प्रदायकको भिडियो कल"</string>
     <string name="cdma_system_select_title" msgid="8261408056382123386">"प्रणाली चयन गर्नुहोस्"</string>
     <string name="cdma_system_select_summary" msgid="384128007068464145">"CDMA रोमिङ मोड परिवर्तन गर्नुहोस्"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"ब्याट्री"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"सेटिङहरू नामक प्यानल"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"फ्रिफर्म विन्डोहरू अन गर्नुहोस्"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"डेस्कटपको जस्तो अनुभव दिने सुविधाहरू अन गर्नुहोस्"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"यो डिभाइस र सहायक डिस्प्लेहरूमा डेस्कटप भ्यू अन गर्नुहोस्।"</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"सहायक डिस्प्लेहरूमा डेस्कटप भ्यू अन गर्नुहोस्।"</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"दोस्रो डिस्प्लेमा फ्रिफर्म विन्डो अन गर्नुहोस्"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"एउटै विन्डोमा नअट्ने एपहरू एकभन्दा बढी विन्डोमा खोल्नुहोस्"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"एउटै विन्डोमा नअट्ने एपहरू एकभन्दा बढी विन्डोमा खोल्न दिनुहोस्"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"डिभाइस सुपरिवेक्षण गर्ने सुविधा प्रयोग गर्नुहोस्"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"सुरु गर्न PIN सेटअप गर्नुहोस्"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"सुपरिवेक्षण, अभिभावकीय सुपरिवेक्षण, अभिभावकीय नियन्त्रणहरू"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

@@ -126,7 +126,7 @@
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Seus dispositivos"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Parear novo dispositivo"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Desativar descarga de hardware de Bluetooth A2DP"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Desativar descarga de hardware de Bluetooth LE Audio"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Desativar descarga de hardware do Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Reiniciar dispositivo?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Reinicie o dispositivo para mudar essa configuração."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Reiniciar"</string>
@@ -134,11 +134,11 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Desativar Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"Desativa o recurso de Bluetooth LE Audio caso o hardware do dispositivo tenha essa opção."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Modo Bluetooth LE Audio"</string>
-    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Ativar a visualização da interface de transmissão de Bluetooth LE Audio"</string>
-    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Ativa a visualização da interface de compartilhamento de LE Audio, incluindo o compartilhamento de áudio pessoal e a transmissão particular"</string>
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Ativar a visualização da interface de transmissão do Bluetooth LE Audio"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Ativa a visualização da interface de compartilhamento do LE Audio, incluindo o compartilhamento de áudio pessoal e a transmissão particular"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Mostrar a chave do Bluetooth LE Audio nos Detalhes do dispositivo"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Ignorar lista de permissões do Bluetooth LE Audio"</string>
-    <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Usar o áudio de baixo consumo (LE Audio) por padrão, mesmo que o periférico dele não tenha sido verificado para atender aos critérios da lista de permissões."</string>
+    <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Usa o LE Audio por padrão, mesmo que o periférico dele não tenha sido verificado para atender aos critérios da lista de permissões."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Dispositivos portáteis de mídia"</string>
     <string name="connected_device_temp_bond_device_title" msgid="1141199848329262106">"Dispositivos convidados"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Dispositivos de chamada"</string>
@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Ao usar o Desbloqueio facial"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Exigir olhos abertos"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Para desbloquear o smartphone, os olhos precisam estar abertos"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Sempre exigir confirmação"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Sempre exigir etapa de confirmação ao usar Desbloqueio facial em apps"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Excluir modelo de rosto"</string>
@@ -547,7 +549,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Excluir"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Toque no sensor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Encoste o dedo no sensor e, após sentir uma vibração, tire o dedo"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Mantenha a digital no sensor até sentir uma vibração."</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Mantenha a digital no sensor até sentir uma vibração"</string>
     <string name="security_settings_sfps_enroll_start_message" msgid="9054672627477685212">"Sem pressionar o botão, mantenha a digital no sensor até sentir uma vibração.\n\nMova o dedo ligeiramente sempre que o dispositivo vibrar. Isso ajuda na captura da sua impressão digital."</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Toque e pressione o sensor de impressão digital"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Tire o dedo e toque novamente"</string>
@@ -859,7 +861,7 @@
     <string name="lockpassword_password_too_short" msgid="1938086368137797700">"{count,plural, =1{Precisa ter pelo menos # caractere}one{Precisa ter pelo menos # caractere}other{Precisa ter pelo menos # caracteres}}"</string>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Caso use apenas números, a senha precisa ter pelo menos 1 dígito}one{Caso use apenas números, a senha precisa ter pelo menos # dígito}other{Caso use apenas números, a senha precisa ter pelo menos # dígitos}}"</string>
     <string name="lockpassword_pin_too_short" msgid="8910105226463085689">"{count,plural, =1{O PIN precisa ter pelo menos # dígito}one{O PIN precisa ter pelo menos # dígito}other{O PIN precisa ter pelo menos # dígitos}}"</string>
-    <string name="lockpassword_pin_too_short_autoConfirm_extra_message" msgid="3271351502900762571">"{count,plural, =1{O PIN precisa ter pelo menos # dígito, mas recomendamos {minAutoConfirmLen} dígitos para maior segurança.}one{O PIN precisa ter pelo menos # dígito, mas recomendamos {minAutoConfirmLen} dígitos para maior segurança.}other{O PIN precisa ter pelo menos # dígitos, mas recomendamos {minAutoConfirmLen} dígitos para maior segurança.}}"</string>
+    <string name="lockpassword_pin_too_short_autoConfirm_extra_message" msgid="3271351502900762571">"{count,plural, =1{O PIN precisa ter pelo menos # dígito, mas recomendamos {minAutoConfirmLen} dígitos para maior segurança}one{O PIN precisa ter pelo menos # dígito, mas recomendamos {minAutoConfirmLen} dígitos para maior segurança}other{O PIN precisa ter pelo menos # dígitos, mas recomendamos {minAutoConfirmLen} dígitos para maior segurança}}"</string>
     <string name="lockpassword_password_too_long" msgid="1940345313260498308">"{count,plural, =1{Precisa ter menos de # caractere}one{Precisa ter menos de # caractere}other{Precisa ter menos de # caracteres}}"</string>
     <string name="lockpassword_pin_too_long" msgid="1678212054564388576">"{count,plural, =1{Precisa ter menos de # dígito}one{Precisa ter menos de # dígito}other{Precisa ter menos de # dígitos}}"</string>
     <string name="lockpassword_pin_recently_used" msgid="6650277060998923465">"O administrador do dispositivo não permite o uso de um PIN recente"</string>
@@ -1245,7 +1247,7 @@
     <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"Salvar redes?"</string>
     <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"Salvando <xliff:g id="NUMBER">%d</xliff:g> redes…"</string>
     <string name="wifi_add_app_networks_saved_summary" msgid="1648417628665152905">"Redes salvas"</string>
-    <string name="wifi_calling_settings_title" msgid="264665264535884440">"Chamadas por Wi-Fi"</string>
+    <string name="wifi_calling_settings_title" msgid="264665264535884440">"Ligação pelo Wi-Fi"</string>
     <string name="wifi_calling_suggestion_title" msgid="4791435106729906727">"Aumentar as chamadas com Wi‑Fi"</string>
     <string name="wifi_calling_suggestion_summary" msgid="5413024679599742858">"Ativar a chamada no Wi‑Fi para aumentar a cobertura"</string>
     <string name="wifi_calling_mode_title" msgid="5145896168360825619">"Preferência de chamadas"</string>
@@ -1373,7 +1375,7 @@
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Alguns modos também ativam o tema escuro}=1{O modo {mode_1} também ativa o tema escuro}=2{Os modos {mode_1} e {mode_2} também ativam o tema escuro}=3{Os modos {mode_1}, {mode_2} e {mode_3} também ativam o tema escuro}one{Os modos {mode_1}, {mode_2} e mais # também ativam o tema escuro}other{Os modos {mode_1}, {mode_2} e mais # também ativam o tema escuro}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Configurações de modos"</string>
     <string name="even_dimmer_display_title" msgid="4509732439977906028">"Tela ainda mais escura"</string>
-    <string name="even_dimmer_display_summary" msgid="120301078873242172">"Permitir que o dispositivo fique mais escuro do que o normal"</string>
+    <string name="even_dimmer_display_summary" msgid="120301078873242172">"Permite que o dispositivo fique mais escuro do que o normal"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Tempo limite da tela"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Depois de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inatividade"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"Sem definição"</string>
@@ -1868,7 +1870,7 @@
     <string name="archive" msgid="9074663845068632127">"Arquivar"</string>
     <string name="restore" msgid="7622486640713967157">"Restaurar"</string>
     <string name="restoring_step_one" msgid="3465050101254272874">"Restaurando"</string>
-    <string name="restoring_step_two" msgid="140484846432595108">"Restaurando."</string>
+    <string name="restoring_step_two" msgid="140484846432595108">"Restaurando"</string>
     <string name="restoring_step_three" msgid="3712883580876329811">"Restaurando…"</string>
     <string name="restoring_step_four" msgid="8966846882470446209">"Restaurando…"</string>
     <string name="total_size_label" msgid="2052185048749658866">"Total"</string>
@@ -2334,7 +2336,7 @@
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Configurações rápidas"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Teclas de volume"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"teclas de volume"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Tocar e manter as duas teclas de volume pressionadas"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Toque e mantenha as duas teclas de volume pressionadas"</string>
     <string name="accessibility_shortcut_edit_screen_title_two_finger_double_tap" msgid="8952595692906527694">"Toque duplo com %1$d dedos"</string>
     <string name="accessibility_shortcut_edit_screen_summary_two_finger_double_tap" msgid="385404127425496362">"Toque rapidamente na tela 2 vezes com %1$d dedos"</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Toque triplo"</string>
@@ -2373,7 +2375,7 @@
     <string name="accessibility_notification_high_contrast_text_content" msgid="7159316497764514501">"Tente usar o Contorno de texto. Ela está nas Configurações."</string>
     <string name="accessibility_notification_high_contrast_text_action" msgid="7190559555068414342">"Abrir as Configurações"</string>
     <string name="accessibility_toggle_maximize_text_contrast_preference_title" msgid="6940551350643305572">"Contorno de texto"</string>
-    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Adicionar um fundo preto ou branco ao redor do texto para aumentar o contraste"</string>
+    <string name="accessibility_toggle_maximize_text_contrast_preference_summary" msgid="8200408691846666900">"Adiciona um fundo preto ou branco ao redor do texto para aumentar o contraste"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Atual. autom. da ampliação da tela"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Atualiz. ampliação da tela em transições de aplic."</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Botão liga/desliga encerra chamadas"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tocar na tela três vezes"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Editar atalhos de acessibilidade"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Escolha o atalho para %1$s"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continuar"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Aparelhos auditivos"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Configure e gerencie aparelhos auditivos ASHA e LE Audio, implantes cocleares e outros dispositivos de amplificação de som"</string>
@@ -3035,7 +3039,7 @@
     <string name="data_usage_background_label" msgid="5363718469293175279">"Segundo plano:"</string>
     <string name="data_usage_app_settings" msgid="5693524672522122485">"Configurar app"</string>
     <string name="data_usage_app_restrict_background" msgid="5728840276368097276">"Dados em segundo plano"</string>
-    <string name="data_usage_app_restrict_background_summary" msgid="2997942775999602794">"Ativar o uso de dados móveis em segundo plano"</string>
+    <string name="data_usage_app_restrict_background_summary" msgid="2997942775999602794">"Ativa o uso de dados móveis em segundo plano"</string>
     <string name="data_usage_app_restrict_background_summary_disabled" msgid="8213268097024597864">"Definir um limite de dados para restringir dados em 2º plano"</string>
     <string name="data_usage_app_restrict_dialog_title" msgid="5383874438677899255">"Restringir dados de segundo plano?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"Este recurso pode fazer com que um app que depende de dados de segundo plano pare de funcionar quando somente redes de acesso limitado estiverem disponíveis.\n\nVocê pode encontrar controles de uso de dados mais apropriados nas configurações disponíveis no app."</string>
@@ -3249,7 +3253,7 @@
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Chamada avançada"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Chamada 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Usar serviços de LTE para melhorar chamadas de voz (recomendado)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Usar serviços 4G para melhorar chamadas de voz (recomendado)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Usa serviços 4G para melhorar chamadas de voz (recomendado)"</string>
     <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
     <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Usar o 5G em chamadas de voz"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Enviar contatos para a operadora"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Permitir adiar notificações"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Ponto de notificação no ícone do app"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Pacotes de notificações"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Resumos de notificações"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"Ativado"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Desativado"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Usar resumos de notificações"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Resumir automaticamente as notificações de conversas de qualquer app"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Notificações ao vivo"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Mostrar informações ao vivo"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"As notificações fixadas mostram informações em tempo real dos apps e sempre aparecem na barra de status e na tela de bloqueio"</string>
@@ -3882,7 +3881,7 @@
     <string name="app_notification_settings" msgid="2848603567344392693">"Configurações do app"</string>
     <string name="notification_channels" msgid="8080872820677975820">"Categorias de notificação"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"Outros"</string>
-    <string name="no_channels" msgid="4716199078612071915">"Este app não postou nenhuma notificação"</string>
+    <string name="no_channels" msgid="4716199078612071915">"Esse app não postou nenhuma notificação"</string>
     <string name="no_recent_channels" msgid="5068574296267584043">"Mostrar categorias não usadas"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Configurações avançadas no app"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Mostrar categorias não usadas"</string>
@@ -4051,7 +4050,7 @@
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Informações e configurações em <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Gerenciado por <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Desativar o <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Este modo nunca será ativado quando estiver desativado"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"O modo nunca será ativado quando estiver desativado"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Desativar"</string>
     <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Ativar <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
     <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Esse modo pode ser ativado automaticamente de acordo com as configurações"</string>
@@ -4442,7 +4441,7 @@
     <string name="data_saver_off" msgid="5891210864117269045">"Desativada"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Usar o recurso Economia de dados"</string>
     <string name="unrestricted_app_title" msgid="8531936851059106374">"Uso de dados móveis ilimitados"</string>
-    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Permitir acesso a dados móveis ilimitados quando a Economia de dados estiver ativada"</string>
+    <string name="unrestricted_app_summary" msgid="8320813971858627624">"Permite o acesso a dados móveis ilimitados quando a Economia de dados estiver ativada"</string>
     <string name="home_app" msgid="6056850504746902747">"App de início"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Adicionar outra impressão digital"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Desbloqueie com um dedo diferente"</string>
@@ -4532,7 +4531,7 @@
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Ajuda a aumentar a duração da bateria"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Blocos de desenvolvedor para configurações rápidas"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Desativar o tempo limite da autorização adb"</string>
-    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Desativar a revogação automática de autorizações adb para sistemas que não foram reconectados no período padrão (7 dias) ou configurado pelo usuário (mínimo de 1 dia)."</string>
+    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Desativa a revogação automática de autorizações adb para sistemas que não foram reconectados no período padrão (7 dias) ou configurado pelo usuário (mínimo de 1 dia)."</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Sensores desativados"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Configurações do perfil de trabalho"</string>
     <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"Pesquisar contatos do diretório de trabalho nos apps pessoais"</string>
@@ -4786,7 +4785,7 @@
     <string name="disabled_feature" msgid="7151433782819744211">"Recurso não disponível"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"Esse recurso foi desativado porque causa lentidão no seu smartphone"</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"Sempre mostrar a caixa de diálogo de falha"</string>
-    <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"Mostrar a caixa de diálogo sempre que um app falha"</string>
+    <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"Mostra a caixa de diálogo sempre que um app falha"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"Selecionar app ativado para ANGLE"</string>
     <string name="angle_enabled_app_not_set" msgid="4472572224881726067">"Nenhum conjunto de aplicativos ativados para ANGLE"</string>
     <string name="angle_enabled_app_set" msgid="7811829383833353021">"Aplicativo ativado para ANGLE: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Bateria"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Painel de configurações"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Ativar janelas de forma livre"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Ativar recursos da experiência para computadores"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Ativar a versão para computadores no dispositivo e em telas secundárias."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Ativar a versão para computadores em telas secundárias."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Ativar janelas de forma livre na tela secundária"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Ativar recursos não redimensionáveis em várias janelas"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Permitir que apps não redimensionáveis sejam usados em várias janelas"</string>
@@ -5215,7 +5211,7 @@
     <string name="allow_mock_modem" msgid="3832264806530479214">"Permitir Mock Modem"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Permita que este dispositivo execute o serviço Mock Modem para testes de instrumentação. Não ative esse recurso durante o uso normal do smartphone."</string>
     <string name="disable_screen_share_protections_for_apps_and_notifications" msgid="4987116103699222633">"Desativar as proteções do compartilhamento de tela"</string>
-    <string name="disable_screen_share_protections_for_apps_and_notifications_summary" msgid="5379583403909210858">"Desative as proteções do sistema para conteúdo sensível de apps nas próximas sessões de compartilhamento de tela"</string>
+    <string name="disable_screen_share_protections_for_apps_and_notifications_summary" msgid="5379583403909210858">"Desativa as proteções do sistema para conteúdo sensível de apps nas próximas sessões de compartilhamento de tela"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Mídia"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Fixar player de mídia"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Para retomar a reprodução rapidamente, o player de mídia fica aberto nas Configurações rápidas"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Usar supervisão do dispositivo"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Configure o PIN para começar"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervisão, supervisão da família, controles da família"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

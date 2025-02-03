@@ -240,7 +240,7 @@
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"Eerste dag van de week"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"Cijfervoorkeuren"</string>
     <string name="measurement_system_preferences_title" msgid="5539250190895110890">"Meetsysteem"</string>
-    <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Standaard gebruiken"</string>
+    <string name="default_string_of_regional_preference" msgid="3428899072914884203">"Gebruik standaard"</string>
     <string name="celsius_temperature_unit" msgid="8896459071273084507">"Celsius (°C)"</string>
     <string name="fahrenheit_temperature_unit" msgid="1118677820614569801">"Fahrenheit (°F)"</string>
     <string name="sunday_first_day_of_week" msgid="7644548348295686051">"Zondag"</string>
@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Als je ontgrendelt via gezichtsherkenning"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Vereisen dat ogen open zijn"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Je ogen moeten open zijn om de telefoon te ontgrendelen"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Altijd bevestiging vereisen"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Vereis altijd bevestiging bij Ontgrendelen via gezichtsherkenning."</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Gezichtsmodel verwijderen"</string>
@@ -576,7 +578,7 @@
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Leg de zijkant van je vingerafdruk op de sensor en houd vast. Doe dan hetzelfde aan de andere kant."</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Instellen van vingerafdruk overslaan?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Je hebt ervoor gekozen je vingerafdruk te gebruiken als manier om je telefoon te ontgrendelen. Als je dit nu overslaat, moet je het later instellen. Het instellen neemt ongeveer een minuut in beslag."</string>
-    <string name="lock_screen_skip_setup_title" msgid="6979006375138175111">"Instellen overslaan voor <xliff:g id="OPTIONS">%s</xliff:g>?"</string>
+    <string name="lock_screen_skip_setup_title" msgid="6979006375138175111">"<xliff:g id="OPTIONS">%s</xliff:g> instellen overslaan?"</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Instellen pincode overslaan?"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"Pincode en gezicht instellen overslaan?"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"Pincode en vingerafdruk instellen overslaan?"</string>
@@ -2125,7 +2127,7 @@
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Door de gebruiker geselecteerd: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Spraak"</string>
     <string name="speech_preference_title" msgid="5080497338234779098">"Spraak"</string>
-    <string name="speech_preference_summary" msgid="5190362663352347487">"Spraakherkenning en -uitvoer beheren"</string>
+    <string name="speech_preference_summary" msgid="5190362663352347487">"Beheer spraakherkenning en -uitvoer"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Snelheid van aanwijzer"</string>
     <string name="pointer_scale" msgid="3170694549809691557">"Grootte van cursor"</string>
     <string name="pointer_scale_decrease_content_description" msgid="4479646756230008068">"Aanwijzerschaal verkleinen"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tik 3 keer op het scherm"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Snelkoppelingen voor toegankelijkheid bewerken"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Kies je sneltoets voor %1$s"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Doorgaan"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Hoortoestellen"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Stel ASHA- en LE Audio-hoortoestellen, cochleaire implantaten en andere versterkingsapparaten in en beheer die"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Snoozen van meldingen toestaan"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Meldingsstipje op app-icoon"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Meldingsbundels"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Meldingssamenvattingen"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"Aan"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Uit"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Meldingssamenvattingen gebruiken"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Vat gespreksmeldingen vanuit elke app automatisch samen"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Live meldingen"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Live informatie tonen"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Vastgezette meldingen tonen live informatie van apps en verschijnen altijd in de statusbalk en op het vergrendelscherm"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batterij"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Instellingenvenster"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Vensters met vrije vorm aanzetten"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Functies voor desktopervaring aanzetten"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Zet de desktopweergave aan op het apparaat en op secundaire schermen."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Zet de desktopweergave aan op secundaire schermen."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Vensters met vrije vorm aanzetten op secundair scherm"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Apps met niet-aanpasbaar formaat aanzetten in meerdere vensters"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Dit staat apps met een niet-aanpasbaar formaat toe in meerdere vensters"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Apparaattoezicht gebruiken"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Stel een pincode in om aan de slag te gaan"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"toezicht, ouderlijk toezicht, opties voor ouderlijk toezicht"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

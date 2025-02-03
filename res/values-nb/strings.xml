@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Når du bruker ansiktslås"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Øynene må være åpne"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Øynene dine må være åpne for å låse opp telefonen"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Krev alltid bekreftelse"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Krev alltid bekreftelsestrinnet når ansiktslås brukes i apper"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Slett ansiktsmodellen"</string>
@@ -2059,7 +2061,7 @@
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"Pekerhastighet, bevegelser"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Trykk for å klikke"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Trykk og dra for å flytte elementer"</string>
-    <string name="trackpad_tap_dragging_summary" msgid="2935498183201422245">"Dobbelttrykk på et element, hold inne på trykk 2, og dra elementet for å flytte det"</string>
+    <string name="trackpad_tap_dragging_summary" msgid="2935498183201422245">"Dobbelttrykk på et element, hold inne trykk nr. 2, og dra elementet for å flytte det"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Styreflatebevegelser"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Tilpass enkeltbevegelser for styreflatenavigasjon"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Omvendt rulling"</string>
@@ -2466,8 +2468,10 @@
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Sveip opp med to fingre fra bunnen"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Hold inne volumtastene"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Trippeltrykk på skjermen"</string>
-    <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Endre tilgjengelighetssnarveier"</string>
+    <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Endre snarveier for tilgjengelighet"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Velg hurtigtast for %1$s"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Fortsett"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Høreapparater"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Konfigurer og administrer høreapparater, cochlea-implantater og andre forsterkningsenheter som bruker ASHA eller LE-lyd"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Tillat slumring av varsler"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Varselprikk på appikoner"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Varselspakker"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Varseloppsummeringer"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"På"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Av"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Bruk varseloppsummeringer"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Oppsummer samtalevarsler fra alle apper automatisk"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Sanntidsvarsler"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Vis sanntidsinformasjon"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Festede varsler viser sanntidsinformasjon fra apper og vises alltid i statusfeltet og på låseskjermen"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batteri"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Innstillinger-panel"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Slå på vinduer i fritt format"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Slå på funksjoner for datamaskinopplevelsen"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Slå på datamaskinvisning på enheten og på sekundære skjermer."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Slå på datamaskinvisning på sekundære skjermer."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Slå på vinduer i fritt format på sekundærskjermen"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Slå på apper som ikke kan endre størrelse, i flervindusmodus"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Tillater apper som ikke kan endre størrelse, i flervindusmodus"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Bruk enhetstilsyn"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Konfigurer en PIN-kode for å komme i gang"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"tilsyn, foreldretilsyn, foreldrekontroll"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

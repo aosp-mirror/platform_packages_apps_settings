@@ -137,7 +137,7 @@
     <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Bluetooth LE аудио тарату пайдаланушы интерфейсінің алғы нұсқасын қосу"</string>
     <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"LE аудио бөлісу пайдаланушы интерфейсінің алғы нұсқасын, соның ішінде жеке аудио бөлісу және жеке тарату опцияларын қосады."</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"LE Audio ауыстырғышын \"Құрылғы туралы мәлімет\" бөлімінде көрсету"</string>
-    <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bypass Bluetooth LE Audio рұқсат тізімін айналып өту"</string>
+    <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bluetooth LE Audio рұқсат тізімін айналып өту"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE Audio перифериялық құрылғысының рұқсат тізімі шарттарына сәйкес келуі расталмаса да, LE Audio әдепкісінше пайдаланылады."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Мультимедиа құрылғылары"</string>
     <string name="connected_device_temp_bond_device_title" msgid="1141199848329262106">"Қонақ құрылғылар"</string>
@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Бет тану функциясын пайдаланған кезде"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Көз ашық тұруы керек"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Телефон құлпын ашу үшін көзіңізді ашып тұрыңыз."</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Әрқашан растауды сұрау"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Қолданбаларда бет тану функциясын пайдаланғанда, үнемі растау қадамын сұрау"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Бет үлгісін жою"</string>
@@ -1284,7 +1286,7 @@
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Жеке аккаунт - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Іздеу"</string>
     <string name="display_settings" msgid="7197750639709493852">"Дисплей"</string>
-    <string name="accelerometer_title" msgid="7745991950833748909">"Экранды автоматты бұру"</string>
+    <string name="accelerometer_title" msgid="7745991950833748909">"Экранды автоматты түрде бұру"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Өшірулі"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Қосулы"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Қосулы – Бет негізінде"</string>
@@ -1369,7 +1371,7 @@
     <string name="dark_ui_summary_on_auto_mode_modes" msgid="7769594183411785087">"<xliff:g id="ID_1">%1$s</xliff:g> басталған кезде, өшіріледі."</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"Қараңғы батарея кейбір экрандарда батарея зарядын ұзаққа жеткізу үшін қара фонды пайдаланады. Экран өшпейінше, қараңғы режим кестелері қосылмайды."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Қараңғы режим қазір \"Ұйқы\" режимінің кестесіне қолданылып жатыр."</string>
-    <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"\"Ұйқы\" режимі параметрлері"</string>
+    <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Ұйқы режимі параметрлері"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{Қараңғы режим басқа режимдердің ықпалынан да қосылуы мүмкін.}=1{Қараңғы режим {mode_1} режимінің ықпалынан да қосылуы мүмкін.}=2{Қараңғы режим {mode_1} және {mode_2} режимдерінің ықпалынан да қосылуы мүмкін.}=3{Қараңғы режим {mode_1}, {mode_2} және {mode_3} режимдерінің ықпалынан да қосылуы мүмкін.}other{Қараңғы режим {mode_1}, {mode_2} және тағы # режимнің ықпалынан да қосылуы мүмкін.}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Режим параметрлері"</string>
     <string name="even_dimmer_display_title" msgid="4509732439977906028">"Экранды қарайту"</string>
@@ -2357,7 +2359,7 @@
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Арнайы мүмкіндіктер түймесі қолданылуда. Бұл қимыл 3 түймемен басқарылмайды."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Арнайы мүмкіндіктерге жылдам қол жеткізу"</string>
     <string name="accessibility_button_gesture_description" msgid="1141723096904904336">"&lt;b&gt;Бастау үшін:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Арнайы мүмкіндіктердің параметрлеріне өтіңіз.&lt;br/&gt; {1,number,integer}. Функцияны таңдап, жылдам пәрменді түртіңіз.&lt;br/&gt; {2,number,integer}. Функцияны пайдалану үшін түймені не қимылды қолданғыңыз келетінін таңдаңыз.&lt;br/&gt;"</string>
-    <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Бастау үшін&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Арнайы мүмкіндіктердің параметрлеріне өтіңіз&lt;br/&gt; {1,number,integer}. Функцияны таңдап, жылдам пәрменді түртіңіз&lt;br/&gt; {2,number,integer}. Функцияны пайдалану үшін түймені таңдаңыз&lt;br/&gt;"</string>
+    <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Функцияны реттеу үшін:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Арнайы мүмкіндіктердің параметрлеріне өтіңіз.&lt;br/&gt; {1,number,integer}. Функцияны таңдап, жылдам пәрменді түртіңіз.&lt;br/&gt; {2,number,integer}. Функцияға түйме тағайындаңыз.&lt;br/&gt;"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Түйме не қимылды қолдану"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Орны"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Көлемі"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Экранды үш рет түрту"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Арнайы мүмкіндіктер жылдам пәрмендерін өзгерту"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"%1$s үшін жылдам пәрмен таңдаңыз."</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Жалғастыру"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Есту аппараттары"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"ASHA және LE Audio есту құрылғыларын, кохлеарлы импланттарды және тағы басқа күшейткіш құрылғыларды реттеңіз және басқарыңыз."</string>
@@ -3516,7 +3520,7 @@
     <string name="zen_mode_not_found_text" msgid="692090778655810329">"Режим табылмады."</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Хабарландыруларды шектеу"</string>
     <string name="zen_mode_setup_page_summary" msgid="7568908001205193154">"Кедергілер мен алаңдататын нәрселерді блоктау"</string>
-    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"<xliff:g id="MODE">%1$s</xliff:g> режимін реттеу"</string>
+    <string name="zen_mode_setup_button_label" msgid="1959984133767361374">"<xliff:g id="MODE">%1$s</xliff:g> параметрлерін реттеу"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Мазаламау режимін қосу"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Оятқыштар мен мультимедиа дыбыстары тоқтата алады."</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Кестелер"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Хабарландыруларды кейінге қалдыруға рұқсат беру"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Қолданба белгішесіндегі хабарландыру белгісі"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Хабарландыру топтары"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Хабарландыру қорытындылары"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"Қосу"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Өшіру"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Хабарландыру қорытындыларын пайдаланыңыз"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Кез келген қолданбадағы әңгіме хабарландыруларын автоматты түрде қорытындылаңыз."</string>
     <string name="live_notifications" msgid="4650406646292963831">"Нақты уақыттағы хабарландырулар"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Нақты уақыттағы ақпаратты көрсету"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Бекітілген хабарландырулар қолданбалардың нақты уақыттағы ақпаратын көрсетеді және әрдайым күй жолағында және құлып экранында көрсетіледі."</string>
@@ -4045,7 +4044,7 @@
     <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"Режим атауы бос болмауы керек."</string>
     <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"Белгішені таңдау"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Күнтізбедегі іс-шаралар"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"\"Ұйқы\" режимі"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Ұйқы режимі"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Көлік жүргізгенде"</string>
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Қолданба параметрлері"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Ақпарат пен параметрлерді қолданбада (<xliff:g id="APP_NAME">%1$s</xliff:g>) көруге болады."</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Батарея"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Параметрлер панелі"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Еркін пішінді терезелерге рұқсат беру"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Компьютерге арналған нұсқа функцияларын қосу"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Компьютерлік нұсқаны құрылғыда және қосымша дисплейлерде қосыңыз."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Компьютерлік нұсқаны қосымша дисплейлерде қосыңыз."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Қосымша дисплейде еркін пішінді терезені қосу"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Өлшемі өзгермейтін қолданба мен көп терезелі режим"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Өлшемі өзгермейтін қолданбаларды көп терезелі режимде пайдалануға мүмкіндік береді."</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Құрылғыны қадағалау функциясын пайдалану"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Бастау үшін PIN кодын орнатыңыз."</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"қадағалау, ата-ана қадағалауы, ата-ана бақылауы"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

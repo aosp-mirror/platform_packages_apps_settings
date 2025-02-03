@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Når du bruger ansigtsoplåsning"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Kræv, at øjnene skal være åbne"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Dine øjne skal være åbne for at låse telefonen op"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Bed altid om bekræftelse"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Kræv altid et bekræftelsestrin ved brug af ansigtsoplåsning i apps"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Slet ansigtsmodel"</string>
@@ -2359,7 +2361,7 @@
     <string name="accessibility_button_gesture_description" msgid="1141723096904904336">"&lt;b&gt;Sådan kommer du i gang&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gå til indstillinger for hjælpefunktioner&lt;br/&gt; {1,number,integer}. Vælg en funktion, og tryk på genvejen&lt;br/&gt; {2,number,integer}. Vælg, om du vil bruge en knap eller en bevægelse for at tilgå funktionen&lt;br/&gt;"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Sådan kommer du i gang&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gå til indstillinger for hjælpefunktioner&lt;br/&gt; {1,number,integer}. Vælg en funktion, og tryk på genvejen&lt;br/&gt; {2,number,integer}. Vælg den knap, du vil bruge for at tilgå funktionen&lt;br/&gt;"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Brug knap eller bevægelse"</string>
-    <string name="accessibility_button_location_title" msgid="7182107846092304942">"Lokation"</string>
+    <string name="accessibility_button_location_title" msgid="7182107846092304942">"Placering"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Størrelse"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Udton, når funktionen ikke bruges"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Udtones efter et par sekunder, så det bliver nemmere at se din skærm"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tryk tre gange på skærmen"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Rediger genveje til hjælpefunktioner"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Vælg din genvej til %1$s"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Fortsæt"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Høreapparater"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Konfigurer og administrer høreapparater, der understøtter ASHA og LE-lyd, cochlear-implantater og andre enheder til lydforstærkning"</string>
@@ -2759,7 +2763,7 @@
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Aktivér"</string>
-    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"Brug batterisparefunktionen"</string>
+    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"Brug Batterisparefunktion"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="7857393318205740864">"Slå automatisk til"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"Aldrig"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"ved batteriniveau på <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -3485,7 +3489,7 @@
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Høretelefoner med ledning"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"Lyden fra kompatible medieenheder bliver endnu bedre"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Fra"</string>
-    <string name="spatial_summary_on_one" msgid="6239933399496282994">"Til/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
+    <string name="spatial_summary_on_one" msgid="6239933399496282994">"Til / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Til/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> og <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Du kan også aktivere rumlig lyd for Bluetooth-enheder."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Indstillinger for forbundne enheder"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Tillad udsættelse af notifikationer"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Notifikationsprik på appikon"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Notifikationspakker"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Notifikationsoversigter"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"Til"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Fra"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Brug notifikationsoversigter"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Opsummer automatisk samtalenotifikationer fra alle apps"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Livenotifikationer"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Vis liveoplysninger"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Fastgjorte notifikationer viser liveoplysninger fra apps og vises altid på statusbjælken og låseskærmen"</string>
@@ -3692,7 +3691,7 @@
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Hvis du aktiverer bobler for denne app, aktiveres funktionen overalt på din enhed.\n\nDette påvirker andre apps og samtaler, som kan vises i bobler."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"Aktivér"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Luk"</string>
-    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Til – Samtaler kan vises som svævende ikoner"</string>
+    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Til / Samtaler kan vises som svævende ikoner"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Tillad, at apps viser bobler"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Nogle samtaler vises som svævende ikoner oven på andre apps"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Alle samtaler kan vises i bobler"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batteri"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Indstillingspanel"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Aktivér vinduer i frit format"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Aktivér funktioner til computeroplevelse"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Aktivér computervenlig visning på enheden og på sekundære skærme."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Aktivér computervenlig visning på sekundære skærme."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Aktivér vinduer i frit format på en sekundær skærm"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Aktivér app, hvis størrelse ikke kan justeres, i multivindue"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Tillader, at apps, hvis størrelse ikke kan justeres, kan være i et multivindue"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Brug forældrestyring af enhed"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Konfigurer en pinkode for at komme i gang"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"forældrestyring, indstillinger for børnesikring, børnesikring"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>

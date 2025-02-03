@@ -125,8 +125,8 @@
     <string name="bluetooth_off_footer" msgid="76578735660216295">"Activez le Bluetooth pour vous connecter à d\'autres appareils."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"Vos appareils"</string>
     <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"Associer nouvel appareil"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Désactiver le déchargement du matériel Bluetooth A2DP"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Désactiver le déchargement du matériel Bluetooth LE Audio"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Désactiver le déchargement matériel pour le Bluetooth A2DP"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Désactiver le déchargement matériel pour le Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Redémarrer l\'appareil ?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Vous devez redémarrer l\'appareil pour modifier ce paramètre."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Redémarrer"</string>
@@ -137,7 +137,7 @@
     <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Activer l\'aperçu de l\'UI de diffusion Bluetooth LE Audio"</string>
     <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"Active l\'aperçu de l\'UI de partage LE Audio, y compris le partage audio personnel et la diffusion privée"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"Bouton LE Audio dans Détails appareil"</string>
-    <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Liste d\'autorisation de contournement Bluetooth LE Audio"</string>
+    <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Contourner la liste d\'autorisation du Bluetooth LE Audio"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"Utilisez LE Audio par défaut même si le respect des critères de la liste d\'autorisation par le périphérique LE Audio n\'a pas été validé."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Périphériques multimédias"</string>
     <string name="connected_device_temp_bond_device_title" msgid="1141199848329262106">"Appareils invités"</string>
@@ -211,7 +211,7 @@
     <string name="desc_notice_of_language_picker" msgid="3449290526457925447">"Pour sélectionner une langue pour chaque application, accédez aux paramètres de langue de cette application."</string>
     <string name="desc_locale_helper_footer_general" msgid="6112153921151780303">"En savoir plus sur les langues des applications"</string>
     <string name="title_change_system_region" msgid="5476591184463491936">"Basculer sur la région %s ?"</string>
-    <string name="desc_notice_device_region_change" msgid="6702773189066944100">"Votre appareil conservera %s comme langue du système"</string>
+    <string name="desc_notice_device_region_change" msgid="6702773189066944100">"Votre appareil conservera la langue suivante comme langue du système : %s"</string>
     <string name="title_change_system_locale" msgid="8589844586256566951">"Sélectionner %s comme langue du système ?"</string>
     <string name="title_system_locale_addition" msgid="8218683660751479466">"Ajouter %s aux langues préférées ?"</string>
     <string name="desc_system_locale_addition" msgid="3409917362651596070">"Cela permet aux applis et sites Web de savoir que vous préférez aussi cette langue."</string>
@@ -402,6 +402,8 @@
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Lorsque vous utilisez la reconnaissance faciale"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Garder les yeux ouverts"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Vous devez ouvrir les yeux pour déverrouiller le téléphone"</string>
+    <string name="security_settings_face_settings_gaze" msgid="7539766717836085281"></string>
+    <string name="security_settings_face_settings_gaze_details" msgid="1234235596091247119"></string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Toujours demander confirmation"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Toujours confirmer le déverrouillage par reconnaissance faciale dans les applis"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Supprimer l\'empreinte faciale"</string>
@@ -2468,6 +2470,8 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Appuyer trois fois sur l\'écran"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Modifier les raccourcis d\'accessibilité"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Choisissez votre raccourci pour %1$s"</string>
+    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
+    <skip />
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continuer"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Appareils auditifs"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Configurez et gérez les appareils auditifs ASHA et LE Audio, les implants cochléaires ainsi que d\'autres amplificateurs auditifs"</string>
@@ -3249,7 +3253,7 @@
     <string name="enhanced_4g_lte_mode_title_advanced_calling" msgid="7066009898031465265">"Appel avancé"</string>
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Appel en 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Utiliser les services LTE pour améliorer les appels vocaux (recommandé)"</string>
-    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Utiliser les services 4G pour améliorer les appels vocaux et autres (recommandé)"</string>
+    <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Utiliser les services 4G pour améliorer les appels vocaux (recommandé)"</string>
     <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Vo5G"</string>
     <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Utiliser la 5G pour les appels vocaux"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Envoyer les contacts à l\'opérateur"</string>
@@ -3671,16 +3675,11 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Autoriser la mise en attente des notifications"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Pastille de notification sur l\'icône de l\'application"</string>
     <string name="notification_bundles" msgid="3614044525822580826">"Groupes de notifications"</string>
-    <!-- no translation found for notification_summarization_title (1516039882005781529) -->
-    <skip />
-    <!-- no translation found for notification_summarization_on (5692758038788359790) -->
-    <skip />
-    <!-- no translation found for notification_summarization_off (4660131515915234037) -->
-    <skip />
-    <!-- no translation found for notification_summarization_main_control_title (3341727937605794607) -->
-    <skip />
-    <!-- no translation found for notification_summarization_description (3468513132824606481) -->
-    <skip />
+    <string name="notification_summarization_title" msgid="1516039882005781529">"Résumés de notifications"</string>
+    <string name="notification_summarization_on" msgid="5692758038788359790">"Activé"</string>
+    <string name="notification_summarization_off" msgid="4660131515915234037">"Désactivé"</string>
+    <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Utiliser les résumés de notifications"</string>
+    <string name="notification_summarization_description" msgid="3468513132824606481">"Résumer automatiquement les notifications de conversation de n\'importe quelle appli"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Notifications en direct"</string>
     <string name="live_notifications_switch" msgid="50547709843410137">"Afficher les infos en direct"</string>
     <string name="live_notifications_desc" msgid="7383414458419053003">"Les notifications épinglées affichent des informations en direct provenant d\'applis et apparaissent toujours dans la barre d\'état et sur l\'écran de verrouillage"</string>
@@ -5080,12 +5079,9 @@
     <string name="bluetooth_header_battery_content_description" msgid="3804237436331504879">"Batterie"</string>
     <string name="settings_panel_title" msgid="346363079938069215">"Panneau des paramètres"</string>
     <string name="enable_desktop_mode" msgid="5644818402534562302">"Activer les fenêtres de forme libre"</string>
-    <!-- no translation found for enable_desktop_experience_features (7389235241021706660) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_with_desktop (6021998363632868925) -->
-    <skip />
-    <!-- no translation found for enable_desktop_experience_features_summary_without_desktop (6635507335168490646) -->
-    <skip />
+    <string name="enable_desktop_experience_features" msgid="7389235241021706660">"Activer les fonctionnalités du mode ordinateur"</string>
+    <string name="enable_desktop_experience_features_summary_with_desktop" msgid="6021998363632868925">"Activez l\'affichage en mode ordinateur sur l\'appareil et les écrans secondaires."</string>
+    <string name="enable_desktop_experience_features_summary_without_desktop" msgid="6635507335168490646">"Activez l\'affichage en mode ordinateur sur les écrans secondaires."</string>
     <string name="enable_desktop_mode_on_secondary_display" msgid="2609567824593768780">"Activer les fenêtres de forme libre sur un écran secondaire"</string>
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Activer les applis non redimensionnables en mode multifenêtre"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Autorise le mode multifenêtre pour les applis non redimensionnables"</string>
@@ -5612,7 +5608,7 @@
     <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"Votre mot de passe doit contenir entre 4 et 16 caractères et n\'être composé que de lettres, de chiffres et de symboles"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Lecteur de QR code"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Besoin d\'aide ?"</annotation></string>
-    <string name="homepage_search" msgid="6759334912284663559">"Rechercher un paramètre"</string>
+    <string name="homepage_search" msgid="6759334912284663559">"Rechercher dans les paramètres"</string>
     <string name="keywords_contacts_storage" msgid="9061213057165337893">"contacts, stockage, compte"</string>
     <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Stockage des contacts"</string>
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Appareil uniquement"</string>
@@ -5632,4 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Utiliser la supervision de l\'appareil"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Configurez un code pour commencer"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervision, supervision parentale, contrôle parental"</string>
+    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
+    <skip />
+    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <skip />
 </resources>
