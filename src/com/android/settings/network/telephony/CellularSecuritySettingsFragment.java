@@ -16,7 +16,6 @@
 package com.android.settings.network.telephony;
 
 import android.app.settings.SettingsEnums;
-import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -43,11 +42,5 @@ public class CellularSecuritySettingsFragment extends DashboardFragment {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.cellular_security;
-    }
-
-    @Override
-    public void onCreatePreferences(Bundle bundle, String rootKey) {
-        super.onCreatePreferences(bundle, rootKey);
-        setPreferencesFromResource(R.xml.cellular_security, rootKey);
     }
 }
