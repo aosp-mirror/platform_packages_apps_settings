@@ -16,11 +16,13 @@
 
 package com.android.settings.spa.system
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Bundle
 import android.os.UserHandle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -30,7 +32,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.applications.AppLocaleUtil
 import com.android.settings.applications.appinfo.AppLocaleDetails
+import com.android.settings.core.SubSettingLauncher
+import com.android.settings.flags.Flags
 import com.android.settings.localepicker.AppLocalePickerActivity
+import com.android.settings.localepicker.AppLocalePickerFragment
 import com.android.settingslib.spa.framework.util.filterItem
 import com.android.settingslib.spaprivileged.framework.common.asUser
 import com.android.settingslib.spaprivileged.model.app.AppListModel
@@ -94,10 +99,23 @@ class AppLanguagesListModel(private val context: Context) : AppListModel<AppLang
     @Composable
     override fun AppListItemModel<AppLanguagesRecord>.AppItem() {
         AppListItem {
-            val intent = Intent(context, AppLocalePickerActivity::class.java).apply {
-                data = Uri.parse("package:${record.app.packageName}")
+            if (Flags.settingsExpressiveDesignEnabled()) {
+                val extra = Bundle()
+                extra.putString(AppLocalePickerFragment.ARG_PACKAGE_NAME, record.app.packageName)
+                extra.putInt(AppLocalePickerFragment.ARG_PACKAGE_UID, context.userId)
+                SubSettingLauncher(context)
+                    .setDestination(AppLocalePickerFragment::class.java.canonicalName)
+                    .setTitleText(context.getString(R.string.app_locale_picker_title))
+                    .setSourceMetricsCategory(SettingsEnums.APPS_LOCALE_LIST)
+                    .setArguments(extra)
+                    .setUserHandle(record.app.userHandle)
+                    .launch()
+            } else {
+                val intent = Intent(context, AppLocalePickerActivity::class.java).apply {
+                    data = Uri.parse("package:${record.app.packageName}")
+                }
+                context.startActivityAsUser(intent, record.app.userHandle)
             }
-            context.startActivityAsUser(intent, record.app.userHandle)
         }
     }
 }
