@@ -54,6 +54,7 @@ import android.text.format.DateUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.util.CollectionUtils;
@@ -436,7 +437,7 @@ public class NotificationBackend {
         }
     }
 
-    public List<String> getAssistantAdjustments(String pkg) {
+    public List<String> getAllowedAssistantAdjustments(String pkg) {
         try {
             return sINM.getAllowedAssistantAdjustments(pkg);
         } catch (Exception e) {
@@ -764,6 +765,23 @@ public class NotificationBackend {
         }
         try {
             sINM.setCanBePromoted(pkg, uid, allowed, /* fromUser= */ true);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
+    public @NonNull String[] getAdjustmentDeniedPackages(String key) {
+        try {
+            return sINM.getAdjustmentDeniedPackages(key);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return new String[]{};
+        }
+    }
+
+    public @NonNull void setAdjustmentSupportedForPackage(String key, String pkg, boolean enabled) {
+        try {
+            sINM.setAdjustmentSupportedForPackage(key, pkg, enabled);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
         }
