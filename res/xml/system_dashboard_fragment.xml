@@ -53,6 +53,7 @@
         android:icon="@drawable/ic_settings_touchpad"
         android:order="-254"
         android:fragment="com.android.settings.inputmethod.TouchpadAndMouseSettings"
+        settings:keywords="@string/keywords_touchpad"
         settings:controller="com.android.settings.inputmethod.TouchpadAndMouseSettingsController"/>
 
     <Preference
@@ -62,6 +63,7 @@
         android:icon="@drawable/ic_settings_touchpad"
         android:order="-253"
         android:fragment="com.android.settings.inputmethod.TouchpadSettingFragment"
+        settings:keywords="@string/keywords_touchpad"
         settings:controller="com.android.settings.inputmethod.TouchpadSettingsController"/>
 
     <Preference
