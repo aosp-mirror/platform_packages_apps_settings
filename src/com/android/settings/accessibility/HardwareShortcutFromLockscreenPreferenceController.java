@@ -31,6 +31,8 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
+import java.util.Locale;
+
 /**
  * Setting to allow the hardware shortcut to turn on from the lock screen
  */
@@ -87,7 +89,8 @@ public class HardwareShortcutFromLockscreenPreferenceController
         } else {
             return mContext.getString(
                     R.string.accessibility_shortcut_unassigned_setting_unavailable_summary,
-                    AccessibilityUtil.getShortcutSummaryList(mContext, HARDWARE));
+                    AccessibilityUtil.getShortcutSummaryList(mContext, HARDWARE)
+                            .toString().toLowerCase(Locale.getDefault()));
         }
     }
 
