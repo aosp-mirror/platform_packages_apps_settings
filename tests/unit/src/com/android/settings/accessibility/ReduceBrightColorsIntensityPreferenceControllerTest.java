@@ -188,15 +188,24 @@ public class ReduceBrightColorsIntensityPreferenceControllerTest {
                 .isEqualTo(80);
     }
 
+    // Slider range should represent percentage.
     @Test
-    public void rangeOfSlider_staysWithinValidRange() {
-        when(mResources.getInteger(
-                R.integer.config_reduceBrightColorsStrengthMax)).thenReturn(90);
-        when(mResources.getInteger(
-                R.integer.config_reduceBrightColorsStrengthMin)).thenReturn(15);
-        assertThat(mPreferenceController.getMax()).isEqualTo(85);
-        assertThat(mPreferenceController.getMin()).isEqualTo(10);
+    public void rangeOfSlider_isPercentage() {
+        assertThat(mPreferenceController.getMax()).isEqualTo(100);
+        assertThat(mPreferenceController.getMin()).isEqualTo(0);
         assertThat(mPreferenceController.getMax() - mPreferenceController.getMin())
-                .isEqualTo(75);
+                .isEqualTo(100);
+    }
+
+    // Slider should be of range 100 - 0.
+    @Test
+    public void rangeOfSlider_isInverted() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED, 1);
+        mPreferenceController.onPreferenceChange(/* preference= */ null, 2);
+        assertThat(
+                Settings.Secure.getInt(mContext.getContentResolver(),
+                        Settings.Secure.REDUCE_BRIGHT_COLORS_LEVEL, 0))
+                .isEqualTo(98);
     }
 }
