@@ -190,6 +190,7 @@ private const val KEY_INT_RANGE = "key_int_range"
 private const val KEY_MIN = "key_min"
 private const val KEY_MAX = "key_max"
 private const val KEY_STEP = "key_step"
+private const val KEY_TAGS = "tags"
 
 private fun PreferenceProto.toMetadata(
     context: Context,
@@ -213,6 +214,7 @@ private fun PreferenceProto.toMetadata(
         }
         extras.putBundle(KEY_INT_RANGE, intRange)
     }
+    if (tagsCount > 0) extras.putStringArray(KEY_TAGS, tagsList.toTypedArray())
     return SettingsPreferenceMetadata.Builder(screenKey, key)
         .setTitle(title.getText(context))
         .setSummary(summary.getText(context))
