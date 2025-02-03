@@ -40,7 +40,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.RawContacts.DefaultAccount.DefaultAccountAndState;
 import android.provider.SearchIndexableResource;
@@ -250,13 +249,13 @@ public class ContactsStorageSettingsTest {
 
         SelectorWithWidgetPreference account1Preference = accountCategory.findPreference(
                 String.valueOf(TEST_ACCOUNT1.hashCode()));
-        assertThat(account1Preference.getTitle()).isEqualTo("Device and Google");
+        assertThat(account1Preference.getTitle()).isEqualTo("Device & Google");
         assertThat(account1Preference.getSummary()).isEqualTo("test@gmail.com");
         assertThat(account1Preference.getIcon()).isNotNull();
 
         SelectorWithWidgetPreference account2Preference = accountCategory.findPreference(
                 String.valueOf(TEST_ACCOUNT2.hashCode()));
-        assertThat(account2Preference.getTitle()).isEqualTo("Device and Samsung");
+        assertThat(account2Preference.getTitle()).isEqualTo("Device & Samsung");
         assertThat(account2Preference.getSummary()).isEqualTo("test@samsung.com");
         assertThat(account2Preference.getIcon()).isNotNull();
 
@@ -304,19 +303,19 @@ public class ContactsStorageSettingsTest {
 
         SelectorWithWidgetPreference account1Preference = accountCategory.findPreference(
                 String.valueOf(TEST_ACCOUNT1.hashCode()));
-        assertThat(account1Preference.getTitle()).isEqualTo("Device and Google");
+        assertThat(account1Preference.getTitle()).isEqualTo("Device & Google");
         assertThat(account1Preference.getSummary()).isEqualTo("test@gmail.com");
         assertThat(account1Preference.getIcon()).isNotNull();
 
         SelectorWithWidgetPreference account2Preference = accountCategory.findPreference(
                 String.valueOf(TEST_ACCOUNT2.hashCode()));
-        assertThat(account2Preference.getTitle()).isEqualTo("Device and Samsung");
+        assertThat(account2Preference.getTitle()).isEqualTo("Device & Samsung");
         assertThat(account2Preference.getSummary()).isEqualTo("test@samsung.com");
         assertThat(account2Preference.getIcon()).isNotNull();
 
         SelectorWithWidgetPreference account3Preference = accountCategory.findPreference(
                 String.valueOf(TEST_ACCOUNT3.hashCode()));
-        assertThat(account3Preference.getTitle()).isEqualTo("Device and Outlook");
+        assertThat(account3Preference.getTitle()).isEqualTo("Device & Outlook");
         assertThat(account3Preference.getSummary()).isEqualTo("test@outlook.com");
         assertThat(account3Preference.getIcon()).isNotNull();
 
@@ -374,13 +373,13 @@ public class ContactsStorageSettingsTest {
         // onAccountsUpdate should refresh the icon and layouts.
         SelectorWithWidgetPreference account1Preference = accountCategory.findPreference(
                 String.valueOf(TEST_ACCOUNT1.hashCode()));
-        assertThat(account1Preference.getTitle()).isEqualTo("Device and Google");
+        assertThat(account1Preference.getTitle()).isEqualTo("Device & Google");
         assertThat(account1Preference.getSummary()).isEqualTo("test@gmail.com");
         assertThat(account1Preference.getIcon()).isNotNull();
 
         SelectorWithWidgetPreference account2Preference = accountCategory.findPreference(
                 String.valueOf(TEST_ACCOUNT2.hashCode()));
-        assertThat(account2Preference.getTitle()).isEqualTo("Device and Samsung");
+        assertThat(account2Preference.getTitle()).isEqualTo("Device & Samsung");
         assertThat(account2Preference.getSummary()).isEqualTo("test@samsung.com");
         assertThat(account2Preference.getIcon()).isNotNull();
     }
