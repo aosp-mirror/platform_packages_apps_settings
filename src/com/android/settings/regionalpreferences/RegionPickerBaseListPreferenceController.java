@@ -154,7 +154,7 @@ public abstract class RegionPickerBaseListPreferenceController extends BasePrefe
 
     private List<LocaleStore.LocaleInfo> getSortedLocaleList(
             List<LocaleStore.LocaleInfo> localeInfos) {
-        final Locale sortingLocale = Locale.getDefault();
+        final Locale sortingLocale = LocaleList.getDefault().get(0);
         final LocaleHelper.LocaleInfoComparator comp =
                 new LocaleHelper.LocaleInfoComparator(sortingLocale, true);
         Collections.sort(localeInfos, comp);
@@ -162,7 +162,7 @@ public abstract class RegionPickerBaseListPreferenceController extends BasePrefe
     }
 
     private void switchRegion(LocaleStore.LocaleInfo localeInfo) {
-        if (localeInfo.getLocale().equals(Locale.getDefault())) {
+        if (localeInfo.getLocale().equals(LocaleList.getDefault().get(0))) {
             return;
         }
 
