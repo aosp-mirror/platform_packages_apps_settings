@@ -29,6 +29,7 @@ import android.safetycenter.SafetyEvent;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricNavigationUtils;
 import com.android.settings.biometrics.face.FaceStatusUtils;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 
 /** Face biometrics Safety Source for Safety Center. */
@@ -87,7 +88,9 @@ public final class FaceSafetySource {
                             REQUEST_CODE_FACE_SETTING),
                     disablingAdmin == null /* enabled */,
                     faceStatusUtils.hasEnrolled(),
-                    safetyEvent);
+                    safetyEvent,
+                    FeatureFactory.getFeatureFactory().getBiometricsFeatureProvider()
+                            .getSafetySourceIssue(SAFETY_SOURCE_ID));
 
             return;
         }

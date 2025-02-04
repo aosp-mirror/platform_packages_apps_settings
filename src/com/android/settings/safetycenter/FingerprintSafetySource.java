@@ -29,6 +29,7 @@ import android.safetycenter.SafetyEvent;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricNavigationUtils;
 import com.android.settings.biometrics.fingerprint.FingerprintStatusUtils;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 
 /** Fingerprint biometrics Safety Source for Safety Center. */
@@ -89,7 +90,9 @@ public final class FingerprintSafetySource {
                             REQUEST_CODE_FINGERPRINT_SETTING),
                     disablingAdmin == null /* enabled */,
                     fingerprintStatusUtils.hasEnrolled(),
-                    safetyEvent);
+                    safetyEvent,
+                    FeatureFactory.getFeatureFactory().getBiometricsFeatureProvider()
+                            .getSafetySourceIssue(SAFETY_SOURCE_ID));
             return;
         }
 

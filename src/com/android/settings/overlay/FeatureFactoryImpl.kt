@@ -27,6 +27,8 @@ import com.android.settings.accessibility.AccessibilitySearchFeatureProviderImpl
 import com.android.settings.accounts.AccountFeatureProvider
 import com.android.settings.accounts.AccountFeatureProviderImpl
 import com.android.settings.applications.ApplicationFeatureProviderImpl
+import com.android.settings.biometrics.BiometricsFeatureProvider
+import com.android.settings.biometrics.BiometricsFeatureProviderImpl
 import com.android.settings.biometrics.face.FaceFeatureProvider
 import com.android.settings.biometrics.face.FaceFeatureProviderImpl
 import com.android.settings.biometrics.fingerprint.FingerprintFeatureProvider
@@ -143,6 +145,10 @@ open class FeatureFactoryImpl : FeatureFactory() {
 
     override val bluetoothFeatureProvider: BluetoothFeatureProvider by lazy {
         BluetoothFeatureProviderImpl()
+    }
+
+    override val biometricsFeatureProvider: BiometricsFeatureProvider by lazy {
+        BiometricsFeatureProviderImpl()
     }
 
     override val faceFeatureProvider: FaceFeatureProvider by lazy { FaceFeatureProviderImpl() }
