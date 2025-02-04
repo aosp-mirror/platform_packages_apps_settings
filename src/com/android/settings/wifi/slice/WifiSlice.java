@@ -17,8 +17,8 @@
 package com.android.settings.wifi.slice;
 
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
-import static android.provider.SettingsSlicesContract.KEY_WIFI;
 
+import static com.android.settings.contract.SettingsContractKt.KEY_WIFI;
 import static com.android.settings.slices.CustomSliceRegistry.WIFI_SLICE_URI;
 import static com.android.settingslib.wifi.WifiUtils.getHotspotIconResource;
 
