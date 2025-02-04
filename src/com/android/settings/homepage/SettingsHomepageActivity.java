@@ -395,9 +395,18 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content),
                 (v, windowInsets) -> {
-                    Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+                    Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()
+                            | WindowInsetsCompat.Type.displayCutout());
                     // Apply the insets paddings to the view.
-                    v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+                    v.setPadding(insets.left, 0, insets.right, insets.bottom);
+
+                    // reset the top padding of search bar container to original top padding
+                    // plus insets top.
+                    View container = findViewById(R.id.app_bar_container);
+                    final int top_padding = getResources().getDimensionPixelSize(
+                            R.dimen.search_bar_container_top_padding);
+                    container.setPadding(container.getPaddingLeft(), top_padding + insets.top,
+                            container.getPaddingRight(), container.getPaddingBottom());
 
                     // Return CONSUMED if you don't want the window insets to keep being
                     // passed down to descendant views.
@@ -466,8 +475,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 : Utils.getColorAttrDefaultColor(this, android.R.attr.colorBackground);
 
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        // Update status bar color
-        window.setStatusBarColor(color);
+
         // Update content background.
         findViewById(android.R.id.content).setBackgroundColor(color);
         if (Flags.homepageRevamp()) {
