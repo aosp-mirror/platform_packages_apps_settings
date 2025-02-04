@@ -452,17 +452,38 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                 var pref = getDisplayPreference(context, display, groupCleanable);
                 pref.setSummary(display.getMode().getPhysicalWidth() + " x "
                                    + display.getMode().getPhysicalHeight());
-                pref.setTitle(display.getName());
             }
         }
     }
 
     private Preference getDisplayPreference(@NonNull Context context,
             @NonNull Display display, @NonNull PrefRefresh groupCleanable) {
-        var pref = groupCleanable.findUnusedPreference(DisplayPreference.generateKey(display));
-        pref = pref != null ? pref : new DisplayPreference(context, display);
-        groupCleanable.addPreference(pref);
-        return pref;
+        var itemKey = "display_id_" + display.getDisplayId();
+        var categoryKey = itemKey + "_category";
+        var category = (PreferenceCategory) groupCleanable.findUnusedPreference(categoryKey);
+
+        if (category != null) {
+            groupCleanable.addPreference(category);
+            return category.findPreference(itemKey);
+        } else {
+            category = new PreferenceCategory(context);
+            category.setPersistent(false);
+            category.setKey(categoryKey);
+            // Must add the category to the hierarchy before adding its descendants. Otherwise
+            // the category will not have a preference manager, which causes an exception when a
+            // child is added to it.
+            groupCleanable.addPreference(category);
+
+            var prefItem = new DisplayPreference(context, display);
+            prefItem.setTitle(context.getString(EXTERNAL_DISPLAY_RESOLUTION_TITLE_RESOURCE)
+                    + " | " + context.getString(EXTERNAL_DISPLAY_ROTATION_TITLE_RESOURCE));
+            prefItem.setKey(itemKey);
+
+            category.addPreference(prefItem);
+            category.setTitle(display.getName());
+
+            return prefItem;
+        }
     }
 
     private List<Display> externalDisplaysToShow(int displayIdToShow) {
@@ -621,16 +642,11 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             implements Preference.OnPreferenceClickListener {
         private final int mDisplayId;
 
-        static String generateKey(final Display display) {
-            return "display_id_" + display.getDisplayId();
-        }
-
         DisplayPreference(@NonNull final Context context, @NonNull final Display display) {
             super(context);
             mDisplayId = display.getDisplayId();
 
             setPersistent(false);
-            setKey(generateKey(display));
             setOnPreferenceClickListener(this);
         }
 
