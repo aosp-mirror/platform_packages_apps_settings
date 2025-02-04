@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -729,7 +730,8 @@ public class BatteryInfoTest {
                         ChargingType.WIRED, ChargingSpeed.REGULAR, /* batteryLevel= */ 65);
         var expectedRemainingLabel = "Expected remaining label";
         var expectedChargeLabel = "65% - " + expectedRemainingLabel;
-        when(mFeatureFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(mContext))
+        when(mFeatureFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(
+                        eq(mContext), anyBoolean()))
                 .thenReturn(true);
         when(mFeatureFactory.batterySettingsFeatureProvider.getChargingOptimizationRemainingLabel(
                         eq(mContext), anyInt(), anyInt(), anyLong(), anyLong()))
@@ -755,7 +757,8 @@ public class BatteryInfoTest {
         Intent batteryIntent =
                 createIntentForGetBatteryInfoTest(
                         ChargingType.WIRED, ChargingSpeed.REGULAR, /* batteryLevel= */ 65);
-        when(mFeatureFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(mContext))
+        when(mFeatureFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(
+                        eq(mContext), anyBoolean()))
                 .thenReturn(false);
         var expectedStatusLabel = "Charging";
         var expectedRemainingLabel = "2 hr, 10 min left until full";
@@ -777,7 +780,8 @@ public class BatteryInfoTest {
         Intent batteryIntent =
                 createIntentForGetBatteryInfoTest(
                         ChargingType.WIRED, ChargingSpeed.REGULAR, /* batteryLevel= */ 65);
-        when(mFeatureFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(mContext))
+        when(mFeatureFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(
+                        eq(mContext), anyBoolean()))
                 .thenReturn(false);
         var expectedStatusLabel = "Charging";
         var expectedRemainingLabel = "Fully charged by";
@@ -827,7 +831,7 @@ public class BatteryInfoTest {
     }
 
     @Test
-    public void getBatteryInfo_plugTypeNoneWithLonglifeAndChargeOptimization_chargingString() {
+    public void getBatteryInfo_plugTypeNoneIsChargeOptimization_chargingString() {
         prepareTestGetBatteryInfoEnvironment(
                 /* remainingTimeMs= */ Duration.ofMinutes(130).toMillis(),
                 /* chargingStringV2Enabled= */ false);
@@ -840,7 +844,8 @@ public class BatteryInfoTest {
                         /* isLonglife= */ true);
         var expectedRemainingLabel = "Expected remaining label";
         var expectedChargeLabel = "85% - " + expectedRemainingLabel;
-        when(mFeatureFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(mContext))
+        when(mFeatureFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(
+                        eq(mContext), anyBoolean()))
                 .thenReturn(true);
         when(mFeatureFactory.batterySettingsFeatureProvider.getChargingOptimizationRemainingLabel(
                         eq(mContext), anyInt(), anyInt(), anyLong(), anyLong()))
@@ -859,34 +864,7 @@ public class BatteryInfoTest {
     }
 
     @Test
-    public void getBatteryInfo_plugTypeNoneNotChargeOptimizationLonglife_dischargingString() {
-        prepareTestGetBatteryInfoEnvironment(
-                /* remainingTimeMs= */ Duration.ofMinutes(130).toMillis(),
-                /* chargingStringV2Enabled= */ false);
-        Intent batteryIntent =
-                createIntentForGetBatteryInfoTest(
-                        ChargingType.NONE,
-                        ChargingSpeed.REGULAR,
-                        /* batteryLevel= */ 85,
-                        BatteryManager.BATTERY_STATUS_DISCHARGING,
-                        /* isLonglife= */ true);
-        var expectedRemainingLabel =
-                PowerUtil.getBatteryRemainingShortStringFormatted(
-                        mContext, PowerUtil.convertUsToMs(1000L));
-        when(mFeatureFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(mContext))
-                .thenReturn(false);
-        var expectedStatusLabel = "Not charging";
-
-        assertGetBatteryInfo(
-                batteryIntent,
-                /* currentTimeMillis= */ UNUSED_TIME_MS,
-                expectedStatusLabel,
-                expectedRemainingLabel,
-                expectedRemainingLabel);
-    }
-
-    @Test
-    public void getBatteryInfo_plugTypeNoneChargeOptimizationNotLonglife_dischargingString() {
+    public void getBatteryInfo_plugTypeNoneNotChargeOptimization_dischargingString() {
         prepareTestGetBatteryInfoEnvironment(
                 /* remainingTimeMs= */ Duration.ofMinutes(130).toMillis(),
                 /* chargingStringV2Enabled= */ false);
@@ -900,8 +878,9 @@ public class BatteryInfoTest {
         var expectedRemainingLabel =
                 PowerUtil.getBatteryRemainingShortStringFormatted(
                         mContext, PowerUtil.convertUsToMs(1000L));
-        when(mFeatureFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(mContext))
-                .thenReturn(true);
+        when(mFeatureFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(
+                        eq(mContext), anyBoolean()))
+                .thenReturn(false);
         var expectedStatusLabel = "Not charging";
 
         assertGetBatteryInfo(

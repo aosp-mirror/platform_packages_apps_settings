@@ -60,7 +60,7 @@ public interface BatterySettingsFeatureProvider {
             @NonNull Context context, long remainingTimeMs, long currentTimeMs);
 
     /** Return true if it's in the charging optimization mode. */
-    boolean isChargingOptimizationMode(@NonNull Context context);
+    boolean isChargingOptimizationMode(@NonNull Context context, boolean isLongLife);
 
     /** Return a charging remaining time label for charging optimization mode. */
     @Nullable

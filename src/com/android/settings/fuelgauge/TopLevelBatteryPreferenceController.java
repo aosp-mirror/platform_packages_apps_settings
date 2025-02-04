@@ -161,7 +161,8 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
         }
         final BatterySettingsFeatureProvider featureProvider =
                 FeatureFactory.getFeatureFactory().getBatterySettingsFeatureProvider();
-        if (info.chargeLabel != null && featureProvider.isChargingOptimizationMode(mContext)) {
+        if (info.chargeLabel != null
+                && featureProvider.isChargingOptimizationMode(mContext, info.isLongLife)) {
             return info.chargeLabel;
         }
         if (info.batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
