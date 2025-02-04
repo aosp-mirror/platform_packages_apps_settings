@@ -419,7 +419,9 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
             return;
         }
         final var displayRotation = getDisplayRotation(display.getDisplayId());
-        screen.addPreference(updateIllustrationImage(context, displayRotation));
+        if (!isTopologyPaneEnabled(mInjector)) {
+            screen.addPreference(updateIllustrationImage(context, displayRotation));
+        }
         screen.addPreference(updateResolutionPreference(context, display));
         screen.addPreference(updateRotationPreference(context, display, displayRotation));
         if (isResolutionSettingEnabled(mInjector)) {
