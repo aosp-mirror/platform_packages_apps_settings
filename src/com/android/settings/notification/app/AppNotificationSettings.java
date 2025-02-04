@@ -21,6 +21,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.service.notification.Adjustment;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -132,6 +133,10 @@ public class AppNotificationSettings extends NotificationSettings {
                 context, mDependentFieldListener, mBackend));
         mControllers.add(new BundleListPreferenceController(context, mBackend));
         mControllers.add(new PromotedNotificationsPreferenceController(context, mBackend));
+        mControllers.add(new AdjustmentKeyPreferenceController(context, mBackend,
+                Adjustment.KEY_SUMMARIZATION));
+        mControllers.add(new AdjustmentKeyPreferenceController(context, mBackend,
+                Adjustment.KEY_TYPE));
         return new ArrayList<>(mControllers);
     }
 }

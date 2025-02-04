@@ -90,6 +90,16 @@
             android:summary="@string/live_notifications_desc" />
 
         <com.android.settingslib.RestrictedSwitchPreference
+            android:key="key_summarization"
+            android:title="@string/notification_app_level_summarize_title"
+            android:summary="@string/notification_app_level_summarize_subtext" />
+
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="key_type"
+            android:title="@string/notification_app_level_bundle_title"
+            android:summary="@string/notification_app_level_bundle_subtext" />
+
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="invalid_conversation_switch"
             android:title="@string/conversation_section_switch_title" />
         <Preference
