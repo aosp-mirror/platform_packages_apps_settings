@@ -95,8 +95,7 @@ public final class LockScreenSafetySource {
                 new SafetySourceStatus.Builder(
                                 context.getString(R.string.unlock_set_unlock_launch_picker_title),
                                 lockScreenAllowedByAdmin
-                                        ? screenLockPreferenceDetailsUtils.getSummary(
-                                                UserHandle.myUserId())
+                                        ? getScreenLockSummary(screenLockPreferenceDetailsUtils)
                                         : context.getString(R.string.disabled_by_policy_title),
                                 severityLevel)
                         .setPendingIntent(lockScreenAllowedByAdmin ? pendingIntent : null)
@@ -112,6 +111,12 @@ public final class LockScreenSafetySource {
 
         SafetyCenterManagerWrapper.get()
                 .setSafetySourceData(context, SAFETY_SOURCE_ID, safetySourceData, safetyEvent);
+    }
+
+    private static String getScreenLockSummary(
+            ScreenLockPreferenceDetailsUtils screenLockPreferenceDetailsUtils) {
+        String summary = screenLockPreferenceDetailsUtils.getSummary(UserHandle.myUserId());
+        return summary != null ? summary : "";
     }
 
     /** Notifies Safety Center of a change in lock screen settings. */

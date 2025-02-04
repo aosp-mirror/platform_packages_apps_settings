@@ -78,6 +78,7 @@ public class ScreenLockPreferenceDetailsUtilsTest {
     private StorageManager mStorageManager;
 
     private Context mContext;
+    private FakeFeatureFactory mFeatureFactory;
 
     private ScreenLockPreferenceDetailsUtils mScreenLockPreferenceDetailsUtils;
 
@@ -95,8 +96,8 @@ public class ScreenLockPreferenceDetailsUtilsTest {
         doNothing().when(mContext).startActivity(any());
         when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{});
 
-        final FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
-        when(featureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
                 .thenReturn(mLockPatternUtils);
 
         mScreenLockPreferenceDetailsUtils = new ScreenLockPreferenceDetailsUtils(mContext);
@@ -231,6 +232,15 @@ public class ScreenLockPreferenceDetailsUtilsTest {
     }
 
     @Test
+    public void getSummary_noLockPatternUtils_shouldReturnNull() {
+        when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
+                .thenReturn(null);
+        mScreenLockPreferenceDetailsUtils = new ScreenLockPreferenceDetailsUtils(mContext);
+
+        assertNull(mScreenLockPreferenceDetailsUtils.getSummary(USER_ID));
+    }
+
+    @Test
     public void isPasswordQualityManaged_withoutAdmin_shouldReturnFalse() {
         final RestrictedLockUtils.EnforcedAdmin admin = null;
 
@@ -270,6 +280,15 @@ public class ScreenLockPreferenceDetailsUtilsTest {
     @Test
     public void isLockPatternSecure_patternIsNotSecure_shouldReturnFalse() {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(false);
+
+        assertThat(mScreenLockPreferenceDetailsUtils.isLockPatternSecure()).isFalse();
+    }
+
+    @Test
+    public void isLockPatternSecure_noLockPatterUtils_shouldReturnFalse() {
+        when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
+                .thenReturn(null);
+        mScreenLockPreferenceDetailsUtils = new ScreenLockPreferenceDetailsUtils(mContext);
 
         assertThat(mScreenLockPreferenceDetailsUtils.isLockPatternSecure()).isFalse();
     }
@@ -332,6 +351,20 @@ public class ScreenLockPreferenceDetailsUtilsTest {
 
     @Test
     public void getLaunchChooseLockGenericFragmentIntent_noQuietMode_returnsIntent() {
+        when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
+
+        final Intent intent = mScreenLockPreferenceDetailsUtils
+                .getLaunchChooseLockGenericFragmentIntent(SOURCE_METRICS_CATEGORY);
+
+        assertFragmentLaunchIntent(intent,
+                ChooseLockGeneric.ChooseLockGenericFragment.class.getName());
+    }
+
+    @Test
+    public void getLaunchChooseLockGenericFragmentIntent_noLockPatternUtils_returnsIntent() {
+        when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
+                .thenReturn(null);
+        mScreenLockPreferenceDetailsUtils = new ScreenLockPreferenceDetailsUtils(mContext);
         when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
 
         final Intent intent = mScreenLockPreferenceDetailsUtils
