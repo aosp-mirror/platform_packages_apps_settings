@@ -131,6 +131,14 @@ public class LockScreenNotificationShowSensitiveControllerTest {
         assertThat(mWorkController.mWorkProfileUserId).isEqualTo(10);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void validatePreferenceId() {
+        new LockScreenNotificationShowSensitiveController(
+                mMockContext,
+                "Illegal Key"
+        );
+    }
+
     @Test
     public void getAvailabilityStatus_noSecureLockscreen() {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(false);
@@ -266,34 +274,58 @@ public class LockScreenNotificationShowSensitiveControllerTest {
 
     @Test
     public void isChecked() {
+        // Given: screen is secure
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
+
+        // When: disable LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS
+        // then updateState, this mocks the mWorkController.mContentObserver.onChange()
         Settings.Secure.putIntForUser(mContext.getContentResolver(),
                 LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
                 0, 0);
+        mController.updateState(mPreference);
 
+        // Then: the toggle is unchecked
         assertThat(mController.isChecked()).isFalse();
+        assertThat(mPreference.isChecked()).isFalse();
 
+        // When: enable LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS
+        // then updateState, this mocks the mWorkController.mContentObserver.onChange()
         Settings.Secure.putIntForUser(mContext.getContentResolver(),
                 LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
                 1, 0);
+        mController.updateState(mPreference);
 
+        // Then: the toggle is checked
         assertThat(mController.isChecked()).isTrue();
+        assertThat(mPreference.isChecked()).isTrue();
     }
 
     @Test
     public void isChecked_work() {
+        // Given: screen is secure
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
+
+        // When: disable LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS for work profile
+        // then updateState, this mocks the mWorkController.mContentObserver.onChange()
         Settings.Secure.putIntForUser(mContext.getContentResolver(),
                 LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
                 0, 10);
+        mWorkController.updateState(mWorkPreference);
 
+        // Then: the toggle is unchecked
         assertThat(mWorkController.isChecked()).isFalse();
+        assertThat(mWorkPreference.isChecked()).isFalse();
 
+        // When: enable LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS for work profile
+        // then updateState, this mocks the mWorkController.mContentObserver.onChange()
         Settings.Secure.putIntForUser(mContext.getContentResolver(),
                 LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
                 1, 10);
+        mWorkController.updateState(mWorkPreference);
 
+        // Then: the toggle is checked
         assertThat(mWorkController.isChecked()).isTrue();
+        assertThat(mWorkPreference.isChecked()).isTrue();
     }
 
     @Test

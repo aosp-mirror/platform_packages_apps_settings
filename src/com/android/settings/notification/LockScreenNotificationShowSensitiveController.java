@@ -81,6 +81,13 @@ public class LockScreenNotificationShowSensitiveController
     public LockScreenNotificationShowSensitiveController(@NonNull Context context,
             @NonNull String preferenceKey) {
         super(context, preferenceKey);
+
+        // This prevents unexpected controller usages.
+        if (!KEY_SHOW_SENSITIVE.equals(preferenceKey)
+                && !KEY_SHOW_SENSITIVE_WORK_PROFILE.equals(preferenceKey)) {
+            throw new IllegalArgumentException("Invalid preference key: " + preferenceKey);
+        }
+
         mContentResolver = context.getContentResolver();
 
         mUserManager = context.getSystemService(UserManager.class);
@@ -138,13 +145,18 @@ public class LockScreenNotificationShowSensitiveController
     }
 
     private int getUserId() {
-        return KEY_SHOW_SENSITIVE.equals(getPreferenceKey())
-                ? UserHandle.myUserId() : mWorkProfileUserId;
+        return switch (getPreferenceKey()) {
+            case KEY_SHOW_SENSITIVE -> UserHandle.myUserId();
+            case KEY_SHOW_SENSITIVE_WORK_PROFILE -> mWorkProfileUserId;
+            default -> throw new IllegalArgumentException(
+                    "Invalid preference key: " + getPreferenceKey());
+        };
     }
 
     @Override
     public void updateState(@Nullable Preference preference) {
         if (preference == null) return;
+        super.updateState(preference);
         setChecked(showSensitiveContentWhenLocked());
         preference.setVisible(isAvailable());
     }
@@ -195,7 +207,7 @@ public class LockScreenNotificationShowSensitiveController
         if (!isLockScreenSecure()) return true;
         if (getEnforcedAdmin(userId) != null) return false;
         return Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, ON, userId) == ON;
+                Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, ON, userId) != OFF;
     }
 
     @Override
