@@ -32,3 +32,6 @@ const val KEY_LOCATION = SettingsSlicesContract.KEY_LOCATION
 
 /** Contract key for the "Wi-fi" setting. */
 const val KEY_WIFI = SettingsSlicesContract.KEY_WIFI
+
+/** Contract key for the "Use Data Saver" setting. */
+const val KEY_DATA_SAVER = "data_saver"
