@@ -34,6 +34,7 @@ import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.contract.KEY_AIRPLANE_MODE
 import com.android.settings.network.SatelliteRepository.Companion.isSatelliteOn
 import com.android.settingslib.RestrictedSwitchPreference
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
@@ -58,6 +59,8 @@ class AirplaneModePreference :
 
     override val icon: Int
         @DrawableRes get() = R.drawable.ic_airplanemode_active
+
+    override fun tags(context: Context) = arrayOf(KEY_AIRPLANE_MODE)
 
     override fun isAvailable(context: Context) =
         (context.resources.getBoolean(R.bool.config_show_toggle_airplane) &&
