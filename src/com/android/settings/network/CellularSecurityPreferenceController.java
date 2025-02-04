@@ -72,8 +72,7 @@ public class CellularSecurityPreferenceController extends BasePreferenceControll
     @Override
     public int getAvailabilityStatus() {
         if (!mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)
-                || !Flags.enableModemCipherTransparencyUnsolEvents()
-                || !Flags.enableModemCipherTransparency()) {
+                || !Flags.enableModemCipherTransparencyUnsolEvents()) {
             return UNSUPPORTED_ON_DEVICE;
         }
         if (mTelephonyManager == null) {
