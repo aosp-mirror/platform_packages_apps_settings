@@ -62,7 +62,6 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
     private boolean mZenMuted;
     private int mIconResId;
     private int mMuteIconResId;
-    private boolean mStopped;
     @VisibleForTesting
     AudioManager mAudioManager;
     private Locale mLocale;
@@ -114,18 +113,13 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         mListener = listener;
     }
 
-    public void onActivityResume() {
-        if (mStopped) {
-            init();
-        }
-    }
-
-    public void onActivityPause() {
-        mStopped = true;
+    @Override
+    public void onDetached() {
         if (mVolumizer != null) {
             mVolumizer.stop();
             mVolumizer = null;
         }
+        super.onDetached();
     }
 
     @Override
@@ -135,16 +129,25 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
         mIconView = (ImageView) view.findViewById(com.android.internal.R.id.icon);
         mSuppressionTextView = (TextView) view.findViewById(R.id.suppression_text);
         mTitle = (TextView) view.findViewById(com.android.internal.R.id.title);
-        init();
+        onBindViewHolder();
     }
 
-    protected void init() {
-        if (mSeekBar == null) return;
-        // It's unnecessary to set up relevant volumizer configuration if preference is disabled.
-        if (!isEnabled()) {
-            mSeekBar.setEnabled(false);
-            return;
+    protected void onBindViewHolder() {
+        boolean isEnabled = isEnabled();
+        mSeekBar.setEnabled(isEnabled);
+        if (mVolumizer == null) {
+            createSeekBarVolumizer();
         }
+        mVolumizer.setSeekBar(mSeekBar);
+        updateIconView();
+        updateSuppressionText();
+        if (isEnabled && mListener != null) {
+            mListener.onUpdateMuteState();
+        }
+    }
+
+    @SuppressWarnings("NullAway")
+    protected void createSeekBarVolumizer() {
         final SeekBarVolumizer.Callback sbvc = new SeekBarVolumizer.Callback() {
             @Override
             public void onSampleStarting(SeekBarVolumizer sbv) {
@@ -184,16 +187,8 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
             }
         };
         final Uri sampleUri = mStream == AudioManager.STREAM_MUSIC ? getMediaVolumeUri() : null;
-        if (mVolumizer == null) {
-            mVolumizer = mSeekBarVolumizerFactory.create(mStream, sampleUri, sbvc);
-        }
+        mVolumizer = mSeekBarVolumizerFactory.create(mStream, sampleUri, sbvc);
         mVolumizer.start();
-        mVolumizer.setSeekBar(mSeekBar);
-        updateIconView();
-        updateSuppressionText();
-        if (mListener != null) {
-            mListener.onUpdateMuteState();
-        }
     }
 
     protected void updateIconView() {

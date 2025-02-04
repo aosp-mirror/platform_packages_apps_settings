@@ -49,8 +49,7 @@ public class RemoteVolumeSeekBarPreference extends VolumeSeekBarPreference {
     }
 
     @Override
-    protected void init() {
-        if (mSeekBar == null) return;
+    protected void onBindViewHolder() {
         setContinuousUpdates(true);
         updateIconView();
         updateSuppressionText();
