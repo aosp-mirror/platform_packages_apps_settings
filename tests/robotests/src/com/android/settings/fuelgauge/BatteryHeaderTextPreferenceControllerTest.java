@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -98,9 +99,7 @@ public class BatteryHeaderTextPreferenceControllerTest {
         mBatteryIntent.putExtra(BatteryManager.EXTRA_PLUGGED, 1);
         doReturn(mBatteryIntent).when(mContext).registerReceiver(any(), any());
 
-        doReturn(mBatteryHeaderTextPreference)
-                .when(mPreferenceScreen)
-                .findPreference(PREF_KEY);
+        doReturn(mBatteryHeaderTextPreference).when(mPreferenceScreen).findPreference(PREF_KEY);
 
         mBatteryInfo.batteryLevel = BATTERY_LEVEL;
 
@@ -322,7 +321,8 @@ public class BatteryHeaderTextPreferenceControllerTest {
                         /* isFastCharging= */ true,
                         /* isChargingStringV2= */ true);
         var expectedChargingString = batteryInfo.remainingLabel;
-        when(mFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(mContext))
+        when(mFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(
+                        eq(mContext), anyBoolean()))
                 .thenReturn(true);
 
         mController.updateBatteryStatus(/* label= */ null, batteryInfo);
@@ -339,7 +339,8 @@ public class BatteryHeaderTextPreferenceControllerTest {
                         /* isFastCharging= */ true,
                         /* isChargingStringV2= */ true);
         var expectedChargingString = batteryInfo.statusLabel;
-        when(mFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(mContext))
+        when(mFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(
+                        eq(mContext), anyBoolean()))
                 .thenReturn(true);
 
         mController.updateBatteryStatus(/* label= */ null, batteryInfo);
@@ -356,7 +357,8 @@ public class BatteryHeaderTextPreferenceControllerTest {
                         /* isFastCharging= */ true,
                         /* isChargingStringV2= */ true);
         var expectedChargingString = batteryInfo.statusLabel + " • " + batteryInfo.remainingLabel;
-        when(mFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(mContext))
+        when(mFactory.batterySettingsFeatureProvider.isChargingOptimizationMode(
+                        eq(mContext), anyBoolean()))
                 .thenReturn(false);
 
         mController.updateBatteryStatus(/* label= */ null, batteryInfo);
@@ -448,7 +450,9 @@ public class BatteryHeaderTextPreferenceControllerTest {
 
         mController.updateHeaderPreference(mBatteryInfo);
 
-        verify(mBatteryHeaderTextPreference).setText(mContext.getString(
+        verify(mBatteryHeaderTextPreference)
+                .setText(
+                        mContext.getString(
                                 com.android.settingslib.R.string
                                         .battery_info_status_charging_on_hold));
     }
