@@ -46,8 +46,9 @@ import android.provider.Settings;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.graphics.hwui.flags.Flags;
-import com.android.settings.R;
 import com.android.settings.Utils;
+
+import com.google.common.truth.Expect;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -65,7 +66,8 @@ import java.util.List;
 /** Tests for {@link HighContrastTextMigrationReceiver}. */
 @RunWith(RobolectricTestRunner.class)
 public class HighContrastTextMigrationReceiverTest {
-
+    @Rule
+    public final Expect expect = Expect.create();
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private final Context mContext = ApplicationProvider.getApplicationContext();
@@ -230,14 +232,12 @@ public class HighContrastTextMigrationReceiverTest {
         assertThat(notification).isNotNull();
 
         ShadowNotification shadowNotification = Shadows.shadowOf(notification);
-        assertThat(shadowNotification.getContentTitle()).isEqualTo(mContext.getString(
-                R.string.accessibility_notification_high_contrast_text_title));
-        assertThat(shadowNotification.getContentText()).isEqualTo(
-                mContext.getString(R.string.accessibility_notification_high_contrast_text_content));
+        expect.that(shadowNotification.getContentTitle()).isEqualTo("Improve text contrast");
+        expect.that(shadowNotification.getContentText()).isEqualTo(
+                "Outline text has replaced high contrast text. You can turn it on in Settings.");
 
-        assertThat(notification.actions.length).isEqualTo(1);
-        assertThat(notification.actions[0].title.toString()).isEqualTo(
-                mContext.getString(R.string.accessibility_notification_high_contrast_text_action));
+        expect.that(notification.actions.length).isEqualTo(1);
+        expect.that(notification.actions[0].title.toString()).isEqualTo("Go to Settings");
     }
 
     private void assertPromptStateAndHctState(
