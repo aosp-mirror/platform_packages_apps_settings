@@ -159,10 +159,11 @@ public class HighContrastTextMigrationReceiver extends BroadcastReceiver {
             actionIntent.setAction(ACTION_OPEN_SETTINGS);
             PendingIntent actionPendingIntent = PendingIntent.getBroadcast(context, 0,
                     actionIntent, PendingIntent.FLAG_IMMUTABLE);
+            final int actionResId =
+                    R.string.accessibility_notification_high_contrast_text_action_open_settings;
             Notification.Action settingsAction = new Notification.Action.Builder(
                     /* icon= */ null,
-                    context.getString(R.string.accessibility_notification_high_contrast_text_action,
-                            context.getString(R.string.settings_label)),
+                    context.getString(actionResId, context.getString(R.string.settings_label)),
                     actionPendingIntent
             ).build();
 
