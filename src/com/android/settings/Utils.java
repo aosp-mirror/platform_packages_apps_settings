@@ -116,6 +116,7 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.widget.ActionBarShadowController;
 import com.android.settingslib.widget.AdaptiveIcon;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -1294,5 +1295,20 @@ public final class Utils extends com.android.settingslib.Utils {
         final boolean dreamsOnlyEnabledForDockUser = context.getResources().getBoolean(
                 com.android.internal.R.bool.config_dreamsOnlyEnabledForDockUser);
         return dreamsSupported && (!dreamsOnlyEnabledForDockUser || canCurrentUserDream(context));
+    }
+
+    /**
+     * Returns {@code true} if the supplied package is a protected package. Otherwise, returns
+     * {@code false}.
+     *
+     * @param context the context
+     * @param packageName the package name
+     */
+    public static boolean isProtectedPackage(
+            @NonNull Context context, @NonNull String packageName) {
+        final List<String> protectedPackageNames = Arrays.asList(context.getResources()
+                .getStringArray(com.android.internal.R.array
+                        .config_biometric_protected_package_names));
+        return protectedPackageNames != null && protectedPackageNames.contains(packageName);
     }
 }
