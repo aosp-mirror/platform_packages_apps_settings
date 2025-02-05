@@ -638,7 +638,7 @@
     <string name="private_space_biometric_unlock_title" msgid="1978145237698659673">"Desbloqueo facial y con huella dactilar en espacio privado"</string>
     <string name="private_space_fingerprint_enroll_introduction_title" msgid="5187730641333680942">"Configura el Desbloqueo con huellas dactilares para el espacio privado"</string>
     <string name="private_space_fingerprint_enroll_introduction_message" msgid="9092068873421435300">"Usa tu huella dactilar para desbloquear el espacio privado o verificar tu identidad, por ejemplo, cuando accedes a apps o apruebas compras"</string>
-    <string name="private_space_fingerprint_enroll_introduction_footer_message" msgid="7125255484447984854">"Tu espacio privado se puede desbloquear, aunque no lo desees, por ejemplo, cuando alguien sostiene tu teléfono frente a tu dedo."</string>
+    <string name="private_space_fingerprint_enroll_introduction_footer_message" msgid="7125255484447984854">"Tu espacio privado se puede desbloquear aunque no lo desees, por ejemplo, cuando alguien sostiene tu teléfono frente a tu dedo."</string>
     <string name="private_space_fingerprint_enroll_finish_message" msgid="4754797926493316965">"Usa tu huella dactilar para desbloquear el espacio privado o aprobar compras"</string>
     <string name="private_space_face_enroll_introduction_title" msgid="3717541082520006032">"Configura el Desbloqueo facial para el espacio privado"</string>
     <string name="private_space_face_enroll_introduction_message" msgid="250239418499081821">"Usa tu rostro para desbloquear tu espacio privado o verificar tu identidad, por ejemplo, cuando accedes a apps o apruebas compras."</string>
@@ -1380,7 +1380,7 @@
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Después de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactividad"</string>
     <string name="screen_timeout_summary_not_set" msgid="5107680774964178875">"No establecido"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Fondo de pantalla"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Estilo y fondo de pantalla"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Fondo de pantalla y estilo"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Pantalla principal, pantalla de bloqueo"</string>
     <string name="wallpaper_suggestion_title" msgid="3812842717939877330">"Cambiar fondo de pantalla"</string>
     <string name="wallpaper_suggestion_summary" msgid="9077061486716754784">"Personalizar tu pantalla"</string>
@@ -2470,8 +2470,7 @@
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Presionar tres veces la pantalla"</string>
     <string name="accessibility_shortcut_edit_screen_title" msgid="4494142067760961499">"Editar combinaciones de accesibilidad"</string>
     <string name="accessibility_shortcut_edit_screen_prompt" msgid="5966054283114856682">"Elige tu combinación de teclas para %1$s"</string>
-    <!-- no translation found for accessibility_shortcut_unassigned_setting_unavailable_summary (993486098872935043) -->
-    <skip />
+    <string name="accessibility_shortcut_unassigned_setting_unavailable_summary" msgid="993486098872935043">"Para usar esta función, activa la combinación de teclas %1$s en la página de una función de accesibilidad"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continuar"</string>
     <string name="accessibility_hearingaid_title" msgid="1263619711863375614">"Dispositivos auditivos"</string>
     <string name="accessibility_hearingaid_intro" msgid="6686620444104350629">"Configura y gestiona audífonos ASHA y LE Audio, implantes cocleares y otros dispositivos de amplificación de sonido"</string>
@@ -2763,7 +2762,7 @@
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Activado"</string>
-    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"Usar el Ahorro de batería"</string>
+    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"Usar Ahorro de batería"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="7857393318205740864">"Activar automáticamente"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"Nunca"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"con <xliff:g id="PERCENT">%1$s</xliff:g> de batería"</string>
@@ -3489,7 +3488,7 @@
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Auriculares con cable"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"El audio del contenido multimedia compatible se hace más envolvente"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"No"</string>
-    <string name="spatial_summary_on_one" msgid="6239933399496282994">"Sí (<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>)"</string>
+    <string name="spatial_summary_on_one" msgid="6239933399496282994">"Sí / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Sí (<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> y <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>)"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"También puedes activar el audio espacial para dispositivos Bluetooth."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Configuración de dispositivos conectados"</string>
@@ -5617,7 +5616,8 @@
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Se produjo un error al establecer la cuenta predeterminada"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"No hay cuenta predeterminada"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Solo en dispositivo"</string>
-    <string name="contacts_storage_account_title" msgid="4939024280942927810">"Dispositivo y %1$s"</string>
+    <!-- no translation found for contacts_storage_account_title (7334522539665856395) -->
+    <skip />
     <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Agrega una cuenta para comenzar"</string>
     <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Dónde guardar los contactos"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Busca con un círculo"</string>
@@ -5628,8 +5628,8 @@
     <string name="device_supervision_switch_title" msgid="3203958797412413373">"Usar la supervisión de dispositivos"</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="8294396978464347129">"Configurar un PIN para comenzar"</string>
     <string name="keywords_supervision_settings" msgid="2580555201483955376">"supervisión, supervisión parental, controles parentales"</string>
-    <!-- no translation found for supervision_pin_management_preference_title (961680798581006465) -->
-    <skip />
-    <!-- no translation found for supervision_pin_management_preference_summary_add (3244161328612671896) -->
+    <string name="supervision_pin_management_preference_title" msgid="961680798581006465">"Administra tu PIN"</string>
+    <string name="supervision_pin_management_preference_summary_add" msgid="3244161328612671896">"Agrega un método de recuperación de PIN"</string>
+    <!-- no translation found for supervision_change_pin_preference_title (2288584039438231801) -->
     <skip />
 </resources>
