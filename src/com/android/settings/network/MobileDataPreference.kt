@@ -58,8 +58,6 @@ class MobileDataPreference :
 
     override fun getWritePermissions(context: Context) =
         Permissions.allOf(
-            // SubscriptionManager.createForAllUserProfiles
-            Manifest.permission.INTERACT_ACROSS_PROFILES,
             // TelephonyManager.setDataEnabledForReason
             Manifest.permission.MODIFY_PHONE_STATE,
         )
