@@ -34,7 +34,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
 
@@ -105,7 +104,7 @@ public class PreferredSimDialogFragment extends SimDialogFragment implements
         final SubscriptionInfo info = getPreferredSubscription();
         if (info == null || (info.isEmbedded()
             && (info.getProfileClass() == PROFILE_CLASS_PROVISIONING
-                || (Flags.oemEnabledSatelliteFlag() && info.isOnlyNonTerrestrialNetwork())))) {
+                || info.isOnlyNonTerrestrialNetwork()))) {
             dismiss("SubscriptionInfo is null or other esim's cases.");
             return;
         }

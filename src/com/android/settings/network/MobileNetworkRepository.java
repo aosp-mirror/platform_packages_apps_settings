@@ -37,7 +37,6 @@ import androidx.annotation.GuardedBy;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
 
-import com.android.internal.telephony.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.mobile.dataservice.MobileNetworkDatabase;
@@ -509,8 +508,7 @@ public class MobileNetworkRepository extends SubscriptionManager.OnSubscriptions
                     }
                     if (subInfo.isEmbedded()
                         && (subInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING
-                            || (Flags.oemEnabledSatelliteFlag()
-                            && subInfo.isOnlyNonTerrestrialNetwork()))) {
+                            || subInfo.isOnlyNonTerrestrialNetwork())) {
                         if (DEBUG) {
                             Log.d(TAG, "Do not insert the provisioning or satellite eSIM");
                         }
