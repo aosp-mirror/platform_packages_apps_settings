@@ -129,8 +129,11 @@ public class BluetoothDetailsAmbientVolumePreferenceController extends Bluetooth
 
     @Override
     public boolean isAvailable() {
-        return mCachedDevice.isHearingDevice() && mCachedDevice.getProfiles().stream().anyMatch(
-                profile -> profile instanceof VolumeControlProfile);
+        return mCachedDevice.isHearingDevice()
+                && mCachedDevice.getProfiles().stream().anyMatch(
+                        profile -> profile instanceof VolumeControlProfile)
+                && mAmbientUiController != null
+                && mAmbientUiController.isAmbientControlAvailable();
     }
 
     @Nullable
