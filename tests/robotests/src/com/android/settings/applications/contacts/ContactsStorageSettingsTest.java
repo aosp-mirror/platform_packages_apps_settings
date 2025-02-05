@@ -155,7 +155,7 @@ public class ContactsStorageSettingsTest {
 
         assertThat(deviceOnlyPreference.getTitle()).isEqualTo("Device only");
         assertThat(deviceOnlyPreference.getSummary()).isEqualTo(
-                "New contacts won't be synced with an account");
+                "Contacts may not sync or be available on your other devices");
         assertThat(deviceOnlyPreference.getOrder()).isEqualTo(999);
         assertThat(mContactsStorageSettings.findPreference(
                 PREF_KEY_ACCOUNT_CATEGORY).getTitle()).isEqualTo("Where to save contacts");
