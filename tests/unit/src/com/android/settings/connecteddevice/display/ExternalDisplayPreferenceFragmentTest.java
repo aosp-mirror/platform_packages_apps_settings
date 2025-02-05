@@ -17,7 +17,6 @@ package com.android.settings.connecteddevice.display;
 
 import static android.view.Display.INVALID_DISPLAY;
 
-import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.PREVIOUSLY_SHOWN_LIST_KEY;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.DISPLAYS_LIST_PREFERENCE_KEY;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_CHANGE_RESOLUTION_FOOTER_RESOURCE;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_NOT_FOUND_FOOTER_RESOURCE;
@@ -26,8 +25,13 @@ import static com.android.settings.connecteddevice.display.ExternalDisplayPrefer
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_ROTATION_KEY;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_ROTATION_TITLE_RESOURCE;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_SETTINGS_RESOURCE;
+import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_SIZE_PREFERENCE_KEY;
+import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_SIZE_SUMMARY_RESOURCE;
+import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_SIZE_TITLE_RESOURCE;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_USE_PREFERENCE_KEY;
 import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.EXTERNAL_DISPLAY_USE_TITLE_RESOURCE;
+import static com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.PREVIOUSLY_SHOWN_LIST_KEY;
+import static com.android.settings.flags.Flags.FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING;
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST;
 import static com.android.settingslib.widget.FooterPreference.KEY_FOOTER;
 
@@ -207,6 +211,29 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
 
     @Test
     @UiThreadTest
+    public void testShowEnabledDisplay_OnlyOneDisplayAvailable_displaySizeDisabled() {
+        mFlags.setFlag(FLAG_DISPLAY_SIZE_CONNECTED_DISPLAY_SETTING, false);
+        doReturn(true).when(mMockedInjector).isDisplayEnabled(any());
+        // Only one display available
+        doReturn(new Display[] {mDisplays[1]}).when(mMockedInjector).getAllDisplays();
+        // Init
+        initFragment();
+        mHandler.flush();
+        PreferenceCategory list = mPreferenceScreen.findPreference(DISPLAYS_LIST_PREFERENCE_KEY);
+        assertThat(list).isNull();
+        var pref = mPreferenceScreen.findPreference(EXTERNAL_DISPLAY_RESOLUTION_PREFERENCE_KEY);
+        assertThat(pref).isNotNull();
+        pref = mPreferenceScreen.findPreference(EXTERNAL_DISPLAY_ROTATION_KEY);
+        assertThat(pref).isNotNull();
+        var footerPref = (FooterPreference) mPreferenceScreen.findPreference(KEY_FOOTER);
+        assertThat(footerPref).isNotNull();
+        var sizePref = mPreferenceScreen.findPreference(EXTERNAL_DISPLAY_SIZE_PREFERENCE_KEY);
+        assertThat(sizePref).isNull();
+        verify(footerPref).setTitle(EXTERNAL_DISPLAY_CHANGE_RESOLUTION_FOOTER_RESOURCE);
+    }
+
+    @Test
+    @UiThreadTest
     public void testShowEnabledDisplay_OnlyOneDisplayAvailable() {
         doReturn(true).when(mMockedInjector).isDisplayEnabled(any());
         // Only one display available
@@ -222,6 +249,8 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         assertThat(pref).isNotNull();
         var footerPref = (FooterPreference) mPreferenceScreen.findPreference(KEY_FOOTER);
         assertThat(footerPref).isNotNull();
+        var sizePref = mPreferenceScreen.findPreference(EXTERNAL_DISPLAY_SIZE_PREFERENCE_KEY);
+        assertThat(sizePref).isNotNull();
         verify(footerPref).setTitle(EXTERNAL_DISPLAY_CHANGE_RESOLUTION_FOOTER_RESOURCE);
     }
 
@@ -240,6 +269,8 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         assertThat(pref).isNotNull();
         var footerPref = (FooterPreference) mPreferenceScreen.findPreference(KEY_FOOTER);
         assertThat(footerPref).isNotNull();
+        var sizePref = mPreferenceScreen.findPreference(EXTERNAL_DISPLAY_SIZE_PREFERENCE_KEY);
+        assertThat(sizePref).isNotNull();
         verify(footerPref).setTitle(EXTERNAL_DISPLAY_CHANGE_RESOLUTION_FOOTER_RESOURCE);
     }
 
@@ -265,6 +296,8 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         assertThat(pref).isNull();
         var footerPref = (FooterPreference) mPreferenceScreen.findPreference(KEY_FOOTER);
         assertThat(footerPref).isNull();
+        var sizePref = mPreferenceScreen.findPreference(EXTERNAL_DISPLAY_SIZE_PREFERENCE_KEY);
+        assertThat(sizePref).isNull();
     }
 
     @Test
@@ -334,6 +367,24 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         assertThat(pref.getOnPreferenceClickListener()).isNotNull();
         assertThat(pref.getOnPreferenceClickListener().onPreferenceClick(pref)).isTrue();
         assertThat(mResolutionSelectorDisplayId).isEqualTo(mDisplayIdArg);
+        verify(mMockedMetricsLogger).writePreferenceClickMetric(pref);
+    }
+
+    @Test
+    @UiThreadTest
+    public void testDisplaySizePreference() {
+        mDisplayIdArg = 1;
+        doReturn(true).when(mMockedInjector).isDisplayEnabled(any());
+        var fragment = initFragment();
+        mHandler.flush();
+        var pref = fragment.getSizePreference(mContext);
+        assertThat(pref.getKey()).isEqualTo(EXTERNAL_DISPLAY_SIZE_PREFERENCE_KEY);
+        assertThat("" + pref.getTitle()).isEqualTo(getText(EXTERNAL_DISPLAY_SIZE_TITLE_RESOURCE));
+        assertThat("" + pref.getSummary())
+                .isEqualTo(getText(EXTERNAL_DISPLAY_SIZE_SUMMARY_RESOURCE));
+        assertThat(pref.isEnabled()).isTrue();
+        assertThat(pref.getOnPreferenceClickListener()).isNotNull();
+        assertThat(pref.getOnPreferenceClickListener().onPreferenceClick(pref)).isTrue();
         verify(mMockedMetricsLogger).writePreferenceClickMetric(pref);
     }
 
