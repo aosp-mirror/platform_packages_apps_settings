@@ -33,5 +33,17 @@ const val KEY_LOCATION = SettingsSlicesContract.KEY_LOCATION
 /** Contract key for the "Wi-fi" setting. */
 const val KEY_WIFI = SettingsSlicesContract.KEY_WIFI
 
+/** Contract key for the "Use Wi-Fi calling" setting. */
+const val KEY_WIFI_CALLING = "wifi_calling"
+
 /** Contract key for the "Use Data Saver" setting. */
 const val KEY_DATA_SAVER = "data_saver"
+
+/** Contract key for the "Mobile data" setting. */
+const val KEY_MOBILE_DATA = "mobile_data"
+
+/** Contract key for the "Adaptive brightness" setting. */
+const val KEY_ADAPTIVE_BRIGHTNESS = "auto_brightness"
+
+/** Contract key for the "Screen attention" setting. */
+const val KEY_SCREEN_ATTENTION = "screen_attention"
