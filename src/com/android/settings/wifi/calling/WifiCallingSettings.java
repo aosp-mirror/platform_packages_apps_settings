@@ -94,6 +94,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         if (MobileNetworkUtils.isMobileNetworkUserRestricted(getActivity())) {
             return new ViewStub(getActivity());
         }
