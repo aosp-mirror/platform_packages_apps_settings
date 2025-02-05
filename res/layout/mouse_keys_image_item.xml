@@ -15,12 +15,25 @@
   limitations under the License.
 -->
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          android:id="@+id/layout_description"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="16dp"
-          android:layout_marginEnd="20dp"
-          android:layout_marginBottom="20dp"
-          android:textAppearance="?android:attr/textAppearanceListItemSmall"
-          android:drawablePadding="8dp"/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginStart="16dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter" />
+
+    <TextView
+        android:id="@+id/layout_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:gravity="center" />
+</LinearLayout>
