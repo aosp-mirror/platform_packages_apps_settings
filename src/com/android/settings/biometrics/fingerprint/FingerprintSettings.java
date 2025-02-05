@@ -332,6 +332,8 @@ public class FingerprintSettings extends SubSettings {
         private boolean mIsEnrolling;
         /** SaveInstance key if we are waiting activity result from a extension preference */
         @NonNull private String mLaunchedExtPrefKey = "";
+        /** key list for changing visibility */
+        @NonNull private final ArrayList<String> mExtPrefKeys = new ArrayList<>();
 
         private long mChallenge;
 
@@ -474,6 +476,7 @@ public class FingerprintSettings extends SubSettings {
                 if (preference instanceof PrimarySwitchIntentPreference) {
                     preference.setOnPreferenceClickListener(this::onExtIntentPreferenceClick);
                 }
+                mExtPrefKeys.add(preference.getKey());
                 mFingerprintUnlockCategory.addPreference(preference);
             }
         }
@@ -826,8 +829,17 @@ public class FingerprintSettings extends SubSettings {
             updateAddPreference();
         }
 
+        /**
+         * Lambda function for setCategoryHasChildrenSupplier
+         */
+        private boolean fingerprintUnlockCategoryHasChild() {
+            return mFingerprintUnlockCategory.getPreferenceCount() > 0;
+        }
+
         private void addFingerprintUnlockCategory() {
             mFingerprintUnlockCategory = findPreference(KEY_FINGERPRINT_UNLOCK_CATEGORY);
+            mFingerprintUnlockCategoryPreferenceController.setCategoryHasChildrenSupplier(
+                    this::fingerprintUnlockCategoryHasChild);
             if (isSfps()) {
                 // For both SFPS "screen on to auth" and "rest to unlock"
                 final Preference restToUnlockPreference = FeatureFactory.getFeatureFactory()
@@ -866,6 +878,14 @@ public class FingerprintSettings extends SubSettings {
                 final int status =
                         mScreenOffUnlockUdfpsPreferenceController.getAvailabilityStatus();
                 updatePreferenceVisibility(status, mScreenOffUnlockUdfpsPreference);
+            }
+            if (!mExtPrefKeys.isEmpty()) {
+                for (String key: mExtPrefKeys) {
+                    Preference preference = mFingerprintUnlockCategory.findPreference(key);
+                    if (preference != null) {
+                        updatePreferenceVisibility(categoryStatus, preference);
+                    }
+                }
             }
         }
 
