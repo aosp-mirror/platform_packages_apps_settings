@@ -141,7 +141,7 @@ public class CustomSliceRegistry {
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendEncodedPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath("mobile_data")
+            .appendPath(SettingsContractKt.KEY_MOBILE_DATA)
             .build();
 
     /**
@@ -220,7 +220,7 @@ public class CustomSliceRegistry {
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
-            .appendPath(WifiCallingSliceHelper.PATH_WIFI_CALLING)
+            .appendPath(SettingsContractKt.KEY_WIFI_CALLING)
             .build();
     /**
      * Full {@link Uri} for the Wifi Calling Preference Slice.
