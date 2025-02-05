@@ -26,9 +26,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.supervision.SupervisionManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -42,6 +44,9 @@ import android.net.ConnectivityManager;
 import android.net.VpnManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.text.SpannableStringBuilder;
 
@@ -51,8 +56,10 @@ import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -68,10 +75,13 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 public class EnterprisePrivacyFeatureProviderImplTest {
 
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private static final String OWNER_ORGANIZATION = "ACME";
     private static final String VPN_PACKAGE_ID = "com.example.vpn";
     private static final String IME_PACKAGE_ID = "com.example.ime";
     private static final String IME_PACKAGE_LABEL = "Test IME";
+    private static final String SUPERVISION_PACKAGE = "com.supervision.app";
 
     private final ComponentName mOwner = new ComponentName("mock", "component");
     private final ComponentName mAdmin1 = new ComponentName("mock", "admin1");
@@ -82,19 +92,14 @@ public class EnterprisePrivacyFeatureProviderImplTest {
 
     private List<UserInfo> mProfiles = new ArrayList<>();
 
-    @Mock
-    private Context mContext;
-    @Mock
-    private DevicePolicyManager mDevicePolicyManager;
-    @Mock
-    private PackageManager mPackageManager;
-    @Mock
-    private UserManager mUserManager;
-    @Mock
-    private ConnectivityManager mConnectivityManger;
-    @Mock
-    private VpnManager mVpnManager;
+    @Mock private Context mContext;
+    @Mock private DevicePolicyManager mDevicePolicyManager;
+    @Mock private PackageManager mPackageManager;
+    @Mock private UserManager mUserManager;
+    @Mock private ConnectivityManager mConnectivityManager;
+    @Mock private VpnManager mVpnManager;
     private Resources mResources;
+    @Mock private SupervisionManager mSupervisionManager;
 
     private EnterprisePrivacyFeatureProvider mProvider;
 
@@ -108,12 +113,14 @@ public class EnterprisePrivacyFeatureProviderImplTest {
         when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        when(mContext.getSystemService(SupervisionManager.class))
+                .thenReturn(mSupervisionManager);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         mProfiles.add(new UserInfo(mUserId, "", "", 0 /* flags */));
         mResources = RuntimeEnvironment.application.getResources();
 
         mProvider = new EnterprisePrivacyFeatureProviderImpl(mContext, mDevicePolicyManager,
-                mPackageManager, mUserManager, mConnectivityManger, mVpnManager, mResources);
+                mPackageManager, mUserManager, mConnectivityManager, mVpnManager, mResources);
     }
 
     @Test
@@ -430,6 +437,7 @@ public class EnterprisePrivacyFeatureProviderImplTest {
     }
 
     @Test
+    @DisableFlags(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
     public void testShowParentalControls() {
         when(mDevicePolicyManager.getProfileOwnerOrDeviceOwnerSupervisionComponent(any()))
                 .thenReturn(mOwner);
@@ -438,6 +446,25 @@ public class EnterprisePrivacyFeatureProviderImplTest {
         Intent intent = addParentalControlsIntent(mOwner.getPackageName());
         assertThat(mProvider.showParentalControls()).isTrue();
         verify(mContext).startActivity(intentEquals(intent));
+    }
+
+    @Test
+    @EnableFlags(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
+    public void testShowParentalControls_usingSupervisionManager() {
+        when(mSupervisionManager.getActiveSupervisionAppPackage())
+                .thenReturn(SUPERVISION_PACKAGE);
+        when(mPackageManager.queryIntentActivitiesAsUser(any(Intent.class), anyInt(), anyInt()))
+                .thenReturn(ImmutableList.of(new ResolveInfo()));
+
+        // If the intent is resolved, then we can use it to launch the activity.
+        assertThat(mProvider.showParentalControls()).isTrue();
+        verifyNoMoreInteractions(mDevicePolicyManager);
+
+        ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        verify(mContext).startActivity(captor.capture());
+        Intent intent = captor.getValue();
+        assertThat(intent).isNotNull();
+        assertThat(intent.getPackage()).isEqualTo(SUPERVISION_PACKAGE);
     }
 
     private Intent addWorkPolicyInfoIntent(
