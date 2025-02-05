@@ -30,6 +30,7 @@ import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ResourceId;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -73,12 +74,19 @@ public class FaceSettings extends DashboardFragment {
     private static final String KEY_BIOMETRICS_SUCCESSFULLY_AUTHENTICATED =
             "biometrics_successfully_authenticated";
 
+    private static final String PREF_KEY_FACE_DESCRIPTION = "security_settings_face_description";
     private static final String PREF_KEY_DELETE_FACE_DATA =
             "security_settings_face_delete_faces_container";
     private static final String PREF_KEY_ENROLL_FACE_UNLOCK =
             "security_settings_face_enroll_faces_container";
     private static final String PREF_KEY_USE_FACE_TO_CATEGORY =
             "biometric_settings_use_face_to";
+    private static final String PREF_KEY_FACE_ENROLLED_CATEGORY =
+            "security_settings_face_enrolled_category";
+    private static final String PREF_KEY_FACE_REMOVE =
+            "security_settings_face_remove";
+    private static final String PREF_KEY_FACE_ENROLL =
+            "security_settings_face_enroll";
     public static final String SECURITY_SETTINGS_FACE_MANAGE_CATEGORY =
             "security_settings_face_manage_category";
 
@@ -98,6 +106,9 @@ public class FaceSettings extends DashboardFragment {
     private List<Preference> mTogglePreferences;
     private Preference mRemoveButton;
     private Preference mEnrollButton;
+    private PreferenceCategory mFaceEnrolledCategory;
+    private Preference mFaceRemoveButton;
+    private Preference mFaceEnrollButton;
     private FaceFeatureProvider mFaceFeatureProvider;
 
     private boolean mConfirmingPassword;
@@ -111,8 +122,7 @@ public class FaceSettings extends DashboardFragment {
         }
 
         // Hide the "remove" button and show the "set up face authentication" button.
-        mRemoveButton.setVisible(false);
-        mEnrollButton.setVisible(true);
+        updateFaceAddAndRemovePreference(false);
     };
 
     private final FaceSettingsEnrollButtonPreferenceController.Listener mEnrollListener = intent ->
@@ -193,6 +203,15 @@ public class FaceSettings extends DashboardFragment {
                 : use(FaceSettingsLockscreenBypassPreferenceController.class);
         mLockscreenController.setUserId(mUserId);
 
+        final int descriptionResId = FeatureFactory.getFeatureFactory()
+                .getFaceFeatureProvider().getFaceSettingsFeatureProvider()
+                .getSettingPageDescription();
+        if (ResourceId.isValid(descriptionResId)) {
+            final Preference preference = findPreference(PREF_KEY_FACE_DESCRIPTION);
+            preference.setTitle(descriptionResId);
+            preference.setVisible(true);
+        }
+
         final PreferenceCategory managePref =
                 findPreference(SECURITY_SETTINGS_FACE_MANAGE_CATEGORY);
         Preference keyguardPref = findPreference(FaceSettingsKeyguardPreferenceController.KEY);
@@ -201,8 +220,13 @@ public class FaceSettings extends DashboardFragment {
         Preference confirmPref = findPreference(FaceSettingsConfirmPreferenceController.KEY);
         Preference bypassPref =
                 findPreference(mLockscreenController.getPreferenceKey());
+        Preference unlockKeyguard = findPreference(
+                use(FaceSettingsKeyguardUnlockPreferenceController.class).getPreferenceKey());
+        Preference appsPref = findPreference(
+                use(FaceSettingsAppsPreferenceController.class).getPreferenceKey());
         mTogglePreferences = new ArrayList<>(
-                Arrays.asList(keyguardPref, appPref, attentionPref, confirmPref, bypassPref));
+                Arrays.asList(keyguardPref, appPref, attentionPref, confirmPref, bypassPref,
+                        unlockKeyguard, appsPref));
 
         if (RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
                 getContext(), DevicePolicyManager.KEYGUARD_DISABLE_FACE, mUserId) != null) {
@@ -215,9 +239,18 @@ public class FaceSettings extends DashboardFragment {
         mRemoveButton = findPreference(FaceSettingsRemoveButtonPreferenceController.KEY);
         mEnrollButton = findPreference(FaceSettingsEnrollButtonPreferenceController.KEY);
 
+        mFaceEnrolledCategory = findPreference(PREF_KEY_FACE_ENROLLED_CATEGORY);
+        mFaceRemoveButton = findPreference(PREF_KEY_FACE_REMOVE);
+        mFaceRemoveButton.setIcon(R.drawable.ic_face);
+        mFaceRemoveButton.setOnPreferenceClickListener(
+                use(FaceSettingsRemoveButtonPreferenceController.class));
+        mFaceEnrollButton = findPreference(PREF_KEY_FACE_ENROLL);
+        mFaceEnrollButton.setIcon(R.drawable.ic_add_24dp);
+        mFaceEnrollButton.setOnPreferenceClickListener(
+                use(FaceSettingsEnrollButtonPreferenceController.class));
+
         final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
-        mEnrollButton.setVisible(!hasEnrolled);
-        mRemoveButton.setVisible(hasEnrolled);
+        updateFaceAddAndRemovePreference(hasEnrolled);
 
         // There is no better way to do this :/
         for (AbstractPreferenceController controller : mControllers) {
@@ -255,8 +288,7 @@ public class FaceSettings extends DashboardFragment {
     public void onStart() {
         super.onStart();
         final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
-        mEnrollButton.setVisible(!hasEnrolled);
-        mRemoveButton.setVisible(hasEnrolled);
+        updateFaceAddAndRemovePreference(hasEnrolled);
 
         // When the user has face id registered but failed enrolling in device lock state,
         // lead users directly to the confirm deletion dialog in Face Unlock settings.
@@ -264,10 +296,16 @@ public class FaceSettings extends DashboardFragment {
             final boolean isReEnrollFaceUnlock = getIntent().getBooleanExtra(
                     FaceSettings.KEY_RE_ENROLL_FACE, false);
             if (isReEnrollFaceUnlock) {
-                final Button removeBtn = ((LayoutPreference) mRemoveButton).findViewById(
-                        R.id.security_settings_face_settings_remove_button);
-                if (removeBtn != null && removeBtn.isEnabled()) {
-                    mRemoveController.onClick(removeBtn);
+                if (Flags.biometricsOnboardingEducation()) {
+                    if (mFaceRemoveButton.isEnabled()) {
+                        mRemoveController.onPreferenceClick(mFaceRemoveButton);
+                    }
+                } else {
+                    final Button removeBtn = ((LayoutPreference) mRemoveButton).findViewById(
+                            R.id.security_settings_face_settings_remove_button);
+                    if (removeBtn != null && removeBtn.isEnabled()) {
+                        mRemoveController.onClick(removeBtn);
+                    }
                 }
             }
         }
@@ -327,8 +365,7 @@ public class FaceSettings extends DashboardFragment {
                 });
 
                 final boolean hasEnrolled = mFaceManager.hasEnrolledTemplates(mUserId);
-                mEnrollButton.setVisible(!hasEnrolled);
-                mRemoveButton.setVisible(hasEnrolled);
+                updateFaceAddAndRemovePreference(hasEnrolled);
                 final Utils.BiometricStatus biometricAuthStatus =
                         Utils.requestBiometricAuthenticationForMandatoryBiometrics(getActivity(),
                                 mBiometricsAuthenticationRequested,
@@ -405,6 +442,17 @@ public class FaceSettings extends DashboardFragment {
         }
 
         return mControllers;
+    }
+
+    private void updateFaceAddAndRemovePreference(boolean hasEnrolled) {
+        if (Flags.biometricsOnboardingEducation()) {
+            mFaceEnrolledCategory.setVisible(true);
+            mFaceRemoveButton.setVisible(hasEnrolled);
+            mFaceEnrollButton.setVisible(!hasEnrolled);
+        } else {
+            mEnrollButton.setVisible(!hasEnrolled);
+            mRemoveButton.setVisible(hasEnrolled);
+        }
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {

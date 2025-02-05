@@ -19,9 +19,11 @@ package com.android.settings.biometrics.face;
 import static android.provider.Settings.Secure.FACE_KEYGUARD_ENABLED;
 
 import android.content.Context;
+import android.hardware.face.FaceManager;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
+import androidx.preference.Preference;
 
 import com.android.settings.Utils;
 import com.android.settings.biometrics.activeunlock.ActiveUnlockStatusUtils;
@@ -32,9 +34,12 @@ public class FaceSettingsKeyguardUnlockPreferenceController extends
     private static final int OFF = 0;
     private static final int DEFAULT = ON;
 
+    private FaceManager mFaceManager;
+
     public FaceSettingsKeyguardUnlockPreferenceController(
             @NonNull Context context, @NonNull String key) {
         super(context, key);
+        mFaceManager = Utils.getFaceManagerOrNull(context);
     }
 
     @Override
@@ -47,6 +52,20 @@ public class FaceSettingsKeyguardUnlockPreferenceController extends
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putIntForUser(mContext.getContentResolver(),
                 FACE_KEYGUARD_ENABLED, isChecked ? ON : OFF, getUserId());
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (!FaceSettings.isFaceHardwareDetected(mContext)) {
+            preference.setEnabled(false);
+        } else if (!mFaceManager.hasEnrolledTemplates(getUserId())) {
+            preference.setEnabled(false);
+        } else if (getRestrictingAdmin() != null) {
+            preference.setEnabled(false);
+        } else {
+            preference.setEnabled(true);
+        }
     }
 
     @Override
