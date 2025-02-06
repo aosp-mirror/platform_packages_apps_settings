@@ -16,7 +16,6 @@
 
 package com.android.settings.datausage
 
-import android.Manifest
 import android.app.settings.SettingsEnums.ACTION_DATA_SAVER_MODE
 import android.content.Context
 import com.android.settings.PreferenceActionMetricsProvider
@@ -50,11 +49,9 @@ class DataSaverMainSwitchPreference :
 
     override fun storage(context: Context) = createDataStore(context)
 
-    override fun getReadPermissions(context: Context) =
-        Permissions.allOf(Manifest.permission.MANAGE_NETWORK_POLICY)
+    override fun getReadPermissions(context: Context) = Permissions.EMPTY
 
-    override fun getWritePermissions(context: Context) =
-        Permissions.allOf(Manifest.permission.MANAGE_NETWORK_POLICY)
+    override fun getWritePermissions(context: Context) = Permissions.EMPTY
 
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
