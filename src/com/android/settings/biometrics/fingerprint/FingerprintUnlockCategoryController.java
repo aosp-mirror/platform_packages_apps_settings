@@ -16,14 +16,15 @@
 
 package com.android.settings.biometrics.fingerprint;
 
-import static android.hardware.biometrics.Flags.screenOffUnlockUdfps;
-
+import android.annotation.Nullable;
 import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+
+import java.util.function.Supplier;
 
 /**
  * Preference controller that controls the fingerprint unlock features to be shown / be hidden.
@@ -34,17 +35,31 @@ public class FingerprintUnlockCategoryController extends BasePreferenceControlle
     private int mUserId;
     @VisibleForTesting
     protected FingerprintManager mFingerprintManager;
+    @Nullable
+    private Supplier<Boolean> mCategoryHasChildSupplier = null;
 
     public FingerprintUnlockCategoryController(Context context, String key) {
         super(context, key);
         mFingerprintManager = Utils.getFingerprintManagerOrNull(context);
     }
 
+    public void setCategoryHasChildrenSupplier(
+            @Nullable Supplier<Boolean> categoryHasChildSupplier
+    ) {
+        mCategoryHasChildSupplier = categoryHasChildSupplier;
+    }
+
     @Override
     public int getAvailabilityStatus() {
+        Supplier<Boolean> categoryHasChildSupplier = mCategoryHasChildSupplier;
+        boolean hasChild = false;
+        if (categoryHasChildSupplier != null) {
+            hasChild = categoryHasChildSupplier.get();
+        }
+
         if (mFingerprintManager != null
                 && mFingerprintManager.isHardwareDetected()
-                && (mFingerprintManager.isPowerbuttonFps() || screenOffUnlockUdfps())) {
+                && hasChild) {
             return mFingerprintManager.hasEnrolledTemplates(getUserId())
                     ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
         } else {
