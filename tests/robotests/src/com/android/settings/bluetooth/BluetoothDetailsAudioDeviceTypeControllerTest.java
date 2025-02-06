@@ -18,7 +18,6 @@ package com.android.settings.bluetooth;
 
 import static android.bluetooth.BluetoothDevice.DEVICE_TYPE_LE;
 import static android.media.AudioManager.AUDIO_DEVICE_CATEGORY_SPEAKER;
-import static android.media.audio.Flags.automaticBtDeviceType;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -98,12 +97,7 @@ public class BluetoothDetailsAudioDeviceTypeControllerTest extends
     @Test
     public void createAudioDeviceTypePreference_btDeviceIsCategorized_checkSelection() {
         int deviceType = AUDIO_DEVICE_CATEGORY_SPEAKER;
-        if (automaticBtDeviceType()) {
-            when(mAudioManager.getBluetoothAudioDeviceCategory(MAC_ADDRESS)).thenReturn(deviceType);
-        } else {
-            when(mAudioManager.getBluetoothAudioDeviceCategory_legacy(MAC_ADDRESS, /*isBle=*/
-                    true)).thenReturn(deviceType);
-        }
+        when(mAudioManager.getBluetoothAudioDeviceCategory(MAC_ADDRESS)).thenReturn(deviceType);
 
         mController.createAudioDeviceTypePreference(mContext);
         mAudioDeviceTypePref = mController.getAudioDeviceTypePreference();
@@ -118,12 +112,7 @@ public class BluetoothDetailsAudioDeviceTypeControllerTest extends
 
         mController.onPreferenceChange(mAudioDeviceTypePref, Integer.toString(deviceType));
 
-        if (automaticBtDeviceType()) {
-            verify(mAudioManager).setBluetoothAudioDeviceCategory(eq(MAC_ADDRESS),
-                    eq(AUDIO_DEVICE_CATEGORY_SPEAKER));
-        } else {
-            verify(mAudioManager).setBluetoothAudioDeviceCategory_legacy(eq(MAC_ADDRESS), eq(true),
-                    eq(AUDIO_DEVICE_CATEGORY_SPEAKER));
-        }
+        verify(mAudioManager).setBluetoothAudioDeviceCategory(eq(MAC_ADDRESS),
+                eq(AUDIO_DEVICE_CATEGORY_SPEAKER));
     }
 }
