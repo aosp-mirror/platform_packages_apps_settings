@@ -35,7 +35,7 @@ import com.android.settingslib.widget.MainSwitchPreference;
 public class KeyboardAccessibilityMouseKeysController extends
         InputSettingPreferenceController implements
         LifecycleObserver {
-    private static final String KEY_MOUSE_KEY = "accessibility_mouse_keys";
+    private static final String KEY_MOUSE_KEY = "keyboard_a11y_page_mouse_keys";
     private static final String KEY_MOUSE_KEY_MAIN_PAGE = "mouse_keys_main_switch";
 
     @Nullable
