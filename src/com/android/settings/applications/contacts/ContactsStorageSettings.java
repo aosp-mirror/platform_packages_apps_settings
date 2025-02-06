@@ -232,7 +232,7 @@ public class ContactsStorageSettings extends DashboardFragment
                     getPrefContext());
             preference.setTitle(R.string.sim_card_label);
             preference.setIcon(R.drawable.ic_sim_card);
-            preference.setSummary(R.string.sim_card_label);
+            preference.setSummary(R.string.contacts_storage_device_only_preference_summary);
             preference.setKey(preferenceKey);
             preference.setOnClickListener(this);
             mAccountMap.put(preferenceKey, currentDefaultAccountAndState);

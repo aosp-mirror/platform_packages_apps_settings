@@ -345,7 +345,8 @@ public class ContactsStorageSettingsTest {
         SelectorWithWidgetPreference simPreference = accountCategory.findPreference(
                 String.valueOf(SIM_ACCOUNT.hashCode()));
         assertThat(simPreference.getTitle()).isEqualTo("SIM");
-        assertThat(simPreference.getSummary()).isEqualTo("SIM");
+        assertThat(simPreference.getSummary()).isEqualTo(
+                "Contacts may not sync or be available on your other devices");
         assertThat(simPreference.getIcon()).isNotNull();
         assertThat(simPreference.isChecked()).isTrue();
     }
