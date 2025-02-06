@@ -5515,12 +5515,12 @@
             android:exported="true"
             android:permission="android.permission.BLUETOOTH_PRIVILEGED" />
 
-        <!-- Once b/364771256 is fixed, add android:featureFlag="com.android.settings.flags.catalyst_service". -->
-        <!-- Permission is not yet finalized, use READ_BASIC_PHONE_STATE temporarily. -->
+        <!-- Service based on settingslib ipc to expose Preference Metadata and Get/Set functionality. -->
         <service
             android:name=".SettingsService"
             android:exported="true"
-            android:permission="android.permission.READ_BASIC_PHONE_STATE">
+            android:featureFlag="com.android.settings.flags.catalyst_service"
+            android:permission="android.permission.READ_SYSTEM_PREFERENCES">
             <intent-filter>
                 <action android:name="com.android.settingslib.PREFERENCE_SERVICE" />
             </intent-filter>

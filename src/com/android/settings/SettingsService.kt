@@ -16,21 +16,19 @@
 
 package com.android.settings
 
-import android.content.Intent
-import com.android.settings.flags.Flags
+import android.Manifest.permission.WRITE_SYSTEM_PREFERENCES
+import android.app.AppOpsManager.OP_WRITE_SYSTEM_PREFERENCES
 import com.android.settings.metrics.SettingsRemoteOpMetricsLogger
 import com.android.settingslib.ipc.ApiPermissionChecker
+import com.android.settingslib.ipc.AppOpApiPermissionChecker
 import com.android.settingslib.service.PreferenceService
 
 /** Service to expose settings APIs. */
 class SettingsService :
     PreferenceService(
         graphPermissionChecker = ApiPermissionChecker.alwaysAllow(),
-        setterPermissionChecker = ApiPermissionChecker.alwaysAllow(),
+        setterPermissionChecker =
+            AppOpApiPermissionChecker(OP_WRITE_SYSTEM_PREFERENCES, WRITE_SYSTEM_PREFERENCES),
         getterPermissionChecker = ApiPermissionChecker.alwaysAllow(),
         metricsLogger = SettingsRemoteOpMetricsLogger(),
-    ) {
-
-    override fun onBind(intent: Intent) =
-        if (Flags.catalystService()) super.onBind(intent) else null
-}
+    )
