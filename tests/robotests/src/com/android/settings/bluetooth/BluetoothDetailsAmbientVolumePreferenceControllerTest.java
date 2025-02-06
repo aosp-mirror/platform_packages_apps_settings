@@ -98,30 +98,44 @@ public class BluetoothDetailsAmbientVolumePreferenceControllerTest extends
     @Test
     public void isAvailable_notHearingDevice_returnFalse() {
         when(mCachedDevice.isHearingDevice()).thenReturn(false);
+        when(mCachedDevice.getProfiles()).thenReturn(List.of(mVolumeControlProfile));
+        when(mUiController.isAmbientControlAvailable()).thenReturn(true);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
-    public void isAvailable_isHearingDeviceAndNotSupportVcp_returnFalse() {
+    public void isAvailable_notSupportVcp_returnFalse() {
         when(mCachedDevice.isHearingDevice()).thenReturn(true);
         when(mCachedDevice.getProfiles()).thenReturn(List.of());
+        when(mUiController.isAmbientControlAvailable()).thenReturn(true);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
-    public void isAvailable_isHearingDeviceAndSupportVcp_returnTrue() {
+    public void isAvailable_noValidAmbientControlPoint_returnFalse() {
         when(mCachedDevice.isHearingDevice()).thenReturn(true);
         when(mCachedDevice.getProfiles()).thenReturn(List.of(mVolumeControlProfile));
+        when(mUiController.isAmbientControlAvailable()).thenReturn(false);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isAvailable_isHearingDevice_supportVcp_validAmbientControl_returnTrue() {
+        when(mCachedDevice.isHearingDevice()).thenReturn(true);
+        when(mCachedDevice.getProfiles()).thenReturn(List.of(mVolumeControlProfile));
+        when(mUiController.isAmbientControlAvailable()).thenReturn(true);
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
-    public void refresh_isHearingDeviceAndNotSupportVcp_verifyUiControllerNoRefresh() {
-        when(mCachedDevice.isHearingDevice()).thenReturn(true);
-        when(mCachedDevice.getProfiles()).thenReturn(List.of());
+    public void refresh_notHearingDevice_verifyUiControllerNotRefresh() {
+        when(mCachedDevice.isHearingDevice()).thenReturn(false);
+        when(mCachedDevice.getProfiles()).thenReturn(List.of(mVolumeControlProfile));
+        when(mUiController.isAmbientControlAvailable()).thenReturn(true);
 
         mController.refresh();
 
@@ -129,9 +143,32 @@ public class BluetoothDetailsAmbientVolumePreferenceControllerTest extends
     }
 
     @Test
-    public void refresh_isHearingDeviceAndSupportVcp_verifyUiControllerRefresh() {
+    public void refresh_notSupportVcp_verifyUiControllerNotRefresh() {
+        when(mCachedDevice.isHearingDevice()).thenReturn(true);
+        when(mCachedDevice.getProfiles()).thenReturn(List.of());
+        when(mUiController.isAmbientControlAvailable()).thenReturn(true);
+
+        mController.refresh();
+
+        verify(mUiController, never()).refresh();
+    }
+
+    @Test
+    public void refresh_noValidAmbientControl_verifyUiControllerNotRefresh() {
         when(mCachedDevice.isHearingDevice()).thenReturn(true);
         when(mCachedDevice.getProfiles()).thenReturn(List.of(mVolumeControlProfile));
+        when(mUiController.isAmbientControlAvailable()).thenReturn(false);
+
+        mController.refresh();
+
+        verify(mUiController, never()).refresh();
+    }
+
+    @Test
+    public void refresh_isHearingDevice_supportVcp_validAmbientControl_verifyUiControllerRefresh() {
+        when(mCachedDevice.isHearingDevice()).thenReturn(true);
+        when(mCachedDevice.getProfiles()).thenReturn(List.of(mVolumeControlProfile));
+        when(mUiController.isAmbientControlAvailable()).thenReturn(true);
 
         mController.refresh();
 
