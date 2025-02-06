@@ -16,6 +16,8 @@
 
 package com.android.settings.service
 
+import android.Manifest.permission.WRITE_SYSTEM_PREFERENCES
+import android.app.AppOpsManager.OP_WRITE_SYSTEM_PREFERENCES
 import android.os.Binder
 import android.os.OutcomeReceiver
 import android.service.settings.preferences.GetValueRequest
@@ -32,6 +34,7 @@ import com.android.settingslib.graph.PreferenceGetterApiHandler
 import com.android.settingslib.graph.PreferenceGetterFlags
 import com.android.settingslib.graph.PreferenceSetterApiHandler
 import com.android.settingslib.ipc.ApiPermissionChecker
+import com.android.settingslib.ipc.AppOpApiPermissionChecker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -47,10 +50,15 @@ class PreferenceService : SettingsPreferenceService() {
 
     init {
         val metricsLogger = SettingsRemoteOpMetricsLogger()
+        // PreferenceService specifies READ_SYSTEM_PREFERENCES permission in AndroidManifest.xml
         getApiHandler =
             PreferenceGetterApiHandler(1, ApiPermissionChecker.alwaysAllow(), metricsLogger)
         setApiHandler =
-            PreferenceSetterApiHandler(2, ApiPermissionChecker.alwaysAllow(), metricsLogger)
+            PreferenceSetterApiHandler(
+                2,
+                AppOpApiPermissionChecker(OP_WRITE_SYSTEM_PREFERENCES, WRITE_SYSTEM_PREFERENCES),
+                metricsLogger,
+            )
         graphApi =
             GetPreferenceGraphApiHandler(3, ApiPermissionChecker.alwaysAllow(), metricsLogger)
     }
