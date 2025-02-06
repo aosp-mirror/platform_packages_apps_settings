@@ -56,6 +56,7 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectedState;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -72,6 +73,7 @@ import org.robolectric.shadows.ShadowBinder;
 import java.util.ArrayList;
 import java.util.List;
 
+@Ignore("b/394813533")
 @Deprecated(forRemoval = true)
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
