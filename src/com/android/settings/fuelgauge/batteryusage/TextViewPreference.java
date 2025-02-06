@@ -25,9 +25,10 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settingslib.widget.GroupSectionDividerMixin;
 
 /** A preference for a single text view. */
-public class TextViewPreference extends Preference {
+public class TextViewPreference extends Preference implements GroupSectionDividerMixin {
     private static final String TAG = "TextViewPreference";
 
     @VisibleForTesting CharSequence mText;

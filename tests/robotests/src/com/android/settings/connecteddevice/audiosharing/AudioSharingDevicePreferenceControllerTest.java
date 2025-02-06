@@ -117,8 +117,6 @@ import java.util.concurrent.Executor;
         })
 public class AudioSharingDevicePreferenceControllerTest {
     private static final String KEY = "audio_sharing_device_list";
-    private static final String KEY_AUDIO_SHARING_SETTINGS =
-            "connected_device_audio_sharing_settings";
     private static final String TEST_DEVICE_NAME = "test";
 
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
@@ -151,7 +149,6 @@ public class AudioSharingDevicePreferenceControllerTest {
     private Lifecycle mLifecycle;
     private LifecycleOwner mLifecycleOwner;
     private PreferenceCategory mPreferenceGroup;
-    private Preference mAudioSharingPreference;
     private FakeFeatureFactory mFeatureFactory;
     private AudioManager mAudioManager;
 
@@ -189,10 +186,6 @@ public class AudioSharingDevicePreferenceControllerTest {
         when(mScreen.getContext()).thenReturn(mContext);
         mPreferenceGroup = spy(new PreferenceCategory(mContext));
         doReturn(mPreferenceManager).when(mPreferenceGroup).getPreferenceManager();
-        mAudioSharingPreference = new Preference(mContext);
-        mPreferenceGroup.addPreference(mAudioSharingPreference);
-        when(mPreferenceGroup.findPreference(KEY_AUDIO_SHARING_SETTINGS))
-                .thenReturn(mAudioSharingPreference);
         when(mScreen.findPreference(KEY)).thenReturn(mPreferenceGroup);
         mController = new AudioSharingDevicePreferenceController(mContext);
         mController.init(mFragment);
@@ -260,7 +253,6 @@ public class AudioSharingDevicePreferenceControllerTest {
         mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.displayPreference(mScreen);
         assertThat(mPreferenceGroup.isVisible()).isFalse();
-        assertThat(mAudioSharingPreference.isVisible()).isFalse();
         verify(mBluetoothDeviceUpdater, never()).forceUpdate();
     }
 
@@ -269,7 +261,6 @@ public class AudioSharingDevicePreferenceControllerTest {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.displayPreference(mScreen);
         assertThat(mPreferenceGroup.isVisible()).isFalse();
-        assertThat(mAudioSharingPreference.isVisible()).isFalse();
         verify(mBluetoothDeviceUpdater).setPrefContext(mContext);
         verify(mBluetoothDeviceUpdater).forceUpdate();
     }
@@ -299,8 +290,7 @@ public class AudioSharingDevicePreferenceControllerTest {
         shadowOf(Looper.getMainLooper()).idle();
 
         assertThat(mPreferenceGroup.isVisible()).isTrue();
-        assertThat(mAudioSharingPreference.isVisible()).isTrue();
-        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(2);
+        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(1);
     }
 
     @Test
@@ -312,8 +302,7 @@ public class AudioSharingDevicePreferenceControllerTest {
         shadowOf(Looper.getMainLooper()).idle();
 
         assertThat(mPreferenceGroup.isVisible()).isFalse();
-        assertThat(mAudioSharingPreference.isVisible()).isFalse();
-        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(1);
+        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(0);
     }
 
     @Test
@@ -584,6 +573,7 @@ public class AudioSharingDevicePreferenceControllerTest {
     public void testInCallState_showCallStateTitleAndSetActiveOnDeviceClick() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mSetFlagsRule.disableFlags(Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API);
         Settings.Secure.putInt(mContext.getContentResolver(),
                 BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
                 BluetoothCsipSetCoordinator.GROUP_ID_INVALID);
@@ -609,6 +599,7 @@ public class AudioSharingDevicePreferenceControllerTest {
     public void testInCallState_enableHysteresisFix_setAndSaveActiveOnDeviceClick() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mSetFlagsRule.enableFlags(Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        mSetFlagsRule.enableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API);
         Settings.Secure.putInt(mContext.getContentResolver(),
                 BLUETOOTH_LE_BROADCAST_PRIMARY_DEVICE_GROUP_ID,
                 BluetoothCsipSetCoordinator.GROUP_ID_INVALID);

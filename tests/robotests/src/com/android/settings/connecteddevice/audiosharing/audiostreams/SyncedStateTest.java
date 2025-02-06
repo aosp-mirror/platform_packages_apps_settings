@@ -30,6 +30,7 @@ import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.preference.Preference;
@@ -59,6 +60,8 @@ import org.robolectric.shadows.ShadowLooper;
         })
 public class SyncedStateTest {
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    private static final String INVALID_PASSWORD = "PAS";
+    private static final String VALID_PASSWORD = "PASSWORD";
     private static final String ENCRYPTED_METADATA =
             "BLUETOOTH:UUID:184F;BN:VGVzdA==;AT:1;AD:00A1A1A1A1A1;BI:1E240;BC:VGVzdENvZGU=;"
                     + "MD:BgNwVGVzdA==;AS:1;PI:A0;NS:1;BS:3;NB:2;SM:BQNUZXN0BARlbmc=;;";
@@ -143,15 +146,24 @@ public class SyncedStateTest {
 
         Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
         assertThat(positiveButton).isNotNull();
+        assertThat(positiveButton.isEnabled()).isFalse();
         assertThat(positiveButton.getText().toString())
                 .isEqualTo(
                         mMockContext.getString(R.string.bluetooth_connect_access_dialog_positive));
 
+        ShadowAlertDialog shadowDialog = Shadow.extract(dialog);
+        EditText editText = shadowDialog.getView().findViewById(R.id.broadcast_edit_text);
+        assertThat(editText).isNotNull();
+        editText.setText(VALID_PASSWORD);
+        assertThat(positiveButton.isEnabled()).isTrue();
+        editText.setText(INVALID_PASSWORD);
+        assertThat(positiveButton.isEnabled()).isFalse();
+
+        editText.setText(VALID_PASSWORD);
         positiveButton.callOnClick();
         ShadowLooper.idleMainLooper();
         verify(mMockController).handleSourceAddRequest(any(), any());
 
-        ShadowAlertDialog shadowDialog = Shadow.extract(dialog);
         TextView title = shadowDialog.getView().findViewById(R.id.broadcast_name_text);
         assertThat(title).isNotNull();
         assertThat(title.getText().toString()).isEqualTo(BROADCAST_TITLE);

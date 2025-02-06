@@ -24,7 +24,6 @@ import android.telephony.SubscriptionPlan;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.format.Formatter;
 import android.text.style.AbsoluteSizeSpan;
 import android.util.AttributeSet;
 import android.view.View;
@@ -39,7 +38,9 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
+import com.android.settings.datausage.lib.DataUsageFormatter;
 import com.android.settingslib.Utils;
+import com.android.settingslib.spaprivileged.framework.common.BytesFormatter;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.HashMap;
@@ -165,11 +166,12 @@ public class DataUsageSummaryPreference extends Preference {
     }
 
     private void updateDataUsageLabels(PreferenceViewHolder holder) {
-        TextView usageNumberField = getDataUsed(holder);
+        DataUsageFormatter dataUsageFormatter = new DataUsageFormatter(getContext());
 
-        final Formatter.BytesResult usedResult = Formatter.formatBytes(getContext().getResources(),
-                mDataplanUse, Formatter.FLAG_CALCULATE_ROUNDED | Formatter.FLAG_IEC_UNITS);
-        final SpannableString usageNumberText = new SpannableString(usedResult.value);
+        TextView usageNumberField = getDataUsed(holder);
+        final BytesFormatter.Result usedResult =
+                dataUsageFormatter.formatDataUsageWithUnits(mDataplanUse);
+        final SpannableString usageNumberText = new SpannableString(usedResult.getNumber());
         final int textSize =
                 getContext().getResources().getDimensionPixelSize(R.dimen.usage_number_text_size);
         usageNumberText.setSpan(new AbsoluteSizeSpan(textSize), 0, usageNumberText.length(),
@@ -177,7 +179,7 @@ public class DataUsageSummaryPreference extends Preference {
         CharSequence template = getContext().getText(R.string.data_used_formatted);
 
         CharSequence usageText =
-                TextUtils.expandTemplate(template, usageNumberText, usedResult.units);
+                TextUtils.expandTemplate(template, usageNumberText, usedResult.getUnits());
         usageNumberField.setText(usageText);
 
         final MeasurableLinearLayout layout = getLayout(holder);
@@ -188,13 +190,13 @@ public class DataUsageSummaryPreference extends Preference {
             if (dataRemaining >= 0) {
                 usageRemainingField.setText(
                         TextUtils.expandTemplate(getContext().getText(R.string.data_remaining),
-                                DataUsageUtils.formatDataUsage(getContext(), dataRemaining)));
+                                dataUsageFormatter.formatDataUsage(dataRemaining)));
                 usageRemainingField.setTextColor(
                         Utils.getColorAttr(getContext(), android.R.attr.colorAccent));
             } else {
                 usageRemainingField.setText(
                         TextUtils.expandTemplate(getContext().getText(R.string.data_overusage),
-                                DataUsageUtils.formatDataUsage(getContext(), -dataRemaining)));
+                                dataUsageFormatter.formatDataUsage(-dataRemaining)));
                 usageRemainingField.setTextColor(
                         Utils.getColorAttr(getContext(), android.R.attr.colorError));
             }

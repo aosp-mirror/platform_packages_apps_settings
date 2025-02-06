@@ -83,10 +83,10 @@ public class AppStorageSizesControllerTest {
         mController.setResult(result);
         mController.updateUi(mContext);
 
-        assertThat(mAppPreference.getSummary()).isEqualTo("1 B");
-        assertThat(mCachePreference.getSummary()).isEqualTo("10 B");
-        assertThat(mDataPreference.getSummary()).isEqualTo("90 B");
-        assertThat(mTotalPreference.getSummary()).isEqualTo("101 B");
+        assertThat(mAppPreference.getSummary()).isEqualTo("1 byte");
+        assertThat(mCachePreference.getSummary()).isEqualTo("10 byte");
+        assertThat(mDataPreference.getSummary()).isEqualTo("90 byte");
+        assertThat(mTotalPreference.getSummary()).isEqualTo("101 byte");
     }
 
     @Test
@@ -101,10 +101,10 @@ public class AppStorageSizesControllerTest {
         mController.setCacheCleared(true);
         mController.updateUi(mContext);
 
-        assertThat(mAppPreference.getSummary()).isEqualTo("1 B");
-        assertThat(mCachePreference.getSummary()).isEqualTo("0 B");
-        assertThat(mDataPreference.getSummary()).isEqualTo("90 B");
-        assertThat(mTotalPreference.getSummary()).isEqualTo("91 B");
+        assertThat(mAppPreference.getSummary()).isEqualTo("1 byte");
+        assertThat(mCachePreference.getSummary()).isEqualTo("0 byte");
+        assertThat(mDataPreference.getSummary()).isEqualTo("90 byte");
+        assertThat(mTotalPreference.getSummary()).isEqualTo("91 byte");
     }
 
     @Test
@@ -119,9 +119,9 @@ public class AppStorageSizesControllerTest {
         mController.setDataCleared(true);
         mController.updateUi(mContext);
 
-        assertThat(mAppPreference.getSummary()).isEqualTo("1 B");
-        assertThat(mCachePreference.getSummary()).isEqualTo("0 B");
-        assertThat(mDataPreference.getSummary()).isEqualTo("0 B");
-        assertThat(mTotalPreference.getSummary()).isEqualTo("1 B");
+        assertThat(mAppPreference.getSummary()).isEqualTo("1 byte");
+        assertThat(mCachePreference.getSummary()).isEqualTo("0 byte");
+        assertThat(mDataPreference.getSummary()).isEqualTo("0 byte");
+        assertThat(mTotalPreference.getSummary()).isEqualTo("1 byte");
     }
 }

@@ -25,7 +25,6 @@ import android.service.settings.preferences.SetValueRequest
 import android.service.settings.preferences.SetValueResult
 import android.service.settings.preferences.SettingsPreferenceMetadata
 import android.service.settings.preferences.SettingsPreferenceValue
-import com.android.settingslib.graph.PreferenceCoordinate
 import com.android.settingslib.graph.PreferenceGetterErrorCode
 import com.android.settingslib.graph.PreferenceGetterFlags
 import com.android.settingslib.graph.PreferenceGetterRequest
@@ -40,6 +39,7 @@ import com.android.settingslib.graph.proto.PreferenceOrGroupProto
 import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.graph.toIntent
+import com.android.settingslib.metadata.PreferenceCoordinate
 import com.android.settingslib.metadata.SensitivityLevel
 
 /** Transform Catalyst Graph result to Framework GET METADATA result */
@@ -157,11 +157,10 @@ fun transformFrameworkSetValueRequest(request: SetValueRequest): PreferenceSette
         SettingsPreferenceValue.TYPE_INT -> preferenceValueProto {
             intValue = request.preferenceValue.intValue
         }
-        else -> null
+        else -> return null
     }
-    return valueProto?.let {
-        PreferenceSetterRequest(request.screenKey, request.preferenceKey, it)
-    }
+    // TODO: support parameterized screen
+    return PreferenceSetterRequest(request.screenKey, null, request.preferenceKey, valueProto)
 }
 
 /** Translate Catalyst SET VALUE result to Framework SET VALUE result */
@@ -191,6 +190,7 @@ private const val KEY_INT_RANGE = "key_int_range"
 private const val KEY_MIN = "key_min"
 private const val KEY_MAX = "key_max"
 private const val KEY_STEP = "key_step"
+private const val KEY_TAGS = "tags"
 
 private fun PreferenceProto.toMetadata(
     context: Context,
@@ -214,6 +214,7 @@ private fun PreferenceProto.toMetadata(
         }
         extras.putBundle(KEY_INT_RANGE, intRange)
     }
+    if (tagsCount > 0) extras.putStringArray(KEY_TAGS, tagsList.toTypedArray())
     return SettingsPreferenceMetadata.Builder(screenKey, key)
         .setTitle(title.getText(context))
         .setSummary(summary.getText(context))

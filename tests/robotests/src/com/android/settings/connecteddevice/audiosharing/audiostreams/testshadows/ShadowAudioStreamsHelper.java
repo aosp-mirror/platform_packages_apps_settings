@@ -16,6 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows;
 
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState;
+
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
@@ -57,18 +59,14 @@ public class ShadowAudioStreamsHelper {
     }
 
     @Implementation
-    public List<BluetoothLeBroadcastReceiveState> getAllConnectedSources() {
-        return sMockHelper.getAllConnectedSources();
+    public Map<Integer, LocalBluetoothLeBroadcastSourceState> getConnectedBroadcastIdAndState(
+            boolean hysteresisModeFixAvailable) {
+        return sMockHelper.getConnectedBroadcastIdAndState(hysteresisModeFixAvailable);
     }
 
     @Implementation
     public Map<BluetoothDevice, List<BluetoothLeBroadcastReceiveState>> getAllSourcesByDevice() {
         return sMockHelper.getAllSourcesByDevice();
-    }
-
-    @Implementation
-    public List<BluetoothLeBroadcastReceiveState> getAllPresentSources() {
-        return sMockHelper.getAllPresentSources();
     }
 
     /** Gets {@link CachedBluetoothDevice} in sharing or le connected */

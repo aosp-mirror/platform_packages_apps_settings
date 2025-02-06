@@ -52,11 +52,11 @@ public class NfcEnablerTest {
     @Test
     public void handleNfcStateChanged_stateOff_shouldCheckIfPreferenceEnableState() {
         mNfcEnabler.handleNfcStateChanged(NfcAdapter.STATE_OFF);
-        verify(mNfcPreference).updateStatus(false);
+        verify(mNfcPreference).setChecked(false);
         verify(mNfcPreference).setEnabled(true);
 
         mNfcEnabler.handleNfcStateChanged(NfcAdapter.STATE_ON);
-        verify(mNfcPreference).updateStatus(true);
+        verify(mNfcPreference).setChecked(true);
         verify(mNfcPreference, times(2)).setEnabled(true);
     }
 }

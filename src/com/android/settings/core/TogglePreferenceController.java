@@ -15,13 +15,14 @@ package com.android.settings.core;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
+import com.android.settings.onboarding.OnboardingFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SliceData;
-import com.android.settings.onboarding.OnboardingFeatureProvider;
 import com.android.settings.widget.TwoStateButtonPreference;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.instrumentation.SettingsJankMonitor;
@@ -37,7 +38,7 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
 
     private static final String TAG = "TogglePrefController";
 
-    public TogglePreferenceController(Context context, String preferenceKey) {
+    public TogglePreferenceController(@NonNull Context context, @NonNull String preferenceKey) {
         super(context, preferenceKey);
     }
 

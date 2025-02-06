@@ -148,7 +148,7 @@ public class ZenModeTriggerUpdatePreferenceControllerTest {
 
     @Test
     public void isAvailable_manualDND_false() {
-        mController.setZenMode(TestModeBuilder.MANUAL_DND_INACTIVE);
+        mController.setZenMode(TestModeBuilder.MANUAL_DND);
         assertThat(mController.isAvailable()).isFalse();
     }
 
@@ -307,6 +307,25 @@ public class ZenModeTriggerUpdatePreferenceControllerTest {
         assertThat(
                 mPreference.getIntent().getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
                 .isEqualTo(ZenModeSetScheduleFragment.class.getName());
+    }
+
+    @Test
+    public void updateState_scheduleTimeRuleWithNoDays_emptySummary() {
+        ZenModeConfig.ScheduleInfo scheduleInfo = new ZenModeConfig.ScheduleInfo();
+        scheduleInfo.days = new int[] {};
+        scheduleInfo.startHour = 1;
+        scheduleInfo.endHour = 15;
+        ZenMode mode = new TestModeBuilder()
+                .setConditionId(ZenModeConfig.toScheduleConditionId(scheduleInfo))
+                .setPackage(SystemZenRules.PACKAGE_ANDROID)
+                .setType(TYPE_SCHEDULE_TIME)
+                .setTriggerDescription("some schedule")
+                .build();
+
+        mController.updateState(mPreference, mode);
+
+        assertThat(mPreference.getTitle()).isEqualTo("1:00 AM - 3:00 PM");
+        assertThat(mPreference.getSummary()).isNull();
     }
 
     @Test

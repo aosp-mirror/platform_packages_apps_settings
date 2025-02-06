@@ -29,6 +29,7 @@ import androidx.preference.TwoStatePreference;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+import com.android.wm.shell.shared.desktopmode.DesktopModeStatus;
 
 public class FreeformWindowsPreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin,
@@ -54,7 +55,9 @@ public class FreeformWindowsPreferenceController extends DeveloperOptionsPrefere
     public boolean isAvailable() {
         // When devices have the system feature FEATURE_FREEFORM_WINDOW_MANAGEMENT, freeform
         // mode is enabled automatically, and this toggle is not needed.
-        return !mContext.getPackageManager().hasSystemFeature(FEATURE_FREEFORM_WINDOW_MANAGEMENT);
+        return !mContext.getPackageManager().hasSystemFeature(FEATURE_FREEFORM_WINDOW_MANAGEMENT)
+                && !DesktopModeStatus.canShowDesktopExperienceDevOption(mContext)
+                && !DesktopModeStatus.canShowDesktopModeDevOption(mContext);
     }
 
     @Override

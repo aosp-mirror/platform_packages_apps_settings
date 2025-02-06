@@ -51,6 +51,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Looper;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.FeatureFlagUtils;
 import android.util.Pair;
@@ -79,6 +81,7 @@ import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
+import com.android.settingslib.bluetooth.BluetoothLeBroadcastMetadataExt;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
@@ -244,8 +247,53 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
+    public void bluetoothOn_profileReady_switchEnabled() {
+        mSwitchBar.setEnabled(false);
+        mContext.registerReceiver(
+                mController.mReceiver,
+                mController.mIntentFilter,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
+        mShadowBluetoothAdapter.setEnabled(true);
+        when(mBroadcast.isEnabled(null)).thenReturn(false);
+        Intent intent = new Intent(BluetoothAdapter.ACTION_STATE_CHANGED);
+        intent.putExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.STATE_ON);
+        mContext.sendBroadcast(intent);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        verify(mSwitchBar).setEnabled(true);
+        assertThat(mSwitchBar.isChecked()).isFalse();
+        assertThat(mOnAudioSharingStateChanged).isTrue();
+        assertThat(mOnAudioSharingServiceConnected).isFalse();
+        verify(mBtProfileManager, never()).addServiceListener(any());
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
+    public void bluetoothOn_profileNotReady_switchDisabled_registerProfileListener() {
+        mSwitchBar.setEnabled(false);
+        mContext.registerReceiver(
+                mController.mReceiver,
+                mController.mIntentFilter,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
+        mShadowBluetoothAdapter.setEnabled(true);
+        when(mBroadcast.isEnabled(null)).thenReturn(false);
+        when(mBroadcast.isProfileReady()).thenReturn(false);
+        Intent intent = new Intent(BluetoothAdapter.ACTION_STATE_CHANGED);
+        intent.putExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.STATE_ON);
+        mContext.sendBroadcast(intent);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        assertThat(mSwitchBar.isEnabled()).isFalse();
+        assertThat(mSwitchBar.isChecked()).isFalse();
+        assertThat(mOnAudioSharingStateChanged).isFalse();
+        assertThat(mOnAudioSharingServiceConnected).isFalse();
+        verify(mBtProfileManager).addServiceListener(mController);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void bluetoothOff_switchDisabled() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         assertThat(mSwitchBar.isEnabled()).isTrue();
         mContext.registerReceiver(
                 mController.mReceiver,
@@ -262,11 +310,12 @@ public class AudioSharingSwitchBarControllerTest {
         assertThat(mSwitchBar.isChecked()).isFalse();
         assertThat(mOnAudioSharingStateChanged).isTrue();
         assertThat(mOnAudioSharingServiceConnected).isFalse();
+        verify(mBtProfileManager, never()).addServiceListener(any());
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onServiceConnected_switchEnabled() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         when(mBroadcast.isEnabled(null)).thenReturn(true);
         mController.onServiceConnected();
         shadowOf(Looper.getMainLooper()).idle();
@@ -279,20 +328,20 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void getAvailabilityStatus_flagOn() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void getAvailabilityStatus_flagOff() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onStart_flagOff_doNothing() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.onStart(mLifecycleOwner);
         verify(mContext, never())
                 .registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class), anyInt());
@@ -306,8 +355,8 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onStart_flagOnProfileNotReady_registerProfileCallback() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         when(mBroadcast.isEnabled(null)).thenReturn(false);
         when(mBroadcast.isProfileReady()).thenReturn(false);
         mController.onStart(mLifecycleOwner);
@@ -315,21 +364,21 @@ public class AudioSharingSwitchBarControllerTest {
 
         verify(mContext)
                 .registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class), anyInt());
-        verify(mBroadcast, never())
+        verify(mBroadcast)
                 .registerServiceCallBack(
                         any(Executor.class), any(BluetoothLeBroadcast.Callback.class));
-        verify(mAssistant, never())
+        verify(mAssistant)
                 .registerServiceCallBack(
                         any(Executor.class), any(BluetoothLeBroadcastAssistant.Callback.class));
-        verify(mEventManager, never()).registerCallback(any(BluetoothCallback.class));
+        verify(mEventManager).registerCallback(any(BluetoothCallback.class));
         verify(mBtProfileManager).addServiceListener(mController);
         assertThat(mSwitchBar.isChecked()).isFalse();
         assertThat(mSwitchBar.isEnabled()).isFalse();
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onStart_flagOn_registerCallback() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         when(mBroadcast.isEnabled(null)).thenReturn(true);
         mController.onStart(mLifecycleOwner);
         shadowOf(Looper.getMainLooper()).idle();
@@ -349,8 +398,8 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onStart_flagOn_updateSwitch() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         when(mBroadcast.isEnabled(null)).thenReturn(false);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of());
         mController.onStart(mLifecycleOwner);
@@ -361,8 +410,8 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onStop_flagOff_doNothing() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.onStop(mLifecycleOwner);
         verify(mContext, never()).unregisterReceiver(any(BroadcastReceiver.class));
         verify(mBroadcast, never())
@@ -374,8 +423,8 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onStop_flagOn_notRegistered_doNothing() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.setCallbacksRegistered(false);
         doNothing().when(mContext).unregisterReceiver(any(BroadcastReceiver.class));
         mController.onStop(mLifecycleOwner);
@@ -390,8 +439,8 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void onStop_flagOn_registered_unregisterCallback() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.setCallbacksRegistered(true);
         mContext.registerReceiver(
                 mController.mReceiver,
@@ -515,23 +564,14 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
-    public void onBroadcastMetadataChanged_hasLocalSource_noDialog() {
+    public void onBroadcastMetadataChanged_notTriggeredHere_noDialog() {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2, mDevice1));
-        when(mState.getBroadcastId()).thenReturn(1);
-        when(mBroadcast.getLatestBroadcastId()).thenReturn(1);
-        when(mAssistant.getAllSources(mDevice2)).thenReturn(ImmutableList.of(mState));
+        when(mAssistant.getAllSources(any(BluetoothDevice.class))).thenReturn(ImmutableList.of());
         when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
         doNothing().when(mBroadcast).startPrivateBroadcast();
-        mController.onCheckedChanged(mBtnView, /* isChecked= */ true);
-        shadowOf(Looper.getMainLooper()).idle();
-
-        verify(mBroadcast).startPrivateBroadcast();
-        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
-        assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).containsExactly(
-                AudioSharingProgressDialogFragment.class.getName());
 
         mController.mBroadcastCallback.onBroadcastMetadataChanged(/* reason= */ 1, mMetadata);
         shadowOf(Looper.getMainLooper()).idle();
@@ -540,7 +580,7 @@ public class AudioSharingSwitchBarControllerTest {
         verify(mFeatureFactory.metricsFeatureProvider, never())
                 .action(any(Context.class), eq(SettingsEnums.ACTION_AUTO_JOIN_AUDIO_SHARING));
 
-        childFragments = mParentFragment.getChildFragmentManager().getFragments();
+        List<Fragment> childFragments = mParentFragment.getChildFragmentManager().getFragments();
         // No audio sharing dialog.
         assertThat(childFragments).comparingElementsUsing(CLAZZNAME_EQUALS).doesNotContain(
                 AudioSharingDialogFragment.class.getName());
@@ -552,6 +592,12 @@ public class AudioSharingSwitchBarControllerTest {
     public void onBroadcastMetadataChanged_singleActiveDevice_showJoinAudioSharingDialog() {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
+        String metadataStr =
+                "BLUETOOTH:UUID:184F;BN:VGVzdA==;AT:1;AD:00A1A1A1A1A1;BI:1E240;BC:VGVzdENvZGU=;"
+                        + "MD:BgNwVGVzdA==;AS:1;PI:A0;NS:1;BS:3;NB:2;SM:BQNUZXN0BARlbmc=;;";
+        // Use real metadata as the dialog will display a qr code image
+        BluetoothLeBroadcastMetadata realMetadata =
+                BluetoothLeBroadcastMetadataExt.INSTANCE.convertToBroadcastMetadata(metadataStr);
         when(mBtnView.isEnabled()).thenReturn(true);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2));
         when(mAssistant.getAllSources(any(BluetoothDevice.class))).thenReturn(ImmutableList.of());
@@ -565,8 +611,8 @@ public class AudioSharingSwitchBarControllerTest {
                 AudioSharingProgressDialogFragment.class.getName());
 
         when(mBroadcast.isEnabled(null)).thenReturn(true);
-        when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);
-        mController.mBroadcastCallback.onBroadcastMetadataChanged(/* reason= */ 1, mMetadata);
+        when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(realMetadata);
+        mController.mBroadcastCallback.onBroadcastMetadataChanged(/* reason= */ 1, realMetadata);
         shadowOf(Looper.getMainLooper()).idle();
 
         verify(mFeatureFactory.metricsFeatureProvider)
@@ -613,7 +659,7 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
-    public void onBroadcastMetadataChanged_oneActiveOnConnected_showJoinAudioSharingDialog() {
+    public void onBroadcastMetadataChanged_oneActiveOneConnected_showJoinAudioSharingDialog() {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
@@ -681,7 +727,7 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
-    public void onBroadcastMetadataChanged_oneActiveOnConnected_clickShareBtnOnDialog_addSource() {
+    public void onBroadcastMetadataChanged_oneActiveOneConnected_clickShareBtnOnDialog_addSource() {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
@@ -722,7 +768,7 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
-    public void onBroadcastMetadataChanged_oneActiveOnConnected_clickCancelBtnOnDialog_doNothing() {
+    public void onBroadcastMetadataChanged_oneActiveOneConnected_clickCancelBtnOnDlg_doNothing() {
         FeatureFlagUtils.setEnabled(
                 mContext, FeatureFlagUtils.SETTINGS_NEED_CONNECTED_BLE_DEVICE_FOR_BROADCAST, true);
         when(mBtnView.isEnabled()).thenReturn(true);
@@ -965,8 +1011,8 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void handleStartAudioSharingFromIntent_flagOff_doNothing() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         var unused = setUpFragmentWithStartSharingIntent();
         mController.onStart(mLifecycleOwner);
         shadowOf(Looper.getMainLooper()).idle();
@@ -975,8 +1021,8 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void handleStartAudioSharingFromIntent_profileNotReady_doNothing() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         when(mAssistant.isProfileReady()).thenReturn(false);
         var unused = setUpFragmentWithStartSharingIntent();
         mController.onServiceConnected();
@@ -986,8 +1032,8 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void handleStartAudioSharingFromIntent_argFalse_doNothing() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         mController.onStart(mLifecycleOwner);
         shadowOf(Looper.getMainLooper()).idle();
 
@@ -995,8 +1041,8 @@ public class AudioSharingSwitchBarControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING)
     public void handleStartAudioSharingFromIntent_handle() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
         when(mBtnView.isEnabled()).thenReturn(true);
         when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice2, mDevice1));
         when(mBroadcast.getLatestBluetoothLeBroadcastMetadata()).thenReturn(mMetadata);

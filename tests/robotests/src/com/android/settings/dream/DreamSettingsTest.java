@@ -59,6 +59,7 @@ public class DreamSettingsTest {
             DreamSettings.WHILE_CHARGING_ONLY,
             DreamSettings.WHILE_DOCKED_ONLY,
             DreamSettings.EITHER_CHARGING_OR_DOCKED,
+            DreamSettings.WHILE_POSTURED_ONLY,
             DreamSettings.NEVER_DREAM
     );
 
@@ -66,7 +67,8 @@ public class DreamSettingsTest {
     private static final int[] SETTINGS = {
             DreamBackend.WHILE_CHARGING,
             DreamBackend.WHILE_DOCKED,
-            DreamBackend.EITHER,
+            DreamBackend.WHILE_CHARGING_OR_DOCKED,
+            DreamBackend.WHILE_POSTURED,
             DreamBackend.NEVER,
     };
 
@@ -74,6 +76,7 @@ public class DreamSettingsTest {
             R.string.screensaver_settings_summary_sleep,
             R.string.screensaver_settings_summary_dock,
             R.string.screensaver_settings_summary_either_long,
+            R.string.screensaver_settings_summary_postured,
             R.string.screensaver_settings_summary_never
     };
 
@@ -81,6 +84,7 @@ public class DreamSettingsTest {
             R.string.screensaver_settings_summary_sleep,
             R.string.screensaver_settings_summary_dock_and_charging,
             R.string.screensaver_settings_summary_either_long,
+            R.string.screensaver_settings_summary_postured_and_charging,
             R.string.screensaver_settings_summary_never
     };
 

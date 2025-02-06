@@ -20,7 +20,7 @@
     android:title="@string/cellular_security_settings_title">
 
     <com.android.settingslib.widget.TopIntroPreference
-	android:key="cellular_security_prefs_top_intro"
+        android:key="cellular_security_prefs_top_intro"
         android:title="@string/cellular_security_top_intro"/>
     <PreferenceCategory
         android:key="cellular_security_notifications_category"
@@ -34,6 +34,7 @@
                 "com.android.settings.network.telephony.CellularSecurityNotificationsPreferenceController"/>
     </PreferenceCategory>
     <PreferenceCategory
+      android:key="cellular_security_encryption_divider"
       android:title="@string/cellular_security_settings_encryption_title"
       settings:controller="com.android.settings.network.telephony.CellularSecurityEncryptionDividerController">
         <SwitchPreferenceCompat

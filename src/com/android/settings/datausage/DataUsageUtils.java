@@ -31,9 +31,6 @@ import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.text.BidiFormatter;
-import android.text.format.Formatter;
-import android.text.format.Formatter.BytesResult;
 import android.util.Log;
 
 import com.android.settings.datausage.lib.DataUsageLib;
@@ -52,19 +49,6 @@ public final class DataUsageUtils {
     private static final String TAG = "DataUsageUtils";
 
     private DataUsageUtils() {
-    }
-
-    /**
-     * Format byte value to readable string using IEC units.
-     *
-     * @deprecated Use {@link com.android.settings.datausage.lib.DataUsageFormatter} instead.
-     */
-    @Deprecated
-    public static CharSequence formatDataUsage(Context context, long byteValue) {
-        final BytesResult res = Formatter.formatBytes(context.getResources(), byteValue,
-                Formatter.FLAG_IEC_UNITS);
-        return BidiFormatter.getInstance().unicodeWrap(context.getString(
-                com.android.internal.R.string.fileSizeSuffix, res.value, res.units));
     }
 
     /**

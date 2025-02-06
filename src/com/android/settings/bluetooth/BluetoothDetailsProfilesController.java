@@ -85,6 +85,8 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             "persist.bluetooth.leaudio.toggle_visible";
     private static final String BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY =
             "persist.bluetooth.leaudio.bypass_allow_list";
+    private static final String LE_AUDIO_TOGGLE_VISIBLE_FOR_ASHA_PROPERTY =
+            "bluetooth.leaudio.toggle_visible_for_asha";
 
     private Set<String> mInvisibleProfiles = Collections.emptySet();
     private final AtomicReference<Set<String>> mAdditionalInvisibleProfiles =
@@ -378,6 +380,12 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         // Remove hearing aids toggle anyway since showing the toggle will confuse users
         if (hearingAidSupported) {
             result.remove(mManager.getProfileManager().getHearingAidProfile());
+            if (leAudioSupported
+                    && !SystemProperties.getBoolean(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, false)
+                    && !SystemProperties.getBoolean(
+                            LE_AUDIO_TOGGLE_VISIBLE_FOR_ASHA_PROPERTY, true)) {
+                result.remove(mManager.getProfileManager().getLeAudioProfile());
+            }
         }
         if (leAudioSupported && !classicAudioSupported && !hearingAidSupported) {
             mIsLeAudioOnlyDevice = true;

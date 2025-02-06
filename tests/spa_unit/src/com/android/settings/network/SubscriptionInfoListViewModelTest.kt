@@ -89,24 +89,8 @@ class SubscriptionInfoListViewModelTest {
     }
 
     @Test
-    fun onSubscriptionsChanged_flagOffHasNonTerrestrialNetwork_filterNonTerrestrialNetwork() =
-        runBlocking {
-            mSetFlagsRule.disableFlags(Flags.FLAG_OEM_ENABLED_SATELLITE_FLAG)
-            activeSubscriptionInfoList = listOf(SUB_INFO_1, SUB_INFO_2, SUB_INFO_4)
-
-            val listDeferred = async {
-                createViewModel().subscriptionInfoListFlow.toListWithTimeout()
-            }
-            delay(100)
-            subInfoListener?.onSubscriptionsChanged()
-
-            assertThat(listDeferred.await()).contains(listOf(SUB_INFO_1, SUB_INFO_2, SUB_INFO_4))
-        }
-
-    @Test
     fun onSubscriptionsChanged_flagOnHasNonTerrestrialNetwork_filterNonTerrestrialNetwork() =
         runBlocking {
-            mSetFlagsRule.enableFlags(Flags.FLAG_OEM_ENABLED_SATELLITE_FLAG)
             activeSubscriptionInfoList = listOf(SUB_INFO_1, SUB_INFO_2, SUB_INFO_4)
 
             val listDeferred = async {

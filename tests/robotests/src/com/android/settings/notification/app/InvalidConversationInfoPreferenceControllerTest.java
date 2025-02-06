@@ -34,6 +34,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.common.collect.ImmutableList;
 
@@ -89,6 +90,18 @@ public class InvalidConversationInfoPreferenceControllerTest {
     }
 
     @Test
+    public void testIsAvailable_notIfExpressiveTheme() {
+        if (SettingsThemeHelper.isExpressiveTheme(mContext)) {
+            when(mBackend.isInInvalidMsgState(anyString(), anyInt())).thenReturn(true);
+            NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+            appRow.pkg = "hi";
+            appRow.uid = 0;
+            mController.onResume(appRow, null, null, null, null, null, null);
+            assertFalse(mController.isAvailable());
+        }
+    }
+
+    @Test
     public void testIsAvailable_notIfAppBlocked() {
         when(mBackend.isInInvalidMsgState(anyString(), anyInt())).thenReturn(true);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
@@ -111,6 +124,9 @@ public class InvalidConversationInfoPreferenceControllerTest {
 
     @Test
     public void testIsAvailable() {
+        if (SettingsThemeHelper.isExpressiveTheme(mContext)) {
+            return;
+        }
         when(mBackend.isInInvalidMsgState(anyString(), anyInt())).thenReturn(true);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.pkg = "hi";

@@ -37,19 +37,19 @@ public class NfcEnabler extends BaseNfcEnabler {
     protected void handleNfcStateChanged(int newState) {
         switch (newState) {
             case NfcAdapter.STATE_OFF:
-                mPreference.updateStatus(false);
+                mPreference.setChecked(false);
                 mPreference.setEnabled(true);
                 break;
             case NfcAdapter.STATE_ON:
-                mPreference.updateStatus(true);
+                mPreference.setChecked(true);
                 mPreference.setEnabled(true);
                 break;
             case NfcAdapter.STATE_TURNING_ON:
-                mPreference.updateStatus(true);
+                mPreference.setChecked(true);
                 mPreference.setEnabled(false);
                 break;
             case NfcAdapter.STATE_TURNING_OFF:
-                mPreference.updateStatus(false);
+                mPreference.setChecked(false);
                 mPreference.setEnabled(false);
                 break;
         }

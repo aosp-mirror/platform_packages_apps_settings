@@ -404,7 +404,7 @@ public class BatteryInfo {
         }
         final BatterySettingsFeatureProvider featureProvider =
                 FeatureFactory.getFeatureFactory().getBatterySettingsFeatureProvider();
-        if (featureProvider.isChargingOptimizationMode(context)) {
+        if (featureProvider.isChargingOptimizationMode(context, info.isLongLife)) {
             final CharSequence chargeLabel =
                     featureProvider.getChargingOptimizationChargeLabel(
                             context,
@@ -567,10 +567,11 @@ public class BatteryInfo {
 
     private static boolean isPluggedIn(Context context, boolean isCharging, int chargingPolicy) {
         return isCharging
-                || (chargingPolicy == BatteryManager.CHARGING_POLICY_ADAPTIVE_LONGLIFE
-                        && FeatureFactory.getFeatureFactory()
-                                .getBatterySettingsFeatureProvider()
-                                .isChargingOptimizationMode(context));
+                || FeatureFactory.getFeatureFactory()
+                        .getBatterySettingsFeatureProvider()
+                        .isChargingOptimizationMode(
+                                context,
+                                chargingPolicy == BatteryManager.CHARGING_POLICY_ADAPTIVE_LONGLIFE);
     }
 
     public interface BatteryDataParser {

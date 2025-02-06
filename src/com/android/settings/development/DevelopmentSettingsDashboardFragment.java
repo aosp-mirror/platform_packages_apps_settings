@@ -67,7 +67,6 @@ import com.android.settings.development.bluetooth.AbstractBluetoothDialogPrefere
 import com.android.settings.development.bluetooth.AbstractBluetoothPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothBitPerSampleDialogPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothChannelModeDialogPreferenceController;
-import com.android.settings.development.bluetooth.BluetoothCodecDialogPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothCodecListPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothHDAudioPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothQualityDialogPreferenceController;
@@ -199,8 +198,12 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             super.onChange(selfChange, uri);
+            Activity activity = getActivity();
+            if (activity == null) {
+                return;
+            }
             final boolean developmentEnabledState =
-                    DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext());
+                    DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(activity);
             final boolean switchState = mSwitchBar.isChecked();
 
             // when developer options is enabled, but it is disabled by other privilege apps like:
@@ -210,7 +213,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                     return;
                 }
                 disableDeveloperOptions();
-                getActivity().runOnUiThread(() -> finishFragment());
+                activity.runOnUiThread(() -> finishFragment());
             }
         }
     };
@@ -799,6 +802,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new FreeformWindowsPreferenceController(context, fragment));
         controllers.add(new DesktopModePreferenceController(context, fragment));
         controllers.add(new DesktopModeSecondaryDisplayPreferenceController(context, fragment));
+        controllers.add(new DesktopExperiencePreferenceController(context, fragment));
         controllers.add(new NonResizableMultiWindowPreferenceController(context));
         controllers.add(new ShortcutManagerThrottlingPreferenceController(context));
         controllers.add(new EnableGnssRawMeasFullTrackingPreferenceController(context));
@@ -813,8 +817,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new AutofillCategoryController(context, lifecycle));
         controllers.add(new AutofillLoggingLevelPreferenceController(context, lifecycle));
         controllers.add(new AutofillResetOptionsPreferenceController(context));
-        controllers.add(new BluetoothCodecDialogPreferenceController(context, lifecycle,
-                bluetoothA2dpConfigStore, fragment));
         controllers.add(
                 new BluetoothCodecListPreferenceController(
                         context, lifecycle, bluetoothA2dpConfigStore, fragment));
@@ -832,7 +834,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new OverlaySettingsPreferenceController(context));
         controllers.add(new StylusHandwritingPreferenceController(context));
         controllers.add(new IngressRateLimitPreferenceController((context)));
-        controllers.add(new BackAnimationPreferenceController(context, fragment));
         controllers.add(new PhantomProcessPreferenceController(context));
         controllers.add(new ForceEnableNotesRolePreferenceController(context));
         controllers.add(new GrammaticalGenderPreferenceController(context));
@@ -850,8 +851,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     @Override
     public void onBluetoothCodecChanged() {
         for (AbstractPreferenceController controller : mPreferenceControllers) {
-            if (controller instanceof AbstractBluetoothDialogPreferenceController
-                    && !(controller instanceof BluetoothCodecDialogPreferenceController)) {
+            if (controller instanceof AbstractBluetoothDialogPreferenceController) {
                 ((AbstractBluetoothDialogPreferenceController) controller)
                         .onBluetoothCodecUpdated();
             }

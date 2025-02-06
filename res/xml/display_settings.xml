@@ -34,7 +34,7 @@
             settings:userRestriction="no_config_brightness"/>
 
         <com.android.settingslib.PrimarySwitchPreference
-            android:key="screen_brightness_mode"
+            android:key="@string/preference_key_auto_brightness"
             android:title="@string/auto_brightness_title"
             android:fragment="com.android.settings.display.AutoBrightnessSettings"
             settings:useAdminDisabledSummary="true"

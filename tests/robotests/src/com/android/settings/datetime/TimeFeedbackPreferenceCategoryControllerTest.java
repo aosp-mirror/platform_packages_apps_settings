@@ -74,7 +74,7 @@ public class TimeFeedbackPreferenceCategoryControllerTest {
 
     /**
      * Extend class under test to change {@link #isTimeFeedbackFeatureEnabled} to not call
-     * {@link TimeFeedbackLaunchUtils} because that's non-trivial to fake.
+     * {@link DateTimeLaunchUtils} because that's non-trivial to fake.
      */
     private static class TestTimeFeedbackPreferenceCategoryController
             extends TimeFeedbackPreferenceCategoryController {

@@ -65,11 +65,15 @@ public class RegionAndNumberingSystemPickerFragment extends DashboardFragment im
 
     public static final String EXTRA_TARGET_LOCALE = "extra_target_locale";
     public static final String EXTRA_IS_NUMBERING_SYSTEM = "extra_is_numbering_system";
+    public static final String EXTRA_APP_PACKAGE_NAME = "extra_package_name";
 
     private static final String TAG = "RegionAndNumberingSystemPickerFragment";
     private static final String KEY_PREFERENCE_SYSTEM_LOCALE_LIST = "system_locale_list";
     private static final String KEY_PREFERENCE_SYSTEM_LOCALE_SUGGESTED_LIST =
             "system_locale_suggested_list";
+    private static final String KEY_PREFERENCE_APP_LOCALE_LIST = "app_locale_list";
+    private static final String KEY_PREFERENCE_APP_LOCALE_SUGGESTED_LIST =
+            "app_locale_suggested_list";
     private static final String KEY_TOP_INTRO_PREFERENCE = "top_intro_region";
     private static final String EXTRA_EXPAND_SEARCH_VIEW = "expand_search_view";
 
@@ -81,6 +85,10 @@ public class RegionAndNumberingSystemPickerFragment extends DashboardFragment im
     private SystemLocaleAllListPreferenceController mSystemLocaleAllListPreferenceController;
     @SuppressWarnings("NullAway")
     private SystemLocaleSuggestedListPreferenceController mSuggestedListPreferenceController;
+    @SuppressWarnings("NullAway")
+    private AppLocaleAllListPreferenceController mAppLocaleAllListPreferenceController;
+    @SuppressWarnings("NullAway")
+    private AppLocaleSuggestedListPreferenceController mAppLocaleSuggestedListPreferenceController;
     @Nullable
     private LocaleStore.LocaleInfo mLocaleInfo;
     @Nullable
@@ -94,6 +102,8 @@ public class RegionAndNumberingSystemPickerFragment extends DashboardFragment im
     private boolean mIsNumberingMode;
     @Nullable
     private CharSequence mPrefix;
+    @SuppressWarnings("NullAway")
+    private String mPackageName;
 
     @Override
     public void onCreate(@NonNull Bundle icicle) {
@@ -116,8 +126,8 @@ public class RegionAndNumberingSystemPickerFragment extends DashboardFragment im
         }
 
         TopIntroPreference topIntroPreference = findPreference(KEY_TOP_INTRO_PREFERENCE);
-        if (topIntroPreference != null) {
-            topIntroPreference.setVisible(!mIsNumberingMode);
+        if (topIntroPreference != null && mIsNumberingMode) {
+            topIntroPreference.setTitle(R.string.top_intro_numbering_system_title);
         }
 
         if (mSystemLocaleAllListPreferenceController != null) {
@@ -297,21 +307,36 @@ public class RegionAndNumberingSystemPickerFragment extends DashboardFragment im
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getSettingsLifecycle());
+        return buildPreferenceControllers(context);
     }
 
     private List<AbstractPreferenceController> buildPreferenceControllers(
-            @NonNull Context context, @Nullable Lifecycle lifecycle) {
+            @NonNull Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        mLocaleInfo = (LocaleStore.LocaleInfo) getArguments().getSerializable(EXTRA_TARGET_LOCALE);
-        mIsNumberingMode = getArguments().getBoolean(EXTRA_IS_NUMBERING_SYSTEM);
-        mSuggestedListPreferenceController = new SystemLocaleSuggestedListPreferenceController(
-                context, KEY_PREFERENCE_SYSTEM_LOCALE_SUGGESTED_LIST, mLocaleInfo,
-                mIsNumberingMode);
-        mSystemLocaleAllListPreferenceController = new SystemLocaleAllListPreferenceController(
-                context, KEY_PREFERENCE_SYSTEM_LOCALE_LIST, mLocaleInfo, mIsNumberingMode);
-        controllers.add(mSuggestedListPreferenceController);
-        controllers.add(mSystemLocaleAllListPreferenceController);
+        Bundle args = getArguments();
+        mLocaleInfo = (LocaleStore.LocaleInfo) args.getSerializable(EXTRA_TARGET_LOCALE);
+        mIsNumberingMode = args.getBoolean(EXTRA_IS_NUMBERING_SYSTEM);
+        mPackageName = args.getString(EXTRA_APP_PACKAGE_NAME);
+        Log.d(TAG, "buildPreferenceControllers packageName = " + mPackageName);
+        if (TextUtils.isEmpty(mPackageName)) {
+            mSuggestedListPreferenceController = new SystemLocaleSuggestedListPreferenceController(
+                    context, KEY_PREFERENCE_SYSTEM_LOCALE_SUGGESTED_LIST, mLocaleInfo,
+                    mIsNumberingMode);
+            mSystemLocaleAllListPreferenceController = new SystemLocaleAllListPreferenceController(
+                    context, KEY_PREFERENCE_SYSTEM_LOCALE_LIST, mLocaleInfo, mIsNumberingMode);
+            controllers.add(mSuggestedListPreferenceController);
+            controllers.add(mSystemLocaleAllListPreferenceController);
+        } else {
+            mAppLocaleSuggestedListPreferenceController =
+                    new AppLocaleSuggestedListPreferenceController(context,
+                            KEY_PREFERENCE_APP_LOCALE_SUGGESTED_LIST, mPackageName,
+                            mIsNumberingMode, mLocaleInfo);
+            mAppLocaleAllListPreferenceController = new AppLocaleAllListPreferenceController(
+                    context, KEY_PREFERENCE_APP_LOCALE_LIST, mPackageName, mIsNumberingMode,
+                    mLocaleInfo);
+            controllers.add(mAppLocaleSuggestedListPreferenceController);
+            controllers.add(mAppLocaleAllListPreferenceController);
+        }
 
         return controllers;
     }

@@ -82,6 +82,9 @@ public class BubbleSummaryPreferenceController extends NotificationPreferenceCon
             intent.putExtra(Settings.EXTRA_APP_UID, mAppRow.uid);
             preference.setIntent(intent);
         }
+        if (preference.getParent() != null) {
+           preference.getParent().setVisible(true);
+        }
     }
 
     @Override

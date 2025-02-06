@@ -31,7 +31,6 @@ import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.datausage.DataUsageUtils
-import com.android.settings.datausage.lib.DataUsageFormatter.FormattedDataUsage
 import com.android.settings.datausage.lib.DataUsageLib
 import com.android.settings.datausage.lib.NetworkCycleDataRepository
 import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.AllTimeRange
@@ -88,7 +87,7 @@ class DataUsagePreferenceController(context: Context, key: String) :
             getDataUsageSummaryAndEnabled()
         }
         preference.isEnabled = enabled
-        preference.summary = summary?.displayText
+        preference.summary = summary
     }
 
     private fun getNetworkTemplate(): NetworkTemplate? =
@@ -100,12 +99,16 @@ class DataUsagePreferenceController(context: Context, key: String) :
     fun createNetworkCycleDataRepository(): NetworkCycleDataRepository? =
         networkTemplate?.let { NetworkCycleDataRepository(mContext, it) }
 
-    private fun getDataUsageSummaryAndEnabled(): Pair<FormattedDataUsage?, Boolean> {
+    private fun getDataUsageSummaryAndEnabled(): Pair<String?, Boolean> {
         val repository = createNetworkCycleDataRepository() ?: return null to false
 
         repository.loadFirstCycle()?.let { usageData ->
-            val formattedDataUsage = usageData.formatUsage(mContext)
-                .format(mContext, R.string.data_usage_template, usageData.formatDateRange(mContext))
+            val formattedDataUsage =
+                mContext.getString(
+                    R.string.data_usage_template,
+                    usageData.formatUsage(mContext),
+                    usageData.formatDateRange(mContext),
+                )
             val hasUsage = usageData.usage > 0 || repository.queryUsage(AllTimeRange).usage > 0
             return formattedDataUsage to hasUsage
         }

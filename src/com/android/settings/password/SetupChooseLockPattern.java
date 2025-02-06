@@ -16,8 +16,6 @@
 
 package com.android.settings.password;
 
-import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
-
 import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_PATTERN;
 
 import android.content.Context;
@@ -138,17 +136,10 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
         protected void updateStage(Stage stage) {
             super.updateStage(stage);
             if (!showMinimalUi() && mOptionsButton != null) {
-                // In landscape, keep view stub to avoid pattern view shifting, but in portrait the
-                // header title and description could become multiple lines in confirm stage,
-                // gone the button view to reserve more room for growth height of header.
-                @View.Visibility
-                final int hideOrGone =
-                        getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE
-                                ? View.INVISIBLE : View.GONE;
                 mOptionsButton.setVisibility(
                         (stage == Stage.Introduction || stage == Stage.HelpScreen ||
                                 stage == Stage.ChoiceTooShort || stage == Stage.FirstChoiceValid)
-                                ? View.VISIBLE : hideOrGone);
+                                ? View.VISIBLE : View.INVISIBLE);
             }
 
             if (stage.leftMode == LeftButtonMode.Gone && stage == Stage.Introduction) {

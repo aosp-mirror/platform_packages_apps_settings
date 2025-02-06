@@ -81,9 +81,8 @@ public class HeaderPreferenceController extends NotificationPreferenceController
             mHeaderController = EntityHeaderController.newInstance(
                     activity, mFragment, pref.findViewById(R.id.entity_header));
             pref = mHeaderController.setIcon(mAppRow.icon)
-                    .setLabel(getLabel())
-                    .setSummary(getSummary())
-                    .setSecondSummary(getSecondSummary())
+                    .setLabel(getSummary())
+                    .setSummary(getSecondSummary())
                     .setPackageName(mAppRow.pkg)
                     .setUid(mAppRow.uid)
                     .setButtonActions(EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE,
@@ -92,14 +91,6 @@ public class HeaderPreferenceController extends NotificationPreferenceController
                     .done(mContext);
             pref.findViewById(R.id.entity_header).setVisibility(View.VISIBLE);
             pref.findViewById(R.id.entity_header).setBackground(null);
-        }
-    }
-
-    public CharSequence getLabel() {
-        if (mChannel != null && !isDefaultChannel()) {
-            return mChannel.getName();
-        } else {
-            return mAppRow.label;
         }
     }
 
@@ -113,15 +104,7 @@ public class HeaderPreferenceController extends NotificationPreferenceController
         if (mChannel != null) {
             if (mChannelGroup != null
                     && !TextUtils.isEmpty(mChannelGroup.getName())) {
-                final SpannableStringBuilder summary = new SpannableStringBuilder();
-                BidiFormatter bidi = BidiFormatter.getInstance();
-                summary.append(bidi.unicodeWrap(mAppRow.label));
-                summary.append(bidi.unicodeWrap(mContext.getText(
-                        R.string.notification_header_divider_symbol_with_spaces)));
-                summary.append(bidi.unicodeWrap(mChannelGroup.getName().toString()));
-                return summary.toString();
-            } else {
-                return mAppRow.label.toString();
+                return mChannelGroup.getName().toString();
             }
         }
         return "";

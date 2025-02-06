@@ -18,6 +18,7 @@ package com.android.settings.regionalpreferences;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.LocaleList;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -91,7 +92,7 @@ public abstract class RegionPickerBaseListPreferenceController extends BasePrefe
                     ? getSuggestedLocaleList()
                     : getSupportedLocaleList();
         if (getPreferenceCategoryKey().contains(KEY_SUGGESTED)) {
-            Locale systemLocale = Locale.getDefault();
+            Locale systemLocale = LocaleList.getDefault().get(0);
             LocaleStore.LocaleInfo localeInfo = LocaleStore.getLocaleInfo(systemLocale);
             result.add(localeInfo);
         }
@@ -105,7 +106,7 @@ public abstract class RegionPickerBaseListPreferenceController extends BasePrefe
             mPreferenceCategory.addPreference(pref);
             pref.setTitle(locale.getFullCountryNameNative());
             pref.setKey(locale.toString());
-            if (locale.getLocale().equals(Locale.getDefault())) {
+            if (locale.getLocale().equals(LocaleList.getDefault().get(0))) {
                 pref.setChecked(true);
             } else {
                 pref.setChecked(false);
@@ -153,7 +154,7 @@ public abstract class RegionPickerBaseListPreferenceController extends BasePrefe
 
     private List<LocaleStore.LocaleInfo> getSortedLocaleList(
             List<LocaleStore.LocaleInfo> localeInfos) {
-        final Locale sortingLocale = Locale.getDefault();
+        final Locale sortingLocale = LocaleList.getDefault().get(0);
         final LocaleHelper.LocaleInfoComparator comp =
                 new LocaleHelper.LocaleInfoComparator(sortingLocale, true);
         Collections.sort(localeInfos, comp);
@@ -161,7 +162,7 @@ public abstract class RegionPickerBaseListPreferenceController extends BasePrefe
     }
 
     private void switchRegion(LocaleStore.LocaleInfo localeInfo) {
-        if (localeInfo.getLocale().equals(Locale.getDefault())) {
+        if (localeInfo.getLocale().equals(LocaleList.getDefault().get(0))) {
             return;
         }
 

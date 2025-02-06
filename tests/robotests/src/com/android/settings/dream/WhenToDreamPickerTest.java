@@ -80,9 +80,13 @@ public class WhenToDreamPickerTest {
         assertThat(mPicker.getDefaultKey())
                 .isEqualTo(DreamSettings.getKeyFromSetting(DreamBackend.WHILE_DOCKED));
 
-        when(mBackend.getWhenToDreamSetting()).thenReturn(DreamBackend.EITHER);
+        when(mBackend.getWhenToDreamSetting()).thenReturn(DreamBackend.WHILE_CHARGING_OR_DOCKED);
         assertThat(mPicker.getDefaultKey())
-                .isEqualTo(DreamSettings.getKeyFromSetting(DreamBackend.EITHER));
+                .isEqualTo(DreamSettings.getKeyFromSetting(DreamBackend.WHILE_CHARGING_OR_DOCKED));
+
+        when(mBackend.getWhenToDreamSetting()).thenReturn(DreamBackend.WHILE_POSTURED);
+        assertThat(mPicker.getDefaultKey())
+                .isEqualTo(DreamSettings.getKeyFromSetting(DreamBackend.WHILE_POSTURED));
 
         when(mBackend.getWhenToDreamSetting()).thenReturn(DreamBackend.NEVER);
         assertThat(mPicker.getDefaultKey())
@@ -105,9 +109,16 @@ public class WhenToDreamPickerTest {
 
     @Test
     public void setDreamWhileChargingOrDocked() {
-        final String key = DreamSettings.getKeyFromSetting(DreamBackend.EITHER);
+        final String key = DreamSettings.getKeyFromSetting(DreamBackend.WHILE_CHARGING_OR_DOCKED);
         mPicker.setDefaultKey(key);
-        verify(mBackend).setWhenToDream(DreamBackend.EITHER);
+        verify(mBackend).setWhenToDream(DreamBackend.WHILE_CHARGING_OR_DOCKED);
+    }
+
+    @Test
+    public void setDreamWhilePostured() {
+        final String key = DreamSettings.getKeyFromSetting(DreamBackend.WHILE_POSTURED);
+        mPicker.setDefaultKey(key);
+        verify(mBackend).setWhenToDream(DreamBackend.WHILE_POSTURED);
     }
 
     @Test

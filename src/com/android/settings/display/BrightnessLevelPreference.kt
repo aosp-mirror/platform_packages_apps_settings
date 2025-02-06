@@ -33,7 +33,6 @@ import com.android.settings.Utils
 import com.android.settings.core.SettingsBaseActivity
 import com.android.settingslib.RestrictedPreference
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
-import com.android.settingslib.datastore.DataChangeReason
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
@@ -42,10 +41,10 @@ import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MAX
 import com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MIN
 import com.android.settingslib.display.BrightnessUtils.convertLinearToGammaFloat
-import com.android.settingslib.metadata.PersistentPreference
+import com.android.settingslib.metadata.IntRangeValuePreference
+import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
-import com.android.settingslib.metadata.RangeValue
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
@@ -55,9 +54,7 @@ import java.text.NumberFormat
 
 // LINT.IfChange
 class BrightnessLevelPreference :
-    PreferenceMetadata,
-    PersistentPreference<Int>,
-    RangeValue,
+    IntRangeValuePreference,
     PreferenceBinding,
     PreferenceRestrictionMixin,
     PreferenceSummaryProvider,
@@ -100,8 +97,14 @@ class BrightnessLevelPreference :
         preference.isPersistent = false
     }
 
-    override fun getReadPermissions(context: Context) =
-        Permissions.allOf(Manifest.permission.CONTROL_DISPLAY_BRIGHTNESS)
+    // Note that we *currently* use restricted APIs to obtain the brightness value, but the
+    // brightness value itself is not data that requires permission restriction (as evidence this
+    // value is already available via the summary field). As long as we only
+    // expose the brightness value and not the other data obtained from BrightnessInfo, we do not
+    // require a permission control to obtain this value. A new API is in the works for Brightness
+    // that we can later migrate to that doesn't use any of these permission controls.
+    // Reference ticket: b/388557367
+    override fun getReadPermissions(context: Context) = Permissions.EMPTY
 
     override fun getWritePermissions(context: Context) = Permissions.EMPTY
 
@@ -155,7 +158,7 @@ class BrightnessLevelPreference :
         }
 
         override fun onKeyChanged(key: String, reason: Int) {
-            notifyChange(KEY, DataChangeReason.UPDATE)
+            notifyChange(KEY, reason)
         }
 
         override fun onDisplayAdded(displayId: Int) {}
@@ -163,7 +166,7 @@ class BrightnessLevelPreference :
         override fun onDisplayRemoved(displayId: Int) {}
 
         override fun onDisplayChanged(displayId: Int) {
-            notifyChange(KEY, DataChangeReason.UPDATE)
+            notifyChange(KEY, PreferenceChangeReason.STATE)
         }
     }
 

@@ -49,7 +49,7 @@ public class DarkModeActivationPreferenceController extends BasePreferenceContro
     public final void updateState(Preference preference) {
         final boolean active = (mContext.getResources().getConfiguration().uiMode
                 & Configuration.UI_MODE_NIGHT_YES) != 0;
-        mPreference.updateStatus(active);
+        mPreference.setChecked(active);
     }
 
     @Override

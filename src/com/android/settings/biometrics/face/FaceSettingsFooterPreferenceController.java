@@ -19,11 +19,13 @@ package com.android.settings.biometrics.face;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ResourceId;
 import android.hardware.biometrics.SensorProperties;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
 import android.hardware.face.IFaceAuthenticatorsRegisteredCallback;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
@@ -35,6 +37,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.HelpUtils;
+import com.android.settingslib.widget.FooterPreference;
 
 import java.util.List;
 
@@ -82,14 +85,15 @@ public class FaceSettingsFooterPreferenceController extends BasePreferenceContro
                 mContext, mContext.getString(R.string.help_url_face), getClass().getName());
         final AnnotationSpan.LinkInfo linkInfo =
                 new AnnotationSpan.LinkInfo(mContext, ANNOTATION_URL, helpIntent);
-
-        int footerRes;
+        final FaceSettingsFeatureProvider featureProvider = FeatureFactory.getFeatureFactory()
+                .getFaceFeatureProvider().getFaceSettingsFeatureProvider();
+        final int footerRes;
         boolean isAttentionSupported = mProvider.isAttentionSupported(mContext);
         if (Utils.isPrivateProfile(mUserId, mContext)) {
             footerRes = R.string.private_space_face_settings_footer;
         } else if (mIsFaceStrong) {
             footerRes = isAttentionSupported
-                    ? R.string.security_settings_face_settings_footer_class3
+                    ? featureProvider.getSettingPageFooterDescriptionClass3()
                     : R.string.security_settings_face_settings_footer_attention_not_supported;
         } else {
             footerRes = isAttentionSupported
@@ -98,6 +102,20 @@ public class FaceSettingsFooterPreferenceController extends BasePreferenceContro
         }
         preference.setTitle(AnnotationSpan.linkify(
                 mContext.getText(footerRes), linkInfo));
+
+        final int learnMoreRes = featureProvider.getSettingPageFooterLearnMoreDescription();
+        final int learnMoreUrlRes = featureProvider.getSettingPageFooterLearnMoreUrl();
+        if (ResourceId.isValid(learnMoreRes)
+                && ResourceId.isValid(learnMoreUrlRes)
+                && preference instanceof FooterPreference) {
+            final Intent learnMoreIntent = HelpUtils.getHelpIntent(
+                    mContext, mContext.getString(learnMoreUrlRes), getClass().getName());
+            final View.OnClickListener learnMoreClickListener = (v) -> {
+                mContext.startActivityForResult(KEY, learnMoreIntent, 0, null);
+            };
+            ((FooterPreference) preference).setLearnMoreAction(learnMoreClickListener);
+            ((FooterPreference) preference).setLearnMoreText(mContext.getString(learnMoreRes));
+        }
     }
 
     public void setUserId(int userId) {

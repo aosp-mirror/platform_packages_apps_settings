@@ -69,7 +69,7 @@ public class DefaultCombinedPreferenceControllerTest {
         // The setting intent should be null for the new design since this
         // is handled by the delegate for the PrimaryProviderPreference.
         DefaultCombinedPreferenceController dcpc =
-                new DefaultCombinedPreferenceController(mContext);
+                new DefaultCombinedPreferenceController(mContext, false, false);
         assertThat(dcpc.getSettingIntent(null).getPackage()).isNull();
     }
 
@@ -81,7 +81,7 @@ public class DefaultCombinedPreferenceControllerTest {
 
         // For the old design the setting intent should still be used.
         DefaultCombinedPreferenceController dcpc =
-                new DefaultCombinedPreferenceController(mContext);
+                new DefaultCombinedPreferenceController(mContext, false, false);
         assertThat(dcpc.getSettingIntent(null).getPackage()).isNotNull();
     }
 
@@ -104,7 +104,7 @@ public class DefaultCombinedPreferenceControllerTest {
         }
 
         DefaultCombinedPreferenceController dcpc =
-                new DefaultCombinedPreferenceController(mContext);
+                new DefaultCombinedPreferenceController(mContext, false, false);
         PrimaryProviderPreference ppp = createTestPreference();
         Drawable appIcon = mContext.getResources().getDrawable(R.drawable.ic_settings_delete);
 

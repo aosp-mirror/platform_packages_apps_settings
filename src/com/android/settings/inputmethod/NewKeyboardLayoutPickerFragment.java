@@ -28,14 +28,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.android.hardware.input.Flags;
 import com.android.settings.R;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 
@@ -87,9 +84,6 @@ public class NewKeyboardLayoutPickerFragment extends Fragment {
                 getPickerLayout(getResources().getConfiguration()), container, false);
         mKeyboardLayoutPreview = fragmentView.findViewById(R.id.keyboard_layout_preview);
         mKeyboardLayoutPreviewText = fragmentView.findViewById(R.id.keyboard_layout_preview_name);
-        if (!Flags.keyboardLayoutPreviewFlag()) {
-            updateViewMarginForPreviewFlagOff(fragmentView);
-        }
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.keyboard_layout_title, new NewKeyboardLayoutPickerTitle())
@@ -109,14 +103,5 @@ public class NewKeyboardLayoutPickerFragment extends Fragment {
         return !ActivityEmbeddingUtils.isAlreadyEmbedded(this.getActivity())
                 && configuration.orientation == ORIENTATION_LANDSCAPE
                 ? R.layout.keyboard_layout_picker_one_pane_land : R.layout.keyboard_layout_picker;
-    }
-
-    private void updateViewMarginForPreviewFlagOff(ViewGroup fragmentView) {
-        LinearLayout previewContainer = fragmentView.findViewById(
-                R.id.keyboard_layout_picker_container);
-        FrameLayout.LayoutParams previewContainerLayoutParams =
-                (FrameLayout.LayoutParams) previewContainer.getLayoutParams();
-        previewContainerLayoutParams.setMargins(0, 0, 0, 0);
-        previewContainer.setLayoutParams(previewContainerLayoutParams);
     }
 }

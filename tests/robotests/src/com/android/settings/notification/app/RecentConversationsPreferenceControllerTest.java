@@ -50,6 +50,7 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settingslib.widget.ButtonPreference;
 import com.android.settingslib.widget.LayoutPreference;
 
 import com.google.common.collect.ImmutableList;
@@ -232,14 +233,16 @@ public class RecentConversationsPreferenceControllerTest {
                 new NotificationChannelGroup("hi", "group"), 7,
                 false);
 
-        RecentConversationPreference pref = mController.createConversationPref(ccw);
+        Preference pref = mController.createConversationPref(ccw);
         final View view = View.inflate(mContext, pref.getLayoutResource(), null);
         PreferenceViewHolder holder = spy(PreferenceViewHolder.createInstanceForTests(view));
-        View delete = View.inflate(mContext, pref.getSecondTargetResId(), null);
-        when(holder.findViewById(pref.getClearId())).thenReturn(delete);
+        View delete = View.inflate(mContext, ((RecentConversationPreference) pref)
+                .getSecondTargetResId(), null);
+        when(holder.findViewById(((RecentConversationPreference) pref).getClearId()))
+                .thenReturn(delete);
 
         pref.onBindViewHolder(holder);
-        pref.getClearView().performClick();
+        ((RecentConversationPreference) pref).getClearView().performClick();
 
         verify(mPs).removeRecentConversation(
                 si.getPackage(), UserHandle.getUserId(ccw.getUid()), si.getId());
@@ -260,24 +263,24 @@ public class RecentConversationsPreferenceControllerTest {
                 new NotificationChannelGroup("hi", "group"), 7,
                 true);
 
-        RecentConversationPreference pref = mController.createConversationPref(ccw);
+        Preference pref = mController.createConversationPref(ccw);
         final View view = View.inflate(mContext, pref.getLayoutResource(), null);
         PreferenceViewHolder holder = spy(PreferenceViewHolder.createInstanceForTests(view));
-        View delete = View.inflate(mContext, pref.getSecondTargetResId(), null);
-        when(holder.findViewById(pref.getClearId())).thenReturn(delete);
+        View delete = View.inflate(mContext, ((RecentConversationPreference) pref).
+                getSecondTargetResId(), null);
+        when(holder.findViewById(((RecentConversationPreference) pref).getClearId()))
+                .thenReturn(delete);
         mPreferenceGroup.addPreference(pref);
 
-        RecentConversationPreference pref2 = mController.createConversationPref(ccw2);
-        final View view2 = View.inflate(mContext, pref2.getLayoutResource(), null);
-        PreferenceViewHolder holder2 = spy(PreferenceViewHolder.createInstanceForTests(view2));
-        View delete2 = View.inflate(mContext, pref2.getSecondTargetResId(), null);
-        when(holder2.findViewById(pref.getClearId())).thenReturn(delete2);
+        Preference pref2 = mController.createConversationPref(ccw2);
         mPreferenceGroup.addPreference(pref2);
 
-        LayoutPreference clearAll = mController.getClearAll(mPreferenceGroup);
+        ButtonPreference clearAll = mController.getClearAll(mPreferenceGroup);
+        final View rootView = View.inflate(mContext, clearAll.getLayoutResource(), null);
+        clearAll.onBindViewHolder(PreferenceViewHolder.createInstanceForTests(rootView));
         mPreferenceGroup.addPreference(clearAll);
 
-        clearAll.findViewById(R.id.conversation_settings_clear_recents).performClick();
+        clearAll.getButton().performClick();
 
         verify(mPs).removeAllRecentConversations();
         assertThat((Preference) mPreferenceGroup.findPreference("hi:person")).isNull();
@@ -294,9 +297,9 @@ public class RecentConversationsPreferenceControllerTest {
                 new NotificationChannelGroup("hi", "group"), 7,
                 true);
 
-        RecentConversationPreference pref = mController.createConversationPref(ccw);
+        Preference pref = mController.createConversationPref(ccw);
 
-        assertThat(pref.hasClearListener()).isFalse();
+        assertThat(pref instanceof RecentConversationPreference).isFalse();
     }
 
     @Test

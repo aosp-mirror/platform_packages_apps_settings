@@ -54,6 +54,9 @@ public class AppLinkPreferenceController extends NotificationPreferenceControlle
     }
 
     public void updateState(Preference preference) {
+        if (preference.getParent() != null) {
+            preference.getParent().setVisible(true);
+        }
         if (mAppRow != null) {
             preference.setIntent(mAppRow.settingsIntent);
         }

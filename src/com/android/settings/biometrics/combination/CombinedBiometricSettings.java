@@ -29,6 +29,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
@@ -75,6 +76,12 @@ public class CombinedBiometricSettings extends BiometricsSettingsBase {
         mCombinedBiometricStatusUtils = new CombinedBiometricStatusUtils(getActivity(), mUserId);
         if (mActiveUnlockStatusUtils.isAvailable()) {
             updateUiForActiveUnlock();
+        }
+        if (Flags.biometricsOnboardingEducation()) {
+            final PreferenceCategory category = findPreference(KEY_USE_BIOMETRIC_PREFERENCE);
+            if (category != null) {
+                category.setVisible(false);
+            }
         }
     }
 

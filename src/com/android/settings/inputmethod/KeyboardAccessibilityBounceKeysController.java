@@ -16,6 +16,9 @@
 
 package com.android.settings.inputmethod;
 
+import static android.app.settings.SettingsEnums.ACTION_BOUNCE_KEYS_DISABLED;
+import static android.app.settings.SettingsEnums.ACTION_BOUNCE_KEYS_ENABLED;
+
 import android.content.Context;
 import android.hardware.input.InputSettings;
 import android.net.Uri;
@@ -28,13 +31,13 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settingslib.PrimarySwitchPreference;
 
 public class KeyboardAccessibilityBounceKeysController extends
         InputSettingPreferenceController implements
         LifecycleObserver {
     public static final int BOUNCE_KEYS_THRESHOLD = 500;
+    private static final String KEY_TAG = "bounce_keys_dialog_tag";
 
     @Nullable
     private PrimarySwitchPreference mPrimaryPreference;
@@ -42,8 +45,6 @@ public class KeyboardAccessibilityBounceKeysController extends
     public KeyboardAccessibilityBounceKeysController(@NonNull Context context,
             @NonNull String key) {
         super(context, key);
-        constructDialog(context, R.string.bounce_keys_dialog_title,
-                R.string.bounce_keys_dialog_subtitle);
     }
 
     @Override
@@ -61,12 +62,11 @@ public class KeyboardAccessibilityBounceKeysController extends
 
     @Override
     public boolean handlePreferenceTreeClick(@NonNull Preference preference) {
-        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())
+                || mFragmentManager == null) {
             return false;
         }
-        if (mAlertDialog != null) {
-            mAlertDialog.show();
-        }
+        KeyboardAccessibilityBounceKeysDialogFragment.getInstance().show(mFragmentManager, KEY_TAG);
         return true;
     }
 
@@ -78,6 +78,8 @@ public class KeyboardAccessibilityBounceKeysController extends
     @Override
     public boolean setChecked(boolean isChecked) {
         updateInputSettingKeysValue(isChecked ? BOUNCE_KEYS_THRESHOLD : 0);
+        mMetricsFeatureProvider.action(mContext,
+                isChecked ? ACTION_BOUNCE_KEYS_ENABLED : ACTION_BOUNCE_KEYS_DISABLED);
         return true;
     }
 
@@ -98,10 +100,5 @@ public class KeyboardAccessibilityBounceKeysController extends
     @Override
     protected void updateInputSettingKeysValue(int thresholdTimeMillis) {
         InputSettings.setAccessibilityBounceKeysThreshold(mContext, thresholdTimeMillis);
-    }
-
-    @Override
-    protected int getInputSettingKeysValue() {
-        return InputSettings.getAccessibilityBounceKeysThreshold(mContext);
     }
 }

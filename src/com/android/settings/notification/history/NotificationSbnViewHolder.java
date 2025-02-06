@@ -49,7 +49,6 @@ public class NotificationSbnViewHolder extends RecyclerView.ViewHolder {
     private final TextView mTitle;
     private final TextView mSummary;
     private final ImageView mProfileBadge;
-    private final View mDivider;
 
     NotificationSbnViewHolder(View itemView) {
         super(itemView);
@@ -59,7 +58,6 @@ public class NotificationSbnViewHolder extends RecyclerView.ViewHolder {
         mTitle = itemView.findViewById(R.id.title);
         mSummary = itemView.findViewById(R.id.text);
         mProfileBadge = itemView.findViewById(R.id.profile_badge);
-        mDivider = itemView.findViewById(R.id.divider);
     }
 
     void setSummary(CharSequence summary) {
@@ -90,10 +88,6 @@ public class NotificationSbnViewHolder extends RecyclerView.ViewHolder {
     void setProfileBadge(Drawable badge) {
         mProfileBadge.setImageDrawable(badge);
         mProfileBadge.setVisibility(badge != null ? View.VISIBLE : View.GONE);
-    }
-
-    void setDividerVisible(boolean visible) {
-        mDivider.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     void addOnClick(int position, String pkg, int uid, int userId, PendingIntent pi,

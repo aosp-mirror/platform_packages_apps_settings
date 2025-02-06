@@ -31,14 +31,18 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class VolumeSeekBarPreferenceControllerTest {
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     @Mock
     private Context mContext;
@@ -46,8 +50,6 @@ public class VolumeSeekBarPreferenceControllerTest {
     private PreferenceScreen mScreen;
     @Mock
     private VolumeSeekBarPreference mPreference;
-    @Mock
-    private VolumeSeekBarPreference.Callback mCallback;
     @Mock
     private VolumeSeekBarPreference.Listener mListener;
     @Mock
@@ -57,10 +59,9 @@ public class VolumeSeekBarPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         when(mScreen.findPreference(nullable(String.class))).thenReturn(mPreference);
         when(mPreference.getKey()).thenReturn("key");
-        mController = new VolumeSeekBarPreferenceControllerTestable(mContext, mCallback, true,
+        mController = new VolumeSeekBarPreferenceControllerTestable(mContext, true,
                 mPreference.getKey(), mListener);
         mController.setAudioHelper(mHelper);
     }
@@ -69,7 +70,6 @@ public class VolumeSeekBarPreferenceControllerTest {
     public void displayPreference_available_shouldUpdatePreference() {
         mController.displayPreference(mScreen);
 
-        verify(mPreference).setCallback(mCallback);
         verify(mPreference).setStream(VolumeSeekBarPreferenceControllerTestable.AUDIO_STREAM);
         verify(mPreference).setMuteIcon(VolumeSeekBarPreferenceControllerTestable.MUTE_ICON);
         verify(mPreference).setListener(mListener);
@@ -77,7 +77,7 @@ public class VolumeSeekBarPreferenceControllerTest {
 
     @Test
     public void displayPreference_notAvailable_shouldNotUpdatePreference() {
-        mController = new VolumeSeekBarPreferenceControllerTestable(mContext, mCallback, false,
+        mController = new VolumeSeekBarPreferenceControllerTestable(mContext, false,
                 mPreference.getKey(), mListener);
 
         mController.displayPreference(mScreen);
@@ -86,24 +86,6 @@ public class VolumeSeekBarPreferenceControllerTest {
         verify(mPreference, never()).setStream(anyInt());
         verify(mPreference, never()).setMuteIcon(anyInt());
         verify(mPreference, never()).setListener(mListener);
-    }
-
-    @Test
-    public void onResume_shouldResumePreference() {
-        mController.displayPreference(mScreen);
-
-        mController.onResume();
-
-        verify(mPreference).onActivityResume();
-    }
-
-    @Test
-    public void onPause_shouldPausePreference() {
-        mController.displayPreference(mScreen);
-
-        mController.onPause();
-
-        verify(mPreference).onActivityPause();
     }
 
     @Test
@@ -152,19 +134,17 @@ public class VolumeSeekBarPreferenceControllerTest {
         assertThat(mController.getSliderPosition()).isEqualTo(7);
     }
 
-    private class VolumeSeekBarPreferenceControllerTestable
-        extends VolumeSeekBarPreferenceController {
+    private static class VolumeSeekBarPreferenceControllerTestable extends
+            VolumeSeekBarPreferenceController {
 
-        private final static int AUDIO_STREAM = 1;
-        private final static int MUTE_ICON = 2;
+        private static final int AUDIO_STREAM = 1;
+        private static final int MUTE_ICON = 2;
 
-        private boolean mAvailable;
+        private final boolean mAvailable;
 
-        VolumeSeekBarPreferenceControllerTestable(Context context,
-                VolumeSeekBarPreference.Callback callback, boolean available, String key,
+        VolumeSeekBarPreferenceControllerTestable(Context context, boolean available, String key,
                 VolumeSeekBarPreference.Listener listener) {
             super(context, key);
-            setCallback(callback);
             mAvailable = available;
             mVolumePreferenceListener = listener;
         }

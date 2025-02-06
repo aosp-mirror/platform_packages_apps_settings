@@ -56,13 +56,10 @@ class AppDataUsageSummaryControllerTest {
         composeTestRule.onNode(hasTextExactly("Total", "6.75 kB")).assertIsDisplayed()
         composeTestRule.onNode(hasTextExactly("Foreground", "5.54 kB")).assertIsDisplayed()
         composeTestRule.onNode(hasTextExactly("Background", "1.21 kB")).assertIsDisplayed()
-        composeTestRule.onNodeWithContentDescription("6.75 kB").assertIsDisplayed()
-        composeTestRule.onNodeWithContentDescription("5.54 kB").assertIsDisplayed()
-        composeTestRule.onNodeWithContentDescription("1.21 kB").assertIsDisplayed()
     }
 
     @Test
-    fun summary_zero() {
+    fun summary_smallByte() {
         val appUsage = NetworkUsageDetailsData(
             range = Range(1L, 2L),
             totalUsage = 3,
@@ -75,12 +72,9 @@ class AppDataUsageSummaryControllerTest {
             controller.Content()
         }
 
-        composeTestRule.onNode(hasTextExactly("Total", "3 B")).assertIsDisplayed()
-        composeTestRule.onNode(hasTextExactly("Foreground", "1 B")).assertIsDisplayed()
-        composeTestRule.onNode(hasTextExactly("Background", "2 B")).assertIsDisplayed()
-        composeTestRule.onNodeWithContentDescription("3 byte").assertIsDisplayed()
-        composeTestRule.onNodeWithContentDescription("1 byte").assertIsDisplayed()
-        composeTestRule.onNodeWithContentDescription("2 byte").assertIsDisplayed()
+        composeTestRule.onNode(hasTextExactly("Total", "3 byte")).assertIsDisplayed()
+        composeTestRule.onNode(hasTextExactly("Foreground", "1 byte")).assertIsDisplayed()
+        composeTestRule.onNode(hasTextExactly("Background", "2 byte")).assertIsDisplayed()
     }
 
     private companion object {

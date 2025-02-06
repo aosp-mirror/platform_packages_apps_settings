@@ -16,6 +16,9 @@
 
 package com.android.settings.inputmethod;
 
+import static android.app.settings.SettingsEnums.ACTION_MOUSE_KEYS_DISABLED;
+import static android.app.settings.SettingsEnums.ACTION_MOUSE_KEYS_ENABLED;
+
 import android.content.Context;
 import android.hardware.input.InputSettings;
 import android.net.Uri;
@@ -32,7 +35,7 @@ import com.android.settingslib.widget.MainSwitchPreference;
 public class KeyboardAccessibilityMouseKeysController extends
         InputSettingPreferenceController implements
         LifecycleObserver {
-    private static final String KEY_MOUSE_KEY = "accessibility_mouse_keys";
+    private static final String KEY_MOUSE_KEY = "keyboard_a11y_page_mouse_keys";
     private static final String KEY_MOUSE_KEY_MAIN_PAGE = "mouse_keys_main_switch";
 
     @Nullable
@@ -63,6 +66,8 @@ public class KeyboardAccessibilityMouseKeysController extends
     public boolean setChecked(boolean isChecked) {
         InputSettings.setAccessibilityMouseKeysEnabled(mContext,
                 isChecked);
+        mMetricsFeatureProvider.action(mContext,
+                isChecked ? ACTION_MOUSE_KEYS_ENABLED : ACTION_MOUSE_KEYS_DISABLED);
         return true;
     }
 

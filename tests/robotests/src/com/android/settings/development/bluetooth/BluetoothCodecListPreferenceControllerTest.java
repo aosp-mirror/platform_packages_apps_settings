@@ -18,7 +18,6 @@ package com.android.settings.development.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.atLeastOnce;
@@ -35,14 +34,12 @@ import android.bluetooth.BluetoothCodecType;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
-import android.platform.test.annotations.EnableFlags;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.development.BluetoothA2dpConfigStore;
-import com.android.settings.development.Flags;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -73,6 +70,7 @@ public class BluetoothCodecListPreferenceControllerTest {
     private BluetoothCodecType mCodecTypeAAC;
     private BluetoothCodecType mCodecTypeSBC;
     private BluetoothCodecType mCodecTypeAPTX;
+    private BluetoothCodecType mCodecTypeAPTXHD;
     private BluetoothCodecType mCodecTypeLDAC;
     private BluetoothCodecType mCodecTypeOPUS;
     private List<BluetoothCodecType> mCodecTypes;
@@ -114,6 +112,8 @@ public class BluetoothCodecListPreferenceControllerTest {
                 BluetoothCodecType.createFromType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC);
         mCodecTypeAPTX =
                 BluetoothCodecType.createFromType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX);
+        mCodecTypeAPTXHD =
+                BluetoothCodecType.createFromType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_APTX_HD);
         mCodecTypeLDAC =
                 BluetoothCodecType.createFromType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC);
         mCodecTypeOPUS =
@@ -125,6 +125,7 @@ public class BluetoothCodecListPreferenceControllerTest {
                         mCodecTypeSBC,
                         mCodecTypeAAC,
                         mCodecTypeAPTX,
+                        mCodecTypeAPTXHD,
                         mCodecTypeLDAC,
                         mCodecTypeOPUS));
 
@@ -213,6 +214,11 @@ public class BluetoothCodecListPreferenceControllerTest {
         verify(mBluetoothA2dpConfigStore).setCodecType(mCodecTypeAPTX);
 
         assertTrue(
+                mController.writeConfigurationValues(String.valueOf(
+                        mCodecTypeAPTXHD.getCodecId())));
+        verify(mBluetoothA2dpConfigStore).setCodecType(mCodecTypeAPTXHD);
+
+        assertTrue(
                 mController.writeConfigurationValues(String.valueOf(mCodecTypeLDAC.getCodecId())));
         verify(mBluetoothA2dpConfigStore).setCodecType(mCodecTypeLDAC);
 
@@ -244,7 +250,6 @@ public class BluetoothCodecListPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A2DP_OFFLOAD_CODEC_EXTENSIBILITY_SETTINGS)
     public void onPreferenceChange_notifyPreference() {
         assertFalse(
                 mController.onPreferenceChange(
@@ -271,7 +276,6 @@ public class BluetoothCodecListPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A2DP_OFFLOAD_CODEC_EXTENSIBILITY_SETTINGS)
     public void onPreferenceChange_listPreferenceIsNull() {
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(null);
         assertFalse(
@@ -280,13 +284,11 @@ public class BluetoothCodecListPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A2DP_OFFLOAD_CODEC_EXTENSIBILITY_SETTINGS)
     public void onPreferenceChange_unknownCodecId() {
         assertFalse(mController.onPreferenceChange(mPreference, String.valueOf(TEST_ENTRY_VALUE)));
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A2DP_OFFLOAD_CODEC_EXTENSIBILITY_SETTINGS)
     public void onPreferenceChange_codecSelection() {
         when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
         when(mBluetoothA2dp.isOptionalCodecsEnabled(mActiveDevice))
@@ -327,6 +329,14 @@ public class BluetoothCodecListPreferenceControllerTest {
                         mPreference, String.valueOf(mCodecTypeAPTX.getCodecId())));
         mCodecStatus =
                 new BluetoothCodecStatus.Builder()
+                        .setCodecConfig(mCodecConfigAPTXHD)
+                        .setCodecsSelectableCapabilities(mCodecConfigs)
+                        .build();
+        assertTrue(
+                mController.onPreferenceChange(
+                        mPreference, String.valueOf(mCodecTypeAPTXHD.getCodecId())));
+        mCodecStatus =
+                new BluetoothCodecStatus.Builder()
                         .setCodecConfig(mCodecConfigOPUS)
                         .setCodecsSelectableCapabilities(mCodecConfigs)
                         .build();
@@ -336,7 +346,6 @@ public class BluetoothCodecListPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A2DP_OFFLOAD_CODEC_EXTENSIBILITY_SETTINGS)
     public void updateState_notifyPreference() {
         assertFalse(
                 mController.onPreferenceChange(
@@ -437,7 +446,6 @@ public class BluetoothCodecListPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A2DP_OFFLOAD_CODEC_EXTENSIBILITY_SETTINGS)
     public void onBluetoothServiceConnected_verifyBluetoothA2dpConfigStore() {
         mCodecStatus =
                 new BluetoothCodecStatus.Builder()

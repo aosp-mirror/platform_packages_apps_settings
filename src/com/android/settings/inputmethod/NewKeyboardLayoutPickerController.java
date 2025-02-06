@@ -57,8 +57,8 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
     private KeyboardLayout[] mKeyboardLayouts;
     private PreferenceScreen mScreen;
     private String mPreviousSelection;
-    private String mFinalSelectedLayout;
-    private String mLayout;
+    private String mFinalSelectedLayoutDescriptor;
+    private String mSelectedLayoutDescriptor;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private KeyboardLayoutSelectedCallback mKeyboardLayoutSelectedCallback;
 
@@ -83,8 +83,8 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
         mInputMethodSubtype =
                 arguments.getParcelable(
                         InputPeripheralsSettingsUtils.EXTRA_INPUT_METHOD_SUBTYPE);
-        mLayout = getSelectedLayoutLabel();
-        mFinalSelectedLayout = mLayout;
+        mSelectedLayoutDescriptor = getSelectedLayoutDescriptor();
+        mFinalSelectedLayoutDescriptor = mSelectedLayoutDescriptor;
         mKeyboardLayouts = mIm.getKeyboardLayoutListForInputDevice(
                 mInputDeviceIdentifier, mUserId, mInputMethodInfo, mInputMethodSubtype);
         InputPeripheralsSettingsUtils.sortKeyboardLayoutsByLabel(mKeyboardLayouts);
@@ -106,8 +106,12 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
 
     @Override
     public void onStop() {
-        if (mLayout != null && !mLayout.equals(mFinalSelectedLayout)) {
-            String change = "From:" + mLayout + ", to:" + mFinalSelectedLayout;
+        if (mSelectedLayoutDescriptor != null
+                && !mSelectedLayoutDescriptor.equals(mFinalSelectedLayoutDescriptor)) {
+            String change = "From:"
+                    + getLayoutLabel(mSelectedLayoutDescriptor)
+                    + ", to:"
+                    + getLayoutLabel(mFinalSelectedLayoutDescriptor);
             mMetricsFeatureProvider.action(
                     mContext, SettingsEnums.ACTION_PK_LAYOUT_CHANGED, change);
         }
@@ -152,7 +156,7 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
         }
         setLayout(pref);
         mPreviousSelection = preference.getKey();
-        mFinalSelectedLayout = pref.getTitle().toString();
+        mFinalSelectedLayoutDescriptor = mPreviousSelection;
         return true;
     }
 
@@ -182,12 +186,12 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
             pref = new TickButtonPreference(mScreen.getContext());
             pref.setTitle(layout.getLabel());
 
-            if (mLayout.equals(layout.getLabel())) {
+            if (mSelectedLayoutDescriptor.equals(layout.getDescriptor())) {
                 if (mKeyboardLayoutSelectedCallback != null) {
                     mKeyboardLayoutSelectedCallback.onSelected(layout);
                 }
                 pref.setSelected(true);
-                mPreviousSelection = layout.getDescriptor();
+                mPreviousSelection = mSelectedLayoutDescriptor;
             }
             pref.setKey(layout.getDescriptor());
             mScreen.addPreference(pref);
@@ -204,15 +208,19 @@ public class NewKeyboardLayoutPickerController extends BasePreferenceController 
                 mPreferenceMap.get(preference).getDescriptor());
     }
 
-    private String getSelectedLayoutLabel() {
-        String label = mContext.getString(R.string.keyboard_default_layout);
+    private String getSelectedLayoutDescriptor() {
         KeyboardLayoutSelectionResult result = InputPeripheralsSettingsUtils.getKeyboardLayout(
                 mIm, mUserId, mInputDeviceIdentifier, mInputMethodInfo, mInputMethodSubtype);
+        return result.getLayoutDescriptor();
+    }
+
+    private String getLayoutLabel(String descriptor) {
+        String label = mContext.getString(R.string.keyboard_default_layout);
         KeyboardLayout[] keyboardLayouts = InputPeripheralsSettingsUtils.getKeyboardLayouts(
                 mIm, mUserId, mInputDeviceIdentifier, mInputMethodInfo, mInputMethodSubtype);
-        if (result.getLayoutDescriptor() != null) {
+        if (descriptor != null) {
             for (KeyboardLayout keyboardLayout : keyboardLayouts) {
-                if (keyboardLayout.getDescriptor().equals(result.getLayoutDescriptor())) {
+                if (keyboardLayout.getDescriptor().equals(descriptor)) {
                     label = keyboardLayout.getLabel();
                     break;
                 }

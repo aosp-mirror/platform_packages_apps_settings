@@ -182,8 +182,8 @@ class DataUsageSummaryPreferenceControllerTest {
         val limitInfo = argumentCaptor {
             verify(preference).setLimitInfo(capture())
         }.firstValue.toString()
-        assertThat(limitInfo).isEqualTo("1 B data warning")
-        verify(preference).setLabels("0 B", "1 B")
+        assertThat(limitInfo).isEqualTo("1 byte data warning")
+        verify(preference).setLabels("0 byte", "1 byte")
     }
 
     @Test
@@ -200,8 +200,8 @@ class DataUsageSummaryPreferenceControllerTest {
         val limitInfo = argumentCaptor {
             verify(preference).setLimitInfo(capture())
         }.firstValue.toString()
-        assertThat(limitInfo).isEqualTo("1 B data limit")
-        verify(preference).setLabels("0 B", "1 B")
+        assertThat(limitInfo).isEqualTo("1 byte data limit")
+        verify(preference).setLabels("0 byte", "1 byte")
     }
 
     @Test
@@ -219,7 +219,7 @@ class DataUsageSummaryPreferenceControllerTest {
             verify(preference).setLimitInfo(capture())
         }.firstValue.toString()
         assertThat(limitInfo).isEqualTo("512 MB data warning / 1.00 GB data limit")
-        verify(preference).setLabels("0 B", "1.00 GB")
+        verify(preference).setLabels("0 byte", "1.00 GB")
     }
 
     @Test
@@ -256,7 +256,7 @@ class DataUsageSummaryPreferenceControllerTest {
             POSITIVE_DATA_PLAN_INFO.dataPlanSize,
         )
         verify(preference).setChartEnabled(true)
-        verify(preference).setLabels("0 B", "9 B")
+        verify(preference).setLabels("0 byte", "9 byte")
         val progress = argumentCaptor {
             verify(preference).setProgress(capture())
         }.firstValue

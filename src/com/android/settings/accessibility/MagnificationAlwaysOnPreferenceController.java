@@ -44,7 +44,7 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
  * to 100%.
  */
 public class MagnificationAlwaysOnPreferenceController extends
-        MagnificationFeaturePreferenceController implements LifecycleObserver, OnResume, OnPause {
+        MagnificationTogglePreferenceController implements LifecycleObserver, OnResume, OnPause {
 
     private static final String TAG =
             MagnificationAlwaysOnPreferenceController.class.getSimpleName();

@@ -29,6 +29,7 @@ import android.provider.SettingsSlicesContract;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.contract.SettingsContractKt;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.fuelgauge.BatterySaverReceiver;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -73,7 +74,7 @@ public class BatterySaverButtonPreferenceController extends TogglePreferenceCont
                 .scheme(ContentResolver.SCHEME_CONTENT)
                 .authority(SettingsSlicesContract.AUTHORITY)
                 .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-                .appendPath(SettingsSlicesContract.KEY_BATTERY_SAVER)
+                .appendPath(SettingsContractKt.KEY_BATTERY_SAVER)
                 .build();
     }
 
@@ -92,7 +93,7 @@ public class BatterySaverButtonPreferenceController extends TogglePreferenceCont
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        mPreference.updateStatus(isChecked());
+        mPreference.setChecked(isChecked());
     }
 
     @Override

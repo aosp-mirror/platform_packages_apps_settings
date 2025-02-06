@@ -63,6 +63,9 @@ public class DeletedChannelsPreferenceController extends NotificationPreferenceC
     }
 
     public void updateState(Preference preference) {
+        if (preference.getParent() != null) {
+            preference.getParent().setVisible(true);
+        }
         if (mAppRow != null) {
             int deletedChannelCount = mBackend.getDeletedChannelCount(mAppRow.pkg, mAppRow.uid);
             preference.setTitle(StringUtil.getIcuPluralsString(mContext, deletedChannelCount,

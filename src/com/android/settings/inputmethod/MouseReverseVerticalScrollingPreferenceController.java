@@ -16,6 +16,9 @@
 
 package com.android.settings.inputmethod;
 
+import static android.app.settings.SettingsEnums.ACTION_MOUSE_REVERSE_VERTICAL_SCROLLING_DISABLED;
+import static android.app.settings.SettingsEnums.ACTION_MOUSE_REVERSE_VERTICAL_SCROLLING_ENABLED;
+
 import android.content.Context;
 import android.hardware.input.InputSettings;
 
@@ -23,12 +26,16 @@ import androidx.annotation.NonNull;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class MouseReverseVerticalScrollingPreferenceController extends TogglePreferenceController {
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     public MouseReverseVerticalScrollingPreferenceController(
             @NonNull Context context, @NonNull String key) {
         super(context, key);
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -39,6 +46,9 @@ public class MouseReverseVerticalScrollingPreferenceController extends TogglePre
     @Override
     public boolean setChecked(boolean isChecked) {
         InputSettings.setMouseReverseVerticalScrolling(mContext, isChecked);
+        mMetricsFeatureProvider.action(mContext,
+                isChecked ? ACTION_MOUSE_REVERSE_VERTICAL_SCROLLING_ENABLED :
+                        ACTION_MOUSE_REVERSE_VERTICAL_SCROLLING_DISABLED);
         return true;
     }
 

@@ -53,6 +53,7 @@ import androidx.slice.SliceProvider;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.Utils;
+import com.android.settings.contract.SettingsContractKt;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
@@ -626,7 +627,7 @@ public class SettingsSliceProviderTest {
                 .scheme(ContentResolver.SCHEME_CONTENT)
                 .authority(SettingsSlicesContract.AUTHORITY)
                 .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-                .appendPath(SettingsSlicesContract.KEY_LOCATION)
+                .appendPath(SettingsContractKt.KEY_LOCATION)
                 .build();
 
         mProvider.onSlicePinned(uri);

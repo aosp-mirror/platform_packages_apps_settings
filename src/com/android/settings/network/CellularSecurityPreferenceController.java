@@ -23,6 +23,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.safetycenter.SafetyCenterManager;
+import android.safetycenter.SafetySourceData;
+import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -38,6 +40,8 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.telephony.CellularSecuritySettingsFragment;
 
+import java.util.List;
+
 /**
  * {@link BasePreferenceController} for accessing Cellular Security settings from Network &
  * Internet Settings menu.
@@ -45,6 +49,7 @@ import com.android.settings.network.telephony.CellularSecuritySettingsFragment;
 public class CellularSecurityPreferenceController extends BasePreferenceController {
 
     private static final String LOG_TAG = "CellularSecurityPreferenceController";
+    private static final String SAFETY_SOURCE_ID = "AndroidCellularNetworkSecurity";
 
     private @Nullable TelephonyManager mTelephonyManager;
 
@@ -67,15 +72,19 @@ public class CellularSecurityPreferenceController extends BasePreferenceControll
     @Override
     public int getAvailabilityStatus() {
         if (!mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)
-                || !Flags.enableIdentifierDisclosureTransparencyUnsolEvents()
-                || !Flags.enableModemCipherTransparencyUnsolEvents()
-                || !Flags.enableIdentifierDisclosureTransparency()
-                || !Flags.enableModemCipherTransparency()) {
+                || !Flags.enableModemCipherTransparencyUnsolEvents()) {
             return UNSUPPORTED_ON_DEVICE;
         }
         if (mTelephonyManager == null) {
             Log.w(LOG_TAG, "Telephony manager not yet initialized");
             mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        }
+
+        // Check there are valid SIM cards which can be displayed to the user, otherwise this
+        // settings should not be shown.
+        List<SubscriptionInfo> availableSubs = SubscriptionUtil.getAvailableSubscriptions(mContext);
+        if (availableSubs.isEmpty()) {
+            return CONDITIONALLY_UNAVAILABLE;
         }
 
         boolean isNullCipherDisablementAvailable = false;
@@ -124,13 +133,30 @@ public class CellularSecurityPreferenceController extends BasePreferenceControll
         if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
             return super.handlePreferenceTreeClick(preference);
         }
-        boolean isSafetyCenterSupported = isSafetyCenterSupported();
-        if (isSafetyCenterSupported && areNotificationsEnabled()) {
+        if (!isSafetyCenterSupported()) {
+            // Realistically, it's unlikely to end up in handlePreferenceTreeClick with SafetyCenter
+            // being not supported on the device.
+            return false;
+        }
+        // Need to check that both Safety Center is available on device, and also that the HALs are
+        // enabled before showing the Safety Center UI. Otherwise, we need to take them to the page
+        // where the HALs can be enabled.
+        SafetyCenterManager safetyCenterManager = mContext.getSystemService(
+                SafetyCenterManager.class);
+        SafetySourceData data = null;
+        if (safetyCenterManager.isSafetyCenterEnabled()) {
+            data = safetyCenterManager.getSafetySourceData(SAFETY_SOURCE_ID);
+        }
+        // Can only redirect to SafetyCenter if it has received data via the SafetySource, as
+        // SafetyCenter doesn't support redirecting to a specific page associated with a source
+        // if it hasn't received data from that source. See b/373942609 for details.
+        if (data != null && areNotificationsEnabled()) {
             Intent safetyCenterIntent = new Intent(Intent.ACTION_SAFETY_CENTER);
             safetyCenterIntent.putExtra(SafetyCenterManager.EXTRA_SAFETY_SOURCES_GROUP_ID,
                     "AndroidCellularNetworkSecuritySources");
             mContext.startActivity(safetyCenterIntent);
         } else {
+            Log.v(LOG_TAG, "Hardware APIs not enabled, or data source is null.");
             final Bundle bundle = new Bundle();
             bundle.putString(CellularSecuritySettingsFragment.KEY_CELLULAR_SECURITY_PREFERENCE, "");
 

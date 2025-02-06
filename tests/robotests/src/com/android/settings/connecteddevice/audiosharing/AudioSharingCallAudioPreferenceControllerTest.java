@@ -24,6 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -42,6 +43,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.os.Looper;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.View;
@@ -66,6 +68,7 @@ import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LeAudioProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -76,7 +79,6 @@ import com.android.settingslib.flags.Flags;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
 
 import org.junit.After;
 import org.junit.Before;
@@ -88,8 +90,10 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowListView;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 import java.util.ArrayList;
@@ -107,8 +111,11 @@ public class AudioSharingCallAudioPreferenceControllerTest {
     private static final String PREF_KEY = "calls_and_alarms";
     private static final String TEST_DEVICE_NAME1 = "test1";
     private static final String TEST_DEVICE_NAME2 = "test2";
+    private static final String TEMP_BOND_METADATA =
+            "<TEMP_BOND_TYPE>le_audio_sharing</TEMP_BOND_TYPE>";
     private static final int TEST_DEVICE_GROUP_ID1 = 1;
     private static final int TEST_DEVICE_GROUP_ID2 = 2;
+    private static final int METADATA_FAST_PAIR_CUSTOMIZED_FIELDS = 25;
 
     private static final String TEST_SETTINGS_KEY =
             "bluetooth_le_broadcast_fallback_active_group_id";
@@ -441,6 +448,23 @@ public class AudioSharingCallAudioPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_TEMPORARY_BOND_DEVICES_UI)
+    public void displayPreference_hasTemporaryBondDevice_doNotShow() {
+        Settings.Secure.putInt(mContentResolver, TEST_SETTINGS_KEY, TEST_DEVICE_GROUP_ID1);
+        when(mCachedDevice1.isActiveDevice(BluetoothProfile.LE_AUDIO)).thenReturn(true);
+        when(mBroadcast.isEnabled(any())).thenReturn(true);
+        when(mAssistant.getAllConnectedDevices()).thenReturn(ImmutableList.of(mDevice1, mDevice2));
+        when(mAssistant.getAllSources(any())).thenReturn(ImmutableList.of(mState));
+        when(mDevice2.getMetadata(METADATA_FAST_PAIR_CUSTOMIZED_FIELDS)).thenReturn(
+                TEMP_BOND_METADATA.getBytes());
+
+        mController.displayPreference(mScreen);
+        shadowOf(Looper.getMainLooper()).idle();
+
+        assertThat(mController.mGroupedConnectedDevices).hasSize(0);
+    }
+
+    @Test
     public void displayPreference_clickToShowCorrectDialog() {
         AlertDialog latestAlertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         if (latestAlertDialog != null) {
@@ -462,19 +486,46 @@ public class AudioSharingCallAudioPreferenceControllerTest {
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog.isShowing()).isTrue();
         assertThat(dialog.getListView().getCount()).isEqualTo(2);
-        ArrayList<View> outViews = new ArrayList<>();
-        dialog.getListView()
-                .findViewsWithText(outViews, TEST_DEVICE_NAME1, View.FIND_VIEWS_WITH_TEXT);
-        assertThat(outViews.size()).isEqualTo(1);
-        View view = Iterables.getOnlyElement(outViews);
-        assertThat(view instanceof CheckedTextView).isTrue();
-        assertThat(((CheckedTextView) view).isChecked()).isTrue();
+        ShadowListView listView = Shadows.shadowOf(dialog.getListView());
+        View view1 = listView.findItemContainingText(TEST_DEVICE_NAME1);
+        assertThat(view1).isNotNull();
+        assertThat(view1 instanceof CheckedTextView).isTrue();
+        assertThat(((CheckedTextView) view1).isChecked()).isTrue();
+        View view2 = listView.findItemContainingText(TEST_DEVICE_NAME2);
+        assertThat(view2).isNotNull();
+        assertThat(view2 instanceof CheckedTextView).isTrue();
+        assertThat(((CheckedTextView) view2).isChecked()).isFalse();
+
         verify(mFeatureFactory.metricsFeatureProvider)
                 .visible(
                         /* context= */ eq(null),
                         /* source= */ anyInt(),
                         eq(SettingsEnums.DIALOG_AUDIO_SHARING_CALL_AUDIO),
                         /* latency= */ anyInt());
+
+        LeAudioProfile leAudioProfile = mock(LeAudioProfile.class);
+        when(mBtProfileManager.getLeAudioProfile()).thenReturn(leAudioProfile);
+
+        // Perform click to switch call audio device by set active
+        mSetFlagsRule.disableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API);
+        int index = listView.findIndexOfItemContainingText(TEST_DEVICE_NAME2);
+        listView.performItemClick(index);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertThat(((CheckedTextView) view1).isChecked()).isFalse();
+        assertThat(((CheckedTextView) view2).isChecked()).isTrue();
+        verify(mCachedDevice3).setActive();
+        verify(leAudioProfile, never()).setBroadcastToUnicastFallbackGroup(TEST_DEVICE_GROUP_ID2);
+
+        // Perform click to switch call audio device with API
+        mSetFlagsRule.enableFlags(Flags.FLAG_ADOPT_PRIMARY_GROUP_MANAGEMENT_API);
+        Settings.Secure.putInt(mContentResolver, TEST_SETTINGS_KEY, TEST_DEVICE_GROUP_ID2);
+        index = listView.findIndexOfItemContainingText(TEST_DEVICE_NAME1);
+        listView.performItemClick(index);
+        shadowOf(Looper.getMainLooper()).idle();
+        assertThat(((CheckedTextView) view1).isChecked()).isTrue();
+        assertThat(((CheckedTextView) view2).isChecked()).isFalse();
+        verify(mCachedDevice1, never()).setActive();
+        verify(leAudioProfile).setBroadcastToUnicastFallbackGroup(TEST_DEVICE_GROUP_ID1);
     }
 
     @Test

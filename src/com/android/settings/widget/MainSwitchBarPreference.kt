@@ -80,7 +80,7 @@ class MainSwitchBarPreference(context: Context, private val metadata: MainSwitch
 
     override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
         // prevent user from toggling the switch before data store operation is done
-        isEnabled = false
+        if (metadata.disableWidgetOnCheckedChanged) isEnabled = false
         // once data store is updated, isEnabled will be reset due to rebind
         persistBoolean(isChecked)
     }

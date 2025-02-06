@@ -57,7 +57,8 @@ public class DesktopModePreferenceController extends DeveloperOptionsPreferenceC
 
     @Override
     public boolean isAvailable() {
-        return DesktopModeStatus.canShowDesktopModeDevOption(mContext);
+        return DesktopModeStatus.canShowDesktopModeDevOption(mContext)
+                && !DesktopModeStatus.canShowDesktopExperienceDevOption(mContext);
     }
 
     @Override
@@ -88,7 +89,7 @@ public class DesktopModePreferenceController extends DeveloperOptionsPreferenceC
         final boolean shouldDevOptionBeEnabled = switch (toggleOverride) {
             case OVERRIDE_OFF -> false;
             case OVERRIDE_ON -> true;
-            case OVERRIDE_UNSET -> DesktopModeStatus.shouldDevOptionBeEnabledByDefault();
+            case OVERRIDE_UNSET -> DesktopModeStatus.shouldDevOptionBeEnabledByDefault(mContext);
         };
         ((TwoStatePreference) mPreference).setChecked(shouldDevOptionBeEnabled);
     }

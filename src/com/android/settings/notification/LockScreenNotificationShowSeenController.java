@@ -16,6 +16,8 @@
 
 package com.android.settings.notification;
 
+import static android.provider.Settings.Secure.LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -42,7 +44,8 @@ import com.android.settings.core.TogglePreferenceController;
 public class LockScreenNotificationShowSeenController extends TogglePreferenceController
         implements LifecycleEventObserver {
 
-    private static final int UNSET = 0;
+    // 0 is the default value for phones, we treat 0 as off as usage
+    private static final int UNSET_OFF = 0;
     static final int ON = 1;
     static final int OFF = 2;
     @Nullable private Preference mPreference;
@@ -96,13 +99,23 @@ public class LockScreenNotificationShowSeenController extends TogglePreferenceCo
 
     @Override
     public int getAvailabilityStatus() {
-        if (!Flags.notificationMinimalism()) {
-            return CONDITIONALLY_UNAVAILABLE;
+        if (Flags.notificationMinimalism()) {
+            if (!lockScreenShowNotification()) {
+                return CONDITIONALLY_UNAVAILABLE;
+            }
+            // We want to show the switch when the lock screen notification minimalism flag is on.
+            return AVAILABLE;
         }
-        if (!lockScreenShowNotification()) {
+
+        int setting = Settings.Secure.getInt(mContext.getContentResolver(),
+                LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, UNSET_OFF);
+        if (setting == UNSET_OFF) {
+            // hide the setting if the minimalism flag is off, and the device is phone
+            // UNSET_OFF is the default value for phones
             return CONDITIONALLY_UNAVAILABLE;
+        } else {
+            return AVAILABLE;
         }
-        return AVAILABLE;
     }
 
     /**
@@ -118,9 +131,14 @@ public class LockScreenNotificationShowSeenController extends TogglePreferenceCo
         return lockScreenShowSeenNotifications();
     }
 
+    /**
+     * @return whether to show seen notifications on lockscreen
+     */
     private boolean lockScreenShowSeenNotifications() {
+        // UNSET_OFF is the default value for phone, which is equivalent to off in effect
+        // (show seen notification)
         return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, UNSET) == OFF;
+                Settings.Secure.LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, UNSET_OFF) != ON;
     }
 
     @Override

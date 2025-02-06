@@ -118,6 +118,8 @@ public class NetworkProviderSettingsTest {
     @Spy
     Context mContext = ApplicationProvider.getApplicationContext();
     @Mock
+    private FragmentActivity mFragmentActivity;
+    @Mock
     private PowerManager mPowerManager;
     @Mock
     private WifiManager mWifiManager;
@@ -129,7 +131,6 @@ public class NetworkProviderSettingsTest {
     private AirplaneModeEnabler mAirplaneModeEnabler;
     @Mock
     private DataUsagePreference mDataUsagePreference;
-    private NetworkProviderSettings mNetworkProviderSettings;
     @Mock
     private WifiPickerTracker mMockWifiPickerTracker;
     @Mock
@@ -157,8 +158,11 @@ public class NetworkProviderSettingsTest {
     @Mock
     NetworkProviderSettings.WifiRestriction mWifiRestriction;
 
+    private NetworkProviderSettings mNetworkProviderSettings;
+
     @Before
     public void setUp() {
+        when(mFragmentActivity.getApplicationContext()).thenReturn(mContext);
         when(mMenu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mMenuItem);
 
         mNetworkProviderSettings = spy(new NetworkProviderSettings() {
@@ -166,6 +170,8 @@ public class NetworkProviderSettingsTest {
             boolean showAnySubscriptionInfo(Context context) { return true; }
         });
         doReturn(mContext).when(mNetworkProviderSettings).getContext();
+        doReturn(mFragmentActivity).when(mNetworkProviderSettings).getActivity();
+        doReturn(mFragmentActivity).when(mNetworkProviderSettings).requireActivity();
         doReturn(mPreferenceManager).when(mNetworkProviderSettings).getPreferenceManager();
         doReturn(null).when(mNetworkProviderSettings).getPreferenceScreenBindingKey(mContext);
         doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
@@ -294,13 +300,10 @@ public class NetworkProviderSettingsTest {
     }
 
     private void setUpForOnCreate() {
-        final FragmentActivity activity = mock(FragmentActivity.class);
-        doReturn(activity).when(mNetworkProviderSettings).requireActivity();
-        doReturn(activity).when(mNetworkProviderSettings).getActivity();
         final Resources.Theme theme = mContext.getTheme();
-        when(activity.getTheme()).thenReturn(theme);
+        when(mFragmentActivity.getTheme()).thenReturn(theme);
         UserManager userManager = mock(UserManager.class);
-        when(activity.getSystemService(Context.USER_SERVICE))
+        when(mFragmentActivity.getSystemService(Context.USER_SERVICE))
                 .thenReturn(userManager);
 
         when(mNetworkProviderSettings.findPreference(NetworkProviderSettings.PREF_KEY_DATA_USAGE))
@@ -343,10 +346,6 @@ public class NetworkProviderSettingsTest {
 
     @Test
     public void onCreateContextMenu_shouldHaveForgetAndDisconnectMenuForConnectedWifiEntry() {
-        final FragmentActivity activity = mock(FragmentActivity.class);
-        when(activity.getApplicationContext()).thenReturn(mContext);
-        when(mNetworkProviderSettings.getActivity()).thenReturn(activity);
-
         when(mWifiEntry.canDisconnect()).thenReturn(true);
         when(mWifiEntry.canForget()).thenReturn(true);
         when(mWifiEntry.isSaved()).thenReturn(true);
@@ -365,10 +364,6 @@ public class NetworkProviderSettingsTest {
 
     @Test
     public void onCreateContextMenu_canShare_shouldHaveShareMenuForConnectedWifiEntry() {
-        final FragmentActivity activity = mock(FragmentActivity.class);
-        when(activity.getApplicationContext()).thenReturn(mContext);
-        when(mNetworkProviderSettings.getActivity()).thenReturn(activity);
-
         when(mWifiEntry.canDisconnect()).thenReturn(true);
         when(mWifiEntry.canShare()).thenReturn(true);
         when(mWifiEntry.canForget()).thenReturn(true);
@@ -387,10 +382,6 @@ public class NetworkProviderSettingsTest {
 
     @Test
     public void onCreateContextMenu_canNotShare_shouldDisappearShareMenuForConnectedWifiEntry() {
-        final FragmentActivity activity = mock(FragmentActivity.class);
-        when(activity.getApplicationContext()).thenReturn(mContext);
-        when(mNetworkProviderSettings.getActivity()).thenReturn(activity);
-
         when(mWifiEntry.canDisconnect()).thenReturn(true);
         when(mWifiEntry.canShare()).thenReturn(false);
         when(mWifiEntry.canForget()).thenReturn(true);
@@ -415,6 +406,13 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
+    public void onWifiEntriesChanged_activityIsNull_shouldNotCrash() {
+        doReturn(null).when(mNetworkProviderSettings).getActivity();
+
+        mNetworkProviderSettings.onWifiEntriesChanged(WIFI_ENTRIES_CHANGED_REASON_GENERAL);
+    }
+
+    @Test
     public void openSubscriptionHelpPage_shouldCallStartActivityForResult() {
         doReturn(new Intent()).when(mNetworkProviderSettings).getHelpIntent(mContext,
                 FAKE_URI_STRING);
@@ -428,20 +426,16 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    public void onNumSavedNetworksChanged_isFinishing_ShouldNotCrash() {
-        final FragmentActivity activity = mock(FragmentActivity.class);
-        when(activity.isFinishing()).thenReturn(true);
-        when(mNetworkProviderSettings.getActivity()).thenReturn(activity);
+    public void onNumSavedNetworksChanged_isFinishing_shouldNotCrash() {
+        when(mFragmentActivity.isFinishing()).thenReturn(true);
         when(mNetworkProviderSettings.getContext()).thenReturn(null);
 
         mNetworkProviderSettings.onNumSavedNetworksChanged();
     }
 
     @Test
-    public void onNumSavedSubscriptionsChanged_isFinishing_ShouldNotCrash() {
-        final FragmentActivity activity = mock(FragmentActivity.class);
-        when(activity.isFinishing()).thenReturn(true);
-        when(mNetworkProviderSettings.getActivity()).thenReturn(activity);
+    public void onNumSavedSubscriptionsChanged_isFinishing_shouldNotCrash() {
+        when(mFragmentActivity.isFinishing()).thenReturn(true);
         when(mNetworkProviderSettings.getContext()).thenReturn(null);
 
         mNetworkProviderSettings.onNumSavedSubscriptionsChanged();
@@ -634,7 +628,7 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    public void updateWifiEntryPreferences_activityIsNull_ShouldNotCrash() {
+    public void updateWifiEntryPreferences_activityIsNull_shouldNotCrash() {
         when(mNetworkProviderSettings.getActivity()).thenReturn(null);
 
         // should not crash
@@ -642,9 +636,7 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    public void updateWifiEntryPreferences_viewIsNull_ShouldNotCrash() {
-        final FragmentActivity activity = mock(FragmentActivity.class);
-        when(mNetworkProviderSettings.getActivity()).thenReturn(activity);
+    public void updateWifiEntryPreferences_viewIsNull_shouldNotCrash() {
         when(mNetworkProviderSettings.getView()).thenReturn(null);
 
         // should not crash

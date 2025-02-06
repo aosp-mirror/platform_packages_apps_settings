@@ -924,6 +924,9 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
 
     @Override
     public void onWifiEntriesChanged(@WifiPickerTracker.WifiEntriesChangedReason int reason) {
+        if (isFinishingOrDestroyed()) {
+            return;
+        }
         updateWifiEntryPreferences();
         if (reason == WifiPickerTracker.WIFI_ENTRIES_CHANGED_REASON_SCAN_RESULTS) {
             setProgressBarVisible(false);

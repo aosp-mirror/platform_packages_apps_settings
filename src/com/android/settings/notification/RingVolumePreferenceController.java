@@ -27,16 +27,17 @@ import android.os.Looper;
 import android.os.Message;
 import android.service.notification.NotificationListenerService;
 
-import androidx.lifecycle.OnLifecycleEvent;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.R;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 /**
  * This slider represents both ring and notification
  */
 public class RingVolumePreferenceController extends
-        RingerModeAffectedVolumePreferenceController {
+        RingerModeAffectedVolumePreferenceController implements DefaultLifecycleObserver {
 
     private static final String KEY_RING_VOLUME = "ring_volume";
     private static final String TAG = "RingVolumePreferenceController";
@@ -58,10 +59,8 @@ public class RingVolumePreferenceController extends
         updateRingerMode();
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onResume(@NonNull LifecycleOwner owner) {
         mReceiver.register(true);
         updateEffectsSuppressor();
         selectPreferenceIconState();
@@ -71,10 +70,8 @@ public class RingVolumePreferenceController extends
         }
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onPause(@NonNull LifecycleOwner owner) {
         mReceiver.register(false);
     }
 

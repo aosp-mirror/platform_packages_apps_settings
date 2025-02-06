@@ -31,6 +31,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.fragment.app.FragmentActivity;
@@ -39,7 +43,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.internal.R;
+import com.android.window.flags.Flags;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -54,8 +62,9 @@ import org.robolectric.annotation.Config;
 })
 public class DesktopModeSecondaryDisplayPreferenceControllerTest {
 
-    private static final String ENG_BUILD_TYPE = "eng";
-    private static final String USER_BUILD_TYPE = "user";
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private static final int SETTING_VALUE_INVALID = -1;
 
     @Mock
@@ -72,34 +81,36 @@ public class DesktopModeSecondaryDisplayPreferenceControllerTest {
     private FragmentTransaction mTransaction;
 
     private Context mContext;
+    private Resources mResources;
     private DesktopModeSecondaryDisplayPreferenceController mController;
 
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
+        mResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(mResources);
         doReturn(mTransaction).when(mFragmentManager).beginTransaction();
         doReturn(mFragmentManager).when(mActivity).getSupportFragmentManager();
         doReturn(mActivity).when(mFragment).getActivity();
         mController = new DesktopModeSecondaryDisplayPreferenceController(mContext, mFragment);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
+        when(mResources.getBoolean(R.bool.config_isDesktopModeSupported)).thenReturn(false);
     }
 
+    @DisableFlags(Flags.FLAG_SHOW_DESKTOP_EXPERIENCE_DEV_OPTION)
     @Test
-    public void isAvailable_engBuild_shouldBeTrue() {
-        mController = spy(mController);
-        doReturn(ENG_BUILD_TYPE).when(mController).getBuildType();
-
+    public void isAvailable_whenDesktopExperienceDevOptionIsDisabled_shouldBeTrue() {
         assertThat(mController.isAvailable()).isTrue();
     }
 
+    @EnableFlags(Flags.FLAG_SHOW_DESKTOP_EXPERIENCE_DEV_OPTION)
     @Test
-    public void isAvailable_userBuild_shouldBeTrue() {
-        mController = spy(mController);
-        doReturn(USER_BUILD_TYPE).when(mController).getBuildType();
+    public void isAvailable_whenDesktopExperienceDevOptionIsEnabled_shouldBeFalse() {
+        when(mResources.getBoolean(R.bool.config_isDesktopModeSupported)).thenReturn(true);
 
-        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
@@ -172,4 +183,5 @@ public class DesktopModeSecondaryDisplayPreferenceControllerTest {
         assertThat(mode).isEqualTo(SETTING_VALUE_OFF);
         verify(mPreference).setEnabled(false);
     }
+
 }

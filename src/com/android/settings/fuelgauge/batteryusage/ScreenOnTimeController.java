@@ -30,6 +30,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settingslib.widget.SettingsThemeHelper;
 
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -119,10 +120,11 @@ public class ScreenOnTimeController extends BasePreferenceController {
         }
 
         final SpannableString spannableText = new SpannableString(text);
+        final int enlargeFontSizeDp = SettingsThemeHelper.isExpressiveTheme(context) ? 64 : 36;
         final Matcher matcher = NUMBER_PATTERN.matcher(text);
         while (matcher.find()) {
             spannableText.setSpan(
-                    new AbsoluteSizeSpan(36, true /* dip */),
+                    new AbsoluteSizeSpan(enlargeFontSizeDp, true /* dip */),
                     matcher.start(),
                     matcher.end(),
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

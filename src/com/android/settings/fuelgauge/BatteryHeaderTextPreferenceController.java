@@ -80,13 +80,14 @@ public class BatteryHeaderTextPreferenceController extends BasePreferenceControl
         }
         if (BatteryUtils.isBatteryDefenderOn(info)
                 || FeatureFactory.getFeatureFactory()
-                .getPowerUsageFeatureProvider()
-                .isExtraDefend()) {
+                        .getPowerUsageFeatureProvider()
+                        .isExtraDefend()) {
             return mContext.getString(
                     com.android.settingslib.R.string.battery_info_status_charging_on_hold);
         }
         if (info.remainingLabel != null
-                && mBatterySettingsFeatureProvider.isChargingOptimizationMode(mContext)) {
+                && mBatterySettingsFeatureProvider.isChargingOptimizationMode(
+                        mContext, info.isLongLife)) {
             return info.remainingLabel;
         }
         if (info.batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
@@ -97,8 +98,8 @@ public class BatteryHeaderTextPreferenceController extends BasePreferenceControl
                     mBatterySettingsFeatureProvider.getWirelessChargingLabel(mContext, info);
             if (mBatteryHeaderTextPreference != null && wirelessChargingLabel != null) {
                 mBatteryHeaderTextPreference.setContentDescription(
-                        mBatterySettingsFeatureProvider
-                                .getWirelessChargingContentDescription(mContext, info));
+                        mBatterySettingsFeatureProvider.getWirelessChargingContentDescription(
+                                mContext, info));
                 return wirelessChargingLabel;
             }
         }

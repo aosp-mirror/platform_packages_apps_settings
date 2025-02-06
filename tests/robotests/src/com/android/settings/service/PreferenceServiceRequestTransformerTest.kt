@@ -33,7 +33,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.homepage.SettingsHomepageActivity
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.flags.Flags.FLAG_SETTINGS_CATALYST
-import com.android.settingslib.graph.PreferenceCoordinate
 import com.android.settingslib.graph.PreferenceGetterErrorCode
 import com.android.settingslib.graph.PreferenceGetterFlags
 import com.android.settingslib.graph.PreferenceGetterResponse
@@ -48,6 +47,7 @@ import com.android.settingslib.graph.proto.PreferenceGraphProto
 import com.android.settingslib.graph.rangeValueProto
 import com.android.settingslib.graph.textProto
 import com.android.settingslib.graph.toProto
+import com.android.settingslib.metadata.PreferenceCoordinate
 import com.android.settingslib.metadata.SensitivityLevel
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule

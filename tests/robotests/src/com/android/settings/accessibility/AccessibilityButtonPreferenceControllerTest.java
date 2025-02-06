@@ -20,6 +20,10 @@ import static android.provider.Settings.Secure.NAVIGATION_MODE;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.when;
@@ -31,12 +35,15 @@ import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Flags;
 import android.provider.Settings;
+import android.view.accessibility.AccessibilityManager;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowAccessibilityManager;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
@@ -48,11 +55,17 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /** Tests for {@link AccessibilityButtonPreferenceController}. */
+@Config(shadows = {
+        SettingsShadowResources.class,
+        com.android.settings.testutils.shadow.ShadowAccessibilityManager.class
+})
 @RunWith(RobolectricTestRunner.class)
 public class AccessibilityButtonPreferenceControllerTest {
 
@@ -68,9 +81,12 @@ public class AccessibilityButtonPreferenceControllerTest {
     private PreferenceScreen mScreen;
     private Preference mPreference;
     private AccessibilityButtonPreferenceController mController;
+    private ShadowAccessibilityManager mShadowAccessibilityManager;
 
     @Before
     public void setUp() {
+        mShadowAccessibilityManager = Shadow.extract(
+                mContext.getSystemService(AccessibilityManager.class));
         mController = new AccessibilityButtonPreferenceController(mContext, "test_key");
         mPreference = new Preference(mContext);
         mPreference.setKey("test_key");
@@ -162,5 +178,21 @@ public class AccessibilityButtonPreferenceControllerTest {
                 mResources.getString(R.string.accessibility_button_title));
         assertThat(raw.screenTitle).isEqualTo(
                 mResources.getString(R.string.accessibility_shortcuts_settings_title));
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    public void getAvailabilityStatus_settingEmpty_disabled() {
+        mShadowAccessibilityManager.setAccessibilityShortcutTargets(SOFTWARE, List.of());
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    public void getAvailabilityStatus_settingNotEmpty_available() {
+        mShadowAccessibilityManager.setAccessibilityShortcutTargets(SOFTWARE, List.of("Foo"));
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 }

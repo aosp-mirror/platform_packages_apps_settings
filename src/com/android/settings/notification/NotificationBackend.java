@@ -54,6 +54,7 @@ import android.text.format.DateUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.util.CollectionUtils;
@@ -436,7 +437,7 @@ public class NotificationBackend {
         }
     }
 
-    public List<String> getAssistantAdjustments(String pkg) {
+    public List<String> getAllowedAssistantAdjustments(String pkg) {
         try {
             return sINM.getAllowedAssistantAdjustments(pkg);
         } catch (Exception e) {
@@ -687,6 +688,37 @@ public class NotificationBackend {
         }
     }
 
+    public boolean isNotificationSummarizationSupported() {
+        try {
+            return !sINM.getUnsupportedAdjustmentTypes().contains(Adjustment.KEY_SUMMARIZATION);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+        return false;
+    }
+
+    public boolean isNotificationSummarizationEnabled(Context context) {
+        try {
+            return sINM.getAllowedAssistantAdjustments(context.getPackageName())
+                    .contains(Adjustment.KEY_SUMMARIZATION);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+        return false;
+    }
+
+    public void setNotificationSummarizationEnabled(boolean enabled) {
+        try {
+            if (enabled) {
+                sINM.allowAssistantAdjustment(Adjustment.KEY_SUMMARIZATION);
+            } else {
+                sINM.disallowAssistantAdjustment(Adjustment.KEY_SUMMARIZATION);
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
     public boolean isBundleTypeApproved(@Adjustment.Types int type) {
         try {
             int[] approved = sINM.getAllowedAdjustmentKeyTypes();
@@ -733,6 +765,23 @@ public class NotificationBackend {
         }
         try {
             sINM.setCanBePromoted(pkg, uid, allowed, /* fromUser= */ true);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
+    public @NonNull String[] getAdjustmentDeniedPackages(String key) {
+        try {
+            return sINM.getAdjustmentDeniedPackages(key);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return new String[]{};
+        }
+    }
+
+    public @NonNull void setAdjustmentSupportedForPackage(String key, String pkg, boolean enabled) {
+        try {
+            sINM.setAdjustmentSupportedForPackage(key, pkg, enabled);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
         }

@@ -16,6 +16,8 @@
 
 package com.android.settings.notification;
 
+import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+
 import static com.android.internal.notification.NotificationAccessConfirmationActivityContract.EXTRA_COMPONENT_NAME;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -41,6 +43,19 @@ import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class NotificationAccessConfirmationActivityTest {
+
+    @Test
+    public void onCreate_setsWindowFlags() {
+        ComponentName cn = new ComponentName("com.example", "com.example.SomeService");
+        installPackage(cn.getPackageName(), "Example");
+
+        NotificationAccessConfirmationActivity activity = startActivityWithIntent(cn);
+
+        assertThat(activity.getWindow().getAttributes().privateFlags
+                & SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS).isNotEqualTo(0);
+        assertThat(activity.getWindow().getAttributes().flags
+                & SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS).isEqualTo(0);
+    }
 
     @Test
     public void start_withMissingIntentFilter_finishes() {

@@ -22,11 +22,6 @@ import android.os.UserManager;
 public class DefaultCombinedPickerWork extends DefaultCombinedPicker {
     private static final String TAG = "DefaultCombinedPickerWork";
 
-    @Override
-    protected int getUser() {
-        return UserHandle.myUserId();
-    }
-
     /** Returns whether the user is handled by this fragment. */
     public static boolean isUserHandledByFragment(UserManager userManager, int userId) {
         return userManager.isManagedProfile(userId);

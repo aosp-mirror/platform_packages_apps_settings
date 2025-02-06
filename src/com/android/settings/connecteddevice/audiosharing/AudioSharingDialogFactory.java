@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice.audiosharing;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -147,13 +148,27 @@ public class AudioSharingDialogFactory {
         /**
          * Sets the custom image of the dialog custom body.
          *
-         * @param iconRes The text to be used for the title.
+         * @param iconRes The iconRes to be used for the image.
          * @return This builder.
          */
         @NonNull
         public AudioSharingDialogFactory.DialogBuilder setCustomImage(@DrawableRes int iconRes) {
             ImageView image = mCustomBody.findViewById(R.id.description_image);
             image.setImageResource(iconRes);
+            image.setVisibility(View.VISIBLE);
+            return this;
+        }
+
+        /**
+         * Sets the custom image of the dialog custom body.
+         *
+         * @param drawable The drawable to be used for the image.
+         * @return This builder.
+         */
+        @NonNull
+        public AudioSharingDialogFactory.DialogBuilder setCustomImage(Drawable drawable) {
+            ImageView image = mCustomBody.findViewById(R.id.description_image);
+            image.setImageDrawable(drawable);
             image.setVisibility(View.VISIBLE);
             return this;
         }
@@ -183,6 +198,21 @@ public class AudioSharingDialogFactory {
                 @NonNull CharSequence message) {
             TextView subTitle = mCustomBody.findViewById(R.id.description_text);
             subTitle.setText(message);
+            subTitle.setVisibility(View.VISIBLE);
+            return this;
+        }
+
+        /**
+         * Sets the custom message below image.
+         *
+         * @param messageRes Resource ID of the string to be used for the message body.
+         * @return This builder.
+         */
+        @NonNull
+        public AudioSharingDialogFactory.DialogBuilder setCustomMessage2(
+                @StringRes int messageRes) {
+            TextView subTitle = mCustomBody.findViewById(R.id.description_text_2);
+            subTitle.setText(messageRes);
             subTitle.setVisibility(View.VISIBLE);
             return this;
         }

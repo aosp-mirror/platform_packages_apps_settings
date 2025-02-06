@@ -346,11 +346,10 @@ public class AudioSharingUtils {
         return vc != null && vc.isProfileReady();
     }
 
-    /** Set {@link CachedBluetoothDevice} as primary device for call audio */
-    public static void setPrimary(
+    /** Set {@link CachedBluetoothDevice} as user preferred primary device for call audio */
+    public static void setUserPreferredPrimary(
             @NonNull Context context, @Nullable CachedBluetoothDevice cachedDevice) {
         if (cachedDevice == null) return;
-        cachedDevice.setActive();
         if (BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(context)) {
             int groupId = BluetoothUtils.getGroupId(cachedDevice);
             // TODO: use real key name in SettingsProvider

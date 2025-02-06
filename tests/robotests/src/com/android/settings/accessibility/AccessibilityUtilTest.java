@@ -21,15 +21,7 @@ import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_GESTURE
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
-import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
-import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
-import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
-import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TRIPLETAP;
-import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TWOFINGER_DOUBLETAP;
-
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.spy;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
@@ -61,7 +53,6 @@ public final class AccessibilityUtilTest {
     private static final String SECURE_TEST_KEY = "secure_test_key";
     private static final String MOCK_PACKAGE_NAME = "com.mock.example";
     private static final String MOCK_CLASS_NAME = MOCK_PACKAGE_NAME + ".mock_a11y_service";
-    private static final String MOCK_CLASS_NAME2 = MOCK_PACKAGE_NAME + ".mock_a11y_service2";
     private static final ComponentName MOCK_COMPONENT_NAME = new ComponentName(MOCK_PACKAGE_NAME,
             MOCK_CLASS_NAME);
     @Rule
@@ -71,7 +62,7 @@ public final class AccessibilityUtilTest {
 
     @Before
     public void setUp() {
-        mContext = spy(ApplicationProvider.getApplicationContext());
+        mContext = ApplicationProvider.getApplicationContext();
     }
 
     @Test
@@ -146,37 +137,6 @@ public final class AccessibilityUtilTest {
 
         assertThat(AccessibilityUtil.getAccessibilityServiceFragmentType(info)).isEqualTo(
                 AccessibilityUtil.AccessibilityServiceFragmentType.TOGGLE);
-    }
-
-    @Test
-    public void convertKeyFromSettings_shortcutTypeSoftware() {
-        assertThat(AccessibilityUtil.convertKeyFromSettings(SOFTWARE))
-                .isEqualTo(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
-    }
-
-    @Test
-    public void convertKeyFromSettings_shortcutTypeHardware() {
-        assertThat(AccessibilityUtil.convertKeyFromSettings(HARDWARE))
-                .isEqualTo(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
-    }
-
-    @Test
-    public void convertKeyFromSettings_shortcutTypeTripleTap() {
-        assertThat(AccessibilityUtil.convertKeyFromSettings(TRIPLETAP))
-                .isEqualTo(Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
-    }
-
-    @Test
-    public void convertKeyFromSettings_shortcutTypeMultiFingersMultiTap() {
-        assertThat(AccessibilityUtil.convertKeyFromSettings(TWOFINGER_DOUBLETAP))
-                .isEqualTo(
-                        Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED);
-    }
-
-    @Test
-    public void convertKeyFromSettings_shortcutTypeQuickSettings() {
-        assertThat(AccessibilityUtil.convertKeyFromSettings(QUICK_SETTINGS))
-                .isEqualTo(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
     }
 
     @Test

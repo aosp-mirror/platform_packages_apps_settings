@@ -76,7 +76,7 @@ public class PreventRingingSwitchPreferenceController extends AbstractPreference
 
     public void setChecked(boolean isChecked) {
         if (mSwitch != null) {
-            mSwitch.updateStatus(isChecked);
+            mSwitch.setChecked(isChecked);
         }
     }
 

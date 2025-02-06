@@ -37,6 +37,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.Locale;
+
 @RunWith(AndroidJUnit4.class)
 public class Enable16KbDeviceTest {
     private static final long TIMEOUT = 2000;
@@ -92,7 +94,15 @@ public class Enable16KbDeviceTest {
         // Verify that ext4 toggle is visible
         verifyTextOnScreen(EXT4_TITLE);
 
-        mDevice.wait(Until.findObject(By.text(EXT4_CONFIRMATION)), TIMEOUT).click();
+        UiObject2 confirmationObject =
+            mDevice.wait(Until.findObject(By.text(EXT4_CONFIRMATION)), TIMEOUT);
+        if (confirmationObject == null) {
+            // Workaround for (b/390535191). AOSP targets display the string in all caps.
+            confirmationObject = mDevice.wait(
+                Until.findObject(By.text(EXT4_CONFIRMATION.toUpperCase(Locale.ROOT))), TIMEOUT);
+        }
+        assertTrue(confirmationObject != null);
+        confirmationObject.click();
     }
 
     @Test

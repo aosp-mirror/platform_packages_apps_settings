@@ -36,7 +36,7 @@ public class TouchpadAndMouseSettings extends DashboardFragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        use(TouchGesturesButtonPreferenceController.class).setFragment(this /*parent*/);
+        use(TouchpadGesturesTutorialButtonPreferenceController.class).setFragment(this /*parent*/);
     }
 
     @Override

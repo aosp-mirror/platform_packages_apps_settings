@@ -29,6 +29,16 @@ import com.android.internal.R;
 /** Common code for double tap power settings shared between controllers. */
 final class DoubleTapPowerSettingsUtils {
 
+    /** Configuration value indicating double tap power button gesture is disabled. */
+    static final int DOUBLE_TAP_POWER_DISABLED_MODE = 0;
+    /** Configuration value indicating double tap power button gesture should launch camera. */
+    static final int DOUBLE_TAP_POWER_LAUNCH_CAMERA_MODE = 1;
+    /**
+     * Configuration value indicating double tap power button gesture should launch one of many
+     * target actions.
+     */
+    static final int DOUBLE_TAP_POWER_MULTI_TARGET_MODE = 2;
+
     /** Setting storing whether the double tap power button gesture is enabled. */
     private static final String DOUBLE_TAP_POWER_BUTTON_GESTURE_ENABLED =
             Settings.Secure.DOUBLE_TAP_POWER_BUTTON_GESTURE_ENABLED;
@@ -52,19 +62,23 @@ final class DoubleTapPowerSettingsUtils {
     /**
      * @return true if double tap power button gesture is available.
      */
-    public static boolean isDoubleTapPowerButtonGestureAvailable(@NonNull Context context) {
-        return context.getResources().getBoolean(R.bool.config_doubleTapPowerGestureEnabled);
+    public static boolean isMultiTargetDoubleTapPowerButtonGestureAvailable(
+            @NonNull Context context) {
+        return context.getResources()
+                .getInteger(
+                        R.integer.config_doubleTapPowerGestureMode)
+                == DOUBLE_TAP_POWER_MULTI_TARGET_MODE;
     }
 
     /**
      * Gets double tap power button gesture enable or disable flag from Settings provider.
      *
-     * @return true if double tap on the power button gesture is currently enabled.
      * @param context App context
+     * @return true if double tap on the power button gesture is currently enabled.
      */
     public static boolean isDoubleTapPowerButtonGestureEnabled(@NonNull Context context) {
         return Settings.Secure.getInt(
-                        context.getContentResolver(), DOUBLE_TAP_POWER_BUTTON_GESTURE_ENABLED, ON)
+                context.getContentResolver(), DOUBLE_TAP_POWER_BUTTON_GESTURE_ENABLED, ON)
                 == ON;
     }
 
@@ -72,7 +86,7 @@ final class DoubleTapPowerSettingsUtils {
      * Sets double tap power button gesture enable or disable flag to Settings provider.
      *
      * @param context App context
-     * @param enable enable or disable double tap power button gesture.
+     * @param enable  enable or disable double tap power button gesture.
      * @return {@code true} if the setting is updated.
      */
     public static boolean setDoubleTapPowerButtonGestureEnabled(
@@ -84,19 +98,19 @@ final class DoubleTapPowerSettingsUtils {
     }
 
     /**
-     * @return true if double tap on the power button gesture for camera launch is currently
-     *     enabled.
      * @param context App context
+     * @return true if double tap on the power button gesture for camera launch is currently
+     * enabled.
      */
     public static boolean isDoubleTapPowerButtonGestureForCameraLaunchEnabled(
             @NonNull Context context) {
         return Settings.Secure.getInt(
-                        context.getContentResolver(),
-                        DOUBLE_TAP_POWER_BUTTON_GESTURE_TARGET_ACTION,
-                        context.getResources()
-                                .getInteger(
-                                        com.android.internal.R.integer
-                                                .config_defaultDoubleTapPowerGestureAction))
+                context.getContentResolver(),
+                DOUBLE_TAP_POWER_BUTTON_GESTURE_TARGET_ACTION,
+                context.getResources()
+                        .getInteger(
+                                com.android.internal.R.integer
+                                        .config_doubleTapPowerGestureMultiTargetDefaultAction))
                 == DOUBLE_TAP_POWER_BUTTON_CAMERA_LAUNCH_VALUE;
     }
 

@@ -46,7 +46,7 @@ public class BluetoothScanningMainSwitchPreferenceController extends TogglePrefe
         super.displayPreference(screen);
         MainSwitchPreference pref = screen.findPreference(getPreferenceKey());
         pref.addOnSwitchChangeListener(this);
-        pref.updateStatus(isChecked());
+        pref.setChecked(isChecked());
     }
 
     @Override

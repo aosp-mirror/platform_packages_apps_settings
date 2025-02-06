@@ -69,6 +69,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     private View mIllustrationAccessibility;
     private Intent mResultIntent;
     private boolean mAccessibilityEnabled;
+    protected Intent mExtraInfoIntent;
 
     private final CompoundButton.OnCheckedChangeListener mSwitchDiversityListener =
             new CompoundButton.OnCheckedChangeListener() {
@@ -171,12 +172,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         mFooterBarMixin.setPrimaryButton(footerButton);
 
         final Button accessibilityButton = findViewById(R.id.accessibility_button);
-        accessibilityButton.setOnClickListener(view -> {
-            mSwitchDiversity.setChecked(true);
-            accessibilityButton.setVisibility(View.GONE);
-            mSwitchDiversity.setVisibility(View.VISIBLE);
-            mSwitchDiversity.addOnLayoutChangeListener(mSwitchDiversityOnLayoutChangeListener);
-        });
+        accessibilityButton.setOnClickListener(this::onAccessibilityButtonClicked);
 
         mSwitchDiversity = findViewById(R.id.toggle_diversity);
         mSwitchDiversity.setListener(mSwitchDiversityListener);
@@ -263,6 +259,9 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         if (mResultIntent != null) {
             intent.putExtras(mResultIntent);
         }
+        if (mExtraInfoIntent != null) {
+            intent.putExtras(mExtraInfoIntent);
+        }
 
         intent.putExtra(EXTRA_KEY_REQUIRE_DIVERSITY, !mSwitchDiversity.isChecked());
         intent.putExtra(BiometricUtils.EXTRA_ENROLL_REASON,
@@ -280,6 +279,13 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
             mNextLaunched = true;
         }
 
+    }
+
+    protected void onAccessibilityButtonClicked(View view) {
+        mSwitchDiversity.setChecked(true);
+        view.setVisibility(View.GONE);
+        mSwitchDiversity.setVisibility(View.VISIBLE);
+        mSwitchDiversity.addOnLayoutChangeListener(mSwitchDiversityOnLayoutChangeListener);
     }
 
     protected void onSkipButtonClick(View view) {

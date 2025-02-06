@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
+import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -28,7 +29,6 @@ import com.android.settings.widget.SeekBarPreference;
 /** PreferenceController for feature intensity. */
 public class ReduceBrightColorsIntensityPreferenceController extends SliderPreferenceController {
 
-    private static final int INVERSE_PERCENTAGE_BASE = 100;
     private final ColorDisplayManager mColorDisplayManager;
 
     public ReduceBrightColorsIntensityPreferenceController(Context context, String key) {
@@ -58,7 +58,6 @@ public class ReduceBrightColorsIntensityPreferenceController extends SliderPrefe
         updateState(preference);
     }
 
-
     @Override
     public final void updateState(Preference preference) {
         super.updateState(preference);
@@ -67,24 +66,28 @@ public class ReduceBrightColorsIntensityPreferenceController extends SliderPrefe
 
     @Override
     public int getSliderPosition() {
-        return INVERSE_PERCENTAGE_BASE - mColorDisplayManager.getReduceBrightColorsStrength();
+        final int settingValue = Settings.Secure.getInt(
+                mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_LEVEL,
+                /* fallback= */ 0);
+
+        return getMax() - settingValue;
     }
 
     @Override
     public boolean setSliderPosition(int position) {
-        return mColorDisplayManager.setReduceBrightColorsStrength(
-                INVERSE_PERCENTAGE_BASE - position);
+        return Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.REDUCE_BRIGHT_COLORS_LEVEL,
+                getMax() - position);
     }
 
     @Override
     public int getMax() {
-        return INVERSE_PERCENTAGE_BASE
-                - ColorDisplayManager.getMinimumReduceBrightColorsStrength(mContext);
+        return 100;
     }
 
     @Override
     public int getMin() {
-        return INVERSE_PERCENTAGE_BASE
-                - ColorDisplayManager.getMaximumReduceBrightColorsStrength(mContext);
+        return 0;
     }
 }

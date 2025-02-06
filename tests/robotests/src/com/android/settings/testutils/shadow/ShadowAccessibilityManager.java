@@ -26,6 +26,7 @@ import android.content.Context;
 import android.util.ArrayMap;
 import android.view.accessibility.AccessibilityManager;
 
+import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 
 import org.robolectric.annotation.Implementation;
@@ -96,8 +97,11 @@ public class ShadowAccessibilityManager extends org.robolectric.shadows.ShadowAc
     /**
      * Used by tests to easily write directly to a shortcut targets value
      */
-    public void setAccessibilityShortcutTargets(
-            @UserShortcutType int shortcutType, List<String> targets) {
-        mShortcutTargets.put(shortcutType, targets);
+    public void setAccessibilityShortcutTargets(int shortcutTypes, List<String> targets) {
+        for (int type : ShortcutConstants.USER_SHORTCUT_TYPES) {
+            if ((type & shortcutTypes) == type) {
+                mShortcutTargets.put(type, List.copyOf(targets));
+            }
+        }
     }
 }

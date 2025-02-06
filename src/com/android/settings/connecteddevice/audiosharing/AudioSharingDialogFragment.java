@@ -17,10 +17,13 @@
 package com.android.settings.connecteddevice.audiosharing;
 
 import static com.android.settings.connecteddevice.audiosharing.AudioSharingDashboardFragment.SHARE_THEN_PAIR_REQUEST_CODE;
+import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsQrCodeFragment.getQrCodeDrawable;
 import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast.EXTRA_PAIR_AND_JOIN_SHARING;
 
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
+import android.bluetooth.BluetoothLeBroadcastMetadata;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
@@ -42,12 +45,14 @@ import com.android.settingslib.bluetooth.BluetoothUtils;
 
 import com.google.common.collect.Iterables;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
     private static final String TAG = "AudioSharingDialog";
 
     private static final String BUNDLE_KEY_DEVICE_ITEMS = "bundle_key_device_items";
+    private static final String BUNDLE_KEY_BROADCAST_METADATA = "bundle_key_broadcast_metadata";
 
     // The host creates an instance of this dialog fragment must implement this interface to receive
     // event callbacks.
@@ -80,12 +85,14 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
      *
      * @param host        The Fragment this dialog will be hosted.
      * @param deviceItems The connected device items eligible for audio sharing.
+     * @param metadata    The audio sharing metadata, nullable.
      * @param listener    The callback to handle the user action on this dialog.
      * @param eventData   The eventData to log with for dialog onClick events.
      */
     public static void show(
             @Nullable Fragment host,
             @NonNull List<AudioSharingDeviceItem> deviceItems,
+            @Nullable BluetoothLeBroadcastMetadata metadata,
             @NonNull DialogEventListener listener,
             @NonNull Pair<Integer, Object>[] eventData) {
         if (host == null) {
@@ -116,6 +123,9 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
             Log.d(TAG, "Show up the dialog.");
             final Bundle bundle = new Bundle();
             bundle.putParcelableList(BUNDLE_KEY_DEVICE_ITEMS, deviceItems);
+            if (metadata != null) {
+                bundle.putParcelable(BUNDLE_KEY_BROADCAST_METADATA, metadata);
+            }
             AudioSharingDialogFragment dialogFrag = new AudioSharingDialogFragment();
             dialogFrag.setArguments(bundle);
             dialogFrag.show(manager, TAG);
@@ -150,8 +160,6 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
         }
         if (deviceItems.isEmpty()) {
             builder.setTitle(R.string.audio_sharing_share_dialog_title)
-                    .setCustomImage(R.drawable.audio_sharing_guidance)
-                    .setCustomMessage(R.string.audio_sharing_dialog_connect_device_content)
                     .setCustomPositiveButton(
                             R.string.audio_sharing_pair_button_label,
                             v -> {
@@ -172,17 +180,38 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
                                     launcher.setResultListener(sHost, SHARE_THEN_PAIR_REQUEST_CODE);
                                 }
                                 launcher.launch();
-                            })
-                    .setCustomNegativeButton(
-                            R.string.audio_sharing_qrcode_button_label,
-                            v -> {
-                                onCancelClick();
-                                new SubSettingLauncher(getContext())
-                                        .setTitleRes(R.string.audio_streams_qr_code_page_title)
-                                        .setDestination(AudioStreamsQrCodeFragment.class.getName())
-                                        .setSourceMetricsCategory(getMetricsCategory())
-                                        .launch();
                             });
+            BluetoothLeBroadcastMetadata metadata = arguments.getParcelable(
+                    BUNDLE_KEY_BROADCAST_METADATA, BluetoothLeBroadcastMetadata.class);
+            Drawable qrCodeDrawable = metadata == null ? null : getQrCodeDrawable(metadata,
+                    getContext()).orElse(null);
+            if (qrCodeDrawable != null) {
+                builder.setCustomImage(qrCodeDrawable)
+                        .setCustomMessage(
+                                getString(
+                                        R.string.audio_sharing_dialog_qr_code_content,
+                                        metadata.getBroadcastName(),
+                                        new String(
+                                                metadata.getBroadcastCode(),
+                                                StandardCharsets.UTF_8)))
+                        .setCustomMessage2(R.string.audio_sharing_dialog_pair_new_device_content)
+                        .setCustomNegativeButton(R.string.audio_streams_dialog_close,
+                                v -> onCancelClick());
+            } else {
+                builder.setCustomImage(R.drawable.audio_sharing_guidance)
+                        .setCustomMessage(R.string.audio_sharing_dialog_connect_device_content)
+                        .setCustomNegativeButton(
+                                R.string.audio_sharing_qrcode_button_label,
+                                v -> {
+                                    onCancelClick();
+                                    new SubSettingLauncher(getContext())
+                                            .setTitleRes(R.string.audio_streams_qr_code_page_title)
+                                            .setDestination(
+                                                    AudioStreamsQrCodeFragment.class.getName())
+                                            .setSourceMetricsCategory(getMetricsCategory())
+                                            .launch();
+                                });
+            }
         } else if (deviceItems.size() == 1) {
             AudioSharingDeviceItem deviceItem = Iterables.getOnlyElement(deviceItems);
             builder.setTitle(

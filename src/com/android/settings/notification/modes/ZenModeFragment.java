@@ -95,14 +95,6 @@ public class ZenModeFragment extends ZenModeFragmentBase {
             return;
         }
 
-        // Set title for the entire screen
-        ComponentActivity activity = getActivity();
-        if (mode != null && activity != null) {
-            activity.setTitle(mode.getName());
-            mModeMenuProvider = new ModeMenuProvider(mode);
-            activity.addMenuProvider(mModeMenuProvider);
-        }
-
         // allow duration preference controller to listen for settings changes
         use(ManualDurationPreferenceController.class).registerSettingsObserver();
         mSettingsObserverRegistered = true;
@@ -120,10 +112,27 @@ public class ZenModeFragment extends ZenModeFragmentBase {
     }
 
     @Override
-    public void onStop() {
+    public void onResume() {
+        super.onResume();
+        ZenMode mode = getMode();
+        ComponentActivity activity = getActivity();
+        if (mode != null && activity != null) {
+            activity.setTitle(mode.getName());
+            mModeMenuProvider = new ModeMenuProvider(mode);
+            activity.addMenuProvider(mModeMenuProvider);
+        }
+    }
+
+    @Override
+    public void onPause() {
         if (getActivity() != null && mModeMenuProvider != null) {
             getActivity().removeMenuProvider(mModeMenuProvider);
         }
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
         if (mSettingsObserverRegistered) {
             use(ManualDurationPreferenceController.class).unregisterSettingsObserver();
         }

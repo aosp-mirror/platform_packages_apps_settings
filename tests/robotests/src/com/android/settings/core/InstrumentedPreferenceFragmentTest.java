@@ -16,7 +16,6 @@
 
 package com.android.settings.core;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -84,7 +83,6 @@ public class InstrumentedPreferenceFragmentTest {
         mFragment.onCreatePreferences(Bundle.EMPTY, null /* rootKey */);
 
         verify(mFragment).addPreferencesFromResource(R.xml.screen_pinning_settings);
-        verify(mActivity, never()).setTitle(any());
     }
 
     @Test
@@ -97,7 +95,6 @@ public class InstrumentedPreferenceFragmentTest {
         mFragment.onCreatePreferences(Bundle.EMPTY, null /* rootKey */);
 
         verify(mFragment).addPreferencesFromResource(R.xml.screen_pinning_settings);
-        verify(mActivity).setTitle(title);
     }
 
     public static class InstrumentedPreferenceFragmentTestable

@@ -44,11 +44,16 @@ public class ZenAccessDetails extends AppInfoWithHeader implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.zen_access_permission_details);
+        getSettingsLifecycle().addObserver(
+                new ZenAccessSettingObserverMixin(getContext(), this /* listener */));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         requireActivity().setTitle(Flags.modesApi() && Flags.modesUi()
                 ? R.string.manage_zen_modes_access_title
                 : R.string.manage_zen_access_title);
-        getSettingsLifecycle().addObserver(
-                new ZenAccessSettingObserverMixin(getContext(), this /* listener */));
     }
 
     @Override

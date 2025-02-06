@@ -16,7 +16,8 @@
 
 package com.android.settings.service
 
-import android.app.Application
+import android.Manifest.permission.WRITE_SYSTEM_PREFERENCES
+import android.app.AppOpsManager.OP_WRITE_SYSTEM_PREFERENCES
 import android.os.Binder
 import android.os.OutcomeReceiver
 import android.service.settings.preferences.GetValueRequest
@@ -26,12 +27,14 @@ import android.service.settings.preferences.MetadataResult
 import android.service.settings.preferences.SetValueRequest
 import android.service.settings.preferences.SetValueResult
 import android.service.settings.preferences.SettingsPreferenceService
+import com.android.settings.metrics.SettingsRemoteOpMetricsLogger
 import com.android.settingslib.graph.GetPreferenceGraphApiHandler
 import com.android.settingslib.graph.GetPreferenceGraphRequest
 import com.android.settingslib.graph.PreferenceGetterApiHandler
 import com.android.settingslib.graph.PreferenceGetterFlags
 import com.android.settingslib.graph.PreferenceSetterApiHandler
 import com.android.settingslib.ipc.ApiPermissionChecker
+import com.android.settingslib.ipc.AppOpApiPermissionChecker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -41,9 +44,24 @@ class PreferenceService : SettingsPreferenceService() {
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
-    private val getApiHandler = PreferenceGetterApiHandler(1, ApiPermissionChecker.alwaysAllow())
-    private val setApiHandler = PreferenceSetterApiHandler(2, ApiPermissionChecker.alwaysAllow())
-    private val graphApi = GraphProvider(3)
+    private val getApiHandler: PreferenceGetterApiHandler
+    private val setApiHandler: PreferenceSetterApiHandler
+    private val graphApi: GetPreferenceGraphApiHandler
+
+    init {
+        val metricsLogger = SettingsRemoteOpMetricsLogger()
+        // PreferenceService specifies READ_SYSTEM_PREFERENCES permission in AndroidManifest.xml
+        getApiHandler =
+            PreferenceGetterApiHandler(1, ApiPermissionChecker.alwaysAllow(), metricsLogger)
+        setApiHandler =
+            PreferenceSetterApiHandler(
+                2,
+                AppOpApiPermissionChecker(OP_WRITE_SYSTEM_PREFERENCES, WRITE_SYSTEM_PREFERENCES),
+                metricsLogger,
+            )
+        graphApi =
+            GetPreferenceGraphApiHandler(3, ApiPermissionChecker.alwaysAllow(), metricsLogger)
+    }
 
     override fun onGetAllPreferenceMetadata(
         request: MetadataRequest,
@@ -58,10 +76,7 @@ class PreferenceService : SettingsPreferenceService() {
                     application,
                     callingPid,
                     callingUid,
-                    GetPreferenceGraphRequest(
-                        includeValue = false,
-                        flags = PreferenceGetterFlags.METADATA,
-                    ),
+                    GetPreferenceGraphRequest(flags = PreferenceGetterFlags.METADATA),
                 )
             val result = transformCatalystGetMetadataResponse(this@PreferenceService, graphProto)
             callback.onResult(result)
@@ -107,15 +122,5 @@ class PreferenceService : SettingsPreferenceService() {
                 callback.onResult(transformCatalystSetValueResponse(response))
             }
         }
-    }
-
-    // Basic implementation - we already have permission to access Graph for Metadata via superclass
-    private class GraphProvider(override val id: Int) : GetPreferenceGraphApiHandler(emptySet()) {
-        override fun hasPermission(
-            application: Application,
-            callingPid: Int,
-            callingUid: Int,
-            request: GetPreferenceGraphRequest,
-        ) = true
     }
 }

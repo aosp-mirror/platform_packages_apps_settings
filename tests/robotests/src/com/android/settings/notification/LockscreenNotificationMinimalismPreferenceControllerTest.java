@@ -17,6 +17,10 @@
 package com.android.settings.notification;
 
 import static android.provider.Settings.Secure.LOCK_SCREEN_NOTIFICATION_MINIMALISM;
+import static android.provider.Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS;
+
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -34,6 +38,8 @@ import android.provider.Settings;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.server.notification.Flags;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -44,9 +50,15 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+/**
+ * Disable FLAG_NOTIFICATION_LOCK_SCREEN_SETTINGS because this toggle will be replaced by the new
+ * settings page.
+ */
 @RunWith(RobolectricTestRunner.class)
+@DisableFlags(Flags.FLAG_NOTIFICATION_LOCK_SCREEN_SETTINGS)
 public class LockscreenNotificationMinimalismPreferenceControllerTest {
-
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -56,8 +68,6 @@ public class LockscreenNotificationMinimalismPreferenceControllerTest {
     private Preference mPreference;
     static final int ON = 1;
     static final int OFF = 0;
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setUp() {
@@ -72,17 +82,33 @@ public class LockscreenNotificationMinimalismPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(com.android.server.notification.Flags.FLAG_NOTIFICATION_MINIMALISM)
+    @DisableFlags(Flags.FLAG_NOTIFICATION_MINIMALISM)
     public void display_featureFlagOff_shouldNotDisplay() {
+        // Given: lockscreen show notifications, FLAG_NOTIFICATION_MINIMALISM is disabled
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                LOCK_SCREEN_SHOW_NOTIFICATIONS, ON);
+
+        // When: displayPreference
         mController.displayPreference(mScreen);
+
+        // Then: The controller is CONDITIONALLY_UNAVAILABLE, preference is not visible
         assertThat(mPreference.isVisible()).isFalse();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
     @EnableFlags(com.android.server.notification.Flags.FLAG_NOTIFICATION_MINIMALISM)
     public void display_featureFlagOn_shouldDisplay() {
+        // Given: lockscreen show notifications, FLAG_NOTIFICATION_MINIMALISM is enabled
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                LOCK_SCREEN_SHOW_NOTIFICATIONS, ON);
+
+        // When: displayPreference
         mController.displayPreference(mScreen);
+
+        // Then: The controller is AVAILABLE, preference is visible
         assertThat(mPreference.isVisible()).isTrue();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test

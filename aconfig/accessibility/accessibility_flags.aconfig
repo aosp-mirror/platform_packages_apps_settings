@@ -1,5 +1,5 @@
 package: "com.android.settings.accessibility"
-container: "system"
+container: "system_ext"
 
 # NOTE: Keep alphabetized to help limit merge conflicts from multiple simultaneous editors.
 
@@ -56,6 +56,20 @@ flag {
   namespace: "accessibility"
   description: "Allows users to control hearing aid volume offset in the Bluetooth device details page."
   bug: "301198830"
+}
+
+flag {
+  name: "enable_magnification_cursor_following_dialog"
+  namespace: "accessibility"
+  description: "Decides whether to show the magnification cursor following dialog in Settings app."
+  bug: "388335935"
+}
+
+flag {
+  name: "enable_magnification_focus_following_dialog"
+  namespace: "accessibility"
+  description: "Decides whether to show the magnification focus following dialog in Settings app."
+  bug: "388336111"
 }
 
 flag {

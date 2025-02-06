@@ -236,11 +236,13 @@ public class LocationTimeZoneDetectionPreferenceControllerTest {
                 .setUseLocationEnabled(useLocationEnabled)
                 .setConfigureGeoDetectionEnabledCapability(configureGeoDetectionEnabledCapability)
                 .setSetManualTimeZoneCapability(CAPABILITY_NOT_APPLICABLE)
+                .setConfigureNotificationsEnabledCapability(CAPABILITY_POSSESSED)
                 .build();
 
         TimeZoneConfiguration configuration = new TimeZoneConfiguration.Builder()
                 .setAutoDetectionEnabled(setAutoDetectionEnabled)
                 .setGeoDetectionEnabled(true)
+                .setNotificationsEnabled(true)
                 .build();
 
         return new TimeZoneCapabilitiesAndConfig(status, capabilities, configuration);

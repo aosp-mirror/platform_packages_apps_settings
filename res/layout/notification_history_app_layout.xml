@@ -25,6 +25,8 @@
         android:id="@+id/app_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
+        android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd"
         android:paddingTop="20dp"
         android:paddingBottom="18dp"
         android:paddingStart="16dp"
@@ -84,15 +86,12 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/notification_list_wrapper"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
+        android:layout_marginEnd="?android:attr/listPreferredItemPaddingEnd">
 
         <com.android.settings.notification.history.NotificationHistoryRecyclerView
             android:id="@+id/notification_list"

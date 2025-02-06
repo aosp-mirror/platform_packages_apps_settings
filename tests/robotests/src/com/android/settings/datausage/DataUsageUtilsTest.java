@@ -29,7 +29,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.telephony.TelephonyManager;
-import android.util.DataUnit;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -72,14 +71,6 @@ public final class DataUsageUtilsTest {
         when(mTelephonyManager.isDataCapable()).thenReturn(false);
         final boolean hasMobileData = DataUsageUtils.hasMobileData(mContext);
         assertThat(hasMobileData).isFalse();
-    }
-
-    @Test
-    public void formatDataUsage_useIECUnit() {
-        final CharSequence formattedDataUsage = DataUsageUtils.formatDataUsage(
-                mContext, DataUnit.GIBIBYTES.toBytes(1));
-
-        assertThat(formattedDataUsage).isEqualTo("1.00 GB");
     }
 
     @Test

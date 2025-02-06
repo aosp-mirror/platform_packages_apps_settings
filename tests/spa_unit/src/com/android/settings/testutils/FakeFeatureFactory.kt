@@ -21,6 +21,7 @@ import com.android.settings.accessibility.AccessibilityMetricsFeatureProvider
 import com.android.settings.accessibility.AccessibilitySearchFeatureProvider
 import com.android.settings.accounts.AccountFeatureProvider
 import com.android.settings.applications.ApplicationFeatureProvider
+import com.android.settings.biometrics.BiometricsFeatureProvider
 import com.android.settings.biometrics.face.FaceFeatureProvider
 import com.android.settings.biometrics.fingerprint.FingerprintFeatureProvider
 import com.android.settings.bluetooth.BluetoothFeatureProvider
@@ -113,6 +114,8 @@ class FakeFeatureFactory : FeatureFactory() {
     }
 
     override val bluetoothFeatureProvider: BluetoothFeatureProvider
+        get() = TODO("Not yet implemented")
+    override val biometricsFeatureProvider: BiometricsFeatureProvider
         get() = TODO("Not yet implemented")
     override val faceFeatureProvider: FaceFeatureProvider
         get() = TODO("Not yet implemented")

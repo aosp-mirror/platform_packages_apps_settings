@@ -45,6 +45,9 @@ import java.util.concurrent.Executors;
 public class AudioSharingPreferenceController extends BasePreferenceController
         implements DefaultLifecycleObserver, BluetoothCallback {
     private static final String TAG = "AudioSharingPreferenceController";
+    private static final String CONNECTED_DEVICES_PREF_KEY =
+            "connected_device_audio_sharing_settings";
+    private static final String CONNECTION_PREFERENCES_PREF_KEY = "audio_sharing_settings";
 
     @Nullable private final LocalBluetoothManager mBtManager;
     @Nullable private final BluetoothEventManager mEventManager;
@@ -57,7 +60,7 @@ public class AudioSharingPreferenceController extends BasePreferenceController
             new BluetoothLeBroadcast.Callback() {
                 @Override
                 public void onBroadcastStarted(int reason, int broadcastId) {
-                    refreshSummary();
+                    refreshPreference();
                 }
 
                 @Override
@@ -69,7 +72,7 @@ public class AudioSharingPreferenceController extends BasePreferenceController
 
                 @Override
                 public void onBroadcastStopped(int reason, int broadcastId) {
-                    refreshSummary();
+                    refreshPreference();
                 }
 
                 @Override
@@ -111,6 +114,7 @@ public class AudioSharingPreferenceController extends BasePreferenceController
         }
         mEventManager.registerCallback(this);
         mBroadcast.registerServiceCallBack(mExecutor, mBroadcastCallback);
+        updateVisibility();
     }
 
     @Override
@@ -131,6 +135,13 @@ public class AudioSharingPreferenceController extends BasePreferenceController
     public void displayPreference(@NonNull PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
+        // super.displayPreference set the visibility based on isAvailable()
+        // immediately set the preference invisible on Connected devices page to avoid the audio
+        // sharing entrance being shown before updateVisibility(need binder call) take effects.
+        if (mPreference != null && CONNECTED_DEVICES_PREF_KEY.equals(getPreferenceKey())) {
+            mPreference.setVisible(false);
+        }
+        updateVisibility();
     }
 
     @Override
@@ -141,14 +152,51 @@ public class AudioSharingPreferenceController extends BasePreferenceController
 
     @Override
     public CharSequence getSummary() {
-        return BluetoothUtils.isBroadcasting(mBtManager)
-                ? mContext.getString(R.string.audio_sharing_summary_on)
-                : mContext.getString(R.string.audio_sharing_summary_off);
+        return switch (getPreferenceKey()) {
+            case CONNECTION_PREFERENCES_PREF_KEY -> BluetoothUtils.isBroadcasting(mBtManager)
+                    ? mContext.getString(R.string.audio_sharing_summary_on)
+                    : mContext.getString(R.string.audio_sharing_summary_off);
+            default -> "";
+        };
     }
 
     @Override
     public void onBluetoothStateChanged(@AdapterState int bluetoothState) {
-        refreshSummary();
+        refreshPreference();
+    }
+
+    private void refreshPreference() {
+        switch (getPreferenceKey()) {
+            // Audio sharing entrance on Connected devices page has no summary, but its visibility
+            // will change based on audio sharing state
+            case CONNECTED_DEVICES_PREF_KEY -> updateVisibility();
+            // Audio sharing entrance on Connection preferences page always show up, but its summary
+            // will change based on audio sharing state
+            case CONNECTION_PREFERENCES_PREF_KEY -> refreshSummary();
+        }
+    }
+
+    private void updateVisibility() {
+        if (mPreference == null) {
+            return;
+        }
+        switch (getPreferenceKey()) {
+            case CONNECTED_DEVICES_PREF_KEY -> {
+                var unused =
+                        ThreadUtils.postOnBackgroundThread(
+                                () -> {
+                                    boolean visible = BluetoothUtils.isBroadcasting(mBtManager);
+                                    AudioSharingUtils.postOnMainThread(
+                                            mContext,
+                                            () -> {
+                                                // Check nullability to pass NullAway check
+                                                if (mPreference != null) {
+                                                    mPreference.setVisible(visible);
+                                                }
+                                            });
+                                });
+            }
+        }
     }
 
     private void refreshSummary() {

@@ -19,22 +19,17 @@ package com.android.settings.notification;
 import android.content.Context;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.notification.VolumeSeekBarPreference.Callback;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 /**
  * Base class for preference controller that handles VolumeSeekBarPreference
  */
 public abstract class VolumeSeekBarPreferenceController extends
-        AdjustVolumeRestrictedPreferenceController implements LifecycleObserver {
+        AdjustVolumeRestrictedPreferenceController {
 
     protected VolumeSeekBarPreference mPreference;
-    protected VolumeSeekBarPreference.Callback mVolumePreferenceCallback;
     protected AudioHelper mHelper;
     protected VolumeSeekBarPreference.Listener mVolumePreferenceListener;
 
@@ -48,10 +43,6 @@ public abstract class VolumeSeekBarPreferenceController extends
         mHelper = helper;
     }
 
-    public void setCallback(Callback callback) {
-        mVolumePreferenceCallback = callback;
-    }
-
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
@@ -62,24 +53,9 @@ public abstract class VolumeSeekBarPreferenceController extends
 
     protected void setupVolPreference(PreferenceScreen screen) {
         mPreference = screen.findPreference(getPreferenceKey());
-        mPreference.setCallback(mVolumePreferenceCallback);
         mPreference.setListener(mVolumePreferenceListener);
         mPreference.setStream(getAudioStream());
         mPreference.setMuteIcon(getMuteIcon());
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    public void onResume() {
-        if (mPreference != null) {
-            mPreference.onActivityResume();
-        }
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    public void onPause() {
-        if (mPreference != null) {
-            mPreference.onActivityPause();
-        }
     }
 
     @Override

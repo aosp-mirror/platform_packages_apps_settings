@@ -23,6 +23,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.supervision.SupervisionManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -31,6 +32,9 @@ import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -40,6 +44,7 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.utils.StringUtil;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -51,11 +56,13 @@ import java.util.List;
 @RunWith(AndroidJUnit4.class)
 public class FingerprintStatusUtilsTest {
 
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private static final ComponentName COMPONENT_NAME =
             new ComponentName("package", "class");
     private static final int USER_ID = UserHandle.myUserId();
     private static final UserHandle USER_HANDLE = new UserHandle(USER_ID);
-
 
     @Mock
     private PackageManager mPackageManager;
@@ -65,6 +72,8 @@ public class FingerprintStatusUtilsTest {
     private FingerprintManager mFingerprintManager;
     @Mock
     private FaceManager mFaceManager;
+    @Mock
+    private SupervisionManager mSupervisionManager;
 
     private Context mApplicationContext;
     private FingerprintStatusUtils mFingerprintStatusUtils;
@@ -76,13 +85,13 @@ public class FingerprintStatusUtilsTest {
         when(mApplicationContext.getPackageManager()).thenReturn(mPackageManager);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)).thenReturn(true);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(true);
-        when(mDevicePolicyManager.getProfileOwnerOrDeviceOwnerSupervisionComponent(USER_HANDLE))
-                .thenReturn(COMPONENT_NAME);
         when(mApplicationContext.getSystemService(Context.FINGERPRINT_SERVICE))
                 .thenReturn(mFingerprintManager);
         when(mApplicationContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
         when(mApplicationContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mFaceManager);
+        when(mApplicationContext.getSystemService(Context.SUPERVISION_SERVICE))
+                .thenReturn(mSupervisionManager);
         mFingerprintStatusUtils =
                 new FingerprintStatusUtils(mApplicationContext, mFingerprintManager, USER_ID);
     }
@@ -134,7 +143,10 @@ public class FingerprintStatusUtilsTest {
     }
 
     @Test
+    @DisableFlags(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
     public void getDisabledAdmin_whenFingerprintDisabled_returnsEnforcedAdmin() {
+        when(mDevicePolicyManager.getProfileOwnerOrDeviceOwnerSupervisionComponent(USER_HANDLE))
+                .thenReturn(COMPONENT_NAME);
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME))
                 .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT);
 
@@ -143,6 +155,20 @@ public class FingerprintStatusUtilsTest {
 
         assertThat(admin).isEqualTo(new RestrictedLockUtils.EnforcedAdmin(
                 COMPONENT_NAME, UserManager.DISALLOW_BIOMETRIC, USER_HANDLE));
+    }
+
+    @Test
+    @EnableFlags(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
+    public void getDisabledAdmin_whenFingerprintDisabled_returnsRestriction() {
+        when(mSupervisionManager.isSupervisionEnabledForUser(USER_ID)).thenReturn(true);
+        when(mDevicePolicyManager.getKeyguardDisabledFeatures(null))
+                .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT);
+
+        final RestrictedLockUtils.EnforcedAdmin admin =
+                mFingerprintStatusUtils.getDisablingAdmin();
+
+        assertThat(admin.enforcedRestriction).isEqualTo(UserManager.DISALLOW_BIOMETRIC);
+        assertThat(admin.user).isEqualTo(USER_HANDLE);
     }
 
     @Test

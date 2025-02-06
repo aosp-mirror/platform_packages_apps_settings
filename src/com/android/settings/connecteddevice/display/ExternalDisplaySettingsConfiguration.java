@@ -323,19 +323,15 @@ public class ExternalDisplaySettingsConfiguration {
                 || flags.displayTopologyPaneInDisplayList();
     }
 
-    /**
-     * If true, indicates the display list activity should be shown even if there is only one
-     * display.
-     */
-    public static boolean forceShowDisplayList(@NonNull FeatureFlags flags) {
-        return flags.displayTopologyPaneInDisplayList();
-    }
-
     static boolean isDisplayAllowed(@NonNull Display display,
             @NonNull SystemServicesProvider props) {
         return display.getType() == Display.TYPE_EXTERNAL
                 || display.getType() == Display.TYPE_OVERLAY
                 || isVirtualDisplayAllowed(display, props);
+    }
+
+    static boolean isTopologyPaneEnabled(@Nullable Injector injector) {
+        return injector != null && injector.getFlags().displayTopologyPaneInDisplayList();
     }
 
     static boolean isVirtualDisplayAllowed(@NonNull Display display,
@@ -346,7 +342,8 @@ public class ExternalDisplaySettingsConfiguration {
     }
 
     static boolean isUseDisplaySettingEnabled(@Nullable Injector injector) {
-        return injector != null && injector.getFlags().resolutionAndEnableConnectedDisplaySetting();
+        return injector != null && injector.getFlags().resolutionAndEnableConnectedDisplaySetting()
+                && !injector.getFlags().displayTopologyPaneInDisplayList();
     }
 
     static boolean isResolutionSettingEnabled(@Nullable Injector injector) {
@@ -355,5 +352,9 @@ public class ExternalDisplaySettingsConfiguration {
 
     static boolean isRotationSettingEnabled(@Nullable Injector injector) {
         return injector != null && injector.getFlags().rotationConnectedDisplaySetting();
+    }
+
+    static boolean isDisplaySizeSettingEnabled(@Nullable Injector injector) {
+        return injector != null && injector.getFlags().displaySizeConnectedDisplaySetting();
     }
 }

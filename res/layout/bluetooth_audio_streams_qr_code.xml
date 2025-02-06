@@ -38,11 +38,11 @@
 
         <ImageView
             android:id="@+id/qrcode_view"
-            android:layout_width="@dimen/qrcode_size"
-            android:layout_height="@dimen/qrcode_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:contentDescription="@string/qr_code_content_description"
             android:focusable="true"
-            android:paddingTop="70dp"/>
+            android:layout_marginTop="70dp"/>
 
         <TextView
             android:id="@+id/password"

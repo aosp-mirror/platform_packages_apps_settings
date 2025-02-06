@@ -22,7 +22,6 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.PowerManager;
@@ -72,18 +71,14 @@ public class BatterySaverButtonPreferenceControllerTest {
 
     @Test
     public void updateState_lowPowerOn_preferenceIsChecked() {
-        when(mPowerManager.isPowerSaveMode()).thenReturn(true);
-
-        mPreference.updateStatus(mPowerManager.isPowerSaveMode());
+        mPreference.setChecked(true);
 
         assertThat(mPreference.isChecked()).isTrue();
     }
 
     @Test
     public void testUpdateState_lowPowerOff_preferenceIsUnchecked() {
-        when(mPowerManager.isPowerSaveMode()).thenReturn(false);
-
-        mPreference.updateStatus(mPowerManager.isPowerSaveMode());
+        mPreference.setChecked(false);
 
         assertThat(mPreference.isChecked()).isFalse();
     }

@@ -518,6 +518,11 @@ public class Settings extends SettingsActivity {
      */
     public static class OneHandedSettingsActivity extends SettingsActivity { /* empty */ }
 
+    /**
+     * Activity for Double Tap Power Settings
+     */
+    public static class DoubleTapPowerSettingsActivity extends SettingsActivity { /* empty */ }
+
     public static class PreviouslyConnectedDeviceActivity extends SettingsActivity { /* empty */ }
 
     public static class ScreenTimeoutActivity extends SettingsActivity { /* empty */ }
@@ -528,4 +533,5 @@ public class Settings extends SettingsActivity {
     public static class HearingDevicesActivity extends SettingsActivity { /* empty */ }
     public static class HearingDevicesPairingActivity extends SettingsActivity { /* empty */ }
     public static class ContactsStorageSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class ContentProtectionSettingsActivity extends SettingsActivity { /* empty */ }
 }

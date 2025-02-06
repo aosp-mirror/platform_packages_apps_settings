@@ -113,13 +113,7 @@ public abstract class ShortcutOptionPreferenceController extends BasePreferenceC
 
     /**
      * Enable or disable the shortcut for the given accessibility features.
-     *
-     * @deprecated use
-     * {@link AccessibilityManager#enableShortcutsForTargets(boolean, int, Set, int)} instead.
-     *
-     * (TODO 367414968: finish removal.)
      */
-    @Deprecated
     protected void enableShortcutForTargets(boolean enable) {
         Set<String> shortcutTargets = getShortcutTargets();
         @ShortcutConstants.UserShortcutType int shortcutType = getShortcutType();

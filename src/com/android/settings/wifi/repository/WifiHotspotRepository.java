@@ -475,7 +475,7 @@ public class WifiHotspotRepository {
         try {
             List<WifiAvailableChannel> channels =
                     mWifiManager.getAllowedChannels(sapBand.band, OP_MODE_SAP);
-            log("isChannelAvailable(), band:" + sapBand.band + ", channels:" + channels);
+            log("isChannelAvailable(), band:" + sapBand.band + ", allowedChannels:" + channels);
             sapBand.hasChannels = (channels != null && channels.size() > 0);
             sapBand.isChannelsUnsupported = false;
         } catch (IllegalArgumentException e) {

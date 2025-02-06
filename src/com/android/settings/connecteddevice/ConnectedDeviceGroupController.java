@@ -44,7 +44,6 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.flags.FeatureFlags;
 import com.android.settings.flags.FeatureFlagsImpl;
-import com.android.settings.flags.Flags;
 import com.android.settings.overlay.DockUpdaterFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
@@ -280,9 +279,6 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
 
     @Override
     public void updateDynamicRawDataToIndex(List<SearchIndexableRaw> rawData) {
-        if (!Flags.enableBondedBluetoothDeviceSearchable()) {
-            return;
-        }
         if (mLocalBluetoothManager == null) {
             Log.d(TAG, "Bluetooth is not supported");
             return;

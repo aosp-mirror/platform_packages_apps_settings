@@ -60,12 +60,17 @@ public class ItemInfoArrayAdapter<T extends ItemInfoArrayAdapter.ItemInfo> exten
             summary.setVisibility(View.GONE);
         }
         final ImageView image = root.findViewById(R.id.image);
-        image.setImageResource(item.mDrawableId);
-        if (getContext().getResources().getConfiguration().getLayoutDirection()
-                == View.LAYOUT_DIRECTION_LTR) {
-            image.setScaleType(ImageView.ScaleType.FIT_START);
+        if (item.mDrawableId == null) {
+            image.setVisibility(View.GONE);
         } else {
-            image.setScaleType(ImageView.ScaleType.FIT_END);
+            image.setVisibility(View.VISIBLE);
+            image.setImageResource(item.mDrawableId);
+            if (getContext().getResources().getConfiguration().getLayoutDirection()
+                    == View.LAYOUT_DIRECTION_LTR) {
+                image.setScaleType(ImageView.ScaleType.FIT_START);
+            } else {
+                image.setScaleType(ImageView.ScaleType.FIT_END);
+            }
         }
         return root;
     }
@@ -78,11 +83,12 @@ public class ItemInfoArrayAdapter<T extends ItemInfoArrayAdapter.ItemInfo> exten
         public final CharSequence mTitle;
         @Nullable
         public final CharSequence mSummary;
+        @Nullable
         @DrawableRes
-        public final int mDrawableId;
+        public final Integer mDrawableId;
 
         public ItemInfo(@NonNull CharSequence title, @Nullable CharSequence summary,
-                @DrawableRes int drawableId) {
+                @Nullable @DrawableRes Integer drawableId) {
             mTitle = title;
             mSummary = summary;
             mDrawableId = drawableId;

@@ -41,7 +41,6 @@ import android.os.UserManager;
 import android.service.notification.NotificationListenerService;
 import android.text.TextUtils;
 import android.util.Slog;
-import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.Toast;
 
@@ -124,7 +123,7 @@ public class NotificationAccessConfirmationActivity extends Activity
                 NLSIntent, /* flags */ 0, mUserId);
         boolean hasNLSIntentFilter = false;
         for (ResolveInfo service : matchedServiceList) {
-            if (service.serviceInfo.packageName.equals(mComponentName.getPackageName())) {
+            if (service.serviceInfo.getComponentName().equals(mComponentName)) {
                 if (!requiredPermission.equals(service.serviceInfo.permission)) {
                     Slog.e(LOG_TAG, "Service " + mComponentName + " lacks permission "
                             + requiredPermission);
@@ -158,21 +157,7 @@ public class NotificationAccessConfirmationActivity extends Activity
                 .installContent(p);
         // Consistent with the permission dialog
         // Used instead of p.mCancelable as that is only honored for AlertDialog
-        getWindow().setCloseOnTouchOutside(false); 
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getWindow().addFlags(
-                WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
-    }
-
-    @Override
-    public void onPause() {
-        getWindow().clearFlags(
-                WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
-        super.onPause();
+        getWindow().setCloseOnTouchOutside(false);
     }
 
     private void onAllow() {

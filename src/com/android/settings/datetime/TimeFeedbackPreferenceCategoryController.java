@@ -62,6 +62,6 @@ public class TimeFeedbackPreferenceCategoryController extends BasePreferenceCont
     }
 
     protected boolean isTimeFeedbackFeatureEnabled() {
-        return TimeFeedbackLaunchUtils.isFeedbackFeatureSupported();
+        return DateTimeLaunchUtils.isFeedbackFeatureSupported();
     }
 }

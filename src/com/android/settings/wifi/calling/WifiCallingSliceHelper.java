@@ -64,11 +64,6 @@ public class WifiCallingSliceHelper {
     private static final String TAG = "WifiCallingSliceHelper";
 
     /**
-     * Settings slice path to wifi calling setting.
-     */
-    public static final String PATH_WIFI_CALLING = "wifi_calling";
-
-    /**
      * Settings slice path to wifi calling preference setting.
      */
     public static final String PATH_WIFI_CALLING_PREFERENCE =

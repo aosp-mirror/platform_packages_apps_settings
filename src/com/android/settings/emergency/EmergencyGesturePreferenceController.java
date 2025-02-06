@@ -63,7 +63,7 @@ public class EmergencyGesturePreferenceController extends BasePreferenceControll
         mSwitchBar = (MainSwitchPreference) pref;
         mSwitchBar.setTitle(mContext.getString(R.string.emergency_gesture_switchbar_title));
         mSwitchBar.addOnSwitchChangeListener(this);
-        mSwitchBar.updateStatus(isChecked());
+        mSwitchBar.setChecked(isChecked());
     }
 
     @VisibleForTesting

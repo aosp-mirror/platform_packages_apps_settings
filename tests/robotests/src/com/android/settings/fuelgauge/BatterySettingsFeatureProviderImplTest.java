@@ -89,7 +89,7 @@ public class BatterySettingsFeatureProviderImplTest {
 
     @Test
     public void isChargingOptimizationMode_default_returnFalse() {
-        assertThat(mImpl.isChargingOptimizationMode(mContext)).isFalse();
+        assertThat(mImpl.isChargingOptimizationMode(mContext, true)).isFalse();
     }
 
     @Test

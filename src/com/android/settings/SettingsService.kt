@@ -16,44 +16,19 @@
 
 package com.android.settings
 
-import android.app.Application
-import android.content.Intent
-import com.android.settings.flags.Flags
-import com.android.settingslib.graph.PreferenceGetterRequest
-import com.android.settingslib.graph.PreferenceSetterRequest
+import android.Manifest.permission.WRITE_SYSTEM_PREFERENCES
+import android.app.AppOpsManager.OP_WRITE_SYSTEM_PREFERENCES
+import com.android.settings.metrics.SettingsRemoteOpMetricsLogger
 import com.android.settingslib.ipc.ApiPermissionChecker
+import com.android.settingslib.ipc.AppOpApiPermissionChecker
 import com.android.settingslib.service.PreferenceService
 
 /** Service to expose settings APIs. */
 class SettingsService :
     PreferenceService(
         graphPermissionChecker = ApiPermissionChecker.alwaysAllow(),
-        setterPermissionChecker = SetterPermissionChecker(),
-        getterPermissionChecker = GetterPermissionChecker(),
-    ) {
-
-    override fun onBind(intent: Intent) =
-        if (Flags.catalystService()) super.onBind(intent) else null
-}
-
-/** Permission checker for external setter API. */
-private class SetterPermissionChecker : ApiPermissionChecker<PreferenceSetterRequest> {
-
-    override fun hasPermission(
-        application: Application,
-        callingPid: Int,
-        callingUid: Int,
-        request: PreferenceSetterRequest,
-    ) = true
-}
-
-/** Permission checker for external getter API. */
-private class GetterPermissionChecker : ApiPermissionChecker<PreferenceGetterRequest> {
-
-    override fun hasPermission(
-        application: Application,
-        callingPid: Int,
-        callingUid: Int,
-        request: PreferenceGetterRequest,
-    ) = true
-}
+        setterPermissionChecker =
+            AppOpApiPermissionChecker(OP_WRITE_SYSTEM_PREFERENCES, WRITE_SYSTEM_PREFERENCES),
+        getterPermissionChecker = ApiPermissionChecker.alwaysAllow(),
+        metricsLogger = SettingsRemoteOpMetricsLogger(),
+    )

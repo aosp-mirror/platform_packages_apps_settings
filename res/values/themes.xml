@@ -190,9 +190,6 @@
 
         <!-- Define this color for material design -->
         <item name="colorPrimaryVariant">@android:color/white</item>
-        <!-- Workaround for E2E modification. -->
-        <!-- TODO (b/328622648) waiting for new method instead of this attribute. -->
-        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
     </style>
 
     <style name="Theme.Settings.Home" parent="Theme.Settings.HomeBase">
@@ -202,7 +199,7 @@
         <!-- Homepage should follow device default design, the values is same as device default theme.-->
         <item name="android:navigationBarColor">@android:color/white</item>
         <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
-        <item name="android:colorBackground">@android:color/system_surface_container_light</item>
+        <item name="android:colorBackground">@color/settingslib_materialColorSurfaceContainerLow</item>
     </style>
 
     <style name="Theme.Settings.Home.NoAnimation">
@@ -246,5 +243,9 @@
         <item name="elevationOverlayColor">?attr/colorPrimary</item>
         <item name="colorPrimary">@*android:color/primary_device_default_settings_light</item>
         <item name="colorAccent">@*android:color/accent_device_default_light</item>
+    </style>
+
+    <style name="SettingsSudThemeGlif.Light" parent="@style/SudThemeGlif.Light">
+        <item name="android:background">@color/settingslib_materialColorSurfaceContainerLowest</item>
     </style>
 </resources>

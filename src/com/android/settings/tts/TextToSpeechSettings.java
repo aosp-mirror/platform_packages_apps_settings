@@ -49,7 +49,7 @@ import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.GearPreference;
-import com.android.settings.widget.SeekBarPreference;
+import com.android.settingslib.widget.SliderPreference;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.ActionButtonsPreference;
 
@@ -114,8 +114,8 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
 
     private static final int MIN_SPEECH_PITCH = 25;
 
-    private SeekBarPreference mDefaultPitchPref;
-    private SeekBarPreference mDefaultRatePref;
+    private SliderPreference mDefaultPitchPref;
+    private SliderPreference mDefaultRatePref;
     private ActionButtonsPreference mActionButtons;
 
     private int mDefaultPitch = TextToSpeech.Engine.DEFAULT_PITCH;
@@ -174,8 +174,8 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         mLocalePreference = (ListPreference) findPreference(KEY_ENGINE_LOCALE);
         mLocalePreference.setOnPreferenceChangeListener(this);
 
-        mDefaultPitchPref = (SeekBarPreference) findPreference(KEY_DEFAULT_PITCH);
-        mDefaultRatePref = (SeekBarPreference) findPreference(KEY_DEFAULT_RATE);
+        mDefaultPitchPref = (SliderPreference) findPreference(KEY_DEFAULT_PITCH);
+        mDefaultRatePref = (SliderPreference) findPreference(KEY_DEFAULT_RATE);
 
         mActionButtons = ((ActionButtonsPreference) findPreference(KEY_ACTION_BUTTONS))
                 .setButton1Text(R.string.tts_play)
@@ -317,18 +317,16 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
                 android.provider.Settings.Secure.getInt(
                         resolver, TTS_DEFAULT_PITCH, TextToSpeech.Engine.DEFAULT_PITCH);
 
-        mDefaultRatePref.setProgress(getSeekBarProgressFromValue(KEY_DEFAULT_RATE, mDefaultRate));
+        mDefaultRatePref.setValue(getSliderProgressFromValue(KEY_DEFAULT_RATE, mDefaultRate));
         mDefaultRatePref.setOnPreferenceChangeListener(this);
-        mDefaultRatePref.setMax(getSeekBarProgressFromValue(KEY_DEFAULT_RATE, MAX_SPEECH_RATE));
-        mDefaultRatePref.setContinuousUpdates(true);
-        mDefaultRatePref.setHapticFeedbackMode(SeekBarPreference.HAPTIC_FEEDBACK_MODE_ON_ENDS);
+        mDefaultRatePref.setMax(getSliderProgressFromValue(KEY_DEFAULT_RATE, MAX_SPEECH_RATE));
+        mDefaultRatePref.setUpdatesContinuously(true);
 
-        mDefaultPitchPref.setProgress(
-                getSeekBarProgressFromValue(KEY_DEFAULT_PITCH, mDefaultPitch));
+        mDefaultPitchPref.setValue(
+                getSliderProgressFromValue(KEY_DEFAULT_PITCH, mDefaultPitch));
         mDefaultPitchPref.setOnPreferenceChangeListener(this);
-        mDefaultPitchPref.setMax(getSeekBarProgressFromValue(KEY_DEFAULT_PITCH, MAX_SPEECH_PITCH));
-        mDefaultPitchPref.setContinuousUpdates(true);
-        mDefaultPitchPref.setHapticFeedbackMode(SeekBarPreference.HAPTIC_FEEDBACK_MODE_ON_ENDS);
+        mDefaultPitchPref.setMax(getSliderProgressFromValue(KEY_DEFAULT_PITCH, MAX_SPEECH_PITCH));
+        mDefaultPitchPref.setUpdatesContinuously(true);
 
         if (mTts != null) {
             mCurrentEngine = mTts.getCurrentEngine();
@@ -356,12 +354,12 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     }
 
     /**
-     * The minimum speech pitch/rate value should be > 0 but the minimum value of a seekbar in
-     * android is fixed at 0. Therefore, we increment the seekbar progress with MIN_SPEECH_VALUE so
-     * that the minimum seekbar progress value is MIN_SPEECH_PITCH/RATE. SPEECH_VALUE =
-     * MIN_SPEECH_VALUE + SEEKBAR_PROGRESS
+     * The minimum speech pitch/rate value should be > 0 but the minimum value of a slider in
+     * android is fixed at 0. Therefore, we increment the slider progress with MIN_SPEECH_VALUE so
+     * that the minimum slider progress value is MIN_SPEECH_PITCH/RATE. SPEECH_VALUE =
+     * MIN_SPEECH_VALUE + SLIDER_PROGRESS
      */
-    private int getValueFromSeekBarProgress(String preferenceKey, int progress) {
+    private int getValueFromSliderProgress(String preferenceKey, int progress) {
         if (preferenceKey.equals(KEY_DEFAULT_RATE)) {
             return MIN_SPEECH_RATE + progress;
         } else if (preferenceKey.equals(KEY_DEFAULT_PITCH)) {
@@ -371,10 +369,10 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     }
 
     /**
-     * Since we are appending the MIN_SPEECH value to the speech seekbar progress, the speech
-     * seekbar progress should be set to (speechValue - MIN_SPEECH value).
+     * Since we are appending the MIN_SPEECH value to the speech slider progress, the speech
+     * slider progress should be set to (speechValue - MIN_SPEECH value).
      */
-    private int getSeekBarProgressFromValue(String preferenceKey, int value) {
+    private int getSliderProgressFromValue(String preferenceKey, int value) {
         if (preferenceKey.equals(KEY_DEFAULT_RATE)) {
             return value - MIN_SPEECH_RATE;
         } else if (preferenceKey.equals(KEY_DEFAULT_PITCH)) {
@@ -686,20 +684,20 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
 
     private void resetTts() {
         // Reset button.
-        int speechRateSeekbarProgress =
-                getSeekBarProgressFromValue(
+        int speechRateSliderProgress =
+                getSliderProgressFromValue(
                         KEY_DEFAULT_RATE, TextToSpeech.Engine.DEFAULT_RATE);
-        mDefaultRatePref.setProgress(speechRateSeekbarProgress);
-        updateSpeechRate(speechRateSeekbarProgress);
-        int pitchSeekbarProgress =
-                getSeekBarProgressFromValue(
+        mDefaultRatePref.setValue(speechRateSliderProgress);
+        updateSpeechRate(speechRateSliderProgress);
+        int pitchSliderProgress =
+                getSliderProgressFromValue(
                         KEY_DEFAULT_PITCH, TextToSpeech.Engine.DEFAULT_PITCH);
-        mDefaultPitchPref.setProgress(pitchSeekbarProgress);
-        updateSpeechPitchValue(pitchSeekbarProgress);
+        mDefaultPitchPref.setValue(pitchSliderProgress);
+        updateSpeechPitchValue(pitchSliderProgress);
     }
 
-    private void updateSpeechRate(int speechRateSeekBarProgress) {
-        mDefaultRate = getValueFromSeekBarProgress(KEY_DEFAULT_RATE, speechRateSeekBarProgress);
+    private void updateSpeechRate(int speechRateSliderProgress) {
+        mDefaultRate = getValueFromSliderProgress(KEY_DEFAULT_RATE, speechRateSliderProgress);
         try {
             updateTTSSetting(TTS_DEFAULT_RATE, mDefaultRate);
             if (mTts != null) {
@@ -712,8 +710,8 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         return;
     }
 
-    private void updateSpeechPitchValue(int speechPitchSeekBarProgress) {
-        mDefaultPitch = getValueFromSeekBarProgress(KEY_DEFAULT_PITCH, speechPitchSeekBarProgress);
+    private void updateSpeechPitchValue(int speechPitchSliderProgress) {
+        mDefaultPitch = getValueFromSliderProgress(KEY_DEFAULT_PITCH, speechPitchSliderProgress);
         try {
             updateTTSSetting(TTS_DEFAULT_PITCH, mDefaultPitch);
             if (mTts != null) {

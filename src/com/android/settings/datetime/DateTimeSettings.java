@@ -74,6 +74,15 @@ public class DateTimeSettings extends DashboardFragment implements
                 use(TimeFeedbackPreferenceCategoryController.class);
         use(TimeFeedbackPreferenceController.class)
                 .registerWithOptionalCategoryController(helpAndFeedbackCategoryController);
+
+        // All the elements in the category are optional, so we must ensure the category is only
+        // available if any of the elements are available.
+        NotificationsPreferenceCategoryController
+                notificationsPreferenceCategoryController =
+                use(NotificationsPreferenceCategoryController.class);
+        use(TimeZoneNotificationsPreferenceController.class)
+                .registerIn(
+                        notificationsPreferenceCategoryController);
     }
 
     @Override

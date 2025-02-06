@@ -38,6 +38,8 @@ import android.content.Context;
 import android.os.UserManager;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.notification.NotificationBackend;
@@ -68,7 +70,6 @@ public class AllowSoundPreferenceControllerTest {
     private NotificationManager mNm;
     @Mock
     private UserManager mUm;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
 
     @Mock
@@ -83,6 +84,7 @@ public class AllowSoundPreferenceControllerTest {
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         mContext = RuntimeEnvironment.application;
+        mScreen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         mController =
                 spy(new AllowSoundPreferenceController(mContext, mDependentFieldListener, mBackend));
     }
@@ -160,6 +162,7 @@ public class AllowSoundPreferenceControllerTest {
                 RestrictedLockUtils.EnforcedAdmin.class), null);
 
         Preference pref = new RestrictedSwitchPreference(mContext);
+        mScreen.addPreference(pref);
         mController.updateState(pref);
 
         assertFalse(pref.isEnabled());
@@ -173,6 +176,7 @@ public class AllowSoundPreferenceControllerTest {
         mController.onResume(appRow, channel, null, null, null, null, null);
 
         Preference pref = new RestrictedSwitchPreference(mContext);
+        mScreen.addPreference(pref);
         mController.updateState(pref);
 
         assertTrue(pref.isEnabled());
@@ -186,6 +190,7 @@ public class AllowSoundPreferenceControllerTest {
                 null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
+        mScreen.addPreference(pref);
         mController.updateState(pref);
         assertTrue(pref.isChecked());
     }
@@ -198,6 +203,7 @@ public class AllowSoundPreferenceControllerTest {
                 null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
+        mScreen.addPreference(pref);
         mController.updateState(pref);
         assertTrue(pref.isChecked());
     }
@@ -210,6 +216,7 @@ public class AllowSoundPreferenceControllerTest {
                 null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
+        mScreen.addPreference(pref);
         mController.updateState(pref);
         assertFalse(pref.isChecked());
     }
@@ -222,7 +229,7 @@ public class AllowSoundPreferenceControllerTest {
                 null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
+        mScreen.addPreference(pref);
         mController.displayPreference(mScreen);
         mController.updateState(pref);
         pref.setChecked(true);
@@ -240,7 +247,7 @@ public class AllowSoundPreferenceControllerTest {
                 null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
+        mScreen.addPreference(pref);
         mController.displayPreference(mScreen);
         mController.updateState(pref);
 

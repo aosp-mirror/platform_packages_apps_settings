@@ -26,7 +26,6 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -50,7 +49,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -136,48 +134,10 @@ public final class CellularSecurityPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
-    @Test
-    public void getAvailabilityStatus_flagsDisabled_shouldReturnFalse() {
-        // Both flags disabled
-        enableFlags(false);
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
-
-        // One flag is disabled
-        mSetFlagsRule.disableFlags(
-                Flags.FLAG_ENABLE_IDENTIFIER_DISCLOSURE_TRANSPARENCY_UNSOL_EVENTS);
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
-    }
-
-    @Test
-    public void handlePreferenceTreeClick_safetyCenterSupported_shouldRedirectToSafetyCenter() {
-        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-
-        doReturn(true).when(mTelephonyManager).isNullCipherNotificationsEnabled();
-        doReturn(true).when(mTelephonyManager)
-              .isCellularIdentifierDisclosureNotificationsEnabled();
-        doReturn(true).when(mTelephonyManager).isNullCipherAndIntegrityPreferenceEnabled();
-        boolean prefHandled = mController.handlePreferenceTreeClick(mPreference);
-
-        assertThat(prefHandled).isTrue();
-        verify(mContext).startActivity(intentCaptor.capture());
-        assertThat(intentCaptor.getValue().getAction()).isEqualTo(Intent.ACTION_SAFETY_CENTER);
-    }
-
     private void enableFlags(boolean enabled) {
         if (enabled) {
-            mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_MODEM_CIPHER_TRANSPARENCY_UNSOL_EVENTS);
-            mSetFlagsRule.enableFlags(
-                    Flags.FLAG_ENABLE_IDENTIFIER_DISCLOSURE_TRANSPARENCY_UNSOL_EVENTS);
-            mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_MODEM_CIPHER_TRANSPARENCY);
-            mSetFlagsRule.enableFlags(
-                    Flags.FLAG_ENABLE_IDENTIFIER_DISCLOSURE_TRANSPARENCY);
         } else {
             mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_MODEM_CIPHER_TRANSPARENCY_UNSOL_EVENTS);
-            mSetFlagsRule.disableFlags(
-                    Flags.FLAG_ENABLE_IDENTIFIER_DISCLOSURE_TRANSPARENCY_UNSOL_EVENTS);
-            mSetFlagsRule.disableFlags(Flags.FLAG_ENABLE_MODEM_CIPHER_TRANSPARENCY);
-            mSetFlagsRule.disableFlags(
-                    Flags.FLAG_ENABLE_IDENTIFIER_DISCLOSURE_TRANSPARENCY);
         }
     }
 }

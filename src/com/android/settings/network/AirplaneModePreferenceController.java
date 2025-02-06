@@ -37,6 +37,7 @@ import androidx.preference.TwoStatePreference;
 import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.contract.SettingsContractKt;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
@@ -64,7 +65,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSlicesContract.AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(SettingsSlicesContract.KEY_AIRPLANE_MODE)
+            .appendPath(SettingsContractKt.KEY_AIRPLANE_MODE)
             .build();
 
     private Fragment mFragment;

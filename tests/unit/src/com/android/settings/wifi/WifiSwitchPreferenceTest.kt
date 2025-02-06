@@ -16,11 +16,19 @@
 
 package com.android.settings.wifi
 
+import android.app.settings.SettingsEnums.ACTION_WIFI_OFF
+import android.app.settings.SettingsEnums.ACTION_WIFI_ON
 import android.content.ContextWrapper
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkCapabilities.TRANSPORT_CELLULAR
+import android.net.NetworkCapabilities.TRANSPORT_WIFI
 import android.net.wifi.WifiManager
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
@@ -28,11 +36,13 @@ import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
 
 @RunWith(AndroidJUnit4::class)
 class WifiSwitchPreferenceTest {
 
     private val mockWifiManager = mock<WifiManager>()
+    private val mockConnectivityManager = mock<ConnectivityManager>()
 
     private val context =
         object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
@@ -41,6 +51,7 @@ class WifiSwitchPreferenceTest {
             override fun getSystemService(name: String): Any? =
                 when (name) {
                     getSystemServiceName(WifiManager::class.java) -> mockWifiManager
+                    getSystemServiceName(ConnectivityManager::class.java) -> mockConnectivityManager
                     else -> super.getSystemService(name)
                 }
         }
@@ -66,6 +77,35 @@ class WifiSwitchPreferenceTest {
     }
 
     @Test
+    fun setValue_valueTrue_metricsActionWifiOn() {
+        val metricsFeatureProvider = FakeFeatureFactory.setupForTest().metricsFeatureProvider
+
+        wifiSwitchPreference.storage(context).setBoolean(WifiSwitchPreference.KEY, true)
+
+        verify(metricsFeatureProvider).action(context, ACTION_WIFI_ON)
+    }
+
+    @Test
+    fun setValue_valueFalseWithoutDefaultWifi_metricsActionWifiOffWithFalse() {
+        val metricsFeatureProvider = FakeFeatureFactory.setupForTest().metricsFeatureProvider
+        mockDefaultNetwork(TRANSPORT_CELLULAR)
+
+        wifiSwitchPreference.storage(context).setBoolean(WifiSwitchPreference.KEY, false)
+
+        verify(metricsFeatureProvider).action(context, ACTION_WIFI_OFF, false)
+    }
+
+    @Test
+    fun setValue_valueFalseWithDefaultWifi_metricsActionWifiOffWithTrue() {
+        val metricsFeatureProvider = FakeFeatureFactory.setupForTest().metricsFeatureProvider
+        mockDefaultNetwork(TRANSPORT_WIFI)
+
+        wifiSwitchPreference.storage(context).setBoolean(WifiSwitchPreference.KEY, false)
+
+        verify(metricsFeatureProvider).action(context, ACTION_WIFI_OFF, true)
+    }
+
+    @Test
     fun performClick_defaultOn_checkedIsFalse() {
         mockWifiManager.stub { on { isWifiEnabled } doReturn true }
 
@@ -85,4 +125,16 @@ class WifiSwitchPreferenceTest {
 
     private fun getSwitchPreference(): SwitchPreferenceCompat =
         wifiSwitchPreference.createAndBindWidget(context)
+
+    private fun mockDefaultNetwork(transportType: Int) {
+        val mockNetwork = mock<Network>()
+        val networkCapabilities =
+            NetworkCapabilities.Builder.withoutDefaultCapabilities()
+                .addTransportType(transportType)
+                .build()
+        mockConnectivityManager.stub {
+            on { activeNetwork } doReturn mockNetwork
+            on { getNetworkCapabilities(mockNetwork) } doReturn networkCapabilities
+        }
+    }
 }

@@ -824,8 +824,7 @@ public class SubscriptionUtil {
     private static boolean isEmbeddedSubscriptionVisible(@NonNull SubscriptionInfo subInfo) {
         if (subInfo.isEmbedded()
                 && (subInfo.getProfileClass() == PROFILE_CLASS_PROVISIONING
-                || (com.android.internal.telephony.flags.Flags.oemEnabledSatelliteFlag()
-                && subInfo.isOnlyNonTerrestrialNetwork()))) {
+                    || subInfo.isOnlyNonTerrestrialNetwork())) {
             return false;
         }
         return true;

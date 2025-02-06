@@ -100,11 +100,17 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
     @VisibleForTesting
     static final int MAX_PHONE_COUNT_SINGLE_SIM = 1;
 
-    private final OnSubscriptionsChangedListener mOnSubscriptionsChangedListener =
+    @VisibleForTesting
+    final OnSubscriptionsChangedListener mOnSubscriptionsChangedListener =
             new OnSubscriptionsChangedListener() {
                 @Override
                 public void onSubscriptionsChanged() {
+                    SubscriptionInfo oldSubInfo = mSubscriptionInfo;
                     mSubscriptionInfo = getPhoneSubscriptionInfo(mSlotIndex);
+                    if (getSubId(oldSubInfo) != getSubId(mSubscriptionInfo)) {
+                      unregisterTelephonyCallback(oldSubInfo);
+                      registerTelephonyCallback(mSubscriptionInfo);
+                    }
                     updateSubscriptionStatus();
                 }
             };
@@ -123,7 +129,6 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
     private final Context mContext;
 
     private boolean mShowLatestAreaInfo;
-    private boolean mIsRegisteredListener = false;
 
     private final BroadcastReceiver mAreaInfoReceiver = new BroadcastReceiver() {
         @Override
@@ -137,7 +142,8 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
     };
 
     @VisibleForTesting
-    protected SimStatusDialogTelephonyCallback mTelephonyCallback;
+    protected final SimStatusDialogTelephonyCallback mTelephonyCallback =
+            new SimStatusDialogTelephonyCallback();
 
     private CellBroadcastServiceConnection mCellBroadcastServiceConnection;
 
@@ -181,8 +187,6 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
         mContext = dialog.getContext();
         mSlotIndex = slotId;
         mSubscriptionInfo = getPhoneSubscriptionInfo(slotId);
-
-        mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
         mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
         mEuiccManager = mContext.getSystemService(EuiccManager.class);
         mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
@@ -201,11 +205,13 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
 
     public void initialize() {
         if (mSubscriptionInfo == null) {
-            return;
+            // Should not depend on default sub TelephonyManager, but lots of code already uses it
+            mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        } else {
+            mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(mSubscriptionInfo.getSubscriptionId());
         }
-        mTelephonyManager =
-            getTelephonyManager().createForSubscriptionId(mSubscriptionInfo.getSubscriptionId());
-        mTelephonyCallback = new SimStatusDialogTelephonyCallback();
+
         updateLatestAreaInfo();
         updateSubscriptionStatus();
     }
@@ -222,6 +228,10 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
         updateNetworkType();
         updateRoamingStatus(serviceState);
         updateIccidNumber();
+
+        if (mSubscriptionInfo == null) {
+            updateDataState(TelephonyManager.DATA_UNKNOWN);
+        }
     }
 
     /**
@@ -242,13 +252,9 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
      */
     @Override
     public void onResume(@NonNull LifecycleOwner owner) {
-        if (mSubscriptionInfo == null) {
-            return;
-        }
-        mTelephonyManager = getTelephonyManager().createForSubscriptionId(
-                mSubscriptionInfo.getSubscriptionId());
-        getTelephonyManager()
-                .registerTelephonyCallback(mContext.getMainExecutor(), mTelephonyCallback);
+        // get the latest sub info for it may be updated in onPause/onStop status.
+        mSubscriptionInfo = getPhoneSubscriptionInfo(mSlotIndex);
+        registerTelephonyCallback(mSubscriptionInfo);
         mSubscriptionManager.addOnSubscriptionsChangedListener(
                 mContext.getMainExecutor(), mOnSubscriptionsChangedListener);
         collectSimStatusDialogInfo(owner);
@@ -259,8 +265,6 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
                     new IntentFilter(CellBroadcastIntents.ACTION_AREA_INFO_UPDATED),
                     Context.RECEIVER_EXPORTED/*UNAUDITED*/);
         }
-
-        mIsRegisteredListener = true;
     }
 
     /**
@@ -268,22 +272,9 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
      */
     @Override
     public void onPause(@NonNull LifecycleOwner owner) {
-        if (mSubscriptionInfo == null) {
-            if (mIsRegisteredListener) {
-                mSubscriptionManager.removeOnSubscriptionsChangedListener(
-                        mOnSubscriptionsChangedListener);
-                getTelephonyManager().unregisterTelephonyCallback(mTelephonyCallback);
-                if (mShowLatestAreaInfo) {
-                    mContext.unregisterReceiver(mAreaInfoReceiver);
-                }
-                mIsRegisteredListener = false;
-            }
-            return;
-        }
-
-        mSubscriptionManager.removeOnSubscriptionsChangedListener(mOnSubscriptionsChangedListener);
-        getTelephonyManager().unregisterTelephonyCallback(mTelephonyCallback);
-
+        mSubscriptionManager.removeOnSubscriptionsChangedListener(
+                mOnSubscriptionsChangedListener);
+        unregisterTelephonyCallback(mSubscriptionInfo);
         if (mShowLatestAreaInfo) {
             mContext.unregisterReceiver(mAreaInfoReceiver);
         }
@@ -553,6 +544,34 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
 
     private SubscriptionInfo getPhoneSubscriptionInfo(int slotId) {
         return SubscriptionManager.from(mContext).getActiveSubscriptionInfoForSimSlotIndex(slotId);
+    }
+
+    private void registerTelephonyCallback(SubscriptionInfo subInfo) {
+        if (subInfo == null) {
+            return;
+        }
+
+        // No need to have a member to hold mTelephonyManager, leaving it as lots of code
+        // depending on it
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(subInfo.getSubscriptionId());
+        mTelephonyManager.registerTelephonyCallback(
+                mContext.getMainExecutor(), mTelephonyCallback);
+    }
+
+    private void unregisterTelephonyCallback(SubscriptionInfo subInfo) {
+        if (subInfo == null) {
+          return;
+        }
+
+        mContext.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(subInfo.getSubscriptionId())
+                .unregisterTelephonyCallback(mTelephonyCallback);
+    }
+
+    private int getSubId(SubscriptionInfo subInfo) {
+        return subInfo == null ? SubscriptionManager.INVALID_SUBSCRIPTION_ID :
+                subInfo.getSubscriptionId();
     }
 
     @VisibleForTesting

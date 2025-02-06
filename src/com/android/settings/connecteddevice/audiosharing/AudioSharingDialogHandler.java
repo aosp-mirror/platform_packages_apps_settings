@@ -192,7 +192,8 @@ public class AudioSharingDialogHandler {
                     // If this method is called with user triggered, e.g. manual click on the
                     // "Connected devices" page, we need call setActive for the device, since user
                     // intend to switch active device for the call.
-                    AudioSharingUtils.setPrimary(mContext, cachedDevice);
+                    cachedDevice.setActive();
+                    AudioSharingUtils.setUserPreferredPrimary(mContext, cachedDevice);
                 }
                 return;
             }

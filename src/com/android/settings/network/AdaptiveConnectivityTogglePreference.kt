@@ -16,7 +16,6 @@
 
 package com.android.settings.network
 
-import android.Manifest
 import android.content.Context
 import android.net.wifi.WifiManager
 import android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED
@@ -39,8 +38,7 @@ class AdaptiveConnectivityTogglePreference :
 
     override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
 
-    override fun getWritePermissions(context: Context) =
-        SettingsSecureStore.getWritePermissions() and Manifest.permission.NETWORK_SETTINGS
+    override fun getWritePermissions(context: Context) = SettingsSecureStore.getWritePermissions()
 
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW

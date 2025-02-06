@@ -78,7 +78,8 @@ public class AccountPersonalDashboardFragment extends DashboardFragment {
                     forceUpdatePreferences();
                 }
             };
-            cmpp.init(this, getFragmentManager(), getIntent(), delegate, /*isWorkProfile=*/false);
+            cmpp.init(this, getFragmentManager(),
+                    getIntent(), delegate, /*isWorkProfile=*/false, /*isPrivateSpace=*/ false);
         } else {
             getSettingsLifecycle().addObserver(use(PasswordsPreferenceController.class));
         }
@@ -87,7 +88,8 @@ public class AccountPersonalDashboardFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        buildAutofillPreferenceControllers(context, controllers);
+        buildAutofillPreferenceControllers(
+                context, controllers, /*isWorkProfile=*/ false, /*isPrivateSpace=*/ false);
         final String[] authorities = getIntent().getStringArrayExtra(EXTRA_AUTHORITIES);
         buildAccountPreferenceControllers(context, this /* parent */, authorities, controllers);
         return controllers;

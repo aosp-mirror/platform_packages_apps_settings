@@ -21,8 +21,11 @@ import static android.safetycenter.SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOUR
 import static android.safetycenter.SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCE_IDS;
 import static android.safetycenter.SafetyEvent.SAFETY_EVENT_TYPE_DEVICE_REBOOTED;
 import static android.safetycenter.SafetyEvent.SAFETY_EVENT_TYPE_REFRESH_REQUESTED;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -30,7 +33,10 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Flags;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
@@ -39,6 +45,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.flags.Flags;
 import com.android.settings.privatespace.PrivateSpaceSafetySource;
 import com.android.settings.testutils.FakeFeatureFactory;
 
@@ -51,7 +58,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
@@ -60,6 +66,9 @@ public class SafetySourceBroadcastReceiverTest {
     private static final String REFRESH_BROADCAST_ID = "REFRESH_BROADCAST_ID";
 
     private Context mApplicationContext;
+
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     @Mock private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
 
@@ -202,6 +211,7 @@ public class SafetySourceBroadcastReceiverTest {
     }
 
     @Test
+    @RequiresFlagsDisabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
     public void onReceive_onRefresh_withBiometricsSourceId_setsBiometricData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent =
@@ -220,9 +230,49 @@ public class SafetySourceBroadcastReceiverTest {
         assertThat(captor.getValue()).isEqualTo(BiometricsSafetySource.SAFETY_SOURCE_ID);
     }
 
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    public void onReceive_onRefresh_withFaceUnlockSourceId_setsFaceUnlockData() {
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        Intent intent =
+                new Intent()
+                        .setAction(ACTION_REFRESH_SAFETY_SOURCES)
+                        .putExtra(
+                                EXTRA_REFRESH_SAFETY_SOURCE_IDS,
+                                new String[] {FaceSafetySource.SAFETY_SOURCE_ID})
+                        .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
+
+        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mSafetyCenterManagerWrapper, times(1))
+                .setSafetySourceData(any(), captor.capture(), any(), any());
+
+        assertThat(captor.getValue()).isEqualTo(FaceSafetySource.SAFETY_SOURCE_ID);
+    }
+
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    public void onReceive_onRefresh_withFingerprintUnlockSourceId_setsFingerprintUnlockData() {
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        Intent intent =
+                new Intent()
+                        .setAction(ACTION_REFRESH_SAFETY_SOURCES)
+                        .putExtra(
+                                EXTRA_REFRESH_SAFETY_SOURCE_IDS,
+                                new String[] {FingerprintSafetySource.SAFETY_SOURCE_ID})
+                        .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
+
+        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mSafetyCenterManagerWrapper, times(1))
+                .setSafetySourceData(any(), captor.capture(), any(), any());
+
+        assertThat(captor.getValue()).isEqualTo(FingerprintSafetySource.SAFETY_SOURCE_ID);
+    }
+
     /**
-     *  Tests that on receiving the refresh broadcast request with the PS source id, the PS data
-     * is set.
+     * Tests that on receiving the refresh broadcast request with the PS source id, the PS data is
+     * set.
      */
     @Test
     public void onReceive_onRefresh_withPrivateSpaceSourceId_setsPrivateSpaceData() {
@@ -247,7 +297,8 @@ public class SafetySourceBroadcastReceiverTest {
     @Test
     public void onReceive_onRefresh_withPrivateSpaceFeatureDisabled_setsNullData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
-        mSetFlagsRule.disableFlags(Flags.FLAG_ALLOW_PRIVATE_PROFILE,
+        mSetFlagsRule.disableFlags(
+                android.os.Flags.FLAG_ALLOW_PRIVATE_PROFILE,
                 android.multiuser.Flags.FLAG_ENABLE_PRIVATE_SPACE_FEATURES);
 
         Intent intent =
@@ -273,16 +324,48 @@ public class SafetySourceBroadcastReceiverTest {
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
         ArgumentCaptor<SafetyEvent> captor = ArgumentCaptor.forClass(SafetyEvent.class);
-        verify(mSafetyCenterManagerWrapper, times(3))
+        verify(mSafetyCenterManagerWrapper, atLeastOnce())
                 .setSafetySourceData(any(), any(), any(), captor.capture());
 
         SafetyEvent bootEvent = new SafetyEvent.Builder(SAFETY_EVENT_TYPE_DEVICE_REBOOTED).build();
-        assertThat(captor.getAllValues())
-                .containsExactlyElementsIn(Arrays.asList(bootEvent, bootEvent, bootEvent));
+        assertThat(captor.getAllValues()).contains(bootEvent);
     }
 
     @Test
-    public void onReceive_onBootCompleted_sendsAllSafetySourcesData() {
+    @RequiresFlagsEnabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    public void onReceive_onBootCompleted_flagOn_sendsAllSafetySourcesData() {
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        Intent intent = new Intent().setAction(Intent.ACTION_BOOT_COMPLETED);
+
+        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mSafetyCenterManagerWrapper, times(4))
+                .setSafetySourceData(any(), captor.capture(), any(), any());
+        List<String> safetySourceIdList = captor.getAllValues();
+
+        assertThat(
+                        safetySourceIdList.stream()
+                                .anyMatch(id -> id.equals(LockScreenSafetySource.SAFETY_SOURCE_ID)))
+                .isTrue();
+        assertThat(
+                        safetySourceIdList.stream()
+                                .anyMatch(id -> id.equals(FaceSafetySource.SAFETY_SOURCE_ID)))
+                .isTrue();
+        assertThat(
+                        safetySourceIdList.stream()
+                                .anyMatch(
+                                        id -> id.equals(FingerprintSafetySource.SAFETY_SOURCE_ID)))
+                .isTrue();
+        assertThat(
+                        safetySourceIdList.stream()
+                                .anyMatch(
+                                        id -> id.equals(PrivateSpaceSafetySource.SAFETY_SOURCE_ID)))
+                .isTrue();
+    }
+
+    @Test
+    @RequiresFlagsDisabled(Flags.FLAG_BIOMETRICS_ONBOARDING_EDUCATION)
+    public void onReceive_onBootCompleted_flagOff_sendsAllSafetySourcesData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent = new Intent().setAction(Intent.ACTION_BOOT_COMPLETED);
 
@@ -292,11 +375,18 @@ public class SafetySourceBroadcastReceiverTest {
                 .setSafetySourceData(any(), captor.capture(), any(), any());
         List<String> safetySourceIdList = captor.getAllValues();
 
-        assertThat(safetySourceIdList.stream().anyMatch(
-                id -> id.equals(LockScreenSafetySource.SAFETY_SOURCE_ID))).isTrue();
-        assertThat(safetySourceIdList.stream().anyMatch(
-                id -> id.equals(BiometricsSafetySource.SAFETY_SOURCE_ID))).isTrue();
-        assertThat(safetySourceIdList.stream().anyMatch(
-                id -> id.equals(PrivateSpaceSafetySource.SAFETY_SOURCE_ID))).isTrue();
+        assertThat(
+                        safetySourceIdList.stream()
+                                .anyMatch(id -> id.equals(LockScreenSafetySource.SAFETY_SOURCE_ID)))
+                .isTrue();
+        assertThat(
+                        safetySourceIdList.stream()
+                                .anyMatch(id -> id.equals(BiometricsSafetySource.SAFETY_SOURCE_ID)))
+                .isTrue();
+        assertThat(
+                        safetySourceIdList.stream()
+                                .anyMatch(
+                                        id -> id.equals(PrivateSpaceSafetySource.SAFETY_SOURCE_ID)))
+                .isTrue();
     }
 }

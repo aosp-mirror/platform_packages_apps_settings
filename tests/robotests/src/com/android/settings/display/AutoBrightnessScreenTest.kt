@@ -128,7 +128,11 @@ class AutoBrightnessScreenTest {
         }
 
     private fun setScreenBrightnessMode(value: Int) =
-        Settings.System.putInt(context.contentResolver, AutoBrightnessScreen.KEY, value)
+        Settings.System.putInt(
+            context.contentResolver,
+            Settings.System.SCREEN_BRIGHTNESS_MODE,
+            value,
+        )
 
     private fun getResId() =
         when {

@@ -75,6 +75,7 @@ public class ConnectedDeviceDashboardFragmentTest {
     private static final String KEY_AUDIO_SHARING_SETTINGS =
             "connected_device_audio_sharing_settings";
     private static final String KEY_ADD_BT_DEVICES = "add_bt_devices";
+    private static final String KEY_TEMPORARY_BOND_DEVICES = "temp_bond_device_list";
     private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
     private static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
     private static final String SLICE_ACTION = "com.android.settings.SEARCH_RESULT_TRAMPOLINE";
@@ -129,7 +130,8 @@ public class ConnectedDeviceDashboardFragmentTest {
                         KEY_SAVED_DEVICE_SEE_ALL,
                         KEY_FAST_PAIR_DEVICE_SEE_ALL,
                         KEY_AUDIO_SHARING_DEVICES,
-                        KEY_AUDIO_SHARING_SETTINGS);
+                        KEY_AUDIO_SHARING_SETTINGS,
+                        KEY_TEMPORARY_BOND_DEVICES);
     }
 
     @Test

@@ -19,6 +19,8 @@ package com.android.settings.accessibility;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
@@ -39,6 +41,7 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.R;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
@@ -132,6 +135,7 @@ public class AccessibilityButtonFragmentTest {
     }
 
     @Test
+    @DisableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
     public void getNonIndexableKeys_existInXmlLayout() {
         final List<String> niks = AccessibilityButtonFragment.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(mContext);
@@ -139,7 +143,38 @@ public class AccessibilityButtonFragmentTest {
                 XmlTestUtils.getKeysFromPreferenceXml(mContext,
                         R.xml.accessibility_button_settings);
 
-        assertThat(keys).containsAtLeastElementsIn(niks);
+        assertThat(keys).isNotNull();
+        assertThat(niks).containsAtLeastElementsIn(keys);
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    public void getNonIndexableKeys_noTargets_doesNotExistInXmlLayout() {
+        Settings.Secure.putStringForUser(mContext.getContentResolver(),
+                ShortcutUtils.convertToKey(SOFTWARE), "", mContext.getUserId());
+        final List<String> niks = AccessibilityButtonFragment.SEARCH_INDEX_DATA_PROVIDER
+                .getNonIndexableKeys(mContext);
+        final List<String> keys =
+                XmlTestUtils.getKeysFromPreferenceXml(mContext,
+                        R.xml.accessibility_button_settings);
+
+        assertThat(keys).isNotNull();
+        assertThat(niks).containsAtLeastElementsIn(keys);
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.accessibility.Flags.FLAG_FIX_A11Y_SETTINGS_SEARCH)
+    public void getNonIndexableKeys_hasTargets_expectedKeys() {
+        Settings.Secure.putStringForUser(mContext.getContentResolver(),
+                ShortcutUtils.convertToKey(SOFTWARE), "Foo", mContext.getUserId());
+        final List<String> niks = AccessibilityButtonFragment.SEARCH_INDEX_DATA_PROVIDER
+                .getNonIndexableKeys(mContext);
+
+        // Some keys should show up anyway, as they're flagged as unsearchable in the xml.
+        assertThat(niks).containsAtLeast(
+                "accessibility_button_preview",
+                "accessibility_button_footer",
+                "accessibility_button_or_gesture");
     }
 
     private static class TestAccessibilityButtonFragment extends AccessibilityButtonFragment {

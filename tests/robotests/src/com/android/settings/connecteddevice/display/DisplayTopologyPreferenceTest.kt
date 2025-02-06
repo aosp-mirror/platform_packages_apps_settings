@@ -18,12 +18,14 @@ package com.android.settings.connecteddevice.display
 
 import android.hardware.display.DisplayTopology.TreeNode.POSITION_BOTTOM
 import android.hardware.display.DisplayTopology.TreeNode.POSITION_LEFT
+import android.hardware.display.DisplayTopology.TreeNode.POSITION_TOP
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.ColorDrawable
 import android.hardware.display.DisplayTopology
+import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
@@ -33,6 +35,10 @@ import androidx.test.core.view.MotionEventBuilder
 
 import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
+
+import java.util.function.Consumer
+
+import kotlin.math.abs
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -45,7 +51,8 @@ class DisplayTopologyPreferenceTest {
     val injector = TestInjector(context)
     val rootView = View.inflate(context, preference.layoutResource, /*parent=*/ null)
     val holder = PreferenceViewHolder.createInstanceForTests(rootView)
-    val wallpaper = ColorDrawable(Color.MAGENTA)
+    val wallpaper = Bitmap.createBitmap(
+            intArrayOf(Color.MAGENTA), /*width=*/ 1, /*height=*/ 1, Bitmap.Config.RGB_565)
 
     init {
         preference.injector = injector
@@ -54,15 +61,33 @@ class DisplayTopologyPreferenceTest {
     }
 
     class TestInjector(context : Context) : DisplayTopologyPreference.Injector(context) {
-        var topology : DisplayTopology? = null
-        var systemWallpaper : Drawable? = null
+        var topology: DisplayTopology? = null
+        var systemWallpaper: Bitmap? = null
+        var topologyListener: Consumer<DisplayTopology>? = null
 
         override var displayTopology : DisplayTopology?
             get() = topology
             set(value) { topology = value }
 
-        override val wallpaper : Drawable
+        override val wallpaper: Bitmap?
             get() = systemWallpaper!!
+
+        override val densityDpi = DisplayMetrics.DENSITY_DEFAULT
+
+        override fun registerTopologyListener(listener: Consumer<DisplayTopology>) {
+            if (topologyListener != null) {
+                throw IllegalStateException(
+                        "already have a listener registered: ${topologyListener}")
+            }
+            topologyListener = listener
+        }
+
+        override fun unregisterTopologyListener(listener: Consumer<DisplayTopology>) {
+            if (topologyListener != listener) {
+                throw IllegalStateException("no such listener registered: ${listener}")
+            }
+            topologyListener = null
+        }
     }
 
     @Test
@@ -81,20 +106,30 @@ class DisplayTopologyPreferenceTest {
                 .map { preference.mPaneContent.getChildAt(it) as DisplayBlock }
                 .toList()
 
-    /**
-     * Sets up a simple topology in the pane with two displays. Returns the left-hand display and
-     * right-hand display in order in a list. The right-hand display is the root.
-     */
-    fun setupTwoDisplays(): List<DisplayBlock> {
+    fun singleDisplayTopology(): DisplayTopology {
+        val primaryId = 22;
+
+        val root = DisplayTopology.TreeNode(
+                primaryId, /* width= */ 200f, /* height= */ 160f, POSITION_LEFT, /* offset= */ 0f)
+
+        return DisplayTopology(root, primaryId)
+    }
+
+    fun twoDisplayTopology(childPosition: Int, childOffset: Float): DisplayTopology {
+        val primaryId = 1
+
         val child = DisplayTopology.TreeNode(
                 /* displayId= */ 42, /* width= */ 100f, /* height= */ 80f,
-                POSITION_LEFT, /* offset= */ 42f)
+                childPosition, childOffset)
         val root = DisplayTopology.TreeNode(
-                /* displayId= */ 0, /* width= */ 200f, /* height= */ 160f,
-                POSITION_LEFT, /* offset= */ 0f)
+                primaryId, /* width= */ 200f, /* height= */ 160f, POSITION_LEFT, /* offset= */ 0f)
         root.addChild(child)
-        injector.topology = DisplayTopology(root, /*primaryDisplayId=*/ 0)
 
+        return DisplayTopology(root, primaryId)
+    }
+
+    /** Uses the topology in the injector to populate and prepare the pane for interaction. */
+    fun preparePane() {
         // This layoutParams needs to be non-null for the global layout handler.
         preference.mPaneHolder.layoutParams = FrameLayout.LayoutParams(
                 /* width= */ 640, /* height= */ 480)
@@ -106,6 +141,17 @@ class DisplayTopologyPreferenceTest {
 
         preference.onAttached()
         preference.onGlobalLayout()
+    }
+
+    /**
+     * Sets up a simple topology in the pane with two displays. Returns the left-hand display and
+     * right-hand display in order in a list. The right-hand display is the root.
+     */
+    fun setupTwoDisplays(childPosition: Int = POSITION_LEFT, childOffset: Float = 42f):
+            List<DisplayBlock> {
+        injector.topology = twoDisplayTopology(childPosition, childOffset)
+
+        preparePane()
 
         val paneChildren = getPaneChildren()
         assertThat(paneChildren).hasSize(2)
@@ -122,14 +168,14 @@ class DisplayTopologyPreferenceTest {
         val (childBlock, rootBlock) = setupTwoDisplays()
 
         // After accounting for padding, child should be half the length of root in each dimension.
-        assertThat(childBlock.layoutParams.width + BLOCK_PADDING)
+        assertThat(childBlock.layoutParams.width)
                 .isEqualTo(rootBlock.layoutParams.width / 2)
-        assertThat(childBlock.layoutParams.height + BLOCK_PADDING)
+        assertThat(childBlock.layoutParams.height)
                 .isEqualTo(rootBlock.layoutParams.height / 2)
         assertThat(childBlock.y).isGreaterThan(rootBlock.y)
-        assertThat(childBlock.background).isEqualTo(wallpaper)
-        assertThat(rootBlock.background).isEqualTo(wallpaper)
-        assertThat(rootBlock.x - BLOCK_PADDING * 2)
+        assertThat(childBlock.background).isEqualTo(childBlock.mUnselectedImage)
+        assertThat(rootBlock.background).isEqualTo(rootBlock.mUnselectedImage)
+        assertThat(rootBlock.x)
                 .isEqualTo(childBlock.x + childBlock.layoutParams.width)
 
         assertThat(preference.mTopologyHint.text)
@@ -138,7 +184,7 @@ class DisplayTopologyPreferenceTest {
 
     @Test
     fun dragDisplayDownward() {
-        val (leftBlock, rightBlock) = setupTwoDisplays()
+        val (leftBlock, _) = setupTwoDisplays()
 
         val downEvent = MotionEventBuilder.newBuilder()
                 .setPointer(0f, 0f)
@@ -149,7 +195,7 @@ class DisplayTopologyPreferenceTest {
         // coordinates. The original offset is 42, so the new offset will be 42 + 40.
         val moveEvent = MotionEventBuilder.newBuilder()
                 .setAction(MotionEvent.ACTION_MOVE)
-                .setPointer(0f, leftBlock.layoutParams.height / 2f + BLOCK_PADDING)
+                .setPointer(0f, leftBlock.layoutParams.height / 2f)
                 .build()
         val upEvent = MotionEventBuilder.newBuilder().setAction(MotionEvent.ACTION_UP).build()
 
@@ -178,7 +224,7 @@ class DisplayTopologyPreferenceTest {
         val moveEvent = MotionEventBuilder.newBuilder()
                 .setAction(MotionEvent.ACTION_MOVE)
                 .setPointer(
-                        -leftBlock.layoutParams.width - 2f * BLOCK_PADDING,
+                        -leftBlock.layoutParams.width.toFloat(),
                         -leftBlock.layoutParams.height / 2f)
                 .build()
 
@@ -218,5 +264,125 @@ class DisplayTopologyPreferenceTest {
         assertThat(childrenBefore).hasSize(2)
         assertThat(childrenAfter).hasSize(3)
         assertThat(childrenAfter.subList(0, 2)).isEqualTo(childrenBefore)
+    }
+
+    @Test
+    fun applyNewTopologyViaListenerUpdate() {
+        setupTwoDisplays()
+        val newTopology = injector.topology!!.copy()
+        newTopology.addDisplay(/* displayId= */ 8008, /* width= */ 300f, /* height= */ 320f)
+
+        injector.topology = newTopology
+        injector.topologyListener!!.accept(newTopology)
+
+        assertThat(preference.mTimesReceivedSameTopology).isEqualTo(0)
+        val paneChildren = getPaneChildren()
+        assertThat(paneChildren).hasSize(3)
+
+        // Look for a display with the same unusual aspect ratio as the one we've added.
+        val expectedAspectRatio = 300f/320f
+        assertThat(paneChildren
+                .map { it.layoutParams.width.toFloat() /
+                        it.layoutParams.height.toFloat() }
+                .filter { abs(it - expectedAspectRatio) < 0.001f }
+        ).hasSize(1)
+    }
+
+    @Test
+    fun ignoreListenerUpdateOfUnchangedTopology() {
+        injector.topology = twoDisplayTopology(POSITION_TOP, /* offset= */ 12.0f)
+        preparePane()
+
+        assertThat(preference.mTimesReceivedSameTopology).isEqualTo(0)
+        injector.topology = twoDisplayTopology(POSITION_TOP, /* offset= */ 12.1f)
+        injector.topologyListener!!.accept(injector.topology!!)
+
+        assertThat(preference.mTimesReceivedSameTopology).isEqualTo(1)
+    }
+
+    @Test
+    fun cannotMoveSingleDisplay() {
+        injector.topology = singleDisplayTopology()
+        preparePane()
+
+        val paneChildren = getPaneChildren()
+        assertThat(paneChildren).hasSize(1)
+        val block = paneChildren[0]
+
+        val origY = block.y
+
+        block.dispatchTouchEvent(MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_DOWN)
+                .setPointer(0f, 0f)
+                .build())
+        block.dispatchTouchEvent(MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_MOVE)
+                .setPointer(0f, 30f)
+                .build())
+
+        assertThat(block.y).isWithin(0.01f).of(origY)
+
+        block.dispatchTouchEvent(MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_UP)
+                .build())
+
+        // Block should be back to original position.
+        assertThat(block.y).isWithin(0.01f).of(origY)
+    }
+
+    @Test
+    fun updatedTopologyCancelsDragIfNonTrivialChange() {
+        val (leftBlock, _) = setupTwoDisplays(POSITION_LEFT, /* childOffset= */ 42f)
+
+        assertThat(leftBlock.y).isWithin(0.05f).of(143.76f)
+
+        leftBlock.dispatchTouchEvent(MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_DOWN)
+                .setPointer(0f, 0f)
+                .build())
+        leftBlock.dispatchTouchEvent(MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_MOVE)
+                .setPointer(0f, 30f)
+                .build())
+        assertThat(leftBlock.y).isWithin(0.05f).of(173.76f)
+
+        // Offset is only different by 0.5 dp, so the drag will not cancel.
+        injector.topology = twoDisplayTopology(POSITION_LEFT, /* childOffset= */ 41.5f)
+        injector.topologyListener!!.accept(injector.topology!!)
+
+        assertThat(leftBlock.y).isWithin(0.05f).of(173.76f)
+        // Move block farther downward.
+        leftBlock.dispatchTouchEvent(MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_MOVE)
+                .setPointer(0f, 50f)
+                .build())
+        assertThat(leftBlock.y).isWithin(0.05f).of(193.76f)
+
+        injector.topology = twoDisplayTopology(POSITION_LEFT, /* childOffset= */ 20f)
+        injector.topologyListener!!.accept(injector.topology!!)
+
+        assertThat(leftBlock.y).isWithin(0.05f).of(115.60f)
+        // Another move in the opposite direction should not move the left block.
+        leftBlock.dispatchTouchEvent(MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_MOVE)
+                .setPointer(0f, -20f)
+                .build())
+        assertThat(leftBlock.y).isWithin(0.05f).of(115.60f)
+    }
+
+    @Test
+    fun highlightDuringDrag() {
+        val (leftBlock, _) = setupTwoDisplays(POSITION_LEFT, /* childOffset= */ 42f)
+
+        assertThat(leftBlock.background).isEqualTo(leftBlock.mUnselectedImage)
+        leftBlock.dispatchTouchEvent(MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_DOWN)
+                .setPointer(0f, 0f)
+                .build())
+        assertThat(leftBlock.background).isEqualTo(leftBlock.mSelectedImage)
+        leftBlock.dispatchTouchEvent(MotionEventBuilder.newBuilder()
+                .setAction(MotionEvent.ACTION_UP)
+                .build())
+        assertThat(leftBlock.background).isEqualTo(leftBlock.mUnselectedImage)
     }
 }

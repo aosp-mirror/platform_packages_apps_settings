@@ -17,6 +17,7 @@
 package com.android.settings.biometrics;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.supervision.SupervisionManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.hardware.biometrics.BiometricAuthenticator;
@@ -44,6 +45,7 @@ public class ParentalControlsUtils {
      * {@link android.hardware.biometrics.ParentalControlsUtilsInternal#getTestComponentName}
      * @return non-null EnforcedAdmin if parental consent is required
      */
+    @Nullable
     public static RestrictedLockUtils.EnforcedAdmin parentConsentRequired(@NonNull Context context,
             @BiometricAuthenticator.Modality int modality) {
 
@@ -58,7 +60,11 @@ public class ParentalControlsUtils {
         }
 
         final DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
-        return parentConsentRequiredInternal(dpm, modality, userHandle);
+        final SupervisionManager sm =
+                android.app.supervision.flags.Flags.deprecateDpmSupervisionApis()
+                        ? context.getSystemService(SupervisionManager.class)
+                        : null;
+        return parentConsentRequiredInternal(dpm, sm, modality, userHandle);
     }
 
     /**
@@ -68,16 +74,23 @@ public class ParentalControlsUtils {
     @Nullable
     @VisibleForTesting
     static RestrictedLockUtils.EnforcedAdmin parentConsentRequiredInternal(
-            @NonNull DevicePolicyManager dpm, @BiometricAuthenticator.Modality int modality,
+            @NonNull DevicePolicyManager dpm,
+            @Nullable SupervisionManager sm,
+            @BiometricAuthenticator.Modality int modality,
             @NonNull UserHandle userHandle) {
-        if (ParentalControlsUtilsInternal.parentConsentRequired(dpm, modality,
-                userHandle)) {
+        if (!ParentalControlsUtilsInternal.parentConsentRequired(
+                dpm, sm, modality, userHandle)) {
+            return null;
+        }
+        if (android.app.supervision.flags.Flags.deprecateDpmSupervisionApis()) {
+            // Supervision doesn't necessarily have have an admin component.
+            return new RestrictedLockUtils.EnforcedAdmin(
+                    /* component= */ null, UserManager.DISALLOW_BIOMETRIC, userHandle);
+        } else {
             final ComponentName cn =
                     ParentalControlsUtilsInternal.getSupervisionComponentName(dpm, userHandle);
             return new RestrictedLockUtils.EnforcedAdmin(cn, UserManager.DISALLOW_BIOMETRIC,
                     userHandle);
-        } else {
-            return null;
         }
     }
 }

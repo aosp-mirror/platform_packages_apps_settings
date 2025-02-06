@@ -287,7 +287,6 @@ public class SetupChooseLockPatternTest {
         final FooterButton nextButton = footerBarMixin.getPrimaryButton();
 
         assertThat(nextButton.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(nextButton.isEnabled()).isFalse();
 
         enterPattern();
 
@@ -333,7 +332,6 @@ public class SetupChooseLockPatternTest {
                 mContext.getString(R.string.lockpattern_need_to_unlock_wrong));
         assertThat(nextButton.getText().toString()).isEqualTo(
                 mContext.getString(R.string.lockpattern_confirm_button_text));
-        assertThat(nextButton.isEnabled()).isFalse();
     }
 
     @Test

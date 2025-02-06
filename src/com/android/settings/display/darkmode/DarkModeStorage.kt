@@ -24,8 +24,8 @@ import android.content.IntentFilter
 import android.content.res.Configuration
 import android.os.PowerManager
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
-import com.android.settingslib.datastore.DataChangeReason
 import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.metadata.PreferenceChangeReason
 
 /**
  * Abstract storage for dark mode settings.
@@ -54,7 +54,7 @@ internal class DarkModeStorage(private val context: Context) :
         broadcastReceiver =
             object : BroadcastReceiver() {
                 override fun onReceive(context: Context, intent: Intent) {
-                    notifyChange(DataChangeReason.UPDATE)
+                    notifyChange(PreferenceChangeReason.STATE)
                 }
             }
         context.registerReceiver(
@@ -63,7 +63,7 @@ internal class DarkModeStorage(private val context: Context) :
         )
 
         darkModeObserver = DarkModeObserver(context)
-        darkModeObserver.subscribe { notifyChange(DataChangeReason.UPDATE) }
+        darkModeObserver.subscribe { notifyChange(PreferenceChangeReason.VALUE) }
     }
 
     override fun onLastObserverRemoved() {

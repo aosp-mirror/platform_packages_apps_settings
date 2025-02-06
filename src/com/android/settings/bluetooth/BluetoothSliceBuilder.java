@@ -25,7 +25,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
-import android.provider.SettingsSlicesContract;
 import android.util.Log;
 
 import androidx.core.graphics.drawable.IconCompat;
@@ -37,6 +36,7 @@ import androidx.slice.builders.SliceAction;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.connecteddevice.BluetoothDashboardFragment;
+import com.android.settings.contract.SettingsContractKt;
 import com.android.settings.network.SatelliteRepository;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SliceBroadcastReceiver;
@@ -118,7 +118,7 @@ public class BluetoothSliceBuilder {
     public static Intent getIntent(Context context) {
         final String screenTitle = context.getText(R.string.bluetooth_settings_title).toString();
         final Uri contentUri = new Uri.Builder().appendPath(
-                SettingsSlicesContract.KEY_BLUETOOTH).build();
+                SettingsContractKt.KEY_BLUETOOTH).build();
         return SliceBuilderUtils.buildSearchResultPageIntent(context,
                 BluetoothDashboardFragment.class.getName(), null /* key */, screenTitle,
                 SettingsEnums.SETTINGS_CONNECTED_DEVICE_CATEGORY,

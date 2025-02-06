@@ -1,5 +1,5 @@
 package: "com.android.settings.flags"
-container: "system"
+container: "system_ext"
 
 flag {
   name: "rotation_connected_display_setting"
@@ -30,16 +30,6 @@ flag {
 }
 
 flag {
-    name: "enable_bonded_bluetooth_device_searchable"
-    namespace: "pixel_cross_device_control"
-    description: "Set bonded bluetooth devices under connected devices page to be searchable by Settings search."
-    bug: "319056077"
-    metadata {
-        purpose: PURPOSE_BUGFIX
-    }
-}
-
-flag {
     name: "exclude_webcam_auth_challenge"
     namespace: "safety_center"
     description: "Gates whether to exclude webcam from USB preferences auth challenge."
@@ -47,4 +37,11 @@ flag {
     metadata {
         purpose: PURPOSE_BUGFIX
     }
+}
+
+flag {
+  name: "display_size_connected_display_setting"
+  namespace: "lse_desktop_experience"
+  description: "Allow changing display size of the connected display."
+  bug: "392853666"
 }

@@ -75,18 +75,33 @@
 
     </PreferenceCategory>
 
+    <!-- An optional preference category for notifications. Only displayed up if enabled via flags and config. -->
+    <PreferenceCategory
+        android:key="time_notifications_category"
+        android:title="@string/time_notifications_title"
+        settings:controller="com.android.settings.datetime.NotificationsPreferenceCategoryController">
+
+        <SwitchPreferenceCompat
+            android:key="time_zone_change_notifications"
+            android:summary="@string/summary_placeholder"
+            android:title="@string/time_zone_change_notifications_toggle_title"
+            settings:keywords="@string/keywords_time_notification_category"
+            settings:controller="com.android.settings.datetime.TimeZoneNotificationsPreferenceController" />
+
+    </PreferenceCategory>
+
     <!-- An optional preference category for feedback. Only displayed up if enabled via flags and config. -->
     <PreferenceCategory
-            android:key="time_feedback_preference_category"
-            android:title="@string/time_feedback_category_title"
-            settings:keywords="@string/keywords_time_feedback_category"
-            settings:controller="com.android.settings.datetime.TimeFeedbackPreferenceCategoryController">
+        android:key="time_feedback_preference_category"
+        android:title="@string/time_feedback_category_title"
+        settings:controller="com.android.settings.datetime.TimeFeedbackPreferenceCategoryController"
+        settings:keywords="@string/keywords_time_feedback_category">
 
         <Preference
-                android:key="time_feedback"
-                android:title="@string/time_feedback_title"
-                settings:keywords="@string/keywords_time_feedback"
-                settings:controller="com.android.settings.datetime.TimeFeedbackPreferenceController" />
+            android:key="time_feedback"
+            android:title="@string/time_feedback_title"
+            settings:controller="com.android.settings.datetime.TimeFeedbackPreferenceController"
+            settings:keywords="@string/keywords_time_feedback" />
 
     </PreferenceCategory>
 

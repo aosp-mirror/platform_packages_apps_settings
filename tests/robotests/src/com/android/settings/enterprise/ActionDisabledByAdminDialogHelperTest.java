@@ -29,7 +29,9 @@ import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
+import android.app.supervision.SupervisionManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.Process;
 import android.os.UserHandle;
@@ -49,14 +51,19 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowContextImpl;
 import org.robolectric.shadows.ShadowProcess;
 
 @RunWith(RobolectricTestRunner.class)
@@ -66,19 +73,24 @@ import org.robolectric.shadows.ShadowProcess;
         ShadowActivity.class
 })
 public class ActionDisabledByAdminDialogHelperTest {
+    @Rule public final MockitoRule mMocks = MockitoJUnit.rule();
+
     private static final ComponentName ADMIN_COMPONENT =
             new ComponentName("some.package.name", "some.package.name.SomeClass");
     private static final int USER_ID = 123;
     private static final EnforcedAdmin ENFORCED_ADMIN =
             new EnforcedAdmin(ADMIN_COMPONENT, new UserHandle(USER_ID));
+
+    @Mock private SupervisionManager mSupervisionManager;
+
     private ActionDisabledByAdminDialogHelper mHelper;
     private Activity mActivity;
-    private org.robolectric.shadows.ShadowActivity mActivityShadow;
 
     @Before
     public void setUp() {
         mActivity = Robolectric.setupActivity(CustomActivity.class);
-        mActivityShadow = Shadow.extract(mActivity);
+        ShadowContextImpl shadowContext = Shadow.extract(mActivity.getBaseContext());
+        shadowContext.setSystemService(Context.SUPERVISION_SERVICE, mSupervisionManager);
         mHelper = new ActionDisabledByAdminDialogHelper(mActivity);
     }
 

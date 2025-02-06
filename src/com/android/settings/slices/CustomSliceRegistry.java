@@ -16,9 +16,6 @@
 
 package com.android.settings.slices;
 
-import static android.provider.SettingsSlicesContract.KEY_LOCATION;
-import static android.provider.SettingsSlicesContract.KEY_WIFI;
-
 import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
@@ -26,6 +23,7 @@ import android.util.ArrayMap;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.contract.SettingsContractKt;
 import com.android.settings.display.AlwaysOnDisplaySlice;
 import com.android.settings.display.ScreenTimeoutPreferenceController;
 import com.android.settings.flashlight.FlashlightSlice;
@@ -68,7 +66,7 @@ public class CustomSliceRegistry {
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSlicesContract.AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(SettingsSlicesContract.KEY_BLUETOOTH)
+            .appendPath(SettingsContractKt.KEY_BLUETOOTH)
             .build();
 
     /**
@@ -115,7 +113,7 @@ public class CustomSliceRegistry {
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSlicesContract.AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(KEY_LOCATION)
+            .appendPath(SettingsContractKt.KEY_LOCATION)
             .build();
     /**
      * Backing Uri for Low storage Slice.
@@ -143,7 +141,7 @@ public class CustomSliceRegistry {
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendEncodedPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath("mobile_data")
+            .appendPath(SettingsContractKt.KEY_MOBILE_DATA)
             .build();
 
     /**
@@ -222,7 +220,7 @@ public class CustomSliceRegistry {
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
-            .appendPath(WifiCallingSliceHelper.PATH_WIFI_CALLING)
+            .appendPath(SettingsContractKt.KEY_WIFI_CALLING)
             .build();
     /**
      * Full {@link Uri} for the Wifi Calling Preference Slice.
@@ -240,7 +238,7 @@ public class CustomSliceRegistry {
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(SettingsSlicesContract.AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath(KEY_WIFI)
+            .appendPath(SettingsContractKt.KEY_WIFI)
             .build();
 
     /**

@@ -69,9 +69,6 @@ public class ZenAccessSettings extends EmptyTextSettings implements
         mContext = getActivity();
         mPkgMan = mContext.getPackageManager();
         mNoMan = mContext.getSystemService(NotificationManager.class);
-        requireActivity().setTitle(Flags.modesApi() && Flags.modesUi()
-                ? R.string.manage_zen_modes_access_title
-                : R.string.manage_zen_access_title);
         getSettingsLifecycle().addObserver(
                 new ZenAccessSettingObserverMixin(getContext(), this /* listener */));
     }
@@ -92,6 +89,9 @@ public class ZenAccessSettings extends EmptyTextSettings implements
     @Override
     public void onResume() {
         super.onResume();
+        requireActivity().setTitle(Flags.modesApi() && Flags.modesUi()
+                ? R.string.manage_zen_modes_access_title
+                : R.string.manage_zen_access_title);
         reloadList();
     }
 

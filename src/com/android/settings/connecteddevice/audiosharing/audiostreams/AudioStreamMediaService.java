@@ -16,7 +16,8 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
-import static java.util.Collections.emptyList;
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.PAUSED;
+import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.STREAMING;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -67,7 +68,8 @@ public class AudioStreamMediaService extends Service {
     static final String DEVICES = "audio_stream_media_service_devices";
     private static final String TAG = "AudioStreamMediaService";
     private static final int NOTIFICATION_ID = 1;
-    private static final int BROADCAST_CONTENT_TEXT = R.string.audio_streams_listening_now;
+    private static final int BROADCAST_LISTENING_NOW_TEXT = R.string.audio_streams_listening_now;
+    private static final int BROADCAST_STREAM_PAUSED_TEXT = R.string.audio_streams_present_now;
     @VisibleForTesting static final String LEAVE_BROADCAST_ACTION = "leave_broadcast_action";
     private static final String LEAVE_BROADCAST_TEXT = "Leave Broadcast";
     private static final String CHANNEL_ID = "bluetooth_notification_channel";
@@ -77,7 +79,7 @@ public class AudioStreamMediaService extends Service {
     private static final int ZERO_PLAYBACK_SPEED = 0;
     private final PlaybackState.Builder mPlayStatePlayingBuilder =
             new PlaybackState.Builder()
-                    .setActions(PlaybackState.ACTION_PAUSE | PlaybackState.ACTION_SEEK_TO)
+                    .setActions(PlaybackState.ACTION_PLAY_PAUSE | PlaybackState.ACTION_SEEK_TO)
                     .setState(
                             PlaybackState.STATE_PLAYING,
                             STATIC_PLAYBACK_POSITION,
@@ -88,9 +90,19 @@ public class AudioStreamMediaService extends Service {
                             com.android.settings.R.drawable.ic_clear);
     private final PlaybackState.Builder mPlayStatePausingBuilder =
             new PlaybackState.Builder()
-                    .setActions(PlaybackState.ACTION_PLAY | PlaybackState.ACTION_SEEK_TO)
+                    .setActions(PlaybackState.ACTION_PLAY_PAUSE | PlaybackState.ACTION_SEEK_TO)
                     .setState(
                             PlaybackState.STATE_PAUSED,
+                            STATIC_PLAYBACK_POSITION,
+                            ZERO_PLAYBACK_SPEED)
+                    .addCustomAction(
+                            LEAVE_BROADCAST_ACTION,
+                            LEAVE_BROADCAST_TEXT,
+                            com.android.settings.R.drawable.ic_clear);
+    private final PlaybackState.Builder mPlayStateHysteresisBuilder =
+            new PlaybackState.Builder()
+                    .setState(
+                            PlaybackState.STATE_STOPPED,
                             STATIC_PLAYBACK_POSITION,
                             ZERO_PLAYBACK_SPEED)
                     .addCustomAction(
@@ -102,11 +114,13 @@ public class AudioStreamMediaService extends Service {
             FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
     private final AtomicBoolean mIsMuted = new AtomicBoolean(false);
+    private final AtomicBoolean mIsHysteresis = new AtomicBoolean(false);
     // Set 25 as default as the volume range from `VolumeControlProfile` is from 0 to 255.
     // If the initial volume from `onDeviceVolumeChanged` is larger than zero (not muted), we will
     // override this value. Otherwise, we raise the volume to 25 when the play button is clicked.
     private final AtomicInteger mLatestPositiveVolume = new AtomicInteger(25);
     private final Object mLocalSessionLock = new Object();
+    private boolean mHysteresisModeFixAvailable;
     private int mBroadcastId;
     @Nullable private List<BluetoothDevice> mDevices;
     @Nullable private LocalBluetoothManager mLocalBtManager;
@@ -139,6 +153,7 @@ public class AudioStreamMediaService extends Service {
             Log.w(TAG, "onCreate() : mLeBroadcastAssistant is null!");
             return;
         }
+        mHysteresisModeFixAvailable = BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(this);
 
         mNotificationManager = getSystemService(NotificationManager.class);
         if (mNotificationManager == null) {
@@ -256,6 +271,9 @@ public class AudioStreamMediaService extends Service {
     }
 
     private PlaybackState getPlaybackState() {
+        if (mIsHysteresis.get()) {
+            return mPlayStateHysteresisBuilder.build();
+        }
         return mIsMuted.get() ? mPlayStatePausingBuilder.build() : mPlayStatePlayingBuilder.build();
     }
 
@@ -284,7 +302,9 @@ public class AudioStreamMediaService extends Service {
                 new Notification.Builder(this, CHANNEL_ID)
                         .setSmallIcon(com.android.settingslib.R.drawable.ic_bt_le_audio_sharing)
                         .setStyle(mediaStyle)
-                        .setContentText(getString(BROADCAST_CONTENT_TEXT))
+                        .setContentText(getString(
+                                mIsHysteresis.get() ? BROADCAST_STREAM_PAUSED_TEXT :
+                                        BROADCAST_LISTENING_NOW_TEXT))
                         .setSilent(true);
         return notificationBuilder.build();
     }
@@ -308,14 +328,42 @@ public class AudioStreamMediaService extends Service {
             handleRemoveSource();
         }
 
+        @Override
+        public void onReceiveStateChanged(
+                BluetoothDevice sink, int sourceId, BluetoothLeBroadcastReceiveState state) {
+            super.onReceiveStateChanged(sink, sourceId, state);
+            if (!mHysteresisModeFixAvailable || mDevices == null || !mDevices.contains(sink)) {
+                return;
+            }
+            var sourceState = LocalBluetoothLeBroadcastAssistant.getLocalSourceState(state);
+            boolean streaming = sourceState == STREAMING;
+            boolean paused = sourceState == PAUSED;
+            // Exit early if the state is neither streaming nor paused
+            if (!streaming && !paused) {
+                return;
+            }
+            // Atomically update mIsHysteresis if its current value is not the current paused state
+            if (mIsHysteresis.compareAndSet(!paused, paused)) {
+                synchronized (mLocalSessionLock) {
+                    if (mLocalSession == null) {
+                        return;
+                    }
+                    mLocalSession.setPlaybackState(getPlaybackState());
+                    if (mNotificationManager != null) {
+                        mNotificationManager.notify(
+                                NOTIFICATION_ID,
+                                buildNotification(mLocalSession.getSessionToken())
+                        );
+                    }
+                    Log.d(TAG, "updating hysteresis mode to : " + paused);
+                }
+            }
+        }
+
         private void handleRemoveSource() {
-            List<BluetoothLeBroadcastReceiveState> connected =
-                    mAudioStreamsHelper == null
-                            ? emptyList()
-                            : mAudioStreamsHelper.getAllConnectedSources();
-            if (connected.stream()
-                    .map(BluetoothLeBroadcastReceiveState::getBroadcastId)
-                    .noneMatch(id -> id == mBroadcastId)) {
+            if (mAudioStreamsHelper != null
+                    && !mAudioStreamsHelper.getConnectedBroadcastIdAndState(
+                            mHysteresisModeFixAvailable).containsKey(mBroadcastId)) {
                 stopSelf();
             }
         }

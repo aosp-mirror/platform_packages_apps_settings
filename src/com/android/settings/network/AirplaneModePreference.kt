@@ -30,18 +30,19 @@ import android.telephony.TelephonyManager
 import androidx.annotation.DrawableRes
 import androidx.preference.Preference
 import com.android.settings.AirplaneModeEnabler
+import com.android.settings.PreferenceActionMetricsProvider
 import com.android.settings.PreferenceRestrictionMixin
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.contract.KEY_AIRPLANE_MODE
 import com.android.settings.network.SatelliteRepository.Companion.isSatelliteOn
-import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.RestrictedSwitchPreference
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
-import com.android.settingslib.datastore.DataChangeReason
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
@@ -51,12 +52,15 @@ import com.android.settingslib.metadata.SwitchPreference
 // LINT.IfChange
 class AirplaneModePreference :
     SwitchPreference(KEY, R.string.airplane_mode),
+    PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider,
     PreferenceLifecycleProvider,
     PreferenceRestrictionMixin {
 
     override val icon: Int
         @DrawableRes get() = R.drawable.ic_airplanemode_active
+
+    override fun tags(context: Context) = arrayOf(KEY_AIRPLANE_MODE)
 
     override fun isAvailable(context: Context) =
         (context.resources.getBoolean(R.bool.config_show_toggle_airplane) &&
@@ -88,6 +92,9 @@ class AirplaneModePreference :
     override val sensitivityLevel
         get() = SensitivityLevel.HIGH_SENSITIVITY
 
+    override val preferenceActionMetrics: Int
+        get() = ACTION_AIRPLANE_TOGGLE
+
     override fun storage(context: Context): KeyValueStore =
         AirplaneModeStorage(context, SettingsGlobalStore.get(context))
 
@@ -109,16 +116,12 @@ class AirplaneModePreference :
             (settingsStore.getBoolean(key) ?: DEFAULT_VALUE) as T
 
         override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
-            if (value is Boolean) {
-                settingsStore.setBoolean(key, value)
+            if (value !is Boolean) return
+            settingsStore.setBoolean(key, value)
 
-                val intent = Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED)
-                intent.putExtra("state", value)
-                context.sendBroadcastAsUser(intent, UserHandle.ALL)
-
-                val metricsFeature = featureFactory.metricsFeatureProvider
-                metricsFeature.action(context, ACTION_AIRPLANE_TOGGLE, value)
-            }
+            val intent = Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED)
+            intent.putExtra("state", value)
+            context.sendBroadcastAsUser(intent, UserHandle.ALL)
         }
 
         override fun onFirstObserverAdded() {
@@ -126,7 +129,7 @@ class AirplaneModePreference :
                 phoneStateListener =
                     object : PhoneStateListener(Looper.getMainLooper()) {
                         override fun onRadioPowerStateChanged(state: Int) {
-                            notifyChange(KEY, DataChangeReason.UPDATE)
+                            notifyChange(KEY, PreferenceChangeReason.VALUE)
                         }
                     }
                 it.listen(phoneStateListener, PhoneStateListener.LISTEN_RADIO_POWER_STATE_CHANGED)

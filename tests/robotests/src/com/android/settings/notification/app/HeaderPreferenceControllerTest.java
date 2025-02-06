@@ -114,27 +114,6 @@ public class HeaderPreferenceControllerTest {
     }
 
     @Test
-    public void testGetLabel() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.label = "bananas";
-        mController.onResume(appRow, null, null, null, null, null, null);
-        assertEquals(appRow.label, mController.getLabel());
-
-        NotificationChannelGroup group = new NotificationChannelGroup("id", "name");
-        mController.onResume(appRow, null, group, null, null, null, null);
-        assertEquals(appRow.label, mController.getLabel());
-
-        NotificationChannel channel = new NotificationChannel("cid", "cname", IMPORTANCE_NONE);
-        mController.onResume(appRow, channel, group, null, null, null, null);
-        assertEquals(channel.getName(), mController.getLabel());
-
-        NotificationChannel defaultChannel = new NotificationChannel(
-                NotificationChannel.DEFAULT_CHANNEL_ID, "", IMPORTANCE_NONE);
-        mController.onResume(appRow, defaultChannel, null, null, null, null, null);
-        assertEquals(appRow.label, mController.getLabel());
-    }
-
-    @Test
     public void testGetSummary() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.label = "bananas";
@@ -146,16 +125,14 @@ public class HeaderPreferenceControllerTest {
         NotificationChannel channel = new NotificationChannel("cid", "cname", IMPORTANCE_NONE);
         mController.onResume(appRow, channel, group, null, null, null, null);
         assertTrue(mController.getSummary().toString().contains(group.getName()));
-        assertTrue(mController.getSummary().toString().contains(appRow.label));
 
         mController.onResume(appRow, channel, null, null, null, null, null);
         assertFalse(mController.getSummary().toString().contains(group.getName()));
-        assertTrue(mController.getSummary().toString().contains(appRow.label));
 
         NotificationChannel defaultChannel = new NotificationChannel(
                 NotificationChannel.DEFAULT_CHANNEL_ID, "", IMPORTANCE_NONE);
         mController.onResume(appRow, defaultChannel, null, null, null, null, null);
-        assertEquals(appRow.label, mController.getSummary());
+        assertEquals("", mController.getSummary());
     }
 
     @Test

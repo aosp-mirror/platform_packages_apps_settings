@@ -53,7 +53,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager;
 import com.android.settings.testutils.shadow.ShadowFragment;
@@ -376,11 +375,6 @@ public class ToggleFeaturePreferenceFragmentTest {
         @Override
         ComponentName getTileComponentName() {
             return PLACEHOLDER_TILE_COMPONENT_NAME;
-        }
-
-        @Override
-        protected CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
-            return PLACEHOLDER_TILE_TOOLTIP_CONTENT;
         }
 
         @Override

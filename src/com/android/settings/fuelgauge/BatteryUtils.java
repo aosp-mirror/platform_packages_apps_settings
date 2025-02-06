@@ -223,10 +223,16 @@ public class BatteryUtils {
     public boolean shouldHideUidBatteryConsumerUnconditionally(
             UidBatteryConsumer consumer, String[] packages) {
         final int uid = consumer.getUid();
+        if (android.content.pm.Flags.removeHiddenModuleUsage()) {
+            return uid == UID_TETHERING ? false : uid < 0;
+        }
         return uid == UID_TETHERING ? false : uid < 0 || isHiddenSystemModule(packages);
     }
 
-    /** Returns true if one the specified packages belongs to a hidden system module. */
+    /**
+     * Returns true if one the specified packages belongs to a hidden system module.
+     * TODO(b/382016780): to be removed after flag cleanup.
+     */
     public boolean isHiddenSystemModule(String[] packages) {
         if (packages != null) {
             for (int i = 0, length = packages.length; i < length; i++) {

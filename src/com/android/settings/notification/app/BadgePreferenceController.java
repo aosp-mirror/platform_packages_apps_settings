@@ -82,6 +82,9 @@ public class BadgePreferenceController extends NotificationPreferenceController
 
     public void updateState(Preference preference) {
         if (mAppRow != null) {
+            if (preference.getParent() != null) {
+                preference.getParent().setVisible(true);
+            }
             RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
             pref.setDisabledByAdmin(mAdmin);
             if (mChannel != null) {

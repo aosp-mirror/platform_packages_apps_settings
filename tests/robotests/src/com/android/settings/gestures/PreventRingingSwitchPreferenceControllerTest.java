@@ -88,7 +88,7 @@ public class PreventRingingSwitchPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mController.mSwitch, times(1)).updateStatus(false);
+        verify(mController.mSwitch, times(1)).setChecked(false);
     }
 
     @Test
@@ -98,7 +98,7 @@ public class PreventRingingSwitchPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mController.mSwitch, times(1)).updateStatus(true);
+        verify(mController.mSwitch, times(1)).setChecked(true);
     }
 
     @Test
@@ -108,7 +108,7 @@ public class PreventRingingSwitchPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mController.mSwitch, times(1)).updateStatus(true);
+        verify(mController.mSwitch, times(1)).setChecked(true);
     }
 
     @Test

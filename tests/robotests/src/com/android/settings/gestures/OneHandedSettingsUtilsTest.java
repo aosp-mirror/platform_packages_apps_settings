@@ -22,14 +22,9 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.os.UserHandle;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
-import android.view.accessibility.Flags;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -37,8 +32,6 @@ import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class OneHandedSettingsUtilsTest {
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private static final int OFF = 0;
     private static final int ON = 1;
 
@@ -162,21 +155,11 @@ public class OneHandedSettingsUtilsTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void getShortcutEnabled_qsShortcutEnabled_returnTrue() {
         setupShortcuts(
                 /* enableFab= */ false, /* enableVolumeKeys= */ false, /* enableQs=*/ true);
 
         assertThat(OneHandedSettingsUtils.getShortcutEnabled(mContext)).isTrue();
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void getShortcutEnabled_flagDisabled_qsShortcutEnabled_returnFalse() {
-        setupShortcuts(
-                /* enableFab= */ false, /* enableVolumeKeys= */ false, /* enableQs=*/ true);
-
-        assertThat(OneHandedSettingsUtils.getShortcutEnabled(mContext)).isFalse();
     }
 
     private void setupShortcuts(boolean enableFab, boolean enableVolumeKeys, boolean enableQs) {

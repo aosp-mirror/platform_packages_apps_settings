@@ -30,6 +30,7 @@ import androidx.preference.TwoStatePreference;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+import com.android.wm.shell.shared.desktopmode.DesktopModeStatus;
 
 /**
  * Preference controller to control Desktop mode features on secondary display
@@ -59,6 +60,11 @@ public class DesktopModeSecondaryDisplayPreferenceController extends
     @Override
     public String getPreferenceKey() {
         return ENABLE_DESKTOP_MODE_ON_SECONDARY_DISPLAY;
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return !DesktopModeStatus.canShowDesktopExperienceDevOption(mContext);
     }
 
     @Override

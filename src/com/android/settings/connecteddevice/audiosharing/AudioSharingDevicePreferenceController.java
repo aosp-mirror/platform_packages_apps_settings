@@ -78,8 +78,6 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
 
     private static final String TAG = "AudioSharingDevicePrefController";
     private static final String KEY = "audio_sharing_device_list";
-    private static final String KEY_AUDIO_SHARING_SETTINGS =
-            "connected_device_audio_sharing_settings";
 
     @Nullable private final LocalBluetoothManager mBtManager;
     @Nullable private final CachedBluetoothDeviceManager mDeviceManager;
@@ -89,7 +87,6 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
     private final Executor mExecutor;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     @Nullable private PreferenceGroup mPreferenceGroup;
-    @Nullable private Preference mAudioSharingSettingsPreference;
     @Nullable private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
     @Nullable private DashboardFragment mFragment;
     @Nullable private AudioSharingDialogHandler mDialogHandler;
@@ -280,12 +277,7 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
         super.displayPreference(screen);
         mPreferenceGroup = screen.findPreference(KEY);
         if (mPreferenceGroup != null) {
-            mAudioSharingSettingsPreference =
-                    mPreferenceGroup.findPreference(KEY_AUDIO_SHARING_SETTINGS);
             mPreferenceGroup.setVisible(false);
-        }
-        if (mAudioSharingSettingsPreference != null) {
-            mAudioSharingSettingsPreference.setVisible(false);
         }
 
         if (isAvailable()) {
@@ -320,11 +312,8 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
     @Override
     public void onDeviceAdded(Preference preference) {
         if (mPreferenceGroup != null) {
-            if (mPreferenceGroup.getPreferenceCount() == 1) {
+            if (mPreferenceGroup.getPreferenceCount() == 0) {
                 mPreferenceGroup.setVisible(true);
-                if (mAudioSharingSettingsPreference != null) {
-                    mAudioSharingSettingsPreference.setVisible(true);
-                }
             }
             mPreferenceGroup.addPreference(preference);
         }
@@ -334,11 +323,8 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
     public void onDeviceRemoved(Preference preference) {
         if (mPreferenceGroup != null) {
             mPreferenceGroup.removePreference(preference);
-            if (mPreferenceGroup.getPreferenceCount() == 1) {
+            if (mPreferenceGroup.getPreferenceCount() == 0) {
                 mPreferenceGroup.setVisible(false);
-                if (mAudioSharingSettingsPreference != null) {
-                    mAudioSharingSettingsPreference.setVisible(false);
-                }
             }
         }
     }
@@ -389,7 +375,8 @@ public class AudioSharingDevicePreferenceController extends BasePreferenceContro
             Log.d(TAG, "onDeviceClick, set active in call mode");
             CachedBluetoothDevice cachedDevice =
                     ((BluetoothDevicePreference) preference).getBluetoothDevice();
-            AudioSharingUtils.setPrimary(mContext, cachedDevice);
+            cachedDevice.setActive();
+            AudioSharingUtils.setUserPreferredPrimary(mContext, cachedDevice);
         }
         mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_AUDIO_SHARING_DEVICE_CLICK,
                 isCallMode);

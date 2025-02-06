@@ -20,15 +20,13 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 public class PromotedNotificationsPreferenceController extends
         NotificationPreferenceController implements Preference.OnPreferenceChangeListener {
-    private static final String KEY_PROMOTED_CATEGORY = "promoted_category";
-    private static final String KEY_PROMOTED_SWITCH = "promoted_switch";
+    protected static final String KEY_PROMOTED_SWITCH = "promoted_switch";
 
     public PromotedNotificationsPreferenceController(@NonNull Context context,
             @NonNull NotificationBackend backend) {
@@ -38,7 +36,7 @@ public class PromotedNotificationsPreferenceController extends
     @Override
     @NonNull
     public String getPreferenceKey() {
-        return KEY_PROMOTED_CATEGORY;
+        return KEY_PROMOTED_SWITCH;
     }
 
     @Override
@@ -56,12 +54,13 @@ public class PromotedNotificationsPreferenceController extends
     }
 
     /**
-     * Updates the state of the promoted notifications switch. Because this controller governs
-     * the full PreferenceCategory, we must find the switch preference within the category first.
+     * Updates the state of the promoted notifications switch.
      */
     public void updateState(@NonNull Preference preference) {
-        PreferenceCategory category = (PreferenceCategory) preference;
-        RestrictedSwitchPreference pref = category.findPreference(KEY_PROMOTED_SWITCH);
+        RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
+        if (pref.getParent() != null) {
+            pref.getParent().setVisible(true);
+        }
 
         if (pref != null && mAppRow != null) {
             pref.setDisabledByAdmin(mAdmin);

@@ -118,7 +118,7 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
         if (config == null) {
             return;
         }
-        mBluetoothA2dpConfigStore.setCodecType(config.getCodecType());
+        mBluetoothA2dpConfigStore.setCodecType(config.getExtendedCodecType());
         mBluetoothA2dpConfigStore.setSampleRate(config.getSampleRate());
         mBluetoothA2dpConfigStore.setBitsPerSample(config.getBitsPerSample());
         mBluetoothA2dpConfigStore.setChannelMode(config.getChannelMode());

@@ -9,7 +9,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,7 +35,6 @@ public class NotificationHistoryRecyclerView extends RecyclerView {
         super(context, attrs, defStyle);
 
         setLayoutManager(new LinearLayoutManager(getContext()));
-        addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         ItemTouchHelper touchHelper = new ItemTouchHelper(
                 new DismissTouchHelper(0, ItemTouchHelper.START | ItemTouchHelper.END));
         touchHelper.attachToRecyclerView(this);

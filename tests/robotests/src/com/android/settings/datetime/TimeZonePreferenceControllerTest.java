@@ -16,6 +16,7 @@
 
 package com.android.settings.datetime;
 
+import static android.app.time.Capabilities.CAPABILITY_POSSESSED;
 import static android.app.time.DetectorStatusTypes.DETECTION_ALGORITHM_STATUS_RUNNING;
 import static android.app.time.DetectorStatusTypes.DETECTOR_STATUS_RUNNING;
 import static android.app.time.LocationTimeZoneAlgorithmStatus.PROVIDER_STATUS_NOT_PRESENT;
@@ -113,10 +114,12 @@ public class TimeZonePreferenceControllerTest {
                 .setUseLocationEnabled(useLocationEnabled)
                 .setConfigureGeoDetectionEnabledCapability(Capabilities.CAPABILITY_NOT_SUPPORTED)
                 .setSetManualTimeZoneCapability(suggestManualCapability)
+                .setConfigureNotificationsEnabledCapability(CAPABILITY_POSSESSED)
                 .build();
         TimeZoneConfiguration config = new TimeZoneConfiguration.Builder()
                 .setAutoDetectionEnabled(!suggestManualAllowed)
                 .setGeoDetectionEnabled(false)
+                .setNotificationsEnabled(true)
                 .build();
         return new TimeZoneCapabilitiesAndConfig(status, capabilities, config);
     }

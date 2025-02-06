@@ -22,7 +22,6 @@ import android.text.TextUtils;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -77,7 +76,7 @@ public class NightDisplayActivationPreferenceController extends
 
         mPreference = (MainSwitchPreference) screen.findPreference(getPreferenceKey());
         mPreference.addOnSwitchChangeListener(this);
-        mPreference.updateStatus(mColorDisplayManager.isNightDisplayActivated());
+        mPreference.setChecked(mColorDisplayManager.isNightDisplayActivated());
     }
 
     @Override

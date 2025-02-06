@@ -23,6 +23,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import com.android.internal.app.UnlaunchableAppActivity;
@@ -43,6 +44,7 @@ public class ScreenLockPreferenceDetailsUtils {
 
     private final int mUserId = UserHandle.myUserId();
     private final Context mContext;
+    @Nullable
     private final LockPatternUtils mLockPatternUtils;
     private final int mProfileChallengeUserId;
     private final UserManager mUm;
@@ -85,14 +87,15 @@ public class ScreenLockPreferenceDetailsUtils {
      * Returns whether the lock pattern is secure.
      */
     public boolean isLockPatternSecure() {
-        return mLockPatternUtils.isSecure(mUserId);
+        return mLockPatternUtils != null && mLockPatternUtils.isSecure(mUserId);
     }
 
     /**
      * Returns whether the Gear Menu should be shown.
      */
     public boolean shouldShowGearMenu() {
-        return isLockPatternSecure();
+        return !com.android.settings.flags.Flags.biometricsOnboardingEducation()
+                && isLockPatternSecure();
     }
 
     /**
@@ -147,6 +150,7 @@ public class ScreenLockPreferenceDetailsUtils {
         // profile with unified challenge on FBE-enabled devices. Otherwise, vold would not be
         // able to complete the operation due to the lack of (old) encryption key.
         if (mProfileChallengeUserId != UserHandle.USER_NULL
+                && mLockPatternUtils != null
                 && !mLockPatternUtils.isSeparateProfileChallengeEnabled(mProfileChallengeUserId)
                 && StorageManager.isFileEncrypted()) {
             if (mUm.isQuietModeEnabled(UserHandle.of(mProfileChallengeUserId))) {
@@ -165,8 +169,12 @@ public class ScreenLockPreferenceDetailsUtils {
                 .toIntent();
     }
 
+    @Nullable
     @StringRes
     private Integer getSummaryResId(int userId) {
+        if (mLockPatternUtils == null) {
+            return null;
+        }
         if (!mLockPatternUtils.isSecure(userId)) {
             if (userId == mProfileChallengeUserId
                     || mLockPatternUtils.isLockScreenDisabled(userId)) {

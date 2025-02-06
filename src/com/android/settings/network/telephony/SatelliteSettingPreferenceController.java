@@ -95,7 +95,13 @@ public class SatelliteSettingPreferenceController extends
             return UNSUPPORTED_ON_DEVICE;
         }
 
-        return mIsCarrierSatelliteAttachSupported ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        int availabilityStatus = mIsCarrierSatelliteAttachSupported
+                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        if (availabilityStatus == AVAILABLE && mIsCarrierRoamingNtnConnectedTypeManual
+                && !mIsSatelliteSmsAvailableForManualType) {
+            availabilityStatus = CONDITIONALLY_UNAVAILABLE;
+        }
+        return availabilityStatus;
     }
 
     @Override

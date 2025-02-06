@@ -503,9 +503,8 @@ public class AccessibilitySettingsTest {
     }
 
     private String getPreferenceCategory(ComponentName componentName) {
-        return mFragment.mServicePreferenceToPreferenceCategoryMap.get(
-                        mFragment.getPreferenceScreen().findPreference(
-                                componentName.flattenToString())).getKey();
+        return mFragment.getPreferenceScreen().findPreference(
+                componentName.flattenToString()).getParent().getKey();
     }
 
     private AccessibilityServiceInfo getMockAccessibilityServiceInfo(ComponentName componentName) {
