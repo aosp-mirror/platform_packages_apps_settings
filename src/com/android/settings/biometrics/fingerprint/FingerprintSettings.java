@@ -28,6 +28,8 @@ import static com.android.settings.Utils.isPrivateProfile;
 import static com.android.settings.biometrics.BiometricEnrollBase.BIOMETRIC_AUTH_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_CHALLENGE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -37,6 +39,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ResourceId;
 import android.graphics.drawable.Drawable;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
@@ -276,6 +279,8 @@ public class FingerprintSettings extends SubSettings {
                 "security_settings_fingerprint_unlock_category";
         private static final String KEY_FINGERPRINT_UNLOCK_FOOTER =
                 "security_settings_fingerprint_footer";
+        private static final String KEY_FINGERPRINT_DESCRIPTION =
+                "security_settings_fingerprint_description";
         private static final String KEY_BIOMETRICS_AUTHENTICATION_REQUESTED =
                 "biometrics_authentication_requested";
         private static final String KEY_BIOMETRICS_USE_FINGERPRINT_TO_CATEGORY =
@@ -648,13 +653,16 @@ public class FingerprintSettings extends SubSettings {
                 mFooterColumns.add(column2);
             } else {
                 final FooterColumn column = new FooterColumn();
+                final FingerprintSettingsFeatureProvider featureProvider =
+                        FeatureFactory.getFeatureFactory().getFingerprintFeatureProvider()
+                                .getFingerprintSettingsFeatureProvider();
                 column.mTitle = getString(isPrivateProfile()
                         ? R.string.private_space_fingerprint_enroll_introduction_message
                         : R.string.security_settings_fingerprint_enroll_introduction_v3_message,
                         DeviceHelper.getDeviceName(getActivity()));
                 column.mLearnMoreClickListener = learnMoreClickListener;
                 column.mLearnMoreOverrideText = getText(
-                        R.string.security_settings_fingerprint_settings_footer_learn_more);
+                        featureProvider.getSettingPageFooterLearnMoreDescription());
                 mFooterColumns.add(column);
             }
         }
@@ -735,6 +743,14 @@ public class FingerprintSettings extends SubSettings {
                 scrollToPreference(fpPrefKey);
                 addFingerprintUnlockCategory();
             }
+            final int descriptionRes = FeatureFactory.getFeatureFactory()
+                    .getFingerprintFeatureProvider().getFingerprintSettingsFeatureProvider()
+                    .getSettingPageDescription();
+            if (ResourceId.isValid(descriptionRes)) {
+                final Preference preference = findPreference(KEY_FINGERPRINT_DESCRIPTION);
+                preference.setTitle(descriptionRes);
+                preference.setVisible(true);
+            }
             createFooterPreference(root);
         }
 
@@ -748,8 +764,7 @@ public class FingerprintSettings extends SubSettings {
                         R.string.security_settings_fingerprint_title));
             }
 
-            String keyToReturn = mIsExpressiveThemeStyle
-                    ? KEY_FINGERPRINT_ADD_EXPRESSIVE : KEY_FINGERPRINT_ADD;
+            String keyToReturn = getAddFingerprintPreferenceKey();
             final List<Fingerprint> items = mFingerprintManager.getEnrolledFingerprints(mUserId);
             final int fingerprintCount = items.size();
             for (int i = 0; i < fingerprintCount; i++) {
@@ -785,8 +800,7 @@ public class FingerprintSettings extends SubSettings {
                 mFingerprintsEnrolledCategory.addPreference(pref);
                 pref.setOnPreferenceChangeListener(this);
             }
-            mAddFingerprintPreference = findPreference(mIsExpressiveThemeStyle
-                    ? KEY_FINGERPRINT_ADD_EXPRESSIVE : KEY_FINGERPRINT_ADD);
+            mAddFingerprintPreference = findPreference(getAddFingerprintPreferenceKey());
             setupAddFingerprintPreference();
             return keyToReturn;
         }
@@ -839,18 +853,31 @@ public class FingerprintSettings extends SubSettings {
         }
 
         private void updateFingerprintUnlockCategoryVisibility() {
-            final boolean fingerprintUnlockCategoryAvailable =
-                    mFingerprintUnlockCategoryPreferenceController.isAvailable();
-            if (mFingerprintUnlockCategory.isVisible() != fingerprintUnlockCategoryAvailable) {
-                mFingerprintUnlockCategory.setVisible(fingerprintUnlockCategoryAvailable);
-            }
+            final int categoryStatus =
+                    mFingerprintUnlockCategoryPreferenceController.getAvailabilityStatus();
+            updatePreferenceVisibility(categoryStatus, mFingerprintUnlockCategory);
+
             if (mRequireScreenOnToAuthPreferenceController != null) {
-                mRequireScreenOnToAuthPreference.setVisible(
-                        mRequireScreenOnToAuthPreferenceController.isAvailable());
+                final int status =
+                        mRequireScreenOnToAuthPreferenceController.getAvailabilityStatus();
+                updatePreferenceVisibility(status, mRequireScreenOnToAuthPreference);
             }
             if (mScreenOffUnlockUdfpsPreferenceController != null) {
-                mScreenOffUnlockUdfpsPreference.setVisible(
-                        mScreenOffUnlockUdfpsPreferenceController.isAvailable());
+                final int status =
+                        mScreenOffUnlockUdfpsPreferenceController.getAvailabilityStatus();
+                updatePreferenceVisibility(status, mScreenOffUnlockUdfpsPreference);
+            }
+        }
+
+        private void updatePreferenceVisibility(int availabilityStatus, Preference preference) {
+            if (availabilityStatus == AVAILABLE) {
+                preference.setVisible(true);
+                preference.setEnabled(true);
+            } else if (availabilityStatus == CONDITIONALLY_UNAVAILABLE) {
+                preference.setVisible(true);
+                preference.setEnabled(false);
+            } else {
+                preference.setVisible(false);
             }
         }
 
@@ -898,8 +925,29 @@ public class FingerprintSettings extends SubSettings {
                     .setOnPreferenceChangeListener(fingerprintAppController);
         }
 
+        private void updateUseFingerprintToEnableStatus() {
+            final PreferenceCategory category =
+                    findPreference(KEY_BIOMETRICS_USE_FINGERPRINT_TO_CATEGORY);
+            if (!category.isVisible()) {
+                return;
+            }
+            final boolean hasFingerprintEnrolled =
+                    mFingerprintManager.getEnrolledFingerprints(mUserId).size() > 0;
+
+            final FingerprintSettingsKeyguardUnlockPreferenceController fpUnlockController =
+                    use(FingerprintSettingsKeyguardUnlockPreferenceController.class);
+            findPreference(fpUnlockController.getPreferenceKey())
+                    .setEnabled(hasFingerprintEnrolled);
+
+            final FingerprintSettingsAppsPreferenceController fingerprintAppController =
+                    use(FingerprintSettingsAppsPreferenceController.class);
+            findPreference(fingerprintAppController.getPreferenceKey())
+                    .setEnabled(hasFingerprintEnrolled);
+        }
+
         private void updatePreferencesAfterFingerprintRemoved() {
             updateAddPreference();
+            updateUseFingerprintToEnableStatus();
             if (isSfps() || (screenOffUnlockUdfps() && isScreenOffUnlcokSupported())) {
                 updateFingerprintUnlockCategoryVisibility();
             }
@@ -911,8 +959,7 @@ public class FingerprintSettings extends SubSettings {
                 return; // Activity went away
             }
 
-            mAddFingerprintPreference = findPreference(
-                    mIsExpressiveThemeStyle ? KEY_FINGERPRINT_ADD_EXPRESSIVE : KEY_FINGERPRINT_ADD);
+            mAddFingerprintPreference = findPreference(getAddFingerprintPreferenceKey());
 
             if (mAddFingerprintPreference == null) {
                 return; // b/275519315 Skip if updateAddPreference() invoke before addPreference()
@@ -945,11 +992,11 @@ public class FingerprintSettings extends SubSettings {
                     findPreference(KEY_FINGERPRINT_ADD_EXPRESSIVE);
 
             if (nonExpressiveBtnPreference != null) {
-                nonExpressiveBtnPreference.setVisible(!mIsExpressiveThemeStyle);
+                nonExpressiveBtnPreference.setVisible(!shouldShowExpressiveAddFingerprintPref());
             }
 
             if (expressiveBtnPreference != null) {
-                expressiveBtnPreference.setVisible(mIsExpressiveThemeStyle);
+                expressiveBtnPreference.setVisible(shouldShowExpressiveAddFingerprintPref());
             }
         }
 
@@ -1053,7 +1100,7 @@ public class FingerprintSettings extends SubSettings {
         @Override
         public boolean onPreferenceTreeClick(Preference pref) {
             final String key = pref.getKey();
-            if (!mIsExpressiveThemeStyle && KEY_FINGERPRINT_ADD.equals(key)) {
+            if (KEY_FINGERPRINT_ADD.equals(key)) {
                 mIsEnrolling = true;
                 Intent intent = new Intent();
                 intent.setClassName(SETTINGS_PACKAGE_NAME,
@@ -1449,6 +1496,16 @@ public class FingerprintSettings extends SubSettings {
 
         private boolean isPrivateProfile() {
             return Utils.isPrivateProfile(mUserId, getContext());
+        }
+
+        private String getAddFingerprintPreferenceKey() {
+            return shouldShowExpressiveAddFingerprintPref()
+                    ? KEY_FINGERPRINT_ADD_EXPRESSIVE : KEY_FINGERPRINT_ADD;
+        }
+
+        private boolean shouldShowExpressiveAddFingerprintPref() {
+            return Flags.biometricsOnboardingEducation() && mIsExpressiveThemeStyle
+                    && mFingerprintManager.hasEnrolledTemplates(mUserId);
         }
 
         public static class DeleteFingerprintDialog extends InstrumentedDialogFragment

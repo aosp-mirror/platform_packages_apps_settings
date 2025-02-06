@@ -23,6 +23,7 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
+import androidx.preference.Preference;
 
 import com.android.settings.Utils;
 import com.android.settings.biometrics.activeunlock.ActiveUnlockStatusUtils;
@@ -51,6 +52,20 @@ public class FingerprintSettingsAppsPreferenceController
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putIntForUser(mContext.getContentResolver(), FINGERPRINT_APP_ENABLED,
                 isChecked ? ON : OFF, getUserId());
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (!FingerprintSettings.isFingerprintHardwareDetected(mContext)) {
+            preference.setEnabled(false);
+        } else if (!mFingerprintManager.hasEnrolledTemplates(getUserId())) {
+            preference.setEnabled(false);
+        } else if (getRestrictingAdmin() != null) {
+            preference.setEnabled(false);
+        } else {
+            preference.setEnabled(true);
+        }
     }
 
     @Override
