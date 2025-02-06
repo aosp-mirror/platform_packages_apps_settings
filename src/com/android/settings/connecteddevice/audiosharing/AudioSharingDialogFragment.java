@@ -17,13 +17,13 @@
 package com.android.settings.connecteddevice.audiosharing;
 
 import static com.android.settings.connecteddevice.audiosharing.AudioSharingDashboardFragment.SHARE_THEN_PAIR_REQUEST_CODE;
-import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsQrCodeFragment.getQrCodeBitmap;
+import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamsQrCodeFragment.getQrCodeDrawable;
 import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast.EXTRA_PAIR_AND_JOIN_SHARING;
 
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
-import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
@@ -45,6 +45,7 @@ import com.android.settingslib.bluetooth.BluetoothUtils;
 
 import com.google.common.collect.Iterables;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
@@ -159,7 +160,6 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
         }
         if (deviceItems.isEmpty()) {
             builder.setTitle(R.string.audio_sharing_share_dialog_title)
-                    .setCustomMessage(R.string.audio_sharing_dialog_connect_device_content)
                     .setCustomPositiveButton(
                             R.string.audio_sharing_pair_button_label,
                             v -> {
@@ -183,14 +183,23 @@ public class AudioSharingDialogFragment extends InstrumentedDialogFragment {
                             });
             BluetoothLeBroadcastMetadata metadata = arguments.getParcelable(
                     BUNDLE_KEY_BROADCAST_METADATA, BluetoothLeBroadcastMetadata.class);
-            Bitmap qrCodeBitmap = metadata == null ? null : getQrCodeBitmap(metadata,
+            Drawable qrCodeDrawable = metadata == null ? null : getQrCodeDrawable(metadata,
                     getContext()).orElse(null);
-            if (qrCodeBitmap != null) {
-                builder.setCustomImage(qrCodeBitmap)
-                        .setCustomNegativeButton(com.android.settings.R.string.cancel,
+            if (qrCodeDrawable != null) {
+                builder.setCustomImage(qrCodeDrawable)
+                        .setCustomMessage(
+                                getString(
+                                        R.string.audio_sharing_dialog_qr_code_content,
+                                        metadata.getBroadcastName(),
+                                        new String(
+                                                metadata.getBroadcastCode(),
+                                                StandardCharsets.UTF_8)))
+                        .setCustomMessage2(R.string.audio_sharing_dialog_pair_new_device_content)
+                        .setCustomNegativeButton(R.string.audio_streams_dialog_close,
                                 v -> onCancelClick());
             } else {
                 builder.setCustomImage(R.drawable.audio_sharing_guidance)
+                        .setCustomMessage(R.string.audio_sharing_dialog_connect_device_content)
                         .setCustomNegativeButton(
                                 R.string.audio_sharing_qrcode_button_label,
                                 v -> {

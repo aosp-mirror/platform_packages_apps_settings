@@ -47,6 +47,15 @@
             android:paddingBottom="24dp"
             android:visibility="gone" />
 
+        <TextView
+            android:id="@+id/description_text_2"
+            style="@style/DeviceAudioSharingText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingBottom="24dp"
+            android:visibility="gone" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/device_btn_list"
             android:layout_width="match_parent"
