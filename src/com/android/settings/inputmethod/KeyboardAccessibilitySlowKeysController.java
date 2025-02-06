@@ -16,7 +16,6 @@
 
 package com.android.settings.inputmethod;
 
-import static android.app.settings.SettingsEnums.ACTION_SLOW_KEYS_CUSTOM_VALUE_CHANGE;
 import static android.app.settings.SettingsEnums.ACTION_SLOW_KEYS_DISABLED;
 import static android.app.settings.SettingsEnums.ACTION_SLOW_KEYS_ENABLED;
 
@@ -32,20 +31,19 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settingslib.PrimarySwitchPreference;
 
 public class KeyboardAccessibilitySlowKeysController extends
         InputSettingPreferenceController implements
         LifecycleObserver {
     public static final int SLOW_KEYS_THRESHOLD = 500;
+    private static final String KEY_TAG = "slow_keys_dialog_tag";
 
     @Nullable
     private PrimarySwitchPreference mPrimarySwitchPreference;
 
     public KeyboardAccessibilitySlowKeysController(@NonNull Context context, @NonNull String key) {
         super(context, key);
-        constructDialog(context, R.string.slow_keys, R.string.slow_keys_summary);
     }
 
     @Override
@@ -90,28 +88,16 @@ public class KeyboardAccessibilitySlowKeysController extends
 
     @Override
     public boolean handlePreferenceTreeClick(@NonNull Preference preference) {
-        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())
+                || mFragmentManager == null) {
             return false;
         }
-        if (mAlertDialog != null) {
-            mAlertDialog.show();
-        }
+        KeyboardAccessibilitySlowKeysDialogFragment.getInstance().show(mFragmentManager, KEY_TAG);
         return true;
     }
 
     @Override
     protected void updateInputSettingKeysValue(int thresholdTimeMillis) {
         InputSettings.setAccessibilitySlowKeysThreshold(mContext, thresholdTimeMillis);
-    }
-
-    @Override
-    protected void onCustomValueUpdated(int thresholdTimeMillis) {
-        mMetricsFeatureProvider.action(mContext,
-                ACTION_SLOW_KEYS_CUSTOM_VALUE_CHANGE, thresholdTimeMillis);
-    }
-
-    @Override
-    protected int getInputSettingKeysValue() {
-        return InputSettings.getAccessibilitySlowKeysThreshold(mContext);
     }
 }

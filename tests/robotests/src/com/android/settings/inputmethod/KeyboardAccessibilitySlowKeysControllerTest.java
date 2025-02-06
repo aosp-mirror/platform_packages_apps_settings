@@ -18,6 +18,9 @@ package com.android.settings.inputmethod;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -25,12 +28,12 @@ import android.hardware.input.InputSettings;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
-import android.widget.RadioGroup;
 
-import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.keyboard.Flags;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
@@ -45,10 +48,13 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowLooper;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
+        KeyboardAccessibilitySlowKeysControllerTest
+                .ShadowKeyboardAccessibilitySlowKeysDialogFragment.class,
         com.android.settings.testutils.shadow.ShadowFragment.class,
         ShadowAlertDialogCompat.class,
 })
@@ -60,6 +66,15 @@ public class KeyboardAccessibilitySlowKeysControllerTest {
     private static final String PREFERENCE_KEY = "keyboard_a11y_page_slow_keys";
     @Mock
     private Preference mPreference;
+    @Mock
+    private Fragment mFragment;
+    @Mock
+    private FragmentManager mFragmentManager;
+    @Mock
+    private FragmentTransaction mFragmentTransaction;
+    @Mock
+    private KeyboardAccessibilitySlowKeysDialogFragment
+            mKeyboardAccessibilitySlowKeysDialogFragment;
     private Context mContext;
     private KeyboardAccessibilitySlowKeysController mKeyboardAccessibilitySlowKeysController;
 
@@ -71,6 +86,11 @@ public class KeyboardAccessibilitySlowKeysControllerTest {
                 mContext,
                 PREFERENCE_KEY);
         when(mPreference.getKey()).thenReturn(PREFERENCE_KEY);
+        when(mFragment.getParentFragmentManager()).thenReturn(mFragmentManager);
+        when(mFragmentManager.beginTransaction()).thenReturn(mFragmentTransaction);
+        mKeyboardAccessibilitySlowKeysController.setFragment(mFragment);
+        ShadowKeyboardAccessibilitySlowKeysDialogFragment.setInstance(
+                mKeyboardAccessibilitySlowKeysDialogFragment);
     }
 
     @Test
@@ -107,23 +127,25 @@ public class KeyboardAccessibilitySlowKeysControllerTest {
     public void handlePreferenceTreeClick_dialogShows() {
         mKeyboardAccessibilitySlowKeysController.handlePreferenceTreeClick(mPreference);
 
-        AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-
-        assertThat(alertDialog.isShowing()).isTrue();
+        verify(mKeyboardAccessibilitySlowKeysDialogFragment).show(any(FragmentManager.class),
+                anyString());
     }
 
-    @Test
-    public void handlePreferenceTreeClick_performClickOn200_updatesSlowKeysThreshold() {
-        mKeyboardAccessibilitySlowKeysController.handlePreferenceTreeClick(mPreference);
-        AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        RadioGroup radioGroup = alertDialog.findViewById(R.id.input_setting_keys_value_group);
-        radioGroup.check(R.id.input_setting_keys_value_200);
+    /**
+     * Note: Actually, shadow of KeyboardAccessibilitySlowKeysDialogFragment will not be used.
+     * Instance that returned with {@link #getInstance} should be set with {@link #setInstance}
+     */
+    @Implements(KeyboardAccessibilitySlowKeysDialogFragment.class)
+    public static class ShadowKeyboardAccessibilitySlowKeysDialogFragment {
+        static KeyboardAccessibilitySlowKeysDialogFragment sInstance = null;
 
-        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).performClick();
-        ShadowLooper.idleMainLooper();
+        @Implementation
+        protected static KeyboardAccessibilitySlowKeysDialogFragment getInstance() {
+            return sInstance;
+        }
 
-        assertThat(alertDialog.isShowing()).isFalse();
-        int threshold = InputSettings.getAccessibilitySlowKeysThreshold(mContext);
-        assertThat(threshold).isEqualTo(200);
+        public static void setInstance(KeyboardAccessibilitySlowKeysDialogFragment instance) {
+            sInstance = instance;
+        }
     }
 }
