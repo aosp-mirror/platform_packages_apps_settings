@@ -114,11 +114,10 @@
             android:summary="@string/oem_unlock_enable_summary"
             settings:useAdditionalSummary="true" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="enable_16k_pages"
             android:title="@string/enable_16k_pages"
-            android:summary="@string/enable_16k_pages_summary"
-            settings:useAdditionalSummary="true" />
+            android:summary="@string/enable_16k_pages_summary"/>
 
         <Preference
             android:key="running_apps"
