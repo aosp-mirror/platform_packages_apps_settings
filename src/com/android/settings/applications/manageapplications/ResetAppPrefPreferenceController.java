@@ -18,9 +18,11 @@ package com.android.settings.applications.manageapplications;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -69,5 +71,20 @@ public class ResetAppPrefPreferenceController extends AbstractPreferenceControll
     @Override
     public void onSaveInstanceState(Bundle outState) {
         mResetAppsHelper.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        Preference preference = screen.findPreference(getPreferenceKey());
+        if (preference != null) {
+            preference.setEnabled(!isInCallState());
+        }
+    }
+
+    boolean isInCallState() {
+        TelephonyManager telephonyManager = mContext.getSystemService(TelephonyManager.class);
+        return telephonyManager.getCallState(telephonyManager.getSubscriptionId())
+                != TelephonyManager.CALL_STATE_IDLE;
     }
 }
