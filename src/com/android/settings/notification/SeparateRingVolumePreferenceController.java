@@ -35,6 +35,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 /**
  * This slider is used to represent ring volume when ring is separated from notification
  */
+// LINT.IfChange
 public class SeparateRingVolumePreferenceController extends
         RingerModeAffectedVolumePreferenceController {
 
@@ -149,3 +150,4 @@ public class SeparateRingVolumePreferenceController extends
     }
 
 }
+// LINT.ThenChange(SeparateRingVolumePreference.kt)

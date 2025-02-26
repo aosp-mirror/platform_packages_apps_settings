@@ -28,12 +28,9 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserHandle;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
-import android.view.accessibility.Flags;
 
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -182,20 +179,6 @@ public class TripleTapShortcutOptionControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void enableShortcutForTargets_enableShortcut_settingUpdated() {
-        mController.enableShortcutForTargets(true);
-
-        assertThat(
-                Settings.Secure.getInt(
-                        mContext.getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
-                        AccessibilityUtil.State.OFF)
-        ).isEqualTo(AccessibilityUtil.State.ON);
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_enableShortcut_callA11yManager() {
         mController.enableShortcutForTargets(true);
 
@@ -209,20 +192,6 @@ public class TripleTapShortcutOptionControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void enableShortcutForTargets_disableShortcut_settingUpdated() {
-        mController.enableShortcutForTargets(false);
-
-        assertThat(
-                Settings.Secure.getInt(
-                        mContext.getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
-                        AccessibilityUtil.State.OFF)
-        ).isEqualTo(AccessibilityUtil.State.OFF);
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_disableShortcut_callA11yManager() {
         mController.enableShortcutForTargets(false);
 

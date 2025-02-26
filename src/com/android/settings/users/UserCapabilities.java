@@ -36,6 +36,7 @@ public class UserCapabilities {
     boolean mIsAdmin;
     boolean mIsGuest;
     boolean mIsEphemeral;
+    boolean mUserSwitchingUiEnabled;
     boolean mUserSwitcherEnabled;
     boolean mCanAddGuest;
     boolean mDisallowAddUser;
@@ -68,7 +69,8 @@ public class UserCapabilities {
         caps.mCanAddRestrictedProfile =
                 offerRestricted && !dpm.isDeviceManaged() && userManager.isUserTypeEnabled(
                         UserManager.USER_TYPE_FULL_RESTRICTED);
-
+        caps.mUserSwitchingUiEnabled = context.getResources().getBoolean(
+                com.android.internal.R.bool.config_allowChangeUserSwitcherEnabled);
         caps.updateAddUserCapabilities(context);
         return caps;
     }
@@ -134,6 +136,7 @@ public class UserCapabilities {
                 ", mEnforcedAdmin=" + mEnforcedAdmin +
                 ", mDisallowSwitchUser=" + mDisallowSwitchUser +
                 ", mDisallowAddUserSetByAdmin=" + mDisallowAddUserSetByAdmin +
+                ", mUserSwitchingUiEnabled=" + mUserSwitchingUiEnabled +
                 ", mUserSwitcherEnabled=" + mUserSwitcherEnabled +
                 '}';
     }

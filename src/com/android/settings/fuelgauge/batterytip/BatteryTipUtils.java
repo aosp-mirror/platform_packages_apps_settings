@@ -16,16 +16,15 @@
 
 package com.android.settings.fuelgauge.batterytip;
 
+import android.app.Activity;
 import android.app.AppOpsManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.UserHandle;
 import android.os.UserManager;
 
 import androidx.annotation.NonNull;
 
 import com.android.internal.util.CollectionUtils;
-import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
 import com.android.settings.fuelgauge.batterytip.actions.OpenBatterySaverAction;
@@ -33,8 +32,6 @@ import com.android.settings.fuelgauge.batterytip.actions.OpenRestrictAppFragment
 import com.android.settings.fuelgauge.batterytip.actions.RestrictAppAction;
 import com.android.settings.fuelgauge.batterytip.actions.SmartBatteryAction;
 import com.android.settings.fuelgauge.batterytip.actions.UnrestrictAppAction;
-import com.android.settings.fuelgauge.batterytip.tips.AppLabelPredicate;
-import com.android.settings.fuelgauge.batterytip.tips.AppRestrictionPredicate;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
@@ -52,7 +49,7 @@ public class BatteryTipUtils {
             AppOpsManager appOpsManager, UserManager userManager) {
         final List<UserHandle> userHandles = userManager.getUserProfiles();
         final List<AppOpsManager.PackageOps> packageOpsList =
-                appOpsManager.getPackagesForOps(new int[] {AppOpsManager.OP_RUN_ANY_IN_BACKGROUND});
+                appOpsManager.getPackagesForOps(new int[]{AppOpsManager.OP_RUN_ANY_IN_BACKGROUND});
         final List<AppInfo> appInfos = new ArrayList<>();
 
         for (int i = 0, size = CollectionUtils.size(packageOpsList); i < size; i++) {
@@ -65,7 +62,7 @@ public class BatteryTipUtils {
                 }
                 if (entry.getMode() != AppOpsManager.MODE_ALLOWED
                         && userHandles.contains(
-                                new UserHandle(UserHandle.getUserId(packageOps.getUid())))) {
+                            new UserHandle(UserHandle.getUserId(packageOps.getUid())))) {
                     appInfos.add(
                             new AppInfo.Builder()
                                     .setPackageName(packageOps.getPackageName())
@@ -82,34 +79,34 @@ public class BatteryTipUtils {
      * Get a corresponding action based on {@code batteryTip}
      *
      * @param batteryTip used to detect which action to choose
-     * @param settingsActivity used to populate {@link BatteryTipAction}
-     * @param fragment used to populate {@link BatteryTipAction}
+     * @param activity   used to populate {@link BatteryTipAction}
+     * @param fragment   used to populate {@link BatteryTipAction}
      * @return an action for {@code batteryTip}
      */
     public static BatteryTipAction getActionForBatteryTip(
             BatteryTip batteryTip,
-            SettingsActivity settingsActivity,
+            Activity activity,
             InstrumentedPreferenceFragment fragment) {
         switch (batteryTip.getType()) {
             case BatteryTip.TipType.SMART_BATTERY_MANAGER:
-                return new SmartBatteryAction(settingsActivity, fragment);
+                return new SmartBatteryAction(activity, fragment);
             case BatteryTip.TipType.BATTERY_SAVER:
             case BatteryTip.TipType.LOW_BATTERY:
-                return new OpenBatterySaverAction(settingsActivity);
+                return new OpenBatterySaverAction(activity);
             case BatteryTip.TipType.APP_RESTRICTION:
                 if (batteryTip.getState() == BatteryTip.StateType.HANDLED) {
                     return new OpenRestrictAppFragmentAction(fragment, (RestrictAppTip) batteryTip);
                 } else {
-                    return new RestrictAppAction(settingsActivity, (RestrictAppTip) batteryTip);
+                    return new RestrictAppAction(activity, (RestrictAppTip) batteryTip);
                 }
             case BatteryTip.TipType.REMOVE_APP_RESTRICTION:
-                return new UnrestrictAppAction(settingsActivity, (UnrestrictAppTip) batteryTip);
+                return new UnrestrictAppAction(activity, (UnrestrictAppTip) batteryTip);
             default:
                 return null;
         }
     }
 
-   /** Detect and return anomaly apps after {@code timeAfterMs} */
+    /** Detect and return anomaly apps after {@code timeAfterMs} */
     public static List<AppInfo> detectAnomalies(Context context, long timeAfterMs) {
         return new ArrayList<>();
     }

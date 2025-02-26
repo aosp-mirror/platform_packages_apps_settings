@@ -21,22 +21,13 @@ import android.content.Context;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.accessibility.ListDialogPreference.OnValueChangedListener;
-import com.android.settings.core.BasePreferenceController;
 
 /** Preference controller for captioning edge type. */
-public class CaptioningEdgeTypeController extends BasePreferenceController
+public class CaptioningEdgeTypeController extends BaseCaptioningCustomController
         implements OnValueChangedListener {
-
-    private final CaptionHelper mCaptionHelper;
 
     public CaptioningEdgeTypeController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mCaptionHelper = new CaptionHelper(context);
-    }
-
-    @Override
-    public int getAvailabilityStatus() {
-        return AVAILABLE;
     }
 
     @Override

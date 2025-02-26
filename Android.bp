@@ -79,6 +79,7 @@ android_library {
         "BiometricsSharedLib",
         "SystemUIUnfoldLib",
         "WifiTrackerLib",
+        "android.hardware.biometrics.flags-aconfig-java",
         "android.hardware.dumpstate-V1-java",
         "android.hardware.dumpstate-V1.0-java",
         "android.hardware.dumpstate-V1.1-java",
@@ -98,6 +99,7 @@ android_library {
         "SettingsLibDataStore",
         "SettingsLibMetadata",
         "SettingsLibPreference",
+        "SettingsLibService",
         "aconfig_settings_flags_lib",
         "accessibility_settings_flags_lib",
         "contextualcards",
@@ -107,7 +109,6 @@ android_library {
         "fuelgauge-protos-lite",
         "settings-logtags",
         "statslog-settings",
-        "telephony_flags_core_java_lib",
         "setupdesign-lottie-loading-layout",
         "device_policy_aconfig_flags_lib",
         "keyboard_flags_lib",
@@ -131,7 +132,12 @@ android_library {
         "ims-common",
     ],
     flags_packages: [
+        "aconfig_settings_flags",
+        "aconfig_settingslib_flags",
         "android.app.flags-aconfig",
+        "android.provider.flags-aconfig",
+        "android.security.flags-aconfig",
+        "keyboard_flags",
     ],
 }
 

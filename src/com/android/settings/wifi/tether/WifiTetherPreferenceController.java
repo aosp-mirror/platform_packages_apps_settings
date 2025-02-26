@@ -48,6 +48,7 @@ import com.android.settingslib.wifi.WifiUtils;
 
 import java.util.List;
 
+// LINT.IfChange
 public class WifiTetherPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop,
         SwitchWidgetController.OnSwitchChangeListener {
@@ -251,3 +252,4 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
         return true;
     }
 }
+// LINT.ThenChange(WifiHotspotSwitchPreference.kt)

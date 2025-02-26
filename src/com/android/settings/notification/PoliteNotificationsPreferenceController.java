@@ -18,16 +18,19 @@ package com.android.settings.notification;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.android.server.notification.Flags;
 import com.android.settings.core.BasePreferenceController;
 
-// TODO: b/291897570 - remove controller when the feature flag is removed!
+// TODO(b/330606963): remove controller when the feature flag is removed!
 /**
  * Controller for polite notifications settings page.
  */
 public class PoliteNotificationsPreferenceController extends BasePreferenceController {
 
-    public PoliteNotificationsPreferenceController(Context context, String preferenceKey) {
+    public PoliteNotificationsPreferenceController(@NonNull Context context,
+            @NonNull String preferenceKey) {
         super(context, preferenceKey);
     }
 

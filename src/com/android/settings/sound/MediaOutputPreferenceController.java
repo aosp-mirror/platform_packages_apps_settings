@@ -41,6 +41,7 @@ import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.media.MediaOutputConstants;
+import com.android.settingslib.media.PhoneMediaDevice;
 
 import java.util.List;
 
@@ -132,6 +133,12 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
+        // Always use media switcher to control routing in desktop.
+        if (PhoneMediaDevice.inputRoutingEnabledAndIsDesktop(mContext)) {
+            mPreference.setVisible(true);
+            return;
+        }
+
         mPreference.setVisible(!Utils.isAudioModeOngoingCall(mContext)
                 && (enableOutputSwitcherForSystemRouting() ? true : mMediaController != null));
     }
@@ -153,8 +160,10 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
         }
 
         mPreference.setEnabled(true);
-        if (Utils.isAudioModeOngoingCall(mContext)) {
-            // Ongoing call status, switch entry for media will be disabled.
+        if (Utils.isAudioModeOngoingCall(mContext) &&
+                !PhoneMediaDevice.inputRoutingEnabledAndIsDesktop(mContext)) {
+            // Ongoing call status, switch entry for media will be disabled, unless input routing is
+            // enabled in desktop.
             mPreference.setVisible(false);
             preference.setSummary(
                     mContext.getText(R.string.media_out_summary_ongoing_call_state));

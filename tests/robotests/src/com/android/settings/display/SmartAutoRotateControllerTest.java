@@ -33,6 +33,8 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
+import android.hardware.devicestate.DeviceState;
+import android.hardware.devicestate.DeviceStateManager;
 import android.os.UserHandle;
 import android.provider.Settings;
 
@@ -56,6 +58,8 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 
+import java.util.List;
+
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowSensorPrivacyManager.class, ShadowSystemSettings.class})
 public class SmartAutoRotateControllerTest {
@@ -67,21 +71,30 @@ public class SmartAutoRotateControllerTest {
     private PackageManager mPackageManager;
     @Mock
     private Preference mPreference;
+    @Mock
+    private DeviceStateManager mDeviceStateManager;
     private ContentResolver mContentResolver;
-    private final DeviceStateRotationLockSettingsManager mDeviceStateAutoRotateSettingsManager =
-            DeviceStateRotationLockSettingsManager.getInstance(RuntimeEnvironment.application);
+    private DeviceStateRotationLockSettingsManager mDeviceStateAutoRotateSettingsManager;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         final Context context = Mockito.spy(RuntimeEnvironment.application);
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
+
         when(context.getPackageManager()).thenReturn(mPackageManager);
         when(context.getContentResolver()).thenReturn(mContentResolver);
         doReturn(PACKAGE_NAME).when(mPackageManager).getRotationResolverPackageName();
         doReturn(PackageManager.PERMISSION_GRANTED).when(mPackageManager).checkPermission(
                 Manifest.permission.CAMERA, PACKAGE_NAME);
+        // Necessary for the DeviceStateRotationLockSettingsManager setup
+        doReturn(context).when(context).getApplicationContext();
+        doReturn(mDeviceStateManager).when(context).getSystemService(DeviceStateManager.class);
+        doReturn(getDeviceStateList()).when(mDeviceStateManager).getSupportedDeviceStates();
+        mDeviceStateAutoRotateSettingsManager = DeviceStateRotationLockSettingsManager.getInstance(
+                context);
         mController = Mockito.spy(new SmartAutoRotateController(context, "test_key"));
+
         when(mController.isCameraLocked()).thenReturn(false);
         when(mController.isPowerSaveMode()).thenReturn(false);
         doReturn(mController.getPreferenceKey()).when(mPreference).getKey();
@@ -182,5 +195,14 @@ public class SmartAutoRotateControllerTest {
         ShadowDeviceStateRotationLockSettingsManager shadowManager =
                 Shadow.extract(mDeviceStateAutoRotateSettingsManager);
         shadowManager.setRotationLockedForAllStates(false);
+    }
+
+    /**
+     * Returns a list that includes a singular default {@link DeviceState}. To be returned when
+     * {@link DeviceStateManager#getSupportedDeviceStates()} is called.
+     */
+    private List<DeviceState> getDeviceStateList() {
+        return List.of(new DeviceState(
+                new DeviceState.Configuration.Builder(0 /* identifier */, "DEFAULT").build()));
     }
 }

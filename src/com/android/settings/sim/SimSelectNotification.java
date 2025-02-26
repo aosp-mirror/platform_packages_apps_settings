@@ -42,6 +42,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -91,6 +92,11 @@ public class SimSelectNotification extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        UserManager userManager = context.getSystemService(UserManager.class);
+        if (userManager != null && !userManager.isMainUser()) {
+            Log.d(TAG, "The userId is not the main user");
+            return;
+        }
         if (!SubscriptionUtil.isSimHardwareVisible(context)) {
             Log.w(TAG, "Received unexpected intent with null action.");
             return;

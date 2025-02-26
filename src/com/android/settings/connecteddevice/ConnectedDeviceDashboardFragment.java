@@ -80,7 +80,7 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
                             + ", action : "
                             + action);
         }
-        if (BluetoothUtils.isAudioSharingEnabled()) {
+        if (BluetoothUtils.isAudioSharingUIAvailable(context)) {
             use(AudioSharingDevicePreferenceController.class).init(this);
         }
         use(AvailableMediaDeviceGroupController.class).init(this);

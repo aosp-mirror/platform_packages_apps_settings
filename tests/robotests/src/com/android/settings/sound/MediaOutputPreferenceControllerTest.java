@@ -16,6 +16,7 @@
 
 package com.android.settings.sound;
 
+import static android.content.pm.PackageManager.FEATURE_PC;
 import static android.media.AudioSystem.DEVICE_OUT_BLE_HEADSET;
 import static android.media.AudioSystem.DEVICE_OUT_BLUETOOTH_A2DP;
 import static android.media.AudioSystem.DEVICE_OUT_EARPIECE;
@@ -42,6 +43,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageStats;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
@@ -49,14 +51,17 @@ import android.media.VolumeProvider;
 import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
 import android.media.session.PlaybackState;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
+import com.android.media.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
+import com.android.settings.media.MediaOutputUtils;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.A2dpProfile;
@@ -113,6 +118,8 @@ public class MediaOutputPreferenceControllerTest {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
+    @Mock
+    private PackageManager mPackageManager;
     @Mock
     private LocalBluetoothManager mLocalManager;
     @Mock
@@ -484,6 +491,32 @@ public class MediaOutputPreferenceControllerTest {
         mController.updateState(mPreference);
 
         assertThat(mPreference.isVisible()).isFalse();
+    }
+
+    /**
+     * During a call
+     * Preference should be visible when input routing is available in desktop
+     */
+    @EnableFlags(Flags.FLAG_ENABLE_AUDIO_INPUT_DEVICE_ROUTING_AND_VOLUME_CONTROL)
+    @Test
+    public void updateState_inCall_preferenceVisible_inputRoutingEnabledInDesktop()
+            throws PackageManager.NameNotFoundException {
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mPackageManager.hasSystemFeature(FEATURE_PC)).thenReturn(true);
+
+        ApplicationInfo appInfo = new ApplicationInfo();
+        appInfo.flags = ApplicationInfo.FLAG_INSTALLED;
+        appInfo.packageName = TEST_PACKAGE_NAME;
+        appInfo.name = TEST_APPLICATION_LABEL;
+        when(mPackageManager.getApplicationInfo(TEST_PACKAGE_NAME,
+                PackageManager.MATCH_DISABLED_COMPONENTS
+                        | PackageManager.MATCH_ANY_USER)).thenReturn(appInfo);
+
+
+        mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isVisible()).isTrue();
     }
 
     @Test

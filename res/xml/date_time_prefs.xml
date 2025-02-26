@@ -23,7 +23,7 @@
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="auto_time"
         android:title="@string/date_time_auto"
-        settings:useAdditionalSummary="true"
+        android:summary="@string/summary_placeholder"
         settings:userRestriction="no_config_date_time"
         settings:controller="com.android.settings.datetime.AutoTimePreferenceController" />
 
@@ -48,6 +48,7 @@
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="auto_zone"
             android:title="@string/zone_auto_title"
+            android:summary="@string/summary_placeholder"
             settings:userRestriction="no_config_date_time"
             settings:controller="com.android.settings.datetime.AutoTimeZonePreferenceController" />
 
@@ -60,6 +61,7 @@
         <SwitchPreferenceCompat
             android:key="location_time_zone_detection"
             android:title="@string/location_time_zone_detection_toggle_title"
+            android:summary="@string/summary_placeholder"
             settings:controller="com.android.settings.datetime.LocationTimeZoneDetectionPreferenceController"/>
 
         <com.android.settingslib.RestrictedPreference
