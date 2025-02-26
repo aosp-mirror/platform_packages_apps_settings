@@ -49,7 +49,7 @@ public class BatterySaverScheduleSeekBarController
         implements OnPreferenceChangeListener, OnSeekBarChangeListener {
 
     public static final int MAX_SEEKBAR_VALUE = 15;
-    public static final int MIN_SEEKBAR_VALUE = 2;
+    public static final int MIN_SEEKBAR_VALUE = 4;
     public static final String KEY_BATTERY_SAVER_SEEK_BAR = "battery_saver_seek_bar";
     private static final int LEVEL_UNIT_SCALE = 5;
 
