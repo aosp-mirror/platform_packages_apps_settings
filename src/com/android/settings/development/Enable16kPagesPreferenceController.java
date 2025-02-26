@@ -39,7 +39,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -139,7 +139,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
                         Settings.Global.ENABLE_16K_PAGES,
                         defaultOptionValue /* default */);
 
-        ((SwitchPreference) mPreference).setChecked(optionValue == ENABLE_16K_PAGE_SIZE);
+        ((SwitchPreferenceCompat) mPreference).setChecked(optionValue == ENABLE_16K_PAGE_SIZE);
     }
 
     @Override
@@ -150,7 +150,7 @@ public class Enable16kPagesPreferenceController extends DeveloperOptionsPreferen
                 mContext.getContentResolver(),
                 Settings.Global.ENABLE_16K_PAGES,
                 ENABLE_4K_PAGE_SIZE);
-        ((SwitchPreference) mPreference).setChecked(false);
+        ((SwitchPreferenceCompat) mPreference).setChecked(false);
     }
 
     @Override
