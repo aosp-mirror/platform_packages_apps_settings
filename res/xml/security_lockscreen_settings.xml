@@ -17,6 +17,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="lockscreen_from_display_settings"
     android:title="@string/lockscreen_settings_title">
 
     <PreferenceCategory
@@ -27,6 +28,13 @@
             android:title="@string/lock_screen_notifications_title"
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_lock_screen_notif"/>
+
+        <Preference
+            android:key="security_lock_screen_notifications_page"
+            android:title="@string/lock_screen_notifs_title"
+            android:summary="@string/summary_placeholder"
+            android:fragment="com.android.settings.notification.LockScreenNotificationsPreferencePageFragment"
+            settings:controller="com.android.settings.notification.LockScreenNotificationsPreferencePageController" />
 
         <SwitchPreferenceCompat
             android:key="security_display_lockscreen_bypass"

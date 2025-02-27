@@ -58,6 +58,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = MediaVolumePreferenceControllerTest.ShadowSliceBackgroundWorker.class)
 public class MediaVolumePreferenceControllerTest {
@@ -269,3 +270,4 @@ public class MediaVolumePreferenceControllerTest {
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 }
+// LINT.ThenChange(MediaVolumePreference.kt)

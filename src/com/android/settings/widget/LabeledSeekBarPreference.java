@@ -56,10 +56,10 @@ public class LabeledSeekBarPreference extends SeekBarPreference {
     private final int mTextStartId;
     private final int mTextEndId;
     private final int mTickMarkId;
-    private final int mIconStartId;
-    private final int mIconEndId;
-    private final int mIconStartContentDescriptionId;
-    private final int mIconEndContentDescriptionId;
+    private int mIconStartId;
+    private int mIconEndId;
+    private int mIconStartContentDescriptionId;
+    private int mIconEndContentDescriptionId;
     private OnPreferenceChangeListener mStopListener;
     private SeekBar.OnSeekBarChangeListener mSeekBarChangeListener;
 
@@ -108,6 +108,38 @@ public class LabeledSeekBarPreference extends SeekBarPreference {
 
     public SeekBar getSeekbar() {
         return mSeekBar;
+    }
+
+    /** Set the start icon of the Seekbar. */
+    public void setIconStart(int iconStartId) {
+        if (mIconStartId != iconStartId) {
+            mIconStartId = iconStartId;
+            notifyChanged();
+        }
+    }
+
+    /** Set the description resource id of the start icon. */
+    public void setIconStartContentDescription(int iconStartContentDescriptionId) {
+        if (mIconStartContentDescriptionId != iconStartContentDescriptionId) {
+            mIconStartContentDescriptionId = iconStartContentDescriptionId;
+            notifyChanged();
+        }
+    }
+
+    /** Set the end icon of the Seekbar. */
+    public void setIconEnd(int iconEndId) {
+        if (mIconEndId != iconEndId) {
+            mIconEndId = iconEndId;
+            notifyChanged();
+        }
+    }
+
+    /** Set the description resource id of the end icon. */
+    public void setIconEndContentDescription(int iconEndContentDescriptionId) {
+        if (mIconEndContentDescriptionId != iconEndContentDescriptionId) {
+            mIconEndContentDescriptionId = iconEndContentDescriptionId;
+            notifyChanged();
+        }
     }
 
     @Override

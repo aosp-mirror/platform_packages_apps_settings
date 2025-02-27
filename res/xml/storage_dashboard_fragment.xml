@@ -101,7 +101,8 @@
             android:key="pref_system"
             android:title="@string/storage_os_name"
             android:icon="@drawable/ic_android_vd_theme_24"
-            android:order="202"/>
+            android:order="202"
+            settings:searchable="false"/>
         <com.android.settings.deviceinfo.StorageItemPreference
             android:key="temporary_files"
             android:title="@string/storage_temporary_files"

@@ -354,6 +354,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
         mGrantAdminPref.setChecked(mUserInfo.isAdmin());
 
+        mSwitchUserPref.setVisible(mUserCaps.mUserSwitchingUiEnabled);
+
         mSwitchUserPref.setTitle(
                 context.getString(com.android.settingslib.R.string.user_switch_to_user,
                         mUserInfo.name));

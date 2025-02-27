@@ -21,17 +21,14 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.android.settings.R;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.Indexable;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ZenModeRestrictNotificationsSettings extends ZenModeSettingsBase implements Indexable {
 
     @Override
@@ -72,16 +69,4 @@ public class ZenModeRestrictNotificationsSettings extends ZenModeSettingsBase im
     public int getMetricsCategory() {
         return SettingsEnums.SETTINGS_ZEN_NOTIFICATIONS;
     }
-
-    /**
-     * For Search.
-     */
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.zen_mode_restrict_notifications_settings) {
-
-            @Override
-            public List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-                return buildPreferenceControllers(context, null);
-            }
-        };
 }

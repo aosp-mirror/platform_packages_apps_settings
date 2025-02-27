@@ -35,20 +35,21 @@ public interface KeyboardSettingsFeatureProvider {
     boolean supportsFirmwareUpdate();
 
     /**
-     * Add firmware update preference category .
+     * Register firmware information preferences update on preference screen.
      *
-     * @param context The context to initialize the application with.
-     * @param screen  The {@link PreferenceScreen} to add the firmware update preference category.
-     *
-     * @return true if the category is added successfully.
+     * @param screen The {@link PreferenceScreen} to add the firmware information preferences.
      */
-    boolean addFirmwareUpdateCategory(Context context, PreferenceScreen screen);
+    void registerKeyboardInformationCategory(@Nullable PreferenceScreen screen);
+
+    /**
+     * Unregister firmware information preferences update on preference screen.
+     */
+    void unregisterKeyboardInformationCategory();
 
     /**
      * Get custom action key icon.
      *
      * @param context Context for accessing resources.
-     *
      * @return Returns the image of the icon, or null if there is no any custom icon.
      */
     @Nullable

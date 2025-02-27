@@ -34,6 +34,7 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
+// LINT.IfChange
 public class DarkUIPreferenceController extends TogglePreferenceController implements
         LifecycleObserver, OnStart, OnStop {
 
@@ -123,3 +124,4 @@ public class DarkUIPreferenceController extends TogglePreferenceController imple
         return AVAILABLE;
     }
 }
+// LINT.ThenChange(darkmode/DarkModeScreen.kt)

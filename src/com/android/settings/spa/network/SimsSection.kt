@@ -21,7 +21,6 @@ import android.content.Intent
 import android.os.UserManager
 import android.telephony.SubscriptionInfo
 import android.telephony.euicc.EuiccManager
-import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.SimCard
@@ -44,6 +43,7 @@ import com.android.settings.network.telephony.euicc.EuiccRepository
 import com.android.settings.network.telephony.phoneNumberFlow
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
+import com.android.settingslib.spa.widget.ui.Category
 import com.android.settingslib.spa.widget.ui.SettingsIcon
 import com.android.settingslib.spaprivileged.model.enterprise.Restrictions
 import com.android.settingslib.spaprivileged.template.preference.RestrictedPreference
@@ -53,7 +53,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun SimsSection(subscriptionInfoList: List<SubscriptionInfo>) {
-    Column {
+    Category {
         for (subInfo in subscriptionInfoList) {
             SimPreference(subInfo)
         }
@@ -137,9 +137,9 @@ private fun AddSim() {
     }
 }
 
-fun startAddSimFlow(context: Context) {
-    val intent = Intent(EuiccManager.ACTION_PROVISION_EMBEDDED_SUBSCRIPTION)
-    intent.setPackage(Utils.PHONE_PACKAGE_NAME)
-    intent.putExtra(EuiccManager.EXTRA_FORCE_PROVISION, true)
-    context.startActivity(intent)
+fun startAddSimFlow(context: Context) = context.startActivity(getAddSimIntent())
+
+fun getAddSimIntent() = Intent(EuiccManager.ACTION_PROVISION_EMBEDDED_SUBSCRIPTION).apply {
+    setPackage(Utils.PHONE_PACKAGE_NAME)
+    putExtra(EuiccManager.EXTRA_FORCE_PROVISION, true)
 }

@@ -29,14 +29,18 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityFragmentUtils;
 import com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.MainSwitchPreference;
+
+import java.util.List;
 
 /**
  * Fragment for One-handed mode settings
@@ -48,7 +52,8 @@ import com.android.settingslib.widget.MainSwitchPreference;
 public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
 
     private static final String TAG = "OneHandedSettings";
-    private static final String ONE_HANDED_SHORTCUT_KEY = "one_handed_shortcuts_preference";
+    @VisibleForTesting
+    static final String ONE_HANDED_SHORTCUT_KEY = "one_handed_shortcuts_preference";
     private static final String ONE_HANDED_ILLUSTRATION_KEY = "one_handed_header";
     protected static final String ONE_HANDED_MAIN_SWITCH_KEY =
             "gesture_one_handed_mode_enabled_main_switch";
@@ -179,6 +184,25 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return OneHandedSettingsUtils.isSupportOneHandedMode();
+                }
+
+                @Override
+                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
+                        boolean enabled) {
+                    final List<SearchIndexableRaw> rawData =
+                            super.getRawDataToIndex(context, enabled);
+                    if (!com.android.settings.accessibility.Flags.fixA11ySettingsSearch()) {
+                        return rawData;
+                    }
+                    rawData.add(createShortcutPreferenceSearchData(context));
+                    return rawData;
+                }
+
+                private SearchIndexableRaw createShortcutPreferenceSearchData(Context context) {
+                    final SearchIndexableRaw raw = new SearchIndexableRaw(context);
+                    raw.key = ONE_HANDED_SHORTCUT_KEY;
+                    raw.title = context.getString(R.string.one_handed_mode_shortcut_title);
+                    return raw;
                 }
             };
 

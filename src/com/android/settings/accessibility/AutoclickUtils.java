@@ -16,18 +16,11 @@
 
 package com.android.settings.accessibility;
 
-import static java.lang.annotation.RetentionPolicy.SOURCE;
-
-import android.annotation.IntDef;
-import android.annotation.PluralsRes;
 import android.annotation.StringRes;
 import android.content.Context;
-import android.content.res.Resources;
 
-import com.android.settings.R;
 import com.android.settingslib.utils.StringUtil;
 
-import java.lang.annotation.Retention;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,16 +45,6 @@ public final class AutoclickUtils {
      */
     static final int AUTOCLICK_DELAY_STEP = 100;
 
-    @Retention(SOURCE)
-    @IntDef({
-        Quantity.ONE,
-        Quantity.FEW
-    })
-    private @interface Quantity {
-        int ONE = 1;
-        int FEW = 3;
-    }
-
     /**
      * Gets string that should be used for provided autoclick delay.
      *
@@ -73,13 +56,12 @@ public final class AutoclickUtils {
      */
     public static CharSequence getAutoclickDelaySummary(Context context,
                                                         @StringRes int id, int delayMillis) {
-        final int quantity = (delayMillis == 1000) ? Quantity.ONE : Quantity.FEW;
         final float delaySecond =  (float) delayMillis / 1000;
         // Only show integer when delay time is 1.
         final String decimalFormat = (delaySecond == 1) ? "%.0f" : "%.1f";
 
         Map<String, Object> arguments = new HashMap<>();
-        arguments.put("count", quantity);
+        arguments.put("count", delaySecond);
         arguments.put("time", String.format(decimalFormat, delaySecond));
         return StringUtil.getIcuPluralsString(context, arguments, id);
     }

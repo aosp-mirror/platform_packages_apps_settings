@@ -19,3 +19,10 @@ flag {
   description: "Shows hdr/sdr dev opton on the development options page from aconfig"
   bug: "291863102"
 }
+
+flag {
+  name: "page_size_app_compat_setting"
+  namespace: "devoptions_settings"
+  description: "Flag to enable page size app compat mode from Settings."
+  bug: "371049373"
+}
