@@ -48,18 +48,21 @@ public class Enable16KbTest extends BaseHostJUnit4Test {
     private static final String SWITCH_TO_4KB = "enable16k_switchTo4Kb";
     private static final String DISABLE_DEV_OPTION = "enable16k_disableDeveloperOption";
 
+    private static final int DEVICE_WAIT_TIMEOUT = 120000;
+    private static final int DEVICE_UPDATE_TIMEOUT = 180000;
+
     @Test
     @AppModeFull
     public void enable16KbToggle() throws Exception {
-        // Wait for 2 mins device to be online
-        getDevice().waitForDeviceOnline(120000);
+        // Wait for 2 minutes for device to be online
+        prepareDevice();
         if (!isPackageInstalled(APP_PACKAGE)) {
             //If test app has failed for some reason, retry installation
             installTestApp();
         }
 
         // Check if developer option is enabled otherwise exit
-        getDevice().enableAdbRoot();
+        prepareDevice();
         String result = getDevice().getProperty("ro.product.build.16k_page.enabled");
         assumeTrue("true".equals(result));
 
@@ -72,8 +75,6 @@ public class Enable16KbTest extends BaseHostJUnit4Test {
 
         // Enables developer option and switch to ext4
         runTestAndWait(SWITCH_TO_EXT4);
-
-        getDevice().enableAdbRoot();
         getDevice().executeShellCommand("am start -a com.android.setupwizard.FOUR_CORNER_EXIT");
         assertTrue(verifyExt4());
 
@@ -81,13 +82,11 @@ public class Enable16KbTest extends BaseHostJUnit4Test {
         installTestApp();
 
         // Enable developer option and switch to 16kb kernel and Check page size
-        getDevice().enableAdbRoot();
         runTestAndWait(SWITCH_TO_16KB);
         result = getDevice().executeShellCommand("getconf PAGE_SIZE");
         assertEquals("16384", result.strip());
 
         // switch back to 4kb kernel and check page size
-        getDevice().enableAdbRoot();
         runTestAndWait(SWITCH_TO_4KB);
         result = getDevice().executeShellCommand("getconf PAGE_SIZE");
         assertEquals("4096", result.strip());
@@ -105,11 +104,23 @@ public class Enable16KbTest extends BaseHostJUnit4Test {
     }
 
     private void runTestAndWait(String testMethodName) throws Exception {
+        prepareDevice();
         runDeviceTests(APP_PACKAGE, APP_PACKAGE + "." + TEST_NAME, testMethodName);
         // Device is either formatting or applying update. It usually takes 3 minutes to boot.
-        RunUtil.getDefault().sleep(180000);
-        // Wait for 2 mins device to be online againg
-        getDevice().waitForDeviceOnline(120000);
+        RunUtil.getDefault().sleep(DEVICE_UPDATE_TIMEOUT);
+
+        // make sure it is available again after the test
+        prepareDevice();
+    }
+
+    private void prepareDevice() throws Exception {
+        // Verify that device is online before running test and enable root
+        getDevice().waitForDeviceOnline(DEVICE_WAIT_TIMEOUT);
+        getDevice().enableAdbRoot();
+        getDevice().waitForDeviceOnline(DEVICE_WAIT_TIMEOUT);
+
+        getDevice().executeShellCommand("input keyevent KEYCODE_WAKEUP");
+        getDevice().executeShellCommand("wm dismiss-keyguard");
     }
 
     private boolean verifyExt4() throws Exception {
