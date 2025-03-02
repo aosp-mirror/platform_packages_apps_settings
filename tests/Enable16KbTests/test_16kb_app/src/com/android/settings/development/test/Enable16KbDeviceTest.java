@@ -43,17 +43,17 @@ import java.util.Locale;
 public class Enable16KbDeviceTest {
     private static final long TIMEOUT = 2000;
 
-    private static final String ENABLE_16K_TOGGLE = "Boot with 16KB page size";
+    private static final String ENABLE_16K_TOGGLE = "Boot with 16 KB page size";
     private static final String BUILD_NUMBER = "Build number";
     private static final String USE_DEVELOPER_OPTIONS = "Use developer options";
     private static final String EXT4_CONFIRMATION = "Erase all data";
-    private static final String EXT4_TITLE = "Reformat device to ext4? (required for 16KB mode)";
-    private static final String TOGGLE_16K_TITLE = "Switch from 4KB mode to 16KB mode";
-    private static final String TOGGLE_4K_TITLE = "Switch from 16KB mode to 4KB mode";
+    private static final String EXT4_TITLE = "Reformat device to ext4? (required for 16 KB mode)";
+    private static final String TOGGLE_16K_TITLE = "Switch from 4 KB mode to 16 KB mode";
+    private static final String TOGGLE_4K_TITLE = "Switch from 16 KB mode to 4 KB mode";
     private static final String ANDROID_WIDGET_SCROLLVIEW = "android.widget.ScrollView";
     private static final String OKAY = "OK";
-    private static final String NOTIFICATION_TITLE_4K = "Using 4KB page-agnostic mode";
-    private static final String NOTIFICATION_TITLE_16K = "Using 16KB page-agnostic mode";
+    private static final String NOTIFICATION_TITLE_4K = "Using 4 KB page-agnostic mode";
+    private static final String NOTIFICATION_TITLE_16K = "Using 16 KB page-agnostic mode";
 
     private Context mContext;
     private UiDevice mDevice;

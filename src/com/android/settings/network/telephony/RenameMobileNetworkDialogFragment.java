@@ -165,6 +165,7 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
         }
         final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
                 info, getContext());
+        mNameView.setText(displayName);
         if (!TextUtils.isEmpty(displayName)) {
             mNameView.setSelection(Math.min(displayName.length(),
                     getResources().getInteger(R.integer.sim_label_max_length)));
