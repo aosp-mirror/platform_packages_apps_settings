@@ -36,6 +36,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.Utils;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
@@ -201,7 +202,8 @@ public class ModifierKeysPreferenceController extends BasePreferenceController {
     }
 
     private int getColorOfMaterialColorPrimary() {
-        return mContext.getColor(com.android.internal.R.color.materialColorPrimary);
+        return Utils.getColorAttrDefaultColor(
+                mContext, com.android.internal.R.attr.materialColorPrimary);
     }
 
     private static boolean isCtrl(int keyCode) {

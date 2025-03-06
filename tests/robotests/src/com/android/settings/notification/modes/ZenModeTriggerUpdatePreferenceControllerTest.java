@@ -310,6 +310,25 @@ public class ZenModeTriggerUpdatePreferenceControllerTest {
     }
 
     @Test
+    public void updateState_scheduleTimeRuleWithNoDays_emptySummary() {
+        ZenModeConfig.ScheduleInfo scheduleInfo = new ZenModeConfig.ScheduleInfo();
+        scheduleInfo.days = new int[] {};
+        scheduleInfo.startHour = 1;
+        scheduleInfo.endHour = 15;
+        ZenMode mode = new TestModeBuilder()
+                .setConditionId(ZenModeConfig.toScheduleConditionId(scheduleInfo))
+                .setPackage(SystemZenRules.PACKAGE_ANDROID)
+                .setType(TYPE_SCHEDULE_TIME)
+                .setTriggerDescription("some schedule")
+                .build();
+
+        mController.updateState(mPreference, mode);
+
+        assertThat(mPreference.getTitle()).isEqualTo("1:00 AM - 3:00 PM");
+        assertThat(mPreference.getSummary()).isNull();
+    }
+
+    @Test
     public void updateState_appWithConfigActivity_showsLinkToConfigActivity() {
         ZenMode mode = new TestModeBuilder()
                 .setPackage("some.package")

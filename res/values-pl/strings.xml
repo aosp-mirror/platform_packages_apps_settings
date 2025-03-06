@@ -131,7 +131,7 @@
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Inne urządzenia"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Zapisane urządzenia"</string>
     <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"Powiązane z kontem"</string>
-    <string name="connected_device_previously_associated_fast_pair_device_title" msgid="8353405823992023457">"Poprzednio używane z kontem"</string>
+    <string name="connected_device_previously_associated_fast_pair_device_title" msgid="8353405823992023457">"Wcześniej używane na tym koncie"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"Bluetooth włączy się, by sparować urządzenia"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"Ustawienia połączeń"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Wcześniej połączone"</string>
@@ -1613,7 +1613,7 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Hotspot, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Nie udostępniam internetu innym urządzeniom"</string>
-    <string name="tether_preference_summary_off" msgid="6266799346319794630">"Wyłączone"</string>
+    <string name="tether_preference_summary_off" msgid="6266799346319794630">"Wył."</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Tethering przez USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Tethering przez Bluetooth"</string>
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Tethering przez Ethernet"</string>
@@ -1962,8 +1962,7 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opcje"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Ułatwienia dostępu"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Klawiatura fizyczna"</string>
-    <!-- no translation found for physical_keyboard_layout_picker_title (4526600767648916256) -->
-    <skip />
+    <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Selektor układu klawiatury fizycznej"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Klawisze z filtrem powtórzeń"</string>
     <string name="bounce_keys_summary" msgid="7418024428905737729">"Klawiatura ignoruje szybko powtarzane naciśnięcia tego samego klawisza"</string>
     <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"Próg klawisza z filtrem powtórzeń"</string>
@@ -1985,7 +1984,7 @@
     <string name="mouse_swap_primary_button" msgid="3028204969091057207">"Zamień lewy i prawy przycisk"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"Używaj lewego przycisku myszy jako prawego"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"<xliff:g id="KEYBOARD_NAME">%s</xliff:g> – klawisze sterowania myszą"</string>
-    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Aby przesunąć wskaźnik myszy, naciśnij klawisz <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"Aby przesuwać wskaźnik myszy, używaj klawiszy <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>"</string>
     <string name="mouse_keys_click_summary" msgid="1642125742164614577">"Aby kliknąć główny przycisk myszy, naciśnij klawisz <xliff:g id="CLICK_LABEL">%s</xliff:g>"</string>
     <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"Aby nacisnąć i przytrzymać główny przycisk myszy, kliknij klawisz <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>"</string>
     <string name="mouse_keys_release_summary" msgid="2379239679203818720">"Aby zwolnić główny przycisk myszy, naciśnij klawisz <xliff:g id="RELEASE_LABEL">%s</xliff:g>"</string>
@@ -2213,7 +2212,7 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Powiększanie skrótem"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Powiększanie skrótem i trzykrotnym kliknięciem"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"<xliff:g id="SERVICE">%1$s</xliff:g> – informacje"</string>
-    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Rozmiar interfejsu i tekst"</string>
+    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Rozmiar elementów interfejsu i tekstu"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Zmień sposób wyświetlania tekstu"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Temat: Projekty balonów"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Nadawca: Krzysztof"</string>
@@ -3640,14 +3639,10 @@
     <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"Pokaż mniej powiadomień na ekranie blokady"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"Na ekranie blokady pokazuj tylko nowe powiadomienia"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"Automatycznie usuwaj już wyświetlone powiadomienia z ekranu blokady"</string>
-    <!-- no translation found for lock_screen_notifs_show_full_list (6767009263807771108) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_full_list_desc (4868489278443057427) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_show_compact (1133598661314460528) -->
-    <skip />
-    <!-- no translation found for lock_screen_notifs_compact_desc (2442594880539709057) -->
-    <skip />
+    <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"Pełna lista"</string>
+    <string name="lock_screen_notifs_full_list_desc" msgid="4868489278443057427">"Bieżące domyślne miejsce docelowe to pełna półka i stos powiadomień."</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"Kompaktowe"</string>
+    <string name="lock_screen_notifs_compact_desc" msgid="2442594880539709057">"Nowe powiadomienia są zwijane na półce na ekranie blokady."</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Powiadomienia na ekranie blokady"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Pokazuj rozmowy, domyślne i ciche"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Pokazuj rozmowy, domyślne i ciche"</string>
@@ -3665,14 +3660,10 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Pokazuj w całości powiadomienia związane z pracą"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Ukryj poufne informacje związane z pracą"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Jak mają pokazywać się powiadomienia z profilu, gdy urządzenie jest zablokowane?"</string>
-    <!-- no translation found for lock_screen_notification_hide_seen_title (6356324850662946426) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_hide_seen_summary (8345971177658888274) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_hide_silent_title (3284314455767315329) -->
-    <skip />
-    <!-- no translation found for lock_screen_notification_hide_silent_summary (1934066619526795468) -->
-    <skip />
+    <string name="lock_screen_notification_hide_seen_title" msgid="6356324850662946426">"Ukryj wyświetlone powiadomienia"</string>
+    <string name="lock_screen_notification_hide_seen_summary" msgid="8345971177658888274">"Wyświetlone powiadomienia są usuwane z ekranu blokady."</string>
+    <string name="lock_screen_notification_hide_silent_title" msgid="3284314455767315329">"Ukryj wyciszone powiadomienia"</string>
+    <string name="lock_screen_notification_hide_silent_summary" msgid="1934066619526795468">"Ciche powiadomienia i rozmowy są usuwane z ekranu blokady."</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Powiadomienia z profilu"</string>
     <string name="notifications_title" msgid="4221655533193721131">"Powiadomienia"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"Powiadomienia z aplikacji"</string>
@@ -3750,8 +3741,8 @@
     <string name="notif_type_alerting_summary" msgid="4681068287836313604">"Mogą włączać dzwonek lub wibracje w zależności od ustawień"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"Ciche"</string>
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"Powiadomienia, które nigdy nie włączają dźwięku ani wibracji"</string>
-    <string name="notification_listener_allowed" msgid="5536962633536318551">"Mają dostęp"</string>
-    <string name="notification_listener_not_allowed" msgid="3352962779597846538">"Nie mają dostępu"</string>
+    <string name="notification_listener_allowed" msgid="5536962633536318551">"Ma dostęp"</string>
+    <string name="notification_listener_not_allowed" msgid="3352962779597846538">"Nie ma dostępu"</string>
     <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"Zobacz wszystkie aplikacje"</string>
     <string name="notif_listener_excluded_app_summary" msgid="2914567678047195396">"Zmień ustawienia poszczególnych aplikacji, które wysyłają powiadomienia"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Aplikacje pokazywane na urządzeniu"</string>
@@ -4478,20 +4469,13 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"Gesty"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Szybko otwieraj aparat"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Aby szybko uruchomić aparat, naciśnij dwukrotnie przycisk zasilania. Możesz to zrobić na dowolnym ekranie."</string>
-    <!-- no translation found for double_tap_power_title (8705875166298116659) -->
-    <skip />
-    <!-- no translation found for double_tap_power_enabled (305978257631612678) -->
-    <skip />
-    <!-- no translation found for double_tap_power_target_action_category (6186809788568348488) -->
-    <skip />
-    <!-- no translation found for double_tap_power_camera_action_title (8398392033718681209) -->
-    <skip />
-    <!-- no translation found for double_tap_power_camera_action_summary (1231656402570674349) -->
-    <skip />
-    <!-- no translation found for double_tap_power_wallet_action_title (2238628756927241786) -->
-    <skip />
-    <!-- no translation found for double_tap_power_wallet_action_summary (6567586974229774570) -->
-    <skip />
+    <string name="double_tap_power_title" msgid="8705875166298116659">"Dwukrotne naciśnięcie przycisku zasilania"</string>
+    <string name="double_tap_power_enabled" msgid="305978257631612678">"Używaj dwukrotnego naciśnięcia"</string>
+    <string name="double_tap_power_target_action_category" msgid="6186809788568348488">"Dwukrotne naciśnięcie przycisku zasilania"</string>
+    <string name="double_tap_power_camera_action_title" msgid="8398392033718681209">"Otwórz Aparat"</string>
+    <string name="double_tap_power_camera_action_summary" msgid="1231656402570674349">"Dostęp do Aparatu"</string>
+    <string name="double_tap_power_wallet_action_title" msgid="2238628756927241786">"Otwórz Portfel"</string>
+    <string name="double_tap_power_wallet_action_summary" msgid="6567586974229774570">"Dostęp do Portfela"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Odwracaj aparat do selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"Tryb nawigacji"</string>
@@ -4910,25 +4894,6 @@
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"łączność satelitarna"</string>
     <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"przesyłanie wiadomości przez satelitę"</string>
     <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"Twoje konto obejmuje wykorzystanie danych"</string>
-    <string name="title_for_satellite_sos" msgid="4608739357329147285">"Satelitarne połączenie alarmowe"</string>
-    <string name="summary_for_satellite_sos_entry" msgid="4981480371923329605">"Wysyłaj wiadomości do służb ratunkowych, gdy nie możesz połączyć się z siecią komórkową lub Wi‑Fi"</string>
-    <string name="keywords_satellite_sos" msgid="6275777197418023949">"satelitarne połączenie alarmowe, połączenie alarmowe"</string>
-    <string name="category_title_about_satellite_sos" msgid="7229724397303154919">"Informacje o satelitarnych połączeniach alarmowych"</string>
-    <string name="satellite_sos_introduction" msgid="4670230212117495751">"Możesz wysyłać wiadomości do służb ratunkowych i udostępniać swoją lokalizację bez dostępu do sieci komórkowej lub Wi-Fi. Ta usługa może być niedostępna w niektórych lokalizacjach i określonych okolicznościach."</string>
-    <string name="satellite_sos_how_it_works_step_1" msgid="4669862942425306921">"Zadzwoń lub wyślij SMS-a do służb ratunkowych"</string>
-    <string name="satellite_sos_how_it_works_step_2" msgid="3558248744927579016">"Odpowiedz na pytania dotyczące sytuacji alarmowej"</string>
-    <string name="satellite_sos_how_it_works_step_3" msgid="4496038314890474893">"Postępuj zgodnie z instrukcjami, aby połączyć się z satelitą"</string>
-    <string name="satellite_sos_how_it_works_summary_1" msgid="4497178023367920284">"Jeśli nie ma sygnału sieci komórkowej, zobaczysz opcję użycia satelitarnego połączenia alarmowego"</string>
-    <string name="satellite_sos_how_it_works_summary_2" msgid="1302661361673503362">"Wysyłaj odpowiedzi do służb ratunkowych, które udzielą odpowiedniej pomocy"</string>
-    <string name="satellite_sos_how_it_works_summary_3" msgid="4612675365617172405">"Po nawiązaniu połączenia możesz wysyłać wiadomości do służb ratunkowych"</string>
-    <string name="satellite_sos_try_demo" msgid="1915233782211344468">"Zobacz prezentację"</string>
-    <string name="satellite_sos_footer_text" msgid="4454885538165117230">"Gdy łączysz się ze służbami ratunkowymi przez satelitę, Twoje imię i nazwisko, adres e-mail, numer telefonu, lokalizacja, informacje o urządzeniu (IMEI, język, model, poziom naładowania baterii) i dane kontaktów alarmowych są udostępniane służbom ratunkowym i dostawcom usług satelitarnych. \n\nAby można było korzystać z satelitarnego połączenia alarmowego, Wiadomości Google muszą być domyślną aplikacją do SMS-ów. \n\nJeśli automatyczny wybór sieci jest wyłączony, zostanie włączony, a urządzenie będzie automatycznie łączyć się z dowolną siecią."</string>
-    <string name="satellite_sos_sharing_preferences_subheader_title" msgid="5701538329333628267">"Ustawienia udostępniania"</string>
-    <string name="satellite_sos_sharing_preferences_step_1" msgid="3106774199702637359">"Kontakty alarmowe"</string>
-    <string name="satellite_sos_sharing_preferences_step_2" msgid="738246589687762115">"Twoje konto Google."</string>
-    <string name="satellite_sos_sharing_preferences_description" msgid="782508188142964342">"Sprawdź lub zaktualizuj informacje, które zostaną udostępniane służbom ratunkowym"</string>
-    <!-- no translation found for satellite_sos_learn_more_link (2442930426165677255) -->
-    <skip />
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nazwy punktów dostępu"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Niedostępne po połączeniu z siecią <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -5116,8 +5081,7 @@
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"Ogólny tryb strony 16 kB"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"Więcej informacji"</string>
     <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"Uruchamiaj aplikację w trybie zgodności z rozmiarem strony"</string>
-    <!-- no translation found for enable_16k_app_compat_details (3389401258168314266) -->
-    <skip />
+    <string name="enable_16k_app_compat_details" msgid="3389401258168314266">"Gdy to ustawienie jest włączone, na urządzeniu ze stronicowaniem 16 KB aplikacja będzie uruchamiana w trybie zgodności z rozmiarem strony."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Obsługiwanie zgłaszania błędów"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Określa, która aplikacja ma obsługiwać skrót do zgłaszania błędów na urządzeniu."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Osobista"</string>
