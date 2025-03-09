@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.GESTURE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
@@ -36,6 +37,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.text.SpannableStringBuilder;
@@ -131,7 +133,6 @@ public final class AccessibilityShortcutsTutorialTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void createTutorialPages_turnOnQuickSettingShortcut_hasOnePage() {
         mShortcutTypes |= QUICK_SETTINGS;
 
@@ -258,7 +259,6 @@ public final class AccessibilityShortcutsTutorialTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void createAccessibilityTutorialDialog_qsShortcut_inSuwTalkbackOn_verifyText() {
         mShortcutTypes |= QUICK_SETTINGS;
         setTouchExplorationEnabled(true);
@@ -290,7 +290,6 @@ public final class AccessibilityShortcutsTutorialTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void createAccessibilityTutorialDialog_qsShortcut_notInSuwTalkbackOn_verifyText() {
         mShortcutTypes |= QUICK_SETTINGS;
         setTouchExplorationEnabled(true);
@@ -316,7 +315,6 @@ public final class AccessibilityShortcutsTutorialTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void createAccessibilityTutorialDialog_qsShortcut_inSuwTalkbackOff_verifyText() {
         mShortcutTypes |= QUICK_SETTINGS;
         setTouchExplorationEnabled(false);
@@ -347,7 +345,6 @@ public final class AccessibilityShortcutsTutorialTest {
     }
 
     @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void createAccessibilityTutorialDialog_qsShortcut_notInSuwTalkbackOff_verifyText() {
         mShortcutTypes |= QUICK_SETTINGS;
         setTouchExplorationEnabled(false);
@@ -479,8 +476,36 @@ public final class AccessibilityShortcutsTutorialTest {
     }
 
     @Test
+    @DisableFlags(android.provider.Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
     public void createAccessibilityTutorialDialog_gestureShortcut_talkbackOn_verifyText() {
         mShortcutTypes |= SOFTWARE;
+        setTouchExplorationEnabled(true);
+        AccessibilityTestUtils.setSoftwareShortcutMode(
+                mContext, /* gestureNavEnabled= */ true, /* floatingButtonEnabled= */ false);
+
+        final String expectedTitle = mContext.getString(
+                R.string.accessibility_tutorial_dialog_title_gesture);
+        final String expectedInstruction = StringUtil.getIcuPluralsString(
+                mContext,
+                /* count= */ 3,
+                R.string.accessibility_tutorial_dialog_gesture_shortcut_instruction);
+
+        final AlertDialog alertDialog =
+                createAccessibilityTutorialDialog(
+                        mContext, mShortcutTypes, FAKE_FEATURE_NAME);
+        alertDialog.show();
+        ShadowLooper.idleMainLooper();
+
+        verifyTutorialTitleAndInstruction(
+                alertDialog,
+                expectedTitle,
+                expectedInstruction);
+    }
+
+    @Test
+    @EnableFlags(android.provider.Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
+    public void createAccessibilityTutorialDialog_gestureShortcut_talkbackOn_flag_verifyText() {
+        mShortcutTypes |= GESTURE;
         setTouchExplorationEnabled(true);
         AccessibilityTestUtils.setSoftwareShortcutMode(
                 mContext, /* gestureNavEnabled= */ true, /* floatingButtonEnabled= */ false);
@@ -504,8 +529,35 @@ public final class AccessibilityShortcutsTutorialTest {
     }
 
     @Test
+    @DisableFlags(android.provider.Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
     public void createAccessibilityTutorialDialog_gestureShortcut_talkbackOff_verifyText() {
         mShortcutTypes |= SOFTWARE;
+        setTouchExplorationEnabled(false);
+        AccessibilityTestUtils.setSoftwareShortcutMode(
+                mContext, /* gestureNavEnabled= */ true, /* floatingButtonEnabled= */ false);
+        final String expectedTitle = mContext.getString(
+                R.string.accessibility_tutorial_dialog_title_gesture);
+        final String expectedInstruction = StringUtil.getIcuPluralsString(
+                mContext,
+                /* count= */ 2,
+                R.string.accessibility_tutorial_dialog_gesture_shortcut_instruction);
+
+        final AlertDialog alertDialog =
+                createAccessibilityTutorialDialog(
+                        mContext, mShortcutTypes, FAKE_FEATURE_NAME);
+        alertDialog.show();
+        ShadowLooper.idleMainLooper();
+
+        verifyTutorialTitleAndInstruction(
+                alertDialog,
+                expectedTitle,
+                expectedInstruction);
+    }
+
+    @Test
+    @EnableFlags(android.provider.Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
+    public void createAccessibilityTutorialDialog_gestureShortcut_talkbackOff_flag_verifyText() {
+        mShortcutTypes |= GESTURE;
         setTouchExplorationEnabled(false);
         AccessibilityTestUtils.setSoftwareShortcutMode(
                 mContext, /* gestureNavEnabled= */ true, /* floatingButtonEnabled= */ false);

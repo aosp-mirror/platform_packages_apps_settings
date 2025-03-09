@@ -49,9 +49,14 @@ public class AccessibilityButtonFooterPreferenceController extends
     public void displayPreference(PreferenceScreen screen) {
         // Need to update footerPreference's data before super.displayPreference(), then it will use
         // data to update related property of footerPreference.
-        final int titleResource = AccessibilityUtil.isGestureNavigateEnabled(mContext)
-                ? R.string.accessibility_button_gesture_description
-                : R.string.accessibility_button_description;
+        final int titleResource;
+        if (android.provider.Flags.a11yStandaloneGestureEnabled()) {
+            titleResource = R.string.accessibility_button_description;
+        } else {
+            titleResource = AccessibilityUtil.isGestureNavigateEnabled(mContext)
+                    ? R.string.accessibility_button_gesture_description
+                    : R.string.accessibility_button_description;
+        }
         final CharSequence footerText = Html.fromHtml(
                 MessageFormat.format(mContext.getString(titleResource), 1, 2, 3),
                 Html.FROM_HTML_MODE_COMPACT);

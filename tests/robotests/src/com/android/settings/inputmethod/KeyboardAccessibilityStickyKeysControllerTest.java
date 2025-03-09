@@ -50,7 +50,7 @@ public class KeyboardAccessibilityStickyKeysControllerTest {
         mContext = RuntimeEnvironment.application;
         mKeyboardAccessibilityStickyKeysController = new KeyboardAccessibilityStickyKeysController(
                 mContext,
-                "accessibility_sticky_keys");
+                "keyboard_a11y_page_sticky_keys");
     }
 
     @Test

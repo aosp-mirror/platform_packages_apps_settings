@@ -291,23 +291,23 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
             // Certificates can be installed into SYSTEM_UID or WIFI_UID through CertInstaller.
             final int myUserId = UserHandle.myUserId();
             final int systemUid = UserHandle.getUid(myUserId, Process.SYSTEM_UID);
-            final int wifiUid = UserHandle.getUid(myUserId, Process.WIFI_UID);
-
             try {
                 KeyStore processKeystore = KeyStore.getInstance(KEYSTORE_PROVIDER);
                 processKeystore.load(null);
                 KeyStore wifiKeystore = null;
-                if (myUserId == 0) {
-                    wifiKeystore = KeyStore.getInstance(KEYSTORE_PROVIDER);
-                    wifiKeystore.load(new AndroidKeyStoreLoadStoreParameter(
-                            KeyProperties.NAMESPACE_WIFI));
-                }
 
                 List<Credential> credentials = new ArrayList<>();
                 credentials.addAll(getCredentialsForUid(processKeystore, systemUid).values());
-                if (wifiKeystore != null) {
-                    credentials.addAll(getCredentialsForUid(wifiKeystore, wifiUid).values());
+
+                UserManager userManager = getContext().getSystemService(UserManager.class);
+                if (userManager.isAdminUser()) {
+                    wifiKeystore = KeyStore.getInstance(KEYSTORE_PROVIDER);
+                    wifiKeystore.load(
+                        new AndroidKeyStoreLoadStoreParameter(KeyProperties.NAMESPACE_WIFI));
+                    credentials.addAll(
+                            getCredentialsForUid(wifiKeystore, Process.WIFI_UID).values());
                 }
+
                 return credentials;
             } catch (Exception e) {
                 throw new RuntimeException("Failed to load credentials from Keystore.", e);

@@ -18,9 +18,16 @@ package com.android.settings.gestures;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.SearchIndexableResource;
+import android.service.quickaccesswallet.Flags;
+
+import com.android.settings.R;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -31,6 +38,7 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 public class DoubleTapPowerSettingsTest {
 
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private DoubleTapPowerSettings mSettings;
 
     @Before
@@ -39,12 +47,38 @@ public class DoubleTapPowerSettingsTest {
     }
 
     @Test
-    public void testSearchIndexProvider_shouldIndexResource() {
+    @EnableFlags(Flags.FLAG_LAUNCH_WALLET_OPTION_ON_POWER_DOUBLE_TAP)
+    public void getPreferenceScreenResId_flagEnabled_returnsFlagEnabledResId() {
+        assertThat(mSettings.getPreferenceScreenResId()).isEqualTo(R.xml.double_tap_power_settings);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_LAUNCH_WALLET_OPTION_ON_POWER_DOUBLE_TAP)
+    public void getPreferenceScreenResId_flagDisabled_returnsFlagDisabledResId() {
+        assertThat(mSettings.getPreferenceScreenResId())
+                .isEqualTo(R.xml.double_tap_power_to_open_camera_settings);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_LAUNCH_WALLET_OPTION_ON_POWER_DOUBLE_TAP)
+    public void testSearchIndexProvider_flagEnabled_shouldIndexFlagEnabledResource() {
         final List<SearchIndexableResource> indexRes =
-            DoubleTapPowerSettings.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
-                RuntimeEnvironment.application, true /* enabled */);
+                DoubleTapPowerSettings.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
+                        RuntimeEnvironment.getApplication(), true /* enabled */);
 
         assertThat(indexRes).isNotNull();
-        assertThat(indexRes.get(0).xmlResId).isEqualTo(mSettings.getPreferenceScreenResId());
+        assertThat(indexRes.get(0).xmlResId).isEqualTo(R.xml.double_tap_power_settings);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_LAUNCH_WALLET_OPTION_ON_POWER_DOUBLE_TAP)
+    public void testSearchIndexProvider_flagDisabled_shouldIndexFlagDisabledResource() {
+        final List<SearchIndexableResource> indexRes =
+                DoubleTapPowerSettings.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
+                        RuntimeEnvironment.getApplication(), true /* enabled */);
+
+        assertThat(indexRes).isNotNull();
+        assertThat(indexRes.get(0).xmlResId)
+                .isEqualTo(R.xml.double_tap_power_to_open_camera_settings);
     }
 }

@@ -23,11 +23,16 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.flags.Flags;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -40,6 +45,9 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class TimeFormatPreferenceControllerTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private UpdateTimeAndDateCallback mCallback;
@@ -97,6 +105,7 @@ public class TimeFormatPreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags({Flags.FLAG_REVAMP_TOGGLES})
     public void updateState_autoSet_shouldNotEnablePreference() {
         Settings.System.putString(mContext.getContentResolver(), Settings.System.TIME_12_24, null);
 

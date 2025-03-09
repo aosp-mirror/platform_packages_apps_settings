@@ -33,6 +33,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
+// LINT.IfChange
 public class FirmwareVersionDetailPreferenceController extends BasePreferenceController {
 
     private static final String TAG = "firmwareDialogCtrl";
@@ -125,3 +126,4 @@ public class FirmwareVersionDetailPreferenceController extends BasePreferenceCon
                 mContext, UserManager.DISALLOW_FUN, UserHandle.myUserId());
     }
 }
+// LINT.ThenChange(FirmwareVersionDetailPreference.kt)

@@ -107,7 +107,7 @@ class BatteryOptimizationModeAppListModel(
         PowerAllowlistBackend.getInstance(context).refreshList()
         return recordListFlow.filterItem {
             val appOptimizationMode = BatteryOptimizeUtils(context, it.app.uid, it.app.packageName)
-                .getAppOptimizationMode(/* refreshList */ false);
+                .getAppOptimizationMode(/* refreshList */ false, /* ignoreUnknownMode */ true);
             when (OptimizationModeSpinnerItem.entries.getOrNull(option)) {
                 OptimizationModeSpinnerItem.Restricted ->
                     appOptimizationMode == BatteryOptimizeUtils.MODE_RESTRICTED

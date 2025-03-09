@@ -98,13 +98,4 @@ public class ZenModeSettingsTest {
         assertThat(mBuilder.getCallsSettingSummary(policy))
                 .isEqualTo("Starred contacts and repeat callers");
     }
-
-    @Test
-    public void searchProvider_shouldIndexDefaultXml() {
-        final List<SearchIndexableResource> sir = ZenModeSettings.SEARCH_INDEX_DATA_PROVIDER
-                .getXmlResourcesToIndex(mContext, true /* enabled */);
-
-        assertThat(sir).hasSize(1);
-        assertThat(sir.get(0).xmlResId).isEqualTo(R.xml.zen_mode_settings);
-    }
 }

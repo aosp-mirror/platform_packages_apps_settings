@@ -27,5 +27,5 @@ interface HardwareInfoFeatureProvider {
     /**
      * The country of origin label.
      */
-    val countryIfOriginLabel: String
+    val countryOfOriginLabel: String
 }

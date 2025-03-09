@@ -16,6 +16,7 @@
 
 package com.android.settings.inputmethod;
 
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.input.InputDeviceIdentifier;
@@ -35,12 +36,13 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
-import com.android.settings.inputmethod.NewKeyboardSettingsUtils.KeyboardInfo;
+import com.android.settings.inputmethod.InputPeripheralsSettingsUtils.KeyboardInfo;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -106,6 +108,16 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
         mIm = mContext.getSystemService(InputManager.class);
         mImm = mContext.getSystemService(InputMethodManager.class);
         mInputDeviceId = -1;
+
+        Activity activity = Preconditions.checkNotNull(getActivity());
+        InputDevice inputDeviceFromIntent =
+                activity.getIntent().getParcelableExtra(
+                        InputPeripheralsSettingsUtils.EXTRA_INPUT_DEVICE,
+                        InputDevice.class);
+
+        if (inputDeviceFromIntent != null) {
+            launchLayoutPickerWithIdentifier(inputDeviceFromIntent.getIdentifier());
+        }
     }
 
     @Override
@@ -117,14 +129,15 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
             return;
         }
         mInputDeviceIdentifier =
-                arguments.getParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER,
+                arguments.getParcelable(
+                        InputPeripheralsSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER,
                         InputDeviceIdentifier.class);
         if (mInputDeviceIdentifier == null) {
             Log.e(TAG, "The inputDeviceIdentifier should not be null");
             return;
         }
         InputDevice inputDevice =
-                NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier);
+                InputPeripheralsSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier);
         if (inputDevice == null) {
             Log.e(TAG, "inputDevice is null");
             return;
@@ -138,7 +151,7 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
         super.onStart();
         mIm.registerInputDeviceListener(this, null);
         InputDevice inputDevice =
-                NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier);
+                InputPeripheralsSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier);
         if (inputDevice == null) {
             Log.e(TAG, "Unable to start: input device is null");
             getActivity().finish();
@@ -160,8 +173,25 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
         mInputDeviceId = -1;
     }
 
+    private void launchLayoutPickerWithIdentifier(
+            InputDeviceIdentifier inputDeviceIdentifier) {
+        if (InputPeripheralsSettingsUtils.getInputDevice(mIm, inputDeviceIdentifier) == null) {
+            return;
+        }
+        InputMethodInfo info = mImm.getCurrentInputMethodInfoAsUser(UserHandle.of(mUserId));
+        InputMethodSubtype subtype = mImm.getCurrentInputMethodSubtype();
+        CharSequence subtypeLabel = getSubtypeLabel(mContext, info, subtype);
+
+        showKeyboardLayoutPicker(
+                subtypeLabel,
+                inputDeviceIdentifier,
+                mUserId,
+                info,
+                subtype);
+    }
+
     private void updateCheckedState() {
-        if (NewKeyboardSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier) == null) {
+        if (InputPeripheralsSettingsUtils.getInputDevice(mIm, mInputDeviceIdentifier) == null) {
             return;
         }
 
@@ -207,9 +237,9 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
     private void mapLanguageWithLayout(InputMethodInfo info, InputMethodSubtype subtype) {
         CharSequence subtypeLabel = getSubtypeLabel(mContext, info, subtype);
         KeyboardLayout[] keyboardLayouts =
-                NewKeyboardSettingsUtils.getKeyboardLayouts(
+                InputPeripheralsSettingsUtils.getKeyboardLayouts(
                         mIm, mUserId, mInputDeviceIdentifier, info, subtype);
-        KeyboardLayoutSelectionResult result = NewKeyboardSettingsUtils.getKeyboardLayout(
+        KeyboardLayoutSelectionResult result = InputPeripheralsSettingsUtils.getKeyboardLayout(
                 mIm, mUserId, mInputDeviceIdentifier, info, subtype);
         if (result.getLayoutDescriptor() != null) {
             for (int i = 0; i < keyboardLayouts.length; i++) {
@@ -316,13 +346,14 @@ public class NewKeyboardLayoutEnabledLocalesFragment extends DashboardFragment
             InputMethodSubtype inputMethodSubtype) {
         Bundle arguments = new Bundle();
         arguments.putParcelable(
-                NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER, inputDeviceIdentifier);
+                InputPeripheralsSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER,
+                inputDeviceIdentifier);
         arguments.putParcelable(
-                NewKeyboardSettingsUtils.EXTRA_INPUT_METHOD_INFO, inputMethodInfo);
+                InputPeripheralsSettingsUtils.EXTRA_INPUT_METHOD_INFO, inputMethodInfo);
         arguments.putParcelable(
-                NewKeyboardSettingsUtils.EXTRA_INPUT_METHOD_SUBTYPE, inputMethodSubtype);
-        arguments.putInt(NewKeyboardSettingsUtils.EXTRA_USER_ID, userId);
-        arguments.putCharSequence(NewKeyboardSettingsUtils.EXTRA_TITLE, subtypeLabel);
+                InputPeripheralsSettingsUtils.EXTRA_INPUT_METHOD_SUBTYPE, inputMethodSubtype);
+        arguments.putInt(InputPeripheralsSettingsUtils.EXTRA_USER_ID, userId);
+        arguments.putCharSequence(InputPeripheralsSettingsUtils.EXTRA_TITLE, subtypeLabel);
         new SubSettingLauncher(mContext)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .setDestination(NewKeyboardLayoutPickerFragment.class.getName())

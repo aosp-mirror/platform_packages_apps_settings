@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
+import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.telephony.data.ApnSetting
@@ -45,7 +46,7 @@ constructor(
     private var subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
     private var telephonyManager: TelephonyManager =
         context.getSystemService(TelephonyManager::class.java)!!
-
+    private val carrierConfigRepository = CarrierConfigRepository(context)
     private var preferenceScreen: PreferenceScreen? = null
 
     fun init(subId: Int) {
@@ -54,7 +55,13 @@ constructor(
     }
 
     override fun getAvailabilityStatus() =
-        if (getAvailabilityStatus(telephonyManager, subId, getDefaultDataSubId)) AVAILABLE
+        if (getAvailabilityStatus(
+                telephonyManager,
+                subId,
+                getDefaultDataSubId,
+                carrierConfigRepository
+            )
+        ) AVAILABLE
         else CONDITIONALLY_UNAVAILABLE
 
     override fun displayPreference(screen: PreferenceScreen) {
@@ -92,11 +99,14 @@ constructor(
             telephonyManager: TelephonyManager,
             subId: Int,
             getDefaultDataSubId: () -> Int,
+            carrierConfigRepository: CarrierConfigRepository,
         ): Boolean {
             return SubscriptionManager.isValidSubscriptionId(subId) &&
                 !telephonyManager.isDataEnabled &&
                 telephonyManager.isApnMetered(ApnSetting.TYPE_MMS) &&
-                !isFallbackDataEnabled(telephonyManager, subId, getDefaultDataSubId())
+                !isFallbackDataEnabled(telephonyManager, subId, getDefaultDataSubId()) &&
+                carrierConfigRepository.getBoolean(
+                    subId, CarrierConfigManager.KEY_MMS_MMS_ENABLED_BOOL)
         }
 
         private fun isFallbackDataEnabled(
@@ -118,11 +128,16 @@ constructor(
         ) : MobileNetworkSettingsSearchItem {
             private var telephonyManager: TelephonyManager =
                 context.getSystemService(TelephonyManager::class.java)!!
+            private val carrierConfigRepository = CarrierConfigRepository(context)
 
             @VisibleForTesting
             fun isAvailable(subId: Int): Boolean =
                 getAvailabilityStatus(
-                    telephonyManager.createForSubscriptionId(subId), subId, getDefaultDataSubId)
+                    telephonyManager.createForSubscriptionId(subId),
+                    subId,
+                    getDefaultDataSubId,
+                    carrierConfigRepository
+                )
 
             override fun getSearchResult(subId: Int): MobileNetworkSettingsSearchResult? {
                 if (!isAvailable(subId)) return null

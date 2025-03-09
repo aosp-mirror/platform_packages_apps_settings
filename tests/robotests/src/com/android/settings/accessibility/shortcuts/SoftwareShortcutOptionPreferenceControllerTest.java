@@ -33,14 +33,11 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.UserHandle;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
-import android.view.accessibility.Flags;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -50,10 +47,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.accessibility.AccessibilityButtonFragment;
-import com.android.settings.accessibility.FloatingMenuSizePreferenceController;
 import com.android.settings.testutils.AccessibilityTestUtils;
 import com.android.settings.utils.AnnotationSpan;
-import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -178,23 +173,6 @@ public class SoftwareShortcutOptionPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void enableShortcutForTargets_enableShortcut_shortcutTurnedOn() {
-        String target = TARGET_ALWAYS_ON_A11Y_SERVICE.flattenToString();
-        mController.setShortcutTargets(Set.of(target));
-        assertThat(ShortcutUtils.isComponentIdExistingInSettings(
-                mContext, ShortcutConstants.UserShortcutType.SOFTWARE, target
-        )).isFalse();
-
-        mController.enableShortcutForTargets(true);
-
-        assertThat(ShortcutUtils.isComponentIdExistingInSettings(
-                mContext, ShortcutConstants.UserShortcutType.SOFTWARE, target
-        )).isTrue();
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_enableShortcut_callA11yManager() {
         String target = TARGET_ALWAYS_ON_A11Y_SERVICE.flattenToString();
         mController.setShortcutTargets(Set.of(target));
@@ -214,25 +192,6 @@ public class SoftwareShortcutOptionPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void enableShortcutForTargets_disableShortcut_shortcutTurnedOff() {
-        String target = TARGET_ALWAYS_ON_A11Y_SERVICE.flattenToString();
-        ShortcutUtils.optInValueToSettings(
-                mContext, ShortcutConstants.UserShortcutType.SOFTWARE, target);
-        assertThat(ShortcutUtils.isComponentIdExistingInSettings(
-                mContext, ShortcutConstants.UserShortcutType.SOFTWARE, target
-        )).isTrue();
-        mController.setShortcutTargets(Set.of(target));
-
-        mController.enableShortcutForTargets(false);
-
-        assertThat(ShortcutUtils.isComponentIdExistingInSettings(
-                mContext, ShortcutConstants.UserShortcutType.SOFTWARE, target
-        )).isFalse();
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_disableShortcut_callA11yManager() {
         String target = TARGET_ALWAYS_ON_A11Y_SERVICE.flattenToString();
         ShortcutUtils.optInValueToSettings(
@@ -251,89 +210,6 @@ public class SoftwareShortcutOptionPreferenceControllerTest {
                 UserHandle.myUserId()
         );
         verifyNoMoreInteractions(mAccessibilityManager);
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void enableShortcutForTargets_enableShortcutWithMagnification_menuSizeIncreased() {
-        mController.setShortcutTargets(Set.of(TARGET_MAGNIFICATION));
-
-        mController.enableShortcutForTargets(true);
-
-        assertThat(
-                Settings.Secure.getInt(
-                        mContext.getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE,
-                        FloatingMenuSizePreferenceController.Size.UNKNOWN))
-                .isEqualTo(FloatingMenuSizePreferenceController.Size.LARGE);
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void enableShortcutForTargets_enableShortcutWithMagnification_userConfigureSmallMenuSize_menuSizeNotChanged() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE,
-                FloatingMenuSizePreferenceController.Size.SMALL);
-        mController.setShortcutTargets(Set.of(TARGET_MAGNIFICATION));
-
-        mController.enableShortcutForTargets(true);
-
-        assertThat(
-                Settings.Secure.getInt(
-                        mContext.getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_FLOATING_MENU_SIZE,
-                        FloatingMenuSizePreferenceController.Size.UNKNOWN))
-                .isEqualTo(FloatingMenuSizePreferenceController.Size.SMALL);
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void enableShortcutForTargets_enableAlwaysOnServiceShortcut_turnsOnAlwaysOnService() {
-        mController.setShortcutTargets(
-                Set.of(TARGET_ALWAYS_ON_A11Y_SERVICE.flattenToString()));
-
-        mController.enableShortcutForTargets(true);
-
-        assertThat(AccessibilityUtils.getEnabledServicesFromSettings(mContext))
-                .contains(TARGET_ALWAYS_ON_A11Y_SERVICE);
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void enableShortcutForTargets_disableAlwaysOnServiceShortcut_turnsOffAlwaysOnService() {
-        mController.setShortcutTargets(
-                Set.of(TARGET_ALWAYS_ON_A11Y_SERVICE.flattenToString()));
-
-        mController.enableShortcutForTargets(false);
-
-        assertThat(AccessibilityUtils.getEnabledServicesFromSettings(mContext))
-                .doesNotContain(TARGET_ALWAYS_ON_A11Y_SERVICE);
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void enableShortcutForTargets_enableStandardServiceShortcut_wontTurnOnService() {
-        mController.setShortcutTargets(
-                Set.of(TARGET_STANDARD_A11Y_SERVICE.flattenToString()));
-
-        mController.enableShortcutForTargets(true);
-
-        assertThat(AccessibilityUtils.getEnabledServicesFromSettings(mContext))
-                .doesNotContain(TARGET_STANDARD_A11Y_SERVICE);
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void enableShortcutForTargets_disableStandardServiceShortcutWithServiceOn_wontTurnOffService() {
-        mController.setShortcutTargets(
-                Set.of(TARGET_STANDARD_A11Y_SERVICE.flattenToString()));
-        AccessibilityUtils.setAccessibilityServiceState(
-                mContext, TARGET_STANDARD_A11Y_SERVICE, /* enabled= */ true);
-
-        mController.enableShortcutForTargets(false);
-
-        assertThat(AccessibilityUtils.getEnabledServicesFromSettings(mContext))
-                .contains(TARGET_STANDARD_A11Y_SERVICE);
     }
 
     private void assertLaunchSettingsPage(String page) {

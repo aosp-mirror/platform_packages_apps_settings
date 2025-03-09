@@ -18,14 +18,20 @@ package com.android.settings.notification.modes;
 
 import android.annotation.Nullable;
 import android.app.INotificationManager;
+import android.app.ZenBypassingApp;
+import android.content.ContentProvider;
 import android.content.Context;
 import android.content.pm.ParceledListSlice;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.ServiceManager;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.Contacts;
 import android.service.notification.ConversationChannelWrapper;
+import android.util.ArrayMap;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -37,8 +43,10 @@ import com.google.common.collect.ImmutableList;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 
 /**
  * Class used for Settings-system_server interactions that are not <em>directly</em> related to
@@ -54,6 +62,7 @@ class ZenHelperBackend {
 
     private final Context mContext;
     private final INotificationManager mInm;
+    private final UserManager mUserManager;
 
     static ZenHelperBackend getInstance(Context context) {
         if (sInstance == null) {
@@ -66,25 +75,32 @@ class ZenHelperBackend {
         mContext = context;
         mInm = INotificationManager.Stub.asInterface(
                 ServiceManager.getService(Context.NOTIFICATION_SERVICE));
+        mUserManager = context.getSystemService(UserManager.class);
     }
 
     /**
-     * Returns all of a user's packages that have at least one channel that will bypass DND
+     * Returns a mapping between a user's packages that have at least one channel that will
+     * bypass DND, and a Boolean indicating whether all of the package's channels bypass.
      */
-    List<String> getPackagesBypassingDnd(int userId,
-            boolean includeConversationChannels) {
+    Map<String, Boolean> getPackagesBypassingDnd(int userId) {
+        Map<String, Boolean> bypassingAppsMap = new HashMap<>();
         try {
-            return mInm.getPackagesBypassingDnd(userId, includeConversationChannels);
+            List<ZenBypassingApp> bypassingApps = mInm.getPackagesBypassingDnd(userId).getList();
+            for (ZenBypassingApp zba : bypassingApps) {
+                bypassingAppsMap.put(zba.getPkg(), zba.doAllChannelsBypass());
+            }
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
-            return new ArrayList<>();
         }
+        return bypassingAppsMap;
     }
 
+    /** Returns all conversation channels for profiles of the current user. */
     ImmutableList<ConversationChannelWrapper> getAllConversations() {
         return getConversations(false);
     }
 
+    /** Returns all important (priority) conversation channels for profiles of the current user. */
     ImmutableList<ConversationChannelWrapper> getImportantConversations() {
         return getConversations(true);
     }
@@ -97,7 +113,9 @@ class ZenHelperBackend {
                     onlyImportant);
             if (parceledList != null) {
                 for (ConversationChannelWrapper conversation : parceledList.getList()) {
-                    if (!conversation.getNotificationChannel().isDemoted()) {
+                    if (conversation.getShortcutInfo() != null
+                            && conversation.getNotificationChannel() != null
+                            && !conversation.getNotificationChannel().isDemoted()) {
                         list.add(conversation);
                     }
                 }
@@ -109,38 +127,52 @@ class ZenHelperBackend {
         }
     }
 
-    record Contact(long id, @Nullable String displayName, @Nullable Uri photoUri) { }
+    record Contact(UserHandle user, long contactId, @Nullable String displayName,
+                   @Nullable Uri photoUri) { }
 
+    /** Returns all contacts for profiles of the current user. */
     ImmutableList<Contact> getAllContacts() {
-        try (Cursor cursor = queryAllContactsData()) {
-            return getContactsFromCursor(cursor);
-        }
+        return getContactsForUserProfiles(this::queryAllContactsData);
     }
 
+    /** Returns all starred contacts for profiles of the current user. */
     ImmutableList<Contact> getStarredContacts() {
-        try (Cursor cursor = queryStarredContactsData()) {
-            return getContactsFromCursor(cursor);
-        }
+        return getContactsForUserProfiles(this::queryStarredContactsData);
     }
 
-    private ImmutableList<Contact> getContactsFromCursor(Cursor cursor) {
-        ImmutableList.Builder<Contact> list = new ImmutableList.Builder<>();
+    private ImmutableList<Contact> getContactsForUserProfiles(
+            Function<UserHandle, Cursor> userQuery) {
+        ImmutableList.Builder<Contact> contacts = new ImmutableList.Builder<>();
+        for (UserHandle user : mUserManager.getAllProfiles()) {
+            try (Cursor cursor = userQuery.apply(user)) {
+                loadContactsFromCursor(user, cursor, contacts);
+            }
+        }
+        return contacts.build();
+    }
+
+    private void loadContactsFromCursor(UserHandle user, Cursor cursor,
+            ImmutableList.Builder<Contact> contactsListBuilder) {
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 long id = cursor.getLong(0);
                 String name = Strings.emptyToNull(cursor.getString(1));
                 String photoUriStr = cursor.getString(2);
                 Uri photoUri = !Strings.isNullOrEmpty(photoUriStr) ? Uri.parse(photoUriStr) : null;
-                list.add(new Contact(id, name, photoUri));
+                contactsListBuilder.add(new Contact(user, id, name,
+                        ContentProvider.maybeAddUserId(photoUri, user.getIdentifier())));
             } while (cursor.moveToNext());
         }
-        return list.build();
     }
 
     int getAllContactsCount() {
-        try (Cursor cursor = queryAllContactsData()) {
-            return cursor != null ? cursor.getCount() : 0;
+        int count = 0;
+        for (UserHandle user : mUserManager.getEnabledProfiles()) {
+            try (Cursor cursor = queryAllContactsData(user)) {
+                count += (cursor != null ? cursor.getCount() : 0);
+            }
         }
+        return count;
     }
 
     private static final String[] CONTACTS_PROJECTION = new String[] {
@@ -149,17 +181,17 @@ class ZenHelperBackend {
             ContactsContract.Contacts.PHOTO_THUMBNAIL_URI
     };
 
-    private Cursor queryStarredContactsData() {
+    private Cursor queryStarredContactsData(UserHandle user) {
         return mContext.getContentResolver().query(
-                ContactsContract.Contacts.CONTENT_URI,
+                ContentProvider.maybeAddUserId(Contacts.CONTENT_URI, user.getIdentifier()),
                 CONTACTS_PROJECTION,
                 /* selection= */ ContactsContract.Data.STARRED + "=1", /* selectionArgs= */ null,
                 /* sortOrder= */ ContactsContract.Contacts.DISPLAY_NAME_PRIMARY);
     }
 
-    private Cursor queryAllContactsData() {
+    private Cursor queryAllContactsData(UserHandle user) {
         return mContext.getContentResolver().query(
-                ContactsContract.Contacts.CONTENT_URI,
+                ContentProvider.maybeAddUserId(Contacts.CONTENT_URI, user.getIdentifier()),
                 CONTACTS_PROJECTION,
                 /* selection= */ null, /* selectionArgs= */ null,
                 /* sortOrder= */ ContactsContract.Contacts.DISPLAY_NAME_PRIMARY);
