@@ -18,8 +18,6 @@ package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 
-import com.android.settingslib.accessibility.AccessibilityUtils;
-
 /**
  * Fragment that does not have toggle bar to turn on service to use.
  *
@@ -36,30 +34,5 @@ public class InvisibleToggleAccessibilityServicePreferenceFragment extends
     protected void onInstallSwitchPreferenceToggleSwitch() {
         super.onInstallSwitchPreferenceToggleSwitch();
         mToggleServiceSwitchPreference.setVisible(false);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * Enables accessibility service only when user had allowed permission. Disables
-     * accessibility service when shortcutPreference is unchecked.
-     */
-    @Override
-    public void onToggleClicked(ShortcutPreference preference) {
-        super.onToggleClicked(preference);
-        boolean enabled = getArguments().getBoolean(AccessibilitySettings.EXTRA_CHECKED)
-                && preference.isChecked();
-        AccessibilityUtils.setAccessibilityServiceState(getContext(), mComponentName, enabled);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * Enables accessibility service when user clicks permission allow button.
-     */
-    @Override
-    void onAllowButtonFromShortcutToggleClicked() {
-        super.onAllowButtonFromShortcutToggleClicked();
-        AccessibilityUtils.setAccessibilityServiceState(getContext(), mComponentName, true);
     }
 }

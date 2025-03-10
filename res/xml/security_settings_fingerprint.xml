@@ -40,7 +40,16 @@
             android:title="@string/security_settings_require_screen_on_to_auth_title"
             android:summary="@string/security_settings_require_screen_on_to_auth_description"
             settings:keywords="@string/security_settings_require_screen_on_to_auth_keywords"
-            settings:controller="com.android.settings.biometrics.fingerprint.FingerprintSettingsRequireScreenOnToAuthPreferenceController" />
+            settings:controller="com.android.settings.biometrics.fingerprint.FingerprintSettingsRequireScreenOnToAuthPreferenceController"
+            settings:isPreferenceVisible="false"/>
+
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="@string/security_settings_screen_off_unlock_udfps_key"
+            android:title="@string/security_settings_screen_off_unlock_udfps_title"
+            android:summary="@string/security_settings_screen_off_unlock_udfps_description"
+            settings:keywords="@string/security_settings_screen_off_unlock_udfps_keywords"
+            settings:controller="com.android.settings.biometrics.fingerprint.FingerprintSettingsScreenOffUnlockUdfpsPreferenceController"
+            settings:isPreferenceVisible="false"/>
     </PreferenceCategory>
 
     <PreferenceCategory

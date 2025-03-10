@@ -28,12 +28,13 @@
         <com.android.settingslib.RestrictedPreference
             android:key="@string/preference_key_brightness_level"
             android:title="@string/brightness"
+            android:persistent="false"
             settings:keywords="@string/keywords_display_brightness_level"
             settings:useAdminDisabledSummary="true"
             settings:userRestriction="no_config_brightness"/>
 
         <com.android.settingslib.PrimarySwitchPreference
-            android:key="@string/preference_key_auto_brightness"
+            android:key="screen_brightness_mode"
             android:title="@string/auto_brightness_title"
             android:fragment="com.android.settings.display.AutoBrightnessSettings"
             settings:useAdminDisabledSummary="true"

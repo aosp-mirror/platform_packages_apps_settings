@@ -45,6 +45,8 @@ import com.android.settings.biometrics.fingerprint2.domain.interactor.EnrollFing
 import com.android.settings.biometrics.fingerprint2.domain.interactor.EnrollStageInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.EnrollStageInteractorImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.EnrolledFingerprintsInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintEnrollStageCountInteractor
+import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintEnrollStageThresholdInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintSensorInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FingerprintSensorInteractorImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.FoldStateInteractor
@@ -58,6 +60,7 @@ import com.android.settings.biometrics.fingerprint2.domain.interactor.SensorInte
 import com.android.settings.biometrics.fingerprint2.domain.interactor.TouchEventInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.UdfpsEnrollInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.UdfpsEnrollInteractorImpl
+import com.android.settings.biometrics.fingerprint2.domain.interactor.UserInteractorImpl
 import com.android.settings.biometrics.fingerprint2.domain.interactor.VibrationInteractor
 import com.android.settings.biometrics.fingerprint2.domain.interactor.VibrationInteractorImpl
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.AuthenitcateInteractor
@@ -67,6 +70,7 @@ import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.Genera
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.RemoveFingerprintInteractor
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.RenameFingerprintInteractor
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.SensorInteractor
+import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.UserInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.Settings
 import java.util.concurrent.Executors
 import kotlinx.coroutines.MainScope
@@ -97,11 +101,11 @@ class BiometricsEnvironment(
         com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser
       )
     )
-  private val fingerprintEnrollmentRepository =
-    FingerprintEnrollmentRepositoryImpl(fingerprintManager, userRepo, fingerprintSettingsRepository,
-      backgroundDispatcher, applicationScope)
   private val fingerprintSensorRepository: FingerprintSensorRepository =
     FingerprintSensorRepositoryImpl(fingerprintManager, backgroundDispatcher, applicationScope)
+  private val fingerprintEnrollmentRepository =
+    FingerprintEnrollmentRepositoryImpl(fingerprintManager, userRepo, fingerprintSettingsRepository,
+      backgroundDispatcher, applicationScope, fingerprintSensorRepository)
   private val debuggingRepository: DebuggingRepository = DebuggingRepositoryImpl()
   private val udfpsDebugRepo = UdfpsEnrollDebugRepositoryImpl()
 
@@ -111,29 +115,34 @@ class BiometricsEnvironment(
   fun createCanEnrollFingerprintsInteractor(): CanEnrollFingerprintsInteractor =
     CanEnrollFingerprintsInteractorImpl(fingerprintEnrollmentRepository)
 
+  fun createFingerprintEnrollStageCountInteractor(): FingerprintEnrollStageCountInteractor =
+    FingerprintEnrollStageCountInteractor(fingerprintEnrollmentRepository)
+
+  fun createFingerprintEnrollStageThresholdInteractor(): FingerprintEnrollStageThresholdInteractor =
+    FingerprintEnrollStageThresholdInteractor(fingerprintEnrollmentRepository)
+
   fun createGenerateChallengeInteractor(): GenerateChallengeInteractor =
-    GenerateChallengeInteractorImpl(fingerprintManager, context.userId, gateKeeperPasswordProvider)
+    GenerateChallengeInteractorImpl(fingerprintManager, userRepo, gateKeeperPasswordProvider)
 
   fun createFingerprintEnrollInteractor(): EnrollFingerprintInteractor =
-    EnrollFingerprintInteractorImpl(context.userId, fingerprintManager, Settings)
+    EnrollFingerprintInteractorImpl(userRepo, fingerprintManager, Settings)
 
   fun createFingerprintsEnrolledInteractor(): EnrolledFingerprintsInteractorImpl =
-    EnrolledFingerprintsInteractorImpl(fingerprintManager, context.userId)
+    EnrolledFingerprintsInteractorImpl(fingerprintEnrollmentRepository)
 
   fun createAuthenticateInteractor(): AuthenitcateInteractor =
-    AuthenticateInteractorImpl(fingerprintManager, context.userId)
+    AuthenticateInteractorImpl(fingerprintManager, userRepo)
+
+  fun createUserInteractor(): UserInteractor = UserInteractorImpl(userRepo)
 
   fun createRemoveFingerprintInteractor(): RemoveFingerprintInteractor =
-    RemoveFingerprintsInteractorImpl(fingerprintManager, context.userId)
+    RemoveFingerprintsInteractorImpl(fingerprintManager, userRepo)
 
   fun createRenameFingerprintInteractor(): RenameFingerprintInteractor =
-    RenameFingerprintsInteractorImpl(fingerprintManager, context.userId, backgroundDispatcher)
+    RenameFingerprintsInteractorImpl(fingerprintManager, userRepo, backgroundDispatcher)
 
-  val accessibilityInteractor: AccessibilityInteractor by lazy {
-    AccessibilityInteractorImpl(
-      context.getSystemService(AccessibilityManager::class.java)!!,
-      applicationScope,
-    )
+  fun createAccessibilityInteractor(): AccessibilityInteractor {
+    return AccessibilityInteractorImpl(context.getSystemService(AccessibilityManager::class.java)!!)
   }
 
   val foldStateInteractor: FoldStateInteractor by lazy { FoldStateInteractorImpl(context) }
@@ -153,7 +162,7 @@ class BiometricsEnvironment(
   val enrollStageInteractor: EnrollStageInteractor by lazy { EnrollStageInteractorImpl() }
 
   val udfpsEnrollInteractor: UdfpsEnrollInteractor by lazy {
-    UdfpsEnrollInteractorImpl(context, accessibilityInteractor)
+    UdfpsEnrollInteractorImpl(context, createAccessibilityInteractor())
   }
 
   val sensorInteractor: FingerprintSensorInteractor by lazy {

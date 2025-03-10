@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2024 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <style name="Theme.Settings.Expressive" parent="Theme.SettingsBase.Expressive">
+        <item name="android:clipToPadding">false</item>
+        <item name="android:clipChildren">false</item>
+        <item name="preferenceTheme">@style/SettingsPreferenceTheme.Expressive</item>
+        <item name="android:listPreferredItemHeight">72dip</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:datePickerDialogTheme">@style/PickerDialogTheme.Settings</item>
+
+        <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
+        <item name="face_layout_theme">@style/FaceLayoutTheme</item>
+        <item name="ic_menu_moreoverflow">@*android:drawable/ic_menu_moreoverflow_holo_dark</item>
+
+        <!-- For edge-to-edge -->
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+
+        <!-- For wifi icon -->
+        <item name="wifi_signal">@drawable/wifi_signal</item>
+        <item name="wifi_signal_color">?android:attr/colorAccent</item>
+        <item name="wifi_friction">@drawable/wifi_friction</item>
+
+        <item name="side_margin">0dp</item>
+        <item name="sudListItemIconColor">?android:attr/colorAccent</item>
+
+        <!-- Redefine the ActionBar style for contentInsetStart -->
+        <item name="android:actionBarStyle">@style/Widget.ActionBar</item>
+
+        <item name="preferenceBackgroundColor">@drawable/preference_background</item>
+
+        <!-- For AndroidX AlertDialog -->
+        <item name="alertDialogTheme">@style/Theme.AlertDialog</item>
+
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle</item>
+
+        <!-- For AppBarLayout -->
+        <item name="colorPrimary">@*android:color/primary_device_default_settings_light</item>
+        <item name="colorPrimaryVariant">@android:color/white</item>
+
+        <!-- For slice view in settings -->
+        <item name="sliceViewStyle">@style/Widget.SliceView.Settings</item>
+
+        <item name="notification_importance_button_background_color_unselected">@android:color/transparent</item>
+        <item name="notification_importance_button_border_color_unselected">?androidprv:attr/materialColorOutlineVariant</item>
+        <item name="notification_importance_button_foreground_color_unselected">?androidprv:attr/materialColorOnSurfaceVariant</item>
+
+        <item name="notification_importance_button_background_color_selected">?androidprv:attr/materialColorSecondaryContainer</item>
+        <item name="notification_importance_button_border_color_selected">?androidprv:attr/materialColorOnSecondaryContainer</item>
+        <item name="notification_importance_button_foreground_color_selected">?androidprv:attr/materialColorOnSecondaryContainer</item>
+
+        <!-- For AppCompat widgets, e.g. TextInputLayout -->
+        <item name="colorAccent">?android:attr/colorAccent</item>
+    </style>
+
+    <style name="Theme.Settings.Expressive.NoActionBar">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorSurface">@color/settingslib_colorSurface</item>
+    </style>
+
+    <style name="Theme.SubSettings.Expressive.Base" parent="Theme.Settings.Expressive.NoActionBar">
+        <!-- Redefine the ActionBar style for contentInsetStart -->
+        <item name="android:actionBarStyle">@style/Widget.ActionBar.SubSettings</item>
+
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.SubSettings.Expressive" parent="Theme.SubSettings.Expressive.Base"/>
+</resources>

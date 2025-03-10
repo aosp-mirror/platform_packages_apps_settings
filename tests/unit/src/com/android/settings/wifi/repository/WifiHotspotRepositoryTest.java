@@ -78,6 +78,7 @@ import java.util.Arrays;
 public class WifiHotspotRepositoryTest {
     static final String WIFI_SSID = "wifi_ssid";
     static final String WIFI_PASSWORD = "wifi_password";
+    static final String WIFI_PASSWORD_SHORT = "wifi";
 
     static final int WIFI_5GHZ_BAND_PREFERRED = BAND_2GHZ_5GHZ;
     static final int WIFI_6GHZ_BAND_PREFERRED = BAND_2GHZ_5GHZ_6GHZ;
@@ -477,7 +478,7 @@ public class WifiHotspotRepositoryTest {
 
     @Test
     public void setSpeedType_2g5ghzTo6ghz_setConfigSecurityToWpa3() {
-        mockConfig(SPEED_2GHZ_5GHZ, SECURITY_TYPE_WPA3_SAE_TRANSITION);
+        mockConfig(SPEED_2GHZ_5GHZ, SECURITY_TYPE_WPA3_SAE_TRANSITION, WIFI_PASSWORD);
 
         mRepository.setSpeedType(SPEED_6GHZ);
 
@@ -497,8 +498,30 @@ public class WifiHotspotRepositoryTest {
         SparseIntArray channels = mSoftApConfigCaptor.getValue().getChannels();
         assertThat(channels.get(BAND_2GHZ, CHANNEL_NOT_FOUND)).isNotEqualTo(CHANNEL_NOT_FOUND);
         assertThat(channels.get(BAND_2GHZ_5GHZ, CHANNEL_NOT_FOUND)).isNotEqualTo(CHANNEL_NOT_FOUND);
+    }
+
+    @Test
+    public void setSpeedType_6ghzTo2g5ghzWith8CharPassphrase_changesSecurityToWpa3Transition() {
+        mockConfigSpeedType(SPEED_6GHZ);
+        mRepository.mIsDualBand = true;
+
+        mRepository.setSpeedType(SPEED_2GHZ_5GHZ);
+
+        verify(mWifiManager).setSoftApConfiguration(mSoftApConfigCaptor.capture());
         assertThat(mSoftApConfigCaptor.getValue().getSecurityType())
                 .isEqualTo(SECURITY_TYPE_WPA3_SAE_TRANSITION);
+    }
+
+    @Test
+    public void setSpeedType_6ghzTo2g5ghzWithLessThan8CharPassphrase_doesNotChangeSecurity() {
+        mockConfig(SECURITY_TYPE_WPA3_SAE, SPEED_6GHZ, WIFI_PASSWORD_SHORT);
+        mRepository.mIsDualBand = true;
+
+        mRepository.setSpeedType(SPEED_2GHZ_5GHZ);
+
+        verify(mWifiManager).setSoftApConfiguration(mSoftApConfigCaptor.capture());
+        assertThat(mSoftApConfigCaptor.getValue().getSecurityType())
+                .isEqualTo(SECURITY_TYPE_WPA3_SAE);
     }
 
     @Test
@@ -784,18 +807,18 @@ public class WifiHotspotRepositoryTest {
     }
 
     private void mockConfigSecurityType(int securityType) {
-        mockConfig(securityType, SPEED_2GHZ);
+        mockConfig(securityType, SPEED_2GHZ,
+                (securityType == SECURITY_TYPE_OPEN) ? null : WIFI_PASSWORD);
     }
 
     private void mockConfigSpeedType(int speedType) {
-        mockConfig(SECURITY_TYPE_WPA3_SAE, speedType);
+        mockConfig(SECURITY_TYPE_WPA3_SAE, speedType, WIFI_PASSWORD);
     }
 
-    private void mockConfig(int securityType, int speedType) {
+    private void mockConfig(int securityType, int speedType, String passphrase) {
         SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
         // Security Type
         doReturn(securityType).when(mSecurityType).getValue();
-        String passphrase = (securityType == SECURITY_TYPE_OPEN) ? null : WIFI_PASSWORD;
         configBuilder.setPassphrase(passphrase, securityType).build();
 
         // Speed Type

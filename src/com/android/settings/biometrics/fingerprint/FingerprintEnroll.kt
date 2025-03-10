@@ -41,6 +41,14 @@ open class FingerprintEnroll: AppCompatActivity() {
     }
 
     /**
+     *  Inner class to request adding of an additional fingerprint
+     */
+    class AddAdditionalFingerprint : FingerprintEnroll() {
+        override val nextActivityClass: Class<*>
+            get() = enrollActivityProvider.addAnother
+    }
+
+    /**
      * The class of the next activity to launch. This is open to allow subclasses to provide their
      * own behavior. Defaults to the default activity class provided by the
      * enrollActivityClassProvider.
@@ -49,7 +57,7 @@ open class FingerprintEnroll: AppCompatActivity() {
         get() = enrollActivityProvider.default
 
     protected val enrollActivityProvider: FingerprintEnrollActivityClassProvider
-        get() = featureFactory.fingerprintFeatureProvider.enrollActivityClassProvider
+        get() = featureFactory.fingerprintFeatureProvider.getEnrollActivityClassProvider(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

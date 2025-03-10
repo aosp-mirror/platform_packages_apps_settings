@@ -34,6 +34,7 @@ import androidx.navigation.navArgument
 import com.android.settings.R
 import com.android.settings.applications.AppInfoBase
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
+import com.android.settings.development.Enable16kUtils
 import com.android.settings.flags.Flags
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.app.appcompat.UserAspectRatioAppPreference
@@ -42,6 +43,7 @@ import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListPro
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
+import com.android.settings.spa.app.specialaccess.WriteSystemPreferencesAppListProvider
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
@@ -140,18 +142,20 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
 
         AppButtons(packageInfoPresenter, isHibernationSwitchEnabledStateFlow)
 
-        AppSettingsPreference(app)
-        AppAllServicesPreference(app)
-        AppNotificationPreference(app)
-        AppPermissionPreference(app)
-        AppStoragePreference(app)
-        InstantAppDomainsPreference(app)
-        AppDataUsagePreference(app)
-        AppTimeSpentPreference(app)
-        AppBatteryPreference(app)
-        AppLocalePreference(app)
-        AppOpenByDefaultPreference(app)
-        DefaultAppShortcuts(app)
+        Category {
+            AppSettingsPreference(app)
+            AppAllServicesPreference(app)
+            AppNotificationPreference(app)
+            AppPermissionPreference(app)
+            AppStoragePreference(app)
+            InstantAppDomainsPreference(app)
+            AppDataUsagePreference(app)
+            AppTimeSpentPreference(app)
+            AppBatteryPreference(app)
+            AppLocalePreference(app)
+            AppOpenByDefaultPreference(app)
+            DefaultAppShortcuts(app)
+        }
 
         Category(title = stringResource(R.string.unused_apps_category)) {
             HibernationSwitchPreference(app, isHibernationSwitchEnabledStateFlow)
@@ -165,6 +169,8 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
             InstallUnknownAppsListProvider.InfoPageEntryItem(app)
             InteractAcrossProfilesDetailsPreference(app)
             AlarmsAndRemindersAppListProvider.InfoPageEntryItem(app)
+            WriteSystemPreferencesAppListProvider.InfoPageEntryItem(app)
+            Enable16KbAppCompatPreference(app)
         }
 
         Category(title = stringResource(R.string.app_install_details_group_title)) {

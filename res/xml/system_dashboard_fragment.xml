@@ -43,8 +43,8 @@
         android:summary="@string/trackpad_settings_summary"
         android:icon="@drawable/ic_settings_trackpad"
         android:order="-254"
-        android:fragment="com.android.settings.inputmethod.TrackpadSettings"
-        settings:controller="com.android.settings.inputmethod.TrackpadSettingsController"/>
+        android:fragment="com.android.settings.inputmethod.TouchpadAndMouseSettings"
+        settings:controller="com.android.settings.inputmethod.TouchpadAndMouseSettingsController"/>
 
     <Preference
         android:key="gesture_settings"

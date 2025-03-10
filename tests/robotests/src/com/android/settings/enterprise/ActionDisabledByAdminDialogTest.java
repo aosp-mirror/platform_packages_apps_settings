@@ -16,38 +16,72 @@
 
 package com.android.settings.enterprise;
 
-import static org.junit.Assert.assertEquals;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static android.security.advancedprotection.AdvancedProtectionManager.ACTION_SHOW_ADVANCED_PROTECTION_SUPPORT_DIALOG;
+import static android.security.advancedprotection.AdvancedProtectionManager.ADVANCED_PROTECTION_SYSTEM_ENTITY;
+import static android.security.advancedprotection.AdvancedProtectionManager.EXTRA_SUPPORT_DIALOG_FEATURE;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import android.app.admin.Authority;
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.UnknownAuthority;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.UserHandle;
+import android.os.UserManager;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.security.advancedprotection.AdvancedProtectionManager;
 
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class ActionDisabledByAdminDialogTest {
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
+    @Mock
+    private DevicePolicyManager mDevicePolicyManager;
+    @Mock
+    private AdvancedProtectionManager mAdvancedProtectionManager;
 
     private ActionDisabledByAdminDialog mDialog;
+    private final ComponentName mAdminComponent = new ComponentName("admin", "adminclass");
 
     @Before
     public void setUp() {
-        mDialog = new ActionDisabledByAdminDialog();
+        MockitoAnnotations.initMocks(this);
+        mDialog = spy(new ActionDisabledByAdminDialog());
+        doReturn(mDevicePolicyManager).when(mDialog).getSystemService(DevicePolicyManager.class);
+        doReturn(mAdvancedProtectionManager).when(mDialog).getSystemService(
+                AdvancedProtectionManager.class);
     }
 
     @Test
     public void testGetAdminDetailsFromIntent() {
         final int userId = 123;
-        final ComponentName component = new ComponentName("com.some.package", ".SomeClass");
-        final EnforcedAdmin expectedAdmin = new EnforcedAdmin(component, UserHandle.of(userId));
+        final EnforcedAdmin expectedAdmin = new EnforcedAdmin(mAdminComponent, UserHandle.of(
+                userId));
 
         final Intent intent = new Intent();
-        intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, component);
+        intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mAdminComponent);
         intent.putExtra(Intent.EXTRA_USER_ID, userId);
         assertEquals(expectedAdmin, mDialog.getAdminDetailsFromIntent(intent));
     }
@@ -72,5 +106,54 @@ public class ActionDisabledByAdminDialogTest {
     @Test
     public void testGetRestrictionFromNullIntent() {
         assertEquals(null, mDialog.getRestrictionFromIntent(null));
+    }
+
+    @RequiresFlagsEnabled(android.security.Flags.FLAG_AAPM_API)
+    @Test
+    public void testGetAdminDetailsFromIntent_nullComponent_advancedProtection_launchesNewDialog() {
+        final int userId = UserHandle.myUserId();
+        final Authority advancedProtectionAuthority = new UnknownAuthority(
+                ADVANCED_PROTECTION_SYSTEM_ENTITY);
+        final EnforcingAdmin advancedProtectionEnforcingAdmin = new EnforcingAdmin("test.pkg",
+                advancedProtectionAuthority, UserHandle.of(userId), mAdminComponent);
+        final String userRestriction = UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY;
+
+        final Intent apmIntent = new Intent(ACTION_SHOW_ADVANCED_PROTECTION_SUPPORT_DIALOG);
+        apmIntent.setFlags(FLAG_ACTIVITY_NEW_TASK);
+        apmIntent.putExtra(EXTRA_SUPPORT_DIALOG_FEATURE, "featureId");
+
+        final Intent dialogIntent = new Intent();
+        dialogIntent.putExtra(Intent.EXTRA_USER_ID, userId);
+        dialogIntent.putExtra(DevicePolicyManager.EXTRA_RESTRICTION, userRestriction);
+
+        when(mDevicePolicyManager.getEnforcingAdmin(userId, userRestriction))
+                .thenReturn(advancedProtectionEnforcingAdmin);
+        when(mAdvancedProtectionManager.createSupportIntentForPolicyIdentifierOrRestriction(
+                userRestriction, /* type */ null)).thenReturn(apmIntent);
+        doNothing().when(mDialog).startActivityAsUser(apmIntent, UserHandle.of(userId));
+
+        mDialog.getAdminDetailsFromIntent(dialogIntent);
+
+        verify(mDialog).startActivityAsUser(apmIntent, UserHandle.of(userId));
+        assertTrue(mDialog.isFinishing());
+    }
+
+    @RequiresFlagsEnabled(android.security.Flags.FLAG_AAPM_API)
+    @Test
+    public void testGetAdminDetailsFromIntent_nullComponent_notAdvancedProtection_retrievesAdmin() {
+        final int userId = UserHandle.myUserId();
+        final EnforcingAdmin nonAdvancedProtectionEnforcingAdmin = new EnforcingAdmin("test.pkg",
+                UnknownAuthority.UNKNOWN_AUTHORITY, UserHandle.of(userId), mAdminComponent);
+        final String userRestriction = UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY;
+
+        final Intent dialogIntent = new Intent();
+        dialogIntent.putExtra(Intent.EXTRA_USER_ID, userId);
+        dialogIntent.putExtra(DevicePolicyManager.EXTRA_RESTRICTION, userRestriction);
+
+        when(mDevicePolicyManager.getEnforcingAdmin(userId, userRestriction))
+                .thenReturn(nonAdvancedProtectionEnforcingAdmin);
+
+        EnforcedAdmin admin = mDialog.getAdminDetailsFromIntent(dialogIntent);
+        assertEquals(mAdminComponent, admin.component);
     }
 }

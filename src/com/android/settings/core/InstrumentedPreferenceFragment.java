@@ -147,7 +147,7 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
         mMetricsFeatureProvider.logClickedPreference(preference, getMetricsCategory());
     }
 
-    private void updateActivityTitleWithScreenTitle(PreferenceScreen screen) {
+    protected void updateActivityTitleWithScreenTitle(PreferenceScreen screen) {
         if (screen != null) {
             final CharSequence title = screen.getTitle();
             if (!TextUtils.isEmpty(title)) {

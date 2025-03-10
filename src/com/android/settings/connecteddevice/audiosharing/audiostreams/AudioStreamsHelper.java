@@ -19,7 +19,6 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamMediaService.BROADCAST_ID;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamMediaService.BROADCAST_TITLE;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamMediaService.DEVICES;
-import static com.android.settingslib.flags.Flags.audioSharingHysteresisModeFix;
 
 import static java.util.Collections.emptyList;
 
@@ -139,7 +138,6 @@ public class AudioStreamsHelper {
     }
 
     /** Retrieves a list of all LE broadcast receive states from active sinks. */
-    @VisibleForTesting
     public List<BluetoothLeBroadcastReceiveState> getAllConnectedSources() {
         if (mLeBroadcastAssistant == null) {
             Log.w(TAG, "getAllSources(): LeBroadcastAssistant is null!");
@@ -165,7 +163,6 @@ public class AudioStreamsHelper {
     }
 
     /** Retrieves LocalBluetoothLeBroadcastAssistant. */
-    @VisibleForTesting
     @Nullable
     public LocalBluetoothLeBroadcastAssistant getLeBroadcastAssistant() {
         return mLeBroadcastAssistant;
@@ -273,7 +270,8 @@ public class AudioStreamsHelper {
         List<BluetoothLeBroadcastReceiveState> sourceList =
                 assistant.getAllSources(cachedDevice.getDevice());
         if (!sourceList.isEmpty()
-                && (audioSharingHysteresisModeFix()
+                && (BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(
+                                localBtManager.getContext())
                         || sourceList.stream().anyMatch(AudioStreamsHelper::isConnected))) {
             Log.d(
                     TAG,
@@ -286,7 +284,8 @@ public class AudioStreamsHelper {
             List<BluetoothLeBroadcastReceiveState> list =
                     assistant.getAllSources(device.getDevice());
             if (!list.isEmpty()
-                    && (audioSharingHysteresisModeFix()
+                    && (BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(
+                                    localBtManager.getContext())
                             || list.stream().anyMatch(AudioStreamsHelper::isConnected))) {
                 Log.d(
                         TAG,

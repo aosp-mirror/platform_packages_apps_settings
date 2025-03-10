@@ -143,20 +143,6 @@ public class TwoFingerDoubleTapShortcutOptionControllerTest {
     }
 
     @Test
-    @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void enableShortcutForTargets_enableShortcut_settingUpdated() {
-        mController.enableShortcutForTargets(true);
-
-        assertThat(
-                Settings.Secure.getInt(
-                        mContext.getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED,
-                        AccessibilityUtil.State.OFF)
-        ).isEqualTo(AccessibilityUtil.State.ON);
-    }
-
-    @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_enableShortcut_callA11yManager() {
         mController.enableShortcutForTargets(true);
 
@@ -170,20 +156,6 @@ public class TwoFingerDoubleTapShortcutOptionControllerTest {
     }
 
     @Test
-    @DisableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void enableShortcutForTargets_disableShortcut_settingUpdated() {
-        mController.enableShortcutForTargets(false);
-
-        assertThat(
-                Settings.Secure.getInt(
-                        mContext.getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED,
-                        AccessibilityUtil.State.OFF)
-        ).isEqualTo(AccessibilityUtil.State.OFF);
-    }
-
-    @Test
-    @EnableFlags(android.view.accessibility.Flags.FLAG_A11Y_QS_SHORTCUT)
     public void enableShortcutForTargets_disableShortcut_callA11yManager() {
         mController.enableShortcutForTargets(false);
 

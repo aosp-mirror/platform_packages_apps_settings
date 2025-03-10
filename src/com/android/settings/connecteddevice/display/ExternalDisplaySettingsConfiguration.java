@@ -19,8 +19,8 @@ import static android.content.Context.DISPLAY_SERVICE;
 import static android.hardware.display.DisplayManager.DISPLAY_CATEGORY_ALL_INCLUDING_DISABLED;
 import static android.hardware.display.DisplayManager.EVENT_FLAG_DISPLAY_ADDED;
 import static android.hardware.display.DisplayManager.EVENT_FLAG_DISPLAY_CHANGED;
-import static android.hardware.display.DisplayManager.EVENT_FLAG_DISPLAY_CONNECTION_CHANGED;
 import static android.hardware.display.DisplayManager.EVENT_FLAG_DISPLAY_REMOVED;
+import static android.hardware.display.DisplayManager.PRIVATE_EVENT_FLAG_DISPLAY_CONNECTION_CHANGED;
 import static android.view.Display.INVALID_DISPLAY;
 
 import static com.android.server.display.feature.flags.Flags.enableModeLimitForExternalDisplay;
@@ -159,8 +159,8 @@ public class ExternalDisplaySettingsConfiguration {
                 return;
             }
             dm.registerDisplayListener(listener, mHandler, EVENT_FLAG_DISPLAY_ADDED
-                    | EVENT_FLAG_DISPLAY_CHANGED | EVENT_FLAG_DISPLAY_REMOVED
-                    | EVENT_FLAG_DISPLAY_CONNECTION_CHANGED);
+                    | EVENT_FLAG_DISPLAY_CHANGED | EVENT_FLAG_DISPLAY_REMOVED,
+                    PRIVATE_EVENT_FLAG_DISPLAY_CONNECTION_CHANGED);
         }
 
         /**
@@ -319,7 +319,16 @@ public class ExternalDisplaySettingsConfiguration {
      */
     public static boolean isExternalDisplaySettingsPageEnabled(@NonNull FeatureFlags flags) {
         return flags.rotationConnectedDisplaySetting()
-                || flags.resolutionAndEnableConnectedDisplaySetting();
+                || flags.resolutionAndEnableConnectedDisplaySetting()
+                || flags.displayTopologyPaneInDisplayList();
+    }
+
+    /**
+     * If true, indicates the display list activity should be shown even if there is only one
+     * display.
+     */
+    public static boolean forceShowDisplayList(@NonNull FeatureFlags flags) {
+        return flags.displayTopologyPaneInDisplayList();
     }
 
     static boolean isDisplayAllowed(@NonNull Display display,

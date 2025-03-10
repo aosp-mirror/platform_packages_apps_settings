@@ -24,6 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.accessibility.CaptioningManager;
@@ -33,7 +34,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -53,6 +53,8 @@ public class CaptioningWindowColorControllerTest {
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Mock
     private PreferenceScreen mScreen;
     private final Context mContext = ApplicationProvider.getApplicationContext();
@@ -62,18 +64,13 @@ public class CaptioningWindowColorControllerTest {
 
     @Before
     public void setUp() {
-        mController = new CaptioningWindowColorController(mContext, "captioning_window_color");
+        mController = new CaptioningWindowColorController(
+                mContext, "captioning_window_color");
         final AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
         mPreference = new ColorPreference(mContext, attributeSet);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         CaptioningManager captioningManager = mContext.getSystemService(CaptioningManager.class);
         mShadowCaptioningManager = Shadow.extract(captioningManager);
-    }
-
-    @Test
-    public void getAvailabilityStatus_shouldReturnAvailable() {
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test

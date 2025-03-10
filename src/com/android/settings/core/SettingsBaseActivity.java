@@ -46,6 +46,7 @@ import com.android.settings.Utils;
 import com.android.settings.core.CategoryMixin.CategoryHandler;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 import com.android.settingslib.transition.SettingsTransitionHelper.TransitionType;
+import com.android.settingslib.widget.SettingsThemeHelper;
 import com.android.window.flags.Flags;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -67,6 +68,12 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
     private static final String TAG = "SettingsBaseActivity";
     private static final int DEFAULT_REQUEST = -1;
     private static final float TOOLBAR_LINE_SPACING_MULTIPLIER = 1.1f;
+
+    private static final int EXPRESSIVE_LAYOUT_ID =
+            com.android.settingslib.collapsingtoolbar.R.layout.settingslib_expressive_collapsing_toolbar_base_layout;
+    private static final int COLLAPSING_LAYOUT_ID =
+            com.android.settingslib.collapsingtoolbar.R.layout.collapsing_toolbar_base_layout;
+
 
     protected CategoryMixin mCategoryMixin;
     protected CollapsingToolbarLayout mCollapsingToolbarLayout;
@@ -116,8 +123,9 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         }
 
         if (isToolbarEnabled() && !isAnySetupWizard) {
-            super.setContentView(
-                    com.android.settingslib.collapsingtoolbar.R.layout.collapsing_toolbar_base_layout);
+            int resId = SettingsThemeHelper.isExpressiveTheme(getApplicationContext())
+                    ? EXPRESSIVE_LAYOUT_ID : COLLAPSING_LAYOUT_ID;
+            super.setContentView(resId);
             mCollapsingToolbarLayout =
                     findViewById(com.android.settingslib.collapsingtoolbar.R.id.collapsing_toolbar);
             mAppBarLayout = findViewById(R.id.app_bar);

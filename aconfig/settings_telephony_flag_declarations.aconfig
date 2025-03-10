@@ -14,3 +14,19 @@ flag {
     description: "Control the Dual SIM onobarding feature"
     bug: "298898436"
 }
+
+# OWNER=yomna TARGET=25Q2
+flag {
+    name: "mobile_network_security_2g_toggle"
+    namespace: "hardware_backed_security"
+    description: "Exposing 2G toggles in Mobile Network Security page"
+    bug: "355062720"
+}
+
+# OWNER=yomna TARGET=25Q2
+flag {
+    name: "add_security_algorithms_to_eng_menu"
+    namespace: "hardware_backed_security"
+    description: "Exposing security transparency features to field engineering menu"
+    bug: "355062720"
+}
