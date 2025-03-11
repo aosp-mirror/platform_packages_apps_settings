@@ -17,20 +17,20 @@
 package com.android.settings.bluetooth.ui.viewmodel
 
 import android.app.Application
+import android.bluetooth.BluetoothAdapter
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.android.settings.R
-import com.android.settings.bluetooth.domain.interactor.SpatialAudioInteractor
 import com.android.settings.bluetooth.ui.layout.DeviceSettingLayout
 import com.android.settings.bluetooth.ui.layout.DeviceSettingLayoutColumn
 import com.android.settings.bluetooth.ui.layout.DeviceSettingLayoutRow
 import com.android.settings.bluetooth.ui.model.DeviceSettingPreferenceModel
 import com.android.settings.bluetooth.ui.model.FragmentTypeModel
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.devicesettings.DeviceSettingId
-import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepository
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingConfigItemModel
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingIcon
 import com.android.settingslib.bluetooth.devicesettings.shared.model.DeviceSettingModel
@@ -47,11 +47,17 @@ import kotlinx.coroutines.flow.stateIn
 
 class BluetoothDeviceDetailsViewModel(
     private val application: Application,
-    private val deviceSettingRepository: DeviceSettingRepository,
-    private val spatialAudioInteractor: SpatialAudioInteractor,
+    private val bluetoothAdapter: BluetoothAdapter,
     private val cachedDevice: CachedBluetoothDevice,
     backgroundCoroutineContext: CoroutineContext,
 ) : AndroidViewModel(application) {
+
+    private val deviceSettingRepository =
+        featureFactory.bluetoothFeatureProvider.getDeviceSettingRepository(
+            application,
+            bluetoothAdapter,
+            viewModelScope,
+        )
 
     private val items =
         viewModelScope.async(backgroundCoroutineContext, start = CoroutineStart.LAZY) {
@@ -79,11 +85,8 @@ class BluetoothDeviceDetailsViewModel(
         if (settingId == DeviceSettingId.DEVICE_SETTING_ID_MORE_SETTINGS) {
             return flowOf(DeviceSettingPreferenceModel.MoreSettingsPreference(settingId))
         }
-        return when (settingId) {
-            DeviceSettingId.DEVICE_SETTING_ID_SPATIAL_AUDIO_MULTI_TOGGLE ->
-                spatialAudioInteractor.getDeviceSetting(cachedDevice)
-            else -> deviceSettingRepository.getDeviceSetting(cachedDevice, settingId)
-        }.map { it?.toPreferenceModel() }
+        return deviceSettingRepository.getDeviceSetting(cachedDevice, settingId)
+            .map { it?.toPreferenceModel() }
     }
 
     private fun DeviceSettingModel.toPreferenceModel(): DeviceSettingPreferenceModel? {
@@ -101,7 +104,8 @@ class BluetoothDeviceDetailsViewModel(
                                 DeviceSettingStateModel.ActionSwitchPreferenceState(newState)
                             )
                         },
-                        onPrimaryClick = { intent?.let { application.startActivity(it) } },
+                        disabled = !isAllowedChangingState,
+                        action = action,
                     )
                 } else {
                     DeviceSettingPreferenceModel.PlainPreference(
@@ -109,7 +113,7 @@ class BluetoothDeviceDetailsViewModel(
                         title = title,
                         summary = summary,
                         icon = icon,
-                        onClick = { intent?.let { application.startActivity(it) } },
+                        action = action,
                     )
                 }
             }
@@ -119,7 +123,7 @@ class BluetoothDeviceDetailsViewModel(
                 DeviceSettingPreferenceModel.HelpPreference(
                     id = id,
                     icon = DeviceSettingIcon.ResourceIcon(R.drawable.ic_help),
-                    onClick = { application.startActivity(intent) },
+                    intent = intent,
                 )
             is DeviceSettingModel.MultiTogglePreference ->
                 DeviceSettingPreferenceModel.MultiTogglePreference(
@@ -149,7 +153,6 @@ class BluetoothDeviceDetailsViewModel(
         val positionToSettingIds =
             combine(configDeviceSetting) { settings ->
                     val positionMapping = mutableMapOf<Int, List<DeviceSettingLayoutColumn>>()
-                    var multiToggleSettingIds: MutableList<DeviceSettingLayoutColumn>? = null
                     for (i in settings.indices) {
                         val configItem = configItems[i]
                         val setting = settings[i]
@@ -157,35 +160,13 @@ class BluetoothDeviceDetailsViewModel(
                         if (!isXmlPreference && setting == null) {
                             continue
                         }
-                        if (setting !is DeviceSettingPreferenceModel.MultiTogglePreference) {
-                            multiToggleSettingIds = null
-                            positionMapping[i] =
-                                listOf(
-                                    DeviceSettingLayoutColumn(
-                                        configItem.settingId,
-                                        configItem.highlighted,
-                                    )
-                                )
-                            continue
-                        }
-
-                        if (multiToggleSettingIds != null) {
-                            multiToggleSettingIds.add(
+                        positionMapping[i] =
+                            listOf(
                                 DeviceSettingLayoutColumn(
                                     configItem.settingId,
                                     configItem.highlighted,
                                 )
                             )
-                        } else {
-                            multiToggleSettingIds =
-                                mutableListOf(
-                                    DeviceSettingLayoutColumn(
-                                        configItem.settingId,
-                                        configItem.highlighted,
-                                    )
-                                )
-                            positionMapping[i] = multiToggleSettingIds
-                        }
                     }
                     positionMapping
                 }
@@ -199,8 +180,7 @@ class BluetoothDeviceDetailsViewModel(
 
     class Factory(
         private val application: Application,
-        private val deviceSettingRepository: DeviceSettingRepository,
-        private val spatialAudioInteractor: SpatialAudioInteractor,
+        private val bluetoothAdapter: BluetoothAdapter,
         private val cachedDevice: CachedBluetoothDevice,
         private val backgroundCoroutineContext: CoroutineContext,
     ) : ViewModelProvider.Factory {
@@ -208,8 +188,7 @@ class BluetoothDeviceDetailsViewModel(
             @Suppress("UNCHECKED_CAST")
             return BluetoothDeviceDetailsViewModel(
                 application,
-                deviceSettingRepository,
-                spatialAudioInteractor,
+                bluetoothAdapter,
                 cachedDevice,
                 backgroundCoroutineContext,
             )

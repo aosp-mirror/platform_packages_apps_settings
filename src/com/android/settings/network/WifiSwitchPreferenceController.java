@@ -38,6 +38,7 @@ import com.google.common.annotations.VisibleForTesting;
 /**
  * This controller helps to manage the state of wifi switch preference.
  */
+// LINT.IfChange
 public class WifiSwitchPreferenceController extends AbstractPreferenceController implements
         LifecycleObserver {
 
@@ -125,3 +126,4 @@ public class WifiSwitchPreferenceController extends AbstractPreferenceController
         return wifiManager.isWifiEnabled();
     }
 }
+// LINT.ThenChange(WifiSwitchPreference.kt)

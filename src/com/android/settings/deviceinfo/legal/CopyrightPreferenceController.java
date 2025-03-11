@@ -17,6 +17,7 @@ package com.android.settings.deviceinfo.legal;
 import android.content.Context;
 import android.content.Intent;
 
+// LINT.IfChange
 public class CopyrightPreferenceController extends LegalPreferenceController {
 
     private static final Intent INTENT = new Intent("android.settings.COPYRIGHT");
@@ -30,3 +31,4 @@ public class CopyrightPreferenceController extends LegalPreferenceController {
         return INTENT;
     }
 }
+// LINT.ThenChange(LegalPreference.kt)

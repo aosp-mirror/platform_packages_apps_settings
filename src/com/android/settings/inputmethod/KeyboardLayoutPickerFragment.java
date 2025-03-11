@@ -46,7 +46,7 @@ public class KeyboardLayoutPickerFragment extends DashboardFragment {
         final InputDeviceIdentifier inputDeviceIdentifier = getActivity().getIntent().
                 getParcelableExtra(EXTRA_INPUT_DEVICE_IDENTIFIER);
         final InputManager im = context.getSystemService(InputManager.class);
-        if (NewKeyboardSettingsUtils.getInputDevice(im, inputDeviceIdentifier) == null) {
+        if (InputPeripheralsSettingsUtils.getInputDevice(im, inputDeviceIdentifier) == null) {
             return;
         }
         use(KeyboardLayoutPickerController.class).initialize(this /*parent*/,

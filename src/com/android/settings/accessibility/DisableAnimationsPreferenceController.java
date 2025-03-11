@@ -37,6 +37,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 import java.util.Arrays;
 import java.util.List;
 
+// LINT.IfChange
 /** A toggle preference controller for disable animations. */
 public class DisableAnimationsPreferenceController extends TogglePreferenceController implements
         LifecycleObserver, OnStart, OnStop {
@@ -123,3 +124,4 @@ public class DisableAnimationsPreferenceController extends TogglePreferenceContr
         mContentResolver.unregisterContentObserver(mSettingsContentObserver);
     }
 }
+// LINT.ThenChange(src/com/android/settings/accessibility/RemoveAnimationsPreference.kt)

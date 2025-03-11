@@ -56,7 +56,7 @@ class AppDialog extends AlertDialog implements DialogInterface.OnClickListener {
     @Override
     protected void onCreate(Bundle savedState) {
         setTitle(mLabel);
-        setMessage(getContext().getString(R.string.vpn_version, mPackageInfo.versionName));
+        setMessage(getContext().getString(R.string.vpn_version_info, mPackageInfo.versionName));
 
         createButtons();
         super.onCreate(savedState);

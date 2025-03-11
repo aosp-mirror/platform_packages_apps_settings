@@ -25,6 +25,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -90,4 +92,9 @@ public class VibrationIntensitySettingsFragment extends DashboardFragment {
                     return VibrationIntensitySettingsFragment.isPageSearchEnabled(context);
                 }
             };
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return VibrationIntensityScreen.KEY;
+    }
 }

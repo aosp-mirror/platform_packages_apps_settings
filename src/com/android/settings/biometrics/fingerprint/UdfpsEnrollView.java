@@ -133,6 +133,15 @@ public class UdfpsEnrollView extends FrameLayout implements UdfpsEnrollHelper.Li
         enrollHelper.setListener(this);
     }
 
+    /**
+     * Adjust progress bar radius only for decreasing.
+     * @param decreasePadding the decrease padding
+     */
+    void setDecreasePadding(int decreasePadding) {
+        mProgressBarRadius -= decreasePadding;
+        onSensorRectUpdated();
+    }
+
     private void onSensorRectUpdated() {
         updateDimensions();
 

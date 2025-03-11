@@ -25,7 +25,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
 
+import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 
@@ -44,36 +46,44 @@ public class AudioSharingErrorDialogFragment extends InstrumentedDialogFragment 
      * @param host The Fragment this dialog will be hosted.
      */
     public static void show(@Nullable Fragment host) {
-        if (host == null || !BluetoothUtils.isAudioSharingEnabled()) return;
-        final FragmentManager manager;
-        try {
-            manager = host.getChildFragmentManager();
-        } catch (IllegalStateException e) {
-            Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+        if (host == null) {
+            Log.d(TAG, "Fail to show dialog, host is null");
             return;
         }
-        AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
-        if (dialog != null) {
-            Log.d(TAG, "Dialog is showing, return.");
-            return;
+        if (BluetoothUtils.isAudioSharingUIAvailable(host.getContext())) {
+            final FragmentManager manager;
+            try {
+                manager = host.getChildFragmentManager();
+            } catch (IllegalStateException e) {
+                Log.d(TAG, "Fail to show dialog: " + e.getMessage());
+                return;
+            }
+            Lifecycle.State currentState = host.getLifecycle().getCurrentState();
+            if (!currentState.isAtLeast(Lifecycle.State.STARTED)) {
+                Log.d(TAG, "Fail to show dialog with state: " + currentState);
+                return;
+            }
+            AlertDialog dialog = AudioSharingDialogHelper.getDialogIfShowing(manager, TAG);
+            if (dialog != null) {
+                Log.d(TAG, "Dialog is showing, return.");
+                return;
+            }
+            Log.d(TAG, "Show up the error dialog.");
+            AudioSharingErrorDialogFragment dialogFrag = new AudioSharingErrorDialogFragment();
+            dialogFrag.show(manager, TAG);
         }
-        Log.d(TAG, "Show up the error dialog.");
-        AudioSharingErrorDialogFragment dialogFrag = new AudioSharingErrorDialogFragment();
-        dialogFrag.show(manager, TAG);
     }
 
     @Override
     @NonNull
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        // TODO: put strings to res till they are finalized
         AlertDialog dialog =
                 AudioSharingDialogFactory.newBuilder(getActivity())
-                        .setTitle("Couldn't share audio")
-                        .setTitleIcon(com.android.settings.R.drawable.ic_warning_24dp)
+                        .setTitle(R.string.audio_sharing_retry_dialog_title)
+                        .setTitleIcon(R.drawable.ic_warning_24dp)
                         .setIsCustomBodyEnabled(true)
-                        .setCustomMessage("Something went wrong. Please try again.")
-                        .setPositiveButton(com.android.settings.R.string.okay, (d, w) -> {
-                        })
+                        .setCustomMessage(R.string.audio_sharing_retry_dialog_content)
+                        .setPositiveButton(R.string.okay, (d, w) -> {})
                         .build();
         dialog.setCanceledOnTouchOutside(true);
         return dialog;

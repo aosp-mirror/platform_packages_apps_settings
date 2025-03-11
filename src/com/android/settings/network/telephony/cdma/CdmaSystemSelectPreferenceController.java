@@ -16,19 +16,19 @@
 
 package com.android.settings.network.telephony.cdma;
 
-import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA;
-import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA;
-import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_UNKNOWN;
+import static android.telephony.TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA;
+import static android.telephony.TelephonyManager.NETWORK_MODE_NR_LTE_GSM_WCDMA;
+
+import static com.android.settings.network.telephony.mode.NetworkModes.NETWORK_MODE_UNKNOWN;
 
 import android.content.Context;
 import android.provider.Settings;
+import android.telephony.RadioAccessFamily;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-
-import com.android.settings.network.telephony.MobileNetworkUtils;
 
 /**
  * Preference controller for "System Select"
@@ -65,7 +65,7 @@ public class CdmaSystemSelectPreferenceController extends CdmaBasePreferenceCont
             }
 
             final int settingsNetworkMode =
-                    hasTelephonyMgr ? MobileNetworkUtils.getNetworkTypeFromRaf(
+                    hasTelephonyMgr ? RadioAccessFamily.getNetworkTypeFromRaf(
                             (int) mTelephonyManager.getAllowedNetworkTypesForReason(
                                     TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER))
                             : NETWORK_MODE_UNKNOWN;

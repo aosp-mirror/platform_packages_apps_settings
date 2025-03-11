@@ -17,24 +17,21 @@
 package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT;
-import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
-import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
-import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
 import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
+import static com.android.settings.accessibility.AccessibilityUtil.getShortcutSummaryList;
 import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_GENERAL_CATEGORY;
 import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_SAVED_QS_TOOLTIP_TYPE;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.icu.text.CaseMap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,18 +43,16 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.accessibility.common.ShortcutConstants;
-import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
-import com.android.settings.utils.LocaleUtils;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+import java.util.Set;
 
 /**
  * Base class for accessibility fragments shortcut functions and dialog management.
@@ -120,9 +115,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         final List<String> shortcutFeatureKeys = new ArrayList<>();
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
-        }
+        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_QS_TARGETS);
         mSettingsContentObserver = new AccessibilitySettingsContentObserver(new Handler());
         mSettingsContentObserver.registerKeysToObserverCallback(shortcutFeatureKeys, key -> {
             updateShortcutPreferenceData();
@@ -241,6 +234,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         );
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onToggleClicked(ShortcutPreference preference) {
         if (getComponentName() == null) {
@@ -248,13 +242,12 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         }
 
         final int shortcutTypes = getUserPreferredShortcutTypes();
-        if (preference.isChecked()) {
-            AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes,
-                    getComponentName());
+        final boolean isChecked = preference.isChecked();
+        getPrefContext().getSystemService(AccessibilityManager.class).enableShortcutsForTargets(
+                isChecked, shortcutTypes,
+                Set.of(getComponentName().flattenToString()), getPrefContext().getUserId());
+        if (isChecked) {
             showDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
-        } else {
-            AccessibilityUtil.optOutAllValuesFromSettings(getPrefContext(), shortcutTypes,
-                    getComponentName());
         }
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }
@@ -340,37 +333,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         }
 
         final int shortcutTypes = getUserPreferredShortcutTypes();
-
-        // LINT.IfChange(shortcut_type_ui_order)
-        final List<CharSequence> list = new ArrayList<>();
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            if (hasShortcutType(shortcutTypes, QUICK_SETTINGS)) {
-                final CharSequence qsTitle = context.getText(
-                        R.string.accessibility_feature_shortcut_setting_summary_quick_settings);
-                list.add(qsTitle);
-            }
-        }
-        if (hasShortcutType(shortcutTypes, SOFTWARE)) {
-            list.add(getSoftwareShortcutTypeSummary(context));
-        }
-        if (hasShortcutType(shortcutTypes, HARDWARE)) {
-            final CharSequence hardwareTitle = context.getText(
-                    R.string.accessibility_shortcut_hardware_keyword);
-            list.add(hardwareTitle);
-        }
-        // LINT.ThenChange(/res/xml/accessibility_edit_shortcuts.xml:shortcut_type_ui_order)
-
-        // Show software shortcut if first time to use.
-        if (list.isEmpty()) {
-            list.add(getSoftwareShortcutTypeSummary(context));
-        }
-
-        return CaseMap.toTitle().wholeString().noLowercase().apply(Locale.getDefault(), /* iter= */
-                null, LocaleUtils.getConcatenatedString(list));
-    }
-
-    private boolean hasShortcutType(int value, @UserShortcutType int type) {
-        return (value & type) == type;
+        return getShortcutSummaryList(context, shortcutTypes);
     }
 
     protected void updateShortcutPreferenceData() {
@@ -410,38 +373,13 @@ public abstract class AccessibilityShortcutPreferenceFragment extends Restricted
         showQuickSettingsTooltipIfNeeded();
     }
 
+    /**
+     * @deprecated made obsolete by quick settings rollout.
+     *
+     * (TODO 367414968: finish removal.)
+     */
+    @Deprecated
     private void showQuickSettingsTooltipIfNeeded() {
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            // Don't show Quick Settings tooltip
-            return;
-        }
-        final ComponentName tileComponentName = getTileComponentName();
-        if (tileComponentName == null) {
-            // Returns if no tile service assigned.
-            return;
-        }
-
-        if (!mNeedsQSTooltipReshow && AccessibilityQuickSettingUtils.hasValueInSharedPreferences(
-                getContext(), tileComponentName)) {
-            // Returns if quick settings tooltip only show once.
-            return;
-        }
-
-        final CharSequence content = getTileTooltipContent(mNeedsQSTooltipType);
-        if (TextUtils.isEmpty(content)) {
-            // Returns if no content of tile tooltip assigned.
-            return;
-        }
-
-        final int imageResId = mNeedsQSTooltipType == QuickSettingsTooltipType.GUIDE_TO_EDIT
-                ? R.drawable.accessibility_qs_tooltip_illustration
-                : R.drawable.accessibility_auto_added_qs_tooltip_illustration;
-        mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(getContext());
-        mTooltipWindow.setup(content, imageResId);
-        mTooltipWindow.showAtTopCenter(getView());
-        AccessibilityQuickSettingUtils.optInValueToSharedPreferences(getContext(),
-                tileComponentName);
-        mNeedsQSTooltipReshow = false;
     }
 
     /**

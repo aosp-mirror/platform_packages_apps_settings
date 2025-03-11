@@ -173,6 +173,7 @@ public class VpnSettingsTest {
     }
 
     @Test
+    @UiThreadTest
     public void getVpnApps_isAdvancedVpn_returnsOne() throws Exception {
         ApplicationInfo info = new ApplicationInfo();
         info.uid = 1111;

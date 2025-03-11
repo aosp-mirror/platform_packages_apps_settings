@@ -20,6 +20,7 @@ import android.content.Context;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
+// LINT.IfChange
 public class WallpaperAttributionsPreferenceController extends BasePreferenceController {
 
     public WallpaperAttributionsPreferenceController(Context context, String key) {
@@ -33,3 +34,4 @@ public class WallpaperAttributionsPreferenceController extends BasePreferenceCon
                 : UNSUPPORTED_ON_DEVICE;
     }
 }
+// LINT.ThenChange(WallpaperAttributionsPreference.kt)

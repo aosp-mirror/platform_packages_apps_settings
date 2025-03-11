@@ -16,6 +16,13 @@
 
 package com.android.settings.display;
 
+import static android.hardware.devicestate.DeviceState.PROPERTY_EMULATED_ONLY;
+import static android.hardware.devicestate.DeviceState.PROPERTY_FEATURE_REAR_DISPLAY;
+import static android.hardware.devicestate.DeviceState.PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_INNER_PRIMARY;
+import static android.hardware.devicestate.DeviceState.PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_OUTER_PRIMARY;
+import static android.hardware.devicestate.DeviceState.PROPERTY_FOLDABLE_HARDWARE_CONFIGURATION_FOLD_IN_CLOSED;
+import static android.hardware.devicestate.DeviceState.PROPERTY_FOLDABLE_HARDWARE_CONFIGURATION_FOLD_IN_HALF_OPEN;
+import static android.hardware.devicestate.DeviceState.PROPERTY_FOLDABLE_HARDWARE_CONFIGURATION_FOLD_IN_OPEN;
 import static android.provider.Settings.Secure.DEVICE_STATE_ROTATION_LOCK_LOCKED;
 
 import static com.android.settings.display.SmartAutoRotatePreferenceFragment.AUTO_ROTATE_MAIN_SWITCH_PREFERENCE_KEY;
@@ -39,6 +46,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
+import android.hardware.devicestate.DeviceState;
+import android.hardware.devicestate.DeviceStateManager;
 import android.view.View;
 
 import androidx.preference.Preference;
@@ -61,6 +70,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
+import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
@@ -70,10 +80,35 @@ import java.util.List;
 })
 public class SmartAutoRotatePreferenceFragmentTest {
 
-    private static final int STATE_FOLDED = 0;
-    private static final int STATE_HALF_FOLDED = 1;
-    private static final int STATE_UNFOLDED = 2;
-    private static final int STATE_REAR_DISPLAY = 3;
+    private static final DeviceState DEVICE_STATE_FOLDED = new DeviceState(
+            new DeviceState.Configuration.Builder(/* identifier= */ 0, "FOLDED")
+                    .setSystemProperties(Set.of(
+                            PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_OUTER_PRIMARY))
+                    .setPhysicalProperties(Set.of(
+                            PROPERTY_FOLDABLE_HARDWARE_CONFIGURATION_FOLD_IN_CLOSED))
+                    .build());
+    private static final DeviceState DEVICE_STATE_HALF_FOLDED = new DeviceState(
+            new DeviceState.Configuration.Builder(/* identifier= */ 1, "HALF_FOLDED")
+                    .setSystemProperties(Set.of(
+                            PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_INNER_PRIMARY))
+                    .setPhysicalProperties(Set.of(
+                            PROPERTY_FOLDABLE_HARDWARE_CONFIGURATION_FOLD_IN_HALF_OPEN))
+                    .build());
+    private static final DeviceState DEVICE_STATE_UNFOLDED = new DeviceState(
+            new DeviceState.Configuration.Builder(/* identifier= */ 2, "UNFOLDED")
+                    .setSystemProperties(Set.of(
+                            PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_INNER_PRIMARY))
+                    .setPhysicalProperties(Set.of(
+                            PROPERTY_FOLDABLE_HARDWARE_CONFIGURATION_FOLD_IN_OPEN))
+                    .build());
+    private static final DeviceState DEVICE_STATE_REAR_DISPLAY = new DeviceState(
+            new DeviceState.Configuration.Builder(/* identifier= */ 3, "REAR_DISPLAY")
+                    .setSystemProperties(Set.of(
+                            PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_OUTER_PRIMARY,
+                            PROPERTY_FEATURE_REAR_DISPLAY, PROPERTY_EMULATED_ONLY))
+                    .setPhysicalProperties(Set.of(
+                            PROPERTY_FOLDABLE_HARDWARE_CONFIGURATION_FOLD_IN_CLOSED))
+                    .build());
 
     private static final String PACKAGE_NAME = "package_name";
 
@@ -96,6 +131,9 @@ public class SmartAutoRotatePreferenceFragmentTest {
     @Mock
     private Preference mRotateMainSwitchPreference;
 
+    @Mock
+    private DeviceStateManager mDeviceStateManager;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -105,6 +143,7 @@ public class SmartAutoRotatePreferenceFragmentTest {
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
         when(mContext.getApplicationContext()).thenReturn(mContext);
+        doReturn(mDeviceStateManager).when(mContext).getSystemService(DeviceStateManager.class);
         doReturn(PACKAGE_NAME).when(mPackageManager).getRotationResolverPackageName();
         doReturn(PackageManager.PERMISSION_GRANTED).when(mPackageManager).checkPermission(
                 Manifest.permission.CAMERA, PACKAGE_NAME);
@@ -130,14 +169,7 @@ public class SmartAutoRotatePreferenceFragmentTest {
         when(mFragment.findPreference(AUTO_ROTATE_MAIN_SWITCH_PREFERENCE_KEY))
                 .thenReturn(mRotateMainSwitchPreference);
 
-        when(mResources.getIntArray(com.android.internal.R.array.config_foldedDeviceStates))
-                .thenReturn(new int[] {STATE_FOLDED});
-        when(mResources.getIntArray(com.android.internal.R.array.config_halfFoldedDeviceStates))
-                .thenReturn(new int[] {STATE_HALF_FOLDED});
-        when(mResources.getIntArray(com.android.internal.R.array.config_openDeviceStates))
-                .thenReturn(new int[] {STATE_UNFOLDED});
-        when(mResources.getIntArray(com.android.internal.R.array.config_rearDisplayDeviceStates))
-                .thenReturn(new int[] {STATE_REAR_DISPLAY});
+        setUpPostureMappings();
     }
 
     @Test
@@ -195,8 +227,8 @@ public class SmartAutoRotatePreferenceFragmentTest {
     public void createPreferenceControllers_settableDeviceStates_returnsDeviceStateControllers() {
         enableDeviceStateSettableRotationStates(
                 new String[] {
-                    STATE_FOLDED + ":" + DEVICE_STATE_ROTATION_LOCK_LOCKED,
-                    STATE_UNFOLDED + ":" + DEVICE_STATE_ROTATION_LOCK_LOCKED
+                    DEVICE_STATE_FOLDED.getIdentifier() + ":" + DEVICE_STATE_ROTATION_LOCK_LOCKED,
+                    DEVICE_STATE_UNFOLDED.getIdentifier() + ":" + DEVICE_STATE_ROTATION_LOCK_LOCKED
                 },
                 new String[] {"Folded", "Unfolded"});
 
@@ -235,5 +267,24 @@ public class SmartAutoRotatePreferenceFragmentTest {
         DeviceStateRotationLockSettingsManager.resetInstance();
         DeviceStateRotationLockSettingsManager.getInstance(mContext)
                 .resetStateForTesting(mResources);
+    }
+
+    // Sets up posture mappings for PosturesHelper
+    private void setUpPostureMappings() {
+        when(mResources.getIntArray(
+                com.android.internal.R.array.config_foldedDeviceStates)).thenReturn(
+                    new int[]{DEVICE_STATE_FOLDED.getIdentifier()});
+        when(mResources.getIntArray(
+                com.android.internal.R.array.config_halfFoldedDeviceStates)).thenReturn(
+                    new int[]{DEVICE_STATE_HALF_FOLDED.getIdentifier()});
+        when(mResources.getIntArray(
+                com.android.internal.R.array.config_openDeviceStates)).thenReturn(
+                    new int[]{DEVICE_STATE_UNFOLDED.getIdentifier()});
+        when(mResources.getIntArray(
+                com.android.internal.R.array.config_rearDisplayDeviceStates)).thenReturn(
+                    new int[]{DEVICE_STATE_REAR_DISPLAY.getIdentifier()});
+        when(mDeviceStateManager.getSupportedDeviceStates()).thenReturn(
+                List.of(DEVICE_STATE_FOLDED, DEVICE_STATE_HALF_FOLDED, DEVICE_STATE_UNFOLDED,
+                        DEVICE_STATE_REAR_DISPLAY));
     }
 }

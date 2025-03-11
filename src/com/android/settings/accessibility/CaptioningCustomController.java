@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import android.annotation.Nullable;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Handler;
@@ -27,7 +28,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -36,11 +36,11 @@ import java.util.Arrays;
 import java.util.List;
 
 /** Preference controller for captioning custom visibility. */
-public class CaptioningCustomController extends BasePreferenceController
+public class CaptioningCustomController extends BaseCaptioningCustomController
         implements LifecycleObserver, OnStart, OnStop {
 
+    @Nullable
     private Preference mCustom;
-    private final CaptionHelper mCaptionHelper;
     private final ContentResolver mContentResolver;
     @VisibleForTesting
     AccessibilitySettingsContentObserver mSettingsContentObserver;
@@ -50,32 +50,31 @@ public class CaptioningCustomController extends BasePreferenceController
     );
 
     public CaptioningCustomController(Context context, String preferenceKey) {
-        super(context, preferenceKey);
-        mCaptionHelper = new CaptionHelper(context);
-        mContentResolver = context.getContentResolver();
-        mSettingsContentObserver = new AccessibilitySettingsContentObserver(
-                new Handler(Looper.getMainLooper()));
-        mSettingsContentObserver.registerKeysToObserverCallback(CAPTIONING_FEATURE_KEYS,
-                key -> refreshShowingCustom());
+        this(context, preferenceKey,
+                new AccessibilitySettingsContentObserver(new Handler(Looper.getMainLooper())));
     }
 
     @VisibleForTesting
-    CaptioningCustomController(Context context, String preferenceKey,
+    CaptioningCustomController(
+            Context context, String preferenceKey,
             AccessibilitySettingsContentObserver contentObserver) {
-        this(context, preferenceKey);
+        super(context, preferenceKey);
+        mContentResolver = context.getContentResolver();
         mSettingsContentObserver = contentObserver;
-    }
-
-    @Override
-    public int getAvailabilityStatus() {
-        return AVAILABLE;
+        mSettingsContentObserver.registerKeysToObserverCallback(CAPTIONING_FEATURE_KEYS, key -> {
+            if (mCustom != null) {
+                mCustom.setVisible(shouldShowPreference());
+            }
+        });
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mCustom = screen.findPreference(getPreferenceKey());
-        refreshShowingCustom();
+        if (mCustom != null) {
+            mCustom.setVisible(shouldShowPreference());
+        }
     }
 
     @Override
@@ -88,9 +87,7 @@ public class CaptioningCustomController extends BasePreferenceController
         mSettingsContentObserver.unregister(mContentResolver);
     }
 
-    private void refreshShowingCustom() {
-        final boolean isCustomPreset =
-                mCaptionHelper.getRawUserStyle() == CaptioningManager.CaptionStyle.PRESET_CUSTOM;
-        mCustom.setVisible(isCustomPreset);
+    private boolean shouldShowPreference() {
+        return mCaptionHelper.getRawUserStyle() == CaptioningManager.CaptionStyle.PRESET_CUSTOM;
     }
 }
