@@ -63,7 +63,12 @@ public class ShowOperatorNamePreferenceController extends AbstractPreferenceCont
     @Override
     public void updateState(Preference preference) {
         int value = Settings.Secure.getInt(mContext.getContentResolver(),
-                KEY_SHOW_OPERATOR_NAME, 1);
+                KEY_SHOW_OPERATOR_NAME, getShowOperatorNameDefault());
         ((TwoStatePreference) preference).setChecked(value != 0);
+    }
+
+    private int getShowOperatorNameDefault() {
+        return mContext.getResources()
+            .getInteger(com.android.internal.R.integer.config_showOperatorNameDefault);
     }
 }
