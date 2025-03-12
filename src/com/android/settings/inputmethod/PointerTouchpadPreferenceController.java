@@ -32,8 +32,8 @@ public class PointerTouchpadPreferenceController extends BasePreferenceControlle
 
     @Override
     public int getAvailabilityStatus() {
-        boolean isTouchpad = NewKeyboardSettingsUtils.isTouchpad();
-        boolean isMouse = NewKeyboardSettingsUtils.isMouse();
+        boolean isTouchpad = InputPeripheralsSettingsUtils.isTouchpad();
+        boolean isMouse = InputPeripheralsSettingsUtils.isMouse();
         return (isTouchpad || isMouse) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 }

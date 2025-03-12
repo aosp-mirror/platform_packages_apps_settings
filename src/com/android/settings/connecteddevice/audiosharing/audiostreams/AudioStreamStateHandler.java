@@ -18,8 +18,6 @@ package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 import static android.text.Spanned.SPAN_EXCLUSIVE_INCLUSIVE;
 
-import static com.android.settingslib.flags.Flags.audioSharingHysteresisModeFix;
-
 import android.os.Handler;
 import android.os.Looper;
 import android.text.SpannableString;
@@ -98,7 +96,8 @@ class AudioStreamStateHandler {
                             newState
                                             == AudioStreamsProgressCategoryController
                                                     .AudioStreamState.SOURCE_ADDED
-                                    || (audioSharingHysteresisModeFix()
+                                    || (BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(
+                                                    preference.getContext())
                                             && newState
                                                     == AudioStreamsProgressCategoryController
                                                             .AudioStreamState.SOURCE_PRESENT));

@@ -18,38 +18,43 @@ package com.android.settings.biometrics.fingerprint2.domain.interactor
 
 import android.hardware.fingerprint.FingerprintManager
 import android.hardware.fingerprint.FingerprintManager.RemovalCallback
+import com.android.settings.biometrics.fingerprint2.data.repository.UserRepo
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.RemoveFingerprintInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintData
+import kotlinx.coroutines.flow.first
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class RemoveFingerprintsInteractorImpl(
   private val fingerprintManager: FingerprintManager,
-  private val userId: Int,
+  private val userRepo: UserRepo,
 ) : RemoveFingerprintInteractor {
 
-  override suspend fun removeFingerprint(fp: FingerprintData): Boolean = suspendCoroutine {
-    val callback =
-      object : RemovalCallback() {
-        override fun onRemovalError(
-          fp: android.hardware.fingerprint.Fingerprint,
-          errMsgId: Int,
-          errString: CharSequence,
-        ) {
-          it.resume(false)
-        }
+  override suspend fun removeFingerprint(fp: FingerprintData): Boolean {
+    val userId = userRepo.currentUser.first()
+    return suspendCoroutine {
+      val callback =
+        object : RemovalCallback() {
+          override fun onRemovalError(
+            fp: android.hardware.fingerprint.Fingerprint,
+            errMsgId: Int,
+            errString: CharSequence,
+          ) {
+            it.resume(false)
+          }
 
-        override fun onRemovalSucceeded(
-          fp: android.hardware.fingerprint.Fingerprint?,
-          remaining: Int,
-        ) {
-          it.resume(true)
+          override fun onRemovalSucceeded(
+            fp: android.hardware.fingerprint.Fingerprint?,
+            remaining: Int,
+          ) {
+            it.resume(true)
+          }
         }
-      }
-    fingerprintManager.remove(
-      android.hardware.fingerprint.Fingerprint(fp.name, fp.fingerId, fp.deviceId),
-      userId,
-      callback,
-    )
+      fingerprintManager.remove(
+        android.hardware.fingerprint.Fingerprint(fp.name, fp.fingerId, fp.deviceId),
+        userId,
+        callback,
+      )
+    }
   }
 }

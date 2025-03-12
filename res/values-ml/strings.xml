@@ -67,6 +67,7 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"പുതിയ ഉപകരണം ജോടിയാക്കുക"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_screen_auto_on_title" msgid="2203993262483477532">"നാളെ സ്വയമേവ ഓണാക്കുക"</string>
+    <string name="bluetooth_screen_auto_on_summary" msgid="1490150818921417875">"Bluetooth ഓഫാക്കുകയാണെങ്കിൽ, അടുത്ത ദിവസം വീണ്ടും ഓണാകും"</string>
     <string name="bluetooth_pair_right_ear_button" msgid="3979894494803078852">"വലതു ചെവി ജോടിയാക്കൂ"</string>
     <string name="bluetooth_pair_left_ear_button" msgid="1019938875726073791">"ഇടത് ചെവി ജോടിയാക്കൂ"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"അടുത്ത ചെവി ജോടിയാക്കുക"</string>
@@ -120,6 +121,8 @@
     <string name="bluetooth_disable_leaudio" msgid="8619410595945155354">"Bluetooth LE ഓഡിയോ പ്രവർത്തനരഹിതമാക്കുക"</string>
     <string name="bluetooth_disable_leaudio_summary" msgid="4756307633476985470">"ഉപകരണം LE ഓഡിയോ ഹാർഡ്‌വെയർ ശേഷികളെ പിന്തുണയ്‌ക്കുന്നുണ്ടെങ്കിൽ Bluetooth LE ഓഡിയോ ഫീച്ചർ പ്രവർത്തനരഹിതമാക്കുന്നു."</string>
     <string name="bluetooth_leaudio_mode" msgid="5206961943393400814">"Bluetooth LE ഓഡിയോ മോഡ്"</string>
+    <string name="bluetooth_leaudio_broadcast_ui" msgid="3205637582933819543">"Bluetooth LE ഓഡിയോ ബ്രോഡ്‌കാസ്റ്റ് UI പ്രിവ്യൂ പ്രവർത്തനക്ഷമമാക്കുക"</string>
+    <string name="bluetooth_leaudio_broadcast_ui_summary" msgid="3616202872693209662">"വ്യക്തിഗത ഓഡിയോ പങ്കിടലും സ്വകാര്യ ബ്രോഡ്‌കാസ്റ്റും ഉൾപ്പെടെ LE ഓഡിയോ പങ്കിടൽ UI പ്രിവ്യൂ പ്രവർത്തനക്ഷമമാക്കുന്നു"</string>
     <string name="bluetooth_show_leaudio_device_details" msgid="3306637862550475370">"ഉപകരണ വിശദാംശങ്ങളിൽ LE ഓഡിയോ ടോഗിൾ കാണിക്കൂ"</string>
     <string name="bluetooth_bypass_leaudio_allowlist" msgid="7392319491894565552">"Bluetooth LE ഓഡിയോ വൈറ്റ്ലിസ്റ്റ് ബൈപാസ് ചെയ്യുക"</string>
     <string name="bluetooth_bypass_leaudio_allowlist_summary" msgid="8999245286359656738">"LE ഓഡിയോ പെരിഫറൽ, വൈറ്റ്ലിസ്റ്റ് മാനദണ്ഡം പാലിക്കുന്നുണ്ടോയെന്ന് പരിശോധിച്ചുറപ്പിച്ചിട്ടില്ലെങ്കിലും ഡിഫോൾട്ടായി LE ഓഡിയോ ഉപയോഗിക്കുക."</string>
@@ -175,6 +178,10 @@
     <string name="app_locale_picker_title" msgid="2431448962911301366">"ആപ്പ് ഭാഷ"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"നിർദ്ദേശിച്ച ഭാഷകൾ"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"എല്ലാ ഭാഷകളും"</string>
+    <string name="suggested_locales_title" msgid="119908696638862861">"നിർദ്ദേശിക്കുന്നത്"</string>
+    <string name="all_supported_locales_title" msgid="2535112632133166546">"എല്ലാ ഭാഷകളും"</string>
+    <string name="all_supported_locales_regions_title" msgid="8756303246586846613">"എല്ലാ പ്രദേശങ്ങളും"</string>
+    <string name="all_supported_numbering_system_title" msgid="7926472764452490800">"എല്ലാ നമ്പറിംഗ് സിസ്‌റ്റങ്ങളും"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"സിസ്റ്റത്തിന്റെ ഭാഷ"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"സിസ്‌റ്റം ഡിഫോൾട്ട്"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"ക്രമീകരണത്തിൽ നിന്ന് ഈ ആപ്പിനുള്ള ഭാഷ തിരഞ്ഞെടുക്കാനുള്ള ഓപ്‌ഷൻ ലഭ്യമല്ല."</string>
@@ -190,10 +197,16 @@
     <string name="button_label_confirmation_of_system_locale_change" msgid="5593798559604894733">"മാറ്റുക"</string>
     <string name="title_unavailable_locale" msgid="2628898110416542386">"%s ലഭ്യമല്ല"</string>
     <string name="desc_unavailable_locale" msgid="2201756477400935896">"ഈ ഭാഷ സിസ്‌റ്റം ഭാഷയായി ഉപയോഗിക്കാനാകില്ല, എന്നാൽ നിങ്ങൾ ഈ ഭാഷയ്ക്കാണ് മുൻഗണന നൽകുന്നതെന്ന് ആപ്പുകളേയും വെബ്‌സൈറ്റുകളേയും അറിയിച്ചു."</string>
+    <string name="locale_search_menu" msgid="297782694044826686">"തിരയുക"</string>
+    <string name="language_selection_title" msgid="968179636453982415">"ഒരു ഭാഷ ചേർക്കുക"</string>
+    <string name="country_selection_title" msgid="5376929821458644732">"മേഖലാ മുൻഗണന"</string>
+    <string name="search_language_hint" msgid="1739082427104506694">"ഭാഷ ടൈപ്പ് ചെയ്യുക"</string>
+    <string name="more_language_settings_category" msgid="3669703092480725416">"കൂടുതൽ ഭാഷാ ക്രമീകരണം"</string>
     <string name="regional_preferences_title" msgid="4304567374498629528">"പ്രാദേശിക മുൻഗണനകൾ"</string>
     <string name="regional_preferences_summary" msgid="1189876997389469650">"യൂണിറ്റ്, നമ്പർ മുൻഗണനകൾ സജ്ജീകരിക്കുക"</string>
     <string name="regional_preferences_main_page_sub_title" msgid="4237109940015254725">"നിങ്ങളുടെ പ്രാദേശിക മുൻഗണനകൾ ആപ്പുകളെ അറിയിക്കുന്നതിലൂടെ അവയ്ക്ക് നിങ്ങളുടെ അനുഭവം വ്യക്തിപരമാക്കാനാകും."</string>
     <string name="regional_preferences_option_page_sub_title" msgid="8303661099255197036">"സാധ്യമാകുന്നിടത്ത് ആപ്പുകൾ നിങ്ങളുടെ പ്രാദേശിക മുൻഗണനകൾ ഉപയോഗിക്കും."</string>
+    <string name="regional_preferences_category_title" msgid="6754667410178749022">"പ്രാദേശിക മുൻഗണനകൾ"</string>
     <string name="temperature_preferences_title" msgid="5009881556503629058">"താപനില"</string>
     <string name="first_day_of_week_preferences_title" msgid="1971850087589599553">"ആഴ്‌ചയിലെ ആദ്യ ദിവസം"</string>
     <string name="numbers_preferences_title" msgid="8197418984391195446">"സംഖ്യാ മുൻഗണനകൾ"</string>
@@ -246,9 +259,11 @@
     <string name="roaming_enable" msgid="7845716016861535340">"റോമിംഗിലാകുമ്പോൾ ഡാറ്റ സേവനങ്ങളുമായി കണ‌ക്റ്റുചെയ്യുക"</string>
     <string name="roaming_disable" msgid="729512894708689604">"റോമിംഗിൽ ഡാറ്റാ സേവനങ്ങളിലേക്ക് കണ‌ക്റ്റ് ചെയ്യുക"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"റോമിംഗ് നിരക്കുകൾ ബാധകമായേക്കാം."</string>
-    <string name="date_time_auto" msgid="4239202185055225869">"സമയം സ്വയമേവ സജ്ജീകരിക്കുക"</string>
-    <string name="zone_auto_title" msgid="5141692422373097957">"സ്വയമേവ സജ്ജീകരിക്കുക"</string>
-    <string name="auto_zone_requires_location_summary" msgid="4831038184260596735">"ഈ ടോഗിൾ ഓണായിരിക്കുമ്പോൾ സമയമേഖല സജ്ജീകരിക്കാൻ ലൊക്കേഷൻ ഉപയോഗിക്കും"</string>
+    <string name="date_time_auto" msgid="1759599045100040686">"സ്വയമേവ ഉള്ള തീയതിയും സമയവും"</string>
+    <string name="date_time_auto_summary" msgid="8294938565417729698">"നിങ്ങളുടെ നെറ്റ്‌വർക്കും വയർലെസ് സിഗ്‌നലുകളും ഉപയോഗിച്ച് സ്വയമേവ സജ്ജീകരിക്കുക"</string>
+    <string name="zone_auto_title" msgid="3520584257065861479">"സ്വയമേവ ഉള്ള സമയമേഖല"</string>
+    <string name="zone_auto_title_summary" msgid="6540356783943375071">"നിങ്ങളുടെ സമീപമുള്ള മൊബൈൽ നെറ്റ്‌വർക്കുകളുടെ അടിസ്ഥാനത്തിൽ സ്വയമേവ സജ്ജീകരിക്കുക"</string>
+    <string name="auto_zone_requires_location_summary" msgid="2366567167956530124">"ലഭ്യമാണെങ്കിൽ, നിങ്ങളുടെ ഉപകരണ ലൊക്കേഷൻ ഉപയോഗിച്ച് സ്വയമേവ സജ്ജീകരിക്കുക"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"ഡിഫോൾട്ട് ഭാഷ ഉപയോഗിക്കുക"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24-മണിക്കൂർ ഫോർമാറ്റ് ഉപയോഗിക്കുക"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"സമയം"</string>
@@ -549,6 +564,9 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"വിരൽ ഉയർത്തുക, തുടർന്ന് സെൻസർ വീണ്ടും തൊടുക"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"ഫിംഗർപ്രിന്റ് സെൻസർ ഉപയോഗിക്കാനാകുന്നില്ല"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"റിപ്പയർ കേന്ദ്രം സന്ദർശിക്കുക."</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"സ്ക്രീൻ ഓഫ് ഫിംഗർപ്രിന്റ് അൺലോക്ക്"</string>
+    <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"സ്‌ക്രീൻ ഓഫായിരിക്കുമ്പോൾ പോലും ഫിംഗർപ്രിന്റ് അൺലോക്ക് ഉപയോഗിക്കുക"</string>
+    <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"സ്ക്രീൻ ഓഫാക്കൽ, അൺലോക്ക്"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"കൂടുതൽ സുരക്ഷാ ക്രമീകരണം"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"ഔദ്യോഗിക പ്രൊഫൈൽ ലോക്ക്, എൻക്രിപ്‌ഷൻ എന്നിവയും മറ്റും"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"എൻക്രിപ്ഷൻ, ക്രെഡൻഷ്യലുകൾ എന്നിവയും മറ്റും"</string>
@@ -657,6 +675,9 @@
     <string name="private_space_choose_your_pattern_header" msgid="2165607102459936724">"സ്വകാര്യ സ്പേസിന് പാറ്റേൺ സജ്ജീകരിക്കൂ"</string>
     <string name="private_space_category_lock" msgid="1917657024358778169">"ലോക്ക് ചെയ്യുക"</string>
     <string name="private_space_category_hide" msgid="3236587591523126649">"മറയ്ക്കുക"</string>
+    <string name="private_space_confirm_your_pattern_header" msgid="449382220134788771">"നിങ്ങളുടെ സ്വകാര്യ സ്പേസ് പാറ്റേൺ സ്ഥിരീകരിക്കുക"</string>
+    <string name="private_space_confirm_your_pin_header" msgid="4543332157470087796">"നിങ്ങളുടെ സ്വകാര്യ സ്പേസ് പിൻ വീണ്ടും നൽകുക"</string>
+    <string name="private_space_confirm_your_password_header" msgid="9202308075814307169">"നിങ്ങളുടെ സ്വകാര്യ സ്പേസ് പാസ്‌വേഡ് വീണ്ടും നൽകുക"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"നിങ്ങൾക്ക് <xliff:g id="COUNT">%d</xliff:g> ഫിംഗർപ്രിന്റുകൾ വരെ ചേർക്കാം"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"നിങ്ങൾ പരമാവധി എണ്ണം ഫിംഗർപ്രിന്റുകൾ ചേർത്തിട്ടുണ്ട്"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"കൂടുതൽ ഫിംഗർപ്രിന്റുകൾ ചേർക്കാൻ കഴിയില്ല"</string>
@@ -877,6 +898,7 @@
     <string name="external_display_on" msgid="2560104443500154333">"ഓണാണ്"</string>
     <string name="external_display_off" msgid="5634413756025351374">"ഓഫാണ്"</string>
     <string name="external_display_settings_title" msgid="6256884595821605779">"ബാഹ്യ ഡിസ്പ്ലേ"</string>
+    <string name="builtin_display_settings_category" msgid="3441388849060771885">"ബിൽറ്റ് ഇൻ ഡിസ്‌പ്ലേ"</string>
     <string name="external_display_use_title" msgid="8198257340836261386">"ബാഹ്യ ഡിസ്പ്ലേ ഉപയോഗിക്കുക"</string>
     <string name="external_display_resolution_settings_title" msgid="2446784716488289268">"ഡിസ്‌പ്ലേ റെസല്യൂഷൻ"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"ബാഹ്യ ഡിസ്പ്ലേ വിച്ഛേദിച്ചിരിക്കുന്നു"</string>
@@ -888,6 +910,7 @@
     <string name="external_display_change_resolution_footer_title" msgid="9024291681663573443">"റൊട്ടേഷൻ അല്ലെങ്കിൽ റെസല്യൂഷൻ മാറ്റുന്നത് നിലവിൽ റൺ ചെയ്യുന്ന ഏത് ആപ്പിന്റെയും പ്രവർത്തനം അവസാനിപ്പിക്കും"</string>
     <string name="external_display_not_found_footer_title" msgid="8882902921634316363">"സ്‌ക്രീൻ മിറർ ചെയ്യാൻ നിങ്ങളുടെ ഉപകരണം ഒരു ബാഹ്യ ഡിസ്‌പ്ലേയിലേക്ക് കണക്റ്റ് ചെയ്യേണ്ടതുണ്ട്"</string>
     <string name="external_display_more_options_title" msgid="1222751990705118774">"കൂടുതൽ ഓപ്ഷനുകൾ"</string>
+    <string name="external_display_topology_hint" msgid="854973327795578470">"ഡിസ്പ്ലേകൾ പുനഃക്രമീകരിക്കാൻ വലിച്ചിടുക."</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"കാസ്‌റ്റ് ചെയ്യുക"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"മിറർ"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"വയർലസ്‌ഡിസ്പ്ലേ സജീവമാക്കൂ"</string>
@@ -1024,6 +1047,8 @@
     <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"പാസ്‌വേഡ് പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക"</string>
     <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"ഉപകരണ നിർമ്മാതാവുമായി ബന്ധപ്പെടുക"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"കണക്ഷൻ പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക"</string>
+    <string name="wifi_dpp_check_connection_no_matched_ssid" msgid="3608318690698685427">"ഈ വൈഫൈ നെറ്റ്‌വർക്ക് ഇപ്പോൾ ലഭ്യമല്ല"</string>
+    <string name="wifi_dpp_check_connection_no_matched_security" msgid="1462706753123341376">"ഈ QR കോഡുമായി ബന്ധപ്പെട്ട് ഒരു പ്രശ്നമുണ്ട്. മറ്റൊരു രീതിയിൽ കണക്റ്റ് ചെയ്യാൻ ശ്രമിക്കുക."</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"നെറ്റ്‌വർക്ക് തിരഞ്ഞെടുക്കുക"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"ഉപകരണം കണക്റ്റ് ചെയ്യാൻ, ഒരു നെറ്റ്‌വർക്ക് തിരഞ്ഞെടുക്കുക"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5170095438763569255">"ഈ ഉപകരണം “<xliff:g id="SSID">%1$s</xliff:g>” എന്നതിലേക്ക് ചേർക്കണോ?"</string>
@@ -1219,8 +1244,8 @@
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"സ്വയമേവ തിരിയുക ക്രമീകരണത്തെ കുറിച്ച് കൂടുതലറിയുക"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"സ്ക്രീൻ റെസല്യൂഷൻ"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"കൂടിയ റെസല്യൂഷൻ"</string>
-    <string name="screen_resolution_option_full" msgid="2694003735219114186">"പൂർണ്ണ റെസല്യൂഷൻ"</string>
-    <string name="screen_resolution_footer" msgid="6772341522952795647">"പൂർണ്ണ റെസല്യൂഷൻ കൂടുതൽ ബാറ്ററി ചാർജ് ഉപയോഗിക്കുന്നു. നിങ്ങളുടെ റെസല്യൂഷൻ മാറ്റുന്നത് ചില ആപ്പുകൾ റീസ്റ്റാർട്ട് ചെയ്യാൻ കാരണമായേക്കാം."</string>
+    <string name="screen_resolution_option_full" msgid="4456839315039000517">"പരമാവധി റെസല്യൂഷൻ"</string>
+    <string name="screen_resolution_footer" msgid="1230761249204935717">"പരമാവധി റെസല്യൂഷൻ കൂടുതൽ ബാറ്ററി ചാർജ് ഉപയോഗിക്കുന്നു. നിങ്ങളുടെ റെസല്യൂഷൻ മാറ്റുന്നത് ചില ആപ്പുകൾ റീസ്റ്റാർട്ട് ചെയ്യാൻ കാരണമായേക്കാം."</string>
     <string name="screen_resolution_selected_a11y" msgid="6158451180032224977">"തിരഞ്ഞെടുത്തു"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"നിറങ്ങൾ"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"സ്വാഭാവികം"</string>
@@ -1229,7 +1254,6 @@
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"അനുയോജ്യമായത്"</string>
     <string name="brightness" msgid="6216871641021779698">"തെളിച്ചനില"</string>
     <string name="auto_brightness_title" msgid="4239324728760986697">"അനുയോജ്യമായ തെളിച്ചം"</string>
-    <string name="auto_brightness_content_description_title" msgid="237734599617077375">"അനുയോജ്യമായ തെളിച്ചത്തെ കുറിച്ച്"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"നിങ്ങളുടെ ചുറ്റുപാട്, പ്രവർത്തനം എന്നിവ അനുസരിച്ച് സ്‌ക്രീൻ തെളിച്ചം സ്വയമേവ ക്രമീകരിക്കും. നിങ്ങളുടെ താൽപര്യം മനസ്സിലാക്കാൻ അനുയോജ്യമായ തെളിച്ചത്തിനെ സഹായിക്കുന്നതിന് സ്ലൈഡർ നേരിട്ട് നീക്കാം."</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"ഓണാണ്"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"ഓഫ്"</string>
@@ -1300,7 +1324,7 @@
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"ഉറക്ക സമയ മോഡ് ക്രമീകരണം"</string>
     <string name="dark_ui_modes_footer_summary" msgid="1041117250408363391">"{count,plural,offset:2 =0{മോഡുകൾക്ക് ഡാർക്ക് തീം സജീവമാക്കാനും കഴിയും}=1{{mode_1} മോഡ് ഡാർക്ക് തീം സജീവമാക്കുകയും ചെയ്യുന്നു}=2{{mode_1}, {mode_2} മോഡുകൾ ഡാർക്ക് തീം സജീവമാക്കുകയും ചെയ്യുന്നു}=3{{mode_1}, {mode_2}, {mode_3} മോഡുകൾ ഡാർക്ക് തീം സജീവമാക്കുകയും ചെയ്യുന്നു}other{{mode_1}, {mode_2} എന്നിവയും മറ്റ് # മോഡുകളും ഡാർക്ക് തീം സജീവമാക്കുകയും ചെയ്യുന്നു}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"മോഡുകൾ ക്രമീകരണം"</string>
-    <string name="even_dimmer_display_title" msgid="6731255736830410149">"കൂടുതൽ മങ്ങിയത്"</string>
+    <string name="even_dimmer_display_title" msgid="4509732439977906028">"കൂടുതൽ ഡിം ചെയ്യൽ"</string>
     <string name="even_dimmer_display_summary" msgid="120301078873242172">"ഉപകരണത്തെ പതിവിൽ കൂടുതൽ മങ്ങാൻ അനുവദിക്കുക"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"സ്ക്രീൻ തെളിഞ്ഞിരിക്കുന്ന സമയപരിധി"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> നിഷ്ക്രിയത്വത്തിന് ശേഷം"</string>
@@ -1623,7 +1647,7 @@
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Bluetooth ഓഫ് ആണെങ്കിൽ പോലും ആപ്പുകളെയും സേവനങ്ങളെയും ഏത് സമയവും അടുത്തുള്ള ഉപകരണം സ്‌കാൻ ചെയ്യാൻ അനുവദിക്കുക. ഉദാഹരണത്തിന്, ലൊക്കേഷൻ‌ അടിസ്ഥാനമാക്കിയുള്ള ഫീച്ചറുകളും സേവനങ്ങളും മെച്ചപ്പെടുത്താൻ ഇത് ഉപയോഗിക്കാം."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"ലൊക്കേഷൻ സേവനങ്ങൾ"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"ലൊക്കേഷൻ സേവനങ്ങൾ"</string>
-    <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"ലൊക്കേഷൻ ഉപയോഗിക്കുക"</string>
+    <string name="location_time_zone_detection_toggle_title" msgid="720338048522014712">"സമയമേഖലയ്ക്കായി ലൊക്കേഷൻ ഉപയോഗിക്കുക"</string>
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"സമയമേഖല സ്വയമേവ സജ്ജീകരിക്കാനാകുന്നില്ല"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
     <string name="location_time_zone_detection_status_summary_blocked_by_settings" msgid="5276280770344278768">"ലൊക്കേഷൻ അല്ലെങ്കിൽ ലൊക്കേഷൻ സേവനങ്ങൾ ഓഫാണ്"</string>
@@ -1634,11 +1658,11 @@
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"ലൊക്കേഷൻ ക്രമീകരണം"</string>
     <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"ഇത് പരിഹരിക്കുക"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"റദ്ദാക്കുക"</string>
-    <string name="location_time_zone_detection_auto_is_off" msgid="6264253990141650280">"സ്വയമേവയുള്ള സമയമേഖല ഓഫാണ്"</string>
+    <string name="location_time_zone_detection_auto_is_off" msgid="4785540862935730060">"സ്വയമേവയുള്ള സമയമേഖല ഓഫായിരിക്കുമ്പോൾ ലഭ്യമല്ല"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"ലൊക്കേഷൻ ഉപയോഗിച്ചുള്ള സമയമേഖല കണ്ടെത്തൽ പ്രവർത്തനരഹിതമാക്കി"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"ലൊക്കേഷൻ ഉപയോഗിച്ചുള്ള സമയമേഖല കണ്ടെത്തൽ പിന്തുണയ്ക്കുന്നില്ല"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"ലൊക്കേഷൻ ഉപയോഗിച്ചുള്ള സമയമേഖല കണ്ടെത്തലിൽ മാറ്റങ്ങൾ അനുവദനീയമല്ല"</string>
-    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"സമയമേഖല സജ്ജീകരിക്കാൻ ലൊക്കേഷൻ ഉപയോഗിച്ചേക്കാം"</string>
+    <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"നിങ്ങളുടെ ഉപകരണ ലൊക്കേഷൻ ലഭ്യമാണെങ്കിൽ, സമയമേഖല സജ്ജീകരിക്കാൻ അത് ഉപയോഗിച്ചേക്കാം"</string>
     <string name="about_settings_summary" msgid="4831942939227432513">"നിയമ വിവരം, നില, സോഫ്‌റ്റ്‌വെയർ പതിപ്പ് എന്നിവ കാണുക"</string>
     <string name="legal_information" msgid="7509900979811934843">"നിയമപരമായ വിവരങ്ങൾ"</string>
     <string name="manual" msgid="3651593989906084868">"മാനുവൽ"</string>
@@ -1938,14 +1962,34 @@
     <string name="keyboard_options_category" msgid="8040137073401152608">"ഓപ്‌ഷനുകൾ"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"ഉപയോഗസഹായി"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"ഫിസിക്കൽ കീബോർഡ്"</string>
+    <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"ഫിസിക്കൽ കീബോർഡ് ലേഔട്ട് പിക്കർ"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"ബൗൺസ് കീകൾ"</string>
-    <string name="bounce_keys_summary" msgid="7347050868868080302">"<xliff:g id="BOUNCE_KEYS_THRESHOLD">%1$d</xliff:g> മില്ലിസെക്കൻഡിനുള്ളിൽ ഒരേ കീ അതിവേഗം ആവർത്തിച്ച് അമർത്തുന്നത് കീബോർഡ് അവഗണിക്കും"</string>
+    <string name="bounce_keys_summary" msgid="7418024428905737729">"ഒരേ കീ അതിവേഗം ആവർത്തിച്ച് അമർത്തുന്നത് കീബോർഡ് അവഗണിക്കും"</string>
+    <string name="bounce_keys_dialog_title" msgid="4088646362538368693">"ബൗൺസ് കീ ത്രെഷോൾഡ്"</string>
+    <string name="bounce_keys_dialog_subtitle" msgid="5640575860258120026">"നിങ്ങളുടെ കീബോർഡ്, ആവർത്തിച്ചുള്ള കീ അമർത്തലുകൾ അവഗണിക്കേണ്ടതിന്റെ സമയദൈർഘ്യം തിരഞ്ഞെടുക്കുക"</string>
+    <string name="input_setting_keys_dialog_option_200" msgid="3121006986226247560">"0.2 സെക്കൻഡ്"</string>
+    <string name="input_setting_keys_dialog_option_400" msgid="2634500629396699440">"0.4 സെക്കൻഡ്"</string>
+    <string name="input_setting_keys_dialog_option_600" msgid="3828362866751805146">"0.6 സെക്കൻഡ്"</string>
+    <string name="input_setting_keys_custom_title" msgid="670425691119253202">"ഇഷ്‌ടാനുസൃതം"</string>
+    <string name="input_setting_keys_custom_value" msgid="4455905650507193648">"ഇഷ്‍ടാനുസൃത മൂല്യം"</string>
     <string name="slow_keys" msgid="2891452895499690837">"സ്ലോ കീകൾ"</string>
-    <string name="slow_keys_summary" msgid="1784371292745423292">"കീ പ്രസ്സ് പ്രവർത്തിക്കാൻ എടുക്കുന്ന സമയം <xliff:g id="SLOW_KEYS_THRESHOLD">%1$d</xliff:g> മില്ലിസെക്കൻഡ് ആയി ക്രമീകരിക്കും"</string>
+    <string name="slow_keys_summary" msgid="2914214326648535377">"കീ അമർത്തൽ സജീവമാകാൻ എടുക്കുന്ന സമയം ക്രമീകരിക്കുന്നു"</string>
     <string name="sticky_keys" msgid="7317317044898161747">"സ്‌റ്റിക്കി കീകൾ"</string>
     <string name="sticky_keys_summary" msgid="1844953803625480623">"കുറുക്കുവഴികൾക്കായി, കീകൾ ഒരുമിച്ച് അമർത്തിപ്പിടിക്കുന്നതിന് പകരം ഒരു സമയം ഒരു കീ അമർത്തുക"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"മൗസ് കീകൾ"</string>
-    <string name="mouse_keys_summary" msgid="2396247040177734245">"മൗസ് നിയന്ത്രിക്കാൻ, ഫിസിക്കൽ കീബോർഡ് ഉപയോഗിക്കുക."</string>
+    <string name="mouse_keys_main_title" msgid="3570638931365221460">"മൗസ് കീകൾ ഉപയോഗിക്കുക"</string>
+    <string name="mouse_keys_summary" msgid="7030731235143286467">"പോയിന്റർ നിയന്ത്രിക്കാൻ നിങ്ങളുടെ കീബോർഡ് ഉപയോഗിക്കുക"</string>
+    <string name="mouse_reverse_vertical_scrolling" msgid="154907817154779952">"മൗസ് വിപരീത ദിശയിൽ സ്‌ക്രോൾ ചെയ്യൽ"</string>
+    <string name="mouse_reverse_vertical_scrolling_summary" msgid="3386655598642587942">"പേജ് താഴേക്ക് നീക്കാൻ മുകളിലേക്ക് സ്ക്രോൾ ചെയ്യുക"</string>
+    <string name="mouse_swap_primary_button" msgid="3028204969091057207">"ഇടത്, വലത് ബട്ടണുകൾ സ്വാപ്പ് ചെയ്യുക"</string>
+    <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"ഇടത് മൗസ് ബട്ടൺ വലത് ബട്ടണായി ഉപയോഗിക്കുക"</string>
+    <string name="mouse_key_main_page_title" msgid="8051692181770475257">"<xliff:g id="KEYBOARD_NAME">%s</xliff:g> എന്നതിനുള്ള മൗസ് കീകൾ"</string>
+    <string name="mouse_keys_directional_summary" msgid="8108444346340180562">"മൗസ് പോയിന്റർ നീക്കാൻ <xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g> കീകൾ ഉപയോഗിക്കുക"</string>
+    <string name="mouse_keys_click_summary" msgid="1642125742164614577">"പ്രാഥമിക മൗസ് ബട്ടൺ ക്ലിക്ക് ചെയ്യാൻ <xliff:g id="CLICK_LABEL">%s</xliff:g> ഉപയോഗിക്കുക"</string>
+    <string name="mouse_keys_press_hold_summary" msgid="2313418505798763112">"മൗസിന്റെ പ്രൈമറി ബട്ടൺ അമർത്തിപ്പിടിക്കാൻ <xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g> കീ ഉപയോഗിക്കുക"</string>
+    <string name="mouse_keys_release_summary" msgid="2379239679203818720">"മൗസിന്റെ പ്രൈമറി ബട്ടൺ റിലീസ് ചെയ്യാൻ <xliff:g id="RELEASE_LABEL">%s</xliff:g> കീ ഉപയോഗിക്കുക"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="8129249227018251990">"സ്ക്രോൾ മോഡ് ടോഗിൾ ചെയ്യാൻ <xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g> ഉപയോഗിക്കുക. ഇങ്ങനെ ചെയ്യുമ്പോൾ <xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g> കീകൾ മുകളിലേക്കോ താഴേക്കോ ഇടത്തോട്ടോ വലത്തോട്ടോ കാഴ്‌ച സ്ക്രോൾ ചെയ്യുന്നു"</string>
+    <string name="mouse_keys_release2_summary" msgid="2395196580659122185">"മൗസിന്റെ സെക്കൻഡറി ബട്ടൺ അമർത്തിപ്പിടിക്കാൻ <xliff:g id="RELEASE_2_LABEL">%s</xliff:g> കീ ഉപയോഗിക്കുക"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"കീബോഡ് കുറുക്കുവഴികൾ"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"കുറുക്കുവഴികളുടെ ലിസ്റ്റ് കാണിക്കുക"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"ഔദ്യോഗിക പ്രൊഫൈൽ കീബോർഡുകളും ടൂളുകളും"</string>
@@ -1953,6 +1997,7 @@
     <string name="keyboard_default_layout" msgid="5377811770620422301">"ഡിഫോൾട്ട്"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"ടച്ച്പാഡ്"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"ടച്ച്പാഡും മൗസും"</string>
+    <string name="mouse_settings" msgid="7301671756721327122">"മൗസ്"</string>
     <string name="trackpad_settings_summary" msgid="3369855644136760402">"പോയിന്റർ വേഗത, ജെസ്ച്ചറുകൾ"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"ക്ലിക്ക് ചെയ്യാൻ ടാപ്പ് ചെയ്യുക"</string>
     <string name="trackpad_tap_dragging_title" msgid="798644199582480712">"ടാപ്പുചെയ്‌ത് വലിച്ചിടൽ"</string>
@@ -1964,6 +2009,7 @@
     <string name="trackpad_bottom_right_tap_title" msgid="230337692279220068">"താഴെ വലതുവശത്ത് ക്ലിക്ക് ചെയ്യൽ"</string>
     <string name="trackpad_bottom_right_tap_summary" msgid="4467915480282133447">"കൂടുതൽ ഓപ്ഷനുകൾക്ക് ടച്ച്പാഡിന് താഴെ വലതുമൂല ക്ലിക്ക് ചെയ്യൂ"</string>
     <string name="trackpad_pointer_speed" msgid="7786579408631352625">"പോയിന്റർ വേഗത"</string>
+    <string name="three_finger_tap_preference_title" msgid="7130739855086106052">"മൂന്ന് വിരൽ ടാപ്പ് ഉപയോഗിക്കുക"</string>
     <string name="pointer_fill_style" msgid="8794616790175016092">"പോയിന്റർ നിറം"</string>
     <string name="pointer_fill_style_black_button" msgid="4540815366995820960">"പോയിന്റർ ഫിൽ സ്റ്റൈൽ കറുപ്പാക്കൂ"</string>
     <string name="pointer_fill_style_green_button" msgid="3731413496528067979">"പോയിന്റർ ഫിൽ സ്റ്റൈൽ പച്ചയാക്കൂ"</string>
@@ -1978,6 +2024,11 @@
     <string name="trackpad_touch_gesture" msgid="8641725062131922497">"ടച്ച്പാഡ് ജെസ്ച്ചറുകൾ മനസ്സിലാക്കുക"</string>
     <string name="keywords_touchpad" msgid="8159846254066666032">"ട്രാക്ക്പാഡ്, ട്രാക്ക് പാഡ്, മൗസ്, കഴ്‌സർ, സ്ക്രോൾ, സ്വൈപ്പ്, വലത് ക്ലിക്ക്, ക്ലിക്ക്, പോയിന്റർ"</string>
     <string name="keywords_trackpad_bottom_right_tap" msgid="1285062446073929305">"വലത് ക്ലിക്ക്, ടാപ്പ്"</string>
+    <string name="three_finger_tap_middle_click" msgid="5274906692591143158">"മിഡിൽ ക്ലിക്ക്"</string>
+    <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Assistant ലോഞ്ച് ചെയ്യുക"</string>
+    <string name="three_finger_tap_go_home" msgid="6526301745535089812">"ഹോമിലേക്ക് പോകുക"</string>
+    <string name="three_finger_tap_go_back" msgid="2898205524575684271">"മടങ്ങുക"</string>
+    <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"അടുത്തിടെയുള്ള ആപ്പുകൾ കാണുക"</string>
     <string name="gesture_title_go_home" msgid="3682238648647225933">"ഹോമിലേക്ക് പോകുക"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"ടച്ച്‌പാഡിൽ മൂന്ന് വിരൽ കൊണ്ട് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്യുക"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"മടങ്ങുക"</string>
@@ -2014,6 +2065,10 @@
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"<xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> എന്നതിനായി പുതിയ കീ തിരഞ്ഞെടുക്കൂ:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"ഫിസിക്കൽ കീബോർഡ് ഉപയോഗസഹായി"</string>
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"സ്റ്റിക്കി കീകൾ, ബൗൺസ് കീകൾ, മൗസ് കീകൾ"</string>
+    <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"ആവർത്തിക്കുന്ന കീകൾ"</string>
+    <string name="keyboard_repeat_keys_timeout_title" msgid="3411871149974652293">"ആവർത്തിക്കുന്നതിന് മുമ്പുള്ള കാലതാമസം"</string>
+    <string name="keyboard_repeat_keys_delay_title" msgid="7323531750483922943">"ആവർത്തന നിരക്ക്"</string>
+    <string name="keyboard_repeat_keys_summary" msgid="8972905345211768313">"കീ വിടുന്നത് വരെ അതിന്റെ പ്രതീകം ആവർത്തിക്കാൻ കീ അമർത്തിപ്പിടിക്കുക"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> ലേഔട്ട്"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"ഡിഫോൾട്ട്"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"സ്വയമേവ: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
@@ -2418,7 +2473,7 @@
     <string name="captioning_preview_title" msgid="2888561631323180535">"പ്രിവ്യൂ ചെയ്യുക"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"സാധാരണ ഓപ്ഷനുകൾ"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"ഭാഷ"</string>
-    <string name="captioning_text_size" msgid="8039448543171463017">"ടെക്സ്റ്റ് വലുപ്പം"</string>
+    <string name="captioning_text_size" msgid="5764254558945371745">"സബ്‌ടൈറ്റിലിന്റെ വലുപ്പം"</string>
     <string name="captioning_preset" msgid="4174276086501638524">"അടിക്കുറിപ്പ് സ്റ്റൈൽ"</string>
     <string name="captioning_custom_options_title" msgid="3858866498893566351">"ഇഷ്‌ടാനുസൃത ഓപ്‌ഷനുകൾ"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"പശ്ചാത്തല വര്‍ണം"</string>
@@ -2545,6 +2600,8 @@
     <string name="controls_subtitle" msgid="3759606830916441564">"പവർ ഉപയോഗം ക്രമീകരിക്കുക"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"ഉൾപ്പെടുത്തിയ പാക്കേജുകൾ"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"ആപ്പുകൾ സാധാരണ രീതിയിൽ റൺ ചെയ്യുന്നു"</string>
+    <string name="battery_tip_replacement_title" msgid="3932335880485957919">"ബാറ്ററി മാറ്റാൻ നിർദ്ദേശിക്കുന്നു"</string>
+    <string name="battery_tip_replacement_summary" msgid="7892640031317153349">"ബാറ്ററി കപ്പാസിറ്റിയും ചാർജിംഗ് പെർഫോമൻസും കുറഞ്ഞു, ബാറ്ററി മാറ്റാൻ നിർദ്ദേശിക്കുന്നു."</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"ബാറ്ററി നില കുറവാണ്"</string>
     <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"ബാറ്ററി ലെെഫ് വർദ്ധിപ്പിക്കാൻ ബാറ്ററി സേവർ ഓണാക്കുക"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"ബാറ്ററി ലെെഫ് മെച്ചപ്പെടുത്തുക"</string>
@@ -2962,6 +3019,7 @@
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"ഈ VPN വിച്ഛേദിക്കണോ?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"വിച്ഛേദിക്കുക"</string>
     <string name="vpn_version" msgid="6344167191984400976">"പതിപ്പ്"</string>
+    <string name="vpn_version_info" msgid="5717671228402924155">"പതിപ്പ് <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"VPN മറക്കുക"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"നിലവിലുള്ള VPN-ന് പകരം പുതിയതാക്കണോ?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"\'എല്ലായ്പ്പോഴും ഓൺ\' VPN സജ്ജമാക്കണോ?"</string>
@@ -3384,7 +3442,7 @@
     <string name="zen_mode_select_schedule_time_example" msgid="2690518300573994725">"\"പ്രവൃത്തിദിവസങ്ങളിൽ 9 AM - 5 PM\""</string>
     <string name="zen_mode_select_schedule_calendar" msgid="8098396764270136497">"കലണ്ടർ ഇവന്റുകൾ"</string>
     <string name="zen_modes_summary_some_active" msgid="4780578487747956559">"{count,plural,offset:2 =0{}=1{{mode_1} സജീവമാണ്}=2{{mode_1}, {mode_2} എന്നിവ സജീവമാണ്}=3{{mode_1}, {mode_2}, {mode_3} എന്നിവ സജീവമാണ്}other{{mode_1}, {mode_2} എന്നിവയും മറ്റ് # എണ്ണവും സജീവമാണ്}}"</string>
-    <string name="zen_modes_summary_none_active" msgid="7076119084658457243">"{count,plural, =0{}=1{ഒരു മോഡിന് സ്വയമേവ ഓണാകാനാകും}other{# മോഡുകൾക്ക് സ്വയമേവ ഓണാകാനാകും}}"</string>
+    <string name="zen_modes_summary" msgid="2576893588489258390">"{count,plural, =0{ശല്യപ്പെടുത്തരുത്}=1{{mode_1}}=2{{mode_1}, {mode_2}}other{{mode_1}, {mode_2}, {mode_3}}}"</string>
     <string name="zen_mode_active_text" msgid="5002406772481439437">"ഓണാണ്"</string>
     <string name="zen_mode_disabled_needs_setup" msgid="389269759040103728">"സജ്ജീകരിച്ചിട്ടില്ല"</string>
     <string name="zen_mode_disabled_by_user" msgid="138592173630683253">"പ്രവർത്തനരഹിതമാക്കി"</string>
@@ -3509,15 +3567,6 @@
     <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"മനസ്സിലായി"</string>
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"അറിയിപ്പുകള്‍"</string>
     <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"സമയ ദൈര്‍ഘ്യം"</string>
-    <string name="zen_msg_event_reminder_title" msgid="5362025129007417554">"സന്ദേശങ്ങളും റിമൈൻഡറുകളും ഇവന്റുകളും"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"\'ശല്യപ്പെടുത്തരുത്\' ഓണായിരിക്കുമ്പോൾ, നിങ്ങൾ മുകളിൽ അനുവദിച്ചിട്ടുള്ള ഇനങ്ങൾ ഒഴികെയുള്ള, സന്ദേശങ്ങളും റിമൈൻഡറും ഇവന്റുകളും മ്യൂട്ട് ചെയ്യപ്പെടും. നിങ്ങളെ വിളിക്കുന്നതിന് സുഹൃത്തുക്കളെയോ കുടുംബാംഗങ്ങളെയോ മറ്റ് കോൺടാക്‌റ്റുകളെയോ അനുവദിക്കാൻ നിങ്ങൾക്ക് ക്രമീകരണം ക്രമപ്പെടുത്താവുന്നതാണ്."</string>
-    <string name="zen_onboarding_ok" msgid="8764248406533833392">"പൂർത്തിയാക്കി"</string>
-    <string name="zen_onboarding_settings" msgid="2815839576245114342">"ക്രമീകരണം"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"അറിയിപ്പുകൾക്ക് വിഷ്വലോ ശബ്‌ദമോ വേണ്ട"</string>
-    <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"അറിയിപ്പുകൾക്ക് ശബ്‍ദം വേണ്ട"</string>
-    <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"നിങ്ങൾ അറിയിപ്പുകൾ കാണുകയോ കേൾക്കുകയോ ഇല്ല. നക്ഷത്രമിട്ടിട്ടുള്ള കോൺടാക്‌റ്റുകളിൽ നിന്നും ആവർത്തിച്ച് വിളിക്കുന്നവരിൽ നിന്നുമുള്ള കോളുകൾ അനുവദനീയം."</string>
-    <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(നിലവിലെ ക്രമീകരണം)"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"ശല്ല്യപ്പെടുത്തരുത് അറിയിപ്പ് ക്രമീകരണം മാറ്റണോ?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"ഔദ്യോഗിക പ്രൊഫൈൽ ശബ്ദങ്ങൾ"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"വ്യക്തിപര പ്രൊഫൈൽ ശബ്ദങ്ങൾ ഉപയോഗിക്കുക"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"നിങ്ങളുടെ വ്യക്തിപര പ്രൊഫൈൽ ഉപയോഗിക്കുന്ന അതേ ശബ്‌ദങ്ങൾ ഉപയോഗിക്കുക"</string>
@@ -3586,8 +3635,14 @@
     <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"അൺലോക്ക് ചെയ്‌ത്, അവസാനം ഉപയോഗിച്ച സ്‌ക്രീനിലേക്ക് നേരിട്ട് പോകുക. ലോക്ക് സ്‌ക്രീനിൽ അറിയിപ്പ് കാണിക്കില്ല. അവ കാണാൻ മുകളിൽ നിന്ന് താഴോട്ട് സ്വെെപ്പ് ചെയ്യൂ."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"ലോക്ക് സ്‌ക്രീൻ, ലോക്ക് സ്‌ക്രീൻ, ഒഴിവാക്കുക, മറികടക്കുക"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"ഔദ്യോഗിക പ്രൊഫൈൽ ലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ"</string>
+    <string name="lock_screen_notif_minimalism" msgid="5556871004042668149">"ലോക്ക് സ്‌ക്രീനിൽ അറിയിപ്പ് കുറയ്ക്കാനുള്ള ഓപ്ഷൻ"</string>
+    <string name="lock_screen_notif_minimalism_summary" msgid="4607237285421814421">"ലോക്ക് സ്ക്രീനിൽ കുറച്ച് അറിയിപ്പുകൾ മാത്രം കാണിക്കുക"</string>
     <string name="unseen_notifs_lock_screen" msgid="6910701117021324612">"ലോക്ക് സ്ക്രീനിൽ പുതിയ അറിയിപ്പുകൾ മാത്രം കാണിക്കുക"</string>
     <string name="unseen_notifs_lock_screen_summary" msgid="5996722793868021391">"ലോക്ക് സ്ക്രീനിൽ നിന്ന് മുമ്പ് കണ്ട അറിയിപ്പുകൾ സ്വയമേവ നീക്കം ചെയ്യുക"</string>
+    <string name="lock_screen_notifs_show_full_list" msgid="6767009263807771108">"പൂർണ്ണ ലിസ്റ്റ്"</string>
+    <string name="lock_screen_notifs_full_list_desc" msgid="4868489278443057427">"നിലവിലെ ഡിഫോൾട്ട് പ്ലേസ്‌മെന്റ് പൂർണ്ണ ഷെൽഫും അറിയിപ്പ് സ്‌റ്റാക്കുമാണ്."</string>
+    <string name="lock_screen_notifs_show_compact" msgid="1133598661314460528">"കോംപാക്റ്റ്"</string>
+    <string name="lock_screen_notifs_compact_desc" msgid="2442594880539709057">"പുതിയ അറിയിപ്പുകൾ നിങ്ങളുടെ ലോക്ക് സ്‌ക്രീനിലെ ഷെൽഫിലേക്ക് ചുരുക്കും."</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"ലോക്ക്‌സ്ക്രീനിലെ അറിയിപ്പുകൾ"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"ഡിഫോൾട്ടായതും നിശബ്‌ദമായതുമായ സംഭാഷണങ്ങൾ കാണിക്കുക"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"ഡിഫോൾട്ടായതും നിശബ്‌ദമായതുമായ സംഭാഷണങ്ങൾ കാണിക്കുക"</string>
@@ -3605,6 +3660,10 @@
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"എല്ലാ ഔദ്യോഗിക അറിയിപ്പ് ഉള്ളടക്കങ്ങളും കാണിക്കുക"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"രഹസ്യാത്മകമായ ഔദ്യോഗിക ഉള്ളടക്കം അദൃശ്യമാക്കുക"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"നിങ്ങളുടെ ഉപകരണം ലോക്കുചെയ്തിരിക്കുമ്പോൾ, പ്രൊഫൈൽ അറിയിപ്പുകൾ എങ്ങനെ കാണിക്കാനാണ് നിങ്ങൾ ആഗ്രഹിക്കുന്നത്?"</string>
+    <string name="lock_screen_notification_hide_seen_title" msgid="6356324850662946426">"കണ്ട അറിയിപ്പുകൾ മറയ്ക്കുക"</string>
+    <string name="lock_screen_notification_hide_seen_summary" msgid="8345971177658888274">"കണ്ട അറിയിപ്പുകൾ ലോക്ക് സ്‌ക്രീനിൽ നിന്ന് നീക്കം ചെയ്യും."</string>
+    <string name="lock_screen_notification_hide_silent_title" msgid="3284314455767315329">"നിശബ്‌ദ അറിയിപ്പുകൾ മറയ്ക്കുക"</string>
+    <string name="lock_screen_notification_hide_silent_summary" msgid="1934066619526795468">"നിശബ്‌ദ അറിയിപ്പുകളും സംഭാഷണങ്ങളും ലോക്ക് സ്‌ക്രീനിൽ നിന്ന് നീക്കം ചെയ്യും."</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"പ്രൊഫൈൽ അറിയിപ്പുകൾ"</string>
     <string name="notifications_title" msgid="4221655533193721131">"അറിയിപ്പുകൾ"</string>
     <string name="app_notifications_title" msgid="248374669037385148">"ആപ്പ് അറിയിപ്പുകൾ"</string>
@@ -3695,6 +3754,11 @@
     <string name="notification_polite_description" msgid="5497748284893832854">"ചെറിയൊരു കാലയളവിൽ നിങ്ങൾക്ക് നിരവധി അറിയിപ്പുകൾ ലഭിച്ചാൽ, നിങ്ങളുടെ ഉപകരണം 2 മിനിറ്റ് വരെ അതിന്റെ ശബ്‌ദം കുറയ്ക്കുകയും മുന്നറിയിപ്പുകൾ ചെറുതാക്കുകയും ചെയ്യും. കോളുകളെയും അലാറങ്ങളെയും മുൻ‌ഗണനയുള്ള സംഭാഷണങ്ങളെയും ബാധിക്കില്ല. \n\nകൂൾഡൗൺ സമയത്ത് ലഭിച്ച അറിയിപ്പുകൾ സ്‌ക്രീനിന്റെ മുകളിൽ നിന്ന് താഴേയ്ക്ക് വലിച്ച് കണ്ടെത്താം."</string>
     <string name="notification_polite_work" msgid="8823596456640216391">"ഔദ്യോഗിക പ്രൊഫൈലുകളിൽ ബാധകമാക്കുക"</string>
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"ഔദ്യോഗിക പ്രൊഫൈൽ ആപ്പുകൾക്ക് ബാധകമാക്കുക"</string>
+    <string name="notification_bundle_title" msgid="460988459835922719">"ബണ്ടിൽ ചെയ്‌ത അറിയിപ്പുകൾ"</string>
+    <string name="notification_bundle_on" msgid="1596327200778050642">"ഓണാണ്"</string>
+    <string name="notification_bundle_off" msgid="1550261372988157377">"ഓഫാണ്"</string>
+    <string name="notification_bundle_main_control_title" msgid="4746182488388939403">"അറിയിപ്പ് ബണ്ടിൽ ചെയ്യൽ ഉപയോഗിക്കുക"</string>
+    <string name="notification_bundle_description" msgid="3896142878395333784">"നിശബ്‌ദമായ അനുഭവം നൽകാൻ, സമാന തീമുകളുള്ള അറിയിപ്പുകൾ നിശബ്‌ദമാക്കി ഒരുമിച്ചൊരു ഗ്രൂപ്പായി മാറ്റും. ബണ്ടിൽ ചെയ്യൽ ഒരു ആപ്പിന്റെ സ്വന്തം അറിയിപ്പ് ക്രമീകരണം അസാധുവാക്കും."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR സഹായി സേവനങ്ങൾ"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"ഇൻസ്റ്റാൾ ചെയ്ത ആപ്പുകളൊന്നും VR സഹായി സേവനങ്ങളായി റൺ ചെയ്യുന്നതിന് അഭ്യർത്ഥിച്ചിട്ടില്ല."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"<xliff:g id="SERVICE">%1$s</xliff:g> എന്ന സേവനത്തിന് VR സേവന ആക്‌സസ് അനുവദിക്കണോ?"</string>
@@ -3803,6 +3867,7 @@
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"മുൻഗണനയുള്ള സംഭാഷണങ്ങൾ"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"ഒന്നും വേണ്ട"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{ഒന്നുമില്ല}=1{ഒരു സംഭാഷണം}other{# സംഭാഷണങ്ങൾ}}"</string>
+    <string name="zen_mode_from_conversations_settings" msgid="2411930666794576607">"സംഭാഷണ ക്രമീകരണം"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"തടസ്സപ്പെടുത്താൻ കഴിയുന്നത് ആർക്ക്"</string>
     <string name="zen_mode_people_footer" msgid="7710707353004137431">"സന്ദേശമയയ്ക്കലിനും കോളിംഗിനുമുള്ള ആപ്പുകൾക്ക് അറിയിപ്പുകൾ ലഭ്യമാക്കാൻ കഴിയില്ലെങ്കിലും നിങ്ങൾ ഇവിടെ തിരഞ്ഞെടുക്കുന്ന ആളുകൾക്ക് ആ ആപ്പുകൾ വഴി തുടർന്നും നിങ്ങളെ ബന്ധപ്പെടാനാകും"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"കോളുകൾ"</string>
@@ -3826,6 +3891,8 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"ആർക്കും വിളിക്കാം"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Contacts"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"നക്ഷത്രചിഹ്നമിട്ടവ"</string>
+    <string name="zen_mode_from_contacts_settings" msgid="853428575138439415">"കോൺടാക്‌റ്റ് ക്രമീകരണം"</string>
+    <string name="zen_mode_from_starred_settings" msgid="3389516761063134119">"നക്ഷത്രചിഹ്നമിട്ട കോൺടാക്‌റ്റുകളുടെ ക്രമീകരണം"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"ഒന്നും വേണ്ട"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"ഒന്നും വേണ്ട"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"അലാറങ്ങൾ"</string>
@@ -3855,6 +3922,7 @@
     <string name="zen_mode_apps_subtext" msgid="1764211974662012877">"{count,plural,offset:2 =0{ഒരു ആപ്പിനും തടസ്സപ്പെടുത്താൻ കഴിയില്ല}=1{{app_1} എന്നതിന് തടസ്സപ്പെടുത്താൻ കഴിയും}=2{{app_1}, {app_2} എന്നിവയ്ക്ക് തടസ്സപ്പെടുത്താൻ കഴിയും}=3{{app_1}, {app_2}, {app_3} എന്നിവയ്ക്ക് തടസ്സപ്പെടുത്താൻ കഴിയും}other{{app_1}, {app_2} എന്നിവയ്ക്കും മറ്റ് # എണ്ണത്തിനും തടസ്സപ്പെടുത്താൻ കഴിയും}}"</string>
     <string name="zen_mode_apps_work_app" msgid="8528767938316361588">"<xliff:g id="APP_LABEL">%s</xliff:g> (ഔദ്യോഗികം)"</string>
     <string name="zen_mode_apps_calculating" msgid="5420121396943539286">"കണക്കാക്കുന്നു…"</string>
+    <string name="zen_mode_apps_priority_apps_settings" msgid="5544513568250354374">"ആപ്പ് ക്രമീകരണം"</string>
     <string name="zen_mode_plus_n_items" msgid="6136713354369243421">"+<xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"അസാധുവാക്കാൻ ആപ്പുകളെ അനുവദിക്കുക"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"തടസ്സപ്പെടുത്താൻ കഴിയുന്ന ആപ്പുകൾ"</string>
@@ -3897,6 +3965,8 @@
     <string name="zen_mode_new_custom_title" msgid="7513785385574267851">"മോഡ് സൃഷ്ടിക്കുക"</string>
     <string name="zen_mode_new_custom_default_name" msgid="2778307946775085105">"ഇഷ്‍ടാനുസൃത മോഡ്"</string>
     <string name="zen_mode_edit_name_hint" msgid="4584652062167540536">"മോഡിന്റെ പേര്"</string>
+    <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"മോഡിന്റെ പേര് നൽകാതിരിക്കാനാകില്ല"</string>
+    <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"ഒരു ഐക്കൺ തിരഞ്ഞെടുക്കുക"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"കലണ്ടർ ഇവന്റുകൾ"</string>
     <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"ഉറക്ക സമയ ദിനചര്യ"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"ഡ്രൈവ് ചെയ്യുമ്പോൾ"</string>
@@ -4151,6 +4221,9 @@
     <string name="full_screen_intent_title" msgid="5888548315628268674">"പൂർണ്ണ സ്ക്രീൻ അറിയിപ്പുകൾ"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"ഈ ആപ്പിൽ നിന്നുള്ള പൂർണ്ണ സ്ക്രീൻ അറിയിപ്പുകൾ അനുവദിക്കുക"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"ഉപകരണം ലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ അറിയിപ്പുകൾ പൂർണ്ണ സ്‌ക്രീനിൽ കാണിക്കാൻ ഈ ആപ്പിനെ അനുവദിക്കുക. അലാറങ്ങൾ, ഇൻകമിംഗ് കോളുകൾ അല്ലെങ്കിൽ മറ്റ് അടിയന്തര അറിയിപ്പുകൾ ഹെെലെെറ്റ് ചെയ്യാൻ ആപ്പുകൾ ഇവ ഉപയോഗിച്ചേക്കാം."</string>
+    <string name="write_system_preferences_page_title" msgid="4775435310385611055">"സിസ്റ്റം മുൻഗണനകൾ എഴുതുക"</string>
+    <string name="write_system_preferences_switch_title" msgid="213522354119233085">"നിങ്ങളുടെ താൽപ്പര്യാർത്ഥം സിസ്റ്റം മുൻഗണനകൾ പരിഷ്‌ക്കരിക്കാൻ ഈ ആപ്പിനെ അനുവദിക്കുക"</string>
+    <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"പ്രധാന സിസ്റ്റം മുൻഗണനകൾ പരിഷ്‌ക്കരിക്കാൻ ഈ അനുമതി ആപ്പിനെ അനുവദിക്കുന്നു."</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"മീഡിയ മാനേജ്‌മെന്റ് ആപ്പുകൾ"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"മീഡിയ മാനേജ് ചെയ്യാൻ ആപ്പിനെ അനുവദിക്കുക"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"അനുവദിച്ചാൽ, നിങ്ങളോട് ചോദിക്കാതെ മറ്റ് ആപ്പുകൾ ഉപയോഗിച്ച് സൃഷ്‌ടിച്ച മീഡിയ ഫയലുകൾ പരിഷ്‌ക്കരിക്കാനോ ഇല്ലാതാക്കാനോ ഈ ആപ്പിന് കഴിയും. ഫയലുകളും മീഡിയയും ആക്‌സസ് ചെയ്യാൻ ആപ്പിന് അനുമതി ഉണ്ടായിരിക്കണം."</string>
@@ -4396,6 +4469,13 @@
     <string name="gesture_preference_title" msgid="8291899281322647187">"ജെസ്‌ചറുകൾ"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"ക്യാമറ അതിവേഗം തുറക്കുക"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"ക്യാമറ വേഗത്തിൽ തുറക്കുന്നതിന്, പവർ ബട്ടൺ രണ്ട് തവണ ടാപ്പ് ചെയ്യുക. ഏത് സ്ക്രീനിലും പ്രവർത്തിക്കും."</string>
+    <string name="double_tap_power_title" msgid="8705875166298116659">"പവർ ബട്ടൺ ഡബിൾ ടാപ്പ് ചെയ്യുക"</string>
+    <string name="double_tap_power_enabled" msgid="305978257631612678">"ഡബിൾ ടാപ്പ് ചെയ്യൽ ഉപയോഗിക്കുക"</string>
+    <string name="double_tap_power_target_action_category" msgid="6186809788568348488">"പവർ ബട്ടൺ ഡബിൾ ടാപ്പ് ചെയ്യുക"</string>
+    <string name="double_tap_power_camera_action_title" msgid="8398392033718681209">"ക്യാമറ തുറക്കുക"</string>
+    <string name="double_tap_power_camera_action_summary" msgid="1231656402570674349">"ക്യാമറ ആക്സസ് ചെയ്യുക"</string>
+    <string name="double_tap_power_wallet_action_title" msgid="2238628756927241786">"Wallet തുറക്കുക"</string>
+    <string name="double_tap_power_wallet_action_summary" msgid="6567586974229774570">"Wallet ആക്സസ് ചെയ്യുക"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"സെൽഫിക്ക് ക്യാമറ ഫ്ലിപ്പ് ചെയ്യുക"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="system_navigation_title" msgid="4890381153527184636">"നാവിഗേഷൻ മോഡ്"</string>
@@ -4793,11 +4873,11 @@
     <string name="satellite_setting_title" msgid="2543034229989047673">"സാറ്റലൈറ്റ് സന്ദേശമയയ്ക്കൽ"</string>
     <string name="satellite_setting_enabled_summary" msgid="3554127722727530845">"സാറ്റലൈറ്റ് വഴി ടെക്‌സ്‌റ്റ് മെസേജുകൾ അയയ്ക്കുക, സ്വീകരിക്കുക. നിങ്ങളുടെ അക്കൗണ്ടിൽ ഉൾപ്പെടുത്തിയിരിക്കുന്നു."</string>
     <string name="satellite_setting_disabled_summary" msgid="8428393986403708690">"സാറ്റലൈറ്റ് വഴി ടെക്‌സ്‌റ്റ് മെസേജുകൾ അയയ്ക്കുക, സ്വീകരിക്കുക. നിങ്ങളുടെ അക്കൗണ്ടിൽ ഉൾപ്പെടുത്തിയിട്ടില്ല."</string>
-    <string name="keywords_satellite_setting" msgid="3312183289776517695">"സാറ്റലൈറ്റ് സന്ദേശമയയ്ക്കൽ"</string>
-    <string name="category_name_about_satellite_messaging" msgid="3756205049485508340">"സാറ്റലൈറ്റ് സന്ദേശമയയ്ക്കലിനെ കുറിച്ച്"</string>
+    <string name="keywords_satellite_setting" msgid="613553612424945946">"സാറ്റലൈറ്റ് സഹായത്തോടെ സന്ദേശമയയ്ക്കൽ, സാറ്റലൈറ്റ് കണക്റ്റിവിറ്റി"</string>
+    <string name="category_name_about_satellite_messaging" msgid="4978095955643523120">"<xliff:g id="SUBJECT">%1$s</xliff:g> എന്നതിനെ കുറിച്ച്"</string>
     <string name="title_about_satellite_setting" msgid="9212860038048311345">"യോഗ്യതയുള്ള <xliff:g id="CARRIER_NAME">%1$s</xliff:g> അക്കൗണ്ടിന്റെ ഭാഗമായി, സാറ്റലൈറ്റ് വഴി ടെക്സ്റ്റ് മെസേജുകൾ അയയ്‌ക്കാനും സ്വീകരിക്കാനും നിങ്ങൾക്ക് കഴിയും"</string>
     <string name="category_title_your_satellite_plan" msgid="3017895097366691841">"നിങ്ങളുടെ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> പ്ലാൻ"</string>
-    <string name="title_have_satellite_plan" msgid="2048372355699977947">"നിങ്ങളുടെ അക്കൗണ്ടിൽ സാറ്റലൈറ്റ് സന്ദേശമയയ്‌ക്കൽ ഉൾപ്പെടുത്തിയിട്ടുണ്ട്"</string>
+    <string name="title_have_satellite_plan" msgid="857337944804101443">"നിങ്ങളുടെ അക്കൗണ്ടിൽ സന്ദേശമയയ്ക്കൽ ഉൾപ്പെടുത്തിയിട്ടുണ്ട്"</string>
     <string name="title_no_satellite_plan" msgid="2876056203035197505">"നിങ്ങളുടെ അക്കൗണ്ടിൽ സാറ്റലൈറ്റ് സന്ദേശമയയ്‌ക്കൽ ഉൾപ്പെടുത്തിയിട്ടില്ല"</string>
     <string name="summary_add_satellite_setting" msgid="190359698593056946">"കൂടുതലറിയുക"</string>
     <string name="category_name_how_it_works" msgid="585303230539269496">"ഇത് പ്രവർത്തിക്കുന്നത് എങ്ങനെയാണ്"</string>
@@ -4805,10 +4885,15 @@
     <string name="summary_satellite_connection_guide" msgid="3496123195218418456">"നിങ്ങളുടെ ഫോൺ ഒരു സാറ്റലൈറ്റുമായി സ്വയമേവ കണക്‌റ്റ് ചെയ്യും. മികച്ച കണക്ഷൻ ലഭിക്കാൻ, ആകാശം വ്യക്തമായി കാണുന്നിടത്ത് നിൽക്കുക."</string>
     <string name="title_supported_service" msgid="4275535165812691571">"നിങ്ങളുടെ ഫോൺ സാറ്റലൈറ്റുമായി കണക്‌റ്റ് ചെയ്‌തതിന് ശേഷം"</string>
     <string name="summary_supported_service" msgid="4320535903444834786">"അടിയന്തര സേവനങ്ങൾക്ക് ഉൾപ്പെടെ ഏതൊരാൾക്കും ടെക്‌സ്‌റ്റ് ചെയ്യാൻ നിങ്ങൾക്ക് കഴിയും. ഒരു മൊബൈൽ നെറ്റ്‌വർക്ക് ലഭ്യമാകുമ്പോൾ നിങ്ങളുടെ ഫോൺ അതിലേക്ക് വീണ്ടും കണക്‌റ്റ് ചെയ്യും."</string>
-    <string name="satellite_setting_summary_more_information" msgid="7729454610548016356">"സാറ്റലൈറ്റ് സന്ദേശമയയ്ക്കലിന് കൂടുതൽ സമയമെടുത്തേക്കാം, ചില പ്രദേശങ്ങളിൽ മാത്രമേ അത് ലഭ്യമാകൂ. കാലാവസ്ഥയും ചില ഘടനകളും നിങ്ങളുടെ സാറ്റലൈറ്റ് കണക്ഷനെ ബാധിച്ചേക്കാം. സാറ്റലൈറ്റ് വഴി കോളുകൾ ചെയ്യുന്നത് ലഭ്യമല്ല. എമർജൻസി കോളുകൾ തുടർന്നും കണക്റ്റ് ചെയ്‌തേക്കാം.\n\nഅക്കൗണ്ടിലെ മാറ്റങ്ങൾ, ക്രമീകരണത്തിൽ ദൃശ്യമാകാൻ കുറച്ച് സമയമെടുത്തേക്കാം. വിശദാംശങ്ങൾക്ക് നിങ്ങളുടെ സേവനദാതാവിനെ ബന്ധപ്പെടുക."</string>
-    <string name="more_about_satellite_messaging" msgid="3385673133561348509">"സാറ്റലൈറ്റ് സന്ദേശമയയ്ക്കലിനെ കുറിച്ചുള്ള കൂടുതൽ വിവരങ്ങൾ"</string>
+    <string name="satellite_setting_summary_more_information" msgid="1028146147094166868">"<xliff:g id="SUBJECT">%1$s</xliff:g> എന്നതിന് കൂടുതൽ സമയമെടുത്തേക്കാം, ചില പ്രദേശങ്ങളിൽ മാത്രമേ അത് ലഭ്യമാകൂ. കാലാവസ്ഥയും ചില ഘടനകളും നിങ്ങളുടെ സാറ്റലൈറ്റ് കണക്ഷനെ ബാധിച്ചേക്കാം. സാറ്റലൈറ്റ് വഴി കോളുകൾ ചെയ്യുന്നത് ലഭ്യമല്ല. എമർജൻസി കോളുകൾ തുടർന്നും കണക്റ്റ് ചെയ്‌തേക്കാം.\n\nഅക്കൗണ്ടിലെ മാറ്റങ്ങൾ, ക്രമീകരണത്തിൽ ദൃശ്യമാകാൻ കുറച്ച് സമയമെടുത്തേക്കാം. വിശദവിവരങ്ങൾക്ക് <xliff:g id="CARRIER_NAME">%1$s</xliff:g> എന്നതിനെ ബന്ധപ്പെടുക."</string>
+    <string name="more_about_satellite_messaging" msgid="1039277943532711584">"<xliff:g id="SUBJECT">%1$s</xliff:g> എന്നതിനെ കുറിച്ചുള്ള കൂടുതൽ വിവരങ്ങൾ"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> ഓണാക്കാനാകുന്നില്ല"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g> ഓണാക്കാൻ, ആദ്യം സാറ്റലൈറ്റ് കണക്ഷൻ അവസാനിപ്പിക്കുക"</string>
+    <string name="category_title_satellite_connectivity" msgid="7540022356863917632">"സാറ്റലൈറ്റ് കണക്റ്റിവിറ്റി"</string>
+    <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"സാറ്റലൈറ്റ് കണക്റ്റിവിറ്റി"</string>
+    <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"സാറ്റലൈറ്റ് കണക്റ്റിവിറ്റി"</string>
+    <string name="description_satellite_setting_messaging" msgid="4367494645429198805">"സാറ്റലൈറ്റ് സഹായത്തോടെ സന്ദേശമയയ്ക്കൽ"</string>
+    <string name="title_have_satellite_data_plan" msgid="5614932315409789011">"ഡാറ്റയുടെ ഉപയോഗം നിങ്ങളുടെ അക്കൗണ്ടിൽ ഉൾപ്പെടുത്തിയിട്ടുണ്ട്"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ആക്‌സസ് പോയിന്റ് പേരുകൾ"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"APN"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> എന്നതിലേക്ക് കണക്‌റ്റ് ചെയ്‌തിരിക്കുമ്പോൾ ലഭ്യമല്ല"</string>
@@ -4995,6 +5080,8 @@
     <string name="page_agnostic_16k_pages_text" msgid="2999817238546170627">"നിങ്ങൾ പേജ് വലുപ്പം തിരിച്ചറിയൽ മോഡിന്റെ 16KB മോഡിലാണ്. ഈ മോഡിൽ സോഫ്റ്റ്‌വെയർ സമഗ്രത സംബന്ധിച്ച് ഉറപ്പ് നൽകാനാകില്ല, കൂടാതെ ബൂട്ട് ലോഡർ അൺലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ ഫോണിൽ സംഭരിച്ചിരിക്കുന്ന ഏതെങ്കിലും ഡാറ്റ അപകടത്തിലായേക്കാം. ഈ മോഡുകളിൽ ചില ഫീച്ചറുകൾ പ്രവർത്തനരഹിതമാക്കുന്നതിനാൽ, ചില ആപ്പുകൾ പ്രവർത്തിച്ചേക്കില്ല. പ്രൊഡക്ഷൻ മോഡിൽ തിരികെ പ്രവേശിക്കുന്നതിന്, നിങ്ങൾ 4KB മോഡിലേക്ക് തിരികെ മാറുകയും ഉപകരണത്തിന്റെ ബൂട്ട് ലോഡർ ലോക്ക് ചെയ്യുകയും വേണം. ഇത് ഉപകരണത്തെ വീണ്ടും ഫാക്‌ടറി റീസെറ്റ് ചെയ്യുകയും പ്രൊഡക്ഷൻ ക്രമീകരണത്തിലേക്ക് പുനഃസ്ഥാപിക്കുകയും ചെയ്യും. ഉപകരണം വിജയകരമായി Android-ലേക്ക് ബൂട്ട് ചെയ്ത് കഴിഞ്ഞ്, ഡെവലപ്പർ ഓപ്ഷനുകളിൽ OEM അൺലോക്ക് ചെയ്യൽ പ്രവർത്തനരഹിതമാക്കുക. ഉപകരണം Android-ലേക്ക് ബൂട്ട് ചെയ്യാനായില്ലെങ്കിലോ അസ്ഥിരമാണെങ്കിലോ, &lt;a href=\"https://developers.google.com/android/images\"&gt;https://developers.google.com/android/images&lt;/a&gt; -ൽ നിന്നുള്ള ഏറ്റവും പുതിയ ഫാക്ടറി ഇമേജുകൾ ഉപയോഗിച്ച് ഉപകരണം വീണ്ടും ഫ്ലാഷ് ചെയ്യുക അല്ലെങ്കിൽ &lt;a href=\"https://flash.android.com/back-to-public\"&gt;https://flash.android.com/back-to-public&lt;/a&gt; ഉപയോഗിക്കുക, തുടർന്ന് \'ഉപകരണം തുടച്ചുനീക്കുക\', \'ബൂട്ട് ലോഡർ ലോക്ക് ചെയ്യുക\', \'എല്ലാ പാർട്ടീഷനുകളും ഫോഴ്‌സ് ഫ്ലാഷ് ചെയ്യുക\' എന്നിവ തിരഞ്ഞെടുക്കുക."</string>
     <string name="page_agnostic_notification_channel_name" msgid="1658444283036376361">"16KB പേജ്-ആഗ്നോസ്റ്റിക് മോഡ്"</string>
     <string name="page_agnostic_notification_action" msgid="2309805437430150456">"കൂടുതൽ വായിക്കുക"</string>
+    <string name="enable_16k_app_compat_title" msgid="4173159228844992989">"പേജ് വലുപ്പത്തിന് അനുയോജ്യമായ മോഡ് ഉപയോഗിച്ച് ആപ്പ് റൺ ചെയ്യുക"</string>
+    <string name="enable_16k_app_compat_details" msgid="3389401258168314266">"ടോഗിൾ ചെയ്‌തിരിക്കുമ്പോൾ, 16 KB ഉപകരണത്തിൽ പേജ് വലുപ്പത്തിന് അനുയോജ്യമായ മോഡിൽ ആപ്പ് റൺ ചെയ്യും."</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"ബഗ് റിപ്പോർട്ട് ഹാൻഡ്‍ലർ"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"നിങ്ങളുടെ ഉപകരണത്തിലെ ബഗ് റിപ്പോർട്ട് കുറുക്കുവഴി കൈകാര്യം ചെയ്യുന്നത് ഏത് ആപ്പാണെന്ന് നിർണ്ണയിക്കുന്നു."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"വ്യക്തിപരം"</string>
@@ -5159,7 +5246,7 @@
     <string name="uwb_settings_summary" msgid="3074271396764672268">"UWB ഉള്ള സമീപമുള്ള ഉപകരണങ്ങളുടെ ആപേക്ഷിക സ്ഥാനം തിരിച്ചറിയാൻ സഹായിക്കുന്നു"</string>
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"UWB ഉപയോഗിക്കാൻ ഫ്ലൈറ്റ് മോഡ് ഓഫാക്കുക"</string>
     <string name="uwb_settings_summary_no_uwb_regulatory" msgid="3465456428217979428">"നിലവിലെ ലൊക്കേഷനിൽ UWB ലഭ്യമല്ല"</string>
-    <string name="thread_network_settings_title" msgid="4212301030523859220">"Thread"</string>
+    <string name="thread_network_settings_title" msgid="4212301030523859220">"ത്രെഡ്"</string>
     <string name="thread_network_settings_main_switch_title" msgid="3859168481929323474">"ത്രെഡ് ഉപയോഗിക്കുക"</string>
     <string name="thread_network_settings_footer_title" msgid="7385600318850220927">"സ്‌മാർട്ട് ‌ഹോം ഉപകരണങ്ങൾ കണക്റ്റ് ചെയ്യുന്നതിനും കാര്യക്ഷമതയും പ്രകടനശേഷിയും വർദ്ധിപ്പിക്കുന്നതിനും ത്രെഡ് സഹായിക്കുന്നു.\n\nപ്രവർത്തനക്ഷമമാക്കുമ്പോൾ, ഈ ഉപകരണം ത്രെഡ് നെറ്റ്‌വർക്കിലേക്ക് കണക്റ്റ് ചെയ്യാൻ യോഗ്യമാകുന്നു, ഈ ഫോണിലൂടെ Matter പിന്തുണയ്ക്കുന്ന ഉപകരണങ്ങളെ നിയന്ത്രിക്കുന്നതിന് നിങ്ങളെ ഇത് അനുവദിക്കുന്നു."</string>
     <string name="thread_network_settings_learn_more" msgid="8278498005848565050">"ത്രെഡിനെ കുറിച്ച് കൂടുതലറിയുക"</string>
@@ -5433,7 +5520,21 @@
     <string name="audio_streams_main_page_password_dialog_join_button" msgid="2967747276379153408">"സ്ട്രീം ചെയ്യുന്നത് കേൾക്കുക"</string>
     <string name="audio_streams_main_page_qr_code_scanner_summary" msgid="5312980105735143360">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ഉപയോഗിച്ച് കേൾക്കാൻ ഓഡിയോ സ്ട്രീം QR കോഡ് സ്കാൻ ചെയ്യുക"</string>
     <string name="audio_streams_main_page_password_dialog_cannot_edit" msgid="9020898619297520153">"പങ്കിടുമ്പോൾ പാസ്‌വേഡ് എഡിറ്റ് ചെയ്യാനാകില്ല. പാസ്‌വേഡ് മാറ്റാൻ, ആദ്യം ഓഡിയോ പങ്കിടൽ ഓഫാക്കുക."</string>
+    <string name="audio_streams_main_page_password_dialog_format_alert" msgid="4129498127640454717">"നിങ്ങളുടെ പാസ്‌വേഡിൽ 4-16 പ്രതീകങ്ങൾ അടങ്ങിയിരിക്കുകയും അക്ഷരങ്ങളും അക്കങ്ങളും ചിഹ്നങ്ങളും മാത്രം ഉപയോഗിച്ചിരിക്കുകയും വേണം"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"QR കോഡ് സ്കാനർ"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"സഹായം ആവശ്യമാണോ?"</annotation></string>
     <string name="homepage_search" msgid="6759334912284663559">"തിരയൽ ക്രമീകരണം"</string>
+    <string name="keywords_contacts_storage" msgid="9061213057165337893">"കോൺടാക്റ്റുകൾ, സ്റ്റോറേജ്, അക്കൗണ്ട്"</string>
+    <string name="contacts_storage_settings_title" msgid="1574030546525203810">"കോൺടാക്റ്റുകളുടെ സ്റ്റോറേജ്"</string>
+    <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"ഉപകരണം മാത്രം"</string>
+    <string name="contacts_storage_device_only_preference_summary" msgid="2339782491812039153">"പുതിയ കോൺടാക്റ്റുകൾ ഒരു അക്കൗണ്ടുമായി സമന്വയിപ്പിക്കില്ല"</string>
+    <string name="contacts_storage_selection_message" msgid="8082077300632059003">"കോൺടാക്റ്റുകൾ നിങ്ങളുടെ ഉപകരണത്തിൽ സംരക്ഷിക്കുകയും ഡിഫോൾട്ടായി നിങ്ങളുടെ അക്കൗണ്ടിലേക്ക് സമന്വയിപ്പിക്കുകയും ചെയ്യും"</string>
+    <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"ഡിഫോൾട്ട് അക്കൗണ്ട് സജ്ജീകരിക്കുന്നതിൽ പിശക്"</string>
+    <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"ഡിഫോൾട്ട് ഒന്നും സജ്ജീകരിച്ചിട്ടില്ല"</string>
+    <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"ഉപകരണം മാത്രം"</string>
+    <string name="contacts_storage_account_title" msgid="4939024280942927810">"ഉപകരണത്തിലും %1$s എന്നതിലും"</string>
+    <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"ആരംഭിക്കുന്നതിന് ഒരു അക്കൗണ്ട് ചേർക്കുക"</string>
+    <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"കോൺടാക്റ്റുകൾ എവിടെ സംരക്ഷിക്കും"</string>
+    <string name="search_gesture_feature_title" msgid="7037117019612710960">"തിരയാൻ വട്ടം വരയ്ക്കൽ"</string>
+    <string name="search_gesture_feature_summary" msgid="1793056495030564014">"നിങ്ങളുടെ സ്ക്രീനിലുള്ള ഉള്ളടക്കം ഉപയോഗിച്ച് തിരയാൻ ഹോം ബട്ടൺ അല്ലെങ്കിൽ നാവിഗേഷൻ ഹാൻഡിൽ സ്‌പർശിച്ചുപിടിക്കുക."</string>
 </resources>

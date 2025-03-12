@@ -22,21 +22,18 @@ import android.content.Context
 import android.media.AudioManager
 import android.media.Spatializer
 import android.net.Uri
-import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.preference.Preference
-import com.android.settings.SettingsPreferenceFragment
-import com.android.settings.bluetooth.domain.interactor.SpatialAudioInteractor
-import com.android.settings.bluetooth.domain.interactor.SpatialAudioInteractorImpl
 import com.android.settings.bluetooth.ui.view.DeviceDetailsFragmentFormatter
 import com.android.settings.bluetooth.ui.view.DeviceDetailsFragmentFormatterImpl
+import com.android.settings.dashboard.DashboardFragment
 import com.android.settingslib.bluetooth.BluetoothUtils
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepository
 import com.android.settingslib.bluetooth.devicesettings.data.repository.DeviceSettingRepositoryImpl
-import com.android.settingslib.media.data.repository.SpatializerRepositoryImpl
-import com.android.settingslib.media.domain.interactor.SpatializerInteractor
+import com.android.settingslib.core.AbstractPreferenceController
 import com.google.common.collect.ImmutableList
 import com.google.common.collect.ImmutableSet
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
 /** Impl of [BluetoothFeatureProvider] */
@@ -76,34 +73,21 @@ open class BluetoothFeatureProviderImpl : BluetoothFeatureProvider {
     override fun getDeviceSettingRepository(
         context: Context,
         bluetoothAdapter: BluetoothAdapter,
-        scope: LifecycleCoroutineScope
+        scope: CoroutineScope
     ): DeviceSettingRepository =
         DeviceSettingRepositoryImpl(context, bluetoothAdapter, scope, Dispatchers.IO)
 
-    override fun getSpatialAudioInteractor(
-        context: Context,
-        audioManager: AudioManager,
-        scope: LifecycleCoroutineScope
-    ): SpatialAudioInteractor {
-        return SpatialAudioInteractorImpl(
-            context, audioManager,
-            SpatializerInteractor(
-                SpatializerRepositoryImpl(
-                    getSpatializer(context),
-                    Dispatchers.IO
-                )
-            ), scope, Dispatchers.IO)
-    }
-
     override fun getDeviceDetailsFragmentFormatter(
         context: Context,
-        fragment: SettingsPreferenceFragment,
+        fragment: DashboardFragment,
         bluetoothAdapter: BluetoothAdapter,
-        cachedDevice: CachedBluetoothDevice
+        cachedDevice: CachedBluetoothDevice,
+        controllers: List<AbstractPreferenceController>,
     ): DeviceDetailsFragmentFormatter {
         return DeviceDetailsFragmentFormatterImpl(
             context,
             fragment,
+            controllers,
             bluetoothAdapter,
             cachedDevice,
             Dispatchers.IO

@@ -21,6 +21,15 @@
             android:height="@dimen/accessibility_icon_size"
             android:color="@color/accessibility_feature_background"/>
     </item>
-    <item android:gravity="center"
-        android:drawable="@drawable/ic_brightness_medium"/>
+    <item android:gravity="center">
+        <vector xmlns:android="http://schemas.android.com/apk/res/android"
+            android:width="@dimen/accessibility_icon_foreground_size"
+            android:height="@dimen/accessibility_icon_foreground_size"
+            android:viewportWidth="24"
+            android:viewportHeight="24">
+            <path
+                android:fillColor="@android:color/white"
+                android:pathData="M9 14.5V13H15V14.5H9ZM8 11.5V10H16V11.5H8ZM7 23C6.45 23 5.975 22.8083 5.575 22.425C5.19167 22.025 5 21.55 5 21V3C5 2.45 5.19167 1.98333 5.575 1.6C5.975 1.2 6.45 0.999999 7 0.999999H17C17.55 0.999999 18.0167 1.2 18.4 1.6C18.8 1.98333 19 2.45 19 3V21C19 21.55 18.8 22.025 18.4 22.425C18.0167 22.8083 17.55 23 17 23H7ZM7 20V21H17V20H7ZM7 18H17V6H7V18ZM7 4H17V3H7V4ZM7 4V3V4ZM7 20V21V20Z"/>
+        </vector>
+    </item>
 </layer-list>

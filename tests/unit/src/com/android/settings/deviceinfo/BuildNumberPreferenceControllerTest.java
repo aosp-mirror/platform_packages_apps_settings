@@ -93,7 +93,7 @@ public class BuildNumberPreferenceControllerTest {
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
         when(mContext.getSystemService(BiometricManager.class)).thenReturn(mBiometricManager);
         when(mBiometricManager.canAuthenticate(mContext.getUserId(),
-                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
+                BiometricManager.Authenticators.IDENTITY_CHECK))
                 .thenReturn(BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
 
         mFactory = FakeFeatureFactory.setupForTest();
@@ -213,7 +213,7 @@ public class BuildNumberPreferenceControllerTest {
     public void onActivityResult_confirmPasswordRequestCompleted_launchBiometricPrompt() {
         when(mUserManager.isAdminUser()).thenReturn(true);
         when(mBiometricManager.canAuthenticate(mContext.getUserId(),
-                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
+                BiometricManager.Authenticators.IDENTITY_CHECK))
                 .thenReturn(BiometricManager.BIOMETRIC_SUCCESS);
 
         final boolean activityResultHandled = mController.onActivityResult(
@@ -233,8 +233,8 @@ public class BuildNumberPreferenceControllerTest {
     public void onActivityResult_confirmPasswordRequestCompleted_mandatoryBiometricsError() {
         when(mUserManager.isAdminUser()).thenReturn(true);
         when(mBiometricManager.canAuthenticate(mContext.getUserId(),
-                BiometricManager.Authenticators.MANDATORY_BIOMETRICS))
-                .thenReturn(BiometricManager.BIOMETRIC_ERROR_MANDATORY_NOT_ACTIVE);
+                BiometricManager.Authenticators.IDENTITY_CHECK))
+                .thenReturn(BiometricManager.BIOMETRIC_ERROR_IDENTITY_CHECK_NOT_ACTIVE);
 
         final boolean activityResultHandled = mController.onActivityResult(
                 BuildNumberPreferenceController.REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF,

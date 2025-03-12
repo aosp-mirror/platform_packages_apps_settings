@@ -113,7 +113,8 @@ public class AudioSharingPasswordPreferenceController extends BasePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        return BluetoothUtils.isAudioSharingEnabled() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return BluetoothUtils.isAudioSharingUIAvailable(mContext) ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -136,7 +137,11 @@ public class AudioSharingPasswordPreferenceController extends BasePreferenceCont
 
     @Override
     public boolean isTextValid(String value) {
-        return mAudioSharingPasswordValidator.isTextValid(value);
+        boolean isValid = mAudioSharingPasswordValidator.isTextValid(value);
+        if (mPreference != null) {
+            mPreference.showEditTextFormatAlert(!isValid);
+        }
+        return isValid;
     }
 
     @Override

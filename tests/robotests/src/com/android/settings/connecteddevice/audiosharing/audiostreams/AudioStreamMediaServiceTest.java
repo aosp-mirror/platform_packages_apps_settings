@@ -80,6 +80,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.android.util.concurrent.InlineExecutorService;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.util.ReflectionHelpers;
@@ -143,6 +144,8 @@ public class AudioStreamMediaServiceTest {
 
         mAudioStreamMediaService = spy(new AudioStreamMediaService());
         ReflectionHelpers.setField(mAudioStreamMediaService, "mBase", mContext);
+        ReflectionHelpers.setField(
+                mAudioStreamMediaService, "mExecutor", new InlineExecutorService());
         when(mAudioStreamMediaService.getSystemService(anyString()))
                 .thenReturn(mMediaSessionManager);
         when(mMediaSessionManager.createSession(any(), anyString(), any())).thenReturn(mISession);
@@ -353,18 +356,6 @@ public class AudioStreamMediaServiceTest {
     }
 
     @Test
-    public void mediaSessionCallback_onSeekTo_updateNotification() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-
-        mAudioStreamMediaService.onCreate();
-        mAudioStreamMediaService.onStartCommand(setupIntent(), /* flags= */ 0, /* startId= */ 0);
-        assertThat(mAudioStreamMediaService.mMediaSessionCallback).isNotNull();
-        mAudioStreamMediaService.mMediaSessionCallback.onSeekTo(100);
-
-        verify(mNotificationManager).notify(anyInt(), any());
-    }
-
-    @Test
     public void mediaSessionCallback_onPause_setVolume() {
         mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
 
@@ -413,19 +404,6 @@ public class AudioStreamMediaServiceTest {
                 .action(
                         any(),
                         eq(SettingsEnums.ACTION_AUDIO_STREAM_NOTIFICATION_LEAVE_BUTTON_CLICK));
-    }
-
-    @Test
-    public void volumeControlCallback_onDeviceVolumeChanged_updateNotification() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_ENABLE_LE_AUDIO_SHARING);
-
-        mAudioStreamMediaService.onCreate();
-        assertThat(mAudioStreamMediaService.mVolumeControlCallback).isNotNull();
-        mAudioStreamMediaService.onStartCommand(setupIntent(), /* flags= */ 0, /* startId= */ 0);
-        mAudioStreamMediaService.mVolumeControlCallback.onDeviceVolumeChanged(
-                mDevice, /* volume= */ 0);
-
-        verify(mNotificationManager).notify(anyInt(), any());
     }
 
     @Test

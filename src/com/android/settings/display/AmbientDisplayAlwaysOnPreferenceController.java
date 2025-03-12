@@ -29,6 +29,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
+// LINT.IfChange
 public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreferenceController {
 
     private final int ON = 1;
@@ -130,3 +131,4 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
         return powerManager.isAmbientDisplaySuppressedForTokenByApp(AOD_SUPPRESSED_TOKEN, uid);
     }
 }
+// LINT.ThenChange(AmbientDisplayAlwaysOnPreference.kt)

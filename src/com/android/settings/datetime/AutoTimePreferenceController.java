@@ -27,6 +27,8 @@ import android.app.time.TimeConfiguration;
 import android.app.time.TimeManager;
 import android.content.Context;
 
+import androidx.preference.Preference;
+
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
@@ -74,6 +76,17 @@ public class AutoTimePreferenceController extends TogglePreferenceController {
             default:
                 throw new IllegalStateException("Unknown capability=" + capability);
         }
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        refreshSummary(preference);
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        return mContext.getString(R.string.date_time_auto_summary);
     }
 
     @Override

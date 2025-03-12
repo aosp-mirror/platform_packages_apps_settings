@@ -32,6 +32,7 @@ import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Flags;
+import android.provider.Settings;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
@@ -92,8 +93,9 @@ public class AccessibilityButtonFragmentTest {
     @Test
     @DisableFlags(Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
     public void onCreate_navigationGestureEnabled_setCorrectTitle() {
-        when(mResources.getInteger(com.android.internal.R.integer.config_navBarInteractionMode))
-                .thenReturn(NAV_BAR_MODE_GESTURAL);
+        Settings.Secure.putIntForUser(
+                mContext.getContentResolver(), Settings.Secure.NAVIGATION_MODE,
+                NAV_BAR_MODE_GESTURAL, mContext.getUserId());
 
         mFragment.onAttach(mContext);
         mFragment.onCreate(Bundle.EMPTY);
@@ -104,9 +106,10 @@ public class AccessibilityButtonFragmentTest {
 
     @Test
     @EnableFlags(Flags.FLAG_A11Y_STANDALONE_GESTURE_ENABLED)
-    public void onCreate_navigationGestureEnabled_gestureFlag_setCorrectTitle() {
-        when(mResources.getInteger(com.android.internal.R.integer.config_navBarInteractionMode))
-                .thenReturn(NAV_BAR_MODE_GESTURAL);
+    public void onCreate_navigationGestureEnabled_flag_setCorrectTitle() {
+        Settings.Secure.putIntForUser(
+                mContext.getContentResolver(), Settings.Secure.NAVIGATION_MODE,
+                NAV_BAR_MODE_GESTURAL, mContext.getUserId());
 
         mFragment.onAttach(mContext);
         mFragment.onCreate(Bundle.EMPTY);
@@ -117,8 +120,9 @@ public class AccessibilityButtonFragmentTest {
 
     @Test
     public void onCreate_navigationBarEnabled_setCorrectTitle() {
-        when(mResources.getInteger(com.android.internal.R.integer.config_navBarInteractionMode))
-                .thenReturn(NAV_BAR_MODE_2BUTTON);
+        Settings.Secure.putIntForUser(
+                mContext.getContentResolver(), Settings.Secure.NAVIGATION_MODE,
+                NAV_BAR_MODE_2BUTTON, mContext.getUserId());
 
         mFragment.onAttach(mContext);
         mFragment.onCreate(Bundle.EMPTY);

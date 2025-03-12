@@ -16,8 +16,6 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
-import static com.android.settingslib.flags.Flags.audioSharingHysteresisModeFix;
-
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
@@ -38,6 +36,7 @@ import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
@@ -77,7 +76,7 @@ public class AudioStreamButtonController extends BasePreferenceController
                         BluetoothLeBroadcastReceiveState state) {
                     super.onReceiveStateChanged(sink, sourceId, state);
                     boolean shouldUpdateButton =
-                            audioSharingHysteresisModeFix()
+                            BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(mContext)
                                     ? AudioStreamsHelper.hasSourcePresent(state)
                                     : AudioStreamsHelper.isConnected(state);
                     if (shouldUpdateButton) {
@@ -157,7 +156,7 @@ public class AudioStreamButtonController extends BasePreferenceController
         }
 
         List<BluetoothLeBroadcastReceiveState> sources =
-                audioSharingHysteresisModeFix()
+                BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(mContext)
                         ? mAudioStreamsHelper.getAllPresentSources()
                         : mAudioStreamsHelper.getAllConnectedSources();
         boolean isConnected =

@@ -31,8 +31,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.android.settings.R;
-
 import com.google.common.base.Strings;
 
 import org.junit.Test;
@@ -45,15 +43,14 @@ import org.robolectric.RuntimeEnvironment;
 public class NotificationAccessConfirmationActivityTest {
 
     @Test
-    public void start_showsDialog() {
+    public void start_withMissingIntentFilter_finishes() {
         ComponentName cn = new ComponentName("com.example", "com.example.SomeService");
         installPackage(cn.getPackageName(), "X");
 
         NotificationAccessConfirmationActivity activity = startActivityWithIntent(cn);
 
-        assertThat(activity.isFinishing()).isFalse();
-        assertThat(getDialogText(activity)).isEqualTo(
-                activity.getString(R.string.notification_listener_security_warning_summary, "X"));
+        assertThat(getDialogText(activity)).isNull();
+        assertThat(activity.isFinishing()).isTrue();
     }
 
     @Test

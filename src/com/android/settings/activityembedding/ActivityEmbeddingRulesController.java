@@ -257,9 +257,10 @@ public class ActivityEmbeddingRulesController {
         final FingerprintEnrollActivityClassProvider fpClassProvider = FeatureFactory
                 .getFeatureFactory()
                 .getFingerprintFeatureProvider()
-                .getEnrollActivityClassProvider();
+                .getEnrollActivityClassProvider(mContext);
         addActivityFilter(activityFilters, fpClassProvider.getDefault());
         addActivityFilter(activityFilters, fpClassProvider.getInternal());
+        addActivityFilter(activityFilters, fpClassProvider.getAddAnother());
         addActivityFilter(activityFilters, FingerprintEnrollEnrolling.class);
         addActivityFilter(activityFilters, FaceEnrollIntroductionInternal.class);
         addActivityFilter(activityFilters, FaceEnrollIntroduction.class);

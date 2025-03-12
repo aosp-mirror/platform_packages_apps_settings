@@ -71,7 +71,9 @@ public class UserAdapter extends BaseAdapter {
                         && userInfo.isPrivateProfile())) {
                 mIcon = context.getPackageManager().getUserBadgeForDensityNoBackground(
                         userHandle, /* density= */ 0);
-                mIcon.setTint(tintColor);
+                if (mIcon != null) {
+                    mIcon.setTint(tintColor);
+                }
             } else {
                 mIcon = UserIcons.getDefaultUserIconInColor(context.getResources(), tintColor);
             }

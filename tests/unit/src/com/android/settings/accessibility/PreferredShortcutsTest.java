@@ -25,12 +25,7 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.platform.test.annotations.RequiresFlagsDisabled;
-import android.platform.test.annotations.RequiresFlagsEnabled;
-import android.platform.test.flag.junit.CheckFlagsRule;
-import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.provider.Settings;
-import android.view.accessibility.Flags;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -41,7 +36,6 @@ import com.android.internal.accessibility.util.ShortcutUtils;
 
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -61,8 +55,6 @@ public class PreferredShortcutsTest {
             CLASS_NAME_2);
     private static final ContentResolver sContentResolver =
             ApplicationProvider.getApplicationContext().getContentResolver();
-    @Rule
-    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
     private final Context mContext = ApplicationProvider.getApplicationContext();
 
     @Before
@@ -175,7 +167,6 @@ public class PreferredShortcutsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void updatePreferredShortcutFromSettings_colorInversionWithQsAndSoftwareShortcut_preferredShortcutsMatches() {
         String target = COLOR_INVERSION_COMPONENT_NAME.flattenToString();
         Settings.Secure.putString(sContentResolver,
@@ -190,23 +181,6 @@ public class PreferredShortcutsTest {
         assertThat(savedPreferredShortcut).isEqualTo(
                 UserShortcutType.SOFTWARE | UserShortcutType.QUICK_SETTINGS);
 
-    }
-
-    @Test
-    @RequiresFlagsDisabled(Flags.FLAG_A11Y_QS_SHORTCUT)
-    public void updatePreferredShortcutFromSettings_colorInversionWithQsAndHardwareShortcut_qsShortcutNotSaved() {
-        String target = COLOR_INVERSION_COMPONENT_NAME.flattenToString();
-        Settings.Secure.putString(sContentResolver,
-                Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE, target);
-        Settings.Secure.putString(sContentResolver,
-                Settings.Secure.ACCESSIBILITY_QS_TARGETS, target);
-        assertThat(!android.view.accessibility.Flags.a11yQsShortcut()).isTrue();
-
-        PreferredShortcuts.updatePreferredShortcutsFromSettings(mContext, Set.of(target));
-
-        int savedPreferredShortcut = PreferredShortcuts.retrieveUserShortcutType(
-                mContext, target);
-        assertThat(savedPreferredShortcut).isEqualTo(UserShortcutType.HARDWARE);
     }
 
     @Test
