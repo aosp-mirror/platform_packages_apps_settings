@@ -30,7 +30,7 @@ class BiometricSettingsProvider : ContentProvider() {
   }
 
   override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int {
-    throw UnsupportedOperationException("query operation not supported currently.")
+    throw UnsupportedOperationException("delete operation not supported currently.")
   }
 
   override fun getType(uri: Uri): String? {
