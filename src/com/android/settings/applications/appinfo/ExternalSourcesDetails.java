@@ -17,6 +17,8 @@ package com.android.settings.applications.appinfo;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
+import static android.os.UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES;
+import static android.os.UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY;
 
 import android.app.AppOpsManager;
 import android.app.settings.SettingsEnums;
@@ -34,6 +36,7 @@ import com.android.settings.Settings;
 import com.android.settings.applications.AppInfoWithHeader;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge.InstallAppsState;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
@@ -82,15 +85,34 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
     public static CharSequence getPreferenceSummary(Context context, AppEntry entry) {
         final UserHandle userHandle = UserHandle.getUserHandleForUid(entry.info.uid);
         final UserManager um = UserManager.get(context);
-        final int userRestrictionSource = um.getUserRestrictionSource(
-                UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES, userHandle)
-                | um.getUserRestrictionSource(
-                        UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY,
-                        userHandle);
-        if ((userRestrictionSource & UserManager.RESTRICTION_SOURCE_SYSTEM) != 0) {
-            return context.getString(com.android.settingslib.widget.restricted.R.string.disabled_by_admin);
-        } else if (userRestrictionSource != 0) {
-            return context.getString(com.android.settingslib.R.string.disabled);
+        if (android.security.Flags.aapmFeatureDisableInstallUnknownSources()) {
+            if (um.hasBaseUserRestriction(DISALLOW_INSTALL_UNKNOWN_SOURCES, userHandle)) {
+                return context.getString(com.android.settingslib.R.string.disabled);
+            } else if (um.hasUserRestrictionForUser(DISALLOW_INSTALL_UNKNOWN_SOURCES, userHandle)) {
+                return context.getString(
+                        com.android.settingslib.widget.restricted.R.string.disabled_by_admin);
+            } else if (um.hasUserRestrictionForUser(DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY,
+                    userHandle)) {
+                if (RestrictedLockUtilsInternal.isPolicyEnforcedByAdvancedProtection(context,
+                        DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY, userHandle.getIdentifier())) {
+                    return context.getString(com.android.settingslib.widget.restricted
+                            .R.string.disabled_by_advanced_protection);
+                } else {
+                    return context.getString(
+                            com.android.settingslib.widget.restricted.R.string.disabled_by_admin);
+                }
+            }
+        } else {
+            final int userRestrictionSource = um.getUserRestrictionSource(
+                    DISALLOW_INSTALL_UNKNOWN_SOURCES, userHandle)
+                    | um.getUserRestrictionSource(
+                            UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY, userHandle);
+            if ((userRestrictionSource & UserManager.RESTRICTION_SOURCE_SYSTEM) != 0) {
+                return context.getString(
+                        com.android.settingslib.widget.restricted.R.string.disabled_by_admin);
+            } else if (userRestrictionSource != 0) {
+                return context.getString(com.android.settingslib.R.string.disabled);
+            }
         }
         final InstallAppsState appsState = new AppStateInstallAppsBridge(context, null, null)
                 .createInstallAppsStateFor(entry.info.packageName, entry.info.uid);
@@ -110,14 +132,14 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
         if (mPackageInfo == null || mPackageInfo.applicationInfo == null) {
             return false;
         }
-        if (mUserManager.hasBaseUserRestriction(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES,
+        if (mUserManager.hasBaseUserRestriction(DISALLOW_INSTALL_UNKNOWN_SOURCES,
                 UserHandle.of(UserHandle.myUserId()))) {
             mSwitchPref.setChecked(false);
             mSwitchPref.setSummary(com.android.settingslib.R.string.disabled);
             mSwitchPref.setEnabled(false);
             return true;
         }
-        mSwitchPref.checkRestrictionAndSetDisabled(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES);
+        mSwitchPref.checkRestrictionAndSetDisabled(DISALLOW_INSTALL_UNKNOWN_SOURCES);
         if (!mSwitchPref.isDisabledByAdmin()) {
             mSwitchPref.checkRestrictionAndSetDisabled(
                     UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY);

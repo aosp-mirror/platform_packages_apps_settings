@@ -17,7 +17,6 @@
 package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT;
-import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
 
 import android.content.ComponentName;
@@ -25,12 +24,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.UserHandle;
 import android.util.ArrayMap;
-import android.view.accessibility.Flags;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.internal.accessibility.util.ShortcutUtils;
 
@@ -123,12 +120,7 @@ public final class PreferredShortcuts {
     public static void updatePreferredShortcutsFromSettings(
             @NonNull Context context, @NonNull Set<String> components) {
         final Map<Integer, Set<String>> shortcutTypeToTargets = new ArrayMap<>();
-        for (int shortcutType : ShortcutConstants.USER_SHORTCUT_TYPES) {
-            if (!Flags.a11yQsShortcut()
-                    && shortcutType == QUICK_SETTINGS) {
-                // Skip saving quick setting as preferred shortcut option when flag is not enabled
-                continue;
-            }
+        for (int shortcutType : AccessibilityUtil.SHORTCUTS_ORDER_IN_UI) {
             shortcutTypeToTargets.put(
                     shortcutType,
                     ShortcutUtils.getShortcutTargetsFromSettings(

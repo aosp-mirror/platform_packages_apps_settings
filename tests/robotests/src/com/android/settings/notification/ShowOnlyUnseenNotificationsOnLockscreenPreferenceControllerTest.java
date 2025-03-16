@@ -29,12 +29,16 @@ import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -53,6 +57,8 @@ public class ShowOnlyUnseenNotificationsOnLockscreenPreferenceControllerTest {
 
     private ShowOnlyUnseenNotificationsOnLockscreenPreferenceController mController;
     private Preference mPreference;
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setUp() {
@@ -67,15 +73,26 @@ public class ShowOnlyUnseenNotificationsOnLockscreenPreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(com.android.server.notification.Flags.FLAG_NOTIFICATION_MINIMALISM)
     public void display_configUnset_shouldNotDisplay() {
         mController.displayPreference(mScreen);
         assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
+    @DisableFlags(com.android.server.notification.Flags.FLAG_NOTIFICATION_MINIMALISM)
     public void display_configSet_showDisplay() {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, OFF);
+        mController.displayPreference(mScreen);
+        assertThat(mPreference.isVisible()).isTrue();
+    }
+
+    @Test
+    @EnableFlags(com.android.server.notification.Flags.FLAG_NOTIFICATION_MINIMALISM)
+    public void display_configUnset_minimalismEnabled_shouldDisplay() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                LOCK_SCREEN_SHOW_ONLY_UNSEEN_NOTIFICATIONS, ON);
         mController.displayPreference(mScreen);
         assertThat(mPreference.isVisible()).isTrue();
     }

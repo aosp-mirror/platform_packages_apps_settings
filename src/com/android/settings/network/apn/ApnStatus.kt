@@ -25,6 +25,7 @@ import android.telephony.CarrierConfigManager
 import android.util.Log
 import com.android.settings.R
 import com.android.settings.network.apn.ApnTypes.getPreSelectedApnType
+import com.android.settings.network.apn.ApnTypes.getReadOnlyApnTypes
 
 private const val TAG = "ApnStatus"
 
@@ -204,9 +205,7 @@ fun getCarrierCustomizedConfig(
         CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL
     )
     val customizedConfig = CustomizedConfig(
-        readOnlyApnTypes = b.getStringArray(
-            CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY
-        )?.toList() ?: emptyList(),
+        readOnlyApnTypes = b.getReadOnlyApnTypes(),
         readOnlyApnFields = b.getStringArray(
             CarrierConfigManager.KEY_READ_ONLY_APN_FIELDS_STRING_ARRAY
         )?.toList() ?: emptyList(),

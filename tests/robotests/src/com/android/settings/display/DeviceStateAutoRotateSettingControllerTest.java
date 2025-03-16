@@ -21,10 +21,13 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.hardware.devicestate.DeviceState;
+import android.hardware.devicestate.DeviceStateManager;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
@@ -41,6 +44,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -56,15 +60,16 @@ import java.util.List;
 })
 public class DeviceStateAutoRotateSettingControllerTest {
 
-    private static final int DEFAULT_DEVICE_STATE = 1;
+    private static final DeviceState DEFAULT_DEVICE_STATE = new DeviceState(
+            new DeviceState.Configuration.Builder(/* identifier= */ 1, "DEFAULT").build());
     private static final String DEFAULT_DEVICE_STATE_DESCRIPTION = "Device state description";
     private static final int DEFAULT_ORDER = -10;
 
-    private final Context mContext = RuntimeEnvironment.application;
-    private final DeviceStateRotationLockSettingsManager mAutoRotateSettingsManager =
-            DeviceStateRotationLockSettingsManager.getInstance(mContext);
+    private final Context mContext = Mockito.spy(RuntimeEnvironment.application);
+    private DeviceStateRotationLockSettingsManager mAutoRotateSettingsManager;
 
     @Mock private MetricsFeatureProvider mMetricsFeatureProvider;
+    @Mock private DeviceStateManager mDeviceStateManager;
 
     private DeviceStateAutoRotateSettingController mController;
 
@@ -72,9 +77,15 @@ public class DeviceStateAutoRotateSettingControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        doReturn(mContext).when(mContext).getApplicationContext();
+        doReturn(mDeviceStateManager).when(mContext).getSystemService(DeviceStateManager.class);
+        doReturn(List.of(DEFAULT_DEVICE_STATE)).when(
+                mDeviceStateManager).getSupportedDeviceStates();
+        mAutoRotateSettingsManager =
+                DeviceStateRotationLockSettingsManager.getInstance(mContext);
         mController = new DeviceStateAutoRotateSettingController(
                 mContext,
-                DEFAULT_DEVICE_STATE,
+                DEFAULT_DEVICE_STATE.getIdentifier(),
                 DEFAULT_DEVICE_STATE_DESCRIPTION,
                 DEFAULT_ORDER,
                 mMetricsFeatureProvider
@@ -128,20 +139,22 @@ public class DeviceStateAutoRotateSettingControllerTest {
     public void getPreferenceKey_returnsKeyBasedOnDeviceState() {
         String key = mController.getPreferenceKey();
 
-        String expectedKey = "auto_rotate_device_state_" + DEFAULT_DEVICE_STATE;
+        String expectedKey = "auto_rotate_device_state_" + DEFAULT_DEVICE_STATE.getIdentifier();
         assertThat(key).isEqualTo(expectedKey);
     }
 
     @Test
     public void isChecked_settingForStateIsUnlocked_returnsTrue() {
-        mAutoRotateSettingsManager.updateSetting(DEFAULT_DEVICE_STATE, /* rotationLocked= */ false);
+        mAutoRotateSettingsManager.updateSetting(
+                DEFAULT_DEVICE_STATE.getIdentifier(), /* rotationLocked= */ false);
 
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
     public void isChecked_settingForStateIsLocked_returnsFalse() {
-        mAutoRotateSettingsManager.updateSetting(DEFAULT_DEVICE_STATE, /* rotationLocked= */ true);
+        mAutoRotateSettingsManager.updateSetting(
+                DEFAULT_DEVICE_STATE.getIdentifier(), /* rotationLocked= */ true);
 
         assertThat(mController.isChecked()).isFalse();
     }
@@ -150,7 +163,8 @@ public class DeviceStateAutoRotateSettingControllerTest {
     public void setChecked_true_deviceStateSettingIsUnlocked() {
         mController.setChecked(true);
 
-        boolean rotationLocked = mAutoRotateSettingsManager.isRotationLocked(DEFAULT_DEVICE_STATE);
+        boolean rotationLocked = mAutoRotateSettingsManager.isRotationLocked(
+                DEFAULT_DEVICE_STATE.getIdentifier());
 
         assertThat(rotationLocked).isFalse();
     }
@@ -159,7 +173,8 @@ public class DeviceStateAutoRotateSettingControllerTest {
     public void setChecked_false_deviceStateSettingIsLocked() {
         mController.setChecked(false);
 
-        boolean rotationLocked = mAutoRotateSettingsManager.isRotationLocked(DEFAULT_DEVICE_STATE);
+        boolean rotationLocked = mAutoRotateSettingsManager.isRotationLocked(
+                DEFAULT_DEVICE_STATE.getIdentifier());
 
         assertThat(rotationLocked).isTrue();
     }
@@ -169,7 +184,8 @@ public class DeviceStateAutoRotateSettingControllerTest {
         mController.setChecked(true);
 
         verify(mMetricsFeatureProvider).action(mContext,
-                SettingsEnums.ACTION_ENABLE_AUTO_ROTATION_DEVICE_STATE, DEFAULT_DEVICE_STATE);
+                SettingsEnums.ACTION_ENABLE_AUTO_ROTATION_DEVICE_STATE,
+                DEFAULT_DEVICE_STATE.getIdentifier());
     }
 
     @Test
@@ -177,7 +193,8 @@ public class DeviceStateAutoRotateSettingControllerTest {
         mController.setChecked(false);
 
         verify(mMetricsFeatureProvider).action(mContext,
-                SettingsEnums.ACTION_DISABLE_AUTO_ROTATION_DEVICE_STATE, DEFAULT_DEVICE_STATE);
+                SettingsEnums.ACTION_DISABLE_AUTO_ROTATION_DEVICE_STATE,
+                DEFAULT_DEVICE_STATE.getIdentifier());
     }
 
     @Test

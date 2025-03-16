@@ -43,7 +43,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.sample
-import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.flow.transformLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -72,10 +71,12 @@ class FingerprintSettingsViewModel(
 
   /** Represents the stream of the information of "Add Fingerprint" preference. */
   val addFingerprintPrefInfo: Flow<Pair<Boolean, Int>> =
-    _enrolledFingerprints.filterOnlyWhenSettingsIsShown().combine(
-      canEnrollFingerprintsInteractor.canEnrollFingerprints
-    ) { _, canEnrollFingerprints ->
-      Pair(canEnrollFingerprints, canEnrollFingerprintsInteractor.maxFingerprintsEnrollable())
+    combine(
+      _enrolledFingerprints.filterOnlyWhenSettingsIsShown(),
+      canEnrollFingerprintsInteractor.canEnrollFingerprints,
+      canEnrollFingerprintsInteractor.maxFingerprintsEnrollable,
+    ) { _, canEnrollFingerprints, maxFingerprints ->
+      Pair(canEnrollFingerprints, maxFingerprints)
     }
 
   /** Represents the stream of visibility of sfps preference. */

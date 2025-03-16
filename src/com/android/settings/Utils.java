@@ -131,6 +131,7 @@ import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settingslib.widget.ActionBarShadowController;
 import com.android.settingslib.widget.AdaptiveIcon;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -1180,9 +1181,9 @@ public final class Utils extends com.android.settingslib.Utils {
         try {
             return context.getPackageManager().getApplicationInfo(packageName, 0).enabled;
         } catch (Exception e) {
-            Log.e(TAG, "Error while retrieving application info for package " + packageName, e);
+            // Expected, package is not installed or not enabled.
+            return false;
         }
-        return false;
     }
 
     /** Get {@link Resources} by subscription id if subscription id is valid. */
@@ -1516,13 +1517,13 @@ public final class Utils extends com.android.settingslib.Utils {
             final UserManager userManager = context.getSystemService(
                     UserManager.class);
             final int status = biometricManager.canAuthenticate(getEffectiveUserId(
-                    userManager, userId), BiometricManager.Authenticators.MANDATORY_BIOMETRICS);
+                    userManager, userId), BiometricManager.Authenticators.IDENTITY_CHECK);
             switch(status) {
                 case BiometricManager.BIOMETRIC_SUCCESS:
                     return BiometricStatus.OK;
                 case BiometricManager.BIOMETRIC_ERROR_LOCKOUT:
                     return BiometricStatus.LOCKOUT;
-                case BiometricManager.BIOMETRIC_ERROR_MANDATORY_NOT_ACTIVE:
+                case BiometricManager.BIOMETRIC_ERROR_IDENTITY_CHECK_NOT_ACTIVE:
                 case BiometricManager.BIOMETRIC_ERROR_NOT_ENABLED_FOR_APPS:
                     return BiometricStatus.NOT_ACTIVE;
                 default:
@@ -1582,7 +1583,7 @@ public final class Utils extends com.android.settingslib.Utils {
         final Intent intent = new Intent();
         if (android.hardware.biometrics.Flags.mandatoryBiometrics()) {
             intent.putExtra(BIOMETRIC_PROMPT_AUTHENTICATORS,
-                    BiometricManager.Authenticators.MANDATORY_BIOMETRICS);
+                    BiometricManager.Authenticators.IDENTITY_CHECK);
         }
         intent.putExtra(BIOMETRIC_PROMPT_NEGATIVE_BUTTON_TEXT,
                 resources.getString(R.string.cancel));
@@ -1599,5 +1600,20 @@ public final class Utils extends com.android.settingslib.Utils {
     private static void disableComponent(PackageManager pm, ComponentName componentName) {
         pm.setComponentEnabledSetting(componentName,
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+    }
+
+    /**
+     * Returns {@code true} if the supplied package is a protected package. Otherwise, returns
+     * {@code false}.
+     *
+     * @param context the context
+     * @param packageName the package name
+     */
+    public static boolean isProtectedPackage(
+            @NonNull Context context, @NonNull String packageName) {
+        final List<String> protectedPackageNames = Arrays.asList(context.getResources()
+                .getStringArray(com.android.internal.R.array
+                        .config_biometric_protected_package_names));
+        return protectedPackageNames != null && protectedPackageNames.contains(packageName);
     }
 }

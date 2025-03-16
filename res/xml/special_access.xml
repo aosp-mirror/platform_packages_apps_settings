@@ -60,7 +60,7 @@
 
     <Preference
         android:key="zen_access"
-        android:title="@string/manage_zen_access_title"
+        android:title="@string/manage_zen_modes_access_title"
         android:order="-1500"
         android:fragment="com.android.settings.notification.zen.ZenAccessSettings"
         settings:controller="com.android.settings.applications.specialaccess.zenaccess.ZenAccessController" />
@@ -105,6 +105,11 @@
         android:key="use_full_screen_intent"
         android:title="@string/full_screen_intent_title"
         settings:controller="com.android.settings.spa.app.specialaccess.UseFullScreenIntentPreferenceController" />
+
+    <Preference
+        android:key="write_system_preferences"
+        android:title="@string/write_system_preferences_page_title"
+        settings:controller="com.android.settings.spa.app.specialaccess.WriteSystemPreferencesPreferenceController" />
 
     <Preference
         android:key="picture_in_picture"

@@ -237,6 +237,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.USER_INITIALIZE"/>
                 <action android:name="android.intent.action.PRE_BOOT_COMPLETED"/>
+                <action android:name="com.google.android.setupwizard.SETUP_WIZARD_FINISHED"/>
             </intent-filter>
         </receiver>
 
@@ -851,10 +852,15 @@
         </activity>
 
         <activity android:name=".network.SimOnboardingActivity"
-            android:exported="false"
+            android:exported="true"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-            android:theme="@style/Theme.SpaLib.BottomSheetDialog"/>
+            android:theme="@style/Theme.SpaLib.BottomSheetDialog">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.SIM_PREFERENCE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+      </activity>
 
         <activity android:name=".network.telephony.ToggleSubscriptionDialogActivity"
                   android:exported="false"
@@ -1073,28 +1079,6 @@
         </activity>
 
         <activity
-            android:name=".Settings$LanguageAndInputSettingsActivity"
-            android:label="@string/language_settings"
-            android:exported="true"
-            android:icon="@drawable/ic_settings_language">
-            <intent-filter>
-                <action android:name="android.settings.LANGUAGE_SETTINGS"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.VOICE_LAUNCH"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.language.LanguageAndInputSettings"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true"/>
-        </activity>
-
-        <activity
             android:name=".Settings$LanguageSettingsActivity"
             android:label="@string/languages_settings"
             android:exported="true"
@@ -1142,6 +1126,38 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.regionalpreferences.RegionalPreferencesEntriesFragment"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_system"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true"/>
+        </activity>
+
+        <activity
+            android:name=".Settings$TemperatureUnitSettingsActivity"
+            android:label="@string/temperature_preferences_title"
+            android:exported="true" >
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.TEMPERATURE_UNIT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.regionalpreferences.TemperatureUnitFragment"/>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_system"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true"/>
+        </activity>
+
+        <activity
+            android:name=".Settings$FirstDayOfWeekSettingsActivity"
+            android:label="@string/first_day_of_week_preferences_title"
+            android:exported="true" >
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.FIRST_DAY_OF_WEEK_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.regionalpreferences.FirstDayOfWeekItemFragment"/>
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                 android:value="@string/menu_key_system"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -1219,14 +1235,29 @@
                        android:value="@string/menu_key_system"/>
         </activity>
 
+        <activity android:name="Settings$PhysicalKeyboardLayoutPickerActivity"
+            android:label="@string/physical_keyboard_layout_picker_title"
+            android:exported="true"
+            android:clearTaskOnLaunch="true"
+            android:featureFlag="com.android.settings.keyboard.keyboard_and_touchpad_a11y_new_page_enabled">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.HARD_KEYBOARD_LAYOUT_PICKER_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.inputmethod.NewKeyboardLayoutEnabledLocalesFragment" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_system"/>
+        </activity>
+
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name="LanguageSettings"
                 android:label="@string/language_input_gesture_title"
                 android:clearTaskOnLaunch="true"
                 android:exported="true"
-                android:targetActivity="Settings$LanguageAndInputSettingsActivity">
+                android:targetActivity="Settings$LanguageSettingsActivity">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.language.LanguageAndInputSettings" />
+                android:value="com.android.settings.language.LanguageSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_system"/>
         </activity-alias>
@@ -1383,40 +1414,6 @@
             android:theme="@style/Theme.Settings.NoActionBar">
         </activity>
 
-        <activity
-            android:name=".notification.zen.ZenSuggestionActivity"
-            android:label="@string/zen_mode_settings_title"
-            android:icon="@drawable/ic_suggestion_dnd"
-            android:exported="true"
-            android:theme="@android:style/Theme.NoDisplay">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.ZEN" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION" />
-            </intent-filter>
-
-            <meta-data android:name="com.android.settings.dismiss"
-                       android:value="0" />
-            <meta-data android:name="com.android.settings.title"
-                       android:resource="@string/zen_suggestion_title" />
-            <meta-data android:name="com.android.settings.summary"
-                       android:resource="@string/zen_suggestion_summary" />
-        </activity>
-
-        <activity
-            android:name=".notification.zen.ZenOnboardingActivity"
-            android:label="@string/zen_onboarding_dnd_visual_disturbances_header"
-            android:icon="@drawable/ic_notifications"
-            android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar"
-            android:exported="true">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.ZEN_MODE_ONBOARDING" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <activity
             android:name="Settings$ZenModeAutomationSettingsActivity"
             android:label="@string/zen_mode_automation_settings_title"
@@ -1984,6 +1981,20 @@
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                 android:value="@string/menu_key_apps"/>
         </activity-alias>
+
+        <activity android:name="Settings$AppStorageSettingsActivity"
+                  android:label="@string/storage_label"
+                  android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.APP_STORAGE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                   android:value="com.android.settings.applications.AppStorageSettings" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                   android:value="@string/menu_key_apps"/>
+        </activity>
 
         <activity android:name=".applications.InstalledAppOpenByDefaultActivity"
                   android:label="@string/application_info_label"
@@ -2833,6 +2844,10 @@
             android:exported="false"
             android:theme="@style/GlifTheme.Light"
             android:taskAffinity="com.android.settings.root" />
+        <activity android:name=".biometrics.fingerprint.FingerprintEnroll$AddAdditionalFingerprint"
+            android:exported="false"
+            android:theme="@style/GlifTheme.Light"
+            android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollFindSensor"
             android:exported="false"
@@ -3418,6 +3433,21 @@
                 android:value="com.android.settings.fuelgauge.batteryusage.PowerUsageSummary" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_battery"/>
+        </activity>
+
+        <activity
+            android:name="Settings$PowerUsageAdvancedActivity"
+            android:label="@string/advanced_battery_title"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.battery.action.POWER_USAGE_ADVANCED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.fuelgauge.batteryusage.PowerUsageAdvanced" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                android:value="@string/menu_key_battery"/>
         </activity>
 
         <provider
@@ -4533,6 +4563,10 @@
                   android:label="@string/privacy_settings_title"
                   android:exported="true"
                   android:icon="@drawable/ic_settings_backup">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.BACKUP_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -5348,11 +5382,46 @@
                 android:value="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamConfirmDialog" />
         </activity>
 
+        <activity
+            android:name="Settings$ContactsStorageSettingsActivity"
+            android:label="@string/contacts_storage_settings_title"
+            android:exported="true"
+            android:featureFlag="android.provider.new_default_account_api_enabled">
+            <intent-filter>
+                <action android:name="android.provider.action.SET_DEFAULT_ACCOUNT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.contacts.ContactsStorageSettings"/>
+        </activity>
+
         <service
             android:name="com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamMediaService"
             android:foregroundServiceType="mediaPlayback"
             android:enabled="true"
             android:exported="false" />
+
+        <!-- Once b/364771256 is fixed, add android:featureFlag="com.android.settings.flags.catalyst_service". -->
+        <!-- Permission is not yet finalized, use READ_BASIC_PHONE_STATE temporarily. -->
+        <service
+            android:name=".SettingsService"
+            android:exported="true"
+            android:permission="android.permission.READ_BASIC_PHONE_STATE">
+            <intent-filter>
+                <action android:name="com.android.settingslib.PREFERENCE_SERVICE" />
+            </intent-filter>
+        </service>
+
+        <!-- Service to expose Preference Metadata and Get/Set functionality -->
+        <service
+            android:name=".service.PreferenceService"
+            android:exported="true"
+            android:featureFlag="com.android.settingslib.flags.settings_catalyst"
+            android:permission="android.permission.READ_SYSTEM_PREFERENCES">
+            <intent-filter>
+                <action android:name="android.service.settings.preferences.action.PREFERENCE_SERVICE" />
+            </intent-filter>
+        </service>
 
         <receiver android:name="com.android.settings.connecteddevice.audiosharing.AudioSharingReceiver"
             android:exported="false">
@@ -5369,6 +5438,23 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="Settings$ChangeNfcTagAppsActivity"
+            android:exported="true"
+            android:label="@string/change_nfc_tag_apps_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.nfc.action.CHANGE_TAG_INTENT_PREFERENCE" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>

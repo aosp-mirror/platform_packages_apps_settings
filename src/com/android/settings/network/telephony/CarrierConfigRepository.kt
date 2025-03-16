@@ -224,7 +224,10 @@ class CarrierConfigRepository(private val context: Context) {
         }
 
         private val BooleanKeysWhichNotFollowingsNamingConventions =
-            listOf(CarrierConfigManager.KEY_IGNORE_DATA_ENABLED_CHANGED_FOR_VIDEO_CALLS)
+            listOf(
+                CarrierConfigManager.KEY_IGNORE_DATA_ENABLED_CHANGED_FOR_VIDEO_CALLS,
+                CarrierConfigManager.KEY_MMS_MMS_ENABLED_BOOL,
+            )
 
         private fun checkBooleanKey(key: String) {
             check(key.endsWith("_bool") || key in BooleanKeysWhichNotFollowingsNamingConventions) {

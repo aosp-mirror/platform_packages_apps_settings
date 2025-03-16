@@ -45,6 +45,7 @@ public class AudioSharingDashboardFragment extends DashboardFragment
     public static final int SHARE_THEN_PAIR_REQUEST_CODE = 1002;
 
     SettingsMainSwitchBar mMainSwitchBar;
+    private Context mContext;
     private AudioSharingDeviceVolumeGroupController mAudioSharingDeviceVolumeGroupController;
     private AudioSharingCallAudioPreferenceController mAudioSharingCallAudioPreferenceController;
     private AudioSharingPlaySoundPreferenceController mAudioSharingPlaySoundPreferenceController;
@@ -78,6 +79,7 @@ public class AudioSharingDashboardFragment extends DashboardFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mContext = context;
         mAudioSharingDeviceVolumeGroupController =
                 use(AudioSharingDeviceVolumeGroupController.class);
         mAudioSharingDeviceVolumeGroupController.init(this);
@@ -107,23 +109,25 @@ public class AudioSharingDashboardFragment extends DashboardFragment
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (!BluetoothUtils.isAudioSharingEnabled()) return;
-        // In share then pair flow, after users be routed to pair new device page and successfully
-        // pair and connect an LEA headset, the pair fragment will be finished with RESULT_OK
-        // and EXTRA_BT_DEVICE_TO_AUTO_ADD_SOURCE, pass the BT device to switch bar controller,
-        // which is responsible for adding source to the device with loading indicator.
-        if (requestCode == SHARE_THEN_PAIR_REQUEST_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                BluetoothDevice btDevice =
-                        data != null
-                                ? data.getParcelableExtra(EXTRA_BT_DEVICE_TO_AUTO_ADD_SOURCE,
-                                BluetoothDevice.class)
-                                : null;
-                Log.d(TAG, "onActivityResult: RESULT_OK with device = " + btDevice);
-                if (btDevice != null) {
-                    var unused = ThreadUtils.postOnBackgroundThread(
-                            () -> mAudioSharingSwitchBarController.handleAutoAddSourceAfterPair(
-                                    btDevice));
+        if (BluetoothUtils.isAudioSharingUIAvailable(mContext)) {
+            // In share then pair flow, after users be routed to pair new device page and
+            // successfully pair and connect an LEA headset, the pair fragment will be finished with
+            // RESULT_OK and EXTRA_BT_DEVICE_TO_AUTO_ADD_SOURCE, pass the BT device to switch bar
+            // controller, which is responsible for adding source to the device with loading
+            // indicator.
+            if (requestCode == SHARE_THEN_PAIR_REQUEST_CODE) {
+                if (resultCode == Activity.RESULT_OK) {
+                    BluetoothDevice btDevice =
+                            data != null
+                                    ? data.getParcelableExtra(EXTRA_BT_DEVICE_TO_AUTO_ADD_SOURCE,
+                                    BluetoothDevice.class)
+                                    : null;
+                    Log.d(TAG, "onActivityResult: RESULT_OK with device = " + btDevice);
+                    if (btDevice != null) {
+                        var unused = ThreadUtils.postOnBackgroundThread(
+                                () -> mAudioSharingSwitchBarController.handleAutoAddSourceAfterPair(
+                                        btDevice));
+                    }
                 }
             }
         }

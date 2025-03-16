@@ -19,19 +19,22 @@ package com.android.settings.biometrics.fingerprint2.domain.interactor
 import android.hardware.fingerprint.FingerprintManager
 import android.os.CancellationSignal
 import android.util.Log
+import com.android.settings.biometrics.fingerprint2.data.repository.UserRepo
 import com.android.settings.biometrics.fingerprint2.lib.domain.interactor.AuthenitcateInteractor
 import com.android.settings.biometrics.fingerprint2.lib.model.FingerprintAuthAttemptModel
 import kotlin.coroutines.resume
 import kotlinx.coroutines.CancellableContinuation
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.suspendCancellableCoroutine
 
 class AuthenticateInteractorImpl(
   private val fingerprintManager: FingerprintManager,
-  private val userId: Int,
+  private val userRepo: UserRepo,
 ) : AuthenitcateInteractor {
 
-  override suspend fun authenticate(): FingerprintAuthAttemptModel =
-    suspendCancellableCoroutine { c: CancellableContinuation<FingerprintAuthAttemptModel> ->
+  override suspend fun authenticate(): FingerprintAuthAttemptModel {
+    val userId = userRepo.currentUser.first()
+    return suspendCancellableCoroutine { c: CancellableContinuation<FingerprintAuthAttemptModel> ->
       val authenticationCallback =
         object : FingerprintManager.AuthenticationCallback() {
 
@@ -64,6 +67,7 @@ class AuthenticateInteractorImpl(
         userId,
       )
     }
+  }
 
   companion object {
     private const val TAG = "AuthenticateInteractor"

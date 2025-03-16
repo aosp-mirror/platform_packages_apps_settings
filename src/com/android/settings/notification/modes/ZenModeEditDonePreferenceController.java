@@ -17,7 +17,9 @@
 package com.android.settings.notification.modes;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +34,7 @@ class ZenModeEditDonePreferenceController extends AbstractZenModePreferenceContr
 
     private final Runnable mConfirmSave;
     @Nullable private Button mButton;
+    private boolean mHasValidName;
 
     ZenModeEditDonePreferenceController(@NonNull Context context, @NonNull String key,
             Runnable confirmSave) {
@@ -46,15 +49,22 @@ class ZenModeEditDonePreferenceController extends AbstractZenModePreferenceContr
         if (pref != null) {
             mButton = pref.findViewById(R.id.done);
             if (mButton != null) {
-                mButton.setOnClickListener(v -> mConfirmSave.run());
+                mButton.setOnClickListener(this::onButtonClick);
             }
+        }
+    }
+
+    private void onButtonClick(View view) {
+        if (mHasValidName) {
+            mConfirmSave.run();
+        } else {
+            Toast.makeText(mContext, R.string.zen_mode_edit_name_empty_error, Toast.LENGTH_SHORT)
+                    .show();
         }
     }
 
     @Override
     void updateState(Preference preference, @NonNull ZenMode zenMode) {
-        if (mButton != null) {
-            mButton.setEnabled(!zenMode.getName().isBlank());
-        }
+        mHasValidName = !zenMode.getName().isBlank();
     }
 }
