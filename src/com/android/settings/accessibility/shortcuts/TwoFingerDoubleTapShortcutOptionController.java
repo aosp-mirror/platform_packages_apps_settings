@@ -86,16 +86,4 @@ public class TwoFingerDoubleTapShortcutOptionController
                 Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED,
                 AccessibilityUtil.State.OFF) == AccessibilityUtil.State.ON;
     }
-
-    @Override
-    protected void enableShortcutForTargets(boolean enable) {
-        if (android.view.accessibility.Flags.a11yQsShortcut()) {
-            super.enableShortcutForTargets(enable);
-            return;
-        }
-        Settings.Secure.putInt(
-                mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED,
-                enable ? AccessibilityUtil.State.ON : AccessibilityUtil.State.OFF);
-    }
 }

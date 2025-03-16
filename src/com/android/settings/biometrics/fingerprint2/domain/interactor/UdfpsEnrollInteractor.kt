@@ -19,6 +19,7 @@ package com.android.settings.biometrics.fingerprint2.domain.interactor
 import android.content.Context
 import android.graphics.PointF
 import android.util.TypedValue
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -87,7 +88,7 @@ class UdfpsEnrollInteractorImpl(
   override val guidedEnrollmentOffset: Flow<PointF> =
     combine(
       _guidedEnrollment,
-      accessibilityInteractor.isAccessibilityEnabled,
+      accessibilityInteractor.isEnabledFlow(MainScope()),
       isGuidedEnrollment,
     ) { point, accessibilityEnabled, guidedEnrollmentEnabled ->
       if (accessibilityEnabled || !guidedEnrollmentEnabled) {

@@ -40,6 +40,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.concurrent.Executor;
 
+// LINT.IfChange
 public class PeakRefreshRatePreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
 
@@ -196,3 +197,4 @@ public class PeakRefreshRatePreferenceController extends TogglePreferenceControl
         return defaultPeakRefreshRate;
     }
 }
+// LINT.ThenChange(PeakRefreshRateSwitchPreference.kt)

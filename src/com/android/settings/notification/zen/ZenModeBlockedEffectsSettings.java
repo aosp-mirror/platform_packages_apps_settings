@@ -29,16 +29,13 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.android.settings.R;
-import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.Indexable;
-import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@SearchIndexable
 public class ZenModeBlockedEffectsSettings extends ZenModeSettingsBase implements Indexable {
 
     @Override
@@ -88,16 +85,4 @@ public class ZenModeBlockedEffectsSettings extends ZenModeSettingsBase implement
     public int getMetricsCategory() {
         return SettingsEnums.ZEN_WHAT_TO_BLOCK;
     }
-
-    /**
-     * For Search.
-     */
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.zen_mode_block_settings) {
-
-            @Override
-            public List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-                return buildPreferenceControllers(context, null);
-            }
-        };
 }

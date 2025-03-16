@@ -30,6 +30,7 @@ import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreferenceHelper;
+import com.android.settingslib.RestrictedPreferenceHelperProvider;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -37,7 +38,7 @@ import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.AppSwitchPreference;
 
 public class UnrestrictedDataAccessPreference extends AppSwitchPreference implements
-        DataSaverBackend.Listener {
+        DataSaverBackend.Listener, RestrictedPreferenceHelperProvider {
     private static final String ECM_SETTING_IDENTIFIER = "android:unrestricted_data_access";
 
     private final ApplicationsState mApplicationsState;
@@ -76,6 +77,11 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
 
     static String generateKey(final AppEntry entry) {
         return entry.info.packageName + "|" + entry.info.uid;
+    }
+
+    @Override
+    public @NonNull RestrictedPreferenceHelper getRestrictedPreferenceHelper() {
+        return mHelper;
     }
 
     @Override

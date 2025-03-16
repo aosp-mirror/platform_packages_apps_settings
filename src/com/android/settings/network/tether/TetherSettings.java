@@ -48,14 +48,15 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
-import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.Utils;
+import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.datausage.DataSaverBackend;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.tether.WifiTetherPreferenceController;
@@ -71,11 +72,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+// LINT.IfChange
 /**
  * Displays preferences for Tethering.
  */
 @SearchIndexable
-public class TetherSettings extends RestrictedSettingsFragment
+public class TetherSettings extends RestrictedDashboardFragment
         implements DataSaverBackend.Listener {
 
     @VisibleForTesting
@@ -144,10 +146,19 @@ public class TetherSettings extends RestrictedSettingsFragment
     }
 
     @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.tether_prefs;
+    }
+
+    @SuppressWarnings("NullAway")
+    @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        // Even when the UI is restricted, addPreferencesFromResource cannot be omitted.
-        addPreferencesFromResource(R.xml.tether_prefs);
         setIfOnlyAvailableForAdmins(true);
         if (isUiRestricted()) {
             return;
@@ -194,18 +205,23 @@ public class TetherSettings extends RestrictedSettingsFragment
             getPreferenceScreen().removePreference(mUsbTether);
         }
 
-        mWifiTetherPreferenceController.displayPreference(getPreferenceScreen());
+        if (!isCatalystEnabled() && mWifiTetherPreferenceController != null) {
+            mWifiTetherPreferenceController.displayPreference(getPreferenceScreen());
+        }
 
-        if (!bluetoothAvailable) {
-            getPreferenceScreen().removePreference(mBluetoothTether);
-        } else {
-            BluetoothPan pan = mBluetoothPan.get();
-            if (pan != null && pan.isTetheringOn()) {
-                mBluetoothTether.setChecked(true);
+        if (!isCatalystEnabled()) {
+            if (!bluetoothAvailable) {
+                mBluetoothTether.setVisible(false);
             } else {
-                mBluetoothTether.setChecked(false);
+                BluetoothPan pan = mBluetoothPan.get();
+                if (pan != null && pan.isTetheringOn()) {
+                    mBluetoothTether.setChecked(true);
+                } else {
+                    mBluetoothTether.setChecked(false);
+                }
             }
         }
+
         if (!ethernetAvailable) getPreferenceScreen().removePreference(mEthernetTether);
         // Set initial state based on Data Saver mode.
         onDataSaverChanged(mDataSaverBackend.isDataSaverEnabled());
@@ -214,8 +230,10 @@ public class TetherSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     void setupViewModel() {
         TetheringManagerModel model = new ViewModelProvider(this).get(TetheringManagerModel.class);
-        mWifiTetherPreferenceController =
-                new WifiTetherPreferenceController(getContext(), getSettingsLifecycle(), model);
+        if (!isCatalystEnabled()) {
+            mWifiTetherPreferenceController =
+                    new WifiTetherPreferenceController(getContext(), getSettingsLifecycle(), model);
+        }
         mTm = model.getTetheringManager();
         model.getTetheredInterfaces().observe(this, this::onTetheredInterfacesChanged);
     }
@@ -252,9 +270,13 @@ public class TetherSettings extends RestrictedSettingsFragment
     @Override
     public void onDataSaverChanged(boolean isDataSaving) {
         mDataSaverEnabled = isDataSaving;
-        mWifiTetherPreferenceController.setDataSaverEnabled(mDataSaverEnabled);
+        if (!isCatalystEnabled()) {
+            mWifiTetherPreferenceController.setDataSaverEnabled(mDataSaverEnabled);
+        }
         mUsbTether.setEnabled(!mDataSaverEnabled);
-        mBluetoothTether.setEnabled(!mDataSaverEnabled);
+        if (!isCatalystEnabled()) {
+            mBluetoothTether.setEnabled(!mDataSaverEnabled);
+        }
         mEthernetTether.setEnabled(!mDataSaverEnabled);
         mDataSaverFooter.setVisible(mDataSaverEnabled);
     }
@@ -504,6 +526,8 @@ public class TetherSettings extends RestrictedSettingsFragment
     }
 
     private void updateBluetoothState() {
+        if (isCatalystEnabled()) return;
+
         final int btState = getBluetoothState();
         if (DEBUG) {
             Log.d(TAG, "updateBluetoothState() btState : " + btState);
@@ -559,7 +583,7 @@ public class TetherSettings extends RestrictedSettingsFragment
     }
 
     private void startTethering(int choice) {
-        if (choice == TETHERING_BLUETOOTH) {
+        if (choice == TETHERING_BLUETOOTH && !isCatalystEnabled()) {
             // Turn on Bluetooth first.
             BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
             if (adapter.getState() == BluetoothAdapter.STATE_OFF) {
@@ -581,7 +605,7 @@ public class TetherSettings extends RestrictedSettingsFragment
             } else {
                 mCm.stopTethering(TETHERING_USB);
             }
-        } else if (preference == mBluetoothTether) {
+        } else if (preference == mBluetoothTether && !isCatalystEnabled()) {
             if (mBluetoothTether.isChecked()) {
                 startTethering(TETHERING_BLUETOOTH);
             } else {
@@ -723,4 +747,10 @@ public class TetherSettings extends RestrictedSettingsFragment
         }
         updateBluetoothAndEthernetState();
     }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return TetherScreen.KEY;
+    }
 }
+// LINT.ThenChange(BluetoothTetherSwitchPreference.kt)

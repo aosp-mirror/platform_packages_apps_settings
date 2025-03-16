@@ -15,3 +15,40 @@ flag {
   bug: "301226085"
 }
 
+flag {
+  name: "enroll_layout_truncate_improvement"
+  namespace: "biometrics_integration"
+  description: "This flag controls whether the enroll layout truncate improvement feature should be enabled"
+  bug: "359149850"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+  }
+}
+
+flag {
+  name: "screen_off_unlock_power_optimization"
+  namespace: "biometrics_integration"
+  description: "This flag controls Whether to gate fp unlock when screen turns off feature before AOC optimized"
+  bug: "368465560"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+  }
+}
+
+flag {
+  name: "biometrics_onboarding_education"
+  namespace: "biometrics_integration"
+  description: "This flag controls whether the onboarding education settings UX should be enabled"
+  bug: "370940762"
+}
+
+flag {
+  name: "biometric_onboarding_education"
+  namespace: "biometrics_integration"
+  description: "This flag controls whether the onboarding education settings UX should be enabled"
+  bug: "370940762"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+  }
+}
+

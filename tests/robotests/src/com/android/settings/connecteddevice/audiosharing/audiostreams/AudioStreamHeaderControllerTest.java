@@ -20,6 +20,7 @@ import static com.android.settings.connecteddevice.audiosharing.audiostreams.Aud
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamHeaderController.AUDIO_STREAM_HEADER_NOT_LISTENING_SUMMARY;
 import static com.android.settings.connecteddevice.audiosharing.audiostreams.AudioStreamHeaderController.AUDIO_STREAM_HEADER_PRESENT_NOW_SUMMARY;
 import static com.android.settingslib.flags.Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX;
+import static com.android.settingslib.flags.Flags.FLAG_ENABLE_LE_AUDIO_SHARING;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -28,9 +29,11 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcastAssistant;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
+import android.bluetooth.BluetoothStatusCodes;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -41,6 +44,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows.ShadowAudioStreamsHelper;
 import com.android.settings.connecteddevice.audiosharing.audiostreams.testshadows.ShadowEntityHeaderController;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
@@ -57,6 +61,7 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -69,6 +74,7 @@ import java.util.concurrent.Executor;
             ShadowEntityHeaderController.class,
             ShadowThreadUtils.class,
             ShadowAudioStreamsHelper.class,
+            ShadowBluetoothAdapter.class,
         })
 public class AudioStreamHeaderControllerTest {
     @Rule public final MockitoRule mMockitoRule = MockitoJUnit.rule();
@@ -93,6 +99,13 @@ public class AudioStreamHeaderControllerTest {
     @Before
     public void setUp() {
         mSetFlagsRule.disableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
+        ShadowBluetoothAdapter shadowBluetoothAdapter = Shadow.extract(
+                BluetoothAdapter.getDefaultAdapter());
+        shadowBluetoothAdapter.setEnabled(true);
+        shadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
+                BluetoothStatusCodes.FEATURE_SUPPORTED);
+        shadowBluetoothAdapter.setIsLeAudioBroadcastAssistantSupported(
+                BluetoothStatusCodes.FEATURE_SUPPORTED);
 
         ShadowEntityHeaderController.setUseMock(mHeaderController);
         ShadowAudioStreamsHelper.setUseMock(mAudioStreamsHelper);
@@ -260,6 +273,7 @@ public class AudioStreamHeaderControllerTest {
 
     @Test
     public void testCallback_onReceiveStateChangedWithSourcePresent_updateButton() {
+        mSetFlagsRule.enableFlags(FLAG_ENABLE_LE_AUDIO_SHARING);
         mSetFlagsRule.enableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
         String address = "11:22:33:44:55:66";
 

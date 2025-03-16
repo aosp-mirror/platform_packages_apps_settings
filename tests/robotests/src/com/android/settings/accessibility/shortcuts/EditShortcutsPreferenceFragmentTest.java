@@ -16,6 +16,9 @@
 
 package com.android.settings.accessibility.shortcuts;
 
+import static android.provider.Settings.ACTION_ACCESSIBILITY_SHORTCUT_SETTINGS;
+
+import static com.android.internal.accessibility.AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
@@ -43,8 +46,8 @@ import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.util.Pair;
 import android.view.accessibility.AccessibilityManager;
-import android.view.accessibility.Flags;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.testing.FragmentScenario;
 import androidx.lifecycle.Lifecycle;
@@ -160,7 +163,7 @@ public class EditShortcutsPreferenceFragmentTest {
     public void showEditShortcutScreen_inSuw_launchSubSettingWithSuw() {
         EditShortcutsPreferenceFragment.showEditShortcutScreen(
                 mActivity, METRICS_CATEGORY, SCREEN_TITLE,
-                TARGET_FAKE_COMPONENT, createSuwIntent(new Intent(), /* isInSuw= */ true));
+                TARGET_FAKE_COMPONENT, setIntentInSuw(new Intent(), /* isInSuw= */ true));
 
         assertLaunchSubSettingWithCurrentTargetComponents(
                 TARGET_FAKE_COMPONENT.flattenToString(), /* isInSuw= */ true);
@@ -195,6 +198,53 @@ public class EditShortcutsPreferenceFragmentTest {
                 assertThat(controller.getShortcutTargets()).containsExactlyElementsIn(TARGETS);
                 assertThat(controller.isInSetupWizard()).isFalse();
             }
+        });
+    }
+
+    @Test
+    @EnableFlags(
+            com.android.settings.accessibility.Flags.FLAG_TOGGLE_FEATURE_FRAGMENT_COLLECTION_INFO)
+    public void shortcutDescriptionPref_defaultLaunch_notVisible() {
+        mFragmentScenario = createFragScenario(/* isInSuw= */ false, TARGET);
+        mFragmentScenario.moveToState(Lifecycle.State.CREATED);
+
+        mFragmentScenario.onFragment(fragment -> {
+            Preference preference = fragment.findPreference(
+                    mContext.getString(R.string.accessibility_shortcut_description_pref));
+            assertThat(preference.isVisible()).isFalse();
+        });
+    }
+
+    @Test
+    @EnableFlags(
+            com.android.settings.accessibility.Flags.FLAG_TOGGLE_FEATURE_FRAGMENT_COLLECTION_INFO)
+    public void shortcutDescriptionPref_launchFromAction_singleTarget_notVisible() {
+        mFragmentScenario = createFragScenario(/* isInSuw= */ false, List.of(TARGET),
+                ACTION_ACCESSIBILITY_SHORTCUT_SETTINGS);
+        mFragmentScenario.moveToState(Lifecycle.State.CREATED);
+
+        mFragmentScenario.onFragment(fragment -> {
+            Preference preference = fragment.findPreference(
+                    mContext.getString(R.string.accessibility_shortcut_description_pref));
+            assertThat(preference.isVisible()).isFalse();
+        });
+    }
+
+    @Test
+    @EnableFlags(
+            com.android.settings.accessibility.Flags.FLAG_TOGGLE_FEATURE_FRAGMENT_COLLECTION_INFO)
+    public void shortcutDescriptionPref_launchFromAction_multipleTargets_isVisible() {
+        mFragmentScenario = createFragScenario(/* isInSuw= */ false,
+                // Both of these components are system components with known labels, so we don't
+                // need to mock AccessibilityManager with fake labels.
+                List.of(TARGET, DALTONIZER_COMPONENT_NAME.flattenToString()),
+                ACTION_ACCESSIBILITY_SHORTCUT_SETTINGS);
+        mFragmentScenario.moveToState(Lifecycle.State.CREATED);
+
+        mFragmentScenario.onFragment(fragment -> {
+            Preference preference = fragment.findPreference(
+                    mContext.getString(R.string.accessibility_shortcut_description_pref));
+            assertThat(preference.isVisible()).isTrue();
         });
     }
 
@@ -415,7 +465,6 @@ public class EditShortcutsPreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void fragmentResumed_enableTouchExploration_qsShortcutOptionSummaryUpdated() {
         String expectedSummary = StringUtil.getIcuPluralsString(mContext, 2,
                 R.string.accessibility_shortcut_edit_dialog_summary_quick_settings);
@@ -435,7 +484,6 @@ public class EditShortcutsPreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void fragmentPaused_enableTouchExploration_qsShortcutOptionSummaryNotUpdated() {
         String expectedSummary = StringUtil.getIcuPluralsString(mContext, 1,
                 R.string.accessibility_shortcut_edit_dialog_summary_quick_settings);
@@ -593,7 +641,6 @@ public class EditShortcutsPreferenceFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_A11Y_QS_SHORTCUT)
     public void onQuickSettingsShortcutSettingChanged_preferredShortcutsUpdated() {
         final String target = TARGET_FAKE_COMPONENT.flattenToString();
         mFragmentScenario = createFragScenario(
@@ -654,9 +701,14 @@ public class EditShortcutsPreferenceFragmentTest {
 
     private FragmentScenario<EditShortcutsPreferenceFragment> createFragScenario(
             boolean isInSuw, String target) {
+        return createFragScenario(isInSuw, List.of(target), null);
+    }
+    private FragmentScenario<EditShortcutsPreferenceFragment> createFragScenario(
+            boolean isInSuw, List<String> targets, @Nullable String intentAction) {
         Bundle args = new Bundle();
         args.putStringArray(
-                EditShortcutsPreferenceFragment.ARG_KEY_SHORTCUT_TARGETS, new String[]{target});
+                EditShortcutsPreferenceFragment.ARG_KEY_SHORTCUT_TARGETS,
+                targets.toArray(new String[0]));
         FragmentScenario<EditShortcutsPreferenceFragment> scenario =
                 FragmentScenario.launch(
                         EditShortcutsPreferenceFragment.class, args,
@@ -664,7 +716,11 @@ public class EditShortcutsPreferenceFragmentTest {
         scenario.onFragment(fragment -> {
             Intent intent = fragment.requireActivity().getIntent();
             intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, SCREEN_TITLE);
-            fragment.requireActivity().setIntent(createSuwIntent(intent, isInSuw));
+            setIntentInSuw(intent, isInSuw);
+            if (intentAction != null) {
+                intent.setAction(intentAction);
+            }
+            fragment.requireActivity().setIntent(intent);
             // Since the fragment is attached before we have a chance
             // to modify the activity's intent; initialize controllers again
             fragment.initializePreferenceControllerArguments();
@@ -672,11 +728,7 @@ public class EditShortcutsPreferenceFragmentTest {
         return scenario;
     }
 
-    private Intent createSuwIntent(Intent intent, boolean isInSuw) {
-
-        if (intent == null) {
-            intent = new Intent();
-        }
+    private Intent setIntentInSuw(Intent intent, boolean isInSuw) {
         intent.putExtra(EXTRA_IS_SETUP_FLOW, isInSuw);
         intent.putExtra(EXTRA_IS_FIRST_RUN, isInSuw);
         intent.putExtra(EXTRA_IS_PRE_DEFERRED_SETUP, isInSuw);

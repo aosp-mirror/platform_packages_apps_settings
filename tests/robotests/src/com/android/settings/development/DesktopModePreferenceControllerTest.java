@@ -17,9 +17,9 @@
 package com.android.settings.development;
 
 import static android.provider.Settings.Global.DEVELOPMENT_OVERRIDE_DESKTOP_MODE_FEATURES;
-import static android.window.flags.DesktopModeFlags.ToggleOverride.OVERRIDE_ON;
-import static android.window.flags.DesktopModeFlags.ToggleOverride.OVERRIDE_OFF;
-import static android.window.flags.DesktopModeFlags.ToggleOverride.OVERRIDE_UNSET;
+import static android.window.DesktopModeFlags.ToggleOverride.OVERRIDE_ON;
+import static android.window.DesktopModeFlags.ToggleOverride.OVERRIDE_OFF;
+import static android.window.DesktopModeFlags.ToggleOverride.OVERRIDE_UNSET;
 
 import static com.google.common.truth.Truth.assertThat;
 

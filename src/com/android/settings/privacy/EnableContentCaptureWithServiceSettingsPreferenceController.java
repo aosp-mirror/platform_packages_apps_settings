@@ -19,7 +19,6 @@ package com.android.settings.privacy;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
@@ -33,7 +32,6 @@ import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
 import com.android.settings.utils.ContentCaptureUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public final class EnableContentCaptureWithServiceSettingsPreferenceController
@@ -94,11 +92,7 @@ public final class EnableContentCaptureWithServiceSettingsPreferenceController
 
     private void show(Preference preference) {
         final UserManager userManager = UserManager.get(mContext);
-        final List<UserInfo> userInfos = userManager.getUsers();
-        final ArrayList<UserHandle> userHandles = new ArrayList<>(userInfos.size());
-        for (UserInfo info : userInfos) {
-            userHandles.add(info.getUserHandle());
-        }
+        final List<UserHandle> userHandles = userManager.getEnabledProfiles();
         final Intent intent = preference.getIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         if (userHandles.size() == 1) {
             mContext.startActivityAsUser(intent, userHandles.get(0));

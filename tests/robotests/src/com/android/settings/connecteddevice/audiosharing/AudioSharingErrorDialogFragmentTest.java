@@ -24,11 +24,13 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothStatusCodes;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.flags.Flags;
@@ -114,6 +116,10 @@ public class AudioSharingErrorDialogFragmentTest {
         AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
         assertThat(dialog.isShowing()).isTrue();
+        TextView title = dialog.findViewById(R.id.title_text);
+        assertThat(title).isNotNull();
+        assertThat(title.getText().toString()).isEqualTo(
+                mParent.getString(R.string.audio_sharing_retry_dialog_title));
     }
 
     @Test

@@ -48,8 +48,8 @@ import androidx.preference.TwoStatePreference;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.Settings;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.keyboard.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -65,7 +65,7 @@ import java.util.Objects;
 // TODO(b/327638540): Update implementation of preference here and reuse key preferences and
 //  controllers between here and A11y Setting page.
 @SearchIndexable
-public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
+public final class PhysicalKeyboardFragment extends DashboardFragment
         implements InputManager.InputDeviceListener,
         KeyboardLayoutDialogFragment.OnSetupKeyboardLayoutsListener {
 
@@ -79,6 +79,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     private static final String KEYBOARD_SHORTCUTS_HELPER = "keyboard_shortcuts_helper";
     private static final String MODIFIER_KEYS_SETTINGS = "modifier_keys_settings";
     private static final String EXTRA_AUTO_SELECTION = "auto_selection";
+    private static final String TAG = "KeyboardAndTouchA11yFragment";
     private static final Uri sVirtualKeyboardSettingsUri = Secure.getUriFor(
             Secure.SHOW_IME_WITH_HARD_KEYBOARD);
     private static final Uri sAccessibilityBounceKeysUri = Secure.getUriFor(
@@ -119,6 +120,16 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     private String mBluetoothAddress;
 
     @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.physical_keyboard_settings;
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putParcelable(EXTRA_AUTO_SELECTION, mAutoInputDeviceIdentifier);
         super.onSaveInstanceState(outState);
@@ -126,6 +137,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
+        super.onCreatePreferences(bundle, s);
         Activity activity = Preconditions.checkNotNull(getActivity());
         addPreferencesFromResource(R.xml.physical_keyboard_settings);
         mIm = Preconditions.checkNotNull(activity.getSystemService(InputManager.class));
@@ -152,7 +164,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         mFeatureProvider = featureFactory.getKeyboardSettingsFeatureProvider();
         mSupportsFirmwareUpdate = mFeatureProvider.supportsFirmwareUpdate();
         if (mSupportsFirmwareUpdate) {
-            mFeatureProvider.addFirmwareUpdateCategory(getContext(), getPreferenceScreen());
+            mFeatureProvider.registerKeyboardInformationCategory(getPreferenceScreen());
         }
         boolean isModifierKeySettingsEnabled = FeatureFlagUtils
                 .isEnabled(getContext(), FeatureFlagUtils.SETTINGS_NEW_KEYBOARD_MODIFIER_KEY);
@@ -277,11 +289,12 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 getActivity().finish();
                 return;
             }
-            ThreadUtils.postOnMainThread(() -> updateHardKeyboards(newHardKeyboards));
+            ThreadUtils.postOnMainThread(() -> updateHardKeyboards(context, newHardKeyboards));
         });
     }
 
-    private void updateHardKeyboards(@NonNull List<HardKeyboardDeviceInfo> newHardKeyboards) {
+    private void updateHardKeyboards(@NonNull Context context,
+                                     @NonNull List<HardKeyboardDeviceInfo> newHardKeyboards) {
         if (Objects.equals(mLastHardKeyboards, newHardKeyboards)) {
             // Nothing has changed.  Ignore.
             return;
@@ -304,7 +317,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             final Preference pref = new Preference(getPrefContext());
             pref.setTitle(hardKeyboardDeviceInfo.mDeviceName);
             String currentLayout =
-                    NewKeyboardSettingsUtils.getSelectedKeyboardLayoutLabelForUser(getContext(),
+                    InputPeripheralsSettingsUtils.getSelectedKeyboardLayoutLabelForUser(context,
                             UserHandle.myUserId(), hardKeyboardDeviceInfo.mDeviceIdentifier);
             if (currentLayout != null) {
                 pref.setSummary(currentLayout);
@@ -324,14 +337,14 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             vendorAndProductId.append("-");
             vendorAndProductId.append(productId);
             mMetricsFeatureProvider.action(
-                    getContext(),
+                    context,
                     SettingsEnums.ACTION_USE_SPECIFIC_KEYBOARD,
                     vendorAndProductId.toString());
         }
         mKeyboardAssistanceCategory.setOrder(1);
         preferenceScreen.addPreference(mKeyboardAssistanceCategory);
         if (mSupportsFirmwareUpdate) {
-            mFeatureProvider.addFirmwareUpdateCategory(getPrefContext(), preferenceScreen);
+            mFeatureProvider.registerKeyboardInformationCategory(preferenceScreen);
         }
 
         if (InputSettings.isAccessibilityBounceKeysFeatureEnabled()
@@ -340,10 +353,10 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 || InputSettings.isAccessibilityMouseKeysFeatureFlagEnabled()) {
             Objects.requireNonNull(mKeyboardA11yCategory).setOrder(2);
             preferenceScreen.addPreference(mKeyboardA11yCategory);
-            updateAccessibilityBounceKeysSwitch();
-            updateAccessibilitySlowKeysSwitch();
-            updateAccessibilityStickyKeysSwitch();
-            updateAccessibilityMouseKeysSwitch();
+            updateAccessibilityBounceKeysSwitch(context);
+            updateAccessibilitySlowKeysSwitch(context);
+            updateAccessibilityStickyKeysSwitch(context);
+            updateAccessibilityMouseKeysSwitch(context);
         }
     }
 
@@ -356,7 +369,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
 
     private void showEnabledLocalesKeyboardLayoutList(InputDeviceIdentifier inputDeviceIdentifier) {
         Bundle arguments = new Bundle();
-        arguments.putParcelable(NewKeyboardSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER,
+        arguments.putParcelable(InputPeripheralsSettingsUtils.EXTRA_INPUT_DEVICE_IDENTIFIER,
                 inputDeviceIdentifier);
         new SubSettingLauncher(getContext())
                 .setSourceMetricsCategory(getMetricsCategory())
@@ -401,46 +414,50 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                     mContentObserver,
                     UserHandle.myUserId());
         }
-        updateAccessibilityBounceKeysSwitch();
-        updateAccessibilitySlowKeysSwitch();
-        updateAccessibilityStickyKeysSwitch();
-        updateAccessibilityMouseKeysSwitch();
+        final Context context = getContext();
+        updateAccessibilityBounceKeysSwitch(context);
+        updateAccessibilitySlowKeysSwitch(context);
+        updateAccessibilityStickyKeysSwitch(context);
+        updateAccessibilityMouseKeysSwitch(context);
     }
 
     private void unregisterSettingsObserver() {
         getActivity().getContentResolver().unregisterContentObserver(mContentObserver);
+        if (mSupportsFirmwareUpdate) {
+            mFeatureProvider.unregisterKeyboardInformationCategory();
+        }
     }
 
-    private void updateAccessibilityBounceKeysSwitch() {
+    private void updateAccessibilityBounceKeysSwitch(@NonNull Context context) {
         if (!InputSettings.isAccessibilityBounceKeysFeatureEnabled()) {
             return;
         }
         Objects.requireNonNull(mAccessibilityBounceKeys).setChecked(
-                InputSettings.isAccessibilityBounceKeysEnabled(getContext()));
+                InputSettings.isAccessibilityBounceKeysEnabled(context));
     }
 
-    private void updateAccessibilitySlowKeysSwitch() {
+    private void updateAccessibilitySlowKeysSwitch(@NonNull Context context) {
         if (!InputSettings.isAccessibilitySlowKeysFeatureFlagEnabled()) {
             return;
         }
         Objects.requireNonNull(mAccessibilitySlowKeys).setChecked(
-                InputSettings.isAccessibilitySlowKeysEnabled(getContext()));
+                InputSettings.isAccessibilitySlowKeysEnabled(context));
     }
 
-    private void updateAccessibilityStickyKeysSwitch() {
+    private void updateAccessibilityStickyKeysSwitch(@NonNull Context context) {
         if (!InputSettings.isAccessibilityStickyKeysFeatureEnabled()) {
             return;
         }
         Objects.requireNonNull(mAccessibilityStickyKeys).setChecked(
-                InputSettings.isAccessibilityStickyKeysEnabled(getContext()));
+                InputSettings.isAccessibilityStickyKeysEnabled(context));
     }
 
-    private void updateAccessibilityMouseKeysSwitch() {
+    private void updateAccessibilityMouseKeysSwitch(@NonNull Context context) {
         if (!InputSettings.isAccessibilityMouseKeysFeatureFlagEnabled()) {
             return;
         }
         Objects.requireNonNull(mAccessibilityMouseKeys).setChecked(
-                InputSettings.isAccessibilityMouseKeysEnabled(getContext()));
+                InputSettings.isAccessibilityMouseKeysEnabled(context));
     }
 
     private void toggleKeyboardShortcutsMenu() {
@@ -477,13 +494,13 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             if (sAccessibilityBounceKeysUri.equals(uri)) {
-                updateAccessibilityBounceKeysSwitch();
+                updateAccessibilityBounceKeysSwitch(getContext());
             } else if (sAccessibilitySlowKeysUri.equals(uri)) {
-                updateAccessibilitySlowKeysSwitch();
+                updateAccessibilitySlowKeysSwitch(getContext());
             } else if (sAccessibilityStickyKeysUri.equals(uri)) {
-                updateAccessibilityStickyKeysSwitch();
+                updateAccessibilityStickyKeysSwitch(getContext());
             } else if (sAccessibilityMouseKeysUri.equals(uri)) {
-                updateAccessibilityMouseKeysSwitch();
+                updateAccessibilityMouseKeysSwitch(getContext());
             }
         }
     };

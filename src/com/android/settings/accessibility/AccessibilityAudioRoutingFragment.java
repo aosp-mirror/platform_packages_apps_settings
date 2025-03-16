@@ -19,12 +19,18 @@ package com.android.settings.accessibility;
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
+import android.util.FeatureFlagUtils;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.search.SearchIndexable;
 
 /** Settings fragment containing bluetooth audio routing. */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class AccessibilityAudioRoutingFragment extends RestrictedDashboardFragment {
     private static final String TAG = "AccessibilityAudioRoutingFragment";
 
@@ -47,6 +53,25 @@ public class AccessibilityAudioRoutingFragment extends RestrictedDashboardFragme
         return TAG;
     }
 
+    @VisibleForTesting
+    static boolean isPageSearchEnabled(Context context) {
+        if (!FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_AUDIO_ROUTING)) {
+            return false;
+        }
+
+        final HearingAidHelper mHelper = new HearingAidHelper(context);
+        return mHelper.isHearingAidSupported();
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_audio_routing_fragment);
+            new BaseSearchIndexProvider(R.xml.accessibility_audio_routing_fragment) {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    if (Flags.fixA11ySettingsSearch()) {
+                        return AccessibilityAudioRoutingFragment.isPageSearchEnabled(context);
+                    } else {
+                        return super.isPageSearchEnabled(context);
+                    }
+                }
+            };
 }
