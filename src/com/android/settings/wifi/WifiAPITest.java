@@ -162,12 +162,18 @@ public class WifiAPITest extends SettingsPreferenceFragment implements
             final EditText input = new EditText(getPrefContext());
             alert.setView(input);
             alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
+                public void onClick(DialogInterface dialog, int whichButton) {
                     Editable value = input.getText();
-                    netid =  Integer.parseInt(value.toString());
-                    mWifiManager.enableNetwork(netid, false);
+                    try {
+                        netid = Integer.parseInt(value.toString());
+                    } catch (NumberFormatException e) {
+                        // Invalid netid
+                        e.printStackTrace();
+                        return;
                     }
-                    });
+                    mWifiManager.enableNetwork(netid, false);
+                }
+            });
             alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                     // Canceled.
