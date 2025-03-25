@@ -22,15 +22,18 @@ import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 
 import androidx.preference.SwitchPreference;
+import androidx.preference.TwoStatePreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,11 +57,14 @@ public class ShowOperatorNamePreferenceControllerTest {
     @Mock
     private PersistableBundle mConfig;
     private Context mContext;
+    private Resources mResources;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        mResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(mResources);
 
         when(mConfigManager.getConfigForSubId(anyInt())).thenReturn(mConfig);
         when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(mConfigManager);
@@ -98,5 +104,25 @@ public class ShowOperatorNamePreferenceControllerTest {
         final int mode =
             Settings.Secure.getInt(mContext.getContentResolver(), KEY_SHOW_OPERATOR_NAME, 1);
         assertThat(mode).isEqualTo(0);
+    }
+
+    @Test
+    public void testUpdateState_DefaultValueEnabled() {
+        when(mResources.getInteger(com.android.internal.R.integer.config_showOperatorNameDefault))
+                .thenReturn(1);
+
+        TwoStatePreference testPreference = mock(TwoStatePreference.class);
+        mController.updateState(testPreference);
+        verify(testPreference).setChecked(true);
+    }
+
+    @Test
+    public void testUpdateState_DefaultValueDisabled() {
+        when(mResources.getInteger(com.android.internal.R.integer.config_showOperatorNameDefault))
+                .thenReturn(0);
+
+        TwoStatePreference testPreference = mock(TwoStatePreference.class);
+        mController.updateState(testPreference);
+        verify(testPreference).setChecked(false);
     }
 }
