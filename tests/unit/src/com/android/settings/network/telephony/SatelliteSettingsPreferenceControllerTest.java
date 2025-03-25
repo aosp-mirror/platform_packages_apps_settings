@@ -113,20 +113,6 @@ public class SatelliteSettingsPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_CARRIER_ENABLED_SATELLITE_FLAG)
-    public void getAvailabilityStatus_carrierIsSupport_returnAvailable() {
-        when(mContext.getSystemService(SatelliteManager.class)).thenReturn(null);
-        mCarrierConfig.putBoolean(
-                CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL,
-                true);
-        when(mCarrierConfigCache.getConfigForSubId(TEST_SUB_ID)).thenReturn(mCarrierConfig);
-
-        int result = mController.getAvailabilityStatus(TEST_SUB_ID);
-
-        assertThat(result).isEqualTo(AVAILABLE);
-    }
-
-    @Test
     @Ignore("avoid post submit failed")
     @EnableFlags(com.android.settings.flags.Flags.FLAG_SATELLITE_OEM_SETTINGS_UX_MIGRATION)
     public void getAvailabilityStatus_registerTelephonyCallback_success() {

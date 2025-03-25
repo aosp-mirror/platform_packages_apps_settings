@@ -23,8 +23,6 @@ import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.util.SparseArray;
 
-import androidx.annotation.ArrayRes;
-
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.RealObject;
@@ -63,12 +61,13 @@ public class SettingsShadowResources extends ShadowResources {
     }
 
     @Implementation
-    protected int[] getIntArray(@ArrayRes int id) throws NotFoundException {
+    protected int[] getIntArray(int id) throws NotFoundException {
         final Object override = sResourceOverrides.get(id);
         if (override instanceof int[]) {
             return (int[]) override;
         }
-        return directlyOn(realResources, Resources.class).getIntArray(id);
+        return directlyOn(
+                realResources, Resources.class, "getIntArray", ClassParameter.from(int.class, id));
     }
 
     @Implementation
